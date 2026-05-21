@@ -1,0 +1,62 @@
+[
+  {
+    "id": 212,
+    "topic": "react",
+    "question": "How do you create components in React?",
+    "level": 2,
+    "levelLabel": "Junior",
+    "answerGeneral": "The standard way today is a function that takes a props object and returns JSX: function Button({ label }) { return <button>{label}</button> }. Class components — extending React.Component with a render method — are the older form and still valid, but function components with hooks have replaced them for new code. Either way, the component name must be capitalised, and it should behave as a pure function of its props and state.",
+    "answerPersonal": null,
+    "detailMd": "## Function components — the default\n\nA component is a function that takes a props object and returns JSX:\n\n```jsx\nfunction Welcome({ name }) {\n  return <h1>Hello, {name}</h1>;\n}\n```\n\nAn arrow function works identically. The name must be capitalised, and the function should be pure — same props and state, same output.\n\n## Class components — the older form\n\n```jsx\nclass Welcome extends React.Component {\n  render() {\n    return <h1>Hello, {this.props.name}</h1>;\n  }\n}\n```\n\nStill valid, but new code does not use them — hooks gave function components state and lifecycle with less ceremony.\n\n## Composition over inheritance\n\nYou build bigger UIs by nesting components, not extending them:\n\n```jsx\nfunction App() {\n  return (\n    <Page>\n      <Header />\n      <Welcome name=\"Aaron\" />\n    </Page>\n  );\n}\n```\n\n## Keep them focused\n\nA good component does one thing and is small enough to read at a glance. When a component juggles unrelated concerns, split it — and lift shared logic into a custom hook rather than a base class.",
+    "answerGeneralTr": "Bugün standart yol, bir props object'i alıp JSX döndüren bir fonksiyondur: function Button({ label }) { return <button>{label}</button> }. Class component'ler — React.Component'i bir render metoduyla extend eden — eski formdur ve hâlâ geçerlidir, ama yeni kod için hook'lu function component'ler onların yerini almıştır. Her iki şekilde de component adı büyük harfle başlamalı ve component prop'larının ve state'inin pure bir fonksiyonu gibi davranmalıdır.",
+    "answerPersonalTr": null
+  },
+  {
+    "id": 213,
+    "topic": "react",
+    "question": "What is useState() in React?",
+    "level": 2,
+    "levelLabel": "Junior",
+    "answerGeneral": "useState is the hook that gives a function component a piece of local state. You call it with an initial value and it returns a pair — the current value and a setter: const [count, setCount] = useState(0). Calling the setter schedules a re-render with the new value. State updates are not instantaneous within the same render, and when the next value depends on the previous one you pass an updater function — setCount(c => c + 1) — to stay correct under batching.",
+    "answerPersonal": null,
+    "detailMd": "## The hook\n\n`useState` gives a function component a piece of state that survives re-renders:\n\n```jsx\nfunction Counter() {\n  const [count, setCount] = useState(0);\n  return <button onClick={() => setCount(count + 1)}>{count}</button>;\n}\n```\n\nIt returns a pair: the current value, and a setter that schedules a re-render with the new value.\n\n## State is a snapshot\n\nWithin one render the state variable never changes — it is a fixed snapshot. Calling the setter does not mutate `count`; it asks React to render again with a new value. So this increments only once:\n\n```jsx\nsetCount(count + 1);\nsetCount(count + 1); // both saw the same count\n```\n\n## The updater function\n\nWhen the next value depends on the current one — especially across batched or async updates — pass a function:\n\n```jsx\nsetCount((c) => c + 1);\nsetCount((c) => c + 1); // now increments twice\n```\n\n## Lazy init and immutability\n\nIf the initial value is expensive, pass a function so it runs only once: `useState(() => expensiveInit())`. And always update immutably — make a new object or array rather than mutating the existing one, or React will not see the change.",
+    "answerGeneralTr": "useState, bir function component'e bir parça yerel state veren hook'tur. Onu bir başlangıç değeriyle çağırırsın ve bir çift döndürür — mevcut değer ve bir setter: const [count, setCount] = useState(0). Setter'ı çağırmak yeni değerle bir yeniden render planlar. State güncellemeleri aynı render içinde anında değildir; sonraki değer öncekine bağlıysa, batching altında doğru kalmak için bir updater fonksiyonu geçersin — setCount(c => c + 1).",
+    "answerPersonalTr": null
+  },
+  {
+    "id": 214,
+    "topic": "react",
+    "question": "What are React Hooks (and their advantages)?",
+    "level": 2,
+    "levelLabel": "Junior",
+    "answerGeneral": "Hooks are functions like useState, useEffect, and useContext that let function components use state, side effects, and other React features that once required class components. The advantages: you reuse stateful logic by extracting a custom hook instead of reaching for HOCs or render props; related logic stays together rather than scattered across lifecycle methods; and there is no this binding and no constructor boilerplate. They are why function components became the default.",
+    "answerPersonal": null,
+    "detailMd": "## What hooks are\n\nHooks are functions that let a function component hook into React features. The core set: `useState` for state, `useEffect` for side effects, `useContext` for context, plus `useRef`, `useMemo`, `useReducer`, and `useCallback`.\n\n```jsx\nfunction Profile({ id }) {\n  const [user, setUser] = useState(null);\n  useEffect(() => {\n    fetchUser(id).then(setUser);\n  }, [id]);\n  return user ? <h1>{user.name}</h1> : <p>Loading…</p>;\n}\n```\n\n## Why they were a step change\n\nBefore hooks, only class components had state and lifecycle. Hooks brought those to functions and, more importantly, made stateful logic reusable: you extract a `useUser(id)` custom hook and share it, with no HOC wrapper and no extra nesting in the tree.\n\n## The advantages\n\nRelated logic stays together instead of being split across `componentDidMount` and `componentWillUnmount`. There is no `this`, no constructor, no binding. Components get shorter and easier to test.\n\n## The rules\n\nHooks must be called at the top level of a component, in the same order every render — never inside conditions or loops. That order is how React keeps each hook's state straight. The `eslint-plugin-react-hooks` rule enforces it.",
+    "answerGeneralTr": "Hook'lar, useState, useEffect ve useContext gibi fonksiyonlardır; function component'lerin bir zamanlar class component gerektiren state, side effect ve diğer React özelliklerini kullanmasını sağlar. Avantajları: HOC'lara ya da render prop'lara başvurmak yerine bir custom hook çıkararak stateful mantığı yeniden kullanırsın; ilişkili mantık lifecycle metotlarına dağılmak yerine bir arada durur; ve this binding'i ve constructor boilerplate'i yoktur. Function component'lerin default olmasının nedeni onlardır.",
+    "answerPersonalTr": null
+  },
+  {
+    "id": 215,
+    "topic": "react",
+    "question": "What is the difference between state and props?",
+    "level": 2,
+    "levelLabel": "Junior",
+    "answerGeneral": "Both are plain objects that feed a component's render output, but ownership differs. Props are passed in from the parent and are read-only to the receiving component — like function arguments. State is owned and managed inside the component, and changing it via the setter triggers a re-render. Roughly: props are configuration handed down, state is data that changes over the component's life. Lifting state up means moving it to the nearest common parent and passing it back down as props.",
+    "answerPersonal": null,
+    "detailMd": "## Two kinds of data\n\nBoth props and state are plain objects that influence what a component renders, but they differ in who owns them.\n\n**Props** are passed in by the parent. To the receiving component they are read-only — like the arguments of a function.\n\n**State** is owned and managed inside the component. It is created with `useState`, and changing it via the setter triggers a re-render.\n\n```jsx\nfunction Toggle({ label }) {           // label: a prop, from the parent\n  const [on, setOn] = useState(false); // on: state, owned here\n  return <button onClick={() => setOn(!on)}>{label}: {String(on)}</button>;\n}\n```\n\n## A simple test\n\nAsk: can the component change this value itself? If yes, it is state. If it only receives and displays it, it is a prop. If a value can be computed from props or other state, it should be neither — derive it during render.\n\n## Lifting state up\n\nWhen two components need the same changing value, you cannot pass state sideways. You move the state up to their nearest common parent and pass it down to both as props. The parent owns it; the children receive it. This is the standard way data is shared in React.",
+    "answerGeneralTr": "İkisi de bir component'in render çıktısını besleyen düz object'lerdir, ama sahiplik farklıdır. Prop'lar ebeveynden aktarılır ve onları alan component için salt okunurdur — fonksiyon argümanları gibi. State ise component'in içinde sahiplenilir ve yönetilir; onu setter ile değiştirmek bir yeniden render tetikler. Kabaca: prop'lar aşağı verilen yapılandırma, state ise component'in ömrü boyunca değişen veridir. State'i yukarı taşımak, onu en yakın ortak ebeveyne taşıyıp prop olarak geri aşağı geçirmek demektir.",
+    "answerPersonalTr": null
+  },
+  {
+    "id": 216,
+    "topic": "react",
+    "question": "What is state in React?",
+    "level": 2,
+    "levelLabel": "Junior",
+    "answerGeneral": "State is data a component owns that can change over its lifetime, and whose changes should update the UI. In a function component you hold it with useState, or useReducer for complex transitions. The guidance is to keep state minimal: store only what you cannot derive, compute the rest during render, and put each piece at the lowest component that needs it. Anything that does not affect rendering does not belong in state.",
+    "answerPersonal": null,
+    "detailMd": "## State, defined\n\nState is the data a component owns that can change over time and that, when it changes, should re-render the UI. A form input, a toggle, fetched data, the current tab — all state.\n\n```jsx\nfunction Tabs() {\n  const [active, setActive] = useState('home');\n  return <Panel name={active} onChange={setActive} />;\n}\n```\n\n## Keep it minimal\n\nThe most common state mistake is storing too much:\n\n- **Do not store what you can derive.** A filtered list, a total, a formatted string — compute these during render from existing state. Duplicated state drifts out of sync.\n- **Do not put non-rendering values in state.** A timer id or a previous value that does not affect output belongs in a ref.\n- **Keep each piece local.** Put state in the lowest component that needs it; lift it only when something else needs it too.\n\n## useState vs useReducer\n\n`useState` suits independent values. When several values change together, or the next state depends on an action, `useReducer` keeps the transitions in one tested place.\n\n## Immutability\n\nAlways replace, never mutate: `setItems([...items, next])`, not `items.push(next)`. React detects a change by reference, so a mutated object looks unchanged and the UI will not update.",
+    "answerGeneralTr": "State, bir component'in sahip olduğu, ömrü boyunca değişebilen ve değişiklikleri UI'ı güncellemesi gereken veridir. Bir function component'te onu useState ile, karmaşık geçişler için useReducer ile tutarsın. Tavsiye state'i minimum tutmaktır: yalnızca türetemediğini sakla, gerisini render sırasında hesapla ve her parçayı ona ihtiyaç duyan en alttaki component'e koy. Render'ı etkilemeyen hiçbir şey state'e ait değildir.",
+    "answerPersonalTr": null
+  }
+]

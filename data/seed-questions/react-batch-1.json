@@ -1,0 +1,62 @@
+[
+  {
+    "id": 201,
+    "topic": "react",
+    "question": "How do you write comments in JSX?",
+    "level": 1,
+    "levelLabel": "Entry",
+    "answerGeneral": "Inside JSX you wrap a comment in braces and a block comment: {/* like this */}. The braces drop you into a JavaScript expression and the /* */ is the comment itself, so it produces no output. Outside JSX — in ordinary component logic — you use normal // and /* */ comments. A plain // inside JSX markup will not work, because it would just render as text.",
+    "answerPersonal": null,
+    "detailMd": "## Comments inside JSX\n\nJSX has no comment syntax of its own. Inside markup you open a JavaScript expression with braces and put a block comment in it:\n\n```jsx\nfunction Greeting() {\n  return (\n    <div>\n      {/* this is a JSX comment */}\n      <h1>Hello</h1>\n      {/* comments can\n          span multiple lines too */}\n    </div>\n  );\n}\n```\n\nThe `{}` is a normal expression slot, and a block comment evaluates to nothing, so React renders nothing for it.\n\n## Why a plain // does not work\n\nA `//` line comment placed directly in markup is treated as text and rendered on the page. Even inside braces it is risky, because the closing `}` can end up commented out — keep comments to the block form in JSX.\n\n## Comments in component logic\n\nOutside the returned JSX — the function body, hooks, handlers — it is ordinary JavaScript, so normal `//` and block comments work as usual:\n\n```jsx\nfunction Counter() {\n  // plain JS comment — fine here\n  const [count, setCount] = useState(0);\n  return <button onClick={() => setCount(count + 1)}>{count}</button>;\n}\n```\n\n## Comment with intent\n\nThe best comment explains why, not what — the markup already says what. A note on why a workaround exists, or why an element is conditionally hidden, is worth far more than one restating the tag.",
+    "answerGeneralTr": "JSX içinde bir yorumu süslü parantez ve blok yorum ile sararsın: {/* böyle */}. Parantezler seni bir JavaScript ifadesine sokar, /* */ ise yorumun kendisidir, dolayısıyla hiçbir çıktı üretmez. JSX dışında — sıradan component mantığında — normal // ve /* */ yorumlarını kullanırsın. JSX markup'ı içinde düz bir // çalışmaz, çünkü sadece metin olarak render edilir.",
+    "answerPersonalTr": null
+  },
+  {
+    "id": 202,
+    "topic": "react",
+    "question": "What is the virtual DOM?",
+    "level": 1,
+    "levelLabel": "Entry",
+    "answerGeneral": "The virtual DOM is a lightweight in-memory representation of the UI — a tree of plain JavaScript objects describing what the real DOM should look like. When state changes, React builds a new virtual tree, compares it against the previous one (diffing), and applies only the minimal set of real DOM changes. Direct DOM manipulation is slow, so this indirection lets you describe the UI declaratively while React handles efficient updates.",
+    "answerPersonal": null,
+    "detailMd": "## What it is\n\nThe virtual DOM is a tree of plain JavaScript objects that mirrors the structure of the real DOM. Each node records a type, props, and children — cheap to create and cheap to discard, unlike real DOM nodes.\n\n## The update cycle\n\nWhen a component renders, React produces a new virtual tree. It compares that tree against the previous one — diffing — to work out exactly what changed, then commits only those differences to the real DOM:\n\n```jsx\nfunction Counter() {\n  const [n, setN] = useState(0);\n  return <p>Count: {n}</p>;\n}\n// setN(1) -> new virtual tree -> diff finds only the text changed\n// -> React updates just that one text node\n```\n\n## Why the indirection helps\n\nReal DOM operations are expensive — layout, reflow, repaint — and mutating the DOM by hand is error-prone. The virtual DOM lets you re-describe the whole UI on every state change as if it were cheap, and React derives the minimal real update for you.\n\n## The honest caveat\n\nThe virtual DOM is not magically fast — it trades some diffing work for a much simpler programming model. Frameworks like Svelte skip it by compiling updates ahead of time. For React, the real performance lever is rendering less: stable keys, memoisation, and not putting derivable data in state.",
+    "answerGeneralTr": "Virtual DOM, UI'ın hafif, bellek içi bir temsilidir — gerçek DOM'un nasıl görünmesi gerektiğini tarif eden, düz JavaScript object'lerinden oluşan bir ağaç. State değiştiğinde React yeni bir virtual ağaç kurar, onu öncekiyle karşılaştırır (diffing) ve yalnızca minimum gerçek DOM değişikliğini uygular. Doğrudan DOM manipülasyonu yavaştır; bu dolaylılık UI'ı deklaratif tarif etmeni sağlarken verimli güncellemeleri React halleder.",
+    "answerPersonalTr": null
+  },
+  {
+    "id": 203,
+    "topic": "react",
+    "question": "What are props in React?",
+    "level": 1,
+    "levelLabel": "Entry",
+    "answerGeneral": "Props are the inputs to a component — data passed from a parent down to a child, written like HTML attributes: <Avatar size={48} user={user} />. Inside the component they arrive as a read-only object; a component must never mutate its own props. They can carry any value, including callback functions, which is how a child communicates back up to its parent. Props flow one way, parent to child.",
+    "answerPersonal": null,
+    "detailMd": "## Props are inputs from the parent\n\nA component receives data from its parent through props — passed as JSX attributes, read as a single object argument:\n\n```jsx\nfunction Avatar({ size, user }) {\n  return <img src={user.avatarUrl} width={size} height={size} />;\n}\n\n// parent\n<Avatar size={48} user={currentUser} />\n```\n\nStrings can use quotes; anything else — numbers, objects, arrays, functions — goes in braces.\n\n## Props are read-only\n\nA component must never reassign its own props. React assumes a component is a pure function of its props: same props in, same UI out. Mutating them breaks that and causes bugs that are hard to trace. If something must change, it belongs in state, owned by whoever renders the component.\n\n## Passing behaviour down\n\nProps carry callbacks too — this is how a child talks back to its parent:\n\n```jsx\n<SearchBox onSearch={(term) => setQuery(term)} />\n```\n\nThe child just calls `onSearch`; it does not know or care what happens. The parent owns the logic.\n\n## children and one-way flow\n\nThe nested content of a tag arrives as the special `children` prop. And props flow only one way — parent to child. To share a value with a sibling, lift it into their common parent and pass it down to both.",
+    "answerGeneralTr": "Prop'lar bir component'in girdileridir — bir ebeveynden bir çocuğa aktarılan veri, HTML attribute'ları gibi yazılır: <Avatar size={48} user={user} />. Component'in içinde salt okunur bir object olarak gelirler; bir component kendi prop'larını asla değiştirmemelidir. Callback fonksiyonları dahil herhangi bir değer taşıyabilirler — bir çocuğun ebeveyniyle yukarı doğru iletişim kurma biçimi budur. Prop'lar tek yönde akar: ebeveynden çocuğa.",
+    "answerPersonalTr": null
+  },
+  {
+    "id": 204,
+    "topic": "react",
+    "question": "What are the major features of React?",
+    "level": 1,
+    "levelLabel": "Entry",
+    "answerGeneral": "The core ones: a virtual DOM with diffing for efficient updates; JSX, an HTML-like syntax for describing UI in JavaScript; a component model where you compose small reusable pieces; one-way data flow, so data moves predictably parent to child; and hooks, which give function components state and lifecycle behaviour. React also supports server-side rendering, which modern frameworks like Next.js build on.",
+    "answerPersonal": null,
+    "detailMd": "## The pieces that define React\n\n**Component model.** You build UIs from small, self-contained functions that return markup, then compose them. Reuse and testing fall out naturally.\n\n**JSX.** An HTML-like syntax for describing UI inside JavaScript, so structure and logic live together rather than in separate template files.\n\n**Virtual DOM and reconciliation.** React re-describes the UI on every change and commits only the minimal real DOM updates, so you write declaratively without hand-tuning DOM operations.\n\n**One-way data flow.** Data moves parent to child through props; state changes trigger predictable re-renders. No hidden two-way binding to reason about.\n\n**Hooks.** `useState`, `useEffect`, and friends give function components state, side effects, and reusable logic.\n\n```jsx\nfunction Likes({ count }) {\n  return <span>{count} likes</span>; // component + JSX + props at once\n}\n```\n\n## Beyond the core\n\nReact also supports server-side rendering and streaming, which frameworks like Next.js build on for performance and SEO, and the same model powers React Native on mobile.\n\n## What React is not\n\nIt is deliberately a library, not a framework — routing, data fetching, and build setup are left to you or to a framework on top. That is flexibility, and also why most teams reach for Next.js rather than wiring it all by hand.",
+    "answerGeneralTr": "Temel olanlar: verimli güncellemeler için diffing yapan bir virtual DOM; UI'ı JavaScript içinde tarif etmek için HTML benzeri bir sözdizimi olan JSX; küçük, yeniden kullanılabilir parçaları bestelediğin bir component modeli; verinin ebeveynden çocuğa öngörülebilir aktığı tek yönlü veri akışı; ve function component'lere state ve lifecycle davranışı veren hook'lar. React ayrıca server-side rendering destekler — Next.js gibi modern framework'ler bunun üzerine kurulur.",
+    "answerPersonalTr": null
+  },
+  {
+    "id": 205,
+    "topic": "react",
+    "question": "What is JSX?",
+    "level": 1,
+    "levelLabel": "Entry",
+    "answerGeneral": "JSX is a syntax extension to JavaScript that lets you write markup that looks like HTML directly in your code: const el = <h1>Hello</h1>. It is not a string and not HTML — a build step (Babel, swc) transpiles each tag into a React.createElement call, or the modern jsx() runtime. It is optional in theory but universal in practice, because describing UI as markup is far more readable than nested function calls.",
+    "answerPersonal": null,
+    "detailMd": "## What JSX is\n\nJSX is a syntax extension that lets you write markup directly in JavaScript:\n\n```jsx\nconst greeting = <h1 className=\"title\">Hello, world</h1>;\n```\n\nIt is not HTML and not a string — it is syntax that a build tool understands.\n\n## How it compiles\n\nA transpiler (Babel, swc, the TypeScript compiler) rewrites every JSX tag into a function call. The modern automatic runtime turns the line above into roughly:\n\n```js\nimport { jsx } from 'react/jsx-runtime';\nconst greeting = jsx('h1', { className: 'title', children: 'Hello, world' });\n```\n\nSo JSX is just a readable way to call `createElement` / `jsx`. That is why a JSX file needs a build step, and why component names must be capitalised — a lowercase tag compiles to a string DOM element.\n\n## Differences from HTML\n\nBecause it is JavaScript, some attribute names change: `class` becomes `className`, `for` becomes `htmlFor`, and event handlers are camelCase (`onClick`). Braces embed any JavaScript expression, and every element must be closed, including `<br />`.\n\n## Is it required?\n\nTechnically no — you can call `createElement` by hand — but in practice every React codebase uses JSX, because nested function calls are far harder to read than nested tags.",
+    "answerGeneralTr": "JSX, JavaScript'e bir sözdizimi uzantısıdır; kodun içine doğrudan HTML'e benzeyen markup yazmanı sağlar: const el = <h1>Merhaba</h1>. Bir string ya da HTML değildir — bir build adımı (Babel, swc) her tag'i bir React.createElement çağrısına ya da modern jsx() runtime'ına transpile eder. Teoride opsiyoneldir ama pratikte evrenseldir, çünkü UI'ı markup olarak tarif etmek iç içe fonksiyon çağrılarından çok daha okunabilirdir.",
+    "answerPersonalTr": null
+  }
+]

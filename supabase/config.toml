@@ -1,0 +1,8 @@
+# Supabase local config — used by `supabase` CLI.
+# After running `supabase login` and `supabase link --project-ref <ref>`,
+# apply migrations with `supabase db push`.
+
+project_id = "interview-prep"
+
+[db]
+major_version = 15

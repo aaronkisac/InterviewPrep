@@ -1,0 +1,137 @@
+[
+  {
+    "slug": "virtual-dom",
+    "label": "Virtual DOM",
+    "topic": "react",
+    "tooltip": "An in-memory representation of the real DOM. React diffs old and new versions to compute the minimal set of DOM updates.",
+    "definition": "The Virtual DOM is React's in-memory representation of the UI tree. When state changes, React builds a new virtual tree, compares it against the previous one, and applies only the diff to the real DOM. The point is that you can write code as if the whole UI re-renders on every change — React makes it efficient under the hood. This is what allows the declarative model to scale.",
+    "codeExample": null,
+    "relatedSlugs": ["reconciliation", "hydration"]
+  },
+  {
+    "slug": "reconciliation",
+    "label": "Reconciliation",
+    "topic": "react",
+    "tooltip": "The algorithm React uses to figure out the minimum DOM operations needed to update the UI when state or props change.",
+    "definition": "Reconciliation is the algorithm React uses to diff the previous element tree against the new one. It uses two heuristics: different element types produce different trees (so type changes cause unmount/remount), and stable `key` props identify children across renders. Understanding reconciliation is what makes keys, stable component identities, and subtree-remount bugs click into place.",
+    "codeExample": "// Same type → React updates in place\n<button className={on ? 'on' : 'off'}>Toggle</button>\n\n// Type change → React tears down and rebuilds\n{on ? <ButtonOn /> : <ButtonOff />}",
+    "relatedSlugs": ["virtual-dom"]
+  },
+  {
+    "slug": "hook",
+    "label": "Hook",
+    "topic": "react",
+    "tooltip": "A function (useState, useEffect, etc.) that lets function components opt into React features like state, lifecycle, and context.",
+    "definition": "Hooks are functions starting with `use` that let function components access state, side effects, refs, context, and other React features that used to require class components. Rules: call hooks at the top level (no conditionals), only call them from React functions. The hook system is built on calling order — that's why the rules exist.",
+    "codeExample": "function Counter() {\n  const [count, setCount] = useState(0);\n  useEffect(() => {\n    document.title = `Count: ${count}`;\n  }, [count]);\n  return <button onClick={() => setCount(c => c + 1)}>+1</button>;\n}",
+    "relatedSlugs": ["server-component", "strict-mode"]
+  },
+  {
+    "slug": "strict-mode",
+    "label": "StrictMode",
+    "topic": "react",
+    "tooltip": "A dev-only wrapper that surfaces problems by double-invoking effects, reducers, and state initialisers.",
+    "definition": "`<React.StrictMode>` is a development-only wrapper that intentionally double-invokes function component bodies, class render methods, reducers, and state initialisers. It also runs effects through a setup→cleanup→setup cycle to simulate a remount. The point is to catch effects that aren't idempotent — bugs that would otherwise only show up under concurrent rendering. It's a no-op in production.",
+    "codeExample": "<React.StrictMode>\n  <App />\n</React.StrictMode>",
+    "relatedSlugs": ["hook", "reconciliation"]
+  },
+  {
+    "slug": "hydration",
+    "label": "Hydration",
+    "topic": "react",
+    "tooltip": "The process of attaching React's event handlers and state to server-rendered HTML so the page becomes interactive.",
+    "definition": "When the server sends pre-rendered HTML, the browser shows it immediately — but it isn't interactive yet. Hydration is the process where React downloads the JS bundle, walks the DOM, and attaches event handlers, restores state, and connects the rendered HTML to its component tree. A hydration mismatch happens when the server-rendered output doesn't match what the client would render — usually caused by reading `window`, `Date.now()`, or other non-deterministic values during render.",
+    "codeExample": null,
+    "relatedSlugs": ["virtual-dom", "server-component"]
+  },
+  {
+    "slug": "generic",
+    "label": "Generic",
+    "topic": "typescript",
+    "tooltip": "A type parameter that lets a function or type work with multiple input types while preserving the relationship between them.",
+    "definition": "Generics let you write a function or type that works with multiple input types without losing type information. The classic use is a function whose return type depends on its input: `first<T>(arr: T[]): T | undefined` preserves the element type, so `first([1,2,3])` returns `number | undefined`, not `unknown | undefined`. Generics also work on classes, interfaces, and type aliases.",
+    "codeExample": "function first<T>(arr: T[]): T | undefined {\n  return arr[0];\n}\n\nconst n = first([1, 2, 3]); // n: number | undefined\nconst s = first(['a', 'b']); // s: string | undefined",
+    "relatedSlugs": ["type-inference", "discriminated-union"]
+  },
+  {
+    "slug": "type-inference",
+    "label": "Type Inference",
+    "topic": "typescript",
+    "tooltip": "The compiler's ability to figure out a type from context, so you don't have to annotate everything by hand.",
+    "definition": "TypeScript infers types from initialisers, return values, and function calls so you don't have to annotate every variable. `const x = 42` is inferred as `number`. `users.map(u => u.name)` infers `string[]` if `users` is typed. Over-annotating is the rookie move — let the compiler do the work and only annotate at API boundaries (function parameters, exported function returns).",
+    "codeExample": "// No annotations needed — inferred\nconst users = [{ id: '1', name: 'Aaron' }];\nconst names = users.map(u => u.name);\n//    ^? string[]",
+    "relatedSlugs": ["generic", "structural-typing"]
+  },
+  {
+    "slug": "discriminated-union",
+    "label": "Discriminated Union",
+    "topic": "typescript",
+    "tooltip": "A union type where each variant has a literal property the compiler can use to narrow which variant you're holding.",
+    "definition": "A discriminated union (or tagged union) is a union type where every member has a shared property holding a unique literal value — the discriminant. The compiler narrows the union based on that discriminant inside conditional checks. This pattern replaces enums + interfaces with something safer and more ergonomic.",
+    "codeExample": "type Shape =\n  | { kind: 'circle'; radius: number }\n  | { kind: 'square'; side: number };\n\nfunction area(shape: Shape) {\n  if (shape.kind === 'circle') return Math.PI * shape.radius ** 2;\n  return shape.side ** 2; // shape is narrowed to square here\n}",
+    "relatedSlugs": ["generic", "structural-typing"]
+  },
+  {
+    "slug": "structural-typing",
+    "label": "Structural Typing",
+    "topic": "typescript",
+    "tooltip": "TypeScript matches types by shape, not by name — duck typing with compiler help.",
+    "definition": "TypeScript uses structural typing: two types are compatible if they have the same shape, regardless of whether either was declared to implement the other. A plain object literal can satisfy an interface without ever being declared as that interface. This is the opposite of nominal typing in languages like Java or C#.",
+    "codeExample": "interface Point { x: number; y: number; }\n\nfunction distance(a: Point, b: Point) { /* ... */ }\n\nconst p = { x: 1, y: 2, label: 'A' };\ndistance(p, p); // ✅ p has the right shape",
+    "relatedSlugs": ["type-inference", "discriminated-union"]
+  },
+  {
+    "slug": "const-assertion",
+    "label": "const Assertion",
+    "topic": "typescript",
+    "tooltip": "`as const` tells TS to infer the narrowest possible type — string literals stay literal, arrays become readonly tuples.",
+    "definition": "`as const` narrows inference to the most specific type possible. String literals stay as their literal type, arrays become readonly tuples, object properties become readonly literal types. The classic use is deriving a union type from a runtime constant — define the values once, derive the type from `typeof`.",
+    "codeExample": "const STATUS = {\n  pending: 'pending',\n  active: 'active',\n  archived: 'archived',\n} as const;\n\ntype Status = (typeof STATUS)[keyof typeof STATUS];\n// → 'pending' | 'active' | 'archived'",
+    "relatedSlugs": ["type-inference", "discriminated-union"]
+  },
+  {
+    "slug": "app-router",
+    "label": "App Router",
+    "topic": "nextjs",
+    "tooltip": "Next.js 13+ routing system built on React Server Components, living in the app/ directory.",
+    "definition": "The App Router is the routing system introduced in Next.js 13 and stabilised in 14. It lives in `app/` and is built on React Server Components by default. Key features: nested layouts that persist across navigation, streaming with Suspense, parallel and intercepting routes, route handlers for APIs, and per-segment loading and error states.",
+    "codeExample": "app/\n├── layout.tsx     // wraps everything\n├── page.tsx       // /\n└── blog/\n    ├── page.tsx           // /blog\n    └── [slug]/\n        └── page.tsx       // /blog/:slug",
+    "relatedSlugs": ["server-component", "route-handler", "isr"]
+  },
+  {
+    "slug": "server-component",
+    "label": "Server Component",
+    "topic": "nextjs",
+    "tooltip": "A React component that renders on the server and never ships its JS to the browser. Default in App Router.",
+    "definition": "A React Server Component renders on the server (at build or request time) and never ships its JavaScript to the browser. It can fetch data directly, read from databases, access environment variables — anything server-side. The browser receives just the rendered HTML / RSC payload. In Next.js App Router, components are Server Components by default; you opt into client behaviour with `'use client'`.",
+    "codeExample": "// Server Component — no 'use client'\nexport default async function ProductList() {\n  const products = await db.product.findMany();\n  return <ul>{products.map(p => <li key={p.id}>{p.name}</li>)}</ul>;\n}",
+    "relatedSlugs": ["app-router", "hydration"]
+  },
+  {
+    "slug": "isr",
+    "label": "ISR",
+    "topic": "nextjs",
+    "tooltip": "Incremental Static Regeneration — serve static pages but refresh them in the background after a time window or on-demand.",
+    "definition": "ISR (Incremental Static Regeneration) lets you serve statically generated pages but refresh them after a TTL or via on-demand invalidation. You get CDN-speed responses with eventual freshness. Configure with `export const revalidate = N` for time-based refresh, or `revalidatePath` / `revalidateTag` for on-demand invalidation when underlying data changes.",
+    "codeExample": "// Time-based ISR\nexport const revalidate = 60; // seconds\n\n// On-demand from a webhook\nimport { revalidateTag } from 'next/cache';\nrevalidateTag('products');",
+    "relatedSlugs": ["app-router", "server-component"]
+  },
+  {
+    "slug": "route-handler",
+    "label": "Route Handler",
+    "topic": "nextjs",
+    "tooltip": "App Router replacement for API routes. A route.ts file exporting HTTP method functions using standard Web Request/Response.",
+    "definition": "Route Handlers are the App Router replacement for `pages/api/` routes. A `route.ts` file inside `app/` exports HTTP method functions (`GET`, `POST`, `PATCH`, etc.) that use the standard Web `Request` and `Response` objects rather than Next-specific `req`/`res`. This makes them portable and easier to test.",
+    "codeExample": "// app/api/users/route.ts\nexport async function GET() {\n  const users = await db.user.findMany();\n  return Response.json(users);\n}\n\nexport async function POST(request: Request) {\n  const body = await request.json();\n  const user = await db.user.create({ data: body });\n  return Response.json(user, { status: 201 });\n}",
+    "relatedSlugs": ["app-router", "server-component"]
+  },
+  {
+    "slug": "middleware",
+    "label": "Middleware",
+    "topic": "nextjs",
+    "tooltip": "Code that runs at the Edge before a request reaches a route — used for auth gates, redirects, A/B tests, locale negotiation.",
+    "definition": "Middleware runs at the Edge before a request hits a route. The function receives a `NextRequest` and returns a `NextResponse` — it can redirect, rewrite, set cookies, or modify request headers. Configure which routes it runs on via a `matcher` config. In Next 16+, the file is named `proxy.ts` (same API). Keep it small — runs on every matched request.",
+    "codeExample": "// middleware.ts (or proxy.ts in Next 16+)\nimport { NextResponse } from 'next/server';\nimport type { NextRequest } from 'next/server';\n\nexport function middleware(request: NextRequest) {\n  const token = request.cookies.get('session');\n  if (!token) return NextResponse.redirect(new URL('/login', request.url));\n  return NextResponse.next();\n}\n\nexport const config = { matcher: ['/dashboard/:path*'] };",
+    "relatedSlugs": ["app-router", "route-handler"]
+  }
+]

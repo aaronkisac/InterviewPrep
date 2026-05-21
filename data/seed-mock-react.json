@@ -1,0 +1,522 @@
+[
+  {
+    "topic": "react",
+    "question": "What is React?",
+    "options": [
+      {
+        "optionText": "A JavaScript library for building user interfaces out of small, reusable components.",
+        "isCorrect": true,
+        "explanation": "Correct — React is a view-layer library; you compose UIs from components."
+      },
+      {
+        "optionText": "A full backend framework with a built-in database and ORM.",
+        "isCorrect": false,
+        "explanation": "React is frontend-only — it has no database or server layer."
+      },
+      {
+        "optionText": "A CSS preprocessor for generating stylesheets.",
+        "isCorrect": false,
+        "explanation": "That describes tools like Sass; React handles UI logic, not styling syntax."
+      },
+      {
+        "optionText": "A programming language that compiles down to JavaScript.",
+        "isCorrect": false,
+        "explanation": "That describes TypeScript; React is a library written in JavaScript."
+      }
+    ]
+  },
+  {
+    "topic": "react",
+    "question": "How would you write an inline style in React?",
+    "options": [
+      {
+        "optionText": "Pass an object to the style prop with camelCased keys: style={{ backgroundColor: \"tomato\" }}.",
+        "isCorrect": true,
+        "explanation": "Correct — the style prop takes a JS object and CSS property names are camelCased."
+      },
+      {
+        "optionText": "Pass a CSS string: style=\"background-color: tomato\".",
+        "isCorrect": false,
+        "explanation": "That is the plain DOM API; React's style prop expects an object, not a string."
+      },
+      {
+        "optionText": "Use a css prop: css={{ backgroundColor: \"tomato\" }}.",
+        "isCorrect": false,
+        "explanation": "There is no built-in css prop — that is a styled-components / Emotion convention."
+      },
+      {
+        "optionText": "Pass an object with kebab-case keys: style={{ \"background-color\": \"tomato\" }}.",
+        "isCorrect": false,
+        "explanation": "React style keys are camelCased (backgroundColor), not kebab-case."
+      }
+    ]
+  },
+  {
+    "topic": "react",
+    "question": "What is JEST?",
+    "options": [
+      {
+        "optionText": "A JavaScript test runner from Meta, usually paired with React Testing Library.",
+        "isCorrect": true,
+        "explanation": "Correct — Jest bundles a runner, assertions, mocking, and snapshots in one tool."
+      },
+      {
+        "optionText": "A global state management library similar to Redux.",
+        "isCorrect": false,
+        "explanation": "Jest is for testing, not state management."
+      },
+      {
+        "optionText": "A module bundler that replaces Webpack.",
+        "isCorrect": false,
+        "explanation": "Jest runs tests; it is not a bundler."
+      },
+      {
+        "optionText": "A React hook for fetching data inside components.",
+        "isCorrect": false,
+        "explanation": "Jest is a test tool, not a hook or a runtime API."
+      }
+    ]
+  },
+  {
+    "topic": "react",
+    "question": "What are the advantages of ReactJS?",
+    "options": [
+      {
+        "optionText": "Composable, reusable components plus a declarative model React turns into efficient DOM updates.",
+        "isCorrect": true,
+        "explanation": "Correct — composition, the virtual DOM diff, and a large ecosystem are the core advantages."
+      },
+      {
+        "optionText": "It removes the need for any build step or tooling.",
+        "isCorrect": false,
+        "explanation": "JSX still needs a build step — that is a cost, not an advantage."
+      },
+      {
+        "optionText": "It guarantees the app works with JavaScript disabled.",
+        "isCorrect": false,
+        "explanation": "A React app needs JavaScript to render on the client."
+      },
+      {
+        "optionText": "It ships with a built-in router and data-fetching layer.",
+        "isCorrect": false,
+        "explanation": "React is view-only — routing and data fetching are bring-your-own."
+      }
+    ]
+  },
+  {
+    "topic": "react",
+    "question": "What is Flux?",
+    "options": [
+      {
+        "optionText": "A unidirectional data-flow pattern: actions go through a dispatcher into stores, then out to views.",
+        "isCorrect": true,
+        "explanation": "Correct — Flux is the one-way data-flow pattern Meta proposed alongside React."
+      },
+      {
+        "optionText": "A two-way data-binding system that syncs views and models automatically.",
+        "isCorrect": false,
+        "explanation": "Flux is deliberately one-directional — the opposite of two-way binding."
+      },
+      {
+        "optionText": "A React hook for managing global state.",
+        "isCorrect": false,
+        "explanation": "Flux predates hooks; it is an architectural pattern, not an API."
+      },
+      {
+        "optionText": "A CSS-in-JS styling approach.",
+        "isCorrect": false,
+        "explanation": "Flux is about data flow, not styling."
+      }
+    ]
+  },
+  {
+    "topic": "react",
+    "question": "How error boundaries handled in React (15)?",
+    "options": [
+      {
+        "optionText": "They weren't — error boundaries didn't exist until React 16 (componentDidCatch / getDerivedStateFromError).",
+        "isCorrect": true,
+        "explanation": "Correct — before React 16 an uncaught error unmounted the whole tree."
+      },
+      {
+        "optionText": "With a built-in <ErrorBoundary> component shipped in React 15.",
+        "isCorrect": false,
+        "explanation": "No such built-in component exists; you write your own boundary class."
+      },
+      {
+        "optionText": "By wrapping every component's render in a try/catch block.",
+        "isCorrect": false,
+        "explanation": "A try/catch in render does not catch errors thrown by child components."
+      },
+      {
+        "optionText": "With the built-in useErrorBoundary hook.",
+        "isCorrect": false,
+        "explanation": "There is no built-in error-boundary hook — boundaries are class components."
+      }
+    ]
+  },
+  {
+    "topic": "react",
+    "question": "What are the limitations of ReactJS?",
+    "options": [
+      {
+        "optionText": "It's only a view library — routing, data fetching, and forms are bring-your-own, and JSX needs a build step.",
+        "isCorrect": true,
+        "explanation": "Correct — React leaves many decisions to you, which adds setup cost."
+      },
+      {
+        "optionText": "It cannot render lists or conditional UI.",
+        "isCorrect": false,
+        "explanation": "React renders lists and conditional UI easily — that is core functionality."
+      },
+      {
+        "optionText": "It only supports class components, not function components.",
+        "isCorrect": false,
+        "explanation": "Function components with hooks are the modern default."
+      },
+      {
+        "optionText": "It requires a specific backend language to run.",
+        "isCorrect": false,
+        "explanation": "React is backend-agnostic — it runs against any API."
+      }
+    ]
+  },
+  {
+    "topic": "react",
+    "question": "What’s the difference between an \"Element\" and a \"Component\" in React?",
+    "options": [
+      {
+        "optionText": "An Element is a plain object describing UI; a Component is the function or class that returns Elements.",
+        "isCorrect": true,
+        "explanation": "Correct — Elements describe, Components produce."
+      },
+      {
+        "optionText": "An Element is reusable; a Component is a single one-off instance.",
+        "isCorrect": false,
+        "explanation": "That is reversed — Components are the reusable definitions."
+      },
+      {
+        "optionText": "They are the same thing under two different names.",
+        "isCorrect": false,
+        "explanation": "They are distinct: one is data, the other is the code that returns it."
+      },
+      {
+        "optionText": "An Element holds state; a Component is always stateless.",
+        "isCorrect": false,
+        "explanation": "Elements are immutable data; state lives in Components."
+      }
+    ]
+  },
+  {
+    "topic": "react",
+    "question": "What are stateful components?",
+    "options": [
+      {
+        "optionText": "A component that owns and manages its own state, usually via useState or useReducer.",
+        "isCorrect": true,
+        "explanation": "Correct — stateful components hold internal data that drives what they render."
+      },
+      {
+        "optionText": "A component that only receives props and renders them.",
+        "isCorrect": false,
+        "explanation": "That describes a stateless component."
+      },
+      {
+        "optionText": "A component that can never re-render after mounting.",
+        "isCorrect": false,
+        "explanation": "Re-rendering on state change is exactly what stateful components do."
+      },
+      {
+        "optionText": "Any component written using the class syntax.",
+        "isCorrect": false,
+        "explanation": "Class vs function is unrelated — function components can be stateful too."
+      }
+    ]
+  },
+  {
+    "topic": "react",
+    "question": "What are stateless components?",
+    "options": [
+      {
+        "optionText": "A component that takes props and returns JSX with no internal state.",
+        "isCorrect": true,
+        "explanation": "Correct — a pure mapping from props to UI, easy to test and reuse."
+      },
+      {
+        "optionText": "A component that manages the application's global state.",
+        "isCorrect": false,
+        "explanation": "That is the opposite — a stateless component holds no state."
+      },
+      {
+        "optionText": "A component that cannot accept any props.",
+        "isCorrect": false,
+        "explanation": "Stateless components commonly take props; they just hold no state."
+      },
+      {
+        "optionText": "A component that must be written as a class.",
+        "isCorrect": false,
+        "explanation": "Stateless components are typically plain functions."
+      }
+    ]
+  },
+  {
+    "topic": "react",
+    "question": "What is the difference between createElement and cloneElement?",
+    "options": [
+      {
+        "optionText": "createElement builds a brand-new Element; cloneElement copies an existing one with merged props.",
+        "isCorrect": true,
+        "explanation": "Correct — createElement is what JSX compiles to; cloneElement clones and overrides props."
+      },
+      {
+        "optionText": "createElement copies an existing element while cloneElement builds a new one.",
+        "isCorrect": false,
+        "explanation": "That is reversed."
+      },
+      {
+        "optionText": "Both build brand-new elements — the names are interchangeable.",
+        "isCorrect": false,
+        "explanation": "cloneElement starts from an existing element, not from scratch."
+      },
+      {
+        "optionText": "cloneElement deep-clones the entire rendered DOM subtree.",
+        "isCorrect": false,
+        "explanation": "cloneElement copies the Element object and its props, not DOM nodes."
+      }
+    ]
+  },
+  {
+    "topic": "react",
+    "question": "What's an alternative way to avoid having to bind to this in event callback methods?",
+    "options": [
+      {
+        "optionText": "Write a function component (no this to bind), or use a class-field arrow method.",
+        "isCorrect": true,
+        "explanation": "Correct — function components have no this; class-field arrows auto-bind to the instance."
+      },
+      {
+        "optionText": "Call .bind(this) inside render on every pass.",
+        "isCorrect": false,
+        "explanation": "That binds on every render and creates a new function each time — the pattern to avoid."
+      },
+      {
+        "optionText": "Use the React.autoBind helper to bind all methods.",
+        "isCorrect": false,
+        "explanation": "There is no such API."
+      },
+      {
+        "optionText": "Wrap the component in StrictMode.",
+        "isCorrect": false,
+        "explanation": "StrictMode surfaces dev-time issues; it has nothing to do with this binding."
+      }
+    ]
+  },
+  {
+    "topic": "react",
+    "question": "What are some limitations of things you shouldn't do in the component's render method?",
+    "options": [
+      {
+        "optionText": "No side effects — no fetching, subscriptions, mutations, or setState; render must stay pure.",
+        "isCorrect": true,
+        "explanation": "Correct — calling setState in render causes an infinite loop; effects belong in useEffect."
+      },
+      {
+        "optionText": "You shouldn't return JSX from render.",
+        "isCorrect": false,
+        "explanation": "Returning Elements is exactly what render is for."
+      },
+      {
+        "optionText": "You shouldn't read props or state inside render.",
+        "isCorrect": false,
+        "explanation": "Render reads props and state — that is how it describes the UI."
+      },
+      {
+        "optionText": "You shouldn't use any conditional logic in render.",
+        "isCorrect": false,
+        "explanation": "Conditional rendering is fine and common."
+      }
+    ]
+  },
+  {
+    "topic": "react",
+    "question": "What is the point of using keys in React?",
+    "options": [
+      {
+        "optionText": "Keys give list items a stable identity so React can move nodes instead of rebuilding them.",
+        "isCorrect": true,
+        "explanation": "Correct — stable keys let reconciliation reorder DOM nodes efficiently and keep state."
+      },
+      {
+        "optionText": "Keys are required to apply CSS styles to list items.",
+        "isCorrect": false,
+        "explanation": "Keys are about identity for diffing, not styling."
+      },
+      {
+        "optionText": "A key caches the component so it never re-renders.",
+        "isCorrect": false,
+        "explanation": "Keys do not memoise — they identify items across renders."
+      },
+      {
+        "optionText": "The array index is always the best value to use as a key.",
+        "isCorrect": false,
+        "explanation": "Index keys break when the list reorders or items are inserted."
+      }
+    ]
+  },
+  {
+    "topic": "react",
+    "question": "What's the typical pattern for rendering a list of components from an array of data?",
+    "options": [
+      {
+        "optionText": "Map the array to JSX and give each element a stable key, usually the row's id.",
+        "isCorrect": true,
+        "explanation": "Correct — items.map(item => <Row key={item.id} {...item} />) is the standard pattern."
+      },
+      {
+        "optionText": "Use a plain for loop directly inside the JSX return.",
+        "isCorrect": false,
+        "explanation": "JSX expects an expression — you map (or build an array in a loop), not loop inline."
+      },
+      {
+        "optionText": "Call ReactDOM.render once per item in the array.",
+        "isCorrect": false,
+        "explanation": "You render the list within one tree, not with separate render calls."
+      },
+      {
+        "optionText": "Map the array and use the index as the key for best performance.",
+        "isCorrect": false,
+        "explanation": "Index keys are unsafe when the list can reorder — prefer a stable id."
+      }
+    ]
+  },
+  {
+    "topic": "react",
+    "question": "What is the render method for?",
+    "options": [
+      {
+        "optionText": "In a class component, render returns the Elements to display for the current props and state, and must be pure.",
+        "isCorrect": true,
+        "explanation": "Correct — render is the pure description of what to draw; same inputs, same output."
+      },
+      {
+        "optionText": "render performs data fetching and other side effects.",
+        "isCorrect": false,
+        "explanation": "Side effects belong in lifecycle methods / effects, not render."
+      },
+      {
+        "optionText": "render directly manipulates the real DOM.",
+        "isCorrect": false,
+        "explanation": "React applies DOM changes; render only returns a description."
+      },
+      {
+        "optionText": "render is where you call setState to update the UI.",
+        "isCorrect": false,
+        "explanation": "Calling setState in render triggers an infinite loop."
+      }
+    ]
+  },
+  {
+    "topic": "react",
+    "question": "Why do class methods need to be bound to a class instance?",
+    "options": [
+      {
+        "optionText": "JS methods don't carry their this — passed as a callback, this becomes undefined unless you bind it.",
+        "isCorrect": true,
+        "explanation": "Correct — binding (or a class-field arrow) fixes this to the component instance."
+      },
+      {
+        "optionText": "Because React deletes any unbound methods at runtime.",
+        "isCorrect": false,
+        "explanation": "React does not remove methods — the issue is the lost this reference."
+      },
+      {
+        "optionText": "Because binding makes the component re-render faster.",
+        "isCorrect": false,
+        "explanation": "Binding is about this, not render performance."
+      },
+      {
+        "optionText": "Because function components also require manual binding.",
+        "isCorrect": false,
+        "explanation": "Function components have no this, so there is nothing to bind."
+      }
+    ]
+  },
+  {
+    "topic": "react",
+    "question": "What is reconciliation in React?",
+    "options": [
+      {
+        "optionText": "The algorithm React uses to compute the minimal DOM updates between the old and new trees.",
+        "isCorrect": true,
+        "explanation": "Correct — React diffs by element type and key to find the smallest set of changes."
+      },
+      {
+        "optionText": "The process of compiling JSX into JavaScript.",
+        "isCorrect": false,
+        "explanation": "That is what a compiler like Babel/SWC does, not reconciliation."
+      },
+      {
+        "optionText": "Re-fetching data from the server whenever props change.",
+        "isCorrect": false,
+        "explanation": "Reconciliation is about the UI tree diff, not data fetching."
+      },
+      {
+        "optionText": "Merging several setState calls into a single update.",
+        "isCorrect": false,
+        "explanation": "That is batching — a separate optimisation from reconciliation."
+      }
+    ]
+  },
+  {
+    "topic": "react",
+    "question": "What's the difference between an Element and a Component in React?",
+    "options": [
+      {
+        "optionText": "Elements are immutable plain objects ({type, props, children}); Components return Elements, and type can be a string or a component.",
+        "isCorrect": true,
+        "explanation": "Correct — Elements describe UI; type may be a host string like 'div' or a component."
+      },
+      {
+        "optionText": "Elements and Components are both mutable objects you edit in place.",
+        "isCorrect": false,
+        "explanation": "Elements are immutable — you create new ones rather than mutating them."
+      },
+      {
+        "optionText": "A Component is just a rendered Element stored in the DOM.",
+        "isCorrect": false,
+        "explanation": "A Component is the function or class; Elements are its output."
+      },
+      {
+        "optionText": "Elements can only describe host elements like 'div', never components.",
+        "isCorrect": false,
+        "explanation": "An Element's type can also be a component function or class."
+      }
+    ]
+  },
+  {
+    "topic": "react",
+    "question": "What is StrictMode in React?",
+    "options": [
+      {
+        "optionText": "A dev-only wrapper that surfaces problems by double-invoking effects and reducers and flagging deprecated APIs; a no-op in production.",
+        "isCorrect": true,
+        "explanation": "Correct — StrictMode helps catch impure effects and legacy APIs during development."
+      },
+      {
+        "optionText": "A production optimisation that strips unused code from the bundle.",
+        "isCorrect": false,
+        "explanation": "StrictMode does nothing in production — it is purely a dev aid."
+      },
+      {
+        "optionText": "A mode that enforces TypeScript strict type-checking.",
+        "isCorrect": false,
+        "explanation": "StrictMode is a runtime React wrapper, unrelated to TypeScript config."
+      },
+      {
+        "optionText": "A wrapper that prevents components inside it from re-rendering.",
+        "isCorrect": false,
+        "explanation": "StrictMode actually double-invokes some functions in dev — it does not block renders."
+      }
+    ]
+  }
+]

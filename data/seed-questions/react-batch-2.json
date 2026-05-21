@@ -1,0 +1,74 @@
+[
+  {
+    "id": 206,
+    "topic": "react",
+    "question": "What is context in React?",
+    "level": 2,
+    "levelLabel": "Junior",
+    "answerGeneral": "Context lets you pass data through the component tree without threading props through every intermediate level. You create a context, wrap a subtree in its Provider with a value, and any descendant reads it with the useContext hook. It is meant for genuinely global-ish data — theme, locale, the current user, auth state — not as a general replacement for props or a state manager. Every consumer re-renders when the context value changes.",
+    "answerPersonal": null,
+    "detailMd": "## The problem context solves\n\nWhen data is needed by many components at different depths, passing it through every intermediate component as props — \"prop drilling\" — is tedious and noisy. Context lets a value skip the middle layers.\n\n## The three parts\n\n```jsx\nconst ThemeContext = createContext('light');\n\nfunction App() {\n  return (\n    <ThemeContext.Provider value=\"dark\">\n      <Toolbar />\n    </ThemeContext.Provider>\n  );\n}\n\nfunction ThemedButton() {\n  const theme = useContext(ThemeContext); // 'dark', no props threaded\n  return <button className={theme}>Click</button>;\n}\n```\n\nYou create a context, a `Provider` supplies a value to a subtree, and any descendant reads it with `useContext`.\n\n## What it is for\n\nGenuinely cross-cutting data: theme, locale, the authenticated user, a feature-flag set — things many components need and that change rarely.\n\n## What to watch\n\nContext is not a state manager and not a performance tool. Every consumer re-renders whenever the provider's `value` changes, so do not put fast-changing state in one large context. Split contexts by concern, and memoise the `value` object so it does not get a fresh reference on every render.",
+    "answerGeneralTr": "Context, veriyi her ara seviyeden prop geçirmeden component ağacında aktarmanı sağlar. Bir context oluşturursun, bir alt ağacı Provider'ıyla bir değer vererek sararsın ve herhangi bir alt eleman onu useContext hook'uyla okur. Gerçekten global-ish veri içindir — tema, dil, mevcut kullanıcı, auth durumu — prop'ların ya da bir state manager'ın genel bir ikamesi değil. Context değeri değiştiğinde her tüketici yeniden render olur.",
+    "answerPersonalTr": null
+  },
+  {
+    "id": 207,
+    "topic": "react",
+    "question": "How does React work?",
+    "level": 2,
+    "levelLabel": "Junior",
+    "answerGeneral": "You describe the UI as a tree of components that return elements based on their props and state. React renders that into a virtual DOM, and when state changes it re-renders the affected components, diffs the new virtual tree against the old one, and commits only the minimal real DOM changes — a process called reconciliation. The key idea is declarative: you describe what the UI should be for a given state, and React works out how to get there.",
+    "answerPersonal": null,
+    "detailMd": "## The mental model\n\nYou write components — functions that take props and state and return a description of the UI. You never tell React to update the DOM; you describe what the UI should be for the current state, and React makes the DOM match.\n\n## Render, diff, commit\n\n```jsx\nfunction Counter() {\n  const [n, setN] = useState(0);\n  return <button onClick={() => setN(n + 1)}>{n}</button>;\n}\n```\n\nWhen `setN` runs, React re-invokes `Counter`, gets a new element tree, and diffs it against the previous tree — reconciliation. It finds only the button's text changed, and commits just that one DOM update.\n\n## Why declarative matters\n\nThe old imperative way — find a node, mutate it, keep it in sync by hand — is where most UI bugs lived. React removes that whole class of bug: there is one source of truth (state), and the UI is a pure function of it.\n\n## The layers\n\nReact core handles components and reconciliation; a renderer (ReactDOM for the web) commits the result. Hooks let function components hold state across renders. Frameworks like Next.js add routing, data fetching, and server rendering on top — but the core loop is always render, diff, commit.",
+    "answerGeneralTr": "UI'ı, prop'larına ve state'ine göre element döndüren component'lerden oluşan bir ağaç olarak tarif edersin. React bunu bir virtual DOM'a render eder ve state değiştiğinde etkilenen component'leri yeniden render eder, yeni virtual ağacı eskisiyle karşılaştırır ve yalnızca minimum gerçek DOM değişikliğini uygular — buna reconciliation denir. Ana fikir deklaratiftir: belirli bir state için UI'ın ne olması gerektiğini tarif edersin, oraya nasıl varılacağını React çözer.",
+    "answerPersonalTr": null
+  },
+  {
+    "id": 208,
+    "topic": "react",
+    "question": "What are refs and what are they used for?",
+    "level": 2,
+    "levelLabel": "Junior",
+    "answerGeneral": "A ref is an escape hatch that holds a mutable reference to something — usually a DOM node — across renders, without triggering a re-render when it changes. You create one with useRef and attach it via the ref attribute to reach the underlying element: focusing an input, measuring layout, controlling a media element, integrating a non-React library. Use them sparingly — most UI should be driven by state and props, with refs reserved for the imperative things React's declarative model cannot express.",
+    "answerPersonal": null,
+    "detailMd": "## What a ref is\n\nA ref is a container with a single `.current` property that React keeps stable across renders. Writing to `.current` does not trigger a re-render — that is the whole point. It is the escape hatch from React's declarative model.\n\n## Reaching a DOM node\n\nThe most common use is getting hold of a real DOM element:\n\n```jsx\nfunction SearchField() {\n  const inputRef = useRef(null);\n  useEffect(() => inputRef.current.focus(), []); // focus on mount\n  return <input ref={inputRef} />;\n}\n```\n\n## What refs are good for\n\nThings the declarative model cannot express: focusing or scrolling an element, measuring its size, playing or pausing a `<video>`, integrating an imperative non-React library, or holding a mutable value (a timer id) that should survive renders without causing one.\n\n## When not to use them\n\nIf something affects what is rendered, it belongs in state, not a ref. Reading or writing the DOM during render is a bug — refs are only safe in effects and event handlers, after the DOM exists. Reach for a ref when, and only when, state genuinely cannot do the job.",
+    "answerGeneralTr": "Ref, bir şeye — genelde bir DOM node'una — render'lar boyunca, değiştiğinde yeniden render tetiklemeden, değiştirilebilir bir referans tutan bir kaçış kapısıdır. Birini useRef ile oluşturur ve altta yatan elemana ulaşmak için ref attribute'uyla bağlarsın: bir input'a focus vermek, layout ölçmek, bir medya elemanını kontrol etmek, React olmayan bir kütüphaneyi entegre etmek. Onları tutumlu kullan — UI'ın çoğu state ve prop ile sürülmeli, ref'ler React'in deklaratif modelinin ifade edemediği imperative şeyler için saklanmalı.",
+    "answerPersonalTr": null
+  },
+  {
+    "id": 209,
+    "topic": "react",
+    "question": "What are fragments?",
+    "level": 2,
+    "levelLabel": "Junior",
+    "answerGeneral": "A fragment lets a component return multiple elements without wrapping them in an extra DOM node. You use <React.Fragment> or the short syntax <>...</>. It exists because a component must return a single root — fragments satisfy that without polluting the DOM with wrapper divs, which keeps the markup clean and avoids breaking CSS layouts like flexbox or grid. The long form is needed only when you must pass a key, as in a list.",
+    "answerPersonal": null,
+    "detailMd": "## The single-root rule\n\nA component must return one element. When you have siblings with no natural wrapper, a fragment groups them without adding a DOM node:\n\n```jsx\nfunction ProfileRow() {\n  return (\n    <>\n      <td>Aaron</td>\n      <td>London</td>\n    </>\n  );\n}\n```\n\n`<>...</>` is the short syntax; `<React.Fragment>...</React.Fragment>` is the explicit form.\n\n## Why not just a div\n\nAn extra wrapper `<div>` changes the DOM. It can break CSS that depends on a direct parent-child relationship — flexbox and grid children, table rows, `:first-child` selectors. Fragments group elements in the React tree only, leaving the DOM exactly as you want it.\n\n## When you need the long form\n\nThe short syntax cannot take attributes. If you render a list of fragments and each needs a `key`, use the explicit form:\n\n```jsx\nitems.map((item) => (\n  <React.Fragment key={item.id}>\n    <dt>{item.term}</dt>\n    <dd>{item.definition}</dd>\n  </React.Fragment>\n));\n```\n\n`key` is the only attribute a fragment accepts.",
+    "answerGeneralTr": "Fragment, bir component'in birden fazla elemanı fazladan bir DOM node'una sarmadan döndürmesini sağlar. <React.Fragment> ya da kısa sözdizimi <>...</> kullanırsın. Var olma nedeni şu: bir component tek bir kök döndürmek zorundadır — fragment'lar DOM'u wrapper div'lerle kirletmeden bunu karşılar, böylece markup temiz kalır ve flexbox ya da grid gibi CSS düzenlerini bozmaz. Uzun form yalnızca bir liste gibi key geçmen gerektiğinde lazımdır.",
+    "answerPersonalTr": null
+  },
+  {
+    "id": 210,
+    "topic": "react",
+    "question": "Why is it necessary to capitalize component names?",
+    "level": 2,
+    "levelLabel": "Junior",
+    "answerGeneral": "JSX uses the case of a tag to decide what it is. A lowercase name like <div> is treated as a built-in DOM element and passed to createElement as a string; a capitalised name like <Avatar> is treated as a reference to a component variable in scope. Write a component in lowercase and React looks for a DOM tag of that name instead of your component, so it silently renders nothing useful. Capitalising component names is the rule that keeps the two apart.",
+    "answerPersonal": null,
+    "detailMd": "## JSX decides by case\n\nWhen the build step compiles a JSX tag, it uses the first letter to decide what the tag means:\n\n```jsx\n<button />   // lowercase -> the string 'button', a DOM element\n<Button />   // capitalised -> the variable Button, your component\n```\n\nA lowercase tag compiles to `createElement('button', ...)` — a literal string. A capitalised tag compiles to `createElement(Button, ...)` — a reference to a value in scope.\n\n## What goes wrong\n\nName a component `button` and React looks for a DOM element called `button`, not your function. There is no error — just the wrong, empty output:\n\n```jsx\nfunction button() { return <p>hi</p>; }  // wrong\n<button />  // renders an empty native <button>, not your <p>\n```\n\n## The convention\n\nComponents are PascalCase (`UserCard`, `NavBar`); DOM elements stay lowercase. This is also why a component imported under a lowercase alias fails — the case at the use site is what matters.\n\n## Dotted names are exempt\n\n`<obj.Component />` works lowercased, because the property access already tells JSX it is a component reference, not a string tag.",
+    "answerGeneralTr": "JSX, bir tag'in ne olduğuna karar vermek için harf büyüklüğünü kullanır. <div> gibi küçük harfli bir ad yerleşik bir DOM elemanı sayılır ve createElement'e string olarak geçilir; <Avatar> gibi büyük harfli bir ad ise scope'taki bir component değişkenine referans sayılır. Bir component'i küçük harfle yazarsan React senin component'in yerine o adda bir DOM tag'i arar ve sessizce işe yaramaz bir şey render eder. Component adlarını büyük harfle yazmak ikisini ayrı tutan kuraldır.",
+    "answerPersonalTr": null
+  },
+  {
+    "id": 211,
+    "topic": "react",
+    "question": "What are inline conditional expressions in JSX?",
+    "level": 2,
+    "levelLabel": "Junior",
+    "answerGeneral": "Because JSX braces hold a JavaScript expression, you render conditionally with expressions rather than statements. The common ones: the ternary cond ? <A /> : <B /> when there are two outcomes, and the logical && — cond && <A /> — when you render something or nothing. A caveat with &&: a left side of 0 or an empty string renders as a literal value, so use a real boolean (count > 0 && ...). For bigger branches, compute the element above the return.",
+    "answerPersonal": null,
+    "detailMd": "## JSX braces hold expressions, not statements\n\nYou cannot put an `if` statement inside JSX, because the braces expect an expression. So conditional rendering uses expression forms.\n\n## Ternary — one of two things\n\n```jsx\n<div>{isLoggedIn ? <Dashboard /> : <LoginForm />}</div>\n```\n\n## Logical && — something or nothing\n\n```jsx\n<div>{hasError && <ErrorBanner />}</div>\n```\n\nThe caveat: `&&` returns its left operand when that operand is falsy. If `count` is `0`, `{count && <List />}` renders a literal `0` on the page. Guard with a real boolean instead:\n\n```jsx\n{count > 0 && <List />}\n```\n\n## Returning nothing\n\n`null`, `undefined`, `false`, and `true` all render nothing — so a condition that resolves to one of those is safe.\n\n## When to pull it out\n\nNested ternaries get unreadable fast. Once a condition has more than two branches, compute the element in a variable above the `return`, or use an early `return`, and keep the JSX flat.",
+    "answerGeneralTr": "JSX parantezleri bir JavaScript ifadesi tuttuğu için, koşullu render'ı statement değil ifadelerle yaparsın. Yaygın olanlar: iki sonuç olduğunda ternary cond ? <A /> : <B /> ve bir şey ya da hiçbir şey render ettiğinde mantıksal && — cond && <A />. && ile bir uyarı: 0 ya da boş string olan bir sol taraf literal değer olarak render olur, bu yüzden gerçek bir boolean kullan (count > 0 && ...). Daha büyük dallar için elemanı return'ün üstünde hesapla.",
+    "answerPersonalTr": null
+  }
+]
