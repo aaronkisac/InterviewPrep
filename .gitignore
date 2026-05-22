@@ -48,3 +48,6 @@ next-env.d.ts
 
 # graphify — auto-generated dependency graph, changes on every commit
 /graphify-out/
+
+# write permission test file created by tooling
+.writetest
