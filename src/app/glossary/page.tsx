@@ -12,6 +12,8 @@ const SECTION_ORDER: Array<{ key: Topic | "general"; label: string }> = [
   { key: "react", label: TOPIC_LABELS.react },
   { key: "typescript", label: TOPIC_LABELS.typescript },
   { key: "nextjs", label: TOPIC_LABELS.nextjs },
+  { key: "javascript", label: TOPIC_LABELS.javascript },
+  { key: "redux", label: TOPIC_LABELS.redux },
   { key: "general", label: "General" },
 ];
 

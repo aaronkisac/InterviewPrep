@@ -14,12 +14,20 @@ export function parseLanguage(value: string | undefined): Language {
 
 export const TR_FALLBACK = "TR çevirisi yakında.";
 
-export const TOPICS: readonly Topic[] = ["react", "typescript", "nextjs"];
+export const TOPICS: readonly Topic[] = [
+  "react",
+  "typescript",
+  "nextjs",
+  "javascript",
+  "redux",
+];
 
 export const TOPIC_LABELS: Record<Topic, string> = {
   react: "React",
   typescript: "TypeScript",
   nextjs: "Next.js",
+  javascript: "JavaScript",
+  redux: "Redux",
 };
 
 export const LEVELS: ReadonlyArray<{

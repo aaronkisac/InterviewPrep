@@ -133,5 +133,248 @@
     "definition": "Middleware runs at the Edge before a request hits a route. The function receives a `NextRequest` and returns a `NextResponse` — it can redirect, rewrite, set cookies, or modify request headers. Configure which routes it runs on via a `matcher` config. In Next 16+, the file is named `proxy.ts` (same API). Keep it small — runs on every matched request.",
     "codeExample": "// middleware.ts (or proxy.ts in Next 16+)\nimport { NextResponse } from 'next/server';\nimport type { NextRequest } from 'next/server';\n\nexport function middleware(request: NextRequest) {\n  const token = request.cookies.get('session');\n  if (!token) return NextResponse.redirect(new URL('/login', request.url));\n  return NextResponse.next();\n}\n\nexport const config = { matcher: ['/dashboard/:path*'] };",
     "relatedSlugs": ["app-router", "route-handler"]
+  },
+  {
+    "slug": "redux-store",
+    "label": "Redux Store",
+    "topic": "redux",
+    "tooltip": "The single object that holds the entire application state tree in a Redux app.",
+    "definition": "The Redux store is the single source of truth for application state. Created with `configureStore()` (Redux Toolkit) or the legacy `createStore()`, it exposes three core methods: `getState()` to read the current state, `dispatch(action)` to trigger a state change, and `subscribe(listener)` to react to changes. There is always exactly one store per Redux application — multiple data domains are handled by combining slice reducers, not by creating multiple stores.",
+    "codeExample": "import { configureStore } from '@reduxjs/toolkit';\nimport cartReducer from './cartSlice';\nimport userReducer from './userSlice';\n\nexport const store = configureStore({\n  reducer: { cart: cartReducer, user: userReducer },\n});\n\nexport type RootState  = ReturnType<typeof store.getState>;\nexport type AppDispatch = typeof store.dispatch;",
+    "relatedSlugs": ["redux-reducer", "redux-action", "redux-dispatch"]
+  },
+  {
+    "slug": "redux-reducer",
+    "label": "Reducer",
+    "topic": "redux",
+    "tooltip": "A pure function (state, action) => newState that describes how state changes in response to an action.",
+    "definition": "A reducer is a pure function that takes the current state and an action object and returns the next state — never mutating the original. The name comes from `Array.prototype.reduce`: just as reduce folds an array into a single value, a Redux reducer folds a stream of dispatched actions into the current state. Rules: no side effects, no direct mutations, always return the current state unchanged for unknown action types. Redux Toolkit's `createSlice` generates reducers with Immer baked in, so you can write mutating-looking code that produces new immutable state.",
+    "codeExample": "import { createSlice, PayloadAction } from '@reduxjs/toolkit';\n\nconst counterSlice = createSlice({\n  name: 'counter',\n  initialState: { value: 0 },\n  reducers: {\n    increment: (state) => { state.value += 1; },\n    setBy:     (state, action: PayloadAction<number>) => {\n      state.value = action.payload;\n    },\n  },\n});\n\nexport const { increment, setBy } = counterSlice.actions;\nexport default counterSlice.reducer;",
+    "relatedSlugs": ["redux-store", "redux-action", "immer", "combine-reducers"]
+  },
+  {
+    "slug": "redux-action",
+    "label": "Action",
+    "topic": "redux",
+    "tooltip": "A plain JS object with a `type` field that describes what happened in the app.",
+    "definition": "An action is the only way to describe a state change in Redux — a plain object with at minimum a `type` string. By convention (and Redux Toolkit's Flux Standard Action shape) it also carries a `payload` field for data. Actions are dispatched to the store, which passes them through middleware and then to the root reducer. With `createSlice`, action creators are auto-generated and fully typed — you rarely write action objects by hand.",
+    "codeExample": "// Manual action object\nstore.dispatch({ type: 'cart/addItem', payload: { id: '42', qty: 1 } });\n\n// Auto-generated action creator (Redux Toolkit)\nimport { addItem } from './cartSlice';\nstore.dispatch(addItem({ id: '42', qty: 1 }));\n// dispatches: { type: 'cart/addItem', payload: { id: '42', qty: 1 } }",
+    "relatedSlugs": ["redux-dispatch", "redux-reducer", "redux-store"]
+  },
+  {
+    "slug": "redux-dispatch",
+    "label": "Dispatch",
+    "topic": "redux",
+    "tooltip": "The store method that sends an action through middleware and into the root reducer to update state.",
+    "definition": "`store.dispatch(action)` is the only way to trigger a state change. It sends the action through the middleware pipeline (thunk, logger, etc.) and then calls the root reducer with the current state and that action. In React components, use the typed `useAppDispatch` hook rather than importing the store directly — this keeps components decoupled from the store singleton and ensures correct TypeScript inference.",
+    "codeExample": "// In a component\nimport { useAppDispatch } from '@/app/hooks';\nimport { increment } from './counterSlice';\n\nfunction Counter() {\n  const dispatch = useAppDispatch();\n  return <button onClick={() => dispatch(increment())}>+1</button>;\n}",
+    "relatedSlugs": ["redux-action", "redux-store", "thunk"]
+  },
+  {
+    "slug": "thunk",
+    "label": "Thunk",
+    "topic": "redux",
+    "tooltip": "A function dispatched to the Redux store instead of a plain action object, used to handle async logic.",
+    "definition": "A thunk is a function that wraps an expression to delay its evaluation — in Redux it is a function you dispatch that the `redux-thunk` middleware intercepts before it reaches the reducer. The thunk receives `(dispatch, getState)` and can perform async work (API calls, timeouts) then dispatch plain actions with the results. Redux Toolkit ships `createAsyncThunk` which auto-generates `pending`, `fulfilled`, and `rejected` action types and handles AbortController-based cancellation.",
+    "codeExample": "import { createAsyncThunk } from '@reduxjs/toolkit';\n\nexport const fetchUser = createAsyncThunk(\n  'user/fetch',\n  async (userId: string) => {\n    const res = await fetch(`/api/users/${userId}`);\n    if (!res.ok) throw new Error('Not found');\n    return res.json();\n  },\n);\n\n// Dispatching from a component:\ndispatch(fetchUser('u_123'));",
+    "relatedSlugs": ["redux-dispatch", "redux-middleware", "redux-saga"]
+  },
+  {
+    "slug": "redux-selector",
+    "label": "Selector",
+    "topic": "redux",
+    "tooltip": "A function that reads and optionally derives data from the Redux store, optionally memoised with Reselect.",
+    "definition": "A selector is a function that takes the Redux state and returns a derived value. Simple selectors are just arrow functions; complex ones use `createSelector` from Reselect (bundled with Redux Toolkit) to memoize the result — it only recomputes when its inputs change. Selectors decouple components from the store's internal shape: rename a field in state and only the selector changes, not every component that reads it.",
+    "codeExample": "import { createSelector } from '@reduxjs/toolkit';\nimport type { RootState } from './store';\n\nconst selectItems  = (state: RootState) => state.cart.items;\nconst selectCoupon = (state: RootState) => state.cart.coupon;\n\nexport const selectTotal = createSelector(\n  [selectItems, selectCoupon],\n  (items, coupon) => {\n    const raw = items.reduce((s, i) => s + i.price * i.qty, 0);\n    return coupon ? raw * (1 - coupon.discount) : raw;\n  },\n);\n\n// In a component:\nconst total = useAppSelector(selectTotal);",
+    "relatedSlugs": ["redux-store", "reselect"]
+  },
+  {
+    "slug": "redux-middleware",
+    "label": "Redux Middleware",
+    "topic": "redux",
+    "tooltip": "A function that intercepts dispatched actions before they reach the reducer — used for async logic, logging, and crash reporting.",
+    "definition": "Redux middleware is a higher-order function that wraps the `dispatch` function. It sits between `store.dispatch()` and the root reducer, letting you intercept, transform, delay, or side-effect on every action. The standard shape is `(store) => (next) => (action) => { ... }`. `redux-thunk` is the most common — it lets you dispatch functions. `redux-logger` logs state before and after. Multiple middlewares are composed left-to-right.",
+    "codeExample": "// Custom middleware\nconst analyticsMiddleware =\n  (store: MiddlewareAPI) =>\n  (next: Dispatch) =>\n  (action: unknown) => {\n    if (isAction(action)) analytics.track(action.type);\n    return next(action);\n  };\n\n// Register in configureStore\nconfigureStore({\n  reducer: rootReducer,\n  middleware: (getDefault) =>\n    getDefault().concat(analyticsMiddleware),\n});",
+    "relatedSlugs": ["thunk", "redux-saga", "redux-store"]
+  },
+  {
+    "slug": "redux-saga",
+    "label": "redux-saga",
+    "topic": "redux",
+    "tooltip": "A middleware library that manages async side effects using ES6 generator functions and declarative effect descriptors.",
+    "definition": "redux-saga is a Redux middleware that handles side effects — API calls, WebSocket messages, complex async orchestration — using ES6 generators. Instead of calling async functions directly, sagas `yield` plain effect descriptor objects (`call`, `put`, `take`, `race`, `fork`) that the middleware interprets. Because the generator only produces descriptions and never executes I/O itself, sagas are easy to test without mocks. Key helper effects: `takeEvery` (spawn a task per action), `takeLatest` (cancel previous task on new action), `race` (run effects in parallel, cancel the loser).",
+    "codeExample": "import { call, put, takeLatest } from 'redux-saga/effects';\n\nfunction* fetchUserSaga(action: PayloadAction<string>) {\n  try {\n    const user: User = yield call(api.getUser, action.payload);\n    yield put(userLoaded(user));\n  } catch (e) {\n    yield put(userFailed(String(e)));\n  }\n}\n\nexport function* rootSaga() {\n  yield takeLatest('user/fetch', fetchUserSaga);\n}",
+    "relatedSlugs": ["thunk", "redux-middleware"]
+  },
+  {
+    "slug": "flux",
+    "label": "Flux",
+    "topic": "redux",
+    "tooltip": "Facebook's unidirectional data flow architecture — the pattern that directly inspired Redux.",
+    "definition": "Flux is an application architecture pattern Facebook introduced alongside React in 2014 to tame the complexity of two-way data binding. It enforces a strict one-way cycle: Action → Dispatcher → Store → View. Redux was directly inspired by Flux but simplified it: it eliminates the separate Dispatcher, collapses multiple mutable stores into one immutable state tree, and replaces in-store mutation logic with pure reducer functions. Understanding Flux makes Redux's design decisions (one store, pure reducers, actions as the only mutation path) immediately obvious.",
+    "codeExample": null,
+    "relatedSlugs": ["redux-store", "redux-action", "redux-reducer"]
+  },
+  {
+    "slug": "redux-toolkit",
+    "label": "Redux Toolkit",
+    "topic": "redux",
+    "tooltip": "The official, opinionated Redux toolset — configureStore, createSlice, createAsyncThunk, RTK Query.",
+    "definition": "Redux Toolkit (RTK) is the official recommended way to write Redux logic. It wraps the raw Redux API with `configureStore` (auto-wires DevTools and thunk middleware), `createSlice` (generates reducers and action creators in one call), `createAsyncThunk` (handles pending/fulfilled/rejected lifecycle actions), and RTK Query (declarative data fetching and caching). It bundles Immer so you can write apparently-mutating reducer logic that actually produces immutable state, and Reselect for memoised selectors.",
+    "codeExample": "import { configureStore, createSlice } from '@reduxjs/toolkit';\n\nconst counterSlice = createSlice({\n  name: 'counter',\n  initialState: { value: 0 },\n  reducers: {\n    increment: (state) => { state.value += 1; },\n  },\n});\n\nconst store = configureStore({\n  reducer: { counter: counterSlice.reducer },\n});\n\nexport const { increment } = counterSlice.actions;",
+    "relatedSlugs": ["redux-store", "redux-reducer", "immer", "reselect"]
+  },
+  {
+    "slug": "immer",
+    "label": "Immer",
+    "topic": "redux",
+    "tooltip": "A library that lets you write mutating-looking code that actually produces a new immutable state object.",
+    "definition": "Immer uses JavaScript `Proxy` to record mutations you make on a draft copy of the state, then produces a new immutable object reflecting those changes — the original is never touched. Redux Toolkit bundles Immer into `createSlice` reducers, so you can write `state.items.push(item)` instead of `return { ...state, items: [...state.items, item] }`. Immer only applies inside `createSlice` (or `createReducer`) — mutating outside those functions is still a bug.",
+    "codeExample": "// Without Immer — verbose spread\ncase 'addItem':\n  return {\n    ...state,\n    cart: { ...state.cart, items: [...state.cart.items, action.payload] },\n  };\n\n// With Immer (inside createSlice) — clear and direct\naddItem: (state, action: PayloadAction<CartItem>) => {\n  state.cart.items.push(action.payload); // safe — Immer wraps this\n},",
+    "relatedSlugs": ["redux-reducer", "redux-toolkit"]
+  },
+  {
+    "slug": "reselect",
+    "label": "Reselect",
+    "topic": "redux",
+    "tooltip": "A memoised selector library. createSelector only recomputes when its input selectors return new references.",
+    "definition": "Reselect is the selector library bundled with Redux Toolkit. Its `createSelector` function takes one or more input selectors and a result function; the result function is only called when the inputs produce new values (by reference equality). This prevents React components from re-rendering when an expensive derived value hasn't actually changed. Selectors compose — pass one `createSelector` output as an input to another to build up a pipeline of cached transformations.",
+    "codeExample": "import { createSelector } from '@reduxjs/toolkit';\n\nconst selectAllProducts = (state: RootState) => state.products.items;\nconst selectFilter      = (state: RootState) => state.products.filter;\n\n// Only recomputes when products or filter change\nexport const selectFilteredProducts = createSelector(\n  [selectAllProducts, selectFilter],\n  (products, filter) =>\n    filter\n      ? products.filter((p) => p.category === filter)\n      : products,\n);",
+    "relatedSlugs": ["redux-selector", "redux-toolkit"]
+  },
+  {
+    "slug": "combine-reducers",
+    "label": "combineReducers",
+    "topic": "redux",
+    "tooltip": "Utility that merges multiple slice reducers into one root reducer, each responsible for its own state slice.",
+    "definition": "`combineReducers` (or the object shorthand in `configureStore`) composes multiple reducer functions into a single root reducer. Each slice reducer receives only its own piece of the state tree — it never sees or can accidentally affect sibling slices. On every dispatch, the root reducer calls each slice reducer with its slice and the action, then assembles the results into a new top-level state object. This is the primary mechanism for splitting Redux state by domain without requiring multiple stores.",
+    "codeExample": "import { combineReducers } from '@reduxjs/toolkit';\n\n// Explicit combineReducers\nconst rootReducer = combineReducers({\n  cart:    cartReducer,\n  user:    userReducer,\n  session: sessionReducer,\n});\n\n// Or use the shorthand in configureStore (equivalent)\nconfigureStore({\n  reducer: {\n    cart:    cartReducer,\n    user:    userReducer,\n    session: sessionReducer,\n  },\n});",
+    "relatedSlugs": ["redux-reducer", "redux-store"]
+  },
+  {
+    "slug": "closure",
+    "label": "Closure",
+    "topic": "javascript",
+    "tooltip": "A function that retains access to variables from its outer scope even after that scope has finished executing.",
+    "definition": "A closure is formed when a function is defined inside another function and the inner function captures (closes over) variables from the outer function's scope. The inner function retains a live reference to those variables — not a copy — so it reads and writes the same memory even after the outer function has returned. Closures are the mechanism behind data privacy (module pattern), partial application, memoization, and any code that needs to 'remember' state between calls without using global variables.",
+    "codeExample": "function makeCounter(start = 0) {\n  let count = start; // captured by the closure\n  return {\n    increment: () => ++count,\n    decrement: () => --count,\n    value:     () => count,\n  };\n}\n\nconst counter = makeCounter(10);\ncounter.increment(); // 11\ncounter.increment(); // 12\ncounter.value();     // 12\n// count is private — unreachable outside makeCounter",
+    "relatedSlugs": ["scope", "iife", "module-pattern-js"]
+  },
+  {
+    "slug": "scope",
+    "label": "Scope",
+    "topic": "javascript",
+    "tooltip": "The region of code where a variable is accessible. JavaScript has global, function, and block scope.",
+    "definition": "Scope determines where in the code a variable can be read or written. JavaScript has three scope types: **global scope** (accessible everywhere), **function scope** (`var` declarations are limited to the enclosing function), and **block scope** (`let` and `const` are limited to the nearest `{}`). Scope is lexical — it is determined by where you write the code, not where it is called from. Nested functions form a scope chain: inner scopes can access outer variables, but outer scopes cannot access inner variables.",
+    "codeExample": "var globalVar = 'global';\n\nfunction outer() {\n  let outerLet = 'outer';\n\n  function inner() {\n    let innerLet = 'inner';\n    console.log(outerLet);  // ✅ accessible via scope chain\n    console.log(globalVar); // ✅ accessible\n  }\n\n  inner();\n  // console.log(innerLet); // ❌ ReferenceError\n}\n\n// Block scope\n{\n  let blockVar = 'block';\n}\n// console.log(blockVar); // ❌ ReferenceError",
+    "relatedSlugs": ["closure", "hoisting-js"]
+  },
+  {
+    "slug": "hoisting-js",
+    "label": "Hoisting",
+    "topic": "javascript",
+    "tooltip": "JavaScript's behaviour of moving var declarations and function definitions to the top of their scope before execution.",
+    "definition": "Hoisting is the mechanism by which JavaScript's engine processes declarations before executing code. `var` declarations are hoisted and initialised to `undefined`, so they can be referenced before the line they appear on (returning `undefined`, not an error). Function declarations are fully hoisted — both name and body — so they can be called before their definition. `let` and `const` are hoisted to the top of their block but placed in a Temporal Dead Zone (TDZ) — accessing them before the declaration line throws a `ReferenceError`. Only declarations are hoisted, not assignments.",
+    "codeExample": "// var — hoisted as undefined\nconsole.log(x); // undefined (no error)\nvar x = 5;\n\n// function declaration — fully hoisted\ngreet(); // 'Hello' — works before definition\nfunction greet() { return 'Hello'; }\n\n// let/const — TDZ\nconsole.log(y); // ReferenceError!\nlet y = 10;",
+    "relatedSlugs": ["scope", "closure"]
+  },
+  {
+    "slug": "iife",
+    "label": "IIFE",
+    "topic": "javascript",
+    "tooltip": "Immediately Invoked Function Expression — a function that executes the moment it is defined, creating a private scope.",
+    "definition": "An IIFE (Immediately Invoked Function Expression) is a function expression wrapped in parentheses and immediately called. The wrapping parentheses make it an expression rather than a declaration; the trailing `()` invokes it straight away. IIFEs were the primary way to create private scope before ES6 modules — any `var` inside the IIFE is invisible to the outside world. Today, ES modules provide file-level scope, making IIFEs mostly a legacy pattern, though they still appear in bundled output and libraries that need to support environments without a module system.",
+    "codeExample": "(function () {\n  var privateVar = 'hidden';\n  console.log('IIFE ran');\n})();\n\n// Arrow function variant\n(() => {\n  const init = 'also private';\n  console.log(init);\n})();\n\n// console.log(privateVar); // ❌ ReferenceError",
+    "relatedSlugs": ["closure", "scope"]
+  },
+  {
+    "slug": "event-loop",
+    "label": "Event Loop",
+    "topic": "javascript",
+    "tooltip": "The mechanism that allows JavaScript to perform non-blocking operations by offloading work and processing queued callbacks one at a time.",
+    "definition": "JavaScript is single-threaded — only one piece of code runs at a time. The event loop is the scheduler that coordinates what runs next. It works with three areas: the **call stack** (currently executing code), the **microtask queue** (Promise callbacks, `queueMicrotask`), and the **macrotask queue** (`setTimeout`, I/O, UI events). After each call stack is emptied, the event loop drains the entire microtask queue first, then picks one macrotask. This ordering is why Promise `.then` callbacks always run before `setTimeout(fn, 0)` callbacks.",
+    "codeExample": "console.log('1');\nsetTimeout(() => console.log('4'), 0); // macrotask\nPromise.resolve().then(() => console.log('3')); // microtask\nconsole.log('2');\n// Output: 1 → 2 → 3 → 4",
+    "relatedSlugs": ["promise-js", "async-await"]
+  },
+  {
+    "slug": "promise-js",
+    "label": "Promise",
+    "topic": "javascript",
+    "tooltip": "An object representing the eventual completion or failure of an asynchronous operation, enabling cleaner async code than callbacks.",
+    "definition": "A Promise is an object that represents the result of an asynchronous operation that will settle at some future point. It has three states: **pending** (initial), **fulfilled** (succeeded with a value), and **rejected** (failed with a reason). Once settled it is immutable. Handlers are registered with `.then(onFulfilled)`, `.catch(onRejected)`, and `.finally(onSettled)`. Each `.then` returns a new Promise, enabling chaining. Promise callbacks are microtasks — they run before the next event loop macrotask. `Promise.all`, `Promise.allSettled`, `Promise.race`, and `Promise.any` coordinate multiple concurrent promises.",
+    "codeExample": "const fetchUser = (id) =>\n  fetch(`/api/users/${id}`)\n    .then(res => {\n      if (!res.ok) throw new Error(`HTTP ${res.status}`);\n      return res.json();\n    });\n\nfetchUser(1)\n  .then(user => console.log(user.name))\n  .catch(err => console.error(err))\n  .finally(() => console.log('done'));",
+    "relatedSlugs": ["async-await", "event-loop"]
+  },
+  {
+    "slug": "async-await",
+    "label": "async / await",
+    "topic": "javascript",
+    "tooltip": "Syntactic sugar over Promises that makes asynchronous code read like synchronous code.",
+    "definition": "`async` functions always return a Promise. `await` suspends the function's execution until the awaited Promise settles, then resumes with the resolved value. Under the hood, the engine transforms the async function into a state machine similar to a generator. The suspended function does not block the thread — other tasks continue to run. Error handling uses `try/catch` rather than `.catch()`. Independent async operations should be started simultaneously with `Promise.all` rather than awaited sequentially, to avoid unnecessary latency.",
+    "codeExample": "async function loadDashboard(userId) {\n  try {\n    // Parallel — both requests fire at the same time\n    const [user, posts] = await Promise.all([\n      fetchUser(userId),\n      fetchPosts(userId),\n    ]);\n    return { user, posts };\n  } catch (err) {\n    console.error('Dashboard load failed:', err);\n    throw err;\n  }\n}",
+    "relatedSlugs": ["promise-js", "event-loop"]
+  },
+  {
+    "slug": "prototype-chain",
+    "label": "Prototype Chain",
+    "topic": "javascript",
+    "tooltip": "The linked chain of objects JavaScript searches when looking up a property that doesn't exist on the object itself.",
+    "definition": "Every JavaScript object has an internal `[[Prototype]]` link pointing to another object (or `null`). When you access a property, the engine first checks the object itself. If not found, it follows the `[[Prototype]]` link and checks that object — and so on up the chain until it finds the property or reaches `null` (the chain's end). This is how objects can 'inherit' methods without copying them: they all share a single copy on a prototype object. ES6 `class` and `extends` use this same mechanism.",
+    "codeExample": "const animal = { breathe() { return 'breathing'; } };\nconst dog = Object.create(animal);\ndog.bark = () => 'woof';\n\nconst rex = Object.create(dog);\nrex.bark();    // 'woof'    — found on dog\nrex.breathe(); // 'breathing' — found on animal\n\n// Check own vs inherited\nrex.hasOwnProperty('bark');    // false\ndog.hasOwnProperty('bark');    // true",
+    "relatedSlugs": ["closure", "scope"]
+  },
+  {
+    "slug": "event-delegation",
+    "label": "Event Delegation",
+    "topic": "javascript",
+    "tooltip": "Attaching a single event listener to a parent element to handle events from all its children via bubbling.",
+    "definition": "Event delegation exploits event bubbling: instead of attaching a listener to every child element, you attach one listener to a common parent. When a child is clicked, the event bubbles up and the parent's handler fires. You use `event.target` (or `event.target.closest(selector)`) to identify which child triggered it. Benefits: fewer listeners (less memory), automatically covers dynamically added children, single cleanup point on teardown. It is especially valuable for large lists, tables, and components that mount/unmount items frequently.",
+    "codeExample": "const list = document.querySelector('#todo-list');\n\nlist.addEventListener('click', (e) => {\n  const item = e.target.closest('[data-id]');\n  if (!item) return;\n\n  if (e.target.matches('.delete-btn')) {\n    deleteItem(item.dataset.id);\n  } else if (e.target.matches('.complete-btn')) {\n    toggleComplete(item.dataset.id);\n  }\n});\n// Works for items added later — no re-binding needed",
+    "relatedSlugs": ["event-loop"]
+  },
+  {
+    "slug": "debounce",
+    "label": "Debounce",
+    "topic": "javascript",
+    "tooltip": "A technique that delays invoking a function until after a specified quiet period since the last call.",
+    "definition": "Debouncing ensures a function only executes after a specified delay has elapsed since the last invocation. Every new call resets the timer. It is used for events that fire rapidly where you only care about the final settled state — search input (wait until the user stops typing), window resize, autocomplete, form validation. The delay is typically 150–300 ms for user input. A leading variant fires immediately on the first call and then ignores subsequent calls during the quiet period.",
+    "codeExample": "function debounce(fn, delay) {\n  let timerId;\n  return function (...args) {\n    clearTimeout(timerId);\n    timerId = setTimeout(() => fn.apply(this, args), delay);\n  };\n}\n\nconst handleSearch = debounce((query) => {\n  fetchResults(query);\n}, 300);\n\ninput.addEventListener('input', e => handleSearch(e.target.value));\n// API is only called 300ms after the user stops typing",
+    "relatedSlugs": ["throttle", "event-loop"]
+  },
+  {
+    "slug": "throttle",
+    "label": "Throttle",
+    "topic": "javascript",
+    "tooltip": "A technique that limits a function to fire at most once per specified interval, regardless of how often it is called.",
+    "definition": "Throttling ensures a function executes at most once per specified time interval, no matter how frequently the triggering event fires. Unlike debounce (which waits for silence), throttle guarantees regular execution during continuous activity. Common use cases: scroll and resize handlers (limit to ~60fps), API rate limiting, game input processing. A leading throttle fires on the first call; a trailing throttle fires after the interval; most implementations fire on both.",
+    "codeExample": "function throttle(fn, interval) {\n  let lastTime = 0;\n  return function (...args) {\n    const now = Date.now();\n    if (now - lastTime >= interval) {\n      lastTime = now;\n      fn.apply(this, args);\n    }\n  };\n}\n\nconst onScroll = throttle(updateParallax, 16); // ~60fps\nwindow.addEventListener('scroll', onScroll);",
+    "relatedSlugs": ["debounce", "event-loop"]
+  },
+  {
+    "slug": "generator-js",
+    "label": "Generator",
+    "topic": "javascript",
+    "tooltip": "A function that can pause its execution with yield and resume later, producing a sequence of values on demand.",
+    "definition": "A generator function (`function*`) returns an iterator when called. Inside the body, `yield` pauses execution and emits a value; calling `.next()` resumes from where it left off. Generators enable lazy evaluation — values are produced only when requested, which is memory-efficient for large or infinite sequences. They also support two-way communication: `yield` expressions can receive values passed via `.next(value)`. Redux-saga uses generators to orchestrate async side effects. `async/await` was itself inspired by the generator + Promise pattern.",
+    "codeExample": "function* range(start, end) {\n  for (let i = start; i <= end; i++) {\n    yield i;\n  }\n}\n\nfor (const n of range(1, 5)) {\n  console.log(n); // 1 2 3 4 5\n}\n\n// Infinite sequence — only computes on demand\nfunction* naturals() {\n  let n = 1;\n  while (true) yield n++;\n}\nconst gen = naturals();\ngen.next().value; // 1\ngen.next().value; // 2",
+    "relatedSlugs": ["event-loop", "async-await"]
+  },
+  {
+    "slug": "symbol-js",
+    "label": "Symbol",
+    "topic": "javascript",
+    "tooltip": "A primitive value that is guaranteed to be unique every time it is created, used as collision-free property keys.",
+    "definition": "Symbol is a primitive type introduced in ES6. Every `Symbol()` call produces a unique value — even if you pass the same description string. Symbols are non-enumerable by default, so they don't appear in `Object.keys()` or `for...in` loops, making them ideal for attaching metadata without polluting the public API. Well-known symbols like `Symbol.iterator`, `Symbol.toPrimitive`, and `Symbol.hasInstance` let objects hook into built-in JavaScript behaviours. `Symbol.for(key)` creates symbols in a global registry shared across modules.",
+    "codeExample": "const ID = Symbol('id');\nconst user = { name: 'Alice', [ID]: 42 };\n\nconsole.log(Object.keys(user)); // ['name'] — Symbol hidden\nconsole.log(user[ID]);          // 42\n\n// Well-known symbol: custom iteration\nclass Range {\n  constructor(a, b) { this.a = a; this.b = b; }\n  [Symbol.iterator]() {\n    let i = this.a;\n    return { next: () => i <= this.b ? { value: i++, done: false } : { done: true } };\n  }\n}\nfor (const n of new Range(1, 3)) console.log(n); // 1 2 3",
+    "relatedSlugs": ["prototype-chain"]
+  },
+  {
+    "slug": "web-worker",
+    "label": "Web Worker",
+    "topic": "javascript",
+    "tooltip": "A background thread in the browser that runs JavaScript without blocking the main UI thread.",
+    "definition": "Web Workers run JavaScript in a separate thread from the main (UI) thread. Because JavaScript is single-threaded by default, CPU-heavy work blocks the event loop and freezes the UI. Web Workers solve this by offloading computation. Workers communicate with the main thread via `postMessage` / `onmessage` (using the structured-clone algorithm or Transferable objects for zero-copy buffer transfers). Limitations: no DOM access, no `window` or `document`. They can use `fetch`, `IndexedDB`, `WebSocket`, and `WebAssembly`. The `comlink` library wraps workers in a Proxy, eliminating most message-passing boilerplate.",
+    "codeExample": "// main.js\nconst worker = new Worker('/worker.js');\nworker.postMessage({ data: largeArray });\nworker.onmessage = (e) => console.log('Result:', e.data.result);\n\n// worker.js\nself.onmessage = (e) => {\n  const result = e.data.data.reduce((a, b) => a + b, 0);\n  self.postMessage({ result });\n};",
+    "relatedSlugs": ["event-loop"]
   }
 ]

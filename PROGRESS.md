@@ -1,6 +1,6 @@
 # Progress
 
-Last updated: 2026-05-22 (Next.js bank — 22 new questions across 4 batches, ids 301–322)
+Last updated: 2026-05-22 (Redux bank complete — 35 questions ids 401–435, 13 glossary terms, Topic type updated)
 
 ## Stack (per spec v1.1)
 
@@ -151,3 +151,61 @@ include. **22 new questions** written across 4 batch files.
 - All answers are App Router-aware (Next.js 13+/15+); Pages Router concepts are covered where interviewers still ask about them (ids 320–321).
 - `detailMdTr` is unset across all 22 — English-only deep dives, same as TypeScript and React batches.
 - `data/seed-mock-nextjs.json` is still missing — Next.js topic remains disabled in `/mock` until mock options are seeded.
+
+## Redux question bank ✅ COMPLETE
+
+35 new questions across 5 batches. `Topic` type extended with `"redux"` in `src/lib/supabase/types.ts`.
+
+| Step | Status | Notes |
+| --- | --- | --- |
+| redux-batch-1 — L1 Entry (6 q) | ✅ | ids 401–406. What is Redux, Flux, core principles, store, reducers, reducer concept. |
+| redux-batch-2 — L2 Junior (9 q) | ✅ | ids 407–415. DevTools, DevTools features, Thunk, Thunk uses, initial state, Container vs Component, reducer naming, constants, connect(). |
+| redux-batch-3 — L3 Mid (9 q) | ✅ | ids 416–424. All state in Redux?, redux-saga, selectors, multiple middleware, Context vs Redux, Redux Form, Redux Form features, async middleware choices, Ajax requests. |
+| redux-batch-4 — L4 Senior (7 q) | ✅ | ids 425–431. Directory structure, saga vs thunk, Redux downsides, store access outside React, reset state, proper store access, @ decorator. |
+| redux-batch-5 — L5 Expert (4 q) | ✅ | ids 432–435. Redux vs RxJS, call vs put in saga, saga mental model, Relay vs Redux. |
+| `pnpm seed` import | ⬜ | Seed script auto-loads every `data/seed-questions/*.json`, upserts by (topic, question). |
+
+### Notes
+
+- Redux ids start at 401 — clear of React (1–20, 201–250), TypeScript (101–143), Next.js (301–322).
+- Level split: L1 Entry (401–406), L2 Junior (407–415), L3 Mid (416–424), L4 Senior (425–431), L5 Expert (432–435).
+- All `answerPersonal` fields are `null` — no Aaron-specific Redux proof points in the current job history.
+- `detailMdTr` is unset — English-only deep dives, consistent with React/TypeScript/Next.js batches.
+- `data/seed-mock-redux.json` not yet created — Redux topic will be disabled in `/mock` until mock options are seeded.
+
+## Redux glossary terms ✅ COMPLETE
+
+13 new terms added to `data/seed-terms.json`. Slugs: `redux-store`, `redux-reducer`, `redux-action`, `redux-dispatch`, `thunk`, `redux-selector`, `redux-middleware`, `redux-saga`, `flux`, `redux-toolkit`, `immer`, `reselect`, `combine-reducers`.
+
+All terms carry `topic: "redux"`, a tooltip (used in hover popover), a full `definition`, a `codeExample` where relevant, and `relatedSlugs` cross-linking related terms. Run `pnpm seed` to import.
+
+## JavaScript question bank ✅ COMPLETE (Adım 1)
+
+86 new questions across 8 batches (ids 501–586). `Topic` type extended with `"javascript"` in `src/lib/supabase/types.ts`.
+6 duplicate/unusable questions from the 92-question source were merged or dropped.
+
+| Step | Status | Notes |
+| --- | --- | --- |
+| js-batch-1 — L1 Entry (10 q) | ✅ | ids 501–510. Object type, typeof, arrays, equality, scope, == vs ===, values/types, null/undefined, let, undefined vs not defined. |
+| js-batch-2 — L2 Junior pt1 (9 q) | ✅ | ids 511–519. Host vs native objects, strict mode (merged), event bubbling, iteration, polyfill, let vs var, arrow fn advantages, use strict pros/cons, anonymous fn. |
+| js-batch-3 — L2 Junior pt2 (9 q) | ✅ | ids 520–528. Set dedup, anonymous vs named fns, shim vs polyfill, coercion, IIFE, export default, arrow fn use cases, spread vs rest, destructuring. |
+| js-batch-4 — L3 Mid pt1 (11 q) | ✅ | ids 529–539. throw vs new Error, same-origin, load event, callback hell, compile-to-JS, Symbol, generators intro, extending builtins, generators use cases, closure (merged), Object.freeze vs const. |
+| js-batch-5 — L3 Mid pt2 (11 q) | ✅ | ids 540–550. ES6 classes benefits, class vs ES5 constructors, currying, DOMContentLoaded, AMD vs CJS, HOF, bind, ES5 vs ES6, global scope, linear search, binary search. |
+| js-batch-6 — L4 Senior pt1 (10 q) | ✅ | ids 551–560. Event delegation, prototypal inheritance, `this` keyword, Promises, async/await, event loop, hoisting, debounce, throttle, memoization. |
+| js-batch-7 — L4 Senior pt2 (10 q) | ✅ | ids 561–570. Map vs WeakMap, Proxy, pass by value vs reference, memory leaks, garbage collection, pure functions & immutability, module pattern, Observer pattern, TCO, Web Workers. |
+| js-batch-8 — L5 Expert (16 q) | ✅ | ids 571–586. Optional chaining & ??, iterators & iterables, tagged template literals, BigInt, Intl API, Symbol advanced, microtasks vs macrotasks, type coercion, generators advanced, Reflect API, WebAssembly, Service Workers, performance optimisations, WeakRef & FinalizationRegistry, V8 hidden classes, Temporal API. |
+| `pnpm seed` import | ⬜ | Seed script auto-loads every `data/seed-questions/*.json`, upserts by (topic, question). |
+
+### Notes
+
+- JavaScript ids start at 501 — clear of React (1–20, 201–250), TypeScript (101–143), Next.js (301–322), Redux (401–435).
+- Level split: L1 Entry (501–510), L2 Junior (511–528), L3 Mid (529–550), L4 Senior (551–570), L5 Expert (571–586).
+- `answerPersonal` is set on several questions where Aaron's experience is directly relevant.
+- All batches include full `detailMd` and `detailMdTr` — JavaScript is the first topic with complete Turkish deep dives.
+- `data/seed-mock-javascript.json` not yet created — JavaScript topic will be disabled in `/mock` until mock options are seeded.
+
+## JavaScript glossary terms ✅ COMPLETE (Adım 2)
+
+15 new terms added to `data/seed-terms.json`. Slugs: `closure`, `scope`, `hoisting-js`, `iife`, `event-loop`, `promise-js`, `async-await`, `prototype-chain`, `event-delegation`, `debounce`, `throttle`, `generator-js`, `symbol-js`, `web-worker`.
+
+All terms carry `topic: "javascript"`, a tooltip, a full `definition`, a `codeExample`, and `relatedSlugs`. Run `pnpm seed` to import.
