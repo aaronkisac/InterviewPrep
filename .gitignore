@@ -45,3 +45,6 @@ next-env.d.ts
 /supabase/.branches
 /supabase/.temp
 .env.local
+
+# graphify — auto-generated dependency graph, changes on every commit
+/graphify-out/
