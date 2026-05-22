@@ -64,8 +64,8 @@
     "hash": "9f8c0bd10a4bc6be80ab25e09f6f4bd7"
   },
   "C:\\Users\\nezih\\Downloads\\projects\\interviewPrepApp\\Interview_Prep_App\\src\\app\\glossary\\page.tsx": {
-    "mtime": 1779129888.8695753,
-    "hash": "b9dfc4f42988aafb761828c0697e7914"
+    "mtime": 1779477184.9222898,
+    "hash": "9ffe6c98ec481b03f9903c40ea77d1ef"
   },
   "C:\\Users\\nezih\\Downloads\\projects\\interviewPrepApp\\Interview_Prep_App\\src\\app\\glossary\\[slug]\\not-found.tsx": {
     "mtime": 1779129504.6088433,
@@ -164,8 +164,8 @@
     "hash": "a865879c2b9eebbb54b9f08f603b5c86"
   },
   "C:\\Users\\nezih\\Downloads\\projects\\interviewPrepApp\\Interview_Prep_App\\src\\lib\\topics.ts": {
-    "mtime": 1779059171.398999,
-    "hash": "92fe63b164545b863e09db7449f77272"
+    "mtime": 1779477183.0539625,
+    "hash": "d31a2abd7f9b0002e64bc33fc88c399d"
   },
   "C:\\Users\\nezih\\Downloads\\projects\\interviewPrepApp\\Interview_Prep_App\\src\\lib\\utils.ts": {
     "mtime": 1779025464.1018975,
@@ -184,8 +184,8 @@
     "hash": "278d9e6baa665717f475a66d7b672bb5"
   },
   "C:\\Users\\nezih\\Downloads\\projects\\interviewPrepApp\\Interview_Prep_App\\src\\lib\\supabase\\types.ts": {
-    "mtime": 1779059456.8575313,
-    "hash": "873c65af74fac79acc6e69b6a5f79917"
+    "mtime": 1779472774.7850893,
+    "hash": "163aa07db407b1f509055d0bfbf440a0"
   },
   "C:\\Users\\nezih\\Downloads\\projects\\interviewPrepApp\\Interview_Prep_App\\supabase\\migrations\\20260517000001_init.sql": {
     "mtime": 1779025552.798452,
@@ -207,13 +207,17 @@
     "mtime": 1779059451.9371367,
     "hash": "10828b227ac71a920f09317cd10d0705"
   },
+  "C:\\Users\\nezih\\Downloads\\projects\\interviewPrepApp\\Interview_Prep_App\\supabase\\migrations\\20260522000001_topics_javascript_redux.sql": {
+    "mtime": 1779477181.2719376,
+    "hash": "ac60952983e2ab9c799df58edd6676d3"
+  },
   "C:\\Users\\nezih\\Downloads\\projects\\interviewPrepApp\\Interview_Prep_App\\pnpm-workspace.yaml": {
     "mtime": 1779035926.250794,
     "hash": "746edc6874f98fb883714a0041fb48db"
   },
   "C:\\Users\\nezih\\Downloads\\projects\\interviewPrepApp\\Interview_Prep_App\\PROGRESS.md": {
-    "mtime": 1779444001.667212,
-    "hash": "8806474a345add4c4c403bd003f8f670"
+    "mtime": 1779491735.6896665,
+    "hash": "9b37635c157cba8f590f6258b83c36f0"
   },
   "C:\\Users\\nezih\\Downloads\\projects\\interviewPrepApp\\Interview_Prep_App\\README.md": {
     "mtime": 1779025252.0,
