@@ -1,6 +1,6 @@
 # Progress
 
-Last updated: 2026-05-21 (TypeScript + React banks — 88 new questions, short answers + detailMd)
+Last updated: 2026-05-22 (Next.js bank — 22 new questions across 4 batches, ids 301–322)
 
 ## Stack (per spec v1.1)
 
@@ -127,3 +127,27 @@ Same flow as the TypeScript bank. Source is `data/raw/react-questions-source.md`
   library); the rest are `null`.
 - Answers are written modern (hooks-era) even where the source phrasing is
   class-component-dated.
+
+## Next.js question bank expansion ✅ COMPLETE
+
+Source: 40 questions from external JSON. 14 overlapped with the existing 20
+seeded questions and were dropped; 1 (versions 10 vs 11) was too outdated to
+include. **22 new questions** written across 4 batch files.
+
+| Step | Status | Notes |
+| --- | --- | --- |
+| Dedupe + level mapping | ✅ | 40 source → 20 already seeded, 1 dropped (outdated), 1 merged into existing, 22 new. |
+| nextjs-batch-1 — L1 Entry (6 q) | ✅ | ids 301–306. Benefits, Link, static files, Fast Refresh, built-in optimisations, next.config.js. |
+| nextjs-batch-2 — L2 Junior (7 q) | ✅ | ids 307–313. Env vars, TypeScript, error handling, Metadata API, CSS/styling, dynamic imports, code splitting. |
+| nextjs-batch-3 — L3 Mid (6 q) | ✅ | ids 314–319. State management, auth, SEO, deployment, analytics, i18n. |
+| nextjs-batch-4 — L4 Senior (3 q) | ✅ | ids 320–322. _app/_document (Pages Router), Draft Mode, security. |
+| `pnpm seed` import | ⬜ | Seed script auto-loads every `data/seed-questions/*.json`, upserts by (topic, question). |
+
+### Notes
+
+- New Next.js ids start at 301 — clear of base seed (1–20), TypeScript (101–143), React (201–250).
+- Level split: L1 Entry (ids 301–305), L2 Junior (ids 306–313), L3 Mid (ids 314–319), L4 Senior (ids 320–322).
+- `answerPersonal` is set on 4 questions (ids 301, 305, 316, 319) where Butlin's or Heyman Al proof points fit naturally; the rest are `null`.
+- All answers are App Router-aware (Next.js 13+/15+); Pages Router concepts are covered where interviewers still ask about them (ids 320–321).
+- `detailMdTr` is unset across all 22 — English-only deep dives, same as TypeScript and React batches.
+- `data/seed-mock-nextjs.json` is still missing — Next.js topic remains disabled in `/mock` until mock options are seeded.
