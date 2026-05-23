@@ -1,0 +1,86 @@
+[
+  {
+    "id": 1005,
+    "topic": "agile-scrum",
+    "level": 2,
+    "levelLabel": "Junior",
+    "question": "What are Epics, User Stories, and Tasks in Agile?",
+    "answerGeneral": "These are three levels of work breakdown. An Epic is a large body of work that can span multiple sprints (e.g. 'User Authentication'). A User Story is a small, independent slice of functionality written from the user's perspective: 'As a [user] I want to [action] so that [benefit]'. A Task is a specific technical step needed to complete a user story (e.g. 'Write JWT middleware'). Epics contain User Stories; User Stories contain Tasks.",
+    "answerGeneralTr": "Bunlar iş kırılımının üç düzeyidir. Epic, birden fazla sprint'e yayılabilen büyük bir iş bütünüdür (ör. 'Kullanıcı Kimlik Doğrulama'). User Story, kullanıcının bakış açısından yazılmış küçük, bağımsız bir işlevsellik dilimidir: 'Bir [kullanıcı] olarak, [fayda] elde etmek için [eylem] yapmak istiyorum'. Task, bir user story'yi tamamlamak için gereken spesifik teknik bir adımdır (ör. 'JWT middleware yaz'). Epic'ler User Story içerir; User Story'ler Task içerir.",
+    "answerPersonal": null,
+    "detailMd": "## Epics, User Stories, and Tasks\n\n## Hierarchy\n\n```\nEpic: User Authentication\n  └─ User Story: As a user, I want to sign up with email\n       └─ Task: Create /auth/register API endpoint\n       └─ Task: Build registration form UI\n       └─ Task: Write unit tests\n  └─ User Story: As a user, I want to reset my password\n       └─ Task: Send password reset email\n       └─ Task: Build reset form\n```\n\n## Epic\n\n- Large feature or goal spanning multiple sprints\n- Too big to estimate or complete in one sprint\n- Broken down into User Stories during refinement\n- Example: \"Shopping Cart\", \"Push Notifications\", \"Admin Dashboard\"\n\n## User Story\n\nFormat: **As a [persona], I want [goal], so that [benefit]**\n\n```\nAs a returning customer,\nI want to save items to a wishlist,\nso that I can purchase them later without searching again.\n```\n\n**INVEST criteria for a good story:**\n- **I**ndependent\n- **N**egotiable\n- **V**aluable\n- **E**stimable\n- **S**mall\n- **T**estable\n\n## Task\n\n- Specific technical work item\n- Assigned to individual developers\n- Usually estimated in hours\n- Examples: \"Set up database schema\", \"Write API tests\", \"Deploy to staging\"",
+    "detailMdTr": null
+  },
+  {
+    "id": 1006,
+    "topic": "agile-scrum",
+    "level": 2,
+    "levelLabel": "Junior",
+    "question": "What are the roles in Scrum?",
+    "answerGeneral": "Scrum defines three roles: Product Owner (owns the Product Backlog and maximises the product's value), Scrum Master (facilitates Scrum events, removes impediments, coaches the team on Scrum), and Developers (the cross-functional team that designs, builds, and tests the Increment). All three form the Scrum Team — there are no sub-teams or hierarchies within it.",
+    "answerGeneralTr": "Scrum üç rol tanımlar: Product Owner (Product Backlog'a sahip olur ve ürünün değerini maksimize eder), Scrum Master (Scrum etkinliklerini kolaylaştırır, engelleri kaldırır, ekibe Scrum konusunda koçluk yapar) ve Geliştiriciler (Increment'i tasarlayan, inşa eden ve test eden çapraz işlevli ekip). Üçü Scrum Team'i oluşturur — içinde alt ekipler veya hiyerarşi yoktur.",
+    "answerPersonal": null,
+    "detailMd": "## Scrum Roles\n\n## The Scrum Team\n\nThe Scrum Team is small (typically 3-9 people), cross-functional, and self-managing. There are no sub-teams.\n\n## Product Owner\n\n- Creates and orders the Product Backlog\n- Defines acceptance criteria for User Stories\n- Decides what gets built and in what order\n- Is the single voice for stakeholder priorities (no committee decisions)\n- Must be available to the team — delays in PO feedback slow the team\n\n## Scrum Master\n\n- Facilitates all Scrum events (Planning, Daily, Review, Retro)\n- Removes impediments blocking the team\n- Coaches the team on Scrum theory and practices\n- Protects the team from external interruptions\n- Acts as a servant-leader — **not** a project manager or boss\n- Works with the organisation to improve Agile adoption\n\n## Developers\n\n- Everyone who builds the Increment (frontend, backend, QA, UX — whoever is needed)\n- Self-organising: they decide **how** to do the work\n- Cross-functional: the team has all the skills needed to deliver\n- Collectively responsible for the Increment\n- No sub-roles within Developers in Scrum (\"senior\", \"lead\" etc. exist outside Scrum)\n\n## Common Misconception\n\nScrum Master ≠ Project Manager. A PM assigns work and tracks tasks. A Scrum Master coaches, facilitates, and removes obstacles — the team manages itself.",
+    "detailMdTr": null
+  },
+  {
+    "id": 1007,
+    "topic": "agile-scrum",
+    "level": 2,
+    "levelLabel": "Junior",
+    "question": "What is Sprint Planning?",
+    "answerGeneral": "Sprint Planning is the event that kicks off each Sprint. The whole Scrum Team collaborates to define the Sprint Goal, select User Stories from the top of the Product Backlog, and break them into Tasks. The output is the Sprint Backlog — the team's commitment for the Sprint. It is time-boxed to 8 hours for a one-month Sprint (proportionally less for shorter sprints).",
+    "answerGeneralTr": "Sprint Planning, her Sprint'i başlatan etkinliktir. Tüm Scrum Team, Sprint Hedefini tanımlamak, Product Backlog'un üstünden User Story seçmek ve bunları Task'lara bölmek için iş birliği yapar. Çıktı, ekibin Sprint için taahhüdü olan Sprint Backlog'dur. Bir aylık Sprint için 8 saat ile sınırlandırılmıştır (daha kısa sprint'ler için orantılı olarak daha az).",
+    "answerPersonal": null,
+    "detailMd": "## Sprint Planning\n\n## Timeboxes\n\n| Sprint Length | Planning Timebox |\n|---|---|\n| 1 week | 2 hours |\n| 2 weeks | 4 hours |\n| 1 month | 8 hours |\n\n## Two Questions Sprint Planning Answers\n\n1. **Why is this Sprint valuable?** → Sprint Goal\n2. **What can be Done this Sprint?** → Sprint Backlog items\n3. **How will the work get done?** → Tasks broken out by Developers\n\n## Inputs\n\n- Product Backlog (refined and estimated)\n- Team velocity (how much they typically complete)\n- Team capacity (PTO, meetings, etc.)\n- Definition of Done\n\n## The Sprint Goal\n\nA single sentence that describes the Sprint's objective. Example:\n> \"Enable users to add items to a cart and proceed to checkout.\"\n\nThe team has flexibility in choosing which stories to include — the Goal is the commitment, not individual stories.\n\n## The Sprint Backlog\n\nThe Sprint Backlog = selected User Stories + Sprint Goal + Tasks. It belongs to the Developers and only they can add/remove tasks from it (scope changes come through the PO, but the team controls the how).\n\n## Definition of Ready\n\nBefore Sprint Planning, backlog items should be \"Ready\": well-defined, estimated, testable, and achievable within a Sprint. Bringing unready items into planning wastes the timebox.",
+    "detailMdTr": null
+  },
+  {
+    "id": 1008,
+    "topic": "agile-scrum",
+    "level": 2,
+    "levelLabel": "Junior",
+    "question": "What are the Scrum events (ceremonies)?",
+    "answerGeneral": "Scrum defines five events: the Sprint itself (the container for all other events), Sprint Planning (kick off the sprint), Daily Scrum (15-minute daily sync), Sprint Review (demonstrate the Increment to stakeholders), and Sprint Retrospective (team inspects their process). All events are time-boxed and happen on a cadence to create predictability.",
+    "answerGeneralTr": "Scrum beş etkinlik tanımlar: Sprint'in kendisi (diğer tüm etkinliklerin kabı), Sprint Planning (sprint başlangıcı), Daily Scrum (15 dakikalık günlük senkronizasyon), Sprint Review (paydaşlara Increment gösterimi) ve Sprint Retrospective (ekip süreçlerini inceler). Tüm etkinlikler öngörülebilirlik yaratmak için bir kadansta zaman sınırlıdır.",
+    "answerPersonal": null,
+    "detailMd": "## Scrum Events\n\n## Overview\n\n| Event | Who attends | Timebox (2-week sprint) | Purpose |\n|---|---|---|---|\n| Sprint | Whole team | 1-4 weeks | Container |\n| Sprint Planning | Whole Scrum Team | 4 hours | Define Sprint Goal + backlog |\n| Daily Scrum | Developers | 15 minutes | Inspect progress toward Goal |\n| Sprint Review | Team + stakeholders | 2 hours | Demo + inspect Increment |\n| Sprint Retrospective | Scrum Team only | 1.5 hours | Improve the process |\n\n## Daily Scrum\n\nNot a status report to the Scrum Master — a planning meeting for Developers.\n\nThree questions (traditional, still useful):\n1. What did I do yesterday that helped toward the Sprint Goal?\n2. What will I do today toward the Sprint Goal?\n3. Do I see any impediments?\n\n## Sprint Review\n\n- Product Owner presents completed work\n- Stakeholders give feedback\n- Product Backlog may be adjusted based on feedback\n- Informal meeting — not a gate/approval\n\n## Sprint Retrospective\n\n- Held after Sprint Review, before next Sprint Planning\n- Team-only (no stakeholders)\n- Common format: What went well? What didn't? What will we improve?\n- Produces at least one concrete improvement action for the next Sprint",
+    "detailMdTr": null
+  },
+  {
+    "id": 1009,
+    "topic": "agile-scrum",
+    "level": 2,
+    "levelLabel": "Junior",
+    "question": "What is Acceptance Criteria?",
+    "answerGeneral": "Acceptance Criteria are the conditions a User Story must satisfy to be considered complete. They are defined by the Product Owner (often with input from the team) before work begins, written from the user's perspective, and serve as the test for 'done'. They eliminate ambiguity about what 'complete' means and are the basis for acceptance testing.",
+    "answerGeneralTr": "Acceptance Criteria, bir User Story'nin tamamlandığı kabul edilmesi için karşılaması gereken koşullardır. Çalışma başlamadan önce Product Owner tarafından (genellikle ekipten girdi alarak) tanımlanır, kullanıcının bakış açısından yazılır ve 'bitti'nin testi olarak hizmet eder. 'Tamamlandı'nın ne anlama geldiği konusundaki belirsizliği ortadan kaldırır ve kabul testi için temel oluştururlar.",
+    "answerPersonal": null,
+    "detailMd": "## Acceptance Criteria\n\n## Why They Exist\n\nWithout acceptance criteria, \"done\" is subjective. Developers think a story is done; the PO disagrees. Acceptance criteria make the definition of done explicit and testable for each story.\n\n## Format: Given/When/Then (Gherkin)\n\n```gherkin\nUser Story: As a user, I want to reset my password\n\nScenario: Valid email address submitted\n  Given I am on the forgot password page\n  When I enter a registered email address\n  And I click \"Send reset link\"\n  Then I receive a reset email within 2 minutes\n  And the link expires after 24 hours\n\nScenario: Invalid email address\n  Given I am on the forgot password page\n  When I enter an unregistered email\n  Then I see \"If this email is registered, you'll receive a link\" (no leak)\n```\n\n## Simpler Format (Checklist)\n\n```\n✓ User can request a password reset with their email address\n✓ A reset link is emailed within 2 minutes\n✓ Reset link expires after 24 hours\n✓ Expired or already-used links show a clear error message\n✓ Unregistered emails show a generic response (security)\n```\n\n## Acceptance Criteria vs Definition of Done\n\n| Acceptance Criteria | Definition of Done |\n|---|---|\n| Specific to one User Story | Applies to ALL Stories |\n| Written by PO | Agreed by whole team |\n| Functional requirements | Quality standards (tests, review, deploy) |",
+    "detailMdTr": null
+  },
+  {
+    "id": 1010,
+    "topic": "agile-scrum",
+    "level": 2,
+    "levelLabel": "Junior",
+    "question": "What are Story Points and how are they used?",
+    "answerGeneral": "Story Points are a relative unit of estimation for the effort, complexity, and uncertainty of a User Story — not time. Teams use the Fibonacci-like scale (1, 2, 3, 5, 8, 13, 21) because small differences aren't meaningful for large items. Points are relative: a story estimated at 8 is roughly twice as complex as one at 4. Over time, the team's average points completed per Sprint becomes their Velocity.",
+    "answerGeneralTr": "Story Point'ler, bir User Story'nin efor, karmaşıklık ve belirsizliği için göreli bir tahmin birimidir — zaman değil. Ekipler Fibonacci benzeri bir ölçek kullanır (1, 2, 3, 5, 8, 13, 21) çünkü büyük öğeler için küçük farklar anlamlı değildir. Point'ler görelidir: 8 olarak tahmin edilen bir story, 4 olarak tahminlenen kadar yaklaşık iki katı karmaşıktır. Zamanla, ekibin Sprint başına tamamladığı ortalama point miktarı onların Velocity'si olur.",
+    "answerPersonal": null,
+    "detailMd": "## Story Points\n\n## Why Not Hours?\n\nHour estimates are biased by who does the work (a senior finishes in 1 hour what a junior takes 4 hours to do). Story Points measure complexity relative to the team's baseline — normalising for team skill.\n\n## Fibonacci Scale\n\n```\n1  → trivial (change a label)\n2  → simple, well-understood\n3  → small, some complexity\n5  → moderate complexity or uncertainty\n8  → complex, multiple unknowns\n13 → very large — consider breaking down\n21 → too big — must be split before estimating\n```\n\nThe gaps get bigger as complexity grows — precise estimation of large work is impossible, and the scale reflects that.\n\n## Planning Poker\n\nA common estimation technique:\n1. PO reads the story\n2. Everyone privately picks a card\n3. All reveal simultaneously (prevents anchoring bias)\n4. Discuss extreme outliers\n5. Re-vote until consensus\n\n## Velocity\n\n```\nVelocity = average Story Points completed per Sprint\n           (measured over last 3-5 Sprints)\n```\n\nUsed to forecast: if velocity is 30 points and the backlog has 120 points, expect ~4 more Sprints.\n\n## Story Points ≠ Hours\n\nNever convert story points to hours — it defeats the purpose and creates pressure on developers to work faster rather than smarter.",
+    "detailMdTr": null
+  },
+  {
+    "id": 1011,
+    "topic": "agile-scrum",
+    "level": 2,
+    "levelLabel": "Junior",
+    "question": "What is an Agile iteration?",
+    "answerGeneral": "An iteration (called a Sprint in Scrum) is a short, fixed-length cycle of work, typically 1-4 weeks. At the start, the team commits to a set of work; at the end, they deliver a working, tested increment. Iterations create a regular cadence for planning, feedback, and adaptation. The consistent length helps teams build a reliable velocity.",
+    "answerGeneralTr": "Bir iterasyon (Scrum'da Sprint olarak adlandırılır), genellikle 1-4 hafta süren kısa, sabit uzunluklu bir çalışma döngüsüdür. Başlangıçta ekip bir dizi işe taahhüt eder; sonunda çalışan, test edilmiş bir increment sunar. İterasyonlar planlama, geri bildirim ve uyum için düzenli bir kadans oluşturur. Tutarlı uzunluk, ekiplerin güvenilir bir velocity oluşturmasına yardımcı olur.",
+    "answerPersonal": null,
+    "detailMd": "## Agile Iteration\n\n## What Happens in an Iteration\n\n```\n[Start]   Sprint Planning\n          → Sprint Goal defined\n          → Sprint Backlog selected\n\n[During]  Daily work\n          Daily Scrum\n          Developers self-organise\n\n[End]     Sprint Review\n          → Working Increment demonstrated\n          → Stakeholder feedback collected\n\n          Sprint Retrospective\n          → Team reflects on process\n          → Identifies one improvement\n\n→ Next Iteration begins immediately\n```\n\n## Key Properties\n\n- **Fixed length**: the same duration every Sprint (no \"we'll finish when we finish\")\n- **Valuable output**: a working, potentially shippable Increment — not just tasks ticked\n- **Team commitment**: scope is protected; no new work added after Sprint starts (without team agreement)\n- **Regular feedback**: stakeholders review the Increment every Sprint, not once at the end\n\n## Why Consistent Iteration Length Matters\n\n- Builds rhythm and predictability\n- Allows accurate velocity measurement\n- Creates regular points to re-prioritise and adjust\n- Reduces the cost of coordination between teams (everyone knows the cadence)\n\n## Iteration vs Release\n\nNot every iteration needs to ship to production. In mature teams with CI/CD, every iteration may result in a production release. In others, releases are batched across multiple sprints. The iteration is about learning rhythm, not release frequency.",
+    "detailMdTr": null
+  }
+]

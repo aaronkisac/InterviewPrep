@@ -1,14 +1,27 @@
 # Progress
 
-Last updated: 2026-05-23 (HTML5 bank complete — 51 questions ids 601–651, 7 batch files, Topic type updated)
+Last updated: 2026-05-23 (design-patterns bank complete — all 7 new topic banks written; migration + seed pending local run)
 
 ---
 
 ## Quick Reference (Spec Summary)
 
-**Stack:** Next.js 16 · TypeScript strict · TailwindCSS 4.3 · shadcn/ui · Radix UI · Supabase · NextAuth v5 · pnpm
+**Stack:** Next.js 15 · TypeScript strict · TailwindCSS v4 · shadcn/ui · Radix UI · Supabase · NextAuth v5 · pnpm
 
-**ID ranges:** React 1–20, 201–250 · TypeScript 101–143 · Next.js 301–322 · Redux 401–435 · JS 501–586 · HTML5 601–651
+**ID ranges:**
+- React 1–20, 201–250
+- TypeScript 101–143
+- Next.js 301–322
+- Redux 401–435
+- JavaScript 501–586
+- HTML5 601–651
+- CSS 701–733
+- React Hooks 801–829
+- Git 901–921
+- Agile & Scrum 1001–1026
+- WebSockets 1101–1118
+- Unit Testing 1201–1216
+- Design Patterns 1301–1316
 
 **Question schema:** `id · topic · level (1–5) · question · answerGeneral · answerGeneralTr · answerPersonal · detailMd · detailMdTr · mock_options[]`
 
@@ -16,13 +29,13 @@ Last updated: 2026-05-23 (HTML5 bank complete — 51 questions ids 601–651, 7 
 
 **Mock options rule:** Exactly 4 options, exactly 1 correct → topic becomes selectable in `/mock`
 
-**Topics enum:** `react | typescript | nextjs | redux | javascript | html5` (extend in `src/lib/supabase/types.ts` + migration)
+**Topics enum (current):** `react | typescript | nextjs | redux | javascript | html5 | css | react-hooks | git | agile-scrum | websockets | unit-testing | design-patterns`
 
 **File conventions:** kebab-case files · PascalCase components · server queries in `src/lib/*.ts` · client components in `_components/`
 
 **Auth:** Google + GitHub, `allowDangerousEmailAccountLinking: true` · JWT sessions · role from `public.users`
 
-**Glossary:** terms in `data/seed-terms.json` · first mention auto-wrapped via `glossary-match.ts` · `pnpm seed` imports
+**Glossary:** terms in `data/seed-terms.json` (58 terms total) · first mention auto-wrapped via `glossary-match.ts` · `pnpm seed` imports
 
 ---
 
@@ -30,20 +43,42 @@ Last updated: 2026-05-23 (HTML5 bank complete — 51 questions ids 601–651, 7 
 
 | Phase | Summary |
 | --- | --- |
-| Phase 1 — Foundation | Next.js 16 + TS + Tailwind + shadcn/ui + Supabase migrations + NextAuth (Google/GitHub) + seed script. |
+| Phase 1 — Foundation | Next.js 15 + TS + Tailwind + shadcn/ui + Supabase migrations + NextAuth (Google/GitHub) + seed script. |
 | Phase 2 — Reading experience | `/questions` list + filters + EN/TR toggle · expandable cards · `/questions/[id]` detail · `TermTooltip` + `/glossary`. Auto-glossary via `glossary-match.ts` + `rehype-glossary.ts`. |
 | Phase 3 — Mock interview (React only) | `/mock` config page + `/mock/session` end screen. React mock options seeded (20 q, 4 options each). TypeScript/Next.js topics disabled until their seed files land. |
-| TypeScript bank | 43 new questions (ids 101–143), all `detailMd` written. `pnpm seed` ⬜ pending. |
-| React bank | 50 new questions (ids 201–250), all `detailMd` written. `pnpm seed` ⬜ pending. |
-| Next.js bank | 22 new questions (ids 301–322), all `detailMd` written. `pnpm seed` ⬜ pending. |
-| Redux bank + glossary | 35 questions (ids 401–435) + 13 glossary terms. `pnpm seed` ⬜ pending. |
-| JavaScript bank + glossary | 86 questions (ids 501–586, all levels) + 15 glossary terms. Full `detailMd` + `detailMdTr`. `pnpm seed` ⬜ pending. |
-| HTML5 bank | 51 questions (ids 601–651, 7 batches). `answerPersonal` on id 648 (WCAG/ReciteMe). `pnpm seed` ⬜ pending. |
+| TypeScript bank | 43 questions (ids 101–143), all `detailMd` written. |
+| React bank | 50 questions (ids 201–250), all `detailMd` written. |
+| Next.js bank | 22 questions (ids 301–322), all `detailMd` written. |
+| Redux bank + glossary | 35 questions (ids 401–435) + 13 glossary terms. |
+| JavaScript bank + glossary | 86 questions (ids 501–586, all levels) + 15 glossary terms. Full `detailMd` + `detailMdTr`. |
+| HTML5 bank | 51 questions (ids 601–651, 7 batches). `answerPersonal` on id 648 (WCAG/ReciteMe). |
+| CSS bank + glossary | 33 questions (ids 701–733, 5 batches, all levels). 10 glossary terms. Migration: `20260523000001_topic_css.sql`. |
+| React Hooks bank + glossary | 29 questions (ids 801–829, 5 batches, all levels). 10 glossary terms. Migration: `20260523000002_topic_react_hooks.sql`. |
+| Git bank + glossary | 21 questions (ids 901–921, 5 batches, all levels). 9 glossary terms. Migration: `20260523000004_topic_git.sql`. |
+| Agile & Scrum bank + glossary | 26 questions (ids 1001–1026, 5 batches, all levels). 10 glossary terms. Migration: `20260523000005_topic_agile_scrum.sql`. |
+| WebSockets bank + glossary | 18 questions (ids 1101–1118, 5 batches, all levels). 6 glossary terms. Migration: `20260523000006_topic_websockets.sql`. |
+| Unit Testing bank + glossary | 16 questions (ids 1201–1216, 5 batches, all levels). 8 glossary terms. |
+| Design Patterns bank + glossary | 16 questions (ids 1301–1316, 5 batches, all levels). 8 glossary terms. |
+| Types + Topics update | `src/lib/supabase/types.ts` and `src/lib/topics.ts` updated with all 13 topics. |
+| Combined migration | `20260523000007_topic_unit_testing_design_patterns.sql` — adds unit-testing + design-patterns to DB constraints. |
 
 ---
 
-## Pending
+## Pending — Must run locally
 
-- `pnpm seed` — run once to import all `data/seed-questions/*.json` batches and updated `data/seed-terms.json` into Supabase.
-- Mock options seed files still missing: `seed-mock-typescript.json`, `seed-mock-nextjs.json`, `seed-mock-redux.json`, `seed-mock-javascript.json`, `seed-mock-html5.json` — these topics remain disabled in `/mock` until created.
-- `detailMdTr` — Turkish deep dives unset for TypeScript, React, Next.js, Redux, HTML5 batches (optional).
+```bash
+# 1. Apply all pending migrations (adds new topics to DB check constraints)
+supabase db push
+
+# 2. Import all question + glossary data into Supabase
+pnpm seed
+```
+
+### After seed runs, these should be live:
+- CSS, React Hooks, Git, Agile & Scrum, WebSockets, Unit Testing, Design Patterns topics visible in `/questions`
+- Glossary tooltips for 58 terms across all topics
+
+### Still missing (optional / future):
+- Mock options for new topics (`seed-mock-*.json`) — needed before topics appear in `/mock`
+- `detailMdTr` (Turkish deep dives) for all banks except JavaScript
+- `answerPersonal` for most new questions (add from Aaron's real interview experience)

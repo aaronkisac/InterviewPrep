@@ -1,0 +1,86 @@
+[
+  {
+    "id": 1012,
+    "topic": "agile-scrum",
+    "level": 3,
+    "levelLabel": "Mid",
+    "question": "What is the difference between the Product Backlog and Sprint Backlog?",
+    "answerGeneral": "The Product Backlog is the complete, ordered list of all work that might be done on the product — owned by the Product Owner. The Sprint Backlog is the subset of Product Backlog items selected for the current Sprint, plus the Sprint Goal and the team's plan — owned by the Developers. The Product Backlog is ever-evolving; the Sprint Backlog is fixed for the Sprint duration.",
+    "answerGeneralTr": "Product Backlog, üründe yapılabilecek tüm işlerin tam, sıralı listesidir — Product Owner'a aittir. Sprint Backlog, mevcut Sprint için seçilen Product Backlog öğelerinin alt kümesi ile Sprint Hedefi ve ekibin planıdır — Geliştiricilere aittir. Product Backlog sürekli değişir; Sprint Backlog Sprint süresi boyunca sabittir.",
+    "answerPersonal": null,
+    "detailMd": "## Product Backlog vs Sprint Backlog\n\n## Comparison\n\n| | Product Backlog | Sprint Backlog |\n|---|---|---|\n| Owner | Product Owner | Developers |\n| Scope | Entire product | Current Sprint only |\n| Content | Epics, stories, bugs, tech debt | Selected stories + tasks |\n| Stability | Always changing | Fixed for the Sprint |\n| Ordering | Priority by value | Team's daily plan |\n| Horizon | Long-term | 1-4 weeks |\n\n## Product Backlog\n\n```\nProduct Backlog (ordered by value)\n  1. [8pts] User can sign up with email (Sprint 3)\n  2. [5pts] User can reset password\n  3. [13pts] Shopping cart checkout\n  4. [3pts] Order confirmation email\n  ...\n  N. [?pts] Admin analytics dashboard (far future)\n```\n\n- Continuously refined (\"backlog grooming\")\n- Items at the top are small and estimated\n- Items near the bottom are large and vague — that's fine\n- The PO reprioritises it as business needs change\n\n## Sprint Backlog\n\n```\nSprint Goal: \"Enable user registration flow\"\n\nSprint Backlog:\n  Story: User can sign up with email [8pts]\n    Task: Create /auth/register endpoint\n    Task: Build registration form\n    Task: Write unit + integration tests\n    Task: Add email verification step\n```\n\n- Created during Sprint Planning\n- Only Developers modify it during the Sprint\n- Scope changes require team agreement + PO discussion",
+    "detailMdTr": null
+  },
+  {
+    "id": 1013,
+    "topic": "agile-scrum",
+    "level": 3,
+    "levelLabel": "Mid",
+    "question": "What is the Definition of Done in Scrum?",
+    "answerGeneral": "The Definition of Done (DoD) is a shared, formal list of quality standards that every Increment must meet before it can be considered 'done'. It typically includes items like code reviewed, unit tests passing, integration tests passing, deployed to staging, accessibility checked, and documentation updated. The DoD creates transparency and prevents a 'done but not actually done' culture.",
+    "answerGeneralTr": "Done Tanımı (DoD), her Increment'in 'bitti' sayılabilmesi için karşılaması gereken paylaşılmış, resmi kalite standartları listesidir. Genellikle kod incelendi, birim testler geçti, entegrasyon testler geçti, staging'e dağıtıldı, erişilebilirlik kontrol edildi ve belgeler güncellendi gibi öğeler içerir. DoD şeffaflık yaratır ve 'bitti ama aslında bitmedi' kültürünü önler.",
+    "answerPersonal": null,
+    "detailMd": "## Definition of Done (DoD)\n\n## Why It Matters\n\nWithout a DoD, \"done\" means different things to different people. One developer marks a story done when the code is written; another waits until tests pass; another until it's deployed. The DoD aligns the whole team.\n\n## Example DoD for a Web Team\n\n```\nA User Story is Done when:\n\n□ Code implemented and reviewed (PR approved by ≥2 developers)\n□ Unit tests written (coverage ≥85%)\n□ Integration tests pass\n□ No new TypeScript errors\n□ Deployed to staging environment\n□ QA / acceptance criteria verified\n□ WCAG 2.1 AA accessibility checked\n□ Performance budget not exceeded (LCP < 2.5s)\n□ Documentation updated (if applicable)\n□ Product Owner has accepted the story\n```\n\n## DoD vs Acceptance Criteria\n\n```\nDefinition of Done     → applies to EVERY story (quality gate)\nAcceptance Criteria    → specific to ONE story (functional requirement)\n\nStory AC: \"User sees error message if email is already registered\"\nDoD: \"Unit tests written, code reviewed, deployed to staging\"\n```\n\nA story passes Acceptance Criteria but still isn't Done unless it meets the DoD.\n\n## Evolution\n\nThe DoD should evolve over time. Each Sprint Retrospective is an opportunity to add a new standard as the team's quality maturity grows.",
+    "detailMdTr": null
+  },
+  {
+    "id": 1014,
+    "topic": "agile-scrum",
+    "level": 3,
+    "levelLabel": "Mid",
+    "question": "What is a Sprint Review?",
+    "answerGeneral": "The Sprint Review is held at the end of each Sprint. The Scrum Team demonstrates the Increment to stakeholders, and together they inspect what was built against the Sprint Goal. Stakeholders provide feedback, the Product Backlog may be updated, and the team discusses what's coming next. It is an informal working session — not a gate review or approval ceremony.",
+    "answerGeneralTr": "Sprint Review, her Sprint'in sonunda düzenlenir. Scrum Team, Increment'i paydaşlara gösterir ve birlikte inşa edileni Sprint Hedefi karşısında incelerler. Paydaşlar geri bildirim verir, Product Backlog güncellenebilir ve ekip sırada ne olduğunu tartışır. Resmi olmayan bir çalışma oturumudur — bir geçit incelemesi veya onay töreni değildir.",
+    "answerPersonal": null,
+    "detailMd": "## Sprint Review\n\n## Purpose\n\nInspect the Increment and adapt the Product Backlog based on what was learned.\n\n## Timebox\n\n| Sprint Length | Review Timebox |\n|---|---|\n| 1 week | 1 hour |\n| 2 weeks | 2 hours |\n| 1 month | 4 hours |\n\n## Who Attends\n\n- Scrum Team (all roles)\n- Key stakeholders (business, product, customers — whoever is relevant)\n\n## Typical Agenda\n\n1. Product Owner explains what was planned and what is Done\n2. Developers demo the Increment (working software, not slides)\n3. Stakeholders ask questions, give feedback\n4. Product Owner explains current state of backlog\n5. Team discusses what's planned for next Sprint\n6. Discuss timeline, budget, market feedback\n\n## Key Distinctions\n\n- **Not a gate**: stories aren't \"accepted\" or \"rejected\" here (that happens during development)\n- **Not a status report**: it's a collaborative inspection\n- **Undone work is not demoed**: only completed Increment items that meet the DoD\n\n## Sprint Review vs Retrospective\n\n| Review | Retrospective |\n|---|---|\n| What did we build? | How did we work? |\n| Stakeholders attend | Team only |\n| Inspect the Increment | Inspect the process |\n| Adapt the Product Backlog | Adapt team practices |",
+    "detailMdTr": null
+  },
+  {
+    "id": 1015,
+    "topic": "agile-scrum",
+    "level": 3,
+    "levelLabel": "Mid",
+    "question": "What is a Sprint Retrospective?",
+    "answerGeneral": "The Sprint Retrospective is held after the Sprint Review and before the next Sprint Planning. The Scrum Team inspects how the last Sprint went — tools, relationships, processes — and identifies improvements. It should result in at least one actionable improvement added to the next Sprint Backlog. It is the team's primary mechanism for continuous self-improvement.",
+    "answerGeneralTr": "Sprint Retrospective, Sprint Review'dan sonra ve bir sonraki Sprint Planning'den önce yapılır. Scrum Team, son Sprint'in nasıl geçtiğini — araçlar, ilişkiler, süreçler — inceler ve iyileştirmeleri belirler. En az bir uygulanabilir iyileştirme ile sonuçlanmalı ve bir sonraki Sprint Backlog'a eklenmelidir. Ekibin sürekli öz-iyileştirme için birincil mekanizmasıdır.",
+    "answerPersonal": null,
+    "detailMd": "## Sprint Retrospective\n\n## Timebox\n\n| Sprint Length | Retro Timebox |\n|---|---|\n| 1 week | 45 minutes |\n| 2 weeks | 1.5 hours |\n| 1 month | 3 hours |\n\n## Who Attends\n\nScrum Team only (PO, SM, Developers). No stakeholders — the team needs a safe space to be honest.\n\n## What to Inspect\n\n- **People**: collaboration, communication, morale\n- **Processes**: how work flows through the team\n- **Tools**: dev tools, project management, communication tools\n- **Definition of Done**: is it still right?\n\n## Common Formats\n\n### Start/Stop/Continue\n```\nStart:    Things we should start doing\nStop:     Things that aren't helping us\nContinue: Things that are working well\n```\n\n### 4Ls\n```\nLiked:    What went well?\nLearned:  What did we learn?\nLacked:   What was missing?\nLonged for: What do we wish we had?\n```\n\n## Output\n\n- At least **one concrete improvement action** with an owner and timeline\n- Added to the Sprint Backlog so it gets done, not just discussed\n\n## Common Anti-Pattern\n\nRetros that generate lots of talking but no action. If the same problems appear every Sprint, the team isn't acting on retro outputs — a SM red flag.",
+    "detailMdTr": null
+  },
+  {
+    "id": 1016,
+    "topic": "agile-scrum",
+    "level": 3,
+    "levelLabel": "Mid",
+    "question": "What is Velocity in Agile and how is it used?",
+    "answerGeneral": "Velocity is the average number of Story Points a Scrum team completes per Sprint, measured over the last 3-5 Sprints. It is used to forecast future delivery: if velocity is 30 points and 150 points remain in the backlog, expect 5 more Sprints. Velocity is a planning tool for the team — not a management metric for comparing teams or pressuring developers to go faster.",
+    "answerGeneralTr": "Velocity, son 3-5 Sprint üzerinden ölçülen, bir Scrum ekibinin Sprint başına tamamladığı ortalama Story Point sayısıdır. Gelecekteki teslimatı tahmin etmek için kullanılır: velocity 30 point ve backlog'da 150 point kaldıysa 5 Sprint daha bekleyin. Velocity, ekip için bir planlama aracıdır — ekipleri karşılaştırmak veya geliştiricileri daha hızlı olmaya zorlamak için bir yönetim metriği değildir.",
+    "answerPersonal": null,
+    "detailMd": "## Velocity in Agile\n\n## How It's Calculated\n\n```\nSprint 1: 28 points\nSprint 2: 32 points\nSprint 3: 31 points\nSprint 4: 29 points\n\nVelocity = (28 + 32 + 31 + 29) / 4 = 30 points/Sprint\n```\n\nUse the last 3-5 Sprints for stability. New teams need ~5 Sprints before velocity stabilises.\n\n## Using Velocity for Forecasting\n\n```\nProduct Backlog: 120 story points remaining\nVelocity: 30 points/Sprint\n\nForecast: ~4 Sprints to complete the backlog\n         = ~8 weeks (at 2-week sprints)\n```\n\n## What Velocity Is\n\n- A team-specific metric\n- A planning and forecasting tool\n- Based on completed work only (not started or in-progress)\n- Naturally fluctuating (vacations, onboarding, tech debt)\n\n## What Velocity Is NOT\n\n- A performance metric\n- Comparable between teams (teams estimate differently)\n- Something to be maximised (inflating estimates to boost velocity is gaming the system)\n- A commitment (it's an average, not a guarantee)\n\n## Common Mistakes\n\n```\n❌ \"Team B has velocity 60, why does Team A only have 30?\"\n   (teams use different point scales)\n\n❌ \"You must hit 35 points this Sprint\"\n   (external velocity targets kill estimation honesty)\n\n❌ Counting partially done stories\n   (velocity only counts stories meeting the DoD)\n```",
+    "detailMdTr": null
+  },
+  {
+    "id": 1017,
+    "topic": "agile-scrum",
+    "level": 3,
+    "levelLabel": "Mid",
+    "question": "What are Burn-Down and Burn-Up charts?",
+    "answerGeneral": "A Burn-Down chart shows remaining work over time — it should trend toward zero by the Sprint or release end. A Burn-Up chart shows completed work over time alongside total scope — it makes scope changes visible (the total line goes up when new work is added). Burn-Down shows progress against commitment; Burn-Up shows progress against the total and makes scope creep transparent.",
+    "answerGeneralTr": "Burn-Down grafiği zaman içinde kalan çalışmayı gösterir — Sprint veya yayın sonuna kadar sıfıra doğru eğilmeli. Burn-Up grafiği, toplam kapsam ile birlikte zaman içinde tamamlanan çalışmayı gösterir — kapsam değişikliklerini görünür kılar (yeni iş eklendiğinde toplam satır yukarı çıkar). Burn-Down taahhüde karşı ilerlemeyi gösterir; Burn-Up toplama karşı ilerlemeyi gösterir ve kapsam kaymasını şeffaf yapar.",
+    "answerPersonal": null,
+    "detailMd": "## Burn-Down vs Burn-Up Charts\n\n## Sprint Burn-Down\n\n```\nStory Points\nRemaining\n40 |\\                Ideal line\n   | \\\n30 |  \\    * actual\n   |   \\  * \n20 |    *\n   |     \\\n10 |      \\\n   |       *──── team finished early!\n 0 +─────────────────────────────→ Sprint Days\n   D1  D3  D5  D7  D9\n```\n\n- X axis: Sprint days\n- Y axis: remaining story points\n- Ideal line: straight diagonal from total points to 0\n- Actual line: how the team is tracking\n\n## What Burn-Down Highlights\n\n- Team ahead/behind the ideal trend\n- Mid-Sprint impediments (flat line = blocked)\n- Risk of not finishing Sprint Goal\n- Sudden jumps up = scope added mid-Sprint\n\n## Release Burn-Up\n\n```\nStory Points\nCompleted\n120 |          ___scope line (moves up when scope added)\n100 |         /\n 80 |        /  ← actual completed\n 60 |       /\n 40 |      /\n 20 |     /\n  0 +──────────────────────────→ Sprints\n    S1  S2  S3  S4  S5  S6\n```\n\n- Shows completed work AND total scope\n- Scope creep is immediately visible (scope line rises)\n- Great for communicating release progress to stakeholders\n\n## Key Difference\n\nBurn-Down hides scope changes (it just shows remaining work). Burn-Up makes them explicit — when scope grows, the gap between the scope line and completed line widens visually.",
+    "detailMdTr": null
+  },
+  {
+    "id": 1018,
+    "topic": "agile-scrum",
+    "level": 3,
+    "levelLabel": "Mid",
+    "question": "What are the Scrum Values?",
+    "answerGeneral": "Scrum defines five values: Commitment (the team commits to the Sprint Goal), Courage (team members speak up, face hard problems), Focus (everyone focuses on the Sprint Goal), Openness (the team is open about work and challenges), and Respect (team members respect each other's abilities and perspectives). These values underpin the trust needed for empirical process control.",
+    "answerGeneralTr": "Scrum beş değer tanımlar: Taahhüt (ekip Sprint Hedefine taahhüt eder), Cesaret (ekip üyeleri konuşur, zor sorunlarla yüzleşir), Odak (herkes Sprint Hedefine odaklanır), Açıklık (ekip çalışma ve zorluklar konusunda açıktır) ve Saygı (ekip üyeleri birbirinin yeteneklerine ve bakış açılarına saygı duyar). Bu değerler ampirik süreç kontrolü için gereken güveni destekler.",
+    "answerPersonal": null,
+    "detailMd": "## Scrum Values\n\nThe five Scrum Values live alongside the three empirical pillars (Transparency, Inspection, Adaptation). Without the values, the mechanics of Scrum produce box-ticking, not agility.\n\n## The 5 Values\n\n### Commitment\nThe team commits to the Sprint Goal — not to a list of individual stories. If the Sprint Goal is at risk, the team escalates rather than silently working overtime.\n\n### Courage\nTeam members:\n- Say \"I don't know\" and ask for help\n- Raise concerns at the Daily Scrum or Retro\n- Challenge the PO on unrealistic scope\n- Tackle technical debt even when business pressure is high\n\n### Focus\nDuring the Sprint, everyone focuses on the Sprint Goal. Side projects, multi-team obligations, and ad-hoc requests should be minimised.\n\n### Openness\nThe Scrum Team is open about:\n- Current progress (is the Sprint Goal at risk?)\n- Blockers and impediments\n- What they're learning about the product and the market\n\n### Respect\nDevelopers trust each other's expertise. PO trusts the team to estimate and build. SM trusts the team to self-organise.\n\n## Why They Matter\n\nA team that **does Scrum** (attends ceremonies, writes stories) but doesn't embody the values will have:\n- Daily Scrums where no one admits they're stuck\n- Retros where no one speaks honestly\n- Sprint Reviews where only good news is shown\n- Velocity gaming to please management",
+    "detailMdTr": null
+  }
+]

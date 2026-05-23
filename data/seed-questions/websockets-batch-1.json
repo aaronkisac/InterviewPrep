@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1101,
+    "topic": "websockets",
+    "level": 1,
+    "levelLabel": "Entry",
+    "question": "What is WebSocket?",
+    "answerGeneral": "WebSocket is a communication protocol that provides full-duplex (two-way), persistent communication over a single TCP connection. Unlike HTTP's request-response model, WebSocket keeps the connection open so both the client and server can send messages at any time. It's used for real-time applications like chat, live feeds, collaborative tools, and gaming.",
+    "answerGeneralTr": "WebSocket, tek bir TCP bağlantısı üzerinden tam çift yönlü (two-way), kalıcı iletişim sağlayan bir iletişim protokolüdür. HTTP'nin istek-yanıt modelinin aksine WebSocket, hem istemci hem de sunucunun istedikleri zaman mesaj gönderebilmesi için bağlantıyı açık tutar. Sohbet, canlı akışlar, iş birliği araçları ve oyun gibi gerçek zamanlı uygulamalar için kullanılır.",
+    "answerPersonal": null,
+    "detailMd": "## What is WebSocket?\n\n## The Problem WebSocket Solves\n\nHTTP is stateless and half-duplex — the client must initiate every request. For real-time apps that need server push (chat, notifications, live dashboards), polling HTTP creates either latency (polling) or overhead (long-polling).\n\n## WebSocket in One Diagram\n\n```\nHTTP (request-response):\n  Client ──→ Request  ──→ Server\n  Client ←── Response ←── Server\n  Connection closed.\n\nWebSocket (full-duplex):\n  Client ←──────────────→ Server\n         open connection\n  Client ──→ message ──→ Server\n  Client ←── message ←── Server\n  Client ──→ message ──→ Server\n         (any time, either side)\n```\n\n## Key Characteristics\n\n- **Full-duplex**: both sides can send/receive simultaneously\n- **Persistent**: one connection stays open (no repeated handshakes)\n- **Low overhead**: minimal frame headers after the handshake (vs full HTTP headers per request)\n- **Starts as HTTP**: connection is upgraded via HTTP Upgrade mechanism\n- **Real-time**: messages delivered instantly, not on next poll\n\n## Common Use Cases\n\n- Chat applications\n- Live sports scores and financial data feeds\n- Collaborative editing (Google Docs-like)\n- Multiplayer games\n- Real-time notifications\n- Live dashboards and monitoring",
+    "detailMdTr": null
+  },
+  {
+    "id": 1102,
+    "topic": "websockets",
+    "level": 1,
+    "levelLabel": "Entry",
+    "question": "Why use WebSocket over HTTP?",
+    "answerGeneral": "HTTP is request-response — the server can only send data when the client asks. WebSocket provides persistent bidirectional communication so the server can push data to the client instantly without waiting for a request. This eliminates polling overhead and reduces latency dramatically for real-time use cases. WebSocket headers per message are tiny (2-14 bytes) vs HTTP headers (hundreds of bytes per request).",
+    "answerGeneralTr": "HTTP istek-yanıt tabanlıdır — sunucu yalnızca istemci istediğinde veri gönderebilir. WebSocket kalıcı iki yönlü iletişim sağlar, böylece sunucu istek beklemeden anında istemciye veri itebilir. Bu, yoklama (polling) ek yükünü ortadan kaldırır ve gerçek zamanlı kullanım durumları için gecikmeyi önemli ölçüde azaltır. Mesaj başına WebSocket başlıkları çok küçüktür (2-14 bayt) vs HTTP başlıkları (istek başına yüzlerce bayt).",
+    "answerPersonal": null,
+    "detailMd": "## WebSocket vs HTTP\n\n## Connection Model\n\n```\nHTTP polling (every 2 seconds):\n  Client: GET /updates? (header: 400 bytes)\n  Server: 200 OK (empty, nothing new)\n  Client: GET /updates? (header: 400 bytes again)\n  Server: 200 OK (empty again)\n  × repeated forever, mostly wasted\n\nWebSocket:\n  Client: WS handshake (once)\n  Server: 101 Switching Protocols (once)\n  Server: → \"new message\" (2-14 byte frame, instantly)\n  Server: → \"user joined\" (2-14 byte frame)\n```\n\n## When HTTP is Better\n\n| Scenario | Better Choice |\n|---|---|\n| Fetching a user profile | HTTP REST |\n| Submitting a form | HTTP POST |\n| Real-time chat | WebSocket |\n| File download | HTTP |\n| Live stock ticker | WebSocket |\n| Search results | HTTP REST |\n\n## HTTP/2 Push vs WebSocket\n\nHTTP/2 server push exists but is limited to pushing resources the server predicts are needed (CSS, JS) — not general-purpose messaging. WebSocket is the right tool for application-level real-time messaging.\n\n## Overhead Comparison\n\n```\nHTTP request headers: ~300-800 bytes per request\nWebSocket frame:      2 bytes for small messages\n                      10 bytes for medium messages\n```\n\nFor an app sending 100 updates/second, the difference is significant.",
+    "detailMdTr": null
+  }
+]

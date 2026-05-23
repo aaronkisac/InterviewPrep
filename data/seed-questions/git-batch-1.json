@@ -1,0 +1,38 @@
+[
+  {
+    "id": 901,
+    "topic": "git",
+    "level": 1,
+    "levelLabel": "Entry",
+    "question": "What is Git?",
+    "answerGeneral": "Git is a distributed version control system that tracks changes to files over time, allowing multiple developers to collaborate on a project. Every developer has a full copy of the repository history on their local machine. Git records snapshots of the project, not diffs, making branching and merging fast and cheap.",
+    "answerGeneralTr": "Git, dosyalardaki değişiklikleri zaman içinde takip eden ve birden fazla geliştiricinin bir proje üzerinde iş birliği yapmasına olanak tanıyan dağıtık bir sürüm kontrol sistemidir. Her geliştiricinin yerel makinesinde deponun tam geçmişi bulunur. Git, fark (diff) yerine projenin anlık görüntülerini (snapshot) kaydeder; bu da dallanmayı ve birleştirmeyi hızlı ve düşük maliyetli kılar.",
+    "answerPersonal": null,
+    "detailMd": "## What is Git?\n\nGit is a **distributed version control system (DVCS)** created by Linus Torvalds in 2005. It tracks changes to files and coordinates work among multiple developers.\n\n## Key Concepts\n\n```\nWorking Directory → Staging Area (Index) → Local Repository → Remote Repository\n```\n\n## How Git Stores Data\n\nGit stores **snapshots**, not deltas. Every commit is a complete picture of the project at that point — unchanged files are stored as links to previous identical files (not duplicated).\n\n```bash\n# Basic flow\ngit add .           # stage changes\ngit commit -m \"...\" # snapshot to local repo\ngit push            # push to remote\n```\n\n## Distributed vs Centralised\n\n| Feature | Git (distributed) | SVN (centralised) |\n|---|---|---|\n| Full history | Every developer | Server only |\n| Offline work | ✅ Full capability | ❌ Limited |\n| Branching | Cheap, instant | Expensive copy |\n| Speed | Local (fast) | Network (slow) |\n\n## Core Objects\n\n- **Blob** — file content\n- **Tree** — directory listing\n- **Commit** — snapshot with metadata + parent pointer\n- **Tag** — named pointer to a commit",
+    "detailMdTr": null
+  },
+  {
+    "id": 902,
+    "topic": "git",
+    "level": 1,
+    "levelLabel": "Entry",
+    "question": "What is the difference between Git and SVN?",
+    "answerGeneral": "Git is distributed — every developer has a complete local copy of the repository and can commit, branch, and view history offline. SVN is centralised — there is one server repository and developers must connect to it for most operations. Git branches are cheap (just a pointer), SVN branches are expensive copies. Git is faster for most operations because they happen locally.",
+    "answerGeneralTr": "Git dağıtık bir sistemdir — her geliştiricinin tam bir yerel depo kopyası vardır ve çevrimdışı commit atabilir, dal oluşturabilir, geçmişi görüntüleyebilir. SVN merkezi bir sistemdir — tek bir sunucu deposu vardır ve çoğu işlem için bağlantı gerekir. Git dalları ucuzdur (yalnızca bir pointer), SVN dalları ise pahalı kopyalardır. Çoğu işlem yerel gerçekleştiğinden Git daha hızlıdır.",
+    "answerPersonal": null,
+    "detailMd": "## Git vs SVN\n\n## Architecture\n\n```\nSVN (centralised):\n  Developer A ←→ Central Server ←→ Developer B\n\nGit (distributed):\n  Developer A ←→ Remote (GitHub) ←→ Developer B\n       ↕                                   ↕\n  Full local repo                   Full local repo\n```\n\n## Feature Comparison\n\n| Feature | Git | SVN |\n|---|---|---|\n| Repository model | Distributed | Centralised |\n| Offline commits | ✅ | ❌ |\n| Branching cost | O(1) — just a pointer | O(n) — directory copy |\n| Merge tracking | Built-in | Limited |\n| Revision ID | SHA-1 hash | Sequential integer |\n| Speed | Local (fast) | Network-bound |\n| Learning curve | Higher | Lower |\n\n## When SVN Still Makes Sense\n\n- Large binary files (assets, game art) — SVN has better lock support\n- Teams that need fine-grained per-directory access control\n- Legacy enterprise setups with deep SVN tooling\n\n## Why Git Won\n\nGit's distributed model, cheap branching, and speed made workflows like Gitflow and GitHub's fork+PR model possible. The industry shifted almost entirely to Git post-2010.",
+    "detailMdTr": null
+  },
+  {
+    "id": 903,
+    "topic": "git",
+    "level": 1,
+    "levelLabel": "Entry",
+    "question": "What is the command to write a commit message in Git?",
+    "answerGeneral": "The basic command is `git commit -m \"your message\"`. For a multi-line message, run `git commit` without the `-m` flag — Git opens your configured editor. Best practice: write the subject line under 50 characters in the imperative mood (e.g. 'Add login form'), optionally followed by a blank line and a longer body explaining the why.",
+    "answerGeneralTr": "Temel komut `git commit -m \"mesajınız\"` şeklindedir. Çok satırlı bir mesaj için `-m` bayrağı olmadan `git commit` çalıştırın — Git yapılandırılmış editörünüzü açar. En iyi uygulama: konu satırını 50 karakterin altında ve emir kipinde yazın (örn. 'Add login form'), ardından isteğe bağlı olarak boş bir satır ve neden yapıldığını açıklayan daha uzun bir gövde ekleyin.",
+    "answerPersonal": null,
+    "detailMd": "## Git Commit Messages\n\n## Basic Commands\n\n```bash\n# Inline message (subject only)\ngit commit -m \"Add login form validation\"\n\n# Opens editor for multi-line message\ngit commit\n\n# Stage all tracked changes and commit\ngit commit -am \"Fix typo in header\"\n\n# Amend the most recent commit\ngit commit --amend -m \"Updated message\"\n```\n\n## Commit Message Conventions\n\n```\nAdd login form validation                  ← subject: ≤50 chars, imperative\n                                           ← blank line\nValidates email format and password        ← body: explains WHY\nstrength before form submission. Closes\n#42.\n```\n\n## Conventional Commits (popular format)\n\n```\nfeat: add OAuth login\nfix: handle null user in dashboard\nchore: update dependencies\nrefactor: extract auth middleware\ndocs: add API usage examples\n```\n\n## Imperative Mood\n\nWrite as if completing \"This commit will...\"\n- ✅ `Add login form` (\"This commit will Add login form\")\n- ❌ `Added login form`\n- ❌ `Adding login form`\n\nThe imperative mood matches Git's own auto-generated messages (`Merge branch 'feat/login'`).",
+    "detailMdTr": null
+  }
+]

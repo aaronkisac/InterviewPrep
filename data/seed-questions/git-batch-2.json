@@ -1,0 +1,62 @@
+[
+  {
+    "id": 904,
+    "topic": "git",
+    "level": 2,
+    "levelLabel": "Junior",
+    "question": "What's the difference between a pull request and a branch?",
+    "answerGeneral": "A branch is a lightweight pointer to a commit — it's a parallel line of development. A pull request (PR) is a collaboration tool built on top of branches: it is a request to merge one branch into another, with a UI for code review, discussion, and CI checks. Branches exist in Git itself; pull requests are a feature of hosting platforms like GitHub, GitLab, and Bitbucket.",
+    "answerGeneralTr": "Dal (branch), bir commit'e işaret eden hafif bir pointer'dır — paralel bir geliştirme hattıdır. Pull request (PR) ise dalların üzerine inşa edilmiş bir iş birliği aracıdır: bir dalı diğeriyle birleştirme isteğidir ve kod incelemesi, tartışma ile CI kontrolleri için bir arayüz sunar. Dallar Git'in kendisinde bulunur; pull request'ler GitHub, GitLab ve Bitbucket gibi hosting platformlarının bir özelliğidir.",
+    "answerPersonal": null,
+    "detailMd": "## Branch vs Pull Request\n\n## Branch\n\nA branch is just a file containing a commit SHA — a movable pointer:\n\n```bash\ngit checkout -b feature/login   # creates and switches to new branch\ngit push origin feature/login   # pushes branch to remote\n```\n\nBranches are local to Git. They cost almost nothing — no copying of files.\n\n## Pull Request\n\nA PR is a platform concept (GitHub, GitLab, Bitbucket). It wraps a branch with:\n- Side-by-side diff view\n- Line-by-line comments\n- Review approvals\n- CI/CD status checks\n- Merge button (merge, squash, or rebase)\n\n```\nfeature/login ──→ PR #42 ──→ code review ──→ CI ──→ merge to main\n```\n\n## Typical Workflow\n\n1. Create a branch: `git checkout -b feat/oauth`\n2. Push commits\n3. Open a PR on GitHub\n4. Reviewer approves + CI passes\n5. Merge (the PR merges the branch into `main`)\n6. Delete the branch\n\n## Key Distinction\n\nYou can have a branch with no PR (local experiments), and you can have a PR targeting a branch that doesn't exist yet (draft PR). They are separate things that are commonly used together.",
+    "detailMdTr": null
+  },
+  {
+    "id": 905,
+    "topic": "git",
+    "level": 2,
+    "levelLabel": "Junior",
+    "question": "What is a Git fork? What is the difference between fork, branch, and clone?",
+    "answerGeneral": "A clone is a local copy of a remote repository on your machine. A branch is a parallel line of development within a repository. A fork is a server-side copy of someone else's repository to your own account — it's how open-source contribution works: you fork, make changes, then open a PR back to the original.",
+    "answerGeneralTr": "Clone, uzak bir deponun yerel makinenize yapılan kopyasıdır. Branch (dal), bir depo içinde paralel bir geliştirme hattıdır. Fork ise başkasının deposunun kendi hesabınıza sunucu tarafında kopyalanmasıdır — açık kaynak katkısı böyle çalışır: fork yaparsınız, değişiklikler yaparsınız, ardından orijinal depoya PR açarsınız.",
+    "answerPersonal": null,
+    "detailMd": "## Fork vs Branch vs Clone\n\n## Clone\n\n```bash\ngit clone https://github.com/user/repo.git\n```\n\n- Downloads the entire repo history to your local machine\n- Creates a local working copy\n- Remote is set as `origin` automatically\n- You need write access to push back\n\n## Branch\n\n```bash\ngit checkout -b feature/auth\n```\n\n- A pointer inside an existing repository\n- Same codebase, different line of development\n- Lightweight — just a SHA reference\n\n## Fork\n\n- A **server-side copy** of a repository to your own account\n- Made through the hosting platform UI (GitHub, GitLab)\n- Lets you push changes without write access to the original\n- Open-source workflow: fork → clone → commit → push to fork → PR to original\n\n```\nOriginal repo (upstream)\n       ↓ fork\nYour fork (origin)\n       ↓ clone\nLocal machine\n       ↓ push to fork\nYour fork\n       ↓ PR\nOriginal repo\n```\n\n## When to Use Which\n\n| Scenario | Use |\n|---|---|\n| Work on a project you own | Branch |\n| Contribute to open source | Fork |\n| Get a project on your machine | Clone |\n| Work on someone's repo with access | Clone + Branch |",
+    "detailMdTr": null
+  },
+  {
+    "id": 906,
+    "topic": "git",
+    "level": 2,
+    "levelLabel": "Junior",
+    "question": "What is the difference between git pull and git fetch?",
+    "answerGeneral": "`git fetch` downloads changes from the remote into your local remote-tracking branches but does not modify your working branch. `git pull` does a fetch followed immediately by a merge (or rebase with `--rebase`). Use `git fetch` when you want to inspect remote changes before integrating them; use `git pull` when you're confident you want to update your local branch immediately.",
+    "answerGeneralTr": "`git fetch` uzaktaki değişiklikleri yerel uzak-takip dallarınıza indirir ancak çalışma dalınızı değiştirmez. `git pull` ise bir fetch'in hemen ardından birleştirme (merge) yapar (`--rebase` ile rebase). Uzak değişiklikleri entegre etmeden önce incelemek istediğinizde `git fetch` kullanın; yerel dalınızı hemen güncellemek istediğinizde `git pull` kullanın.",
+    "answerPersonal": null,
+    "detailMd": "## git fetch vs git pull\n\n## git fetch\n\n```bash\ngit fetch origin\n# Downloads remote changes to origin/main (remote tracking branch)\n# Your local main is UNTOUCHED\n\ngit log main..origin/main  # see what's coming\ngit diff main origin/main  # inspect changes\ngit merge origin/main      # merge when ready\n```\n\n## git pull\n\n```bash\ngit pull origin main\n# = git fetch origin main\n# + git merge origin/main\n```\n\n`git pull --rebase` replays your local commits on top of the fetched commits instead of creating a merge commit.\n\n## When to Use Each\n\n```\ngit fetch → inspect → git merge   (careful, explicit)\ngit pull                           (quick, assumes merge is safe)\ngit pull --rebase                  (linear history preference)\n```\n\n## Common Problem\n\nBlind `git pull` on a shared branch can create unnecessary merge commits and messy history. Prefer `git fetch` + inspect, or configure:\n\n```bash\ngit config pull.rebase true  # always rebase instead of merge\n```",
+    "detailMdTr": null
+  },
+  {
+    "id": 907,
+    "topic": "git",
+    "level": 2,
+    "levelLabel": "Junior",
+    "question": "How do you revert a previous commit in Git?",
+    "answerGeneral": "There are several approaches. `git revert <sha>` creates a new commit that undoes the changes — safe on shared branches because it preserves history. `git reset --soft HEAD~1` moves the branch pointer back but keeps changes staged. `git reset --hard HEAD~1` discards everything. Only use `reset` on commits that haven't been pushed to a shared branch.",
+    "answerGeneralTr": "Birkaç yaklaşım vardır. `git revert <sha>` değişiklikleri geri alan yeni bir commit oluşturur — geçmişi koruduğu için paylaşılan dallarda güvenlidir. `git reset --soft HEAD~1` dal pointer'ını geri taşır ancak değişiklikleri aşamalı hâlde bırakır. `git reset --hard HEAD~1` her şeyi siler. `reset` yalnızca paylaşılan bir dala push edilmemiş commit'lerde kullanılmalıdır.",
+    "answerPersonal": null,
+    "detailMd": "## Reverting Commits in Git\n\n## Option 1: git revert (safe, preserves history)\n\n```bash\ngit revert abc1234        # creates a new \"undo\" commit\ngit revert HEAD           # revert the most recent commit\ngit revert HEAD~3..HEAD   # revert last 3 commits\n```\n\n✅ Safe on shared branches — no history rewriting.\n\n## Option 2: git reset (rewrites history — local only)\n\n```bash\n# Keep changes staged\ngit reset --soft HEAD~1\n\n# Keep changes in working directory (unstaged)\ngit reset --mixed HEAD~1  # default\n\n# Discard all changes (dangerous!)\ngit reset --hard HEAD~1\n```\n\n⚠️ Never `reset` commits already pushed to a shared branch — it will cause diverged history for other developers.\n\n## Option 3: git restore (single file)\n\n```bash\ngit restore --source=HEAD~1 src/api.ts  # restore one file to previous version\n```\n\n## Decision Flow\n\n```\nCommit already pushed to shared branch?\n  YES → git revert (safe)\n  NO  → git reset (cleaner local history)\n```",
+    "detailMdTr": null
+  },
+  {
+    "id": 908,
+    "topic": "git",
+    "level": 2,
+    "levelLabel": "Junior",
+    "question": "When should I use git stash?",
+    "answerGeneral": "Use `git stash` when you need to switch context — for example, you have work in progress on a feature branch and an urgent bug needs fixing on another branch. Stash temporarily shelves your uncommitted changes so you can switch branches with a clean working directory, then restore the changes later with `git stash pop`.",
+    "answerGeneralTr": "Bağlam değiştirmeniz gerektiğinde `git stash` kullanın — örneğin bir özellik dalında devam eden çalışmanız varken başka bir dalda acil bir hata düzeltilmesi gerekiyor. Stash, commit edilmemiş değişikliklerinizi geçici olarak rafa kaldırır, böylece temiz bir çalışma diziniyle dal değiştirebilir, ardından `git stash pop` ile değişiklikleri geri yükleyebilirsiniz.",
+    "answerPersonal": null,
+    "detailMd": "## git stash\n\n## Basic Usage\n\n```bash\ngit stash              # shelve all uncommitted changes\ngit stash push -m \"WIP: login form\"  # with a descriptive label\ngit stash list         # see all stashes\ngit stash pop          # restore most recent stash + remove it\ngit stash apply        # restore most recent stash but keep it\ngit stash drop         # delete most recent stash\ngit stash clear        # delete all stashes\n```\n\n## Common Scenario\n\n```bash\n# Working on feature, urgent bug arrives\ngit stash push -m \"WIP: feature/auth\"\ngit checkout main\ngit checkout -b hotfix/login-crash\n# fix bug, commit, merge\ngit checkout feature/auth\ngit stash pop          # restore your WIP\n```\n\n## Stash Specific Files\n\n```bash\ngit stash push -- src/LoginForm.tsx  # stash only one file\n```\n\n## Include Untracked Files\n\n```bash\ngit stash push --include-untracked   # or -u\n```\n\n## git stash pop vs git stash apply\n\n- `pop` = apply + delete from stash list (most common)\n- `apply` = apply but keep in stash list (useful if you want to apply to multiple branches)",
+    "detailMdTr": null
+  }
+]

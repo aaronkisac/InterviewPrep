@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1019,
+    "topic": "agile-scrum",
+    "level": 4,
+    "levelLabel": "Senior",
+    "question": "What are the main differences between Scrum and Agile?",
+    "answerGeneral": "Agile is a mindset — a set of values and principles from the Agile Manifesto. Scrum is a specific framework that implements Agile principles through defined roles, events, and artifacts. All Scrum is Agile, but not all Agile is Scrum. Other frameworks (Kanban, XP, SAFe) are also Agile but aren't Scrum.",
+    "answerGeneralTr": "Agile bir zihniyettir — Agile Manifesto'dan değerler ve prensipler bütünü. Scrum ise Agile prensiplerini tanımlanmış roller, etkinlikler ve artifact'lar aracılığıyla uygulayan belirli bir çerçevedir. Tüm Scrum Agile'dır, ancak tüm Agile Scrum değildir. Diğer çerçeveler (Kanban, XP, SAFe) de Agile'dır ancak Scrum değildir.",
+    "answerPersonal": null,
+    "detailMd": "## Scrum vs Agile\n\n## Analogy\n\n```\nAgile = a philosophy (\"play beautiful football\")\nScrum = a specific system (\"4-3-3 formation with these rules\")\n```\n\n## Comparison\n\n| | Agile | Scrum |\n|---|---|---|\n| Type | Mindset / Philosophy | Framework |\n| Source | Agile Manifesto (2001) | Scrum Guide (Ken Schwaber & Jeff Sutherland) |\n| Prescriptiveness | Principles only | Defined roles, events, artifacts |\n| Flexibility | Very high | Structured within Scrum rules |\n| Examples | Any iterative approach | Sprint, DoD, Retrospective |\n\n## Agile Is Not a Method\n\nYou can't \"install\" Agile. You can only practice it through a framework like Scrum, Kanban, or XP, and through cultural change.\n\n## Other Agile Frameworks\n\n```\nAgile (mindset)\n  ├── Scrum           → sprints, defined events, defined roles\n  ├── Kanban          → flow-based, no iterations, WIP limits\n  ├── XP              → engineering focus (TDD, pair programming, CI)\n  ├── SAFe            → Agile at enterprise scale\n  └── LeSS            → Large-Scale Scrum\n```\n\n## Scrumban\n\nMany teams combine Scrum's structure with Kanban's flow visualisation — using sprint cadence for ceremonies but a Kanban board for task tracking.",
+    "detailMdTr": null
+  },
+  {
+    "id": 1020,
+    "topic": "agile-scrum",
+    "level": 4,
+    "levelLabel": "Senior",
+    "question": "What is the difference between Incremental and Iterative development in Agile?",
+    "answerGeneral": "Iterative development refines a complete system through repeated cycles of improvement — you build a rough version of the whole, then improve it. Incremental development adds new pieces of functionality sequentially — each increment adds something new. Agile combines both: each Sprint delivers a working increment (incremental) and the team can revisit and improve earlier work based on feedback (iterative).",
+    "answerGeneralTr": "İteratif geliştirme, tekrarlanan iyileştirme döngüleri aracılığıyla eksiksiz bir sistemi rafine eder — tümevarımsal bir taslak oluşturur, sonra iyileştirirsiniz. Artımlı geliştirme, sıralı olarak yeni işlev parçaları ekler — her increment yeni bir şey ekler. Agile her ikisini birleştirir: her Sprint çalışan bir increment sunar (artımlı) ve ekip geri bildirime dayalı olarak önceki çalışmayı gözden geçirip iyileştirebilir (iteratif).",
+    "answerPersonal": null,
+    "detailMd": "## Incremental vs Iterative Development\n\n## Iterative Development\n\nBuild the whole thing, then improve it:\n\n```\nIteration 1: Rough version of entire car (all parts, low quality)\nIteration 2: Improved version with better engine\nIteration 3: Better steering, refined interior\nIteration 4: Full polish\n```\n\nEach cycle produces a complete but progressively refined product.\n\n## Incremental Development\n\nBuild one piece at a time:\n\n```\nIncrement 1: Skateboard (works, delivers value)\nIncrement 2: Scooter (better, works)\nIncrement 3: Bicycle (even better, works)\nIncrement 4: Motorbike → Car (full product)\n```\n\nEach increment adds new functionality. The famous skateboard metaphor shows each increment delivers user value — not just a wheel.\n\n## Agile Uses Both\n\n```\nSprint 1: Auth feature (increment)\nSprint 2: Product listing (increment)\nSprint 3: Cart (increment) + Auth improvements based on feedback (iterative)\nSprint 4: Checkout (increment) + Cart UX improvements (iterative)\n```\n\n## Why It Matters\n\nPure incremental (never revisit earlier work) leads to technical debt accumulation. Pure iterative (keep refining, never ship) leads to analysis paralysis. Agile's combination — ship working increments AND improve earlier work — is what makes it practical.",
+    "detailMdTr": null
+  },
+  {
+    "id": 1021,
+    "topic": "agile-scrum",
+    "level": 4,
+    "levelLabel": "Senior",
+    "question": "What are the roles and responsibilities of a Scrum Master?",
+    "answerGeneral": "The Scrum Master is a servant-leader who ensures the Scrum Team understands and enacts Scrum theory. Key responsibilities: facilitating all Scrum events, coaching the team on Agile practices, removing impediments, protecting the team from external disruptions, and helping the organisation adopt Scrum. A Scrum Master does not assign work or manage people — they remove obstacles so the self-organising team can do its best work.",
+    "answerGeneralTr": "Scrum Master, Scrum Team'in Scrum teorisini anlayıp uygulamasını sağlayan hizmetkar-liderdir. Temel sorumluluklar: tüm Scrum etkinliklerini kolaylaştırma, ekibe Agile pratikler konusunda koçluk yapma, engelleri kaldırma, ekibi dış kesintilerden koruma ve kuruluşun Scrum'ı benimsemesine yardımcı olma. Scrum Master iş atamaz veya insanları yönetmez — kendi kendini örgütleyen ekibin en iyi işini yapabilmesi için engelleri kaldırır.",
+    "answerPersonal": null,
+    "detailMd": "## Scrum Master Responsibilities\n\n## Three Areas of Service\n\n### 1. Service to the Scrum Team\n- Coaches team members in Agile and Scrum\n- Facilitates Sprint Planning, Daily Scrum, Review, Retrospective\n- Helps team reach consensus\n- Ensures the Daily Scrum happens and is useful\n- Protects the team from interruptions\n\n### 2. Service to the Product Owner\n- Helps the PO understand product goal setting\n- Helps the PO communicate effectively with stakeholders\n- Assists with backlog management and refinement\n- Helps the PO understand what makes a good Product Backlog\n\n### 3. Service to the Organisation\n- Leads Agile adoption\n- Plans Scrum implementation\n- Removes organisational impediments\n- Works with other SMs to improve Scrum effectiveness\n\n## Scrum Master Is NOT\n\n```\n❌ Project Manager (assigns tasks, tracks hours)\n❌ Team Lead (authority over developers)\n❌ Scribe (just takes meeting notes)\n❌ Impediment magician (removes all obstacles alone — teams own their blockers)\n```\n\n## Servant-Leader Model\n\nThe SM leads by enabling, coaching, and removing friction — not by directing. A great SM makes themselves unnecessary over time by building a self-sufficient, high-performing team.",
+    "detailMdTr": null
+  },
+  {
+    "id": 1022,
+    "topic": "agile-scrum",
+    "level": 4,
+    "levelLabel": "Senior",
+    "question": "What is a Scrum Increment?",
+    "answerGeneral": "The Increment is the sum of all completed Product Backlog items from the current Sprint plus the value of all previous Increments. Each Increment must be usable and meet the Definition of Done — it is concrete evidence of progress. Multiple Increments may be created within a Sprint. A Sprint ends with at least one Increment, regardless of whether the Product Owner decides to release it.",
+    "answerGeneralTr": "Increment, mevcut Sprint'teki tamamlanmış tüm Product Backlog öğelerinin toplamı artı önceki tüm Increment'lerin değeridir. Her Increment kullanılabilir olmalı ve Done Tanımını karşılamalıdır — ilerlemenin somut kanıtıdır. Bir Sprint içinde birden fazla Increment oluşturulabilir. Sprint, Product Owner'ın yayınlamaya karar verip vermediğinden bağımsız olarak en az bir Increment ile sona erer.",
+    "answerPersonal": null,
+    "detailMd": "## Scrum Increment\n\n## Definition\n\nThe Increment is the usable, integrated sum of all completed Sprint Backlog items plus all previously accepted Increments.\n\n```\nSprint 1 Increment: Login + Registration\nSprint 2 Increment: Login + Registration + Product Search + Listing\nSprint 3 Increment: All of above + Cart + Checkout\n```\n\nEach Sprint produces a complete, integrated Increment — not isolated features.\n\n## Must Meet the Definition of Done\n\nWork not meeting the DoD is NOT part of the Increment. It cannot be demoed at the Sprint Review or counted toward velocity.\n\n## Multiple Increments Per Sprint\n\nIn Scrum 2020, the Scrum Guide clarified: multiple Increments can be created within a Sprint. You don't have to wait until the Sprint Review to release value — if a story is done on Day 5 of a 2-week Sprint, you can release it immediately.\n\n## Release Decision\n\nThe Product Owner decides whether to release an Increment — not the Scrum Team. The team's job is to make the Increment releasable (meets DoD). The business decides when to flip the switch.\n\n## Increment as Learning Vehicle\n\nEach Increment gives stakeholders something real to react to. Feedback from Sprint Reviews feeds back into the Product Backlog, enabling the team to course-correct before building more.",
+    "detailMdTr": null
+  },
+  {
+    "id": 1023,
+    "topic": "agile-scrum",
+    "level": 4,
+    "levelLabel": "Senior",
+    "question": "What is Scrum Theory based on?",
+    "answerGeneral": "Scrum is founded on empirical process control theory — the idea that knowledge comes from experience and decisions should be based on what is known. It rests on three pillars: Transparency (the process and work must be visible), Inspection (progress toward goals must be checked regularly), and Adaptation (if inspection reveals deviation, adjust as soon as possible). These pillars are activated through the five Scrum Values.",
+    "answerGeneralTr": "Scrum, ampirik süreç kontrol teorisine dayanır — bilginin deneyimden geldiği ve kararların bilinenler üzerine alınması gerektiği fikri. Üç direk üzerine kuruludur: Şeffaflık (süreç ve iş görünür olmalı), Denetim (hedeflere doğru ilerleme düzenli olarak kontrol edilmeli) ve Uyarlama (denetim sapma ortaya koyarsa en kısa sürede düzeltin). Bu direktifler beş Scrum Değeri aracılığıyla etkinleştirilir.",
+    "answerPersonal": null,
+    "detailMd": "## Scrum Theory\n\n## Empiricism vs Defined Process\n\nTraditional project management uses a **defined process**: follow a detailed plan precisely, and you'll get a predictable output (works for building a bridge — requirements don't change).\n\nSoftware requirements DO change. Scrum uses **empiricism**: make small decisions based on current knowledge, observe outcomes, adapt.\n\n```\nDefined process: Plan everything upfront → execute exactly → deliver\nEmpirical process: Plan a bit → execute → inspect → adapt → repeat\n```\n\n## Three Pillars\n\n### Transparency\n- The process, work in progress, and impediments must be visible to everyone\n- Common language (DoD, story points) enables shared understanding\n- Daily Scrum, Sprint Backlog, burn-down chart all serve transparency\n\n### Inspection\n- Scrum artifacts and progress are inspected regularly\n- Daily Scrum: inspect progress toward Sprint Goal daily\n- Sprint Review: inspect the Increment\n- Sprint Retrospective: inspect the process\n\n### Adaptation\n- When inspection reveals problems, adjust immediately\n- Sprint Planning: adapt based on Product Backlog and velocity\n- Daily Scrum: adapt the daily plan\n- Sprint Retrospective: adapt the team process\n\n## Why Empiricism Works for Software\n\nSoftware development involves high variability and creativity. No plan survives contact with users. Empiricism builds learning into the process rather than treating surprises as failures.",
+    "detailMdTr": null
+  }
+]

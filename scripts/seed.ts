@@ -422,6 +422,6 @@ async function main() {
 }
 
 main().catch((err: unknown) => {
-  console.error("Seed failed:", err instanceof Error ? err.message : err);
+  console.error("Seed failed:", err);
   process.exit(1);
 });

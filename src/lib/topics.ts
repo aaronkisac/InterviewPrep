@@ -23,6 +23,11 @@ export const TOPICS: readonly Topic[] = [
   "html5",
   "css",
   "react-hooks",
+  "git",
+  "agile-scrum",
+  "websockets",
+  "unit-testing",
+  "design-patterns",
 ];
 
 export const TOPIC_LABELS: Record<Topic, string> = {
@@ -34,6 +39,11 @@ export const TOPIC_LABELS: Record<Topic, string> = {
   html5: "HTML5",
   css: "CSS",
   "react-hooks": "React Hooks",
+  git: "Git",
+  "agile-scrum": "Agile & Scrum",
+  websockets: "WebSockets",
+  "unit-testing": "Unit Testing",
+  "design-patterns": "Design Patterns",
 };
 
 export const LEVELS: ReadonlyArray<{

@@ -2,7 +2,7 @@
 // Regenerate from Supabase with `supabase gen types typescript` once the
 // project is linked.
 
-export type Topic = "react" | "typescript" | "nextjs" | "redux" | "javascript" | "html5" | "css" | "react-hooks";
+export type Topic = "react" | "typescript" | "nextjs" | "redux" | "javascript" | "html5" | "css" | "react-hooks" | "git" | "agile-scrum" | "websockets" | "unit-testing" | "design-patterns";
 export type LevelLabel = "Entry" | "Junior" | "Mid" | "Senior" | "Expert";
 export type QuestionStatus = "active" | "pending" | "rejected";
 export type UserRole = "user" | "admin";

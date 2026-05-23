@@ -6,7 +6,10 @@
     "tooltip": "An in-memory representation of the real DOM. React diffs old and new versions to compute the minimal set of DOM updates.",
     "definition": "The Virtual DOM is React's in-memory representation of the UI tree. When state changes, React builds a new virtual tree, compares it against the previous one, and applies only the diff to the real DOM. The point is that you can write code as if the whole UI re-renders on every change — React makes it efficient under the hood. This is what allows the declarative model to scale.",
     "codeExample": null,
-    "relatedSlugs": ["reconciliation", "hydration"]
+    "relatedSlugs": [
+      "reconciliation",
+      "hydration"
+    ]
   },
   {
     "slug": "reconciliation",
@@ -15,7 +18,9 @@
     "tooltip": "The algorithm React uses to figure out the minimum DOM operations needed to update the UI when state or props change.",
     "definition": "Reconciliation is the algorithm React uses to diff the previous element tree against the new one. It uses two heuristics: different element types produce different trees (so type changes cause unmount/remount), and stable `key` props identify children across renders. Understanding reconciliation is what makes keys, stable component identities, and subtree-remount bugs click into place.",
     "codeExample": "// Same type → React updates in place\n<button className={on ? 'on' : 'off'}>Toggle</button>\n\n// Type change → React tears down and rebuilds\n{on ? <ButtonOn /> : <ButtonOff />}",
-    "relatedSlugs": ["virtual-dom"]
+    "relatedSlugs": [
+      "virtual-dom"
+    ]
   },
   {
     "slug": "hook",
@@ -24,7 +29,10 @@
     "tooltip": "A function (useState, useEffect, etc.) that lets function components opt into React features like state, lifecycle, and context.",
     "definition": "Hooks are functions starting with `use` that let function components access state, side effects, refs, context, and other React features that used to require class components. Rules: call hooks at the top level (no conditionals), only call them from React functions. The hook system is built on calling order — that's why the rules exist.",
     "codeExample": "function Counter() {\n  const [count, setCount] = useState(0);\n  useEffect(() => {\n    document.title = `Count: ${count}`;\n  }, [count]);\n  return <button onClick={() => setCount(c => c + 1)}>+1</button>;\n}",
-    "relatedSlugs": ["server-component", "strict-mode"]
+    "relatedSlugs": [
+      "server-component",
+      "strict-mode"
+    ]
   },
   {
     "slug": "strict-mode",
@@ -33,7 +41,10 @@
     "tooltip": "A dev-only wrapper that surfaces problems by double-invoking effects, reducers, and state initialisers.",
     "definition": "`<React.StrictMode>` is a development-only wrapper that intentionally double-invokes function component bodies, class render methods, reducers, and state initialisers. It also runs effects through a setup→cleanup→setup cycle to simulate a remount. The point is to catch effects that aren't idempotent — bugs that would otherwise only show up under concurrent rendering. It's a no-op in production.",
     "codeExample": "<React.StrictMode>\n  <App />\n</React.StrictMode>",
-    "relatedSlugs": ["hook", "reconciliation"]
+    "relatedSlugs": [
+      "hook",
+      "reconciliation"
+    ]
   },
   {
     "slug": "hydration",
@@ -42,7 +53,10 @@
     "tooltip": "The process of attaching React's event handlers and state to server-rendered HTML so the page becomes interactive.",
     "definition": "When the server sends pre-rendered HTML, the browser shows it immediately — but it isn't interactive yet. Hydration is the process where React downloads the JS bundle, walks the DOM, and attaches event handlers, restores state, and connects the rendered HTML to its component tree. A hydration mismatch happens when the server-rendered output doesn't match what the client would render — usually caused by reading `window`, `Date.now()`, or other non-deterministic values during render.",
     "codeExample": null,
-    "relatedSlugs": ["virtual-dom", "server-component"]
+    "relatedSlugs": [
+      "virtual-dom",
+      "server-component"
+    ]
   },
   {
     "slug": "generic",
@@ -51,7 +65,10 @@
     "tooltip": "A type parameter that lets a function or type work with multiple input types while preserving the relationship between them.",
     "definition": "Generics let you write a function or type that works with multiple input types without losing type information. The classic use is a function whose return type depends on its input: `first<T>(arr: T[]): T | undefined` preserves the element type, so `first([1,2,3])` returns `number | undefined`, not `unknown | undefined`. Generics also work on classes, interfaces, and type aliases.",
     "codeExample": "function first<T>(arr: T[]): T | undefined {\n  return arr[0];\n}\n\nconst n = first([1, 2, 3]); // n: number | undefined\nconst s = first(['a', 'b']); // s: string | undefined",
-    "relatedSlugs": ["type-inference", "discriminated-union"]
+    "relatedSlugs": [
+      "type-inference",
+      "discriminated-union"
+    ]
   },
   {
     "slug": "type-inference",
@@ -60,7 +77,10 @@
     "tooltip": "The compiler's ability to figure out a type from context, so you don't have to annotate everything by hand.",
     "definition": "TypeScript infers types from initialisers, return values, and function calls so you don't have to annotate every variable. `const x = 42` is inferred as `number`. `users.map(u => u.name)` infers `string[]` if `users` is typed. Over-annotating is the rookie move — let the compiler do the work and only annotate at API boundaries (function parameters, exported function returns).",
     "codeExample": "// No annotations needed — inferred\nconst users = [{ id: '1', name: 'Aaron' }];\nconst names = users.map(u => u.name);\n//    ^? string[]",
-    "relatedSlugs": ["generic", "structural-typing"]
+    "relatedSlugs": [
+      "generic",
+      "structural-typing"
+    ]
   },
   {
     "slug": "discriminated-union",
@@ -69,7 +89,10 @@
     "tooltip": "A union type where each variant has a literal property the compiler can use to narrow which variant you're holding.",
     "definition": "A discriminated union (or tagged union) is a union type where every member has a shared property holding a unique literal value — the discriminant. The compiler narrows the union based on that discriminant inside conditional checks. This pattern replaces enums + interfaces with something safer and more ergonomic.",
     "codeExample": "type Shape =\n  | { kind: 'circle'; radius: number }\n  | { kind: 'square'; side: number };\n\nfunction area(shape: Shape) {\n  if (shape.kind === 'circle') return Math.PI * shape.radius ** 2;\n  return shape.side ** 2; // shape is narrowed to square here\n}",
-    "relatedSlugs": ["generic", "structural-typing"]
+    "relatedSlugs": [
+      "generic",
+      "structural-typing"
+    ]
   },
   {
     "slug": "structural-typing",
@@ -78,7 +101,10 @@
     "tooltip": "TypeScript matches types by shape, not by name — duck typing with compiler help.",
     "definition": "TypeScript uses structural typing: two types are compatible if they have the same shape, regardless of whether either was declared to implement the other. A plain object literal can satisfy an interface without ever being declared as that interface. This is the opposite of nominal typing in languages like Java or C#.",
     "codeExample": "interface Point { x: number; y: number; }\n\nfunction distance(a: Point, b: Point) { /* ... */ }\n\nconst p = { x: 1, y: 2, label: 'A' };\ndistance(p, p); // ✅ p has the right shape",
-    "relatedSlugs": ["type-inference", "discriminated-union"]
+    "relatedSlugs": [
+      "type-inference",
+      "discriminated-union"
+    ]
   },
   {
     "slug": "const-assertion",
@@ -87,7 +113,10 @@
     "tooltip": "`as const` tells TS to infer the narrowest possible type — string literals stay literal, arrays become readonly tuples.",
     "definition": "`as const` narrows inference to the most specific type possible. String literals stay as their literal type, arrays become readonly tuples, object properties become readonly literal types. The classic use is deriving a union type from a runtime constant — define the values once, derive the type from `typeof`.",
     "codeExample": "const STATUS = {\n  pending: 'pending',\n  active: 'active',\n  archived: 'archived',\n} as const;\n\ntype Status = (typeof STATUS)[keyof typeof STATUS];\n// → 'pending' | 'active' | 'archived'",
-    "relatedSlugs": ["type-inference", "discriminated-union"]
+    "relatedSlugs": [
+      "type-inference",
+      "discriminated-union"
+    ]
   },
   {
     "slug": "app-router",
@@ -96,7 +125,11 @@
     "tooltip": "Next.js 13+ routing system built on React Server Components, living in the app/ directory.",
     "definition": "The App Router is the routing system introduced in Next.js 13 and stabilised in 14. It lives in `app/` and is built on React Server Components by default. Key features: nested layouts that persist across navigation, streaming with Suspense, parallel and intercepting routes, route handlers for APIs, and per-segment loading and error states.",
     "codeExample": "app/\n├── layout.tsx     // wraps everything\n├── page.tsx       // /\n└── blog/\n    ├── page.tsx           // /blog\n    └── [slug]/\n        └── page.tsx       // /blog/:slug",
-    "relatedSlugs": ["server-component", "route-handler", "isr"]
+    "relatedSlugs": [
+      "server-component",
+      "route-handler",
+      "isr"
+    ]
   },
   {
     "slug": "server-component",
@@ -105,7 +138,10 @@
     "tooltip": "A React component that renders on the server and never ships its JS to the browser. Default in App Router.",
     "definition": "A React Server Component renders on the server (at build or request time) and never ships its JavaScript to the browser. It can fetch data directly, read from databases, access environment variables — anything server-side. The browser receives just the rendered HTML / RSC payload. In Next.js App Router, components are Server Components by default; you opt into client behaviour with `'use client'`.",
     "codeExample": "// Server Component — no 'use client'\nexport default async function ProductList() {\n  const products = await db.product.findMany();\n  return <ul>{products.map(p => <li key={p.id}>{p.name}</li>)}</ul>;\n}",
-    "relatedSlugs": ["app-router", "hydration"]
+    "relatedSlugs": [
+      "app-router",
+      "hydration"
+    ]
   },
   {
     "slug": "isr",
@@ -114,7 +150,10 @@
     "tooltip": "Incremental Static Regeneration — serve static pages but refresh them in the background after a time window or on-demand.",
     "definition": "ISR (Incremental Static Regeneration) lets you serve statically generated pages but refresh them after a TTL or via on-demand invalidation. You get CDN-speed responses with eventual freshness. Configure with `export const revalidate = N` for time-based refresh, or `revalidatePath` / `revalidateTag` for on-demand invalidation when underlying data changes.",
     "codeExample": "// Time-based ISR\nexport const revalidate = 60; // seconds\n\n// On-demand from a webhook\nimport { revalidateTag } from 'next/cache';\nrevalidateTag('products');",
-    "relatedSlugs": ["app-router", "server-component"]
+    "relatedSlugs": [
+      "app-router",
+      "server-component"
+    ]
   },
   {
     "slug": "route-handler",
@@ -123,7 +162,10 @@
     "tooltip": "App Router replacement for API routes. A route.ts file exporting HTTP method functions using standard Web Request/Response.",
     "definition": "Route Handlers are the App Router replacement for `pages/api/` routes. A `route.ts` file inside `app/` exports HTTP method functions (`GET`, `POST`, `PATCH`, etc.) that use the standard Web `Request` and `Response` objects rather than Next-specific `req`/`res`. This makes them portable and easier to test.",
     "codeExample": "// app/api/users/route.ts\nexport async function GET() {\n  const users = await db.user.findMany();\n  return Response.json(users);\n}\n\nexport async function POST(request: Request) {\n  const body = await request.json();\n  const user = await db.user.create({ data: body });\n  return Response.json(user, { status: 201 });\n}",
-    "relatedSlugs": ["app-router", "server-component"]
+    "relatedSlugs": [
+      "app-router",
+      "server-component"
+    ]
   },
   {
     "slug": "middleware",
@@ -132,7 +174,10 @@
     "tooltip": "Code that runs at the Edge before a request reaches a route — used for auth gates, redirects, A/B tests, locale negotiation.",
     "definition": "Middleware runs at the Edge before a request hits a route. The function receives a `NextRequest` and returns a `NextResponse` — it can redirect, rewrite, set cookies, or modify request headers. Configure which routes it runs on via a `matcher` config. In Next 16+, the file is named `proxy.ts` (same API). Keep it small — runs on every matched request.",
     "codeExample": "// middleware.ts (or proxy.ts in Next 16+)\nimport { NextResponse } from 'next/server';\nimport type { NextRequest } from 'next/server';\n\nexport function middleware(request: NextRequest) {\n  const token = request.cookies.get('session');\n  if (!token) return NextResponse.redirect(new URL('/login', request.url));\n  return NextResponse.next();\n}\n\nexport const config = { matcher: ['/dashboard/:path*'] };",
-    "relatedSlugs": ["app-router", "route-handler"]
+    "relatedSlugs": [
+      "app-router",
+      "route-handler"
+    ]
   },
   {
     "slug": "redux-store",
@@ -141,7 +186,11 @@
     "tooltip": "The single object that holds the entire application state tree in a Redux app.",
     "definition": "The Redux store is the single source of truth for application state. Created with `configureStore()` (Redux Toolkit) or the legacy `createStore()`, it exposes three core methods: `getState()` to read the current state, `dispatch(action)` to trigger a state change, and `subscribe(listener)` to react to changes. There is always exactly one store per Redux application — multiple data domains are handled by combining slice reducers, not by creating multiple stores.",
     "codeExample": "import { configureStore } from '@reduxjs/toolkit';\nimport cartReducer from './cartSlice';\nimport userReducer from './userSlice';\n\nexport const store = configureStore({\n  reducer: { cart: cartReducer, user: userReducer },\n});\n\nexport type RootState  = ReturnType<typeof store.getState>;\nexport type AppDispatch = typeof store.dispatch;",
-    "relatedSlugs": ["redux-reducer", "redux-action", "redux-dispatch"]
+    "relatedSlugs": [
+      "redux-reducer",
+      "redux-action",
+      "redux-dispatch"
+    ]
   },
   {
     "slug": "redux-reducer",
@@ -150,7 +199,12 @@
     "tooltip": "A pure function (state, action) => newState that describes how state changes in response to an action.",
     "definition": "A reducer is a pure function that takes the current state and an action object and returns the next state — never mutating the original. The name comes from `Array.prototype.reduce`: just as reduce folds an array into a single value, a Redux reducer folds a stream of dispatched actions into the current state. Rules: no side effects, no direct mutations, always return the current state unchanged for unknown action types. Redux Toolkit's `createSlice` generates reducers with Immer baked in, so you can write mutating-looking code that produces new immutable state.",
     "codeExample": "import { createSlice, PayloadAction } from '@reduxjs/toolkit';\n\nconst counterSlice = createSlice({\n  name: 'counter',\n  initialState: { value: 0 },\n  reducers: {\n    increment: (state) => { state.value += 1; },\n    setBy:     (state, action: PayloadAction<number>) => {\n      state.value = action.payload;\n    },\n  },\n});\n\nexport const { increment, setBy } = counterSlice.actions;\nexport default counterSlice.reducer;",
-    "relatedSlugs": ["redux-store", "redux-action", "immer", "combine-reducers"]
+    "relatedSlugs": [
+      "redux-store",
+      "redux-action",
+      "immer",
+      "combine-reducers"
+    ]
   },
   {
     "slug": "redux-action",
@@ -159,7 +213,11 @@
     "tooltip": "A plain JS object with a `type` field that describes what happened in the app.",
     "definition": "An action is the only way to describe a state change in Redux — a plain object with at minimum a `type` string. By convention (and Redux Toolkit's Flux Standard Action shape) it also carries a `payload` field for data. Actions are dispatched to the store, which passes them through middleware and then to the root reducer. With `createSlice`, action creators are auto-generated and fully typed — you rarely write action objects by hand.",
     "codeExample": "// Manual action object\nstore.dispatch({ type: 'cart/addItem', payload: { id: '42', qty: 1 } });\n\n// Auto-generated action creator (Redux Toolkit)\nimport { addItem } from './cartSlice';\nstore.dispatch(addItem({ id: '42', qty: 1 }));\n// dispatches: { type: 'cart/addItem', payload: { id: '42', qty: 1 } }",
-    "relatedSlugs": ["redux-dispatch", "redux-reducer", "redux-store"]
+    "relatedSlugs": [
+      "redux-dispatch",
+      "redux-reducer",
+      "redux-store"
+    ]
   },
   {
     "slug": "redux-dispatch",
@@ -168,7 +226,11 @@
     "tooltip": "The store method that sends an action through middleware and into the root reducer to update state.",
     "definition": "`store.dispatch(action)` is the only way to trigger a state change. It sends the action through the middleware pipeline (thunk, logger, etc.) and then calls the root reducer with the current state and that action. In React components, use the typed `useAppDispatch` hook rather than importing the store directly — this keeps components decoupled from the store singleton and ensures correct TypeScript inference.",
     "codeExample": "// In a component\nimport { useAppDispatch } from '@/app/hooks';\nimport { increment } from './counterSlice';\n\nfunction Counter() {\n  const dispatch = useAppDispatch();\n  return <button onClick={() => dispatch(increment())}>+1</button>;\n}",
-    "relatedSlugs": ["redux-action", "redux-store", "thunk"]
+    "relatedSlugs": [
+      "redux-action",
+      "redux-store",
+      "thunk"
+    ]
   },
   {
     "slug": "thunk",
@@ -177,7 +239,11 @@
     "tooltip": "A function dispatched to the Redux store instead of a plain action object, used to handle async logic.",
     "definition": "A thunk is a function that wraps an expression to delay its evaluation — in Redux it is a function you dispatch that the `redux-thunk` middleware intercepts before it reaches the reducer. The thunk receives `(dispatch, getState)` and can perform async work (API calls, timeouts) then dispatch plain actions with the results. Redux Toolkit ships `createAsyncThunk` which auto-generates `pending`, `fulfilled`, and `rejected` action types and handles AbortController-based cancellation.",
     "codeExample": "import { createAsyncThunk } from '@reduxjs/toolkit';\n\nexport const fetchUser = createAsyncThunk(\n  'user/fetch',\n  async (userId: string) => {\n    const res = await fetch(`/api/users/${userId}`);\n    if (!res.ok) throw new Error('Not found');\n    return res.json();\n  },\n);\n\n// Dispatching from a component:\ndispatch(fetchUser('u_123'));",
-    "relatedSlugs": ["redux-dispatch", "redux-middleware", "redux-saga"]
+    "relatedSlugs": [
+      "redux-dispatch",
+      "redux-middleware",
+      "redux-saga"
+    ]
   },
   {
     "slug": "redux-selector",
@@ -186,7 +252,10 @@
     "tooltip": "A function that reads and optionally derives data from the Redux store, optionally memoised with Reselect.",
     "definition": "A selector is a function that takes the Redux state and returns a derived value. Simple selectors are just arrow functions; complex ones use `createSelector` from Reselect (bundled with Redux Toolkit) to memoize the result — it only recomputes when its inputs change. Selectors decouple components from the store's internal shape: rename a field in state and only the selector changes, not every component that reads it.",
     "codeExample": "import { createSelector } from '@reduxjs/toolkit';\nimport type { RootState } from './store';\n\nconst selectItems  = (state: RootState) => state.cart.items;\nconst selectCoupon = (state: RootState) => state.cart.coupon;\n\nexport const selectTotal = createSelector(\n  [selectItems, selectCoupon],\n  (items, coupon) => {\n    const raw = items.reduce((s, i) => s + i.price * i.qty, 0);\n    return coupon ? raw * (1 - coupon.discount) : raw;\n  },\n);\n\n// In a component:\nconst total = useAppSelector(selectTotal);",
-    "relatedSlugs": ["redux-store", "reselect"]
+    "relatedSlugs": [
+      "redux-store",
+      "reselect"
+    ]
   },
   {
     "slug": "redux-middleware",
@@ -195,7 +264,11 @@
     "tooltip": "A function that intercepts dispatched actions before they reach the reducer — used for async logic, logging, and crash reporting.",
     "definition": "Redux middleware is a higher-order function that wraps the `dispatch` function. It sits between `store.dispatch()` and the root reducer, letting you intercept, transform, delay, or side-effect on every action. The standard shape is `(store) => (next) => (action) => { ... }`. `redux-thunk` is the most common — it lets you dispatch functions. `redux-logger` logs state before and after. Multiple middlewares are composed left-to-right.",
     "codeExample": "// Custom middleware\nconst analyticsMiddleware =\n  (store: MiddlewareAPI) =>\n  (next: Dispatch) =>\n  (action: unknown) => {\n    if (isAction(action)) analytics.track(action.type);\n    return next(action);\n  };\n\n// Register in configureStore\nconfigureStore({\n  reducer: rootReducer,\n  middleware: (getDefault) =>\n    getDefault().concat(analyticsMiddleware),\n});",
-    "relatedSlugs": ["thunk", "redux-saga", "redux-store"]
+    "relatedSlugs": [
+      "thunk",
+      "redux-saga",
+      "redux-store"
+    ]
   },
   {
     "slug": "redux-saga",
@@ -204,7 +277,10 @@
     "tooltip": "A middleware library that manages async side effects using ES6 generator functions and declarative effect descriptors.",
     "definition": "redux-saga is a Redux middleware that handles side effects — API calls, WebSocket messages, complex async orchestration — using ES6 generators. Instead of calling async functions directly, sagas `yield` plain effect descriptor objects (`call`, `put`, `take`, `race`, `fork`) that the middleware interprets. Because the generator only produces descriptions and never executes I/O itself, sagas are easy to test without mocks. Key helper effects: `takeEvery` (spawn a task per action), `takeLatest` (cancel previous task on new action), `race` (run effects in parallel, cancel the loser).",
     "codeExample": "import { call, put, takeLatest } from 'redux-saga/effects';\n\nfunction* fetchUserSaga(action: PayloadAction<string>) {\n  try {\n    const user: User = yield call(api.getUser, action.payload);\n    yield put(userLoaded(user));\n  } catch (e) {\n    yield put(userFailed(String(e)));\n  }\n}\n\nexport function* rootSaga() {\n  yield takeLatest('user/fetch', fetchUserSaga);\n}",
-    "relatedSlugs": ["thunk", "redux-middleware"]
+    "relatedSlugs": [
+      "thunk",
+      "redux-middleware"
+    ]
   },
   {
     "slug": "flux",
@@ -213,7 +289,11 @@
     "tooltip": "Facebook's unidirectional data flow architecture — the pattern that directly inspired Redux.",
     "definition": "Flux is an application architecture pattern Facebook introduced alongside React in 2014 to tame the complexity of two-way data binding. It enforces a strict one-way cycle: Action → Dispatcher → Store → View. Redux was directly inspired by Flux but simplified it: it eliminates the separate Dispatcher, collapses multiple mutable stores into one immutable state tree, and replaces in-store mutation logic with pure reducer functions. Understanding Flux makes Redux's design decisions (one store, pure reducers, actions as the only mutation path) immediately obvious.",
     "codeExample": null,
-    "relatedSlugs": ["redux-store", "redux-action", "redux-reducer"]
+    "relatedSlugs": [
+      "redux-store",
+      "redux-action",
+      "redux-reducer"
+    ]
   },
   {
     "slug": "redux-toolkit",
@@ -222,7 +302,12 @@
     "tooltip": "The official, opinionated Redux toolset — configureStore, createSlice, createAsyncThunk, RTK Query.",
     "definition": "Redux Toolkit (RTK) is the official recommended way to write Redux logic. It wraps the raw Redux API with `configureStore` (auto-wires DevTools and thunk middleware), `createSlice` (generates reducers and action creators in one call), `createAsyncThunk` (handles pending/fulfilled/rejected lifecycle actions), and RTK Query (declarative data fetching and caching). It bundles Immer so you can write apparently-mutating reducer logic that actually produces immutable state, and Reselect for memoised selectors.",
     "codeExample": "import { configureStore, createSlice } from '@reduxjs/toolkit';\n\nconst counterSlice = createSlice({\n  name: 'counter',\n  initialState: { value: 0 },\n  reducers: {\n    increment: (state) => { state.value += 1; },\n  },\n});\n\nconst store = configureStore({\n  reducer: { counter: counterSlice.reducer },\n});\n\nexport const { increment } = counterSlice.actions;",
-    "relatedSlugs": ["redux-store", "redux-reducer", "immer", "reselect"]
+    "relatedSlugs": [
+      "redux-store",
+      "redux-reducer",
+      "immer",
+      "reselect"
+    ]
   },
   {
     "slug": "immer",
@@ -231,7 +316,10 @@
     "tooltip": "A library that lets you write mutating-looking code that actually produces a new immutable state object.",
     "definition": "Immer uses JavaScript `Proxy` to record mutations you make on a draft copy of the state, then produces a new immutable object reflecting those changes — the original is never touched. Redux Toolkit bundles Immer into `createSlice` reducers, so you can write `state.items.push(item)` instead of `return { ...state, items: [...state.items, item] }`. Immer only applies inside `createSlice` (or `createReducer`) — mutating outside those functions is still a bug.",
     "codeExample": "// Without Immer — verbose spread\ncase 'addItem':\n  return {\n    ...state,\n    cart: { ...state.cart, items: [...state.cart.items, action.payload] },\n  };\n\n// With Immer (inside createSlice) — clear and direct\naddItem: (state, action: PayloadAction<CartItem>) => {\n  state.cart.items.push(action.payload); // safe — Immer wraps this\n},",
-    "relatedSlugs": ["redux-reducer", "redux-toolkit"]
+    "relatedSlugs": [
+      "redux-reducer",
+      "redux-toolkit"
+    ]
   },
   {
     "slug": "reselect",
@@ -240,7 +328,10 @@
     "tooltip": "A memoised selector library. createSelector only recomputes when its input selectors return new references.",
     "definition": "Reselect is the selector library bundled with Redux Toolkit. Its `createSelector` function takes one or more input selectors and a result function; the result function is only called when the inputs produce new values (by reference equality). This prevents React components from re-rendering when an expensive derived value hasn't actually changed. Selectors compose — pass one `createSelector` output as an input to another to build up a pipeline of cached transformations.",
     "codeExample": "import { createSelector } from '@reduxjs/toolkit';\n\nconst selectAllProducts = (state: RootState) => state.products.items;\nconst selectFilter      = (state: RootState) => state.products.filter;\n\n// Only recomputes when products or filter change\nexport const selectFilteredProducts = createSelector(\n  [selectAllProducts, selectFilter],\n  (products, filter) =>\n    filter\n      ? products.filter((p) => p.category === filter)\n      : products,\n);",
-    "relatedSlugs": ["redux-selector", "redux-toolkit"]
+    "relatedSlugs": [
+      "redux-selector",
+      "redux-toolkit"
+    ]
   },
   {
     "slug": "combine-reducers",
@@ -249,7 +340,10 @@
     "tooltip": "Utility that merges multiple slice reducers into one root reducer, each responsible for its own state slice.",
     "definition": "`combineReducers` (or the object shorthand in `configureStore`) composes multiple reducer functions into a single root reducer. Each slice reducer receives only its own piece of the state tree — it never sees or can accidentally affect sibling slices. On every dispatch, the root reducer calls each slice reducer with its slice and the action, then assembles the results into a new top-level state object. This is the primary mechanism for splitting Redux state by domain without requiring multiple stores.",
     "codeExample": "import { combineReducers } from '@reduxjs/toolkit';\n\n// Explicit combineReducers\nconst rootReducer = combineReducers({\n  cart:    cartReducer,\n  user:    userReducer,\n  session: sessionReducer,\n});\n\n// Or use the shorthand in configureStore (equivalent)\nconfigureStore({\n  reducer: {\n    cart:    cartReducer,\n    user:    userReducer,\n    session: sessionReducer,\n  },\n});",
-    "relatedSlugs": ["redux-reducer", "redux-store"]
+    "relatedSlugs": [
+      "redux-reducer",
+      "redux-store"
+    ]
   },
   {
     "slug": "closure",
@@ -258,7 +352,11 @@
     "tooltip": "A function that retains access to variables from its outer scope even after that scope has finished executing.",
     "definition": "A closure is formed when a function is defined inside another function and the inner function captures (closes over) variables from the outer function's scope. The inner function retains a live reference to those variables — not a copy — so it reads and writes the same memory even after the outer function has returned. Closures are the mechanism behind data privacy (module pattern), partial application, memoization, and any code that needs to 'remember' state between calls without using global variables.",
     "codeExample": "function makeCounter(start = 0) {\n  let count = start; // captured by the closure\n  return {\n    increment: () => ++count,\n    decrement: () => --count,\n    value:     () => count,\n  };\n}\n\nconst counter = makeCounter(10);\ncounter.increment(); // 11\ncounter.increment(); // 12\ncounter.value();     // 12\n// count is private — unreachable outside makeCounter",
-    "relatedSlugs": ["scope", "iife", "module-pattern-js"]
+    "relatedSlugs": [
+      "scope",
+      "iife",
+      "module-pattern-js"
+    ]
   },
   {
     "slug": "scope",
@@ -267,7 +365,10 @@
     "tooltip": "The region of code where a variable is accessible. JavaScript has global, function, and block scope.",
     "definition": "Scope determines where in the code a variable can be read or written. JavaScript has three scope types: **global scope** (accessible everywhere), **function scope** (`var` declarations are limited to the enclosing function), and **block scope** (`let` and `const` are limited to the nearest `{}`). Scope is lexical — it is determined by where you write the code, not where it is called from. Nested functions form a scope chain: inner scopes can access outer variables, but outer scopes cannot access inner variables.",
     "codeExample": "var globalVar = 'global';\n\nfunction outer() {\n  let outerLet = 'outer';\n\n  function inner() {\n    let innerLet = 'inner';\n    console.log(outerLet);  // ✅ accessible via scope chain\n    console.log(globalVar); // ✅ accessible\n  }\n\n  inner();\n  // console.log(innerLet); // ❌ ReferenceError\n}\n\n// Block scope\n{\n  let blockVar = 'block';\n}\n// console.log(blockVar); // ❌ ReferenceError",
-    "relatedSlugs": ["closure", "hoisting-js"]
+    "relatedSlugs": [
+      "closure",
+      "hoisting-js"
+    ]
   },
   {
     "slug": "hoisting-js",
@@ -276,7 +377,10 @@
     "tooltip": "JavaScript's behaviour of moving var declarations and function definitions to the top of their scope before execution.",
     "definition": "Hoisting is the mechanism by which JavaScript's engine processes declarations before executing code. `var` declarations are hoisted and initialised to `undefined`, so they can be referenced before the line they appear on (returning `undefined`, not an error). Function declarations are fully hoisted — both name and body — so they can be called before their definition. `let` and `const` are hoisted to the top of their block but placed in a Temporal Dead Zone (TDZ) — accessing them before the declaration line throws a `ReferenceError`. Only declarations are hoisted, not assignments.",
     "codeExample": "// var — hoisted as undefined\nconsole.log(x); // undefined (no error)\nvar x = 5;\n\n// function declaration — fully hoisted\ngreet(); // 'Hello' — works before definition\nfunction greet() { return 'Hello'; }\n\n// let/const — TDZ\nconsole.log(y); // ReferenceError!\nlet y = 10;",
-    "relatedSlugs": ["scope", "closure"]
+    "relatedSlugs": [
+      "scope",
+      "closure"
+    ]
   },
   {
     "slug": "iife",
@@ -285,7 +389,10 @@
     "tooltip": "Immediately Invoked Function Expression — a function that executes the moment it is defined, creating a private scope.",
     "definition": "An IIFE (Immediately Invoked Function Expression) is a function expression wrapped in parentheses and immediately called. The wrapping parentheses make it an expression rather than a declaration; the trailing `()` invokes it straight away. IIFEs were the primary way to create private scope before ES6 modules — any `var` inside the IIFE is invisible to the outside world. Today, ES modules provide file-level scope, making IIFEs mostly a legacy pattern, though they still appear in bundled output and libraries that need to support environments without a module system.",
     "codeExample": "(function () {\n  var privateVar = 'hidden';\n  console.log('IIFE ran');\n})();\n\n// Arrow function variant\n(() => {\n  const init = 'also private';\n  console.log(init);\n})();\n\n// console.log(privateVar); // ❌ ReferenceError",
-    "relatedSlugs": ["closure", "scope"]
+    "relatedSlugs": [
+      "closure",
+      "scope"
+    ]
   },
   {
     "slug": "event-loop",
@@ -294,7 +401,10 @@
     "tooltip": "The mechanism that allows JavaScript to perform non-blocking operations by offloading work and processing queued callbacks one at a time.",
     "definition": "JavaScript is single-threaded — only one piece of code runs at a time. The event loop is the scheduler that coordinates what runs next. It works with three areas: the **call stack** (currently executing code), the **microtask queue** (Promise callbacks, `queueMicrotask`), and the **macrotask queue** (`setTimeout`, I/O, UI events). After each call stack is emptied, the event loop drains the entire microtask queue first, then picks one macrotask. This ordering is why Promise `.then` callbacks always run before `setTimeout(fn, 0)` callbacks.",
     "codeExample": "console.log('1');\nsetTimeout(() => console.log('4'), 0); // macrotask\nPromise.resolve().then(() => console.log('3')); // microtask\nconsole.log('2');\n// Output: 1 → 2 → 3 → 4",
-    "relatedSlugs": ["promise-js", "async-await"]
+    "relatedSlugs": [
+      "promise-js",
+      "async-await"
+    ]
   },
   {
     "slug": "promise-js",
@@ -303,7 +413,10 @@
     "tooltip": "An object representing the eventual completion or failure of an asynchronous operation, enabling cleaner async code than callbacks.",
     "definition": "A Promise is an object that represents the result of an asynchronous operation that will settle at some future point. It has three states: **pending** (initial), **fulfilled** (succeeded with a value), and **rejected** (failed with a reason). Once settled it is immutable. Handlers are registered with `.then(onFulfilled)`, `.catch(onRejected)`, and `.finally(onSettled)`. Each `.then` returns a new Promise, enabling chaining. Promise callbacks are microtasks — they run before the next event loop macrotask. `Promise.all`, `Promise.allSettled`, `Promise.race`, and `Promise.any` coordinate multiple concurrent promises.",
     "codeExample": "const fetchUser = (id) =>\n  fetch(`/api/users/${id}`)\n    .then(res => {\n      if (!res.ok) throw new Error(`HTTP ${res.status}`);\n      return res.json();\n    });\n\nfetchUser(1)\n  .then(user => console.log(user.name))\n  .catch(err => console.error(err))\n  .finally(() => console.log('done'));",
-    "relatedSlugs": ["async-await", "event-loop"]
+    "relatedSlugs": [
+      "async-await",
+      "event-loop"
+    ]
   },
   {
     "slug": "async-await",
@@ -312,7 +425,10 @@
     "tooltip": "Syntactic sugar over Promises that makes asynchronous code read like synchronous code.",
     "definition": "`async` functions always return a Promise. `await` suspends the function's execution until the awaited Promise settles, then resumes with the resolved value. Under the hood, the engine transforms the async function into a state machine similar to a generator. The suspended function does not block the thread — other tasks continue to run. Error handling uses `try/catch` rather than `.catch()`. Independent async operations should be started simultaneously with `Promise.all` rather than awaited sequentially, to avoid unnecessary latency.",
     "codeExample": "async function loadDashboard(userId) {\n  try {\n    // Parallel — both requests fire at the same time\n    const [user, posts] = await Promise.all([\n      fetchUser(userId),\n      fetchPosts(userId),\n    ]);\n    return { user, posts };\n  } catch (err) {\n    console.error('Dashboard load failed:', err);\n    throw err;\n  }\n}",
-    "relatedSlugs": ["promise-js", "event-loop"]
+    "relatedSlugs": [
+      "promise-js",
+      "event-loop"
+    ]
   },
   {
     "slug": "prototype-chain",
@@ -321,7 +437,10 @@
     "tooltip": "The linked chain of objects JavaScript searches when looking up a property that doesn't exist on the object itself.",
     "definition": "Every JavaScript object has an internal `[[Prototype]]` link pointing to another object (or `null`). When you access a property, the engine first checks the object itself. If not found, it follows the `[[Prototype]]` link and checks that object — and so on up the chain until it finds the property or reaches `null` (the chain's end). This is how objects can 'inherit' methods without copying them: they all share a single copy on a prototype object. ES6 `class` and `extends` use this same mechanism.",
     "codeExample": "const animal = { breathe() { return 'breathing'; } };\nconst dog = Object.create(animal);\ndog.bark = () => 'woof';\n\nconst rex = Object.create(dog);\nrex.bark();    // 'woof'    — found on dog\nrex.breathe(); // 'breathing' — found on animal\n\n// Check own vs inherited\nrex.hasOwnProperty('bark');    // false\ndog.hasOwnProperty('bark');    // true",
-    "relatedSlugs": ["closure", "scope"]
+    "relatedSlugs": [
+      "closure",
+      "scope"
+    ]
   },
   {
     "slug": "event-delegation",
@@ -330,7 +449,9 @@
     "tooltip": "Attaching a single event listener to a parent element to handle events from all its children via bubbling.",
     "definition": "Event delegation exploits event bubbling: instead of attaching a listener to every child element, you attach one listener to a common parent. When a child is clicked, the event bubbles up and the parent's handler fires. You use `event.target` (or `event.target.closest(selector)`) to identify which child triggered it. Benefits: fewer listeners (less memory), automatically covers dynamically added children, single cleanup point on teardown. It is especially valuable for large lists, tables, and components that mount/unmount items frequently.",
     "codeExample": "const list = document.querySelector('#todo-list');\n\nlist.addEventListener('click', (e) => {\n  const item = e.target.closest('[data-id]');\n  if (!item) return;\n\n  if (e.target.matches('.delete-btn')) {\n    deleteItem(item.dataset.id);\n  } else if (e.target.matches('.complete-btn')) {\n    toggleComplete(item.dataset.id);\n  }\n});\n// Works for items added later — no re-binding needed",
-    "relatedSlugs": ["event-loop"]
+    "relatedSlugs": [
+      "event-loop"
+    ]
   },
   {
     "slug": "debounce",
@@ -339,7 +460,10 @@
     "tooltip": "A technique that delays invoking a function until after a specified quiet period since the last call.",
     "definition": "Debouncing ensures a function only executes after a specified delay has elapsed since the last invocation. Every new call resets the timer. It is used for events that fire rapidly where you only care about the final settled state — search input (wait until the user stops typing), window resize, autocomplete, form validation. The delay is typically 150–300 ms for user input. A leading variant fires immediately on the first call and then ignores subsequent calls during the quiet period.",
     "codeExample": "function debounce(fn, delay) {\n  let timerId;\n  return function (...args) {\n    clearTimeout(timerId);\n    timerId = setTimeout(() => fn.apply(this, args), delay);\n  };\n}\n\nconst handleSearch = debounce((query) => {\n  fetchResults(query);\n}, 300);\n\ninput.addEventListener('input', e => handleSearch(e.target.value));\n// API is only called 300ms after the user stops typing",
-    "relatedSlugs": ["throttle", "event-loop"]
+    "relatedSlugs": [
+      "throttle",
+      "event-loop"
+    ]
   },
   {
     "slug": "throttle",
@@ -348,7 +472,10 @@
     "tooltip": "A technique that limits a function to fire at most once per specified interval, regardless of how often it is called.",
     "definition": "Throttling ensures a function executes at most once per specified time interval, no matter how frequently the triggering event fires. Unlike debounce (which waits for silence), throttle guarantees regular execution during continuous activity. Common use cases: scroll and resize handlers (limit to ~60fps), API rate limiting, game input processing. A leading throttle fires on the first call; a trailing throttle fires after the interval; most implementations fire on both.",
     "codeExample": "function throttle(fn, interval) {\n  let lastTime = 0;\n  return function (...args) {\n    const now = Date.now();\n    if (now - lastTime >= interval) {\n      lastTime = now;\n      fn.apply(this, args);\n    }\n  };\n}\n\nconst onScroll = throttle(updateParallax, 16); // ~60fps\nwindow.addEventListener('scroll', onScroll);",
-    "relatedSlugs": ["debounce", "event-loop"]
+    "relatedSlugs": [
+      "debounce",
+      "event-loop"
+    ]
   },
   {
     "slug": "generator-js",
@@ -357,7 +484,10 @@
     "tooltip": "A function that can pause its execution with yield and resume later, producing a sequence of values on demand.",
     "definition": "A generator function (`function*`) returns an iterator when called. Inside the body, `yield` pauses execution and emits a value; calling `.next()` resumes from where it left off. Generators enable lazy evaluation — values are produced only when requested, which is memory-efficient for large or infinite sequences. They also support two-way communication: `yield` expressions can receive values passed via `.next(value)`. Redux-saga uses generators to orchestrate async side effects. `async/await` was itself inspired by the generator + Promise pattern.",
     "codeExample": "function* range(start, end) {\n  for (let i = start; i <= end; i++) {\n    yield i;\n  }\n}\n\nfor (const n of range(1, 5)) {\n  console.log(n); // 1 2 3 4 5\n}\n\n// Infinite sequence — only computes on demand\nfunction* naturals() {\n  let n = 1;\n  while (true) yield n++;\n}\nconst gen = naturals();\ngen.next().value; // 1\ngen.next().value; // 2",
-    "relatedSlugs": ["event-loop", "async-await"]
+    "relatedSlugs": [
+      "event-loop",
+      "async-await"
+    ]
   },
   {
     "slug": "symbol-js",
@@ -366,7 +496,9 @@
     "tooltip": "A primitive value that is guaranteed to be unique every time it is created, used as collision-free property keys.",
     "definition": "Symbol is a primitive type introduced in ES6. Every `Symbol()` call produces a unique value — even if you pass the same description string. Symbols are non-enumerable by default, so they don't appear in `Object.keys()` or `for...in` loops, making them ideal for attaching metadata without polluting the public API. Well-known symbols like `Symbol.iterator`, `Symbol.toPrimitive`, and `Symbol.hasInstance` let objects hook into built-in JavaScript behaviours. `Symbol.for(key)` creates symbols in a global registry shared across modules.",
     "codeExample": "const ID = Symbol('id');\nconst user = { name: 'Alice', [ID]: 42 };\n\nconsole.log(Object.keys(user)); // ['name'] — Symbol hidden\nconsole.log(user[ID]);          // 42\n\n// Well-known symbol: custom iteration\nclass Range {\n  constructor(a, b) { this.a = a; this.b = b; }\n  [Symbol.iterator]() {\n    let i = this.a;\n    return { next: () => i <= this.b ? { value: i++, done: false } : { done: true } };\n  }\n}\nfor (const n of new Range(1, 3)) console.log(n); // 1 2 3",
-    "relatedSlugs": ["prototype-chain"]
+    "relatedSlugs": [
+      "prototype-chain"
+    ]
   },
   {
     "slug": "web-worker",
@@ -375,96 +507,216 @@
     "tooltip": "A background thread in the browser that runs JavaScript without blocking the main UI thread.",
     "definition": "Web Workers run JavaScript in a separate thread from the main (UI) thread. Because JavaScript is single-threaded by default, CPU-heavy work blocks the event loop and freezes the UI. Web Workers solve this by offloading computation. Workers communicate with the main thread via `postMessage` / `onmessage` (using the structured-clone algorithm or Transferable objects for zero-copy buffer transfers). Limitations: no DOM access, no `window` or `document`. They can use `fetch`, `IndexedDB`, `WebSocket`, and `WebAssembly`. The `comlink` library wraps workers in a Proxy, eliminating most message-passing boilerplate.",
     "codeExample": "// main.js\nconst worker = new Worker('/worker.js');\nworker.postMessage({ data: largeArray });\nworker.onmessage = (e) => console.log('Result:', e.data.result);\n\n// worker.js\nself.onmessage = (e) => {\n  const result = e.data.data.reduce((a, b) => a + b, 0);\n  self.postMessage({ result });\n};",
-    "relatedSlugs": ["event-loop"]
+    "relatedSlugs": [
+      "event-loop"
+    ]
   },
   {
-    "slug": "css-specificity",
-    "label": "CSS Specificity",
-    "topic": "css",
-    "tooltip": "The algorithm that determines which CSS rule wins when multiple rules target the same element.",
-    "definition": "Specificity is calculated as a three-column value (A, B, C): A counts ID selectors, B counts class/attribute/pseudo-class selectors, and C counts element/pseudo-element selectors. Columns are compared left-to-right — 1,0,0 always beats 0,99,99. Inline styles beat all stylesheet rules; `!important` overrides everything. When specificity is equal, the later rule in source order wins. Keeping specificity flat (all selectors at 0,1,0) is the goal of methodologies like BEM.",
-    "codeExample": "/* (A, B, C) */\na            { color: blue; }  /* 0,0,1 */\n.nav a       { color: green; } /* 0,1,1 — wins */\n#sidebar a   { color: red; }   /* 1,0,1 — wins */\n\n/* :where() has zero specificity — easy to override */\n:where(.card) a { color: gray; } /* 0,0,0 */",
-    "relatedSlugs": ["bem", "css-box-model"]
+    "slug": "unit-test",
+    "label": "Unit Test",
+    "topic": "unit-testing",
+    "tooltip": "A test that verifies a single function or component in isolation, with all dependencies replaced by mocks.",
+    "definition": "A unit test exercises the smallest testable piece of code — typically a single function, method, or component — in complete isolation from external systems. Dependencies such as databases, APIs, and the file system are replaced with mocks or stubs. Unit tests run in milliseconds, are fully deterministic, and pinpoint failures to a specific unit of logic. In JavaScript, Jest is the dominant framework. In React, React Testing Library is used to test component behaviour from the user's perspective without coupling tests to implementation details.",
+    "codeExample": "// Pure function unit test\ntest('formatPrice returns £ prefixed string', () => {\n  expect(formatPrice(9.99)).toBe('£9.99');\n});\n\n// React component unit test\ntest('shows error message on failed submit', async () => {\n  render(<LoginForm onSubmit={jest.fn().mockRejectedValue(new Error('Bad credentials'))} />);\n  await userEvent.click(screen.getByRole('button', { name: /sign in/i }));\n  expect(await screen.findByRole('alert')).toHaveTextContent('Bad credentials');\n});",
+    "relatedSlugs": [
+      "mock",
+      "test-double",
+      "arrange-act-assert",
+      "integration-test"
+    ]
   },
   {
-    "slug": "css-box-model",
-    "label": "CSS Box Model",
-    "topic": "css",
-    "tooltip": "The rectangular box wrapping every HTML element, consisting of content, padding, border, and margin.",
-    "definition": "Every HTML element generates a rectangular box with four layers from inside out: content area, padding (space between content and border), border, and margin (space outside the border). By default `box-sizing: content-box` adds padding and border on top of the declared width. Switching to `box-sizing: border-box` makes width include padding and border, which is far more predictable — it's why most CSS resets apply it globally. Vertical margins between adjacent block elements collapse to the larger of the two values.",
-    "codeExample": "*, *::before, *::after { box-sizing: border-box; }\n\n.card {\n  width: 300px;   /* includes padding + border */\n  padding: 1rem;\n  border: 1px solid;\n  margin-bottom: 1.5rem;\n}",
-    "relatedSlugs": ["block-formatting-context"]
+    "slug": "integration-test",
+    "label": "Integration Test",
+    "topic": "unit-testing",
+    "tooltip": "A test that verifies multiple units work correctly together, often with real (or near-real) dependencies.",
+    "definition": "Integration tests check the contracts between units — where unit tests guarantee each piece works in isolation, integration tests guarantee they work together. They may use a real database, a real HTTP server, or both. In frontend development, integration tests (using React Testing Library) typically render a feature with real child components but mocked API calls. On the backend, integration tests usually hit a test database seeded with known fixtures. Integration tests are slower than unit tests but catch bugs that only appear at the seams: wrong SQL queries, middleware misconfiguration, broken API contracts.",
+    "codeExample": "// Backend integration test (API + test DB)\ntest('POST /api/users creates a user and returns 201', async () => {\n  const res = await request(app)\n    .post('/api/users')\n    .send({ name: 'Aaron', email: 'aaron@example.com' });\n\n  expect(res.status).toBe(201);\n  const user = await db.user.findUnique({ where: { email: 'aaron@example.com' } });\n  expect(user).not.toBeNull();\n});",
+    "relatedSlugs": [
+      "unit-test",
+      "mock",
+      "test-double"
+    ]
   },
   {
-    "slug": "flexbox",
-    "label": "Flexbox",
-    "topic": "css",
-    "tooltip": "A one-dimensional CSS layout model for distributing space and aligning items along a single axis.",
-    "definition": "Flexbox (Flexible Box Layout) arranges items along a main axis (row or column) and a cross axis. The container controls alignment with `justify-content` (main axis) and `align-items` (cross axis). Flex items can grow (`flex-grow`), shrink (`flex-shrink`), and set a base size (`flex-basis`). Flexbox is ideal for components — nav bars, button groups, card footers — and for centering. For two-dimensional page layouts, CSS Grid is the better tool. The two are complementary: Grid for layout, Flexbox for components.",
-    "codeExample": ".nav {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  gap: 1rem;\n}\n\n/* Center anything */\n.centered {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}",
-    "relatedSlugs": ["css-grid", "block-formatting-context"]
+    "slug": "mock",
+    "label": "Mock",
+    "topic": "unit-testing",
+    "tooltip": "A controlled fake that replaces a real dependency and records calls so you can assert on them.",
+    "definition": "A mock replaces a real dependency with a controlled substitute that returns predetermined values and records how it was called. Unlike a stub (which only returns values), a mock also lets you assert that your code called it with the right arguments, the right number of times, and in the right order. In Jest, `jest.fn()` creates a mock function and `jest.mock()` replaces an entire module. Mocks are essential for testing code that depends on external systems (databases, APIs, email services) without actually involving them. Over-mocking is a smell — if you mock everything, you end up testing the mocks, not the behaviour.",
+    "codeExample": "// jest.fn() — mock function\nconst sendEmail = jest.fn().mockResolvedValue({ success: true });\n\nawait notifyUser('aaron@example.com');\n\nexpect(sendEmail).toHaveBeenCalledWith('aaron@example.com', expect.any(String));\nexpect(sendEmail).toHaveBeenCalledTimes(1);\n\n// jest.mock() — replace an entire module\njest.mock('@/lib/email', () => ({\n  sendEmail: jest.fn().mockResolvedValue({ success: true }),\n}));",
+    "relatedSlugs": [
+      "spy",
+      "test-double",
+      "unit-test"
+    ]
   },
   {
-    "slug": "css-grid",
-    "label": "CSS Grid",
-    "topic": "css",
-    "tooltip": "A two-dimensional CSS layout system for defining rows and columns simultaneously.",
-    "definition": "CSS Grid is the browser's native two-dimensional layout system. You define rows and columns on a grid container, then place items into cells using `grid-column` and `grid-row`. `grid-template-areas` gives named regions for readable layouts. The `fr` unit distributes remaining space proportionally. `auto-fill` and `auto-fit` with `minmax()` create responsive grids without media queries. Grid is ideal for page-level layouts and any design where items must align across both axes.",
-    "codeExample": ".layout {\n  display: grid;\n  grid-template-columns: 240px 1fr;\n  grid-template-rows: auto 1fr auto;\n  grid-template-areas:\n    'sidebar header'\n    'sidebar main'\n    'sidebar footer';\n  min-height: 100vh;\n}\n\n/* Responsive card grid — no media queries */\n.cards {\n  display: grid;\n  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));\n  gap: 1.5rem;\n}",
-    "relatedSlugs": ["flexbox"]
+    "slug": "spy",
+    "label": "Spy",
+    "topic": "unit-testing",
+    "tooltip": "A test double that wraps the real implementation, letting it run while recording calls for later assertion.",
+    "definition": "A spy wraps the real implementation of a function or method. The original code still executes, but the spy records every call — arguments, return values, and call count — so you can assert on them. This contrasts with a mock, which replaces the real implementation entirely. In Jest, `jest.spyOn(object, 'methodName')` creates a spy. You can optionally override the implementation with `.mockImplementation()`, effectively turning the spy into a mock. Always call `.mockRestore()` after the test to put the original implementation back. Spies are ideal when you want to verify that a collaborator was called without suppressing its real behaviour (e.g., checking a logger was invoked).",
+    "codeExample": "// Spy — real implementation still runs\nconst consoleSpy = jest.spyOn(console, 'warn');\n\nvalidateInput(null); // internally calls console.warn\n\nexpect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining('null input'));\nconsoleSpy.mockRestore();\n\n// Spy with override\nconst fetchSpy = jest.spyOn(api, 'fetchUser').mockResolvedValue({ name: 'Aaron' });\n// Real fetchUser NOT called — spy overrides it\nfetchSpy.mockRestore();",
+    "relatedSlugs": [
+      "mock",
+      "test-double"
+    ]
   },
   {
-    "slug": "stacking-context",
-    "label": "Stacking Context",
-    "topic": "css",
-    "tooltip": "An isolated layer in which z-index values only compete with each other, not the rest of the page.",
-    "definition": "A stacking context is a self-contained painting layer. z-index values inside it only compete with siblings within the same context — a z-index of 9999 inside a context with z-index 1 will still be painted below an element in a context with z-index 2. New stacking contexts are created by: `position` + `z-index` (non-auto), `opacity < 1`, any `transform`, `filter`, `isolation: isolate`, or `will-change`. This is why React portals render modals at the `<body>` level — to escape any stacking context a parent component might create.",
-    "codeExample": "/* isolation: isolate — cleanest way to create a context */\n.card { isolation: isolate; }\n\n/* Now .card's children can use z-index freely */\n/* without affecting elements outside .card */\n.card__badge { position: absolute; z-index: 10; }",
-    "relatedSlugs": ["css-specificity"]
+    "slug": "tdd",
+    "label": "TDD",
+    "topic": "unit-testing",
+    "tooltip": "Test-Driven Development — a practice where you write a failing test before writing the implementation code.",
+    "definition": "Test-Driven Development (TDD) is a development workflow where you write a failing test first, then write just enough code to make it pass, then refactor — repeating in short cycles. This is often called Red-Green-Refactor. TDD drives API design from the caller's perspective (you write the test before the implementation exists, so you design the API to be easy to use). Benefits include better-designed code, a built-in regression safety net, and tests that document intent. Drawbacks include slower initial velocity, friction with exploratory/UI work, and a tendency toward over-mocking if not applied carefully.",
+    "codeExample": "// 1. RED — write a failing test\ntest('calculateVAT adds 20% to the price', () => {\n  expect(calculateVAT(100)).toBe(120); // calculateVAT doesn't exist yet\n});\n\n// 2. GREEN — write just enough to pass\nfunction calculateVAT(price: number) {\n  return price * 1.2;\n}\n\n// 3. REFACTOR — clean up\nconst VAT_RATE = 0.2;\nfunction calculateVAT(price: number) {\n  return price * (1 + VAT_RATE);\n}",
+    "relatedSlugs": [
+      "unit-test",
+      "arrange-act-assert",
+      "code-coverage"
+    ]
   },
   {
-    "slug": "css-custom-properties",
-    "label": "CSS Custom Properties",
-    "topic": "css",
-    "tooltip": "Native CSS variables declared with -- that cascade, inherit, and can be changed at runtime.",
-    "definition": "CSS custom properties (also called CSS variables) are declared with `--name: value` and accessed via `var(--name, fallback)`. Unlike preprocessor variables, they exist in the browser at runtime — they cascade and inherit through the DOM, can be overridden within media queries or scoped to a component, and can be read and written via JavaScript. This makes them the foundation for runtime theming (dark mode), design token systems, and component-level style customisation without a build step.",
-    "codeExample": ":root {\n  --color-primary: #0070f3;\n  --spacing-4: 1rem;\n}\n\n@media (prefers-color-scheme: dark) {\n  :root { --color-primary: #60a5fa; }\n}\n\n.button {\n  background: var(--color-primary);\n  padding: var(--spacing-4);\n}\n\n// JS: update at runtime\ndocument.documentElement.style\n  .setProperty('--color-primary', '#ff0000');",
-    "relatedSlugs": ["css-specificity", "bem"]
+    "slug": "arrange-act-assert",
+    "label": "Arrange-Act-Assert",
+    "topic": "unit-testing",
+    "tooltip": "A pattern for structuring unit tests into three distinct phases: setup, execution, and verification.",
+    "definition": "Arrange-Act-Assert (AAA) is the standard pattern for structuring tests. Arrange sets up the system under test and its dependencies. Act calls the function or triggers the behaviour being tested — there should be exactly one Act per test. Assert verifies the outcome. The pattern makes tests readable and enforces single responsibility. It maps directly to BDD's Given-When-Then. In React Testing Library: render = Arrange, userEvent/fireEvent = Act, expect = Assert. A test with multiple Acts usually means it's testing more than one thing and should be split.",
+    "codeExample": "test('applying a coupon reduces the total', async () => {\n  // ARRANGE\n  const user = userEvent.setup();\n  render(<Cart items={[{ price: 100 }]} />);\n\n  // ACT\n  await user.type(screen.getByLabelText(/coupon/i), 'SAVE10');\n  await user.click(screen.getByRole('button', { name: /apply/i }));\n\n  // ASSERT\n  expect(screen.getByText(/total: £90/i)).toBeInTheDocument();\n});",
+    "relatedSlugs": [
+      "unit-test",
+      "tdd"
+    ]
   },
   {
-    "slug": "pseudo-element",
-    "label": "Pseudo-element",
-    "topic": "css",
-    "tooltip": "A CSS keyword (::before, ::after, etc.) that styles a specific part of an element without extra HTML.",
-    "definition": "Pseudo-elements target a specific sub-part of an element. `::before` and `::after` insert generated content as the element's first and last child — they require a `content` property (can be an empty string). `::first-line` and `::first-letter` style the first rendered line or character. `::placeholder` styles input placeholder text. `::marker` styles list item bullets or numbers. `::selection` styles highlighted text. CSS3 uses the `::` double-colon notation to distinguish from pseudo-classes (`:hover`, `:focus`), though single-colon still works for legacy pseudo-elements.",
-    "codeExample": "/* Clearfix */\n.clearfix::after { content: ''; display: block; clear: both; }\n\n/* Expand links for print */\n@media print {\n  a::after { content: ' (' attr(href) ')'; }\n}\n\n/* Decorative */\n.section-title::before {\n  content: '';\n  display: inline-block;\n  width: 4px;\n  height: 1em;\n  background: var(--color-primary);\n  margin-right: 0.5rem;\n}",
-    "relatedSlugs": ["css-specificity"]
+    "slug": "code-coverage",
+    "label": "Code Coverage",
+    "topic": "unit-testing",
+    "tooltip": "A metric that measures the percentage of your codebase exercised by tests — split into line, branch, and function coverage.",
+    "definition": "Code coverage measures how much of your source code is executed when tests run. The main types are: line coverage (% of lines executed), branch coverage (% of conditional branches — if/else, ternary — taken), function coverage (% of functions called), and statement coverage (% of statements executed). Branch coverage is the most useful because it catches untested conditional paths. The industry sweet spot is 80–85%. Chasing 100% produces diminishing returns — you end up testing trivial getters and defensive checks. Coverage is a lagging indicator, not a quality metric; a test that achieves 100% coverage without asserting meaningful outcomes is worthless.",
+    "codeExample": "// jest.config.js\nmodule.exports = {\n  collectCoverage: true,\n  coverageThreshold: {\n    global: {\n      branches: 80,\n      functions: 85,\n      lines: 85,\n    },\n  },\n};\n\n// Run: npx jest --coverage\n// Output:\n// Statements   : 92% (230/250)\n// Branches     : 81% (65/80)\n// Functions    : 95% (57/60)\n// Lines        : 91% (228/250)",
+    "relatedSlugs": [
+      "unit-test",
+      "tdd",
+      "arrange-act-assert"
+    ]
   },
   {
-    "slug": "bem",
-    "label": "BEM",
-    "topic": "css",
-    "tooltip": "Block Element Modifier — a CSS naming convention that keeps specificity flat and component styles predictable.",
-    "definition": "BEM is a naming methodology for CSS classes: Block (`card`), Element (`card__title`), Modifier (`card--featured`). Every selector is a single class at specificity 0,1,0 — no nesting, no IDs, no tag selectors. This eliminates specificity wars: any class can override any other with a single-class selector. Elements are tied to their block via double underscore (`__`), and variants use double hyphen (`--`). BEM works well with Sass nesting using `&` to write `.card__title` as `&__title` inside `.card`. Modern CSS Modules and Tailwind solve the same scoping problem differently — BEM remains relevant in design systems and legacy codebases.",
-    "codeExample": "/* BEM naming */\n.card { }                  /* Block */\n.card__title { }           /* Element */\n.card__image { }           /* Element */\n.card--featured { }        /* Block modifier */\n.card__title--large { }    /* Element modifier */\n\n/* SCSS shorthand */\n.card {\n  &__title { font-size: 1.25rem; }\n  &--featured { border: 2px solid gold; }\n}",
-    "relatedSlugs": ["css-specificity", "stacking-context"]
+    "slug": "test-double",
+    "label": "Test Double",
+    "topic": "unit-testing",
+    "tooltip": "An umbrella term for any object that stands in for a real dependency in a test — includes mocks, stubs, spies, fakes, and dummies.",
+    "definition": "Test double is the umbrella term (coined by Gerard Meszaros) for any object that replaces a real dependency in a test. The five subtypes are: Dummy (passed but never used — fills a parameter list), Stub (returns hardcoded values), Mock (records interactions and can assert on them), Spy (wraps real implementation, records calls), and Fake (a working simplified implementation — e.g. an in-memory database). In everyday JavaScript/TypeScript usage the terms mock and stub are often used loosely to mean any test double, but understanding the distinctions helps you choose the right tool.",
+    "codeExample": "// Dummy — just fills the parameter, never used\nconst dummyLogger = {} as Logger;\n\n// Stub — returns hardcoded value\nconst stubRepo = { findById: jest.fn().mockResolvedValue({ id: '1', name: 'Aaron' }) };\n\n// Mock — records + can assert\nconst mockEmail = jest.fn();\nawait service.run(); \nexpect(mockEmail).toHaveBeenCalledTimes(1);\n\n// Fake — working in-memory implementation\nclass InMemoryUserRepo implements UserRepository {\n  private users: User[] = [];\n  async findById(id: string) { return this.users.find(u => u.id === id) ?? null; }\n  async save(user: User) { this.users.push(user); return user; }\n}",
+    "relatedSlugs": [
+      "mock",
+      "spy",
+      "unit-test"
+    ]
   },
   {
-    "slug": "css-preprocessor",
-    "label": "CSS Preprocessor",
-    "topic": "css",
-    "tooltip": "A tool that extends CSS with variables, nesting, and mixins, then compiles to plain CSS.",
-    "definition": "A CSS preprocessor adds programming constructs — variables, nesting, mixins, functions, loops, and partials — to CSS and compiles the result to standard CSS. Sass (SCSS syntax) is the most widely used; Less and Stylus are alternatives. Key benefits: design tokens defined once as variables, component styles co-located via nesting, reusable patterns as mixins, and large codebases split into maintainable partial files. The main downside is a required build step and potential for specificity bloat from excessive nesting. Native CSS custom properties, `@layer`, and CSS nesting (now in all modern browsers) have reduced the gap, making preprocessors optional for many new projects.",
-    "codeExample": "// SCSS\n$primary: #0070f3;\n\n@mixin flex-center {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n\n.hero {\n  @include flex-center;\n  background: $primary;\n\n  &__title { font-size: 2rem; color: #fff; }\n}",
-    "relatedSlugs": ["css-custom-properties", "bem"]
+    "slug": "singleton",
+    "label": "Singleton",
+    "topic": "design-patterns",
+    "tooltip": "A creational pattern that ensures a class has only one instance and provides a global access point to it.",
+    "definition": "The Singleton pattern restricts instantiation of a class to a single object. In JavaScript, ES module exports are natural singletons — every import returns the same module-level object. Common uses: a Redux store, a Supabase client, an app-wide logger. Singletons can be problematic in tests because they carry state between tests and can't be easily replaced with mocks. Prefer dependency injection over ambient singletons when testability matters.",
+    "codeExample": "// Natural JS singleton via module export\nimport { createClient } from '@supabase/supabase-js';\nexport const supabase = createClient(URL, KEY);\n// Every import gets the same instance\n\n// Classic class singleton\nclass Logger {\n  private static instance: Logger;\n  private constructor() {}\n  static getInstance() {\n    if (!Logger.instance) Logger.instance = new Logger();\n    return Logger.instance;\n  }\n}",
+    "relatedSlugs": [
+      "design-pattern",
+      "dependency-injection"
+    ]
   },
   {
-    "slug": "block-formatting-context",
-    "label": "Block Formatting Context",
-    "topic": "css",
-    "tooltip": "An isolated layout region where block boxes are arranged and floats are contained.",
-    "definition": "A Block Formatting Context (BFC) is a self-contained layout region. Key properties: it contains its floated children (preventing parent collapse), it doesn't overlap floats from siblings, and its vertical margins don't collapse with those of its children. A new BFC is created by: `overflow` (any value except `visible`), `display: flow-root` (the cleanest trigger), `float`, `position: absolute/fixed`, `display: flex/grid/inline-flex/inline-grid`. Understanding BFCs explains why `overflow: hidden` on a parent fixes float collapse, and why flex/grid containers don't suffer from it at all.",
-    "codeExample": "/* Three ways to create a BFC */\n\n/* 1. Cleanest — no side effects */\n.container { display: flow-root; }\n\n/* 2. Common — clips overflow */\n.container { overflow: hidden; }\n\n/* 3. Flex is implicitly a BFC */\n.container { display: flex; }",
-    "relatedSlugs": ["css-box-model", "flexbox"]
+    "slug": "observer-pattern",
+    "label": "Observer",
+    "topic": "design-patterns",
+    "tooltip": "A behavioral pattern where a subject notifies all subscribed observers automatically when its state changes.",
+    "definition": "The Observer pattern defines a one-to-many dependency between objects. When the subject (publisher) changes state, all registered observers (subscribers) are notified. It is the foundation of event-driven programming. In the browser: `addEventListener` is the Observer pattern. In Node.js: `EventEmitter`. In React: the Context API re-renders consumers when context value changes; Zustand re-renders components subscribed to a state slice. The key benefit is decoupling — the subject doesn't need to know anything about its observers beyond the notification interface.",
+    "codeExample": "// DOM Observer\nwindow.addEventListener('resize', handleResize);\n\n// Zustand — components are observers of store slices\nconst count = useCountStore((state) => state.count);\n// Component re-renders only when count changes\n\n// Custom event emitter\nconst emitter = new EventEmitter();\nconst unsubscribe = emitter.subscribe({ update: (data) => console.log(data) });\nemitter.emit({ type: 'USER_LOGIN', user });\nunsubscribe(); // clean up",
+    "relatedSlugs": [
+      "strategy-pattern",
+      "command-pattern"
+    ]
+  },
+  {
+    "slug": "strategy-pattern",
+    "label": "Strategy",
+    "topic": "design-patterns",
+    "tooltip": "A behavioral pattern that defines a family of interchangeable algorithms and lets you swap them at runtime.",
+    "definition": "The Strategy pattern encapsulates a family of algorithms behind a common interface, making them interchangeable without modifying the context that uses them. This eliminates long if/else or switch chains and follows the Open/Closed Principle — adding a new algorithm means adding a new strategy, not editing existing code. In JavaScript, strategies are often plain functions stored in a map. In React, custom hooks that accept a strategy function (a sort function, a validation function) are the idiomatic form.",
+    "codeExample": "// Functional strategies (JS-idiomatic)\nconst sortStrategies = {\n  alphabetical: (items) => [...items].sort((a, b) => a.name.localeCompare(b.name)),\n  priceAsc: (items) => [...items].sort((a, b) => a.price - b.price),\n};\n\nfunction sortProducts(products, strategy) {\n  return sortStrategies[strategy](products);\n}\n\n// React: hook accepts a strategy\nfunction useField(validate) {\n  const [value, setValue] = useState('');\n  return { value, setValue, isValid: validate(value) };\n}\nconst email = useField(v => /^[^@]+@[^@]+/.test(v));",
+    "relatedSlugs": [
+      "observer-pattern",
+      "command-pattern",
+      "design-pattern"
+    ]
+  },
+  {
+    "slug": "decorator-pattern",
+    "label": "Decorator",
+    "topic": "design-patterns",
+    "tooltip": "A structural pattern that wraps an object to add behaviour without modifying the original class.",
+    "definition": "The Decorator pattern attaches additional responsibilities to an object dynamically by wrapping it in another object with the same interface. It is an alternative to subclassing and follows the Open/Closed Principle. In JavaScript, Higher-Order Functions are functional decorators. In React, Higher-Order Components (HOCs) like `withAuth()` and `withErrorBoundary()` are classic decorators — they wrap a component and return an enhanced version. The TC39 decorators proposal (`@decorator`) brings the pattern to class syntax.",
+    "codeExample": "// HOC Decorator in React\nfunction withAuth(Component) {\n  return function AuthGuard(props) {\n    const { user } = useAuth();\n    if (!user) return <Navigate to=\"/login\" />;\n    return <Component {...props} />;\n  };\n}\nconst ProtectedDashboard = withAuth(Dashboard);\n\n// Function decorator (HOF)\nconst memoize = (fn) => {\n  const cache = new Map();\n  return (...args) => {\n    const key = JSON.stringify(args);\n    if (!cache.has(key)) cache.set(key, fn(...args));\n    return cache.get(key);\n  };\n};",
+    "relatedSlugs": [
+      "design-pattern",
+      "facade-pattern",
+      "adapter-pattern"
+    ]
+  },
+  {
+    "slug": "facade-pattern",
+    "label": "Facade",
+    "topic": "design-patterns",
+    "tooltip": "A structural pattern that provides a simplified interface to a complex subsystem.",
+    "definition": "The Facade pattern hides the complexity of a subsystem behind a clean, simple API. Callers interact with the facade rather than coordinating multiple low-level components themselves. In frontend, API service layers are classic facades — `authService.login()` hides fetch calls, token storage, header management, and error normalisation. Custom hooks that wrap TanStack Query (e.g. `useProducts()`) are facades that hide query keys, cache config, and data transformation. Facades don't add new capabilities — they simplify access to existing ones.",
+    "codeExample": "// API service facade\nclass AuthService {\n  async login(email, password) {\n    // hides: fetch, JSON parse, token storage,\n    // refresh scheduling, error normalisation\n    const { token, user } = await this.post('/auth/login', { email, password });\n    this.tokenStore.save(token);\n    this.refreshScheduler.schedule(token);\n    return user;\n  }\n}\n\n// Hook facade\nfunction useProducts(filters) {\n  return useQuery({\n    queryKey: ['products', filters],\n    queryFn: () => api.fetchProducts(filters),\n    select: (d) => d.items.map(normalise),\n  });\n}",
+    "relatedSlugs": [
+      "adapter-pattern",
+      "decorator-pattern",
+      "design-pattern"
+    ]
+  },
+  {
+    "slug": "adapter-pattern",
+    "label": "Adapter",
+    "topic": "design-patterns",
+    "tooltip": "A structural pattern that converts one interface into another that clients expect, making incompatible interfaces work together.",
+    "definition": "The Adapter pattern wraps an object with an incompatible interface and exposes the interface clients expect — like a power adapter for electrical sockets. In frontend, adapters normalise third-party API responses into the shape your app uses, wrap a library being replaced (so call sites don't need to change), or unify data from multiple sources into a consistent format. Adapters are distinct from facades: a facade simplifies complexity inside your system; an adapter translates an external interface into your system's expected shape.",
+    "codeExample": "// Normalise third-party API response\nfunction adaptLegacyUser(raw) {\n  return {\n    fullName: `${raw.first_name} ${raw.last_name}`,\n    email: raw.email_address,\n    active: raw.status === 'active',\n  };\n}\nconst users = rawData.map(adaptLegacyUser);\n\n// Library migration adapter — call sites unchanged\nclass FetchAdapter {\n  async get(url, config) {\n    const res = await fetch(url + (config?.params ? '?' + new URLSearchParams(config.params) : ''));\n    if (!res.ok) throw new Error(res.statusText);\n    return res.json();\n  }\n}",
+    "relatedSlugs": [
+      "facade-pattern",
+      "decorator-pattern",
+      "design-pattern"
+    ]
+  },
+  {
+    "slug": "dependency-injection",
+    "label": "Dependency Injection",
+    "topic": "design-patterns",
+    "tooltip": "A technique where a class receives its dependencies from the outside rather than creating them itself.",
+    "definition": "Dependency Injection (DI) is a technique where dependencies are passed to a class or function rather than created internally. This makes the dependency explicit (visible in the function signature), easy to swap (pass a mock in tests), and decoupled (the class doesn't know or care which concrete implementation it gets). In React, DI is idiomatic: props inject dependencies into components, Context provides them to subtrees, and custom hooks can accept repositories/services as arguments. DI is the preferred alternative to the Service Locator pattern, which hides dependencies behind a global registry.",
+    "codeExample": "// Constructor DI\nclass OrderService {\n  constructor(\n    private repo: OrderRepository,\n    private email: EmailService\n  ) {}\n}\n// Production\nconst svc = new OrderService(new SupabaseRepo(), new SendGridEmail());\n// Tests\nconst svc = new OrderService(mockRepo, mockEmail);\n\n// DI via React props\nfunction UserCard({ user, onEdit }) {\n  return <button onClick={() => onEdit(user.id)}>{user.name}</button>;\n}\n\n// DI via hook argument\nfunction useUserService(repo = defaultRepo) {\n  return { getUser: (id) => repo.findById(id) };\n}",
+    "relatedSlugs": [
+      "singleton",
+      "facade-pattern",
+      "design-pattern"
+    ]
+  },
+  {
+    "slug": "design-pattern",
+    "label": "Design Pattern",
+    "topic": "design-patterns",
+    "tooltip": "A named, reusable solution to a commonly recurring problem in software design.",
+    "definition": "Design patterns are battle-tested, named templates for solving recurring software design problems. They originate from the Gang of Four (GoF) book *Design Patterns* (1994), which catalogued 23 patterns in three categories: Creational (how objects are created — Singleton, Factory, Builder), Structural (how objects are composed — Adapter, Facade, Decorator, Proxy, Composite), and Behavioral (how objects communicate — Observer, Strategy, Command, State). Patterns give teams a shared vocabulary and encode decades of collective design experience. They are templates — not code to copy. Over-applying patterns where simpler solutions exist is a common mistake.",
+    "codeExample": "// Three categories in one example\n\n// Creational — Factory decides which class to create\nconst processor = createPaymentProcessor(process.env.PROVIDER);\n\n// Structural — Facade simplifies a complex subsystem\nconst user = await authService.login(email, password);\n\n// Behavioral — Observer decouples event source from handlers\nwindow.addEventListener('resize', updateLayout);\nstore.subscribe(renderUI);",
+    "relatedSlugs": [
+      "singleton",
+      "observer-pattern",
+      "strategy-pattern",
+      "decorator-pattern",
+      "facade-pattern",
+      "adapter-pattern"
+    ]
   }
 ]

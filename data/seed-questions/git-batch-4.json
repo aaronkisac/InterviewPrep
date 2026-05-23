@@ -1,0 +1,62 @@
+[
+  {
+    "id": 916,
+    "topic": "git",
+    "level": 4,
+    "levelLabel": "Senior",
+    "question": "What is a \"bare\" Git repository and what is the difference between git clone, git clone --bare, and git clone --mirror?",
+    "answerGeneral": "A bare repository contains only the Git database (no working tree). `git clone` creates a regular repo with a working tree linked to an `origin` remote. `git clone --bare` creates a bare repo — suitable for hosting (what GitHub stores). `git clone --mirror` is a bare clone that also copies all remote-tracking refs and sets up refspec tracking to fetch all branches and tags — used for backups or migrations.",
+    "answerGeneralTr": "Bare (çıplak) depo yalnızca Git veritabanını içerir (çalışma ağacı yoktur). `git clone` uzak olarak `origin`'e bağlı çalışma ağacı olan normal bir depo oluşturur. `git clone --bare` çıplak bir depo oluşturur — barındırma için uygundur (GitHub'ın depoladığı budur). `git clone --mirror` ayrıca tüm uzak-takip referanslarını kopyalayan ve tüm dalları ve etiketleri almak için refspec takibini ayarlayan bir çıplak klondur — yedekler veya geçişler için kullanılır.",
+    "answerPersonal": null,
+    "detailMd": "## Bare Repository and Clone Variants\n\n## Regular Repository\n\n```\nmy-project/\n  .git/          ← Git database\n  src/           ← Working tree\n  package.json\n```\n\n## Bare Repository\n\n```\nmy-project.git/  ← Only Git database, no working tree\n  HEAD\n  objects/\n  refs/\n```\n\nBare repos are what git hosting platforms store. Developers can't edit files in them directly — they push to and clone from them.\n\n## Clone Comparison\n\n| Command | Working tree | Remotes | Tracking refs |\n|---|---|---|---|\n| `git clone <url>` | ✅ Yes | `origin` set | main branch tracked |\n| `git clone --bare <url>` | ❌ No | None set | All refs copied once |\n| `git clone --mirror <url>` | ❌ No | `origin` set | All refs + auto-sync |\n\n## When to Use Each\n\n```bash\n# Regular clone — everyday work\ngit clone https://github.com/user/repo.git\n\n# Bare clone — set up your own hosting\ngit clone --bare https://github.com/user/repo.git server.git\n\n# Mirror clone — full backup or migration\ngit clone --mirror https://github.com/user/repo.git\ncd repo.git && git remote update  # keeps all branches in sync\n```\n\n## Making an Existing Repo Bare\n\n```bash\ncd my-project\ngit config --bool core.bare true\nmv .git/* . && rm -rf .git\n```\n\nOr more safely: clone with `--bare` into a new location.",
+    "detailMdTr": null
+  },
+  {
+    "id": 917,
+    "topic": "git",
+    "level": 4,
+    "levelLabel": "Senior",
+    "question": "How do you undo a git rebase?",
+    "answerGeneral": "The safest way is `git reflog` — every rebase is recorded there. Find the SHA of the commit that was HEAD before the rebase started, then `git reset --hard <sha>`. If you're on a shared branch and have already pushed, use `git push --force-with-lease` carefully, or create a revert commit instead.",
+    "answerGeneralTr": "En güvenli yol `git reflog` kullanmaktır — her rebase orada kaydedilir. Rebase başlamadan önce HEAD'in gösterdiği commit'in SHA'sını bulun, ardından `git reset --hard <sha>` çalıştırın. Paylaşılan bir daldaysanız ve zaten push ettiyseniz, dikkatlice `git push --force-with-lease` kullanın ya da bunun yerine bir revert commit oluşturun.",
+    "answerPersonal": null,
+    "detailMd": "## Undoing a git rebase\n\n## The Easy Way: ORIG_HEAD\n\nGit saves the pre-rebase state in `ORIG_HEAD`:\n\n```bash\ngit reset --hard ORIG_HEAD\n```\n\nThis works immediately after the rebase. `ORIG_HEAD` is overwritten by the next \"dangerous\" operation.\n\n## The Reliable Way: git reflog\n\n```bash\ngit reflog\n# HEAD@{0}: rebase (finish): returning to refs/heads/main\n# HEAD@{1}: rebase (pick): Add feature X\n# HEAD@{2}: rebase (start): checkout main\n# HEAD@{3}: commit: Start of feature X  ← this is before the rebase\n\ngit reset --hard HEAD@{3}\n```\n\n## If Already Pushed (shared branch)\n\n```bash\n# Force push to your branch (be very careful)\ngit push --force-with-lease origin feature/my-branch\n\n# Better: if it's truly shared, create a revert instead\ngit revert --no-commit HEAD~5..HEAD\ngit commit -m \"Revert accidental rebase\"\n```\n\n## Prevention\n\n```bash\n# Create a backup branch before any risky operation\ngit checkout -b backup/before-rebase\ngit checkout main\ngit rebase main feature/X  # safe to experiment\n```",
+    "detailMdTr": null
+  },
+  {
+    "id": 918,
+    "topic": "git",
+    "level": 4,
+    "levelLabel": "Senior",
+    "question": "What are git hooks and what are their types?",
+    "answerGeneral": "Git hooks are scripts that Git automatically executes before or after specific events. Client-side hooks run on the developer's machine (pre-commit, commit-msg, pre-push, post-checkout). Server-side hooks run on the remote (pre-receive, update, post-receive). They're used to enforce code quality, run linting, validate commit message format, or trigger deployments.",
+    "answerGeneralTr": "Git hook'ları, Git'in belirli olaylardan önce veya sonra otomatik olarak çalıştırdığı betiklerdir. İstemci taraflı hook'lar geliştirici makinesinde çalışır (pre-commit, commit-msg, pre-push, post-checkout). Sunucu taraflı hook'lar uzak depoda çalışır (pre-receive, update, post-receive). Kod kalitesini zorunlu kılmak, linting çalıştırmak, commit mesajı biçimini doğrulamak veya dağıtımları tetiklemek için kullanılırlar.",
+    "answerPersonal": null,
+    "detailMd": "## Git Hooks\n\nHooks live in `.git/hooks/`. They are plain shell scripts (or any executable). Git ships sample hooks with a `.sample` extension — remove the extension to activate.\n\n## Client-Side Hooks\n\n| Hook | Runs | Common Use |\n|---|---|---|\n| `pre-commit` | Before commit is created | Lint, tests, secret scanning |\n| `prepare-commit-msg` | Before editor opens | Auto-fill issue number |\n| `commit-msg` | After message entered | Validate format (Conventional Commits) |\n| `post-commit` | After commit created | Notifications |\n| `pre-push` | Before push to remote | Run full test suite |\n| `post-checkout` | After branch switch | Install deps if package.json changed |\n| `pre-rebase` | Before rebase | Warn if unsafe |\n\n## Server-Side Hooks\n\n| Hook | Runs | Common Use |\n|---|---|---|\n| `pre-receive` | Before refs are updated | Enforce branch policies |\n| `update` | Per branch being updated | Fine-grained access control |\n| `post-receive` | After push completes | Trigger CI/CD, notifications |\n\n## Example: commit-msg hook\n\n```bash\n#!/bin/sh\n# .git/hooks/commit-msg\nMSG=$(cat $1)\nif ! echo \"$MSG\" | grep -qE '^(feat|fix|chore|docs|refactor|test|style):';\n  echo \"Commit message must follow Conventional Commits format\"\n  exit 1\nfi\n```\n\n## Sharing Hooks with the Team\n\nHooks in `.git/hooks/` aren't committed. Solutions:\n```bash\n# Option 1: commitlint + husky (most common in JS projects)\nnpx husky init\n\n# Option 2: configure git to use a committed hooks directory\ngit config core.hooksPath .githooks\n```",
+    "detailMdTr": null
+  },
+  {
+    "id": 919,
+    "topic": "git",
+    "level": 4,
+    "levelLabel": "Senior",
+    "question": "When do you use git rebase instead of git merge?",
+    "answerGeneral": "Use rebase when you want a linear, clean history — for example, updating a feature branch with the latest `main` before opening a PR. Use merge when you want to preserve the true branching history, especially for long-running branches or when integrating into `main` (a merge commit documents when and what was integrated). The golden rule: never rebase a branch that others are working on.",
+    "answerGeneralTr": "Doğrusal, temiz bir geçmiş istediğinizde rebase kullanın — örneğin PR açmadan önce bir özellik dalını en son `main` ile güncellemek. Gerçek dallanma geçmişini korumak istediğinizde birleştirme kullanın; özellikle uzun süreli dallar için veya `main`'e entegrasyon sırasında (birleştirme commit'i ne zaman ve ne entegre edildiğini belgeler). Altın kural: başkalarının üzerinde çalıştığı bir dalı asla rebase etmeyin.",
+    "answerPersonal": null,
+    "detailMd": "## git rebase vs git merge\n\n## What Each Does\n\n```\n# Before: feature diverged from main\nmain:    A ← B ← C\nfeature: A ← B ← D ← E\n\n# After merge:\nmain: A ← B ← C ← M   (M is a merge commit joining C and E)\nfeature:       ↑\n            D ← E\n\n# After rebase (feature replayed on top of C):\nmain:    A ← B ← C\nfeature: A ← B ← C ← D' ← E'  (new commits, same changes)\n```\n\n## When to Rebase\n\n```bash\n# Update feature branch with latest main before PR\ngit checkout feature/auth\ngit rebase main  # replay feature commits on top of latest main\n```\n\n- Feature branches: rebase to stay current with main\n- Interactive rebase to clean up commits before PR (`git rebase -i HEAD~3`)\n- You want no merge commits (linear history)\n\n## When to Merge\n\n```bash\ngit checkout main\ngit merge --no-ff feature/auth  # explicit merge commit\n```\n\n- Integrating a feature branch into main (preserves history)\n- Long-running branches where you want a clear record of divergence\n- Shared branches where rebase would cause problems\n\n## The Golden Rule\n\n> Never rebase a branch that other developers are working on.\n\nRebase rewrites commit SHAs. If someone else has those old SHAs, their history diverges and they'll have a very messy time reconciling.\n\n## Interactive Rebase (Squash/Clean Up)\n\n```bash\ngit rebase -i HEAD~5  # edit last 5 commits interactively\n# squash WIP commits, reorder, edit messages\n```",
+    "detailMdTr": null
+  },
+  {
+    "id": 920,
+    "topic": "git",
+    "level": 4,
+    "levelLabel": "Senior",
+    "question": "How can you use git bisect to find the commit that introduced a regression?",
+    "answerGeneral": "git bisect performs a binary search through commit history to find the commit that introduced a bug. You mark a known-good and known-bad commit, then Git checks out the midpoint. You test and mark it good or bad — Git halves the search space each time. For large histories this narrows thousands of commits to the culprit in ~10 steps. It can also be automated with `git bisect run <test-script>`.",
+    "answerGeneralTr": "git bisect, bir hatayı hangi commit'in getirdiğini bulmak için commit geçmişinde ikili arama yapar. Bilinen iyi ve bilinen kötü bir commit işaretlersiniz, ardından Git orta noktayı kontrol eder. Test eder ve iyi ya da kötü olarak işaretlersiniz — Git her seferinde arama alanını yarıya indirir. Büyük geçmişler için bu, binlerce commit'i yaklaşık 10 adımda sorumluya daraltır. `git bisect run <test-script>` ile de otomatikleştirilebilir.",
+    "answerPersonal": null,
+    "detailMd": "## git bisect\n\n## How It Works\n\nBinary search through commit history:\n\n```\ncommits: A B C D E F G H (bad)\nbisect: tests D → good, tests F → bad, tests E → bad → culprit is E!\n```\n\nlog₂(1000 commits) ≈ 10 steps to find the bug.\n\n## Manual Bisect\n\n```bash\ngit bisect start\ngit bisect bad                 # current HEAD is broken\ngit bisect good v2.0.0         # this tag was working\n\n# Git checks out the midpoint commit\n# Test your app...\ngit bisect good                # if it works\ngit bisect bad                 # if it's broken\n\n# Repeat until Git identifies the culprit:\n# \"abc1234 is the first bad commit\"\n\ngit bisect reset               # return to HEAD\n```\n\n## Automated Bisect\n\n```bash\ngit bisect start\ngit bisect bad HEAD\ngit bisect good v2.0.0\n\n# Script exits 0 = good, 1 = bad\ngit bisect run npm test -- --testPathPattern=regression\n# Git automatically runs the test at each midpoint\n```\n\n## Tips\n\n```bash\ngit bisect log              # see what's been marked so far\ngit bisect skip             # skip a commit (e.g. broken build)\ngit bisect visualize        # open gitk to see the search range\n```\n\n## When to Use\n\nA regression was introduced somewhere in the last 500 commits but you don't know where. Bisect finds it in ~9 steps instead of you checking commits one by one.",
+    "detailMdTr": null
+  }
+]
