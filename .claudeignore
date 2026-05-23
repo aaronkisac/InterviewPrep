@@ -1,0 +1,7 @@
+graphify-out/
+pnpm-lock.yaml
+tsconfig.tsbuildinfo
+tsconfig.check.tsbuildinfo
+data/raw/
+scripts/add-detail-md-*.ts
+scripts/add-tr-*.ts
