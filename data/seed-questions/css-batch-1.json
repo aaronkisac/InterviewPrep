@@ -1,0 +1,62 @@
+[
+  {
+    "id": 701,
+    "topic": "css",
+    "level": 1,
+    "levelLabel": "Entry",
+    "question": "What is CSS?",
+    "answerGeneral": "CSS (Cascading Style Sheets) is a stylesheet language used to describe the presentation of HTML documents. It controls layout, colors, fonts, spacing, and visual effects, separating content from design.",
+    "answerGeneralTr": "CSS (Cascading Style Sheets), HTML belgelerinin görünümünü tanımlayan bir stil dilidir. Düzen, renkler, yazı tipleri ve görsel efektleri kontrol ederek içeriği tasarımdan ayırır.",
+    "answerPersonal": null,
+    "detailMd": "## What is CSS?\n\nCSS stands for **Cascading Style Sheets**. It is the language responsible for the visual presentation of web pages — controlling everything from colors and typography to layout and animation.\n\n## The Cascade\n\nThe \"cascading\" part refers to the algorithm that determines which styles apply when multiple rules target the same element. It considers three factors in order: **origin** (user-agent, author, user), **specificity**, and **source order**.\n\n```css\n/* These three rules all target <h1> */\nh1 { color: black; }        /* specificity: 0,0,1 */\n.title { color: blue; }     /* specificity: 0,1,0 */\n#hero h1 { color: red; }    /* specificity: 1,0,1 — wins */\n```\n\n## Separation of Concerns\n\nCSS separates **structure** (HTML) from **presentation** (CSS), which means:\n- The same HTML can be styled completely differently for web, print, or screen readers.\n- Design changes don't require touching the markup.\n- Stylesheets can be cached independently of HTML.\n\n## CSS Versions\n\nCSS is defined in modules (Selectors, Flexbox, Grid, Animations, etc.) rather than numbered versions. \"CSS3\" is a collective term for all modules that evolved after CSS 2.1. New features like container queries, `:has()`, and cascade layers are still shipping today.",
+    "detailMdTr": null
+  },
+  {
+    "id": 702,
+    "topic": "css",
+    "level": 1,
+    "levelLabel": "Entry",
+    "question": "What is a CSS rule?",
+    "answerGeneral": "A CSS rule consists of a selector and a declaration block. The selector targets HTML elements, and the declaration block contains one or more property-value pairs that define the styles to apply.",
+    "answerGeneralTr": "Bir CSS kuralı, bir seçici ve bir bildirim bloğundan oluşur. Seçici HTML elementlerini hedefler; bildirim bloğu ise uygulanacak stilleri tanımlayan özellik-değer çiftlerini içerir.",
+    "answerPersonal": null,
+    "detailMd": "## Anatomy of a CSS Rule\n\nA CSS rule has two parts:\n\n```css\nselector {\n  property: value;\n  property: value;\n}\n```\n\n- **Selector** — identifies which HTML elements to style.\n- **Declaration block** — wrapped in `{}`, contains one or more declarations.\n- **Declaration** — a `property: value` pair ending with a semicolon.\n\n## Example\n\n```css\n/* Rule targeting all <p> elements */\np {\n  color: #333;          /* text color */\n  font-size: 1rem;      /* font size */\n  line-height: 1.6;     /* spacing between lines */\n}\n```\n\n## At-Rules\n\nBeyond standard rules, CSS has **at-rules** that control how rules are applied:\n\n```css\n/* @media — applies rules at specific viewport sizes */\n@media (max-width: 768px) {\n  p { font-size: 0.875rem; }\n}\n\n/* @keyframes — defines animation steps */\n@keyframes fadeIn {\n  from { opacity: 0; }\n  to   { opacity: 1; }\n}\n\n/* @layer — controls cascade layer order */\n@layer utilities {\n  .sr-only { position: absolute; width: 1px; }\n}\n```\n\n## Multiple Selectors\n\nComma-separated selectors apply the same declarations to multiple targets:\n\n```css\nh1, h2, h3 {\n  font-weight: 700;\n  color: #111;\n}\n```",
+    "detailMdTr": null
+  },
+  {
+    "id": 703,
+    "topic": "css",
+    "level": 1,
+    "levelLabel": "Entry",
+    "question": "What is the difference between classes and IDs in CSS?",
+    "answerGeneral": "IDs are unique identifiers targeting a single element (prefixed with #), while classes can be applied to multiple elements (prefixed with .). IDs have higher specificity than classes, and a page should have only one element per ID.",
+    "answerGeneralTr": "ID'ler tek bir elementi hedefleyen benzersiz tanımlayıcılardır (#). Class'lar birden fazla elemente uygulanabilir (.). ID'lerin özgünlük (specificity) değeri class'lardan yüksektir ve bir sayfada her ID'den yalnızca bir element olmalıdır.",
+    "answerPersonal": null,
+    "detailMd": "## Classes vs IDs\n\n| | Class | ID |\n|---|---|---|\n| Prefix | `.` | `#` |\n| Reusability | Any number of elements | One element per page |\n| Specificity | `0,1,0` | `1,0,0` |\n| JS access | `querySelectorAll('.btn')` | `getElementById('modal')` |\n| HTML anchor | No | Yes (`href=\"#section\"`) |\n\n## Specificity Impact\n\nThe higher specificity of IDs can cause painful overriding issues:\n\n```css\n#submit { color: red; }       /* specificity: 1,0,0 */\n.btn.primary { color: blue; } /* specificity: 0,2,0 — still loses */\n```\n\nThis is why most CSS methodologies (BEM, Tailwind) **avoid IDs for styling** entirely and rely on classes only.\n\n## When to Use Each\n\n```html\n<!-- ID: unique landmark for JS or anchor links -->\n<main id=\"main-content\">...</main>\n\n<!-- Class: reusable style token -->\n<button class=\"btn btn--primary\">Submit</button>\n<button class=\"btn btn--secondary\">Cancel</button>\n```\n\n## Best Practice\n\nReserve IDs for JavaScript hooks and in-page anchor links. Use classes for all styling to keep specificity flat and predictable.",
+    "detailMdTr": null
+  },
+  {
+    "id": 704,
+    "topic": "css",
+    "level": 1,
+    "levelLabel": "Entry",
+    "question": "What are CSS selectors? Name some.",
+    "answerGeneral": "CSS selectors define which HTML elements a rule applies to. Common types include element selectors (div), class selectors (.btn), ID selectors (#header), attribute selectors ([type=\"text\"]), pseudo-class selectors (:hover), and combinators like descendant ( ), child (>), and adjacent sibling (+).",
+    "answerGeneralTr": "CSS seçicileri, bir kuralın hangi HTML elementlerine uygulanacağını belirler. Yaygın türler: element seçiciler (div), class seçiciler (.btn), ID seçiciler (#header), attribute seçiciler ([type=\"text\"]), pseudo-class seçiciler (:hover) ve descendant ( ), child (>) gibi kombinatörlerdir.",
+    "answerPersonal": null,
+    "detailMd": "## CSS Selector Types\n\n### Basic Selectors\n\n```css\ndiv { }              /* element — all <div> elements */\n.card { }            /* class — elements with class=\"card\" */\n#hero { }            /* ID — element with id=\"hero\" */\n* { }                /* universal — every element */\n```\n\n### Attribute Selectors\n\n```css\n[disabled] { }            /* has attribute */\n[type=\"submit\"] { }       /* exact value */\n[href^=\"https\"] { }      /* starts with */\n[src$=\".png\"] { }        /* ends with */\n[class*=\"icon\"] { }      /* contains */\n```\n\n### Pseudo-Classes & Pseudo-Elements\n\n```css\na:hover { }              /* user interaction state */\nli:nth-child(2n) { }     /* structural */\ninput:focus-visible { }  /* keyboard focus only */\n\np::first-line { }        /* first rendered line */\n.card::before { }        /* generated content */\n```\n\n### Combinators\n\n```css\nnav a { }          /* descendant — any <a> inside <nav> */\nul > li { }        /* child — direct <li> of <ul> */\nh2 + p { }         /* adjacent sibling — <p> right after <h2> */\nh2 ~ p { }         /* general sibling — all <p> after <h2> */\n```\n\n### Modern: :is(), :where(), :has()\n\n```css\n:is(h1, h2, h3) { line-height: 1.2; }  /* matches any */\n:where(.card) a { }                     /* zero specificity */\n.parent:has(> .child) { }              /* parent selector */\n```",
+    "detailMdTr": null
+  },
+  {
+    "id": 705,
+    "topic": "css",
+    "level": 1,
+    "levelLabel": "Entry",
+    "question": "Explain the CSS box model and the layout components that it consists of.",
+    "answerGeneral": "The CSS box model describes the rectangular box generated for every HTML element. It consists of four areas from inside out: content (the actual content), padding (space between content and border), border (a line around the padding), and margin (space outside the border separating elements from each other).",
+    "answerGeneralTr": "CSS kutu modeli, her HTML elementi için oluşturulan dikdörtgen kutuyu tanımlar. İçten dışa dört alandan oluşur: content (asıl içerik), padding (içerik ile kenarlık arası boşluk), border (padding etrafındaki çizgi) ve margin (elementler arasındaki dış boşluk).",
+    "answerPersonal": null,
+    "detailMd": "## The CSS Box Model\n\nEvery HTML element generates a rectangular box with four layers:\n\n```\n┌─────────────────────────────┐  ← margin (transparent, pushes others away)\n│  ┌───────────────────────┐  │  ← border\n│  │  ┌─────────────────┐  │  │  ← padding (background color shows here)\n│  │  │    content      │  │  │\n│  │  └─────────────────┘  │  │\n│  └───────────────────────┘  │\n└─────────────────────────────┘\n```\n\n## content-box vs border-box\n\n```css\n/* Default (content-box) */\n.box {\n  width: 200px;   /* content only */\n  padding: 20px;  /* adds 40px → total rendered width: 240px */\n  border: 2px solid; /* adds 4px → total rendered width: 244px */\n}\n\n/* border-box — recommended */\n*, *::before, *::after {\n  box-sizing: border-box;\n}\n.box {\n  width: 200px;   /* includes padding + border → stays 200px */\n  padding: 20px;\n  border: 2px solid;\n}\n```\n\n## Margin Collapsing\n\nVertical margins between block elements collapse to the larger of the two values:\n\n```css\n.first  { margin-bottom: 24px; }\n.second { margin-top: 16px; }\n/* Gap between them = 24px, not 40px */\n```\n\nCollapsing does **not** happen with Flexbox or Grid children, or when a parent has `overflow: hidden`.",
+    "detailMdTr": null
+  }
+]

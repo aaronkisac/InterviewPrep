@@ -1,0 +1,86 @@
+[
+  {
+    "id": 805,
+    "topic": "react-hooks",
+    "level": 2,
+    "levelLabel": "Junior",
+    "question": "What are the advantages of using React Hooks?",
+    "answerGeneral": "Hooks let you reuse stateful logic without HOCs or render props, keep related code together (instead of splitting across lifecycle methods), and eliminate confusing class patterns like binding `this`. Code is shorter, easier to test, and logic is extractable into custom hooks that can be shared across components.",
+    "answerGeneralTr": "Hook'lar, HOC veya render prop olmadan stateful mantığı yeniden kullanmanıza, ilgili kodu bir arada tutmanıza (lifecycle metodlarına dağıtmak yerine) ve `this` bağlama gibi kafa karıştırıcı class kalıplarını ortadan kaldırmanıza olanak tanır. Kod daha kısa, test edilmesi daha kolaydır ve mantık, bileşenler arasında paylaşılabilecek custom hook'lara çıkarılabilir.",
+    "answerPersonal": null,
+    "detailMd": "## Advantages of React Hooks\n\n## 1. Reusable Stateful Logic\n\nBefore hooks, sharing stateful logic required HOCs or render props — both add wrapper components to the tree. Custom hooks extract logic with zero nesting:\n\n```tsx\n// Reusable across any component\nfunction useWindowSize() {\n  const [size, setSize] = useState({ width: 0, height: 0 });\n  useEffect(() => {\n    const handler = () => setSize({ width: window.innerWidth, height: window.innerHeight });\n    window.addEventListener('resize', handler);\n    handler();\n    return () => window.removeEventListener('resize', handler);\n  }, []);\n  return size;\n}\n```\n\n## 2. Co-located Related Logic\n\nClass components split one concern across multiple lifecycle methods. Hooks keep related code together:\n\n```tsx\n// Class: subscribe in componentDidMount, unsubscribe in componentWillUnmount\n// Hooks: same effect handles both\nuseEffect(() => {\n  const sub = store.subscribe(handler);\n  return () => sub.unsubscribe(); // cleanup lives next to setup\n}, []);\n```\n\n## 3. No More `this`\n\nClass components require binding event handlers and understanding `this` context. Hooks use plain closures.\n\n## 4. Easier Testing\n\nCustom hooks are plain functions — testable with `renderHook` from React Testing Library without mounting a full component.\n\n## 5. Smaller Bundle\n\nFunctional components with hooks produce less compiled code than class components.",
+    "detailMdTr": null
+  },
+  {
+    "id": 806,
+    "topic": "react-hooks",
+    "level": 2,
+    "levelLabel": "Junior",
+    "question": "Which lifecycle methods of class components are replaced by useEffect in functional components?",
+    "answerGeneral": "useEffect covers componentDidMount (empty dependency array), componentDidUpdate (specific dependencies), and componentWillUnmount (cleanup return function). It cannot replicate getSnapshotBeforeUpdate or the synchronous DOM-read behaviour of componentDidMount — useLayoutEffect handles synchronous post-DOM cases.",
+    "answerGeneralTr": "useEffect; componentDidMount'u (boş bağımlılık dizisi), componentDidUpdate'i (belirli bağımlılıklar) ve componentWillUnmount'u (cleanup return fonksiyonu) karşılar. getSnapshotBeforeUpdate veya componentDidMount'un senkron DOM okuma davranışını taklit edemez — senkron DOM okuma için useLayoutEffect kullanılır.",
+    "answerPersonal": null,
+    "detailMd": "## useEffect vs Lifecycle Methods\n\n## Mapping\n\n```tsx\n// componentDidMount\nuseEffect(() => {\n  console.log('mounted');\n}, []); // empty array = run once\n\n// componentDidUpdate (specific deps)\nuseEffect(() => {\n  console.log('userId changed:', userId);\n}, [userId]);\n\n// componentWillUnmount\nuseEffect(() => {\n  const sub = subscribe();\n  return () => sub.unsubscribe(); // ← cleanup = componentWillUnmount\n}, []);\n\n// componentDidMount + componentDidUpdate combined\nuseEffect(() => {\n  document.title = `Count: ${count}`;\n}); // no array = after every render\n```\n\n## What useEffect Can't Replace\n\n| Class lifecycle | Hook equivalent |\n|---|---|\n| `componentDidMount` | `useEffect(() => {}, [])` |\n| `componentDidUpdate` | `useEffect(() => {}, [dep])` |\n| `componentWillUnmount` | cleanup in `useEffect` return |\n| `getSnapshotBeforeUpdate` | No direct equivalent |\n| `shouldComponentUpdate` | `React.memo` + `useMemo` |\n| `componentDidCatch` | Error Boundary class component (still required) |\n\n## useLayoutEffect\n\nFor synchronous DOM reads/mutations after paint (equivalent to the synchronous part of `componentDidMount`):\n\n```tsx\nuseLayoutEffect(() => {\n  // Runs synchronously after DOM mutations, before browser paint\n  const rect = ref.current?.getBoundingClientRect();\n  setTooltipPosition(rect);\n}, [visible]);\n```",
+    "detailMdTr": null
+  },
+  {
+    "id": 807,
+    "topic": "react-hooks",
+    "level": 2,
+    "levelLabel": "Junior",
+    "question": "What is batching in React and what are its advantages?",
+    "answerGeneral": "Batching means React groups multiple state updates from the same event into a single re-render. In React 18, automatic batching extends to async callbacks, setTimeout, and native event handlers — previously only synchronous event handlers were batched. This reduces unnecessary renders and improves performance.",
+    "answerGeneralTr": "Batching, React'ın aynı olaydan gelen birden fazla state güncellemesini tek bir yeniden render'da gruplandırması anlamına gelir. React 18'de otomatik batching, async callback'lere, setTimeout'a ve native event handler'lara kadar genişletilmiştir — öncesinde yalnızca senkron event handler'lar toplu işleniyordu. Bu gereksiz render'ları azaltır ve performansı artırır.",
+    "answerPersonal": null,
+    "detailMd": "## React Batching\n\n## Before React 18\n\nOnly state updates inside React event handlers were batched:\n\n```tsx\n// React event handler — 1 re-render (batched)\nfunction handleClick() {\n  setCount(c => c + 1);\n  setFlag(f => !f);\n}\n\n// setTimeout — 2 re-renders (NOT batched in React 17)\nsetTimeout(() => {\n  setCount(c => c + 1); // render 1\n  setFlag(f => !f);     // render 2\n}, 1000);\n```\n\n## React 18 — Automatic Batching\n\nAll updates are batched regardless of origin:\n\n```tsx\n// React 18 — all batched to 1 re-render\nsetTimeout(() => {\n  setCount(c => c + 1);\n  setFlag(f => !f);\n}, 1000);\n\nfetch('/api').then(() => {\n  setData(d);    // batched\n  setLoading(false); // batched → 1 render\n});\n```\n\n## Opting Out with flushSync\n\nWhen you need a state update to flush immediately (e.g., to measure DOM before the next update):\n\n```tsx\nimport { flushSync } from 'react-dom';\n\nflushSync(() => setCount(c => c + 1)); // renders synchronously\nconsole.log(ref.current?.textContent); // sees updated DOM\nflushSync(() => setFlag(f => !f));\n```\n\n## Advantages\n\n- Fewer renders → better performance.\n- Consistent UI — no intermediate states where only some updates have been applied.\n- Predictable behaviour across all async contexts in React 18.",
+    "detailMdTr": null
+  },
+  {
+    "id": 808,
+    "topic": "react-hooks",
+    "level": 2,
+    "levelLabel": "Junior",
+    "question": "When writing a Custom Hook, what is the difference between it and a normal function?",
+    "answerGeneral": "A custom hook is a JavaScript function whose name starts with `use` and that calls other hooks internally. The `use` prefix is what signals to React (and ESLint) that hook rules apply — enabling the exhaustive-deps lint rule and StrictMode double-invocation checks. A normal function cannot call hooks.",
+    "answerGeneralTr": "Bir custom hook, adı `use` ile başlayan ve dahili olarak başka hook'ları çağıran bir JavaScript fonksiyonudur. `use` öneki, React'a (ve ESLint'e) hook kurallarının geçerli olduğunu bildiren işarettir — exhaustive-deps lint kuralını ve StrictMode çift çağırma kontrollerini etkinleştirir. Normal bir fonksiyon hook çağıramaz.",
+    "answerPersonal": null,
+    "detailMd": "## Custom Hooks vs Normal Functions\n\n## The Only Difference: naming + hook calls\n\n```tsx\n// Normal function — cannot call hooks\nfunction getWindowSize() {\n  // useState(0) here would throw: Rules of Hooks violation\n  return { width: window.innerWidth, height: window.innerHeight };\n}\n\n// Custom hook — can call hooks\nfunction useWindowSize() {\n  const [size, setSize] = useState({ width: 0, height: 0 });\n  useEffect(() => {\n    const update = () => setSize({ width: window.innerWidth, height: window.innerHeight });\n    window.addEventListener('resize', update);\n    update();\n    return () => window.removeEventListener('resize', update);\n  }, []);\n  return size;\n}\n```\n\n## Isolated State\n\nEach component that calls the same custom hook gets its **own isolated state**. The hook is not a singleton:\n\n```tsx\nfunction PageA() {\n  const { width } = useWindowSize(); // independent instance\n}\nfunction PageB() {\n  const { width } = useWindowSize(); // independent instance\n}\n```\n\n## Common Patterns\n\n```tsx\n// Data fetching\nfunction useUser(id: string) {\n  const [data, setData] = useState<User | null>(null);\n  const [loading, setLoading] = useState(true);\n  useEffect(() => {\n    fetchUser(id).then(u => { setData(u); setLoading(false); });\n  }, [id]);\n  return { data, loading };\n}\n\n// Form\nfunction useField(initial = '') {\n  const [value, setValue] = useState(initial);\n  return { value, onChange: (e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value) };\n}\n```",
+    "detailMdTr": null
+  },
+  {
+    "id": 809,
+    "topic": "react-hooks",
+    "level": 2,
+    "levelLabel": "Junior",
+    "question": "Do two components using the same Hook share state?",
+    "answerGeneral": "No. Each call to a hook creates an independent instance of that hook's state. State is local to the component instance, not shared between components using the same hook. To share state between components you need either a shared Context, a global store (Zustand, Redux), or lifting state up to a common ancestor.",
+    "answerGeneralTr": "Hayır. Her hook çağrısı, o hook'un state'inin bağımsız bir örneğini oluşturur. State, aynı hook'u kullanan bileşenler arasında paylaşılmaz, bileşen örneğine özeldir. Bileşenler arasında state paylaşmak için ortak bir Context, global store (Zustand, Redux) veya state'i ortak bir ataya taşımak gerekir.",
+    "answerPersonal": null,
+    "detailMd": "## Hook State Isolation\n\n## Each Call = Independent State\n\n```tsx\nfunction useCounter(initial = 0) {\n  const [count, setCount] = useState(initial);\n  return { count, increment: () => setCount(c => c + 1) };\n}\n\nfunction ComponentA() {\n  const { count } = useCounter(); // own state: 0\n}\nfunction ComponentB() {\n  const { count } = useCounter(); // own state: 0 — completely separate\n}\n```\n\nClicking increment in A does not affect B.\n\n## Sharing State Options\n\n### 1. Lift state up\n\n```tsx\nfunction Parent() {\n  const [count, setCount] = useState(0);\n  return (\n    <>\n      <ChildA count={count} />\n      <ChildB count={count} onChange={setCount} />\n    </>\n  );\n}\n```\n\n### 2. Context\n\n```tsx\nconst CountContext = createContext(0);\n\nfunction Provider({ children }: { children: React.ReactNode }) {\n  const [count, setCount] = useState(0);\n  return <CountContext.Provider value={{ count, setCount }}>{children}</CountContext.Provider>;\n}\n```\n\n### 3. External store (Zustand)\n\n```tsx\nconst useStore = create((set) => ({ count: 0, inc: () => set(s => ({ count: s.count + 1 })) }));\n// Both components subscribe to the same store — shared state\n```",
+    "detailMdTr": null
+  },
+  {
+    "id": 810,
+    "topic": "react-hooks",
+    "level": 2,
+    "levelLabel": "Junior",
+    "question": "Does React useState Hook update immediately?",
+    "answerGeneral": "No. State updates are asynchronous and batched. Calling the setter schedules a re-render — the new value is not reflected in the current render. To access the updated value, read it on the next render or use the functional update form to derive the next value from the current one.",
+    "answerGeneralTr": "Hayır. State güncellemeleri asenkrondur ve toplu işlenir. Setter çağrısı bir yeniden render planlar — yeni değer mevcut render'da yansıtılmaz. Güncellenmiş değere erişmek için bir sonraki render'da okuyun veya mevcut değerden sonrakini türetmek için fonksiyonel güncelleme formunu kullanın.",
+    "answerPersonal": null,
+    "detailMd": "## useState Async Behaviour\n\n## The Stale Closure Problem\n\n```tsx\nconst [count, setCount] = useState(0);\n\nfunction handleClick() {\n  setCount(count + 1);\n  console.log(count); // still 0 — state hasn't updated yet\n\n  setCount(count + 1); // also sets to 1, not 2!\n  setCount(count + 1); // still sets to 1!\n}\n```\n\n## Solution: Functional Updates\n\n```tsx\nfunction handleClick() {\n  setCount(prev => prev + 1); // 0 → 1\n  setCount(prev => prev + 1); // 1 → 2\n  setCount(prev => prev + 1); // 2 → 3\n  // All three updaters queue, result: 3\n}\n```\n\n## Reading Updated State\n\nIf you need the new value in the same handler, derive it first:\n\n```tsx\nconst newCount = count + 1;\nsetCount(newCount);\ntrackEvent('count_changed', { value: newCount }); // use derived value\n```\n\n## useEffect to React to State Changes\n\n```tsx\nuseEffect(() => {\n  console.log('count updated:', count); // runs after re-render with new value\n}, [count]);\n```\n\n## React 18 Batching\n\nMultiple `setState` calls in the same event handler (or async callback in React 18) are batched into a single render. This is intentional — it prevents unnecessary intermediate renders.",
+    "detailMdTr": null
+  },
+  {
+    "id": 811,
+    "topic": "react-hooks",
+    "level": 2,
+    "levelLabel": "Junior",
+    "question": "How do I update state on a nested object with useState()?",
+    "answerGeneral": "useState does not deep merge — you must always spread the previous state and update only the changed fields. For deeply nested state, consider flattening the structure, using useReducer, or a library like Immer which allows mutating syntax inside a produce function.",
+    "answerGeneralTr": "useState derin birleştirme yapmaz — her zaman önceki state'i spread edip yalnızca değişen alanları güncellemelisiniz. Derin iç içe state için yapıyı düzleştirmeyi, useReducer kullanmayı veya produce fonksiyonu içinde değiştirme sözdizimi sağlayan Immer gibi bir kütüphane kullanmayı düşünün.",
+    "answerPersonal": null,
+    "detailMd": "## Updating Nested State with useState\n\n## Shallow Merge — Always Spread\n\n```tsx\nconst [form, setForm] = useState({ name: '', email: '', address: { city: '', zip: '' } });\n\n// Update top-level field\nsetForm(prev => ({ ...prev, name: 'Aaron' }));\n\n// Update nested field — must spread nested object too\nsetForm(prev => ({\n  ...prev,\n  address: { ...prev.address, city: 'London' },\n}));\n```\n\n## Why Not Mutate Directly?\n\n```tsx\n// WRONG — same object reference, React bails out of re-render\nform.address.city = 'London';\nsetForm(form);\n```\n\nReact uses reference equality to detect changes. Mutating and re-setting the same object doesn't trigger a re-render.\n\n## useReducer for Complex Shapes\n\n```tsx\ntype Action =\n  | { type: 'SET_NAME'; payload: string }\n  | { type: 'SET_CITY'; payload: string };\n\nfunction reducer(state: FormState, action: Action): FormState {\n  switch (action.type) {\n    case 'SET_CITY':\n      return { ...state, address: { ...state.address, city: action.payload } };\n  }\n}\n```\n\n## Immer (cleanest for deep nesting)\n\n```tsx\nimport { useImmer } from 'use-immer';\n\nconst [form, updateForm] = useImmer({ name: '', address: { city: '' } });\n\n// Mutating syntax — Immer handles immutability under the hood\nupdateForm(draft => { draft.address.city = 'London'; });\n```",
+    "detailMdTr": null
+  }
+]

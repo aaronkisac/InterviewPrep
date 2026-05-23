@@ -1,0 +1,86 @@
+[
+  {
+    "id": 724,
+    "topic": "css",
+    "level": 4,
+    "levelLabel": "Senior",
+    "question": "Is there any reason you'd want to use translate() instead of absolute positioning, or vice-versa? And why?",
+    "answerGeneral": "translate() triggers only the compositing step (GPU-accelerated), while changing top/left with absolute positioning triggers layout (reflow) and paint, which are expensive. Use translate() for animations and transitions for smooth 60fps performance. Use absolute positioning for static placement where no animation is needed.",
+    "answerGeneralTr": "translate() yalnızca compositing adımını tetikler (GPU hızlandırmalı), oysa absolute positioning ile top/left değiştirmek pahalı olan layout (reflow) ve paint adımlarını tetikler. Düzgün 60fps performansı için animasyon ve geçişlerde translate() kullanın; animasyon gerektirmeyen statik yerleşimler için absolute positioning tercih edin.",
+    "answerPersonal": null,
+    "detailMd": "## translate() vs Absolute Positioning\n\n## The Rendering Pipeline Difference\n\nWhen you animate `top` or `left`:\n1. **Layout** — recalculates geometry for affected elements (expensive)\n2. **Paint** — redraws pixels\n3. **Composite** — assembles layers\n\nWhen you animate `transform: translate()`:\n1. ~~Layout~~ — skipped\n2. ~~Paint~~ — skipped\n3. **Composite only** — GPU moves the existing layer\n\n## Performance Impact\n\n```css\n/* Expensive — triggers layout + paint on every frame */\n@keyframes slide-bad {\n  from { left: 0; }\n  to   { left: 100px; }\n}\n\n/* Cheap — compositor only, smooth 60fps */\n@keyframes slide-good {\n  from { transform: translateX(0); }\n  to   { transform: translateX(100px); }\n}\n```\n\n## Absolute Positioning Use Cases\n\n```css\n/* Static placement — no animation, no problem */\n.tooltip {\n  position: absolute;\n  top: 100%;\n  left: 0;\n}\n\n.badge {\n  position: absolute;\n  top: -4px;\n  right: -4px;\n}\n```\n\n## Combining Both\n\nA common pattern: use `absolute` for placement, `translate` for micro-animation:\n\n```css\n.dropdown {\n  position: absolute;\n  top: 100%;\n  transform: translateY(-4px);\n  opacity: 0;\n  transition: transform 0.15s, opacity 0.15s;\n}\n\n.dropdown.open {\n  transform: translateY(0);\n  opacity: 1;\n}\n```\n\n## will-change\n\nHint the browser to promote an element to its own compositor layer before animation begins:\n\n```css\n.animated { will-change: transform; }\n/* Remove after animation — layers consume GPU memory */\n```",
+    "detailMdTr": null
+  },
+  {
+    "id": 725,
+    "topic": "css",
+    "level": 4,
+    "levelLabel": "Senior",
+    "question": "What are the different ways to visually hide content (and make it available only for screen readers)?",
+    "answerGeneral": "The recommended approach is a visually-hidden utility class: position absolute, width/height 1px, overflow hidden, clip-path inset(50%). Avoid display: none or visibility: hidden as these also hide from screen readers. The pattern is essential for accessible icon labels and skip links.",
+    "answerGeneralTr": "Önerilen yaklaşım visually-hidden yardımcı sınıfıdır: position absolute, width/height 1px, overflow hidden, clip-path inset(50%). display: none veya visibility: hidden kullanmaktan kaçının — bunlar ekran okuyuculardan da gizler. Bu kalıp, erişilebilir ikon etiketleri ve skip link'ler için kritiktir.",
+    "answerPersonal": "At Butlin's during our WCAG 2.1 AA audit, visually-hidden classes were applied to icon-only buttons throughout the booking flow to ensure screen reader compatibility.",
+    "detailMd": "## Visually Hiding Content for Screen Readers\n\n## The Problem\n\nSome content is visual-only (icon buttons, decorative images) or screen-reader-only (skip links, extra context). The hiding technique must be chosen carefully based on whether assistive technology should still access it.\n\n## Comparison Table\n\n| Technique | Visible | Screen reader | Use case |\n|---|---|---|---|\n| `display: none` | No | No | Fully hide from everyone |\n| `visibility: hidden` | No | No | Hide but preserve layout space |\n| `opacity: 0` | No | Yes | Animate in/out |\n| `sr-only` class | No | **Yes** | Screen-reader-only text |\n| `aria-hidden=\"true\"` | Yes | No | Decorative icon |\n\n## The sr-only Pattern\n\n```css\n.sr-only {\n  position: absolute;\n  width: 1px;\n  height: 1px;\n  padding: 0;\n  margin: -1px;\n  overflow: hidden;\n  clip-path: inset(50%);\n  white-space: nowrap;\n  border: 0;\n}\n```\n\n## Focusable sr-only (Skip Links)\n\nSkip links should become visible on focus so keyboard users can see them:\n\n```css\n.skip-link {\n  position: absolute;\n  top: -100%;\n  left: 0;\n}\n\n.skip-link:focus {\n  top: 0;\n  z-index: 9999;\n  padding: 0.5rem 1rem;\n  background: #000;\n  color: #fff;\n}\n```\n\n## Icon Button Example\n\n```html\n<button aria-label=\"Close\">\n  <svg aria-hidden=\"true\" focusable=\"false\">...</svg>\n  <span class=\"sr-only\">Close</span>\n</button>\n```",
+    "detailMdTr": null
+  },
+  {
+    "id": 726,
+    "topic": "css",
+    "level": 4,
+    "levelLabel": "Senior",
+    "question": "Can you explain the difference between coding a website to be responsive versus using a mobile-first strategy?",
+    "answerGeneral": "Responsive design means the layout adapts to any screen size using media queries. Mobile-first means starting with styles for the smallest screen and progressively enhancing for larger screens using min-width queries. Mobile-first is generally better for performance — smaller devices download less CSS — and forces prioritising core content first.",
+    "answerGeneralTr": "Responsive tasarım, yerleşimin media query'lerle herhangi bir ekran boyutuna uyum sağlaması anlamına gelir. Mobile-first ise en küçük ekran için stillerle başlayıp büyük ekranlar için min-width sorguları ile kademeli iyileştirme yapmaktır. Mobile-first genellikle performans açısından daha iyidir ve temel içeriği önceliklendirmeyi zorunlu kılar.",
+    "answerPersonal": null,
+    "detailMd": "## Responsive vs Mobile-First\n\n## Responsive Design\n\nThe layout adapts to any screen size. The key tools are:\n- **Fluid grids** — `%`, `fr`, `auto-fill`\n- **Flexible images** — `max-width: 100%`\n- **Media queries** — apply different styles at breakpoints\n\n## Desktop-First (max-width queries)\n\n```css\n/* Base: desktop layout */\n.grid { display: grid; grid-template-columns: 1fr 1fr 1fr; }\n\n/* Override for smaller screens */\n@media (max-width: 768px) {\n  .grid { grid-template-columns: 1fr; }\n}\n```\n\nSmall devices download and parse **all** the desktop CSS first, then override it.\n\n## Mobile-First (min-width queries)\n\n```css\n/* Base: mobile layout */\n.grid { display: grid; grid-template-columns: 1fr; }\n\n/* Progressive enhancement for larger screens */\n@media (min-width: 640px)  { .grid { grid-template-columns: 1fr 1fr; } }\n@media (min-width: 1024px) { .grid { grid-template-columns: 1fr 1fr 1fr; } }\n```\n\n**Advantages of mobile-first:**\n- Smaller devices download less CSS (no overrides to parse).\n- Forces you to prioritise essential content — everything added on larger screens is an enhancement.\n- Aligns with how most users actually browse (>60% mobile traffic globally).\n\n## Modern Enhancement: Container Queries\n\n```css\n@container (min-width: 400px) {\n  .card { flex-direction: row; }\n}\n```\n\nContainer queries respond to the **component's container size**, not the viewport — enabling truly portable responsive components.",
+    "detailMdTr": null
+  },
+  {
+    "id": 727,
+    "topic": "css",
+    "level": 4,
+    "levelLabel": "Senior",
+    "question": "What does * { box-sizing: border-box; } do? What are its advantages?",
+    "answerGeneral": "By default, box-sizing is content-box — width and height apply to content only, with padding and border added on top. border-box makes width and height include padding and border, so a 200px wide element stays 200px regardless of padding. This makes sizing predictable and is why most CSS resets and frameworks apply it globally.",
+    "answerGeneralTr": "Varsayılan box-sizing content-box'tır — genişlik ve yükseklik yalnızca içeriğe uygulanır, padding ve border buna eklenir. border-box, genişlik ve yüksekliğin padding ve border'ı içermesini sağlar; 200px genişliğindeki element padding'e bakılmaksızın 200px kalır. Bu boyutlandırmayı öngörülebilir kılar ve çoğu CSS reset'inin bunu global uygulamasının nedenidir.",
+    "answerPersonal": null,
+    "detailMd": "## box-sizing: border-box\n\n## The Default Problem (content-box)\n\n```css\n.box {\n  width: 200px;\n  padding: 20px;\n  border: 2px solid black;\n}\n/* Rendered width = 200 + 40 (padding) + 4 (border) = 244px */\n/* Breaks percentage-based layouts */\n```\n\n## border-box Solution\n\n```css\n.box {\n  box-sizing: border-box;\n  width: 200px;\n  padding: 20px;\n  border: 2px solid black;\n}\n/* Rendered width = exactly 200px */\n/* Content area = 200 - 40 - 4 = 156px */\n```\n\n## Global Application\n\n```css\n/* Recommended reset */\n*, *::before, *::after {\n  box-sizing: border-box;\n}\n```\n\nApplying via `*` (universal selector) is cheap — the browser calculates it once. Using inheritance is slightly more performant in theory but rarely matters in practice.\n\n## Why It Matters\n\n```css\n/* Two columns, side by side — works perfectly with border-box */\n.col {\n  box-sizing: border-box;\n  width: 50%;\n  padding: 1rem;\n  float: left;\n}\n/* With content-box: 50% + padding overflows to 100%+ */\n```\n\n## Tailwind and Frameworks\n\nTailwind CSS includes `box-sizing: border-box` in its preflight. Next.js global styles and most CSS resets set it globally. You rarely need to think about it if you're starting a modern project.",
+    "detailMdTr": null
+  },
+  {
+    "id": 728,
+    "topic": "css",
+    "level": 4,
+    "levelLabel": "Senior",
+    "question": "How do you optimize your webpages for print?",
+    "answerGeneral": "Use @media print to hide navigation, ads, and interactive elements. Convert to print-friendly colors, expand link URLs using a[href]::after, set page-break-* (or break-*) properties to control where content splits across pages, use absolute units (cm/mm) for sizing, and ensure font sizes are legible at print resolution.",
+    "answerGeneralTr": "@media print ile navigasyon, reklam ve etkileşimli elementleri gizleyin. Baskıya uygun renkler seçin, a[href]::after ile link URL'lerini genişletin, içeriğin sayfalar arasında nerede bölüneceğini kontrol etmek için page-break-* (veya break-*) özelliklerini ayarlayın ve boyutlandırma için mutlak birimler (cm/mm) kullanın.",
+    "answerPersonal": null,
+    "detailMd": "## CSS Print Optimisation\n\n## @media print\n\n```css\n@media print {\n  /* Hide non-content elements */\n  nav, footer, aside, .ads, .cookie-banner,\n  button, video, audio { display: none !important; }\n\n  /* Expand link URLs */\n  a[href]::after { content: ' (' attr(href) ')'; }\n  a[href^=\"#\"]::after,\n  a[href^=\"javascript:\"]::after { content: ''; } /* skip internal/js links */\n\n  /* Ensure readable text on white */\n  body {\n    color: #000;\n    background: #fff;\n    font-size: 12pt;\n  }\n\n  /* Use absolute units for print */\n  .page { width: 100%; max-width: none; }\n}\n```\n\n## Page Breaks\n\n```css\n@media print {\n  h2, h3 { break-after: avoid; }   /* don't orphan a heading */\n  figure  { break-inside: avoid; } /* keep image + caption together */\n  section { break-before: page; }  /* start each section on new page */\n}\n```\n\n## @page Rule\n\n```css\n@page {\n  size: A4 portrait;\n  margin: 2cm;\n}\n\n@page :first {\n  margin-top: 4cm; /* extra top margin on first page */\n}\n```\n\n## Practical Tips\n\n- Load a separate print stylesheet via `<link rel=\"stylesheet\" media=\"print\">`.\n- Test using Chrome DevTools → More tools → Rendering → Emulate CSS print media.\n- Remove `background-color` from containers (ink saving) unless brand-critical.\n- Set `max-width: none` on content wrappers to use full page width.",
+    "detailMdTr": null
+  },
+  {
+    "id": 729,
+    "topic": "css",
+    "level": 4,
+    "levelLabel": "Senior",
+    "question": "Have you ever worked with retina graphics? If so, when and what techniques did you use?",
+    "answerGeneral": "Retina displays have 2x or higher pixel density, so standard raster images appear blurry. Techniques: use SVG wherever possible (resolution-independent), serve 2x images via srcset on <img> or image-set() in CSS background, use @media (min-resolution: 2dppx) for background images, and prefer icon fonts or CSS shapes over image icons.",
+    "answerGeneralTr": "Retina ekranlar 2x veya daha yüksek piksel yoğunluğuna sahiptir, bu nedenle standart görüntüler bulanık görünür. Teknikler: mümkün olan her yerde SVG kullanın, <img>'de srcset veya CSS'de image-set() ile 2x görüntü sunun, arka plan görüntüleri için @media (min-resolution: 2dppx) kullanın ve görüntü ikonları yerine ikon fontları veya CSS şekilleri tercih edin.",
+    "answerPersonal": null,
+    "detailMd": "## Retina / High-DPI Graphics\n\n## The Problem\n\nA retina display (device pixel ratio ≥ 2) uses 4 physical pixels for every 1 CSS pixel. A 100×100px image displayed at 100×100 CSS pixels gets stretched to 200×200 physical pixels, appearing blurry.\n\n## Technique 1: SVG (Best)\n\nSVG is vector-based and scales to any resolution with perfect sharpness. Use it for icons, logos, and illustrations.\n\n```html\n<img src=\"logo.svg\" width=\"200\" height=\"60\" alt=\"Brand\" />\n```\n\n## Technique 2: srcset for Raster Images\n\n```html\n<img\n  src=\"hero-800.jpg\"\n  srcset=\"hero-800.jpg 1x, hero-1600.jpg 2x, hero-2400.jpg 3x\"\n  alt=\"Hero\"\n/>\n```\n\nBrowser picks the most appropriate source for the device's DPR.\n\n## Technique 3: image-set() in CSS\n\n```css\n.hero {\n  background-image: image-set(\n    url('bg.jpg') 1x,\n    url('bg@2x.jpg') 2x\n  );\n}\n```\n\n## Technique 4: @media min-resolution\n\n```css\n.logo { background-image: url('logo.png'); }\n\n@media (min-resolution: 2dppx) {\n  .logo {\n    background-image: url('logo@2x.png');\n    background-size: 100px 40px; /* original CSS dimensions */\n  }\n}\n```\n\n## Modern Recommendation\n\nNext.js `<Image>` component handles responsive and retina images automatically — generating srcset, WebP conversion, and lazy loading out of the box.",
+    "detailMdTr": null
+  },
+  {
+    "id": 730,
+    "topic": "css",
+    "level": 4,
+    "levelLabel": "Senior",
+    "question": "What's the difference between SCSS and Sass?",
+    "answerGeneral": "Sass has two syntaxes. The original .sass syntax uses indentation with no curly braces or semicolons — concise but very different from CSS. SCSS (.scss) is a superset of CSS — any valid CSS is valid SCSS — making it easy to adopt and integrate into existing codebases. SCSS is the dominant syntax today.",
+    "answerGeneralTr": "Sass'ın iki sözdizimi vardır. Orijinal .sass sözdizimi girintileme kullanır, süslü parantez veya noktalı virgül yoktur. SCSS (.scss) ise CSS'in üst kümesidir — geçerli her CSS, geçerli SCSS'tir — bu da mevcut kod tabanlarına adaptasyonu kolaylaştırır. Günümüzde SCSS baskın sözdizimdir.",
+    "answerPersonal": null,
+    "detailMd": "## SCSS vs Sass Syntax\n\n## Side-by-Side Comparison\n\nThe same styles in both syntaxes:\n\n```sass\n// .sass — indented (whitespace-significant)\n$primary: #0070f3\n\n.button\n  background: $primary\n  padding: 0.5rem 1rem\n\n  &:hover\n    background: darken($primary, 10%)\n\n  &--large\n    font-size: 1.25rem\n```\n\n```scss\n// .scss — superset of CSS\n$primary: #0070f3;\n\n.button {\n  background: $primary;\n  padding: 0.5rem 1rem;\n\n  &:hover {\n    background: darken($primary, 10%);\n  }\n\n  &--large {\n    font-size: 1.25rem;\n  }\n}\n```\n\n## Key Differences\n\n| | .sass | .scss |\n|---|---|---|\n| Braces | No `{}` | Required |\n| Semicolons | No `;` | Required |\n| CSS compatibility | Any valid CSS must be rewritten | Any valid CSS is valid SCSS |\n| Adoption | Niche / older projects | Dominant, all major tooling |\n\n## Why SCSS Won\n\n- **Zero migration cost** — drop a `.css` file in, rename to `.scss`, done.\n- **Familiar syntax** — any CSS developer can read it immediately.\n- **Tooling** — webpack, Vite, PostCSS, and editors all support `.scss` natively.\n\n## Sass Modules (Modern)\n\nBoth syntaxes now use `@use` and `@forward` instead of the deprecated `@import`:\n\n```scss\n@use 'sass:color';\n@use 'tokens' as t;\n\n.button { background: color.adjust(t.$primary, $lightness: -10%); }\n```",
+    "detailMdTr": null
+  }
+]

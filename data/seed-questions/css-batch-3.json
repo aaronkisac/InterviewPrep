@@ -1,0 +1,110 @@
+[
+  {
+    "id": 715,
+    "topic": "css",
+    "level": 3,
+    "levelLabel": "Mid",
+    "question": "Have you played around with the new CSS Flexbox or Grid specs?",
+    "answerGeneral": "Flexbox is one-dimensional — it lays items along a single axis (row or column), making it ideal for nav bars, button groups, and centering. CSS Grid is two-dimensional, controlling rows and columns simultaneously, making it ideal for page-level layouts. In practice, Grid structures the page and Flexbox aligns items within components.",
+    "answerGeneralTr": "Flexbox tek boyutludur — öğeleri tek bir eksen (satır veya sütun) boyunca düzenler; nav bar, buton grubu ve ortalama için idealdir. CSS Grid ise iki boyutludur; satır ve sütunları aynı anda kontrol eder, sayfa düzeyindeki yerleşimler için idealdir. Pratikte Grid sayfayı yapılandırır, Flexbox bileşenler içindeki hizalamayı yapar.",
+    "answerPersonal": null,
+    "detailMd": "## Flexbox vs CSS Grid\n\n## Flexbox — One Dimension\n\n```css\n.nav {\n  display: flex;\n  align-items: center;      /* cross axis */\n  justify-content: space-between; /* main axis */\n  gap: 1rem;\n}\n\n/* Center anything */\n.card {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n```\n\nBest for: navbars, button groups, card footers, centering, any single-row/column layout.\n\n## CSS Grid — Two Dimensions\n\n```css\n.page-layout {\n  display: grid;\n  grid-template-columns: 240px 1fr;\n  grid-template-rows: auto 1fr auto;\n  grid-template-areas:\n    'sidebar header'\n    'sidebar main'\n    'sidebar footer';\n  min-height: 100vh;\n}\n\n.sidebar { grid-area: sidebar; }\n.main    { grid-area: main; }\n\n/* Auto-fill responsive grid */\n.card-grid {\n  display: grid;\n  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));\n  gap: 1.5rem;\n}\n```\n\nBest for: page layouts, dashboards, magazine-style grids, any two-dimensional placement.\n\n## Rule of Thumb\n\n> **Grid for layout, Flexbox for components.**\n\nThey are not mutually exclusive — a Grid item can itself be a Flex container.",
+    "detailMdTr": null
+  },
+  {
+    "id": 716,
+    "topic": "css",
+    "level": 3,
+    "levelLabel": "Mid",
+    "question": "What is a Grid System in CSS?",
+    "answerGeneral": "A CSS grid system divides a layout into columns and rows for consistent content placement. Traditional grid systems (like Bootstrap's 12-column grid) used floats and classes. Modern CSS Grid provides native browser support for defining grid-template-columns, grid-template-rows, and placing items precisely with grid-column and grid-row.",
+    "answerGeneralTr": "CSS grid sistemi, içerik yerleştirmek için tutarlı bir yapı sağlamak amacıyla yerleşimi sütunlara ve satırlara böler. Geleneksel grid sistemleri (Bootstrap'ın 12 sütunluk gridi) float ve class kullanırdı. Modern CSS Grid; grid-template-columns, grid-template-rows tanımlamak ve öğeleri tam olarak yerleştirmek için yerel tarayıcı desteği sunar.",
+    "answerPersonal": null,
+    "detailMd": "## CSS Grid Systems\n\n## Traditional (Framework) Grid\n\nBootstrap-style grids used a 12-column float-based system with responsive utility classes:\n\n```html\n<div class=\"row\">\n  <div class=\"col-md-8\">Main</div>\n  <div class=\"col-md-4\">Sidebar</div>\n</div>\n```\n\nThe 12-column convention is arbitrary but divisible by 2, 3, 4, and 6 — making it flexible for most layouts.\n\n## Native CSS Grid\n\n```css\n/* 12-column grid */\n.grid {\n  display: grid;\n  grid-template-columns: repeat(12, 1fr);\n  gap: 1.5rem;\n}\n\n.main    { grid-column: span 8; }\n.sidebar { grid-column: span 4; }\n\n/* Responsive — no media query needed */\n.card-grid {\n  display: grid;\n  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));\n  gap: 1rem;\n}\n```\n\n## Named Grid Lines\n\n```css\n.layout {\n  display: grid;\n  grid-template-columns:\n    [full-start] 1rem\n    [content-start] 1fr\n    [content-end] 1rem\n    [full-end];\n}\n\n.breakout { grid-column: full; }    /* edge-to-edge */\n.article  { grid-column: content; } /* contained */\n```\n\nNative CSS Grid eliminates the need for framework grid classes and works without JavaScript or a build step.",
+    "detailMdTr": null
+  },
+  {
+    "id": 717,
+    "topic": "css",
+    "level": 3,
+    "levelLabel": "Mid",
+    "question": "How would you approach fixing browser-specific styling issues?",
+    "answerGeneral": "Approaches include using a CSS normalizer for a consistent baseline, writing progressive enhancement (standard styles first), using @supports for feature detection, applying vendor prefixes (-webkit-, -moz-) where needed, and testing with cross-browser tools like BrowserStack. Avoiding browser hacks in favour of standards-compliant code is the long-term solution.",
+    "answerGeneralTr": "Yaklaşımlar: tutarlı temel için CSS normalizer kullanmak, ilerleyici geliştirme (önce standart stiller) yazmak, @supports ile özellik tespiti yapmak, gerektiğinde vendor prefix (-webkit-, -moz-) kullanmak ve BrowserStack gibi araçlarla çapraz tarayıcı testi yapmaktır. Uzun vadeli çözüm, standartlara uygun kod yazarak tarayıcı hack'lerinden kaçınmaktır.",
+    "answerPersonal": null,
+    "detailMd": "## Fixing Browser-Specific CSS Issues\n\n## 1. Start with a Normalizer\n\nApplying `normalize.css` or a custom base eliminates most inconsistencies before writing a single line of component CSS.\n\n## 2. Progressive Enhancement\n\nWrite styles for the lowest common denominator first, then layer enhancements:\n\n```css\n.card {\n  background: #eee;           /* fallback */\n  background: oklch(90% 0 0); /* modern browsers */\n}\n```\n\n## 3. Feature Detection with @supports\n\n```css\n.grid {\n  display: flex; /* fallback */\n  flex-wrap: wrap;\n}\n\n@supports (display: grid) {\n  .grid {\n    display: grid;\n    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));\n  }\n}\n```\n\n## 4. Vendor Prefixes (Autoprefixer)\n\nRather than writing prefixes manually, use **PostCSS + Autoprefixer** to add them automatically based on your `browserslist` config:\n\n```json\n// package.json\n\"browserslist\": [\"last 2 versions\", \"> 1%\", \"not dead\"]\n```\n\n## 5. Cross-Browser Testing\n\n- **BrowserStack / LambdaTest** — real device/browser testing.\n- **Chrome DevTools device emulation** — quick responsive checks.\n- **can-i-use.com** — check feature support before using.\n\n## 6. Avoid Browser Hacks\n\nHacks tied to specific browser versions break when that browser updates. Standards-compliant code with `@supports` is maintainable long-term.",
+    "detailMdTr": null
+  },
+  {
+    "id": 718,
+    "topic": "css",
+    "level": 3,
+    "levelLabel": "Mid",
+    "question": "Explain CSS sprites, and how you would implement them on a page or site.",
+    "answerGeneral": "CSS sprites combine multiple images into a single file to reduce HTTP requests. You display the correct portion using background-image with background-position and defined width/height. Today sprites are largely replaced by SVG icons, icon fonts, or HTTP/2. They remain relevant for raster images in performance-critical contexts.",
+    "answerGeneralTr": "CSS sprite'ları, HTTP isteklerini azaltmak için birden fazla görüntüyü tek bir dosyada birleştirir. Doğru bölümü background-image ve background-position kullanarak görüntülersiniz. Günümüzde sprite'ların yerini büyük ölçüde SVG ikonlar, ikon fontları veya HTTP/2 almıştır. Performans kritik raster görüntü senaryolarında hâlâ geçerlidir.",
+    "answerPersonal": null,
+    "detailMd": "## CSS Sprites\n\nA sprite sheet combines many images into one file. Each image is revealed by setting `background-position` to offset into the correct region.\n\n## Implementation\n\n```css\n/* Shared class for all icons using the sprite */\n.icon {\n  display: inline-block;\n  background-image: url('/images/sprite.png');\n  background-repeat: no-repeat;\n}\n\n/* Each icon reveals its slice */\n.icon--home   { width: 24px; height: 24px; background-position: 0 0; }\n.icon--search { width: 24px; height: 24px; background-position: -24px 0; }\n.icon--user   { width: 24px; height: 24px; background-position: -48px 0; }\n```\n\n## Why Sprites Were Used\n\nHTTP/1.1 was limited to ~6 connections per domain. Each image = one request. A 50-icon set meant 50 round-trips. Sprites reduced that to one.\n\n## Why They're Largely Obsolete\n\n- **HTTP/2** multiplexes many requests over one connection — small individual files are cheap.\n- **SVG sprites** — inline `<svg>` with `<use>` references a `<symbol>` by ID, no background hacks needed.\n- **Icon fonts** (Font Awesome) — scalable, colorable via `color` property.\n\n```html\n<!-- SVG sprite (modern approach) -->\n<svg style=\"display:none\">\n  <symbol id=\"icon-home\" viewBox=\"0 0 24 24\">...</symbol>\n</svg>\n\n<svg aria-hidden=\"true\"><use href=\"#icon-home\" /></svg>\n```\n\nRaster sprites are still worth considering for pixel-art games or when dozens of small PNGs must load at once.",
+    "detailMdTr": null
+  },
+  {
+    "id": 719,
+    "topic": "css",
+    "level": 3,
+    "levelLabel": "Mid",
+    "question": "What are the advantages/disadvantages of using CSS preprocessors?",
+    "answerGeneral": "Advantages: variables for consistent values, nesting for readable structure, mixins for reusable patterns, functions/loops for DRY code, and partials for better organisation. Disadvantages: adds a compilation step, debugging can be harder (source maps help), output CSS can bloat if nesting is abused, and the team needs to learn the preprocessor syntax.",
+    "answerGeneralTr": "Avantajlar: tutarlı değerler için değişkenler, okunabilir yapı için iç içe yazım, yeniden kullanılabilir kalıplar için mixin'ler, DRY kod için fonksiyonlar ve partial'larla daha iyi organizasyon. Dezavantajlar: derleme adımı ekler, hata ayıklama zorlaşabilir, iç içe yazım kötüye kullanılırsa CSS şişer ve ekip sözdizimini öğrenmek zorundadır.",
+    "answerPersonal": null,
+    "detailMd": "## CSS Preprocessors: Pros and Cons\n\n## Advantages\n\n**Variables** — define design tokens once:\n```scss\n$color-primary: #0070f3;\n$spacing-unit: 0.25rem;\n```\n\n**Nesting** — co-locate related styles:\n```scss\n.card {\n  padding: 1rem;\n  &__title { font-size: 1.25rem; }\n  &:hover   { box-shadow: 0 4px 12px rgba(0,0,0,.1); }\n}\n```\n\n**Mixins** — reusable blocks with arguments:\n```scss\n@mixin truncate($width: 100%) {\n  width: $width;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n.label { @include truncate(200px); }\n```\n\n**Partials** — split into `_tokens.scss`, `_button.scss`, import into one `main.scss`.\n\n## Disadvantages\n\n- **Build step required** — adds tooling complexity (Dart Sass, webpack/Vite loader).\n- **Debugging** — errors point to compiled CSS line numbers unless source maps are configured.\n- **Specificity bloat** — deep nesting like `.nav .list .item a:hover` generates high-specificity selectors that are hard to override.\n- **Native CSS is catching up** — CSS custom properties, `@layer`, `color-mix()`, and nesting (now shipping in all browsers) reduce the gap.\n\n## Current Recommendation\n\nNew projects can often avoid preprocessors entirely by using CSS custom properties for variables and native CSS nesting. Preprocessors still add value for large design systems with complex token hierarchies.",
+    "detailMdTr": null
+  },
+  {
+    "id": 720,
+    "topic": "css",
+    "level": 3,
+    "levelLabel": "Mid",
+    "question": "Describe z-index and how a stacking context is formed.",
+    "answerGeneral": "z-index controls the stacking order of positioned elements. A stacking context is a group of elements painted as a unit, where z-index values only compete within that context. A new stacking context forms when an element has a non-static position with a z-index, opacity less than 1, transform, filter, or isolation: isolate. Understanding stacking contexts is essential to avoid z-index wars.",
+    "answerGeneralTr": "z-index, konumlandırılmış elementlerin yığılma sırasını kontrol eder. Yığılma bağlamı (stacking context), birim olarak boyanan ve z-index değerlerinin yalnızca kendi içinde rekabet ettiği bir element grubudur. static dışında bir position + z-index, opacity < 1, transform, filter veya isolation: isolate olan elementler yeni bir yığılma bağlamı oluşturur.",
+    "answerPersonal": null,
+    "detailMd": "## z-index and Stacking Contexts\n\n## z-index Basics\n\n`z-index` only works on elements with a `position` value other than `static` (or flex/grid children).\n\n```css\n.dropdown {\n  position: relative;\n  z-index: 10;  /* paints above z-index: 1 siblings */\n}\n```\n\nHigher value = closer to viewer. Negative values paint behind the parent.\n\n## Stacking Context\n\nA stacking context is an isolated layer. **z-index values inside it only compete within that context**, not with the rest of the page.\n\n### What Creates a New Stacking Context\n\n```css\n/* Any of these trigger a new stacking context */\n.element {\n  position: relative; z-index: 1;  /* position + z-index */\n  opacity: 0.99;                    /* opacity < 1 */\n  transform: translateZ(0);         /* any transform */\n  filter: blur(0);                  /* any filter */\n  isolation: isolate;               /* explicit isolation */\n  will-change: transform;           /* will-change hint */\n}\n```\n\n## The Classic z-index Bug\n\n```html\n<div style=\"position:relative; z-index:1\">  <!-- stacking context -->\n  <div style=\"z-index:9999\">Modal</div>     <!-- trapped inside! -->\n</div>\n<div style=\"position:relative; z-index:2\">  <!-- paints above everything inside the first -->\n  <p>I cover the modal</p>\n</div>\n```\n\n## Fix: isolation: isolate\n\n```css\n/* Prevent a component from accidentally creating a stacking context */\n.card { isolation: isolate; }\n```\n\nThis is why modal/dialog portals are rendered at the `<body>` level in React — to escape stacking contexts.",
+    "detailMdTr": null
+  },
+  {
+    "id": 721,
+    "topic": "css",
+    "level": 3,
+    "levelLabel": "Mid",
+    "question": "Explain the basic rules of CSS Specificity.",
+    "answerGeneral": "Specificity determines which CSS rule wins when multiple rules target the same element. It's calculated as a three-part value: (ID count, class/attribute/pseudo-class count, element/pseudo-element count). Inline styles override all stylesheet rules, and !important overrides everything. Equal specificity falls back to source order — the later rule wins.",
+    "answerGeneralTr": "Specificity, birden fazla kural aynı elementi hedeflediğinde hangi CSS kuralının geçerli olacağını belirler. Üç parçalı bir değer olarak hesaplanır: (ID sayısı, class/attribute/pseudo-class sayısı, element/pseudo-element sayısı). Inline stiller tüm stil sayfası kurallarını, !important ise her şeyi geçersiz kılar. Eşit specificity'de kaynak sırası devreye girer.",
+    "answerPersonal": null,
+    "detailMd": "## CSS Specificity\n\n## Calculation\n\nSpecificity is represented as three columns: **(A, B, C)**\n\n| Selector | A (IDs) | B (classes/attrs/pseudo-classes) | C (elements/pseudo-elements) |\n|---|---|---|---|\n| `div` | 0 | 0 | 1 |\n| `.card` | 0 | 1 | 0 |\n| `div.card` | 0 | 1 | 1 |\n| `#hero` | 1 | 0 | 0 |\n| `#hero .card div` | 1 | 1 | 1 |\n| `style=\"\"` (inline) | — | — | — | beats all |\n\nColumns are compared left-to-right: `1,0,0` always beats `0,99,99`.\n\n## Examples\n\n```css\na { color: blue; }              /* 0,0,1 */\n.nav a { color: green; }        /* 0,1,1 — wins */\n#sidebar .nav a { color: red; } /* 1,1,1 — wins */\n```\n\n## !important\n\n`!important` overrides specificity entirely and should be reserved for utility overrides and debugging:\n\n```css\n.hidden { display: none !important; }\n```\n\n## :is(), :not(), :has() Specificity\n\n`:is()` and `:has()` take the specificity of their **most specific argument**:\n```css\n:is(#id, .class) a { } /* specificity: 1,0,1 — the #id argument counts */\n```\n\n`:where()` always has **zero** specificity — useful for base styles you want easily overridable.\n\n## Keeping Specificity Flat\n\nBEM naming keeps everything at `0,1,0`:\n```css\n.card { } .card__title { } .card--featured { } /* all 0,1,0 */\n```",
+    "detailMdTr": null
+  },
+  {
+    "id": 722,
+    "topic": "css",
+    "level": 3,
+    "levelLabel": "Mid",
+    "question": "Explain the purpose of clearing floats in CSS.",
+    "answerGeneral": "When child elements are floated, the parent container collapses to zero height because floated elements are removed from normal flow. Clearing floats prevents this collapse. Common techniques include the clearfix hack (::after pseudo-element with clear: both), adding overflow: hidden to the parent, or using Flexbox/Grid which don't suffer from this problem.",
+    "answerGeneralTr": "Child elementler float edildiğinde, float'lar normal akıştan çıktığı için parent container sıfır yüksekliğe çöker. Float temizleme bunu önler. Yaygın teknikler: clearfix (::after pseudo-elementiyle clear: both), parent'a overflow: hidden eklemek ya da bu sorunu yaşamayan Flexbox/Grid kullanmaktır.",
+    "answerPersonal": null,
+    "detailMd": "## Clearing Floats\n\n## The Problem\n\n```html\n<div class=\"container\">          <!-- height: 0 —  collapses! -->\n  <img style=\"float:left\" />\n  <img style=\"float:right\" />\n</div>\n<p>This text slides up under the images</p>\n```\n\nFloated elements are removed from normal flow, so the parent has no in-flow children to size itself against.\n\n## Solutions\n\n### 1. Clearfix (most portable)\n\n```css\n.clearfix::after {\n  content: '';\n  display: block;\n  clear: both;  /* forces height expansion past floated children */\n}\n```\n\n### 2. overflow: hidden / auto\n\n```css\n.container { overflow: hidden; }\n/* Creates a new Block Formatting Context (BFC) — contains floats */\n```\n\nSide effect: clips content that overflows the container.\n\n### 3. display: flow-root\n\n```css\n.container { display: flow-root; }\n/* Creates BFC without overflow side effects — modern, clean */\n```\n\n### 4. Flexbox or Grid (best for layouts)\n\n```css\n.container { display: flex; gap: 1rem; }\n/* Flex children are not floated — collapse problem doesn't exist */\n```\n\n## Block Formatting Context (BFC)\n\nA BFC is an isolated formatting region that contains its floats. Triggers: `overflow` (non-visible), `display: flow-root`, `float`, `position: absolute/fixed`, `display: flex/grid`.",
+    "detailMdTr": null
+  },
+  {
+    "id": 723,
+    "topic": "css",
+    "level": 3,
+    "levelLabel": "Mid",
+    "question": "What does Accessibility (a11y) mean in a CSS context?",
+    "answerGeneral": "CSS accessibility means writing styles that don't hinder assistive technologies. Key practices: never remove outline without a custom focus style, ensure sufficient color contrast (WCAG 4.5:1 for normal text), use relative units (rem/em) for font sizes, avoid putting meaningful content only in CSS (::before/::after), and use prefers-reduced-motion for animations.",
+    "answerGeneralTr": "CSS erişilebilirliği, yardımcı teknolojileri engellemeyen stiller yazmak anlamına gelir. Temel uygulamalar: özel focus stili olmadan outline kaldırmamak, yeterli renk kontrastı sağlamak (WCAG normal metin için 4.5:1), font boyutlarında rem/em kullanmak, anlamlı içerikleri yalnızca CSS'e (::before/::after) koymamak ve animasyonlar için prefers-reduced-motion kullanmaktır.",
+    "answerPersonal": "At Butlin's I integrated ReciteMe and conducted a WCAG 2.1 AA audit — CSS focus styles and contrast ratios were among the first issues we addressed.",
+    "detailMd": "## CSS and Accessibility\n\n## 1. Focus Styles\n\nNever remove focus outlines without replacing them — keyboard users lose navigation entirely:\n\n```css\n/* Bad */\n* { outline: none; }\n\n/* Good — custom, visible focus style */\n:focus-visible {\n  outline: 2px solid #0070f3;\n  outline-offset: 2px;\n}\n```\n\n`:focus-visible` only shows for keyboard navigation, not mouse clicks — best of both worlds.\n\n## 2. Color Contrast\n\nWCAG 2.1 AA requires:\n- Normal text: **4.5:1** contrast ratio\n- Large text (18px+ or 14px+ bold): **3:1**\n- UI components and graphics: **3:1**\n\nTest with: browser DevTools, axe, or Colour Contrast Analyser.\n\n## 3. Relative Units\n\n```css\n/* Bad — ignores user's browser font-size preference */\nbody { font-size: 14px; }\n\n/* Good — scales with user preference */\nbody { font-size: 1rem; }  /* 1rem = user's base font size */\n.small { font-size: 0.875em; }\n```\n\n## 4. Visually Hidden Content\n\n```css\n.sr-only {\n  position: absolute;\n  width: 1px; height: 1px;\n  padding: 0; margin: -1px;\n  overflow: hidden;\n  clip-path: inset(50%);\n  white-space: nowrap;\n}\n```\n\n## 5. Motion\n\n```css\n@media (prefers-reduced-motion: reduce) {\n  *, *::before, *::after {\n    animation-duration: 0.01ms !important;\n    transition-duration: 0.01ms !important;\n  }\n}\n```",
+    "detailMdTr": null
+  }
+]

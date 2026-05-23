@@ -70,7 +70,13 @@ function getEnv(name: string): string {
 
 async function loadSeedFile(file: string): Promise<SeedQuestion[]> {
   const filePath = path.join(process.cwd(), "data", file);
-  const raw = await readFile(filePath, "utf8");
+  let raw: string;
+  try {
+    raw = await readFile(filePath, "utf8");
+  } catch {
+    // File no longer exists — questions were already seeded; skip gracefully.
+    return [];
+  }
   const parsed = JSON.parse(raw) as unknown;
   if (!Array.isArray(parsed)) {
     throw new Error(`Expected an array in ${file}`);

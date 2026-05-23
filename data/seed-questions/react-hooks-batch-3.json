@@ -1,0 +1,110 @@
+[
+  {
+    "id": 812,
+    "topic": "react-hooks",
+    "level": 3,
+    "levelLabel": "Mid",
+    "question": "When and how would you use useContext?",
+    "answerGeneral": "useContext consumes a React context value without needing a Consumer wrapper. Use it for data that many components at different nesting levels need — theme, locale, auth user, feature flags. Avoid it for frequently changing state shared by many components, as every consumer re-renders when the context value changes.",
+    "answerGeneralTr": "useContext, Consumer sarmalayıcısına gerek kalmadan React context değerini tüketir. Farklı iç içe geçme seviyelerindeki birçok bileşenin ihtiyaç duyduğu veriler için kullanın — tema, dil, auth kullanıcısı, feature flag'ler. Context değeri değiştiğinde her tüketici yeniden render edildiğinden, birçok bileşen tarafından paylaşılan sık değişen state için kullanmaktan kaçının.",
+    "answerPersonal": null,
+    "detailMd": "## useContext\n\n## Setup\n\n```tsx\n// 1. Create context with a default value\nconst ThemeContext = createContext<'light' | 'dark'>('light');\n\n// 2. Provide it high in the tree\nfunction App() {\n  const [theme, setTheme] = useState<'light' | 'dark'>('light');\n  return (\n    <ThemeContext.Provider value={theme}>\n      <Layout />\n    </ThemeContext.Provider>\n  );\n}\n\n// 3. Consume anywhere below\nfunction Button() {\n  const theme = useContext(ThemeContext);\n  return <button className={`btn btn--${theme}`}>Click</button>;\n}\n```\n\n## vs Context.Consumer\n\n```tsx\n// Old: Consumer wrapper (verbose)\n<ThemeContext.Consumer>\n  {theme => <button className={theme}>Click</button>}\n</ThemeContext.Consumer>\n\n// Modern: useContext (clean)\nconst theme = useContext(ThemeContext);\n```\n\n## Good Use Cases\n\n- Auth user / session\n- Theme (light/dark)\n- Locale / i18n\n- Feature flags\n- Toast / notification system\n\n## When NOT to Use Context\n\nContext triggers a re-render in **every consumer** when the value changes — even if the consumer only reads one field of a large object. For high-frequency updates (mouse position, form input), prefer Zustand, Jotai, or component-local state. Split contexts by update frequency to limit blast radius.",
+    "detailMdTr": null
+  },
+  {
+    "id": 813,
+    "topic": "react-hooks",
+    "level": 3,
+    "levelLabel": "Mid",
+    "question": "When to use useState vs useReducer?",
+    "answerGeneral": "Use useState for simple, independent values. Use useReducer when state has multiple sub-values that change together, when next state depends on previous state in complex ways, or when you have many related event types. useReducer also makes state transitions testable in isolation — you can test the reducer function without rendering.",
+    "answerGeneralTr": "Basit, bağımsız değerler için useState kullanın. State'in birlikte değişen birden fazla alt değeri olduğunda, bir sonraki state'in öncekine karmaşık biçimde bağlı olduğunda veya çok sayıda ilgili olay türü olduğunda useReducer kullanın. useReducer, state geçişlerini render olmadan test edilebilir kılar.",
+    "answerPersonal": null,
+    "detailMd": "## useState vs useReducer\n\n## useState — Simple Cases\n\n```tsx\nconst [open, setOpen]       = useState(false);\nconst [query, setQuery]     = useState('');\nconst [count, setCount]     = useState(0);\n```\n\n## useReducer — Complex Cases\n\n```tsx\ntype State = { loading: boolean; data: User[] | null; error: string | null; };\ntype Action =\n  | { type: 'FETCH_START' }\n  | { type: 'FETCH_SUCCESS'; payload: User[] }\n  | { type: 'FETCH_ERROR'; payload: string };\n\nfunction reducer(state: State, action: Action): State {\n  switch (action.type) {\n    case 'FETCH_START':   return { ...state, loading: true, error: null };\n    case 'FETCH_SUCCESS': return { loading: false, data: action.payload, error: null };\n    case 'FETCH_ERROR':   return { loading: false, data: null, error: action.payload };\n  }\n}\n\nconst [state, dispatch] = useReducer(reducer, { loading: false, data: null, error: null });\n\n// Usage\ndispatch({ type: 'FETCH_START' });\n```\n\n## Decision Guide\n\n| Scenario | Pick |\n|---|---|\n| 1–2 independent booleans/strings | `useState` |\n| Object with fields that change together | `useReducer` |\n| Next state depends on previous | `useReducer` (functional update also works) |\n| 3+ related event types | `useReducer` |\n| Need testable state logic | `useReducer` — pure function, no component needed |\n\n## Testing a Reducer\n\n```ts\nit('handles FETCH_SUCCESS', () => {\n  const next = reducer({ loading: true, data: null, error: null }, {\n    type: 'FETCH_SUCCESS', payload: [mockUser]\n  });\n  expect(next.loading).toBe(false);\n  expect(next.data).toHaveLength(1);\n});\n```",
+    "detailMdTr": null
+  },
+  {
+    "id": 814,
+    "topic": "react-hooks",
+    "level": 3,
+    "levelLabel": "Mid",
+    "question": "What are the use cases for useRef?",
+    "answerGeneral": "useRef has two main uses: holding a reference to a DOM node (to call focus, scroll, or measure), and storing a mutable value that persists across renders without triggering re-renders. Common non-DOM uses include storing previous values, interval/timeout IDs, and abort controllers for cancellable fetches.",
+    "answerGeneralTr": "useRef'in iki temel kullanımı vardır: DOM düğümüne referans tutmak (focus, scroll veya ölçüm yapmak için) ve render'lar arasında yeniden render tetiklemeden kalıcı olan değişken bir değer saklamak. Yaygın DOM dışı kullanımlar: önceki değerleri saklamak, interval/timeout ID'leri ve iptal edilebilir fetch'ler için abort controller'lar.",
+    "answerPersonal": null,
+    "detailMd": "## useRef Use Cases\n\n## 1. DOM Access\n\n```tsx\nconst inputRef = useRef<HTMLInputElement>(null);\n\nuseEffect(() => { inputRef.current?.focus(); }, []);\n\nreturn <input ref={inputRef} />;\n```\n\n## 2. Persist Values Without Re-render\n\nUnlike state, mutating `ref.current` does not cause a re-render:\n\n```tsx\n// Store previous value\nfunction usePrevious<T>(value: T) {\n  const ref = useRef<T | undefined>(undefined);\n  useEffect(() => { ref.current = value; }); // update after render\n  return ref.current;\n}\n\n// Store timer ID\nconst timerRef = useRef<ReturnType<typeof setInterval> | null>(null);\nuseEffect(() => {\n  timerRef.current = setInterval(tick, 1000);\n  return () => { if (timerRef.current) clearInterval(timerRef.current); };\n}, []);\n```\n\n## 3. Abort Controller for Cancellable Fetches\n\n```tsx\nconst abortRef = useRef<AbortController | null>(null);\n\nuseEffect(() => {\n  abortRef.current?.abort(); // cancel previous\n  abortRef.current = new AbortController();\n\n  fetch('/api/data', { signal: abortRef.current.signal })\n    .then(r => r.json())\n    .then(setData)\n    .catch(err => { if (err.name !== 'AbortError') setError(err); });\n\n  return () => abortRef.current?.abort();\n}, [query]);\n```\n\n## 4. Instance Variables (Class Equivalent)\n\nIn class components, `this.x` held mutable instance data. `useRef` is the functional equivalent — persists for the component's lifetime, mutable, no re-render on change.",
+    "detailMdTr": null
+  },
+  {
+    "id": 815,
+    "topic": "react-hooks",
+    "level": 3,
+    "levelLabel": "Mid",
+    "question": "Explain the difference between useState and useRef hooks.",
+    "answerGeneral": "useState stores values that drive UI — changing it triggers a re-render. useRef stores mutable values that should persist across renders without causing re-renders. A ref update is invisible to React's rendering cycle. Use state for anything the UI must reflect; use ref for values that are only needed internally or for DOM access.",
+    "answerGeneralTr": "useState, UI'ı yönlendiren değerleri saklar — değişmesi yeniden render'ı tetikler. useRef, render'lar arasında kalıcı olması gereken ancak yeniden render tetiklememesi gereken değişken değerleri saklar. Ref güncellemesi React'ın render döngüsünden gizlidir. UI'ın yansıtması gereken her şey için state; yalnızca dahili olarak ihtiyaç duyulan değerler veya DOM erişimi için ref kullanın.",
+    "answerPersonal": null,
+    "detailMd": "## useState vs useRef\n\n## Core Difference\n\n| | `useState` | `useRef` |\n|---|---|---|\n| Triggers re-render? | Yes | No |\n| Value survives re-render? | Yes | Yes |\n| Mutable? | Via setter only | Direct mutation (`ref.current = x`) |\n| Visible to JSX? | Yes | Only if you read `.current` |\n\n## Example: Counter\n\n```tsx\n// useState — UI reflects value\nconst [count, setCount] = useState(0);\n// <p>{count}</p> updates on screen\n\n// useRef — value tracked internally, UI never updates\nconst renderCount = useRef(0);\nuseEffect(() => { renderCount.current += 1; }); // silent mutation\n```\n\n## Stale Closure with useState\n\n```tsx\nconst [query, setQuery] = useState('');\n\nuseEffect(() => {\n  const id = setInterval(() => {\n    console.log(query); // stale — captures initial value\n  }, 1000);\n  return () => clearInterval(id);\n}, []); // missing dep\n\n// Fix: use ref to always read latest\nconst queryRef = useRef(query);\nuseEffect(() => { queryRef.current = query; }, [query]);\n\nuseEffect(() => {\n  const id = setInterval(() => {\n    console.log(queryRef.current); // always fresh\n  }, 1000);\n  return () => clearInterval(id);\n}, []);\n```\n\n## Rule of Thumb\n\n> If the UI must show the value → `useState`. If it's internal bookkeeping → `useRef`.",
+    "detailMdTr": null
+  },
+  {
+    "id": 816,
+    "topic": "react-hooks",
+    "level": 3,
+    "levelLabel": "Mid",
+    "question": "When and why would you use useMemo()?",
+    "answerGeneral": "useMemo memoizes the result of an expensive computation, recalculating only when its dependencies change. Use it when a calculation is provably expensive (large array transforms, complex filtering), when you need a stable reference for an object/array passed as a prop to a memoized child, or when the result is used as a dependency in another hook.",
+    "answerGeneralTr": "useMemo, pahalı bir hesaplamanın sonucunu memoize eder ve yalnızca bağımlılıkları değiştiğinde yeniden hesaplar. Bir hesaplamanın kanıtlanabilir şekilde pahalı olduğunda (büyük dizi dönüşümleri, karmaşık filtreleme), memoize edilmiş bir child'a prop olarak geçirilen bir nesne/dizi için kararlı referans gerektiğinde veya sonuç başka bir hook'ta bağımlılık olarak kullanıldığında kullanın.",
+    "answerPersonal": null,
+    "detailMd": "## useMemo\n\n## Syntax\n\n```tsx\nconst memoizedValue = useMemo(() => computeExpensiveValue(a, b), [a, b]);\n```\n\nThe factory function only re-runs when `a` or `b` changes.\n\n## When to Use\n\n### 1. Expensive Computation\n\n```tsx\nconst filteredList = useMemo(\n  () => largeList.filter(item => item.name.includes(query)).sort(compareFn),\n  [largeList, query]\n);\n```\n\n### 2. Stable Reference for Memoized Children\n\n```tsx\n// Without useMemo: new array reference every render → MyList always re-renders\n// With useMemo: same reference if deps unchanged → React.memo bails out\nconst items = useMemo(() => data.map(transformItem), [data]);\n\nreturn <MyList items={items} />; // MyList = React.memo(MyList)\n```\n\n### 3. Stable Dependency for Another Hook\n\n```tsx\nconst options = useMemo(() => ({ method: 'POST', body: JSON.stringify(payload) }), [payload]);\n\nuseEffect(() => {\n  fetch('/api', options);\n}, [options]); // won't re-run unless payload changes\n```\n\n## When NOT to Use\n\n- Cheap calculations — `useMemo` itself has overhead (closure, dependency comparison).\n- As a default — don't wrap everything. Profile first.\n- Instead of fixing a structural problem — if a component always re-renders unnecessarily, fix the cause.\n\n## useMemo vs useCallback\n\n`useMemo` memoizes a **value**. `useCallback` memoizes a **function**. `useCallback(fn, deps)` is equivalent to `useMemo(() => fn, deps)`.",
+    "detailMdTr": null
+  },
+  {
+    "id": 817,
+    "topic": "react-hooks",
+    "level": 3,
+    "levelLabel": "Mid",
+    "question": "What are common use cases for useCallback?",
+    "answerGeneral": "useCallback memoizes a function reference, returning the same function object between renders unless dependencies change. Use it when passing callbacks to memoized child components (to prevent unnecessary re-renders), when a function is a dependency in useEffect or useMemo, or when passing stable event handlers to native event listeners in useEffect.",
+    "answerGeneralTr": "useCallback, bağımlılıklar değişmedikçe render'lar arasında aynı fonksiyon nesnesini döndüren bir fonksiyon referansını memoize eder. Memoize edilmiş child bileşenlere callback geçerken (gereksiz yeniden render'ları önlemek için), bir fonksiyon useEffect veya useMemo'da bağımlılık olduğunda ya da useEffect'te native event listener'lara kararlı event handler geçerken kullanın.",
+    "answerPersonal": null,
+    "detailMd": "## useCallback Use Cases\n\n## Syntax\n\n```tsx\nconst handleClick = useCallback(() => {\n  doSomething(id);\n}, [id]);\n```\n\n## 1. Memoized Child Components\n\n```tsx\nconst Row = React.memo(({ onDelete }: { onDelete: (id: string) => void }) => (\n  <button onClick={() => onDelete(rowId)}>Delete</button>\n));\n\nfunction List({ items }: { items: Item[] }) {\n  // Without useCallback: new function ref every render → Row always re-renders\n  const handleDelete = useCallback((id: string) => {\n    setItems(prev => prev.filter(i => i.id !== id));\n  }, []); // stable — no deps that change\n\n  return items.map(item => <Row key={item.id} onDelete={handleDelete} />);\n}\n```\n\n## 2. Stable useEffect Dependency\n\n```tsx\nconst fetchData = useCallback(async () => {\n  const data = await api.get(url);\n  setData(data);\n}, [url]);\n\nuseEffect(() => {\n  fetchData();\n}, [fetchData]); // re-runs only when url changes\n```\n\n## 3. Native Event Listeners\n\n```tsx\nconst handleResize = useCallback(() => {\n  setWidth(window.innerWidth);\n}, []);\n\nuseEffect(() => {\n  window.addEventListener('resize', handleResize);\n  return () => window.removeEventListener('resize', handleResize);\n}, [handleResize]); // stable ref — listener added/removed once\n```\n\n## When NOT to Use\n\n- Inline handlers that don't flow to memoized children.\n- When the child doesn't use `React.memo` — memoizing the callback achieves nothing.\n- Prematurely — profile before optimising.",
+    "detailMdTr": null
+  },
+  {
+    "id": 818,
+    "topic": "react-hooks",
+    "level": 3,
+    "levelLabel": "Mid",
+    "question": "What are the differences between React.memo() and useMemo()?",
+    "answerGeneral": "React.memo is a higher-order component that memoizes an entire component, skipping re-render if props haven't changed. useMemo is a hook that memoizes a computed value inside a component. They solve related but different problems — React.memo prevents unnecessary child renders; useMemo prevents unnecessary recomputations within a render.",
+    "answerGeneralTr": "React.memo, props değişmediyse yeniden render'ı atlayan tüm bir bileşeni memoize eden bir higher-order component'tir. useMemo ise bir bileşen içindeki hesaplanmış bir değeri memoize eden bir hook'tur. İlgili ama farklı sorunları çözerler — React.memo gereksiz child render'larını önler; useMemo bir render içindeki gereksiz yeniden hesaplamaları önler.",
+    "answerPersonal": null,
+    "detailMd": "## React.memo vs useMemo\n\n## React.memo — Memoize a Component\n\n```tsx\n// Skips re-render if props are shallowly equal\nconst Avatar = React.memo(({ user }: { user: User }) => (\n  <img src={user.avatar} alt={user.name} />\n));\n\n// Custom comparison\nconst Avatar = React.memo(\n  ({ user }) => <img src={user.avatar} />,\n  (prev, next) => prev.user.id === next.user.id // only re-render if id changes\n);\n```\n\n## useMemo — Memoize a Value\n\n```tsx\nfunction ProductList({ products, category }: Props) {\n  // Only recomputes when products or category changes\n  const filtered = useMemo(\n    () => products.filter(p => p.category === category),\n    [products, category]\n  );\n\n  return filtered.map(p => <ProductCard key={p.id} product={p} />);\n}\n```\n\n## How They Work Together\n\n```tsx\nconst ExpensiveChild = React.memo(({ items }: { items: Item[] }) => (\n  <ul>{items.map(i => <li key={i.id}>{i.name}</li>)}</ul>\n));\n\nfunction Parent({ rawData, filter }: Props) {\n  // useMemo: stable array reference\n  const items = useMemo(() => rawData.filter(i => i.type === filter), [rawData, filter]);\n\n  // React.memo: child bails out if items reference is stable\n  return <ExpensiveChild items={items} />;\n}\n```\n\n## Summary\n\n| | What it memoizes | Where |\n|---|---|---|\n| `React.memo` | Component render output | Wrap the component definition |\n| `useMemo` | Computed value | Inside a component |",
+    "detailMdTr": null
+  },
+  {
+    "id": 819,
+    "topic": "react-hooks",
+    "level": 3,
+    "levelLabel": "Mid",
+    "question": "Do Hooks replace render props and higher-order components (HOC)?",
+    "answerGeneral": "In most cases, yes. Custom hooks extract and share stateful logic more cleanly than HOCs or render props — no wrapper component, no prop drilling from the wrapper, and no component tree pollution. Some use cases for HOCs remain valid (error boundaries, legacy code integration), but hooks are the idiomatic solution for logic sharing in modern React.",
+    "answerGeneralTr": "Çoğu durumda evet. Custom hook'lar, stateful mantığı HOC veya render prop'lardan daha temiz biçimde çıkarır ve paylaşır — sarmalayıcı bileşen yok, sarmalayıcıdan prop drilling yok ve bileşen ağacı kirliliği yok. HOC'lar için bazı kullanım durumları geçerliliğini korur (error boundary'ler, legacy kod entegrasyonu), ancak hook'lar modern React'ta mantık paylaşımının deyimsel çözümüdür.",
+    "answerPersonal": null,
+    "detailMd": "## Hooks vs HOCs vs Render Props\n\n## The Problem They All Solve\n\nReusing stateful logic across components — e.g., window size, data fetching, auth state.\n\n## HOC Approach (verbose, tree pollution)\n\n```tsx\nfunction withUser<P>(Component: React.ComponentType<P & { user: User }>) {\n  return function WithUser(props: P) {\n    const user = useUserFromSomewhere();\n    return <Component {...props} user={user} />;\n  };\n}\nconst PageWithUser = withUser(Page);\n// DevTools shows: WithUser > Page — hard to debug\n```\n\n## Render Props (callback hell)\n\n```tsx\n<UserProvider render={(user) => <Page user={user} />} />\n// Nested render props create \"callback hell\" in JSX\n```\n\n## Custom Hook (clean)\n\n```tsx\nfunction useUser() {\n  const [user, setUser] = useState<User | null>(null);\n  useEffect(() => { fetchCurrentUser().then(setUser); }, []);\n  return user;\n}\n\nfunction Page() {\n  const user = useUser(); // no wrapper, no extra component\n  return <h1>Hello, {user?.name}</h1>;\n}\n```\n\n## When HOCs Still Make Sense\n\n- **Error boundaries** — still require class components; HOC wrapping is idiomatic.\n- **Library interop** — some libraries (react-redux's `connect`, older Formik) expose HOC APIs.\n- **Code requiring class lifecycle** — rare in modern React.\n\n## Rule of Thumb\n\nDefault to a custom hook. Reach for a HOC only when the consuming component needs no API changes and you're wrapping for cross-cutting concerns.",
+    "detailMdTr": null
+  },
+  {
+    "id": 820,
+    "topic": "react-hooks",
+    "level": 3,
+    "levelLabel": "Mid",
+    "question": "Do React Hooks cover all use cases for class components?",
+    "answerGeneral": "Almost. Hooks cover state, lifecycle, context, refs, and performance optimisation. The two remaining gaps are Error Boundaries (componentDidCatch / getDerivedStateFromError) and getSnapshotBeforeUpdate — both still require class components. In practice this means keeping one ErrorBoundary class component per project.",
+    "answerGeneralTr": "Neredeyse. Hook'lar state, lifecycle, context, ref ve performans optimizasyonunu karşılar. Kalan iki boşluk: Error Boundary'ler (componentDidCatch / getDerivedStateFromError) ve getSnapshotBeforeUpdate — her ikisi de hâlâ class bileşen gerektirir. Pratikte bu, proje başına bir ErrorBoundary class bileşeni tutmak anlamına gelir.",
+    "answerPersonal": null,
+    "detailMd": "## What Hooks Don't Cover\n\n## 1. Error Boundaries\n\n`componentDidCatch` and `getDerivedStateFromError` have no hook equivalent — you must use a class component:\n\n```tsx\nclass ErrorBoundary extends React.Component<\n  { fallback: React.ReactNode; children: React.ReactNode },\n  { hasError: boolean }\n> {\n  state = { hasError: false };\n\n  static getDerivedStateFromError() {\n    return { hasError: true };\n  }\n\n  componentDidCatch(error: Error, info: React.ErrorInfo) {\n    logError(error, info);\n  }\n\n  render() {\n    return this.state.hasError ? this.props.fallback : this.props.children;\n  }\n}\n```\n\nLibraries like `react-error-boundary` wrap this into a convenient component so you never have to write it yourself.\n\n## 2. getSnapshotBeforeUpdate\n\nCaptures a value (e.g., scroll position) from the DOM before React applies updates. No hook runs at the exact same moment. `useLayoutEffect` is the closest alternative but runs after the DOM update.\n\n## Hook Coverage Matrix\n\n| Class Feature | Hook Equivalent |\n|---|---|\n| `this.state` / `setState` | `useState` / `useReducer` |\n| `componentDidMount` | `useEffect(() => {}, [])` |\n| `componentDidUpdate` | `useEffect(() => {}, [deps])` |\n| `componentWillUnmount` | `useEffect` cleanup return |\n| `shouldComponentUpdate` | `React.memo` |\n| `getDerivedStateFromProps` | Derive in render body |\n| `getSnapshotBeforeUpdate` | Partial via `useLayoutEffect` |\n| `componentDidCatch` | **No equivalent — class required** |",
+    "detailMdTr": null
+  }
+]

@@ -376,5 +376,95 @@
     "definition": "Web Workers run JavaScript in a separate thread from the main (UI) thread. Because JavaScript is single-threaded by default, CPU-heavy work blocks the event loop and freezes the UI. Web Workers solve this by offloading computation. Workers communicate with the main thread via `postMessage` / `onmessage` (using the structured-clone algorithm or Transferable objects for zero-copy buffer transfers). Limitations: no DOM access, no `window` or `document`. They can use `fetch`, `IndexedDB`, `WebSocket`, and `WebAssembly`. The `comlink` library wraps workers in a Proxy, eliminating most message-passing boilerplate.",
     "codeExample": "// main.js\nconst worker = new Worker('/worker.js');\nworker.postMessage({ data: largeArray });\nworker.onmessage = (e) => console.log('Result:', e.data.result);\n\n// worker.js\nself.onmessage = (e) => {\n  const result = e.data.data.reduce((a, b) => a + b, 0);\n  self.postMessage({ result });\n};",
     "relatedSlugs": ["event-loop"]
+  },
+  {
+    "slug": "css-specificity",
+    "label": "CSS Specificity",
+    "topic": "css",
+    "tooltip": "The algorithm that determines which CSS rule wins when multiple rules target the same element.",
+    "definition": "Specificity is calculated as a three-column value (A, B, C): A counts ID selectors, B counts class/attribute/pseudo-class selectors, and C counts element/pseudo-element selectors. Columns are compared left-to-right — 1,0,0 always beats 0,99,99. Inline styles beat all stylesheet rules; `!important` overrides everything. When specificity is equal, the later rule in source order wins. Keeping specificity flat (all selectors at 0,1,0) is the goal of methodologies like BEM.",
+    "codeExample": "/* (A, B, C) */\na            { color: blue; }  /* 0,0,1 */\n.nav a       { color: green; } /* 0,1,1 — wins */\n#sidebar a   { color: red; }   /* 1,0,1 — wins */\n\n/* :where() has zero specificity — easy to override */\n:where(.card) a { color: gray; } /* 0,0,0 */",
+    "relatedSlugs": ["bem", "css-box-model"]
+  },
+  {
+    "slug": "css-box-model",
+    "label": "CSS Box Model",
+    "topic": "css",
+    "tooltip": "The rectangular box wrapping every HTML element, consisting of content, padding, border, and margin.",
+    "definition": "Every HTML element generates a rectangular box with four layers from inside out: content area, padding (space between content and border), border, and margin (space outside the border). By default `box-sizing: content-box` adds padding and border on top of the declared width. Switching to `box-sizing: border-box` makes width include padding and border, which is far more predictable — it's why most CSS resets apply it globally. Vertical margins between adjacent block elements collapse to the larger of the two values.",
+    "codeExample": "*, *::before, *::after { box-sizing: border-box; }\n\n.card {\n  width: 300px;   /* includes padding + border */\n  padding: 1rem;\n  border: 1px solid;\n  margin-bottom: 1.5rem;\n}",
+    "relatedSlugs": ["block-formatting-context"]
+  },
+  {
+    "slug": "flexbox",
+    "label": "Flexbox",
+    "topic": "css",
+    "tooltip": "A one-dimensional CSS layout model for distributing space and aligning items along a single axis.",
+    "definition": "Flexbox (Flexible Box Layout) arranges items along a main axis (row or column) and a cross axis. The container controls alignment with `justify-content` (main axis) and `align-items` (cross axis). Flex items can grow (`flex-grow`), shrink (`flex-shrink`), and set a base size (`flex-basis`). Flexbox is ideal for components — nav bars, button groups, card footers — and for centering. For two-dimensional page layouts, CSS Grid is the better tool. The two are complementary: Grid for layout, Flexbox for components.",
+    "codeExample": ".nav {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  gap: 1rem;\n}\n\n/* Center anything */\n.centered {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}",
+    "relatedSlugs": ["css-grid", "block-formatting-context"]
+  },
+  {
+    "slug": "css-grid",
+    "label": "CSS Grid",
+    "topic": "css",
+    "tooltip": "A two-dimensional CSS layout system for defining rows and columns simultaneously.",
+    "definition": "CSS Grid is the browser's native two-dimensional layout system. You define rows and columns on a grid container, then place items into cells using `grid-column` and `grid-row`. `grid-template-areas` gives named regions for readable layouts. The `fr` unit distributes remaining space proportionally. `auto-fill` and `auto-fit` with `minmax()` create responsive grids without media queries. Grid is ideal for page-level layouts and any design where items must align across both axes.",
+    "codeExample": ".layout {\n  display: grid;\n  grid-template-columns: 240px 1fr;\n  grid-template-rows: auto 1fr auto;\n  grid-template-areas:\n    'sidebar header'\n    'sidebar main'\n    'sidebar footer';\n  min-height: 100vh;\n}\n\n/* Responsive card grid — no media queries */\n.cards {\n  display: grid;\n  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));\n  gap: 1.5rem;\n}",
+    "relatedSlugs": ["flexbox"]
+  },
+  {
+    "slug": "stacking-context",
+    "label": "Stacking Context",
+    "topic": "css",
+    "tooltip": "An isolated layer in which z-index values only compete with each other, not the rest of the page.",
+    "definition": "A stacking context is a self-contained painting layer. z-index values inside it only compete with siblings within the same context — a z-index of 9999 inside a context with z-index 1 will still be painted below an element in a context with z-index 2. New stacking contexts are created by: `position` + `z-index` (non-auto), `opacity < 1`, any `transform`, `filter`, `isolation: isolate`, or `will-change`. This is why React portals render modals at the `<body>` level — to escape any stacking context a parent component might create.",
+    "codeExample": "/* isolation: isolate — cleanest way to create a context */\n.card { isolation: isolate; }\n\n/* Now .card's children can use z-index freely */\n/* without affecting elements outside .card */\n.card__badge { position: absolute; z-index: 10; }",
+    "relatedSlugs": ["css-specificity"]
+  },
+  {
+    "slug": "css-custom-properties",
+    "label": "CSS Custom Properties",
+    "topic": "css",
+    "tooltip": "Native CSS variables declared with -- that cascade, inherit, and can be changed at runtime.",
+    "definition": "CSS custom properties (also called CSS variables) are declared with `--name: value` and accessed via `var(--name, fallback)`. Unlike preprocessor variables, they exist in the browser at runtime — they cascade and inherit through the DOM, can be overridden within media queries or scoped to a component, and can be read and written via JavaScript. This makes them the foundation for runtime theming (dark mode), design token systems, and component-level style customisation without a build step.",
+    "codeExample": ":root {\n  --color-primary: #0070f3;\n  --spacing-4: 1rem;\n}\n\n@media (prefers-color-scheme: dark) {\n  :root { --color-primary: #60a5fa; }\n}\n\n.button {\n  background: var(--color-primary);\n  padding: var(--spacing-4);\n}\n\n// JS: update at runtime\ndocument.documentElement.style\n  .setProperty('--color-primary', '#ff0000');",
+    "relatedSlugs": ["css-specificity", "bem"]
+  },
+  {
+    "slug": "pseudo-element",
+    "label": "Pseudo-element",
+    "topic": "css",
+    "tooltip": "A CSS keyword (::before, ::after, etc.) that styles a specific part of an element without extra HTML.",
+    "definition": "Pseudo-elements target a specific sub-part of an element. `::before` and `::after` insert generated content as the element's first and last child — they require a `content` property (can be an empty string). `::first-line` and `::first-letter` style the first rendered line or character. `::placeholder` styles input placeholder text. `::marker` styles list item bullets or numbers. `::selection` styles highlighted text. CSS3 uses the `::` double-colon notation to distinguish from pseudo-classes (`:hover`, `:focus`), though single-colon still works for legacy pseudo-elements.",
+    "codeExample": "/* Clearfix */\n.clearfix::after { content: ''; display: block; clear: both; }\n\n/* Expand links for print */\n@media print {\n  a::after { content: ' (' attr(href) ')'; }\n}\n\n/* Decorative */\n.section-title::before {\n  content: '';\n  display: inline-block;\n  width: 4px;\n  height: 1em;\n  background: var(--color-primary);\n  margin-right: 0.5rem;\n}",
+    "relatedSlugs": ["css-specificity"]
+  },
+  {
+    "slug": "bem",
+    "label": "BEM",
+    "topic": "css",
+    "tooltip": "Block Element Modifier — a CSS naming convention that keeps specificity flat and component styles predictable.",
+    "definition": "BEM is a naming methodology for CSS classes: Block (`card`), Element (`card__title`), Modifier (`card--featured`). Every selector is a single class at specificity 0,1,0 — no nesting, no IDs, no tag selectors. This eliminates specificity wars: any class can override any other with a single-class selector. Elements are tied to their block via double underscore (`__`), and variants use double hyphen (`--`). BEM works well with Sass nesting using `&` to write `.card__title` as `&__title` inside `.card`. Modern CSS Modules and Tailwind solve the same scoping problem differently — BEM remains relevant in design systems and legacy codebases.",
+    "codeExample": "/* BEM naming */\n.card { }                  /* Block */\n.card__title { }           /* Element */\n.card__image { }           /* Element */\n.card--featured { }        /* Block modifier */\n.card__title--large { }    /* Element modifier */\n\n/* SCSS shorthand */\n.card {\n  &__title { font-size: 1.25rem; }\n  &--featured { border: 2px solid gold; }\n}",
+    "relatedSlugs": ["css-specificity", "stacking-context"]
+  },
+  {
+    "slug": "css-preprocessor",
+    "label": "CSS Preprocessor",
+    "topic": "css",
+    "tooltip": "A tool that extends CSS with variables, nesting, and mixins, then compiles to plain CSS.",
+    "definition": "A CSS preprocessor adds programming constructs — variables, nesting, mixins, functions, loops, and partials — to CSS and compiles the result to standard CSS. Sass (SCSS syntax) is the most widely used; Less and Stylus are alternatives. Key benefits: design tokens defined once as variables, component styles co-located via nesting, reusable patterns as mixins, and large codebases split into maintainable partial files. The main downside is a required build step and potential for specificity bloat from excessive nesting. Native CSS custom properties, `@layer`, and CSS nesting (now in all modern browsers) have reduced the gap, making preprocessors optional for many new projects.",
+    "codeExample": "// SCSS\n$primary: #0070f3;\n\n@mixin flex-center {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n\n.hero {\n  @include flex-center;\n  background: $primary;\n\n  &__title { font-size: 2rem; color: #fff; }\n}",
+    "relatedSlugs": ["css-custom-properties", "bem"]
+  },
+  {
+    "slug": "block-formatting-context",
+    "label": "Block Formatting Context",
+    "topic": "css",
+    "tooltip": "An isolated layout region where block boxes are arranged and floats are contained.",
+    "definition": "A Block Formatting Context (BFC) is a self-contained layout region. Key properties: it contains its floated children (preventing parent collapse), it doesn't overlap floats from siblings, and its vertical margins don't collapse with those of its children. A new BFC is created by: `overflow` (any value except `visible`), `display: flow-root` (the cleanest trigger), `float`, `position: absolute/fixed`, `display: flex/grid/inline-flex/inline-grid`. Understanding BFCs explains why `overflow: hidden` on a parent fixes float collapse, and why flex/grid containers don't suffer from it at all.",
+    "codeExample": "/* Three ways to create a BFC */\n\n/* 1. Cleanest — no side effects */\n.container { display: flow-root; }\n\n/* 2. Common — clips overflow */\n.container { overflow: hidden; }\n\n/* 3. Flex is implicitly a BFC */\n.container { display: flex; }",
+    "relatedSlugs": ["css-box-model", "flexbox"]
   }
 ]

@@ -1,0 +1,50 @@
+[
+  {
+    "id": 801,
+    "topic": "react-hooks",
+    "level": 1,
+    "levelLabel": "Entry",
+    "question": "What are React Hooks?",
+    "answerGeneral": "React Hooks are functions that let you use state and other React features inside functional components. Introduced in React 16.8, they replaced the need for class components in most cases. Core hooks include useState, useEffect, useContext, useRef, useMemo, and useCallback.",
+    "answerGeneralTr": "React Hook'ları, fonksiyonel bileşenlerde state ve diğer React özelliklerini kullanmanızı sağlayan fonksiyonlardır. React 16.8 ile tanıtılan Hook'lar, çoğu durumda class bileşenlerine olan ihtiyacı ortadan kaldırdı. Temel hook'lar: useState, useEffect, useContext, useRef, useMemo ve useCallback.",
+    "answerPersonal": null,
+    "detailMd": "## React Hooks\n\nHooks are plain JavaScript functions with two rules:\n1. **Only call at the top level** — never inside loops, conditions, or nested functions.\n2. **Only call from React functions** — functional components or custom hooks.\n\n## Built-in Hooks\n\n```tsx\n// State\nuseState()       // local component state\nuseReducer()     // complex state logic\n\n// Side effects\nuseEffect()      // data fetching, subscriptions, DOM mutations\nuseLayoutEffect() // synchronous DOM measurements\n\n// Refs\nuseRef()         // mutable ref / DOM access\nuseImperativeHandle() // expose methods to parent\n\n// Context\nuseContext()     // consume context without Consumer wrapper\n\n// Performance\nuseMemo()        // memoize expensive computation\nuseCallback()    // memoize function reference\n\n// React 18+\nuseTransition()  // mark updates as non-urgent\nuseDeferredValue() // defer re-rendering heavy parts\nuseSyncExternalStore() // subscribe to external stores\nuseId()          // generate stable unique IDs\n```\n\n## Why Hooks?\n\nBefore hooks, stateful logic was tied to class components — hard to reuse, verbose, and `this` caused constant confusion. Hooks let you extract stateful logic into reusable functions (custom hooks) that can be shared across components without HOCs or render props.",
+    "detailMdTr": null
+  },
+  {
+    "id": 802,
+    "topic": "react-hooks",
+    "level": 1,
+    "levelLabel": "Entry",
+    "question": "What is useState() in React?",
+    "answerGeneral": "useState is a hook that adds local state to a functional component. It returns a tuple: the current state value and a setter function. Calling the setter triggers a re-render with the new value. State updates are asynchronous and batched — the new value is not available immediately after calling the setter.",
+    "answerGeneralTr": "useState, fonksiyonel bir bileşene yerel state ekleyen bir hook'tur. Mevcut state değeri ve bir setter fonksiyonundan oluşan bir tuple döndürür. Setter çağrıldığında bileşen yeni değerle yeniden render edilir. State güncellemeleri asenkrondur ve toplu işlenir — setter çağrıldıktan hemen sonra yeni değer mevcut değildir.",
+    "answerPersonal": null,
+    "detailMd": "## useState\n\n## Basic Usage\n\n```tsx\nconst [count, setCount] = useState(0);\nconst [user, setUser]   = useState<User | null>(null);\nconst [open, setOpen]   = useState(false);\n```\n\n## Functional Updates\n\nWhen the new state depends on the previous, use the functional form to avoid stale closures:\n\n```tsx\n// Unsafe — may read stale count in concurrent mode\nsetCount(count + 1);\n\n// Safe — always gets the latest value\nsetCount(prev => prev + 1);\n```\n\n## Lazy Initialisation\n\nIf the initial value is expensive to compute, pass a function — it runs only on the first render:\n\n```tsx\n// Bad — JSON.parse runs on every render\nconst [data, setData] = useState(JSON.parse(localStorage.getItem('data') ?? '{}'));\n\n// Good — runs once\nconst [data, setData] = useState(() => JSON.parse(localStorage.getItem('data') ?? '{}'));\n```\n\n## Object State\n\nReact does not deep-merge object state — you must spread the previous state manually:\n\n```tsx\nconst [form, setForm] = useState({ name: '', email: '' });\n\n// Correct\nsetForm(prev => ({ ...prev, name: 'Aaron' }));\n\n// Wrong — loses email field\nsetForm({ name: 'Aaron' });\n```\n\n## Batching (React 18)\n\nReact 18 batches all state updates automatically, even in async callbacks — multiple `setState` calls in the same event only cause one re-render.",
+    "detailMdTr": null
+  },
+  {
+    "id": 803,
+    "topic": "react-hooks",
+    "level": 1,
+    "levelLabel": "Entry",
+    "question": "How to call a loading function with React useEffect only once?",
+    "answerGeneral": "Pass an empty dependency array [] as the second argument to useEffect. This tells React to run the effect only after the first render, equivalent to componentDidMount. Without the array, the effect runs after every render; with specific dependencies, it runs when those values change.",
+    "answerGeneralTr": "useEffect'e ikinci argüman olarak boş bir bağımlılık dizisi [] geçin. Bu, React'a efekti yalnızca ilk render sonrasında çalıştırmasını söyler; componentDidMount'a eşdeğerdir. Dizi olmadan efekt her render sonrası çalışır; belirli bağımlılıklarla ise o değerler değiştiğinde çalışır.",
+    "answerPersonal": null,
+    "detailMd": "## useEffect Dependency Array\n\n```tsx\n// Runs after EVERY render\nuseEffect(() => { console.log('render'); });\n\n// Runs ONCE after initial render (componentDidMount)\nuseEffect(() => {\n  fetchData();\n}, []);\n\n// Runs when userId changes (componentDidUpdate)\nuseEffect(() => {\n  fetchUser(userId);\n}, [userId]);\n```\n\n## Fetching on Mount\n\n```tsx\nuseEffect(() => {\n  let cancelled = false;\n\n  async function load() {\n    const data = await fetchPosts();\n    if (!cancelled) setPosts(data);\n  }\n\n  load();\n\n  // Cleanup — prevent setState on unmounted component\n  return () => { cancelled = true; };\n}, []);\n```\n\n## React StrictMode Double Invocation\n\nIn development with StrictMode, React 18 intentionally runs effects **twice** (mount → unmount → mount) to surface missing cleanup functions. This only happens in development — production runs once.\n\n```tsx\nuseEffect(() => {\n  const sub = subscribe(id);\n  return () => sub.unsubscribe(); // cleanup is required\n}, [id]);\n```\n\n## ESLint Rule\n\nThe `react-hooks/exhaustive-deps` ESLint rule warns when dependencies are missing. Never silence it by adding `// eslint-disable` — fix the actual dependency or restructure the logic.",
+    "detailMdTr": null
+  },
+  {
+    "id": 804,
+    "topic": "react-hooks",
+    "level": 1,
+    "levelLabel": "Entry",
+    "question": "How to access DOM elements in React?",
+    "answerGeneral": "Use the useRef hook to create a ref object, then pass it to the ref prop of a JSX element. After the component mounts, ref.current points to the underlying DOM node. This lets you call imperative DOM APIs like focus(), scrollIntoView(), or read measurements.",
+    "answerGeneralTr": "Bir ref nesnesi oluşturmak için useRef hook'unu kullanın, ardından bir JSX elementinin ref prop'una geçirin. Bileşen mount edildikten sonra ref.current, temel DOM düğümünü işaret eder. Bu sayede focus(), scrollIntoView() gibi zorunlu DOM API'lerini çağırabilir veya ölçümleri okuyabilirsiniz.",
+    "answerPersonal": null,
+    "detailMd": "## DOM Access with useRef\n\n## Basic Pattern\n\n```tsx\nimport { useRef, useEffect } from 'react';\n\nfunction SearchInput() {\n  const inputRef = useRef<HTMLInputElement>(null);\n\n  useEffect(() => {\n    inputRef.current?.focus(); // auto-focus on mount\n  }, []);\n\n  return <input ref={inputRef} type=\"search\" />;\n}\n```\n\n## Common Use Cases\n\n```tsx\n// Scroll to element\nconst bottomRef = useRef<HTMLDivElement>(null);\nbottomRef.current?.scrollIntoView({ behavior: 'smooth' });\n\n// Read DOM measurements\nconst boxRef = useRef<HTMLDivElement>(null);\nconst width = boxRef.current?.getBoundingClientRect().width;\n\n// Media control\nconst videoRef = useRef<HTMLVideoElement>(null);\nvideoRef.current?.play();\n```\n\n## Callback Refs\n\nFor dynamic elements or when you need to react to the ref being set:\n\n```tsx\nfunction MeasuredBox() {\n  const [height, setHeight] = useState(0);\n\n  const measuredRef = useCallback((node: HTMLDivElement | null) => {\n    if (node) setHeight(node.getBoundingClientRect().height);\n  }, []);\n\n  return <div ref={measuredRef}>Content</div>;\n}\n```\n\n## Forwarding Refs to Custom Components\n\n```tsx\nconst FancyInput = forwardRef<HTMLInputElement, Props>((props, ref) => (\n  <input ref={ref} {...props} />\n));\n\n// Parent\nconst ref = useRef<HTMLInputElement>(null);\n<FancyInput ref={ref} />\n```",
+    "detailMdTr": null
+  }
+]

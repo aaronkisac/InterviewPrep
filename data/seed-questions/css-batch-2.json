@@ -1,0 +1,110 @@
+[
+  {
+    "id": 706,
+    "topic": "css",
+    "level": 2,
+    "levelLabel": "Junior",
+    "question": "Explain the three main ways to apply CSS styles to a web page.",
+    "answerGeneral": "CSS can be applied inline (style attribute on an element), internally (in a <style> block in the <head>), or externally (via a <link> tag pointing to a .css file). External stylesheets are preferred for maintainability and caching.",
+    "answerGeneralTr": "CSS üç şekilde uygulanabilir: satır içi (elementin style niteliği), dahili (<head> içindeki <style> bloğu) ve harici (<link> etiketiyle .css dosyasına bağlantı). Harici stil sayfaları bakım kolaylığı ve önbellekleme için tercih edilir.",
+    "answerPersonal": null,
+    "detailMd": "## Three Ways to Apply CSS\n\n### 1. Inline Styles\n\n```html\n<p style=\"color: red; font-size: 1rem;\">Text</p>\n```\n\nHighest specificity — overrides everything except `!important`. Useful for dynamic styles set via JavaScript. Avoid for static styles as it mixes concerns and is hard to maintain.\n\n### 2. Internal (Embedded) Stylesheet\n\n```html\n<head>\n  <style>\n    p { color: red; }\n  </style>\n</head>\n```\n\nScoped to a single HTML file. Useful for single-page documents, email templates, or critical CSS inlining for performance. Not cacheable separately.\n\n### 3. External Stylesheet\n\n```html\n<head>\n  <link rel=\"stylesheet\" href=\"/styles/main.css\">\n</head>\n```\n\nThe preferred approach for any real project:\n- **Cached** by the browser on subsequent visits.\n- **Reusable** across multiple HTML pages.\n- **Maintainable** — style changes in one place.\n- Supports `media` attribute to load conditionally: `<link rel=\"stylesheet\" media=\"print\" href=\"print.css\">`.\n\n## Performance Note\n\nCSS is render-blocking — the browser won't paint until it has parsed all linked stylesheets. Keep stylesheets small, use `rel=\"preload\"` for critical CSS, and consider inlining above-the-fold styles for first paint.",
+    "detailMdTr": null
+  },
+  {
+    "id": 707,
+    "topic": "css",
+    "level": 2,
+    "levelLabel": "Junior",
+    "question": "What is a CSS preprocessor and why use one?",
+    "answerGeneral": "A CSS preprocessor extends CSS with features like variables, nesting, mixins, and functions, then compiles down to plain CSS. Using one reduces repetition, improves code organisation, and enables reusable style patterns. Popular options include Sass, Less, and Stylus.",
+    "answerGeneralTr": "CSS ön işleyici; değişkenler, iç içe yazım, mixin'ler ve fonksiyonlar gibi özelliklerle CSS'i genişleten ve düz CSS'e derlenen bir araçtır. Tekrarı azaltır, kod organizasyonunu iyileştirir ve yeniden kullanılabilir stil kalıpları sağlar. Sass, Less ve Stylus en yaygın seçeneklerdir.",
+    "answerPersonal": null,
+    "detailMd": "## CSS Preprocessors\n\nA preprocessor adds programming constructs to CSS and compiles the result to standard CSS that browsers understand.\n\n## Key Features (Sass/SCSS example)\n\n```scss\n// Variables\n$primary: #0070f3;\n$radius: 4px;\n\n// Nesting\n.card {\n  border-radius: $radius;\n\n  &:hover { box-shadow: 0 4px 12px rgba(0,0,0,.1); }\n\n  &__title { font-size: 1.25rem; }\n}\n\n// Mixin (reusable block)\n@mixin flex-center {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n\n.hero { @include flex-center; }\n\n// Partials — split across files, imported into one\n@use 'tokens/colors';\n@use 'components/button';\n```\n\n## Why Use One?\n\n- **DRY** — define a color or spacing value once, reuse everywhere.\n- **Nesting** — keeps component styles grouped and readable.\n- **Partials** — split large stylesheets into maintainable files.\n- **Functions and loops** — generate utility classes or theme scales programmatically.\n\n## Modern Alternative\n\nWith native CSS custom properties (`--variable`) and `@layer`, many preprocessor benefits are now available without a build step. Tailwind CSS takes a different approach: utility classes generated at build time. Preprocessors remain common in legacy codebases and component libraries.",
+    "detailMdTr": null
+  },
+  {
+    "id": 708,
+    "topic": "css",
+    "level": 2,
+    "levelLabel": "Junior",
+    "question": "What is Sass?",
+    "answerGeneral": "Sass (Syntactically Awesome Style Sheets) is the most widely used CSS preprocessor. It adds variables, nesting, mixins, inheritance, and functions to CSS. It comes in two syntaxes: the original indented syntax (.sass) and the more popular SCSS syntax (.scss) which is a superset of CSS.",
+    "answerGeneralTr": "Sass (Syntactically Awesome Style Sheets), en yaygın kullanılan CSS ön işleyicisidir. CSS'e değişkenler, iç içe yazım, mixin'ler, kalıtım ve fonksiyonlar ekler. İki sözdizimi vardır: orijinal girintili sözdizimi (.sass) ve CSS'in üst kümesi olan daha popüler SCSS sözdizimi (.scss).",
+    "answerPersonal": null,
+    "detailMd": "## Sass Overview\n\nSass is compiled by the Dart Sass compiler (the current official implementation) into plain CSS.\n\n## Two Syntaxes\n\n```sass\n// .sass (indented — no braces or semicolons)\n.button\n  background: blue\n  &:hover\n    background: darkblue\n```\n\n```scss\n// .scss (superset of CSS — most common)\n.button {\n  background: blue;\n  &:hover { background: darkblue; }\n}\n```\n\n## Core Features\n\n```scss\n// @use — module system (replaces @import)\n@use 'sass:math';\n@use 'tokens' as t;\n\n// Variables\n$spacing-4: 1rem;\n\n// Mixins with arguments\n@mixin respond-to($bp) {\n  @media (min-width: $bp) { @content; }\n}\n\n.hero {\n  padding: $spacing-4;\n  @include respond-to(768px) { padding: $spacing-4 * 2; }\n}\n\n// @extend — share a set of declarations\n%visually-hidden {\n  position: absolute;\n  width: 1px;\n  height: 1px;\n  overflow: hidden;\n  clip-path: inset(50%);\n}\n.sr-only { @extend %visually-hidden; }\n```\n\n## Current Status\n\nSass is still widely used in large codebases and UI libraries. However, many modern projects favour CSS custom properties + PostCSS or Tailwind, which reduce the need for a full preprocessor.",
+    "detailMdTr": null
+  },
+  {
+    "id": 709,
+    "topic": "css",
+    "level": 2,
+    "levelLabel": "Junior",
+    "question": "Describe floats and how they work.",
+    "answerGeneral": "The float property removes an element from the normal document flow and shifts it left or right, allowing inline content to wrap around it. Originally used for text wrapping images, floats were widely used for layouts before Flexbox and Grid. They require clearfix techniques to prevent parent container collapse.",
+    "answerGeneralTr": "float özelliği, bir elementi normal belge akışından çıkararak sola veya sağa kaydırır ve diğer içeriklerin etrafını sarmasına olanak tanır. Başlangıçta metin-resim sarmaları için kullanılan float'lar, Flexbox ve Grid öncesinde sayfa düzeni için yaygınca kullanıldı. Parent container'ın çökmesini önlemek için clearfix teknikleri gerektirir.",
+    "answerPersonal": null,
+    "detailMd": "## CSS Floats\n\n`float: left | right | none` removes an element from normal flow and shifts it to the side, letting inline content wrap around it.\n\n```css\n/* Classic image float */\n.article img {\n  float: left;\n  margin: 0 1rem 1rem 0;\n}\n```\n\n## The Collapse Problem\n\nBecause floated elements are out of normal flow, a parent containing only floated children collapses to zero height:\n\n```html\n<div class=\"container\">        <!-- collapses! -->\n  <div style=\"float:left\">A</div>\n  <div style=\"float:left\">B</div>\n</div>\n```\n\n## Clearfix Solutions\n\n```css\n/* Modern clearfix */\n.clearfix::after {\n  content: '';\n  display: block;\n  clear: both;\n}\n\n/* Alternative — overflow triggers a new BFC */\n.container { overflow: hidden; }\n\n/* Best alternative — just use Flexbox */\n.container { display: flex; gap: 1rem; }\n```\n\n## When Floats Still Apply\n\nFloats are still the correct tool for **text wrapping around images** — something Flexbox and Grid don't replicate. The `shape-outside` property even lets you wrap text around non-rectangular shapes:\n\n```css\n.pull-quote {\n  float: left;\n  shape-outside: circle(50%);\n}\n```\n\nFor page layouts, always prefer Flexbox or Grid.",
+    "detailMdTr": null
+  },
+  {
+    "id": 710,
+    "topic": "css",
+    "level": 2,
+    "levelLabel": "Junior",
+    "question": "What's the difference between a relative, fixed, absolute and statically positioned element?",
+    "answerGeneral": "Static is the default — elements follow normal flow. Relative offsets an element from its normal position without removing it from flow. Absolute removes the element from flow and positions it relative to its nearest positioned ancestor. Fixed positions relative to the viewport and stays during scroll. Sticky is a hybrid that acts as relative until a scroll threshold, then becomes fixed.",
+    "answerGeneralTr": "Static varsayılandır — elementler normal akışı izler. Relative, elementi normal konumundan akıştan çıkarmadan kaydırır. Absolute, elementi akıştan çıkarıp en yakın konumlandırılmış ataya göre yerleştirir. Fixed, görüntü alanına göre konumlandırır ve kaydırma sırasında sabit kalır. Sticky ise kaydırma eşiğine kadar relative, sonrasında fixed gibi davranır.",
+    "answerPersonal": null,
+    "detailMd": "## CSS Positioning\n\n### static (default)\n\nElement follows normal document flow. `top`, `left`, `right`, `bottom`, and `z-index` have **no effect**.\n\n### relative\n\n```css\n.badge {\n  position: relative;\n  top: -4px;   /* offsets from its natural position */\n               /* original space is still reserved */\n}\n```\n\nAlso creates a **positioning context** for absolutely positioned children.\n\n### absolute\n\n```css\n.parent { position: relative; } /* establishes context */\n\n.tooltip {\n  position: absolute;\n  top: 100%;   /* relative to .parent, not the viewport */\n  left: 0;\n               /* removed from flow — no space reserved */\n}\n```\n\nIf no positioned ancestor exists, it positions relative to the initial containing block (viewport).\n\n### fixed\n\n```css\n.sticky-nav {\n  position: fixed;\n  top: 0;\n  width: 100%;\n  /* stays on screen during scroll */\n}\n```\n\n### sticky\n\n```css\nth {\n  position: sticky;\n  top: 0;  /* acts relative until scrolled to this offset, then sticks */\n}\n```\n\n## Key Rule\n\n`absolute`, `fixed`, and `sticky` create a new **stacking context**. Always set a `position` other than `static` on a parent before using `absolute` children.",
+    "detailMdTr": null
+  },
+  {
+    "id": 711,
+    "topic": "css",
+    "level": 2,
+    "levelLabel": "Junior",
+    "question": "What is DOM (Document Object Model) and how is it linked to CSS?",
+    "answerGeneral": "The DOM is a tree-like in-memory representation of an HTML document. CSS is linked through the CSSOM (CSS Object Model), which the browser builds from stylesheets. The browser combines the DOM and CSSOM to create the render tree, which determines what gets painted on screen.",
+    "answerGeneralTr": "DOM (Belge Nesne Modeli), bir HTML belgesinin bellek içindeki ağaç yapısıdır. CSS, tarayıcının stil sayfalarından oluşturduğu CSSOM (CSS Nesne Modeli) aracılığıyla bağlanır. Tarayıcı, DOM ve CSSOM'u birleştirerek ekranda neyin çizileceğini belirleyen render ağacını oluşturur.",
+    "answerPersonal": null,
+    "detailMd": "## DOM, CSSOM, and the Render Tree\n\n## Browser Rendering Pipeline\n\n```\nHTML bytes → DOM\nCSS bytes  → CSSOM\n              ↓\n         Render Tree  (DOM + CSSOM, visible nodes only)\n              ↓\n           Layout     (calculate sizes & positions)\n              ↓\n           Paint      (draw pixels)\n              ↓\n        Composite     (layer assembly, GPU)\n```\n\n## DOM\n\nThe DOM is a live tree of objects representing every HTML element. JavaScript can read and modify it:\n\n```js\ndocument.querySelector('.card').classList.add('active');\n```\n\n## CSSOM\n\nThe browser parses all CSS (external, internal, inline) into the CSSOM — a matching tree of style rules. This process is **render-blocking**: parsing stops until all CSS is loaded.\n\n## Render Tree\n\nThe render tree combines DOM nodes with their computed styles, excluding invisible elements (`display: none`, `<head>`, `<script>`). Each node in the render tree is called a **render object**.\n\n## Performance Implications\n\n```js\n// Triggers reflow (layout recalculation) — expensive\nelement.style.width = '500px';\nconst h = element.offsetHeight; // forces sync layout\n\n// Batch DOM writes to avoid layout thrashing\nrequestAnimationFrame(() => {\n  element.style.transform = 'translateX(100px)'; // compositing only\n});\n```",
+    "detailMdTr": null
+  },
+  {
+    "id": 712,
+    "topic": "css",
+    "level": 2,
+    "levelLabel": "Junior",
+    "question": "Describe pseudo-elements and discuss what they are used for.",
+    "answerGeneral": "Pseudo-elements (prefixed with ::) let you style specific parts of an element without adding extra HTML. Common ones include ::before and ::after (insert generated content), ::first-line and ::first-letter (style the first line/letter of text), and ::placeholder (style input placeholder text). CSS3 uses :: notation, though single : still works for backwards compatibility.",
+    "answerGeneralTr": "Pseudo-elementler (:: öneki ile) ekstra HTML eklemeden bir elementin belirli bölümlerini stillendirmenizi sağlar. Yaygınları: ::before ve ::after (üretilen içerik ekler), ::first-line ve ::first-letter (metnin ilk satırını/harfini stillendirir), ::placeholder (input placeholder metnini stillendirir). CSS3'te :: gösterimi kullanılır, ancak geriye dönük uyumluluk için : hâlâ çalışır.",
+    "answerPersonal": null,
+    "detailMd": "## Pseudo-Elements\n\nPseudo-elements target a specific **part** of an element rather than the element itself.\n\n## ::before and ::after\n\nInsert generated content as the first/last child. Requires `content` property (can be empty string).\n\n```css\n/* Decorative quote marks */\nblockquote::before { content: '\\201C'; font-size: 4rem; }\nblockquote::after  { content: '\\201D'; }\n\n/* Clearfix */\n.clearfix::after {\n  content: '';\n  display: block;\n  clear: both;\n}\n\n/* Expand URLs for print */\n@media print {\n  a::after { content: ' (' attr(href) ')'; }\n}\n```\n\n## ::first-line and ::first-letter\n\n```css\np::first-letter {\n  float: left;\n  font-size: 3em;\n  line-height: 1;\n  margin-right: 0.1em;\n}\n```\n\n## ::placeholder and ::selection\n\n```css\ninput::placeholder { color: #999; font-style: italic; }\n\n::selection { background: #0070f3; color: white; }\n```\n\n## ::marker (lists)\n\n```css\nli::marker {\n  color: #0070f3;\n  font-weight: bold;\n}\n```\n\n## Pseudo-class vs Pseudo-element\n\n| | Prefix | Targets |\n|---|---|---|\n| Pseudo-class | `:` | State or position (`:hover`, `:nth-child`) |\n| Pseudo-element | `::` | Part of an element (`::before`, `::first-line`) |",
+    "detailMdTr": null
+  },
+  {
+    "id": 713,
+    "topic": "css",
+    "level": 2,
+    "levelLabel": "Junior",
+    "question": "How does CSS actually work under the hood of a browser?",
+    "answerGeneral": "When a browser loads a page, it parses HTML into the DOM and CSS into the CSSOM separately. It combines them into a render tree containing only visible nodes. Layout (reflow) then calculates each node's size and position, painting draws pixels to screen, and compositing layers the final output. Performance issues arise from forced reflows and expensive paint operations.",
+    "answerGeneralTr": "Tarayıcı bir sayfa yüklerken HTML'i DOM'a, CSS'i ise CSSOM'a ayrı ayrı ayrıştırır. Ardından bunları yalnızca görünür düğümleri içeren render ağacında birleştirir. Düzen (reflow) aşamasında her düğümün boyutu ve konumu hesaplanır, boyama (paint) pikselleri çizer ve compositing nihai çıktıyı katmanlar.",
+    "answerPersonal": null,
+    "detailMd": "## How the Browser Renders CSS\n\n## Step-by-Step Pipeline\n\n**1. Parse** — HTML → DOM, CSS → CSSOM (runs in parallel where possible).\n\n**2. Style calculation** — browser matches every DOM node to its applicable CSS rules and computes a final style value for each property.\n\n**3. Layout (Reflow)** — calculates exact geometry (size, position) for every render object, accounting for the box model, floats, Flexbox, Grid, etc.\n\n**4. Paint** — fills in pixels: text, colors, borders, shadows. Chrome DevTools' Paint profiler shows which layers repaint.\n\n**5. Compositing** — the browser assembles layers on the GPU. Elements with `transform`, `opacity`, or `will-change` get their own compositor layer.\n\n## What Triggers Each Step\n\n```\nChange width/height   → Layout + Paint + Composite  (expensive)\nChange color/shadow   → Paint + Composite            (medium)\nChange transform/opacity → Composite only           (cheap, GPU)\n```\n\n## Practical Implications\n\n```css\n/* Bad — triggers layout on every frame */\n.animate { animation: slide 0.3s; }\n@keyframes slide { to { left: 100px; } }\n\n/* Good — compositor-only */\n.animate { animation: slide 0.3s; }\n@keyframes slide { to { transform: translateX(100px); } }\n```\n\nUse `will-change: transform` sparingly to hint the browser to promote an element to its own layer before an animation starts.",
+    "detailMdTr": null
+  },
+  {
+    "id": 714,
+    "topic": "css",
+    "level": 2,
+    "levelLabel": "Junior",
+    "question": "What's the difference between resetting and normalizing CSS? Which would you choose, and why?",
+    "answerGeneral": "CSS reset aggressively removes all browser default styles, giving you a blank slate. Normalizing CSS preserves useful defaults while fixing cross-browser inconsistencies. Normalizing is generally preferred as it retains sensible defaults, reduces the amount of re-styling needed, and is better documented.",
+    "answerGeneralTr": "CSS reset tüm tarayıcı varsayılan stillerini agresif biçimde kaldırarak boş bir başlangıç sağlar. CSS normalize ise tarayıcılar arası tutarsızlıkları düzeltirken kullanışlı varsayılanları korur. Normalize genellikle tercih edilir çünkü makul varsayılanları korur, yeniden stillendirme ihtiyacını azaltır ve daha iyi belgelenmiştir.",
+    "answerPersonal": null,
+    "detailMd": "## Reset vs Normalize\n\n## CSS Reset\n\nAggressively strips browser defaults — margins, paddings, font sizes, list styles, everything:\n\n```css\n/* Eric Meyer's reset (simplified) */\n* { margin: 0; padding: 0; box-sizing: border-box; }\nol, ul { list-style: none; }\na { color: inherit; text-decoration: none; }\n```\n\n**Pros:** Complete control from zero.  \n**Cons:** You must re-declare every style, including sensible defaults like `<strong>` being bold.\n\n## Normalize.css\n\nFixes cross-browser inconsistencies while keeping useful defaults intact:\n\n```css\n/* normalize.css approach */\nbutton, input { font-family: inherit; } /* fix font inheritance */\npre { overflow: auto; }                 /* fix overflow in IE */\n/* leaves h1–h6 sizes, list bullets, etc. intact */\n```\n\n**Pros:** Less work, readable output, actively maintained.  \n**Cons:** Slightly larger file; you inherit some opinions.\n\n## Modern Approach\n\nMany teams use a **minimal custom base** that combines both ideas — fix browser quirks, reset a few noisy defaults, and use `box-sizing: border-box` universally:\n\n```css\n*, *::before, *::after { box-sizing: border-box; }\nbody { margin: 0; line-height: 1.5; -webkit-font-smoothing: antialiased; }\nimg, video { max-width: 100%; display: block; }\n```\n\nNext.js and many frameworks bundle a similar base by default.",
+    "detailMdTr": null
+  }
+]

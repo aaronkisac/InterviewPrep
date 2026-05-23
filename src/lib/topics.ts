@@ -20,6 +20,9 @@ export const TOPICS: readonly Topic[] = [
   "nextjs",
   "javascript",
   "redux",
+  "html5",
+  "css",
+  "react-hooks",
 ];
 
 export const TOPIC_LABELS: Record<Topic, string> = {
@@ -28,6 +31,9 @@ export const TOPIC_LABELS: Record<Topic, string> = {
   nextjs: "Next.js",
   javascript: "JavaScript",
   redux: "Redux",
+  html5: "HTML5",
+  css: "CSS",
+  "react-hooks": "React Hooks",
 };
 
 export const LEVELS: ReadonlyArray<{
