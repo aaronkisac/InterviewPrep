@@ -15,19 +15,19 @@ export function parseLanguage(value: string | undefined): Language {
 export const TR_FALLBACK = "TR çevirisi yakında.";
 
 export const TOPICS: readonly Topic[] = [
-  "react",
-  "typescript",
-  "nextjs",
-  "javascript",
-  "redux",
-  "html5",
-  "css",
-  "react-hooks",
-  "git",
   "agile-scrum",
-  "websockets",
-  "unit-testing",
+  "css",
   "design-patterns",
+  "git",
+  "html5",
+  "javascript",
+  "nextjs",
+  "react",
+  "react-hooks",
+  "redux",
+  "typescript",
+  "unit-testing",
+  "websockets",
 ];
 
 export const TOPIC_LABELS: Record<Topic, string> = {

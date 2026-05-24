@@ -1,0 +1,418 @@
+[
+  {
+    "topic": "design-patterns",
+    "question": "What is a design pattern and why are they used?",
+    "options": [
+      {
+        "optionText": "A reusable, named solution to a commonly recurring software design problem, providing shared vocabulary and proven approaches.",
+        "isCorrect": true,
+        "explanation": "Correct — patterns are templates encoding collective design wisdom, not reusable code."
+      },
+      {
+        "optionText": "A specific code snippet you copy and paste into your project to solve a common problem.",
+        "isCorrect": false,
+        "explanation": "Patterns are templates describing a solution structure, not copy-paste code."
+      },
+      {
+        "optionText": "A type of algorithm optimised for performance-critical operations.",
+        "isCorrect": false,
+        "explanation": "Algorithms solve computational problems; design patterns solve structural/architectural ones."
+      },
+      {
+        "optionText": "A CSS naming convention like BEM or SMACSS used to organise stylesheets.",
+        "isCorrect": false,
+        "explanation": "CSS naming conventions are a separate concern — design patterns apply to software architecture."
+      }
+    ]
+  },
+  {
+    "topic": "design-patterns",
+    "question": "What is the Singleton pattern?",
+    "options": [
+      {
+        "optionText": "A creational pattern that ensures a class has only one instance and provides a global access point to it.",
+        "isCorrect": true,
+        "explanation": "Correct — Singleton restricts instantiation to one object, e.g. a Supabase client or Redux store."
+      },
+      {
+        "optionText": "A pattern that creates multiple instances of a class from a single factory function.",
+        "isCorrect": false,
+        "explanation": "That describes the Factory pattern — Singleton guarantees only ONE instance exists."
+      },
+      {
+        "optionText": "A behavioral pattern that lets one object notify many dependents when its state changes.",
+        "isCorrect": false,
+        "explanation": "That is the Observer pattern — Singleton is about limiting instantiation, not notification."
+      },
+      {
+        "optionText": "A structural pattern that wraps an object to add new behaviour without modifying the original.",
+        "isCorrect": false,
+        "explanation": "That is the Decorator pattern — Singleton is a creational pattern focused on instance control."
+      }
+    ]
+  },
+  {
+    "topic": "design-patterns",
+    "question": "What is the difference between Creational, Structural, and Behavioral design patterns?",
+    "options": [
+      {
+        "optionText": "Creational = object creation, Structural = object composition, Behavioral = object communication.",
+        "isCorrect": true,
+        "explanation": "Correct — the three GoF categories each address a different design concern."
+      },
+      {
+        "optionText": "Creational = UI components, Structural = database schemas, Behavioral = API endpoints.",
+        "isCorrect": false,
+        "explanation": "The GoF categories are not tied to specific layers — they are universal object-oriented design concerns."
+      },
+      {
+        "optionText": "Creational = frontend, Structural = backend, Behavioral = DevOps.",
+        "isCorrect": false,
+        "explanation": "Design patterns apply across all layers — the categories describe how objects relate, not where code runs."
+      },
+      {
+        "optionText": "Creational = algorithms, Structural = data structures, Behavioral = design workflows.",
+        "isCorrect": false,
+        "explanation": "These categories describe OOP design approaches, not algorithms or data structures."
+      }
+    ]
+  },
+  {
+    "topic": "design-patterns",
+    "question": "What is the Observer pattern?",
+    "options": [
+      {
+        "optionText": "A behavioral pattern defining a one-to-many dependency so all observers are notified automatically when the subject changes state.",
+        "isCorrect": true,
+        "explanation": "Correct — DOM addEventListener, Zustand subscriptions, and Node.js EventEmitter all implement Observer."
+      },
+      {
+        "optionText": "A pattern that watches the network and logs all HTTP requests for debugging.",
+        "isCorrect": false,
+        "explanation": "Observer is an OOP pattern about object relationships, not network monitoring."
+      },
+      {
+        "optionText": "A structural pattern that adds a monitoring wrapper around every function call.",
+        "isCorrect": false,
+        "explanation": "Observer is behavioral — about event subscriptions, not function wrapping."
+      },
+      {
+        "optionText": "A creational pattern that creates observable objects using the Proxy API.",
+        "isCorrect": false,
+        "explanation": "Observer is a behavioral pattern; Proxy is a separate structural pattern."
+      }
+    ]
+  },
+  {
+    "topic": "design-patterns",
+    "question": "What is the Factory pattern?",
+    "options": [
+      {
+        "optionText": "A creational pattern that delegates object creation to a factory function or class, decoupling the caller from the concrete implementation.",
+        "isCorrect": true,
+        "explanation": "Correct — the caller asks for an object without knowing which concrete class will be instantiated."
+      },
+      {
+        "optionText": "A pattern that manufactures CSS class names dynamically based on component props.",
+        "isCorrect": false,
+        "explanation": "Factory is a creational OOP pattern about object instantiation, not CSS."
+      },
+      {
+        "optionText": "A behavioral pattern that swaps different algorithms at runtime.",
+        "isCorrect": false,
+        "explanation": "That is the Strategy pattern — Factory is about how objects are created, not which algorithm runs."
+      },
+      {
+        "optionText": "A utility that converts factory functions into React components automatically.",
+        "isCorrect": false,
+        "explanation": "Factory is a general OOP pattern — React.createElement is a factory but the pattern is language-agnostic."
+      }
+    ]
+  },
+  {
+    "topic": "design-patterns",
+    "question": "What is the Module pattern in JavaScript?",
+    "options": [
+      {
+        "optionText": "A pattern that uses closures or ES modules to create private scope, exposing only a public API.",
+        "isCorrect": true,
+        "explanation": "Correct — ES module exports are the modern form; IIFE was the pre-ES6 equivalent."
+      },
+      {
+        "optionText": "A pattern that splits a React component into a .jsx file and a .css file.",
+        "isCorrect": false,
+        "explanation": "File splitting is a file organisation choice — the Module pattern is about encapsulation via scope."
+      },
+      {
+        "optionText": "A Node.js-specific pattern using require() to load third-party packages.",
+        "isCorrect": false,
+        "explanation": "The Module pattern predates Node.js and is about encapsulation, not package loading."
+      },
+      {
+        "optionText": "A pattern for dynamically importing code to reduce initial bundle size.",
+        "isCorrect": false,
+        "explanation": "Dynamic import() is a performance technique — the Module pattern is about private scope and encapsulation."
+      }
+    ]
+  },
+  {
+    "topic": "design-patterns",
+    "question": "What is the Decorator pattern?",
+    "options": [
+      {
+        "optionText": "A structural pattern that wraps an object to add behaviour dynamically without modifying the original class.",
+        "isCorrect": true,
+        "explanation": "Correct — React HOCs like withAuth() and Higher-Order Functions like memoize() are functional decorators."
+      },
+      {
+        "optionText": "A CSS technique for adding visual effects using ::before and ::after pseudo-elements.",
+        "isCorrect": false,
+        "explanation": "CSS pseudo-elements are unrelated to the Decorator design pattern."
+      },
+      {
+        "optionText": "A TypeScript keyword that marks a class member as private.",
+        "isCorrect": false,
+        "explanation": "TypeScript's @decorator syntax is inspired by the pattern, but the pattern itself is about dynamic behaviour addition."
+      },
+      {
+        "optionText": "A creational pattern that produces a family of related objects.",
+        "isCorrect": false,
+        "explanation": "That describes the Abstract Factory pattern — Decorator is structural and adds behaviour to existing objects."
+      }
+    ]
+  },
+  {
+    "topic": "design-patterns",
+    "question": "What is the Strategy pattern?",
+    "options": [
+      {
+        "optionText": "A behavioral pattern that defines a family of interchangeable algorithms and lets you swap them at runtime without modifying the context.",
+        "isCorrect": true,
+        "explanation": "Correct — e.g. passing different sort functions or validators to the same component/hook."
+      },
+      {
+        "optionText": "A pattern for planning which features to ship in the next sprint.",
+        "isCorrect": false,
+        "explanation": "Strategy is an OOP design pattern about runtime algorithm selection, not product planning."
+      },
+      {
+        "optionText": "A structural pattern that provides a unified interface over a complex subsystem.",
+        "isCorrect": false,
+        "explanation": "That is the Facade pattern — Strategy is behavioral and focuses on swappable algorithms."
+      },
+      {
+        "optionText": "A pattern that caches the result of a function call to avoid re-computation.",
+        "isCorrect": false,
+        "explanation": "Caching is a performance optimisation (Memoisation) — Strategy is about interchangeable behaviour, not caching."
+      }
+    ]
+  },
+  {
+    "topic": "design-patterns",
+    "question": "What is the Proxy pattern?",
+    "options": [
+      {
+        "optionText": "A structural pattern that provides a surrogate object controlling access to another object — for access control, lazy loading, caching, or validation.",
+        "isCorrect": true,
+        "explanation": "Correct — JavaScript's built-in Proxy object and React.lazy are both implementations of this pattern."
+      },
+      {
+        "optionText": "A network technique for routing traffic through an intermediary server.",
+        "isCorrect": false,
+        "explanation": "Network proxies share the concept but the Proxy design pattern is about object access control in code."
+      },
+      {
+        "optionText": "A behavioral pattern that encapsulates actions as objects to support undo/redo.",
+        "isCorrect": false,
+        "explanation": "That is the Command pattern — Proxy is structural and about controlled access to another object."
+      },
+      {
+        "optionText": "A creational pattern that clones existing objects instead of creating new ones.",
+        "isCorrect": false,
+        "explanation": "That is the Prototype pattern — Proxy wraps an existing object to intercept access."
+      }
+    ]
+  },
+  {
+    "topic": "design-patterns",
+    "question": "What is the Command pattern?",
+    "options": [
+      {
+        "optionText": "A behavioral pattern that encapsulates a request as an object, enabling undo/redo, queuing, and logging of operations.",
+        "isCorrect": true,
+        "explanation": "Correct — Redux actions are Commands; the history stack enabling undo is classic Command pattern."
+      },
+      {
+        "optionText": "A terminal command for running npm or pnpm scripts in a project.",
+        "isCorrect": false,
+        "explanation": "The Command design pattern is about encapsulating operations as objects, not CLI commands."
+      },
+      {
+        "optionText": "A structural pattern for composing tree structures where individual items and groups are treated uniformly.",
+        "isCorrect": false,
+        "explanation": "That is the Composite pattern — Command is behavioral and about encapsulating actions."
+      },
+      {
+        "optionText": "A creational pattern that constructs complex objects step by step via method chaining.",
+        "isCorrect": false,
+        "explanation": "That is the Builder pattern — Command encapsulates actions as first-class objects."
+      }
+    ]
+  },
+  {
+    "topic": "design-patterns",
+    "question": "What is the Facade pattern and how is it used in frontend applications?",
+    "options": [
+      {
+        "optionText": "A structural pattern providing a simplified interface to a complex subsystem — e.g. authService.login() hiding fetch, token storage, and refresh logic.",
+        "isCorrect": true,
+        "explanation": "Correct — custom hooks wrapping TanStack Query are another common frontend facade."
+      },
+      {
+        "optionText": "A pattern for decorating the visual appearance of a UI component with a wrapper element.",
+        "isCorrect": false,
+        "explanation": "Facade is about API simplification, not visual decoration."
+      },
+      {
+        "optionText": "A behavioral pattern where a subject notifies multiple listeners automatically.",
+        "isCorrect": false,
+        "explanation": "That is the Observer pattern — Facade is structural and hides subsystem complexity."
+      },
+      {
+        "optionText": "A pattern that converts one interface into another to make incompatible systems work together.",
+        "isCorrect": false,
+        "explanation": "That is the Adapter pattern — Facade simplifies an existing interface rather than translating between two."
+      }
+    ]
+  },
+  {
+    "topic": "design-patterns",
+    "question": "What is the Adapter pattern?",
+    "options": [
+      {
+        "optionText": "A structural pattern that converts one interface into another the client expects — making incompatible interfaces work together.",
+        "isCorrect": true,
+        "explanation": "Correct — normalising a third-party API response into your app's expected shape is a classic adapter."
+      },
+      {
+        "optionText": "A pattern that adapts a React component to work in both web and React Native environments.",
+        "isCorrect": false,
+        "explanation": "Cross-platform rendering is a different concern — the Adapter pattern is about interface translation."
+      },
+      {
+        "optionText": "A pattern that simplifies a complex subsystem by hiding its internal details.",
+        "isCorrect": false,
+        "explanation": "Simplification is the Facade pattern — Adapter translates one interface into another."
+      },
+      {
+        "optionText": "A creational pattern that produces objects without specifying their concrete classes.",
+        "isCorrect": false,
+        "explanation": "That is the Factory pattern — Adapter is structural and bridges two incompatible interfaces."
+      }
+    ]
+  },
+  {
+    "topic": "design-patterns",
+    "question": "What is the Composite pattern?",
+    "options": [
+      {
+        "optionText": "A structural pattern that composes objects into tree structures, treating individual objects and groups uniformly.",
+        "isCorrect": true,
+        "explanation": "Correct — React's component tree is a Composite: leaf components and parent components share the same interface."
+      },
+      {
+        "optionText": "A React technique for sharing logic by composing multiple hooks inside a component.",
+        "isCorrect": false,
+        "explanation": "Hook composition is a React practice — the Composite pattern is a structural OOP pattern about tree structures."
+      },
+      {
+        "optionText": "A CSS layout technique using grid or flexbox to compose layouts from smaller pieces.",
+        "isCorrect": false,
+        "explanation": "CSS composition is a styling concept — the Composite pattern is about uniform treatment of objects and collections."
+      },
+      {
+        "optionText": "A behavioral pattern that chains operations in sequence using method chaining.",
+        "isCorrect": false,
+        "explanation": "Method chaining is a Builder/fluent API technique — Composite is structural and about tree hierarchies."
+      }
+    ]
+  },
+  {
+    "topic": "design-patterns",
+    "question": "How are design patterns applied in React — give examples of Structural and Behavioral patterns.",
+    "options": [
+      {
+        "optionText": "Structural: HOC = Decorator, component tree = Composite, React.lazy = Proxy. Behavioral: Context/Zustand = Observer, custom hooks = Strategy, useReducer = State.",
+        "isCorrect": true,
+        "explanation": "Correct — React's idioms map directly to classic GoF patterns even without explicit pattern language."
+      },
+      {
+        "optionText": "React uses only Behavioral patterns; Structural patterns belong to backend architecture.",
+        "isCorrect": false,
+        "explanation": "React uses all three GoF categories — HOC is Decorator (Structural), and component trees are Composite (Structural)."
+      },
+      {
+        "optionText": "React replaces all design patterns with hooks, making GoF patterns obsolete.",
+        "isCorrect": false,
+        "explanation": "Hooks implement the same patterns — useState/useReducer is the State pattern, useContext is Observer — the patterns remain relevant."
+      },
+      {
+        "optionText": "Design patterns don't apply to frontend because JavaScript is not an object-oriented language.",
+        "isCorrect": false,
+        "explanation": "JavaScript supports OOP and functional styles; GoF patterns apply to JS/React, often expressed as functions rather than classes."
+      }
+    ]
+  },
+  {
+    "topic": "design-patterns",
+    "question": "What is the Builder pattern and when would you use it in frontend development?",
+    "options": [
+      {
+        "optionText": "A creational pattern that constructs a complex object step by step via method chaining — used in query builders, test data factories, and URL constructors.",
+        "isCorrect": true,
+        "explanation": "Correct — the fluent API pattern (chain .select().where().limit().build()) is the most common frontend expression of Builder."
+      },
+      {
+        "optionText": "A Webpack/Vite configuration pattern for defining how assets are built and bundled.",
+        "isCorrect": false,
+        "explanation": "Build tools are unrelated to the Builder design pattern, which is about constructing complex objects."
+      },
+      {
+        "optionText": "A pattern that creates a single instance of a complex configuration object shared across the app.",
+        "isCorrect": false,
+        "explanation": "Sharing a single instance is the Singleton pattern — Builder focuses on step-by-step construction."
+      },
+      {
+        "optionText": "A React component that renders its children using a render prop, building the UI incrementally.",
+        "isCorrect": false,
+        "explanation": "Render props are a React composition pattern — the Builder pattern is about constructing complex data objects."
+      }
+    ]
+  },
+  {
+    "topic": "design-patterns",
+    "question": "What is the difference between Dependency Injection and the Service Locator pattern, and which should you prefer?",
+    "options": [
+      {
+        "optionText": "DI passes dependencies explicitly via constructor/props (visible, testable); Service Locator uses a global registry (hidden coupling). Prefer DI.",
+        "isCorrect": true,
+        "explanation": "Correct — DI makes dependencies explicit in the signature; Service Locator hides them, making testing and reasoning harder."
+      },
+      {
+        "optionText": "Service Locator is preferred because it centralises all dependencies in one place, reducing boilerplate.",
+        "isCorrect": false,
+        "explanation": "Centralisation comes at the cost of hidden coupling and harder testing — DI is the recommended approach."
+      },
+      {
+        "optionText": "They are equivalent patterns — the choice is purely stylistic with no practical difference.",
+        "isCorrect": false,
+        "explanation": "They have significant differences in testability, explicitness, and coupling — DI is strongly preferred for most use cases."
+      },
+      {
+        "optionText": "Dependency Injection requires a DI framework like Angular's injector; it cannot be used in React.",
+        "isCorrect": false,
+        "explanation": "React uses DI idiomatically through props, Context, and hook parameters — no framework is needed."
+      }
+    ]
+  }
+]

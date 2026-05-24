@@ -1,0 +1,522 @@
+[
+  {
+    "topic": "javascript",
+    "question": "What is the difference between == and ===?",
+    "options": [
+      {
+        "optionText": "=== is strict equality (no type coercion); == is loose equality and coerces types before comparing",
+        "isCorrect": true,
+        "explanation": "0 == '0' is true (coercion); 0 === '0' is false. Always prefer === to avoid unexpected coercion bugs. The only common use case for == is checking null or undefined: val == null catches both."
+      },
+      {
+        "optionText": "== compares by reference; === compares by value",
+        "isCorrect": false,
+        "explanation": "Both == and === compare objects by reference. The difference is type coercion, not value vs reference comparison."
+      },
+      {
+        "optionText": "=== is only for strings; == works for all types",
+        "isCorrect": false,
+        "explanation": "Both operators work with all JavaScript types."
+      },
+      {
+        "optionText": "They are identical — the extra = in === is just a style convention",
+        "isCorrect": false,
+        "explanation": "They behave differently when types don't match. === never coerces types."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "What is Scope in JavaScript?",
+    "options": [
+      {
+        "optionText": "The region of code where a variable is accessible — JavaScript has global, function, and block scope (let/const), determined at authoring time (lexical scoping)",
+        "isCorrect": true,
+        "explanation": "Scope defines variable visibility. var is function-scoped; let/const are block-scoped (inside {}). JavaScript uses lexical (static) scoping — a function's scope is determined by where it's written, not where it's called."
+      },
+      {
+        "optionText": "Scope refers to the CSS styling applied to JavaScript variables",
+        "isCorrect": false,
+        "explanation": "Scope is a programming concept about variable accessibility, nothing to do with CSS."
+      },
+      {
+        "optionText": "JavaScript only has global scope — all variables are accessible everywhere",
+        "isCorrect": false,
+        "explanation": "JavaScript has function scope (var) and block scope (let/const). Not all variables are globally accessible."
+      },
+      {
+        "optionText": "Scope is determined at runtime based on the call stack (dynamic scoping)",
+        "isCorrect": false,
+        "explanation": "JavaScript uses lexical (static) scoping — scope is determined by where code is written. The this keyword is dynamic, but variable scope is lexical."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "What is strict mode?",
+    "options": [
+      {
+        "optionText": "Activated by 'use strict' — it catches common mistakes, prevents unsafe features (with, arguments.callee), and changes some silent errors to thrown errors",
+        "isCorrect": true,
+        "explanation": "Strict mode: prevents undeclared variables, disables with, makes eval safer, throws on duplicate parameter names, and more. ES modules and classes are always in strict mode by default."
+      },
+      {
+        "optionText": "A TypeScript compiler option that enforces stricter type checking",
+        "isCorrect": false,
+        "explanation": "TypeScript has a strict flag, but JavaScript's strict mode is a runtime directive activated with 'use strict'."
+      },
+      {
+        "optionText": "A browser setting that prevents all JavaScript from running on a page",
+        "isCorrect": false,
+        "explanation": "There's no such browser setting. Strict mode is a JavaScript language opt-in."
+      },
+      {
+        "optionText": "A linting tool configuration that enforces ESLint rules",
+        "isCorrect": false,
+        "explanation": "Strict mode is a JavaScript language feature, not a linting configuration."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "Explain event bubbling and how one may prevent it",
+    "options": [
+      {
+        "optionText": "Events bubble up from the target element to the root; use event.stopPropagation() to stop bubbling, or event.stopImmediatePropagation() to also stop other handlers on the same element",
+        "isCorrect": true,
+        "explanation": "A click on a button inside a div fires on the button first, then the div, then the body. stopPropagation() stops it going higher. stopImmediatePropagation() also prevents other listeners on that same element."
+      },
+      {
+        "optionText": "Events bubble down from the root to the target; use event.preventDefault() to stop this",
+        "isCorrect": false,
+        "explanation": "Bubbling goes upward. The downward phase is called capturing. preventDefault() stops default browser behavior (like form submission), not propagation."
+      },
+      {
+        "optionText": "Event bubbling only occurs in Internet Explorer — modern browsers use a different model",
+        "isCorrect": false,
+        "explanation": "All modern browsers implement the W3C event model with both capture and bubble phases."
+      },
+      {
+        "optionText": "event.preventDefault() stops events from bubbling to parent elements",
+        "isCorrect": false,
+        "explanation": "preventDefault() cancels the default browser action. To stop propagation, use stopPropagation()."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "What advantages are using arrow functions?",
+    "options": [
+      {
+        "optionText": "Shorter syntax, no own 'this' binding (inherits from surrounding context), no arguments object, and cannot be used as constructors",
+        "isCorrect": true,
+        "explanation": "Arrow functions solve the classic 'this' problem in callbacks. Because they don't have their own this, they use the this of their enclosing function — essential in React event handlers and class methods."
+      },
+      {
+        "optionText": "Arrow functions run faster than regular functions at runtime",
+        "isCorrect": false,
+        "explanation": "There's no meaningful performance difference. The advantage is syntax and this binding behavior."
+      },
+      {
+        "optionText": "Arrow functions have their own 'this' binding, making them more explicit than regular functions",
+        "isCorrect": false,
+        "explanation": "It's the opposite — arrow functions have no own this and inherit it lexically."
+      },
+      {
+        "optionText": "Arrow functions support the 'new' keyword for creating objects",
+        "isCorrect": false,
+        "explanation": "Arrow functions cannot be used as constructors — using new with an arrow function throws a TypeError."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "What is a closure, and how/why would you use one?",
+    "options": [
+      {
+        "optionText": "A function that retains access to variables from its outer (enclosing) scope even after that scope has returned — used for data privacy, partial application, and factory functions",
+        "isCorrect": true,
+        "explanation": "function counter() { let n = 0; return () => ++n }. The returned function closes over n. Each call to counter() creates an independent n. Used for module patterns, memoization, currying, and event handlers that need access to outer data."
+      },
+      {
+        "optionText": "A built-in JavaScript method that closes a network connection",
+        "isCorrect": false,
+        "explanation": "Closures are a language mechanism, not related to networking."
+      },
+      {
+        "optionText": "A try/catch block that prevents errors from propagating",
+        "isCorrect": false,
+        "explanation": "Error handling uses try/catch. Closures are about scope and variable retention."
+      },
+      {
+        "optionText": "A design pattern specific to React that allows components to share state",
+        "isCorrect": false,
+        "explanation": "Closures are a fundamental JavaScript concept, not a React-specific pattern."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "What is IIFEs (Immediately Invoked Function Expressions)?",
+    "options": [
+      {
+        "optionText": "A function expression that is defined and immediately called — used to create a new scope and avoid polluting the global scope",
+        "isCorrect": true,
+        "explanation": "(function() { var x = 1; })() — x is not accessible outside. Before ES modules, IIFEs were the primary way to encapsulate code. Still useful for immediately executing async code or initialization logic."
+      },
+      {
+        "optionText": "A special type of arrow function that runs before the page loads",
+        "isCorrect": false,
+        "explanation": "IIFEs are not exclusive to arrow functions and don't specifically run before page load."
+      },
+      {
+        "optionText": "A JavaScript event that fires when a function is first defined",
+        "isCorrect": false,
+        "explanation": "IIFE is not an event. It's a pattern for immediately executing a function expression."
+      },
+      {
+        "optionText": "A function that can only be called once and throws an error on subsequent calls",
+        "isCorrect": false,
+        "explanation": "IIFEs can contain logic that runs once, but they don't inherently prevent being called again — they're just immediately invoked."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "What is Coercion in JavaScript?",
+    "options": [
+      {
+        "optionText": "Automatic type conversion JavaScript performs when using operators or comparisons — e.g., '5' + 1 = '51' (string) but '5' - 1 = 4 (number)",
+        "isCorrect": true,
+        "explanation": "JavaScript coerces types implicitly: + with a string concatenates; -, *, / convert to numbers. Explicit coercion uses Number(), String(), Boolean(). Implicit coercion surprises: [] + {} = '[object Object]', {} + [] = 0."
+      },
+      {
+        "optionText": "A security technique that forces users to enter valid data in forms",
+        "isCorrect": false,
+        "explanation": "Form validation is a separate concern. Coercion is JavaScript's automatic type conversion behavior."
+      },
+      {
+        "optionText": "A TypeScript feature that converts types at compile time",
+        "isCorrect": false,
+        "explanation": "Type coercion is a JavaScript runtime behavior, not a TypeScript compile-time feature."
+      },
+      {
+        "optionText": "Coercion only occurs with the == operator — no other operation causes type conversion",
+        "isCorrect": false,
+        "explanation": "Coercion occurs in many contexts: arithmetic operators, template literals, if conditions, logical operators, and more."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "Explain the `this` keyword in JavaScript.",
+    "options": [
+      {
+        "optionText": "this refers to the execution context — it depends on how a function is called: object method = the object, standalone call = global/undefined (strict), arrow function = enclosing this, new = new instance",
+        "isCorrect": true,
+        "explanation": "this is dynamic and determined at call time. obj.method() → this is obj. function() → this is globalThis (sloppy) or undefined (strict). new Foo() → this is the new object. Arrow functions inherit this from their definition context."
+      },
+      {
+        "optionText": "this always refers to the window/global object in all contexts",
+        "isCorrect": false,
+        "explanation": "this refers to the global object only in sloppy mode standalone function calls. In methods, constructors, and strict mode it behaves differently."
+      },
+      {
+        "optionText": "this is lexically scoped and always refers to the enclosing function's context",
+        "isCorrect": false,
+        "explanation": "Regular functions have dynamic this. Only arrow functions have lexical this."
+      },
+      {
+        "optionText": "this refers to the DOM element that triggered the event in all JavaScript contexts",
+        "isCorrect": false,
+        "explanation": "this is the current DOM element only when used as a DOM event listener (and only with regular functions, not arrow functions)."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "How do Promises work in JavaScript?",
+    "options": [
+      {
+        "optionText": "A Promise is an object representing an async operation's eventual result (pending → fulfilled/rejected); chain with .then()/.catch() or use await inside async functions",
+        "isCorrect": true,
+        "explanation": "Promises avoid callback hell: fetch('/api').then(r => r.json()).then(data => ...).catch(err => ...). async/await is syntactic sugar — await pauses execution in the async function until the Promise resolves."
+      },
+      {
+        "optionText": "Promises are synchronous — they block the event loop until resolved",
+        "isCorrect": false,
+        "explanation": "Promises are asynchronous. The .then() callback is microtask-queued and runs after the current call stack clears."
+      },
+      {
+        "optionText": "A Promise can only be resolved once and then it expires after 30 seconds",
+        "isCorrect": false,
+        "explanation": "Promises don't expire. Once settled (resolved or rejected), they stay settled forever and can be .then()d repeatedly."
+      },
+      {
+        "optionText": "Promises require a callback function passed to setTimeout to work correctly",
+        "isCorrect": false,
+        "explanation": "Promises are independent of setTimeout. They use the microtask queue, which actually has higher priority than setTimeout callbacks."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "Explain the JavaScript event loop.",
+    "options": [
+      {
+        "optionText": "The event loop processes the call stack, then drains the microtask queue (Promises, queueMicrotask), then takes one task from the macrotask queue (setTimeout, I/O), repeating indefinitely",
+        "isCorrect": true,
+        "explanation": "JS is single-threaded. The loop: run current stack → drain ALL microtasks (Promise .then, MutationObserver) → render → take ONE macrotask (setTimeout, setInterval, I/O) → repeat. This is why Promise.resolve().then() runs before setTimeout(fn, 0)."
+      },
+      {
+        "optionText": "The event loop is a loop that runs each event handler exactly once per second",
+        "isCorrect": false,
+        "explanation": "The event loop doesn't run on a timer. It runs continuously, processing tasks as they become available."
+      },
+      {
+        "optionText": "The event loop runs on a separate thread to avoid blocking the main thread",
+        "isCorrect": false,
+        "explanation": "JavaScript is single-threaded. The event loop runs on the same thread. Web Workers provide actual separate threads."
+      },
+      {
+        "optionText": "setTimeout(fn, 0) always executes fn before any synchronous code in the same file",
+        "isCorrect": false,
+        "explanation": "setTimeout callbacks go in the macrotask queue. All synchronous code and microtasks run first, even setTimeout(fn, 0)."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "What is hoisting in JavaScript?",
+    "options": [
+      {
+        "optionText": "JavaScript moves var declarations and function declarations to the top of their scope during compilation — var is hoisted but uninitialized (undefined), functions are fully hoisted",
+        "isCorrect": true,
+        "explanation": "var x = 1 hoists the declaration (var x) but not the assignment. Accessing x before the line gives undefined. Function declarations are fully hoisted — you can call them before they appear. let/const are hoisted but not initialized (temporal dead zone)."
+      },
+      {
+        "optionText": "Hoisting moves all code to the global scope automatically",
+        "isCorrect": false,
+        "explanation": "Hoisting moves declarations to the top of their current scope (function or global), not to the global scope."
+      },
+      {
+        "optionText": "let and const are hoisted exactly the same way as var — all give undefined before initialization",
+        "isCorrect": false,
+        "explanation": "let and const are hoisted but in a Temporal Dead Zone — accessing them before declaration throws a ReferenceError, not undefined."
+      },
+      {
+        "optionText": "Hoisting only applies to function expressions, not function declarations",
+        "isCorrect": false,
+        "explanation": "It's the opposite — function declarations are fully hoisted. Function expressions (var fn = function(){}) only hoist the variable declaration, not the function value."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "What is debouncing and how do you implement it?",
+    "options": [
+      {
+        "optionText": "Debouncing delays function execution until a specified time has passed since the last call — implemented with a timer that resets on each invocation",
+        "isCorrect": true,
+        "explanation": "function debounce(fn, delay) { let timer; return (...args) => { clearTimeout(timer); timer = setTimeout(() => fn(...args), delay) } }. Used for search inputs — wait until user stops typing before firing the API call."
+      },
+      {
+        "optionText": "Debouncing executes a function immediately and then prevents it from running again for a set period",
+        "isCorrect": false,
+        "explanation": "That describes throttling. Debouncing delays execution until the calls stop."
+      },
+      {
+        "optionText": "Debouncing is a CSS technique for smoothing animations",
+        "isCorrect": false,
+        "explanation": "Debouncing is a JavaScript performance technique for rate-limiting function calls."
+      },
+      {
+        "optionText": "Debouncing makes a function execute at most once per animation frame",
+        "isCorrect": false,
+        "explanation": "That's requestAnimationFrame. Debouncing uses a configurable time delay."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "What is memoization and how do you implement it?",
+    "options": [
+      {
+        "optionText": "Caching the result of expensive function calls keyed by arguments, so repeated calls with the same arguments return the cached result instantly",
+        "isCorrect": true,
+        "explanation": "function memoize(fn) { const cache = new Map(); return (arg) => { if (cache.has(arg)) return cache.get(arg); const result = fn(arg); cache.set(arg, result); return result } }. React.memo and useMemo apply this at the component level."
+      },
+      {
+        "optionText": "A technique to store variables in browser memory for faster access",
+        "isCorrect": false,
+        "explanation": "Memoization is specifically about caching function return values based on input arguments, not general memory storage."
+      },
+      {
+        "optionText": "Memoization is the same as browser caching — it stores network responses",
+        "isCorrect": false,
+        "explanation": "Browser caching stores network resources. Memoization caches function computation results in memory during a JavaScript session."
+      },
+      {
+        "optionText": "Memoization is a JavaScript engine optimization applied automatically to all functions",
+        "isCorrect": false,
+        "explanation": "Engines optimize hot code paths but don't memoize pure functions automatically. Memoization must be implemented explicitly."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "What is the difference between Map and WeakMap?",
+    "options": [
+      {
+        "optionText": "Map holds strong references (keys can be any value, iterable); WeakMap only allows object keys and holds weak references, allowing garbage collection of unreachable key-value pairs",
+        "isCorrect": true,
+        "explanation": "WeakMap keys must be objects and are weakly referenced — if no other references to the key exist, the entry is garbage collected. WeakMaps are not iterable (no forEach, no size). Useful for private data storage and caching without memory leaks."
+      },
+      {
+        "optionText": "WeakMap is a smaller, more memory-efficient version of Map with a fixed size limit",
+        "isCorrect": false,
+        "explanation": "WeakMap's 'weak' refers to weak references, not size limitations."
+      },
+      {
+        "optionText": "Map can only use strings as keys; WeakMap supports all value types as keys",
+        "isCorrect": false,
+        "explanation": "Map supports any value as a key (including objects, functions). WeakMap is more restrictive — only object keys."
+      },
+      {
+        "optionText": "WeakMap automatically serializes values to JSON for storage",
+        "isCorrect": false,
+        "explanation": "WeakMap stores JavaScript object references. No serialization occurs."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "What are common causes of memory leaks in JavaScript applications?",
+    "options": [
+      {
+        "optionText": "Detached DOM nodes still referenced by JS, lingering event listeners, closures holding references, global variables, and uncleaned timers/subscriptions",
+        "isCorrect": true,
+        "explanation": "Removing a DOM element but keeping a JS reference (like removeChild() without nulling the reference) prevents GC. Event listeners on removed elements, setInterval never cleared, and closures capturing large objects are classic leak patterns."
+      },
+      {
+        "optionText": "Using too many variables in a function — JavaScript has a maximum variable limit",
+        "isCorrect": false,
+        "explanation": "There's no variable limit. Memory leaks come from retaining references to objects that are no longer needed."
+      },
+      {
+        "optionText": "Memory leaks in JavaScript are impossible because the garbage collector handles all cleanup",
+        "isCorrect": false,
+        "explanation": "The GC only collects unreachable objects. If your code still holds a reference, the GC can't collect it."
+      },
+      {
+        "optionText": "Using async/await instead of callbacks always causes memory leaks",
+        "isCorrect": false,
+        "explanation": "async/await doesn't inherently cause memory leaks. The patterns above are the real culprits."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "What is optional chaining and the nullish coalescing operator?",
+    "options": [
+      {
+        "optionText": "?. short-circuits to undefined if a property is null/undefined instead of throwing; ?? returns the right-hand side only if the left is null or undefined (not falsy)",
+        "isCorrect": true,
+        "explanation": "user?.address?.city safely returns undefined if any link is null/undefined. value ?? 'default' uses 'default' only for null/undefined — unlike ||, which also triggers for 0, '', and false."
+      },
+      {
+        "optionText": "?. is the ternary operator shorthand; ?? is the nullish assignment operator",
+        "isCorrect": false,
+        "explanation": "?. is optional chaining; ?? is nullish coalescing. ??= is the nullish assignment operator (val ??= 'default')."
+      },
+      {
+        "optionText": "Optional chaining (?.) throws an error when it encounters null, making bugs visible",
+        "isCorrect": false,
+        "explanation": "Optional chaining returns undefined when it encounters null/undefined — it silently short-circuits rather than throwing."
+      },
+      {
+        "optionText": "?? and || are identical — both return the right-hand side for all falsy values",
+        "isCorrect": false,
+        "explanation": "?? only triggers for null/undefined. || triggers for all falsy values (0, '', false, NaN, null, undefined). This is an important distinction."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "What are microtasks vs macrotasks and how does the task queue prioritisation work?",
+    "options": [
+      {
+        "optionText": "Microtasks (Promises, queueMicrotask, MutationObserver) run after each task and drain completely before the next macrotask (setTimeout, setInterval, I/O, UI events) executes",
+        "isCorrect": true,
+        "explanation": "Event loop order: run task → drain all microtasks → render → next task. This means Promise.resolve().then(fn) always runs before setTimeout(fn, 0). Microtasks can starve the rendering if they keep queuing more microtasks."
+      },
+      {
+        "optionText": "Macrotasks have higher priority than microtasks and always execute first",
+        "isCorrect": false,
+        "explanation": "It's the opposite — microtasks have higher priority and drain completely before the next macrotask."
+      },
+      {
+        "optionText": "setTimeout callbacks are microtasks because they're part of JavaScript's core",
+        "isCorrect": false,
+        "explanation": "setTimeout creates macrotasks. Promise callbacks are microtasks."
+      },
+      {
+        "optionText": "Microtasks and macrotasks are processed in the order they were queued, with no priority difference",
+        "isCorrect": false,
+        "explanation": "There is a clear priority: microtasks always drain before the next macrotask executes."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "What are Service Workers and how do they enable offline-first applications?",
+    "options": [
+      {
+        "optionText": "A JavaScript proxy running in a background thread that intercepts network requests, caches resources via the Cache API, and serves them when offline",
+        "isCorrect": true,
+        "explanation": "Service Workers run off the main thread, intercept fetch events, and can serve cached responses when the network is unavailable. They enable PWAs with offline support, background sync, and push notifications."
+      },
+      {
+        "optionText": "Service Workers are Node.js processes that run server-side to handle API requests",
+        "isCorrect": false,
+        "explanation": "Service Workers run in the browser in a separate thread. They're client-side, not server-side."
+      },
+      {
+        "optionText": "Service Workers replace Web Workers and provide the same functionality",
+        "isCorrect": false,
+        "explanation": "Service Workers and Web Workers are different. Web Workers are for CPU-intensive tasks on separate threads. Service Workers intercept network requests and manage caching."
+      },
+      {
+        "optionText": "Service Workers can directly access the DOM to update the UI when offline",
+        "isCorrect": false,
+        "explanation": "Service Workers cannot access the DOM. They communicate with pages via postMessage."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "What is the Proxy object in JavaScript and what can it be used for?",
+    "options": [
+      {
+        "optionText": "An object that wraps another object and intercepts operations (get, set, delete, apply etc.) via handler traps — used for validation, logging, reactivity, and access control",
+        "isCorrect": true,
+        "explanation": "const proxy = new Proxy(target, { get(t, k) { console.log(k); return t[k] } }). Vue 3 uses Proxy for its reactivity system. Immer uses it for immutable draft state. You can intercept property access, assignment, deletion, function calls, and more."
+      },
+      {
+        "optionText": "A Proxy is a network proxy configuration object for making HTTP requests",
+        "isCorrect": false,
+        "explanation": "The JavaScript Proxy object is an ES6 meta-programming feature — nothing to do with network proxies."
+      },
+      {
+        "optionText": "Proxy is used exclusively for mocking objects in unit tests",
+        "isCorrect": false,
+        "explanation": "While Proxy can be useful in testing, it's a general-purpose meta-programming tool used in production libraries like Vue, Immer, and more."
+      },
+      {
+        "optionText": "A Proxy creates a deep clone of an object that updates automatically when the original changes",
+        "isCorrect": false,
+        "explanation": "Proxy wraps an object and intercepts operations on it. It's not a cloning mechanism."
+      }
+    ]
+  }
+]

@@ -1,0 +1,418 @@
+[
+  {
+    "topic": "unit-testing",
+    "question": "What is Mocking in unit testing?",
+    "options": [
+      {
+        "optionText": "Replacing a real dependency with a controlled fake that returns predetermined values and records how it was called.",
+        "isCorrect": true,
+        "explanation": "Correct — jest.fn() and jest.mock() create mocks so tests run without real databases or APIs."
+      },
+      {
+        "optionText": "Writing test code that resembles the production code as closely as possible.",
+        "isCorrect": false,
+        "explanation": "Mocking is about substituting dependencies, not mirroring production code."
+      },
+      {
+        "optionText": "Running the same test multiple times to ensure it produces consistent results.",
+        "isCorrect": false,
+        "explanation": "Repeatability is a property of good tests generally — mocking is specifically about replacing dependencies."
+      },
+      {
+        "optionText": "Generating fake user data using tools like Faker.js for integration tests.",
+        "isCorrect": false,
+        "explanation": "Fake data generation is a different technique — mocking is specifically about replacing real implementations with controlled substitutes."
+      }
+    ]
+  },
+  {
+    "topic": "unit-testing",
+    "question": "What is the difference between Unit Tests, Integration Tests, Smoke Tests, and Regression Tests?",
+    "options": [
+      {
+        "optionText": "Unit = single isolated unit; Integration = multiple units together; Smoke = basic sanity check; Regression = ensures old bugs don't return.",
+        "isCorrect": true,
+        "explanation": "Correct — each test type serves a different purpose in a layered testing strategy."
+      },
+      {
+        "optionText": "They are different names for the same type of test, distinguished only by the team's preference.",
+        "isCorrect": false,
+        "explanation": "Each type has a distinct scope and purpose — they are not interchangeable."
+      },
+      {
+        "optionText": "Unit tests run in CI; integration tests run locally; smoke tests run in production; regression tests run weekly.",
+        "isCorrect": false,
+        "explanation": "The distinction is about scope and what is tested, not when or where they run."
+      },
+      {
+        "optionText": "Unit and integration tests are automated; smoke and regression tests are always manual.",
+        "isCorrect": false,
+        "explanation": "All four types can be automated — the distinction is about scope, not execution method."
+      }
+    ]
+  },
+  {
+    "topic": "unit-testing",
+    "question": "What is the Arrange-Act-Assert pattern?",
+    "options": [
+      {
+        "optionText": "A test structure where Arrange sets up state, Act triggers the behaviour under test, and Assert verifies the outcome.",
+        "isCorrect": true,
+        "explanation": "Correct — AAA keeps tests readable and ensures each test has exactly one Act."
+      },
+      {
+        "optionText": "A pattern where you first assert the expected output, then act, then arrange — in reverse order.",
+        "isCorrect": false,
+        "explanation": "The correct order is Arrange → Act → Assert — reversing it would make tests harder to read and write."
+      },
+      {
+        "optionText": "A CI/CD deployment pipeline pattern: Arrange staging, Act on canary, Assert in production.",
+        "isCorrect": false,
+        "explanation": "AAA is a test structure pattern, not a deployment pipeline pattern."
+      },
+      {
+        "optionText": "A pattern specific to Jasmine and Mocha — Jest uses the Given-When-Then pattern instead.",
+        "isCorrect": false,
+        "explanation": "AAA is framework-agnostic and maps directly to Given-When-Then (BDD). Jest, Jasmine, and Mocha all support it."
+      }
+    ]
+  },
+  {
+    "topic": "unit-testing",
+    "question": "What is the fundamental difference between Unit Tests and Integration Tests?",
+    "options": [
+      {
+        "optionText": "Unit tests verify a single unit in isolation with mocked dependencies; integration tests verify multiple units working together, often with real dependencies.",
+        "isCorrect": true,
+        "explanation": "Correct — unit tests are fast and isolated; integration tests are slower but catch seam-level bugs."
+      },
+      {
+        "optionText": "Unit tests are written by developers; integration tests are written by QA engineers.",
+        "isCorrect": false,
+        "explanation": "Who writes them is a team practice, not an inherent distinction — developers write both."
+      },
+      {
+        "optionText": "Unit tests run in the browser; integration tests run in Node.js via Jest.",
+        "isCorrect": false,
+        "explanation": "Both can run in either environment — the distinction is about scope and dependency isolation."
+      },
+      {
+        "optionText": "Unit tests use describe() blocks; integration tests use it() blocks.",
+        "isCorrect": false,
+        "explanation": "Both use the same Jest API — the difference is what is tested, not which functions are called."
+      }
+    ]
+  },
+  {
+    "topic": "unit-testing",
+    "question": "What are the benefits of unit testing?",
+    "options": [
+      {
+        "optionText": "Fast feedback, early bug detection, safe refactoring, living documentation, and better-designed APIs through testability pressure.",
+        "isCorrect": true,
+        "explanation": "Correct — tests that are hard to write often signal design problems; testability drives good architecture."
+      },
+      {
+        "optionText": "Unit tests guarantee the application has zero bugs in production.",
+        "isCorrect": false,
+        "explanation": "Unit tests reduce bugs but cannot guarantee zero bugs — they only cover the cases explicitly tested."
+      },
+      {
+        "optionText": "Unit tests eliminate the need for code reviews since tests verify correctness.",
+        "isCorrect": false,
+        "explanation": "Tests and code reviews are complementary — tests check behaviour; reviews check design, style, and maintainability."
+      },
+      {
+        "optionText": "Unit tests are primarily beneficial for frontend code — backend code rarely benefits.",
+        "isCorrect": false,
+        "explanation": "Unit testing applies equally to backend logic, utilities, and data transformation functions."
+      }
+    ]
+  },
+  {
+    "topic": "unit-testing",
+    "question": "Should unit tests be written for getters and setters?",
+    "options": [
+      {
+        "optionText": "Generally no — trivial getters/setters add coverage noise without testing meaningful behaviour; test the behaviour that uses them instead.",
+        "isCorrect": true,
+        "explanation": "Correct — coverage for its own sake is a smell; if a getter contains logic, it's worth testing."
+      },
+      {
+        "optionText": "Yes, always — every line of code should be covered by a unit test regardless of complexity.",
+        "isCorrect": false,
+        "explanation": "100% coverage is not a goal in itself — testing trivial code wastes time and clutters the test suite."
+      },
+      {
+        "optionText": "Only getters need tests; setters are side-effect-free so they never need testing.",
+        "isCorrect": false,
+        "explanation": "Even setters with validation logic might warrant testing — the principle is to test meaningful behaviour, not based on getter vs setter."
+      },
+      {
+        "optionText": "Yes, because getters and setters are the entry points to state and most bugs occur there.",
+        "isCorrect": false,
+        "explanation": "Most bugs occur in business logic, not trivial accessors — test the logic, not the plumbing."
+      }
+    ]
+  },
+  {
+    "topic": "unit-testing",
+    "question": "What is the difference between Mocking and Spying on an object?",
+    "options": [
+      {
+        "optionText": "A mock replaces the real implementation entirely; a spy wraps the real implementation, letting it run while recording calls.",
+        "isCorrect": true,
+        "explanation": "Correct — jest.spyOn() wraps the real function; jest.fn() or jest.mock() replaces it."
+      },
+      {
+        "optionText": "Mocking is for functions; spying is for objects — they cannot be used interchangeably.",
+        "isCorrect": false,
+        "explanation": "Both can target functions and objects — the difference is whether the real implementation runs."
+      },
+      {
+        "optionText": "Spying is more accurate than mocking because it uses the real implementation.",
+        "isCorrect": false,
+        "explanation": "Neither is inherently more accurate — choose based on whether you need the real implementation to run in the test."
+      },
+      {
+        "optionText": "They are two names for the same Jest feature (jest.fn() and jest.spyOn() are equivalent).",
+        "isCorrect": false,
+        "explanation": "They differ: jest.spyOn preserves the real implementation by default; jest.fn() creates a blank mock."
+      }
+    ]
+  },
+  {
+    "topic": "unit-testing",
+    "question": "When and where should I use mocking?",
+    "options": [
+      {
+        "optionText": "Mock external dependencies (APIs, databases, email services) in unit tests; avoid mocking in integration tests where real behaviour matters.",
+        "isCorrect": true,
+        "explanation": "Correct — over-mocking leads to tests that pass while production code is broken."
+      },
+      {
+        "optionText": "Always mock everything in every test to ensure tests run as fast as possible.",
+        "isCorrect": false,
+        "explanation": "Over-mocking produces false confidence — if you mock everything, you're testing the mocks, not the code."
+      },
+      {
+        "optionText": "Never mock — always use real implementations to ensure tests reflect production.",
+        "isCorrect": false,
+        "explanation": "Real databases and APIs make tests slow, non-deterministic, and hard to run in CI without extensive setup."
+      },
+      {
+        "optionText": "Mock only in E2E tests; unit and integration tests should always use real dependencies.",
+        "isCorrect": false,
+        "explanation": "This reverses best practice — unit tests mock dependencies; E2E tests use real implementations."
+      }
+    ]
+  },
+  {
+    "topic": "unit-testing",
+    "question": "What is a reasonable code coverage percentage for unit tests?",
+    "options": [
+      {
+        "optionText": "80–85% is a practical sweet spot — chasing 100% produces diminishing returns and leads to testing trivial code.",
+        "isCorrect": true,
+        "explanation": "Correct — branch coverage at 80% is more valuable than 100% line coverage of trivial getters."
+      },
+      {
+        "optionText": "100% — any uncovered line is a potential bug and should be tested.",
+        "isCorrect": false,
+        "explanation": "100% coverage is a vanity metric — you can hit 100% with meaningless tests that don't assert anything useful."
+      },
+      {
+        "optionText": "50% — testing more than half the codebase is sufficient for most projects.",
+        "isCorrect": false,
+        "explanation": "50% is generally considered too low — critical business logic paths may not be covered."
+      },
+      {
+        "optionText": "Coverage percentage is irrelevant — only test the most complex functions.",
+        "isCorrect": false,
+        "explanation": "Coverage is a useful signal even if imperfect — it surfaces areas with no tests at all."
+      }
+    ]
+  },
+  {
+    "topic": "unit-testing",
+    "question": "What is the best way to unit test a void method?",
+    "options": [
+      {
+        "optionText": "Assert on observable side effects: state changes, mock calls, emitted events, or DOM updates — not return values.",
+        "isCorrect": true,
+        "explanation": "Correct — if a void method calls sendEmail(), assert that sendEmail was called with the right arguments."
+      },
+      {
+        "optionText": "Void methods cannot be unit tested — skip them and rely on integration tests.",
+        "isCorrect": false,
+        "explanation": "Void methods have testable side effects; you simply assert on those instead of a return value."
+      },
+      {
+        "optionText": "Convert the method to return a boolean success flag, then assert the flag is true.",
+        "isCorrect": false,
+        "explanation": "Changing production code to suit tests is an anti-pattern — test the existing side effects instead."
+      },
+      {
+        "optionText": "Assert that the method does not throw an exception.",
+        "isCorrect": false,
+        "explanation": "Not throwing is a baseline — a useful void method test verifies that the right side effects occurred."
+      }
+    ]
+  },
+  {
+    "topic": "unit-testing",
+    "question": "How do you test private methods?",
+    "options": [
+      {
+        "optionText": "Test private methods through the public API that calls them — if that's impossible, the private logic may need to move to a separate testable class.",
+        "isCorrect": true,
+        "explanation": "Correct — private methods are implementation details; testing them directly couples tests to internals."
+      },
+      {
+        "optionText": "Use TypeScript's 'as any' cast in every test to bypass the private modifier.",
+        "isCorrect": false,
+        "explanation": "as any is a last resort hack — it couples tests to implementation details and breaks at runtime if logic changes."
+      },
+      {
+        "optionText": "Rename private methods to public for testing, then rename back for production.",
+        "isCorrect": false,
+        "explanation": "Changing access modifiers just for tests defeats the purpose of encapsulation."
+      },
+      {
+        "optionText": "Private methods should never be tested — they are internal implementation details.",
+        "isCorrect": false,
+        "explanation": "Private logic should be tested, but through the public interface — not by bypassing access controls."
+      }
+    ]
+  },
+  {
+    "topic": "unit-testing",
+    "question": "What is the best strategy for unit testing database-driven applications?",
+    "options": [
+      {
+        "optionText": "Abstract the database behind a Repository interface; mock the repository in unit tests; use a real test database in integration tests.",
+        "isCorrect": true,
+        "explanation": "Correct — the Repository pattern makes the data layer swappable, enabling fast unit tests and realistic integration tests."
+      },
+      {
+        "optionText": "Always use a real database in unit tests to ensure SQL queries are correct.",
+        "isCorrect": false,
+        "explanation": "Real databases make unit tests slow and non-deterministic — that's what integration tests are for."
+      },
+      {
+        "optionText": "Use SQLite in-memory for all tests regardless of whether you use PostgreSQL in production.",
+        "isCorrect": false,
+        "explanation": "SQLite has different SQL behaviour than PostgreSQL/MySQL — dialect differences can mask real bugs."
+      },
+      {
+        "optionText": "Database-driven apps cannot be unit tested — only end-to-end tests are appropriate.",
+        "isCorrect": false,
+        "explanation": "Abstracting the database behind an interface makes unit testing straightforward without touching a real DB."
+      }
+    ]
+  },
+  {
+    "topic": "unit-testing",
+    "question": "How can you unit test a GUI?",
+    "options": [
+      {
+        "optionText": "Use React Testing Library to test user-facing behaviour via semantic queries (role, label) and userEvent — avoiding implementation details like CSS classes.",
+        "isCorrect": true,
+        "explanation": "Correct — RTL's philosophy: test what users see and do, not how components are structured internally."
+      },
+      {
+        "optionText": "Take screenshots and compare pixel-by-pixel — any visual change fails the test.",
+        "isCorrect": false,
+        "explanation": "That describes visual regression testing (e.g. Chromatic/Percy) — not unit testing of GUI behaviour."
+      },
+      {
+        "optionText": "GUI cannot be unit tested — use only Cypress end-to-end tests for frontend.",
+        "isCorrect": false,
+        "explanation": "React Testing Library enables fast, isolated component-level tests without a real browser."
+      },
+      {
+        "optionText": "Query DOM elements by className and id, then assert on their innerHTML.",
+        "isCorrect": false,
+        "explanation": "RTL's getByRole and getByLabelText are preferred — querying by className couples tests to implementation details."
+      }
+    ]
+  },
+  {
+    "topic": "unit-testing",
+    "question": "Can unit testing be successfully added to an existing production project and how?",
+    "options": [
+      {
+        "optionText": "Yes — apply the 'new code' rule (all new code must have tests) and 'bug-fix' rule (write a failing test before fixing any bug), then gradually increase coverage.",
+        "isCorrect": true,
+        "explanation": "Correct — the incremental approach avoids the trap of trying to test everything before shipping any new features."
+      },
+      {
+        "optionText": "No — unit tests must be written before any production code; retrofitting is not practical.",
+        "isCorrect": false,
+        "explanation": "Retrofitting tests is harder than greenfield TDD but absolutely viable with an incremental strategy."
+      },
+      {
+        "optionText": "Yes — but you must pause all feature development until 100% coverage is achieved.",
+        "isCorrect": false,
+        "explanation": "A big-bang approach to coverage is impractical and demoralising — incremental coverage improvement is far more effective."
+      },
+      {
+        "optionText": "Only if the existing codebase is rewritten to use dependency injection first.",
+        "isCorrect": false,
+        "explanation": "DI helps but isn't required — you can add tests to tightly coupled code using techniques like extract-and-override."
+      }
+    ]
+  },
+  {
+    "topic": "unit-testing",
+    "question": "What are the disadvantages of Test-Driven Development (TDD)?",
+    "options": [
+      {
+        "optionText": "Slower initial velocity, requires design clarity upfront, test maintenance overhead, over-mocking temptation, and poor fit for exploratory/UI work.",
+        "isCorrect": true,
+        "explanation": "Correct — TDD has real costs; it pays off most in business logic with clear requirements, less so for exploratory UI work."
+      },
+      {
+        "optionText": "TDD has no disadvantages — it always produces better code faster.",
+        "isCorrect": false,
+        "explanation": "TDD has genuine trade-offs; acknowledging them is part of using the practice wisely."
+      },
+      {
+        "optionText": "TDD prevents refactoring because existing tests break whenever code is changed.",
+        "isCorrect": false,
+        "explanation": "Good TDD tests are written against behaviour, not implementation — they survive refactoring. Brittle tests are a TDD smell, not an inherent property."
+      },
+      {
+        "optionText": "TDD only works in statically typed languages like TypeScript — not JavaScript.",
+        "isCorrect": false,
+        "explanation": "TDD is language-agnostic and was popularised in dynamically typed languages like Smalltalk and Ruby."
+      }
+    ]
+  },
+  {
+    "topic": "unit-testing",
+    "question": "How do you design a testing strategy for code that relies on caching?",
+    "options": [
+      {
+        "optionText": "Control cache state explicitly: test cache-miss (clear cache first), test cache-hit (pre-populate), test TTL (jest.useFakeTimers()), and test invalidation separately.",
+        "isCorrect": true,
+        "explanation": "Correct — abstracting the cache behind an interface makes these states easy to set up in each test."
+      },
+      {
+        "optionText": "Skip testing cache-related code because timing makes it non-deterministic.",
+        "isCorrect": false,
+        "explanation": "jest.useFakeTimers() eliminates timing non-determinism — caching logic is testable."
+      },
+      {
+        "optionText": "Always disable caching in tests so cache state doesn't affect results.",
+        "isCorrect": false,
+        "explanation": "Disabling caching skips testing the cache logic itself — you need tests that specifically exercise each cache state."
+      },
+      {
+        "optionText": "Only test cache behaviour in integration tests — unit tests cannot simulate cache state.",
+        "isCorrect": false,
+        "explanation": "Abstracting the cache behind an interface allows full unit testing of cache-miss, cache-hit, TTL, and invalidation scenarios."
+      }
+    ]
+  }
+]

@@ -1,0 +1,522 @@
+[
+  {
+    "topic": "typescript",
+    "question": "How to call a base class constructor from a child class in TypeScript?",
+    "options": [
+      {
+        "optionText": "Use super() inside the child class constructor before accessing 'this'",
+        "isCorrect": true,
+        "explanation": "In TypeScript (and JavaScript classes), super() must be the first statement in a child constructor. It calls the parent's constructor and is required when using inheritance."
+      },
+      {
+        "optionText": "Use parent() method to call the base class constructor",
+        "isCorrect": false,
+        "explanation": "There is no parent() method in TypeScript. The keyword is super()."
+      },
+      {
+        "optionText": "Call the base class constructor using BaseClass.constructor()",
+        "isCorrect": false,
+        "explanation": "Constructors are not callable as static methods. super() is the only way to call the parent constructor."
+      },
+      {
+        "optionText": "Use this.super() inside the child class constructor",
+        "isCorrect": false,
+        "explanation": "super is a keyword, not a method on 'this'. It's called as super(), not this.super()."
+      }
+    ]
+  },
+  {
+    "topic": "typescript",
+    "question": "Explain generics in TypeScript",
+    "options": [
+      {
+        "optionText": "Type parameters that let you write reusable, type-safe code that works with multiple types without losing type information",
+        "isCorrect": true,
+        "explanation": "Generics use type variables like <T> to create functions, classes, or interfaces that work with any type while maintaining type safety. Example: function identity<T>(arg: T): T — the return type matches the input type."
+      },
+      {
+        "optionText": "A way to declare variables without specifying a type, equivalent to using 'any'",
+        "isCorrect": false,
+        "explanation": "Generics preserve type information — the opposite of 'any'. With generics, TypeScript tracks the actual type passed in."
+      },
+      {
+        "optionText": "Built-in TypeScript classes like Array, Map, and Set",
+        "isCorrect": false,
+        "explanation": "Those are generic types, but generics is the mechanism that makes them possible — not the built-in types themselves."
+      },
+      {
+        "optionText": "A runtime type checking feature that validates types during execution",
+        "isCorrect": false,
+        "explanation": "TypeScript types including generics are erased at runtime. They only exist at compile time."
+      }
+    ]
+  },
+  {
+    "topic": "typescript",
+    "question": "What does the pipe (|) mean in TypeScript?",
+    "options": [
+      {
+        "optionText": "It creates a union type — a value can be one of several specified types",
+        "isCorrect": true,
+        "explanation": "string | number means the value can be either a string or a number. Union types are fundamental to TypeScript — they let you express 'this or that' precisely."
+      },
+      {
+        "optionText": "It is the bitwise OR operator used for number calculations",
+        "isCorrect": false,
+        "explanation": "While | is bitwise OR in JavaScript, in TypeScript type position (type annotations) it creates union types."
+      },
+      {
+        "optionText": "It creates an intersection type — a value must satisfy both types simultaneously",
+        "isCorrect": false,
+        "explanation": "Intersection types use the & operator. The | operator creates union types."
+      },
+      {
+        "optionText": "It separates optional properties from required properties in an interface",
+        "isCorrect": false,
+        "explanation": "Optional properties use the ? suffix (name?: string). The | creates union types."
+      }
+    ]
+  },
+  {
+    "topic": "typescript",
+    "question": "What is the difference between the String and string types in TypeScript?",
+    "options": [
+      {
+        "optionText": "string (lowercase) is the primitive type; String (uppercase) is the wrapper object type — always prefer lowercase string",
+        "isCorrect": true,
+        "explanation": "string refers to the JavaScript primitive. String is the object wrapper class. They're not interchangeable — a String object is not assignable to string. Using String in type annotations is almost always wrong."
+      },
+      {
+        "optionText": "They are identical — TypeScript treats them the same way",
+        "isCorrect": false,
+        "explanation": "They are different types. string is the primitive; String is an object. TypeScript will flag mismatches."
+      },
+      {
+        "optionText": "String is the TypeScript type; string is the JavaScript type, used only for JS interop",
+        "isCorrect": false,
+        "explanation": "Both exist in TypeScript. string (primitive) is the correct one to use in type annotations."
+      },
+      {
+        "optionText": "String supports additional methods not available on string primitives",
+        "isCorrect": false,
+        "explanation": "String primitive methods are auto-boxed in JavaScript, so 'hello'.toUpperCase() works fine. You don't need the String object for methods."
+      }
+    ]
+  },
+  {
+    "topic": "typescript",
+    "question": "What are assertion functions in TypeScript?",
+    "options": [
+      {
+        "optionText": "Functions that assert a condition and narrow the type if they don't throw — declared with asserts condition or asserts arg is Type in the return type",
+        "isCorrect": true,
+        "explanation": "Example: function assert(val: unknown): asserts val is string { if (typeof val !== 'string') throw new Error('not a string') }. After calling assert(x), TypeScript knows x is string in the following code."
+      },
+      {
+        "optionText": "Functions that use the as keyword to cast any value to any type without checking",
+        "isCorrect": false,
+        "explanation": "Type assertions (as Type) are different from assertion functions. Assertion functions validate at runtime and narrow types."
+      },
+      {
+        "optionText": "Built-in TypeScript functions like assert() available in all projects",
+        "isCorrect": false,
+        "explanation": "TypeScript has no built-in assert() function in the type system. You define assertion functions yourself. Node.js has assert, but that's a separate module."
+      },
+      {
+        "optionText": "Functions used only in test files to validate TypeScript types at compile time",
+        "isCorrect": false,
+        "explanation": "Assertion functions can be used in any TypeScript code, not just tests."
+      }
+    ]
+  },
+  {
+    "topic": "typescript",
+    "question": "What are conditional types in TypeScript?",
+    "options": [
+      {
+        "optionText": "Types that use the T extends U ? X : Y syntax to select between types based on a condition, enabling advanced type inference and transformation",
+        "isCorrect": true,
+        "explanation": "Example: type IsString<T> = T extends string ? true : false. They power many utility types — NonNullable<T> is T extends null | undefined ? never : T. Combined with infer, they extract type information."
+      },
+      {
+        "optionText": "TypeScript's equivalent of if/else statements that run at runtime",
+        "isCorrect": false,
+        "explanation": "Conditional types are compile-time constructs that resolve to a type. They don't execute at runtime."
+      },
+      {
+        "optionText": "A way to make object properties conditional based on environment variables",
+        "isCorrect": false,
+        "explanation": "Conditional types operate on the type system level, not environment variables."
+      },
+      {
+        "optionText": "The type equivalent of the JavaScript ternary operator for runtime values",
+        "isCorrect": false,
+        "explanation": "While the syntax looks similar to a ternary, conditional types operate on types at compile time, not on values at runtime."
+      }
+    ]
+  },
+  {
+    "topic": "typescript",
+    "question": "What are template literal types and what are they used for?",
+    "options": [
+      {
+        "optionText": "Types that use template literal syntax to construct string types, enabling type-safe string manipulation and pattern matching",
+        "isCorrect": true,
+        "explanation": "type EventName = `on${Capitalize<string>}` matches 'onClick', 'onChange' etc. They're used for typed event names, CSS-in-JS property names, API path typing, and more precise string types."
+      },
+      {
+        "optionText": "Template literal types are the TypeScript equivalent of template strings for runtime string building",
+        "isCorrect": false,
+        "explanation": "Template strings (backticks with ${}) are runtime JavaScript. Template literal types are compile-time TypeScript constructs."
+      },
+      {
+        "optionText": "They allow embedding JavaScript expressions inside TypeScript interfaces",
+        "isCorrect": false,
+        "explanation": "TypeScript types are static — they can't contain runtime expressions."
+      },
+      {
+        "optionText": "Template literal types are used to import external type definition files",
+        "isCorrect": false,
+        "explanation": "Type definitions are imported with import type or via @types packages, not template literal types."
+      }
+    ]
+  },
+  {
+    "topic": "typescript",
+    "question": "What is the difference between private fields (#) and the private keyword?",
+    "options": [
+      {
+        "optionText": "#field is truly private at runtime (JS WeakMap-based); private keyword is only TypeScript compile-time enforcement — it's accessible at runtime via any type cast",
+        "isCorrect": true,
+        "explanation": "class Foo { #x = 1; private y = 2 } — #x cannot be accessed outside the class even in compiled JS. y becomes a regular property that TypeScript flags but JS allows access to."
+      },
+      {
+        "optionText": "Both # and private are identical — they provide the same level of encapsulation",
+        "isCorrect": false,
+        "explanation": "They differ significantly at runtime. # provides hard encapsulation; private is erased to a regular property."
+      },
+      {
+        "optionText": "The private keyword is stronger than # — it prevents access in both TypeScript and JavaScript",
+        "isCorrect": false,
+        "explanation": "It's the opposite. The private keyword only enforces at compile time. # provides true runtime encapsulation."
+      },
+      {
+        "optionText": "# fields are deprecated in TypeScript in favour of the private keyword",
+        "isCorrect": false,
+        "explanation": "Private class fields (#) are a JavaScript standard feature. Neither is deprecated."
+      }
+    ]
+  },
+  {
+    "topic": "typescript",
+    "question": "How do you exclude a property from a type in TypeScript?",
+    "options": [
+      {
+        "optionText": "Use the Omit<Type, Keys> utility type: type WithoutName = Omit<User, 'name'>",
+        "isCorrect": true,
+        "explanation": "Omit<T, K> creates a new type with all properties of T except those in K. You can omit multiple: Omit<User, 'name' | 'email'>. The opposite is Pick<T, K> to keep only specified properties."
+      },
+      {
+        "optionText": "Use the Exclude<Type, Keys> utility type to remove properties",
+        "isCorrect": false,
+        "explanation": "Exclude<T, U> works on union types, not object properties. It removes union members. Omit<T, K> removes object properties."
+      },
+      {
+        "optionText": "Set the property to never: type Modified = User & { name: never }",
+        "isCorrect": false,
+        "explanation": "While this technically makes name unusable, it's not the idiomatic approach. Omit<User, 'name'> is cleaner and correct."
+      },
+      {
+        "optionText": "Use the delete keyword in the type definition",
+        "isCorrect": false,
+        "explanation": "delete is a runtime JavaScript operator for objects. TypeScript types use utility types like Omit."
+      }
+    ]
+  },
+  {
+    "topic": "typescript",
+    "question": "What is an index signature, and why would you use one?",
+    "options": [
+      {
+        "optionText": "A type annotation allowing an object to have properties with dynamic keys of a specified type: { [key: string]: number }",
+        "isCorrect": true,
+        "explanation": "Index signatures define the shape of objects with unknown property names. Example: interface StringMap { [key: string]: string }. Used for dictionaries, lookup tables, or objects where keys are only known at runtime."
+      },
+      {
+        "optionText": "A numeric index used to access array elements in TypeScript",
+        "isCorrect": false,
+        "explanation": "Arrays use numeric indices, but index signatures are about object types with dynamic string or number keys."
+      },
+      {
+        "optionText": "A way to define the order in which class methods are executed",
+        "isCorrect": false,
+        "explanation": "Method execution order is determined by call order, not index signatures."
+      },
+      {
+        "optionText": "A reference to the position of a type in a TypeScript union",
+        "isCorrect": false,
+        "explanation": "Unions don't have positional indices. Index signatures are about object property typing."
+      }
+    ]
+  },
+  {
+    "topic": "typescript",
+    "question": "How do you check the type of a variable at runtime in TypeScript?",
+    "options": [
+      {
+        "optionText": "Use typeof for primitives, instanceof for class instances, and custom type guards (is) for complex types",
+        "isCorrect": true,
+        "explanation": "typeof val === 'string' works for primitives. val instanceof Date works for class instances. For interfaces (erased at runtime), write a type guard: function isUser(val: unknown): val is User { return typeof val.name === 'string' }"
+      },
+      {
+        "optionText": "Use TypeScript's built-in checkType() function",
+        "isCorrect": false,
+        "explanation": "There is no checkType() function in TypeScript."
+      },
+      {
+        "optionText": "Use the as keyword to cast and then check the type",
+        "isCorrect": false,
+        "explanation": "Type assertions (as) tell TypeScript to treat a value as a type — they don't check or validate at runtime."
+      },
+      {
+        "optionText": "TypeScript types are available at runtime so you can use type directly in conditions",
+        "isCorrect": false,
+        "explanation": "TypeScript types are erased at compile time. They don't exist at runtime."
+      }
+    ]
+  },
+  {
+    "topic": "typescript",
+    "question": "What is the difference between private and protected members in TypeScript?",
+    "options": [
+      {
+        "optionText": "private members are only accessible within the declaring class; protected members are accessible in the declaring class and all subclasses",
+        "isCorrect": true,
+        "explanation": "class Animal { private secret = 1; protected name = 'dog' }. A subclass Dog can access this.name but not this.secret. Both are TypeScript-only enforcement (erased at runtime unless using # for true privacy)."
+      },
+      {
+        "optionText": "protected members are more restrictive than private — they can only be accessed in abstract classes",
+        "isCorrect": false,
+        "explanation": "protected is less restrictive than private — it allows subclass access. private is the most restrictive."
+      },
+      {
+        "optionText": "Both private and protected restrict access to the same level — they are interchangeable",
+        "isCorrect": false,
+        "explanation": "They have different accessibility scopes. private = class only. protected = class + subclasses."
+      },
+      {
+        "optionText": "private members can be accessed by other instances of the same class; protected cannot",
+        "isCorrect": false,
+        "explanation": "Actually, TypeScript private members can be accessed on other instances of the same class (e.g., a.#x in class A). protected adds subclass access."
+      }
+    ]
+  },
+  {
+    "topic": "typescript",
+    "question": "Why do we need the abstract keyword for classes and methods?",
+    "options": [
+      {
+        "optionText": "Abstract classes cannot be instantiated directly and define a contract — abstract methods must be implemented by all non-abstract subclasses",
+        "isCorrect": true,
+        "explanation": "abstract class Shape { abstract area(): number } cannot be constructed. Subclasses (Circle, Rectangle) must implement area(). This enforces a contract while allowing the base class to provide shared functionality."
+      },
+      {
+        "optionText": "Abstract classes are private classes that can only be used within the same file",
+        "isCorrect": false,
+        "explanation": "Abstract is about instantiation and implementation contracts, not access control."
+      },
+      {
+        "optionText": "Abstract methods are optional implementation hints — subclasses can choose to ignore them",
+        "isCorrect": false,
+        "explanation": "Non-abstract subclasses must implement all abstract methods. TypeScript enforces this at compile time."
+      },
+      {
+        "optionText": "The abstract keyword makes a class immutable — its properties cannot be reassigned",
+        "isCorrect": false,
+        "explanation": "Immutability uses readonly. abstract is about class instantiation and method implementation contracts."
+      }
+    ]
+  },
+  {
+    "topic": "typescript",
+    "question": "What is the purpose of the --incremental flag in TypeScript?",
+    "options": [
+      {
+        "optionText": "Enables incremental compilation — TypeScript saves build info to .tsbuildinfo so only changed files are recompiled on subsequent builds",
+        "isCorrect": true,
+        "explanation": "With --incremental (or incremental: true in tsconfig.json), TypeScript writes a .tsbuildinfo file after each build. Next builds read this file and skip recompiling unchanged files, significantly speeding up compilation in large projects."
+      },
+      {
+        "optionText": "Makes TypeScript add one to every numeric value automatically",
+        "isCorrect": false,
+        "explanation": "The incremental flag is a build optimisation, not a numeric operation."
+      },
+      {
+        "optionText": "Enables TypeScript to compile to older JavaScript versions incrementally",
+        "isCorrect": false,
+        "explanation": "Target JS version is controlled by the target option in tsconfig. --incremental only affects build speed."
+      },
+      {
+        "optionText": "Increases the strictness of TypeScript checks one level at a time",
+        "isCorrect": false,
+        "explanation": "TypeScript strictness is controlled by the strict family of flags in tsconfig. --incremental is purely about compilation speed."
+      }
+    ]
+  },
+  {
+    "topic": "typescript",
+    "question": "What are the main components of TypeScript?",
+    "options": [
+      {
+        "optionText": "The language itself (syntax + type system), the TypeScript compiler (tsc), and the language service (powers editor tooling like autocomplete and error highlighting)",
+        "isCorrect": true,
+        "explanation": "TypeScript has three layers: the language (types, interfaces, generics), tsc which compiles TS to JS, and the language server protocol (LSP) implementation that powers IDE features in VS Code and other editors."
+      },
+      {
+        "optionText": "Components, services, and modules — identical to Angular's architecture",
+        "isCorrect": false,
+        "explanation": "Those are Angular concepts. TypeScript's components are the language, compiler, and language service."
+      },
+      {
+        "optionText": "The type checker, runtime engine, and package manager",
+        "isCorrect": false,
+        "explanation": "TypeScript doesn't have its own runtime engine (Node.js is the runtime) or package manager (npm/pnpm handle that)."
+      },
+      {
+        "optionText": "TypeScript is a single monolithic tool with no distinct components",
+        "isCorrect": false,
+        "explanation": "TypeScript has three distinct components with different roles."
+      }
+    ]
+  },
+  {
+    "topic": "typescript",
+    "question": "How do you build a union type from the properties of a type or interface?",
+    "options": [
+      {
+        "optionText": "Use keyof T to get a union of property name strings, or typeof obj for a type with specific value types",
+        "isCorrect": true,
+        "explanation": "keyof User gives 'id' | 'name' | 'email' (union of property names). For property value types: type UserValues = User[keyof User]. Combined: type ID = Pick<User, 'id'>['id'] extracts the id type."
+      },
+      {
+        "optionText": "Use Object.keys() at compile time to extract property names as a union",
+        "isCorrect": false,
+        "explanation": "Object.keys() is a runtime function that returns string[]. keyof is the compile-time TypeScript equivalent."
+      },
+      {
+        "optionText": "Use the spread operator (...) to merge interface properties into a union",
+        "isCorrect": false,
+        "explanation": "Spread (...) in type context creates intersection types, not unions. Unions use |."
+      },
+      {
+        "optionText": "Union types cannot be derived from object types — they must be written manually",
+        "isCorrect": false,
+        "explanation": "keyof, template literal types, and indexed access types all let you derive union types from object types."
+      }
+    ]
+  },
+  {
+    "topic": "typescript",
+    "question": "How can you check for null and undefined in TypeScript?",
+    "options": [
+      {
+        "optionText": "Use strict null checks (strictNullChecks: true) and check with === null / === undefined, optional chaining (?.), or nullish coalescing (??)",
+        "isCorrect": true,
+        "explanation": "With strictNullChecks enabled, null and undefined are separate types that must be explicitly handled. Use if (val !== null && val !== undefined), val?.property, or val ?? defaultValue to narrow types."
+      },
+      {
+        "optionText": "TypeScript automatically handles null checks — no explicit checks are needed",
+        "isCorrect": false,
+        "explanation": "With strictNullChecks, TypeScript requires explicit null handling. Without it, null and undefined are ignored — but that's less safe."
+      },
+      {
+        "optionText": "Use the ! non-null assertion operator to tell TypeScript a value is never null",
+        "isCorrect": false,
+        "explanation": "! suppresses the null/undefined error without actually checking. It's a type assertion, not a runtime check — use it only when you're certain."
+      },
+      {
+        "optionText": "Use typeof val === 'null' to check for null values",
+        "isCorrect": false,
+        "explanation": "typeof null returns 'object' in JavaScript — a famous quirk. Use val === null instead."
+      }
+    ]
+  },
+  {
+    "topic": "typescript",
+    "question": "What does the tsconfig lib option do?",
+    "options": [
+      {
+        "optionText": "Specifies which built-in API type definitions to include — e.g., lib: ['ES2022', 'DOM'] adds typings for modern JS and browser APIs",
+        "isCorrect": true,
+        "explanation": "The lib array controls what global types are available. 'DOM' adds window, document, fetch etc. 'ES2022' adds Promise, Array.at() etc. Without DOM, TypeScript won't know about browser APIs. Without ESNext libs, newer JS features have no types."
+      },
+      {
+        "optionText": "Defines the path to external library files used by the project",
+        "isCorrect": false,
+        "explanation": "External type definitions come from @types/* packages or declaration files, not the lib option."
+      },
+      {
+        "optionText": "Sets the minimum Node.js version required to run the compiled output",
+        "isCorrect": false,
+        "explanation": "Node.js version requirements are configured in package.json engines field. lib is about available type definitions."
+      },
+      {
+        "optionText": "Specifies which npm packages TypeScript should automatically import types for",
+        "isCorrect": false,
+        "explanation": "Third-party package types come from @types/* packages. lib only covers built-in JavaScript and DOM APIs."
+      }
+    ]
+  },
+  {
+    "topic": "typescript",
+    "question": "What is a dynamic import expression?",
+    "options": [
+      {
+        "optionText": "import() returns a Promise that resolves to the module, enabling code splitting and lazy loading of modules at runtime",
+        "isCorrect": true,
+        "explanation": "const mod = await import('./heavy-module') loads the module only when called. TypeScript infers the type of the resolved module. This is how bundlers (webpack, Rollup) know to code-split."
+      },
+      {
+        "optionText": "A TypeScript feature that automatically imports missing types when you use them",
+        "isCorrect": false,
+        "explanation": "TypeScript doesn't auto-import at runtime. Dynamic imports are explicit import() calls."
+      },
+      {
+        "optionText": "An ES module syntax that replaces static imports with variables",
+        "isCorrect": false,
+        "explanation": "Dynamic imports are a separate syntax (import()) from static imports. Static imports are always at the top of the file."
+      },
+      {
+        "optionText": "A way to conditionally apply TypeScript types based on runtime values",
+        "isCorrect": false,
+        "explanation": "Dynamic imports load JavaScript modules. Runtime conditional types don't exist — TypeScript types are compile-time only."
+      }
+    ]
+  },
+  {
+    "topic": "typescript",
+    "question": "What are modules in TypeScript?",
+    "options": [
+      {
+        "optionText": "Any file with a top-level import or export is a module with its own scope; files without imports/exports are scripts sharing the global scope",
+        "isCorrect": true,
+        "explanation": "TypeScript follows ES module semantics. A file is a module if it has import/export statements — its declarations are local to that file. Without them, declarations merge into the global scope (ambient scripts)."
+      },
+      {
+        "optionText": "Modules in TypeScript are the same as classes — they encapsulate related logic",
+        "isCorrect": false,
+        "explanation": "Classes are objects. Modules are file-level scope boundaries. They serve different purposes."
+      },
+      {
+        "optionText": "TypeScript modules are only available when compiling to CommonJS",
+        "isCorrect": false,
+        "explanation": "TypeScript modules work with ESM, CommonJS, AMD, UMD, and other module formats depending on the module option in tsconfig."
+      },
+      {
+        "optionText": "Modules require the module keyword similar to Python or Rust",
+        "isCorrect": false,
+        "explanation": "TypeScript uses ES module syntax: import and export. There is no module keyword for defining modules."
+      }
+    ]
+  }
+]

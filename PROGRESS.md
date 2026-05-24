@@ -79,6 +79,27 @@ pnpm seed
 - Glossary tooltips for 58 terms across all topics
 
 ### Still missing (optional / future):
-- Mock options for new topics (`seed-mock-*.json`) — needed before topics appear in `/mock`
 - `detailMdTr` (Turkish deep dives) for all banks except JavaScript
 - `answerPersonal` for most new questions (add from Aaron's real interview experience)
+
+---
+
+## Mock Options — All Topics Complete
+
+All 13 topics now have mock seed files (231 questions total). After `pnpm seed` runs, all topics will appear in `/mock`.
+
+| File | Questions |
+| --- | --- |
+| seed-mock-react.json | 20 |
+| seed-mock-typescript.json | 20 |
+| seed-mock-nextjs.json | 21 |
+| seed-mock-redux.json | 16 |
+| seed-mock-javascript.json | 20 |
+| seed-mock-html5.json | 20 |
+| seed-mock-css.json | 16 |
+| seed-mock-react-hooks.json | 16 |
+| seed-mock-git.json | 16 |
+| seed-mock-agile-scrum.json | 16 |
+| seed-mock-websockets.json | 18 |
+| seed-mock-unit-testing.json | 16 |
+| seed-mock-design-patterns.json | 16 |

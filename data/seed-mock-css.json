@@ -1,0 +1,418 @@
+[
+  {
+    "topic": "css",
+    "question": "What is CSS?",
+    "options": [
+      {
+        "optionText": "A styling language that describes the presentation of HTML documents",
+        "isCorrect": true,
+        "explanation": "CSS (Cascading Style Sheets) controls how HTML elements look — colors, layout, fonts, spacing, and more."
+      },
+      {
+        "optionText": "A programming language used to build web servers",
+        "isCorrect": false,
+        "explanation": "CSS is not a programming language and doesn't run on servers. That's the domain of Node.js, Python, etc."
+      },
+      {
+        "optionText": "A markup language for structuring web content",
+        "isCorrect": false,
+        "explanation": "HTML is the markup language for structure. CSS handles presentation."
+      },
+      {
+        "optionText": "A database query language for web applications",
+        "isCorrect": false,
+        "explanation": "CSS has nothing to do with databases. SQL is the query language for relational databases."
+      }
+    ]
+  },
+  {
+    "topic": "css",
+    "question": "What is the difference between classes and IDs in CSS?",
+    "options": [
+      {
+        "optionText": "IDs are unique per page and have higher specificity; classes can be reused on multiple elements",
+        "isCorrect": true,
+        "explanation": "An ID (#) must be unique in the document and has specificity of (0,1,0,0). A class (.) can be applied to many elements and has specificity of (0,0,1,0)."
+      },
+      {
+        "optionText": "Classes are unique per page; IDs can be reused on multiple elements",
+        "isCorrect": false,
+        "explanation": "It's the other way around — IDs should be unique, classes are reusable."
+      },
+      {
+        "optionText": "IDs and classes have identical specificity and can both be reused",
+        "isCorrect": false,
+        "explanation": "Their specificity differs significantly: an ID selector outweighs any number of class selectors."
+      },
+      {
+        "optionText": "IDs apply styles inline; classes apply styles globally",
+        "isCorrect": false,
+        "explanation": "Both are external/internal stylesheet selectors. Inline styles use the style attribute directly on the element."
+      }
+    ]
+  },
+  {
+    "topic": "css",
+    "question": "Explain the CSS box model and the layout components that it consists of.",
+    "options": [
+      {
+        "optionText": "Content, padding, border, and margin — each wrapping the previous layer outward",
+        "isCorrect": true,
+        "explanation": "The box model defines how space is calculated: content area → padding → border → margin, from inner to outer."
+      },
+      {
+        "optionText": "Width, height, color, and font-size properties applied to every element",
+        "isCorrect": false,
+        "explanation": "Those are CSS properties, not the box model layers."
+      },
+      {
+        "optionText": "Header, body, footer, and sidebar sections of a web page",
+        "isCorrect": false,
+        "explanation": "Those are page layout regions, not the CSS box model."
+      },
+      {
+        "optionText": "Flexbox, Grid, Float, and Position layout systems in CSS",
+        "isCorrect": false,
+        "explanation": "Those are layout mechanisms, separate from the box model concept."
+      }
+    ]
+  },
+  {
+    "topic": "css",
+    "question": "What's the difference between a relative, fixed, absolute and statically positioned element?",
+    "options": [
+      {
+        "optionText": "Static is default flow; relative offsets from its normal position; absolute positions relative to nearest positioned ancestor; fixed positions relative to the viewport",
+        "isCorrect": true,
+        "explanation": "position: static is the default. relative moves the element but keeps its space. absolute removes it from flow, anchored to a positioned ancestor. fixed anchors to the viewport and doesn't scroll."
+      },
+      {
+        "optionText": "All four values position elements relative to the viewport",
+        "isCorrect": false,
+        "explanation": "Only fixed positions relative to the viewport. The others use different reference points."
+      },
+      {
+        "optionText": "Absolute and fixed are the same; relative and static are the same",
+        "isCorrect": false,
+        "explanation": "They are all distinct values with different layout behavior."
+      },
+      {
+        "optionText": "Relative removes the element from document flow; absolute keeps it in flow",
+        "isCorrect": false,
+        "explanation": "It's the opposite — absolute removes the element from normal document flow; relative keeps its reserved space."
+      }
+    ]
+  },
+  {
+    "topic": "css",
+    "question": "What is a CSS preprocessor and why use one?",
+    "options": [
+      {
+        "optionText": "A tool that extends CSS with variables, nesting, mixins, and functions, then compiles to standard CSS",
+        "isCorrect": true,
+        "explanation": "Preprocessors like Sass and Less add programming-like features to CSS, improving maintainability and reducing repetition. The output is plain CSS browsers can read."
+      },
+      {
+        "optionText": "A browser extension that applies CSS styles faster than the standard parser",
+        "isCorrect": false,
+        "explanation": "Preprocessors are build-time tools, not runtime browser extensions."
+      },
+      {
+        "optionText": "A JavaScript library that adds animations to CSS properties",
+        "isCorrect": false,
+        "explanation": "Preprocessors are not JavaScript libraries and don't add animation capabilities."
+      },
+      {
+        "optionText": "A minification tool that removes whitespace and comments from CSS files",
+        "isCorrect": false,
+        "explanation": "Minification is a separate optimization step. Preprocessors add authoring features rather than reduce file size."
+      }
+    ]
+  },
+  {
+    "topic": "css",
+    "question": "Describe pseudo-elements and discuss what they are used for.",
+    "options": [
+      {
+        "optionText": "Virtual elements created via CSS (::before, ::after) used to insert decorative content or style specific parts of an element",
+        "isCorrect": true,
+        "explanation": "Pseudo-elements like ::before, ::after, ::first-line, ::first-letter target sub-parts of elements or insert generated content without extra HTML markup."
+      },
+      {
+        "optionText": "HTML elements that are hidden from screen readers",
+        "isCorrect": false,
+        "explanation": "Pseudo-elements are CSS constructs, not hidden HTML elements."
+      },
+      {
+        "optionText": "JavaScript methods that manipulate the CSS of an element at runtime",
+        "isCorrect": false,
+        "explanation": "Pseudo-elements are purely a CSS concept defined in stylesheets."
+      },
+      {
+        "optionText": "Selectors that target elements based on user interaction states like hover or focus",
+        "isCorrect": false,
+        "explanation": "Those are pseudo-classes (:hover, :focus). Pseudo-elements (::before) are different — they create or target sub-parts rather than states."
+      }
+    ]
+  },
+  {
+    "topic": "css",
+    "question": "Have you played around with the new CSS Flexbox or Grid specs?",
+    "options": [
+      {
+        "optionText": "Yes — Flexbox is one-dimensional (row or column) ideal for component layout; Grid is two-dimensional ideal for page layout",
+        "isCorrect": true,
+        "explanation": "Flexbox handles single-axis alignment (nav bars, card rows). Grid handles two-dimensional layouts (full page grids, dashboard). They complement each other and are often used together."
+      },
+      {
+        "optionText": "Flexbox and Grid are identical in functionality; Grid is just the newer version",
+        "isCorrect": false,
+        "explanation": "They solve different problems. Flexbox is one-dimensional; Grid is two-dimensional."
+      },
+      {
+        "optionText": "Flexbox is for vertical layouts only; Grid is for horizontal layouts only",
+        "isCorrect": false,
+        "explanation": "Flexbox works on either axis (row or column). Grid handles both simultaneously."
+      },
+      {
+        "optionText": "Grid replaced Flexbox and Flexbox is now deprecated",
+        "isCorrect": false,
+        "explanation": "Neither is deprecated. Both are modern, widely supported, and serve complementary purposes."
+      }
+    ]
+  },
+  {
+    "topic": "css",
+    "question": "Explain CSS sprites, and how you would implement them on a page or site.",
+    "options": [
+      {
+        "optionText": "A single image file containing multiple images, displayed individually using background-position to reduce HTTP requests",
+        "isCorrect": true,
+        "explanation": "CSS sprites combine icons/images into one file, then use background-image + background-position to show only the needed portion. This was crucial for performance before HTTP/2."
+      },
+      {
+        "optionText": "Animated CSS keyframe sequences applied to HTML elements",
+        "isCorrect": false,
+        "explanation": "CSS animations use @keyframes. Sprites are about combining static images into one file."
+      },
+      {
+        "optionText": "A JavaScript library for creating sprite-based games in the browser",
+        "isCorrect": false,
+        "explanation": "CSS sprites are a CSS technique for icon management, not a game development library."
+      },
+      {
+        "optionText": "SVG icons embedded directly inside HTML markup",
+        "isCorrect": false,
+        "explanation": "Inline SVG is a different technique. Sprites use a single raster (or SVG) file with background-position offsets."
+      }
+    ]
+  },
+  {
+    "topic": "css",
+    "question": "Describe z-index and how a stacking context is formed.",
+    "options": [
+      {
+        "optionText": "z-index controls the stack order of overlapping elements; a stacking context is created by positioned elements with z-index, opacity < 1, transforms, and similar properties",
+        "isCorrect": true,
+        "explanation": "z-index only works on positioned or flex/grid items. A new stacking context is formed by position + z-index, opacity < 1, transform, filter, will-change, isolation: isolate, etc. Elements inside a context are ordered independently."
+      },
+      {
+        "optionText": "z-index applies to every element regardless of its position property",
+        "isCorrect": false,
+        "explanation": "z-index only applies to positioned elements (not static) or flex/grid children."
+      },
+      {
+        "optionText": "A higher z-index always wins regardless of stacking contexts",
+        "isCorrect": false,
+        "explanation": "z-index comparisons only apply within the same stacking context. A z-index of 9999 inside a low-priority context can still appear behind a z-index: 1 in a parent context."
+      },
+      {
+        "optionText": "Stacking context is another name for the CSS cascade",
+        "isCorrect": false,
+        "explanation": "The cascade determines which style rule wins. Stacking context determines how elements overlap visually on the z-axis."
+      }
+    ]
+  },
+  {
+    "topic": "css",
+    "question": "Explain the basic rules of CSS Specificity.",
+    "options": [
+      {
+        "optionText": "Specificity is scored as (inline, ID, class/attr/pseudo-class, element) — higher score wins when multiple rules target the same element",
+        "isCorrect": true,
+        "explanation": "Specificity is calculated as a four-part tuple: inline styles > IDs > classes/attributes/pseudo-classes > elements/pseudo-elements. !important overrides all but is best avoided."
+      },
+      {
+        "optionText": "The last rule written in the stylesheet always wins regardless of selectors",
+        "isCorrect": false,
+        "explanation": "Order matters only when specificity is equal. Higher specificity always overrides later rules with lower specificity."
+      },
+      {
+        "optionText": "Specificity only applies to class selectors, not IDs or elements",
+        "isCorrect": false,
+        "explanation": "All selector types contribute to specificity."
+      },
+      {
+        "optionText": "Specificity is reset to zero after each CSS rule block",
+        "isCorrect": false,
+        "explanation": "Specificity is a property of each selector, calculated per-rule — there's no reset mechanism."
+      }
+    ]
+  },
+  {
+    "topic": "css",
+    "question": "What does * { box-sizing: border-box; } do? What are its advantages?",
+    "options": [
+      {
+        "optionText": "Makes padding and border included in the element's declared width/height, making layout calculations more predictable",
+        "isCorrect": true,
+        "explanation": "With border-box, a 200px wide element stays 200px wide even after adding padding or border. Without it (content-box), padding and border add to the declared width, causing unexpected overflow."
+      },
+      {
+        "optionText": "Removes all default browser margins and paddings from every element",
+        "isCorrect": false,
+        "explanation": "That's what a CSS reset does. box-sizing: border-box only changes how width/height are calculated."
+      },
+      {
+        "optionText": "Makes every element display as a block-level element",
+        "isCorrect": false,
+        "explanation": "box-sizing has nothing to do with display type."
+      },
+      {
+        "optionText": "Adds a visible border to every element for debugging purposes",
+        "isCorrect": false,
+        "explanation": "box-sizing: border-box doesn't add any visible borders. It changes the box model calculation."
+      }
+    ]
+  },
+  {
+    "topic": "css",
+    "question": "What are the different ways to visually hide content (and make it available only for screen readers)?",
+    "options": [
+      {
+        "optionText": "Use a visually-hidden utility class with position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0)",
+        "isCorrect": true,
+        "explanation": "This technique keeps content in the DOM and accessible to screen readers while hiding it visually. display: none and visibility: hidden both remove content from the accessibility tree."
+      },
+      {
+        "optionText": "Use display: none to hide the element from sighted users while screen readers still read it",
+        "isCorrect": false,
+        "explanation": "display: none removes the element from both visual rendering AND the accessibility tree, so screen readers ignore it too."
+      },
+      {
+        "optionText": "Use opacity: 0 to make content invisible but readable by screen readers",
+        "isCorrect": false,
+        "explanation": "opacity: 0 hides the content visually but the element is still interactive and takes up space — not ideal for screen-reader-only content."
+      },
+      {
+        "optionText": "Use visibility: hidden — screen readers will still announce the content",
+        "isCorrect": false,
+        "explanation": "visibility: hidden hides the element from both sighted users and screen readers. Use the visually-hidden pattern instead."
+      }
+    ]
+  },
+  {
+    "topic": "css",
+    "question": "Is there any reason you'd want to use translate() instead of absolute positioning?",
+    "options": [
+      {
+        "optionText": "Yes — translate() uses GPU compositing and doesn't trigger layout reflow, making animations smoother and more performant",
+        "isCorrect": true,
+        "explanation": "translate() is processed on the compositor thread (with will-change or transform), avoiding expensive layout and paint steps. Absolute positioning changes geometry and triggers reflow on every frame."
+      },
+      {
+        "optionText": "No — absolute positioning and translate() have identical performance characteristics",
+        "isCorrect": false,
+        "explanation": "They are very different in performance. translate() avoids layout; absolute positioning triggers it."
+      },
+      {
+        "optionText": "translate() is only available in CSS animations, not for static positioning",
+        "isCorrect": false,
+        "explanation": "transform: translate() can be used statically on any element, not just inside animations."
+      },
+      {
+        "optionText": "absolute positioning always creates a new GPU layer; translate() does not",
+        "isCorrect": false,
+        "explanation": "It's the other way — transform (including translate) promotes elements to their own compositing layer, which is why they're faster for animations."
+      }
+    ]
+  },
+  {
+    "topic": "css",
+    "question": "What does Accessibility (a11y) mean in a CSS context?",
+    "options": [
+      {
+        "optionText": "Writing CSS that ensures sufficient color contrast, focus visibility, readable font sizes, and no content hidden from assistive technologies unintentionally",
+        "isCorrect": true,
+        "explanation": "Accessibility in CSS means: WCAG-compliant contrast ratios, visible :focus styles, scalable units (rem/em over px), not using display: none or visibility: hidden to hide meaningful content from screen readers."
+      },
+      {
+        "optionText": "Using only black and white colors to ensure universal readability",
+        "isCorrect": false,
+        "explanation": "Color is fine; what matters is sufficient contrast ratio (4.5:1 for normal text per WCAG AA)."
+      },
+      {
+        "optionText": "Adding ARIA attributes to CSS selectors",
+        "isCorrect": false,
+        "explanation": "ARIA attributes are HTML attributes, not CSS. CSS can style based on ARIA attributes but cannot add them."
+      },
+      {
+        "optionText": "Minifying CSS files so they load faster for users with slow connections",
+        "isCorrect": false,
+        "explanation": "Performance optimization is valuable but not what a11y specifically means in a CSS context."
+      }
+    ]
+  },
+  {
+    "topic": "css",
+    "question": "What's the difference between SCSS and Sass?",
+    "options": [
+      {
+        "optionText": "SCSS uses CSS-like curly brace syntax; Sass (indented syntax) uses indentation with no braces or semicolons — both compile to CSS",
+        "isCorrect": true,
+        "explanation": "Both are syntaxes of the same Sass preprocessor. SCSS (.scss) is the more popular choice as it's a superset of CSS. Sass (.sass) uses indentation-based syntax similar to Python/YAML."
+      },
+      {
+        "optionText": "Sass is a newer version of SCSS with additional features",
+        "isCorrect": false,
+        "explanation": "Neither is newer — they're two syntaxes of the same tool. SCSS was introduced later but is not 'more advanced'."
+      },
+      {
+        "optionText": "SCSS requires a build step; Sass runs natively in the browser",
+        "isCorrect": false,
+        "explanation": "Both require a build step to compile to CSS. Neither runs natively in browsers."
+      },
+      {
+        "optionText": "SCSS is for React projects; Sass is for plain HTML projects",
+        "isCorrect": false,
+        "explanation": "Both can be used in any project type. The choice is purely syntax preference."
+      }
+    ]
+  },
+  {
+    "topic": "css",
+    "question": "Explain CSS Custom Properties (variables) and their advantages over preprocessor variables.",
+    "options": [
+      {
+        "optionText": "CSS custom properties (--name) are resolved at runtime in the browser, support cascade/inheritance, and can be changed with JavaScript — unlike Sass variables which are compiled away",
+        "isCorrect": true,
+        "explanation": "CSS variables (--primary-color: blue) are live in the browser. They cascade, inherit, and can be updated via JS (element.style.setProperty). Sass variables are static — compiled out before the browser sees them."
+      },
+      {
+        "optionText": "CSS custom properties and Sass variables are functionally identical at runtime",
+        "isCorrect": false,
+        "explanation": "Sass variables don't exist at runtime — they're compiled to static values. CSS custom properties are dynamic browser values."
+      },
+      {
+        "optionText": "CSS custom properties are only available in CSS Grid and Flexbox contexts",
+        "isCorrect": false,
+        "explanation": "CSS custom properties work everywhere in CSS — they're not limited to any layout system."
+      },
+      {
+        "optionText": "CSS custom properties must be declared in the :root selector and cannot be scoped to components",
+        "isCorrect": false,
+        "explanation": ":root is common for global variables, but custom properties can be scoped to any selector and will inherit to child elements."
+      }
+    ]
+  }
+]

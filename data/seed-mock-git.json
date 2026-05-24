@@ -1,0 +1,418 @@
+[
+  {
+    "topic": "git",
+    "question": "What is Git?",
+    "options": [
+      {
+        "optionText": "A distributed version control system that tracks changes in files, enabling collaboration and history management.",
+        "isCorrect": true,
+        "explanation": "Correct — every developer has a full copy of the repository history locally."
+      },
+      {
+        "optionText": "A cloud hosting platform for storing code, like GitHub or Bitbucket.",
+        "isCorrect": false,
+        "explanation": "GitHub/Bitbucket are hosting platforms — Git is the underlying version control system."
+      },
+      {
+        "optionText": "A package manager for installing JavaScript dependencies.",
+        "isCorrect": false,
+        "explanation": "npm and pnpm are package managers — Git tracks code history."
+      },
+      {
+        "optionText": "A programming language used to write deployment scripts.",
+        "isCorrect": false,
+        "explanation": "Git is a version control tool, not a programming language."
+      }
+    ]
+  },
+  {
+    "topic": "git",
+    "question": "What is the difference between Git and SVN?",
+    "options": [
+      {
+        "optionText": "Git is distributed (every clone has full history); SVN is centralised (one server holds the history). Git enables offline commits; SVN requires server connectivity.",
+        "isCorrect": true,
+        "explanation": "Correct — Git's distributed model enables branching, offline work, and faster operations."
+      },
+      {
+        "optionText": "Git is only for open-source projects; SVN is used in enterprise environments.",
+        "isCorrect": false,
+        "explanation": "Both are used in all types of environments — the difference is architecture, not intended audience."
+      },
+      {
+        "optionText": "Git supports binary files; SVN only supports text files.",
+        "isCorrect": false,
+        "explanation": "Both support binary files — the key difference is centralised vs distributed architecture."
+      },
+      {
+        "optionText": "Git is faster only because it is written in C; SVN would be equally fast if rewritten in C.",
+        "isCorrect": false,
+        "explanation": "Git's performance advantage is architectural — local operations don't need network access."
+      }
+    ]
+  },
+  {
+    "topic": "git",
+    "question": "What is the command to write a commit message in Git?",
+    "options": [
+      {
+        "optionText": "git commit -m \"Your message\" — or git commit to open the default editor for a multi-line message.",
+        "isCorrect": true,
+        "explanation": "Correct — -m is the inline message flag; omitting it opens $EDITOR for a full commit message."
+      },
+      {
+        "optionText": "git message \"Your commit message\"",
+        "isCorrect": false,
+        "explanation": "There is no git message command — use git commit -m."
+      },
+      {
+        "optionText": "git save -m \"Your message\"",
+        "isCorrect": false,
+        "explanation": "git save is not a Git command — use git commit -m."
+      },
+      {
+        "optionText": "git log --message \"Your message\"",
+        "isCorrect": false,
+        "explanation": "git log reads history — git commit -m writes a new commit."
+      }
+    ]
+  },
+  {
+    "topic": "git",
+    "question": "What's the difference between a pull request and a branch?",
+    "options": [
+      {
+        "optionText": "A branch is a movable pointer to commits; a pull request is a platform feature (GitHub/GitLab) to propose, review, and merge a branch's changes.",
+        "isCorrect": true,
+        "explanation": "Correct — branches are a core Git concept; pull requests are a collaboration workflow built on top by hosting platforms."
+      },
+      {
+        "optionText": "A pull request is a Git command; a branch is a GitHub/GitLab concept.",
+        "isCorrect": false,
+        "explanation": "This is backwards — branches are core Git; pull requests are a hosting platform feature."
+      },
+      {
+        "optionText": "They are the same thing — 'pull request' is the GitHub term for a branch.",
+        "isCorrect": false,
+        "explanation": "A branch is a reference to commits; a PR is a review/merge workflow built around a branch."
+      },
+      {
+        "optionText": "A pull request downloads code from the remote; a branch pushes code to the remote.",
+        "isCorrect": false,
+        "explanation": "git pull fetches from remote — a pull request is a code review mechanism, not a Git command."
+      }
+    ]
+  },
+  {
+    "topic": "git",
+    "question": "What is a Git fork? What is the difference between fork, branch, and clone?",
+    "options": [
+      {
+        "optionText": "Fork = server-side copy of a repo under your account; Clone = local copy of a repo; Branch = a movable pointer within a repo.",
+        "isCorrect": true,
+        "explanation": "Correct — forks enable contributing to repos you don't have write access to; branches isolate work within a repo."
+      },
+      {
+        "optionText": "Fork and clone are identical operations; branch is a fork within the same repository.",
+        "isCorrect": false,
+        "explanation": "Fork creates a server-side copy; clone creates a local copy — they are distinct operations."
+      },
+      {
+        "optionText": "A fork is a long-lived branch; a clone is a short-lived branch; a branch is a commit reference.",
+        "isCorrect": false,
+        "explanation": "Forks and clones are repository copies (at different locations); branches are lightweight pointers within a repo."
+      },
+      {
+        "optionText": "Cloning creates a read-only copy; forking creates a writable copy; branching requires elevated permissions.",
+        "isCorrect": false,
+        "explanation": "Clones are fully writable locally; fork/branch permissions depend on repository settings, not the operations themselves."
+      }
+    ]
+  },
+  {
+    "topic": "git",
+    "question": "What is the difference between git pull and git fetch?",
+    "options": [
+      {
+        "optionText": "git fetch downloads remote changes without merging; git pull = git fetch + git merge (or rebase) into the current branch.",
+        "isCorrect": true,
+        "explanation": "Correct — git fetch is safe to run anytime; git pull immediately modifies your working branch."
+      },
+      {
+        "optionText": "git pull downloads only new commits; git fetch downloads the full repository history.",
+        "isCorrect": false,
+        "explanation": "Both download changes incrementally — the difference is whether the downloaded changes are merged."
+      },
+      {
+        "optionText": "git fetch is for fetching from GitHub; git pull is for fetching from GitLab.",
+        "isCorrect": false,
+        "explanation": "Both work with any remote — the difference is automatic merging, not the hosting platform."
+      },
+      {
+        "optionText": "git pull is safer than git fetch because it previews changes before applying them.",
+        "isCorrect": false,
+        "explanation": "This is backwards — git fetch is safer because it doesn't modify your working branch."
+      }
+    ]
+  },
+  {
+    "topic": "git",
+    "question": "How do you revert a previous commit in Git?",
+    "options": [
+      {
+        "optionText": "git revert <sha> creates a new commit that undoes the changes — safe for shared branches. git reset moves HEAD back, rewriting history — only for local branches.",
+        "isCorrect": true,
+        "explanation": "Correct — revert is the safe choice for shared branches; reset rewrites history and should not be used on pushed commits."
+      },
+      {
+        "optionText": "git undo <sha> — Git has a built-in undo command for reverting commits.",
+        "isCorrect": false,
+        "explanation": "There is no git undo command — use git revert (safe) or git reset (history-rewriting)."
+      },
+      {
+        "optionText": "git delete <sha> removes the commit from history without creating a new commit.",
+        "isCorrect": false,
+        "explanation": "There is no git delete command — removing commits requires git reset or interactive rebase."
+      },
+      {
+        "optionText": "You cannot revert commits in Git without rewriting the entire repository history.",
+        "isCorrect": false,
+        "explanation": "git revert is specifically designed to undo commits without rewriting history."
+      }
+    ]
+  },
+  {
+    "topic": "git",
+    "question": "When should I use git stash?",
+    "options": [
+      {
+        "optionText": "When you need to switch branches or pull changes but have uncommitted work you're not ready to commit — stash saves it temporarily.",
+        "isCorrect": true,
+        "explanation": "Correct — stash is a temporary shelf for WIP changes; prefer a WIP commit for longer-term storage."
+      },
+      {
+        "optionText": "git stash permanently deletes uncommitted changes — use it to clean up dirty work.",
+        "isCorrect": false,
+        "explanation": "git stash saves changes to a stack — they can be restored with git stash pop. git checkout -- . discards changes permanently."
+      },
+      {
+        "optionText": "git stash should be used instead of committing to keep the commit history clean.",
+        "isCorrect": false,
+        "explanation": "Stash is temporary — for anything longer than a few minutes, a WIP commit on a branch is safer."
+      },
+      {
+        "optionText": "git stash only works for staged changes — unstaged changes must be committed first.",
+        "isCorrect": false,
+        "explanation": "git stash saves both staged and unstaged changes by default."
+      }
+    ]
+  },
+  {
+    "topic": "git",
+    "question": "Tell me the difference between HEAD, working tree, and index in Git.",
+    "options": [
+      {
+        "optionText": "HEAD = last commit (where you are); working tree = files on disk; index (staging area) = what will go into the next commit.",
+        "isCorrect": true,
+        "explanation": "Correct — these three areas are the core model behind git status, git add, and git commit."
+      },
+      {
+        "optionText": "HEAD is the remote branch; working tree is the local branch; index is the merge result.",
+        "isCorrect": false,
+        "explanation": "HEAD is the current local commit; the index is the staging area — neither relates to remote branches."
+      },
+      {
+        "optionText": "HEAD, working tree, and index are three names for the same thing.",
+        "isCorrect": false,
+        "explanation": "They are three distinct areas — understanding the difference is essential for understanding git add, reset, and diff."
+      },
+      {
+        "optionText": "The index stores the full commit history; HEAD is a pointer to the next planned commit.",
+        "isCorrect": false,
+        "explanation": "The index (staging area) holds the next commit's snapshot; HEAD points to the last commit."
+      }
+    ]
+  },
+  {
+    "topic": "git",
+    "question": "What is git cherry-pick?",
+    "options": [
+      {
+        "optionText": "Applies one or more specific commits from another branch onto the current branch, creating new commits with the same diff but different SHAs.",
+        "isCorrect": true,
+        "explanation": "Correct — useful for backporting a bug fix to a release branch without merging all of main."
+      },
+      {
+        "optionText": "Selects the best commits from a branch based on code quality metrics.",
+        "isCorrect": false,
+        "explanation": "Cherry-pick selects commits by SHA — there is no automatic quality evaluation."
+      },
+      {
+        "optionText": "Merges a branch and automatically resolves conflicts by picking the newer version.",
+        "isCorrect": false,
+        "explanation": "Cherry-pick applies specific commits, not a whole branch — it does not auto-resolve conflicts."
+      },
+      {
+        "optionText": "Removes unwanted commits from the history by cherry-picking only the good ones.",
+        "isCorrect": false,
+        "explanation": "Cherry-pick copies commits to the current branch — to remove commits from history, use interactive rebase."
+      }
+    ]
+  },
+  {
+    "topic": "git",
+    "question": "Could you explain the Gitflow workflow?",
+    "options": [
+      {
+        "optionText": "Gitflow uses long-lived main and develop branches, feature branches off develop, release branches for stabilisation, and hotfix branches off main for production fixes.",
+        "isCorrect": true,
+        "explanation": "Correct — Gitflow is suited to scheduled release cycles; trunk-based development is preferred for continuous delivery."
+      },
+      {
+        "optionText": "Gitflow is GitHub's internal branching strategy where all code is committed directly to main.",
+        "isCorrect": false,
+        "explanation": "Committing directly to main is trunk-based development — Gitflow uses multiple long-lived branches."
+      },
+      {
+        "optionText": "Gitflow requires exactly two developers — one for features, one for releases.",
+        "isCorrect": false,
+        "explanation": "Gitflow scales to any team size — the two refers to the two long-lived branches (main and develop), not the number of developers."
+      },
+      {
+        "optionText": "In Gitflow, hotfixes are applied directly to the develop branch and released in the next sprint.",
+        "isCorrect": false,
+        "explanation": "Hotfixes branch off main and are merged back to both main and develop — they bypass the develop cycle for urgent production fixes."
+      }
+    ]
+  },
+  {
+    "topic": "git",
+    "question": "Can you explain what git reset does in plain English?",
+    "options": [
+      {
+        "optionText": "git reset moves HEAD (and the branch pointer) to a previous commit. --soft keeps staged changes, --mixed unstages them, --hard discards them entirely.",
+        "isCorrect": true,
+        "explanation": "Correct — the three modes give granular control over whether staged and working tree changes are kept."
+      },
+      {
+        "optionText": "git reset downloads a fresh copy of the repository from the remote.",
+        "isCorrect": false,
+        "explanation": "git reset operates locally on HEAD and the working tree — use git fetch/pull for remote changes."
+      },
+      {
+        "optionText": "git reset permanently deletes the commits it removes — they cannot be recovered.",
+        "isCorrect": false,
+        "explanation": "Commits removed by reset are still reachable via git reflog for a period — they are recoverable."
+      },
+      {
+        "optionText": "git reset --hard stages all changes so they are ready to be committed.",
+        "isCorrect": false,
+        "explanation": "--hard discards all changes in both the index and working tree — it is the most destructive mode."
+      }
+    ]
+  },
+  {
+    "topic": "git",
+    "question": "What is the difference between git stash pop and git stash apply?",
+    "options": [
+      {
+        "optionText": "git stash pop applies the latest stash and removes it from the stack; git stash apply applies it but leaves it on the stack — useful for applying to multiple branches.",
+        "isCorrect": true,
+        "explanation": "Correct — prefer pop when done with the stash; use apply when you need to apply the same stash to several branches."
+      },
+      {
+        "optionText": "git stash pop applies all stashes at once; git stash apply applies only one.",
+        "isCorrect": false,
+        "explanation": "Both apply one stash at a time — the difference is whether the stash is removed from the stack."
+      },
+      {
+        "optionText": "git stash apply creates a new commit; git stash pop only modifies the working tree.",
+        "isCorrect": false,
+        "explanation": "Neither creates a commit — both restore changes to the working tree and staging area."
+      },
+      {
+        "optionText": "They are identical — the difference is only in the name.",
+        "isCorrect": false,
+        "explanation": "The key difference is stack management: pop removes the stash entry; apply keeps it."
+      }
+    ]
+  },
+  {
+    "topic": "git",
+    "question": "What are git hooks and what are their types?",
+    "options": [
+      {
+        "optionText": "Scripts that Git executes automatically at certain lifecycle points. Pre-commit (lint/test before commit), commit-msg (validate message format), pre-push (run tests before push), post-merge, etc.",
+        "isCorrect": true,
+        "explanation": "Correct — hooks enable automated quality gates; tools like Husky manage them in JavaScript projects."
+      },
+      {
+        "optionText": "Git hooks are webhooks that GitHub fires to external services when events occur.",
+        "isCorrect": false,
+        "explanation": "GitHub webhooks are different — git hooks are local scripts in .git/hooks/ that run on your machine."
+      },
+      {
+        "optionText": "Git hooks are a premium feature available only in enterprise Git hosting plans.",
+        "isCorrect": false,
+        "explanation": "Git hooks are a core Git feature available in any local repository — they do not require a hosting plan."
+      },
+      {
+        "optionText": "Git hooks can only be written in Bash — other languages are not supported.",
+        "isCorrect": false,
+        "explanation": "Git hooks can be written in any executable — Python, Node.js, and Ruby are common choices."
+      }
+    ]
+  },
+  {
+    "topic": "git",
+    "question": "When do you use git rebase instead of git merge?",
+    "options": [
+      {
+        "optionText": "Rebase for cleaning up local feature branches before a PR (linear history); merge for integrating finished features into shared branches (preserves full history).",
+        "isCorrect": true,
+        "explanation": "Correct — the golden rule: never rebase commits already pushed to a shared branch."
+      },
+      {
+        "optionText": "Always rebase — merge commits clutter the history and should be avoided entirely.",
+        "isCorrect": false,
+        "explanation": "Merge commits provide an audit trail of when features were integrated — squashing that history has trade-offs."
+      },
+      {
+        "optionText": "Always merge — rebasing is dangerous and should never be used in professional projects.",
+        "isCorrect": false,
+        "explanation": "Rebase is a standard professional tool for clean history — the risk is only when rebasing shared/public branches."
+      },
+      {
+        "optionText": "Use rebase when files conflict and merge when they don't — conflicts determine the strategy.",
+        "isCorrect": false,
+        "explanation": "Both rebase and merge handle conflicts — the choice is about history shape, not conflict presence."
+      }
+    ]
+  },
+  {
+    "topic": "git",
+    "question": "How can you use git bisect to find the commit that introduced a regression?",
+    "options": [
+      {
+        "optionText": "git bisect start, then mark a known bad commit and a known good commit — Git binary-searches the history, checking out commits for you to test until the culprit is found.",
+        "isCorrect": true,
+        "explanation": "Correct — git bisect run <test-script> can fully automate the search if you have a deterministic test."
+      },
+      {
+        "optionText": "git bisect scans commit messages for keywords like 'bug' or 'fix' to find the regression.",
+        "isCorrect": false,
+        "explanation": "git bisect uses a binary search on the commit graph — it requires you (or a script) to classify each commit as good or bad."
+      },
+      {
+        "optionText": "git bisect requires you to check out each commit manually — it does not automate the search.",
+        "isCorrect": false,
+        "explanation": "git bisect automates the checkout — git bisect run can even automate the testing with a script."
+      },
+      {
+        "optionText": "git bisect only works if commits are tagged with version numbers.",
+        "isCorrect": false,
+        "explanation": "git bisect works with any commit SHAs or branch names — tags are not required."
+      }
+    ]
+  }
+]

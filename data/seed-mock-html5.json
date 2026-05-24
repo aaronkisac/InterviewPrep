@@ -1,0 +1,522 @@
+[
+  {
+    "topic": "html5",
+    "question": "What is the purpose of the alt attribute on images?",
+    "options": [
+      {
+        "optionText": "Provides alternative text for screen readers and displays when the image fails to load — essential for accessibility and SEO",
+        "isCorrect": true,
+        "explanation": "The alt attribute serves two purposes: screen readers announce it to visually impaired users, and browsers display it when the image can't load. It also gives search engines context. Decorative images should have alt='' (empty) to be skipped by screen readers."
+      },
+      {
+        "optionText": "Sets the title tooltip that appears on mouse hover over the image",
+        "isCorrect": false,
+        "explanation": "Hover tooltips are set with the title attribute. alt is for accessibility and fallback text."
+      },
+      {
+        "optionText": "Defines the image dimensions to prevent layout shift during loading",
+        "isCorrect": false,
+        "explanation": "Width and height attributes prevent layout shift. alt is for alternative text."
+      },
+      {
+        "optionText": "A required attribute that browsers use to pre-load images faster",
+        "isCorrect": false,
+        "explanation": "Pre-loading uses the link rel='preload' element or the loading attribute. alt is for alternative text."
+      }
+    ]
+  },
+  {
+    "topic": "html5",
+    "question": "What is the difference between span and div?",
+    "options": [
+      {
+        "optionText": "div is a block-level element that takes full width; span is an inline element that wraps text without breaking flow",
+        "isCorrect": true,
+        "explanation": "div creates a block that starts on a new line. span is inline — it wraps text or inline content without affecting the surrounding flow. Both are generic containers with no semantic meaning."
+      },
+      {
+        "optionText": "span has semantic meaning; div is purely presentational",
+        "isCorrect": false,
+        "explanation": "Both div and span are non-semantic containers. For semantic meaning, use elements like section, article, nav, p, strong etc."
+      },
+      {
+        "optionText": "div can contain any elements; span can only contain text",
+        "isCorrect": false,
+        "explanation": "span is an inline element and should only contain inline elements (text, img, other spans). But this is about valid nesting, not a strict rule of span vs div."
+      },
+      {
+        "optionText": "They are identical — div and span are just old names for the same element",
+        "isCorrect": false,
+        "explanation": "They have different default display values: div is block, span is inline."
+      }
+    ]
+  },
+  {
+    "topic": "html5",
+    "question": "What does a DOCTYPE do?",
+    "options": [
+      {
+        "optionText": "Tells the browser which HTML version to use — <!DOCTYPE html> triggers standards mode in all modern browsers",
+        "isCorrect": true,
+        "explanation": "Without a doctype, browsers enter 'quirks mode' and emulate old buggy behavior. <!DOCTYPE html> (HTML5 doctype) activates standards mode. It's not an HTML tag — it's a document type declaration."
+      },
+      {
+        "optionText": "DOCTYPE defines the website's title shown in the browser tab",
+        "isCorrect": false,
+        "explanation": "The page title is set with the <title> element inside <head>. DOCTYPE tells the browser the document type."
+      },
+      {
+        "optionText": "DOCTYPE prevents search engines from indexing the page",
+        "isCorrect": false,
+        "explanation": "Search engine indexing is controlled by robots.txt and meta robots tags, not DOCTYPE."
+      },
+      {
+        "optionText": "DOCTYPE is required to load external CSS files correctly",
+        "isCorrect": false,
+        "explanation": "CSS loading works regardless of DOCTYPE. However, without DOCTYPE, rendering may differ in quirks mode."
+      }
+    ]
+  },
+  {
+    "topic": "html5",
+    "question": "What's new in HTML5?",
+    "options": [
+      {
+        "optionText": "Semantic elements (article, section, nav), Canvas and SVG, video/audio elements, Web Storage, Web Workers, Geolocation, WebSockets, and new form input types",
+        "isCorrect": true,
+        "explanation": "HTML5 significantly expanded the web platform: semantic markup for accessibility/SEO, native multimedia without Flash, client-side storage, background threads, and APIs for location, offline caching, drag-and-drop, and real-time communication."
+      },
+      {
+        "optionText": "HTML5 replaced CSS entirely — all styling is now done with HTML attributes",
+        "isCorrect": false,
+        "explanation": "CSS is still the styling layer. HTML5 added new APIs and elements, not styling capabilities."
+      },
+      {
+        "optionText": "HTML5 added server-side scripting directly in HTML files using PHP syntax",
+        "isCorrect": false,
+        "explanation": "HTML5 is a client-side markup standard. Server-side scripting remains a separate concern (PHP, Node.js etc)."
+      },
+      {
+        "optionText": "HTML5 is only relevant for mobile — desktop browsers still use HTML4",
+        "isCorrect": false,
+        "explanation": "HTML5 is the current standard for all browsers — mobile and desktop. HTML4 is obsolete."
+      }
+    ]
+  },
+  {
+    "topic": "html5",
+    "question": "What are defer and async attributes on a <script> tag?",
+    "options": [
+      {
+        "optionText": "Both download scripts in parallel without blocking HTML parsing; async executes immediately when downloaded (possibly out of order); defer executes in order after HTML parsing completes",
+        "isCorrect": true,
+        "explanation": "Without attributes: blocks parsing. async: downloads parallel, runs immediately when ready (good for analytics). defer: downloads parallel, runs in order after DOM is ready (good for most scripts). Both avoid blocking the parser."
+      },
+      {
+        "optionText": "defer executes the script immediately; async waits until after the page loads",
+        "isCorrect": false,
+        "explanation": "It's the opposite: defer waits until HTML parsing completes; async runs as soon as the script downloads."
+      },
+      {
+        "optionText": "Both async and defer make scripts execute synchronously",
+        "isCorrect": false,
+        "explanation": "Both attributes make script loading non-blocking/asynchronous. Synchronous is the default (no attributes)."
+      },
+      {
+        "optionText": "async and defer only work in the <body> tag — they have no effect in <head>",
+        "isCorrect": false,
+        "explanation": "async and defer are specifically useful in <head> to avoid parser blocking while keeping the script in the right place."
+      }
+    ]
+  },
+  {
+    "topic": "html5",
+    "question": "Describe the difference between a cookie, sessionStorage and localStorage",
+    "options": [
+      {
+        "optionText": "Cookies: sent with every HTTP request, configurable expiry, accessible server-side. sessionStorage: browser tab lifetime, not sent to server. localStorage: persists indefinitely, not sent to server. Both storage APIs are ~5MB",
+        "isCorrect": true,
+        "explanation": "Cookies are the only one sent to the server on requests. sessionStorage is cleared when the tab closes. localStorage persists until explicitly cleared. Both Web Storage APIs are only accessible via JavaScript."
+      },
+      {
+        "optionText": "All three are sent to the server on every HTTP request",
+        "isCorrect": false,
+        "explanation": "Only cookies are sent with HTTP requests. sessionStorage and localStorage are client-only JavaScript APIs."
+      },
+      {
+        "optionText": "localStorage is cleared when the browser closes; sessionStorage persists indefinitely",
+        "isCorrect": false,
+        "explanation": "It's the opposite: sessionStorage clears when the tab/window closes; localStorage persists until explicitly cleared."
+      },
+      {
+        "optionText": "Cookies have a 50MB storage limit; localStorage has only 4KB like cookies",
+        "isCorrect": false,
+        "explanation": "Cookies are limited to ~4KB. localStorage and sessionStorage can store ~5-10MB (browser-dependent)."
+      }
+    ]
+  },
+  {
+    "topic": "html5",
+    "question": "Why use HTML5 semantic tags?",
+    "options": [
+      {
+        "optionText": "They convey meaning to browsers, screen readers, and search engines — improving accessibility, SEO, and code maintainability over generic divs",
+        "isCorrect": true,
+        "explanation": "<article>, <nav>, <main>, <header>, <footer>, <aside>, <section> communicate structure and intent. Screen readers can navigate by landmarks. Search engines weight semantic headings. Developers understand the layout at a glance."
+      },
+      {
+        "optionText": "Semantic tags load faster than div elements due to browser optimisation",
+        "isCorrect": false,
+        "explanation": "There's no meaningful performance difference. The benefit is semantic meaning, not speed."
+      },
+      {
+        "optionText": "Semantic tags apply built-in CSS styles automatically",
+        "isCorrect": false,
+        "explanation": "Semantic tags have minimal browser default styles (similar to div/span). They don't style your page for you."
+      },
+      {
+        "optionText": "Semantic tags are required — browsers refuse to render pages using only divs",
+        "isCorrect": false,
+        "explanation": "Divs work fine. Semantic tags are a best practice for accessibility and maintainability, not a technical requirement."
+      }
+    ]
+  },
+  {
+    "topic": "html5",
+    "question": "Describe the difference between <script>, <script async> and <script defer>",
+    "options": [
+      {
+        "optionText": "Plain <script> blocks HTML parsing until downloaded and executed; async downloads in parallel and runs immediately; defer downloads in parallel and runs after HTML is fully parsed, in order",
+        "isCorrect": true,
+        "explanation": "For most scripts, defer is the right choice — it doesn't block parsing and respects script order. async suits independent scripts like analytics. Plain script in <head> without defer/async blocks the browser."
+      },
+      {
+        "optionText": "async scripts always run before defer scripts regardless of download order",
+        "isCorrect": false,
+        "explanation": "async scripts run when their download completes, regardless of other scripts. defer scripts run after HTML parsing, in document order."
+      },
+      {
+        "optionText": "Adding defer to a script makes it execute on a background thread",
+        "isCorrect": false,
+        "explanation": "defer changes when a script executes, not on which thread. JavaScript is always single-threaded (Web Workers are separate)."
+      },
+      {
+        "optionText": "async and defer are only valid for external scripts; inline scripts always block",
+        "isCorrect": false,
+        "explanation": "Correct — async and defer only apply to scripts with a src attribute. Inline scripts always execute synchronously and block parsing."
+      }
+    ]
+  },
+  {
+    "topic": "html5",
+    "question": "What is HTML5 Web Storage? Explain localStorage and sessionStorage.",
+    "options": [
+      {
+        "optionText": "Client-side key-value storage APIs: localStorage persists across sessions; sessionStorage is limited to the current tab's lifetime — both store strings and are not sent to the server",
+        "isCorrect": true,
+        "explanation": "Both use the same API (setItem, getItem, removeItem, clear). They're synchronous and store strings (use JSON.stringify/parse for objects). Neither is accessible from other origins (same-origin policy)."
+      },
+      {
+        "optionText": "Web Storage is a NoSQL database built into the browser, similar to MongoDB",
+        "isCorrect": false,
+        "explanation": "Web Storage is a simple synchronous key-value store. IndexedDB is the browser's more database-like option."
+      },
+      {
+        "optionText": "sessionStorage data is shared between all browser tabs on the same domain",
+        "isCorrect": false,
+        "explanation": "sessionStorage is isolated to the specific tab. localStorage is shared across all tabs of the same origin."
+      },
+      {
+        "optionText": "Both localStorage and sessionStorage can store any JavaScript type including functions",
+        "isCorrect": false,
+        "explanation": "Both only store strings. Functions cannot be stored. Objects must be serialized with JSON.stringify."
+      }
+    ]
+  },
+  {
+    "topic": "html5",
+    "question": "What is progressive rendering?",
+    "options": [
+      {
+        "optionText": "Techniques that display content to the user as quickly as possible rather than waiting for the full page to load — includes lazy loading, above-the-fold prioritisation, and streaming HTML",
+        "isCorrect": true,
+        "explanation": "Progressive rendering: send critical HTML first, render visible content immediately, lazy load below-fold images (loading='lazy'), async/defer scripts, and split heavy CSS. React/Next.js support streaming server rendering for this."
+      },
+      {
+        "optionText": "A CSS animation technique that gradually reveals elements as users scroll",
+        "isCorrect": false,
+        "explanation": "Scroll animations are separate (Intersection Observer). Progressive rendering is about loading strategy."
+      },
+      {
+        "optionText": "A browser feature that automatically optimises images to progressive JPEG format",
+        "isCorrect": false,
+        "explanation": "Progressive JPEG is an image format. Progressive rendering is a broader strategy for incremental content delivery."
+      },
+      {
+        "optionText": "Progressive rendering requires Service Workers to work correctly",
+        "isCorrect": false,
+        "explanation": "Service Workers help with offline support and caching. Progressive rendering can be achieved without them."
+      }
+    ]
+  },
+  {
+    "topic": "html5",
+    "question": "What is an iframe and how does it work?",
+    "options": [
+      {
+        "optionText": "An inline frame that embeds another HTML document within the current page — the embedded page has its own browsing context, separate JavaScript and CSS scope",
+        "isCorrect": true,
+        "explanation": "iframes create isolated browsing contexts. The parent and child pages communicate via postMessage. Used for embedding maps, payments (Stripe), social widgets, and sandboxed third-party content. The sandbox attribute restricts what the iframe can do."
+      },
+      {
+        "optionText": "An iframe is a React component that renders child components inside a shadow DOM",
+        "isCorrect": false,
+        "explanation": "iframes are native HTML elements, not React-specific. Shadow DOM is a Web Components concept."
+      },
+      {
+        "optionText": "iframes share JavaScript and CSS with the parent page automatically",
+        "isCorrect": false,
+        "explanation": "iframes are isolated. The embedded page has its own window, document, scripts, and styles — they don't bleed into the parent."
+      },
+      {
+        "optionText": "iframes can only embed content from the same domain for security reasons",
+        "isCorrect": false,
+        "explanation": "iframes can embed cross-origin content. The X-Frame-Options or Content-Security-Policy headers control whether a page allows itself to be embedded, not the parent."
+      }
+    ]
+  },
+  {
+    "topic": "html5",
+    "question": "What are data-* attributes good for?",
+    "options": [
+      {
+        "optionText": "Storing custom data in HTML elements that can be read by JavaScript via dataset — a clean way to embed configuration without using classes or hidden inputs",
+        "isCorrect": true,
+        "explanation": "<button data-id='123' data-action='delete'>. Access via element.dataset.id and element.dataset.action. Useful for attaching data to DOM elements without extra network requests or JS variables."
+      },
+      {
+        "optionText": "They are used to bind CSS styles directly in HTML — replacing the need for CSS classes",
+        "isCorrect": false,
+        "explanation": "data-* attributes store data, not styles. CSS can select on them ([data-state='active']), but they don't apply styles."
+      },
+      {
+        "optionText": "data-* attributes automatically sync values to a database when changed",
+        "isCorrect": false,
+        "explanation": "There's no built-in sync. data-* attributes are static HTML attributes read by JavaScript."
+      },
+      {
+        "optionText": "data-* attributes are required for all HTML5 custom elements",
+        "isCorrect": false,
+        "explanation": "Custom elements use a different specification (Web Components). data-* attributes are available on any HTML element for custom metadata."
+      }
+    ]
+  },
+  {
+    "topic": "html5",
+    "question": "What is accessibility & ARIA role means in a web application?",
+    "options": [
+      {
+        "optionText": "Accessibility ensures usability for people with disabilities; ARIA roles add semantic meaning to non-semantic elements so assistive technologies understand their purpose",
+        "isCorrect": true,
+        "explanation": "ARIA (Accessible Rich Internet Applications) fills gaps where native HTML semantics are absent. role='dialog', aria-label, aria-expanded, aria-live let screen readers understand custom widgets. Rule of thumb: prefer native HTML elements over ARIA when possible."
+      },
+      {
+        "optionText": "ARIA roles apply CSS styles to elements for visual accessibility indicators",
+        "isCorrect": false,
+        "explanation": "ARIA is about semantics communicated to assistive technologies, not visual styling."
+      },
+      {
+        "optionText": "Accessibility is automatically handled by browsers — developers don't need to worry about it",
+        "isCorrect": false,
+        "explanation": "Browsers provide some defaults but developers must write accessible markup, maintain focus management, provide alt text, ensure contrast, and use ARIA where needed."
+      },
+      {
+        "optionText": "ARIA roles replace the need for semantic HTML elements like nav, main, and article",
+        "isCorrect": false,
+        "explanation": "The first rule of ARIA is 'don't use ARIA if a native HTML element exists'. Use nav instead of div role='navigation' where possible."
+      }
+    ]
+  },
+  {
+    "topic": "html5",
+    "question": "How do you serve a page with content in multiple languages?",
+    "options": [
+      {
+        "optionText": "Set lang attribute on <html>, use the Content-Language header, serve different HTML per locale via URL routing (/en/, /tr/), and use hreflang for SEO",
+        "isCorrect": true,
+        "explanation": "<html lang='en'> tells browsers and screen readers the language. hreflang links tell search engines about alternate language versions. Content negotiation via Accept-Language header or URL routing serves the right language version."
+      },
+      {
+        "optionText": "Use the translate='yes' attribute on every element that needs to be translated",
+        "isCorrect": false,
+        "explanation": "translate attribute hints browsers about machine translation, but doesn't serve different languages. Full i18n needs routing and content management."
+      },
+      {
+        "optionText": "JavaScript automatically detects the user's language and translates HTML content",
+        "isCorrect": false,
+        "explanation": "Browsers can offer auto-translation (Google Translate integration) but this is not the correct approach for a multi-language site — provide actual translated content."
+      },
+      {
+        "optionText": "Multiple languages require separate domain names — path-based routing doesn't work",
+        "isCorrect": false,
+        "explanation": "Both subdirectories (/en/), subdomains (en.example.com), and separate domains work for i18n. Path-based routing is widely used."
+      }
+    ]
+  },
+  {
+    "topic": "html5",
+    "question": "What is WebSQL?",
+    "options": [
+      {
+        "optionText": "An obsolete browser API for SQL-based client-side storage — deprecated in favour of IndexedDB and never standardised by W3C",
+        "isCorrect": true,
+        "explanation": "WebSQL used SQLite under the hood in some browsers. The W3C stopped development after key implementors disagreed on the spec. IndexedDB is the modern standard for structured client-side storage."
+      },
+      {
+        "optionText": "A JavaScript library for querying REST APIs using SQL-like syntax",
+        "isCorrect": false,
+        "explanation": "WebSQL was a native browser API, not a third-party library."
+      },
+      {
+        "optionText": "A server-side SQL extension for WebSockets, used for real-time database queries",
+        "isCorrect": false,
+        "explanation": "WebSQL has nothing to do with WebSockets. It was a client-side browser storage API."
+      },
+      {
+        "optionText": "WebSQL is the current W3C standard for browser-based database storage",
+        "isCorrect": false,
+        "explanation": "WebSQL was abandoned. The W3C standard for structured browser storage is IndexedDB."
+      }
+    ]
+  },
+  {
+    "topic": "html5",
+    "question": "What are Web Workers?",
+    "options": [
+      {
+        "optionText": "JavaScript scripts running in background threads — they can't access the DOM but enable CPU-intensive tasks (image processing, encryption) without blocking the main thread",
+        "isCorrect": true,
+        "explanation": "const worker = new Worker('worker.js'). Communication is via postMessage. Web Workers have no access to the DOM, window, or document. Shared Workers can be accessed by multiple tabs. Use for heavy computation that would freeze the UI."
+      },
+      {
+        "optionText": "Server-side worker processes that handle HTTP requests in Node.js",
+        "isCorrect": false,
+        "explanation": "Web Workers are browser-side. Node.js has worker_threads for server-side parallelism."
+      },
+      {
+        "optionText": "Web Workers are JavaScript functions that execute on a schedule like cron jobs",
+        "isCorrect": false,
+        "explanation": "Scheduled background tasks are handled by Service Workers with background sync, not Web Workers."
+      },
+      {
+        "optionText": "Web Workers are the same as Service Workers — both intercept network requests",
+        "isCorrect": false,
+        "explanation": "They're different. Web Workers are for CPU-intensive computation. Service Workers intercept network requests and manage caching."
+      }
+    ]
+  },
+  {
+    "topic": "html5",
+    "question": "What is the purpose of the <main> element?",
+    "options": [
+      {
+        "optionText": "Marks the dominant, unique content of the page — there should be only one <main> per page, and it's a landmark region for screen reader navigation",
+        "isCorrect": true,
+        "explanation": "<main> identifies the primary content, excluding headers, footers, sidebars, and navigation. Screen reader users can jump directly to <main> to skip repetitive navigation. Only one visible <main> should exist per page."
+      },
+      {
+        "optionText": "<main> is the required wrapper for all page content — removing it breaks layout",
+        "isCorrect": false,
+        "explanation": "<main> is semantic and optional. Pages render fine without it, but you lose the accessibility landmark."
+      },
+      {
+        "optionText": "<main> applies a fixed-width container style automatically",
+        "isCorrect": false,
+        "explanation": "<main> is a semantic element with no default layout constraints. Styling is your responsibility."
+      },
+      {
+        "optionText": "<main> is equivalent to <body> — they can be used interchangeably",
+        "isCorrect": false,
+        "explanation": "<body> is the root of all visible content. <main> is a semantic landmark within body that marks the primary content area."
+      }
+    ]
+  },
+  {
+    "topic": "html5",
+    "question": "What is an IndexedDB?",
+    "options": [
+      {
+        "optionText": "A low-level browser API for storing large amounts of structured data client-side with indexes for fast retrieval — asynchronous and supports transactions",
+        "isCorrect": true,
+        "explanation": "IndexedDB can store JSON objects (not just strings like localStorage), files, and blobs. It's transaction-based, async, and can hold hundreds of MB. Wrapped by libraries like Dexie.js for a friendlier API. Used in PWAs for offline data."
+      },
+      {
+        "optionText": "A cached version of the server database that automatically syncs on reconnection",
+        "isCorrect": false,
+        "explanation": "IndexedDB doesn't auto-sync. You build sync logic manually or with libraries like PouchDB."
+      },
+      {
+        "optionText": "IndexedDB is the same as localStorage but with a higher storage limit",
+        "isCorrect": false,
+        "explanation": "They're fundamentally different: IndexedDB is asynchronous, stores any JS value, supports indexes and transactions. localStorage is synchronous and only stores strings."
+      },
+      {
+        "optionText": "IndexedDB is only available in Chrome — other browsers use SQLite",
+        "isCorrect": false,
+        "explanation": "IndexedDB is supported in all modern browsers. WebSQL (which used SQLite) is deprecated and was never universally supported."
+      }
+    ]
+  },
+  {
+    "topic": "html5",
+    "question": "Why would you use a srcset attribute in an image tag? Explain the process the browser uses to evaluate this.",
+    "options": [
+      {
+        "optionText": "srcset provides multiple image resolutions; the browser selects the best one based on the device's screen density (DPR) and viewport size — avoiding unnecessarily large images on small screens",
+        "isCorrect": true,
+        "explanation": "<img srcset='small.jpg 480w, large.jpg 1080w' sizes='(max-width: 600px) 480px, 1080px'>. Browser calculates: viewport width × DPR ÷ sizes hint → picks the smallest src that covers that resolution. Saves bandwidth on mobile."
+      },
+      {
+        "optionText": "srcset loads all listed images in parallel to reduce latency",
+        "isCorrect": false,
+        "explanation": "The browser picks one appropriate image and downloads only that one. It doesn't download all options."
+      },
+      {
+        "optionText": "srcset is used to define fallback images if the primary src fails to load",
+        "isCorrect": false,
+        "explanation": "Error fallback is handled differently (onerror handler). srcset is for responsive images based on screen size."
+      },
+      {
+        "optionText": "srcset requires JavaScript to work — without JS, only the src image loads",
+        "isCorrect": false,
+        "explanation": "srcset is processed by the browser natively without JavaScript. The parser evaluates it during resource loading."
+      }
+    ]
+  },
+  {
+    "topic": "html5",
+    "question": "What are Web Components?",
+    "options": [
+      {
+        "optionText": "A set of native browser APIs — Custom Elements, Shadow DOM, and HTML Templates — that let you create reusable, encapsulated HTML elements without any framework",
+        "isCorrect": true,
+        "explanation": "Custom Elements define new HTML tags. Shadow DOM provides style encapsulation (styles inside don't leak out). HTML Templates (<template>) hold inert markup. Together they create framework-agnostic components usable in React, Vue, or plain HTML."
+      },
+      {
+        "optionText": "Web Components is a JavaScript framework similar to React and Vue",
+        "isCorrect": false,
+        "explanation": "Web Components are native browser standards, not a framework. They can be used with or without frameworks."
+      },
+      {
+        "optionText": "Web Components require TypeScript to function correctly",
+        "isCorrect": false,
+        "explanation": "Web Components are standard JavaScript APIs — no TypeScript required."
+      },
+      {
+        "optionText": "Web Components are React components that are optimised for the web",
+        "isCorrect": false,
+        "explanation": "Web Components are framework-agnostic browser standards. React has its own component model that's distinct from Web Components."
+      }
+    ]
+  }
+]

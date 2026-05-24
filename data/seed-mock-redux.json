@@ -1,0 +1,418 @@
+[
+  {
+    "topic": "redux",
+    "question": "What is Redux?",
+    "options": [
+      {
+        "optionText": "A predictable state container for JavaScript apps that stores all application state in a single immutable store",
+        "isCorrect": true,
+        "explanation": "Redux centralises app state in one store. State changes happen only through dispatched actions processed by pure reducer functions, making state predictable and debuggable."
+      },
+      {
+        "optionText": "A CSS-in-JS library for managing component styles in React",
+        "isCorrect": false,
+        "explanation": "Redux manages application state, not styles. Styled-components or Emotion handle CSS-in-JS."
+      },
+      {
+        "optionText": "A routing library that manages URL state in React applications",
+        "isCorrect": false,
+        "explanation": "Routing is handled by React Router or Next.js. Redux manages application data state."
+      },
+      {
+        "optionText": "A testing framework specifically designed for React components",
+        "isCorrect": false,
+        "explanation": "Testing React components is done with Jest + React Testing Library. Redux is a state management library."
+      }
+    ]
+  },
+  {
+    "topic": "redux",
+    "question": "What are the core principles of Redux?",
+    "options": [
+      {
+        "optionText": "Single source of truth (one store), state is read-only (changed only via actions), and changes are made with pure reducer functions",
+        "isCorrect": true,
+        "explanation": "These three principles ensure predictability: one store means one place to look for state; dispatching actions is the only way to trigger changes; reducers are pure functions so the same input always yields the same output."
+      },
+      {
+        "optionText": "Multiple stores, mutable state, and async reducers",
+        "isCorrect": false,
+        "explanation": "Redux recommends a single store, immutable state, and pure (synchronous) reducers. Async logic goes in middleware like Thunk or Saga."
+      },
+      {
+        "optionText": "Component-local state, direct state mutation, and two-way data binding",
+        "isCorrect": false,
+        "explanation": "Redux is the opposite: global store, immutable updates, and unidirectional data flow."
+      },
+      {
+        "optionText": "Observable streams, reactive programming, and event sourcing",
+        "isCorrect": false,
+        "explanation": "Those describe reactive libraries like RxJS. Redux uses a simpler action-reducer model, though redux-observable adds RxJS integration."
+      }
+    ]
+  },
+  {
+    "topic": "redux",
+    "question": "What are reducers in Redux?",
+    "options": [
+      {
+        "optionText": "Pure functions that take the current state and an action, then return a new state without mutating the original",
+        "isCorrect": true,
+        "explanation": "A reducer has the signature (state, action) => newState. They must be pure — no side effects, no API calls, no mutation. Given the same state and action, they always return the same new state."
+      },
+      {
+        "optionText": "Functions that send actions to the Redux store",
+        "isCorrect": false,
+        "explanation": "Functions that send actions are called action creators or the dispatch function."
+      },
+      {
+        "optionText": "Middleware functions that intercept actions before they reach the store",
+        "isCorrect": false,
+        "explanation": "That describes Redux middleware (Thunk, Saga). Reducers process actions after middleware."
+      },
+      {
+        "optionText": "Selectors that read and transform data from the Redux store",
+        "isCorrect": false,
+        "explanation": "Selectors read from the store. Reducers write to it by returning new state."
+      }
+    ]
+  },
+  {
+    "topic": "redux",
+    "question": "What is Redux Thunk?",
+    "options": [
+      {
+        "optionText": "A middleware that allows action creators to return functions instead of plain objects, enabling async logic like API calls",
+        "isCorrect": true,
+        "explanation": "By default Redux only accepts plain object actions. Redux Thunk lets you dispatch a function (thunk) that receives dispatch and getState, so you can make async API calls and dispatch actions based on results."
+      },
+      {
+        "optionText": "A Redux store enhancer that speeds up state updates",
+        "isCorrect": false,
+        "explanation": "Redux Thunk is middleware, not a performance enhancer."
+      },
+      {
+        "optionText": "A method for combining multiple reducers into a single reducer",
+        "isCorrect": false,
+        "explanation": "That's combineReducers(). Thunk handles async action creators."
+      },
+      {
+        "optionText": "A Redux DevTools plugin for time-travel debugging",
+        "isCorrect": false,
+        "explanation": "Time-travel debugging is a Redux DevTools feature. Thunk is async middleware."
+      }
+    ]
+  },
+  {
+    "topic": "redux",
+    "question": "What is the difference between Component and Container in Redux?",
+    "options": [
+      {
+        "optionText": "Components are presentational (UI only, receive props); Containers are connected to the Redux store via connect() and pass state/dispatch as props",
+        "isCorrect": true,
+        "explanation": "The container/presentational pattern separates concerns: presentational components are dumb, reusable UI; containers are smart, store-connected wrappers. With hooks (useSelector/useDispatch) this pattern is less mandatory but still useful conceptually."
+      },
+      {
+        "optionText": "Containers are the same as React's built-in container HTML elements",
+        "isCorrect": false,
+        "explanation": "Container in the Redux pattern is an architectural concept, not related to HTML container elements."
+      },
+      {
+        "optionText": "Components are connected to the store; containers are purely presentational",
+        "isCorrect": false,
+        "explanation": "It's the other way around. Containers connect to the store; components are presentational."
+      },
+      {
+        "optionText": "Both Component and Container are identical — the terms are interchangeable in Redux",
+        "isCorrect": false,
+        "explanation": "They describe different roles in the container/presentational pattern, even if the distinction has softened with hooks."
+      }
+    ]
+  },
+  {
+    "topic": "redux",
+    "question": "What is redux-saga?",
+    "options": [
+      {
+        "optionText": "A middleware library that uses ES6 generator functions to handle complex async flows (API calls, race conditions, debouncing) as readable sequences",
+        "isCorrect": true,
+        "explanation": "redux-saga manages side effects via sagas — generator functions that describe async flows step by step. They're easier to test than Thunk callbacks and handle complex scenarios like takeLatest, race(), all() naturally."
+      },
+      {
+        "optionText": "A state management alternative that replaces Redux entirely",
+        "isCorrect": false,
+        "explanation": "redux-saga is middleware that works alongside Redux, not a replacement."
+      },
+      {
+        "optionText": "A library for animating Redux state transitions in the UI",
+        "isCorrect": false,
+        "explanation": "redux-saga handles async side effects, not animations."
+      },
+      {
+        "optionText": "A logging tool that records all Redux actions to an external server",
+        "isCorrect": false,
+        "explanation": "Logging is a separate concern (redux-logger). redux-saga manages async business logic."
+      }
+    ]
+  },
+  {
+    "topic": "redux",
+    "question": "What are Redux selectors and why to use them?",
+    "options": [
+      {
+        "optionText": "Functions that extract and derive data from the store — memoized with Reselect to avoid unnecessary recalculations",
+        "isCorrect": true,
+        "explanation": "Selectors encapsulate store shape knowledge and let you compute derived data. Reselect's createSelector memoizes results, so components only re-render when relevant slice of state actually changes."
+      },
+      {
+        "optionText": "CSS selectors used to style Redux-connected components differently",
+        "isCorrect": false,
+        "explanation": "Redux selectors are JavaScript functions that read from the store — nothing to do with CSS."
+      },
+      {
+        "optionText": "The action type strings used to identify Redux actions",
+        "isCorrect": false,
+        "explanation": "Action type strings are constants or enum values. Selectors are functions that read state."
+      },
+      {
+        "optionText": "Middleware functions that filter which actions reach the reducers",
+        "isCorrect": false,
+        "explanation": "Middleware intercepts actions. Selectors read from the store after reducers have processed actions."
+      }
+    ]
+  },
+  {
+    "topic": "redux",
+    "question": "What is the difference between React context and React Redux?",
+    "options": [
+      {
+        "optionText": "Context is a built-in React API for passing data through the tree; Redux adds structured state management with actions, reducers, and middleware — with better performance through selective subscriptions",
+        "isCorrect": true,
+        "explanation": "Context solves prop drilling but re-renders all consumers on any change. Redux with useSelector only re-renders components when their selected slice changes. Redux also adds DevTools, middleware, and a structured update pattern."
+      },
+      {
+        "optionText": "React context and React Redux are identical — Redux is just a wrapper around context",
+        "isCorrect": false,
+        "explanation": "While react-redux v7+ uses context internally, Redux adds significant structure: the reducer pattern, action creators, middleware, and DevTools that raw context doesn't provide."
+      },
+      {
+        "optionText": "Redux is faster than context for every use case",
+        "isCorrect": false,
+        "explanation": "For simple state needs, context is perfectly adequate. Redux adds overhead that's only worthwhile for complex state with many subscribers."
+      },
+      {
+        "optionText": "Context requires a Redux store; Redux can work without context",
+        "isCorrect": false,
+        "explanation": "Context is a built-in React API that doesn't require Redux. Redux uses context as a delivery mechanism in react-redux, but it's optional in plain Redux."
+      }
+    ]
+  },
+  {
+    "topic": "redux",
+    "question": "What are the differences between redux-saga and redux-thunk?",
+    "options": [
+      {
+        "optionText": "Thunk uses callbacks/promises for simple async; Saga uses generator functions for complex flows with better testability and built-in primitives like takeLatest and race()",
+        "isCorrect": true,
+        "explanation": "Thunk is simpler to set up but complex async flows become nested callbacks. Saga separates async logic into readable generator sequences, each step easily unit-testable by iterating the generator."
+      },
+      {
+        "optionText": "Thunk uses generators; Saga uses promises — they are mirror images of each other",
+        "isCorrect": false,
+        "explanation": "It's the opposite: Thunk uses plain functions/promises; Saga uses ES6 generators."
+      },
+      {
+        "optionText": "Both are identical — the choice is purely a matter of naming convention",
+        "isCorrect": false,
+        "explanation": "They have fundamentally different programming models and trade-offs."
+      },
+      {
+        "optionText": "Saga is deprecated in favour of Thunk in modern Redux Toolkit projects",
+        "isCorrect": false,
+        "explanation": "Redux Toolkit recommends RTK Query for data fetching, but both Thunk (built into RTK) and Saga are actively maintained. Neither is deprecated."
+      }
+    ]
+  },
+  {
+    "topic": "redux",
+    "question": "How to access Redux store outside a React component?",
+    "options": [
+      {
+        "optionText": "Export the store instance and call store.getState() or store.dispatch() directly in plain JS modules",
+        "isCorrect": true,
+        "explanation": "Since the store is a plain JavaScript object created with configureStore(), you can import it anywhere and use store.getState(), store.dispatch(), or store.subscribe() without being inside a React component."
+      },
+      {
+        "optionText": "Use React.useContext(ReduxContext) in any JavaScript file",
+        "isCorrect": false,
+        "explanation": "React hooks including useContext can only be called inside React function components or custom hooks — not in plain JS modules."
+      },
+      {
+        "optionText": "Redux store can only be accessed inside components wrapped with connect()",
+        "isCorrect": false,
+        "explanation": "connect() is a convenience wrapper. The raw store is accessible anywhere by importing it."
+      },
+      {
+        "optionText": "Use window.reduxStore — Redux automatically attaches the store to the global window",
+        "isCorrect": false,
+        "explanation": "Redux does not attach anything to window. You must explicitly export and import the store instance."
+      }
+    ]
+  },
+  {
+    "topic": "redux",
+    "question": "What are the differences between call and put in redux-saga?",
+    "options": [
+      {
+        "optionText": "call() invokes a function/promise and waits for the result; put() dispatches an action to the Redux store",
+        "isCorrect": true,
+        "explanation": "In Saga effects: call(fn, ...args) is like awaiting an async function and yields the result back to the saga. put(action) dispatches an action to the Redux store — equivalent to dispatch() in a component."
+      },
+      {
+        "optionText": "call() dispatches actions; put() makes API requests",
+        "isCorrect": false,
+        "explanation": "It's the reverse: call() invokes functions (including API calls); put() dispatches Redux actions."
+      },
+      {
+        "optionText": "Both call() and put() are identical and can be used interchangeably",
+        "isCorrect": false,
+        "explanation": "They have completely different purposes. Mixing them up would cause runtime errors."
+      },
+      {
+        "optionText": "call() is for synchronous operations; put() is for asynchronous operations",
+        "isCorrect": false,
+        "explanation": "call() is used for both sync and async function calls. put() is specifically for dispatching Redux actions, regardless of timing."
+      }
+    ]
+  },
+  {
+    "topic": "redux",
+    "question": "Do you need to keep all component states in Redux store?",
+    "options": [
+      {
+        "optionText": "No — only state that is shared between multiple components or needs to persist across routes belongs in Redux; local UI state is better kept in component state",
+        "isCorrect": true,
+        "explanation": "Redux is best for global, shared, or complex state. Form input, UI toggles, hover states, and other ephemeral local state don't need to be in Redux — useState is simpler and faster."
+      },
+      {
+        "optionText": "Yes — all state must be in Redux to maintain the single source of truth principle",
+        "isCorrect": false,
+        "explanation": "Single source of truth means each piece of state lives in one place — not that everything must be in Redux. Local component state is fine for local concerns."
+      },
+      {
+        "optionText": "Yes — only Redux state triggers component re-renders in React",
+        "isCorrect": false,
+        "explanation": "React's useState and useReducer also trigger re-renders when state changes. They don't need Redux."
+      },
+      {
+        "optionText": "No — Redux should never be used because React context replaces it entirely",
+        "isCorrect": false,
+        "explanation": "Context and Redux serve different needs. Redux is still valuable for complex, high-frequency state with many consumers."
+      }
+    ]
+  },
+  {
+    "topic": "redux",
+    "question": "How to set initial state in Redux?",
+    "options": [
+      {
+        "optionText": "Pass a preloadedState argument to configureStore(), or define a default value in each reducer's state parameter",
+        "isCorrect": true,
+        "explanation": "Two approaches: (1) reducer default: (state = initialState, action) => ... where initialState is defined in the reducer file. (2) configureStore({ preloadedState: { ... } }) for hydrating state from localStorage or server."
+      },
+      {
+        "optionText": "Call store.setState() with the initial values after creating the store",
+        "isCorrect": false,
+        "explanation": "Redux stores have no setState() method. State can only change through dispatched actions."
+      },
+      {
+        "optionText": "Dispatch an INIT action with the initial state as payload",
+        "isCorrect": false,
+        "explanation": "Redux dispatches @@INIT automatically on creation, but you don't dispatch initial state. Reducers define it via default parameter values."
+      },
+      {
+        "optionText": "Define initial state in a global Redux.config() call before creating the store",
+        "isCorrect": false,
+        "explanation": "There is no Redux.config() API. Initial state is set in reducers or as preloadedState in configureStore()."
+      }
+    ]
+  },
+  {
+    "topic": "redux",
+    "question": "What are typical middleware choices for handling asynchronous calls in Redux?",
+    "options": [
+      {
+        "optionText": "Redux Thunk (simple async functions), Redux Saga (generator-based), and RTK Query (built-in data fetching in Redux Toolkit)",
+        "isCorrect": true,
+        "explanation": "Redux Thunk is bundled with Redux Toolkit and covers most use cases. Redux Saga suits complex async flows. RTK Query is the modern recommended approach for server state, providing caching, invalidation, and auto-refetch."
+      },
+      {
+        "optionText": "Redux DevTools is the standard tool for handling async operations",
+        "isCorrect": false,
+        "explanation": "Redux DevTools is a debugging tool, not middleware for handling async logic."
+      },
+      {
+        "optionText": "React Suspense replaces all async middleware in modern Redux",
+        "isCorrect": false,
+        "explanation": "React Suspense handles data fetching at the render level (with libraries like RTK Query). It doesn't replace Redux middleware architecture."
+      },
+      {
+        "optionText": "Async calls must be made outside Redux and results passed via props",
+        "isCorrect": false,
+        "explanation": "This was an older pattern. Redux middleware is specifically designed to handle async side effects within the Redux flow."
+      }
+    ]
+  },
+  {
+    "topic": "redux",
+    "question": "Are there any similarities between Redux and RxJS?",
+    "options": [
+      {
+        "optionText": "Both use observable-like patterns for handling state changes over time; Redux actions can be seen as a stream of events, similar to RxJS Observables",
+        "isCorrect": true,
+        "explanation": "Both are inspired by functional reactive programming. redux-observable bridges them by treating the action stream as an RxJS Observable. Both promote unidirectional data flow and pure transformations, but Redux uses reducers while RxJS uses operators."
+      },
+      {
+        "optionText": "Redux and RxJS are completely unrelated with no overlapping concepts",
+        "isCorrect": false,
+        "explanation": "They share concepts like event streams and pure transformations. redux-observable intentionally merges both."
+      },
+      {
+        "optionText": "RxJS is built on top of Redux and requires it to function",
+        "isCorrect": false,
+        "explanation": "RxJS is an independent library. It can be used with or without Redux."
+      },
+      {
+        "optionText": "Redux replaces RxJS for all reactive programming needs in React apps",
+        "isCorrect": false,
+        "explanation": "Redux and RxJS solve different problems and are complementary. Redux is opinionated about app state; RxJS is a general-purpose reactive programming library."
+      }
+    ]
+  },
+  {
+    "topic": "redux",
+    "question": "What are the downsides of Redux over Flux?",
+    "options": [
+      {
+        "optionText": "Redux requires more boilerplate for simple use cases, has a steeper learning curve (reducers, immutability, middleware), and adds indirection compared to simpler patterns",
+        "isCorrect": true,
+        "explanation": "Redux's strict unidirectional flow, pure reducers, and immutability are powerful but add complexity. For small apps, the boilerplate of action types, action creators, and reducers can outweigh the benefits. Redux Toolkit significantly reduces this now."
+      },
+      {
+        "optionText": "Redux is slower than Flux because it uses a single store instead of multiple stores",
+        "isCorrect": false,
+        "explanation": "Performance is not a notable downside of Redux vs Flux. The single store is actually beneficial for consistency."
+      },
+      {
+        "optionText": "Redux doesn't support React — it was designed for Angular applications",
+        "isCorrect": false,
+        "explanation": "Redux works with any JavaScript framework. react-redux is the official binding for React."
+      },
+      {
+        "optionText": "Redux cannot handle async operations; Flux supports them natively",
+        "isCorrect": false,
+        "explanation": "Both need help for async (neither has built-in async support). Redux uses middleware; Flux stores handle async in their own methods."
+      }
+    ]
+  }
+]

@@ -1,0 +1,418 @@
+[
+  {
+    "topic": "react-hooks",
+    "question": "What are React Hooks?",
+    "options": [
+      {
+        "optionText": "Functions starting with 'use' that let function components access React features like state, effects, refs, and context without class components.",
+        "isCorrect": true,
+        "explanation": "Correct — hooks were introduced in React 16.8 and follow two rules: call at top level, call only from React functions."
+      },
+      {
+        "optionText": "Lifecycle methods that replace componentDidMount and componentDidUpdate in class components.",
+        "isCorrect": false,
+        "explanation": "Hooks are for function components — they replace class components, not just lifecycle methods."
+      },
+      {
+        "optionText": "Third-party plugins that extend React with additional functionality.",
+        "isCorrect": false,
+        "explanation": "Hooks are a core React feature, not third-party plugins."
+      },
+      {
+        "optionText": "Special HTML attributes that hook into browser events like onclick and onchange.",
+        "isCorrect": false,
+        "explanation": "HTML event attributes are unrelated to React Hooks — hooks are JavaScript functions that tap into React's internal state system."
+      }
+    ]
+  },
+  {
+    "topic": "react-hooks",
+    "question": "What is useState() in React?",
+    "options": [
+      {
+        "optionText": "A hook that declares a state variable and returns the current value plus a setter function. Calling the setter schedules a re-render.",
+        "isCorrect": true,
+        "explanation": "Correct — always use the function form of the setter (setCount(c => c + 1)) when new state depends on previous state."
+      },
+      {
+        "optionText": "A hook that stores state in the browser's localStorage for persistence across page refreshes.",
+        "isCorrect": false,
+        "explanation": "useState keeps state in React's memory — for persistence, you need to sync to localStorage separately."
+      },
+      {
+        "optionText": "A hook that provides access to global Redux state without a store setup.",
+        "isCorrect": false,
+        "explanation": "useState manages local component state — for global state use Redux, Zustand, or Context."
+      },
+      {
+        "optionText": "A hook that re-renders the component on every state change and all parent state changes.",
+        "isCorrect": false,
+        "explanation": "useState only causes the component to re-render when its own state changes, not parent state (unless props change)."
+      }
+    ]
+  },
+  {
+    "topic": "react-hooks",
+    "question": "How to call a loading function with React useEffect only once?",
+    "options": [
+      {
+        "optionText": "Pass an empty dependency array [] as the second argument — the effect runs once on mount and the cleanup runs on unmount.",
+        "isCorrect": true,
+        "explanation": "Correct — [] tells React the effect has no dependencies and should not re-run after the initial render."
+      },
+      {
+        "optionText": "Call useEffect without a second argument — effects without a dependency array run only once.",
+        "isCorrect": false,
+        "explanation": "Without a dependency array, useEffect runs after every render — you must pass [] to run it once."
+      },
+      {
+        "optionText": "Wrap the function in useCallback with an empty array and call it inside useEffect.",
+        "isCorrect": false,
+        "explanation": "useCallback memoises a function reference — the key to running an effect once is the [] dependency array."
+      },
+      {
+        "optionText": "Use useState to track whether the function has been called, and skip on subsequent renders.",
+        "isCorrect": false,
+        "explanation": "That is a workaround — passing [] to useEffect is the correct, built-in solution."
+      }
+    ]
+  },
+  {
+    "topic": "react-hooks",
+    "question": "How to access DOM elements in React?",
+    "options": [
+      {
+        "optionText": "Create a ref with useRef(null), attach it to the element via the ref prop, then access the DOM node via ref.current.",
+        "isCorrect": true,
+        "explanation": "Correct — React sets ref.current to the DOM node after mount and null on unmount."
+      },
+      {
+        "optionText": "Use document.getElementById() inside a useEffect — this is the recommended approach.",
+        "isCorrect": false,
+        "explanation": "Direct DOM queries bypass React's rendering model — useRef is the idiomatic React way to access DOM nodes."
+      },
+      {
+        "optionText": "Access DOM elements via the event.target property from any event handler.",
+        "isCorrect": false,
+        "explanation": "event.target works for the specific element that triggered the event, but useRef is for direct DOM access without waiting for an event."
+      },
+      {
+        "optionText": "Use useState to store a reference to the DOM node after the component first renders.",
+        "isCorrect": false,
+        "explanation": "useState triggers re-renders when updated — useRef stores mutable values without causing re-renders."
+      }
+    ]
+  },
+  {
+    "topic": "react-hooks",
+    "question": "What are the advantages of using React Hooks?",
+    "options": [
+      {
+        "optionText": "Simpler code (no class boilerplate), easier logic reuse via custom hooks, co-location of related logic, and better TypeScript inference.",
+        "isCorrect": true,
+        "explanation": "Correct — custom hooks allow sharing stateful logic without HOCs or render props, which were the pre-hooks solutions."
+      },
+      {
+        "optionText": "Hooks make React components render faster by bypassing the virtual DOM.",
+        "isCorrect": false,
+        "explanation": "Hooks do not bypass the virtual DOM — they work within React's existing rendering model."
+      },
+      {
+        "optionText": "Hooks allow React components to run on the server without any modifications.",
+        "isCorrect": false,
+        "explanation": "Server-side rendering is handled separately — hooks are a component authoring API, not an SSR optimisation."
+      },
+      {
+        "optionText": "Hooks automatically memoize all computed values to prevent unnecessary re-renders.",
+        "isCorrect": false,
+        "explanation": "Memoization requires explicit use of useMemo and useCallback — hooks do not memoize automatically."
+      }
+    ]
+  },
+  {
+    "topic": "react-hooks",
+    "question": "When writing a Custom Hook, what is the difference between it and a normal function?",
+    "options": [
+      {
+        "optionText": "A custom hook must start with 'use', can call other hooks internally, and follows hook rules. A normal function cannot call hooks.",
+        "isCorrect": true,
+        "explanation": "Correct — the 'use' prefix signals to React (and linters) that hook rules apply — calls other hooks at the top level."
+      },
+      {
+        "optionText": "Custom hooks are defined outside the component; normal functions are defined inside.",
+        "isCorrect": false,
+        "explanation": "Both can be defined outside components — the distinction is the 'use' prefix and the ability to call other hooks."
+      },
+      {
+        "optionText": "Custom hooks automatically re-render the component when called; normal functions do not.",
+        "isCorrect": false,
+        "explanation": "A custom hook re-renders the component only if it contains hooks like useState or useContext that trigger renders."
+      },
+      {
+        "optionText": "Custom hooks require a return statement; normal functions do not.",
+        "isCorrect": false,
+        "explanation": "Both can return anything or nothing — the distinction is hook rule compliance, not syntax."
+      }
+    ]
+  },
+  {
+    "topic": "react-hooks",
+    "question": "Do two components using the same Hook share state?",
+    "options": [
+      {
+        "optionText": "No — each component that calls a hook gets its own independent state. Hooks don't create shared singletons.",
+        "isCorrect": true,
+        "explanation": "Correct — to share state between components, lift it up or use Context/external stores like Zustand."
+      },
+      {
+        "optionText": "Yes — state is shared between all components that use the same custom hook.",
+        "isCorrect": false,
+        "explanation": "Each hook call creates isolated state — hooks are a per-instance mechanism."
+      },
+      {
+        "optionText": "It depends on whether the hook is exported as a singleton from a module.",
+        "isCorrect": false,
+        "explanation": "How a hook is exported is irrelevant — each invocation of a hook creates independent state."
+      },
+      {
+        "optionText": "State is shared only if both components are in the same component tree.",
+        "isCorrect": false,
+        "explanation": "Being in the same tree does not cause hook state to be shared — each component call creates its own state."
+      }
+    ]
+  },
+  {
+    "topic": "react-hooks",
+    "question": "When and how would you use useContext?",
+    "options": [
+      {
+        "optionText": "When a value (theme, auth, locale) needs to be available to many components at different nesting levels without prop drilling. Create context, wrap with Provider, consume with useContext.",
+        "isCorrect": true,
+        "explanation": "Correct — useContext is React's dependency injection — avoid using it for frequently-changing values as it re-renders all consumers."
+      },
+      {
+        "optionText": "Whenever you need to share state between sibling components that have no common parent.",
+        "isCorrect": false,
+        "explanation": "Sibling components can share state via a common ancestor — context is for deep trees, not specifically siblings."
+      },
+      {
+        "optionText": "useContext replaces Redux for all state management needs.",
+        "isCorrect": false,
+        "explanation": "Context re-renders all consumers on any value change — for complex/frequent state updates, Redux or Zustand scale better."
+      },
+      {
+        "optionText": "useContext allows you to access browser APIs like localStorage and navigator.",
+        "isCorrect": false,
+        "explanation": "Browser APIs are accessed directly — context is for sharing React state through the component tree."
+      }
+    ]
+  },
+  {
+    "topic": "react-hooks",
+    "question": "When to use useState vs useReducer?",
+    "options": [
+      {
+        "optionText": "useState for simple independent values; useReducer for complex state with multiple sub-values, inter-dependent transitions, or when the next state depends on the action type.",
+        "isCorrect": true,
+        "explanation": "Correct — useReducer also centralises update logic, making each transition independently testable."
+      },
+      {
+        "optionText": "useReducer requires Redux — useState is the built-in React alternative.",
+        "isCorrect": false,
+        "explanation": "useReducer is built into React and does not require Redux — it is a simpler, local version of the Redux pattern."
+      },
+      {
+        "optionText": "useState is for primitive values; useReducer is for objects and arrays.",
+        "isCorrect": false,
+        "explanation": "useState handles objects and arrays fine — the distinction is complexity and transition logic, not data type."
+      },
+      {
+        "optionText": "useReducer is deprecated in React 18 — always use useState with the functional updater pattern.",
+        "isCorrect": false,
+        "explanation": "useReducer is not deprecated — it is actively recommended for complex state logic."
+      }
+    ]
+  },
+  {
+    "topic": "react-hooks",
+    "question": "What are the use cases for useRef?",
+    "options": [
+      {
+        "optionText": "Storing DOM node references for direct manipulation (focus, measure), and storing mutable values that survive renders without triggering re-renders (interval IDs, previous values).",
+        "isCorrect": true,
+        "explanation": "Correct — unlike useState, mutating ref.current does not schedule a re-render."
+      },
+      {
+        "optionText": "useRef is used exclusively for accessing DOM elements — state values should use useState.",
+        "isCorrect": false,
+        "explanation": "useRef is also used for any mutable value that should persist across renders without causing re-renders."
+      },
+      {
+        "optionText": "useRef persists data to localStorage so it survives page refreshes.",
+        "isCorrect": false,
+        "explanation": "useRef stores values in React's memory for the component's lifetime — it does not persist beyond the component unmounting."
+      },
+      {
+        "optionText": "useRef memoises expensive calculations between renders, like useMemo.",
+        "isCorrect": false,
+        "explanation": "useRef stores a mutable value — useMemo caches computed values and re-runs when dependencies change."
+      }
+    ]
+  },
+  {
+    "topic": "react-hooks",
+    "question": "Explain the difference between useState and useRef hooks.",
+    "options": [
+      {
+        "optionText": "useState triggers a re-render when updated; useRef does not. Both persist values across renders, but only useState drives UI updates.",
+        "isCorrect": true,
+        "explanation": "Correct — this is why useRef is ideal for storing timer IDs or previous values that shouldn't cause renders."
+      },
+      {
+        "optionText": "useState is for strings and numbers; useRef is for objects and DOM elements.",
+        "isCorrect": false,
+        "explanation": "Both handle any value type — the distinction is re-render behaviour, not data type."
+      },
+      {
+        "optionText": "useRef is a newer hook that replaces useState in React 18.",
+        "isCorrect": false,
+        "explanation": "Both coexist in React 18 with distinct purposes — useRef does not replace useState."
+      },
+      {
+        "optionText": "useState values are synchronous; useRef values are updated asynchronously.",
+        "isCorrect": false,
+        "explanation": "Both are synchronous in terms of mutation — state updates are batched for rendering, not asynchronous updates."
+      }
+    ]
+  },
+  {
+    "topic": "react-hooks",
+    "question": "When and why would you use useMemo()?",
+    "options": [
+      {
+        "optionText": "When a computation is genuinely expensive (filtering thousands of items, complex maths) and runs on frequent re-renders — memoize to avoid redundant work.",
+        "isCorrect": true,
+        "explanation": "Correct — don't reach for useMemo by default; profile first. Most computations are fast enough without it."
+      },
+      {
+        "optionText": "Always wrap every computed value in useMemo to make the component as fast as possible.",
+        "isCorrect": false,
+        "explanation": "useMemo has overhead (memory, comparison cost) — over-using it can make performance worse."
+      },
+      {
+        "optionText": "useMemo is for memoising function references to prevent child re-renders — that's its primary use.",
+        "isCorrect": false,
+        "explanation": "Memoising functions is useCallback — useMemo is for memoising computed values."
+      },
+      {
+        "optionText": "useMemo prevents re-renders caused by parent component state changes.",
+        "isCorrect": false,
+        "explanation": "useMemo memoises a value but doesn't prevent re-renders — wrap the component in React.memo to skip renders."
+      }
+    ]
+  },
+  {
+    "topic": "react-hooks",
+    "question": "What are common use cases for useCallback?",
+    "options": [
+      {
+        "optionText": "Stabilising function references passed to React.memo-wrapped children, and dependencies in useEffect or other hooks where a new function reference would trigger unnecessary re-runs.",
+        "isCorrect": true,
+        "explanation": "Correct — without useCallback, a new function is created every render, potentially causing memoized children to re-render."
+      },
+      {
+        "optionText": "useCallback is used to cache the result of asynchronous API calls between renders.",
+        "isCorrect": false,
+        "explanation": "Caching API results is handled by TanStack Query or useMemo — useCallback memoises function references."
+      },
+      {
+        "optionText": "useCallback prevents the function from being called more than once during a render cycle.",
+        "isCorrect": false,
+        "explanation": "useCallback does not limit how many times a function is called — it stabilises the reference."
+      },
+      {
+        "optionText": "useCallback is used to debounce event handlers in React components.",
+        "isCorrect": false,
+        "explanation": "Debouncing requires a timer (usually in a useRef or useMemo) — useCallback just memoises the function reference."
+      }
+    ]
+  },
+  {
+    "topic": "react-hooks",
+    "question": "What are the differences between React.memo() and useMemo()?",
+    "options": [
+      {
+        "optionText": "React.memo wraps a component to skip re-rendering if props haven't changed; useMemo caches a computed value inside a component.",
+        "isCorrect": true,
+        "explanation": "Correct — React.memo is a component-level optimisation; useMemo is a value-level optimisation within a component."
+      },
+      {
+        "optionText": "React.memo is for class components; useMemo is for function components.",
+        "isCorrect": false,
+        "explanation": "Both apply to function components — React.memo wraps the component; useMemo is a hook inside it."
+      },
+      {
+        "optionText": "They are identical — React.memo is the JSX syntax for useMemo.",
+        "isCorrect": false,
+        "explanation": "They are completely different tools — React.memo prevents component re-renders; useMemo caches computed values."
+      },
+      {
+        "optionText": "useMemo is deprecated in React 18 in favour of React.memo.",
+        "isCorrect": false,
+        "explanation": "Both are actively used in React 18 — they solve different problems and are not interchangeable."
+      }
+    ]
+  },
+  {
+    "topic": "react-hooks",
+    "question": "Do Hooks replace render props and higher-order components (HOC)?",
+    "options": [
+      {
+        "optionText": "Largely yes — custom hooks share stateful logic more cleanly without wrapper nesting. But HOCs still have valid uses (e.g. third-party library integrations, code splitting boundaries).",
+        "isCorrect": true,
+        "explanation": "Correct — hooks reduce 'wrapper hell' from deeply nested HOCs and render props, but don't completely obsolete HOCs."
+      },
+      {
+        "optionText": "No — hooks, HOCs, and render props solve completely different problems and cannot replace each other.",
+        "isCorrect": false,
+        "explanation": "Hooks do overlap significantly with HOCs and render props for stateful logic sharing — custom hooks are now the preferred approach."
+      },
+      {
+        "optionText": "Yes completely — HOCs and render props are deprecated as of React 16.8.",
+        "isCorrect": false,
+        "explanation": "HOCs and render props are not deprecated — they remain valid patterns, though hooks are preferred for logic sharing."
+      },
+      {
+        "optionText": "Only render props are replaced by hooks — HOCs are still the recommended pattern for cross-cutting concerns.",
+        "isCorrect": false,
+        "explanation": "Hooks largely replace both render props and HOCs for logic sharing, though HOCs retain some valid use cases."
+      }
+    ]
+  },
+  {
+    "topic": "react-hooks",
+    "question": "Do React Hooks cover all use cases for class components?",
+    "options": [
+      {
+        "optionText": "Almost — the only missing hook is getSnapshotBeforeUpdate and (until React 19) error boundaries. All other class lifecycle functionality has hook equivalents.",
+        "isCorrect": true,
+        "explanation": "Correct — error boundaries still require class components (or third-party wrappers like react-error-boundary) as of React 18."
+      },
+      {
+        "optionText": "Yes completely — there is no reason to ever use a class component with hooks available.",
+        "isCorrect": false,
+        "explanation": "Error boundaries are a notable exception — they still require class components in React 18."
+      },
+      {
+        "optionText": "No — class components are fundamentally more capable and hooks are a simplified subset.",
+        "isCorrect": false,
+        "explanation": "Hooks cover virtually all class component use cases — the React team recommends hooks for new code."
+      },
+      {
+        "optionText": "Hooks only cover useState and lifecycle methods — complex patterns still require class components.",
+        "isCorrect": false,
+        "explanation": "Hooks cover state, effects, context, refs, reducers, memoization, and more — far beyond just state and lifecycle."
+      }
+    ]
+  }
+]

@@ -1,0 +1,418 @@
+[
+  {
+    "topic": "agile-scrum",
+    "question": "What is Agile?",
+    "options": [
+      {
+        "optionText": "An iterative software development approach emphasising collaboration, working software, customer feedback, and adapting to change over rigid upfront planning.",
+        "isCorrect": true,
+        "explanation": "Correct — Agile values and principles are defined in the Agile Manifesto (2001)."
+      },
+      {
+        "optionText": "A specific project management tool like Jira or Trello.",
+        "isCorrect": false,
+        "explanation": "Jira and Trello are tools that support Agile workflows — Agile itself is a set of values and principles, not a tool."
+      },
+      {
+        "optionText": "A waterfall methodology where requirements are fully defined before development begins.",
+        "isCorrect": false,
+        "explanation": "That describes waterfall — Agile is specifically an alternative to upfront, rigid planning."
+      },
+      {
+        "optionText": "A programming paradigm for writing modular, testable code.",
+        "isCorrect": false,
+        "explanation": "Agile is a project management and product development philosophy, not a programming paradigm."
+      }
+    ]
+  },
+  {
+    "topic": "agile-scrum",
+    "question": "What is Scrum?",
+    "options": [
+      {
+        "optionText": "An Agile framework that organises work into time-boxed sprints with defined roles (Product Owner, Scrum Master, Developers) and ceremonies (Planning, Standup, Review, Retrospective).",
+        "isCorrect": true,
+        "explanation": "Correct — Scrum is one implementation of Agile principles, not Agile itself."
+      },
+      {
+        "optionText": "A synonym for Agile — Scrum and Agile mean the same thing.",
+        "isCorrect": false,
+        "explanation": "Scrum is one framework for implementing Agile principles — Kanban and XP are other Agile frameworks."
+      },
+      {
+        "optionText": "A tool for managing GitHub pull requests and code reviews in a team.",
+        "isCorrect": false,
+        "explanation": "Scrum is a project management framework — it is not a code review tool."
+      },
+      {
+        "optionText": "A methodology that eliminates all planning in favour of continuous delivery.",
+        "isCorrect": false,
+        "explanation": "Scrum includes structured planning — Sprint Planning defines what will be done in each sprint."
+      }
+    ]
+  },
+  {
+    "topic": "agile-scrum",
+    "question": "What is a Sprint in Scrum?",
+    "options": [
+      {
+        "optionText": "A fixed time-box (usually 1–4 weeks) during which the team builds a potentially shippable product increment from selected backlog items.",
+        "isCorrect": true,
+        "explanation": "Correct — sprints have a fixed end date; unfinished work is not automatically rolled over."
+      },
+      {
+        "optionText": "A sprint is a rush to complete all remaining work before a major release.",
+        "isCorrect": false,
+        "explanation": "A sprint is a regular, fixed-length iteration — not an emergency push before a deadline."
+      },
+      {
+        "optionText": "An optional Scrum ceremony held when the team needs extra time to fix bugs.",
+        "isCorrect": false,
+        "explanation": "Sprints are the core time-boxing mechanism of Scrum — they are not optional bug-fixing periods."
+      },
+      {
+        "optionText": "A sprint is a branch in Git where all sprint work is committed before being merged to main.",
+        "isCorrect": false,
+        "explanation": "A sprint is a time-box in Scrum — it is a project management concept, not a Git workflow."
+      }
+    ]
+  },
+  {
+    "topic": "agile-scrum",
+    "question": "What is the Agile Manifesto and what are its 4 values?",
+    "options": [
+      {
+        "optionText": "A 2001 document with 4 values: Individuals & interactions over processes & tools; Working software over comprehensive documentation; Customer collaboration over contract negotiation; Responding to change over following a plan.",
+        "isCorrect": true,
+        "explanation": "Correct — the manifesto values the right-hand items but explicitly states the left-hand items are valued more."
+      },
+      {
+        "optionText": "A management framework with 4 values: Speed, Efficiency, Documentation, and Planning.",
+        "isCorrect": false,
+        "explanation": "Those are not the Agile Manifesto values — the manifesto explicitly deprioritises documentation and rigid planning."
+      },
+      {
+        "optionText": "A 2010 update to waterfall methodology adding iterative checkpoints.",
+        "isCorrect": false,
+        "explanation": "The Agile Manifesto was written in 2001 as an alternative to waterfall, not an update to it."
+      },
+      {
+        "optionText": "A contract between developers and clients defining 4 deliverables per quarter.",
+        "isCorrect": false,
+        "explanation": "The manifesto is a philosophical document — it explicitly values customer collaboration over contract negotiation."
+      }
+    ]
+  },
+  {
+    "topic": "agile-scrum",
+    "question": "What are Epics, User Stories, and Tasks in Agile?",
+    "options": [
+      {
+        "optionText": "Epic = large feature broken into multiple stories; User Story = feature from user's perspective; Task = technical implementation step within a story.",
+        "isCorrect": true,
+        "explanation": "Correct — they form a hierarchy: Epic → Stories → Tasks."
+      },
+      {
+        "optionText": "They are three names for the same concept — the team chooses which term to use.",
+        "isCorrect": false,
+        "explanation": "Each has a distinct scope — epics are larger than stories which are larger than tasks."
+      },
+      {
+        "optionText": "Epics are written by managers; User Stories by developers; Tasks by QA engineers.",
+        "isCorrect": false,
+        "explanation": "Who writes them varies by team — the distinction is scope and granularity, not authorship."
+      },
+      {
+        "optionText": "User Stories are optional — teams can use only Epics and Tasks for planning.",
+        "isCorrect": false,
+        "explanation": "User Stories are the core unit of Agile estimation and sprint planning — epics are split into stories before sprint planning."
+      }
+    ]
+  },
+  {
+    "topic": "agile-scrum",
+    "question": "What are the roles in Scrum?",
+    "options": [
+      {
+        "optionText": "Product Owner (prioritises backlog, owns the what/why), Scrum Master (facilitates, removes impediments), and Developers (build the product, own the how).",
+        "isCorrect": true,
+        "explanation": "Correct — the 2020 Scrum Guide renamed 'Development Team' to 'Developers' to include testers and designers."
+      },
+      {
+        "optionText": "Project Manager, Tech Lead, and Junior Developers.",
+        "isCorrect": false,
+        "explanation": "Those are traditional hierarchical roles — Scrum's three roles are specifically Product Owner, Scrum Master, and Developers."
+      },
+      {
+        "optionText": "CEO, CTO, and Engineering Team.",
+        "isCorrect": false,
+        "explanation": "Scrum roles are within the delivery team — executive titles are not Scrum roles."
+      },
+      {
+        "optionText": "Scrum has no defined roles — it is a self-organising system where anyone does anything.",
+        "isCorrect": false,
+        "explanation": "Scrum has three well-defined roles with specific accountabilities — self-organisation applies within those boundaries."
+      }
+    ]
+  },
+  {
+    "topic": "agile-scrum",
+    "question": "What are the Scrum events (ceremonies)?",
+    "options": [
+      {
+        "optionText": "Sprint Planning, Daily Scrum (standup), Sprint Review, and Sprint Retrospective — plus the Sprint itself as the overarching container.",
+        "isCorrect": true,
+        "explanation": "Correct — all five are defined in the Scrum Guide as formal opportunities to inspect and adapt."
+      },
+      {
+        "optionText": "Kickoff meeting, mid-sprint check-in, and release celebration.",
+        "isCorrect": false,
+        "explanation": "Those are informal team practices — the four Scrum ceremonies are Planning, Standup, Review, and Retrospective."
+      },
+      {
+        "optionText": "Backlog grooming, estimation session, code review, and deployment.",
+        "isCorrect": false,
+        "explanation": "Backlog refinement is an ongoing activity — the formal Scrum events are the four ceremonies."
+      },
+      {
+        "optionText": "Scrum has no defined ceremonies — teams hold meetings whenever they feel necessary.",
+        "isCorrect": false,
+        "explanation": "The Scrum Guide defines specific ceremonies with time-boxes and purposes — they are not ad-hoc."
+      }
+    ]
+  },
+  {
+    "topic": "agile-scrum",
+    "question": "What are Story Points and how are they used?",
+    "options": [
+      {
+        "optionText": "A relative unit of effort (complexity + uncertainty) used to estimate user stories — typically Fibonacci scale (1,2,3,5,8,13). Never convert to hours.",
+        "isCorrect": true,
+        "explanation": "Correct — story points are relative to each other within the team; converting them to hours defeats their purpose."
+      },
+      {
+        "optionText": "Story points represent hours of work — a 5-point story takes exactly 5 hours to complete.",
+        "isCorrect": false,
+        "explanation": "Story points are not hours — they measure relative effort and uncertainty, not calendar time."
+      },
+      {
+        "optionText": "Story points are assigned by the Scrum Master based on team velocity.",
+        "isCorrect": false,
+        "explanation": "The development team estimates story points collaboratively — the Scrum Master facilitates but does not assign them."
+      },
+      {
+        "optionText": "Story points are used to measure and compare developer performance across sprints.",
+        "isCorrect": false,
+        "explanation": "Using story points to measure individual performance is an anti-pattern — they measure team velocity, not individual output."
+      }
+    ]
+  },
+  {
+    "topic": "agile-scrum",
+    "question": "What is the difference between the Product Backlog and Sprint Backlog?",
+    "options": [
+      {
+        "optionText": "Product Backlog = prioritised list of all potential work owned by the PO; Sprint Backlog = subset selected for the current sprint, owned by the Developers.",
+        "isCorrect": true,
+        "explanation": "Correct — the Product Backlog is ever-evolving; the Sprint Backlog is locked for the sprint duration."
+      },
+      {
+        "optionText": "They are the same list — the Sprint Backlog is just what the Product Backlog looks like during a sprint.",
+        "isCorrect": false,
+        "explanation": "They are distinct: the Product Backlog covers all future work; the Sprint Backlog is the current sprint's committed items."
+      },
+      {
+        "optionText": "The Product Backlog is maintained in Jira; the Sprint Backlog is maintained in a physical whiteboard.",
+        "isCorrect": false,
+        "explanation": "Tool choice is irrelevant — the distinction is ownership and scope, not the tool used."
+      },
+      {
+        "optionText": "The Sprint Backlog includes all items from the Product Backlog that haven't been completed yet.",
+        "isCorrect": false,
+        "explanation": "The Sprint Backlog is only the items selected for the current sprint — not all remaining backlog items."
+      }
+    ]
+  },
+  {
+    "topic": "agile-scrum",
+    "question": "What is the Definition of Done in Scrum?",
+    "options": [
+      {
+        "optionText": "A shared checklist of quality criteria that every increment must meet before it can be called Done — e.g. code reviewed, tests passing, deployed to staging.",
+        "isCorrect": true,
+        "explanation": "Correct — DoD ensures consistent quality across all work items, separate from per-story acceptance criteria."
+      },
+      {
+        "optionText": "The acceptance criteria written for each individual user story.",
+        "isCorrect": false,
+        "explanation": "Acceptance criteria are story-specific; the Definition of Done is a universal quality baseline for all stories."
+      },
+      {
+        "optionText": "A document signed by the Product Owner confirming a feature is complete.",
+        "isCorrect": false,
+        "explanation": "DoD is a team agreement — it is not a document requiring sign-off for each story."
+      },
+      {
+        "optionText": "The date when the sprint ends and all work must be submitted.",
+        "isCorrect": false,
+        "explanation": "DoD is about quality criteria, not a deadline — it defines what 'complete' means, not when it's due."
+      }
+    ]
+  },
+  {
+    "topic": "agile-scrum",
+    "question": "What is a Sprint Retrospective?",
+    "options": [
+      {
+        "optionText": "A time-boxed ceremony at the end of each sprint where the team inspects how they worked and agrees on concrete process improvements for the next sprint.",
+        "isCorrect": true,
+        "explanation": "Correct — the output is actionable improvements, not just discussion. Psychological safety is essential for honest retrospectives."
+      },
+      {
+        "optionText": "A meeting where the team demos completed features to stakeholders for approval.",
+        "isCorrect": false,
+        "explanation": "That is the Sprint Review — the Retrospective focuses on team process, not product demonstration."
+      },
+      {
+        "optionText": "A planning session held at the start of each sprint to select backlog items.",
+        "isCorrect": false,
+        "explanation": "That is Sprint Planning — the Retrospective happens at the end to improve how the team works."
+      },
+      {
+        "optionText": "An optional meeting held only when the sprint went poorly.",
+        "isCorrect": false,
+        "explanation": "Retrospectives are held after every sprint regardless of how it went — you learn from good sprints too."
+      }
+    ]
+  },
+  {
+    "topic": "agile-scrum",
+    "question": "What is Velocity in Agile and how is it used?",
+    "options": [
+      {
+        "optionText": "The average story points completed per sprint (typically last 3–5 sprints) — used for release forecasting, not as a performance metric.",
+        "isCorrect": true,
+        "explanation": "Correct — using velocity to compare teams or grade developers is an anti-pattern."
+      },
+      {
+        "optionText": "The speed at which code is deployed to production — measured in deployments per day.",
+        "isCorrect": false,
+        "explanation": "Deployment frequency is a DevOps metric — velocity specifically measures story points completed per sprint."
+      },
+      {
+        "optionText": "A KPI used by management to rank developer productivity and set performance goals.",
+        "isCorrect": false,
+        "explanation": "Using velocity to evaluate individual performance is explicitly an anti-pattern in Agile — it leads to inflated estimates."
+      },
+      {
+        "optionText": "Velocity measures how quickly the team can respond to urgent production bugs.",
+        "isCorrect": false,
+        "explanation": "Velocity tracks planned sprint work completion — response time to incidents is a different operational metric."
+      }
+    ]
+  },
+  {
+    "topic": "agile-scrum",
+    "question": "What are Burn-Down and Burn-Up charts?",
+    "options": [
+      {
+        "optionText": "Burn-down shows remaining work decreasing toward zero over the sprint; burn-up shows completed work increasing toward the total scope, making scope changes visible.",
+        "isCorrect": true,
+        "explanation": "Correct — burn-up is better for communicating scope creep; burn-down is more common for sprint progress."
+      },
+      {
+        "optionText": "Both charts show the same data — the difference is only visual styling.",
+        "isCorrect": false,
+        "explanation": "Burn-up explicitly shows scope as a separate line, making scope changes visible — burn-down hides scope changes."
+      },
+      {
+        "optionText": "Burn-down tracks bug count; burn-up tracks feature count.",
+        "isCorrect": false,
+        "explanation": "Both track work (typically story points) — not specific work types."
+      },
+      {
+        "optionText": "These charts are used to track individual developer output across sprints.",
+        "isCorrect": false,
+        "explanation": "Burn charts track team-level sprint progress, not individual developer output."
+      }
+    ]
+  },
+  {
+    "topic": "agile-scrum",
+    "question": "What is the difference between the main differences between Scrum and Agile?",
+    "options": [
+      {
+        "optionText": "Agile is a philosophy/mindset with values and principles; Scrum is a specific framework implementing Agile using sprints, roles, and ceremonies.",
+        "isCorrect": true,
+        "explanation": "Correct — you can be Agile without using Scrum; Scrum is one of several Agile frameworks alongside Kanban, XP, and SAFe."
+      },
+      {
+        "optionText": "Agile is modern; Scrum is the legacy version that was replaced by Agile.",
+        "isCorrect": false,
+        "explanation": "Agile (2001) and Scrum (early 1990s) both exist today — Scrum implements Agile values."
+      },
+      {
+        "optionText": "Scrum is for software teams; Agile is for project managers and executives.",
+        "isCorrect": false,
+        "explanation": "Both apply to software delivery teams — the distinction is philosophy vs framework, not audience."
+      },
+      {
+        "optionText": "They are identical — 'Agile' and 'Scrum' are used interchangeably in the industry.",
+        "isCorrect": false,
+        "explanation": "While often conflated, they are distinct: Agile is the philosophy; Scrum is one framework to implement it."
+      }
+    ]
+  },
+  {
+    "topic": "agile-scrum",
+    "question": "What is the difference between Incremental and Iterative development in Agile?",
+    "options": [
+      {
+        "optionText": "Incremental = add new pieces of functionality over time; Iterative = repeatedly refine the same piece based on feedback until it is right.",
+        "isCorrect": true,
+        "explanation": "Correct — Agile combines both: each sprint adds increments (incremental) AND refines previous work based on feedback (iterative)."
+      },
+      {
+        "optionText": "They are the same concept described from different team perspectives.",
+        "isCorrect": false,
+        "explanation": "They are genuinely distinct approaches — incremental is additive; iterative is refinement-based."
+      },
+      {
+        "optionText": "Incremental is used for features; iterative is used for bug fixes.",
+        "isCorrect": false,
+        "explanation": "The distinction is about development approach, not work type."
+      },
+      {
+        "optionText": "Iterative development requires more upfront planning than incremental development.",
+        "isCorrect": false,
+        "explanation": "Planning requirements depend on the specific process, not the incremental vs iterative distinction."
+      }
+    ]
+  },
+  {
+    "topic": "agile-scrum",
+    "question": "What is Kanban?",
+    "options": [
+      {
+        "optionText": "A lean workflow management method using a visual board with WIP limits to visualise work, limit multitasking, and surface bottlenecks — no fixed sprints or prescribed roles.",
+        "isCorrect": true,
+        "explanation": "Correct — Kanban suits interrupt-driven work (support, ops); Scrum suits planned feature delivery."
+      },
+      {
+        "optionText": "A Japanese project management tool used exclusively in manufacturing.",
+        "isCorrect": false,
+        "explanation": "Kanban originated in manufacturing (Toyota) but is widely used in software development teams."
+      },
+      {
+        "optionText": "A Scrum ceremony held mid-sprint to review the current sprint board status.",
+        "isCorrect": false,
+        "explanation": "Kanban is a distinct methodology — it is not a Scrum ceremony."
+      },
+      {
+        "optionText": "A burndown chart variant that shows work items on a physical sticky-note board.",
+        "isCorrect": false,
+        "explanation": "A Kanban board can be physical or digital — but Kanban is the entire workflow management methodology, not just the board."
+      }
+    ]
+  }
+]

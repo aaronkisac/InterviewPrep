@@ -1,0 +1,548 @@
+[
+  {
+    "topic": "nextjs",
+    "question": "What are the benefits of using Next.js over a plain React app?",
+    "options": [
+      {
+        "optionText": "Built-in SSR/SSG/ISR, file-based routing, image optimisation, API routes, and zero-config TypeScript — reducing the need for manual Webpack/Babel setup",
+        "isCorrect": true,
+        "explanation": "Next.js provides production-ready defaults: server rendering strategies, automatic code splitting, the Image and Link components, built-in CSS support, and an App Router with React Server Components."
+      },
+      {
+        "optionText": "Next.js removes the need for JavaScript entirely by generating pure HTML",
+        "isCorrect": false,
+        "explanation": "Next.js still uses React and JavaScript. It enhances the developer experience and rendering strategies, not eliminates JS."
+      },
+      {
+        "optionText": "Next.js only works with GraphQL APIs and requires Apollo Client",
+        "isCorrect": false,
+        "explanation": "Next.js is API-agnostic. It works with REST, GraphQL, tRPC, or any data source."
+      },
+      {
+        "optionText": "Next.js replaces the need for a backend — no server-side code is possible",
+        "isCorrect": false,
+        "explanation": "Next.js has robust server-side capabilities: API Routes, Server Actions, Route Handlers, and full SSR support."
+      }
+    ]
+  },
+  {
+    "topic": "nextjs",
+    "question": "What is the Link component in Next.js and why use it instead of an anchor tag?",
+    "options": [
+      {
+        "optionText": "Link enables client-side navigation without full page reloads, prefetches pages in the viewport, and preserves React state across navigations",
+        "isCorrect": true,
+        "explanation": "Using <Link href='/'> instead of <a href='/'> keeps the React app alive during navigation, prefetches linked pages automatically in production, and avoids losing client-side state."
+      },
+      {
+        "optionText": "Link is only for external URLs; anchor tags are used for internal navigation",
+        "isCorrect": false,
+        "explanation": "It's the opposite — Link is used for internal Next.js routes. External URLs can use plain anchor tags."
+      },
+      {
+        "optionText": "Link and anchor tags are identical in Next.js — Link is just a styled anchor",
+        "isCorrect": false,
+        "explanation": "Link handles client-side routing with prefetching. A plain anchor tag causes a full browser navigation and page reload."
+      },
+      {
+        "optionText": "Link adds authentication checks before navigation occurs",
+        "isCorrect": false,
+        "explanation": "Link handles navigation only. Authentication checks are typically done in middleware or server components."
+      }
+    ]
+  },
+  {
+    "topic": "nextjs",
+    "question": "What built-in performance optimisations does Next.js provide?",
+    "options": [
+      {
+        "optionText": "Automatic code splitting, image optimisation (next/image), font optimisation (next/font), route prefetching, and bundling optimisations via Turbopack",
+        "isCorrect": true,
+        "explanation": "Next.js ships per-page JS bundles (code splitting), optimises images to WebP/AVIF with lazy loading, self-hosts fonts to avoid layout shift, prefetches visible links, and uses Turbopack for faster builds."
+      },
+      {
+        "optionText": "Next.js only optimises images — all other optimisations must be added manually",
+        "isCorrect": false,
+        "explanation": "Next.js has many built-in optimisations beyond images."
+      },
+      {
+        "optionText": "Next.js optimises CSS using inline styles automatically",
+        "isCorrect": false,
+        "explanation": "Next.js doesn't convert CSS to inline styles. It supports CSS Modules, Tailwind, and other styling approaches with standard bundling."
+      },
+      {
+        "optionText": "Performance optimisations require the use of a CDN — Next.js alone provides none",
+        "isCorrect": false,
+        "explanation": "Next.js provides significant built-in optimisations that work without a CDN, though a CDN further improves performance."
+      }
+    ]
+  },
+  {
+    "topic": "nextjs",
+    "question": "How do you manage environment variables in a Next.js application?",
+    "options": [
+      {
+        "optionText": "Define them in .env.local (server-only) or prefix with NEXT_PUBLIC_ to expose to the browser; use process.env.VAR_NAME to access them",
+        "isCorrect": true,
+        "explanation": ".env.local variables are only available server-side. NEXT_PUBLIC_ prefix makes them available in client-side code (inlined at build time). Never put secrets in NEXT_PUBLIC_ variables."
+      },
+      {
+        "optionText": "All environment variables are automatically available in both server and client code",
+        "isCorrect": false,
+        "explanation": "Without the NEXT_PUBLIC_ prefix, variables are server-only. Exposing them to the client requires the prefix."
+      },
+      {
+        "optionText": "Environment variables in Next.js must be declared in next.config.js, not .env files",
+        "isCorrect": false,
+        "explanation": ".env files are the standard approach. next.config.js can expose env variables too, but .env.local is the primary mechanism."
+      },
+      {
+        "optionText": "Next.js reads environment variables from the browser's localStorage",
+        "isCorrect": false,
+        "explanation": "Environment variables come from the server environment or are inlined at build time. They have nothing to do with localStorage."
+      }
+    ]
+  },
+  {
+    "topic": "nextjs",
+    "question": "How do you handle errors and error pages in Next.js App Router?",
+    "options": [
+      {
+        "optionText": "Create an error.tsx file in a route segment — it becomes an Error Boundary and receives the error and reset props; not-found.tsx handles 404s",
+        "isCorrect": true,
+        "explanation": "error.tsx must be a Client Component ('use client') since Error Boundaries require it. It catches errors thrown during rendering in that segment and its children. not-found.tsx is shown when notFound() is called in a Server Component."
+      },
+      {
+        "optionText": "All errors must be caught in a global try/catch in the root layout.tsx",
+        "isCorrect": false,
+        "explanation": "While you can add error handling in layout, the proper mechanism is error.tsx files scoped to each segment."
+      },
+      {
+        "optionText": "Next.js App Router has no error boundary support — you must use React's ErrorBoundary class component",
+        "isCorrect": false,
+        "explanation": "error.tsx is Next.js's file-convention way to create Error Boundaries, abstracting the class component requirement."
+      },
+      {
+        "optionText": "Errors are handled by the next.config.js redirects configuration",
+        "isCorrect": false,
+        "explanation": "Redirects in next.config.js are for URL redirects, not runtime error handling."
+      }
+    ]
+  },
+  {
+    "topic": "nextjs",
+    "question": "How does the Metadata API work in Next.js App Router?",
+    "options": [
+      {
+        "optionText": "Export a static metadata object or a generateMetadata() async function from any page or layout to set <head> tags like title, description, and Open Graph",
+        "isCorrect": true,
+        "explanation": "Static: export const metadata = { title: 'Page' }. Dynamic: export async function generateMetadata({ params }) { return { title: await fetchTitle(params.id) } }. Next.js merges metadata from layouts and pages."
+      },
+      {
+        "optionText": "Metadata is set by adding <meta> tags directly inside the JSX of each page component",
+        "isCorrect": false,
+        "explanation": "In the App Router, metadata is defined via the Metadata API, not by writing JSX meta tags directly (which wouldn't work correctly in Server Components)."
+      },
+      {
+        "optionText": "Metadata can only be set globally in layout.tsx — individual pages cannot override it",
+        "isCorrect": false,
+        "explanation": "Pages can export their own metadata that overrides or extends the parent layout's metadata."
+      },
+      {
+        "optionText": "The Metadata API requires a separate third-party package like react-helmet",
+        "isCorrect": false,
+        "explanation": "The Metadata API is built into Next.js App Router. react-helmet is a Pages Router / plain React solution."
+      }
+    ]
+  },
+  {
+    "topic": "nextjs",
+    "question": "What are dynamic imports in Next.js and when do you use them?",
+    "options": [
+      {
+        "optionText": "next/dynamic wraps React.lazy to code-split components on demand, with optional SSR disabling for browser-only libraries and a loading placeholder",
+        "isCorrect": true,
+        "explanation": "dynamic(() => import('./HeavyComponent'), { loading: () => <Spinner />, ssr: false }) loads the component only when needed. Use it for large third-party libraries, charts, maps, or anything that shouldn't be in the initial bundle."
+      },
+      {
+        "optionText": "Dynamic imports in Next.js are only for loading JSON data files at runtime",
+        "isCorrect": false,
+        "explanation": "Dynamic imports load JavaScript modules including React components, not just JSON files."
+      },
+      {
+        "optionText": "Dynamic imports require a REST API endpoint to serve the component code",
+        "isCorrect": false,
+        "explanation": "Dynamic imports are handled by the bundler (webpack/Turbopack) at build time. No API endpoint is needed."
+      },
+      {
+        "optionText": "next/dynamic is deprecated — use React.lazy() with Suspense in the App Router",
+        "isCorrect": false,
+        "explanation": "Both work. next/dynamic is still valid and adds the ssr option not available in plain React.lazy."
+      }
+    ]
+  },
+  {
+    "topic": "nextjs",
+    "question": "How does Next.js improve SEO compared to a plain React SPA?",
+    "options": [
+      {
+        "optionText": "Server-rendered HTML is immediately crawlable by search engines without waiting for JavaScript execution, and the Metadata API generates proper <head> tags per page",
+        "isCorrect": true,
+        "explanation": "SPAs require JS execution before crawlers see content — Next.js SSR/SSG sends complete HTML on first request. The Metadata API ensures unique, SEO-optimised title and meta tags per page."
+      },
+      {
+        "optionText": "Next.js automatically submits sitemaps to Google Search Console",
+        "isCorrect": false,
+        "explanation": "Next.js doesn't automatically submit sitemaps. You can generate one using next-sitemap or a Route Handler, but submission is manual."
+      },
+      {
+        "optionText": "Next.js improves SEO by removing all JavaScript from the page",
+        "isCorrect": false,
+        "explanation": "Next.js still uses JavaScript. The SEO benefit comes from sending pre-rendered HTML, not removing JS."
+      },
+      {
+        "optionText": "SEO in Next.js is identical to a plain React SPA since Google executes JavaScript",
+        "isCorrect": false,
+        "explanation": "While Googlebot can execute JS, SSR still provides faster indexing, better crawl efficiency, and avoids potential rendering issues with JS-dependent content."
+      }
+    ]
+  },
+  {
+    "topic": "nextjs",
+    "question": "How does Next.js handle CSS and styling?",
+    "options": [
+      {
+        "optionText": "Supports CSS Modules (scoped styles), global CSS (imported in layout), Tailwind CSS, CSS-in-JS (with restrictions in Server Components), and styled-jsx",
+        "isCorrect": true,
+        "explanation": "Next.js is flexible: CSS Modules automatically scope class names; global CSS goes in a root layout; Tailwind is fully supported; CSS-in-JS solutions using client-only APIs need 'use client'. styled-jsx is built in."
+      },
+      {
+        "optionText": "Next.js only supports inline styles — external CSS files are not supported",
+        "isCorrect": false,
+        "explanation": "Next.js has extensive CSS support including CSS Modules, Tailwind, and global stylesheets."
+      },
+      {
+        "optionText": "All CSS in Next.js must be written as CSS-in-JS using the built-in style() function",
+        "isCorrect": false,
+        "explanation": "There is no built-in style() function. Next.js supports multiple styling approaches."
+      },
+      {
+        "optionText": "CSS files in Next.js can only be imported in _app.tsx, not in individual components",
+        "isCorrect": false,
+        "explanation": "That restriction only applies to global CSS files. CSS Modules can be imported in any component file."
+      }
+    ]
+  },
+  {
+    "topic": "nextjs",
+    "question": "How do you manage state in a Next.js application?",
+    "options": [
+      {
+        "optionText": "Server state via React Server Components and fetch caching; client state via useState/useReducer, Zustand, or Redux in Client Components",
+        "isCorrect": true,
+        "explanation": "Next.js App Router encourages keeping state on the server when possible (RSC fetch + caching). For client-side interactivity, use React hooks or a client state library. URL state via searchParams is also a clean approach."
+      },
+      {
+        "optionText": "All state in Next.js must be stored in the database — no client-side state is allowed",
+        "isCorrect": false,
+        "explanation": "Client Components in Next.js support the full React state API."
+      },
+      {
+        "optionText": "Next.js has its own built-in global state manager that replaces Redux",
+        "isCorrect": false,
+        "explanation": "Next.js has no built-in global state manager. It leaves client state management to external libraries."
+      },
+      {
+        "optionText": "State in Next.js can only be managed via URL query parameters",
+        "isCorrect": false,
+        "explanation": "URL state is useful but not the only option. React hooks and client state libraries are commonly used."
+      }
+    ]
+  },
+  {
+    "topic": "nextjs",
+    "question": "How do you deploy a Next.js application?",
+    "options": [
+      {
+        "optionText": "Vercel (zero-config), or self-host via 'next build' + 'next start' on Node.js, Docker, or as a static export with 'next export'",
+        "isCorrect": true,
+        "explanation": "Vercel is the easiest option and supports all Next.js features. Self-hosting requires a Node.js server. Static export (output: 'export') works for fully static sites but disables SSR features."
+      },
+      {
+        "optionText": "Next.js can only be deployed on Vercel — no other deployment options exist",
+        "isCorrect": false,
+        "explanation": "Next.js can be deployed on any Node.js-capable platform: AWS, GCP, Azure, Railway, Render, Docker, etc."
+      },
+      {
+        "optionText": "Deploying requires converting the app to PHP before hosting on shared hosting",
+        "isCorrect": false,
+        "explanation": "Next.js is a Node.js application. It doesn't convert to PHP."
+      },
+      {
+        "optionText": "next build outputs static HTML files that can be served from any file server",
+        "isCorrect": false,
+        "explanation": "next build alone produces a Node.js server bundle. You need output: 'export' in next.config.js to generate fully static HTML files."
+      }
+    ]
+  },
+  {
+    "topic": "nextjs",
+    "question": "What are _app.tsx and _document.tsx in the Next.js Pages Router?",
+    "options": [
+      {
+        "optionText": "_app.tsx wraps all pages (persistent layout, global state, styles); _document.tsx customises the HTML shell (html, head, body tags) rendered server-side",
+        "isCorrect": true,
+        "explanation": "_app.tsx is the component that wraps every page — ideal for layouts, providers, and global CSS. _document.tsx lets you add custom attributes to <html>, <body>, load fonts, or add meta tags that apply to every page."
+      },
+      {
+        "optionText": "_app.tsx handles API routes; _document.tsx handles page components",
+        "isCorrect": false,
+        "explanation": "API routes live in the pages/api/ directory. _app.tsx wraps page components; _document.tsx customises the HTML document."
+      },
+      {
+        "optionText": "Both files are required in every Next.js project and cannot be omitted",
+        "isCorrect": false,
+        "explanation": "Both are optional. Next.js provides defaults for both."
+      },
+      {
+        "optionText": "_app.tsx and _document.tsx exist in the App Router as well as the Pages Router",
+        "isCorrect": false,
+        "explanation": "These are Pages Router conventions. The App Router uses layout.tsx and the Metadata API instead."
+      }
+    ]
+  },
+  {
+    "topic": "nextjs",
+    "question": "How would you handle authentication in a Next.js application?",
+    "options": [
+      {
+        "optionText": "Use NextAuth.js (Auth.js) for OAuth/credentials auth with session management, protect routes via middleware.ts, and use server-side session checks in Server Components",
+        "isCorrect": true,
+        "explanation": "NextAuth v5 integrates with Next.js App Router. middleware.ts runs on the Edge and can redirect unauthenticated users before rendering. Server Components can read the session server-side for data-level protection."
+      },
+      {
+        "optionText": "Authentication must be handled entirely client-side using localStorage tokens",
+        "isCorrect": false,
+        "explanation": "Storing auth tokens in localStorage is a security risk (XSS). Server-side sessions with HttpOnly cookies are the recommended approach."
+      },
+      {
+        "optionText": "Next.js has built-in username/password authentication without any additional library",
+        "isCorrect": false,
+        "explanation": "Next.js has no built-in auth system. You need NextAuth, Clerk, Lucia, or a custom implementation."
+      },
+      {
+        "optionText": "Route protection in Next.js can only be done inside each page component",
+        "isCorrect": false,
+        "explanation": "middleware.ts is the recommended approach for route protection — it runs before the page renders."
+      }
+    ]
+  },
+  {
+    "topic": "nextjs",
+    "question": "How would you implement internationalisation (i18n) in a Next.js application?",
+    "options": [
+      {
+        "optionText": "Use the built-in i18n routing config in next.config.js for locale detection and routing, combined with a library like next-intl or next-i18next for translations",
+        "isCorrect": true,
+        "explanation": "next.config.js supports i18n: { locales: ['en', 'tr'], defaultLocale: 'en' } for automatic locale routing. next-intl or next-i18next handle the translation strings and provide hooks like useTranslations()."
+      },
+      {
+        "optionText": "Next.js doesn't support i18n — you must build routing from scratch",
+        "isCorrect": false,
+        "explanation": "Next.js has built-in i18n routing support in both Pages and App Router."
+      },
+      {
+        "optionText": "Internationalisation in Next.js requires a separate Express.js server for each locale",
+        "isCorrect": false,
+        "explanation": "Next.js handles locale routing natively. No additional server is needed."
+      },
+      {
+        "optionText": "All translations must be stored in a database and fetched on every request",
+        "isCorrect": false,
+        "explanation": "Translations are typically stored in static JSON files bundled with the app, loaded at build time or on the edge."
+      }
+    ]
+  },
+  {
+    "topic": "nextjs",
+    "question": "What are the key security considerations in a Next.js application?",
+    "options": [
+      {
+        "optionText": "Validate all Server Action inputs, use HttpOnly cookies for auth tokens, set security headers in next.config.js, sanitize user content, and protect API routes with auth checks",
+        "isCorrect": true,
+        "explanation": "Key security practices: Server Actions need input validation (use Zod); auth tokens in HttpOnly+Secure cookies prevent XSS theft; Content-Security-Policy, X-Frame-Options etc. via headers(); never trust client-sent data."
+      },
+      {
+        "optionText": "Next.js is inherently secure — no additional security measures are needed",
+        "isCorrect": false,
+        "explanation": "No framework is inherently secure. Application-level security is always the developer's responsibility."
+      },
+      {
+        "optionText": "Security in Next.js is handled by Vercel automatically on deployment",
+        "isCorrect": false,
+        "explanation": "Vercel provides infrastructure security, but application security (auth, input validation, XSS prevention) must be implemented by the developer."
+      },
+      {
+        "optionText": "HTTPS is sufficient for Next.js security — no other measures are required",
+        "isCorrect": false,
+        "explanation": "HTTPS encrypts data in transit but doesn't protect against XSS, CSRF, injection attacks, or broken authentication."
+      }
+    ]
+  },
+  {
+    "topic": "nextjs",
+    "question": "How do you implement analytics in a Next.js application?",
+    "options": [
+      {
+        "optionText": "Use next/third-parties for Google Analytics or similar; track route changes via the App Router's layout or a Client Component using usePathname and useEffect",
+        "isCorrect": true,
+        "explanation": "next/third-parties provides optimised third-party script loading. In the App Router, route change tracking requires a Client Component that watches usePathname() since there's no router event equivalent to Pages Router's router.events."
+      },
+      {
+        "optionText": "Analytics only works in Next.js Pages Router — App Router breaks all tracking",
+        "isCorrect": false,
+        "explanation": "Analytics works in the App Router but requires a Client Component to track navigation since router events work differently."
+      },
+      {
+        "optionText": "Next.js includes built-in Google Analytics integration that works without configuration",
+        "isCorrect": false,
+        "explanation": "next/third-parties simplifies loading analytics scripts, but you still need to configure your tracking ID."
+      },
+      {
+        "optionText": "Analytics scripts must be placed in _document.tsx for them to fire correctly",
+        "isCorrect": false,
+        "explanation": "In the App Router, scripts go in layout.tsx using next/script. _document.tsx is a Pages Router concept."
+      }
+    ]
+  },
+  {
+    "topic": "nextjs",
+    "question": "What is Draft Mode in Next.js and when would you use it?",
+    "options": [
+      {
+        "optionText": "A feature that bypasses static generation and renders pages dynamically to preview unpublished CMS content without it being publicly visible",
+        "isCorrect": true,
+        "explanation": "Draft Mode sets a cookie that tells Next.js to skip the static cache and render server-side. A headless CMS (Contentful, Sanity) calls a draft route handler to enable it, allowing editors to preview draft content on the production site."
+      },
+      {
+        "optionText": "Draft Mode saves partially completed forms in the browser automatically",
+        "isCorrect": false,
+        "explanation": "Draft Mode is a rendering mode for CMS previews, not a form state feature."
+      },
+      {
+        "optionText": "Draft Mode is a development-only tool that disables code minification",
+        "isCorrect": false,
+        "explanation": "Draft Mode works in production too — it's specifically designed for CMS preview workflows."
+      },
+      {
+        "optionText": "Draft Mode is the same as Next.js development mode (next dev)",
+        "isCorrect": false,
+        "explanation": "next dev is the development server. Draft Mode is a runtime rendering toggle for preview content."
+      }
+    ]
+  },
+  {
+    "topic": "nextjs",
+    "question": "How does code splitting work in Next.js?",
+    "options": [
+      {
+        "optionText": "Next.js automatically splits JavaScript by route — each page only loads its own JS bundle, shared code goes into a common chunk, and dynamic imports split further on demand",
+        "isCorrect": true,
+        "explanation": "Next.js uses webpack/Turbopack to create per-page bundles. Shared dependencies (React, common utilities) are extracted to shared chunks. dynamic() creates additional split points loaded only when that component is rendered."
+      },
+      {
+        "optionText": "Code splitting in Next.js requires manually configuring webpack entry points",
+        "isCorrect": false,
+        "explanation": "Next.js handles code splitting automatically. Manual webpack configuration is rarely needed and could break the defaults."
+      },
+      {
+        "optionText": "Next.js loads the entire application JavaScript bundle on the first page visit",
+        "isCorrect": false,
+        "explanation": "This is a SPA anti-pattern. Next.js ships only the code needed for the current route."
+      },
+      {
+        "optionText": "Code splitting only works with CSS — JavaScript is always bundled into a single file",
+        "isCorrect": false,
+        "explanation": "Code splitting is specifically about JavaScript bundles. CSS is handled separately via CSS Modules or global stylesheets."
+      }
+    ]
+  },
+  {
+    "topic": "nextjs",
+    "question": "How do you serve static files in Next.js?",
+    "options": [
+      {
+        "optionText": "Place files in the /public directory — they're served at the root URL path (e.g., /public/logo.png is accessible at /logo.png)",
+        "isCorrect": true,
+        "explanation": "The public/ folder is the static file directory in Next.js. Files there are served directly. Reference them with an absolute path starting with / in your code."
+      },
+      {
+        "optionText": "Static files must be imported as modules and processed by webpack",
+        "isCorrect": false,
+        "explanation": "Files in public/ bypass webpack entirely and are served as-is. Images and other assets can also be imported as modules, but public/ is for unprocessed static files."
+      },
+      {
+        "optionText": "Static files are served from the /static directory in Next.js",
+        "isCorrect": false,
+        "explanation": "The directory is /public, not /static. /static was used in older Next.js versions."
+      },
+      {
+        "optionText": "Next.js doesn't support static file serving — use a CDN for all static assets",
+        "isCorrect": false,
+        "explanation": "Next.js serves static files from public/ natively. A CDN is an optional enhancement, not a requirement."
+      }
+    ]
+  },
+  {
+    "topic": "nextjs",
+    "question": "What is Fast Refresh in Next.js and how does it work?",
+    "options": [
+      {
+        "optionText": "A React-aware hot module replacement that updates only the changed component while preserving component state and without a full page reload",
+        "isCorrect": true,
+        "explanation": "Fast Refresh (built on React's hot reloading) replaces only the edited component's module. It preserves useState/useReducer state across edits, shows errors inline with an error overlay, and recovers automatically when errors are fixed."
+      },
+      {
+        "optionText": "Fast Refresh is a caching strategy that serves previously fetched API responses",
+        "isCorrect": false,
+        "explanation": "Fast Refresh is a development DX feature for hot reloading code changes — nothing to do with API caching."
+      },
+      {
+        "optionText": "Fast Refresh performs a full browser reload on every file save",
+        "isCorrect": false,
+        "explanation": "The whole point of Fast Refresh is to avoid full reloads by only re-rendering the affected component."
+      },
+      {
+        "optionText": "Fast Refresh is a build optimisation that reduces production bundle size",
+        "isCorrect": false,
+        "explanation": "Fast Refresh only works in development (next dev). It has no effect on production builds."
+      }
+    ]
+  },
+  {
+    "topic": "nextjs",
+    "question": "What does next.config.js and what can you configure in it?",
+    "options": [
+      {
+        "optionText": "The Next.js configuration file — supports redirects, rewrites, headers, image domains, environment variables, i18n, experimental features, and webpack customisation",
+        "isCorrect": true,
+        "explanation": "next.config.js (or .mjs) exports a config object. Key options: redirects() for URL redirects, rewrites() for URL proxying, headers() for HTTP headers, images.domains for allowed image sources, and the experimental object for App Router flags."
+      },
+      {
+        "optionText": "next.config.js is only for setting the port number the dev server runs on",
+        "isCorrect": false,
+        "explanation": "Port is set via the --port flag or PORT env variable, not next.config.js. The config file handles much more."
+      },
+      {
+        "optionText": "next.config.js replaces package.json and defines project dependencies",
+        "isCorrect": false,
+        "explanation": "Dependencies are defined in package.json. next.config.js is purely a Next.js runtime/build configuration file."
+      },
+      {
+        "optionText": "next.config.js is optional metadata only — Next.js ignores its contents at build time",
+        "isCorrect": false,
+        "explanation": "next.config.js is actively read at build time and affects how the app is built, rendered, and served."
+      }
+    ]
+  }
+]

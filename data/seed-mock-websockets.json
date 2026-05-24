@@ -1,0 +1,470 @@
+[
+  {
+    "topic": "websockets",
+    "question": "What is WebSocket?",
+    "options": [
+      {
+        "optionText": "A protocol providing full-duplex, bidirectional communication over a single persistent TCP connection.",
+        "isCorrect": true,
+        "explanation": "Correct — unlike HTTP, WebSocket stays open so both sides can send messages independently at any time."
+      },
+      {
+        "optionText": "An HTTP method for pushing data from the server to the client.",
+        "isCorrect": false,
+        "explanation": "There is no HTTP method for pushing — WebSocket is a separate protocol, not an HTTP method."
+      },
+      {
+        "optionText": "A browser API for storing data offline, similar to localStorage.",
+        "isCorrect": false,
+        "explanation": "That describes Service Workers and IndexedDB — WebSocket is for real-time bidirectional network communication."
+      },
+      {
+        "optionText": "A REST API technique that uses long polling to simulate real-time updates.",
+        "isCorrect": false,
+        "explanation": "Long polling uses repeated HTTP requests — WebSocket maintains a persistent connection without repeated requests."
+      }
+    ]
+  },
+  {
+    "topic": "websockets",
+    "question": "Why use WebSocket over HTTP?",
+    "options": [
+      {
+        "optionText": "WebSocket enables full-duplex real-time communication with low latency, avoiding the overhead of repeated HTTP request-response cycles.",
+        "isCorrect": true,
+        "explanation": "Correct — HTTP requires a new request for each message; WebSocket keeps one connection open for instant bidirectional messaging."
+      },
+      {
+        "optionText": "WebSocket is more secure than HTTPS because it encrypts data at the application layer.",
+        "isCorrect": false,
+        "explanation": "wss:// uses TLS like HTTPS — security is comparable; the advantage of WebSocket is real-time bidirectional communication."
+      },
+      {
+        "optionText": "WebSocket replaces REST APIs entirely and is better for all types of client-server communication.",
+        "isCorrect": false,
+        "explanation": "WebSocket is best for real-time use cases — REST is simpler and more appropriate for request-response data fetching."
+      },
+      {
+        "optionText": "WebSocket eliminates the need for a backend server because browsers can communicate directly.",
+        "isCorrect": false,
+        "explanation": "WebSocket still requires a server — it enables persistent client-server connections, not peer-to-peer without a server."
+      }
+    ]
+  },
+  {
+    "topic": "websockets",
+    "question": "What is Short Polling and what are its problems?",
+    "options": [
+      {
+        "optionText": "The client sends HTTP requests at a fixed interval to check for updates — wasteful because most requests return no new data.",
+        "isCorrect": true,
+        "explanation": "Correct — short polling works but burns bandwidth and server resources sending empty responses constantly."
+      },
+      {
+        "optionText": "A technique where the server sends data to the client at short intervals using a persistent connection.",
+        "isCorrect": false,
+        "explanation": "That describes Server-Sent Events — short polling uses repeated client-initiated HTTP requests."
+      },
+      {
+        "optionText": "A WebSocket optimisation that sends smaller data frames to reduce latency.",
+        "isCorrect": false,
+        "explanation": "Frame size is a WebSocket protocol detail — short polling is an HTTP-based technique, not WebSocket."
+      },
+      {
+        "optionText": "Short polling is always preferable to WebSocket because it works without special server support.",
+        "isCorrect": false,
+        "explanation": "Short polling's bandwidth waste and latency make it a poor choice when WebSocket or SSE is available."
+      }
+    ]
+  },
+  {
+    "topic": "websockets",
+    "question": "What is Long Polling?",
+    "options": [
+      {
+        "optionText": "The client makes an HTTP request; the server holds it open until data is available, then responds — the client immediately re-requests.",
+        "isCorrect": true,
+        "explanation": "Correct — long polling simulates push by holding requests open, reducing empty responses compared to short polling."
+      },
+      {
+        "optionText": "An HTTP technique where the client sends very large payloads to reduce request frequency.",
+        "isCorrect": false,
+        "explanation": "Payload size is unrelated to polling strategy — long polling is about the server holding the connection until data is ready."
+      },
+      {
+        "optionText": "A WebSocket configuration option that increases the keep-alive timeout.",
+        "isCorrect": false,
+        "explanation": "Long polling is an HTTP technique predating WebSocket — it is not a WebSocket configuration."
+      },
+      {
+        "optionText": "A browser feature that automatically retries failed HTTP requests after a delay.",
+        "isCorrect": false,
+        "explanation": "Automatic retries are a different concern — long polling is a deliberate server-hold technique for near-real-time updates."
+      }
+    ]
+  },
+  {
+    "topic": "websockets",
+    "question": "What different real-time communication techniques exist on the web?",
+    "options": [
+      {
+        "optionText": "Short polling, long polling, Server-Sent Events (SSE), WebSocket, and WebRTC — each with different trade-offs for latency, direction, and complexity.",
+        "isCorrect": true,
+        "explanation": "Correct — choosing the right technique depends on whether you need bidirectional communication, browser compatibility, and infrastructure constraints."
+      },
+      {
+        "optionText": "Only WebSocket exists for real-time web communication — all other techniques are deprecated.",
+        "isCorrect": false,
+        "explanation": "SSE, long polling, and WebRTC are all actively used — the best choice depends on the use case."
+      },
+      {
+        "optionText": "Real-time communication requires a native mobile app — browsers cannot do true real-time.",
+        "isCorrect": false,
+        "explanation": "Browsers support WebSocket, SSE, and WebRTC natively for real-time communication."
+      },
+      {
+        "optionText": "HTTP/2 server push has replaced all other real-time techniques.",
+        "isCorrect": false,
+        "explanation": "HTTP/2 server push is limited and largely deprecated in browsers — WebSocket and SSE remain the primary techniques."
+      }
+    ]
+  },
+  {
+    "topic": "websockets",
+    "question": "What is Server-Sent Events (SSE) / EventSource?",
+    "options": [
+      {
+        "optionText": "A W3C standard for one-directional server-to-client streaming over HTTP, with automatic reconnection via the EventSource API.",
+        "isCorrect": true,
+        "explanation": "Correct — SSE is simpler than WebSocket for pure server-push use cases like notifications and streaming AI responses."
+      },
+      {
+        "optionText": "A bidirectional protocol where both client and server can send messages at any time.",
+        "isCorrect": false,
+        "explanation": "SSE is one-directional (server → client only) — bidirectional communication requires WebSocket."
+      },
+      {
+        "optionText": "A browser API for subscribing to server-side events using MQTT protocol.",
+        "isCorrect": false,
+        "explanation": "SSE uses plain HTTP, not MQTT — EventSource is the browser API for consuming SSE streams."
+      },
+      {
+        "optionText": "An extension of WebSocket that reduces overhead by compressing frames.",
+        "isCorrect": false,
+        "explanation": "SSE is a completely separate technique from WebSocket — it uses chunked HTTP transfer, not WebSocket frames."
+      }
+    ]
+  },
+  {
+    "topic": "websockets",
+    "question": "What is the difference between WebSocket and Server-Sent Events?",
+    "options": [
+      {
+        "optionText": "WebSocket is full-duplex (both directions); SSE is server-to-client only. SSE uses plain HTTP; WebSocket uses a separate ws:// protocol.",
+        "isCorrect": true,
+        "explanation": "Correct — SSE is simpler for push-only, WebSocket is needed for bidirectional real-time communication."
+      },
+      {
+        "optionText": "SSE requires a binary protocol; WebSocket uses plain text only.",
+        "isCorrect": false,
+        "explanation": "This is backwards — WebSocket supports binary frames; SSE uses text over HTTP."
+      },
+      {
+        "optionText": "WebSocket is supported only in Chrome; SSE works in all browsers.",
+        "isCorrect": false,
+        "explanation": "Both are widely supported in modern browsers — WebSocket has broader support if anything."
+      },
+      {
+        "optionText": "They are identical — the difference is only in naming convention between browser vendors.",
+        "isCorrect": false,
+        "explanation": "They are fundamentally different protocols with different capabilities, connection models, and use cases."
+      }
+    ]
+  },
+  {
+    "topic": "websockets",
+    "question": "What are the key features of Socket.io and how does it differ from raw WebSocket?",
+    "options": [
+      {
+        "optionText": "Socket.IO adds rooms, namespaces, automatic reconnection, and HTTP fallback on top of WebSocket — but a Socket.IO client cannot connect to a plain WebSocket server.",
+        "isCorrect": true,
+        "explanation": "Correct — Socket.IO is a higher-level abstraction; its custom protocol is incompatible with raw WebSocket."
+      },
+      {
+        "optionText": "Socket.IO is a drop-in replacement for the browser WebSocket API with the same interface.",
+        "isCorrect": false,
+        "explanation": "Socket.IO has its own protocol and API — it is not a drop-in for the native WebSocket object."
+      },
+      {
+        "optionText": "Socket.IO only works in Node.js environments and cannot be used in the browser.",
+        "isCorrect": false,
+        "explanation": "Socket.IO has both a client (browser) library and a server (Node.js) library."
+      },
+      {
+        "optionText": "Socket.IO is slower than raw WebSocket and should only be used when IE11 support is required.",
+        "isCorrect": false,
+        "explanation": "Socket.IO's overhead is minimal for most apps — its features (rooms, reconnection) justify its use beyond IE11 support."
+      }
+    ]
+  },
+  {
+    "topic": "websockets",
+    "question": "WebSocket vs REST API for real-time data — which to choose?",
+    "options": [
+      {
+        "optionText": "WebSocket for continuous real-time streams (live prices, chat, collaboration); REST for request-response data fetching where real-time is not needed.",
+        "isCorrect": true,
+        "explanation": "Correct — REST's simplicity wins for standard data fetching; WebSocket's persistent connection wins for high-frequency bidirectional updates."
+      },
+      {
+        "optionText": "Always use WebSocket — it is strictly better than REST in every scenario.",
+        "isCorrect": false,
+        "explanation": "REST's simplicity, cachability, and browser tooling support make it better for most request-response use cases."
+      },
+      {
+        "optionText": "REST is always preferable because WebSocket connections are too complex to manage at scale.",
+        "isCorrect": false,
+        "explanation": "WebSocket scales well with the right infrastructure — for live dashboards and chat, it is clearly the right choice."
+      },
+      {
+        "optionText": "The choice depends solely on message size — use WebSocket for large payloads, REST for small ones.",
+        "isCorrect": false,
+        "explanation": "The key factor is communication pattern (bidirectional real-time vs request-response), not payload size."
+      }
+    ]
+  },
+  {
+    "topic": "websockets",
+    "question": "When would you choose Server-Sent Events over WebSocket?",
+    "options": [
+      {
+        "optionText": "When communication is one-directional (server → client only) — e.g. live feeds, notifications, streaming AI responses — because SSE is simpler and traverses proxies easily.",
+        "isCorrect": true,
+        "explanation": "Correct — SSE uses standard HTTP so it works without WebSocket-aware proxy configuration."
+      },
+      {
+        "optionText": "When you need bidirectional communication but want to save bandwidth.",
+        "isCorrect": false,
+        "explanation": "SSE is one-directional — you cannot send messages from client to server over an SSE connection."
+      },
+      {
+        "optionText": "SSE is always preferable to WebSocket because it requires no handshake.",
+        "isCorrect": false,
+        "explanation": "WebSocket's persistent connection is more efficient for high-frequency bidirectional messaging than SSE."
+      },
+      {
+        "optionText": "When you need to broadcast to millions of users — SSE scales better than WebSocket.",
+        "isCorrect": false,
+        "explanation": "Scalability depends on infrastructure, not the protocol choice — both require horizontal scaling for large user counts."
+      }
+    ]
+  },
+  {
+    "topic": "websockets",
+    "question": "How can WebSocket be better than Long Polling in terms of performance?",
+    "options": [
+      {
+        "optionText": "WebSocket eliminates repeated HTTP request/response overhead — one persistent connection handles all messages with much lower latency and bandwidth consumption.",
+        "isCorrect": true,
+        "explanation": "Correct — long polling re-establishes HTTP connections for every message; WebSocket reuses one TCP connection."
+      },
+      {
+        "optionText": "WebSocket compresses data automatically; long polling sends data uncompressed.",
+        "isCorrect": false,
+        "explanation": "Both can use compression — the performance advantage is connection reuse, not built-in compression."
+      },
+      {
+        "optionText": "Long polling is faster because it uses fewer server resources than maintaining persistent connections.",
+        "isCorrect": false,
+        "explanation": "Long polling holds connections open too — WebSocket's efficiency comes from not re-establishing the connection per message."
+      },
+      {
+        "optionText": "WebSocket performance is identical to long polling — the choice is purely stylistic.",
+        "isCorrect": false,
+        "explanation": "WebSocket has measurably lower latency and bandwidth usage for high-frequency messaging compared to long polling."
+      }
+    ]
+  },
+  {
+    "topic": "websockets",
+    "question": "When would you use WebRTC over WebSocket?",
+    "options": [
+      {
+        "optionText": "For peer-to-peer audio/video streaming and low-latency data channels directly between browsers — WebRTC avoids routing media through a central server.",
+        "isCorrect": true,
+        "explanation": "Correct — WebRTC is designed for real-time media; WebSocket routes everything through a server."
+      },
+      {
+        "optionText": "When you need a more secure connection than WebSocket provides.",
+        "isCorrect": false,
+        "explanation": "Both wss:// and WebRTC use TLS — security is not the differentiator."
+      },
+      {
+        "optionText": "WebRTC should replace WebSocket for all chat applications because it is lower latency.",
+        "isCorrect": false,
+        "explanation": "WebRTC adds NAT traversal complexity unsuitable for simple text chat — WebSocket is simpler and appropriate for most chat."
+      },
+      {
+        "optionText": "WebRTC is only for mobile applications — WebSocket is used on the web.",
+        "isCorrect": false,
+        "explanation": "WebRTC runs natively in all modern browsers — it is a web standard, not a mobile-only technology."
+      }
+    ]
+  },
+  {
+    "topic": "websockets",
+    "question": "How do you load balance WebSocket connections?",
+    "options": [
+      {
+        "optionText": "Use sticky sessions (session affinity) so all messages from a client hit the same server, plus a pub/sub layer (Redis) to broadcast messages across servers.",
+        "isCorrect": true,
+        "explanation": "Correct — stateful WebSocket connections require sticky sessions; Redis pub/sub ensures messages reach all subscribed clients across nodes."
+      },
+      {
+        "optionText": "Round-robin load balancing works identically for WebSocket as for HTTP — no special handling needed.",
+        "isCorrect": false,
+        "explanation": "Round-robin can break WebSocket connections mid-session — sticky sessions are required because the connection is stateful."
+      },
+      {
+        "optionText": "WebSocket cannot be load balanced — you must use a single server for all WebSocket traffic.",
+        "isCorrect": false,
+        "explanation": "WebSocket can be load balanced with sticky sessions and a shared pub/sub layer like Redis."
+      },
+      {
+        "optionText": "Load balancing WebSocket requires switching to a binary protocol — JSON messages cannot be load balanced.",
+        "isCorrect": false,
+        "explanation": "Message format is irrelevant to load balancing — the challenge is connection statefulness, not data encoding."
+      }
+    ]
+  },
+  {
+    "topic": "websockets",
+    "question": "How would you secure WebSocket communication?",
+    "options": [
+      {
+        "optionText": "Use wss:// (TLS), authenticate on connection establishment (JWT in first message or cookie), validate all incoming messages, and apply rate limiting.",
+        "isCorrect": true,
+        "explanation": "Correct — wss:// encrypts the channel; auth at connect time prevents unauthorised connections."
+      },
+      {
+        "optionText": "WebSocket is inherently secure — no additional security measures are needed.",
+        "isCorrect": false,
+        "explanation": "ws:// sends data in plaintext — always use wss://, and authentication is essential to prevent unauthorised access."
+      },
+      {
+        "optionText": "Use API keys in the WebSocket URL query string for authentication.",
+        "isCorrect": false,
+        "explanation": "Query strings appear in server logs — use cookies or an initial authenticated message to pass credentials."
+      },
+      {
+        "optionText": "Security is the browser's responsibility — server-side code does not need to validate WebSocket messages.",
+        "isCorrect": false,
+        "explanation": "Never trust client input — validate and sanitise all messages server-side regardless of the transport protocol."
+      }
+    ]
+  },
+  {
+    "topic": "websockets",
+    "question": "Would WebSocket be able to handle 1,000,000 concurrent connections?",
+    "options": [
+      {
+        "optionText": "Yes, with a distributed architecture: horizontal scaling, sticky load balancers, Redis pub/sub for cross-node messaging, and connection-efficient async server runtimes.",
+        "isCorrect": true,
+        "explanation": "Correct — systems like Slack and Discord handle millions of connections by distributing across many nodes."
+      },
+      {
+        "optionText": "No — WebSocket is limited to ~1000 connections per server by the TCP stack.",
+        "isCorrect": false,
+        "explanation": "Modern async servers can handle tens of thousands of connections per instance — 1M is achievable with horizontal scaling."
+      },
+      {
+        "optionText": "Yes, a single Node.js server can handle 1M WebSocket connections without any special configuration.",
+        "isCorrect": false,
+        "explanation": "A single server has memory and file descriptor limits — 1M requires horizontal scaling across multiple nodes."
+      },
+      {
+        "optionText": "WebSocket connections are too resource-intensive — use SSE instead for large numbers of clients.",
+        "isCorrect": false,
+        "explanation": "SSE also holds persistent connections — the scalability challenge is the same; the solution is horizontal scaling."
+      }
+    ]
+  },
+  {
+    "topic": "websockets",
+    "question": "Explain how the WebSocket protocol works under the hood.",
+    "options": [
+      {
+        "optionText": "It starts with an HTTP/1.1 Upgrade handshake; once accepted (101 Switching Protocols), the TCP connection carries lightweight frames instead of HTTP messages.",
+        "isCorrect": true,
+        "explanation": "Correct — the handshake reuses HTTP for initial negotiation, then the connection is 'upgraded' to the WebSocket framing protocol."
+      },
+      {
+        "optionText": "WebSocket opens a new UDP connection per message for low-latency delivery.",
+        "isCorrect": false,
+        "explanation": "WebSocket uses TCP, not UDP — reliability is provided by TCP; WebRTC uses UDP for media streams."
+      },
+      {
+        "optionText": "WebSocket wraps every message in an HTTP request with a Connection: keep-alive header.",
+        "isCorrect": false,
+        "explanation": "After the initial upgrade, WebSocket messages are not HTTP — they are binary frames on the raw TCP connection."
+      },
+      {
+        "optionText": "WebSocket uses a polling mechanism internally but abstracts it behind an event-based API.",
+        "isCorrect": false,
+        "explanation": "WebSocket is a genuine persistent connection — it does not poll internally."
+      }
+    ]
+  },
+  {
+    "topic": "websockets",
+    "question": "What is a WebSocket frame and what is the purpose of frame masking?",
+    "options": [
+      {
+        "optionText": "A frame is the basic data unit in WebSocket. Client-to-server frames must be masked (XOR with a random key) to prevent cache poisoning by intermediary proxies.",
+        "isCorrect": true,
+        "explanation": "Correct — masking prevents intermediary infrastructure (proxies) from being confused by raw byte patterns that resemble HTTP."
+      },
+      {
+        "optionText": "Masking encrypts the WebSocket payload to provide confidentiality — it replaces TLS.",
+        "isCorrect": false,
+        "explanation": "Masking is not encryption and provides no confidentiality — TLS (wss://) is required for encryption."
+      },
+      {
+        "optionText": "Frames are only used for binary data — text messages in WebSocket do not use the framing protocol.",
+        "isCorrect": false,
+        "explanation": "All WebSocket messages, both text and binary, are sent as frames — the frame header includes a type bit distinguishing them."
+      },
+      {
+        "optionText": "Frame masking is optional and is typically disabled in production for performance.",
+        "isCorrect": false,
+        "explanation": "The WebSocket spec mandates masking for client-to-server frames — it is not optional."
+      }
+    ]
+  },
+  {
+    "topic": "websockets",
+    "question": "What is the fundamental difference between WebSocket and raw TCP? Why does WebSocket exist?",
+    "options": [
+      {
+        "optionText": "WebSocket runs over TCP but adds a message-framing layer and an HTTP-compatible handshake, allowing it to traverse existing web infrastructure (proxies, firewalls, load balancers).",
+        "isCorrect": true,
+        "explanation": "Correct — raw TCP has no message boundaries or HTTP upgrade path; WebSocket solves both problems for browser environments."
+      },
+      {
+        "optionText": "WebSocket is faster than raw TCP because it compresses all payloads by default.",
+        "isCorrect": false,
+        "explanation": "WebSocket does not compress by default — performance relative to raw TCP depends on framing overhead, not compression."
+      },
+      {
+        "optionText": "WebSocket replaces TCP with a more reliable transport layer protocol.",
+        "isCorrect": false,
+        "explanation": "WebSocket runs on top of TCP — it does not replace TCP's reliability mechanism."
+      },
+      {
+        "optionText": "The only difference is that WebSocket uses port 80/443 while raw TCP uses port 8080.",
+        "isCorrect": false,
+        "explanation": "Port choice is incidental — the key differences are framing, the HTTP handshake, and browser accessibility."
+      }
+    ]
+  }
+]

@@ -9,19 +9,19 @@ import { TooltipDemo } from "./_components/tooltip-demo";
 export const dynamic = "force-dynamic";
 
 const SECTION_ORDER: Array<{ key: Topic | "general"; label: string }> = [
+  { key: "agile-scrum", label: TOPIC_LABELS["agile-scrum"] },
+  { key: "css", label: TOPIC_LABELS.css },
+  { key: "design-patterns", label: TOPIC_LABELS["design-patterns"] },
+  { key: "git", label: TOPIC_LABELS.git },
+  { key: "html5", label: TOPIC_LABELS.html5 },
+  { key: "javascript", label: TOPIC_LABELS.javascript },
+  { key: "nextjs", label: TOPIC_LABELS.nextjs },
   { key: "react", label: TOPIC_LABELS.react },
   { key: "react-hooks", label: TOPIC_LABELS["react-hooks"] },
-  { key: "typescript", label: TOPIC_LABELS.typescript },
-  { key: "nextjs", label: TOPIC_LABELS.nextjs },
-  { key: "javascript", label: TOPIC_LABELS.javascript },
   { key: "redux", label: TOPIC_LABELS.redux },
-  { key: "css", label: TOPIC_LABELS.css },
-  { key: "html5", label: TOPIC_LABELS.html5 },
-  { key: "git", label: TOPIC_LABELS.git },
-  { key: "agile-scrum", label: TOPIC_LABELS["agile-scrum"] },
-  { key: "websockets", label: TOPIC_LABELS.websockets },
+  { key: "typescript", label: TOPIC_LABELS.typescript },
   { key: "unit-testing", label: TOPIC_LABELS["unit-testing"] },
-  { key: "design-patterns", label: TOPIC_LABELS["design-patterns"] },
+  { key: "websockets", label: TOPIC_LABELS.websockets },
   { key: "general", label: "General" },
 ];
 
