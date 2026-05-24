@@ -53,6 +53,28 @@ export function MockSession({ questions }: { questions: MockQuestion[] }) {
       .map((q, i) => ({ q, picked: q.options.find((o) => o.id === selected[i]) }))
       .filter((entry) => !entry.picked?.isCorrect);
 
+    const pct = Math.round((score / total) * 100);
+    const grade =
+      pct === 100
+        ? { label: "Perfect", color: "text-emerald-600 dark:text-emerald-400" }
+        : pct >= 80
+          ? { label: "Strong", color: "text-emerald-600 dark:text-emerald-400" }
+          : pct >= 60
+            ? { label: "Decent", color: "text-amber-600 dark:text-amber-400" }
+            : { label: "Needs work", color: "text-rose-600 dark:text-rose-400" };
+
+    // Per-topic breakdown
+    const topicMap = new Map<string, { correct: number; total: number }>();
+    questions.forEach((q, i) => {
+      const key = q.topic;
+      if (!topicMap.has(key)) topicMap.set(key, { correct: 0, total: 0 });
+      const entry = topicMap.get(key)!;
+      entry.total += 1;
+      const picked = q.options.find((o) => o.id === selected[i]);
+      if (picked?.isCorrect) entry.correct += 1;
+    });
+    const topicBreakdown = [...topicMap.entries()];
+
     return (
       <div className="space-y-6">
         <div className="rounded-lg border border-border bg-card p-6 text-center">
@@ -62,12 +84,47 @@ export function MockSession({ questions }: { questions: MockQuestion[] }) {
           <p className="mt-2 text-4xl font-semibold tracking-tight">
             {score} / {total}
           </p>
-          <p className="mt-1 text-sm text-muted-foreground">
-            {score === total
-              ? "Clean sweep — every answer correct."
-              : `You missed ${total - score} question${total - score === 1 ? "" : "s"}.`}
+          <p className={cn("mt-1 text-sm font-medium", grade.color)}>
+            {pct}% — {grade.label}
           </p>
+          {score === total && (
+            <p className="mt-1 text-sm text-muted-foreground">
+              Clean sweep — every answer correct.
+            </p>
+          )}
         </div>
+
+        {topicBreakdown.length > 1 && (
+          <div className="rounded-lg border border-border bg-card p-4">
+            <p className="mb-3 text-xs font-medium text-muted-foreground">
+              By topic
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {topicBreakdown.map(([topic, { correct, total: t }]) => {
+                const topicPct = Math.round((correct / t) * 100);
+                return (
+                  <span
+                    key={topic}
+                    className={cn(
+                      "inline-flex items-center gap-1.5 rounded-md border px-2.5 py-1 text-xs font-medium",
+                      topicPct === 100
+                        ? "border-emerald-500/40 bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300"
+                        : topicPct >= 60
+                          ? "border-amber-500/40 bg-amber-50 text-amber-700 dark:bg-amber-950/40 dark:text-amber-300"
+                          : "border-rose-500/40 bg-rose-50 text-rose-700 dark:bg-rose-950/40 dark:text-rose-300",
+                    )}
+                  >
+                    {TOPIC_LABELS[topic as keyof typeof TOPIC_LABELS] ?? topic}
+                    <span className="opacity-70">
+                      {correct}/{t}
+                    </span>
+                  </span>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
 
         {missed.length > 0 && (
           <div className="space-y-3">

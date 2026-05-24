@@ -1,6 +1,6 @@
 # Progress
 
-Last updated: 2026-05-23 (design-patterns bank complete — all 7 new topic banks written; migration + seed pending local run)
+Last updated: 2026-05-24 (mock config Select All/Deselect All; result screen % + grade + topic breakdown; Playwright E2E + GitHub Actions CI added)
 
 ---
 
@@ -77,6 +77,14 @@ pnpm seed
 ### After seed runs, these should be live:
 - CSS, React Hooks, Git, Agile & Scrum, WebSockets, Unit Testing, Design Patterns topics visible in `/questions`
 - Glossary tooltips for 58 terms across all topics
+
+### E2E test setup (done — run after seed):
+```bash
+pnpm install          # picks up @playwright/test
+pnpm exec playwright install --with-deps chromium
+pnpm test:e2e
+```
+GitHub Secrets needed: `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, `NEXTAUTH_SECRET`, `AUTH_SECRET`
 
 ### Still missing (optional / future):
 - `detailMdTr` (Turkish deep dives) for all banks except JavaScript

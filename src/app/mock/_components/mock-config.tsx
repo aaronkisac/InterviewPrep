@@ -37,6 +37,11 @@ export function MockConfig({ meta }: { meta: MockReadyMeta[] }) {
     [meta, topics, minLevel, maxLevel],
   );
 
+  const allSelected = useMemo(
+    () => [...topicsWithData].every((t) => topics.has(t)),
+    [topicsWithData, topics],
+  );
+
   function toggleTopic(topic: Topic) {
     setTopics((prev) => {
       const next = new Set(prev);
@@ -44,6 +49,14 @@ export function MockConfig({ meta }: { meta: MockReadyMeta[] }) {
       else next.add(topic);
       return next;
     });
+  }
+
+  function toggleAll() {
+    if (allSelected) {
+      setTopics(new Set());
+    } else {
+      setTopics(new Set(topicsWithData));
+    }
   }
 
   function handleMin(value: Level) {
@@ -74,7 +87,17 @@ export function MockConfig({ meta }: { meta: MockReadyMeta[] }) {
   return (
     <div className="space-y-6 rounded-lg border border-border bg-card p-6">
       <fieldset className="space-y-3">
-        <legend className="text-sm font-medium">Topics</legend>
+        <div className="flex items-center justify-between">
+          <legend className="text-sm font-medium">Topics</legend>
+          <button
+            type="button"
+            onClick={toggleAll}
+            disabled={topicsWithData.size === 0}
+            className="text-xs text-muted-foreground underline-offset-2 transition hover:text-foreground hover:underline disabled:cursor-not-allowed disabled:opacity-40"
+          >
+            {allSelected ? "Deselect all" : "Select all"}
+          </button>
+        </div>
         <div className="flex flex-wrap gap-2">
           {TOPICS.map((topic) => {
             const hasData = topicsWithData.has(topic);
