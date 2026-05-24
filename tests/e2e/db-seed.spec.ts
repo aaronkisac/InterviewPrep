@@ -4,6 +4,7 @@
  */
 import { createClient } from "@supabase/supabase-js";
 import { expect, test } from "@playwright/test";
+import ws from "ws";
 
 const TOPIC_MINIMUMS: Record<string, number> = {
   react: 50,
@@ -29,7 +30,7 @@ function getAdminClient() {
       "NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY must be set",
     );
   }
-  return createClient(url, key);
+  return createClient(url, key, { realtime: { transport: ws } });
 }
 
 test.describe("DB — question counts", () => {
