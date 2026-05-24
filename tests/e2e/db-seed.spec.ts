@@ -54,15 +54,16 @@ test.describe("DB — question counts", () => {
 
   test("all 13 topics have mock options seeded (≥ 16 each)", async () => {
     const sb = getAdminClient();
+    // mock_options is a separate table joined via question_id
     const { data, error } = await sb
-      .from("questions")
-      .select("topic")
-      .not("mock_options", "is", null);
+      .from("mock_options")
+      .select("question:question_id(topic)");
     expect(error, `Supabase error: ${error?.message}`).toBeNull();
 
     const counts = new Map<string, number>();
     for (const row of data ?? []) {
-      counts.set(row.topic, (counts.get(row.topic) ?? 0) + 1);
+      const topic = (row.question as { topic: string } | null)?.topic;
+      if (topic) counts.set(topic, (counts.get(topic) ?? 0) + 1);
     }
 
     for (const topic of Object.keys(TOPIC_MINIMUMS)) {

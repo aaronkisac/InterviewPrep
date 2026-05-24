@@ -1,5 +1,7 @@
 import { expect, test } from "@playwright/test";
 
+// Section labels as they appear in the DOM (CSS uppercase doesn't affect text content).
+// "General" is omitted — seed-terms.json has no general-topic terms, so that section never renders.
 const EXPECTED_SECTIONS = [
   "Agile & Scrum",
   "CSS",
@@ -14,31 +16,41 @@ const EXPECTED_SECTIONS = [
   "TypeScript",
   "Unit Testing",
   "WebSockets",
-  "General",
 ];
 
 test.describe("/glossary page", () => {
   test("loads with the correct heading", async ({ page }) => {
     await page.goto("/glossary");
-    await expect(page.getByRole("heading", { name: "Terms reference" })).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: "Terms reference", level: 1 }),
+    ).toBeVisible();
+  });
+
+  test("shows total term count in the subtitle", async ({ page }) => {
+    await page.goto("/glossary");
+    // e.g. "105 terms across all topics"
+    await expect(page.getByText(/\d+ terms? across all topics/)).toBeVisible();
   });
 
   test("all 14 topic sections are present", async ({ page }) => {
     await page.goto("/glossary");
+    // h2 elements have CSS text-transform:uppercase visually, but DOM text is original case.
+    // Use locator('h2').filter instead of getByRole to avoid ARIA name normalisation issues.
     for (const section of EXPECTED_SECTIONS) {
+      // Use exact regex to avoid "React" matching "React Hooks"
       await expect(
-        page.getByRole("heading", { name: section }),
-        `section "${section}" not found on glossary page`,
+        page.locator("h2").filter({ hasText: new RegExp(`^${section}$`) }),
+        `section "${section}" not found`,
       ).toBeVisible();
     }
   });
 
-  test("each section contains at least one term", async ({ page }) => {
+  test("at least 105 term links are rendered", async ({ page }) => {
     await page.goto("/glossary");
-    // Terms are rendered as definition list items — at least 105 should exist
-    const terms = page.locator("dt, [data-term]");
-    await expect(terms.first()).toBeVisible();
-    const count = await terms.count();
-    expect(count, `expected ≥ 105 term entries, got ${count}`).toBeGreaterThanOrEqual(105);
+    // Terms are <li> elements inside each <section> — each wraps a link to /glossary/[slug]
+    const termLinks = page.locator('section li a[href^="/glossary/"]');
+    await termLinks.first().waitFor();
+    const count = await termLinks.count();
+    expect(count, `expected ≥ 105 term links, got ${count}`).toBeGreaterThanOrEqual(105);
   });
 });

@@ -1,4 +1,11 @@
 import { defineConfig, devices } from "@playwright/test";
+import { config as loadEnv } from "dotenv";
+import path from "path";
+
+// Load .env.local for local runs — CI injects secrets via environment.
+if (!process.env.CI) {
+  loadEnv({ path: path.resolve(__dirname, ".env.local"), override: false });
+}
 
 export default defineConfig({
   testDir: "./tests/e2e",

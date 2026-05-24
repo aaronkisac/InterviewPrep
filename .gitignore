@@ -50,4 +50,7 @@ next-env.d.ts
 /graphify-out/
 
 # write permission test file created by tooling
-.writetest
+.writetesttest-results/
+playwright-report/
+test-results/
+playwright-report/
