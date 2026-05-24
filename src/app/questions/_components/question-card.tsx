@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 
 import { GlossaryText } from "@/components/glossary-text";
+import { BookmarkButton } from "@/app/questions/_components/bookmark-button";
 import type { GlossaryTerm } from "@/lib/glossary-match";
 import type { Language } from "@/lib/supabase/types";
 import { TOPIC_LABELS, TR_FALLBACK } from "@/lib/topics";
@@ -32,10 +33,12 @@ export function QuestionCard({
   question,
   lang,
   terms,
+  isBookmarked = false,
 }: {
   question: QuestionListItem;
   lang: Language;
   terms: GlossaryTerm[];
+  isBookmarked?: boolean;
 }) {
   const [open, setOpen] = useState(false);
   const [personalOpen, setPersonalOpen] = useState(false);
@@ -70,6 +73,10 @@ export function QuestionCard({
             {question.question}
           </span>
         </span>
+        <BookmarkButton
+          questionId={question.id}
+          initialBookmarked={isBookmarked}
+        />
       </button>
 
       {open && (

@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { getBookmarkedIds } from "@/lib/actions/user-tracking";
 import {
   listQuestions,
   parseLevel,
@@ -57,10 +58,12 @@ export default async function QuestionsPage({
     q: parseQuery(params.q),
   };
 
-  const [questions, terms] = await Promise.all([
+  const [questions, terms, bookmarkedIds] = await Promise.all([
     listQuestions(filters),
     listTerms(),
+    getBookmarkedIds(),
   ]);
+  const bookmarkedSet = new Set(bookmarkedIds);
   const hasActiveFilters =
     Boolean(filters.topic) || Boolean(filters.level) || Boolean(filters.q);
 
@@ -106,6 +109,7 @@ export default async function QuestionsPage({
               question={question}
               lang={lang}
               terms={terms}
+              isBookmarked={bookmarkedSet.has(question.id)}
             />
           ))}
         </ul>

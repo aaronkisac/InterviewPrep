@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
+import { saveMockSession } from "@/lib/actions/user-tracking";
 import type { MockOption, MockQuestion } from "@/lib/mock-shared";
 import { TOPIC_LABELS } from "@/lib/topics";
 import { cn } from "@/lib/utils";
@@ -24,6 +25,30 @@ export function MockSession({ questions }: { questions: MockQuestion[] }) {
 
   const total = questions.length;
   const current = questions[index];
+  const saveCalledRef = useRef(false);
+
+  // Save session to DB once finished (fire-and-forget — failures are silent)
+  useEffect(() => {
+    if (!finished || saveCalledRef.current) return;
+    saveCalledRef.current = true;
+
+    const score = questions.reduce((sum, q, i) => {
+      const picked = q.options.find((o) => o.id === selected[i]);
+      return sum + (picked?.isCorrect ? 1 : 0);
+    }, 0);
+
+    const questionResults = questions.map((q, i) => ({
+      questionId: q.id,
+      correct: q.options.find((o) => o.id === selected[i])?.isCorrect ?? false,
+    }));
+
+    const topics = [...new Set(questions.map((q) => q.topic))];
+
+    saveMockSession({ score, total, topics, questionResults }).catch(() => {
+      // Silently ignore — user still sees their results
+    });
+  }, [finished, questions, selected, total]);
+
   if (!current) return null;
 
   const currentSelectedId = selected[index] ?? null;

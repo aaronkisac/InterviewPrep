@@ -54,3 +54,25 @@ export type UserRow = {
   role: UserRole;
   created_at: string;
 };
+
+export type MockSessionRow = {
+  id: string;
+  user_id: string;
+  score: number;
+  total: number;
+  topics: Topic[];
+  created_at: string;
+};
+
+export type UserQuestionProgressRow = {
+  user_id: string;
+  question_id: string;
+  correct: boolean | null;
+  answered_at: string;
+};
+
+export type BookmarkRow = {
+  user_id: string;
+  question_id: string;
+  created_at: string;
+};

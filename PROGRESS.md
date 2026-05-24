@@ -1,6 +1,6 @@
 # Progress
 
-Last updated: 2026-05-24 (mock config Select All/Deselect All; result screen % + grade + topic breakdown; Playwright E2E + GitHub Actions CI added)
+Last updated: 2026-05-24 (user tracking: mock_sessions + user_question_progress + bookmarks tables; server actions; bookmark button on question cards; /dashboard page)
 
 ---
 
@@ -60,6 +60,7 @@ Last updated: 2026-05-24 (mock config Select All/Deselect All; result screen % +
 | Unit Testing bank + glossary | 16 questions (ids 1201–1216, 5 batches, all levels). 8 glossary terms. |
 | Design Patterns bank + glossary | 16 questions (ids 1301–1316, 5 batches, all levels). 8 glossary terms. |
 | Types + Topics update | `src/lib/supabase/types.ts` and `src/lib/topics.ts` updated with all 13 topics. |
+| User tracking | `mock_sessions` + `user_question_progress` + `bookmarks` tables. Server actions in `src/lib/actions/user-tracking.ts`. Bookmark button on question cards. `/dashboard` page with session history + topic progress + bookmark count. |
 | Combined migration | `20260523000007_topic_unit_testing_design_patterns.sql` — adds unit-testing + design-patterns to DB constraints. |
 
 ---

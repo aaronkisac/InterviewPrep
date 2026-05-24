@@ -14,9 +14,12 @@ export default async function HomePage() {
         </Link>
         {user ? (
           <div className="flex items-center gap-3 text-sm">
-            <span className="text-muted-foreground">
-              {user.email}
-            </span>
+            <Link
+              href="/dashboard"
+              className="text-muted-foreground hover:text-foreground hover:underline"
+            >
+              Dashboard
+            </Link>
             <form
               action={async () => {
                 "use server";
