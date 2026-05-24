@@ -44,14 +44,10 @@ export async function getRelatedTerms(slugs: string[]): Promise<TermListItem[]> 
 export function groupByTopic(
   terms: TermListItem[],
 ): Record<Topic | "general", TermListItem[]> {
-  const groups: Record<string, TermListItem[]> = {
-    react: [],
-    typescript: [],
-    nextjs: [],
-    general: [],
-  };
+  const groups: Record<string, TermListItem[]> = {};
   for (const term of terms) {
     const key = term.topic ?? "general";
+    if (!groups[key]) groups[key] = [];
     groups[key]!.push(term);
   }
   return groups as Record<Topic | "general", TermListItem[]>;

@@ -718,5 +718,584 @@
       "facade-pattern",
       "adapter-pattern"
     ]
+  },
+  {
+    "slug": "css-box-model",
+    "label": "Box Model",
+    "topic": "css",
+    "tooltip": "Every element is a rectangular box made up of content, padding, border, and margin — in that order.",
+    "definition": "The CSS box model describes the rectangular box generated for every element in the document. From inside out: content area (width × height), padding (space between content and border), border (the visible edge), and margin (transparent space separating the element from its neighbours). By default (box-sizing: content-box), width and height set only the content area, so adding padding and border increases the rendered size. box-sizing: border-box (the modern default via a CSS reset) makes width/height include padding and border, which is almost always what you want.",
+    "codeExample": "/* border-box makes width predictable */\n*, *::before, *::after {\n  box-sizing: border-box;\n}\n\n.card {\n  width: 300px;     /* total width is always 300px */\n  padding: 16px;\n  border: 1px solid #ccc;\n  /* content area = 300 - 32 - 2 = 266px */\n}",
+    "relatedSlugs": [
+      "css-specificity",
+      "css-flexbox"
+    ]
+  },
+  {
+    "slug": "css-specificity",
+    "label": "Specificity",
+    "topic": "css",
+    "tooltip": "The algorithm browsers use to decide which CSS rule wins when multiple rules target the same element.",
+    "definition": "Specificity is calculated as a four-part score — inline styles, IDs, classes/attributes/pseudo-classes, and elements — compared from left to right. A higher value in any column wins regardless of lower columns. Inline styles always beat external stylesheets; !important overrides all specificity but makes styles unmanageable. In practice: rely on class selectors, avoid IDs in CSS, and never fight specificity wars with !important.",
+    "codeExample": "/* Specificity scores */\np              { color: black; }  /* 0,0,0,1 */\n.text          { color: blue; }   /* 0,0,1,0 — wins */\n#main .text    { color: red; }    /* 0,1,1,0 — wins over .text */",
+    "relatedSlugs": [
+      "css-cascade",
+      "css-box-model"
+    ]
+  },
+  {
+    "slug": "css-cascade",
+    "label": "Cascade",
+    "topic": "css",
+    "tooltip": "The algorithm that determines which CSS declaration applies when multiple rules target the same property on the same element.",
+    "definition": "The cascade resolves conflicts between CSS declarations using three tiers in order: origin and importance (browser defaults < author styles < user styles; !important reverses this), then specificity (higher specificity wins), then source order (later rules win). CSS Cascade Layers (@layer) give you explicit control over origin order without fighting specificity.",
+    "codeExample": "@layer base, components, utilities;\n\n@layer base {\n  a { color: blue; }\n}\n\n@layer utilities {\n  .text-red { color: red; } /* utilities layer wins */\n}",
+    "relatedSlugs": [
+      "css-specificity",
+      "css-custom-property"
+    ]
+  },
+  {
+    "slug": "css-flexbox",
+    "label": "Flexbox",
+    "topic": "css",
+    "tooltip": "A one-dimensional layout system for distributing space and aligning items along a row or column.",
+    "definition": "Flexbox is a one-dimensional layout model — it lays items out along a single axis (row or column). The container controls direction (flex-direction), wrapping (flex-wrap), main-axis alignment (justify-content), and cross-axis alignment (align-items). Children control how much space they take up (flex-grow, flex-shrink, flex-basis). Flexbox is ideal for navigation bars, card rows, centred content, and any layout where items need to share available space along one axis.",
+    "codeExample": ".nav {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  gap: 16px;\n}\n\n.nav__logo { flex: none; }\n.nav__links { flex: 1; }",
+    "relatedSlugs": [
+      "css-grid",
+      "css-box-model"
+    ]
+  },
+  {
+    "slug": "css-grid",
+    "label": "CSS Grid",
+    "topic": "css",
+    "tooltip": "A two-dimensional layout system for placing elements into rows and columns simultaneously.",
+    "definition": "CSS Grid is a two-dimensional layout system — it controls rows and columns at the same time, unlike Flexbox which is one-dimensional. Define the grid with grid-template-columns and grid-template-rows (using fr units for flexible tracks). grid-template-areas gives a visual ASCII-art layout map. Use Grid for page layout and two-dimensional components; use Flexbox for content alignment within cells.",
+    "codeExample": ".layout {\n  display: grid;\n  grid-template-columns: 240px 1fr;\n  grid-template-areas:\n    'sidebar header'\n    'sidebar main'\n    'sidebar footer';\n}\n\n.header  { grid-area: header; }\n.sidebar { grid-area: sidebar; }\n.main    { grid-area: main; }",
+    "relatedSlugs": [
+      "css-flexbox",
+      "css-media-query"
+    ]
+  },
+  {
+    "slug": "css-custom-property",
+    "label": "CSS Custom Property",
+    "topic": "css",
+    "tooltip": "Variables in CSS, declared with -- prefix, inherited through the DOM tree and readable in JavaScript.",
+    "definition": "CSS custom properties (CSS variables) are properties whose names start with -- and whose values can be referenced with var(). They inherit through the DOM tree, so setting a variable on :root makes it available everywhere. Unlike preprocessor variables, they are live — changing them in JS or via a media query updates every dependent rule without a rebuild. They are the foundation of CSS theming.",
+    "codeExample": ":root {\n  --color-primary: #6366f1;\n  --radius-md: 6px;\n}\n\n.button {\n  background: var(--color-primary);\n  border-radius: var(--radius-md);\n}\n\n/* Theme switch via JS */\ndocument.documentElement.style.setProperty('--color-primary', '#ec4899');",
+    "relatedSlugs": [
+      "css-cascade",
+      "css-media-query"
+    ]
+  },
+  {
+    "slug": "css-pseudo-class",
+    "label": "Pseudo-class",
+    "topic": "css",
+    "tooltip": "A keyword added to a selector that targets elements in a specific state, like :hover, :focus, or :nth-child.",
+    "definition": "A pseudo-class selects elements based on their state or position rather than their attributes. Common pseudo-classes: :hover, :focus, :focus-visible (keyboard only), :disabled, :checked, :nth-child(n), :not(selector), :is(), and :has() (parent selector). Pseudo-elements (::before, ::after, ::placeholder) are distinct — they style generated content rather than states.",
+    "codeExample": ".button:hover { background: var(--color-primary-dark); }\n.input:focus-visible { outline: 2px solid var(--color-primary); }\n.input:disabled { opacity: 0.5; }\n\n/* :has() — style parent based on child */\n.field:has(.input:invalid) .label { color: red; }",
+    "relatedSlugs": [
+      "css-specificity",
+      "css-cascade"
+    ]
+  },
+  {
+    "slug": "css-media-query",
+    "label": "Media Query",
+    "topic": "css",
+    "tooltip": "A CSS rule that applies styles conditionally based on viewport size, device capabilities, or user preferences.",
+    "definition": "Media queries apply CSS rules only when specified conditions are true. Most commonly used for responsive breakpoints (@media (min-width: 768px)), but also for user preferences: prefers-color-scheme: dark, prefers-reduced-motion: reduce. Mobile-first means writing base styles for small screens and using min-width queries to progressively enhance for larger viewports. TailwindCSS's sm:, md:, lg: prefixes compile to min-width media queries.",
+    "codeExample": ".grid { display: grid; grid-template-columns: 1fr; }\n\n@media (min-width: 768px) {\n  .grid { grid-template-columns: repeat(2, 1fr); }\n}\n\n@media (prefers-reduced-motion: reduce) {\n  * { animation-duration: 0.01ms !important; }\n}",
+    "relatedSlugs": [
+      "css-grid",
+      "css-custom-property"
+    ]
+  },
+  {
+    "slug": "css-stacking-context",
+    "label": "Stacking Context",
+    "topic": "css",
+    "tooltip": "An isolated layer in the z-axis where z-index values are compared only within that context, not against the whole page.",
+    "definition": "A stacking context is a three-dimensional space where elements with z-index compete. A new stacking context is created by any element with position + non-auto z-index, opacity < 1, transform, filter, will-change, or several other properties. Within a stacking context, z-index values are only compared against siblings — child elements can never escape their stacking context. This is why a z-index: 9999 inside a transformed element sometimes disappears behind a modal.",
+    "codeExample": "/* Why z-index: 9999 can still lose */\n.parent {\n  transform: translateX(0); /* new stacking context */\n  z-index: 1;\n}\n.child {\n  z-index: 9999; /* only competes within .parent */\n}\n.modal {\n  z-index: 10; /* beats .parent (z-index 1) */\n}",
+    "relatedSlugs": [
+      "css-specificity",
+      "css-cascade"
+    ]
+  },
+  {
+    "slug": "css-bfc",
+    "label": "Block Formatting Context",
+    "topic": "css",
+    "tooltip": "An isolated formatting region where block-level boxes are laid out independently, containing floats and preventing margin collapse.",
+    "definition": "A Block Formatting Context (BFC) is a self-contained layout region. Inside a BFC, vertical margins don't collapse with elements outside, float children are contained, and the box doesn't overlap floated siblings. BFCs are created by overflow: hidden/auto, display: flow-root, display: flex/grid, and position: absolute/fixed. display: flow-root is the modern, intention-revealing way to create a BFC.",
+    "codeExample": "/* Contain floated children */\n.container {\n  display: flow-root; /* creates BFC, no clearfix hack needed */\n}\n\n.float-child {\n  float: left;\n  width: 200px;\n}",
+    "relatedSlugs": [
+      "css-box-model",
+      "css-flexbox"
+    ]
+  },
+  {
+    "slug": "use-state",
+    "label": "useState",
+    "topic": "react-hooks",
+    "tooltip": "The hook for adding local state to a function component — returns the current value and a setter function.",
+    "definition": "useState declares a state variable and returns a pair: the current value and a setter. Calling the setter schedules a re-render with the new value. Pass a function to the setter to derive next state from previous (setCount(c => c + 1)) — always use the function form when new state depends on old state to avoid stale closure bugs. Pass a function to the initialiser (useState(() => expensiveCalc())) for lazy initialisation that runs only once.",
+    "codeExample": "function Counter() {\n  const [count, setCount] = useState(0);\n  return (\n    <button onClick={() => setCount(c => c + 1)}>\n      Count: {count}\n    </button>\n  );\n}\n\n// Lazy initialiser\nconst [data, setData] = useState(() => JSON.parse(localStorage.getItem('data') ?? '[]'));",
+    "relatedSlugs": [
+      "use-reducer",
+      "use-effect",
+      "use-memo"
+    ]
+  },
+  {
+    "slug": "use-effect",
+    "label": "useEffect",
+    "topic": "react-hooks",
+    "tooltip": "The hook for running side effects (data fetching, subscriptions, DOM mutations) after render.",
+    "definition": "useEffect runs a side effect after the browser has painted. The dependency array controls when it runs: empty array [] = once on mount, specific deps = when any dep changes, no array = every render. The cleanup function (returned from the effect) runs before the next execution and on unmount. In React 18 Strict Mode, effects mount → unmount → remount in development to surface cleanup bugs. For data fetching, prefer TanStack Query or SWR over raw useEffect.",
+    "codeExample": "useEffect(() => {\n  const controller = new AbortController();\n\n  fetch(`/api/user/${id}`, { signal: controller.signal })\n    .then(r => r.json())\n    .then(setUser)\n    .catch(e => { if (e.name !== 'AbortError') setError(e); });\n\n  return () => controller.abort();\n}, [id]);",
+    "relatedSlugs": [
+      "use-state",
+      "use-ref",
+      "use-callback"
+    ]
+  },
+  {
+    "slug": "use-memo",
+    "label": "useMemo",
+    "topic": "react-hooks",
+    "tooltip": "Memoises an expensive computed value, recomputing only when its dependencies change.",
+    "definition": "useMemo caches the return value of a function between renders, recomputing only when its dependencies change. Use it when the computation is genuinely expensive (filtering/sorting large lists) and is triggered on frequent re-renders. Don't reach for it by default — memoisation has a cost and most computations are fast enough. useMemo is for values; useCallback is the equivalent for functions.",
+    "codeExample": "function ProductList({ products, category }) {\n  const filtered = useMemo(\n    () => products.filter(p => p.category === category),\n    [products, category],\n  );\n  return <ul>{filtered.map(p => <li key={p.id}>{p.name}</li>)}</ul>;\n}",
+    "relatedSlugs": [
+      "use-callback",
+      "use-state",
+      "use-ref"
+    ]
+  },
+  {
+    "slug": "use-callback",
+    "label": "useCallback",
+    "topic": "react-hooks",
+    "tooltip": "Returns a memoised function reference that only changes when its dependencies change — prevents unnecessary child re-renders.",
+    "definition": "useCallback returns a stable function reference that only changes when its dependencies change. Its primary purpose is to prevent child components wrapped in React.memo from re-rendering unnecessarily because a new function reference was created on every parent render. Like useMemo, reach for it only when you have measured a real performance problem.",
+    "codeExample": "const handleSubmit = useCallback(async (formData) => {\n  await api.saveUser(formData);\n  navigate('/dashboard');\n}, [navigate]);\n\nconst MemoizedForm = React.memo(ExpensiveForm);\nreturn <MemoizedForm onSubmit={handleSubmit} />;",
+    "relatedSlugs": [
+      "use-memo",
+      "use-state"
+    ]
+  },
+  {
+    "slug": "use-ref",
+    "label": "useRef",
+    "topic": "react-hooks",
+    "tooltip": "Returns a mutable ref object whose .current property persists across renders without triggering re-renders.",
+    "definition": "useRef returns an object { current: T } that persists across renders. Mutating .current does NOT trigger a re-render. Two uses: holding a reference to a DOM node (set via the ref prop) and storing mutable values that survive renders without causing them (interval IDs, previous values, abort controllers).",
+    "codeExample": "// DOM ref\nfunction AutoFocusInput() {\n  const inputRef = useRef(null);\n  useEffect(() => { inputRef.current?.focus(); }, []);\n  return <input ref={inputRef} />;\n}\n\n// Mutable value — store interval ID\nconst intervalRef = useRef();\nuseEffect(() => {\n  intervalRef.current = setInterval(tick, 1000);\n  return () => clearInterval(intervalRef.current);\n}, []);",
+    "relatedSlugs": [
+      "use-state",
+      "use-effect",
+      "use-memo"
+    ]
+  },
+  {
+    "slug": "use-context",
+    "label": "useContext",
+    "topic": "react-hooks",
+    "tooltip": "Subscribes a component to a React context, re-rendering when the context value changes.",
+    "definition": "useContext reads the nearest Context.Provider value above in the tree and subscribes to it — the component re-renders whenever the context value changes. Create a context with createContext(defaultValue); wrap a subtree in Context.Provider; consume with useContext(Context). Context is React's built-in dependency injection for subtrees.",
+    "codeExample": "const ThemeContext = createContext('light');\n\nfunction App() {\n  const [theme, setTheme] = useState('light');\n  return (\n    <ThemeContext.Provider value={theme}>\n      <Header />\n    </ThemeContext.Provider>\n  );\n}\n\nfunction Header() {\n  const theme = useContext(ThemeContext);\n  return <nav className={theme}>...</nav>;\n}",
+    "relatedSlugs": [
+      "use-state",
+      "use-reducer"
+    ]
+  },
+  {
+    "slug": "use-reducer",
+    "label": "useReducer",
+    "topic": "react-hooks",
+    "tooltip": "An alternative to useState for complex state logic — manages state with a (state, action) => newState reducer.",
+    "definition": "useReducer is an alternative to useState for state with complex transitions, multiple sub-values, or inter-dependent fields. It takes a reducer (state, action) => newState and initial state, returning current state and a dispatch function. Combine with useContext to distribute state through a subtree — the lightweight alternative to Redux for feature-level state.",
+    "codeExample": "function reducer(state, action) {\n  switch (action.type) {\n    case 'increment': return { ...state, count: state.count + state.step };\n    case 'setStep':   return { ...state, step: action.payload };\n  }\n}\n\nconst [state, dispatch] = useReducer(reducer, { count: 0, step: 1 });\ndispatch({ type: 'increment' });",
+    "relatedSlugs": [
+      "use-state",
+      "use-context",
+      "redux-reducer"
+    ]
+  },
+  {
+    "slug": "use-id",
+    "label": "useId",
+    "topic": "react-hooks",
+    "tooltip": "Generates a stable, unique ID for linking form labels to inputs — safe for server-side rendering.",
+    "definition": "useId generates a unique, stable ID string consistent between server and client renders, making it safe for SSR/hydration. Its primary use is linking label htmlFor to input id inside reusable components — without a unique ID, multiple instances would share the same id and break accessibility. Do not use useId to generate list keys.",
+    "codeExample": "function TextField({ label }) {\n  const id = useId();\n  return (\n    <div>\n      <label htmlFor={id}>{label}</label>\n      <input id={id} />\n    </div>\n  );\n}\n\n// Multiple instances get different IDs\n<TextField label=\"Email\" />    // id=\":r0:\"\n<TextField label=\"Password\" /> // id=\":r1:\"",
+    "relatedSlugs": [
+      "use-ref",
+      "use-state"
+    ]
+  },
+  {
+    "slug": "use-transition",
+    "label": "useTransition",
+    "topic": "react-hooks",
+    "tooltip": "Marks a state update as non-urgent so React can keep the UI responsive while the update is pending.",
+    "definition": "useTransition returns [isPending, startTransition]. Wrapping a state update in startTransition tells React it is non-urgent — the browser can interrupt it to handle more urgent updates like typing. isPending is true while the transition is in-flight. Use it for expensive renders triggered by navigation or filter changes to keep the input field responsive.",
+    "codeExample": "function SearchPage() {\n  const [query, setQuery] = useState('');\n  const [results, setResults] = useState([]);\n  const [isPending, startTransition] = useTransition();\n\n  function handleChange(e) {\n    setQuery(e.target.value); // urgent\n    startTransition(() => {\n      setResults(heavyFilter(e.target.value)); // non-urgent\n    });\n  }\n\n  return (\n    <>\n      <input value={query} onChange={handleChange} />\n      {isPending ? <Spinner /> : <ResultList results={results} />}\n    </>\n  );\n}",
+    "relatedSlugs": [
+      "use-state",
+      "use-memo"
+    ]
+  },
+  {
+    "slug": "git-commit",
+    "label": "Commit",
+    "topic": "git",
+    "tooltip": "A snapshot of the repository's state at a point in time, identified by a SHA hash.",
+    "definition": "A Git commit is an immutable snapshot of the entire repository at a point in time. It contains the file tree, a pointer to the parent commit(s), metadata (author, timestamp), and a message. Good commits are atomic (one logical change), have a descriptive message in imperative mood ('Add validation', not 'Added validation'), and pass tests.",
+    "codeExample": "git add src/components/Button.tsx\ngit commit -m 'Add loading state to Button component'\n\n# Amend the last commit (don't do on shared branches)\ngit commit --amend -m 'Add loading state and test to Button'\n\ngit log --oneline --graph",
+    "relatedSlugs": [
+      "git-branch",
+      "git-rebase"
+    ]
+  },
+  {
+    "slug": "git-branch",
+    "label": "Branch",
+    "topic": "git",
+    "tooltip": "A lightweight movable pointer to a commit — the standard way to isolate work in progress from the main codebase.",
+    "definition": "A Git branch is simply a movable pointer to a commit. Creating a branch is cheap — it only creates a 41-byte file. HEAD points to the currently checked-out branch, and each new commit advances that branch pointer forward. Feature branches isolate work so multiple developers can work in parallel without interfering.",
+    "codeExample": "git switch -c feature/user-auth\ngit push -u origin feature/user-auth\n\n# Delete after merging\ngit branch -d feature/user-auth\ngit push origin --delete feature/user-auth",
+    "relatedSlugs": [
+      "git-commit",
+      "git-merge",
+      "git-rebase"
+    ]
+  },
+  {
+    "slug": "git-rebase",
+    "label": "Rebase",
+    "topic": "git",
+    "tooltip": "Replays commits from one branch onto another, producing a linear history without merge commits.",
+    "definition": "Rebase rewrites commit history by replaying your branch's commits on top of another branch. The result is a linear history — no merge commits. Interactive rebase (git rebase -i) lets you squash, reorder, edit, or drop commits before pushing. Golden rule: never rebase commits already pushed to a shared branch — it rewrites history.",
+    "codeExample": "git switch feature/my-feature\ngit fetch origin\ngit rebase origin/main\n\n# Interactive rebase — squash last 3 commits\ngit rebase -i HEAD~3\n\n# Resolve conflicts\ngit add <resolved-files>\ngit rebase --continue",
+    "relatedSlugs": [
+      "git-merge",
+      "git-commit",
+      "git-branch"
+    ]
+  },
+  {
+    "slug": "git-merge",
+    "label": "Merge",
+    "topic": "git",
+    "tooltip": "Combines two branches by creating a merge commit that has both branches as parents.",
+    "definition": "Merge integrates changes from one branch into another. A fast-forward merge simply moves the pointer forward when there are no diverging commits. A three-way merge creates a new merge commit with two parents when histories have diverged. Merge preserves the full branch history. --no-ff forces a merge commit even when fast-forward is possible.",
+    "codeExample": "git switch main\ngit merge feature/user-auth\n\n# Force a merge commit\ngit merge --no-ff feature/user-auth -m 'Merge feature/user-auth'\n\n# Abort a conflicted merge\ngit merge --abort",
+    "relatedSlugs": [
+      "git-rebase",
+      "git-branch",
+      "git-commit"
+    ]
+  },
+  {
+    "slug": "git-stash",
+    "label": "Stash",
+    "topic": "git",
+    "tooltip": "Temporarily saves uncommitted changes so you can switch context and come back later.",
+    "definition": "Git stash saves your uncommitted changes to a stack and restores a clean working tree. Useful when you need to switch branches without committing half-finished work. git stash pop applies and removes the latest stash; git stash apply applies without removing. Don't use stash as long-term storage — commit on a WIP branch instead.",
+    "codeExample": "git stash push -m 'WIP: form validation'\ngit stash list\n\n# Apply and remove\ngit stash pop\n\n# Apply to a different branch\ngit stash apply stash@{0}",
+    "relatedSlugs": [
+      "git-commit",
+      "git-branch"
+    ]
+  },
+  {
+    "slug": "git-cherry-pick",
+    "label": "Cherry-pick",
+    "topic": "git",
+    "tooltip": "Applies a specific commit from another branch onto the current branch without merging the whole branch.",
+    "definition": "Cherry-pick copies one or more commits from anywhere in history and applies them as new commits on the current branch. Common uses: backport a bug fix to a release branch without merging all of main, apply a commit from the wrong branch. The new commits have different SHAs but the same diff.",
+    "codeExample": "git cherry-pick a3f8c1e\n\n# Range of commits\ngit cherry-pick a3f8c1e^..f9b2e7d\n\n# Stage only (don't commit)\ngit cherry-pick --no-commit a3f8c1e",
+    "relatedSlugs": [
+      "git-commit",
+      "git-rebase"
+    ]
+  },
+  {
+    "slug": "git-reset",
+    "label": "Reset",
+    "topic": "git",
+    "tooltip": "Moves HEAD to a previous commit — --soft keeps changes staged, --mixed unstages, --hard discards everything.",
+    "definition": "Git reset moves the HEAD pointer to a specified commit. Three modes: --soft moves HEAD only (staged changes kept); --mixed (default) moves HEAD and clears the index (working tree unchanged); --hard moves HEAD and discards all changes. Reset on already-pushed commits is destructive — prefer git revert to create an undo commit instead.",
+    "codeExample": "# Undo last commit, keep changes staged\ngit reset --soft HEAD~1\n\n# Undo last commit, unstage changes\ngit reset HEAD~1\n\n# Unstage a specific file\ngit reset HEAD src/app.ts\n\n# DANGER: discard last 2 commits entirely\ngit reset --hard HEAD~2",
+    "relatedSlugs": [
+      "git-commit",
+      "git-rebase"
+    ]
+  },
+  {
+    "slug": "pull-request",
+    "label": "Pull Request",
+    "topic": "git",
+    "tooltip": "A GitHub/GitLab mechanism to propose, review, discuss, and merge changes from a branch into another.",
+    "definition": "A Pull Request (PR) — Merge Request in GitLab — is a structured workflow for proposing code changes. The author pushes a branch, opens a PR against a target branch, and reviewers leave inline comments, approve, or request changes. PRs enable async code review, enforce CI checks, and document why a change was made. Good PR hygiene: small focused scope, descriptive title, self-review before opening.",
+    "codeExample": "# 1. Create and push feature branch\ngit switch -c feature/add-search\ngit push -u origin feature/add-search\n\n# 2. Open PR on GitHub — describe what and why\n# 3. CI runs (lint, tests, build)\n# 4. Reviewer approves\n# 5. Merge (squash / merge / rebase per team convention)\n# 6. Delete the feature branch",
+    "relatedSlugs": [
+      "git-branch",
+      "git-merge",
+      "git-rebase"
+    ]
+  },
+  {
+    "slug": "sprint",
+    "label": "Sprint",
+    "topic": "agile-scrum",
+    "tooltip": "A fixed time-box (usually 1–4 weeks) in which a Scrum team completes a set of agreed work from the backlog.",
+    "definition": "A Sprint is the core time-box of Scrum — a fixed period (typically two weeks) during which the team builds a potentially shippable product increment. It begins with Sprint Planning, runs through Daily Standups, and ends with a Sprint Review (demo) and Sprint Retrospective (process improvement). Sprints have a fixed end date — unfinished work is not automatically carried over.",
+    "codeExample": "Sprint 42 (2 weeks):\n├── Sprint Planning  → select backlog items\n├── Day 1–9         → build, test, review\n│   └── Daily Standup each morning\n├── Day 10 AM       → Sprint Review (demo)\n└── Day 10 PM       → Sprint Retrospective",
+    "relatedSlugs": [
+      "user-story",
+      "velocity",
+      "retrospective",
+      "standup"
+    ]
+  },
+  {
+    "slug": "user-story",
+    "label": "User Story",
+    "topic": "agile-scrum",
+    "tooltip": "A short description of a feature written from the user's perspective: As a [role], I want [goal], so that [benefit].",
+    "definition": "A user story captures a software feature from the end user's perspective. Format: As a [role], I want [goal], so that [benefit]. Stories should be INVEST: Independent, Negotiable, Valuable, Estimable, Small, Testable. Acceptance criteria (Given/When/Then) define when the story is done. Epics are large stories that must be split into smaller stories before sprint planning.",
+    "codeExample": "User Story:\n  As a registered user,\n  I want to reset my password via email,\n  so that I can regain access when I forget it.\n\nAcceptance Criteria:\n  Given I click 'Forgot password' and enter my email\n  When I submit\n  Then I receive a reset link within 5 minutes",
+    "relatedSlugs": [
+      "sprint",
+      "backlog",
+      "story-point"
+    ]
+  },
+  {
+    "slug": "backlog",
+    "label": "Product Backlog",
+    "topic": "agile-scrum",
+    "tooltip": "An ordered list of everything the team might work on — features, bugs, tech debt — maintained by the Product Owner.",
+    "definition": "The Product Backlog is the single, ordered list of all work the team might ever do. The Product Owner owns and prioritises it. Items at the top are refined (estimated, acceptance criteria defined) and sprint-ready; items lower down are rough and large. Backlog refinement sessions happen mid-sprint to prepare upcoming items. The backlog is never done — it evolves as the product grows.",
+    "codeExample": "Product Backlog (prioritised):\n  [P0] Log in with Google             → 3 pts, refined\n  [P0] Fix: session cookie expires    → 1 pt, refined\n  [P1] Export data as CSV             → 5 pts, refined\n  [P1] Migrate to App Router          → 13 pts, rough\n  [P2] Dark mode                      → 8 pts, rough",
+    "relatedSlugs": [
+      "user-story",
+      "sprint",
+      "story-point"
+    ]
+  },
+  {
+    "slug": "retrospective",
+    "label": "Retrospective",
+    "topic": "agile-scrum",
+    "tooltip": "A meeting at the end of each sprint where the team reflects on their process and agrees on improvements.",
+    "definition": "The Sprint Retrospective is a time-boxed meeting (typically 90 minutes for a 2-week sprint) where the team inspects how they worked. Common format: Start/Stop/Continue. The output is a small number of concrete, actionable improvements. Retros work only if the team feels psychologically safe enough to raise real problems.",
+    "codeExample": "Sprint 42 Retrospective:\n\nStart:\n  - Writing ADRs before big changes\n  - Pairing on complex tickets\n\nStop:\n  - Merging PRs without a second reviewer\n\nContinue:\n  - Async standups via Slack\n  - 85% test coverage threshold",
+    "relatedSlugs": [
+      "sprint",
+      "standup"
+    ]
+  },
+  {
+    "slug": "velocity",
+    "label": "Velocity",
+    "topic": "agile-scrum",
+    "tooltip": "The average story points a team completes per sprint — used for release forecasting, not performance measurement.",
+    "definition": "Velocity is the sum of story points completed across each sprint, averaged over the last 3–5 sprints. It is used for forecasting — not for comparing teams or measuring individual performance. A sudden velocity drop signals impediments; consistent rise usually means the team is splitting stories smaller.",
+    "codeExample": "Sprint 40: 18 pts\nSprint 41: 22 pts\nSprint 42: 20 pts\nSprint 43: 19 pts\n\nAverage: 79 / 4 = ~20 pts/sprint\n\nForecasting: 160 pts remaining\n→ 160 / 20 = 8 sprints ≈ 16 weeks",
+    "relatedSlugs": [
+      "sprint",
+      "story-point",
+      "backlog"
+    ]
+  },
+  {
+    "slug": "story-point",
+    "label": "Story Point",
+    "topic": "agile-scrum",
+    "tooltip": "A relative unit of effort used to estimate user stories — measuring complexity and uncertainty, not time.",
+    "definition": "Story points are a relative measure of effort — complexity, uncertainty, and volume combined — not hours. Teams use a Fibonacci-like scale (1, 2, 3, 5, 8, 13). Points are relative to each other and team-specific. Key rule: never convert story points to hours — that destroys their value as relative estimates.",
+    "codeExample": "Planning Poker:\n  Story: 'Filter products by price range'\n\n  Aaron (FE):  5 → non-trivial slider + URL state\n  Sam (BE):    3 → API already handles range queries\n  Priya (QA):  5 → currency formatting edge cases\n\n  Discussion, consensus: 5 pts",
+    "relatedSlugs": [
+      "user-story",
+      "velocity",
+      "sprint"
+    ]
+  },
+  {
+    "slug": "standup",
+    "label": "Daily Standup",
+    "topic": "agile-scrum",
+    "tooltip": "A short daily sync (15 minutes max) where the team shares progress, plans, and blockers.",
+    "definition": "The Daily Scrum is a 15-minute time-boxed event covering: what did I do yesterday, what will I do today, are there blockers. The goal is coordination and early blocker detection — not status reporting. Detailed problem-solving should go offline after the standup. Async standups (Slack updates) are common for distributed teams.",
+    "codeExample": "Yesterday:\n  - Shipped search filter component\n  - Reviewed Sam's API changes\n\nToday:\n  - Pick up FE-421: pagination\n  - Pair with Priya on a11y audit\n\nBlockers:\n  - Waiting on design approval for modal variant",
+    "relatedSlugs": [
+      "sprint",
+      "retrospective"
+    ]
+  },
+  {
+    "slug": "definition-of-done",
+    "label": "Definition of Done",
+    "topic": "agile-scrum",
+    "tooltip": "A shared checklist that defines what 'complete' means for any work item — code, tests, docs, review, deploy.",
+    "definition": "The Definition of Done (DoD) is a shared agreement of what done means for every item leaving the board. It ensures consistent quality. A typical DoD: code reviewed and approved, tests passing, coverage threshold met, accessibility checked, deployed to staging. The DoD is not per-story acceptance criteria — it is the minimum quality bar for all work.",
+    "codeExample": "Definition of Done:\n  ✅ PR reviewed by at least one peer\n  ✅ All CI tests pass\n  ✅ Code coverage >= 85%\n  ✅ No TypeScript strict errors\n  ✅ WCAG 2.1 AA checked\n  ✅ Deployed to staging and smoke-tested",
+    "relatedSlugs": [
+      "sprint",
+      "user-story"
+    ]
+  },
+  {
+    "slug": "kanban",
+    "label": "Kanban",
+    "topic": "agile-scrum",
+    "tooltip": "A lean workflow management method using a visual board of columns with WIP limits to surface bottlenecks.",
+    "definition": "Kanban is a lean workflow management method using a visual board where work items flow through columns (Backlog → In Progress → Review → Done). Work-in-Progress (WIP) limits cap how many items can be in each column, surfacing bottlenecks. Unlike Scrum, Kanban has no sprints, no fixed iterations, and no prescribed roles. It suits teams with unpredictable, interrupt-driven work (support, ops, maintenance).",
+    "codeExample": "Kanban Board (WIP limit = 3):\n┌──────────┬──────────────────┬────────────┬──────────┐\n│ Backlog  │  In Progress (3) │ In Review  │   Done   │\n├──────────┼──────────────────┼────────────┼──────────┤\n│ FE-445   │ FE-441 (Aaron)   │ FE-440     │ FE-438   │\n│ FE-446   │ FE-442 (Sam)     │ FE-439     │ FE-437   │\n└──────────┴──────────────────┴────────────┴──────────┘",
+    "relatedSlugs": [
+      "sprint",
+      "backlog"
+    ]
+  },
+  {
+    "slug": "websocket",
+    "label": "WebSocket",
+    "topic": "websockets",
+    "tooltip": "A protocol providing full-duplex communication over a single persistent TCP connection between client and server.",
+    "definition": "WebSocket is a communication protocol providing full-duplex, bidirectional messaging over a persistent TCP connection. Unlike HTTP's request-response cycle, a WebSocket connection stays open — both client and server can send messages independently at any time. Ideal for: live chat, collaborative editing, live dashboards, multiplayer games. URIs use ws:// or wss:// (TLS-encrypted).",
+    "codeExample": "const ws = new WebSocket('wss://api.example.com/ws');\n\nws.addEventListener('open', () => {\n  ws.send(JSON.stringify({ type: 'subscribe', channel: 'prices' }));\n});\n\nws.addEventListener('message', (event) => {\n  const data = JSON.parse(event.data);\n  updatePrices(data);\n});",
+    "relatedSlugs": [
+      "ws-handshake",
+      "ws-heartbeat",
+      "server-sent-events"
+    ]
+  },
+  {
+    "slug": "ws-handshake",
+    "label": "WebSocket Handshake",
+    "topic": "websockets",
+    "tooltip": "The HTTP Upgrade request that establishes a WebSocket connection and switches protocols from HTTP to WS.",
+    "definition": "The WebSocket handshake starts as an HTTP/1.1 request with an Upgrade: websocket header and a Sec-WebSocket-Key. The server responds with 101 Switching Protocols. From this point, the TCP connection is no longer HTTP — it is a raw WebSocket channel. The handshake traverses HTTP infrastructure, so WebSocket-aware routing is required.",
+    "codeExample": "// Client → Server:\nGET /ws HTTP/1.1\nUpgrade: websocket\nConnection: Upgrade\nSec-WebSocket-Key: dGhlIHNhbXBsZSBub25jZQ==\n\n// Server → Client:\nHTTP/1.1 101 Switching Protocols\nUpgrade: websocket\nSec-WebSocket-Accept: s3pPLMBiTxaQ9kYGzzhZRbK+xOo=\n\n// TCP now carries WebSocket frames",
+    "relatedSlugs": [
+      "websocket",
+      "ws-heartbeat"
+    ]
+  },
+  {
+    "slug": "ws-heartbeat",
+    "label": "Heartbeat / Ping-Pong",
+    "topic": "websockets",
+    "tooltip": "Periodic messages exchanged to detect dead connections — firewalls silently drop idle TCP connections.",
+    "definition": "Long-lived WebSocket connections can appear open while the underlying TCP connection is silently dead — firewalls and NAT devices drop them without a close frame. Heartbeats detect this: the server sends a ping every N seconds; if no pong arrives within the timeout, the connection is considered dead and the client reconnects with exponential backoff.",
+    "codeExample": "// Server-side heartbeat (ws library)\nwss.on('connection', (ws) => {\n  ws.isAlive = true;\n  ws.on('pong', () => { ws.isAlive = true; });\n\n  const timer = setInterval(() => {\n    if (!ws.isAlive) { ws.terminate(); return; }\n    ws.isAlive = false;\n    ws.ping();\n  }, 30_000);\n\n  ws.on('close', () => clearInterval(timer));\n});",
+    "relatedSlugs": [
+      "websocket",
+      "ws-reconnect"
+    ]
+  },
+  {
+    "slug": "ws-reconnect",
+    "label": "Reconnection Strategy",
+    "topic": "websockets",
+    "tooltip": "The pattern of automatically re-establishing a WebSocket connection after disconnection, using exponential backoff.",
+    "definition": "WebSocket connections drop — network blips, server restarts, mobile app backgrounding. A good reconnection strategy retries automatically with exponential backoff: start short, increase delay geometrically, add jitter to prevent thundering herd. Cap the maximum delay (e.g. 30 seconds). On reconnection, re-subscribe to channels and request missed events.",
+    "codeExample": "function connectWithBackoff(url) {\n  let attempt = 0;\n  function connect() {\n    const ws = new WebSocket(url);\n    ws.onopen = () => { attempt = 0; };\n    ws.onclose = () => {\n      const delay = Math.min(1000 * 2 ** attempt, 30_000)\n        + Math.random() * 1000;\n      attempt++;\n      setTimeout(connect, delay);\n    };\n  }\n  connect();\n}",
+    "relatedSlugs": [
+      "websocket",
+      "ws-heartbeat"
+    ]
+  },
+  {
+    "slug": "server-sent-events",
+    "label": "Server-Sent Events",
+    "topic": "websockets",
+    "tooltip": "A unidirectional HTTP streaming mechanism where the server pushes updates to the client over a long-lived connection.",
+    "definition": "Server-Sent Events (SSE) is a W3C standard for the server to push a stream of text events to the browser over a single persistent HTTP connection. Unlike WebSocket, SSE is one-directional (server to client only) and uses plain HTTP — works through standard proxies. The browser's EventSource API handles automatic reconnection. SSE is ideal for live feeds, notifications, and streaming AI responses.",
+    "codeExample": "// Next.js Route Handler\nexport async function GET() {\n  const stream = new ReadableStream({\n    start(controller) {\n      const enc = new TextEncoder();\n      let n = 0;\n      const id = setInterval(() => {\n        controller.enqueue(enc.encode(`data: ${n++}\\n\\n`));\n        if (n > 10) { clearInterval(id); controller.close(); }\n      }, 1000);\n    },\n  });\n  return new Response(stream, {\n    headers: { 'Content-Type': 'text/event-stream' },\n  });\n}\n\n// Client\nconst source = new EventSource('/api/stream');\nsource.onmessage = (e) => console.log(e.data);",
+    "relatedSlugs": [
+      "websocket",
+      "ws-heartbeat"
+    ]
+  },
+  {
+    "slug": "socket-io",
+    "label": "Socket.IO",
+    "topic": "websockets",
+    "tooltip": "A library wrapping WebSocket with rooms, namespaces, automatic reconnection, and HTTP long-polling fallback.",
+    "definition": "Socket.IO wraps WebSocket (with HTTP long-polling fallback) and adds: rooms (broadcast to groups), namespaces (multiple channels on one connection), automatic reconnection, and event acknowledgements. Not a pure WebSocket implementation — a Socket.IO client cannot connect to a raw WebSocket server. Best for chat, collaborative apps, and dashboards where rooms and broadcast patterns simplify the code significantly.",
+    "codeExample": "// Server\nconst io = new Server(httpServer);\nio.on('connection', (socket) => {\n  socket.on('join-room', (roomId) => {\n    socket.join(roomId);\n    socket.to(roomId).emit('user-joined', socket.id);\n  });\n  socket.on('message', ({ roomId, text }) => {\n    io.to(roomId).emit('message', { text, from: socket.id });\n  });\n});\n\n// Client\nconst socket = io('wss://api.example.com');\nsocket.emit('join-room', 'room-42');",
+    "relatedSlugs": [
+      "websocket",
+      "ws-reconnect"
+    ]
+  },
+  {
+    "slug": "semantic-html",
+    "label": "Semantic HTML",
+    "topic": "html5",
+    "tooltip": "Using HTML elements that describe their meaning — nav, main, article, section — rather than generic divs.",
+    "definition": "Semantic HTML means choosing elements that describe the meaning of content, not just its appearance. HTML5 landmarks: header, nav, main, article, section, aside, footer. Benefits: screen readers can navigate by landmark, search engines understand page structure, other developers understand intent. The anti-pattern is 'div soup' — nested divs with class names doing work that HTML elements should carry.",
+    "codeExample": "<body>\n  <header>\n    <nav aria-label=\"Main\">...</nav>\n  </header>\n  <main>\n    <article>\n      <h1>Understanding Closures</h1>\n    </article>\n    <aside>Related articles</aside>\n  </main>\n  <footer>...</footer>\n</body>",
+    "relatedSlugs": [
+      "aria",
+      "service-worker"
+    ]
+  },
+  {
+    "slug": "aria",
+    "label": "ARIA",
+    "topic": "html5",
+    "tooltip": "Accessible Rich Internet Applications — attributes that expose interactive widget roles and states to assistive technologies.",
+    "definition": "ARIA (Accessible Rich Internet Applications) is a set of HTML attributes (role, aria-*) that communicate element roles, states, and properties to assistive technologies. First rule: don't use ARIA — use native HTML elements first. ARIA is for when native elements are insufficient: custom widgets (combobox, dialog), dynamic regions (aria-live), and labelling (aria-label, aria-labelledby). Incorrect ARIA is worse than no ARIA.",
+    "codeExample": "<!-- Native — no ARIA needed -->\n<button type=\"submit\">Save</button>\n\n<!-- Custom dialog needs ARIA -->\n<div role=\"dialog\" aria-modal=\"true\" aria-labelledby=\"dialog-title\">\n  <h2 id=\"dialog-title\">Confirm Delete</h2>\n</div>\n\n<!-- Live region -->\n<div aria-live=\"polite\">{statusMessage}</div>",
+    "relatedSlugs": [
+      "semantic-html"
+    ]
+  },
+  {
+    "slug": "web-storage",
+    "label": "Web Storage",
+    "topic": "html5",
+    "tooltip": "Browser APIs (localStorage and sessionStorage) for storing key-value string data client-side.",
+    "definition": "Web Storage provides two mechanisms: localStorage (persists until explicitly cleared) and sessionStorage (cleared when the tab closes). Both store only strings — use JSON.stringify/parse for objects. Storage is synchronous and origin-scoped. Size limit is typically 5–10 MB. Note: localStorage is not available in SSR environments — guard with typeof window !== 'undefined'.",
+    "codeExample": "localStorage.setItem('theme', 'dark');\nconst theme = localStorage.getItem('theme');\n\n// Objects\nlocalStorage.setItem('user', JSON.stringify({ name: 'Aaron' }));\nconst user = JSON.parse(localStorage.getItem('user') ?? 'null');\n\n// SSR guard\nconst stored = typeof window !== 'undefined'\n  ? localStorage.getItem('prefs')\n  : null;",
+    "relatedSlugs": [
+      "service-worker",
+      "semantic-html"
+    ]
+  },
+  {
+    "slug": "service-worker",
+    "label": "Service Worker",
+    "topic": "html5",
+    "tooltip": "A script that runs in a background thread, enabling offline caching, push notifications, and network interception.",
+    "definition": "A Service Worker is a JavaScript file running in a background thread, separate from the main page. It acts as a programmable network proxy — intercepting fetch requests to serve from cache (offline support), managing push notifications, and background sync. Service workers have no DOM access and communicate via postMessage. They persist across page loads and are scoped to their location in the origin.",
+    "codeExample": "// sw.js\nconst CACHE = 'v1';\nconst ASSETS = ['/', '/index.html', '/styles.css'];\n\nself.addEventListener('install', (e) => {\n  e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS)));\n});\n\nself.addEventListener('fetch', (e) => {\n  e.respondWith(\n    caches.match(e.request).then(cached => cached ?? fetch(e.request))\n  );\n});",
+    "relatedSlugs": [
+      "web-storage",
+      "semantic-html"
+    ]
+  },
+  {
+    "slug": "canvas-html",
+    "label": "Canvas",
+    "topic": "html5",
+    "tooltip": "An HTML element with a JavaScript API for drawing 2D graphics procedurally — immediate mode, no retained scene graph.",
+    "definition": "The canvas element provides a pixel-based drawing surface accessed via the Canvas 2D API (getContext('2d')) or WebGL. Unlike SVG, canvas is immediate mode — you draw by calling imperative methods and the canvas has no memory of what was drawn. Fast for many items (charts, particle systems, games) but harder to make accessible (hit detection is manual). Libraries like Fabric.js, Konva, and Three.js abstract canvas for specific use cases.",
+    "codeExample": "const canvas = document.getElementById('chart');\nconst ctx = canvas.getContext('2d');\n\nctx.fillStyle = '#6366f1';\nctx.fillRect(50, 50, 100, 200);\n\nctx.fillStyle = '#111';\nctx.font = '16px sans-serif';\nctx.fillText('Revenue', 75, 40);\n\nfunction render() {\n  ctx.clearRect(0, 0, canvas.width, canvas.height);\n  requestAnimationFrame(render);\n}\nrender();",
+    "relatedSlugs": [
+      "semantic-html",
+      "web-storage"
+    ]
   }
 ]

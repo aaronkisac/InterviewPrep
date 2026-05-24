@@ -10,10 +10,18 @@ export const dynamic = "force-dynamic";
 
 const SECTION_ORDER: Array<{ key: Topic | "general"; label: string }> = [
   { key: "react", label: TOPIC_LABELS.react },
+  { key: "react-hooks", label: TOPIC_LABELS["react-hooks"] },
   { key: "typescript", label: TOPIC_LABELS.typescript },
   { key: "nextjs", label: TOPIC_LABELS.nextjs },
   { key: "javascript", label: TOPIC_LABELS.javascript },
   { key: "redux", label: TOPIC_LABELS.redux },
+  { key: "css", label: TOPIC_LABELS.css },
+  { key: "html5", label: TOPIC_LABELS.html5 },
+  { key: "git", label: TOPIC_LABELS.git },
+  { key: "agile-scrum", label: TOPIC_LABELS["agile-scrum"] },
+  { key: "websockets", label: TOPIC_LABELS.websockets },
+  { key: "unit-testing", label: TOPIC_LABELS["unit-testing"] },
+  { key: "design-patterns", label: TOPIC_LABELS["design-patterns"] },
   { key: "general", label: "General" },
 ];
 
@@ -36,9 +44,9 @@ export default async function GlossaryPage() {
       </header>
 
       <p className="mb-6 text-sm text-muted-foreground">
-        {terms.length} {terms.length === 1 ? "term" : "terms"} across React,
-        TypeScript, and Next.js. Each entry has a short summary and a full
-        definition with code examples.
+        {terms.length} {terms.length === 1 ? "term" : "terms"} across all
+        topics. Each entry has a short summary and a full definition with code
+        examples.
       </p>
 
       <TooltipDemo />

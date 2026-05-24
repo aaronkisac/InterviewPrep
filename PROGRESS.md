@@ -35,7 +35,7 @@ Last updated: 2026-05-23 (design-patterns bank complete — all 7 new topic bank
 
 **Auth:** Google + GitHub, `allowDangerousEmailAccountLinking: true` · JWT sessions · role from `public.users`
 
-**Glossary:** terms in `data/seed-terms.json` (58 terms total) · first mention auto-wrapped via `glossary-match.ts` · `pnpm seed` imports
+**Glossary:** terms in `data/seed-terms.json` (105 terms total) · first mention auto-wrapped via `glossary-match.ts` · `pnpm seed` imports
 
 ---
 
