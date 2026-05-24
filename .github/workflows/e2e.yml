@@ -20,7 +20,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           # no cache: pnpm here — causes "packages field missing" with pnpm/action-setup@v4
 
       - name: Cache pnpm store
