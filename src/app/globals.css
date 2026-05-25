@@ -1,46 +1,30 @@
 @import "tailwindcss";
 
-:root {
-  --background: hsl(0 0% 100%);
-  --foreground: hsl(0 0% 9%);
-  --card: hsl(0 0% 100%);
-  --card-foreground: hsl(0 0% 9%);
-  --muted: hsl(0 0% 96%);
-  --muted-foreground: hsl(0 0% 45%);
-  --border: hsl(0 0% 90%);
-  --input: hsl(0 0% 90%);
-  --ring: hsl(0 0% 9%);
-  --primary: hsl(0 0% 9%);
-  --primary-foreground: hsl(0 0% 98%);
-  --secondary: hsl(0 0% 94%);
-  --secondary-foreground: hsl(0 0% 9%);
-  --accent: hsl(0 0% 96%);
-  --accent-foreground: hsl(0 0% 9%);
-  --destructive: hsl(0 84% 60%);
-  --destructive-foreground: hsl(0 0% 98%);
-  --success: hsl(142 71% 45%);
-  --success-foreground: hsl(0 0% 98%);
-  --radius: 0.5rem;
-}
+/* ------------------------------------------------------------------ */
+/* Vintage Paper theme — warm dark / parchment aesthetic               */
+/* ------------------------------------------------------------------ */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: hsl(0 0% 4%);
-    --foreground: hsl(0 0% 98%);
-    --card: hsl(0 0% 7%);
-    --card-foreground: hsl(0 0% 98%);
-    --muted: hsl(0 0% 15%);
-    --muted-foreground: hsl(0 0% 65%);
-    --border: hsl(0 0% 18%);
-    --input: hsl(0 0% 18%);
-    --ring: hsl(0 0% 80%);
-    --primary: hsl(0 0% 98%);
-    --primary-foreground: hsl(0 0% 9%);
-    --secondary: hsl(0 0% 15%);
-    --secondary-foreground: hsl(0 0% 98%);
-    --accent: hsl(0 0% 15%);
-    --accent-foreground: hsl(0 0% 98%);
-  }
+:root {
+  --background: hsl(26 16% 15%);
+  --foreground: hsl(39 34% 89%);
+  --card: hsl(26 14% 20%);
+  --card-foreground: hsl(39 34% 89%);
+  --muted: hsl(26 14% 20%);
+  --muted-foreground: hsl(38 18% 72%);
+  --border: hsl(25 13% 26%);
+  --input: hsl(25 13% 26%);
+  --ring: hsl(30 34% 63%);
+  --primary: hsl(30 34% 63%);
+  --primary-foreground: hsl(26 16% 15%);
+  --secondary: hsl(25 13% 26%);
+  --secondary-foreground: hsl(39 34% 89%);
+  --accent: hsl(24 18% 30%);
+  --accent-foreground: hsl(39 34% 89%);
+  --destructive: hsl(0 65% 55%);
+  --destructive-foreground: hsl(39 34% 89%);
+  --success: hsl(142 45% 48%);
+  --success-foreground: hsl(26 16% 15%);
+  --radius: 0.25rem;
 }
 
 @theme inline {
@@ -77,12 +61,10 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family:
-    ui-sans-serif,
-    system-ui,
-    -apple-system,
-    "Segoe UI",
-    Roboto,
-    sans-serif;
+    var(--font-libre-baskerville),
+    Georgia,
+    "Times New Roman",
+    serif;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -93,31 +75,16 @@ body {
 /* ------------------------------------------------------------------ */
 
 :root {
-  --hl-bg: hsl(220 13% 95%);
-  --hl-fg: hsl(220 15% 20%);
-  --hl-keyword: hsl(280 60% 45%);
-  --hl-string: hsl(140 50% 35%);
-  --hl-number: hsl(20 80% 40%);
-  --hl-comment: hsl(220 10% 50%);
-  --hl-function: hsl(210 80% 45%);
-  --hl-type: hsl(35 90% 40%);
-  --hl-attr: hsl(195 70% 35%);
-  --hl-variable: hsl(0 60% 40%);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --hl-bg: hsl(220 13% 12%);
-    --hl-fg: hsl(220 15% 85%);
-    --hl-keyword: hsl(280 70% 75%);
-    --hl-string: hsl(140 50% 70%);
-    --hl-number: hsl(30 90% 65%);
-    --hl-comment: hsl(220 10% 55%);
-    --hl-function: hsl(210 80% 70%);
-    --hl-type: hsl(35 80% 70%);
-    --hl-attr: hsl(195 70% 70%);
-    --hl-variable: hsl(0 70% 75%);
-  }
+  --hl-bg: hsl(26 14% 20%);
+  --hl-fg: hsl(39 34% 89%);
+  --hl-keyword: hsl(280 55% 75%);
+  --hl-string: hsl(140 42% 68%);
+  --hl-number: hsl(30 80% 72%);
+  --hl-comment: hsl(37 15% 52%);
+  --hl-function: hsl(210 70% 72%);
+  --hl-type: hsl(40 75% 70%);
+  --hl-attr: hsl(185 58% 65%);
+  --hl-variable: hsl(0 60% 70%);
 }
 
 .hljs {

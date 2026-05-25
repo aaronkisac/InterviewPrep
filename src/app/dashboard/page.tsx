@@ -3,6 +3,8 @@ import { redirect } from "next/navigation";
 
 import { auth } from "@/lib/auth";
 import { getDashboardData } from "@/lib/actions/user-tracking";
+import { getUserSubmissions } from "@/lib/actions/questions";
+import { DeleteSubmissionButton } from "@/app/dashboard/_components/delete-submission-button";
 import { TOPIC_LABELS } from "@/lib/topics";
 import { cn } from "@/lib/utils";
 
@@ -14,6 +16,41 @@ function formatDate(iso: string): string {
     month: "short",
     year: "numeric",
   });
+}
+
+function StatusChip({
+  status,
+  isShared,
+}: {
+  status: string;
+  isShared: boolean;
+}) {
+  if (!isShared) {
+    return (
+      <span className="shrink-0 rounded-md border border-border px-2 py-0.5 text-xs text-muted-foreground">
+        Private
+      </span>
+    );
+  }
+  if (status === "pending") {
+    return (
+      <span className="shrink-0 rounded-md border border-amber-500/40 bg-amber-50 px-2 py-0.5 text-xs font-medium text-amber-700 dark:bg-amber-950/40 dark:text-amber-300">
+        Pending review
+      </span>
+    );
+  }
+  if (status === "active") {
+    return (
+      <span className="shrink-0 rounded-md border border-emerald-500/40 bg-emerald-50 px-2 py-0.5 text-xs font-medium text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300">
+        Published
+      </span>
+    );
+  }
+  return (
+    <span className="shrink-0 rounded-md border border-rose-500/40 bg-rose-50 px-2 py-0.5 text-xs font-medium text-rose-700 dark:bg-rose-950/40 dark:text-rose-300">
+      Rejected
+    </span>
+  );
 }
 
 function GradeChip({ pct }: { pct: number }) {
@@ -37,22 +74,14 @@ export default async function DashboardPage() {
   const session = await auth().catch(() => null);
   if (!session?.user) redirect("/signin");
 
-  const data = await getDashboardData();
+  const [data, submissions] = await Promise.all([
+    getDashboardData(),
+    getUserSubmissions(),
+  ]);
+
 
   return (
-    <div className="flex flex-1 flex-col">
-      <header className="mx-auto flex w-full max-w-3xl items-center justify-between px-6 pt-6">
-        <Link href="/" className="text-sm font-medium">
-          Interview Prep
-        </Link>
-        <nav className="flex items-center gap-4 text-sm text-muted-foreground">
-          <Link href="/questions" className="hover:text-foreground">Questions</Link>
-          <Link href="/mock" className="hover:text-foreground">Mock</Link>
-          <Link href="/glossary" className="hover:text-foreground">Glossary</Link>
-        </nav>
-      </header>
-
-      <main className="mx-auto w-full max-w-3xl px-6 py-10 space-y-8">
+    <main className="mx-auto w-full max-w-3xl px-6 py-10 space-y-8">
         <div>
           <p className="text-sm font-medium text-muted-foreground">Your progress</p>
           <h1 className="mt-1 text-2xl font-semibold tracking-tight">Dashboard</h1>
@@ -172,6 +201,52 @@ export default async function DashboardPage() {
           </section>
         )}
 
+        {/* My submissions */}
+        <section>
+          <div className="flex items-center justify-between mb-3">
+            <h2 className="text-sm font-medium text-muted-foreground">My submitted questions</h2>
+            <Link
+              href="/questions/new"
+              className="rounded-md border border-border px-3 py-1 text-xs font-medium hover:bg-accent"
+            >
+              + Submit question
+            </Link>
+          </div>
+
+          {submissions.length === 0 ? (
+            <div className="rounded-lg border border-dashed border-border px-5 py-6 text-center">
+              <p className="text-sm text-muted-foreground">
+                You haven&apos;t submitted any questions yet.
+              </p>
+              <Link
+                href="/questions/new"
+                className="mt-3 inline-block text-sm font-medium hover:underline"
+              >
+                Submit your first question →
+              </Link>
+            </div>
+          ) : (
+            <div className="rounded-lg border border-border bg-card divide-y divide-border">
+              {submissions.map((q) => (
+                <div key={q.id} className="flex items-start gap-3 px-4 py-3">
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-medium truncate">{q.question}</p>
+                    <p className="mt-0.5 text-xs text-muted-foreground">
+                      {TOPIC_LABELS[q.topic as keyof typeof TOPIC_LABELS] ?? q.topic}
+                      {" · "}
+                      {q.level_label}
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <StatusChip status={q.status} isShared={q.is_shared} />
+                    <DeleteSubmissionButton id={q.id} />
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </section>
+
         {/* Empty state */}
         {(!data || (data.mockSessions.length === 0 && data.topicProgress.length === 0)) && (
           <div className="rounded-lg border border-dashed border-border p-10 text-center">
@@ -194,7 +269,6 @@ export default async function DashboardPage() {
             </div>
           </div>
         )}
-      </main>
-    </div>
+    </main>
   );
 }

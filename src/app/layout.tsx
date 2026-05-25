@@ -1,5 +1,16 @@
 import type { Metadata } from "next";
+import { Libre_Baskerville } from "next/font/google";
 import "./globals.css";
+
+import { Navbar } from "@/components/navbar";
+
+const libreBaskerville = Libre_Baskerville({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  style: ["normal", "italic"],
+  variable: "--font-libre-baskerville",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Interview Prep",
@@ -11,8 +22,9 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className="h-full antialiased">
+    <html lang="en" className={`h-full antialiased ${libreBaskerville.variable}`}>
       <body className="min-h-full flex flex-col bg-background text-foreground">
+        <Navbar />
         {children}
       </body>
     </html>

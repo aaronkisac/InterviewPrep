@@ -1,6 +1,6 @@
 # Progress
 
-Last updated: 2026-05-24 (user tracking: mock_sessions + user_question_progress + bookmarks tables; server actions; bookmark button on question cards; /dashboard page)
+Last updated: 2026-05-24 (homepage redesign; user question submission; admin review queue; admin user management)
 
 ---
 
@@ -61,6 +61,9 @@ Last updated: 2026-05-24 (user tracking: mock_sessions + user_question_progress 
 | Design Patterns bank + glossary | 16 questions (ids 1301–1316, 5 batches, all levels). 8 glossary terms. |
 | Types + Topics update | `src/lib/supabase/types.ts` and `src/lib/topics.ts` updated with all 13 topics. |
 | User tracking | `mock_sessions` + `user_question_progress` + `bookmarks` tables. Server actions in `src/lib/actions/user-tracking.ts`. Bookmark button on question cards. `/dashboard` page with session history + topic progress + bookmark count. |
+| Homepage redesign | Hero + feature cards + topic grid + login-aware welcome banner. `getTopicStats()` added to `questions.ts`. |
+| User submissions | `/questions/new` form (private or submit for review). `src/lib/actions/questions.ts`: submitQuestion, getUserSubmissions, approveQuestion, rejectQuestion. `/admin/questions` review queue (admin role guard). Dashboard "My submissions" section with status chips. Questions page "+ Submit question" button for logged-in users. |
+| Admin panel | `src/app/admin/layout.tsx` — shared header + role guard. `/admin/questions` — pending review queue. `/admin/users` — list all users, promote/demote admin role. `src/lib/actions/admin.ts`: listAllUsers, setUserRole. Migration `20260524000002_seed_admin.sql` sets harunk3uk@gmail.com to admin. Dashboard shows "Admin" link for admin users. |
 | Combined migration | `20260523000007_topic_unit_testing_design_patterns.sql` — adds unit-testing + design-patterns to DB constraints. |
 
 ---

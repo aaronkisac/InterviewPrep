@@ -46,38 +46,40 @@ export function QuestionCard({
 
   return (
     <li className="rounded-lg border border-border bg-card transition hover:border-foreground/30">
-      <button
-        type="button"
-        onClick={() => setOpen((v) => !v)}
-        aria-expanded={open}
-        aria-controls={`answer-${question.id}`}
-        className="flex w-full items-start gap-3 p-4 text-left"
-      >
-        <span
-          className={cn(
-            "mt-1 inline-block text-xs text-muted-foreground transition-transform",
-            open && "rotate-90",
-          )}
-          aria-hidden="true"
+      <div className="flex w-full items-start gap-3 p-4">
+        <button
+          type="button"
+          onClick={() => setOpen((v) => !v)}
+          aria-expanded={open}
+          aria-controls={`answer-${question.id}`}
+          className="flex flex-1 items-start gap-3 text-left"
         >
-          ▸
-        </span>
-        <span className="flex-1">
-          <span className="flex items-center gap-2 text-xs">
-            <span className="rounded bg-secondary px-1.5 py-0.5 font-medium text-secondary-foreground">
-              {TOPIC_LABELS[question.topic]}
+          <span
+            className={cn(
+              "mt-1 inline-block text-xs text-muted-foreground transition-transform",
+              open && "rotate-90",
+            )}
+            aria-hidden="true"
+          >
+            ▸
+          </span>
+          <span className="flex-1">
+            <span className="flex items-center gap-2 text-xs">
+              <span className="rounded bg-secondary px-1.5 py-0.5 font-medium text-secondary-foreground">
+                {TOPIC_LABELS[question.topic]}
+              </span>
+              <span className="text-muted-foreground">{question.level_label}</span>
             </span>
-            <span className="text-muted-foreground">{question.level_label}</span>
+            <span className="mt-2 block text-sm font-medium leading-snug">
+              {question.question}
+            </span>
           </span>
-          <span className="mt-2 block text-sm font-medium leading-snug">
-            {question.question}
-          </span>
-        </span>
+        </button>
         <BookmarkButton
           questionId={question.id}
           initialBookmarked={isBookmarked}
         />
-      </button>
+      </div>
 
       {open && (
         <div

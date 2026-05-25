@@ -85,6 +85,23 @@ export async function listQuestions(
   });
 }
 
+export async function getTopicStats(): Promise<Record<string, number>> {
+  const supabase = await createServerSupabaseClient();
+  const { data, error } = await supabase
+    .from("questions")
+    .select("topic")
+    .eq("status", "active")
+    .eq("is_shared", true);
+
+  if (error) return {};
+
+  const counts: Record<string, number> = {};
+  for (const row of data ?? []) {
+    counts[row.topic as string] = (counts[row.topic as string] ?? 0) + 1;
+  }
+  return counts;
+}
+
 export async function getQuestionById(
   id: string,
 ): Promise<QuestionRow | null> {

@@ -31,16 +31,11 @@ export default async function GlossaryPage() {
 
   return (
     <main className="mx-auto w-full max-w-3xl px-6 py-10">
-      <header className="mb-6 flex items-center justify-between">
-        <div>
-          <p className="text-sm font-medium text-muted-foreground">Glossary</p>
-          <h1 className="mt-1 text-2xl font-semibold tracking-tight">
-            Terms reference
-          </h1>
-        </div>
-        <Link href="/" className="text-sm text-muted-foreground hover:underline">
-          Home
-        </Link>
+      <header className="mb-6">
+        <p className="text-sm font-medium text-muted-foreground">Glossary</p>
+        <h1 className="mt-1 text-2xl font-semibold tracking-tight">
+          Terms reference
+        </h1>
       </header>
 
       <p className="mb-6 text-sm text-muted-foreground">

@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { auth } from "@/lib/auth";
 import { getBookmarkedIds } from "@/lib/actions/user-tracking";
 import {
   listQuestions,
@@ -58,6 +59,9 @@ export default async function QuestionsPage({
     q: parseQuery(params.q),
   };
 
+  const session = await auth().catch(() => null);
+  const isLoggedIn = Boolean(session?.user);
+
   const [questions, terms, bookmarkedIds] = await Promise.all([
     listQuestions(filters),
     listTerms(),
@@ -78,9 +82,14 @@ export default async function QuestionsPage({
             {i18n.title}
           </h1>
         </div>
-        <Link href="/" className="text-sm text-muted-foreground hover:underline">
-          {i18n.home}
-        </Link>
+        {isLoggedIn && (
+          <Link
+            href="/questions/new"
+            className="rounded-md border border-border px-3 py-1.5 text-xs font-medium hover:bg-accent"
+          >
+            + Submit question
+          </Link>
+        )}
       </header>
 
       <QuestionFilters />
