@@ -168,7 +168,7 @@ export async function getDashboardData(): Promise<DashboardData | null> {
   // Aggregate progress by topic
   const topicMap = new Map<Topic, { seen: number; correct: number }>();
   for (const row of progressResult.data ?? []) {
-    const topic = (row.questions as { topic: Topic } | null)?.topic;
+    const topic = row.questions?.[0]?.topic as Topic | undefined;
     if (!topic) continue;
     const entry = topicMap.get(topic) ?? { seen: 0, correct: 0 };
     entry.seen += 1;
