@@ -1,6 +1,6 @@
 # Progress
 
-Last updated: 2026-05-24 (homepage redesign; user question submission; admin review queue; admin user management)
+Last updated: 2026-05-25 (software-architecture bank 89q; api-design bank 46q; migrations; mock seeds)
 
 ---
 
@@ -22,6 +22,8 @@ Last updated: 2026-05-24 (homepage redesign; user question submission; admin rev
 - WebSockets 1101–1118
 - Unit Testing 1201–1216
 - Design Patterns 1301–1316
+- Software Architecture 1401–1489
+- API Design 1501–1546
 
 **Question schema:** `id · topic · level (1–5) · question · answerGeneral · answerGeneralTr · answerPersonal · detailMd · detailMdTr · mock_options[]`
 
@@ -29,7 +31,7 @@ Last updated: 2026-05-24 (homepage redesign; user question submission; admin rev
 
 **Mock options rule:** Exactly 4 options, exactly 1 correct → topic becomes selectable in `/mock`
 
-**Topics enum (current):** `react | typescript | nextjs | redux | javascript | html5 | css | react-hooks | git | agile-scrum | websockets | unit-testing | design-patterns`
+**Topics enum (current):** `react | typescript | nextjs | redux | javascript | html5 | css | react-hooks | git | agile-scrum | websockets | unit-testing | design-patterns | software-architecture | api-design`
 
 **File conventions:** kebab-case files · PascalCase components · server queries in `src/lib/*.ts` · client components in `_components/`
 
@@ -65,6 +67,8 @@ Last updated: 2026-05-24 (homepage redesign; user question submission; admin rev
 | User submissions | `/questions/new` form (private or submit for review). `src/lib/actions/questions.ts`: submitQuestion, getUserSubmissions, approveQuestion, rejectQuestion. `/admin/questions` review queue (admin role guard). Dashboard "My submissions" section with status chips. Questions page "+ Submit question" button for logged-in users. |
 | Admin panel | `src/app/admin/layout.tsx` — shared header + role guard. `/admin/questions` — pending review queue. `/admin/users` — list all users, promote/demote admin role. `src/lib/actions/admin.ts`: listAllUsers, setUserRole. Migration `20260524000002_seed_admin.sql` sets harunk3uk@gmail.com to admin. Dashboard shows "Admin" link for admin users. |
 | Combined migration | `20260523000007_topic_unit_testing_design_patterns.sql` — adds unit-testing + design-patterns to DB constraints. |
+| Software Architecture bank | 89 questions (ids 1401–1489, 5 batches, all levels). Migration: `20260525000001_topic_software_architecture_api_design.sql`. |
+| API Design bank | 46 questions (ids 1501–1546, 5 batches, all levels). Covers REST, GraphQL, auth, rate limiting, pagination, webhooks, BFF, OpenAPI, tRPC, observability. |
 
 ---
 
@@ -98,7 +102,7 @@ GitHub Secrets needed: `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KE
 
 ## Mock Options — All Topics Complete
 
-All 13 topics now have mock seed files (231 questions total). After `pnpm seed` runs, all topics will appear in `/mock`.
+All 15 topics now have mock seed files (263 questions total). After `pnpm seed` runs, all topics will appear in `/mock`.
 
 | File | Questions |
 | --- | --- |
@@ -115,3 +119,5 @@ All 13 topics now have mock seed files (231 questions total). After `pnpm seed` 
 | seed-mock-websockets.json | 18 |
 | seed-mock-unit-testing.json | 16 |
 | seed-mock-design-patterns.json | 16 |
+| seed-mock-software-architecture.json | 16 |
+| seed-mock-api-design.json | 16 |

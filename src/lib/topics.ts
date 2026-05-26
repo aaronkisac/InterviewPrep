@@ -16,6 +16,7 @@ export const TR_FALLBACK = "TR çevirisi yakında.";
 
 export const TOPICS: readonly Topic[] = [
   "agile-scrum",
+  "api-design",
   "css",
   "design-patterns",
   "git",
@@ -25,6 +26,7 @@ export const TOPICS: readonly Topic[] = [
   "react",
   "react-hooks",
   "redux",
+  "software-architecture",
   "typescript",
   "unit-testing",
   "websockets",
@@ -44,6 +46,8 @@ export const TOPIC_LABELS: Record<Topic, string> = {
   websockets: "WebSockets",
   "unit-testing": "Unit Testing",
   "design-patterns": "Design Patterns",
+  "software-architecture": "Software Architecture",
+  "api-design": "API Design",
 };
 
 export const LEVELS: ReadonlyArray<{

@@ -1,0 +1,162 @@
+[
+  {
+    "topic": "software-architecture",
+    "question": "What does the KISS principle stand for in software design?",
+    "options": [
+      { "optionText": "Keep It Simple, Stupid — avoid unnecessary complexity in your design.", "isCorrect": true, "explanation": "Correct — KISS encourages simplicity as a primary design goal, avoiding over-engineering." },
+      { "optionText": "Keep It Scalable and Secure — prioritise performance and safety above all.", "isCorrect": false, "explanation": "KISS is about simplicity, not specifically scalability or security." },
+      { "optionText": "Keep Implementing Standard Specifications — follow industry standards strictly.", "isCorrect": false, "explanation": "KISS is a general design heuristic, not about following standards." },
+      { "optionText": "Keep It Separated and Stateless — enforce strict service boundaries.", "isCorrect": false, "explanation": "Separation and statelessness are separate architectural concerns, not what KISS means." }
+    ]
+  },
+  {
+    "topic": "software-architecture",
+    "question": "What is the difference between vertical and horizontal scaling?",
+    "options": [
+      { "optionText": "Vertical = add more power to one machine; horizontal = add more machines.", "isCorrect": true, "explanation": "Correct — scale up (bigger server) vs scale out (more servers) is the core distinction." },
+      { "optionText": "Vertical = add more servers; horizontal = add more CPU/RAM to a server.", "isCorrect": false, "explanation": "These are reversed — vertical scaling adds resources to one machine, horizontal adds machines." },
+      { "optionText": "Vertical = database scaling; horizontal = application server scaling.", "isCorrect": false, "explanation": "Both terms apply to any tier — DB, app, cache — not specific layers." },
+      { "optionText": "Vertical = synchronous scaling; horizontal = asynchronous scaling.", "isCorrect": false, "explanation": "Scaling direction (up vs out) is unrelated to sync/async operation mode." }
+    ]
+  },
+  {
+    "topic": "software-architecture",
+    "question": "What is a load balancer and what algorithm does 'Round Robin' use?",
+    "options": [
+      { "optionText": "Routes traffic across servers sequentially — each server gets requests in turn.", "isCorrect": true, "explanation": "Correct — Round Robin distributes requests evenly in a repeating cycle: A→B→C→A…" },
+      { "optionText": "Routes all traffic to the server with the most available memory.", "isCorrect": false, "explanation": "That describes a capacity-aware algorithm, not Round Robin." },
+      { "optionText": "Routes each client to the same server they connected to first, forever.", "isCorrect": false, "explanation": "That describes sticky sessions or IP Hash, not Round Robin." },
+      { "optionText": "Routes traffic based on geographic proximity of the client.", "isCorrect": false, "explanation": "Geo-routing is a CDN/DNS concern, not the Round Robin algorithm." }
+    ]
+  },
+  {
+    "topic": "software-architecture",
+    "question": "What is the CAP theorem in distributed systems?",
+    "options": [
+      { "optionText": "A distributed system can guarantee at most 2 of: Consistency, Availability, and Partition Tolerance.", "isCorrect": true, "explanation": "Correct — CAP theorem (Brewer's theorem) states you must sacrifice one guarantee when a network partition occurs." },
+      { "optionText": "A distributed system must always sacrifice performance when scaling beyond 3 nodes.", "isCorrect": false, "explanation": "CAP is about consistency, availability, and partition tolerance — not performance." },
+      { "optionText": "A system can be fully Consistent, Available, and Partition-Tolerant simultaneously.", "isCorrect": false, "explanation": "The theorem specifically proves this is impossible — hence the 'at most 2' constraint." },
+      { "optionText": "CAP means Cache, API, and Persistence — the three layers of a web app.", "isCorrect": false, "explanation": "CAP stands for Consistency, Availability, Partition Tolerance in distributed systems theory." }
+    ]
+  },
+  {
+    "topic": "software-architecture",
+    "question": "What does SOLID stand for in object-oriented design?",
+    "options": [
+      { "optionText": "Single Responsibility, Open/Closed, Liskov Substitution, Interface Segregation, Dependency Inversion.", "isCorrect": true, "explanation": "Correct — these five principles guide maintainable, extensible object-oriented design." },
+      { "optionText": "Scalable, Observable, Lightweight, Isolated, and Distributed.", "isCorrect": false, "explanation": "These are distributed systems properties, not the SOLID OOP principles." },
+      { "optionText": "Stateless, Open-source, Layered, Idempotent, and Documented.", "isCorrect": false, "explanation": "These describe API design qualities, not the SOLID acronym." },
+      { "optionText": "Single Responsibility, Optimised, Loosely-coupled, Idiomatic, and Declarative.", "isCorrect": false, "explanation": "The correct expansion is Single Responsibility, Open/Closed, Liskov, Interface Segregation, Dependency Inversion." }
+    ]
+  },
+  {
+    "topic": "software-architecture",
+    "question": "What is eventual consistency in distributed systems?",
+    "options": [
+      { "optionText": "All nodes will have the same data eventually, but may serve stale data in the short term.", "isCorrect": true, "explanation": "Correct — eventual consistency trades immediate consistency for availability and partition tolerance." },
+      { "optionText": "All reads always return the most recently written value, guaranteed.", "isCorrect": false, "explanation": "That describes strong consistency, not eventual consistency." },
+      { "optionText": "Data is permanently lost if a node fails before syncing.", "isCorrect": false, "explanation": "Eventual consistency means data converges — it doesn't mean data is lost." },
+      { "optionText": "Consistency is only guaranteed for the primary database node.", "isCorrect": false, "explanation": "Eventual consistency applies across all nodes, not just the primary." }
+    ]
+  },
+  {
+    "topic": "software-architecture",
+    "question": "What is the purpose of the YAGNI principle?",
+    "options": [
+      { "optionText": "You Aren't Gonna Need It — don't implement features until they are actually needed.", "isCorrect": true, "explanation": "Correct — YAGNI prevents over-engineering by discouraging speculative feature development." },
+      { "optionText": "You Always Get New Integrations — embrace third-party integrations for all features.", "isCorrect": false, "explanation": "YAGNI stands for 'You Aren't Gonna Need It' and is about avoiding premature implementation." },
+      { "optionText": "Your Architecture Gets Naturally Improved — refactor continuously as you ship.", "isCorrect": false, "explanation": "Continuous refactoring is a valid practice, but not what YAGNI means." },
+      { "optionText": "You Authorise Generic Network Interfaces — standardise all service APIs.", "isCorrect": false, "explanation": "YAGNI is a development philosophy about not building features ahead of need." }
+    ]
+  },
+  {
+    "topic": "software-architecture",
+    "question": "What is a microservice architecture?",
+    "options": [
+      { "optionText": "An application composed of small, independently deployable services each responsible for a specific business capability.", "isCorrect": true, "explanation": "Correct — microservices replace a monolith with focused services that can be scaled and deployed independently." },
+      { "optionText": "An architecture where all application logic runs in a single process with separate database tables.", "isCorrect": false, "explanation": "That describes a modular monolith — microservices have separate deployable processes." },
+      { "optionText": "A pattern where every function is deployed as a separate serverless function.", "isCorrect": false, "explanation": "Serverless functions are a deployment mechanism — microservices are architectural units, not necessarily serverless." },
+      { "optionText": "An architecture where the frontend is split into micro-frontends served by different teams.", "isCorrect": false, "explanation": "Micro-frontends are a separate pattern — microservices refer to backend service decomposition." }
+    ]
+  },
+  {
+    "topic": "software-architecture",
+    "question": "What is the difference between a monolith and microservices?",
+    "options": [
+      { "optionText": "A monolith is a single deployable unit; microservices are independently deployable components.", "isCorrect": true, "explanation": "Correct — the key distinction is deployment: monoliths deploy as one, microservices deploy separately." },
+      { "optionText": "A monolith uses one database; microservices must use separate programming languages.", "isCorrect": false, "explanation": "Microservices may use different languages but the core distinction is deployment, not language diversity." },
+      { "optionText": "Monoliths are always faster; microservices are always more reliable.", "isCorrect": false, "explanation": "Neither is universally faster or more reliable — it depends on the use case and implementation." },
+      { "optionText": "A monolith is a frontend pattern; microservices are a backend-only pattern.", "isCorrect": false, "explanation": "Both patterns apply to backend architecture — the frontend has its own patterns like micro-frontends." }
+    ]
+  },
+  {
+    "topic": "software-architecture",
+    "question": "What is a CDN (Content Delivery Network) and how does it improve performance?",
+    "options": [
+      { "optionText": "A geographically distributed network of servers that caches content close to users, reducing latency.", "isCorrect": true, "explanation": "Correct — CDNs serve assets from edge nodes near the user rather than from a single origin server." },
+      { "optionText": "A database replication strategy that copies data to multiple regions for disaster recovery.", "isCorrect": false, "explanation": "CDNs cache HTTP responses at the network edge — they're distinct from DB replication." },
+      { "optionText": "A container orchestration system that distributes workloads across cloud zones.", "isCorrect": false, "explanation": "Container orchestration (Kubernetes) distributes compute — CDNs distribute cached content." },
+      { "optionText": "A code delivery pipeline that deploys to multiple environments simultaneously.", "isCorrect": false, "explanation": "CDN is a content delivery network for caching responses, not a CI/CD pipeline." }
+    ]
+  },
+  {
+    "topic": "software-architecture",
+    "question": "What is the difference between stateful and stateless services?",
+    "options": [
+      { "optionText": "Stateless services store no session data server-side; each request is self-contained.", "isCorrect": true, "explanation": "Correct — stateless services are easier to scale horizontally because any instance can handle any request." },
+      { "optionText": "Stateless services are read-only; stateful services handle writes.", "isCorrect": false, "explanation": "Read/write capability is unrelated to stateful vs stateless — both can perform writes." },
+      { "optionText": "Stateful services use Redis; stateless services use relational databases.", "isCorrect": false, "explanation": "The storage technology doesn't define stateful vs stateless — it's about whether session state lives on the server." },
+      { "optionText": "Stateless services never persist data to disk; stateful services always do.", "isCorrect": false, "explanation": "Statelessness refers to request-level session state, not whether data is persisted to a database." }
+    ]
+  },
+  {
+    "topic": "software-architecture",
+    "question": "What is circuit breaker pattern?",
+    "options": [
+      { "optionText": "A pattern that stops calls to a failing service to prevent cascade failures, then retries after a timeout.", "isCorrect": true, "explanation": "Correct — the circuit breaker opens when failures exceed a threshold, fails fast, and closes after the service recovers." },
+      { "optionText": "A pattern that encrypts all communication between microservices.", "isCorrect": false, "explanation": "Encryption between services is mTLS — the circuit breaker handles failure resilience, not security." },
+      { "optionText": "A database connection pattern that limits the number of simultaneous queries.", "isCorrect": false, "explanation": "Connection pooling limits DB connections — circuit breakers manage inter-service call resilience." },
+      { "optionText": "A pattern for rolling back database transactions when an error occurs.", "isCorrect": false, "explanation": "Transaction rollback is a database concern — circuit breakers manage distributed service call failures." }
+    ]
+  },
+  {
+    "topic": "software-architecture",
+    "question": "What is event sourcing?",
+    "options": [
+      { "optionText": "Storing state as a sequence of immutable events rather than the current value, allowing full history replay.", "isCorrect": true, "explanation": "Correct — event sourcing replaces state mutation with event append; current state is derived by replaying events." },
+      { "optionText": "A pattern where events are published to a message queue and consumed asynchronously.", "isCorrect": false, "explanation": "Event-driven messaging is related but distinct — event sourcing specifically uses events as the primary persistence mechanism." },
+      { "optionText": "A logging strategy that captures all system events for debugging purposes.", "isCorrect": false, "explanation": "Audit logs capture events for observation — event sourcing uses events as the source of truth for application state." },
+      { "optionText": "An architectural pattern where each microservice triggers the next via webhooks.", "isCorrect": false, "explanation": "Webhook chaining is one form of event-driven communication — event sourcing is about persistence strategy, not service communication." }
+    ]
+  },
+  {
+    "topic": "software-architecture",
+    "question": "What does DRY stand for and why is it important?",
+    "options": [
+      { "optionText": "Don't Repeat Yourself — every piece of knowledge should have a single, authoritative representation.", "isCorrect": true, "explanation": "Correct — DRY reduces duplication so changes only need to be made in one place, reducing bugs." },
+      { "optionText": "Deploy Reliably Yourself — own the deployment pipeline for your own services.", "isCorrect": false, "explanation": "DRY is about code duplication, not deployment ownership." },
+      { "optionText": "Define Reusable Yaml — use infrastructure-as-code templates for all deployments.", "isCorrect": false, "explanation": "DRY is a general software design principle, not specifically about YAML or infrastructure." },
+      { "optionText": "Delete Redundant Years — remove legacy code every annual refactoring cycle.", "isCorrect": false, "explanation": "DRY means 'Don't Repeat Yourself' and applies continuously to all code, not just legacy removal." }
+    ]
+  },
+  {
+    "topic": "software-architecture",
+    "question": "What is the difference between synchronous and asynchronous communication in microservices?",
+    "options": [
+      { "optionText": "Synchronous: caller waits for response (HTTP/gRPC). Asynchronous: caller publishes and continues without waiting (message queues).", "isCorrect": true, "explanation": "Correct — sync communication blocks until response arrives; async decouples services via message brokers." },
+      { "optionText": "Synchronous uses REST; asynchronous uses GraphQL. The protocol defines the communication pattern.", "isCorrect": false, "explanation": "GraphQL can also be synchronous — the sync/async distinction is about whether the caller waits, not the protocol." },
+      { "optionText": "Synchronous is always faster; asynchronous is always more reliable.", "isCorrect": false, "explanation": "Async can be faster (non-blocking) and sync can be more reliable for critical paths — it's context-dependent." },
+      { "optionText": "Synchronous services share a database; asynchronous services have separate databases.", "isCorrect": false, "explanation": "Database sharing is a separate architectural decision unrelated to synchronous vs asynchronous communication." }
+    ]
+  },
+  {
+    "topic": "software-architecture",
+    "question": "What is a message queue and what problem does it solve?",
+    "options": [
+      { "optionText": "A buffer that decouples producers from consumers, enabling async processing and absorbing traffic spikes.", "isCorrect": true, "explanation": "Correct — queues (RabbitMQ, SQS) let producers publish work without waiting for consumers, smoothing load." },
+      { "optionText": "A caching layer that stores recently queried database results in memory.", "isCorrect": false, "explanation": "That describes a cache (Redis, Memcached) — message queues handle async inter-service communication." },
+      { "optionText": "A database table that stores pending HTTP requests until servers are available.", "isCorrect": false, "explanation": "Message queues are dedicated infrastructure, not a database workaround for pending HTTP requests." },
+      { "optionText": "A load balancer algorithm that queues excess requests and processes them in order.", "isCorrect": false, "explanation": "Load balancers distribute requests — message queues decouple entire services and support async workflows." }
+    ]
+  }
+]
