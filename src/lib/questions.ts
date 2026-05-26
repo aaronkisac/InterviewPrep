@@ -25,7 +25,7 @@ export type QuestionListItem = Pick<
 
 export type QuestionFilters = {
   topic?: Topic;
-  level?: 1 | 2 | 3 | 4 | 5;
+  levels?: (1 | 2 | 3 | 4 | 5)[];
   q?: string;
 };
 
@@ -41,6 +41,17 @@ export function parseLevel(
   if (!value) return undefined;
   const n = Number(value);
   return n >= 1 && n <= 5 ? (n as 1 | 2 | 3 | 4 | 5) : undefined;
+}
+
+export function parseLevels(
+  value: string | undefined,
+): (1 | 2 | 3 | 4 | 5)[] | undefined {
+  if (!value) return undefined;
+  const parsed = value
+    .split(",")
+    .map(Number)
+    .filter((n) => n >= 1 && n <= 5) as (1 | 2 | 3 | 4 | 5)[];
+  return parsed.length > 0 ? parsed : undefined;
 }
 
 export function parseQuery(value: string | undefined): string | undefined {
@@ -66,7 +77,8 @@ export async function listQuestions(
     .order("level", { ascending: true });
 
   if (filters.topic) query = query.eq("topic", filters.topic);
-  if (filters.level) query = query.eq("level", filters.level);
+  if (filters.levels && filters.levels.length > 0)
+    query = query.in("level", filters.levels);
   if (filters.q) query = query.ilike("question", `%${filters.q}%`);
 
   const { data, error } = await query;
