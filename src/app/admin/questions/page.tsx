@@ -2,13 +2,14 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 
 import { auth } from "@/lib/auth";
-import { TOPIC_LABELS, LEVELS } from "@/lib/topics";
+import { LEVELS } from "@/lib/topics";
 import {
   getPendingSubmissions,
   approveQuestion,
   rejectQuestion,
   adminDeleteQuestion,
 } from "@/lib/actions/questions";
+import { listSystemTopics } from "@/lib/actions/admin-topics";
 
 export const dynamic = "force-dynamic";
 export const metadata = { title: "Admin — Pending questions" };
@@ -29,7 +30,11 @@ export default async function AdminQuestionsPage({
   const params = await searchParams;
   const message = params.message;
 
-  const pending = await getPendingSubmissions();
+  const [pending, systemTopics] = await Promise.all([
+    getPendingSubmissions(),
+    listSystemTopics(),
+  ]);
+  const topicLabels = Object.fromEntries(systemTopics.map((t) => [t.slug, t.name]));
 
   async function handleApprove(formData: FormData) {
     "use server";
@@ -101,8 +106,7 @@ export default async function AdminQuestionsPage({
                 {/* Meta chips */}
                 <div className="flex flex-wrap items-center gap-2">
                   <span className="rounded bg-secondary px-2 py-0.5 text-xs font-medium text-secondary-foreground">
-                    {TOPIC_LABELS[q.topic as keyof typeof TOPIC_LABELS] ??
-                      q.topic}
+                    {topicLabels[q.topic] ?? q.topic}
                   </span>
                   <span className="rounded bg-secondary px-2 py-0.5 text-xs text-secondary-foreground">
                     Level {q.level} — {levelLabel(q.level)}

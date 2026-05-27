@@ -21,12 +21,16 @@ export function TermTooltip({
   tooltip,
   children,
   className,
+  isLoggedIn = true,
 }: {
   slug: string;
   tooltip: string;
   children: React.ReactNode;
   className?: string;
+  isLoggedIn?: boolean;
 }) {
+  const definitionHref = isLoggedIn ? `/glossary/${slug}` : "/signin";
+
   return (
     <Popover.Root>
       <Popover.Trigger asChild>
@@ -47,10 +51,10 @@ export function TermTooltip({
         >
           <p className="leading-relaxed text-foreground/90">{tooltip}</p>
           <Link
-            href={`/glossary/${slug}`}
+            href={definitionHref}
             className="mt-2 inline-block text-xs font-medium text-muted-foreground hover:text-foreground hover:underline"
           >
-            View full definition →
+            {isLoggedIn ? "View full definition →" : "Sign in to view full definition →"}
           </Link>
           <Popover.Arrow className="fill-card" />
         </Popover.Content>

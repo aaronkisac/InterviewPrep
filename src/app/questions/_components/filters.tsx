@@ -47,13 +47,22 @@ export function QuestionFilters() {
     });
   }
 
-  // colour per level value
+  // colour per level value — button active state
   const levelColour: Record<number, string> = {
     1: "data-[active=true]:bg-emerald-950 data-[active=true]:border-emerald-800 data-[active=true]:text-emerald-400",
     2: "data-[active=true]:bg-emerald-950 data-[active=true]:border-emerald-800 data-[active=true]:text-emerald-400",
     3: "data-[active=true]:bg-yellow-950 data-[active=true]:border-yellow-800 data-[active=true]:text-yellow-400",
     4: "data-[active=true]:bg-orange-950 data-[active=true]:border-orange-800 data-[active=true]:text-orange-400",
     5: "data-[active=true]:bg-red-950 data-[active=true]:border-red-800 data-[active=true]:text-red-400",
+  };
+
+  // dot colour per level (always visible, not dependent on active state)
+  const dotColour: Record<number, string> = {
+    1: "bg-emerald-500",
+    2: "bg-emerald-500",
+    3: "bg-yellow-400",
+    4: "bg-orange-400",
+    5: "bg-red-500",
   };
 
   return (
@@ -102,8 +111,9 @@ export function QuestionFilters() {
 
       {/* Row 2 — level pills */}
       <div className="flex flex-wrap items-center gap-2">
-{LEVELS.map((lvl) => {
+        {LEVELS.map((lvl) => {
           const active = currentLevels.includes(lvl.value);
+          const dot = dotColour[lvl.value];
           return (
             <button
               key={lvl.value}
@@ -111,13 +121,24 @@ export function QuestionFilters() {
               data-active={active}
               onClick={() => toggleLevel(lvl.value)}
               className={cn(
-                "h-7 rounded-full border px-3 text-[11px] font-medium transition",
+                "flex flex-col items-center gap-1 rounded-lg border px-3 py-1.5 text-[11px] font-medium transition",
                 "border-border bg-background text-muted-foreground",
                 "hover:border-border/80 hover:text-foreground",
                 levelColour[lvl.value],
               )}
             >
-              {lvl.label}
+              <span>{lvl.label}</span>
+              <span className="flex items-center gap-[3px]">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <span
+                    key={i}
+                    className={cn(
+                      "inline-block h-[4px] w-[4px] rounded-full transition-colors",
+                      i < lvl.value ? dot : "bg-border",
+                    )}
+                  />
+                ))}
+              </span>
             </button>
           );
         })}

@@ -2,10 +2,14 @@
 // Regenerate from Supabase with `supabase gen types typescript` once the
 // project is linked.
 
-export type Topic = "react" | "typescript" | "nextjs" | "redux" | "javascript" | "html5" | "css" | "react-hooks" | "git" | "agile-scrum" | "websockets" | "unit-testing" | "design-patterns" | "software-architecture" | "api-design";
+// Topic is now dynamic — driven by the system_topics table.
+// BuiltinTopic lists the original 15 slugs for reference; new admin-created
+// topics are plain strings.
+export type BuiltinTopic = "react" | "typescript" | "nextjs" | "redux" | "javascript" | "html5" | "css" | "react-hooks" | "git" | "agile-scrum" | "websockets" | "unit-testing" | "design-patterns" | "software-architecture" | "api-design";
+export type Topic = string;
 export type LevelLabel = "Entry" | "Junior" | "Mid" | "Senior" | "Expert";
 export type QuestionStatus = "active" | "pending" | "rejected";
-export type UserRole = "user" | "admin";
+export type UserRole = "user" | "admin" | "super_admin";
 
 export type QuestionRow = {
   id: string;

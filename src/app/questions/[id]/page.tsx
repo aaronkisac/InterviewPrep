@@ -3,7 +3,8 @@ import { notFound } from "next/navigation";
 
 import { GlossaryText } from "@/components/glossary-text";
 import { MarkdownContent } from "@/components/markdown-content";
-import { getQuestionById, TOPIC_LABELS } from "@/lib/questions";
+import { getQuestionById } from "@/lib/questions";
+import { listSystemTopics } from "@/lib/actions/admin-topics";
 import { listTerms } from "@/lib/terms";
 import { parseLanguage, TR_FALLBACK } from "@/lib/topics";
 
@@ -32,10 +33,12 @@ export default async function QuestionDetailPage({
   const { id } = await params;
   const { lang: langParam } = await searchParams;
   const lang = parseLanguage(langParam);
-  const [question, terms] = await Promise.all([
+  const [question, terms, systemTopics] = await Promise.all([
     getQuestionById(id),
     listTerms(),
+    listSystemTopics(),
   ]);
+  const topicLabels = Object.fromEntries(systemTopics.map((t) => [t.slug, t.name]));
   if (!question) notFound();
 
   const shortAnswer =
@@ -78,7 +81,7 @@ export default async function QuestionDetailPage({
             href={`/questions?topic=${question.topic}${lang === "tr" ? "&lang=tr" : ""}`}
             className="rounded bg-secondary px-1.5 py-0.5 font-medium text-secondary-foreground hover:opacity-80"
           >
-            {TOPIC_LABELS[question.topic]}
+            {topicLabels[question.topic] ?? question.topic}
           </Link>
           <Link
             href={`/questions?level=${question.level}${lang === "tr" ? "&lang=tr" : ""}`}

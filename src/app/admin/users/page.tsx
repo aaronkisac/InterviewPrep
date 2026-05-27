@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 
 import { auth } from "@/lib/auth";
-import { listAllUsers, setUserRole } from "@/lib/actions/admin";
+import { listAllUsers, listSuperAdmins, setUserRole } from "@/lib/actions/admin";
 import type { UserRole } from "@/lib/supabase/types";
 
 export const dynamic = "force-dynamic";
@@ -15,11 +15,16 @@ export default async function AdminUsersPage({
   const session = await auth().catch(() => null);
   if (!session?.user?.id) redirect("/signin");
 
+  const isSuperAdmin = session.user.role === "super_admin";
+
   const params = await searchParams;
   const message = params.message;
   const errorMsg = params.error;
 
-  const users = await listAllUsers();
+  const [users, superAdmins] = await Promise.all([
+    listAllUsers(),
+    isSuperAdmin ? listSuperAdmins() : Promise.resolve([]),
+  ]);
 
   async function handleRoleChange(formData: FormData) {
     "use server";
@@ -36,7 +41,7 @@ export default async function AdminUsersPage({
   }
 
   return (
-    <main className="mx-auto w-full max-w-3xl px-6 py-12 space-y-8">
+    <main className="mx-auto w-full max-w-3xl px-6 py-12 space-y-10">
       <div>
         <h1 className="text-2xl font-semibold tracking-tight">Users</h1>
         <p className="mt-1 text-sm text-muted-foreground">
@@ -57,6 +62,7 @@ export default async function AdminUsersPage({
         </div>
       )}
 
+      {/* ── Regular users list ── */}
       {users.length === 0 ? (
         <div className="rounded-lg border border-dashed border-border px-6 py-12 text-center">
           <p className="text-sm text-muted-foreground">No users yet.</p>
@@ -66,16 +72,11 @@ export default async function AdminUsersPage({
           {users.map((u) => {
             const isSelf = u.id === session.user?.id;
             return (
-              <div
-                key={u.id}
-                className="flex items-center gap-4 px-4 py-3"
-              >
-                {/* Avatar initials */}
+              <div key={u.id} className="flex items-center gap-4 px-4 py-3">
                 <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-secondary text-xs font-semibold text-secondary-foreground">
                   {(u.name ?? u.email).charAt(0).toUpperCase()}
                 </div>
 
-                {/* Info */}
                 <div className="flex-1 min-w-0">
                   {u.name && (
                     <p className="text-sm font-medium truncate">{u.name}</p>
@@ -88,10 +89,8 @@ export default async function AdminUsersPage({
                   </p>
                 </div>
 
-                {/* Current role chip */}
                 <RoleChip role={u.role} />
 
-                {/* Role toggle form */}
                 {!isSelf && (
                   <form action={handleRoleChange}>
                     <input type="hidden" name="userId" value={u.id} />
@@ -109,7 +108,6 @@ export default async function AdminUsersPage({
                   </form>
                 )}
 
-                {/* Joined date */}
                 <span className="shrink-0 text-xs text-muted-foreground hidden sm:block">
                   {new Date(u.created_at).toLocaleDateString("en-GB", {
                     day: "numeric",
@@ -121,6 +119,51 @@ export default async function AdminUsersPage({
             );
           })}
         </div>
+      )}
+
+      {/* ── Super admin section — only visible to super_admin ── */}
+      {isSuperAdmin && (
+        <section>
+          <div className="mb-3">
+            <h2 className="text-sm font-medium">Super Admins</h2>
+            <p className="mt-0.5 text-xs text-muted-foreground">
+              Full system access. Role changes require a database migration.
+            </p>
+          </div>
+          <div className="rounded-lg border border-amber-500/30 bg-amber-50/40 dark:bg-amber-950/20 divide-y divide-amber-500/20">
+            {superAdmins.map((u) => (
+              <div key={u.id} className="flex items-center gap-4 px-4 py-3">
+                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-amber-100 dark:bg-amber-900 text-xs font-semibold text-amber-700 dark:text-amber-300">
+                  {(u.name ?? u.email).charAt(0).toUpperCase()}
+                </div>
+
+                <div className="flex-1 min-w-0">
+                  {u.name && (
+                    <p className="text-sm font-medium truncate">{u.name}</p>
+                  )}
+                  <p className="text-xs text-muted-foreground truncate">
+                    {u.email}
+                    {u.id === session.user?.id && (
+                      <span className="ml-1 text-muted-foreground">(you)</span>
+                    )}
+                  </p>
+                </div>
+
+                <span className="shrink-0 rounded-md border border-amber-500/40 bg-amber-50 px-2 py-0.5 text-xs font-medium text-amber-700 dark:bg-amber-950/40 dark:text-amber-300">
+                  Super Admin
+                </span>
+
+                <span className="shrink-0 text-xs text-muted-foreground hidden sm:block">
+                  {new Date(u.created_at).toLocaleDateString("en-GB", {
+                    day: "numeric",
+                    month: "short",
+                    year: "numeric",
+                  })}
+                </span>
+              </div>
+            ))}
+          </div>
+        </section>
       )}
     </main>
   );

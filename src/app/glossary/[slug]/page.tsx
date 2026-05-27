@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { GlossaryText } from "@/components/glossary-text";
 import { MarkdownContent } from "@/components/markdown-content";
 import { getRelatedTerms, getTermBySlug, listTerms } from "@/lib/terms";
-import { TOPIC_LABELS } from "@/lib/topics";
+import { listSystemTopics } from "@/lib/actions/admin-topics";
 
 export const dynamic = "force-dynamic";
 
@@ -24,10 +24,12 @@ export default async function TermDetailPage({
   params: Params;
 }) {
   const { slug } = await params;
-  const [term, allTerms] = await Promise.all([
+  const [term, allTerms, systemTopics] = await Promise.all([
     getTermBySlug(slug),
     listTerms(),
+    listSystemTopics(),
   ]);
+  const topicLabels = Object.fromEntries(systemTopics.map((t) => [t.slug, t.name]));
   if (!term) notFound();
 
   const related = await getRelatedTerms(term.related_slugs);
@@ -46,7 +48,7 @@ export default async function TermDetailPage({
             href={`/questions?topic=${term.topic}`}
             className="rounded bg-secondary px-1.5 py-0.5 text-xs font-medium text-secondary-foreground hover:opacity-80"
           >
-            {TOPIC_LABELS[term.topic]}
+            {topicLabels[term.topic] ?? term.topic}
           </Link>
         )}
         <h1 className="mt-3 text-3xl font-semibold leading-tight tracking-tight">

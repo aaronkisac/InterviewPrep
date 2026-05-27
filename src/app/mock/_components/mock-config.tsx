@@ -10,10 +10,16 @@ import {
   type SessionLength,
 } from "@/lib/mock-shared";
 import type { Topic } from "@/lib/supabase/types";
-import { LEVELS, TOPICS, TOPIC_LABELS } from "@/lib/topics";
+import { LEVELS } from "@/lib/topics";
 import { cn } from "@/lib/utils";
 
-export function MockConfig({ meta }: { meta: MockReadyMeta[] }) {
+export function MockConfig({
+  meta,
+  topicLabels = {},
+}: {
+  meta: MockReadyMeta[];
+  topicLabels?: Record<string, string>;
+}) {
   const router = useRouter();
 
   const topicsWithData = useMemo(
@@ -22,7 +28,7 @@ export function MockConfig({ meta }: { meta: MockReadyMeta[] }) {
   );
 
   const [topics, setTopics] = useState<Set<Topic>>(
-    () => new Set(TOPICS.filter((t) => topicsWithData.has(t))),
+    () => new Set([...topicsWithData]),
   );
   const [minLevel, setMinLevel] = useState<Level>(1);
   const [maxLevel, setMaxLevel] = useState<Level>(5);
@@ -99,31 +105,23 @@ export function MockConfig({ meta }: { meta: MockReadyMeta[] }) {
           </button>
         </div>
         <div className="flex flex-wrap gap-2">
-          {TOPICS.map((topic) => {
-            const hasData = topicsWithData.has(topic);
+          {[...topicsWithData].sort().map((topic) => {
             const checked = topics.has(topic);
             return (
               <label
                 key={topic}
                 className={cn(
-                  "inline-flex items-center gap-2 rounded-md border px-3 py-2 text-sm transition",
-                  hasData
-                    ? "cursor-pointer border-input hover:bg-accent"
-                    : "cursor-not-allowed border-dashed border-border text-muted-foreground",
-                  checked && hasData && "border-foreground bg-accent",
+                  "inline-flex cursor-pointer items-center gap-2 rounded-md border border-input px-3 py-2 text-sm transition hover:bg-accent",
+                  checked && "border-foreground bg-accent",
                 )}
               >
                 <input
                   type="checkbox"
                   className="size-4 accent-foreground"
                   checked={checked}
-                  disabled={!hasData}
                   onChange={() => toggleTopic(topic)}
                 />
-                <span>{TOPIC_LABELS[topic]}</span>
-                {!hasData && (
-                  <span className="text-xs">(no questions yet)</span>
-                )}
+                <span>{topicLabels[topic] ?? topic}</span>
               </label>
             );
           })}

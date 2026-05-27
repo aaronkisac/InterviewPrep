@@ -6,6 +6,7 @@ import {
   parseSessionLength,
   parseTopicList,
 } from "@/lib/mock";
+import { listSystemTopics } from "@/lib/actions/admin-topics";
 
 import { MockSession } from "./_components/mock-session";
 
@@ -33,15 +34,15 @@ export default async function MockSessionPage({
   const lo = minLevel <= maxLevel ? minLevel : maxLevel;
   const hi = minLevel <= maxLevel ? maxLevel : minLevel;
 
-  const questions =
+  const [questions, systemTopics] =
     topics.length === 0
-      ? []
-      : await getMockSessionQuestions({
-          topics,
-          minLevel: lo,
-          maxLevel: hi,
-          length,
-        });
+      ? [[], [] as Awaited<ReturnType<typeof listSystemTopics>>]
+      : await Promise.all([
+          getMockSessionQuestions({ topics, minLevel: lo, maxLevel: hi, length }),
+          listSystemTopics(),
+        ]);
+
+  const topicLabels = Object.fromEntries(systemTopics.map((t) => [t.slug, t.name]));
 
   if (questions.length === 0) {
     return (
@@ -70,7 +71,7 @@ export default async function MockSessionPage({
 
   return (
     <main className="mx-auto w-full max-w-2xl px-6 py-10">
-      <MockSession key={sessionKey} questions={questions} />
+      <MockSession key={sessionKey} questions={questions} topicLabels={topicLabels} />
     </main>
   );
 }

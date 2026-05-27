@@ -4,8 +4,10 @@ import { redirect } from "next/navigation";
 import { auth } from "@/lib/auth";
 import { getDashboardData } from "@/lib/actions/user-tracking";
 import { getUserSubmissions } from "@/lib/actions/questions";
+import { listTopicsWithQuestions } from "@/lib/actions/custom-topics";
+import { listSystemTopics } from "@/lib/actions/admin-topics";
 import { DeleteSubmissionButton } from "@/app/dashboard/_components/delete-submission-button";
-import { TOPIC_LABELS } from "@/lib/topics";
+import { MyTopicsSection } from "@/app/dashboard/_components/my-topics-section";
 import { cn } from "@/lib/utils";
 
 export const dynamic = "force-dynamic";
@@ -74,10 +76,13 @@ export default async function DashboardPage() {
   const session = await auth().catch(() => null);
   if (!session?.user) redirect("/signin");
 
-  const [data, submissions] = await Promise.all([
+  const [data, submissions, { topics: customTopics, questionsMap }, systemTopics] = await Promise.all([
     getDashboardData(),
     getUserSubmissions(),
+    listTopicsWithQuestions(),
+    listSystemTopics(),
   ]);
+  const topicLabels = Object.fromEntries(systemTopics.map((t) => [t.slug, t.name]));
 
 
   return (
@@ -117,7 +122,7 @@ export default async function DashboardPage() {
                   return (
                     <div key={topic} className="flex items-center gap-4 px-4 py-3">
                       <span className="w-36 shrink-0 text-sm font-medium">
-                        {TOPIC_LABELS[topic] ?? topic}
+                        {topicLabels[topic] ?? topic}
                       </span>
                       <div className="flex-1">
                         <div className="h-1.5 overflow-hidden rounded-full bg-secondary">
@@ -172,7 +177,7 @@ export default async function DashboardPage() {
                           key={topic}
                           className="rounded bg-secondary px-1.5 py-0.5 text-xs text-secondary-foreground"
                         >
-                          {TOPIC_LABELS[topic] ?? topic}
+                          {topicLabels[topic] ?? topic}
                         </span>
                       ))}
                     </div>
@@ -200,6 +205,12 @@ export default async function DashboardPage() {
             </div>
           </section>
         )}
+
+        {/* My Topics */}
+        <MyTopicsSection
+          initialTopics={customTopics}
+          initialQuestionsMap={questionsMap}
+        />
 
         {/* My submissions */}
         <section>
@@ -232,7 +243,7 @@ export default async function DashboardPage() {
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-medium truncate">{q.question}</p>
                     <p className="mt-0.5 text-xs text-muted-foreground">
-                      {TOPIC_LABELS[q.topic as keyof typeof TOPIC_LABELS] ?? q.topic}
+                      {topicLabels[q.topic] ?? q.topic}
                       {" · "}
                       {q.level_label}
                     </p>

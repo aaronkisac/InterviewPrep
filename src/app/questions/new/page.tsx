@@ -2,14 +2,17 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 
 import { auth } from "@/lib/auth";
-import { TOPIC_LABELS, TOPICS, LEVELS } from "@/lib/topics";
+import { LEVELS } from "@/lib/topics";
 import { submitQuestion } from "@/lib/actions/questions";
+import { listSystemTopics } from "@/lib/actions/admin-topics";
 
 export const metadata = { title: "Submit a question — Interview Prep" };
 
 export default async function NewQuestionPage() {
   const session = await auth().catch(() => null);
   if (!session?.user) redirect("/signin");
+
+  const systemTopics = await listSystemTopics();
 
   async function handleSubmit(formData: FormData) {
     "use server";
@@ -75,9 +78,9 @@ export default async function NewQuestionPage() {
                 <option value="" disabled>
                   Select a topic…
                 </option>
-                {TOPICS.map((t) => (
-                  <option key={t} value={t}>
-                    {TOPIC_LABELS[t]}
+                {systemTopics.map((t) => (
+                  <option key={t.slug} value={t.slug}>
+                    {t.name}
                   </option>
                 ))}
               </select>

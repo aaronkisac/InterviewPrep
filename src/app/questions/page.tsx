@@ -10,19 +10,25 @@ import {
 } from "@/lib/questions";
 import { listTerms } from "@/lib/terms";
 import { parseLanguage } from "@/lib/topics";
+import { listSystemTopics } from "@/lib/actions/admin-topics";
+import { listCustomTopics, getCustomTopic } from "@/lib/actions/custom-topics";
 
 import { TopicTabs } from "./_components/topic-tabs";
 import { QuestionFilters } from "./_components/filters";
 import { QuestionCard } from "./_components/question-card";
+import { CustomQuestionCard } from "./_components/custom-question-card";
 
 export const dynamic = "force-dynamic";
 
 type SearchParams = Promise<{
   topic?: string;
+  mytopic?: string;
   levels?: string;
   q?: string;
   lang?: string;
 }>;
+
+const GUEST_MAX_LEVEL = 2;
 
 const t = {
   en: {
@@ -32,7 +38,12 @@ const t = {
       `${n} ${n === 1 ? "question" : "questions"}${active ? " match" : " total"}`,
     clear: "Clear filters",
     empty: "No questions match these filters yet.",
+    emptyCustom: "No questions in this topic yet. Add some from your dashboard.",
     loginForBookmarks: "Sign in to save bookmarks.",
+    guestBanner: (total: number) =>
+      `You're viewing ${total} junior & entry-level questions. Sign in to unlock all levels, mock interviews, and the glossary.`,
+    signIn: "Sign in",
+    privateTopic: "Private topic",
   },
   tr: {
     bank: "Soru bankası",
@@ -41,7 +52,12 @@ const t = {
       `${n} soru${active ? " eşleşiyor" : " toplam"}`,
     clear: "Filtreleri temizle",
     empty: "Bu filtrelere uyan soru yok.",
+    emptyCustom: "Bu topic'te henüz soru yok. Dashboard'dan ekleyebilirsin.",
     loginForBookmarks: "Yer imlerini görmek için giriş yap.",
+    guestBanner: (total: number) =>
+      `${total} junior ve başlangıç seviyesi soru görüntülüyorsunuz. Tüm seviyeleri, mock mülakatları ve sözlüğü açmak için giriş yapın.`,
+    signIn: "Giriş yap",
+    privateTopic: "Özel topic",
   },
 } as const;
 
@@ -55,6 +71,7 @@ export default async function QuestionsPage({
   const i18n = t[lang];
 
   const isBookmarkedTab = params.topic === "bookmarked";
+  const myTopicSlug = params.mytopic?.trim() || undefined;
 
   const filters = {
     topic: isBookmarkedTab ? undefined : parseTopic(params.topic),
@@ -65,23 +82,55 @@ export default async function QuestionsPage({
   const session = await auth().catch(() => null);
   const isLoggedIn = Boolean(session?.user);
 
-  const [allQuestions, terms, bookmarkedIds] = await Promise.all([
-    listQuestions(filters),
+  // Fetch base data always
+  const [allQuestions, terms, bookmarkedIds, systemTopics] = await Promise.all([
+    // Skip system question fetch if viewing a custom topic
+    myTopicSlug ? Promise.resolve([]) : listQuestions(filters),
     listTerms(),
     getBookmarkedIds(),
+    listSystemTopics(),
   ]);
 
+  // Custom topics for tabs — pass userId directly to avoid a second auth() call
+  const userId = session?.user?.id;
+  const customTopicsForTabs = userId
+    ? await listCustomTopics(userId).catch(() => [])
+    : [];
+
+  // If a custom topic tab is active, fetch its questions
+  const customTopicData =
+    userId && myTopicSlug
+      ? await getCustomTopic(myTopicSlug, userId).catch(() => null)
+      : null;
+
+  const topicLabels = Object.fromEntries(systemTopics.map((t) => [t.slug, t.name]));
   const bookmarkedSet = new Set(bookmarkedIds);
 
+  // System questions (with guest level filter)
+  const visibleQuestions = isLoggedIn
+    ? allQuestions
+    : allQuestions.filter((q) => q.level <= GUEST_MAX_LEVEL);
+
   const questions = isBookmarkedTab
-    ? allQuestions.filter((q) => bookmarkedSet.has(q.id))
-    : allQuestions;
+    ? visibleQuestions.filter((q) => bookmarkedSet.has(q.id))
+    : visibleQuestions;
 
   const hasActiveFilters =
     Boolean(filters.topic) ||
     Boolean(filters.levels?.length) ||
     Boolean(filters.q) ||
     isBookmarkedTab;
+
+  // Custom topic question keyword filter
+  const customQuestions = customTopicData
+    ? filters.q
+      ? customTopicData.questions.filter((q) =>
+          q.question.toLowerCase().includes(filters.q!.toLowerCase()),
+        )
+      : customTopicData.questions
+    : [];
+
+  const isCustomTab = Boolean(myTopicSlug && isLoggedIn);
 
   return (
     <main className="mx-auto w-full max-w-[1200px] px-4 py-8 sm:px-6 lg:px-8">
@@ -92,38 +141,68 @@ export default async function QuestionsPage({
             {i18n.bank}
           </p>
           <h1 className="mt-1 text-2xl font-semibold tracking-tight">
-            {i18n.title}
+            {isCustomTab && customTopicData
+              ? customTopicData.topic.name
+              : i18n.title}
           </h1>
         </div>
         {isLoggedIn && (
-          <Link
-            href="/questions/new"
-            className="rounded-md border border-border px-3 py-1.5 text-xs font-medium hover:bg-accent"
-          >
-            + Submit question
-          </Link>
+          <div className="flex items-center gap-2">
+            {isCustomTab && (
+              <Link
+                href="/dashboard"
+                className="rounded-md border border-border px-3 py-1.5 text-xs font-medium text-muted-foreground hover:bg-accent hover:text-foreground"
+              >
+                ← Dashboard
+              </Link>
+            )}
+            <Link
+              href="/questions/new"
+              className="rounded-md border border-border px-3 py-1.5 text-xs font-medium hover:bg-accent"
+            >
+              + Submit question
+            </Link>
+          </div>
         )}
       </header>
 
-      {/* ── Filters (search + level + lang) — always visible at top ── */}
+      {/* ── Guest upsell banner ── */}
+      {!isLoggedIn && (
+        <div className="mb-5 flex items-center justify-between gap-4 rounded-lg border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-sm text-amber-700 dark:text-amber-400">
+          <p>{i18n.guestBanner(questions.length)}</p>
+          <Link
+            href="/signin"
+            className="flex-shrink-0 rounded-md bg-amber-500 px-3 py-1.5 text-xs font-semibold text-white hover:bg-amber-600"
+          >
+            {i18n.signIn}
+          </Link>
+        </div>
+      )}
+
+      {/* ── Filters ── */}
       <div className="mb-4">
         <QuestionFilters />
       </div>
 
-      {/* ── Tabs + Panel — connected ── */}
+      {/* ── Tabs + Panel ── */}
       <div>
-        <TopicTabs />
+        <TopicTabs
+          isLoggedIn={isLoggedIn}
+          topics={systemTopics}
+          customTopics={customTopicsForTabs}
+        />
 
-        {/* Panel — same bg as active tab, border-t missing (tabs provide it) */}
         <div className="rounded-b-lg border-x border-b border-border bg-card px-4 pb-4 pt-3">
           {/* Count + clear */}
           <div className="mb-3 flex items-center justify-between text-sm text-muted-foreground">
             <span>
-              {isBookmarkedTab && !isLoggedIn
-                ? i18n.loginForBookmarks
-                : i18n.countSuffix(questions.length, hasActiveFilters)}
+              {isCustomTab
+                ? `${customQuestions.length} ${customQuestions.length === 1 ? "question" : "questions"} · ${i18n.privateTopic}`
+                : isBookmarkedTab && !isLoggedIn
+                  ? i18n.loginForBookmarks
+                  : i18n.countSuffix(questions.length, hasActiveFilters)}
             </span>
-            {hasActiveFilters && (
+            {(hasActiveFilters || isCustomTab) && (
               <Link
                 href={`/questions${lang === "tr" ? "?lang=tr" : ""}`}
                 className="text-foreground hover:underline text-xs"
@@ -133,8 +212,26 @@ export default async function QuestionsPage({
             )}
           </div>
 
-          {/* Question list */}
-          {questions.length === 0 ? (
+          {/* Custom topic questions */}
+          {isCustomTab ? (
+            customQuestions.length === 0 ? (
+              <div className="rounded-lg border border-dashed border-border p-8 text-center text-sm text-muted-foreground">
+                <p>{i18n.emptyCustom}</p>
+                <Link
+                  href="/dashboard"
+                  className="mt-3 inline-block text-xs font-medium hover:underline"
+                >
+                  Go to Dashboard →
+                </Link>
+              </div>
+            ) : (
+              <ul className="space-y-1.5">
+                {customQuestions.map((q, i) => (
+                  <CustomQuestionCard key={q.id} question={q} index={i + 1} />
+                ))}
+              </ul>
+            )
+          ) : questions.length === 0 ? (
             <p className="rounded-lg border border-dashed border-border p-8 text-center text-sm text-muted-foreground">
               {i18n.empty}
             </p>
@@ -149,6 +246,8 @@ export default async function QuestionsPage({
                   terms={terms}
                   isBookmarked={bookmarkedSet.has(question.id)}
                   showTopic={isBookmarkedTab}
+                  isLoggedIn={isLoggedIn}
+                  topicLabels={topicLabels}
                 />
               ))}
             </ul>

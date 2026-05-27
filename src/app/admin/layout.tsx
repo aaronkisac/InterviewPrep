@@ -4,14 +4,14 @@ import { auth } from "@/lib/auth";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { NavLink } from "@/components/nav-link";
 
-async function isAdmin(userId: string): Promise<boolean> {
+async function getRole(userId: string): Promise<string | null> {
   const sb = createAdminClient();
   const { data } = await sb
     .from("users")
     .select("role")
     .eq("id", userId)
     .single();
-  return data?.role === "admin";
+  return data?.role ?? null;
 }
 
 export default async function AdminLayout({
@@ -22,8 +22,8 @@ export default async function AdminLayout({
   const session = await auth().catch(() => null);
   if (!session?.user?.id) redirect("/signin");
 
-  const admin = await isAdmin(session.user.id);
-  if (!admin) redirect("/");
+  const role = await getRole(session.user.id);
+  if (role !== "admin" && role !== "super_admin") redirect("/");
 
   return (
     <div className="flex flex-1 flex-col">
@@ -35,6 +35,7 @@ export default async function AdminLayout({
           </span>
           <NavLink href="/admin/questions">Questions</NavLink>
           <NavLink href="/admin/users">Users</NavLink>
+          <NavLink href="/admin/topics">Topics</NavLink>
         </div>
       </div>
 

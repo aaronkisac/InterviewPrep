@@ -1,11 +1,10 @@
 import { createServerSupabaseClient } from "@/lib/supabase/server";
-import { TOPICS } from "@/lib/topics";
 import type { QuestionRow, Topic } from "@/lib/supabase/types";
 
 // Re-export for convenience — Server Components can import everything from
 // "@/lib/questions". Client Components MUST import from "@/lib/topics" instead
 // to avoid pulling next/headers into the client bundle.
-export { TOPICS, TOPIC_LABELS, LEVELS } from "@/lib/topics";
+export { LEVELS } from "@/lib/topics";
 
 export type QuestionListItem = Pick<
   QuestionRow,
@@ -29,10 +28,10 @@ export type QuestionFilters = {
   q?: string;
 };
 
+// Topic is now dynamic — any non-empty slug is valid
 export function parseTopic(value: string | undefined): Topic | undefined {
-  return value && (TOPICS as readonly string[]).includes(value)
-    ? (value as Topic)
-    : undefined;
+  const trimmed = value?.trim();
+  return trimmed && trimmed.length > 0 ? trimmed : undefined;
 }
 
 export function parseLevel(

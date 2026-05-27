@@ -3,7 +3,6 @@
 // supabase/server) so Client Components can import it safely.
 
 import type { LevelLabel, Topic } from "@/lib/supabase/types";
-import { TOPICS } from "@/lib/topics";
 
 export const SESSION_LENGTHS = [5, 10, 20] as const;
 export type SessionLength = (typeof SESSION_LENGTHS)[number];
@@ -39,8 +38,7 @@ export type MockSessionConfig = {
 /** Parses a comma-separated topic list (e.g. "react,nextjs") from a query param. */
 export function parseTopicList(value: string | undefined): Topic[] {
   if (!value) return [];
-  const wanted = new Set(value.split(",").map((s) => s.trim()));
-  return TOPICS.filter((t) => wanted.has(t));
+  return value.split(",").map((s) => s.trim()).filter(Boolean) as Topic[];
 }
 
 export function parseLevelOr(

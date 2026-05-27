@@ -1,8 +1,8 @@
 import Link from "next/link";
 
 import { auth } from "@/lib/auth";
-import { TOPIC_LABELS, TOPICS } from "@/lib/topics";
 import { getTopicStats } from "@/lib/questions";
+import { listSystemTopics } from "@/lib/actions/admin-topics";
 
 export const dynamic = "force-dynamic";
 
@@ -34,9 +34,10 @@ export default async function HomePage() {
   const session = await auth().catch(() => null);
   const user = session?.user;
 
-  const topicStats = await getTopicStats().catch(
-    () => ({}) as Record<string, number>,
-  );
+  const [topicStats, systemTopics] = await Promise.all([
+    getTopicStats().catch(() => ({}) as Record<string, number>),
+    listSystemTopics(),
+  ]);
   const totalQuestions = Object.values(topicStats).reduce((s, n) => s + n, 0);
 
   return (
@@ -54,7 +55,7 @@ export default async function HomePage() {
             {totalQuestions > 0
               ? `${totalQuestions}+ questions`
               : "Hundreds of questions"}{" "}
-            across {TOPICS.length} topics. Structured Q&amp;A, a term glossary,
+            across {systemTopics.length} topics. Structured Q&amp;A, a term glossary,
             and timed mock interview sessions.
           </p>
         </div>
@@ -131,15 +132,15 @@ export default async function HomePage() {
       <section className="space-y-4">
         <h2 className="text-sm font-medium text-muted-foreground">Topics</h2>
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-          {TOPICS.map((topic) => {
-            const count = topicStats[topic] ?? 0;
+          {systemTopics.map((topic) => {
+            const count = topicStats[topic.slug] ?? 0;
             return (
               <Link
-                key={topic}
-                href={`/questions?topic=${topic}`}
+                key={topic.slug}
+                href={`/questions?topic=${topic.slug}`}
                 className="group rounded-lg border border-border bg-card px-4 py-3 transition-colors hover:border-foreground/20 hover:bg-accent/40"
               >
-                <p className="text-sm font-medium">{TOPIC_LABELS[topic]}</p>
+                <p className="text-sm font-medium">{topic.name}</p>
                 <p className="mt-1 text-xs text-muted-foreground">
                   {count > 0 ? `${count} questions` : "Coming soon"}
                 </p>

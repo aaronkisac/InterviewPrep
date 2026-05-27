@@ -7,7 +7,7 @@ import { GlossaryText } from "@/components/glossary-text";
 import { BookmarkButton } from "@/app/questions/_components/bookmark-button";
 import type { GlossaryTerm } from "@/lib/glossary-match";
 import type { Language } from "@/lib/supabase/types";
-import { TOPIC_LABELS, TR_FALLBACK } from "@/lib/topics";
+import { LEVELS, TR_FALLBACK } from "@/lib/topics";
 import type { QuestionListItem } from "@/lib/questions";
 import { cn } from "@/lib/utils";
 
@@ -29,19 +29,21 @@ function pickAnswer(
   };
 }
 
-// 5 dots, colour based on level
+const LEVEL_COLOURS: Record<number, string> = {
+  1: "bg-emerald-500",
+  2: "bg-emerald-500",
+  3: "bg-yellow-400",
+  4: "bg-orange-400",
+  5: "bg-red-500",
+};
+
+// 5 dots, colour based on level — with CSS tooltip showing level name
 function LevelDots({ level }: { level: number }) {
-  const colours: Record<number, string> = {
-    1: "bg-emerald-500",
-    2: "bg-emerald-500",
-    3: "bg-yellow-400",
-    4: "bg-orange-400",
-    5: "bg-red-500",
-  };
-  const active = colours[level] ?? "bg-emerald-500";
+  const active = LEVEL_COLOURS[level] ?? "bg-emerald-500";
+  const label = LEVELS.find((l) => l.value === level)?.label ?? `Level ${level}`;
 
   return (
-    <div className="hidden sm:flex items-center gap-[3px] flex-shrink-0">
+    <div className="relative hidden sm:flex items-center gap-[3px] flex-shrink-0 group/dots">
       {Array.from({ length: 5 }).map((_, i) => (
         <span
           key={i}
@@ -51,6 +53,10 @@ function LevelDots({ level }: { level: number }) {
           )}
         />
       ))}
+      {/* Tooltip */}
+      <span className="pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-1.5 whitespace-nowrap rounded bg-foreground px-1.5 py-0.5 text-[10px] font-medium text-background opacity-0 transition-opacity group-hover/dots:opacity-100">
+        {label}
+      </span>
     </div>
   );
 }
@@ -62,6 +68,8 @@ export function QuestionCard({
   terms,
   isBookmarked = false,
   showTopic = false,
+  isLoggedIn = true,
+  topicLabels = {},
 }: {
   question: QuestionListItem;
   index: number;
@@ -69,6 +77,8 @@ export function QuestionCard({
   terms: GlossaryTerm[];
   isBookmarked?: boolean;
   showTopic?: boolean;
+  isLoggedIn?: boolean;
+  topicLabels?: Record<string, string>;
 }) {
   const [open, setOpen] = useState(false);
   const [personalOpen, setPersonalOpen] = useState(false);
@@ -79,7 +89,7 @@ export function QuestionCard({
       {/* ── Collapsed row ── */}
       <div className="flex w-full items-center gap-2 px-3 py-2.5 sm:gap-3 sm:px-4">
         {/* sequential number */}
-        <span className="hidden sm:inline w-7 flex-shrink-0 font-mono text-[10px] font-bold text-muted-foreground/40 select-none">
+        <span className="hidden sm:inline w-10 flex-shrink-0 font-mono text-base font-bold text-muted-foreground/70 select-none">
           #{index}
         </span>
 
@@ -108,18 +118,20 @@ export function QuestionCard({
         {/* topic badge — only in Bookmarked tab */}
         {showTopic && (
           <span className="hidden md:inline flex-shrink-0 rounded border border-border bg-secondary px-1.5 py-0.5 text-[10px] font-medium text-secondary-foreground">
-            {TOPIC_LABELS[question.topic]}
+            {topicLabels[question.topic] ?? question.topic}
           </span>
         )}
 
         {/* level dots */}
         <LevelDots level={question.level} />
 
-        {/* bookmark */}
-        <BookmarkButton
-          questionId={question.id}
-          initialBookmarked={isBookmarked}
-        />
+        {/* bookmark — only for logged-in users */}
+        {isLoggedIn && (
+          <BookmarkButton
+            questionId={question.id}
+            initialBookmarked={isBookmarked}
+          />
+        )}
       </div>
 
       {/* ── Expanded body ── */}
@@ -139,7 +151,7 @@ export function QuestionCard({
             {isFallback ? (
               general
             ) : (
-              <GlossaryText text={general} terms={terms} />
+              <GlossaryText text={general} terms={terms} isLoggedIn={isLoggedIn} />
             )}
           </div>
 
@@ -164,7 +176,7 @@ export function QuestionCard({
               </button>
               {personalOpen && (
                 <p className="mt-2 rounded border border-dashed border-border bg-background p-3 text-sm leading-relaxed text-foreground/85">
-                  <GlossaryText text={personal} terms={terms} />
+                  <GlossaryText text={personal} terms={terms} isLoggedIn={isLoggedIn} />
                 </p>
               )}
             </div>
@@ -174,15 +186,25 @@ export function QuestionCard({
             {/* show topic in expanded footer if hidden above (mobile) */}
             {showTopic && (
               <span className="md:hidden rounded border border-border bg-secondary px-1.5 py-0.5 text-[10px] font-medium text-secondary-foreground">
-                {TOPIC_LABELS[question.topic]}
+                {topicLabels[question.topic] ?? question.topic}
               </span>
             )}
             <div className="ml-auto">
               <Link
-                href={`/questions/${question.id}?lang=${lang}`}
+                href={
+                  isLoggedIn
+                    ? `/questions/${question.id}?lang=${lang}`
+                    : "/signin"
+                }
                 className="text-xs font-medium text-muted-foreground hover:text-foreground hover:underline"
               >
-                {lang === "tr" ? "Detaylı sayfa →" : "Detail page →"}
+                {isLoggedIn
+                  ? lang === "tr"
+                    ? "Detaylı sayfa →"
+                    : "Detail page →"
+                  : lang === "tr"
+                    ? "Detaylar için giriş yap →"
+                    : "Sign in for full details →"}
               </Link>
             </div>
           </div>

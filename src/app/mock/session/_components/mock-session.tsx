@@ -6,7 +6,6 @@ import { useEffect, useRef, useState } from "react";
 
 import { saveMockSession } from "@/lib/actions/user-tracking";
 import type { MockOption, MockQuestion } from "@/lib/mock-shared";
-import { TOPIC_LABELS } from "@/lib/topics";
 import { cn } from "@/lib/utils";
 
 const OPTION_LABELS = ["A", "B", "C", "D"] as const;
@@ -15,7 +14,13 @@ function correctOption(question: MockQuestion): MockOption | undefined {
   return question.options.find((o) => o.isCorrect);
 }
 
-export function MockSession({ questions }: { questions: MockQuestion[] }) {
+export function MockSession({
+  questions,
+  topicLabels = {},
+}: {
+  questions: MockQuestion[];
+  topicLabels?: Record<string, string>;
+}) {
   const router = useRouter();
   const [index, setIndex] = useState(0);
   const [selected, setSelected] = useState<(string | null)[]>(() =>
@@ -139,7 +144,7 @@ export function MockSession({ questions }: { questions: MockQuestion[] }) {
                           : "border-rose-500/40 bg-rose-50 text-rose-700 dark:bg-rose-950/40 dark:text-rose-300",
                     )}
                   >
-                    {TOPIC_LABELS[topic as keyof typeof TOPIC_LABELS] ?? topic}
+                    {topicLabels[topic as string] ?? topic}
                     <span className="opacity-70">
                       {correct}/{t}
                     </span>
@@ -165,7 +170,7 @@ export function MockSession({ questions }: { questions: MockQuestion[] }) {
                 >
                   <div className="flex items-center gap-2 text-xs">
                     <span className="rounded bg-secondary px-1.5 py-0.5 font-medium text-secondary-foreground">
-                      {TOPIC_LABELS[q.topic]}
+                      {topicLabels[q.topic] ?? q.topic}
                     </span>
                     <span className="text-muted-foreground">
                       {q.levelLabel}
@@ -250,7 +255,7 @@ export function MockSession({ questions }: { questions: MockQuestion[] }) {
       <div className="rounded-lg border border-border bg-card p-6">
         <div className="flex items-center gap-2 text-xs">
           <span className="rounded bg-secondary px-1.5 py-0.5 font-medium text-secondary-foreground">
-            {TOPIC_LABELS[current.topic]}
+            {topicLabels[current.topic] ?? current.topic}
           </span>
           <span className="text-muted-foreground">{current.levelLabel}</span>
         </div>

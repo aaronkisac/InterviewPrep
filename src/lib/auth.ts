@@ -6,7 +6,7 @@ import { SupabaseAdapter } from "@auth/supabase-adapter";
 import { requireEnv } from "@/lib/env";
 import { createAdminClient } from "@/lib/supabase/admin";
 
-type Role = "user" | "admin";
+type Role = "user" | "admin" | "super_admin";
 
 async function readRole(userId: string): Promise<Role> {
   // Read role from public.users on initial sign-in. Falls back to 'user'
@@ -18,7 +18,10 @@ async function readRole(userId: string): Promise<Role> {
       .select("role")
       .eq("id", userId)
       .maybeSingle();
-    return data?.role === "admin" ? "admin" : "user";
+    const role = data?.role;
+    if (role === "super_admin") return "super_admin";
+    if (role === "admin") return "admin";
+    return "user";
   } catch {
     return "user";
   }
@@ -28,7 +31,7 @@ declare module "next-auth" {
   interface Session {
     user: {
       id: string;
-      role: "user" | "admin";
+      role: "user" | "admin" | "super_admin";
     } & DefaultSession["user"];
     supabaseAccessToken?: string;
   }
@@ -74,7 +77,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth((): NextAuthConfig =
       if (session.user) {
         session.user.id = token.sub ?? "";
         session.user.role =
-          (token.role as "user" | "admin" | undefined) ?? "user";
+          (token.role as Role | undefined) ?? "user";
       }
       return session;
     },

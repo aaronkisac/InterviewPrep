@@ -1,6 +1,6 @@
 # Progress
 
-Last updated: 2026-05-25 (software-architecture bank 89q; api-design bank 46q; migrations; mock seeds)
+Last updated: 2026-05-26 (guest access; custom topics; dynamic topics; admin JSON import)
 
 ---
 
@@ -69,6 +69,10 @@ Last updated: 2026-05-25 (software-architecture bank 89q; api-design bank 46q; m
 | Combined migration | `20260523000007_topic_unit_testing_design_patterns.sql` — adds unit-testing + design-patterns to DB constraints. |
 | Software Architecture bank | 89 questions (ids 1401–1489, 5 batches, all levels). Migration: `20260525000001_topic_software_architecture_api_design.sql`. |
 | API Design bank | 46 questions (ids 1501–1546, 5 batches, all levels). Covers REST, GraphQL, auth, rate limiting, pagination, webhooks, BFF, OpenAPI, tRPC, observability. |
+| Guest access restrictions | `src/middleware.ts` protects `/mock`, `/glossary`, `/dashboard`, `/admin`, `/questions/new`, `/questions/[id]`. `/questions` shows only level 1–2 for guests + upsell banner. Bookmark/detail-page/glossary-definition buttons redirect to `/signin` for guests. |
+| Custom Topics | Dashboard accordion — users create private topics, add/edit/delete/JSON-import questions. Actions: `src/lib/actions/custom-topics.ts`. Migration: `20260526000001_custom_topics.sql`. |
+| Dynamic Topics + Admin Import | `Topic` type → `string`. `system_topics` table (migration `20260526000002`). Admin `/admin/topics`: create/delete topics, JSON bulk import per topic (client-side validation + live count). Dashboard JSON import for custom topics. Required fields: admin (question, level 1-5, answerGeneral); user (question). |
+| DB-driven topic lists | All hardcoded `TOPICS`/`TOPIC_LABELS` removed from every page and component. Topic names now fetched via `listSystemTopics()` everywhere: questions list, question detail, mock config, mock session, homepage topic grid, dashboard, glossary, admin questions, `/questions/new`. `mock-shared.ts` `parseTopicList` no longer filters against hardcoded array. |
 
 ---
 

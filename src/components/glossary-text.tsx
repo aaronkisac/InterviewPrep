@@ -14,11 +14,13 @@ export function GlossaryText({
   text,
   terms,
   excludeSlugs,
+  isLoggedIn = true,
 }: {
   text: string;
   terms: GlossaryTerm[];
   /** Skip these slugs — used on a term's own page so it doesn't link to itself. */
   excludeSlugs?: string[];
+  isLoggedIn?: boolean;
 }) {
   const matcher = buildMatcher(terms, excludeSlugs);
   if (!matcher) return <>{text}</>;
@@ -35,6 +37,7 @@ export function GlossaryText({
             key={index}
             slug={segment.slug}
             tooltip={segment.tooltip}
+            isLoggedIn={isLoggedIn}
           >
             {segment.value}
           </TermTooltip>

@@ -1,11 +1,16 @@
 import { getMockReadyMeta } from "@/lib/mock";
+import { listSystemTopics } from "@/lib/actions/admin-topics";
 
 import { MockConfig } from "./_components/mock-config";
 
 export const dynamic = "force-dynamic";
 
 export default async function MockPage() {
-  const meta = await getMockReadyMeta();
+  const [meta, systemTopics] = await Promise.all([
+    getMockReadyMeta(),
+    listSystemTopics(),
+  ]);
+  const topicLabels = Object.fromEntries(systemTopics.map((t) => [t.slug, t.name]));
 
   return (
     <main className="mx-auto w-full max-w-2xl px-6 py-10">
@@ -29,7 +34,7 @@ export default async function MockPage() {
           load the option data.
         </p>
       ) : (
-        <MockConfig meta={meta} />
+        <MockConfig meta={meta} topicLabels={topicLabels} />
       )}
     </main>
   );

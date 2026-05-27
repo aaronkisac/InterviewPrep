@@ -32,7 +32,8 @@ export const TOPICS: readonly Topic[] = [
   "websockets",
 ];
 
-export const TOPIC_LABELS: Record<Topic, string> = {
+// Builtin labels — admin-created topics won't be here; use getTopicLabel() instead.
+export const TOPIC_LABELS: Record<string, string> = {
   react: "React",
   typescript: "TypeScript",
   nextjs: "Next.js",

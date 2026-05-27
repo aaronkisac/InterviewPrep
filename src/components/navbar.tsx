@@ -37,8 +37,8 @@ export async function Navbar() {
         {/* Primary nav — hidden on very small screens */}
         <div className="hidden items-center gap-1 sm:flex">
           <NavLink href="/questions">Questions</NavLink>
-          <NavLink href="/mock">Mock</NavLink>
-          <NavLink href="/glossary">Glossary</NavLink>
+          {user && <NavLink href="/mock">Mock</NavLink>}
+          {user && <NavLink href="/glossary">Glossary</NavLink>}
           {isAdmin && (
             <NavLink
               href="/admin/questions"
