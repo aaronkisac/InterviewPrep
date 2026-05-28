@@ -118,7 +118,7 @@ export default async function FlashcardPage({
   // Build header label
   const topicName =
     topicNameParts.length === 1
-      ? topicNameParts[0]
+      ? topicNameParts[0] ?? ""
       : topicNameParts.length <= 3
         ? topicNameParts.join(", ")
         : `${topicNameParts.slice(0, 2).join(", ")} +${topicNameParts.length - 2} more`;
