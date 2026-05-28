@@ -2,9 +2,10 @@ import { auth } from "@/lib/auth";
 import { getMockReadyMeta } from "@/lib/mock";
 import { listSystemTopics } from "@/lib/actions/admin-topics";
 import { listCustomTopics, getCustomMockReadyMeta } from "@/lib/actions/custom-topics";
+import { getTopicMasteryStats } from "@/lib/actions/user-tracking";
 import type { MockReadyMeta } from "@/lib/mock-shared";
 
-import { MockConfigTabs, type TopicEntry } from "./_components/mock-config-tabs";
+import { MockConfigTabs, type TopicEntry, type TopicStats } from "./_components/mock-config-tabs";
 
 export const dynamic = "force-dynamic";
 
@@ -52,12 +53,32 @@ export default async function MockPage() {
   const flashSystemTopics: TopicEntry[] = systemTopics.map((t) => ({
     key: t.slug,
     name: t.name,
+    total: t.question_count,
   }));
   const flashCustomTopics: TopicEntry[] = customTopics
     .filter((t) => t.question_count > 0)
-    .map((t) => ({ key: `custom:${t.slug}`, name: t.name, isPrivate: true }));
+    .map((t) => ({ key: `custom:${t.slug}`, name: t.name, isPrivate: true, total: t.question_count }));
 
   const flashcardTopics: TopicEntry[] = [...flashSystemTopics, ...flashCustomTopics];
+
+  // Topic mastery stats for chip display ("CSS 12/22")
+  const allTopicKeys = [
+    ...mockTopics.map((t) => t.key),
+    ...flashcardTopics.map((t) => t.key),
+  ];
+  const uniqueTopicKeys = [...new Set(allTopicKeys)];
+
+  const [mockMasteryStats, flashMasteryStats] = userId
+    ? await Promise.all([
+        getTopicMasteryStats(userId, uniqueTopicKeys, "mock"),
+        getTopicMasteryStats(userId, uniqueTopicKeys, "flashcard"),
+      ])
+    : [{}  as Record<string, number>, {} as Record<string, number>];
+
+  const topicStats: TopicStats = {
+    mock: mockMasteryStats,
+    flashcard: flashMasteryStats,
+  };
 
   return (
     <main className="mx-auto w-full max-w-2xl px-6 py-10 space-y-8">
@@ -73,6 +94,7 @@ export default async function MockPage() {
         mockTopics={mockTopics}
         flashcardTopics={flashcardTopics}
         topicLabels={topicLabels}
+        topicStats={topicStats}
       />
     </main>
   );

@@ -112,6 +112,114 @@ export async function getBookmarkedIds(): Promise<string[]> {
 }
 
 // ============================================================================
+// Adaptive learning: user_topic_mastery
+// ============================================================================
+
+export type MasteryRow = {
+  questionId: string;
+  topic: string;
+  mastered: boolean;
+};
+
+/**
+ * Upsert mastery rows after a session finishes.
+ * mode: 'mock' | 'flashcard'
+ * rows: one entry per question answered
+ */
+export async function saveTopicMastery(
+  mode: "mock" | "flashcard",
+  rows: MasteryRow[],
+): Promise<void> {
+  if (rows.length === 0) return;
+  const session = await auth();
+  if (!session?.user?.id) return;
+
+  const userId = session.user.id;
+  const sb = createAdminClient();
+  const now = new Date().toISOString();
+
+  const upsertRows = rows.map((r) => ({
+    user_id: userId,
+    question_id: r.questionId,
+    topic: r.topic,
+    mode,
+    mastered: r.mastered,
+    updated_at: now,
+  }));
+
+  // Only upgrade mastered: true → keep existing true if already set.
+  // We use a raw upsert; "mastered" is set to the new value so a correct
+  // answer after a wrong one properly marks it mastered.
+  await sb
+    .from("user_topic_mastery")
+    .upsert(upsertRows, { onConflict: "user_id,question_id,mode" })
+    .then(({ error }) => {
+      if (error) console.error("[saveTopicMastery]", error.message);
+    });
+}
+
+/**
+ * Return mastered question IDs for a user across given topics + mode.
+ * Used by session builders to apply 80/20 split.
+ */
+export async function getMasteredIds(
+  userId: string,
+  topics: string[],
+  mode: "mock" | "flashcard",
+): Promise<Set<string>> {
+  if (topics.length === 0) return new Set();
+  const sb = createAdminClient();
+
+  const { data, error } = await sb
+    .from("user_topic_mastery")
+    .select("question_id")
+    .eq("user_id", userId)
+    .eq("mode", mode)
+    .eq("mastered", true)
+    .in("topic", topics);
+
+  if (error) {
+    console.error("[getMasteredIds]", error.message);
+    return new Set();
+  }
+
+  return new Set((data ?? []).map((r) => r.question_id as string));
+}
+
+/**
+ * Return mastered count per topic for the given mode.
+ * Used by mock/page to show "CSS 12/22" on topic chips.
+ */
+export async function getTopicMasteryStats(
+  userId: string,
+  topics: string[],
+  mode: "mock" | "flashcard",
+): Promise<Record<string, number>> {
+  if (topics.length === 0) return {};
+  const sb = createAdminClient();
+
+  const { data, error } = await sb
+    .from("user_topic_mastery")
+    .select("topic")
+    .eq("user_id", userId)
+    .eq("mode", mode)
+    .eq("mastered", true)
+    .in("topic", topics);
+
+  if (error) {
+    console.error("[getTopicMasteryStats]", error.message);
+    return {};
+  }
+
+  const result: Record<string, number> = {};
+  for (const row of data ?? []) {
+    const t = row.topic as string;
+    result[t] = (result[t] ?? 0) + 1;
+  }
+  return result;
+}
+
+// ============================================================================
 // Dashboard data
 // ============================================================================
 

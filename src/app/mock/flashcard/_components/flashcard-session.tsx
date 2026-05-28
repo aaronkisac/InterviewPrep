@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { CheckCircle2, XCircle, Eye, ArrowRight, RotateCcw } from "lucide-react";
 
+import { saveTopicMastery } from "@/lib/actions/user-tracking";
 import { LevelDots } from "@/components/level-dots";
 import { cn } from "@/lib/utils";
 
@@ -12,6 +13,7 @@ export type FlashcardQuestion = {
   question: string;
   answer: string;
   level: number;
+  topic: string;          // slug or "custom:slug" — needed for mastery save
   answer_personal?: string | null;
 };
 
@@ -29,11 +31,27 @@ export function FlashcardSession({
   const [revealed, setRevealed] = useState(false);
   const [results, setResults] = useState<Result[]>([]);
   const [done, setDone] = useState(false);
+  const saveCalledRef = useRef(false);
 
   const current = questions[index];
   const total = questions.length;
   const known = results.filter((r) => r === "known").length;
   const pct = Math.round((known / total) * 100);
+
+  // Save mastery once session is done (fire-and-forget)
+  useEffect(() => {
+    if (!done || saveCalledRef.current) return;
+    saveCalledRef.current = true;
+
+    saveTopicMastery(
+      "flashcard",
+      questions.map((q, i) => ({
+        questionId: q.id,
+        topic: q.topic,
+        mastered: results[i] === "known",
+      })),
+    ).catch(() => {});
+  }, [done, questions, results]);
 
   function answer(result: Result) {
     const next = [...results, result];
@@ -51,6 +69,7 @@ export function FlashcardSession({
     setRevealed(false);
     setResults([]);
     setDone(false);
+    saveCalledRef.current = false;
   }
 
   if (done) {
@@ -120,7 +139,7 @@ export function FlashcardSession({
         <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-border">
           <div
             className="h-full rounded-full bg-primary transition-all"
-            style={{ width: `${((index) / total) * 100}%` }}
+            style={{ width: `${(index / total) * 100}%` }}
           />
         </div>
         <span className="shrink-0 text-xs text-muted-foreground">

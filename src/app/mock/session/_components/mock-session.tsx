@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
-import { saveMockSession } from "@/lib/actions/user-tracking";
+import { saveMockSession, saveTopicMastery } from "@/lib/actions/user-tracking";
 import type { MockOption, MockQuestion } from "@/lib/mock-shared";
 import { cn } from "@/lib/utils";
 
@@ -44,14 +44,22 @@ export function MockSession({
 
     const questionResults = questions.map((q, i) => ({
       questionId: q.id,
+      topic: q.topic,
       correct: q.options.find((o) => o.id === selected[i])?.isCorrect ?? false,
     }));
 
     const topics = [...new Set(questions.map((q) => q.topic))];
 
-    saveMockSession({ score, total, topics, questionResults }).catch(() => {
-      // Silently ignore — user still sees their results
-    });
+    saveMockSession({ score, total, topics, questionResults }).catch(() => {});
+
+    saveTopicMastery(
+      "mock",
+      questionResults.map((r) => ({
+        questionId: r.questionId,
+        topic: r.topic,
+        mastered: r.correct,
+      })),
+    ).catch(() => {});
   }, [finished, questions, selected, total]);
 
   if (!current) return null;

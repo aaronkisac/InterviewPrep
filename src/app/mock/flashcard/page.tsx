@@ -4,6 +4,7 @@ import { auth } from "@/lib/auth";
 import { getCustomTopic } from "@/lib/actions/custom-topics";
 import { listQuestions } from "@/lib/questions";
 import { listSystemTopics } from "@/lib/actions/admin-topics";
+import { getMasteredIds } from "@/lib/actions/user-tracking";
 import type { FlashcardQuestion } from "./_components/flashcard-session";
 import { FlashcardSession } from "./_components/flashcard-session";
 
@@ -67,6 +68,7 @@ export default async function FlashcardPage({
         question: q.question,
         answer: q.answer_general ?? "",
         level: q.level ?? 1,
+        topic: slug,
         answer_personal: q.answer_personal ?? null,
       });
     }
@@ -84,6 +86,7 @@ export default async function FlashcardPage({
         question: q.question,
         answer: q.answer,
         level: q.level ?? 1,
+        topic: `custom:${slug}`,
         answer_personal: q.answer_personal,
       });
     }
@@ -96,8 +99,21 @@ export default async function FlashcardPage({
 
   if (allQuestions.length === 0) redirect("/mock");
 
-  // Shuffle and cap
-  const questions = shuffle(allQuestions).slice(0, cardLimit);
+  // 80/20 adaptive split
+  const shuffled = shuffle(allQuestions);
+  const masteredIds = await getMasteredIds(session.user.id, rawTopics, "flashcard");
+
+  const unseen = shuffled.filter((q) => !masteredIds.has(q.id));
+  const mastered = shuffled.filter((q) => masteredIds.has(q.id));
+
+  const take80 = Math.ceil(cardLimit * 0.8);
+  const take20 = cardLimit - take80;
+
+  const questions = [
+    ...unseen.slice(0, take80),
+    ...mastered.slice(0, take20),
+    ...unseen.slice(take80, take80 + Math.max(0, take20 - mastered.length)),
+  ].slice(0, cardLimit);
 
   // Build header label
   const topicName =

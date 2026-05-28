@@ -9,6 +9,7 @@ import {
 } from "@/lib/mock";
 import { listSystemTopics } from "@/lib/actions/admin-topics";
 import { getCustomMockQuestions, listCustomTopics } from "@/lib/actions/custom-topics";
+import { getMasteredIds } from "@/lib/actions/user-tracking";
 import { LEVELS } from "@/lib/topics";
 import type { MockQuestion, Level } from "@/lib/mock-shared";
 
@@ -56,14 +57,15 @@ export default async function MockSessionPage({
     );
   }
 
-  // Fetch system questions + custom questions in parallel
-  const session = customSlugs.length > 0 ? await auth().catch(() => null) : null;
+  // Auth (always needed now for mastery lookup)
+  const session = await auth().catch(() => null);
   const userId = session?.user?.id;
 
   const [systemQuestions, sysTopicList, customQuestionsRaw, customTopicList] =
     await Promise.all([
       systemTopics.length > 0
-        ? getMockSessionQuestions({ topics: systemTopics, minLevel: lo, maxLevel: hi, length })
+        // Fetch all matching questions (no length limit yet — we need the full pool for 80/20)
+        ? getMockSessionQuestions({ topics: systemTopics, minLevel: lo, maxLevel: hi, length: 9999 })
         : Promise.resolve([] as MockQuestion[]),
       listSystemTopics(),
       customSlugs.length > 0 && userId
@@ -103,7 +105,6 @@ export default async function MockSessionPage({
       };
     });
 
-  // Shuffle and combine, then trim to requested length
   function shuffle<T>(arr: T[]): T[] {
     const out = [...arr];
     for (let i = out.length - 1; i > 0; i--) {
@@ -113,7 +114,25 @@ export default async function MockSessionPage({
     return out;
   }
 
-  const combined = shuffle([...systemQuestions, ...customMockQuestions]).slice(0, length);
+  // 80/20 adaptive split: 80% from unseen/wrong, 20% from already mastered
+  const allPool = shuffle([...systemQuestions, ...customMockQuestions]);
+
+  const masteredIds = userId
+    ? await getMasteredIds(userId, allTopics, "mock")
+    : new Set<string>();
+
+  const unseen = allPool.filter((q) => !masteredIds.has(q.id));
+  const mastered = allPool.filter((q) => masteredIds.has(q.id));
+
+  const take80 = Math.ceil(length * 0.8);
+  const take20 = length - take80;
+
+  const combined = [
+    ...unseen.slice(0, take80),
+    ...mastered.slice(0, take20),
+    // If unseen pool is short, fill remainder from mastered
+    ...unseen.slice(take80, take80 + Math.max(0, take20 - mastered.length)),
+  ].slice(0, length);
 
   // Build topic labels
   const topicLabels: Record<string, string> = Object.fromEntries(

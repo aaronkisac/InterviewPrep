@@ -19,6 +19,12 @@ export type TopicEntry = {
   key: string;        // slug (system) or "custom:slug" (private)
   name: string;
   isPrivate?: boolean;
+  total?: number;     // total question count (for flashcard tab display)
+};
+
+export type TopicStats = {
+  mock: Record<string, number>;      // mastered count per topic key
+  flashcard: Record<string, number>; // mastered count per topic key
 };
 
 export function MockConfigTabs({
@@ -26,6 +32,7 @@ export function MockConfigTabs({
   mockTopics,
   flashcardTopics,
   topicLabels = {},
+  topicStats,
 }: {
   mockMeta: MockReadyMeta[];
   /** Topics selectable in mock tab (have mock-ready questions) */
@@ -33,6 +40,7 @@ export function MockConfigTabs({
   /** Topics selectable in flashcard tab (have any questions) */
   flashcardTopics: TopicEntry[];
   topicLabels?: Record<string, string>;
+  topicStats?: TopicStats;
 }) {
   const router = useRouter();
   const [tab, setTab] = useState<Tab>("mock");
@@ -125,6 +133,18 @@ export function MockConfigTabs({
     }
   }
 
+  // ── Topic totals (for "mastered/total" chip display) ─────────────────────────
+  // Mock total: count of mock-ready questions per topic key from mockMeta
+  const mockTotals = useMemo(() => {
+    const map: Record<string, number> = {};
+    for (const m of mockMeta) map[m.topic] = (map[m.topic] ?? 0) + 1;
+    return map;
+  }, [mockMeta]);
+
+  // Flashcard total: question_count from TopicEntry (passed as `total` prop — not available here)
+  // We re-use mockTotals for flashcard too; page can extend this later.
+  // flashcardTopics don't carry a total count, so we show mastered/– when total unknown.
+
   // ── Derived ──────────────────────────────────────────────────────────────────
   const mockEffective = Math.min(mockAvailable, length);
   const canStartMock = mockAvailable > 0 && mockSelected.size > 0 && !isStarting;
@@ -141,6 +161,22 @@ export function MockConfigTabs({
     } else {
       setFlashSelected(flashAllSelected ? new Set() : new Set(flashcardTopicKeys));
     }
+  }
+
+  // ── Stat badge: "12/22" next to topic name ───────────────────────────────────
+  function StatBadge({ topicKey }: { topicKey: string }) {
+    const mastered = isMock
+      ? (topicStats?.mock[topicKey] ?? 0)
+      : (topicStats?.flashcard[topicKey] ?? 0);
+    const total = isMock
+      ? (mockTotals[topicKey] ?? 0)
+      : (currentTopics.find((t) => t.key === topicKey)?.total ?? 0);
+    if (total === 0) return null;
+    return (
+      <span className="ml-0.5 text-[10px] tabular-nums text-muted-foreground/70">
+        {mastered}/{total}
+      </span>
+    );
   }
 
   return (
@@ -206,6 +242,7 @@ export function MockConfigTabs({
                         onChange={() => toggleCurrent(topic.key)}
                       />
                       <span>{topicLabels[topic.key] ?? topic.name}</span>
+                      <StatBadge topicKey={topic.key} />
                     </label>
                   );
                 })}
@@ -232,6 +269,7 @@ export function MockConfigTabs({
                         />
                         <Lock className="size-3 shrink-0 text-violet-500" />
                         <span>{topicLabels[topic.key] ?? topic.name}</span>
+                        <StatBadge topicKey={topic.key} />
                       </label>
                     );
                   })}
