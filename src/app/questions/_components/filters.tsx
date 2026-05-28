@@ -6,10 +6,33 @@ import { useTransition } from "react";
 import { LANGUAGES, LEVELS } from "@/lib/topics";
 import { cn } from "@/lib/utils";
 
-export function QuestionFilters() {
+interface Topic {
+  slug: string;
+  name: string;
+}
+
+interface QuestionFiltersProps {
+  topics?: Topic[];
+}
+
+export function QuestionFilters({ topics = [] }: QuestionFiltersProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [isPending, startTransition] = useTransition();
+
+  const currentTopic = searchParams.get("topic") ?? "";
+
+  function updateTopic(value: string) {
+    const params = new URLSearchParams(searchParams.toString());
+    if (value) {
+      params.set("topic", value);
+    } else {
+      params.delete("topic");
+    }
+    startTransition(() => {
+      router.replace(`/questions?${params.toString()}`, { scroll: false });
+    });
+  }
 
   const currentLevels = (searchParams.get("levels") ?? "")
     .split(",")
@@ -67,6 +90,23 @@ export function QuestionFilters() {
 
   return (
     <div className={cn("space-y-3", isPending && "opacity-70")}>
+      {/* Topic select — used by E2E tests via #topic-filter */}
+      {topics.length > 0 && (
+        <select
+          id="topic-filter"
+          value={currentTopic}
+          onChange={(e) => updateTopic(e.currentTarget.value)}
+          className="h-9 rounded-md border border-input bg-background px-3 text-sm shadow-sm outline-none transition focus:border-ring focus:ring-1 focus:ring-ring"
+        >
+          <option value="">All topics</option>
+          {topics.map((t) => (
+            <option key={t.slug} value={t.slug}>
+              {t.name}
+            </option>
+          ))}
+        </select>
+      )}
+
       {/* Row 1 — search + lang */}
       <div className="flex items-center gap-3">
         <input

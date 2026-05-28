@@ -82,7 +82,7 @@ export default async function GlossaryPage({
           <div className="mb-3 flex items-center justify-between text-sm text-muted-foreground">
             <span>
               {filtered.length} {filtered.length === 1 ? "term" : "terms"}
-              {hasFilter ? " match" : " total"}
+              {hasFilter ? " match" : " across all topics"}
             </span>
             {hasFilter && (
               <Link

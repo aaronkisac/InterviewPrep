@@ -181,7 +181,7 @@ export default async function QuestionsPage({
 
       {/* ── Filters ── */}
       <div className="mb-4">
-        <QuestionFilters />
+        <QuestionFilters topics={systemTopics} />
       </div>
 
       {/* ── Tabs + Panel ── */}
