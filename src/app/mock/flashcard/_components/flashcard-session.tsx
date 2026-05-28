@@ -33,7 +33,7 @@ export function FlashcardSession({
   const [done, setDone] = useState(false);
   const saveCalledRef = useRef(false);
 
-  const current = questions[index];
+  const current = questions[index]!;
   const total = questions.length;
   const known = results.filter((r) => r === "known").length;
   const pct = Math.round((known / total) * 100);
