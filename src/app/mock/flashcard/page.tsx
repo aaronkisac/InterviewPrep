@@ -58,8 +58,8 @@ export default async function FlashcardPage({
   );
 
   for (let i = 0; i < systemSlugs.length; i++) {
-    const slug = systemSlugs[i];
-    const qs = systemQuestionSets[i];
+    const slug = systemSlugs[i]!;
+    const qs = systemQuestionSets[i]!;
     const name = systemTopicsList.find((t) => t.slug === slug)?.name ?? slug;
     topicNameParts.push(name);
     for (const q of qs) {
