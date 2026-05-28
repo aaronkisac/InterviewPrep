@@ -51,6 +51,9 @@ next-env.d.ts
 
 # write permission test file created by tooling
 .writetesttest-results/
+
+# Cowork / Claude agent internal state — never commit
+.omc/
 playwright-report/
 test-results/
 playwright-report/

@@ -35,7 +35,7 @@ export default async function proxy(req: NextRequest) {
   }
 
   // Admin-only gate
-  if (pathname.startsWith("/admin") && role !== "admin") {
+  if (pathname.startsWith("/admin") && role !== "admin" && role !== "super_admin") {
     return NextResponse.redirect(new URL("/", req.nextUrl.origin));
   }
 

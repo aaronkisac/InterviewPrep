@@ -185,7 +185,7 @@ export async function approveQuestion(
     .eq("id", session.user.id)
     .single();
 
-  if (userRow?.role !== "admin") return { ok: false, error: "Forbidden" };
+  if (userRow?.role !== "admin" && userRow?.role !== "super_admin") return { ok: false, error: "Forbidden" };
 
   const { error } = await sb
     .from("questions")
@@ -218,7 +218,7 @@ export async function rejectQuestion(
     .eq("id", session.user.id)
     .single();
 
-  if (userRow?.role !== "admin") return { ok: false, error: "Forbidden" };
+  if (userRow?.role !== "admin" && userRow?.role !== "super_admin") return { ok: false, error: "Forbidden" };
 
   const { error } = await sb
     .from("questions")
@@ -281,7 +281,7 @@ export async function adminDeleteQuestion(
     .eq("id", session.user.id)
     .single();
 
-  if (userRow?.role !== "admin") return { ok: false, error: "Forbidden" };
+  if (userRow?.role !== "admin" && userRow?.role !== "super_admin") return { ok: false, error: "Forbidden" };
 
   const { error } = await sb.from("questions").delete().eq("id", id);
   if (error) return { ok: false, error: error.message };

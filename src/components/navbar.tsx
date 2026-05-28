@@ -17,7 +17,7 @@ export async function Navbar() {
         .select("role")
         .eq("id", user.id)
         .single();
-      isAdmin = data?.role === "admin";
+      isAdmin = data?.role === "admin" || data?.role === "super_admin";
     } catch {
       // Non-critical — fail silently
     }

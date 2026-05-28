@@ -5,9 +5,10 @@ import { useState } from "react";
 
 import { GlossaryText } from "@/components/glossary-text";
 import { BookmarkButton } from "@/app/questions/_components/bookmark-button";
+import { LevelDots } from "@/components/level-dots";
 import type { GlossaryTerm } from "@/lib/glossary-match";
 import type { Language } from "@/lib/supabase/types";
-import { LEVELS, TR_FALLBACK } from "@/lib/topics";
+import { TR_FALLBACK } from "@/lib/topics";
 import type { QuestionListItem } from "@/lib/questions";
 import { cn } from "@/lib/utils";
 
@@ -29,37 +30,6 @@ function pickAnswer(
   };
 }
 
-const LEVEL_COLOURS: Record<number, string> = {
-  1: "bg-emerald-500",
-  2: "bg-emerald-500",
-  3: "bg-yellow-400",
-  4: "bg-orange-400",
-  5: "bg-red-500",
-};
-
-// 5 dots, colour based on level — with CSS tooltip showing level name
-function LevelDots({ level }: { level: number }) {
-  const active = LEVEL_COLOURS[level] ?? "bg-emerald-500";
-  const label = LEVELS.find((l) => l.value === level)?.label ?? `Level ${level}`;
-
-  return (
-    <div className="relative hidden sm:flex items-center gap-[3px] flex-shrink-0 group/dots">
-      {Array.from({ length: 5 }).map((_, i) => (
-        <span
-          key={i}
-          className={cn(
-            "inline-block h-[5px] w-[5px] rounded-full",
-            i < level ? active : "bg-border",
-          )}
-        />
-      ))}
-      {/* Tooltip */}
-      <span className="pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-1.5 whitespace-nowrap rounded bg-foreground px-1.5 py-0.5 text-[10px] font-medium text-background opacity-0 transition-opacity group-hover/dots:opacity-100">
-        {label}
-      </span>
-    </div>
-  );
-}
 
 export function QuestionCard({
   question,

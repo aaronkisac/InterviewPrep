@@ -3,14 +3,39 @@
 import { useState, useTransition } from "react";
 import { CheckCircle2, XCircle, Upload } from "lucide-react";
 
-import { createCustomQuestion, type CustomQuestion } from "@/lib/actions/custom-topics";
+import { createCustomQuestion, type CustomQuestion, type MockOption } from "@/lib/actions/custom-topics";
 import { cn } from "@/lib/utils";
 
-type ValidQuestion = { question: string; answer: string };
+type ValidQuestion = {
+  question: string;
+  answer: string;
+  level: number;
+  answer_personal?: string;
+  mock_options?: MockOption[];
+};
+
 type ValidationResult = {
   valid: ValidQuestion[];
   invalid: Array<{ index: number; reason: string }>;
 };
+
+function parseMockOptions(raw: unknown): MockOption[] | undefined {
+  if (!Array.isArray(raw) || raw.length !== 4) return undefined;
+  const opts = raw.map((o) => {
+    if (typeof o !== "object" || o === null) return null;
+    const obj = o as Record<string, unknown>;
+    if (typeof obj.optionText !== "string" || !obj.optionText.trim()) return null;
+    return {
+      optionText: obj.optionText.trim(),
+      isCorrect: Boolean(obj.isCorrect),
+      explanation: typeof obj.explanation === "string" ? obj.explanation.trim() : undefined,
+    } satisfies MockOption;
+  });
+  if (opts.some((o) => o === null)) return undefined;
+  const correctCount = (opts as MockOption[]).filter((o) => o.isCorrect).length;
+  if (correctCount !== 1) return undefined;
+  return opts as MockOption[];
+}
 
 function validateUserJson(raw: string): { parsed: ValidationResult; error?: never } | { error: string; parsed?: never } {
   let data: unknown;
@@ -28,12 +53,31 @@ function validateUserJson(raw: string): { parsed: ValidationResult; error?: neve
     const item = data[i] as Record<string, unknown>;
     if (!item.question || typeof item.question !== "string" || !item.question.trim()) {
       invalid.push({ index: i + 1, reason: '"question" is required (non-empty string)' });
-    } else {
-      valid.push({
-        question: item.question.trim(),
-        answer: typeof item.answer === "string" ? item.answer.trim() : "",
-      });
+      continue;
     }
+
+    const rawLevel = Number(item.level);
+    const level = rawLevel >= 1 && rawLevel <= 5 ? rawLevel : 1;
+
+    const mock_options = item.mock_options != null
+      ? parseMockOptions(item.mock_options)
+      : undefined;
+
+    if (item.mock_options != null && mock_options === undefined) {
+      invalid.push({
+        index: i + 1,
+        reason: '"mock_options" must be an array of exactly 4 objects with "optionText" and exactly 1 "isCorrect: true"',
+      });
+      continue;
+    }
+
+    valid.push({
+      question: item.question.trim(),
+      answer: typeof item.answer === "string" ? item.answer.trim() : "",
+      level,
+      answer_personal: typeof item.answer_personal === "string" ? item.answer_personal.trim() : undefined,
+      mock_options,
+    });
   }
 
   return { parsed: { valid, invalid } };
@@ -41,8 +85,23 @@ function validateUserJson(raw: string): { parsed: ValidationResult; error?: neve
 
 const EXAMPLE = JSON.stringify(
   [
-    { question: "What is the difference between null and undefined?", answer: "null is explicit absence, undefined is uninitialized." },
-    { question: "What is a closure?", answer: "" },
+    {
+      question: "What is the difference between null and undefined?",
+      answer: "null is explicit absence, undefined is uninitialized.",
+      level: 2,
+      answer_personal: "I always remember: null = intentional empty, undefined = forgotten.",
+    },
+    {
+      question: "What is a closure?",
+      answer: "A function that retains access to its outer scope even after the outer function returns.",
+      level: 3,
+      mock_options: [
+        { optionText: "A function that retains access to its outer scope", isCorrect: true, explanation: "Correct — this is the definition of a closure." },
+        { optionText: "A function with no return value", isCorrect: false },
+        { optionText: "A function that runs immediately", isCorrect: false },
+        { optionText: "A function stored in an object", isCorrect: false },
+      ],
+    },
   ],
   null,
   2,
@@ -76,7 +135,14 @@ export function JsonImportUser({
     startTransition(async () => {
       const created: CustomQuestion[] = [];
       for (const q of result.valid) {
-        const res = await createCustomQuestion(topicId, q.question, q.answer);
+        const res = await createCustomQuestion(
+          topicId,
+          q.question,
+          q.answer,
+          q.level,
+          q.answer_personal,
+          q.mock_options,
+        );
         if (res.ok && res.question) created.push(res.question);
       }
       setSuccess(created.length);
@@ -116,6 +182,14 @@ export function JsonImportUser({
         <div className="mt-1 space-y-0.5">
           <p><span className="font-mono text-foreground">question</span> — required</p>
           <p><span className="font-mono text-foreground">answer</span> — optional</p>
+          <p><span className="font-mono text-foreground">level</span> — optional (1–5, default 1)</p>
+          <p><span className="font-mono text-foreground">answer_personal</span> — optional personal note</p>
+          <p>
+            <span className="font-mono text-foreground">mock_options</span> — optional, array of exactly 4 objects:
+            {" "}<span className="font-mono">optionText</span>,{" "}
+            <span className="font-mono">isCorrect</span> (exactly 1 true),{" "}
+            <span className="font-mono">explanation</span> (optional)
+          </p>
           <pre className="mt-1.5 overflow-x-auto rounded bg-muted p-2 text-[10px] leading-relaxed">{EXAMPLE}</pre>
         </div>
       </details>

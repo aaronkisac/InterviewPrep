@@ -1,41 +1,79 @@
+import { auth } from "@/lib/auth";
 import { getMockReadyMeta } from "@/lib/mock";
 import { listSystemTopics } from "@/lib/actions/admin-topics";
+import { listCustomTopics, getCustomMockReadyMeta } from "@/lib/actions/custom-topics";
+import type { MockReadyMeta } from "@/lib/mock-shared";
 
-import { MockConfig } from "./_components/mock-config";
+import { MockConfigTabs, type TopicEntry } from "./_components/mock-config-tabs";
 
 export const dynamic = "force-dynamic";
 
 export default async function MockPage() {
-  const [meta, systemTopics] = await Promise.all([
+  const session = await auth().catch(() => null);
+  const userId = session?.user?.id;
+
+  const [systemMeta, systemTopics, customTopics, customMockMeta] = await Promise.all([
     getMockReadyMeta(),
     listSystemTopics(),
+    userId ? listCustomTopics(userId).catch(() => []) : Promise.resolve([]),
+    userId ? getCustomMockReadyMeta(userId).catch(() => []) : Promise.resolve([]),
   ]);
-  const topicLabels = Object.fromEntries(systemTopics.map((t) => [t.slug, t.name]));
+
+  // Combine system + custom mock-ready meta
+  const meta: MockReadyMeta[] = [
+    ...systemMeta,
+    ...(customMockMeta as MockReadyMeta[]),
+  ];
+
+  // Topic labels map for display
+  const topicLabels: Record<string, string> = Object.fromEntries(
+    systemTopics.map((t) => [t.slug, t.name]),
+  );
+  for (const t of customTopics) {
+    topicLabels[`custom:${t.slug}`] = t.name;
+  }
+
+  // Mock tab: system topics that have mock-ready questions
+  const systemSlugsWithMock = new Set(
+    systemMeta.map((m) => m.topic).filter((s) => !s.startsWith("custom:")),
+  );
+  const mockSystemTopics: TopicEntry[] = systemTopics
+    .filter((t) => systemSlugsWithMock.has(t.slug))
+    .map((t) => ({ key: t.slug, name: t.name }));
+
+  // Mock tab: custom topics that have mock-ready questions
+  const mockCustomTopics: TopicEntry[] = customTopics
+    .filter((t) => (t.mock_question_count ?? 0) > 0)
+    .map((t) => ({ key: `custom:${t.slug}`, name: t.name, isPrivate: true }));
+
+  const mockTopics: TopicEntry[] = [...mockSystemTopics, ...mockCustomTopics];
+
+  // Flashcard tab: ALL system topics + all custom topics with any questions
+  const flashSystemTopics: TopicEntry[] = systemTopics.map((t) => ({
+    key: t.slug,
+    name: t.name,
+  }));
+  const flashCustomTopics: TopicEntry[] = customTopics
+    .filter((t) => t.question_count > 0)
+    .map((t) => ({ key: `custom:${t.slug}`, name: t.name, isPrivate: true }));
+
+  const flashcardTopics: TopicEntry[] = [...flashSystemTopics, ...flashCustomTopics];
 
   return (
-    <main className="mx-auto w-full max-w-2xl px-6 py-10">
-      <header className="mb-4">
-        <p className="text-sm font-medium text-muted-foreground">
-          Mock interview
+    <main className="mx-auto w-full max-w-2xl px-6 py-10 space-y-8">
+      <header>
+        <p className="text-sm font-medium text-muted-foreground">Practice</p>
+        <h1 className="mt-1 text-2xl font-semibold tracking-tight">Configure your session</h1>
+        <p className="mt-2 text-sm text-muted-foreground">
+          Pick a mode, choose your topics and difficulty, then start.
         </p>
-        <h1 className="mt-1 text-2xl font-semibold tracking-tight">
-          Configure your session
-        </h1>
       </header>
-
-      <p className="mb-6 text-sm text-muted-foreground">
-        Pick your topics and difficulty, choose a length, and answer one
-        multiple-choice question at a time. You get a score at the end.
-      </p>
-
-      {meta.length === 0 ? (
-        <p className="rounded-lg border border-dashed border-border p-8 text-center text-sm text-muted-foreground">
-          No mock questions are available yet. Run <code>pnpm seed</code> to
-          load the option data.
-        </p>
-      ) : (
-        <MockConfig meta={meta} topicLabels={topicLabels} />
-      )}
+      <MockConfigTabs
+        mockMeta={meta}
+        mockTopics={mockTopics}
+        flashcardTopics={flashcardTopics}
+        topicLabels={topicLabels}
+      />
     </main>
   );
 }

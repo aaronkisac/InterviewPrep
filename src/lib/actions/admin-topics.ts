@@ -14,7 +14,7 @@ export type SystemTopic = {
 async function requireAdmin() {
   const session = await auth();
   if (!session?.user?.id) throw new Error("Not authenticated");
-  if (session.user.role !== "admin") throw new Error("Not admin");
+  if (session.user.role !== "admin" && session.user.role !== "super_admin") throw new Error("Not admin");
   return session.user.id;
 }
 
