@@ -1,56 +1,214 @@
 @import "tailwindcss";
 
 /* ------------------------------------------------------------------ */
-/* Vintage Paper theme — warm dark / parchment aesthetic               */
+/* Vintage Paper theme — 21st.dev/community/themes/vintage-paper       */
+/* To switch themes: only update the values in :root and .dark below.  */
 /* ------------------------------------------------------------------ */
 
 :root {
-  --background: hsl(26 16% 15%);
-  --foreground: hsl(39 34% 89%);
-  --card: hsl(26 14% 20%);
-  --card-foreground: hsl(39 34% 89%);
-  --muted: hsl(26 14% 20%);
-  --muted-foreground: hsl(38 18% 72%);
-  --border: hsl(25 13% 26%);
-  --input: hsl(25 13% 26%);
-  --ring: hsl(30 34% 63%);
-  --primary: hsl(30 34% 63%);
-  --primary-foreground: hsl(26 16% 15%);
-  --secondary: hsl(25 13% 26%);
-  --secondary-foreground: hsl(39 34% 89%);
-  --accent: hsl(24 18% 30%);
-  --accent-foreground: hsl(39 34% 89%);
-  --destructive: hsl(0 65% 55%);
-  --destructive-foreground: hsl(39 34% 89%);
+  /* Base */
+  --background: #f5f1e6;
+  --foreground: #4a3f35;
+
+  /* Card */
+  --card: #fffcf5;
+  --card-foreground: #4a3f35;
+
+  /* Popover */
+  --popover: #fffcf5;
+  --popover-foreground: #4a3f35;
+
+  /* Primary */
+  --primary: #a67c52;
+  --primary-foreground: #ffffff;
+
+  /* Secondary */
+  --secondary: #e2d8c3;
+  --secondary-foreground: #5c4d3f;
+
+  /* Muted */
+  --muted: #ece5d8;
+  --muted-foreground: #7d6b56;
+
+  /* Accent */
+  --accent: #d4c8aa;
+  --accent-foreground: #4a3f35;
+
+  /* Destructive */
+  --destructive: #b54a35;
+  --destructive-foreground: #ffffff;
+
+  /* Success (project-specific) */
   --success: hsl(142 45% 48%);
-  --success-foreground: hsl(26 16% 15%);
+  --success-foreground: #ffffff;
+
+  /* Border / Input / Ring */
+  --border: #dbd0ba;
+  --input: #dbd0ba;
+  --ring: #a67c52;
+
+  /* Sidebar */
+  --sidebar: #ece5d8;
+  --sidebar-foreground: #4a3f35;
+  --sidebar-primary: #a67c52;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #d4c8aa;
+  --sidebar-accent-foreground: #4a3f35;
+  --sidebar-border: #dbd0ba;
+  --sidebar-ring: #a67c52;
+
+  /* Charts */
+  --chart-1: #a67c52;
+  --chart-2: #8d6e4c;
+  --chart-3: #735a3a;
+  --chart-4: #b3906f;
+  --chart-5: #c0a080;
+
+  /* Shadow */
+  --shadow-color: hsl(28 13% 20%);
+  --shadow-opacity: 0.12;
+  --shadow-blur: 5px;
+  --shadow-spread: 0px;
+  --shadow-offset-x: 2px;
+  --shadow-offset-y: 3px;
+
+  /* Radius */
   --radius: 0.25rem;
+
+  /* Typography */
+  --font-sans: Libre Baskerville, serif;
+  --font-serif: Lora, serif;
+  --font-mono: IBM Plex Mono, monospace;
+}
+
+.dark {
+  /* Base */
+  --background: #2d2621;
+  --foreground: #ece5d8;
+
+  /* Card */
+  --card: #3a322c;
+  --card-foreground: #ece5d8;
+
+  /* Popover */
+  --popover: #3a322c;
+  --popover-foreground: #ece5d8;
+
+  /* Primary */
+  --primary: #c0a080;
+  --primary-foreground: #2d2621;
+
+  /* Secondary */
+  --secondary: #4a4039;
+  --secondary-foreground: #ece5d8;
+
+  /* Muted */
+  --muted: #3a322c;
+  --muted-foreground: #c5bcac;
+
+  /* Accent */
+  --accent: #59493e;
+  --accent-foreground: #ece5d8;
+
+  /* Destructive */
+  --destructive: #b54a35;
+  --destructive-foreground: #ffffff;
+
+  /* Success (project-specific) */
+  --success: hsl(142 45% 48%);
+  --success-foreground: #2d2621;
+
+  /* Border / Input / Ring */
+  --border: #4a4039;
+  --input: #4a4039;
+  --ring: #c0a080;
+
+  /* Sidebar */
+  --sidebar: #2d2621;
+  --sidebar-foreground: #ece5d8;
+  --sidebar-primary: #c0a080;
+  --sidebar-primary-foreground: #2d2621;
+  --sidebar-accent: #59493e;
+  --sidebar-accent-foreground: #ece5d8;
+  --sidebar-border: #4a4039;
+  --sidebar-ring: #c0a080;
+
+  /* Charts */
+  --chart-1: #c0a080;
+  --chart-2: #b3906f;
+  --chart-3: #a67c52;
+  --chart-4: #8d6e4c;
+  --chart-5: #735a3a;
 }
 
 @theme inline {
+  /* Base */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+
+  /* Card */
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
+
+  /* Popover */
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  /* Primary */
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  /* Secondary */
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  /* Muted */
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
+
+  /* Accent */
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  /* Destructive */
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  /* Success */
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+
+  /* Border / Input / Ring */
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
-  --color-success: var(--success);
-  --color-success-foreground: var(--success-foreground);
+
+  /* Sidebar */
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Charts */
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  /* Radius */
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
 }
+
+/* ------------------------------------------------------------------ */
+/* Base styles                                                          */
+/* ------------------------------------------------------------------ */
 
 html,
 body {
@@ -75,25 +233,21 @@ body {
   color: var(--foreground);
   font-family:
     var(--font-libre-baskerville),
-    Georgia,
-    "Times New Roman",
-    serif;
+    var(--font-sans);
   -webkit-font-smoothing: antialiased;
 }
 
 /* ------------------------------------------------------------------ */
-/* Minimal highlight.js theme — inlined because Tailwind v4 PostCSS    */
-/* can't resolve `@import "highlight.js/styles/..."` from node_modules.*/
-/* Token palette flips with prefers-color-scheme via CSS variables.    */
+/* Highlight.js syntax theme — matches vintage paper palette           */
 /* ------------------------------------------------------------------ */
 
 :root {
-  --hl-bg: hsl(26 14% 20%);
-  --hl-fg: hsl(39 34% 89%);
+  --hl-bg: var(--card);
+  --hl-fg: var(--foreground);
   --hl-keyword: hsl(280 55% 75%);
   --hl-string: hsl(140 42% 68%);
   --hl-number: hsl(30 80% 72%);
-  --hl-comment: hsl(37 15% 52%);
+  --hl-comment: var(--muted-foreground);
   --hl-function: hsl(210 70% 72%);
   --hl-type: hsl(40 75% 70%);
   --hl-attr: hsl(185 58% 65%);

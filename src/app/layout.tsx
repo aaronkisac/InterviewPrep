@@ -3,6 +3,7 @@ import { Libre_Baskerville } from "next/font/google";
 import "./globals.css";
 
 import { Navbar } from "@/components/navbar";
+import { ThemeProvider } from "@/components/theme-provider";
 
 const libreBaskerville = Libre_Baskerville({
   subsets: ["latin"],
@@ -22,10 +23,12 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`h-full antialiased ${libreBaskerville.variable}`}>
+    <html lang="en" className={`h-full antialiased ${libreBaskerville.variable}`} suppressHydrationWarning>
       <body className="min-h-full flex flex-col bg-background text-foreground">
-        <Navbar />
-        {children}
+        <ThemeProvider>
+          <Navbar />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { auth, signOut } from "@/lib/auth";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { NavLink } from "@/components/nav-link";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 export async function Navbar() {
   const session = await auth().catch(() => null);
@@ -51,6 +52,9 @@ export async function Navbar() {
 
         {/* Spacer */}
         <div className="flex-1" />
+
+        {/* Theme toggle */}
+        <ThemeToggle />
 
         {/* Auth controls */}
         {user ? (
