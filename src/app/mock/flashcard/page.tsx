@@ -139,4 +139,5 @@ export default async function FlashcardPage({
 
       <FlashcardSession questions={questions} topicName={topicName} />
     </main>
- 
+   );
+}
