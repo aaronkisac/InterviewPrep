@@ -1,6 +1,6 @@
 # Progress
 
-Last updated: 2026-05-26 (guest access; custom topics; dynamic topics; admin JSON import)
+Last updated: 2026-05-29 (custom topic question fixes: level dots + bookmark support)
 
 ---
 
@@ -73,6 +73,7 @@ Last updated: 2026-05-26 (guest access; custom topics; dynamic topics; admin JSO
 | Custom Topics | Dashboard accordion — users create private topics, add/edit/delete/JSON-import questions. Actions: `src/lib/actions/custom-topics.ts`. Migration: `20260526000001_custom_topics.sql`. |
 | Dynamic Topics + Admin Import | `Topic` type → `string`. `system_topics` table (migration `20260526000002`). Admin `/admin/topics`: create/delete topics, JSON bulk import per topic (client-side validation + live count). Dashboard JSON import for custom topics. Required fields: admin (question, level 1-5, answerGeneral); user (question). |
 | DB-driven topic lists | All hardcoded `TOPICS`/`TOPIC_LABELS` removed from every page and component. Topic names now fetched via `listSystemTopics()` everywhere: questions list, question detail, mock config, mock session, homepage topic grid, dashboard, glossary, admin questions, `/questions/new`. `mock-shared.ts` `parseTopicList` no longer filters against hardcoded array. |
+| Custom topic question fixes | `CustomQuestionCard` now shows `LevelDots`. Custom questions can now be bookmarked via new `custom_question_bookmarks` table (migration `20260529000001`). `toggleCustomBookmark` + `getCustomBookmarkIds` actions added to `custom-topics.ts`. |
 
 ---
 

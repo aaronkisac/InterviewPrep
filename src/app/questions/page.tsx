@@ -11,7 +11,7 @@ import {
 import { listTerms } from "@/lib/terms";
 import { parseLanguage } from "@/lib/topics";
 import { listSystemTopics } from "@/lib/actions/admin-topics";
-import { listCustomTopics, getCustomTopic } from "@/lib/actions/custom-topics";
+import { listCustomTopics, getCustomTopic, getCustomBookmarkIds } from "@/lib/actions/custom-topics";
 
 import { TopicTabs } from "./_components/topic-tabs";
 import { QuestionFilters } from "./_components/filters";
@@ -97,14 +97,19 @@ export default async function QuestionsPage({
     ? await listCustomTopics(userId).catch(() => [])
     : [];
 
-  // If a custom topic tab is active, fetch its questions
-  const customTopicData =
+  // If a custom topic tab is active, fetch its questions + bookmarks
+  const [customTopicData, customBookmarkIds] = await Promise.all([
     userId && myTopicSlug
-      ? await getCustomTopic(myTopicSlug, userId).catch(() => null)
-      : null;
+      ? getCustomTopic(myTopicSlug, userId).catch(() => null)
+      : Promise.resolve(null),
+    userId && myTopicSlug
+      ? getCustomBookmarkIds().catch(() => [] as string[])
+      : Promise.resolve([] as string[]),
+  ]);
 
   const topicLabels = Object.fromEntries(systemTopics.map((t) => [t.slug, t.name]));
   const bookmarkedSet = new Set(bookmarkedIds);
+  const customBookmarkedSet = new Set(customBookmarkIds);
 
   // System questions (with guest level filter)
   const visibleQuestions = isLoggedIn
@@ -227,7 +232,12 @@ export default async function QuestionsPage({
             ) : (
               <ul className="space-y-1.5">
                 {customQuestions.map((q, i) => (
-                  <CustomQuestionCard key={q.id} question={q} index={i + 1} />
+                  <CustomQuestionCard
+                    key={q.id}
+                    question={q}
+                    index={i + 1}
+                    initialBookmarked={customBookmarkedSet.has(q.id)}
+                  />
                 ))}
               </ul>
             )

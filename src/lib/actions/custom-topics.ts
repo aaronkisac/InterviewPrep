@@ -422,3 +422,49 @@ export async function getCustomMockQuestions(
     return opts.length === 4 && opts.filter((o) => o.isCorrect).length === 1;
   }) as CustomQuestion[];
 }
+
+// ── Custom question bookmarks ─────────────────────────────────────────────────
+
+export async function toggleCustomBookmark(
+  customQuestionId: string,
+): Promise<{ bookmarked: boolean } | null> {
+  const session = await auth();
+  if (!session?.user?.id) return null;
+
+  const userId = session.user.id;
+  const sb = createAdminClient();
+
+  const { data: existing } = await sb
+    .from("custom_question_bookmarks")
+    .select("custom_question_id")
+    .eq("user_id", userId)
+    .eq("custom_question_id", customQuestionId)
+    .maybeSingle();
+
+  if (existing) {
+    await sb
+      .from("custom_question_bookmarks")
+      .delete()
+      .eq("user_id", userId)
+      .eq("custom_question_id", customQuestionId);
+    return { bookmarked: false };
+  } else {
+    await sb
+      .from("custom_question_bookmarks")
+      .insert({ user_id: userId, custom_question_id: customQuestionId });
+    return { bookmarked: true };
+  }
+}
+
+export async function getCustomBookmarkIds(): Promise<string[]> {
+  const session = await auth();
+  if (!session?.user?.id) return [];
+
+  const sb = createAdminClient();
+  const { data } = await sb
+    .from("custom_question_bookmarks")
+    .select("custom_question_id")
+    .eq("user_id", session.user.id);
+
+  return (data ?? []).map((r) => r.custom_question_id as string);
+}

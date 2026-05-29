@@ -1,19 +1,34 @@
 "use client";
 
-import { useState } from "react";
-import { Lock } from "lucide-react";
+import { useState, useTransition } from "react";
+import { Lock, Bookmark } from "lucide-react";
+import { Tooltip } from "radix-ui";
 
 import type { CustomQuestion } from "@/lib/actions/custom-topics";
+import { toggleCustomBookmark } from "@/lib/actions/custom-topics";
+import { LevelDots } from "@/components/level-dots";
 import { cn } from "@/lib/utils";
 
 export function CustomQuestionCard({
   question,
   index,
+  initialBookmarked = false,
 }: {
   question: CustomQuestion;
   index: number;
+  initialBookmarked?: boolean;
 }) {
   const [open, setOpen] = useState(false);
+  const [bookmarked, setBookmarked] = useState(initialBookmarked);
+  const [isPending, startTransition] = useTransition();
+
+  function handleBookmark(e: React.MouseEvent) {
+    e.stopPropagation();
+    startTransition(async () => {
+      const result = await toggleCustomBookmark(question.id);
+      if (result !== null) setBookmarked(result.bookmarked);
+    });
+  }
 
   return (
     <li className="rounded-lg border border-border bg-background transition hover:border-foreground/30">
@@ -43,7 +58,54 @@ export function CustomQuestionCard({
           </span>
         </button>
 
-        <Lock className="size-3 flex-shrink-0 text-muted-foreground/40" />
+        <LevelDots level={question.level ?? 1} />
+
+        <Tooltip.Provider delayDuration={300}>
+          <Tooltip.Root>
+            <Tooltip.Trigger asChild>
+              <button
+                type="button"
+                onClick={handleBookmark}
+                disabled={isPending}
+                aria-label={bookmarked ? "Remove bookmark" : "Bookmark question"}
+                className={cn(
+                  "rounded p-1 transition hover:bg-accent disabled:opacity-50",
+                  bookmarked ? "text-amber-500" : "text-muted-foreground hover:text-foreground",
+                )}
+              >
+                <Bookmark className="size-4" fill={bookmarked ? "currentColor" : "none"} />
+              </button>
+            </Tooltip.Trigger>
+            <Tooltip.Portal>
+              <Tooltip.Content
+                side="top"
+                className="z-50 rounded-md bg-foreground px-2.5 py-1.5 text-xs text-background shadow-md animate-in fade-in-0 zoom-in-95"
+                sideOffset={5}
+              >
+                {bookmarked ? "Remove bookmark" : "Save to bookmarks"}
+                <Tooltip.Arrow className="fill-foreground" />
+              </Tooltip.Content>
+            </Tooltip.Portal>
+          </Tooltip.Root>
+
+          <Tooltip.Root>
+            <Tooltip.Trigger asChild>
+              <span className="flex items-center">
+                <Lock className="size-3 flex-shrink-0 text-muted-foreground/40" />
+              </span>
+            </Tooltip.Trigger>
+            <Tooltip.Portal>
+              <Tooltip.Content
+                side="top"
+                className="z-50 rounded-md bg-foreground px-2.5 py-1.5 text-xs text-background shadow-md animate-in fade-in-0 zoom-in-95"
+                sideOffset={5}
+              >
+                Private — only visible to you
+                <Tooltip.Arrow className="fill-foreground" />
+              </Tooltip.Content>
+            </Tooltip.Portal>
+          </Tooltip.Root>
+        </Tooltip.Provider>
       </div>
 
       {/* Expanded body */}
