@@ -10,6 +10,17 @@ import { TooltipDemo } from "./_components/tooltip-demo";
 
 export const dynamic = "force-dynamic";
 
+export const metadata = {
+  title: "Glossary",
+  description:
+    "A searchable glossary of frontend terms with concise definitions, grouped by topic and auto-linked inline across answers.",
+  openGraph: {
+    title: "Glossary · Interview Prep",
+    description:
+      "Searchable frontend term definitions, grouped by topic and auto-linked across answers.",
+  },
+};
+
 type SearchParams = Promise<{ topic?: string; q?: string }>;
 
 // Alphabetical section order — only rendered when they have terms

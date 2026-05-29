@@ -4,6 +4,17 @@ import { MockConfig } from "./_components/mock-config";
 
 export const dynamic = "force-dynamic";
 
+export const metadata = {
+  title: "Mock interview",
+  description:
+    "Run a timed, multiple-choice mock interview. Pick your topics and difficulty range, choose a length, and get a score at the end.",
+  openGraph: {
+    title: "Mock interview · Interview Prep",
+    description:
+      "Timed multiple-choice mock interviews with configurable topics, difficulty, and length.",
+  },
+};
+
 export default async function MockPage() {
   const meta = await getMockReadyMeta();
 

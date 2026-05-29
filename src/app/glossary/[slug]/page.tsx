@@ -13,8 +13,18 @@ type Params = Promise<{ slug: string }>;
 export async function generateMetadata({ params }: { params: Params }) {
   const { slug } = await params;
   const term = await getTermBySlug(slug).catch(() => null);
+  if (!term) {
+    return { title: "Glossary" };
+  }
+  const title = `${term.label} — Glossary`;
   return {
-    title: term ? `${term.label} — Glossary` : "Glossary",
+    title,
+    description: term.tooltip,
+    openGraph: {
+      title: `${title} · Interview Prep`,
+      description: term.tooltip,
+      type: "article",
+    },
   };
 }
 

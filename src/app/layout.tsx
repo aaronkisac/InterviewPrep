@@ -12,10 +12,20 @@ const libreBaskerville = Libre_Baskerville({
   display: "swap",
 });
 
+const siteUrl = process.env.NEXTAUTH_URL ?? "http://localhost:3000";
+
 export const metadata: Metadata = {
-  title: "Interview Prep",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: "Interview Prep",
+    template: "%s · Interview Prep",
+  },
   description:
     "Personal interview prep across React, TypeScript, and Next.js — Q&A, glossary, mock sessions.",
+  openGraph: {
+    siteName: "Interview Prep",
+    type: "website",
+  },
 };
 
 export default function RootLayout({

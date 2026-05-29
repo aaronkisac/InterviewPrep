@@ -1,43 +1,58 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 
 import { auth } from "@/lib/auth";
 import { TOPIC_LABELS, TOPICS } from "@/lib/topics";
 import { getTopicStats } from "@/lib/questions";
+import { listTerms } from "@/lib/terms";
 
 export const dynamic = "force-dynamic";
 
-const FEATURES = [
-  {
-    title: "Q&A bank",
+export const metadata: Metadata = {
+  title: { absolute: "Frontend Interview Prep — React, TypeScript & Next.js" },
+  description:
+    "Practice frontend interviews with a structured Q&A bank, a searchable term glossary, and timed multiple-choice mock sessions across React, TypeScript, and Next.js.",
+  openGraph: {
+    title: "Frontend Interview Prep — React, TypeScript & Next.js",
     description:
-      "Questions across 13 topics with general and personal answers. Filter by topic and seniority level.",
-    href: "/questions",
-    cta: "Browse questions",
+      "A structured Q&A bank, term glossary, and timed mock interview sessions for frontend engineers.",
+    type: "website",
   },
-  {
-    title: "Mock interviews",
-    description:
-      "Pick a topic, answer multiple-choice questions under simulated interview conditions, and review your score.",
-    href: "/mock",
-    cta: "Start a session",
-  },
-  {
-    title: "Glossary",
-    description:
-      "105 frontend terms with concise definitions — auto-linked inline as you read through answers.",
-    href: "/glossary",
-    cta: "Explore terms",
-  },
-] as const;
+};
 
 export default async function HomePage() {
   const session = await auth().catch(() => null);
   const user = session?.user;
 
-  const topicStats = await getTopicStats().catch(
-    () => ({}) as Record<string, number>,
-  );
+  const [topicStats, terms] = await Promise.all([
+    getTopicStats().catch(() => ({}) as Record<string, number>),
+    listTerms().catch(() => []),
+  ]);
   const totalQuestions = Object.values(topicStats).reduce((s, n) => s + n, 0);
+  const topicCount = TOPICS.length;
+  const termCount = terms.length;
+
+  const features = [
+    {
+      title: "Q&A bank",
+      description: `Questions across ${topicCount} topics with general and personal answers. Filter by topic and seniority level.`,
+      href: "/questions",
+      cta: "Browse questions",
+    },
+    {
+      title: "Mock interviews",
+      description:
+        "Pick a topic, answer multiple-choice questions under simulated interview conditions, and review your score.",
+      href: "/mock",
+      cta: "Start a session",
+    },
+    {
+      title: "Glossary",
+      description: `${termCount > 0 ? `${termCount} frontend` : "Frontend"} terms with concise definitions — auto-linked inline as you read through answers.`,
+      href: "/glossary",
+      cta: "Explore terms",
+    },
+  ];
 
   return (
     <main className="mx-auto flex w-full max-w-3xl flex-col gap-14 px-6 py-16">
@@ -109,7 +124,7 @@ export default async function HomePage() {
           What&apos;s inside
         </h2>
         <div className="grid gap-4 sm:grid-cols-3">
-          {FEATURES.map((f) => (
+          {features.map((f) => (
             <Link
               key={f.href}
               href={f.href}

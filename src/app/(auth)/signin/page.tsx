@@ -3,7 +3,9 @@ import { redirect } from "next/navigation";
 import { auth, signIn } from "@/lib/auth";
 
 export const metadata = {
-  title: "Sign in · Interview Prep",
+  title: "Sign in",
+  description:
+    "Sign in with Google or GitHub to save mock session results, bookmark questions, and track your interview-prep progress.",
 };
 
 export default async function SignInPage() {

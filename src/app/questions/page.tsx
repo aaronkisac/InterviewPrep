@@ -17,6 +17,17 @@ import { QuestionCard } from "./_components/question-card";
 
 export const dynamic = "force-dynamic";
 
+export const metadata = {
+  title: "Question bank",
+  description:
+    "Browse frontend interview questions with general and personal answers. Filter by topic and seniority level across React, TypeScript, Next.js, and more.",
+  openGraph: {
+    title: "Question bank · Interview Prep",
+    description:
+      "Browse frontend interview questions with model answers, filterable by topic and seniority level.",
+  },
+};
+
 type SearchParams = Promise<{
   topic?: string;
   levels?: string;
@@ -33,6 +44,8 @@ const t = {
     clear: "Clear filters",
     empty: "No questions match these filters yet.",
     loginForBookmarks: "Sign in to save bookmarks.",
+    invalidTopic: (topic: string) =>
+      `“${topic}” isn’t a known topic — showing all questions instead.`,
   },
   tr: {
     bank: "Soru bankası",
@@ -42,6 +55,8 @@ const t = {
     clear: "Filtreleri temizle",
     empty: "Bu filtrelere uyan soru yok.",
     loginForBookmarks: "Yer imlerini görmek için giriş yap.",
+    invalidTopic: (topic: string) =>
+      `“${topic}” bilinen bir konu değil — bunun yerine tüm sorular gösteriliyor.`,
   },
 } as const;
 
@@ -56,8 +71,16 @@ export default async function QuestionsPage({
 
   const isBookmarkedTab = params.topic === "bookmarked";
 
+  const parsedTopic = isBookmarkedTab ? undefined : parseTopic(params.topic);
+  const invalidTopic =
+    !isBookmarkedTab &&
+    Boolean(params.topic) &&
+    parsedTopic === undefined
+      ? params.topic
+      : undefined;
+
   const filters = {
-    topic: isBookmarkedTab ? undefined : parseTopic(params.topic),
+    topic: parsedTopic,
     levels: parseLevels(params.levels),
     q: parseQuery(params.q),
   };
@@ -104,6 +127,15 @@ export default async function QuestionsPage({
           </Link>
         )}
       </header>
+
+      {invalidTopic && (
+        <div
+          role="status"
+          className="mb-4 rounded-md border border-border bg-muted/40 px-4 py-2.5 text-sm text-muted-foreground"
+        >
+          {i18n.invalidTopic(invalidTopic)}
+        </div>
+      )}
 
       {/* ── Filters (search + level + lang) — always visible at top ── */}
       <div className="mb-4">
