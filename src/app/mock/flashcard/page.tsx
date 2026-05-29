@@ -126,7 +126,7 @@ export default async function FlashcardPage({
   const isMulti = rawTopics.length > 1;
 
   return (
-    <main className="mx-auto w-full max-w-2xl px-6 py-10">
+    <main className="mx-auto w-full max-w-[1200px] px-4 sm:px-6 lg:px-8 py-10">
       <header className="mb-6">
         <p className="text-sm font-medium text-muted-foreground">Flashcard session</p>
         <h1 className="mt-1 text-2xl font-semibold tracking-tight">{topicName}</h1>
@@ -139,5 +139,4 @@ export default async function FlashcardPage({
 
       <FlashcardSession questions={questions} topicName={topicName} />
     </main>
-  );
-}
+ 

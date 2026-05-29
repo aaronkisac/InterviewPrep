@@ -4,6 +4,7 @@ import { auth, signOut } from "@/lib/auth";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { NavLink } from "@/components/nav-link";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { MobileNav } from "@/components/mobile-nav";
 
 export async function Navbar() {
   const session = await auth().catch(() => null);
@@ -24,9 +25,14 @@ export async function Navbar() {
     }
   }
 
+  async function handleSignOut() {
+    "use server";
+    await signOut({ redirectTo: "/" });
+  }
+
   return (
     <nav className="sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="mx-auto flex max-w-3xl items-center gap-2 px-6 py-2">
+      <div className="mx-auto flex max-w-[1200px] items-center gap-2 px-4 sm:px-6 py-2">
         {/* Brand */}
         <Link
           href="/"
@@ -35,8 +41,8 @@ export async function Navbar() {
           Interview Prep
         </Link>
 
-        {/* Primary nav — hidden on very small screens */}
-        <div className="hidden items-center gap-1 sm:flex">
+        {/* Desktop nav — hidden below 800px */}
+        <div className="hidden min-[800px]:flex items-center gap-1">
           <NavLink href="/questions">Questions</NavLink>
           {user && <NavLink href="/mock">Mock</NavLink>}
           {user && <NavLink href="/glossary">Glossary</NavLink>}
@@ -56,18 +62,13 @@ export async function Navbar() {
         {/* Theme toggle */}
         <ThemeToggle />
 
-        {/* Auth controls */}
+        {/* Desktop auth — hidden below 800px */}
         {user ? (
-          <div className="flex items-center gap-1">
+          <div className="hidden min-[800px]:flex items-center gap-1">
             <NavLink href="/dashboard" exact>
               Dashboard
             </NavLink>
-            <form
-              action={async () => {
-                "use server";
-                await signOut({ redirectTo: "/" });
-              }}
-            >
+            <form action={handleSignOut}>
               <button
                 type="submit"
                 className="rounded-md px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-accent/60 hover:text-foreground"
@@ -79,11 +80,18 @@ export async function Navbar() {
         ) : (
           <Link
             href="/signin"
-            className="rounded-md bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground hover:opacity-90"
+            className="hidden min-[800px]:inline-flex rounded-md bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground hover:opacity-90"
           >
             Sign in
           </Link>
         )}
+
+        {/* Mobile hamburger — hidden above 800px */}
+        <MobileNav
+          user={user ? { name: user.name, email: user.email } : undefined}
+          isAdmin={isAdmin}
+          signOutAction={handleSignOut}
+        />
       </div>
     </nav>
   );

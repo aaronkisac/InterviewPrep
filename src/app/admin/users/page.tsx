@@ -41,7 +41,7 @@ export default async function AdminUsersPage({
   }
 
   return (
-    <main className="mx-auto w-full max-w-3xl px-6 py-12 space-y-10">
+    <main className="mx-auto w-full max-w-[1200px] px-4 sm:px-6 lg:px-8 py-12 space-y-10">
       <div>
         <h1 className="text-2xl font-semibold tracking-tight">Users</h1>
         <p className="mt-1 text-sm text-muted-foreground">

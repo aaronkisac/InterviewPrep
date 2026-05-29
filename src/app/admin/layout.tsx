@@ -29,7 +29,7 @@ export default async function AdminLayout({
     <div className="flex flex-1 flex-col">
       {/* Admin sub-nav — sits below the global Navbar */}
       <div className="border-b border-border bg-muted/40">
-        <div className="mx-auto flex w-full max-w-3xl items-center gap-1 px-6 py-1.5">
+        <div className="mx-auto flex w-full max-w-[1200px] items-center gap-1 px-4 sm:px-6 py-1.5">
           <span className="mr-3 text-xs font-medium uppercase tracking-widest text-muted-foreground">
             Admin
           </span>

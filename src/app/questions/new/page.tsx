@@ -60,7 +60,7 @@ export default async function NewQuestionPage() {
   }
 
   return (
-    <main className="mx-auto w-full max-w-3xl px-6 py-12">
+    <main className="mx-auto w-full max-w-[1200px] px-4 sm:px-6 lg:px-8 py-12">
       <div className="mb-8 space-y-1">
         <p className="text-sm font-medium text-muted-foreground">
           <Link href="/questions" className="hover:underline">

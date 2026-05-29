@@ -81,7 +81,7 @@ export default async function MockPage() {
   };
 
   return (
-    <main className="mx-auto w-full max-w-2xl px-6 py-10 space-y-8">
+    <main className="mx-auto w-full max-w-[1200px] px-4 sm:px-6 lg:px-8 py-10 space-y-8">
       <header>
         <p className="text-sm font-medium text-muted-foreground">Practice</p>
         <h1 className="mt-1 text-2xl font-semibold tracking-tight">Configure your session</h1>

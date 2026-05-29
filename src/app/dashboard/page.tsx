@@ -86,7 +86,7 @@ export default async function DashboardPage() {
 
 
   return (
-    <main className="mx-auto w-full max-w-3xl px-6 py-10 space-y-8">
+    <main className="mx-auto w-full max-w-[1200px] px-4 sm:px-6 lg:px-8 py-10 space-y-8">
         <div>
           <p className="text-sm font-medium text-muted-foreground">Your progress</p>
           <h1 className="mt-1 text-2xl font-semibold tracking-tight">Dashboard</h1>

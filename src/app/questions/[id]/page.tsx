@@ -65,7 +65,7 @@ export default async function QuestionDetailPage({
   };
 
   return (
-    <main className="mx-auto w-full max-w-3xl px-6 py-10">
+    <main className="mx-auto w-full max-w-[1200px] px-4 sm:px-6 lg:px-8 py-10">
       <nav className="mb-6 flex items-center gap-2 text-sm text-muted-foreground">
         <Link
           href={`/questions${lang === "tr" ? "?lang=tr" : ""}`}
