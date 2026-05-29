@@ -4,6 +4,7 @@ import { auth, signOut } from "@/lib/auth";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { NavLink } from "@/components/nav-link";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { ThemeSelector } from "@/components/theme-selector";
 import { MobileNav } from "@/components/mobile-nav";
 
 export async function Navbar() {
@@ -59,7 +60,8 @@ export async function Navbar() {
         {/* Spacer */}
         <div className="flex-1" />
 
-        {/* Theme toggle */}
+        {/* Theme controls */}
+        <ThemeSelector />
         <ThemeToggle />
 
         {/* Desktop auth — hidden below 800px */}
