@@ -65,7 +65,7 @@ export default async function MockSessionPage({
     await Promise.all([
       systemTopics.length > 0
         // Fetch all matching questions (no length limit yet — we need the full pool for 80/20)
-        ? getMockSessionQuestions({ topics: systemTopics, minLevel: lo, maxLevel: hi, length: 9999 })
+        ? getMockSessionQuestions({ topics: systemTopics, minLevel: lo, maxLevel: hi })
         : Promise.resolve([] as MockQuestion[]),
       listSystemTopics(),
       customSlugs.length > 0 && userId

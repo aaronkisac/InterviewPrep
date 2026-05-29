@@ -124,7 +124,7 @@ export async function listTopicsWithQuestions(): Promise<{
   const questionsMap: Record<string, CustomQuestion[]> = {};
   for (const q of questionsData ?? []) {
     if (!questionsMap[q.topic_id]) questionsMap[q.topic_id] = [];
-    questionsMap[q.topic_id].push(q);
+    questionsMap[q.topic_id]!.push(q);
   }
 
   const topicsWithCount: CustomTopic[] = topics.map((t) => {

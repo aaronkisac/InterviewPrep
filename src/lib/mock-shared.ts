@@ -32,7 +32,8 @@ export type MockSessionConfig = {
   topics: Topic[];
   minLevel: Level;
   maxLevel: Level;
-  length: SessionLength;
+  /** Omit to return the full filtered pool (used for 80/20 pre-fetch). */
+  length?: SessionLength;
 };
 
 /** Parses a comma-separated topic list (e.g. "react,nextjs") from a query param. */

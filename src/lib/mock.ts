@@ -108,7 +108,7 @@ export async function getMockSessionQuestions(
       q.level <= config.maxLevel,
   );
 
-  return shuffle(pool)
-    .slice(0, config.length)
-    .map((q) => ({ ...q, options: shuffle(q.options) }));
+  const shuffled = shuffle(pool);
+  const trimmed = config.length !== undefined ? shuffled.slice(0, config.length) : shuffled;
+  return trimmed.map((q) => ({ ...q, options: shuffle(q.options) }));
 }

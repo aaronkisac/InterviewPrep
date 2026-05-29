@@ -80,7 +80,7 @@ export default async function NewQuestionPage() {
       <NewQuestionForm
         systemTopics={systemTopics}
         customTopics={customTopics}
-        levels={LEVELS}
+        levels={[...LEVELS]}
         action={handleSubmit}
       />
     </main>
