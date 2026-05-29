@@ -469,7 +469,7 @@
   },
   {
     "topic": "html5",
-    "question": "Why would you use a srcset attribute in an image tag? Explain the process the browser uses to evaluate this.",
+    "question": "Why would you use a srcset attribute in an image tag? Explain the process the browser uses when evaluating the content of this attribute.",
     "options": [
       {
         "optionText": "srcset provides multiple image resolutions; the browser selects the best one based on the device's screen density (DPR) and viewport size — avoiding unnecessarily large images on small screens",

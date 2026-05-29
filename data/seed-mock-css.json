@@ -313,7 +313,7 @@
   },
   {
     "topic": "css",
-    "question": "Is there any reason you'd want to use translate() instead of absolute positioning?",
+    "question": "Is there any reason you'd want to use translate() instead of absolute positioning, or vice-versa? And why?",
     "options": [
       {
         "optionText": "Yes — translate() uses GPU compositing and doesn't trigger layout reflow, making animations smoother and more performant",

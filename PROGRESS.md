@@ -1,6 +1,6 @@
 # Progress
 
-Last updated: 2026-05-29 (custom topic question fixes: level dots + bookmark support)
+Last updated: 2026-05-29 (mock options audit + glossary expansion)
 
 ---
 
@@ -37,7 +37,7 @@ Last updated: 2026-05-29 (custom topic question fixes: level dots + bookmark sup
 
 **Auth:** Google + GitHub, `allowDangerousEmailAccountLinking: true` · JWT sessions · role from `public.users`
 
-**Glossary:** terms in `data/seed-terms.json` (105 terms total) · first mention auto-wrapped via `glossary-match.ts` · `pnpm seed` imports
+**Glossary:** terms in `data/seed-terms.json` (129 terms total) · first mention auto-wrapped via `glossary-match.ts` · `pnpm seed` imports
 
 ---
 
@@ -74,6 +74,7 @@ Last updated: 2026-05-29 (custom topic question fixes: level dots + bookmark sup
 | Dynamic Topics + Admin Import | `Topic` type → `string`. `system_topics` table (migration `20260526000002`). Admin `/admin/topics`: create/delete topics, JSON bulk import per topic (client-side validation + live count). Dashboard JSON import for custom topics. Required fields: admin (question, level 1-5, answerGeneral); user (question). |
 | DB-driven topic lists | All hardcoded `TOPICS`/`TOPIC_LABELS` removed from every page and component. Topic names now fetched via `listSystemTopics()` everywhere: questions list, question detail, mock config, mock session, homepage topic grid, dashboard, glossary, admin questions, `/questions/new`. `mock-shared.ts` `parseTopicList` no longer filters against hardcoded array. |
 | Custom topic question fixes | `CustomQuestionCard` now shows `LevelDots`. Custom questions can now be bookmarked via new `custom_question_bookmarks` table (migration `20260529000001`). `toggleCustomBookmark` + `getCustomBookmarkIds` actions added to `custom-topics.ts`. |
+| Mock options audit + glossary expansion | Fixed seed-mock question text mismatches across 8 topics (api-design 13/16, software-architecture 16/16, agile-scrum 2, css/html5/nextjs/websockets/design-patterns 1 each). Added 5 new batch questions: `api-design-batch-6` (JWT, id 1547), `software-architecture-batch-6` (CDN, stateful/stateless, circuit breaker, sync/async comm, message queue, ids 1490–1494). Added new `agile-scrum-batch-6` (Kanban, id 1027). Glossary expanded from 105 → 129 terms: 10 software-architecture, 10 api-design, 4 additions to react/typescript/nextjs. |
 
 ---
 

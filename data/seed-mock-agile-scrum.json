@@ -339,7 +339,7 @@
   },
   {
     "topic": "agile-scrum",
-    "question": "What is the difference between the main differences between Scrum and Agile?",
+    "question": "What are the main differences between Scrum and Agile?",
     "options": [
       {
         "optionText": "Agile is a philosophy/mindset with values and principles; Scrum is a specific framework implementing Agile using sprints, roles, and ceremonies.",

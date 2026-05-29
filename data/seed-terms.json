@@ -1297,5 +1297,284 @@
       "semantic-html",
       "web-storage"
     ]
+  },
+  {
+    "slug": "monolith",
+    "label": "Monolith",
+    "topic": "software-architecture",
+    "tooltip": "A single deployable unit containing all application logic.",
+    "definition": "A monolithic architecture packages all functionality — UI, business logic, and data access — into one deployable unit. Simple to develop initially but harder to scale and maintain as the codebase grows.",
+    "codeExample": null,
+    "relatedSlugs": [
+      "microservice",
+      "soa"
+    ]
+  },
+  {
+    "slug": "microservice",
+    "label": "Microservice",
+    "topic": "software-architecture",
+    "tooltip": "A small, independently deployable service responsible for one business capability.",
+    "definition": "Microservice architecture decomposes an application into small services that communicate via APIs. Each service owns its data, can be scaled independently, and is deployed separately. Trades simplicity for scalability and resilience.",
+    "codeExample": null,
+    "relatedSlugs": [
+      "monolith",
+      "api-gateway",
+      "message-queue"
+    ]
+  },
+  {
+    "slug": "cap-theorem",
+    "label": "CAP Theorem",
+    "topic": "software-architecture",
+    "tooltip": "A distributed system can guarantee at most 2 of: Consistency, Availability, Partition Tolerance.",
+    "definition": "Brewer's CAP theorem states that when a network partition occurs, a distributed system must choose between Consistency (all nodes see the same data) and Availability (every request gets a response). Partition Tolerance is unavoidable in practice.",
+    "codeExample": null,
+    "relatedSlugs": [
+      "eventual-consistency"
+    ]
+  },
+  {
+    "slug": "eventual-consistency",
+    "label": "Eventual Consistency",
+    "topic": "software-architecture",
+    "tooltip": "All nodes will converge to the same data — but may serve stale data temporarily.",
+    "definition": "A consistency model where updates propagate asynchronously across nodes. Reads may return stale data, but the system guarantees that all replicas will eventually hold the same value. Used by DynamoDB, Cassandra, and DNS.",
+    "codeExample": null,
+    "relatedSlugs": [
+      "cap-theorem"
+    ]
+  },
+  {
+    "slug": "circuit-breaker",
+    "label": "Circuit Breaker",
+    "topic": "software-architecture",
+    "tooltip": "Stops calls to a failing service to prevent cascade failures.",
+    "definition": "A resilience pattern with three states: Closed (normal), Open (failing fast without calling the service), and Half-Open (testing recovery). When failures exceed a threshold the circuit opens, protecting the caller from slow timeouts.",
+    "codeExample": null,
+    "relatedSlugs": [
+      "microservice"
+    ]
+  },
+  {
+    "slug": "event-sourcing",
+    "label": "Event Sourcing",
+    "topic": "software-architecture",
+    "tooltip": "State is stored as a sequence of immutable events rather than current values.",
+    "definition": "Instead of persisting current state, event sourcing appends every change as an immutable event. Current state is derived by replaying the event log. Provides full audit history and enables temporal queries. Often paired with CQRS.",
+    "codeExample": null,
+    "relatedSlugs": [
+      "cqrs",
+      "message-queue"
+    ]
+  },
+  {
+    "slug": "cqrs",
+    "label": "CQRS",
+    "topic": "software-architecture",
+    "tooltip": "Command Query Responsibility Segregation — separate read and write models.",
+    "definition": "CQRS separates the write model (Commands that change state) from the read model (Queries that return data). Enables independent scaling and optimisation of reads and writes. Often combined with Event Sourcing.",
+    "codeExample": null,
+    "relatedSlugs": [
+      "event-sourcing"
+    ]
+  },
+  {
+    "slug": "message-queue",
+    "label": "Message Queue",
+    "topic": "software-architecture",
+    "tooltip": "A durable buffer that decouples producers from consumers for async processing.",
+    "definition": "A message queue accepts messages from producers and delivers them to consumers asynchronously. Absorbs traffic spikes, enables retry logic via dead-letter queues, and decouples services. Examples: RabbitMQ, AWS SQS, Kafka.",
+    "codeExample": null,
+    "relatedSlugs": [
+      "microservice",
+      "event-sourcing"
+    ]
+  },
+  {
+    "slug": "load-balancer",
+    "label": "Load Balancer",
+    "topic": "software-architecture",
+    "tooltip": "Distributes incoming traffic across multiple server instances.",
+    "definition": "A load balancer sits in front of servers and routes requests using algorithms like Round Robin, Least Connections, or IP Hash. Enables horizontal scaling, eliminates single points of failure, and enables zero-downtime deployments.",
+    "codeExample": null,
+    "relatedSlugs": [
+      "horizontal-scaling",
+      "microservice"
+    ]
+  },
+  {
+    "slug": "cdn",
+    "label": "CDN",
+    "topic": "software-architecture",
+    "tooltip": "Content Delivery Network — serves assets from edge nodes close to users.",
+    "definition": "A CDN caches static assets and responses on geographically distributed edge servers. Requests are served from the nearest edge node, reducing latency and origin load. Vercel, Cloudflare, and Fastly are common CDN providers for web apps.",
+    "codeExample": null,
+    "relatedSlugs": [
+      "load-balancer"
+    ]
+  },
+  {
+    "slug": "rest",
+    "label": "REST",
+    "topic": "api-design",
+    "tooltip": "Representational State Transfer — architectural style for stateless HTTP APIs.",
+    "definition": "REST is an architectural style using HTTP verbs (GET, POST, PUT, PATCH, DELETE) on resources identified by URLs. Constraints include statelessness, uniform interface, and layered system. The dominant style for web APIs.",
+    "codeExample": "// RESTful endpoints\nGET    /users        // list\nPOST   /users        // create\nGET    /users/:id    // read\nPUT    /users/:id    // replace\nPATCH  /users/:id    // update\nDELETE /users/:id    // delete",
+    "relatedSlugs": [
+      "graphql",
+      "openapi",
+      "idempotency"
+    ]
+  },
+  {
+    "slug": "graphql",
+    "label": "GraphQL",
+    "topic": "api-design",
+    "tooltip": "Query language where clients specify exactly the data they need.",
+    "definition": "GraphQL is a query language and runtime for APIs. Clients send a typed query describing exactly what fields they need, eliminating over-fetching and under-fetching. A single /graphql endpoint replaces many REST routes. Developed by Meta.",
+    "codeExample": "query {\n  user(id: \"1\") {\n    name\n    email\n    posts { title }\n  }\n}",
+    "relatedSlugs": [
+      "rest",
+      "n-plus-one"
+    ]
+  },
+  {
+    "slug": "jwt",
+    "label": "JWT",
+    "topic": "api-design",
+    "tooltip": "JSON Web Token — stateless, signed token with Header.Payload.Signature.",
+    "definition": "A JWT is a compact, URL-safe token with three base64url-encoded parts: Header (algorithm), Payload (claims like user ID and expiry), and Signature. Servers validate the signature without a DB lookup, enabling stateless auth. Payload is encoded, NOT encrypted.",
+    "codeExample": "// Decode (don't verify) in browser:\nconst [header, payload] = token.split('.')\nJSON.parse(atob(payload)) // { sub, exp, iat }",
+    "relatedSlugs": [
+      "rest",
+      "oauth"
+    ]
+  },
+  {
+    "slug": "oauth",
+    "label": "OAuth 2.0",
+    "topic": "api-design",
+    "tooltip": "Delegated authorisation framework — lets users grant apps access without sharing passwords.",
+    "definition": "OAuth 2.0 allows a user to grant a third-party application limited access to their account without exposing credentials. The Authorization Code flow redirects to the auth server, which issues an access token. Used by Google, GitHub, and Facebook login.",
+    "codeExample": null,
+    "relatedSlugs": [
+      "jwt"
+    ]
+  },
+  {
+    "slug": "rate-limiting",
+    "label": "Rate Limiting",
+    "topic": "api-design",
+    "tooltip": "Restricts how many requests a client can make in a time window — returns 429 when exceeded.",
+    "definition": "Rate limiting protects APIs from abuse and DoS attacks by capping requests per client per time window. When exceeded, the server returns 429 Too Many Requests with a Retry-After header. Common algorithms: Token Bucket, Fixed Window, Sliding Window.",
+    "codeExample": "// Typical response headers\nX-RateLimit-Limit: 100\nX-RateLimit-Remaining: 0\nRetry-After: 60",
+    "relatedSlugs": [
+      "rest"
+    ]
+  },
+  {
+    "slug": "idempotency",
+    "label": "Idempotency",
+    "topic": "api-design",
+    "tooltip": "An operation that produces the same result regardless of how many times it is called.",
+    "definition": "An idempotent operation has the same effect whether called once or many times. GET, PUT, and DELETE are idempotent; POST is not. Idempotency enables safe retries after network failures. APIs often support an Idempotency-Key header for POST requests.",
+    "codeExample": "// Safe to retry — same result\nDELETE /users/1  // deletes once; subsequent calls return 404\nPUT /users/1 { name: 'Aaron' }  // same final state",
+    "relatedSlugs": [
+      "rest"
+    ]
+  },
+  {
+    "slug": "webhook",
+    "label": "Webhook",
+    "topic": "api-design",
+    "tooltip": "A server-initiated HTTP callback — pushes events to your endpoint instead of polling.",
+    "definition": "A webhook is an HTTP POST sent by a service to your endpoint when an event occurs (e.g. payment completed, PR merged). Unlike polling, webhooks are push-based: near-zero latency with no wasted requests. You must validate the signature to prevent spoofing.",
+    "codeExample": "// Verify Stripe webhook signature\nconst event = stripe.webhooks.constructEvent(\n  body, sig, process.env.STRIPE_WEBHOOK_SECRET\n)",
+    "relatedSlugs": [
+      "rest"
+    ]
+  },
+  {
+    "slug": "openapi",
+    "label": "OpenAPI",
+    "topic": "api-design",
+    "tooltip": "Machine-readable API specification format (formerly Swagger) enabling auto-generated docs.",
+    "definition": "OpenAPI (formerly Swagger) is a standard YAML/JSON format for describing REST API endpoints, request/response schemas, and authentication. Tools like Swagger UI generate interactive docs, and code generators create typed clients from the spec.",
+    "codeExample": "# openapi.yaml\npaths:\n  /users/{id}:\n    get:\n      summary: Get user by ID\n      responses:\n        '200':\n          content:\n            application/json:\n              schema:\n                $ref: '#/components/schemas/User'",
+    "relatedSlugs": [
+      "rest"
+    ]
+  },
+  {
+    "slug": "n-plus-one",
+    "label": "N+1 Problem",
+    "topic": "api-design",
+    "tooltip": "Fetching N items then issuing N additional queries for related data — avoid with eager loading.",
+    "definition": "The N+1 problem occurs when code fetches a list of N records, then issues one additional query per record to load related data — resulting in N+1 total queries. Fixed with JOINs, eager loading (Prisma `include`), or DataLoader batching in GraphQL.",
+    "codeExample": "// Bad: N+1\nconst posts = await db.post.findMany()\nfor (const post of posts) {\n  post.author = await db.user.findUnique({ where: { id: post.authorId } })\n}\n\n// Good: 1 query\nconst posts = await db.post.findMany({ include: { author: true } })",
+    "relatedSlugs": [
+      "graphql",
+      "rest"
+    ]
+  },
+  {
+    "slug": "cors",
+    "label": "CORS",
+    "topic": "api-design",
+    "tooltip": "Cross-Origin Resource Sharing — browser policy that blocks cross-origin requests unless allowed by the server.",
+    "definition": "CORS is a browser security mechanism that blocks JavaScript requests to a different origin (protocol + host + port) unless the server responds with the appropriate Access-Control-Allow-Origin header. Preflight OPTIONS requests check permissions before the actual request.",
+    "codeExample": "// Express CORS header\nres.setHeader('Access-Control-Allow-Origin', 'https://myapp.com')\n\n// Next.js Route Handler\nreturn new Response(data, {\n  headers: { 'Access-Control-Allow-Origin': '*' }\n})",
+    "relatedSlugs": [
+      "rest",
+      "webhook"
+    ]
+  },
+  {
+    "slug": "error-boundary",
+    "label": "Error Boundary",
+    "topic": "react",
+    "tooltip": "A React component that catches JS errors in its subtree and displays a fallback UI.",
+    "definition": "Error boundaries are class components (or the `use` hook + Suspense in RSC) that catch rendering errors in child components. They prevent the whole tree from unmounting. In Next.js App Router, `error.tsx` acts as an error boundary per route segment.",
+    "codeExample": "// app/dashboard/error.tsx\n'use client'\nexport default function Error({ error, reset }: { error: Error; reset: () => void }) {\n  return <button onClick={reset}>Try again</button>\n}",
+    "relatedSlugs": [
+      "suspense"
+    ]
+  },
+  {
+    "slug": "suspense",
+    "label": "Suspense",
+    "topic": "react",
+    "tooltip": "Declaratively handles async loading states — shows a fallback while children load.",
+    "definition": "React Suspense lets you declaratively specify a loading fallback while child components wait for async operations (data fetching, lazy-loaded components). In Next.js App Router, each `loading.tsx` wraps its route segment in Suspense automatically.",
+    "codeExample": "import { Suspense } from 'react'\n\n<Suspense fallback={<Spinner />}>\n  <UserProfile /> {/* async component */}\n</Suspense>",
+    "relatedSlugs": [
+      "hook",
+      "error-boundary"
+    ]
+  },
+  {
+    "slug": "type-guard",
+    "label": "Type Guard",
+    "topic": "typescript",
+    "tooltip": "A runtime check that narrows a TypeScript type within a conditional block.",
+    "definition": "Type guards are expressions that check a value's type at runtime, letting TypeScript narrow the type in subsequent code. Can be `typeof`, `instanceof`, `in` checks, or custom predicate functions with `value is Type` return type.",
+    "codeExample": "function isUser(v: unknown): v is User {\n  return typeof v === 'object' && v !== null && 'id' in v\n}\n\nif (isUser(data)) {\n  console.log(data.id) // TypeScript knows data is User\n}",
+    "relatedSlugs": [
+      "discriminated-union",
+      "generic"
+    ]
+  },
+  {
+    "slug": "server-actions",
+    "label": "Server Actions",
+    "topic": "nextjs",
+    "tooltip": "Async server functions called directly from client components — no API route needed.",
+    "definition": "Server Actions are async functions marked with `'use server'` that run on the server but can be invoked from client components or forms. They eliminate the need for API routes for form submissions and mutations. Next.js handles serialisation, CSRF protection, and revalidation.",
+    "codeExample": "'use server'\nexport async function createPost(formData: FormData) {\n  const title = formData.get('title') as string\n  await db.post.create({ data: { title } })\n  revalidatePath('/posts')\n}",
+    "relatedSlugs": [
+      "server-component",
+      "app-router"
+    ]
   }
 ]

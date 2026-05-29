@@ -443,7 +443,7 @@
   },
   {
     "topic": "websockets",
-    "question": "What is the fundamental difference between WebSocket and raw TCP? Why does WebSocket exist?",
+    "question": "What is the fundamental difference between WebSocket and raw TCP? Why does WebSocket exist on top of TCP?",
     "options": [
       {
         "optionText": "WebSocket runs over TCP but adds a message-framing layer and an HTTP-compatible handshake, allowing it to traverse existing web infrastructure (proxies, firewalls, load balancers).",

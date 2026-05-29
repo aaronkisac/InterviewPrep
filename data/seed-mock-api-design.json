@@ -1,7 +1,7 @@
 [
   {
     "topic": "api-design",
-    "question": "What does REST stand for and what HTTP method is used to create a resource?",
+    "question": "What Is A REST API?",
     "options": [
       { "optionText": "Representational State Transfer — POST is used to create a new resource.", "isCorrect": true, "explanation": "Correct — REST is an architectural style and POST is the conventional method for resource creation, returning 201 Created." },
       { "optionText": "Remote Execution and State Transfer — PUT is used to create resources.", "isCorrect": false, "explanation": "REST stands for Representational State Transfer. PUT replaces an existing resource, not creates new ones by convention." },
@@ -11,7 +11,7 @@
   },
   {
     "topic": "api-design",
-    "question": "What HTTP status code should a REST API return when a resource is not found?",
+    "question": "What Are HTTP Status Codes And Why Do They Matter?",
     "options": [
       { "optionText": "404 Not Found — the requested resource does not exist.", "isCorrect": true, "explanation": "Correct — 404 is the standard response when a resource cannot be found at the given URI." },
       { "optionText": "400 Bad Request — the client made an error in their request.", "isCorrect": false, "explanation": "400 means the request itself is malformed (invalid syntax, missing fields) — not that the resource is absent." },
@@ -21,7 +21,7 @@
   },
   {
     "topic": "api-design",
-    "question": "What is the difference between PUT and PATCH in REST?",
+    "question": "What Is The Difference Between PUT And PATCH?",
     "options": [
       { "optionText": "PUT replaces the entire resource; PATCH partially updates it with only the supplied fields.", "isCorrect": true, "explanation": "Correct — PUT requires a full representation and replaces; PATCH applies partial modifications." },
       { "optionText": "PUT creates a new resource; PATCH updates an existing one.", "isCorrect": false, "explanation": "POST creates resources by convention — PUT replaces a resource at a known URL, PATCH partially updates it." },
@@ -31,7 +31,7 @@
   },
   {
     "topic": "api-design",
-    "question": "What HTTP status code is returned when rate limiting kicks in?",
+    "question": "What Is Rate Limiting And Why Should Every API Have It?",
     "options": [
       { "optionText": "429 Too Many Requests, typically with a Retry-After header.", "isCorrect": true, "explanation": "Correct — 429 signals the client has exceeded the allowed request rate; Retry-After tells them when to try again." },
       { "optionText": "503 Service Unavailable — the server is too busy to handle the request.", "isCorrect": false, "explanation": "503 means the server is down or overloaded (often temporarily) — 429 specifically signals rate limiting." },
@@ -41,7 +41,7 @@
   },
   {
     "topic": "api-design",
-    "question": "What is the difference between authentication and authorisation?",
+    "question": "What Is The Difference Between Authentication And Authorisation?",
     "options": [
       { "optionText": "Authentication verifies who you are; authorisation determines what you're allowed to do.", "isCorrect": true, "explanation": "Correct — AuthN = identity (login), AuthZ = permissions (can this user delete this resource?)." },
       { "optionText": "Authentication is server-side; authorisation is client-side.", "isCorrect": false, "explanation": "Both happen server-side — the distinction is about identity verification vs permission checking, not location." },
@@ -51,7 +51,7 @@
   },
   {
     "topic": "api-design",
-    "question": "What is cursor-based pagination and why is it preferred over offset pagination for large datasets?",
+    "question": "How Do You Design Pagination For A REST API?",
     "options": [
       { "optionText": "Uses a pointer to the last seen item; avoids full table scans making it O(log n) at any depth.", "isCorrect": true, "explanation": "Correct — cursor pagination uses indexed seeks instead of OFFSET, staying performant on large or frequently-updated datasets." },
       { "optionText": "Uses a page number and limit; the DB skips rows to reach the right page.", "isCorrect": false, "explanation": "That describes offset pagination — the OFFSET clause scans all preceding rows, becoming slow as pages grow." },
@@ -61,7 +61,7 @@
   },
   {
     "topic": "api-design",
-    "question": "What is an idempotent operation?",
+    "question": "What Is Idempotency And Why Does It Matter In API Design?",
     "options": [
       { "optionText": "An operation that produces the same result whether called once or multiple times with the same input.", "isCorrect": true, "explanation": "Correct — idempotency means safe retries: GET /users/1 always returns the same user regardless of call count." },
       { "optionText": "An operation that executes instantly without any asynchronous processing.", "isCorrect": false, "explanation": "Speed of execution is unrelated to idempotency — an idempotent operation can be slow or async." },
@@ -71,7 +71,7 @@
   },
   {
     "topic": "api-design",
-    "question": "What is CORS and when does a browser enforce it?",
+    "question": "What Is CORS And How Do You Handle It?",
     "options": [
       { "optionText": "Cross-Origin Resource Sharing — enforced when JavaScript makes requests to a different origin (protocol + host + port).", "isCorrect": true, "explanation": "Correct — CORS is a browser security mechanism blocking cross-origin fetches unless the server explicitly allows them." },
       { "optionText": "A server-side firewall that blocks requests from unknown IP addresses.", "isCorrect": false, "explanation": "CORS is a browser policy enforced on the client — servers don't need a firewall; the browser blocks the response." },
@@ -81,7 +81,7 @@
   },
   {
     "topic": "api-design",
-    "question": "What is the purpose of the OpenAPI specification?",
+    "question": "What Is OpenAPI / Swagger And Why Should You Use It?",
     "options": [
       { "optionText": "To describe a REST API's endpoints, schemas, and auth in a machine-readable format enabling auto-generated docs and clients.", "isCorrect": true, "explanation": "Correct — OpenAPI (Swagger) enables interactive docs, SDK generation, and contract validation from a single spec file." },
       { "optionText": "To define database schemas and generate migration files automatically.", "isCorrect": false, "explanation": "Database schema tools (Prisma, Drizzle) handle migrations — OpenAPI describes HTTP API contracts, not DB schemas." },
@@ -91,7 +91,7 @@
   },
   {
     "topic": "api-design",
-    "question": "What is the N+1 problem in API development?",
+    "question": "What Is The N+1 Problem In APIs And How Do You Fix It?",
     "options": [
       { "optionText": "Fetching a list of N items then making N additional queries to get related data — 1+N total queries instead of 1.", "isCorrect": true, "explanation": "Correct — N+1 is solved by JOINs, eager loading (Prisma include), or DataLoader batching." },
       { "optionText": "An API versioning issue where v1 and v1+1 (v2) have incompatible schemas.", "isCorrect": false, "explanation": "N+1 is a database query performance problem — version incompatibility is a separate API design concern." },
@@ -101,7 +101,7 @@
   },
   {
     "topic": "api-design",
-    "question": "What is a webhook and how does it differ from polling?",
+    "question": "What Is A Webhook And How Does It Differ From Polling?",
     "options": [
       { "optionText": "Webhooks are server-initiated pushes (event-driven); polling is client-initiated repeated requests on a schedule.", "isCorrect": true, "explanation": "Correct — webhooks are more efficient (no wasted calls) with near-zero latency, but require a public HTTPS endpoint." },
       { "optionText": "Webhooks run inside the browser; polling runs on the server.", "isCorrect": false, "explanation": "Webhooks are server-to-server HTTP calls — the browser is not involved in webhook delivery." },
@@ -111,7 +111,7 @@
   },
   {
     "topic": "api-design",
-    "question": "What is the BFF (Backend for Frontend) pattern?",
+    "question": "What Is The BFF (Backend For Frontend) Pattern?",
     "options": [
       { "optionText": "A dedicated backend layer per client type (web, mobile) that aggregates and shapes data for that specific client's needs.", "isCorrect": true, "explanation": "Correct — BFF eliminates over/under-fetching by giving each client a tailored API. Next.js Route Handlers naturally serve as a BFF." },
       { "optionText": "A backend pattern where the frontend team maintains all server-side code.", "isCorrect": false, "explanation": "BFF is about dedicated backends per client type, not about who owns the backend code." },
@@ -121,7 +121,7 @@
   },
   {
     "topic": "api-design",
-    "question": "What should you include in a consistent API error response?",
+    "question": "How Do You Handle API Errors Consistently?",
     "options": [
       { "optionText": "An appropriate HTTP status code, a machine-readable error code, and a human-readable message.", "isCorrect": true, "explanation": "Correct — consistent error envelopes let clients handle errors programmatically without string-matching messages." },
       { "optionText": "Always return 200 OK with an error flag in the body to simplify client error handling.", "isCorrect": false, "explanation": "Hiding errors in 200 responses breaks HTTP conventions and makes monitoring, caching, and retries unreliable." },
@@ -131,7 +131,7 @@
   },
   {
     "topic": "api-design",
-    "question": "What is API versioning and what is the most common strategy?",
+    "question": "What Is API Versioning And Why Is It Needed?",
     "options": [
       { "optionText": "A strategy to evolve APIs without breaking existing clients — URL path versioning (/v1/, /v2/) is most common.", "isCorrect": true, "explanation": "Correct — URL versioning is visible, easy to route, and easy to test. Stripe, GitHub, and Twilio all use it." },
       { "optionText": "Releasing new API features without any version identifier, relying on backwards compatibility.", "isCorrect": false, "explanation": "Additive-only changes can avoid versioning, but breaking changes still require version identifiers for existing clients." },
@@ -141,7 +141,7 @@
   },
   {
     "topic": "api-design",
-    "question": "What is GraphQL and what problem does it solve compared to REST?",
+    "question": "What Is The Difference Between REST And GraphQL?",
     "options": [
       { "optionText": "A query language where clients specify exactly what data they need, solving over-fetching and under-fetching.", "isCorrect": true, "explanation": "Correct — GraphQL lets clients request precise fields, reducing payload size and round-trips compared to fixed REST responses." },
       { "optionText": "A database query language that replaces SQL for fetching data from relational databases.", "isCorrect": false, "explanation": "GraphQL is an API query language over HTTP — it abstracts over any data source, not just databases." },
@@ -151,7 +151,7 @@
   },
   {
     "topic": "api-design",
-    "question": "What is a JWT (JSON Web Token) and what are its three parts?",
+    "question": "What Is A JWT (JSON Web Token) And What Are Its Three Parts?",
     "options": [
       { "optionText": "A signed, base64url-encoded token with three parts: Header (algorithm), Payload (claims), Signature.", "isCorrect": true, "explanation": "Correct — JWTs are stateless: the server validates the signature without a DB lookup. Payload is encoded, NOT encrypted." },
       { "optionText": "An encrypted database session record with three fields: user ID, expiry, and permissions.", "isCorrect": false, "explanation": "JWTs are client-side tokens, not server-side session records. They are base64url-encoded, not encrypted by default." },

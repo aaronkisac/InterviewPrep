@@ -131,7 +131,7 @@
   },
   {
     "topic": "design-patterns",
-    "question": "What is the Module pattern in JavaScript?",
+    "question": "What is the module pattern in JavaScript?",
     "options": [
       {
         "optionText": "A pattern that uses closures or ES modules to create private scope, exposing only a public API.",
@@ -339,7 +339,7 @@
   },
   {
     "topic": "design-patterns",
-    "question": "How are design patterns applied in React — give examples of Structural and Behavioral patterns.",
+    "question": "How are design patterns applied in React — give examples of Structural and Behavioral patterns in practice.",
     "options": [
       {
         "optionText": "Structural: HOC = Decorator, component tree = Composite, React.lazy = Proxy. Behavioral: Context/Zustand = Observer, custom hooks = Strategy, useReducer = State.",

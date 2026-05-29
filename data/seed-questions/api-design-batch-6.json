@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1547,
+    "topic": "api-design",
+    "level": 2,
+    "levelLabel": "Junior",
+    "question": "What Is A JWT (JSON Web Token) And What Are Its Three Parts?",
+    "answerGeneral": "A JWT is a compact, URL-safe token used to represent claims between two parties. It has three base64url-encoded parts separated by dots: the **Header** (algorithm and token type), the **Payload** (claims such as user ID, roles, and expiry), and the **Signature** (HMAC or RSA hash of header + payload). The server validates the signature without a database lookup, making JWTs stateless. Important: the payload is encoded, not encrypted — never store sensitive data in it without additional encryption.",
+    "answerGeneralTr": "JWT, iki taraf arasında bilgi aktarmak için kullanılan kompakt, URL-güvenli bir token formatıdır. Nokta ile ayrılmış üç base64url-encoded bölümden oluşur: **Header** (algoritma ve token tipi), **Payload** (user ID, roller, expiry gibi claim'ler) ve **Signature** (header + payload'un HMAC veya RSA hash'i). Sunucu, veritabanına bakmadan sadece imzayı doğrulayarak token'ı valide eder — bu JWT'yi stateless yapar. Önemli: payload şifrelenmemiş, sadece encode edilmiştir; hassas veri saklamayın.",
+    "answerPersonal": null,
+    "detailMd": "## JWT — JSON Web Token\n\n### Structure\n\nA JWT looks like this:\n```\neyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c\n```\n\nThree parts separated by `.`:\n\n| Part | Content | Encoded? |\n|------|---------|----------|\n| Header | `{ \"alg\": \"HS256\", \"typ\": \"JWT\" }` | base64url |\n| Payload | `{ \"sub\": \"user_id\", \"exp\": 1234567890 }` | base64url |\n| Signature | HMAC(header + \".\" + payload, secret) | binary → base64url |\n\n### Standard Claims (Payload)\n\n- `sub` — subject (user ID)\n- `iat` — issued at (Unix timestamp)\n- `exp` — expiry (Unix timestamp)\n- `iss` — issuer\n- `aud` — audience\n\n### How Validation Works\n\n```\nserver recomputes: HMAC(header.payload, secret)\nif recomputed === signature → valid\n```\n\nNo DB call needed — this is the stateless advantage.\n\n### Security Rules\n\n- **Payload is NOT encrypted** — anyone can base64-decode it\n- Store tokens in `httpOnly` cookies (not localStorage) to prevent XSS theft\n- Always set a short `exp` (15 min for access tokens)\n- Use refresh tokens to re-issue access tokens\n- Sign with RS256 (asymmetric) for distributed systems — public key can verify without the secret\n\n### In Next.js (NextAuth)\n\n```ts\n// JWT session strategy in auth.ts\nsession: { strategy: 'jwt' }\n\n// Access claims in server components\nconst session = await auth()\nsession.user.id // from JWT sub\n```",
+    "detailMdTr": null,
+    "is_seed": true,
+    "is_shared": true,
+    "status": "approved"
+  }
+]

@@ -521,7 +521,7 @@
   },
   {
     "topic": "nextjs",
-    "question": "What does next.config.js and what can you configure in it?",
+    "question": "What is next.config.js and what can you configure in it?",
     "options": [
       {
         "optionText": "The Next.js configuration file — supports redirects, rewrites, headers, image domains, environment variables, i18n, experimental features, and webpack customisation",
