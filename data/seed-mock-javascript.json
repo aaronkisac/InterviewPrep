@@ -518,5 +518,1721 @@
         "explanation": "Proxy wraps an object and intercepts operations on it. It's not a cloning mechanism."
       }
     ]
+  },
+  {
+    "topic": "javascript",
+    "question": "What is the object type?",
+    "options": [
+      {
+        "optionText": "typeof returns 'object' for any non-primitive: plain objects, arrays, null (bug), and Date — primitives return 'string', 'number', etc.",
+        "isCorrect": true,
+        "explanation": "Correct — typeof null === 'object' is a historical bug. Use Array.isArray() and null checks to distinguish. Primitives return their own type names."
+      },
+      {
+        "optionText": "Object is a special type that can only hold key-value pairs — arrays are a different type.",
+        "isCorrect": false,
+        "explanation": "Arrays are objects with numeric keys. typeof [] === 'object'. Use Array.isArray() to distinguish arrays from plain objects."
+      },
+      {
+        "optionText": "The object type is only used for class instances — plain {} literals are the 'literal' type.",
+        "isCorrect": false,
+        "explanation": "There is no 'literal' type. Plain objects, class instances, arrays, and null all return 'object' from typeof."
+      },
+      {
+        "optionText": "Objects are reference types and their typeof is 'reference'.",
+        "isCorrect": false,
+        "explanation": "typeof returns 'object' for objects, not 'reference'. The reference vs value distinction describes how they are passed, not their typeof."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "What is typeof operator?",
+    "options": [
+      {
+        "optionText": "A unary operator returning a string: 'string', 'number', 'boolean', 'undefined', 'object', 'function', 'symbol', 'bigint'.",
+        "isCorrect": true,
+        "explanation": "Correct — typeof null === 'object' (legacy bug). typeof undeclaredVar is safe (returns 'undefined'). typeof function(){} === 'function' even though functions are objects."
+      },
+      {
+        "optionText": "typeof checks if a value is an instance of a class — equivalent to instanceof.",
+        "isCorrect": false,
+        "explanation": "instanceof checks the prototype chain for class membership. typeof returns a primitive type string — they serve different purposes."
+      },
+      {
+        "optionText": "typeof only works on primitives — it throws for objects.",
+        "isCorrect": false,
+        "explanation": "typeof works on any value including objects, returning 'object'. It never throws, even for undeclared variables."
+      },
+      {
+        "optionText": "typeof returns 'null' for null values.",
+        "isCorrect": false,
+        "explanation": "typeof null returns 'object' — a famous JS quirk/bug. Use value === null explicitly to check for null."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "Explain arrays in JavaScript",
+    "options": [
+      {
+        "optionText": "Ordered, integer-indexed collections implemented as objects — reference types with methods like map, filter, reduce, push, and pop.",
+        "isCorrect": true,
+        "explanation": "Correct — arrays are objects with numeric string keys. typeof [] === 'object'. Use Array.isArray() to detect them. Sparse arrays have gaps; dense arrays have contiguous indices."
+      },
+      {
+        "optionText": "Arrays are a primitive type in JavaScript — they cannot hold objects as elements.",
+        "isCorrect": false,
+        "explanation": "Arrays are objects (reference type) and can hold any value: primitives, objects, functions, other arrays."
+      },
+      {
+        "optionText": "JavaScript arrays are fixed-size — you must declare the size before adding elements.",
+        "isCorrect": false,
+        "explanation": "JavaScript arrays are dynamic — they resize automatically. length updates when elements are added or removed."
+      },
+      {
+        "optionText": "Arrays are typed — a number[] can only contain numbers.",
+        "isCorrect": false,
+        "explanation": "JavaScript arrays are untyped and can hold mixed values: [1, 'hello', true, {}, null]. TypeScript adds type constraints but JS itself doesn't enforce them."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "Explain equality in JavaScript",
+    "options": [
+      {
+        "optionText": "== performs type coercion before comparing; === compares without coercion — always prefer === to avoid unexpected results.",
+        "isCorrect": true,
+        "explanation": "Correct — '1' == 1 is true (coercion); '1' === 1 is false. Coercion rules are complex: [] == false, null == undefined, but null !== false."
+      },
+      {
+        "optionText": "== and === are identical — the extra = is just a style choice.",
+        "isCorrect": false,
+        "explanation": "They behave differently: == coerces types, === does not. '0' == false is true; '0' === false is false."
+      },
+      {
+        "optionText": "=== is only for primitives — use == for objects.",
+        "isCorrect": false,
+        "explanation": "=== works for all types. For objects, both == and === compare by reference — two objects are only equal if they point to the same memory location."
+      },
+      {
+        "optionText": "== is the modern strict equality; === is the legacy loose comparison.",
+        "isCorrect": false,
+        "explanation": "It's the opposite: === is strict (no coercion) and recommended; == is loose (with coercion) and generally avoided."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "Explain Values and Types in JavaScript",
+    "options": [
+      {
+        "optionText": "7 primitives: undefined, null, boolean, number, bigint, string, symbol — plus the object type for everything else.",
+        "isCorrect": true,
+        "explanation": "Correct — primitives are immutable and compared by value; objects are mutable and compared by reference. Functions are objects with typeof 'function'."
+      },
+      {
+        "optionText": "JavaScript has 3 types: string, number, and boolean — all others are objects.",
+        "isCorrect": false,
+        "explanation": "JavaScript has 8 types: 7 primitives (undefined, null, boolean, number, bigint, string, symbol) and object."
+      },
+      {
+        "optionText": "All JavaScript values are objects — primitives are auto-boxed always.",
+        "isCorrect": false,
+        "explanation": "Primitives are not objects — they are temporarily auto-boxed only when you access methods on them. typeof 'hello' === 'string', not 'object'."
+      },
+      {
+        "optionText": "null and undefined are the same type — the absence type.",
+        "isCorrect": false,
+        "explanation": "null and undefined are different types. typeof undefined === 'undefined'; typeof null === 'object'. null is intentional absence; undefined is uninitialized."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "Explain Null and Undefined in JavaScript",
+    "options": [
+      {
+        "optionText": "undefined: declared but not assigned; null: explicitly set to 'no value'. typeof undefined === 'undefined'; typeof null === 'object' (bug).",
+        "isCorrect": true,
+        "explanation": "Correct — undefined is the default uninitialized state; null is intentional emptiness. null == undefined is true (loose), null === undefined is false (strict)."
+      },
+      {
+        "optionText": "null and undefined are identical — both mean 'empty value'.",
+        "isCorrect": false,
+        "explanation": "They differ in intent and type. undefined is the engine's default for uninitialized; null is developer-set intentional absence. null === undefined is false."
+      },
+      {
+        "optionText": "null is a string; undefined is a number — they both evaluate to 0.",
+        "isCorrect": false,
+        "explanation": "null is the null type; undefined is the undefined type. Neither is a string or number, though null coerces to 0 and undefined to NaN in arithmetic."
+      },
+      {
+        "optionText": "typeof null === 'null' — JavaScript has a special null type.",
+        "isCorrect": false,
+        "explanation": "typeof null === 'object' is the famous JS bug. There is no 'null' type string returned by typeof. Check explicitly: value === null."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "What is let keyword in JavaScript?",
+    "options": [
+      {
+        "optionText": "Block-scoped, re-assignable variable declaration — replaces var in most cases. Not hoisted to the top (temporal dead zone applies).",
+        "isCorrect": true,
+        "explanation": "Correct — let is scoped to the nearest {} block. Accessing before declaration throws ReferenceError (TDZ). Cannot be redeclared in the same scope unlike var."
+      },
+      {
+        "optionText": "let declares a constant — the value cannot be changed after assignment.",
+        "isCorrect": false,
+        "explanation": "const is for constants. let declares a re-assignable variable. Both are block-scoped."
+      },
+      {
+        "optionText": "let is function-scoped just like var — the only difference is the keyword.",
+        "isCorrect": false,
+        "explanation": "var is function-scoped; let is block-scoped. let inside an if block is not visible outside it; var would be."
+      },
+      {
+        "optionText": "let variables are automatically initialized to null.",
+        "isCorrect": false,
+        "explanation": "let variables are uninitialized until the declaration is executed (Temporal Dead Zone). Accessing them before declaration throws ReferenceError, not returns null."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "Explain the difference between undefined and not defined in JavaScript",
+    "options": [
+      {
+        "optionText": "undefined: variable exists in scope but has no value. Not defined: variable was never declared — accessing it throws ReferenceError.",
+        "isCorrect": true,
+        "explanation": "Correct — you can safely check typeof undeclaredVar (returns 'undefined'). But undeclaredVar alone throws ReferenceError. Declared but unassigned vars hold undefined."
+      },
+      {
+        "optionText": "They are the same — both mean the variable has no value.",
+        "isCorrect": false,
+        "explanation": "They differ critically. undefined is a value for declared-but-unassigned variables. 'Not defined' means undeclared — accessing it throws ReferenceError."
+      },
+      {
+        "optionText": "Not defined means the variable is null.",
+        "isCorrect": false,
+        "explanation": "null is an explicit value. 'Not defined' means the variable was never declared — accessing it throws ReferenceError, not returns null."
+      },
+      {
+        "optionText": "undefined and not defined both return false in boolean context.",
+        "isCorrect": false,
+        "explanation": "undefined is falsy, but 'not defined' causes a ReferenceError — it doesn't evaluate to false."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "What's the difference between Host objects and Native objects?",
+    "options": [
+      {
+        "optionText": "Native: defined by ECMAScript spec (Object, Array, Promise). Host: provided by the environment (window, document, fetch, setTimeout in browsers).",
+        "isCorrect": true,
+        "explanation": "Correct — native objects are the same across all JS environments. Host objects vary: browsers have window/DOM, Node.js has process/fs. Both are plain JS objects at runtime."
+      },
+      {
+        "optionText": "Host objects are faster because they are implemented in C++.",
+        "isCorrect": false,
+        "explanation": "Some host objects are implemented natively for performance, but the distinction is about origin (spec vs environment), not speed."
+      },
+      {
+        "optionText": "Native objects are global; host objects are local to each function scope.",
+        "isCorrect": false,
+        "explanation": "Scope is unrelated to the native/host distinction. Both can be global or local. The distinction is whether they're defined in the ECMAScript spec or by the runtime environment."
+      },
+      {
+        "optionText": "There is no difference — all JavaScript objects are host objects.",
+        "isCorrect": false,
+        "explanation": "Native objects (Array, Date, Promise, Map) are defined in the ECMAScript specification. Host objects (window, document, XMLHttpRequest) are environment-specific."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "What language constructions do you use for iterating over object properties and array items?",
+    "options": [
+      {
+        "optionText": "Arrays: for...of, forEach, map/filter/reduce. Objects: for...in (own+inherited), Object.keys/values/entries with forEach.",
+        "isCorrect": true,
+        "explanation": "Correct — for...of iterates values of iterables; for...in iterates keys including inherited ones. Object.keys() is safer for plain objects as it only returns own enumerable properties."
+      },
+      {
+        "optionText": "Use for...in for everything — it works for both arrays and objects.",
+        "isCorrect": false,
+        "explanation": "for...in on arrays iterates over index strings AND any enumerable prototype properties — unreliable. Use for...of or forEach for arrays."
+      },
+      {
+        "optionText": "Arrays and objects must both use a traditional for(let i=0; i<n; i++) loop.",
+        "isCorrect": false,
+        "explanation": "Traditional for loops work but are verbose. for...of, forEach, and Object.entries() are cleaner modern alternatives."
+      },
+      {
+        "optionText": "Objects can't be iterated — you must convert them to arrays first.",
+        "isCorrect": false,
+        "explanation": "Objects can be iterated via for...in or Object.keys/values/entries. They're not iterable by default (no Symbol.iterator) but their properties are accessible."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "What is a Polyfill?",
+    "options": [
+      {
+        "optionText": "Code that implements a missing browser feature by matching the standard API — e.g. implementing Promise for old browsers.",
+        "isCorrect": true,
+        "explanation": "Correct — polyfills replicate native APIs. Babel transpiles syntax (arrow functions → function); polyfills add missing runtime APIs (Promise, Array.prototype.includes). Both are often needed together."
+      },
+      {
+        "optionText": "A CSS workaround for fixing cross-browser layout differences.",
+        "isCorrect": false,
+        "explanation": "CSS normalizers fix styling differences. Polyfills are JavaScript code that implements missing JavaScript/DOM APIs in older environments."
+      },
+      {
+        "optionText": "A type of minification that removes unused code from bundles.",
+        "isCorrect": false,
+        "explanation": "Tree shaking and minification reduce bundle size. Polyfills add code — they implement missing features rather than removing existing ones."
+      },
+      {
+        "optionText": "A build tool that converts modern JS syntax to ES5 for older browsers.",
+        "isCorrect": false,
+        "explanation": "That describes a transpiler like Babel. A polyfill is runtime code that fills API gaps — e.g. adding fetch() to an environment that lacks it."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "What's the difference between using let and var to declare a variable in ES6?",
+    "options": [
+      {
+        "optionText": "var is function-scoped and hoisted (initialized to undefined); let is block-scoped and in the temporal dead zone before its declaration.",
+        "isCorrect": true,
+        "explanation": "Correct — var leaks out of if/for blocks into the enclosing function; let is contained. var can be redeclared; let cannot in the same scope."
+      },
+      {
+        "optionText": "let is the same as var but for constants — its value can't change.",
+        "isCorrect": false,
+        "explanation": "let is re-assignable. const is for constants. The key difference between let and var is scope: block vs function."
+      },
+      {
+        "optionText": "var is newer than let — let is the legacy declaration keyword.",
+        "isCorrect": false,
+        "explanation": "var is the original JS declaration (pre-ES6); let was introduced in ES6 (2015) as the block-scoped, safer alternative."
+      },
+      {
+        "optionText": "They are identical in modern JavaScript — browsers treat them the same.",
+        "isCorrect": false,
+        "explanation": "They differ in scope (block vs function) and hoisting behaviour. These differences cause real bugs. Prefer let (and const) over var."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "What are the advantages and disadvantages of using use strict?",
+    "options": [
+      {
+        "optionText": "Pros: turns silent errors into exceptions, disables with, prevents undeclared globals. Cons: can break legacy code relying on sloppy-mode behaviour.",
+        "isCorrect": true,
+        "explanation": "Correct — 'use strict' is a pragma at the top of a file or function. ES modules are strict by default. Class bodies are strict. Most projects are already strict via TypeScript or Babel."
+      },
+      {
+        "optionText": "use strict makes JavaScript run faster by skipping type checks.",
+        "isCorrect": false,
+        "explanation": "Strict mode doesn't add type checks — it disallows certain syntax. Some engines may optimise strict code slightly better, but that's not its primary purpose."
+      },
+      {
+        "optionText": "use strict is deprecated in ES6 — use TypeScript instead.",
+        "isCorrect": false,
+        "explanation": "use strict is not deprecated. ES modules use strict mode automatically. TypeScript provides type checking but doesn't replace the strict mode runtime behaviour."
+      },
+      {
+        "optionText": "use strict only affects global variables — function internals remain in sloppy mode.",
+        "isCorrect": false,
+        "explanation": "'use strict' at the file level applies to the entire file. At the function level, it applies to that function and its nested functions."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "What's a typical use case for anonymous functions?",
+    "options": [
+      {
+        "optionText": "Inline callbacks (arr.map(x => x * 2)), IIFEs for immediate execution, and short one-off event handlers where naming adds no clarity.",
+        "isCorrect": true,
+        "explanation": "Correct — anonymous functions are common in functional patterns. Named functions are better for recursive calls and improved stack traces. Arrow functions are the modern anonymous form."
+      },
+      {
+        "optionText": "Anonymous functions run faster than named functions — engines optimise them separately.",
+        "isCorrect": false,
+        "explanation": "Function anonymity has no performance impact. Named functions are actually slightly better for debugging as they appear in stack traces."
+      },
+      {
+        "optionText": "Anonymous functions are the only way to create closures in JavaScript.",
+        "isCorrect": false,
+        "explanation": "Any function creates a closure over its surrounding scope — named or anonymous. Closures are about scope chains, not naming."
+      },
+      {
+        "optionText": "Anonymous functions cannot be used as callbacks — they must be assigned to a variable first.",
+        "isCorrect": false,
+        "explanation": "Anonymous functions can be passed directly as callbacks: setTimeout(function() { ... }, 100). No variable assignment needed."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "Suggest one simple way of removing duplicates from an array using ES6",
+    "options": [
+      {
+        "optionText": "[...new Set(arr)] — Set only stores unique values, spreading it back gives a deduplicated array.",
+        "isCorrect": true,
+        "explanation": "Correct — this works for primitives. For objects, Set uses reference equality, so two objects with the same shape are considered distinct."
+      },
+      {
+        "optionText": "arr.unique() — JavaScript arrays have a built-in unique() method.",
+        "isCorrect": false,
+        "explanation": "There is no built-in unique() on arrays. Use [...new Set(arr)] or filter with indexOf."
+      },
+      {
+        "optionText": "Use arr.filter(Boolean) — it removes all falsy values including duplicates.",
+        "isCorrect": false,
+        "explanation": "filter(Boolean) removes falsy values (0, '', null, undefined, NaN) — not duplicates. Use Set or filter with indexOf for deduplication."
+      },
+      {
+        "optionText": "arr.reduce((acc, v) => acc.includes(v) ? acc : [...acc, v], []) — the only correct method.",
+        "isCorrect": false,
+        "explanation": "The reduce approach works but is O(n²) due to includes. [...new Set(arr)] is simpler and O(n) for primitives."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "What is the difference between Anonymous and Named functions?",
+    "options": [
+      {
+        "optionText": "Named functions have an identifier available for recursion and stack traces; anonymous functions have no name and are common in callbacks and expressions.",
+        "isCorrect": true,
+        "explanation": "Correct — named function expressions also work: const greet = function greetFn() {}. greetFn is only accessible inside the function. Useful for debugging and recursion."
+      },
+      {
+        "optionText": "Anonymous functions are always arrow functions; named functions are always regular functions.",
+        "isCorrect": false,
+        "explanation": "Arrow functions can be named via assignment: const fn = () => {}. Regular functions can also be anonymous: function() {}. They're orthogonal concepts."
+      },
+      {
+        "optionText": "Named functions hoist to the top of scope; anonymous functions do not hoist at all.",
+        "isCorrect": false,
+        "explanation": "Function declarations (named) hoist fully. Function expressions (named or anonymous) assigned to variables hoist the variable only, not the function body."
+      },
+      {
+        "optionText": "Anonymous functions cannot access variables from the outer scope.",
+        "isCorrect": false,
+        "explanation": "Both named and anonymous functions create closures over their surrounding scope. Anonymity has no effect on closure behaviour."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "What is the difference between a shim and a polyfill?",
+    "options": [
+      {
+        "optionText": "A polyfill is a shim that specifically mimics a standard API. A shim is any compatibility layer — it may adapt or bridge, not necessarily match the spec.",
+        "isCorrect": true,
+        "explanation": "Correct — all polyfills are shims but not all shims are polyfills. A shim might wrap a non-standard API; a polyfill implements a standard one that's missing."
+      },
+      {
+        "optionText": "Shims are for CSS; polyfills are for JavaScript.",
+        "isCorrect": false,
+        "explanation": "Both terms apply to JavaScript. The difference is specificity: polyfills implement standard APIs; shims are broader compatibility layers."
+      },
+      {
+        "optionText": "They are identical — the terms are used interchangeably.",
+        "isCorrect": false,
+        "explanation": "There is a distinction: polyfills specifically implement standard APIs that are missing. Shims can also translate between different non-standard APIs."
+      },
+      {
+        "optionText": "Shims replace native APIs for performance; polyfills only run when APIs are missing.",
+        "isCorrect": false,
+        "explanation": "Both run when the target API is missing. The distinction is: polyfills match the standard API spec; shims may provide any compatibility layer."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "What is export default in JavaScript?",
+    "options": [
+      {
+        "optionText": "Exports one value per module without a fixed name — importers choose any name: import MyButton from './Button'.",
+        "isCorrect": true,
+        "explanation": "Correct — a module has at most one default export. Named exports use { curly braces }; default exports don't. Tree shaking works better with named exports in bundlers."
+      },
+      {
+        "optionText": "export default exports all named exports from a module as a single object.",
+        "isCorrect": false,
+        "explanation": "export * re-exports all named exports. export default exports one specific value — an object, function, class, or primitive."
+      },
+      {
+        "optionText": "Default exports require curly braces when importing: import { default } from './file'.",
+        "isCorrect": false,
+        "explanation": "Default exports are imported without curly braces: import Anything from './file'. You can also write import { default as Anything } from './file' but the first form is preferred."
+      },
+      {
+        "optionText": "export default is only valid for functions and classes — not values.",
+        "isCorrect": false,
+        "explanation": "export default can export any expression: objects, arrays, strings, numbers, functions, or classes."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "When should I use Arrow Functions in ES6?",
+    "options": [
+      {
+        "optionText": "When you need lexical this (callbacks, class methods called asynchronously), short expressions, and concise functional patterns.",
+        "isCorrect": true,
+        "explanation": "Correct — avoid arrow functions for: object methods (this would be outer context), constructors (can't use new), and functions needing their own arguments or this."
+      },
+      {
+        "optionText": "Always — arrow functions are a strict improvement over regular functions in every case.",
+        "isCorrect": false,
+        "explanation": "Arrow functions can't be constructors, don't have their own this/arguments, and can't be used as object methods where this should refer to the object."
+      },
+      {
+        "optionText": "Only for one-line functions — multi-line logic requires regular functions.",
+        "isCorrect": false,
+        "explanation": "Arrow functions support multi-line bodies with curly braces. The single-line shorthand (implicit return) is optional, not a requirement."
+      },
+      {
+        "optionText": "Never in React — arrow functions cause re-renders on every component update.",
+        "isCorrect": false,
+        "explanation": "Arrow functions in JSX (onClick={() => ...}) create a new function each render, but this rarely causes performance issues. Use useCallback only when profiling shows a problem."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "What are the benefits of using spread syntax in ES6 and how is it different from rest syntax?",
+    "options": [
+      {
+        "optionText": "Spread (...arr) expands iterables at a call/literal site; rest (...args) collects remaining arguments or properties into an array/object.",
+        "isCorrect": true,
+        "explanation": "Correct — spread in function call: Math.max(...nums). In array literal: [...a, ...b]. Rest in parameter: function(a, ...rest). In destructuring: const { x, ...rest } = obj."
+      },
+      {
+        "optionText": "Spread and rest are the same syntax and do the same thing.",
+        "isCorrect": false,
+        "explanation": "Same syntax (...) but opposite semantics. Spread expands; rest collects. The distinction is context: function call/literal (spread) vs parameter/destructuring (rest)."
+      },
+      {
+        "optionText": "Spread deep-clones objects; rest creates shallow copies.",
+        "isCorrect": false,
+        "explanation": "Spread creates shallow copies — nested objects are still references. There's no deep clone built in. Use structuredClone() or JSON.parse(JSON.stringify()) for deep copies."
+      },
+      {
+        "optionText": "Rest syntax is only for arrays — it can't be used with objects.",
+        "isCorrect": false,
+        "explanation": "Rest works with both arrays and objects: const { a, ...rest } = obj; const [first, ...rest] = arr. Both are valid ES6+ syntax."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "Can you give an example for destructuring an object or an array in ES6?",
+    "options": [
+      {
+        "optionText": "Object: const { name, age = 18 } = user. Array: const [first, , third] = arr. Rename: const { name: userName } = user.",
+        "isCorrect": true,
+        "explanation": "Correct — destructuring extracts values in one step. Defaults, renaming, nested destructuring, and rest patterns all work. Common in function params: function({ id, name }) {}."
+      },
+      {
+        "optionText": "Destructuring only works on arrays — use dot notation for objects.",
+        "isCorrect": false,
+        "explanation": "Object destructuring is one of the most used ES6 features. const { x, y } = point extracts properties just like array destructuring extracts elements."
+      },
+      {
+        "optionText": "const { name } = user creates a copy of the name property — changes don't affect user.",
+        "isCorrect": false,
+        "explanation": "For primitives like strings, yes — you get a copy. For nested objects, destructuring extracts the reference — mutations affect the original object."
+      },
+      {
+        "optionText": "Array destructuring requires Array.from() before it can be used.",
+        "isCorrect": false,
+        "explanation": "Array destructuring works directly on any iterable: const [a, b] = [1, 2]. No Array.from() needed."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "What's the difference between throw Error('msg') vs throw new Error('msg')?",
+    "options": [
+      {
+        "optionText": "No practical difference — Error() without new still returns a new Error object. Both produce an error with a message and stack trace.",
+        "isCorrect": true,
+        "explanation": "Correct — the Error() constructor is designed to work both with and without new. Use either, but new Error() is more explicit and the common convention."
+      },
+      {
+        "optionText": "throw Error() throws a string; throw new Error() throws an object.",
+        "isCorrect": false,
+        "explanation": "Both throw an Error object. Error() without new still creates and returns an Error instance per the spec."
+      },
+      {
+        "optionText": "throw new Error() is required — throw Error() is not valid JavaScript.",
+        "isCorrect": false,
+        "explanation": "Both are valid. Many linters prefer new Error() for clarity, but JavaScript accepts both."
+      },
+      {
+        "optionText": "throw Error() doesn't include a stack trace; throw new Error() does.",
+        "isCorrect": false,
+        "explanation": "Both produce an Error object with a stack property. The stack trace behaviour is identical."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "Explain the same-origin policy with regards to JavaScript.",
+    "options": [
+      {
+        "optionText": "Browsers block JS from reading responses from a different origin (protocol + host + port) unless the server sends CORS headers allowing it.",
+        "isCorrect": true,
+        "explanation": "Correct — SOP prevents malicious scripts from reading other sites' data. CORS relaxes it for allowed origins. Sending requests is allowed; reading the response is blocked."
+      },
+      {
+        "optionText": "Same-origin policy prevents any HTTP request from a different domain.",
+        "isCorrect": false,
+        "explanation": "SOP doesn't block sending requests — it blocks reading the response. The browser sends the request and receives the response, but JS can't access it without CORS headers."
+      },
+      {
+        "optionText": "Same-origin policy applies to CSS and images but not JavaScript.",
+        "isCorrect": false,
+        "explanation": "SOP primarily restricts JavaScript's ability to read cross-origin responses. CSS and images can be loaded cross-origin by default (with some limitations)."
+      },
+      {
+        "optionText": "HTTPS overrides the same-origin policy — secure connections allow cross-origin access.",
+        "isCorrect": false,
+        "explanation": "HTTPS provides encryption but doesn't bypass SOP. Origin is scheme + host + port — https://a.com and https://b.com are different origins regardless of HTTPS."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "What is Callback Hell and what is the main cause of it?",
+    "options": [
+      {
+        "optionText": "Deeply nested callbacks where each async step depends on the previous — caused by sequential async operations before Promises/async-await.",
+        "isCorrect": true,
+        "explanation": "Correct — callback hell was the pre-Promise era problem. Nested callbacks are hard to read, error-handle, and debug. Promises flatten the chain; async/await makes it look synchronous."
+      },
+      {
+        "optionText": "Using too many arrow functions in a component — arrows cannot be stacked.",
+        "isCorrect": false,
+        "explanation": "Arrow functions have nothing to do with callback hell. Callback hell is specifically about nested asynchronous callbacks in serial async operations."
+      },
+      {
+        "optionText": "Event listeners that fire too frequently and stack up in the call queue.",
+        "isCorrect": false,
+        "explanation": "Event listener overflow is a different performance concern. Callback hell is about code structure — deeply nested sequential async callbacks."
+      },
+      {
+        "optionText": "Forgetting to call next() in Express middleware chains.",
+        "isCorrect": false,
+        "explanation": "Express middleware is a separate concept. Callback hell refers to the visual pyramid of nested async callback functions, not middleware flows."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "What is the motivation for bringing Symbol to ES6?",
+    "options": [
+      {
+        "optionText": "Guaranteed unique primitive values as object keys — prevent naming collisions, enable well-known symbols (Symbol.iterator, Symbol.toPrimitive) for protocol extension.",
+        "isCorrect": true,
+        "explanation": "Correct — Symbol() !== Symbol() always. Symbol property keys don't appear in for...in or JSON.stringify — useful for private-ish metadata and implementing iteration protocols."
+      },
+      {
+        "optionText": "Symbols are a faster alternative to string keys in objects.",
+        "isCorrect": false,
+        "explanation": "Symbols aren't faster than string keys. Their purpose is uniqueness and protocol extension, not performance."
+      },
+      {
+        "optionText": "Symbols replace enums in JavaScript — they provide type-safe constants.",
+        "isCorrect": false,
+        "explanation": "Symbols guarantee uniqueness but aren't type-safe constants in the TypeScript sense. Enums are a TypeScript feature; Symbols serve a different purpose."
+      },
+      {
+        "optionText": "Symbols make object properties serialisable to JSON.",
+        "isCorrect": false,
+        "explanation": "Symbol-keyed properties are explicitly excluded from JSON.stringify. Their purpose is the opposite — creating non-serialisable, non-enumerable keys."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "What is generator in JS?",
+    "options": [
+      {
+        "optionText": "A function* that can pause (yield) and resume, producing values lazily one at a time via an iterator interface.",
+        "isCorrect": true,
+        "explanation": "Correct — generators implement the iterator protocol automatically. Use for infinite sequences, async coordination (co libraries), and lazy data pipelines."
+      },
+      {
+        "optionText": "A function that generates random numbers — Math.random() is a generator.",
+        "isCorrect": false,
+        "explanation": "Math.random() is a plain function. JavaScript generators (function*) are pausable, resumable functions that produce sequences of values."
+      },
+      {
+        "optionText": "A class constructor that generates instances — equivalent to a factory function.",
+        "isCorrect": false,
+        "explanation": "Factory functions create objects; generators create iterators. Generator functions are declared with function* and use yield, not return, for their values."
+      },
+      {
+        "optionText": "Generators are a build tool concept — webpack uses them to generate bundles.",
+        "isCorrect": false,
+        "explanation": "Webpack's generators are a completely separate concept. JavaScript language generators (function*) are a runtime feature for lazy iteration."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "Why is extending built-in JavaScript objects not a good idea?",
+    "options": [
+      {
+        "optionText": "Future ES specs may add a method with the same name, causing conflicts; third-party code may break; adds unexpected enumerable properties.",
+        "isCorrect": true,
+        "explanation": "Correct — e.g. Array.prototype.flatten was added in ES2019, breaking MooTools which had its own flatten. Extend natives via subclassing or utility functions instead."
+      },
+      {
+        "optionText": "Built-in objects are frozen and can't be extended in strict mode.",
+        "isCorrect": false,
+        "explanation": "Built-in prototypes are not frozen — you can add properties. The problem is that doing so is considered bad practice, not that it's impossible."
+      },
+      {
+        "optionText": "Extending built-ins prevents tree shaking and increases bundle size.",
+        "isCorrect": false,
+        "explanation": "Tree shaking removes unused exports; prototype extension is always included. Bundle size is a real concern but not the main reason against extending built-ins."
+      },
+      {
+        "optionText": "It's fine — extending built-ins is the recommended pattern for adding utility methods.",
+        "isCorrect": false,
+        "explanation": "Extending native prototypes is widely considered an anti-pattern. Use standalone utility functions or a library like lodash instead."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "When should we use generators in ES6?",
+    "options": [
+      {
+        "optionText": "Lazy/infinite sequences, custom iterators, and async coordination — where you need to produce values on demand without materialising the whole sequence.",
+        "isCorrect": true,
+        "explanation": "Correct — generators shine for infinite ranges, streaming data, and managing complex async state machines. async/await has replaced generators for most async use cases."
+      },
+      {
+        "optionText": "Generators should replace all for loops — they are always more efficient.",
+        "isCorrect": false,
+        "explanation": "Generators add overhead. Use them when lazy evaluation genuinely helps — not as a blanket replacement for simple loops."
+      },
+      {
+        "optionText": "Generators are required for any asynchronous code in modern JavaScript.",
+        "isCorrect": false,
+        "explanation": "async/await (built on generators and Promises) is the standard for async code. Generators directly are rarely needed in application code today."
+      },
+      {
+        "optionText": "Generators replace React hooks for managing component state.",
+        "isCorrect": false,
+        "explanation": "Generators are a language feature for iterators and sequences — not a state management tool. React uses useState/useReducer hooks for component state."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "Explain the difference between Object.freeze() vs const",
+    "options": [
+      {
+        "optionText": "const prevents variable reassignment; Object.freeze() prevents property mutation on the object — they address different levels of immutability.",
+        "isCorrect": true,
+        "explanation": "Correct — const obj = {} means obj can't be reassigned but obj.x = 1 still works. Object.freeze(obj) blocks property changes but obj can be reassigned to another reference."
+      },
+      {
+        "optionText": "const and Object.freeze() are identical — both make values fully immutable.",
+        "isCorrect": false,
+        "explanation": "const only locks the binding. Object.freeze() locks the object's properties. Neither is a complete deep immutability solution — nested objects in frozen objects remain mutable."
+      },
+      {
+        "optionText": "Object.freeze() prevents reassignment; const prevents mutation.",
+        "isCorrect": false,
+        "explanation": "It's the reverse: const prevents the variable from pointing to a different object; Object.freeze() prevents modifying the object's own properties."
+      },
+      {
+        "optionText": "Both are deep — Object.freeze() recursively freezes nested objects.",
+        "isCorrect": false,
+        "explanation": "Object.freeze() is shallow — it only freezes the top-level properties. Nested objects remain mutable. Deep freeze requires a recursive implementation."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "What are the benefits of using ES6 classes over ES5 constructor functions?",
+    "options": [
+      {
+        "optionText": "Cleaner syntax, explicit extends for inheritance, super() for parent calls, static methods, and mandatory new enforcement.",
+        "isCorrect": true,
+        "explanation": "Correct — classes are syntactic sugar over prototypes. Key benefit: calling a class without new throws TypeError. ES5 constructors silently polluted the global if called without new."
+      },
+      {
+        "optionText": "ES6 classes are faster than ES5 constructor functions at runtime.",
+        "isCorrect": false,
+        "explanation": "Classes compile to the same prototype-based code — no performance difference. The benefit is readability and safer inheritance syntax."
+      },
+      {
+        "optionText": "ES6 classes support private fields natively; ES5 constructors do not.",
+        "isCorrect": false,
+        "explanation": "Private class fields (#field) were introduced in ES2022, not ES6. ES6 classes themselves don't have true privacy — closures were used in ES5 for similar results."
+      },
+      {
+        "optionText": "Classes are the only way to use inheritance in JavaScript.",
+        "isCorrect": false,
+        "explanation": "Prototype-based inheritance via Object.create() and constructor functions works without classes. Classes are cleaner syntax for the same underlying mechanism."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "What is the difference between ES6 classes and ES5 function constructors?",
+    "options": [
+      {
+        "optionText": "Both use prototypes under the hood, but classes require new (throws without it), support extends/super, and class bodies are always in strict mode.",
+        "isCorrect": true,
+        "explanation": "Correct — class methods are non-enumerable by default (unlike constructor prototype methods in ES5). The prototype chain is the same; the syntax and safety guarantees differ."
+      },
+      {
+        "optionText": "ES6 classes use a different inheritance mechanism than ES5 — they don't use prototypes.",
+        "isCorrect": false,
+        "explanation": "ES6 classes are syntactic sugar — they compile to the same prototype chain. class is not a different runtime mechanism; it's cleaner syntax over prototypal inheritance."
+      },
+      {
+        "optionText": "ES5 constructor functions can't be inherited — only ES6 classes support extends.",
+        "isCorrect": false,
+        "explanation": "ES5 inheritance uses Object.create(Parent.prototype) and constructor stealing. It's verbose but fully capable. ES6 extends is cleaner syntax for the same result."
+      },
+      {
+        "optionText": "ES6 classes create copies of methods for each instance; constructors share via prototype.",
+        "isCorrect": false,
+        "explanation": "Class methods are on the prototype, shared across instances — same as ES5. Arrow function class properties (field declarations) create per-instance copies, but methods don't."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "What is currying in JavaScript?",
+    "options": [
+      {
+        "optionText": "Transforming a function of multiple arguments into a sequence of single-argument functions: add(1)(2)(3) instead of add(1, 2, 3).",
+        "isCorrect": true,
+        "explanation": "Correct — currying enables partial application. const add = a => b => a + b; const add5 = add(5) creates a reusable partially applied function."
+      },
+      {
+        "optionText": "Currying is the process of converting a string to a number using parseInt.",
+        "isCorrect": false,
+        "explanation": "parseInt converts strings to numbers. Currying is a functional programming technique for transforming multi-argument functions into chains of single-argument functions."
+      },
+      {
+        "optionText": "Currying applies CSS styles dynamically from a JavaScript function.",
+        "isCorrect": false,
+        "explanation": "CSS-in-JS applies styles dynamically. Currying is a functional programming pattern — it's about function argument transformation, not styling."
+      },
+      {
+        "optionText": "Currying is another name for memoization — both cache function results.",
+        "isCorrect": false,
+        "explanation": "Memoization caches results for repeated calls with the same arguments. Currying transforms arity — it creates new functions, not cached results."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "What is the difference between document.load and DOMContentLoaded events?",
+    "options": [
+      {
+        "optionText": "DOMContentLoaded fires when HTML is parsed and DOM is ready; window.load fires after all resources (images, stylesheets, iframes) have loaded.",
+        "isCorrect": true,
+        "explanation": "Correct — use DOMContentLoaded for DOM manipulation that doesn't need images. Use load for operations requiring image dimensions. DOMContentLoaded fires much earlier."
+      },
+      {
+        "optionText": "document.load fires first, then DOMContentLoaded fires after images load.",
+        "isCorrect": false,
+        "explanation": "It's the reverse: DOMContentLoaded fires first (DOM ready, no resources needed). window.load fires later after all resources have loaded."
+      },
+      {
+        "optionText": "They are equivalent — both fire when the page is fully loaded.",
+        "isCorrect": false,
+        "explanation": "DOMContentLoaded is faster — it fires when the HTML document is parsed, not when all resources are ready. load waits for images, fonts, and stylesheets."
+      },
+      {
+        "optionText": "DOMContentLoaded is deprecated — use load for all modern JavaScript.",
+        "isCorrect": false,
+        "explanation": "DOMContentLoaded is not deprecated — it's the preferred event for most DOM manipulation as it fires much earlier than load."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "What are the differences between AMD and CommonJS module systems?",
+    "options": [
+      {
+        "optionText": "CommonJS (require/module.exports): synchronous, for Node.js. AMD (define/require): asynchronous, designed for browsers. ES modules replace both.",
+        "isCorrect": true,
+        "explanation": "Correct — CommonJS loads synchronously (fine for Node). AMD loads asynchronously (needed for browser bundles without a build step). ES modules are the standard now."
+      },
+      {
+        "optionText": "AMD is a newer standard that replaces CommonJS in all environments.",
+        "isCorrect": false,
+        "explanation": "AMD and CommonJS coexisted. ES modules (import/export) are the modern standard that replaced both. Node.js still supports CommonJS but is adding ES module support."
+      },
+      {
+        "optionText": "CommonJS and AMD are the same — both use import/export syntax.",
+        "isCorrect": false,
+        "explanation": "CommonJS uses require() and module.exports. AMD uses define() and require(). Import/export is the ES module syntax — a third, distinct system."
+      },
+      {
+        "optionText": "CommonJS works in browsers natively; AMD only works in Node.js.",
+        "isCorrect": false,
+        "explanation": "It's the opposite: CommonJS was designed for Node.js (synchronous); AMD was designed for async browser loading (via RequireJS). Neither works natively in browsers without a bundler."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "What is a higher-order function?",
+    "options": [
+      {
+        "optionText": "A function that takes other functions as arguments or returns a function — e.g. map, filter, reduce, and most callback-based APIs.",
+        "isCorrect": true,
+        "explanation": "Correct — higher-order functions are foundational to functional programming. Array.map(fn), setTimeout(fn, ms), and function decorators are all higher-order functions."
+      },
+      {
+        "optionText": "A function defined at the top of a file — higher in the source code.",
+        "isCorrect": false,
+        "explanation": "Position in source code has nothing to do with higher-order. HOFs take or return functions — it's about their relationship to other functions."
+      },
+      {
+        "optionText": "An async function — it operates at a higher level than synchronous functions.",
+        "isCorrect": false,
+        "explanation": "Async functions are about timing, not HOF status. A HOF takes/returns functions regardless of sync or async."
+      },
+      {
+        "optionText": "A class method that has access to private properties.",
+        "isCorrect": false,
+        "explanation": "Private property access is an OOP concept. Higher-order functions are a functional programming concept — functions that operate on other functions."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "Explain Function.prototype.bind.",
+    "options": [
+      {
+        "optionText": "Creates a new function with this permanently bound to a specified value, with optional pre-filled arguments (partial application).",
+        "isCorrect": true,
+        "explanation": "Correct — const bound = fn.bind(context, arg1). Useful for event handlers in class components and passing methods as callbacks where this matters."
+      },
+      {
+        "optionText": "bind immediately calls the function with the given context — equivalent to call().",
+        "isCorrect": false,
+        "explanation": "bind returns a new function without calling it. call() and apply() invoke immediately; bind just creates the bound function for later invocation."
+      },
+      {
+        "optionText": "bind permanently mutates the original function's this context.",
+        "isCorrect": false,
+        "explanation": "bind returns a NEW function — the original is unchanged. Multiple binds on the same function each return a new bound function."
+      },
+      {
+        "optionText": "bind works the same as arrow functions — both lock the this context.",
+        "isCorrect": false,
+        "explanation": "Both create fixed this, but differently. Arrow functions capture this at definition time lexically. bind creates a new function with this permanently set at call time."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "What are the differences between ES5 and ES6?",
+    "options": [
+      {
+        "optionText": "ES6 added: let/const, arrow functions, classes, template literals, destructuring, default params, spread/rest, Promises, modules, Map/Set, Symbol.",
+        "isCorrect": true,
+        "explanation": "Correct — ES6 (ES2015) was the largest update to JavaScript. It modernised the language significantly and most modern JS code relies on these features."
+      },
+      {
+        "optionText": "ES6 replaced ES5 entirely — ES5 code is no longer valid JavaScript.",
+        "isCorrect": false,
+        "explanation": "ES6 is a superset of ES5. All valid ES5 code runs in ES6 environments. The language is backward-compatible."
+      },
+      {
+        "optionText": "ES6 only added async/await — all other features came in later versions.",
+        "isCorrect": false,
+        "explanation": "async/await came in ES2017. ES6 added classes, arrow functions, Promises, let/const, modules, and many more foundational features."
+      },
+      {
+        "optionText": "ES5 and ES6 are different languages — ES6 is TypeScript.",
+        "isCorrect": false,
+        "explanation": "TypeScript is a separate language that compiles to JavaScript. ES5 and ES6 are versions of the ECMAScript specification — both are JavaScript."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "Why is it generally a bad idea to leave the global scope of a website as-is?",
+    "options": [
+      {
+        "optionText": "Global variables cause name collisions between scripts, create security risks, and make code harder to test and reason about.",
+        "isCorrect": true,
+        "explanation": "Correct — two scripts defining window.utils conflict. Globals are accessible to third-party scripts (XSS attack surface). Modules, IIFEs, and closures encapsulate scope."
+      },
+      {
+        "optionText": "Global variables are slower — the engine searches more scope chains to resolve them.",
+        "isCorrect": false,
+        "explanation": "Global variable lookup is slightly slower than local, but this is negligible in practice. The real problems are naming collisions and maintainability."
+      },
+      {
+        "optionText": "The global scope is frozen in strict mode — you can't add anything to it.",
+        "isCorrect": false,
+        "explanation": "Strict mode prevents implicit global creation (undeclared assignment throws) but doesn't freeze the global scope. Explicit var and window assignments still work."
+      },
+      {
+        "optionText": "Browsers delete global variables on every page navigation for security.",
+        "isCorrect": false,
+        "explanation": "Globals persist until the page unloads. Browsers don't selectively delete globals between navigations — that's the responsibility of the developer."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "What is a linear search algorithm and how do you implement it?",
+    "options": [
+      {
+        "optionText": "Iterate each element one by one until found — O(n) time, works on unsorted arrays. In JS: arr.find(x => x === target) or a manual for loop.",
+        "isCorrect": true,
+        "explanation": "Correct — linear search is simple and works on any array. Use indexOf, find, or includes for most cases. Write your own loop when you need custom comparison logic."
+      },
+      {
+        "optionText": "Linear search divides the array in half each step — O(log n) complexity.",
+        "isCorrect": false,
+        "explanation": "That describes binary search. Linear search checks every element sequentially — O(n) worst case."
+      },
+      {
+        "optionText": "Linear search requires a sorted array to function correctly.",
+        "isCorrect": false,
+        "explanation": "Binary search requires sorting; linear search works on any array regardless of order. Its disadvantage is O(n) time, not a sorting requirement."
+      },
+      {
+        "optionText": "Array.prototype.sort() implements linear search internally.",
+        "isCorrect": false,
+        "explanation": "Array.sort() is a sorting algorithm (typically TimSort). Linear search iterates elements to find one — it's unrelated to sorting."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "What is a binary search algorithm and how does it work?",
+    "options": [
+      {
+        "optionText": "Repeatedly halves a sorted array, comparing the target to the midpoint — O(log n). Requires a sorted array.",
+        "isCorrect": true,
+        "explanation": "Correct — binary search is O(log n) vs linear search's O(n). On a million-element array, binary search takes ~20 steps; linear up to 1,000,000."
+      },
+      {
+        "optionText": "Binary search splits an array into two halves and searches both in parallel.",
+        "isCorrect": false,
+        "explanation": "Binary search eliminates one half after each comparison — only one half is searched. It's sequential, not parallel."
+      },
+      {
+        "optionText": "Binary search works on unsorted arrays — it sorts first internally.",
+        "isCorrect": false,
+        "explanation": "Binary search requires a pre-sorted array. If you need to sort first, the total cost is O(n log n) — only beneficial if you search many times on the same dataset."
+      },
+      {
+        "optionText": "Binary search is O(n) — the same as linear search but with less code.",
+        "isCorrect": false,
+        "explanation": "Binary search is O(log n) — significantly faster than linear search's O(n) for large sorted datasets."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "What is event delegation and why is it useful?",
+    "options": [
+      {
+        "optionText": "Attaching one event listener to a parent instead of many on children — uses event bubbling to handle events from dynamically added elements efficiently.",
+        "isCorrect": true,
+        "explanation": "Correct — e.g. attach one click listener to a <ul> and use e.target to identify which <li> was clicked. Works for dynamically added items; saves memory."
+      },
+      {
+        "optionText": "Event delegation passes events from child to parent using dispatchEvent.",
+        "isCorrect": false,
+        "explanation": "Event bubbling is native browser behaviour — you don't need dispatchEvent. Delegation takes advantage of bubbling by listening at the ancestor level."
+      },
+      {
+        "optionText": "Event delegation prevents events from bubbling up to parent elements.",
+        "isCorrect": false,
+        "explanation": "stopPropagation() prevents bubbling. Event delegation relies on bubbling — it would break if you stopped propagation on child elements."
+      },
+      {
+        "optionText": "Event delegation is a React-specific pattern — vanilla JS handles events directly.",
+        "isCorrect": false,
+        "explanation": "Event delegation is a vanilla JS pattern. React implements it internally (one root listener). Developers can use it in vanilla JS for performance and dynamic lists."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "How does prototypal inheritance work in JavaScript?",
+    "options": [
+      {
+        "optionText": "Every object has a [[Prototype]] chain. Property lookup walks the chain until found or null is reached — classes are syntax over this mechanism.",
+        "isCorrect": true,
+        "explanation": "Correct — Object.create(proto) creates an object with proto as its prototype. hasOwnProperty checks if a property belongs to the object itself vs the chain."
+      },
+      {
+        "optionText": "JavaScript uses classical inheritance — subclasses copy all parent properties.",
+        "isCorrect": false,
+        "explanation": "JavaScript uses prototypal inheritance via the [[Prototype]] chain — properties are not copied; they're looked up by walking the chain."
+      },
+      {
+        "optionText": "Prototypal inheritance only works with ES6 classes — it doesn't apply to plain objects.",
+        "isCorrect": false,
+        "explanation": "All objects participate in the prototype chain, whether created with new, Object.create(), object literals, or ES6 classes."
+      },
+      {
+        "optionText": "The prototype chain is limited to 3 levels deep — beyond that, lookup fails.",
+        "isCorrect": false,
+        "explanation": "The prototype chain can be any length. Performance degrades with very deep chains, but there's no fixed limit."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "How does async/await work under the hood?",
+    "options": [
+      {
+        "optionText": "async functions return a Promise. await pauses execution until the awaited Promise resolves, then resumes — all built on Promises and the microtask queue.",
+        "isCorrect": true,
+        "explanation": "Correct — async/await is syntactic sugar over Promise.then(). Each await is a checkpoint where the function suspends and other tasks can run."
+      },
+      {
+        "optionText": "async/await creates new threads — code after await runs in a separate OS thread.",
+        "isCorrect": false,
+        "explanation": "JavaScript is single-threaded. async/await uses the event loop and microtask queue — no new threads are created."
+      },
+      {
+        "optionText": "await blocks the main thread synchronously until the Promise resolves.",
+        "isCorrect": false,
+        "explanation": "await suspends the async function, not the main thread. Other synchronous code and event loop tasks continue while the await is pending."
+      },
+      {
+        "optionText": "async functions return the resolved value directly — not a Promise.",
+        "isCorrect": false,
+        "explanation": "async functions always return a Promise. If you return a value, it's wrapped in Promise.resolve(). Callers must await or use .then() to get the value."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "What is throttling and how do you implement it?",
+    "options": [
+      {
+        "optionText": "Limits a function to execute at most once per interval — useful for scroll and resize events. Uses a timestamp or timer to block excess calls.",
+        "isCorrect": true,
+        "explanation": "Correct — throttle executes on the leading edge and ignores calls until the interval passes. Debounce waits for a pause; throttle guarantees at least N calls per second."
+      },
+      {
+        "optionText": "Throttling delays a function until it stops being called — same as debouncing.",
+        "isCorrect": false,
+        "explanation": "Debouncing waits for calls to stop; throttling guarantees execution at a fixed rate. Throttle fires on the leading edge; debounce fires after a quiet period."
+      },
+      {
+        "optionText": "Throttling is a CSS property that limits animation frame rate.",
+        "isCorrect": false,
+        "explanation": "CSS animations are controlled by animation-duration and requestAnimationFrame. Throttling is a JavaScript pattern for rate-limiting function calls."
+      },
+      {
+        "optionText": "Throttling only works with Promise-based functions.",
+        "isCorrect": false,
+        "explanation": "Throttling works with any function — synchronous or async. It's implemented with setTimeout or timestamp comparisons, not Promises."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "What is the difference between pass by value and pass by reference in JavaScript?",
+    "options": [
+      {
+        "optionText": "Primitives are passed by value (copy); objects are passed by reference (same object in memory — mutations affect the original).",
+        "isCorrect": true,
+        "explanation": "Correct — reassigning the parameter doesn't affect the caller's variable for either type. But mutating object properties inside the function DOES affect the original."
+      },
+      {
+        "optionText": "Everything in JavaScript is passed by reference — primitives and objects alike.",
+        "isCorrect": false,
+        "explanation": "Primitives (numbers, strings, booleans) are passed by value — a copy. Objects pass a copy of the reference, allowing mutation of the original."
+      },
+      {
+        "optionText": "JavaScript passes everything by value, including objects — objects are cloned on pass.",
+        "isCorrect": false,
+        "explanation": "Objects are not cloned. The reference (memory address) is copied — both the caller and function point to the same object. Mutations are visible to the caller."
+      },
+      {
+        "optionText": "const prevents pass by reference — const objects are automatically passed by value.",
+        "isCorrect": false,
+        "explanation": "const prevents reassigning the binding, not the passing mechanism. A const object is still passed by reference — you can still mutate its properties inside a function."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "How does garbage collection work in JavaScript?",
+    "options": [
+      {
+        "optionText": "The engine (V8) uses mark-and-sweep: objects reachable from the root (global, stack) are marked; unreachable ones are swept and their memory reclaimed.",
+        "isCorrect": true,
+        "explanation": "Correct — reference counting was an older approach but couldn't handle circular references. Mark-and-sweep traces reachability from roots and is used by all modern engines."
+      },
+      {
+        "optionText": "Garbage collection runs after every function call to free local variables.",
+        "isCorrect": false,
+        "explanation": "GC runs periodically at the engine's discretion, not after every function. Local variable memory is reclaimed when no more references exist, which may happen long after the function returns."
+      },
+      {
+        "optionText": "JavaScript has no garbage collector — developers must manually free memory with delete.",
+        "isCorrect": false,
+        "explanation": "JavaScript has automatic garbage collection. delete removes object properties (not free memory directly). Memory is reclaimed automatically when objects are no longer referenced."
+      },
+      {
+        "optionText": "WeakMap and WeakRef prevent garbage collection to keep objects in memory.",
+        "isCorrect": false,
+        "explanation": "WeakMap and WeakRef hold WEAK references — they allow GC to collect the referenced objects. They prevent memory leaks by not blocking collection."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "What are pure functions and why does immutability matter in JavaScript?",
+    "options": [
+      {
+        "optionText": "Pure functions: same input → same output, no side effects. Immutability prevents accidental mutation — enabling predictable state, easier testing, and React's change detection.",
+        "isCorrect": true,
+        "explanation": "Correct — React's reconciliation, Redux reducers, and memoization all rely on pure functions and immutable updates. Spread operator and structuredClone() help create immutable updates."
+      },
+      {
+        "optionText": "Pure functions cannot accept parameters — they only use constants.",
+        "isCorrect": false,
+        "explanation": "Pure functions can accept any parameters — they just must return the same output for the same input and have no side effects. Parameters are the whole point."
+      },
+      {
+        "optionText": "Immutability means using const for all variables — const makes values immutable.",
+        "isCorrect": false,
+        "explanation": "const prevents rebinding but not mutation. Object.freeze() or spreading to new objects creates true immutable updates. Immutability is a design choice, not just a keyword."
+      },
+      {
+        "optionText": "Pure functions are slower because they can't cache results in closures.",
+        "isCorrect": false,
+        "explanation": "Pure functions are easier to memoize precisely because they're predictable. Memoization caches outputs for given inputs — impossible with impure functions."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "What is the module pattern in JavaScript?",
+    "options": [
+      {
+        "optionText": "Uses closures (often an IIFE) to create private state and expose a public API — the pre-ES6 way to achieve encapsulation.",
+        "isCorrect": true,
+        "explanation": "Correct — const counter = (() => { let count = 0; return { inc: () => ++count, get: () => count }; })(). count is private; only inc and get are public. ES modules made this largely obsolete."
+      },
+      {
+        "optionText": "The module pattern is the same as ES6 import/export — they're interchangeable.",
+        "isCorrect": false,
+        "explanation": "The module pattern is a pre-ES6 IIFE-based technique for simulating modules. ES6 modules are a language feature with static imports, tree shaking, and explicit exports."
+      },
+      {
+        "optionText": "The module pattern requires a build tool like webpack to work in browsers.",
+        "isCorrect": false,
+        "explanation": "The IIFE-based module pattern is plain JavaScript — no build tool needed. It was widely used before bundlers existed."
+      },
+      {
+        "optionText": "The module pattern is a React design pattern for managing component state.",
+        "isCorrect": false,
+        "explanation": "The module pattern is a general JavaScript encapsulation technique predating React. React state is managed with useState/useReducer hooks."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "What is the Observer pattern and how do you implement it in JavaScript?",
+    "options": [
+      {
+        "optionText": "A one-to-many dependency where a subject notifies all subscribed observers when it changes — implemented with subscribe/publish/unsubscribe methods.",
+        "isCorrect": true,
+        "explanation": "Correct — EventEmitter in Node.js, EventTarget in browsers, and Redux's store.subscribe() are Observer pattern implementations. Foundational to reactive programming."
+      },
+      {
+        "optionText": "The Observer pattern is the same as the Singleton pattern.",
+        "isCorrect": false,
+        "explanation": "Singleton ensures one instance; Observer enables event-based notification between objects. They solve different problems."
+      },
+      {
+        "optionText": "Observers block the main thread waiting for notifications.",
+        "isCorrect": false,
+        "explanation": "Observers are callback-based — they register a function and return immediately. The callback fires asynchronously when the event occurs, not by blocking."
+      },
+      {
+        "optionText": "The Observer pattern requires Promises — you can't implement it with callbacks.",
+        "isCorrect": false,
+        "explanation": "Callbacks are the traditional Observer mechanism. Promises are for single-resolution async; Observers handle multiple events over time. RxJS Observables combine both concepts."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "What are Web Workers and when should you use them?",
+    "options": [
+      {
+        "optionText": "Background threads for CPU-heavy work (image processing, crypto, parsing) — communicate via postMessage, no DOM access, prevent UI blocking.",
+        "isCorrect": true,
+        "explanation": "Correct — Web Workers run in a separate thread. Use them for: large data parsing, image manipulation, encryption, or any computation > 16ms that would jank the UI."
+      },
+      {
+        "optionText": "Web Workers are Node.js threads for handling concurrent HTTP requests.",
+        "isCorrect": false,
+        "explanation": "Node.js uses Worker Threads for server-side parallelism. Web Workers are a browser API for client-side background processing — they can't handle HTTP requests."
+      },
+      {
+        "optionText": "Web Workers have full DOM access and can update the UI directly.",
+        "isCorrect": false,
+        "explanation": "Web Workers have no DOM access — they can't read or modify the document. Communication is only via postMessage. This isolation keeps the main thread safe."
+      },
+      {
+        "optionText": "Web Workers replace async/await for handling asynchronous operations.",
+        "isCorrect": false,
+        "explanation": "async/await manages async I/O on the single main thread. Web Workers provide true parallelism for CPU-bound work. They solve different performance problems."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "What are JavaScript iterators and iterables?",
+    "options": [
+      {
+        "optionText": "Iterable: object with Symbol.iterator returning an iterator. Iterator: object with next() returning {value, done}. Enables for...of and spread.",
+        "isCorrect": true,
+        "explanation": "Correct — arrays, strings, Maps, Sets, and generators are iterable. Custom iterables implement Symbol.iterator. for...of, spread, and destructuring consume iterables."
+      },
+      {
+        "optionText": "Iterators are the same as generators — both use the yield keyword.",
+        "isCorrect": false,
+        "explanation": "Generators create iterators automatically. An iterator is any object with a next() method. You can write a custom iterator without generators."
+      },
+      {
+        "optionText": "Only arrays are iterable in JavaScript — plain objects can't be iterated.",
+        "isCorrect": false,
+        "explanation": "Arrays, strings, Maps, Sets, generators, and any object implementing Symbol.iterator are iterable. Plain objects ({}) are not iterable by default but can be made so."
+      },
+      {
+        "optionText": "Iterables and iterators are only used internally by JavaScript engines — not in userland code.",
+        "isCorrect": false,
+        "explanation": "Developers use iterables daily: for...of loops, spread, destructuring. Custom iterables are commonly implemented for data structures and lazy sequences."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "What are tagged template literals?",
+    "options": [
+      {
+        "optionText": "A function prefix on a template literal — the function receives the string parts array and interpolated values, enabling custom parsing/sanitisation.",
+        "isCorrect": true,
+        "explanation": "Correct — sql`SELECT * FROM ${table} WHERE id = ${id}` enables safe SQL escaping. styled-components and graphql-tag use tagged templates extensively."
+      },
+      {
+        "optionText": "Template literals with HTML tags inside — like JSX syntax in plain JS.",
+        "isCorrect": false,
+        "explanation": "HTML tags inside template literals are just strings. Tagged template literals are a function-prefixed template syntax for custom string processing."
+      },
+      {
+        "optionText": "Tagged templates are deprecated — use string concatenation instead.",
+        "isCorrect": false,
+        "explanation": "Tagged template literals are not deprecated. They power important libraries like styled-components, sql, and gql."
+      },
+      {
+        "optionText": "Tags in template literals mark expressions that are evaluated lazily.",
+        "isCorrect": false,
+        "explanation": "Template literal expressions are evaluated immediately. The tag function receives already-evaluated values. Lazy evaluation would need generators or closures."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "What is BigInt in JavaScript and when would you use it?",
+    "options": [
+      {
+        "optionText": "A primitive type for integers beyond Number.MAX_SAFE_INTEGER (2^53-1) — declared with n suffix: 9007199254740993n. Can't mix with regular numbers.",
+        "isCorrect": true,
+        "explanation": "Correct — use BigInt for: cryptographic operations, financial calculations requiring integer precision, database IDs larger than 2^53, and timestamp arithmetic."
+      },
+      {
+        "optionText": "BigInt is a large integer class — equivalent to Java's BigInteger.",
+        "isCorrect": false,
+        "explanation": "BigInt is a primitive type in JavaScript, not a class (though typeof BigInt(1) === 'bigint'). It's a language-level primitive introduced in ES2020."
+      },
+      {
+        "optionText": "BigInt replaces Number for all calculations in modern JavaScript.",
+        "isCorrect": false,
+        "explanation": "BigInt only handles integers and can't mix with Number in arithmetic. Use Number for most math; BigInt specifically for integers beyond 2^53."
+      },
+      {
+        "optionText": "BigInt automatically converts to Number when mixed in arithmetic expressions.",
+        "isCorrect": false,
+        "explanation": "Mixing BigInt and Number throws TypeError. You must explicitly convert: Number(bigInt) or BigInt(regularNum). The separation is intentional to prevent precision loss."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "What is the Intl API and what problems does it solve?",
+    "options": [
+      {
+        "optionText": "Built-in locale-aware formatting for dates, numbers, currency, relative time, and collation — Intl.DateTimeFormat, Intl.NumberFormat, Intl.RelativeTimeFormat.",
+        "isCorrect": true,
+        "explanation": "Correct — Intl replaces manual locale handling. new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(1234.56) → '1.234,56 €'."
+      },
+      {
+        "optionText": "The Intl API handles international HTTP requests — it adds CORS and localised headers.",
+        "isCorrect": false,
+        "explanation": "CORS is a browser security mechanism. Intl is a JavaScript API for locale-sensitive string formatting — numbers, dates, currency, and collation."
+      },
+      {
+        "optionText": "Intl.translate() translates text between languages using machine learning.",
+        "isCorrect": false,
+        "explanation": "There is no Intl.translate(). The Intl API formats data according to locale conventions — it doesn't translate text. For translation, use i18n libraries."
+      },
+      {
+        "optionText": "Intl API is only available in Node.js — browsers use the browser's locale settings directly.",
+        "isCorrect": false,
+        "explanation": "Intl API is available in all modern browsers and Node.js (via ICU). It provides consistent cross-browser locale formatting."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "What are JavaScript Symbols and what unique use cases do they enable?",
+    "options": [
+      {
+        "optionText": "Guaranteed-unique primitives used as object keys — enable well-known protocols (Symbol.iterator, Symbol.toPrimitive) and metadata without key collision.",
+        "isCorrect": true,
+        "explanation": "Correct — Symbol('id') !== Symbol('id'). Symbol keys don't appear in for...in or Object.keys() — useful for framework metadata and protocol hooks."
+      },
+      {
+        "optionText": "Symbols are string aliases that make code more readable.",
+        "isCorrect": false,
+        "explanation": "Symbols are a distinct primitive type — they're not strings. Their key property is uniqueness, not readability."
+      },
+      {
+        "optionText": "Symbols are used to mark private class fields — equivalent to the # syntax.",
+        "isCorrect": false,
+        "explanation": "Private class fields (#) use a distinct mechanism with true encapsulation. Symbol properties are not truly private — anyone with the Symbol reference can access them."
+      },
+      {
+        "optionText": "Symbols can be compared with === to check if two symbols are the same value.",
+        "isCorrect": false,
+        "explanation": "Symbol() !== Symbol() always — each call creates a unique value. To share a Symbol, use Symbol.for('key') which registers in a global registry."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "How does JavaScript handle type coercion and what are the most surprising cases?",
+    "options": [
+      {
+        "optionText": "JS auto-converts types in operations. Surprising: [] + [] === '', [] + {} === '[object Object]', null + 1 === 1, +'3' === 3.",
+        "isCorrect": true,
+        "explanation": "Correct — coercion follows complex rules: ToPrimitive, ToString, ToNumber. Use === for comparisons and explicit conversions (Number(), String()) to avoid surprises."
+      },
+      {
+        "optionText": "JavaScript never coerces types — all type mismatches throw TypeError.",
+        "isCorrect": false,
+        "explanation": "JavaScript famously coerces types implicitly in many operations. Only === prevents coercion in equality checks — arithmetic and string operations still coerce."
+      },
+      {
+        "optionText": "Type coercion only happens with the == operator — all other operators are type-safe.",
+        "isCorrect": false,
+        "explanation": "Coercion happens in many contexts: +, -, *, /, if(), template literals, and array joins. == is just the most notorious case."
+      },
+      {
+        "optionText": "TypeScript prevents all type coercion at runtime by adding type annotations.",
+        "isCorrect": false,
+        "explanation": "TypeScript annotations are compile-time only. At runtime, TypeScript compiles to plain JavaScript and coercion still occurs. TypeScript catches type errors before runtime, not during."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "What are JavaScript generators and what advanced patterns do they enable?",
+    "options": [
+      {
+        "optionText": "function* with yield enables lazy sequences, infinite iterators, async coordination, and coroutine-like control flow.",
+        "isCorrect": true,
+        "explanation": "Correct — generators power Redux-saga (yield actions as async steps), infinite scroll (yield next page), and custom iterables. async/await replaced generators for most async use cases."
+      },
+      {
+        "optionText": "Generators generate random values — they're used for random number generation.",
+        "isCorrect": false,
+        "explanation": "Math.random() generates random numbers. JavaScript generators (function*) produce controlled sequences of values using yield — they're for lazy iteration, not randomness."
+      },
+      {
+        "optionText": "Generators run in parallel — multiple yields execute simultaneously.",
+        "isCorrect": false,
+        "explanation": "JavaScript is single-threaded. Generators execute cooperatively — one yield at a time. They don't introduce parallelism."
+      },
+      {
+        "optionText": "Generators are a deprecated feature — use async/await instead.",
+        "isCorrect": false,
+        "explanation": "Generators are not deprecated. async/await replaced them for async code, but generators remain essential for lazy sequences, custom iterators, and coroutine patterns."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "What is the Reflect API and how does it complement Proxy?",
+    "options": [
+      {
+        "optionText": "Reflect provides methods mirroring all JS object operations (Reflect.get, Reflect.set, Reflect.has) — used inside Proxy traps to invoke default behaviour.",
+        "isCorrect": true,
+        "explanation": "Correct — in a Proxy get trap, call Reflect.get(target, prop, receiver) to apply the default behaviour after your custom logic. Reflect ensures correct handling of class inheritance and getters."
+      },
+      {
+        "optionText": "Reflect is a utility for deep object cloning — it reflects an object's structure.",
+        "isCorrect": false,
+        "explanation": "Deep cloning uses structuredClone() or JSON.parse(JSON.stringify()). Reflect provides methods for fundamental object operations like get, set, and defineProperty."
+      },
+      {
+        "optionText": "Reflect replaces Proxy — they do the same thing but Reflect is newer.",
+        "isCorrect": false,
+        "explanation": "They complement each other. Proxy intercepts operations; Reflect invokes the default operation inside the trap. Together they enable clean, non-breaking interception."
+      },
+      {
+        "optionText": "Reflect.get() only works on class instances — it doesn't work on plain objects.",
+        "isCorrect": false,
+        "explanation": "Reflect methods work on any object — plain objects, arrays, class instances. Reflect.get(obj, key) is equivalent to obj[key] but handles edge cases like prototype getters correctly."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "What is WebAssembly and how does it relate to JavaScript?",
+    "options": [
+      {
+        "optionText": "A binary instruction format for near-native speed in browsers — JS calls Wasm modules for CPU-heavy tasks; both run on the same thread in the same sandbox.",
+        "isCorrect": true,
+        "explanation": "Correct — Wasm is not a replacement for JS. It handles performance-critical code (codecs, physics, crypto). JS orchestrates the UI; Wasm handles heavy computation."
+      },
+      {
+        "optionText": "WebAssembly replaces JavaScript entirely — all modern browsers have deprecated JS.",
+        "isCorrect": false,
+        "explanation": "JavaScript is not deprecated. WebAssembly complements JavaScript for performance-critical tasks. Both coexist and interoperate in the browser."
+      },
+      {
+        "optionText": "WebAssembly is a JavaScript library for running assembly-like code in comments.",
+        "isCorrect": false,
+        "explanation": "WebAssembly is a binary format compiled from C++, Rust, Go etc. — not a JS library. It runs in a separate Wasm virtual machine alongside JS."
+      },
+      {
+        "optionText": "WebAssembly can directly manipulate the DOM, making it faster than JS for UI.",
+        "isCorrect": false,
+        "explanation": "Wasm has no direct DOM access — it must call JS APIs to touch the DOM. Its advantage is raw computation speed, not DOM manipulation."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "What are common JavaScript performance optimisation techniques?",
+    "options": [
+      {
+        "optionText": "Avoid layout thrashing (batch DOM reads/writes), use requestAnimationFrame for animation, memoize expensive computations, and reduce re-renders.",
+        "isCorrect": true,
+        "explanation": "Correct — also: virtualise long lists, debounce/throttle events, use Web Workers for CPU work, prefer CSS transforms over layout properties, and minimise synchronous main-thread work."
+      },
+      {
+        "optionText": "Always use var instead of let/const — var is faster due to less strict checking.",
+        "isCorrect": false,
+        "explanation": "The performance difference between var/let/const is negligible. Using var over let for performance is a myth; prefer let/const for correctness."
+      },
+      {
+        "optionText": "Inline all JavaScript in <script> tags — external files have network overhead.",
+        "isCorrect": false,
+        "explanation": "External scripts are cached by the browser across pages. Inlining prevents caching and increases HTML size. External scripts with hashed filenames are better."
+      },
+      {
+        "optionText": "Use synchronous XMLHttpRequest for critical data — it loads before the page renders.",
+        "isCorrect": false,
+        "explanation": "Synchronous XHR blocks the main thread entirely — the browser freezes. Use async fetch/XHR and display a loading state."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "What is a WeakRef and FinalizationRegistry in JavaScript?",
+    "options": [
+      {
+        "optionText": "WeakRef holds a weak reference that doesn't prevent GC. FinalizationRegistry runs a callback after an object is collected — for cache cleanup and logging.",
+        "isCorrect": true,
+        "explanation": "Correct — WeakRef is ES2021. The referenced object can be GC'd at any time — always check wr.deref() !== undefined before use. FinalizationRegistry for post-collection cleanup."
+      },
+      {
+        "optionText": "WeakRef prevents an object from being garbage collected — it keeps it alive.",
+        "isCorrect": false,
+        "explanation": "WeakRef is specifically a WEAK reference — it does NOT prevent GC. The object can be collected even while the WeakRef exists. Use deref() to check if it's still alive."
+      },
+      {
+        "optionText": "FinalizationRegistry is a React hook for cleaning up component side effects.",
+        "isCorrect": false,
+        "explanation": "FinalizationRegistry is a built-in JavaScript API for post-GC callbacks, not React. React cleanup uses the useEffect return function."
+      },
+      {
+        "optionText": "WeakRef and WeakMap are the same — both are weak references to objects.",
+        "isCorrect": false,
+        "explanation": "WeakMap stores key-value pairs where keys are weak references. WeakRef is a standalone weak reference to a single object. Different APIs for different use cases."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "Explain the V8 engine's hidden classes and inline caching optimisations.",
+    "options": [
+      {
+        "optionText": "V8 assigns hidden classes to objects with the same property shape — enabling inline caching (monomorphic call sites) for fast property access.",
+        "isCorrect": true,
+        "explanation": "Correct — adding properties in inconsistent order creates new hidden classes and deoptimises. Best practice: initialise all properties in the constructor in the same order."
+      },
+      {
+        "optionText": "Hidden classes are JavaScript's implementation of private class fields.",
+        "isCorrect": false,
+        "explanation": "Private fields (#) are a language feature. V8 hidden classes are an internal engine optimisation — invisible to JS code — for speeding up property access on objects with consistent shapes."
+      },
+      {
+        "optionText": "Inline caching means V8 stores compiled code in the CPU L1 cache.",
+        "isCorrect": false,
+        "explanation": "CPU cache is at the hardware level. V8's inline caching stores the previously observed type/shape at call sites so property lookups skip generic lookup logic."
+      },
+      {
+        "optionText": "V8 hidden classes only apply to class instances — plain objects don't benefit.",
+        "isCorrect": false,
+        "explanation": "V8's hidden class optimisation applies to all objects — plain objects, class instances, and arrays. Any object with consistent property shapes benefits."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "What is the JavaScript Temporal API and why was it introduced?",
+    "options": [
+      {
+        "optionText": "A modern replacement for Date — provides immutable, timezone-aware date/time objects with a clear API. Fixes Date's mutable, DST-buggy, month-indexed design.",
+        "isCorrect": true,
+        "explanation": "Correct — Date is infamous: months are 0-indexed, it's mutable, lacks timezone support, and toString is inconsistent. Temporal.PlainDate, Temporal.ZonedDateTime etc. fix all of this."
+      },
+      {
+        "optionText": "Temporal is a CSS animation API for time-based transitions in JavaScript.",
+        "isCorrect": false,
+        "explanation": "CSS animations and transitions are separate technologies. The JavaScript Temporal API replaces the Date object for date and time operations."
+      },
+      {
+        "optionText": "Temporal is a Node.js-only API for measuring server response times.",
+        "isCorrect": false,
+        "explanation": "Temporal is a JavaScript language proposal for dates and times. It will be browser and Node.js compatible, not server-only."
+      },
+      {
+        "optionText": "Temporal makes Date synchronous — Date operations are async by default.",
+        "isCorrect": false,
+        "explanation": "Date operations have always been synchronous. Temporal introduces a better API for date/time handling, not a change in sync/async behaviour."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "What are some of the advantages/disadvantages of writing JavaScript code in a language that compiles to JavaScript?",
+    "options": [
+      {
+        "optionText": "Pros: type safety (TypeScript), better tooling, future syntax today. Cons: build step required, source map debugging, added complexity for small projects.",
+        "isCorrect": true,
+        "explanation": "Correct — TypeScript is the dominant compile-to-JS language. The build step is now standard. The tradeoffs are worth it for large codebases; for small scripts plain JS is fine."
+      },
+      {
+        "optionText": "No advantages — compile-to-JS languages are slower than plain JavaScript.",
+        "isCorrect": false,
+        "explanation": "The compiled output is plain JavaScript — identical runtime speed. The advantages are developer experience: type checking, better IDE support, and early error catching."
+      },
+      {
+        "optionText": "Compile-to-JS languages run directly in the browser without transpilation.",
+        "isCorrect": false,
+        "explanation": "Browsers only understand JavaScript. TypeScript, CoffeeScript, and ClojureScript must be compiled to JS before browsers can execute them."
+      },
+      {
+        "optionText": "The only compile-to-JS language is TypeScript — no others exist.",
+        "isCorrect": false,
+        "explanation": "Many languages compile to JS: CoffeeScript, ClojureScript, ReasonML, Elm, PureScript, and Dart (via compilation). TypeScript is the most widely adopted."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "Why would you use something like the load event? Does this event have disadvantages? Do you know any alternatives, and why would you use those?",
+    "options": [
+      {
+        "optionText": "window.load fires after ALL resources load — needed for image dimensions. Disadvantage: very late. Prefer DOMContentLoaded or IntersectionObserver for most cases.",
+        "isCorrect": true,
+        "explanation": "Correct — use window.load when you truly need all resources (image dimensions, iframe heights). For DOM manipulation, DOMContentLoaded fires much earlier."
+      },
+      {
+        "optionText": "The load event fires before the HTML is parsed — use it for early script execution.",
+        "isCorrect": false,
+        "explanation": "load fires last — after DOM, CSS, images, and all resources. For early execution, use scripts in <head> with defer or DOMContentLoaded."
+      },
+      {
+        "optionText": "window.load and DOMContentLoaded fire at the same time.",
+        "isCorrect": false,
+        "explanation": "DOMContentLoaded fires when HTML parsing is complete (no image/CSS wait). window.load fires much later, after all resources including images and iframes have loaded."
+      },
+      {
+        "optionText": "The load event is deprecated — use fetch() events instead.",
+        "isCorrect": false,
+        "explanation": "window.load is not deprecated. fetch() is for HTTP requests. The load event is still useful for detecting when the full page including all resources has loaded."
+      }
+    ]
+  },
+  {
+    "topic": "javascript",
+    "question": "What is tail call optimisation (TCO) in JavaScript?",
+    "options": [
+      {
+        "optionText": "An engine optimisation that reuses the current stack frame for a tail-position function call — enabling recursion without stack overflow. Only guaranteed in strict mode in the spec.",
+        "isCorrect": true,
+        "explanation": "Correct — TCO converts tail recursion to iteration internally. Only Safari fully implements ES6 TCO. Most engines use other techniques (trampolining) for deep recursion."
+      },
+      {
+        "optionText": "TCO automatically memoizes recursive functions to avoid redundant computations.",
+        "isCorrect": false,
+        "explanation": "Memoization caches results; TCO reuses stack frames. They're unrelated optimisations — TCO is about stack space, not computational redundancy."
+      },
+      {
+        "optionText": "TCO is a build tool optimisation that removes unused function calls from bundles.",
+        "isCorrect": false,
+        "explanation": "Dead code elimination (tree shaking) removes unused exports. TCO is a runtime engine optimisation for recursive function calls in tail position."
+      },
+      {
+        "optionText": "TCO replaces all recursion with iteration automatically in ES6.",
+        "isCorrect": false,
+        "explanation": "TCO only applies to tail calls (calls as the last action with no work after). Not all recursion is in tail position. Only Safari implements ES6 TCO fully."
+      }
+    ]
   }
 ]
