@@ -1,0 +1,1198 @@
+[
+  {
+    "topic": "software-architecture",
+    "question": "What Is A Cluster?",
+    "options": [
+      {
+        "optionText": "A group of servers that work together to provide higher availability, scalability, and fault tolerance than a single server can offer.",
+        "isCorrect": true,
+        "explanation": "Correct — clustering distributes load and provides redundancy so that if one node fails, others continue serving requests."
+      },
+      {
+        "optionText": "A collection of microservices that share the same database schema to reduce data duplication.",
+        "isCorrect": false,
+        "explanation": "Sharing a database across microservices is actually an anti-pattern. A cluster refers to grouped server nodes, not services sharing a DB."
+      },
+      {
+        "optionText": "A design pattern where multiple classes collaborate on a single responsibility to reduce class size.",
+        "isCorrect": false,
+        "explanation": "That describes the Delegation or Composite pattern, not a cluster in the infrastructure sense."
+      },
+      {
+        "optionText": "A set of Docker containers running the same image, managed by a load balancer without any shared state.",
+        "isCorrect": false,
+        "explanation": "While containers can form a cluster, a cluster is broader than Docker containers — it includes any group of coordinated server nodes."
+      }
+    ]
+  },
+  {
+    "topic": "software-architecture",
+    "question": "What is Test Driven Development?",
+    "options": [
+      {
+        "optionText": "A development practice where you write a failing test first, then write the minimum code to make it pass, then refactor — red, green, refactor.",
+        "isCorrect": true,
+        "explanation": "Correct — TDD's short feedback loop drives better design and high test coverage by making tests the specification."
+      },
+      {
+        "optionText": "A QA process where testers write automated tests after developers complete a feature, before it goes to production.",
+        "isCorrect": false,
+        "explanation": "That describes post-development testing, not TDD. TDD means tests are written before the implementation."
+      },
+      {
+        "optionText": "A methodology where test results from CI are the primary metric for deciding which features to build next.",
+        "isCorrect": false,
+        "explanation": "That describes a data-driven or test-metric-driven product process, not Test Driven Development."
+      },
+      {
+        "optionText": "A framework-specific technique where unit tests automatically generate mock data and inject it into components.",
+        "isCorrect": false,
+        "explanation": "TDD is a development discipline, not a framework feature or mock-generation technique."
+      }
+    ]
+  },
+  {
+    "topic": "software-architecture",
+    "question": "What does the expression \"Fail Early\" mean, and when would you want to do so?",
+    "options": [
+      {
+        "optionText": "Detecting and reporting errors as close to their source as possible — validating inputs, asserting preconditions — so bugs surface before they cause cascading damage.",
+        "isCorrect": true,
+        "explanation": "Correct — failing early makes bugs cheaper to fix and prevents corrupted state from propagating through the system."
+      },
+      {
+        "optionText": "Deliberately crashing the application on startup if dependencies are unavailable, to avoid serving stale cached data.",
+        "isCorrect": false,
+        "explanation": "While startup checks are one use case, 'Fail Early' is a broader principle about surfacing errors immediately wherever they occur."
+      },
+      {
+        "optionText": "Returning default values instead of throwing exceptions so that the UI never shows an error state to users.",
+        "isCorrect": false,
+        "explanation": "Returning silent defaults is the opposite of Fail Early — it hides errors rather than surfacing them quickly."
+      },
+      {
+        "optionText": "Deploying to production as quickly as possible to get real user feedback before the code is fully tested.",
+        "isCorrect": false,
+        "explanation": "That describes a Lean/MVP ship-early principle, not the software engineering concept of Fail Early."
+      }
+    ]
+  },
+  {
+    "topic": "software-architecture",
+    "question": "What defines a software architect?",
+    "options": [
+      {
+        "optionText": "Someone who makes high-level structural decisions — choosing technologies, defining system boundaries, and ensuring the design meets quality attributes like scalability and maintainability.",
+        "isCorrect": true,
+        "explanation": "Correct — a software architect balances technical depth with the ability to reason about systems at scale and communicate trade-offs to stakeholders."
+      },
+      {
+        "optionText": "The most senior developer on a team who reviews all pull requests before they are merged.",
+        "isCorrect": false,
+        "explanation": "Code review is one activity a senior engineer might do, but it doesn't define an architect's role."
+      },
+      {
+        "optionText": "A project manager who translates business requirements into user stories and assigns them to developers.",
+        "isCorrect": false,
+        "explanation": "That describes a product manager or scrum master role, not a software architect."
+      },
+      {
+        "optionText": "A specialist who writes infrastructure-as-code and manages CI/CD pipelines for the engineering team.",
+        "isCorrect": false,
+        "explanation": "That's closer to a DevOps/platform engineer role. An architect focuses on system design, not pipeline management."
+      }
+    ]
+  },
+  {
+    "topic": "software-architecture",
+    "question": "Why is it a good idea for \"lower\" application layers not to be aware of \"higher\" ones?",
+    "options": [
+      {
+        "optionText": "It enforces the Dependency Inversion Principle — lower layers (domain, data) remain stable and reusable while higher layers (presentation, application) can change without affecting them.",
+        "isCorrect": true,
+        "explanation": "Correct — when low-level modules don't depend on high-level ones, you can swap out the UI or application logic without touching core business rules."
+      },
+      {
+        "optionText": "It reduces the number of files in the project by keeping all shared logic in the top layer that all others can reference.",
+        "isCorrect": false,
+        "explanation": "Centralising logic in the top layer would create the opposite problem — tight coupling from every lower layer to the UI layer."
+      },
+      {
+        "optionText": "It improves database query performance because lower layers can directly access the HTTP request context.",
+        "isCorrect": false,
+        "explanation": "Lower layers having HTTP context is an anti-pattern, not a performance feature."
+      },
+      {
+        "optionText": "It allows the deployment pipeline to build layers in parallel without waiting for the higher layer to compile first.",
+        "isCorrect": false,
+        "explanation": "Build parallelism is a CI concern, not the architectural reason for keeping layers unaware of their dependants."
+      }
+    ]
+  },
+  {
+    "topic": "software-architecture",
+    "question": "Why Do You Need Clustering?",
+    "options": [
+      {
+        "optionText": "To distribute load across multiple servers and eliminate single points of failure, enabling horizontal scaling and high availability.",
+        "isCorrect": true,
+        "explanation": "Correct — clustering means traffic and work are shared, so failure of one node doesn't take down the service."
+      },
+      {
+        "optionText": "To share a single database connection pool across all application instances, reducing DB connection overhead.",
+        "isCorrect": false,
+        "explanation": "DB connection pooling is a separate concern; clustering is about distributing server workload, not sharing connections."
+      },
+      {
+        "optionText": "To enforce strict API versioning by routing requests to clusters based on the API version in the URL.",
+        "isCorrect": false,
+        "explanation": "Version-based routing is a routing concern, not the purpose of clustering."
+      },
+      {
+        "optionText": "To encrypt traffic between services by grouping them in the same network segment with shared TLS certificates.",
+        "isCorrect": false,
+        "explanation": "Encryption and certificate management are security concerns, not the architectural reason for clustering."
+      }
+    ]
+  },
+  {
+    "topic": "software-architecture",
+    "question": "Why use WebSocket over HTTP?",
+    "options": [
+      {
+        "optionText": "WebSocket provides a persistent, full-duplex connection that allows the server to push data to the client without polling — ideal for real-time features like chat or live dashboards.",
+        "isCorrect": true,
+        "explanation": "Correct — HTTP is request-response; WebSocket keeps the connection open so both sides can send messages at any time."
+      },
+      {
+        "optionText": "WebSocket is faster for large file uploads because it compresses payloads at the transport layer automatically.",
+        "isCorrect": false,
+        "explanation": "Large file uploads are generally better handled with HTTP/2 or chunked HTTP. WebSocket's advantage is real-time bidirectional messaging."
+      },
+      {
+        "optionText": "WebSocket improves SEO by reducing page load time through server-side rendering of dynamic content.",
+        "isCorrect": false,
+        "explanation": "WebSocket has no effect on SSR or SEO — those are separate concerns."
+      },
+      {
+        "optionText": "WebSocket is easier to cache at the CDN layer, reducing load on origin servers for high-traffic applications.",
+        "isCorrect": false,
+        "explanation": "WebSocket connections are stateful and persistent — they cannot be cached by a CDN."
+      }
+    ]
+  },
+  {
+    "topic": "software-architecture",
+    "question": "What is Domain Driven Design?",
+    "options": [
+      {
+        "optionText": "A software design approach that centres the codebase around a rich domain model, uses a ubiquitous language shared by developers and domain experts, and organises code into bounded contexts.",
+        "isCorrect": true,
+        "explanation": "Correct — DDD's key ideas are the ubiquitous language, bounded contexts, aggregates, entities, and value objects that reflect real business concepts."
+      },
+      {
+        "optionText": "A database design methodology where every table name matches a business domain term to simplify ORM mapping.",
+        "isCorrect": false,
+        "explanation": "DDD is a holistic design philosophy, not a database naming convention."
+      },
+      {
+        "optionText": "A framework for building microservices where each service is named after its API domain and exposed via REST.",
+        "isCorrect": false,
+        "explanation": "DDD predates microservices and applies to any architecture. Bounded contexts can inform service boundaries, but DDD is broader."
+      },
+      {
+        "optionText": "A project management technique where domain experts write user stories that developers implement without changing.",
+        "isCorrect": false,
+        "explanation": "DDD involves deep collaboration between developers and domain experts on the design, not just requirements gathering."
+      }
+    ]
+  },
+  {
+    "topic": "software-architecture",
+    "question": "What do you understand by Clean Architecture approach?",
+    "options": [
+      {
+        "optionText": "An architecture that organises code in concentric layers — Entities, Use Cases, Interface Adapters, Frameworks — with dependencies only pointing inward, keeping business logic independent of frameworks and UI.",
+        "isCorrect": true,
+        "explanation": "Correct — Robert Martin's Clean Architecture makes the core domain ignorant of delivery mechanisms, enabling testability and flexibility."
+      },
+      {
+        "optionText": "An approach that removes all comments and dead code from the codebase to keep files short and readable.",
+        "isCorrect": false,
+        "explanation": "'Clean' in Clean Architecture refers to dependency direction and layer separation, not code tidiness."
+      },
+      {
+        "optionText": "A microservices pattern where each service has its own database and communicates only via events, with no shared libraries.",
+        "isCorrect": false,
+        "explanation": "Clean Architecture applies to the internal structure of a single service or monolith, not inter-service communication patterns."
+      },
+      {
+        "optionText": "A CI/CD strategy that enforces zero-warning builds and automated code formatting before every merge.",
+        "isCorrect": false,
+        "explanation": "That describes code quality enforcement tooling, not Clean Architecture."
+      }
+    ]
+  },
+  {
+    "topic": "software-architecture",
+    "question": "What do you mean by lower latency interaction?",
+    "options": [
+      {
+        "optionText": "Reducing the time between a user action and the system's response — achieved through caching, edge deployment, optimised queries, and minimising network round trips.",
+        "isCorrect": true,
+        "explanation": "Correct — lower latency means faster perceived responsiveness. Techniques include CDNs, in-memory caches, connection pooling, and payload compression."
+      },
+      {
+        "optionText": "Using fewer HTTP requests by bundling all API calls into a single GraphQL query per page load.",
+        "isCorrect": false,
+        "explanation": "Reducing round trips helps latency, but lower latency interaction is a broader goal encompassing many optimisation strategies."
+      },
+      {
+        "optionText": "Rendering pages on the client side to avoid server round trips and deliver content faster.",
+        "isCorrect": false,
+        "explanation": "CSR can increase latency for first paint. Lower latency often favours SSR or edge rendering depending on the context."
+      },
+      {
+        "optionText": "Compressing images and static assets so the browser downloads fewer bytes per page load.",
+        "isCorrect": false,
+        "explanation": "Asset compression reduces bandwidth and can improve load time, but latency is specifically about delay, not bytes transferred."
+      }
+    ]
+  },
+  {
+    "topic": "software-architecture",
+    "question": "What is a Model in DDD?",
+    "options": [
+      {
+        "optionText": "A set of abstractions that describe selected aspects of a domain, implemented as entities, value objects, and aggregates that reflect business concepts in code.",
+        "isCorrect": true,
+        "explanation": "Correct — the domain model is a distillation of business knowledge into software constructs, collaboratively refined with domain experts."
+      },
+      {
+        "optionText": "A database schema that maps one-to-one with the UI forms so that data entry updates the DB directly.",
+        "isCorrect": false,
+        "explanation": "DDD models are domain-centric, not UI or schema-driven. A domain model may differ significantly from the persistence schema."
+      },
+      {
+        "optionText": "The M in MVC — a class that holds component state and passes it to views via data binding.",
+        "isCorrect": false,
+        "explanation": "While DDD models can live in MVC architectures, a DDD Model is a richer concept encompassing behaviour and business rules, not just data."
+      },
+      {
+        "optionText": "A machine learning model trained on production logs to predict system failures before they occur.",
+        "isCorrect": false,
+        "explanation": "In DDD, 'model' refers to a domain abstraction, not a machine learning model."
+      }
+    ]
+  },
+  {
+    "topic": "software-architecture",
+    "question": "In OOP, what is the difference between the Repository Pattern and a Service Layer?",
+    "options": [
+      {
+        "optionText": "A Repository abstracts data access (CRUD against a data store); a Service Layer encapsulates business logic and orchestrates use cases, often calling repositories and other services.",
+        "isCorrect": true,
+        "explanation": "Correct — they have different responsibilities: repositories handle persistence, service layers handle business workflows."
+      },
+      {
+        "optionText": "A Service Layer is a subset of the Repository Pattern — every service must extend a base repository class.",
+        "isCorrect": false,
+        "explanation": "They are independent patterns. Services don't extend repositories; they may depend on them via injection."
+      },
+      {
+        "optionText": "A Repository Pattern is used in REST APIs while a Service Layer is used in GraphQL APIs.",
+        "isCorrect": false,
+        "explanation": "Both patterns are transport-agnostic — they apply regardless of the API protocol."
+      },
+      {
+        "optionText": "There is no meaningful difference — both are ways to wrap database queries in a class.",
+        "isCorrect": false,
+        "explanation": "They serve different purposes. Conflating them leads to fat repositories with business logic or anemic services that just proxy DB calls."
+      }
+    ]
+  },
+  {
+    "topic": "software-architecture",
+    "question": "Is Unit Of Work equal to Transaction? Or is it more than that?",
+    "options": [
+      {
+        "optionText": "Unit of Work is broader — it tracks all changes to objects during a business operation and coordinates writing them out as a single atomic transaction.",
+        "isCorrect": true,
+        "explanation": "Correct — UoW manages change tracking, deduplication of writes, and transaction coordination across multiple repositories."
+      },
+      {
+        "optionText": "Unit of Work and Transaction are identical — both refer to a single SQL BEGIN/COMMIT block on the database.",
+        "isCorrect": false,
+        "explanation": "A transaction is a DB concept; Unit of Work is a higher-level pattern that may use a transaction internally but adds change tracking on top."
+      },
+      {
+        "optionText": "Unit of Work is smaller than a transaction — it represents a single INSERT or UPDATE statement.",
+        "isCorrect": false,
+        "explanation": "Unit of Work typically spans multiple repository operations across an entire business operation, not a single DB statement."
+      },
+      {
+        "optionText": "Unit of Work replaces transactions entirely by using optimistic locking to resolve conflicts without DB-level locks.",
+        "isCorrect": false,
+        "explanation": "Unit of Work doesn't replace transactions — it coordinates when to commit them. Optimistic locking is a separate concurrency strategy."
+      }
+    ]
+  },
+  {
+    "topic": "software-architecture",
+    "question": "How can you keep one copy of your utility code and let multiple consumer components use and deploy it?",
+    "options": [
+      {
+        "optionText": "Extract the utility into a shared module or package, import it where needed, and — if mutation is required — expose callback or event interfaces so consumers can contribute input without coupling.",
+        "isCorrect": true,
+        "explanation": "Correct — shared modules with well-defined interfaces avoid duplication while keeping consumers decoupled."
+      },
+      {
+        "optionText": "Copy the utility into every component that needs it to avoid dependency issues between modules.",
+        "isCorrect": false,
+        "explanation": "Copying code violates DRY and makes maintenance a nightmare — any bug fix must be applied everywhere."
+      },
+      {
+        "optionText": "Store utility code in the database as stored procedures so any service can execute it via SQL.",
+        "isCorrect": false,
+        "explanation": "Stored procedures are valid in some contexts but putting general utility logic in the DB creates tight coupling to the data layer."
+      },
+      {
+        "optionText": "Use global variables to share utility state across components without importing anything.",
+        "isCorrect": false,
+        "explanation": "Global mutable state introduces hidden coupling, race conditions, and makes testing very difficult."
+      }
+    ]
+  },
+  {
+    "topic": "software-architecture",
+    "question": "\"People who like this also like...\". How would you implement this feature in an e-commerce shop?",
+    "options": [
+      {
+        "optionText": "Use collaborative filtering (user-item matrix or item-based similarity) or embed products with a recommendation model, then serve pre-computed suggestions from a cache for low-latency reads.",
+        "isCorrect": true,
+        "explanation": "Correct — collaborative filtering finds patterns in user behaviour; caching pre-computed results keeps the feature fast at scale."
+      },
+      {
+        "optionText": "Query the database for all products and sort them by total sales, returning the top 10 as recommendations.",
+        "isCorrect": false,
+        "explanation": "Returning best-sellers is a popularity ranking, not personalised 'people who like this also like' recommendations."
+      },
+      {
+        "optionText": "Use a regex to match product names with similar keywords and return those as suggestions.",
+        "isCorrect": false,
+        "explanation": "Name-based keyword matching produces poor recommendations — it ignores actual user behaviour patterns."
+      },
+      {
+        "optionText": "Add a 'related_product_id' foreign key column to each product and manually curate the relationships in the admin panel.",
+        "isCorrect": false,
+        "explanation": "Manual curation doesn't scale to large catalogues and doesn't reflect real user behaviour."
+      }
+    ]
+  },
+  {
+    "topic": "software-architecture",
+    "question": "What does program to interfaces, not implementations mean?",
+    "options": [
+      {
+        "optionText": "Depend on abstractions (interfaces/abstract types) rather than concrete classes so that implementations can be swapped without changing consumers.",
+        "isCorrect": true,
+        "explanation": "Correct — this is one of the SOLID principles (Dependency Inversion) and the Gang of Four's first design principle, enabling flexibility and testability."
+      },
+      {
+        "optionText": "Write TypeScript interface files for every class in the codebase to document the public API.",
+        "isCorrect": false,
+        "explanation": "The principle is about dependency direction, not documentation. Adding interfaces purely for documentation doesn't achieve the design benefit."
+      },
+      {
+        "optionText": "Build REST APIs for every service so that consumers always interact via HTTP, never via direct function calls.",
+        "isCorrect": false,
+        "explanation": "HTTP APIs are one form of interface, but the principle applies to code-level abstractions inside a codebase, not just service boundaries."
+      },
+      {
+        "optionText": "Avoid using classes entirely and write only pure functions to keep the codebase functional.",
+        "isCorrect": false,
+        "explanation": "Programming to interfaces is an OOP principle about abstraction. Functional programming is a separate paradigm."
+      }
+    ]
+  },
+  {
+    "topic": "software-architecture",
+    "question": "Explain the Single Responsibility Principle (SRP)",
+    "options": [
+      {
+        "optionText": "A class or module should have only one reason to change — it should be responsible for a single part of the system's functionality.",
+        "isCorrect": true,
+        "explanation": "Correct — SRP reduces coupling: when business rules change, only the relevant module changes, leaving unrelated modules untouched."
+      },
+      {
+        "optionText": "A class should have only one method, and that method should perform all the work the class needs to do.",
+        "isCorrect": false,
+        "explanation": "SRP is about a single responsibility, not a single method. A class can have multiple methods as long as they all relate to one concern."
+      },
+      {
+        "optionText": "Each microservice should own a single API endpoint and never expose more than one route.",
+        "isCorrect": false,
+        "explanation": "SRP applies to classes and modules in OOP design, not to the number of routes a service exposes."
+      },
+      {
+        "optionText": "A function should be responsible for both validating and persisting data to ensure they stay in sync.",
+        "isCorrect": false,
+        "explanation": "Combining validation and persistence in one function violates SRP — those are two distinct responsibilities."
+      }
+    ]
+  },
+  {
+    "topic": "software-architecture",
+    "question": "What is the difference between DTOs and ViewModels in DDD?",
+    "options": [
+      {
+        "optionText": "DTOs carry data across layer or service boundaries without behaviour; ViewModels are presentation-layer objects shaped specifically for a UI view, often combining multiple DTOs.",
+        "isCorrect": true,
+        "explanation": "Correct — DTOs are transport objects; ViewModels are display objects. A ViewModel may flatten or enrich a DTO with formatting or computed properties."
+      },
+      {
+        "optionText": "DTOs are used in REST APIs; ViewModels are used in GraphQL APIs — they are protocol-specific equivalents.",
+        "isCorrect": false,
+        "explanation": "Both patterns are protocol-agnostic. The distinction is about their role in the layer structure, not the transport protocol."
+      },
+      {
+        "optionText": "ViewModels are persisted to the database; DTOs exist only in memory during a single request.",
+        "isCorrect": false,
+        "explanation": "Neither DTOs nor ViewModels are typically persisted. Both are transient objects for data transfer or display."
+      },
+      {
+        "optionText": "There is no meaningful difference — both are plain objects without business logic.",
+        "isCorrect": false,
+        "explanation": "While both lack domain logic, their purpose and shape differ. Conflating them leads to bloated DTOs full of UI-specific fields."
+      }
+    ]
+  },
+  {
+    "topic": "software-architecture",
+    "question": "Name some Performance Testing best practices",
+    "options": [
+      {
+        "optionText": "Define clear SLOs before testing, test in a production-like environment, use realistic data volumes and traffic patterns, isolate bottlenecks, and run tests repeatedly to detect regressions.",
+        "isCorrect": true,
+        "explanation": "Correct — without realistic conditions and clear goals, performance tests produce misleading results."
+      },
+      {
+        "optionText": "Run performance tests only on the last day before a release to confirm the build is ready for production.",
+        "isCorrect": false,
+        "explanation": "Late-stage performance testing means fixing bottlenecks under deadline pressure. Performance testing should be continuous."
+      },
+      {
+        "optionText": "Test using a single virtual user to eliminate variability and get the most reproducible results.",
+        "isCorrect": false,
+        "explanation": "Single-user tests don't reveal concurrency issues. Realistic load profiles are essential for meaningful results."
+      },
+      {
+        "optionText": "Run performance tests directly against the production database with live data to get the most accurate results.",
+        "isCorrect": false,
+        "explanation": "Testing against live production data risks data corruption and impacts real users. Use a staging environment with production-like data."
+      }
+    ]
+  },
+  {
+    "topic": "software-architecture",
+    "question": "Is it better to return NULL or empty values from functions/methods where the return value is not present?",
+    "options": [
+      {
+        "optionText": "Prefer empty values (empty collections, Null Object pattern) to avoid null checks and NullPointerExceptions; reserve null or Option types for cases where 'not found' is semantically meaningful.",
+        "isCorrect": true,
+        "explanation": "Correct — returning nulls forces callers to guard against them everywhere. Empty values and Null Objects simplify client code."
+      },
+      {
+        "optionText": "Always return null — it is the most explicit way to signal that no value exists and prevents callers from acting on empty data.",
+        "isCorrect": false,
+        "explanation": "Returning null shifts the burden to every caller and is a common source of runtime errors."
+      },
+      {
+        "optionText": "Always throw an exception instead of returning null or empty — missing data is always an error condition.",
+        "isCorrect": false,
+        "explanation": "Not all missing data is an error. 'Not found' is often a normal case that should be handled gracefully, not exceptionally."
+      },
+      {
+        "optionText": "Return -1 for numeric types and 'N/A' for strings to make missing values obvious in logs.",
+        "isCorrect": false,
+        "explanation": "Using sentinel values (-1, 'N/A') pollutes the type system and leads to subtle bugs when callers forget to check for them."
+      }
+    ]
+  },
+  {
+    "topic": "software-architecture",
+    "question": "What is Domain in DDD?",
+    "options": [
+      {
+        "optionText": "The sphere of knowledge and activity around which the application is built — the business problem space that the software is intended to solve.",
+        "isCorrect": true,
+        "explanation": "Correct — in DDD, the domain is the subject area (e.g. e-commerce, banking, logistics) whose concepts and rules the software must accurately model."
+      },
+      {
+        "optionText": "The DNS domain name used by the application's API endpoints.",
+        "isCorrect": false,
+        "explanation": "DNS domains are a networking concern, unrelated to Domain Driven Design's use of 'domain'."
+      },
+      {
+        "optionText": "A database schema that groups related tables under a single namespace.",
+        "isCorrect": false,
+        "explanation": "A DDD domain is a business concept, not a DB schema grouping."
+      },
+      {
+        "optionText": "A bounded context that exposes a public REST API to external consumers.",
+        "isCorrect": false,
+        "explanation": "Bounded contexts are sub-divisions within a domain. The domain is the overall problem space, not a specific API boundary."
+      }
+    ]
+  },
+  {
+    "topic": "software-architecture",
+    "question": "What is the difference between Fault Tolerance and Fault Resilience?",
+    "options": [
+      {
+        "optionText": "Fault Tolerance means the system continues operating correctly even when a fault occurs; Fault Resilience means the system can recover from a fault and return to normal operation.",
+        "isCorrect": true,
+        "explanation": "Correct — tolerance is about masking failures without interruption; resilience is about absorbing and recovering from them."
+      },
+      {
+        "optionText": "They are synonyms — both describe a system that never fails under any condition.",
+        "isCorrect": false,
+        "explanation": "No system is entirely failure-proof. The terms describe different strategies: continuing through failure vs. recovering from it."
+      },
+      {
+        "optionText": "Fault Tolerance applies to hardware failures while Fault Resilience applies to software bugs.",
+        "isCorrect": false,
+        "explanation": "Both concepts apply across hardware and software. The distinction is about masking vs. recovering, not the fault type."
+      },
+      {
+        "optionText": "Fault Resilience requires redundant hardware; Fault Tolerance is achieved purely through software retry logic.",
+        "isCorrect": false,
+        "explanation": "Both can be achieved through software and hardware strategies. Neither is exclusive to one approach."
+      }
+    ]
+  },
+  {
+    "topic": "software-architecture",
+    "question": "Name some Performance Testing metrics to measure",
+    "options": [
+      {
+        "optionText": "Response time (p50/p95/p99), throughput (requests per second), error rate, CPU and memory utilisation, and concurrent user capacity.",
+        "isCorrect": true,
+        "explanation": "Correct — these metrics together reveal latency, capacity, stability, and resource efficiency under load."
+      },
+      {
+        "optionText": "Lines of code, cyclomatic complexity, and test coverage percentage.",
+        "isCorrect": false,
+        "explanation": "Those are code quality metrics, not performance metrics. Performance testing focuses on runtime behaviour under load."
+      },
+      {
+        "optionText": "Deployment frequency, mean time to recovery, and change failure rate.",
+        "isCorrect": false,
+        "explanation": "Those are DORA metrics for delivery performance, not load/performance testing metrics."
+      },
+      {
+        "optionText": "Number of active users, monthly recurring revenue, and feature adoption rate.",
+        "isCorrect": false,
+        "explanation": "Those are product and business metrics, not technical performance testing metrics."
+      }
+    ]
+  },
+  {
+    "topic": "software-architecture",
+    "question": "What is the difference between Concurrency and Parallelism?",
+    "options": [
+      {
+        "optionText": "Concurrency is about dealing with multiple tasks at once (interleaving execution); Parallelism is about doing multiple tasks simultaneously on multiple processors.",
+        "isCorrect": true,
+        "explanation": "Correct — concurrency is a design property (structure); parallelism is an execution property (hardware). You can have one without the other."
+      },
+      {
+        "optionText": "Concurrency requires multiple CPU cores; Parallelism can run on a single core using time-slicing.",
+        "isCorrect": false,
+        "explanation": "It's the opposite — parallelism requires multiple cores; concurrency can run on a single core via context switching."
+      },
+      {
+        "optionText": "They are identical — both mean executing multiple threads at exactly the same time.",
+        "isCorrect": false,
+        "explanation": "Concurrency doesn't require simultaneous execution. Threads can take turns on one core and still be concurrent."
+      },
+      {
+        "optionText": "Parallelism is a subset of concurrency — every parallel program is concurrent, and every concurrent program is parallel.",
+        "isCorrect": false,
+        "explanation": "While parallel programs are concurrent, not all concurrent programs are parallel. A single-threaded event loop is concurrent but not parallel."
+      }
+    ]
+  },
+  {
+    "topic": "software-architecture",
+    "question": "What does it mean \"System Shall Be Resilient\"?",
+    "options": [
+      {
+        "optionText": "The system can absorb disruptions (failures, spikes, degraded dependencies) and recover quickly, continuing to serve users — possibly with degraded but acceptable functionality.",
+        "isCorrect": true,
+        "explanation": "Correct — resilience includes fault isolation, graceful degradation, circuit breakers, retries, and rapid recovery."
+      },
+      {
+        "optionText": "The system must never have downtime — 100% uptime with no maintenance windows.",
+        "isCorrect": false,
+        "explanation": "100% uptime is impractical. Resilience is about recovering quickly from failures, not eliminating them entirely."
+      },
+      {
+        "optionText": "The system encrypts all data at rest and in transit to protect against security breaches.",
+        "isCorrect": false,
+        "explanation": "Encryption is a security property, not resilience. Resilience concerns availability and recovery from failures."
+      },
+      {
+        "optionText": "The system uses synchronous communication between all services to ensure data consistency.",
+        "isCorrect": false,
+        "explanation": "Synchronous coupling actually reduces resilience — if one service is slow, it cascades. Resilient systems often use async and circuit breakers."
+      }
+    ]
+  },
+  {
+    "topic": "software-architecture",
+    "question": "Explain what is Interface Segregation Principle (ISP) in Clean Architecture and what are some of its benefits?",
+    "options": [
+      {
+        "optionText": "ISP states that clients should not be forced to depend on interfaces they don't use — split large interfaces into smaller, focused ones. Advantages: reduced coupling, easier mocking, and no forced implementations of irrelevant methods.",
+        "isCorrect": true,
+        "explanation": "Correct — fat interfaces create unnecessary dependencies. Small, cohesive interfaces keep classes focused and tests simple."
+      },
+      {
+        "optionText": "ISP requires every class to implement at least one interface so that all dependencies can be injected.",
+        "isCorrect": false,
+        "explanation": "ISP is about the size and focus of interfaces, not mandating that every class must implement one."
+      },
+      {
+        "optionText": "ISP means separating the HTTP interface from the business logic by placing controllers in a different package.",
+        "isCorrect": false,
+        "explanation": "That's a layer separation concern (Clean Architecture layers), not the Interface Segregation Principle."
+      },
+      {
+        "optionText": "ISP recommends using a single large interface per domain so consumers always have access to all available methods.",
+        "isCorrect": false,
+        "explanation": "ISP explicitly argues against large interfaces. Consumers should only see the methods they actually need."
+      }
+    ]
+  },
+  {
+    "topic": "software-architecture",
+    "question": "What Is Session Replication?",
+    "options": [
+      {
+        "optionText": "Copying session data across all nodes in a cluster so any node can serve any request without the user being tied to a specific server.",
+        "isCorrect": true,
+        "explanation": "Correct — session replication enables stateful sessions in a multi-node cluster while avoiding sticky sessions."
+      },
+      {
+        "optionText": "Storing the same user session in both a relational database and a Redis cache for redundancy.",
+        "isCorrect": false,
+        "explanation": "Dual-storing sessions is one implementation option, but session replication refers specifically to distributing sessions across cluster nodes."
+      },
+      {
+        "optionText": "Cloning a user's browser session to a staging environment to reproduce bugs from production.",
+        "isCorrect": false,
+        "explanation": "Session replication is an infrastructure/scalability technique, not a debugging tool."
+      },
+      {
+        "optionText": "Restarting user sessions after a deployment to ensure all active users are running the latest code.",
+        "isCorrect": false,
+        "explanation": "Forcing session restarts on deployment is a UX concern, not session replication."
+      }
+    ]
+  },
+  {
+    "topic": "software-architecture",
+    "question": "What Is Sticky Session Load Balancing? What Do You Mean By \"Session Affinity\"?",
+    "options": [
+      {
+        "optionText": "Sticky sessions (session affinity) route all requests from the same client to the same server, typically using a cookie or IP hash, so in-memory session state is always available.",
+        "isCorrect": true,
+        "explanation": "Correct — sticky sessions simplify stateful architectures but create uneven load distribution and complicate failover."
+      },
+      {
+        "optionText": "Sticky sessions cache database query results on each node so repeated queries don't hit the DB.",
+        "isCorrect": false,
+        "explanation": "That describes query caching. Sticky sessions are about routing requests to the same server, not caching DB results."
+      },
+      {
+        "optionText": "Session affinity means all services share a single in-memory session store to avoid data inconsistency.",
+        "isCorrect": false,
+        "explanation": "A shared session store (e.g. Redis) is an alternative to sticky sessions. They are different approaches to stateful session management."
+      },
+      {
+        "optionText": "Sticky sessions use JWT tokens so the server doesn't need to store any session state.",
+        "isCorrect": false,
+        "explanation": "JWTs enable stateless authentication — the opposite of sticky sessions, which exist precisely to maintain server-side state."
+      }
+    ]
+  },
+  {
+    "topic": "software-architecture",
+    "question": "WebSockets vs REST API for real time data? Which to choose?",
+    "options": [
+      {
+        "optionText": "Use WebSockets for true real-time bidirectional data (chat, live feeds, gaming); use REST for request-response interactions where polling or SSE suffices and stateless calls are preferable.",
+        "isCorrect": true,
+        "explanation": "Correct — WebSockets add connection overhead; REST is simpler and better cached. The right choice depends on latency needs and directionality."
+      },
+      {
+        "optionText": "Always use REST because it is more widely supported and can achieve real-time with short polling intervals.",
+        "isCorrect": false,
+        "explanation": "Short polling is inefficient — it floods the server with requests. WebSockets are far more efficient for genuinely real-time data."
+      },
+      {
+        "optionText": "Always use WebSockets — they are strictly superior to REST for all data transfer because they are faster.",
+        "isCorrect": false,
+        "explanation": "WebSockets have overhead (persistent connections, no caching, complex infra). For simple request-response, REST is often simpler and more appropriate."
+      },
+      {
+        "optionText": "Use GraphQL subscriptions instead — they automatically choose WebSocket or REST based on the data change frequency.",
+        "isCorrect": false,
+        "explanation": "GraphQL subscriptions use WebSockets under the hood — they don't auto-select between WebSocket and REST."
+      }
+    ]
+  },
+  {
+    "topic": "software-architecture",
+    "question": "What Do You Mean By High Availability (HA)?",
+    "options": [
+      {
+        "optionText": "A system design goal ensuring the system remains operational for a high percentage of time (e.g. 99.9%+), achieved through redundancy, failover, load balancing, and eliminating single points of failure.",
+        "isCorrect": true,
+        "explanation": "Correct — HA is measured in 'nines' of uptime. Achieving it requires redundant components and automated failover."
+      },
+      {
+        "optionText": "Running the application on high-performance hardware with fast CPUs and SSDs to minimise response time.",
+        "isCorrect": false,
+        "explanation": "Fast hardware improves performance but not availability. A single powerful server is still a single point of failure."
+      },
+      {
+        "optionText": "Deploying the application to multiple regions so users connect to the nearest data centre for low latency.",
+        "isCorrect": false,
+        "explanation": "Multi-region improves latency and is often part of HA, but HA specifically focuses on uptime and failure handling, not latency."
+      },
+      {
+        "optionText": "Encrypting all data in transit and at rest to ensure the system is always safe to access.",
+        "isCorrect": false,
+        "explanation": "Encryption is a security property. High Availability concerns uptime and failure tolerance."
+      }
+    ]
+  },
+  {
+    "topic": "software-architecture",
+    "question": "What Is Middle Tier Clustering?",
+    "options": [
+      {
+        "optionText": "Clustering the application/business logic layer (middle tier) in a three-tier architecture so it can handle more requests and provides redundancy without clustering the database tier.",
+        "isCorrect": true,
+        "explanation": "Correct — middle tier clustering scales the application servers independently while the database remains a separate, potentially non-clustered tier."
+      },
+      {
+        "optionText": "Grouping microservices by domain into clusters, with each cluster having its own API gateway.",
+        "isCorrect": false,
+        "explanation": "That describes domain-based service grouping, not the classic three-tier middle-tier clustering concept."
+      },
+      {
+        "optionText": "Running multiple databases in a cluster to serve a single application server.",
+        "isCorrect": false,
+        "explanation": "Database clustering is a separate concern. Middle tier clustering refers to clustering the application logic layer."
+      },
+      {
+        "optionText": "Clustering the CDN edge nodes that cache static assets between the user and the origin server.",
+        "isCorrect": false,
+        "explanation": "CDN edge clustering is a presentation/content-delivery concern. Middle tier refers to the application/business logic layer."
+      }
+    ]
+  },
+  {
+    "topic": "software-architecture",
+    "question": "How do you update a live heavy traffic site with minimum or Zero Down Time?",
+    "options": [
+      {
+        "optionText": "Use blue-green deployments or rolling updates — route traffic to the new version incrementally, verify health, then cut over; combine with feature flags to decouple deployment from release.",
+        "isCorrect": true,
+        "explanation": "Correct — these strategies allow you to swap in a new version without interrupting live traffic, with the ability to roll back instantly."
+      },
+      {
+        "optionText": "Schedule maintenance windows at 3am when traffic is lowest and warn users in advance.",
+        "isCorrect": false,
+        "explanation": "Maintenance windows still cause downtime and are disruptive for global services. Zero-downtime techniques avoid any interruption."
+      },
+      {
+        "optionText": "Push all changes directly to production and rely on fast rollback scripts if users report issues.",
+        "isCorrect": false,
+        "explanation": "Deploying untested changes to all users simultaneously risks widespread impact before rollback completes."
+      },
+      {
+        "optionText": "Put the site in read-only mode during deployment so users can still view content while the database migrates.",
+        "isCorrect": false,
+        "explanation": "Read-only mode is a form of partial downtime. True zero-downtime deployments keep all functionality available."
+      }
+    ]
+  },
+  {
+    "topic": "software-architecture",
+    "question": "Name some benefits of CQRS Pattern",
+    "options": [
+      {
+        "optionText": "Independent scaling of read and write sides, optimised read models for queries, clearer separation of concerns, and easier event sourcing integration.",
+        "isCorrect": true,
+        "explanation": "Correct — CQRS separates reads (queries) from writes (commands), letting each side be optimised, scaled, and evolved independently."
+      },
+      {
+        "optionText": "It eliminates the need for a database by storing all state in memory on the application server.",
+        "isCorrect": false,
+        "explanation": "CQRS doesn't eliminate databases. It separates read and write models — both typically still interact with persistent storage."
+      },
+      {
+        "optionText": "It ensures strong consistency by synchronously updating all read models before acknowledging a command.",
+        "isCorrect": false,
+        "explanation": "CQRS often involves eventual consistency, especially when read models are updated asynchronously via events."
+      },
+      {
+        "optionText": "It removes the need for an ORM by using raw SQL for all queries and commands.",
+        "isCorrect": false,
+        "explanation": "CQRS is architecture-level separation of concerns, not a statement about ORM vs raw SQL."
+      }
+    ]
+  },
+  {
+    "topic": "software-architecture",
+    "question": "What Is ACID Property Of A System?",
+    "options": [
+      {
+        "optionText": "Atomicity (all or nothing), Consistency (data rules are always enforced), Isolation (concurrent transactions don't interfere), Durability (committed data survives crashes).",
+        "isCorrect": true,
+        "explanation": "Correct — ACID properties are the guarantees relational databases provide to ensure reliable transaction processing."
+      },
+      {
+        "optionText": "Availability, Consistency, Integrity, Durability — the four guarantees of a distributed NoSQL database.",
+        "isCorrect": false,
+        "explanation": "ACID stands for Atomicity, Consistency, Isolation, Durability. The described acronym is incorrect."
+      },
+      {
+        "optionText": "Asynchronous, Concurrent, Idempotent, Distributed — describing the properties of a resilient microservices architecture.",
+        "isCorrect": false,
+        "explanation": "ACID is a database transaction concept, not a microservices architecture pattern."
+      },
+      {
+        "optionText": "A test framework property requiring that all unit tests are Atomic, Consistent, Isolated, and Deterministic.",
+        "isCorrect": false,
+        "explanation": "ACID is a database concept. While good tests should be isolated and deterministic, ACID doesn't refer to testing."
+      }
+    ]
+  },
+  {
+    "topic": "software-architecture",
+    "question": "What is the Command and Query Responsibility Segregation (CQRS) Pattern?",
+    "options": [
+      {
+        "optionText": "An architectural pattern that separates the write side (commands that mutate state) from the read side (queries that return data), allowing each to use different models and storage optimised for their purpose.",
+        "isCorrect": true,
+        "explanation": "Correct — CQRS recognises that read and write workloads often have very different characteristics and can benefit from separate models."
+      },
+      {
+        "optionText": "A SQL query optimisation pattern that separates SELECT statements from INSERT/UPDATE/DELETE in different database roles.",
+        "isCorrect": false,
+        "explanation": "CQRS is an architectural pattern, not a SQL or database role configuration technique."
+      },
+      {
+        "optionText": "A design pattern where commands are queued in RabbitMQ and queries are handled by a dedicated read replica.",
+        "isCorrect": false,
+        "explanation": "Message queues and read replicas are common CQRS implementation choices, but CQRS itself is the conceptual separation, not a specific technology prescription."
+      },
+      {
+        "optionText": "A REST API convention where POST/PUT/DELETE endpoints return no data and GET endpoints never modify state.",
+        "isCorrect": false,
+        "explanation": "While REST's idempotency conventions share some ideas, CQRS is an architectural pattern for entire application design, not an API convention."
+      }
+    ]
+  },
+  {
+    "topic": "software-architecture",
+    "question": "Explain the purpose of Clean Architecture Inner and Outer layers",
+    "options": [
+      {
+        "optionText": "Inner layers (Entities, Use Cases) contain pure business logic with no framework dependencies; outer layers (Controllers, Gateways, UI, DB) handle delivery and infrastructure and depend inward, never outward.",
+        "isCorrect": true,
+        "explanation": "Correct — the Dependency Rule states that source code dependencies only point inward, keeping the core domain stable and independently testable."
+      },
+      {
+        "optionText": "Inner layers are faster because they run in memory; outer layers are slower because they involve network or disk I/O.",
+        "isCorrect": false,
+        "explanation": "While this is often true in practice, the architectural purpose of inner/outer layers is about dependency direction, not performance."
+      },
+      {
+        "optionText": "Inner layers handle user-facing features; outer layers handle background jobs and scheduled tasks.",
+        "isCorrect": false,
+        "explanation": "The layer distinction is about abstraction and dependency direction, not foreground vs. background responsibilities."
+      },
+      {
+        "optionText": "Outer layers are tested with unit tests; inner layers are tested with integration tests.",
+        "isCorrect": false,
+        "explanation": "The opposite is usually true — inner layers (pure business logic) are ideal for fast unit tests; outer layers need integration tests."
+      }
+    ]
+  },
+  {
+    "topic": "software-architecture",
+    "question": "What is the difference between the Clean and the N-Tier Architectures?",
+    "options": [
+      {
+        "optionText": "N-Tier layers each depend on the one below (UI → BL → DAL → DB); Clean Architecture's Dependency Rule requires all dependencies point inward toward the domain, not downward through layers.",
+        "isCorrect": true,
+        "explanation": "Correct — in traditional N-Tier, the domain layer depends on the DAL; in Clean Architecture, the DAL depends on the domain (inverted)."
+      },
+      {
+        "optionText": "N-Tier is for monoliths; Clean Architecture is only suitable for microservices.",
+        "isCorrect": false,
+        "explanation": "Both patterns apply to monoliths and microservices. Clean Architecture is about internal module structure, not deployment topology."
+      },
+      {
+        "optionText": "Clean Architecture uses exactly three layers (Presentation, Business, Data) while N-Tier can have any number.",
+        "isCorrect": false,
+        "explanation": "Clean Architecture typically has four concentric layers (Entities, Use Cases, Interface Adapters, Frameworks). The key difference is dependency direction."
+      },
+      {
+        "optionText": "They are functionally equivalent — Clean Architecture is just a rebranding of N-Tier with different naming.",
+        "isCorrect": false,
+        "explanation": "They differ fundamentally in dependency direction. In N-Tier, higher layers depend on lower ones; Clean Architecture inverts this for the domain."
+      }
+    ]
+  },
+  {
+    "topic": "software-architecture",
+    "question": "What is the difference between Behavior-Driven Development (BDD) vs Domain-Driven Design (DDD)?",
+    "options": [
+      {
+        "optionText": "BDD is a testing methodology that describes system behaviour in natural-language scenarios (Given/When/Then); DDD is an architectural approach to modelling complex business domains in code.",
+        "isCorrect": true,
+        "explanation": "Correct — BDD focuses on specification and testing of behaviour; DDD focuses on structuring the codebase around business concepts."
+      },
+      {
+        "optionText": "BDD is used for front-end testing; DDD is used for back-end architecture — they never overlap.",
+        "isCorrect": false,
+        "explanation": "BDD and DDD can both be applied across the full stack. DDD often informs BDD scenario language through the ubiquitous language."
+      },
+      {
+        "optionText": "They are synonyms — both describe writing tests before code to guide the design.",
+        "isCorrect": false,
+        "explanation": "BDD involves test-first specification; DDD is about domain modelling. They complement each other but are distinct disciplines."
+      },
+      {
+        "optionText": "DDD replaces BDD — once you have a rich domain model, you no longer need behaviour specifications.",
+        "isCorrect": false,
+        "explanation": "DDD and BDD are complementary. DDD's ubiquitous language actually enriches BDD scenarios with meaningful business terminology."
+      }
+    ]
+  },
+  {
+    "topic": "software-architecture",
+    "question": "What is Bad Design?",
+    "options": [
+      {
+        "optionText": "Design that is rigid (hard to change), fragile (breaks in unexpected places when changed), immobile (code can't be reused), and viscous (doing the right thing is harder than the wrong thing).",
+        "isCorrect": true,
+        "explanation": "Correct — these are Robert Martin's four symptoms of bad design: rigidity, fragility, immobility, and viscosity."
+      },
+      {
+        "optionText": "Any design that doesn't use design patterns — good design always requires applying named patterns from the GoF book.",
+        "isCorrect": false,
+        "explanation": "Over-engineering with patterns can itself be bad design. Patterns are tools, not requirements for good software."
+      },
+      {
+        "optionText": "Code that lacks comments and documentation, making it hard for new developers to understand.",
+        "isCorrect": false,
+        "explanation": "Poor documentation is a maintenance issue, but bad design refers to structural problems: tight coupling, poor abstractions, and violated principles."
+      },
+      {
+        "optionText": "Any architecture that doesn't match the diagram in the original technical specification.",
+        "isCorrect": false,
+        "explanation": "Architecture evolves; divergence from a spec diagram doesn't define bad design. The actual quality attributes matter."
+      }
+    ]
+  },
+  {
+    "topic": "software-architecture",
+    "question": "What is Back-Pressure?",
+    "options": [
+      {
+        "optionText": "A flow control mechanism where a consumer signals to a producer to slow down when it can't keep up with the rate of incoming data, preventing buffer overflow and system overload.",
+        "isCorrect": true,
+        "explanation": "Correct — back-pressure is essential in reactive systems and streaming pipelines to handle mismatched producer/consumer speeds."
+      },
+      {
+        "optionText": "The latency introduced by load balancers when they route requests to slow backend nodes.",
+        "isCorrect": false,
+        "explanation": "That describes routing latency. Back-pressure is a flow control signal from consumer to producer."
+      },
+      {
+        "optionText": "A deployment strategy where a previous version of the service pushes back against new deployments until health checks pass.",
+        "isCorrect": false,
+        "explanation": "That describes a blue-green or canary rollback condition, not back-pressure."
+      },
+      {
+        "optionText": "The CPU overhead caused by garbage collection when heap memory fills up under heavy load.",
+        "isCorrect": false,
+        "explanation": "GC pressure is a runtime performance concern. Back-pressure is a flow control concept for managing data rates between producers and consumers."
+      }
+    ]
+  },
+  {
+    "topic": "software-architecture",
+    "question": "What is Elasticity (in contrast to Scalability)?",
+    "options": [
+      {
+        "optionText": "Elasticity is the ability to automatically scale resources up AND down in response to load changes; Scalability is the capability to handle increased load by adding resources.",
+        "isCorrect": true,
+        "explanation": "Correct — a scalable system can grow; an elastic system can also shrink automatically when load drops, optimising cost."
+      },
+      {
+        "optionText": "Elasticity means the system never degrades under any load; Scalability means it degrades gracefully.",
+        "isCorrect": false,
+        "explanation": "Elasticity is about dynamic resource adjustment, not zero degradation. Graceful degradation is resilience, not scalability."
+      },
+      {
+        "optionText": "They are synonyms — both describe the system's ability to handle more users over time.",
+        "isCorrect": false,
+        "explanation": "Elasticity includes automatic scale-down; scalability only implies the ability to scale up. They are related but distinct."
+      },
+      {
+        "optionText": "Scalability applies to databases; Elasticity applies to application servers only.",
+        "isCorrect": false,
+        "explanation": "Both concepts apply across all layers of a system — databases, application servers, caches, and queues can all be elastic or scalable."
+      }
+    ]
+  },
+  {
+    "topic": "software-architecture",
+    "question": "What Is Load Balancing Fail Over?",
+    "options": [
+      {
+        "optionText": "When a load balancer detects a healthy node has become unavailable and automatically redistributes its traffic to the remaining healthy nodes.",
+        "isCorrect": true,
+        "explanation": "Correct — failover ensures continuity by rerouting traffic away from failed nodes, a core mechanism of high availability."
+      },
+      {
+        "optionText": "A technique where the load balancer switches from round-robin to least-connections algorithm when a node is overloaded.",
+        "isCorrect": false,
+        "explanation": "Changing routing algorithms is a load balancing strategy, not failover. Failover specifically handles node failures."
+      },
+      {
+        "optionText": "The process of spinning up a new application server when the primary deployment fails during a release.",
+        "isCorrect": false,
+        "explanation": "That describes a deployment recovery process. Load balancing failover is about runtime traffic rerouting when a node goes down."
+      },
+      {
+        "optionText": "Storing a backup copy of the load balancer configuration so it can be restored after a hardware failure.",
+        "isCorrect": false,
+        "explanation": "Configuration backup is disaster recovery, not load balancing failover."
+      }
+    ]
+  },
+  {
+    "topic": "software-architecture",
+    "question": "Compare Onion vs Clean vs Hexagonal Architectures",
+    "options": [
+      {
+        "optionText": "All three enforce the same core principle — dependencies point inward toward the domain — but differ in terminology and layer names; they are largely equivalent philosophically with minor structural differences.",
+        "isCorrect": true,
+        "explanation": "Correct — Hexagonal (ports and adapters), Onion, and Clean Architecture all share the dependency inversion goal, differing mainly in vocabulary."
+      },
+      {
+        "optionText": "Hexagonal Architecture is for event-driven systems; Onion is for REST APIs; Clean is for monolithic applications.",
+        "isCorrect": false,
+        "explanation": "All three are general architectural patterns applicable to any application style."
+      },
+      {
+        "optionText": "Clean Architecture is the strictest — it requires exactly four layers; Onion and Hexagonal allow any number of rings.",
+        "isCorrect": false,
+        "explanation": "All three are flexible in the number of layers. The four-layer depiction of Clean Architecture is illustrative, not mandatory."
+      },
+      {
+        "optionText": "Onion Architecture places the database at the centre; the other two place it at the outer edge.",
+        "isCorrect": false,
+        "explanation": "All three place the domain at the centre and infrastructure (including the database) at the outer edge."
+      }
+    ]
+  },
+  {
+    "topic": "software-architecture",
+    "question": "What is Unit test, Integration Test, Smoke test, Regression Test and what are the differences between them?",
+    "options": [
+      {
+        "optionText": "Unit: tests a single unit in isolation. Integration: tests multiple components together. Smoke: a quick sanity check after deployment. Regression: ensures existing functionality still works after changes.",
+        "isCorrect": true,
+        "explanation": "Correct — these four test types cover different scopes and purposes in the testing pyramid."
+      },
+      {
+        "optionText": "They are the same — all test the same code paths but at different times during the CI pipeline.",
+        "isCorrect": false,
+        "explanation": "They differ in scope, speed, and purpose. Conflating them leads to gaps in test coverage."
+      },
+      {
+        "optionText": "Unit tests run in production; integration tests run in staging; smoke tests run in development; regression tests run manually.",
+        "isCorrect": false,
+        "explanation": "The distinction between these test types is about scope and purpose, not environment."
+      },
+      {
+        "optionText": "Smoke tests replace unit tests in agile teams because they are faster to write and cover more code paths.",
+        "isCorrect": false,
+        "explanation": "Smoke tests are shallow sanity checks, not replacements for thorough unit tests."
+      }
+    ]
+  },
+  {
+    "topic": "software-architecture",
+    "question": "How do you off-load work from the Database?",
+    "options": [
+      {
+        "optionText": "Use caching layers (Redis/Memcached) for frequent reads, message queues for async writes, read replicas for read-heavy workloads, and denormalise data for expensive joins.",
+        "isCorrect": true,
+        "explanation": "Correct — these strategies reduce DB load by serving data from cache, deferring writes, and distributing read traffic."
+      },
+      {
+        "optionText": "Increase the database connection pool size so more queries can run simultaneously.",
+        "isCorrect": false,
+        "explanation": "A larger connection pool increases concurrency but doesn't reduce the total work the DB must do."
+      },
+      {
+        "optionText": "Switch from a relational to a NoSQL database — NoSQL databases have no performance limits.",
+        "isCorrect": false,
+        "explanation": "NoSQL databases have different performance characteristics but are not infinitely scalable. The same off-loading strategies apply."
+      },
+      {
+        "optionText": "Run all database queries inside background threads on the application server to avoid blocking the event loop.",
+        "isCorrect": false,
+        "explanation": "Async execution avoids blocking the app server but doesn't reduce the number of queries hitting the database."
+      }
+    ]
+  },
+  {
+    "topic": "software-architecture",
+    "question": "Explain what is Cache Stampede",
+    "options": [
+      {
+        "optionText": "When a cached entry expires and many concurrent requests simultaneously find a cache miss, all querying the database at once — overwhelming it before the cache is repopulated.",
+        "isCorrect": true,
+        "explanation": "Correct — cache stampede (thundering herd) is mitigated by probabilistic early expiry, locking (mutex), or background refresh."
+      },
+      {
+        "optionText": "When the cache fills to capacity and starts evicting entries faster than they can be re-inserted.",
+        "isCorrect": false,
+        "explanation": "That describes cache eviction pressure under memory constraints, not a cache stampede."
+      },
+      {
+        "optionText": "When multiple cache servers disagree on the value of a key due to replication lag.",
+        "isCorrect": false,
+        "explanation": "That describes cache inconsistency from eventual consistency, not a stampede."
+      },
+      {
+        "optionText": "When a deploy invalidates all cached entries at once, causing a brief period of elevated load.",
+        "isCorrect": false,
+        "explanation": "While a mass invalidation can trigger stampede-like behaviour, a classic cache stampede refers specifically to concurrent misses on a single expired key."
+      }
+    ]
+  }
+]

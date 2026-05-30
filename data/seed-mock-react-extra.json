@@ -1,0 +1,496 @@
+[
+  {
+    "topic": "react",
+    "question": "How does React work?",
+    "options": [
+      {
+        "optionText": "React builds a virtual DOM in memory, diffs it against the previous render, and patches only the changed parts of the real DOM.",
+        "isCorrect": true,
+        "explanation": "Correct — the virtual DOM reconciliation algorithm is the core of how React updates the UI efficiently."
+      },
+      {
+        "optionText": "React directly manipulates the real DOM on every state change, using CSS animations to make updates appear smooth.",
+        "isCorrect": false,
+        "explanation": "React avoids direct DOM manipulation on every change — it uses a virtual DOM to batch and minimise real DOM writes."
+      },
+      {
+        "optionText": "React compiles JSX to native browser events at build time, bypassing the DOM entirely for maximum performance.",
+        "isCorrect": false,
+        "explanation": "JSX compiles to React.createElement calls, not native events. The DOM is still used at runtime."
+      },
+      {
+        "optionText": "React uses two-way data binding to automatically sync component state with the DOM without any diffing step.",
+        "isCorrect": false,
+        "explanation": "React uses one-way data flow, not two-way binding. Diffing (reconciliation) is central to how it works."
+      }
+    ]
+  },
+  {
+    "topic": "react",
+    "question": "How do you create components in React?",
+    "options": [
+      {
+        "optionText": "By writing function components that return JSX, or class components that extend React.Component and implement a render() method.",
+        "isCorrect": true,
+        "explanation": "Correct — both function and class components are valid. Function components with hooks are the modern standard."
+      },
+      {
+        "optionText": "By calling ReactDOM.create() with a template string and attaching it to a DOM element.",
+        "isCorrect": false,
+        "explanation": "ReactDOM.create() doesn't exist for components. Components are plain functions or classes, not created via ReactDOM."
+      },
+      {
+        "optionText": "By registering components globally with React.register() before they can be used in JSX.",
+        "isCorrect": false,
+        "explanation": "There is no React.register(). Components are just exported JavaScript functions or classes."
+      },
+      {
+        "optionText": "By defining custom HTML elements using the Web Components API and importing them into React.",
+        "isCorrect": false,
+        "explanation": "React components are not Web Components — they are JavaScript constructs specific to React."
+      }
+    ]
+  },
+  {
+    "topic": "react",
+    "question": "What is the purpose of calling super(props) in a constructor?",
+    "options": [
+      {
+        "optionText": "It calls the React.Component constructor so that this.props is correctly set before any code in the constructor runs.",
+        "isCorrect": true,
+        "explanation": "Correct — without super(props), this.props would be undefined inside the constructor body."
+      },
+      {
+        "optionText": "It clones the parent component's state into the child so both share the same data.",
+        "isCorrect": false,
+        "explanation": "super(props) doesn't copy state — it initialises the base class so the component instance is set up properly."
+      },
+      {
+        "optionText": "It is required to register lifecycle methods with React's scheduler.",
+        "isCorrect": false,
+        "explanation": "Lifecycle methods are not registered via super — they are inherited through the class prototype."
+      },
+      {
+        "optionText": "It enables two-way binding between props and state in class components.",
+        "isCorrect": false,
+        "explanation": "React doesn't have two-way binding. super(props) simply initialises the parent class with the props object."
+      }
+    ]
+  },
+  {
+    "topic": "react",
+    "question": "How do you create refs in React?",
+    "options": [
+      {
+        "optionText": "Using React.createRef() in class components or the useRef() hook in function components, then passing the ref to a JSX element via the ref attribute.",
+        "isCorrect": true,
+        "explanation": "Correct — createRef / useRef both produce a mutable object with a .current property that React populates after mounting."
+      },
+      {
+        "optionText": "By querying the DOM directly with document.getElementById() and storing the result in component state.",
+        "isCorrect": false,
+        "explanation": "Direct DOM queries bypass React's ref system and can cause issues with SSR and React's lifecycle. useRef is the correct approach."
+      },
+      {
+        "optionText": "By adding a data-ref attribute to the JSX element and reading it from props inside the component.",
+        "isCorrect": false,
+        "explanation": "data-ref is not a React concept. Refs are created with createRef or useRef and attached via the ref prop."
+      },
+      {
+        "optionText": "By dispatching a REF_CREATED Redux action and storing the DOM reference in the global store.",
+        "isCorrect": false,
+        "explanation": "Storing DOM nodes in Redux is an anti-pattern. Refs should live locally in the component via React's ref APIs."
+      }
+    ]
+  },
+  {
+    "topic": "react",
+    "question": "What is the purpose of the callback argument of setState?",
+    "options": [
+      {
+        "optionText": "It is invoked after the state update is applied and the component has re-rendered, making it safe to read the updated state.",
+        "isCorrect": true,
+        "explanation": "Correct — setState is asynchronous; the callback fires after the update is flushed, unlike code immediately after the setState call."
+      },
+      {
+        "optionText": "It is called before the state update to allow you to cancel it if certain conditions aren't met.",
+        "isCorrect": false,
+        "explanation": "The callback fires after the update, not before. You can't cancel a setState via this callback."
+      },
+      {
+        "optionText": "It replaces shouldComponentUpdate and tells React whether to re-render the component.",
+        "isCorrect": false,
+        "explanation": "The setState callback does not affect rendering decisions — that is shouldComponentUpdate's or React.memo's responsibility."
+      },
+      {
+        "optionText": "It receives the previous state as an argument so you can undo the change if needed.",
+        "isCorrect": false,
+        "explanation": "The callback receives no arguments. To base updates on previous state, use the functional form of setState: setState(prev => ...)."
+      }
+    ]
+  },
+  {
+    "topic": "react",
+    "question": "What is ReactDOM?",
+    "options": [
+      {
+        "optionText": "A package that provides DOM-specific methods such as ReactDOM.render() / createRoot() to mount React trees into the browser DOM.",
+        "isCorrect": true,
+        "explanation": "Correct — ReactDOM bridges React's component model to the actual browser DOM and is separate from the core React package."
+      },
+      {
+        "optionText": "A built-in browser API that React wraps to provide cross-browser compatibility for DOM events.",
+        "isCorrect": false,
+        "explanation": "ReactDOM is a React-specific npm package, not a browser API."
+      },
+      {
+        "optionText": "The virtual DOM implementation used internally by React to track component state changes.",
+        "isCorrect": false,
+        "explanation": "The virtual DOM is an internal React concept; ReactDOM is the renderer that outputs to the real browser DOM."
+      },
+      {
+        "optionText": "A CSS-in-JS library that injects styles directly into the DOM alongside React component output.",
+        "isCorrect": false,
+        "explanation": "ReactDOM has nothing to do with CSS-in-JS. It mounts and updates React component trees in the DOM."
+      }
+    ]
+  },
+  {
+    "topic": "react",
+    "question": "What is the difference between presentational and container components?",
+    "options": [
+      {
+        "optionText": "Presentational components focus on how things look (receive data via props, no business logic); container components handle data fetching, state, and pass data down to presentational ones.",
+        "isCorrect": true,
+        "explanation": "Correct — this separation of concerns pattern (Dan Abramov) keeps UI components reusable and logic components testable."
+      },
+      {
+        "optionText": "Presentational components use class syntax while container components must be function components with hooks.",
+        "isCorrect": false,
+        "explanation": "The distinction is about responsibility (UI vs logic), not syntax. Either type can be a class or function component."
+      },
+      {
+        "optionText": "Container components render inside a <div> wrapper, while presentational components render directly into the body.",
+        "isCorrect": false,
+        "explanation": "The naming has nothing to do with DOM structure — it's a design pattern about separating concerns."
+      },
+      {
+        "optionText": "Presentational components manage global state with Redux; container components manage local state with useState.",
+        "isCorrect": false,
+        "explanation": "It's the opposite — containers typically connect to global stores, while presentational components are pure/dumb."
+      }
+    ]
+  },
+  {
+    "topic": "react",
+    "question": "How is React different from AngularJS?",
+    "options": [
+      {
+        "optionText": "React is a UI library using one-way data flow and a virtual DOM; AngularJS is a full MVC framework with two-way data binding and dirty checking.",
+        "isCorrect": true,
+        "explanation": "Correct — React handles only the view layer; AngularJS prescribes a full application structure with built-in two-way binding."
+      },
+      {
+        "optionText": "React uses TypeScript exclusively while AngularJS supports only JavaScript.",
+        "isCorrect": false,
+        "explanation": "React works with both JS and TS. AngularJS (v1) is JavaScript-based; Angular (v2+) embraces TypeScript."
+      },
+      {
+        "optionText": "AngularJS uses a virtual DOM for diffing while React manipulates the real DOM directly.",
+        "isCorrect": false,
+        "explanation": "It's the opposite — React uses a virtual DOM. AngularJS uses dirty checking ($digest cycle) on the real DOM."
+      },
+      {
+        "optionText": "React requires a build step while AngularJS can run directly in the browser without any compilation.",
+        "isCorrect": false,
+        "explanation": "While AngularJS can be included via a script tag, this isn't the meaningful architectural difference between the two."
+      }
+    ]
+  },
+  {
+    "topic": "react",
+    "question": "Where is state kept in a React + Redux application?",
+    "options": [
+      {
+        "optionText": "In a single centralised Redux store, with components reading slices of state via selectors and dispatching actions to update it.",
+        "isCorrect": true,
+        "explanation": "Correct — Redux's core principle is a single source of truth: one store holds the entire application state tree."
+      },
+      {
+        "optionText": "In each component's local useState hook, with Redux used only for routing between pages.",
+        "isCorrect": false,
+        "explanation": "Redux holds shared/global state. Using Redux only for routing misses its primary purpose."
+      },
+      {
+        "optionText": "In the browser's localStorage, with Redux acting as a sync layer between localStorage and components.",
+        "isCorrect": false,
+        "explanation": "Redux stores state in memory (a JavaScript object). localStorage persistence requires middleware like redux-persist."
+      },
+      {
+        "optionText": "Across multiple context providers — Redux creates one context per reducer slice to avoid unnecessary re-renders.",
+        "isCorrect": false,
+        "explanation": "Redux uses a single store, not multiple contexts. React-Redux's Provider exposes one store to the component tree."
+      }
+    ]
+  },
+  {
+    "topic": "react",
+    "question": "What is the difference between React and React Native?",
+    "options": [
+      {
+        "optionText": "React targets web browsers via the DOM; React Native targets iOS and Android, rendering native platform UI components instead of HTML.",
+        "isCorrect": true,
+        "explanation": "Correct — they share the same component model and hooks API but use different renderers for different platforms."
+      },
+      {
+        "optionText": "React Native is a newer version of React that includes built-in state management and routing.",
+        "isCorrect": false,
+        "explanation": "React Native is a separate project targeting mobile platforms, not a newer version of React."
+      },
+      {
+        "optionText": "React Native compiles JavaScript to native machine code, while React interprets JSX at runtime in the browser.",
+        "isCorrect": false,
+        "explanation": "React Native uses a JS bridge (or JSI) to communicate with native components — it doesn't compile to machine code."
+      },
+      {
+        "optionText": "React is maintained by Meta while React Native is maintained by the open-source community independently.",
+        "isCorrect": false,
+        "explanation": "Both React and React Native are maintained by Meta (Facebook) alongside open-source contributors."
+      }
+    ]
+  },
+  {
+    "topic": "react",
+    "question": "What is the point of Redux?",
+    "options": [
+      {
+        "optionText": "To provide a predictable, centralised state container with strict rules (pure reducers, actions) that make state changes traceable and testable.",
+        "isCorrect": true,
+        "explanation": "Correct — Redux's value is predictability and debuggability (time-travel, DevTools) for complex shared state."
+      },
+      {
+        "optionText": "To replace React's rendering engine with a faster diffing algorithm for large component trees.",
+        "isCorrect": false,
+        "explanation": "Redux manages state — it has nothing to do with React's rendering or reconciliation algorithm."
+      },
+      {
+        "optionText": "To enable server-side rendering by serialising component props into JSON and hydrating them on the client.",
+        "isCorrect": false,
+        "explanation": "SSR serialisation is a separate concern. Redux can assist with it, but that's not its core purpose."
+      },
+      {
+        "optionText": "To eliminate the need for props entirely by allowing all components to communicate directly via events.",
+        "isCorrect": false,
+        "explanation": "Redux doesn't eliminate props; it provides shared state via a store accessed through connect() or useSelector()."
+      }
+    ]
+  },
+  {
+    "topic": "react",
+    "question": "What is Flow?",
+    "options": [
+      {
+        "optionText": "A static type checker for JavaScript developed by Meta, used to annotate and catch type errors in React codebases without a compile step.",
+        "isCorrect": true,
+        "explanation": "Correct — Flow adds type annotations to JavaScript and checks them statically. It was popular in React projects before TypeScript became dominant."
+      },
+      {
+        "optionText": "A React built-in hook that manages the flow of data between parent and child components via context.",
+        "isCorrect": false,
+        "explanation": "No such hook exists. Flow is a standalone static type checker, not a React API."
+      },
+      {
+        "optionText": "A CSS animation library used with React to create smooth transitions between component states.",
+        "isCorrect": false,
+        "explanation": "Flow has nothing to do with CSS animations. It is a static type system for JavaScript."
+      },
+      {
+        "optionText": "A Redux middleware that controls the order in which actions are dispatched to the store.",
+        "isCorrect": false,
+        "explanation": "Flow is a type checker, not a Redux middleware. Action ordering is handled by middleware like redux-saga or redux-thunk."
+      }
+    ]
+  },
+  {
+    "topic": "react",
+    "question": "What is the point of shouldComponentUpdate()?",
+    "options": [
+      {
+        "optionText": "To let you bail out of an expensive re-render by returning false when the component's output won't change given the new props or state.",
+        "isCorrect": true,
+        "explanation": "Correct — returning false from shouldComponentUpdate skips render(), componentDidUpdate() and the virtual DOM diff for that cycle."
+      },
+      {
+        "optionText": "To trigger a forced re-render even when state hasn't changed, ensuring the UI is always in sync.",
+        "isCorrect": false,
+        "explanation": "shouldComponentUpdate is an optimisation to prevent unnecessary renders, not to force them."
+      },
+      {
+        "optionText": "To intercept Redux actions before they reach the store and decide whether to apply them to the component.",
+        "isCorrect": false,
+        "explanation": "shouldComponentUpdate is a React lifecycle method with no connection to Redux or action dispatch."
+      },
+      {
+        "optionText": "To schedule an asynchronous side effect (like an API call) before the component renders.",
+        "isCorrect": false,
+        "explanation": "Side effects before render are handled by componentDidMount / useEffect, not shouldComponentUpdate."
+      }
+    ]
+  },
+  {
+    "topic": "react",
+    "question": "What do you like about React?",
+    "options": [
+      {
+        "optionText": "Its component model, one-way data flow, and large ecosystem make it easy to build predictable UIs; hooks enable clean, reusable logic without class boilerplate.",
+        "isCorrect": true,
+        "explanation": "Correct — this is a representative, balanced answer covering React's core strengths."
+      },
+      {
+        "optionText": "It ships with a built-in router, state manager, and CSS solution so you never need third-party libraries.",
+        "isCorrect": false,
+        "explanation": "React intentionally ships as just the UI layer — routing, state, and styling are left to the ecosystem."
+      },
+      {
+        "optionText": "Its two-way data binding eliminates the need to write event handlers for form inputs.",
+        "isCorrect": false,
+        "explanation": "React uses one-way data flow, not two-way binding. Forms require onChange handlers."
+      },
+      {
+        "optionText": "It automatically optimises bundle size by tree-shaking unused components at runtime.",
+        "isCorrect": false,
+        "explanation": "Tree-shaking is a build-time optimisation handled by bundlers like webpack or Vite, not React itself."
+      }
+    ]
+  },
+  {
+    "topic": "react",
+    "question": "What are typical middleware choices for handling async calls in Redux?",
+    "options": [
+      {
+        "optionText": "redux-thunk (for simple async functions), redux-saga (for complex flows with generators), and RTK Query (for data fetching with caching).",
+        "isCorrect": true,
+        "explanation": "Correct — these are the most common choices, ranging from simple (thunk) to powerful (saga) to batteries-included (RTK Query)."
+      },
+      {
+        "optionText": "React Suspense and Error Boundaries — Redux delegates all async handling to React's built-in concurrency features.",
+        "isCorrect": false,
+        "explanation": "Suspense and Error Boundaries are React features, not Redux middleware. They can coexist but are separate concerns."
+      },
+      {
+        "optionText": "Redux itself handles async calls natively via the built-in async reducer option.",
+        "isCorrect": false,
+        "explanation": "Redux reducers must be pure synchronous functions. Async logic requires middleware."
+      },
+      {
+        "optionText": "Axios and Fetch — these HTTP clients double as Redux middleware when imported inside action creators.",
+        "isCorrect": false,
+        "explanation": "Axios and Fetch are HTTP libraries, not Redux middleware. You use them inside thunks or sagas."
+      }
+    ]
+  },
+  {
+    "topic": "react",
+    "question": "What is the typical data flow in a React + Redux app?",
+    "options": [
+      {
+        "optionText": "UI dispatches an action → middleware handles side effects → reducer updates the store → connected components re-render with new state.",
+        "isCorrect": true,
+        "explanation": "Correct — this unidirectional flow is the foundation of Redux: action → reducer → store → view."
+      },
+      {
+        "optionText": "Store pushes updates directly to the DOM, then React re-reads the DOM to sync component state.",
+        "isCorrect": false,
+        "explanation": "Redux never touches the DOM directly. React-Redux triggers component re-renders when subscribed state changes."
+      },
+      {
+        "optionText": "Components update the store via two-way binding, and the store propagates changes back through props automatically.",
+        "isCorrect": false,
+        "explanation": "Redux uses one-way data flow: components dispatch actions, they don't bind directly to the store."
+      },
+      {
+        "optionText": "Reducers call API endpoints, update the store, then notify the router to navigate to the updated view.",
+        "isCorrect": false,
+        "explanation": "Reducers must be pure — no side effects, no API calls. API calls belong in middleware (thunks, sagas)."
+      }
+    ]
+  },
+  {
+    "topic": "react",
+    "question": "How do you build React in production mode, and what does that do?",
+    "options": [
+      {
+        "optionText": "Set NODE_ENV=production (e.g. via your bundler). This removes development warnings, disables propTypes checks, and enables minification — significantly reducing bundle size.",
+        "isCorrect": true,
+        "explanation": "Correct — production mode strips React's runtime warnings and development-only code paths for a smaller, faster bundle."
+      },
+      {
+        "optionText": "Run react-scripts eject and enable the production flag in the generated webpack config.",
+        "isCorrect": false,
+        "explanation": "Ejecting is not needed. create-react-app's npm run build sets NODE_ENV=production automatically."
+      },
+      {
+        "optionText": "Add the production plugin to .babelrc — this compiles JSX directly to native browser JavaScript without React overhead.",
+        "isCorrect": false,
+        "explanation": "There is no production Babel plugin that removes React. Production mode is controlled by NODE_ENV."
+      },
+      {
+        "optionText": "Import from react/production instead of react — this loads the production build with lazy-loaded components by default.",
+        "isCorrect": false,
+        "explanation": "No such path exists. Production mode is triggered by NODE_ENV, not by a different import path."
+      }
+    ]
+  },
+  {
+    "topic": "react",
+    "question": "What are the advantages of React over Vue?",
+    "options": [
+      {
+        "optionText": "Larger ecosystem and community, JSX as a full JavaScript expression, better TypeScript support, and stronger adoption in enterprise and large-scale applications.",
+        "isCorrect": true,
+        "explanation": "Correct — these are widely cited React advantages. Vue has its own strengths (gentler learning curve, SFC), making the choice context-dependent."
+      },
+      {
+        "optionText": "React ships with two-way data binding out of the box, making form handling simpler than Vue's v-model.",
+        "isCorrect": false,
+        "explanation": "React uses one-way data flow. Vue's v-model is actually one of Vue's conveniences over React."
+      },
+      {
+        "optionText": "React's template syntax is cleaner and more readable than Vue's JSX-based render functions.",
+        "isCorrect": false,
+        "explanation": "React uses JSX, not templates. Vue uses templates by default; Vue also supports JSX but it's not the primary approach."
+      },
+      {
+        "optionText": "React has a built-in CLI that generates production-ready apps with routing and state management pre-configured.",
+        "isCorrect": false,
+        "explanation": "React doesn't have an opinionated CLI beyond create-react-app (now largely superseded). Vue CLI and Nuxt are more opinionated out of the box."
+      }
+    ]
+  },
+  {
+    "topic": "react",
+    "question": "What are the advantages of using arrow functions in React?",
+    "options": [
+      {
+        "optionText": "Arrow functions lexically bind 'this', so event handlers defined as arrow functions don't need .bind(this) in class component constructors.",
+        "isCorrect": true,
+        "explanation": "Correct — arrow functions capture 'this' from the enclosing scope, eliminating the need for explicit binding in class components."
+      },
+      {
+        "optionText": "Arrow functions trigger React's memoisation system automatically, preventing unnecessary re-renders.",
+        "isCorrect": false,
+        "explanation": "Arrow functions defined inline actually create a new reference each render, which can cause unnecessary re-renders unless wrapped in useCallback."
+      },
+      {
+        "optionText": "Arrow functions are faster than regular functions because React's compiler optimises them specifically.",
+        "isCorrect": false,
+        "explanation": "Arrow functions don't receive special optimisation from React's compiler. Performance differences are negligible."
+      },
+      {
+        "optionText": "Arrow functions bypass React's synthetic event system, giving direct access to native browser events.",
+        "isCorrect": false,
+        "explanation": "Arrow functions have no effect on React's event system. Event handlers always receive SyntheticEvent regardless of function syntax."
+      }
+    ]
+  }
+]

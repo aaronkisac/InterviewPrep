@@ -1,0 +1,28 @@
+[
+  {
+    "topic": "design-patterns",
+    "question": "What is the Module pattern in JavaScript?",
+    "options": [
+      {
+        "optionText": "A pattern that uses closures to create private scope, exposing only a public API — encapsulating state and behaviour within a single object.",
+        "isCorrect": true,
+        "explanation": "Correct — the Module pattern leverages IIFE closures to keep implementation details private while returning a public interface."
+      },
+      {
+        "optionText": "A pattern where each module extends a base class and overrides its methods to customise behaviour.",
+        "isCorrect": false,
+        "explanation": "That describes inheritance / the Template Method pattern, not the Module pattern."
+      },
+      {
+        "optionText": "A pattern that registers modules in a central registry so they can be loaded on demand at runtime.",
+        "isCorrect": false,
+        "explanation": "That describes a Service Locator or lazy-loading strategy, not the classic Module pattern."
+      },
+      {
+        "optionText": "A pattern where modules communicate exclusively through a shared event bus, keeping them fully decoupled.",
+        "isCorrect": false,
+        "explanation": "That describes the Observer / Event Emitter pattern, not the Module pattern."
+      }
+    ]
+  }
+]
