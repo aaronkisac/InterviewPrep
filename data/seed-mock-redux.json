@@ -414,5 +414,499 @@
         "explanation": "Both need help for async (neither has built-in async support). Redux uses middleware; Flux stores handle async in their own methods."
       }
     ]
+  },
+  {
+    "topic": "redux",
+    "question": "What is Flux?",
+    "options": [
+      {
+        "optionText": "An application architecture pattern from Facebook enforcing unidirectional data flow: Action → Dispatcher → Store → View.",
+        "isCorrect": true,
+        "explanation": "Correct — Flux was the precursor to Redux. Redux simplified Flux by replacing the Dispatcher with pure reducer functions and combining multiple stores into one."
+      },
+      {
+        "optionText": "A CSS framework developed by Facebook for building responsive UIs.",
+        "isCorrect": false,
+        "explanation": "Flux is a state management architecture pattern, not a CSS framework. Facebook's UI library is React."
+      },
+      {
+        "optionText": "A Redux middleware for handling asynchronous actions with generators.",
+        "isCorrect": false,
+        "explanation": "That describes redux-saga. Flux is the broader architecture pattern that inspired Redux, not a middleware."
+      },
+      {
+        "optionText": "A build tool that bundles React and Redux applications for production.",
+        "isCorrect": false,
+        "explanation": "Flux is an architectural pattern, not a build tool. Bundling is handled by Webpack, Vite, or Turbopack."
+      }
+    ]
+  },
+  {
+    "topic": "redux",
+    "question": "What is a store in Redux?",
+    "options": [
+      {
+        "optionText": "The single object holding the entire application state tree — created with configureStore() and accessed via useAppSelector.",
+        "isCorrect": true,
+        "explanation": "Correct — Redux enforces a single store ('single source of truth'). All state lives there; components subscribe via selectors."
+      },
+      {
+        "optionText": "A local storage wrapper that persists Redux state between browser sessions.",
+        "isCorrect": false,
+        "explanation": "The Redux store lives in memory. Persistence is optional via redux-persist. The store itself is a plain object, not a storage API."
+      },
+      {
+        "optionText": "A collection of reducers — each reducer is one store in Redux.",
+        "isCorrect": false,
+        "explanation": "Redux has one store with multiple reducers combined via combineReducers. A reducer is not a store."
+      },
+      {
+        "optionText": "A component that wraps the app and provides context — equivalent to React Context.",
+        "isCorrect": false,
+        "explanation": "The <Provider> component wraps the app to provide the store via context, but the store itself is the state container, not a component."
+      }
+    ]
+  },
+  {
+    "topic": "redux",
+    "question": "What is a Reducer?",
+    "options": [
+      {
+        "optionText": "A pure function (state, action) => newState that describes how state changes in response to an action.",
+        "isCorrect": true,
+        "explanation": "Correct — reducers must be pure: same inputs always produce same output, no side effects. Redux Toolkit's createSlice generates reducers with Immer for safe mutations."
+      },
+      {
+        "optionText": "A function that dispatches actions to the Redux store.",
+        "isCorrect": false,
+        "explanation": "Dispatching is done via store.dispatch() or the useAppDispatch hook. A reducer receives actions and returns new state."
+      },
+      {
+        "optionText": "A component that subscribes to the store and re-renders when state changes.",
+        "isCorrect": false,
+        "explanation": "Components subscribe via useSelector. A reducer is a pure function that computes new state — it has no awareness of components."
+      },
+      {
+        "optionText": "A middleware that intercepts actions before they reach the store.",
+        "isCorrect": false,
+        "explanation": "Middleware (thunk, saga) intercepts actions. Reducers receive actions after middleware and compute the new state."
+      }
+    ]
+  },
+  {
+    "topic": "redux",
+    "question": "What is Redux DevTools?",
+    "options": [
+      {
+        "optionText": "A browser extension that lets you inspect every dispatched action, time-travel through state history, and replay actions.",
+        "isCorrect": true,
+        "explanation": "Correct — Redux DevTools is one of Redux's killer features. Time-travel debugging lets you step forward/backward through state changes to reproduce bugs."
+      },
+      {
+        "optionText": "A CLI tool that generates Redux boilerplate code for slices and thunks.",
+        "isCorrect": false,
+        "explanation": "Redux Toolkit's CLI (npx create-redux-app) generates code. Redux DevTools is a browser debugging extension."
+      },
+      {
+        "optionText": "A testing library for writing unit tests on Redux reducers and selectors.",
+        "isCorrect": false,
+        "explanation": "Reducer testing uses standard Jest. Redux DevTools is a browser DevTools extension for runtime inspection and time-travel debugging."
+      },
+      {
+        "optionText": "A VS Code extension that adds Redux-aware IntelliSense and type checking.",
+        "isCorrect": false,
+        "explanation": "Redux type support comes from TypeScript + Redux Toolkit types. Redux DevTools is a browser extension, not a VS Code plugin."
+      }
+    ]
+  },
+  {
+    "topic": "redux",
+    "question": "What is Redux Thunk used for?",
+    "options": [
+      {
+        "optionText": "Handling async logic (API calls, timeouts) inside Redux — a thunk is a function that dispatches actions after async work completes.",
+        "isCorrect": true,
+        "explanation": "Correct — redux-thunk lets you dispatch a function instead of a plain action. That function receives dispatch and getState, enabling async workflows."
+      },
+      {
+        "optionText": "Combining multiple reducers into one root reducer for the Redux store.",
+        "isCorrect": false,
+        "explanation": "That's combineReducers. Redux Thunk is middleware for async action creators — functions that dispatch other actions after async work."
+      },
+      {
+        "optionText": "Providing type-safe selectors that memoize expensive state computations.",
+        "isCorrect": false,
+        "explanation": "Memoised selectors are provided by Reselect (createSelector). Redux Thunk handles async side effects."
+      },
+      {
+        "optionText": "Replacing the Redux store with React Context for simpler state management.",
+        "isCorrect": false,
+        "explanation": "Redux Thunk is middleware that enhances Redux — it doesn't replace it. Context is a separate, simpler alternative for small apps."
+      }
+    ]
+  },
+  {
+    "topic": "redux",
+    "question": "Why are Redux state functions called reducers?",
+    "options": [
+      {
+        "optionText": "The name comes from the functional programming reduce operation: (accumulator, value) => accumulator, applied to a stream of actions.",
+        "isCorrect": true,
+        "explanation": "Correct — if you reduce an array of actions over an initial state using the reducer function, you get the current state. Redux models state as accumulated history."
+      },
+      {
+        "optionText": "Because they reduce the amount of code needed compared to class-based state management.",
+        "isCorrect": false,
+        "explanation": "The name is a functional programming term — Array.reduce. It has nothing to do with code verbosity."
+      },
+      {
+        "optionText": "They reduce the state to a minimal representation before sending it to components.",
+        "isCorrect": false,
+        "explanation": "Reducers don't minimise state — they compute new state from the previous state and an action, following the functional reduce pattern."
+      },
+      {
+        "optionText": "They reduce side effects by preventing state mutations.",
+        "isCorrect": false,
+        "explanation": "Reducers are pure functions (no side effects), but the name comes from the reduce() operation in functional programming, not from reducing side effects."
+      }
+    ]
+  },
+  {
+    "topic": "redux",
+    "question": "How to use connect from react-redux?",
+    "options": [
+      {
+        "optionText": "connect(mapStateToProps, mapDispatchToProps)(Component) — a HOC that injects selected state and dispatch as props. Largely replaced by hooks.",
+        "isCorrect": true,
+        "explanation": "Correct — connect is the legacy API. Modern Redux uses useSelector and useDispatch hooks, which are simpler and work directly in functional components."
+      },
+      {
+        "optionText": "Import connect and call it as a hook inside a functional component: const state = connect(mapState).",
+        "isCorrect": false,
+        "explanation": "connect is a higher-order component (HOC), not a hook. Hooks for Redux are useSelector and useDispatch."
+      },
+      {
+        "optionText": "connect replaces the Provider — you don't need <Provider> if you use connect.",
+        "isCorrect": false,
+        "explanation": "<Provider> is always needed to make the store available. connect wraps individual components to subscribe them to the store."
+      },
+      {
+        "optionText": "connect is required in Redux Toolkit — without it, dispatched actions don't reach reducers.",
+        "isCorrect": false,
+        "explanation": "Redux Toolkit recommends useSelector and useDispatch hooks, not connect. Actions reach reducers via the store regardless of connect."
+      }
+    ]
+  },
+  {
+    "topic": "redux",
+    "question": "How to add multiple middlewares to Redux?",
+    "options": [
+      {
+        "optionText": "Pass an array to the middleware option in configureStore — use getDefaultMiddleware().concat(logger, myMiddleware).",
+        "isCorrect": true,
+        "explanation": "Correct — Redux Toolkit's configureStore includes thunk by default. Concatenate additional middlewares like redux-logger or custom ones."
+      },
+      {
+        "optionText": "Call applyMiddleware() multiple times — once per middleware.",
+        "isCorrect": false,
+        "explanation": "applyMiddleware() accepts all middlewares in one call: applyMiddleware(thunk, logger). Calling it multiple times would overwrite previous middleware."
+      },
+      {
+        "optionText": "Add middlewares inside each reducer function — they run before the state update.",
+        "isCorrect": false,
+        "explanation": "Reducers are pure state functions. Middleware is applied at the store level and runs before actions reach reducers."
+      },
+      {
+        "optionText": "Middleware must be added one at a time by recreating the store — configureStore doesn't support arrays.",
+        "isCorrect": false,
+        "explanation": "configureStore's middleware option accepts an array or a callback receiving getDefaultMiddleware. Multiple middlewares are supported."
+      }
+    ]
+  },
+  {
+    "topic": "redux",
+    "question": "How to make Ajax request in Redux?",
+    "options": [
+      {
+        "optionText": "Use createAsyncThunk from Redux Toolkit — it dispatches pending/fulfilled/rejected actions automatically around your async fetch.",
+        "isCorrect": true,
+        "explanation": "Correct — createAsyncThunk is the idiomatic RTK pattern. It handles loading/error states via extraReducers in the slice."
+      },
+      {
+        "optionText": "Make the fetch call inside a reducer — reducers can handle async operations in Redux Toolkit.",
+        "isCorrect": false,
+        "explanation": "Reducers must be pure and synchronous. Async operations belong in thunks, sagas, or middleware — never in reducers."
+      },
+      {
+        "optionText": "Use useEffect in a component to fetch, then dispatch the result — Redux has no built-in async support.",
+        "isCorrect": false,
+        "explanation": "Redux has createAsyncThunk for async. While fetching in useEffect and dispatching is valid, it bypasses Redux's async patterns and loading state management."
+      },
+      {
+        "optionText": "Add an async middleware like redux-ajax — the standard Redux Toolkit doesn't support Ajax.",
+        "isCorrect": false,
+        "explanation": "Redux Toolkit ships createAsyncThunk for async operations. No extra library is needed for Ajax requests."
+      }
+    ]
+  },
+  {
+    "topic": "redux",
+    "question": "How to reset state in Redux?",
+    "options": [
+      {
+        "optionText": "Add a reset action to each slice that returns initialState, or handle a global RESET action in the root reducer.",
+        "isCorrect": true,
+        "explanation": "Correct — for per-slice reset, add a reset reducer. For global reset (e.g. logout), intercept the action in the root reducer and return undefined so all slices reinitialise."
+      },
+      {
+        "optionText": "Call store.reset() — Redux provides a built-in reset method on the store.",
+        "isCorrect": false,
+        "explanation": "Redux stores have no reset() method. State reset is implemented via dispatched actions and reducer logic."
+      },
+      {
+        "optionText": "Delete and recreate the store — Redux stores cannot be reset, only replaced.",
+        "isCorrect": false,
+        "explanation": "Recreating the store is a heavy-handed approach that loses subscriptions. Dispatching a reset action is the correct pattern."
+      },
+      {
+        "optionText": "Use store.dispatch({ type: '@@INIT' }) — this is Redux's internal reset action.",
+        "isCorrect": false,
+        "explanation": "@@INIT is Redux's internal initialisation action — dispatching it manually is not supported. Use a custom reset action handled by your reducers."
+      }
+    ]
+  },
+  {
+    "topic": "redux",
+    "question": "What is the purpose of the constants in Redux?",
+    "options": [
+      {
+        "optionText": "In legacy Redux, string constants (e.g. ADD_TODO = 'ADD_TODO') prevented typos in action types — Redux Toolkit's createSlice eliminates this need.",
+        "isCorrect": true,
+        "explanation": "Correct — constants gave compile-time safety before TypeScript adoption. RTK generates action creators with correct types automatically, making manual constants unnecessary."
+      },
+      {
+        "optionText": "Constants define the initial state values for each Redux slice.",
+        "isCorrect": false,
+        "explanation": "Initial state is defined in the initialState field of createSlice. Constants were used for action type strings, not state values."
+      },
+      {
+        "optionText": "Constants in Redux are configuration values passed to configureStore.",
+        "isCorrect": false,
+        "explanation": "configureStore accepts reducer, middleware, and devTools options. Action type constants are a separate pattern for naming dispatched actions."
+      },
+      {
+        "optionText": "Redux requires constants to be defined in a separate constants.ts file for tree-shaking.",
+        "isCorrect": false,
+        "explanation": "There is no such Redux requirement. Constants were a community convention for action type strings, not a performance or bundling feature."
+      }
+    ]
+  },
+  {
+    "topic": "redux",
+    "question": "How to structure Redux top level directories?",
+    "options": [
+      {
+        "optionText": "Feature folder pattern: each feature has its own directory with its slice, selectors, and thunks co-located.",
+        "isCorrect": true,
+        "explanation": "Correct — Redux Toolkit recommends feature-based organisation over type-based (actions/, reducers/, selectors/). Co-location makes it easier to maintain and delete features."
+      },
+      {
+        "optionText": "Always separate actions, reducers, and selectors into three root-level folders.",
+        "isCorrect": false,
+        "explanation": "This is the old Rails-style organisation that Redux Toolkit moved away from. Feature folders are now recommended."
+      },
+      {
+        "optionText": "Put all Redux code in a single store.ts file — splitting it causes circular imports.",
+        "isCorrect": false,
+        "explanation": "A single file only works for tiny apps. Feature folders are idiomatic for larger codebases and don't inherently cause circular imports."
+      },
+      {
+        "optionText": "Redux has no recommended structure — it's entirely up to the team.",
+        "isCorrect": false,
+        "explanation": "Redux Toolkit's Style Guide explicitly recommends the feature folder pattern with co-located slices."
+      }
+    ]
+  },
+  {
+    "topic": "redux",
+    "question": "What is the proper way to access Redux store?",
+    "options": [
+      {
+        "optionText": "Use typed useAppSelector to read state and useAppDispatch to dispatch — never import the store directly into components.",
+        "isCorrect": true,
+        "explanation": "Correct — direct store imports in components couple them tightly and bypass React's render cycle. Hooks keep components testable and reactive."
+      },
+      {
+        "optionText": "Import the store directly: import store from '../store' and call store.getState().",
+        "isCorrect": false,
+        "explanation": "Direct store imports in components bypass React's subscription mechanism and break re-renders. Use useSelector to subscribe reactively."
+      },
+      {
+        "optionText": "Use React Context to pass the store as a prop through the component tree.",
+        "isCorrect": false,
+        "explanation": "<Provider> already passes the store via context. You access it through useSelector/useDispatch hooks, not manual prop drilling."
+      },
+      {
+        "optionText": "Use withStore() HOC from Redux Toolkit to inject the store into any component.",
+        "isCorrect": false,
+        "explanation": "There is no withStore() HOC in Redux Toolkit. Use the useAppSelector and useAppDispatch hooks from react-redux."
+      }
+    ]
+  },
+  {
+    "topic": "redux",
+    "question": "What is the mental model of redux-saga?",
+    "options": [
+      {
+        "optionText": "A background daemon process that watches the Redux action stream using generator functions and handles side effects declaratively.",
+        "isCorrect": true,
+        "explanation": "Correct — sagas use ES6 generators (yield) and effects (call, put, take, select) to express async flows. They're more powerful than thunks for complex orchestration but have a steeper learning curve."
+      },
+      {
+        "optionText": "A replacement for the Redux store that handles state and side effects in one place.",
+        "isCorrect": false,
+        "explanation": "redux-saga is middleware, not a store replacement. The Redux store still manages state; sagas handle async side effects alongside it."
+      },
+      {
+        "optionText": "A component wrapper that intercepts Redux actions before they reach the store.",
+        "isCorrect": false,
+        "explanation": "Sagas are middleware functions (not component wrappers) that listen to dispatched actions using yield take() and respond with side effects."
+      },
+      {
+        "optionText": "A way to write Redux reducers asynchronously using async/await syntax.",
+        "isCorrect": false,
+        "explanation": "Reducers must remain synchronous and pure. redux-saga uses generator functions (function*) for async orchestration in middleware, not in reducers."
+      }
+    ]
+  },
+  {
+    "topic": "redux",
+    "question": "How Relay is different from Redux?",
+    "options": [
+      {
+        "optionText": "Relay is a GraphQL client that co-locates data requirements with components; Redux is a general-purpose state container for any data.",
+        "isCorrect": true,
+        "explanation": "Correct — Relay fetches, caches, and normalises GraphQL data automatically. Redux is agnostic to data fetching and suits non-GraphQL apps or complex client state."
+      },
+      {
+        "optionText": "Relay is a newer version of Redux with built-in async support.",
+        "isCorrect": false,
+        "explanation": "Relay and Redux are completely independent libraries with different purposes. Relay is a GraphQL framework from Meta; Redux is a general state manager."
+      },
+      {
+        "optionText": "Redux works with REST APIs; Relay works with GraphQL — they are functionally equivalent otherwise.",
+        "isCorrect": false,
+        "explanation": "They have fundamentally different models. Relay auto-generates queries from component fragments; Redux is a manual state container with no data fetching logic."
+      },
+      {
+        "optionText": "Relay replaces both Redux and React Router in a modern React application.",
+        "isCorrect": false,
+        "explanation": "Relay handles data fetching and caching for GraphQL. Routing is still handled by React Router or Next.js; global UI state still benefits from Redux or Zustand."
+      }
+    ]
+  },
+  {
+    "topic": "redux",
+    "question": "What is the purpose of @ symbol in redux connect decorator?",
+    "options": [
+      {
+        "optionText": "It's decorator syntax (@connect) — a shorthand to apply connect as a class decorator instead of wrapping with connect()(Component).",
+        "isCorrect": true,
+        "explanation": "Correct — @connect(mapState, mapDispatch) above a class component is equivalent to export default connect(mapState, mapDispatch)(MyComponent). This is legacy class component syntax."
+      },
+      {
+        "optionText": "@ imports the Redux store from a module alias — it's a Webpack path shortcut.",
+        "isCorrect": false,
+        "explanation": "Module aliases like @/components use @ as a path prefix. In Redux, @connect uses @ as the decorator syntax from the TC39 decorators proposal."
+      },
+      {
+        "optionText": "@ marks the component as a Redux action creator that can be dispatched.",
+        "isCorrect": false,
+        "explanation": "Action creators are plain functions — they have no special syntax. @connect is a class decorator that injects state and dispatch as props."
+      },
+      {
+        "optionText": "@ is required when using TypeScript with Redux — it enables type inference for connected components.",
+        "isCorrect": false,
+        "explanation": "TypeScript type inference for connect comes from type parameters, not the @ decorator. The decorator is optional syntactic sugar for class components."
+      }
+    ]
+  },
+  {
+    "topic": "redux",
+    "question": "What are the features of Redux DevTools?",
+    "options": [
+      {
+        "optionText": "Action log, state tree inspector, time-travel debugging (step through past states), action replay, and import/export of state snapshots.",
+        "isCorrect": true,
+        "explanation": "Correct — Redux DevTools' time-travel is its killer feature. You can jump to any past state, replay actions to reproduce bugs, and export state for sharing."
+      },
+      {
+        "optionText": "Automatic performance profiling, bundle size analysis, and dead code detection.",
+        "isCorrect": false,
+        "explanation": "Performance profiling uses React DevTools Profiler; bundle analysis uses tools like webpack-bundle-analyzer. Redux DevTools focuses on action and state inspection."
+      },
+      {
+        "optionText": "It generates TypeScript types automatically from your Redux slice definitions.",
+        "isCorrect": false,
+        "explanation": "Type generation is done by Redux Toolkit's TypeScript support. Redux DevTools is a runtime debugging tool, not a code generation tool."
+      },
+      {
+        "optionText": "It replaces console.log debugging and adds breakpoints directly in Redux reducers.",
+        "isCorrect": false,
+        "explanation": "Debugger breakpoints are set in browser DevTools. Redux DevTools provides action and state inspection — complementary to, not a replacement for, the debugger."
+      }
+    ]
+  },
+  {
+    "topic": "redux",
+    "question": "What is Redux Form?",
+    "options": [
+      {
+        "optionText": "A library that stores form state (field values, validation, touched flags) in the Redux store — largely superseded by React Hook Form.",
+        "isCorrect": true,
+        "explanation": "Correct — Redux Form was popular for keeping form state in Redux for debugging and cross-component access. Today React Hook Form (uncontrolled) or Formik are preferred for performance."
+      },
+      {
+        "optionText": "Redux Toolkit's built-in form handling solution with automatic validation.",
+        "isCorrect": false,
+        "explanation": "Redux Toolkit has no built-in form library. Redux Form was a separate third-party library. Modern projects use React Hook Form or Formik."
+      },
+      {
+        "optionText": "A Redux middleware that validates action payloads before they reach reducers.",
+        "isCorrect": false,
+        "explanation": "Redux Form manages HTML form state in Redux. Payload validation is a separate concern handled by middleware like redux-immutable-state-invariant or Zod schemas."
+      },
+      {
+        "optionText": "A component library providing pre-styled form inputs connected to Redux.",
+        "isCorrect": false,
+        "explanation": "Redux Form managed form state, not UI components. It worked with any input components. UI component libraries like shadcn/ui are separate."
+      }
+    ]
+  },
+  {
+    "topic": "redux",
+    "question": "What are the main features of Redux Form?",
+    "options": [
+      {
+        "optionText": "Field-level and form-level validation, field arrays for dynamic lists, form state in Redux store, and submission handling.",
+        "isCorrect": true,
+        "explanation": "Correct — Redux Form stored all form state in Redux, enabling DevTools inspection. Its main drawback was performance: every keystroke triggered Redux state updates."
+      },
+      {
+        "optionText": "Uncontrolled inputs with ref-based access, minimal re-renders, and built-in Zod validation.",
+        "isCorrect": false,
+        "explanation": "Those are features of React Hook Form. Redux Form used controlled inputs with state stored in Redux — the opposite of uncontrolled."
+      },
+      {
+        "optionText": "Built-in API integration that submits forms directly to REST endpoints.",
+        "isCorrect": false,
+        "explanation": "Redux Form handled state management, not HTTP submissions. Form submission logic was still written by the developer using fetch or axios."
+      },
+      {
+        "optionText": "Automatic form persistence to localStorage on every field change.",
+        "isCorrect": false,
+        "explanation": "Redux Form stored state in Redux (in memory), not localStorage. Persistence would require redux-persist as an additional layer."
+      }
+    ]
   }
 ]

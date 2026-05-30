@@ -518,5 +518,811 @@
         "explanation": "StrictMode actually double-invokes some functions in dev — it does not block renders."
       }
     ]
+  },
+  {
+    "topic": "react",
+    "question": "How do you write comments in JSX?",
+    "options": [
+      {
+        "optionText": "{/* comment */} — wrap in braces and use block comment syntax inside JSX.",
+        "isCorrect": true,
+        "explanation": "Correct — JSX braces drop into JavaScript, where block comments are valid. HTML-style <!-- --> comments don't work in JSX."
+      },
+      {
+        "optionText": "<!-- comment --> — JSX supports HTML comment syntax.",
+        "isCorrect": false,
+        "explanation": "HTML comments don't work in JSX. Use {/* comment */} instead."
+      },
+      {
+        "optionText": "// comment — single-line comments work anywhere inside JSX.",
+        "isCorrect": false,
+        "explanation": "Single-line comments work in JSX only outside JSX tags (in JS expressions). Inside JSX use {/* block comment */}."
+      },
+      {
+        "optionText": "# comment — React supports Python-style comments for readability.",
+        "isCorrect": false,
+        "explanation": "# is not a comment syntax in JavaScript or JSX. Use {/* comment */} for inline JSX comments."
+      }
+    ]
+  },
+  {
+    "topic": "react",
+    "question": "What is the virtual DOM?",
+    "options": [
+      {
+        "optionText": "A lightweight in-memory tree of JS objects representing the UI — React diffs it against the previous version and patches only changed real DOM nodes.",
+        "isCorrect": true,
+        "explanation": "Correct — reconciliation compares virtual DOM trees and produces minimal real DOM mutations, which are expensive. This is why React is performant for dynamic UIs."
+      },
+      {
+        "optionText": "A server-side copy of the DOM used for server-side rendering.",
+        "isCorrect": false,
+        "explanation": "SSR renders to HTML strings, not a virtual DOM copy. The virtual DOM is an in-memory abstraction used by React's reconciler for diffing."
+      },
+      {
+        "optionText": "A browser API that stores a snapshot of the DOM for fast re-rendering.",
+        "isCorrect": false,
+        "explanation": "The virtual DOM is a React-level abstraction, not a browser API. Browsers have no built-in virtual DOM concept."
+      },
+      {
+        "optionText": "Shadow DOM — a web standard for encapsulating component styles.",
+        "isCorrect": false,
+        "explanation": "Shadow DOM is a browser API for style encapsulation (used by Web Components). React's virtual DOM is a separate in-memory diffing mechanism."
+      }
+    ]
+  },
+  {
+    "topic": "react",
+    "question": "What are props in React?",
+    "options": [
+      {
+        "optionText": "Inputs passed from parent to child — read-only data that customise a component's output.",
+        "isCorrect": true,
+        "explanation": "Correct — props flow down the tree. They are immutable inside the child. If a component needs to change a value, that value should be state, not props."
+      },
+      {
+        "optionText": "Internal component data that can be updated with setState.",
+        "isCorrect": false,
+        "explanation": "Internal updatable data is state, not props. Props are read-only inputs provided by the parent."
+      },
+      {
+        "optionText": "Event listeners attached to a component — onClick, onChange, etc.",
+        "isCorrect": false,
+        "explanation": "Event handlers are passed as props but 'props' is the broader term for all parent-to-child inputs, not just events."
+      },
+      {
+        "optionText": "CSS class names passed via the className attribute.",
+        "isCorrect": false,
+        "explanation": "className is one specific prop but props encompasses all parent-to-child data: strings, numbers, functions, objects, and JSX."
+      }
+    ]
+  },
+  {
+    "topic": "react",
+    "question": "What are the major features of React?",
+    "options": [
+      {
+        "optionText": "Virtual DOM diffing, JSX syntax, one-way data flow, component-based architecture, and hooks for state/side effects.",
+        "isCorrect": true,
+        "explanation": "Correct — these are React's core pillars. One-way data flow (top-down props) makes data tracing predictable. Hooks replaced class lifecycle methods in React 16.8."
+      },
+      {
+        "optionText": "Two-way data binding, built-in router, HTTP client, and a full MVC framework.",
+        "isCorrect": false,
+        "explanation": "Two-way binding and a full framework describes AngularJS. React is a view library — routing (React Router) and HTTP (fetch/axios) are separate."
+      },
+      {
+        "optionText": "Server-side rendering only, no client-side interactivity without Next.js.",
+        "isCorrect": false,
+        "explanation": "React works client-side without Next.js — create-react-app is a pure client-side setup. Next.js adds SSR/SSG on top."
+      },
+      {
+        "optionText": "Shadow DOM encapsulation, web components, and built-in CSS scoping.",
+        "isCorrect": false,
+        "explanation": "Shadow DOM is a browser API used by Web Components — not React. React uses a virtual DOM and relies on CSS Modules/Tailwind for style scoping."
+      }
+    ]
+  },
+  {
+    "topic": "react",
+    "question": "What is JSX?",
+    "options": [
+      {
+        "optionText": "A syntax extension that lets you write HTML-like markup in JavaScript — compiled by Babel/SWC to React.createElement() calls.",
+        "isCorrect": true,
+        "explanation": "Correct — JSX is syntactic sugar. <Button label='OK' /> compiles to React.createElement(Button, { label: 'OK' }). You can write React without JSX but JSX is far more readable."
+      },
+      {
+        "optionText": "A new programming language created by Facebook to replace JavaScript.",
+        "isCorrect": false,
+        "explanation": "JSX is a syntax extension, not a language. It compiles to standard JavaScript — browsers never see JSX directly."
+      },
+      {
+        "optionText": "A template engine like Handlebars that runs inside the browser at runtime.",
+        "isCorrect": false,
+        "explanation": "JSX is compiled at build time, not evaluated at runtime. Unlike template engines, JSX is transformed to plain JS function calls before the browser sees it."
+      },
+      {
+        "optionText": "A JSON format for describing component trees that React parses at runtime.",
+        "isCorrect": false,
+        "explanation": "JSX resembles HTML markup, not JSON. It's a compile-time transform, not a runtime data format."
+      }
+    ]
+  },
+  {
+    "topic": "react",
+    "question": "What is context in React?",
+    "options": [
+      {
+        "optionText": "A way to pass data through the component tree without prop drilling — any descendant can consume it via useContext.",
+        "isCorrect": true,
+        "explanation": "Correct — context suits global data: theme, locale, auth user. Beware: any context change re-renders all consumers, so split contexts for unrelated data."
+      },
+      {
+        "optionText": "The execution context (this) inside a React class component.",
+        "isCorrect": false,
+        "explanation": "The JS this keyword is the execution context in class components. React Context is a separate API for sharing data across the tree."
+      },
+      {
+        "optionText": "A Redux replacement that provides full state management with reducers.",
+        "isCorrect": false,
+        "explanation": "Context provides a transport mechanism, not state management. It doesn't include reducers or devtools. For complex state, use Redux or Zustand."
+      },
+      {
+        "optionText": "A higher-order component that wraps the app and provides router information.",
+        "isCorrect": false,
+        "explanation": "React Router uses context internally, but React Context is the general API. Routers are one use case, not the definition."
+      }
+    ]
+  },
+  {
+    "topic": "react",
+    "question": "What are refs and what are they used for?",
+    "options": [
+      {
+        "optionText": "An escape hatch holding a mutable reference (usually a DOM node) that persists across renders without triggering re-renders.",
+        "isCorrect": true,
+        "explanation": "Correct — use refs for: focusing inputs, reading scroll position, integrating third-party DOM libraries, storing previous values, and interval IDs."
+      },
+      {
+        "optionText": "References to parent components — used to call methods on a parent from a child.",
+        "isCorrect": false,
+        "explanation": "Calling parent methods uses callback props or useImperativeHandle. Refs primarily reference DOM nodes or store mutable values."
+      },
+      {
+        "optionText": "A way to pass data between sibling components without going through a parent.",
+        "isCorrect": false,
+        "explanation": "Sibling communication uses lifting state up or a context/store. Refs are local mutable containers, not inter-component communication channels."
+      },
+      {
+        "optionText": "Aliases for state variables — ref.current is the same as state.",
+        "isCorrect": false,
+        "explanation": "Refs and state are fundamentally different: changing ref.current does NOT trigger a re-render; changing state does."
+      }
+    ]
+  },
+  {
+    "topic": "react",
+    "question": "What are fragments?",
+    "options": [
+      {
+        "optionText": "A way to return multiple elements from a component without adding an extra DOM node — written as <></> or <React.Fragment>.",
+        "isCorrect": true,
+        "explanation": "Correct — without fragments you'd need a wrapping <div>, polluting the DOM. The short syntax <></> doesn't support the key prop; use <React.Fragment key={id}> when needed."
+      },
+      {
+        "optionText": "Lazy-loaded components that only render when they come into the viewport.",
+        "isCorrect": false,
+        "explanation": "Lazy loading uses React.lazy + Suspense. Fragments are a grouping mechanism with no DOM output."
+      },
+      {
+        "optionText": "CSS class fragments that apply partial styles to a component.",
+        "isCorrect": false,
+        "explanation": "CSS fragments don't exist in React. React.Fragment is a rendering concept — it groups JSX children without a DOM wrapper."
+      },
+      {
+        "optionText": "Code splitting points where React splits the bundle into smaller chunks.",
+        "isCorrect": false,
+        "explanation": "Code splitting uses React.lazy() and dynamic import(). Fragments are a JSX grouping tool — they have no impact on bundles."
+      }
+    ]
+  },
+  {
+    "topic": "react",
+    "question": "Why is it necessary to capitalize component names?",
+    "options": [
+      {
+        "optionText": "JSX uses case to distinguish components from HTML elements — lowercase is a built-in element, uppercase is a user-defined component.",
+        "isCorrect": true,
+        "explanation": "Correct — <button> compiles to createElement('button', …); <Button> compiles to createElement(Button, …). React resolves the uppercase name to the function/class."
+      },
+      {
+        "optionText": "React enforces PascalCase for linting purposes only — it has no runtime effect.",
+        "isCorrect": false,
+        "explanation": "It has a definite runtime effect: <button /> creates a DOM element; <Button /> creates a React component. The case distinction is fundamental to JSX compilation."
+      },
+      {
+        "optionText": "Capitalised components are class components; lowercase ones are function components.",
+        "isCorrect": false,
+        "explanation": "Both class and function components must be capitalised. The case signals 'component' vs 'DOM element', not class vs function."
+      },
+      {
+        "optionText": "It's a convention from JavaScript class naming — classes must start with uppercase.",
+        "isCorrect": false,
+        "explanation": "While JS classes are conventionally PascalCase, the JSX rule applies to function components too and is enforced by the compiler, not just convention."
+      }
+    ]
+  },
+  {
+    "topic": "react",
+    "question": "What are inline conditional expressions in JSX?",
+    "options": [
+      {
+        "optionText": "Using && for short-circuit rendering or the ternary operator ? : for if/else — both work because JSX accepts any JS expression.",
+        "isCorrect": true,
+        "explanation": "Correct — {isLoggedIn && <Dashboard />} renders Dashboard only when true. {isLoggedIn ? <Dashboard /> : <Login />} handles both branches. Avoid 0 && … (renders '0')."
+      },
+      {
+        "optionText": "The if/else statement inside JSX — you write if (condition) return <A /> else return <B />.",
+        "isCorrect": false,
+        "explanation": "if statements are not expressions and can't go inside JSX braces. Use ternary (? :) or && for conditional rendering inside JSX."
+      },
+      {
+        "optionText": "The style prop for applying conditional inline CSS: style={{ color: isError ? 'red' : 'black' }}.",
+        "isCorrect": false,
+        "explanation": "That's conditional inline styling. Inline conditional expressions refer to the pattern of conditionally rendering JSX elements, not styles."
+      },
+      {
+        "optionText": "switch statements inside JSX curly braces for multi-branch rendering.",
+        "isCorrect": false,
+        "explanation": "switch is a statement, not an expression — it can't go inside JSX {}. Use an IIFE, a helper function, or object lookup for multi-branch logic."
+      }
+    ]
+  },
+  {
+    "topic": "react",
+    "question": "What is useState() in React?",
+    "options": [
+      {
+        "optionText": "A hook that adds local state to a function component — returns [value, setter] and triggers a re-render when the setter is called.",
+        "isCorrect": true,
+        "explanation": "Correct — const [count, setCount] = useState(0). The setter can take a new value or a function: setCount(prev => prev + 1). Updates are batched in React 18."
+      },
+      {
+        "optionText": "A hook that reads global Redux state inside a component.",
+        "isCorrect": false,
+        "explanation": "Reading Redux state uses useSelector. useState manages local component state with no connection to Redux."
+      },
+      {
+        "optionText": "A lifecycle method that runs when state changes — equivalent to componentDidUpdate.",
+        "isCorrect": false,
+        "explanation": "componentDidUpdate is replaced by useEffect. useState declares state; it's not a lifecycle method."
+      },
+      {
+        "optionText": "A way to share state between components without props — similar to context.",
+        "isCorrect": false,
+        "explanation": "useState is strictly local to the component. Sharing state uses lifting state up, context, or external stores like Redux."
+      }
+    ]
+  },
+  {
+    "topic": "react",
+    "question": "What are React Hooks (and their advantages)?",
+    "options": [
+      {
+        "optionText": "Functions (useState, useEffect, useContext…) that let function components use state, lifecycle behaviour, and other React features without classes.",
+        "isCorrect": true,
+        "explanation": "Correct — hooks enable logic reuse via custom hooks, reduce boilerplate vs class components, and co-locate related logic instead of splitting it across lifecycle methods."
+      },
+      {
+        "optionText": "Event listeners attached to DOM nodes that React cleans up automatically.",
+        "isCorrect": false,
+        "explanation": "Event listeners are handled in JSX (onClick, etc.) or useEffect. Hooks are a broader API for state, side effects, refs, and more."
+      },
+      {
+        "optionText": "Methods on the React class that run at specific lifecycle stages.",
+        "isCorrect": false,
+        "explanation": "Lifecycle methods belong to class components. Hooks are functions for function components — they achieve the same results without classes."
+      },
+      {
+        "optionText": "CSS hooks that apply styles conditionally based on component state.",
+        "isCorrect": false,
+        "explanation": "CSS hooks don't exist in React. React Hooks are JS functions for state and lifecycle features. Conditional styles are handled via className logic or CSS-in-JS."
+      }
+    ]
+  },
+  {
+    "topic": "react",
+    "question": "What is the difference between state and props?",
+    "options": [
+      {
+        "optionText": "Props are read-only inputs from the parent; state is mutable data owned by the component itself.",
+        "isCorrect": true,
+        "explanation": "Correct — a component cannot change its own props. State is internal and triggers re-renders when updated. Both influence what renders."
+      },
+      {
+        "optionText": "State is for strings and numbers; props can hold any data type including functions.",
+        "isCorrect": false,
+        "explanation": "Both can hold any type — functions, objects, arrays, primitives. The distinction is ownership: props come from outside, state lives inside."
+      },
+      {
+        "optionText": "Props are asynchronous; state updates are synchronous.",
+        "isCorrect": false,
+        "explanation": "It's the opposite — state updates (setState, useState setters) are asynchronous and batched. Props are just values passed down synchronously."
+      },
+      {
+        "optionText": "State is global across the app; props are local to one component.",
+        "isCorrect": false,
+        "explanation": "useState is local to a component. Global state needs Redux, Context, or Zustand. Props are per-component inputs from the parent."
+      }
+    ]
+  },
+  {
+    "topic": "react",
+    "question": "What is state in React?",
+    "options": [
+      {
+        "optionText": "Data a component owns that can change over time — updates trigger a re-render so the UI stays in sync.",
+        "isCorrect": true,
+        "explanation": "Correct — state is React's mechanism for reactive UI. Only change state via the setter (useState) or setState — never mutate directly."
+      },
+      {
+        "optionText": "A JavaScript object passed from parent to child to configure a component.",
+        "isCorrect": false,
+        "explanation": "That describes props. State is data the component itself manages internally and can update."
+      },
+      {
+        "optionText": "The browser's storage (localStorage/sessionStorage) accessed inside React components.",
+        "isCorrect": false,
+        "explanation": "Browser storage is a Web API, not React state. React state lives in memory and resets on page refresh unless explicitly persisted."
+      },
+      {
+        "optionText": "The Redux store — React components read it to render correctly.",
+        "isCorrect": false,
+        "explanation": "The Redux store is external state management. React's built-in state (useState/useReducer) is local to a component."
+      }
+    ]
+  },
+  {
+    "topic": "react",
+    "question": "What are portals in React?",
+    "options": [
+      {
+        "optionText": "Portals render children into a different DOM node while keeping them in the React tree — ideal for modals, tooltips, and dropdowns.",
+        "isCorrect": true,
+        "explanation": "Correct — ReactDOM.createPortal(child, domNode) renders outside the parent's DOM but events still bubble through the React tree. The portal is part of the component logically."
+      },
+      {
+        "optionText": "A routing mechanism that navigates between React component 'pages'.",
+        "isCorrect": false,
+        "explanation": "Routing is handled by React Router or Next.js. Portals are a rendering technique to escape the parent DOM node, not a navigation feature."
+      },
+      {
+        "optionText": "A way to share state between two distant components without context.",
+        "isCorrect": false,
+        "explanation": "Portals are about DOM placement, not state sharing. State sharing uses Context, Redux, or Zustand."
+      },
+      {
+        "optionText": "Server-side entry points where React hydrates the page on load.",
+        "isCorrect": false,
+        "explanation": "Hydration uses ReactDOM.hydrateRoot. Portals are client-side DOM escape hatches for rendering inside a different DOM container."
+      }
+    ]
+  },
+  {
+    "topic": "react",
+    "question": "What is the difference between class and function components?",
+    "options": [
+      {
+        "optionText": "Class components use lifecycle methods and this.state; function components use hooks — function components are now preferred.",
+        "isCorrect": true,
+        "explanation": "Correct — hooks (React 16.8+) gave function components all the capabilities of class components. New code should use function components; classes are legacy."
+      },
+      {
+        "optionText": "Class components are faster because they avoid hook overhead on every render.",
+        "isCorrect": false,
+        "explanation": "Performance difference is negligible in practice. Function components with hooks are preferred for readability and logic reuse via custom hooks."
+      },
+      {
+        "optionText": "Function components cannot hold state — they are purely presentational.",
+        "isCorrect": false,
+        "explanation": "useState and useReducer give function components full state capabilities. This was true before hooks (React 16.8) but no longer applies."
+      },
+      {
+        "optionText": "Class components are required for routing; function components are for leaf UI.",
+        "isCorrect": false,
+        "explanation": "React Router and Next.js work entirely with function components. Class components have no special role in routing."
+      }
+    ]
+  },
+  {
+    "topic": "react",
+    "question": "What are controlled components?",
+    "options": [
+      {
+        "optionText": "Form inputs whose value is driven by React state — every change goes through onChange → setState → re-render.",
+        "isCorrect": true,
+        "explanation": "Correct — controlled inputs make React the single source of truth. You can validate on every keystroke, format input, and derive other UI from the value easily."
+      },
+      {
+        "optionText": "Components wrapped in React.memo to prevent unnecessary re-renders.",
+        "isCorrect": false,
+        "explanation": "React.memo is for render optimisation. Controlled components refer to form inputs whose value is managed by React state."
+      },
+      {
+        "optionText": "Child components that can only receive data from their parent via props.",
+        "isCorrect": false,
+        "explanation": "All components receive props from parents — that's not what 'controlled' means. Controlled is specifically about form input value management."
+      },
+      {
+        "optionText": "Components connected to Redux — the store 'controls' their data.",
+        "isCorrect": false,
+        "explanation": "Redux-connected components are sometimes called 'smart' components. Controlled components is a form input pattern about React state managing the value."
+      }
+    ]
+  },
+  {
+    "topic": "react",
+    "question": "What is the React component lifecycle?",
+    "options": [
+      {
+        "optionText": "Three phases: mounting (created & inserted into DOM), updating (re-rendering on state/props change), and unmounting (removed from DOM).",
+        "isCorrect": true,
+        "explanation": "Correct — in function components: useEffect([]) = mount, useEffect([dep]) = update, useEffect cleanup = unmount. Class components use explicit lifecycle methods."
+      },
+      {
+        "optionText": "Two phases: render (create virtual DOM) and commit (update real DOM).",
+        "isCorrect": false,
+        "explanation": "Those are React's internal phases for a single render pass. The component lifecycle refers to mount → update → unmount stages across a component's life."
+      },
+      {
+        "optionText": "The order in which components render from parent to child — top-down always.",
+        "isCorrect": false,
+        "explanation": "Render order is a rendering concept, not the lifecycle. Lifecycle describes the stages a single component goes through from creation to removal."
+      },
+      {
+        "optionText": "The lifecycle of a Redux action: dispatched → reducer → store → component re-render.",
+        "isCorrect": false,
+        "explanation": "That's the Redux data flow, not the React component lifecycle. Component lifecycle covers mounting, updating, and unmounting."
+      }
+    ]
+  },
+  {
+    "topic": "react",
+    "question": "How do you pass a parameter to an event handler?",
+    "options": [
+      {
+        "optionText": "Wrap in an arrow function: onClick={() => handleClick(id)} — the arrow function is called by the event and calls your handler with the param.",
+        "isCorrect": true,
+        "explanation": "Correct — this is the standard pattern. Avoid onClick={handleClick(id)} (calls immediately on render). The arrow wrapper defers execution to the click event."
+      },
+      {
+        "optionText": "Pass the parameter as a second argument to onClick: onClick={handleClick, id}.",
+        "isCorrect": false,
+        "explanation": "onClick only accepts a single function. Pass params via an arrow function wrapper: onClick={() => handleClick(id)}."
+      },
+      {
+        "optionText": "Use data-* attributes and read them from event.target.dataset inside the handler.",
+        "isCorrect": false,
+        "explanation": "data attributes work but are limited to strings. The arrow function pattern is simpler and type-safe for passing any parameter."
+      },
+      {
+        "optionText": "Call bind on the handler: onClick={handleClick.bind(this, id)} in function components.",
+        "isCorrect": false,
+        "explanation": "bind works but creates a new function on every render (same issue as arrow functions but less readable). Arrow function wrappers are the idiomatic React pattern."
+      }
+    ]
+  },
+  {
+    "topic": "react",
+    "question": "What happens when you call setState?",
+    "options": [
+      {
+        "optionText": "React schedules a re-render — state is not updated immediately. The new value is available on the next render.",
+        "isCorrect": true,
+        "explanation": "Correct — React batches updates for performance. Reading state immediately after calling the setter returns the old value. Use the functional form setState(prev => …) for derived updates."
+      },
+      {
+        "optionText": "The component re-renders synchronously before setState returns.",
+        "isCorrect": false,
+        "explanation": "setState is asynchronous and batched. The re-render is scheduled, not immediate. React 18 batches even async setState calls."
+      },
+      {
+        "optionText": "setState directly mutates the state object in place.",
+        "isCorrect": false,
+        "explanation": "Never mutate state directly — React won't detect the change. Always pass a new value or object to the setter."
+      },
+      {
+        "optionText": "The entire React tree re-renders from the root down.",
+        "isCorrect": false,
+        "explanation": "Only the component that called setState and its descendants re-render (unless memoized). React does not re-render the whole tree on every state change."
+      }
+    ]
+  },
+  {
+    "topic": "react",
+    "question": "How are events handled in React?",
+    "options": [
+      {
+        "optionText": "React uses SyntheticEvents delegated to the root — you attach handlers via JSX props like onClick, onChange instead of addEventListener.",
+        "isCorrect": true,
+        "explanation": "Correct — React attaches one listener at the root and dispatches synthetic events to the right component. SyntheticEvents normalise cross-browser differences."
+      },
+      {
+        "optionText": "React uses addEventListener directly on each DOM node for performance.",
+        "isCorrect": false,
+        "explanation": "React uses event delegation — one listener at the root, not one per element. This is more efficient for dynamic lists and reduces memory use."
+      },
+      {
+        "optionText": "React events are identical to native DOM events — no wrapping or normalisation.",
+        "isCorrect": false,
+        "explanation": "React wraps native events in SyntheticEvent, normalising cross-browser differences. The API looks similar but is not the native event object."
+      },
+      {
+        "optionText": "Events must be handled in class components — function components cannot attach event handlers.",
+        "isCorrect": false,
+        "explanation": "Function components attach handlers via JSX props (onClick={handleClick}) just like class components. Hooks replaced lifecycle-based event logic."
+      }
+    ]
+  },
+  {
+    "topic": "react",
+    "question": "Where should you make an AJAX request in a component?",
+    "options": [
+      {
+        "optionText": "Inside useEffect with an empty dependency array for mount-only fetches — or use React Query/SWR for data fetching with caching.",
+        "isCorrect": true,
+        "explanation": "Correct — in Next.js App Router, async Server Components are the preferred place. In client components, useEffect or a data-fetching library handles it."
+      },
+      {
+        "optionText": "Directly in the component body outside any hook — it runs before render.",
+        "isCorrect": false,
+        "explanation": "Fetching in the component body runs on every render and can't be cleaned up. useEffect is the correct place for side effects like data fetching."
+      },
+      {
+        "optionText": "Inside the JSX return statement so data loads while the UI renders.",
+        "isCorrect": false,
+        "explanation": "The render/return must be synchronous. Side effects like fetching belong in useEffect or async Server Components, not inside JSX."
+      },
+      {
+        "optionText": "In a Redux reducer — reducers handle all external data including API responses.",
+        "isCorrect": false,
+        "explanation": "Reducers must be pure and synchronous — no side effects. API calls go in thunks, sagas, or React Query, not reducers."
+      }
+    ]
+  },
+  {
+    "topic": "react",
+    "question": "What is the difference between controlled and uncontrolled components?",
+    "options": [
+      {
+        "optionText": "Controlled: value in React state, updated via onChange. Uncontrolled: value in the DOM, read via ref on demand.",
+        "isCorrect": true,
+        "explanation": "Correct — controlled inputs are predictable and easy to validate; uncontrolled are simpler for file inputs or integrating third-party DOM libraries."
+      },
+      {
+        "optionText": "Controlled components use Redux; uncontrolled components use local state.",
+        "isCorrect": false,
+        "explanation": "Both terms are about where form input value lives: React state (controlled) vs DOM (uncontrolled). Redux is unrelated to this distinction."
+      },
+      {
+        "optionText": "Uncontrolled components cannot be validated — only controlled ones support validation.",
+        "isCorrect": false,
+        "explanation": "Uncontrolled components can be validated on submit by reading ref.current.value. Controlled components validate on every keystroke."
+      },
+      {
+        "optionText": "Controlled = class components; uncontrolled = function components.",
+        "isCorrect": false,
+        "explanation": "Both patterns work in both component types. The distinction is about value management (state vs DOM ref), not component type."
+      }
+    ]
+  },
+  {
+    "topic": "react",
+    "question": "How would you prevent a component from rendering?",
+    "options": [
+      {
+        "optionText": "Return null from the component — React renders nothing while keeping the component mounted and its lifecycle active.",
+        "isCorrect": true,
+        "explanation": "Correct — null renders no DOM output. The component still mounts/unmounts normally. For performance, use React.memo to skip re-renders when props haven't changed."
+      },
+      {
+        "optionText": "Set display: none via inline style — this prevents the component from rendering.",
+        "isCorrect": false,
+        "explanation": "display: none hides the element visually but it still renders and exists in the DOM. Returning null skips rendering entirely."
+      },
+      {
+        "optionText": "Call stopPropagation() on the component to prevent its render from bubbling up.",
+        "isCorrect": false,
+        "explanation": "stopPropagation prevents event bubbling — it has no effect on rendering. Return null or use React.memo to prevent renders."
+      },
+      {
+        "optionText": "Use shouldComponentUpdate returning false — this works in both class and function components.",
+        "isCorrect": false,
+        "explanation": "shouldComponentUpdate is class-component only. Function components use React.memo for render skipping. Returning null from render also stops output."
+      }
+    ]
+  },
+  {
+    "topic": "react",
+    "question": "How do you prevent the default behavior of an event?",
+    "options": [
+      {
+        "optionText": "Call e.preventDefault() on the SyntheticEvent — e.g. in onSubmit to stop a form from reloading the page.",
+        "isCorrect": true,
+        "explanation": "Correct — React's SyntheticEvent supports preventDefault() just like native events. Always use it over returning false (which doesn't work in React)."
+      },
+      {
+        "optionText": "Return false from the event handler — React recognises this as 'prevent default'.",
+        "isCorrect": false,
+        "explanation": "Returning false prevents default in jQuery and plain HTML but NOT in React. You must call e.preventDefault() explicitly."
+      },
+      {
+        "optionText": "Use e.stopPropagation() — this prevents the default browser action.",
+        "isCorrect": false,
+        "explanation": "stopPropagation stops the event from bubbling to parent handlers. preventDefault stops the browser's default action. They are separate methods."
+      },
+      {
+        "optionText": "Add the passive: false option to addEventListener before attaching the handler.",
+        "isCorrect": false,
+        "explanation": "passive: false is for addEventListener in vanilla JS. In React, event handlers are set via JSX props — call e.preventDefault() inside the handler."
+      }
+    ]
+  },
+  {
+    "topic": "react",
+    "question": "What do the three dots (...) do in React?",
+    "options": [
+      {
+        "optionText": "Spread syntax — spreads props onto a component (<Button {...props} />) or merges objects; rest syntax collects remaining props.",
+        "isCorrect": true,
+        "explanation": "Correct — spread props forward all properties from an object. Rest collects remaining props: function Card({ title, ...rest }) lets you pass remaining props to a child."
+      },
+      {
+        "optionText": "An async operator indicating that the following expression returns a Promise.",
+        "isCorrect": false,
+        "explanation": "Async operations use async/await keywords. The ... operator is spread/rest syntax — it has nothing to do with Promises."
+      },
+      {
+        "optionText": "A JSX comment shorthand — equivalent to {/* */}.",
+        "isCorrect": false,
+        "explanation": "JSX comments use {/* */}. The spread ... operator is for copying properties into objects or JSX props."
+      },
+      {
+        "optionText": "An optional chaining operator that safely accesses nested properties.",
+        "isCorrect": false,
+        "explanation": "Optional chaining uses ?. (two characters). The spread/rest operator uses ... (three dots) and is for object/array spreading."
+      }
+    ]
+  },
+  {
+    "topic": "react",
+    "question": "What are higher-order components?",
+    "options": [
+      {
+        "optionText": "Functions that take a component and return an enhanced component — a pattern for reusing logic across components (largely replaced by hooks).",
+        "isCorrect": true,
+        "explanation": "Correct — HOCs like withAuth(Component) or connect() wrap components to add behaviour. Custom hooks are now preferred for logic reuse as they're simpler and composable."
+      },
+      {
+        "optionText": "Components that render other components as children — the render prop pattern.",
+        "isCorrect": false,
+        "explanation": "Render props are another reuse pattern. HOCs are specifically functions that take a component and return a new (wrapped) component."
+      },
+      {
+        "optionText": "Class components that extend PureComponent instead of Component.",
+        "isCorrect": false,
+        "explanation": "PureComponent adds shouldComponentUpdate. HOCs are a wrapping pattern — they're independent of class vs function component type."
+      },
+      {
+        "optionText": "Components at the top of the component tree that manage global state.",
+        "isCorrect": false,
+        "explanation": "Top-level state managers use Context or Redux providers. HOCs are a code-reuse pattern wrapping any component, not a architectural position."
+      }
+    ]
+  },
+  {
+    "topic": "react",
+    "question": "What is the difference between useRef and createRef?",
+    "options": [
+      {
+        "optionText": "useRef persists the same ref object across renders; createRef creates a new ref every render — so createRef in function components is wasteful.",
+        "isCorrect": true,
+        "explanation": "Correct — use useRef in function components. createRef is for class components (created once in constructor). In function components, createRef recreates on every render."
+      },
+      {
+        "optionText": "createRef is for DOM nodes; useRef is for storing arbitrary values.",
+        "isCorrect": false,
+        "explanation": "Both can reference DOM nodes and store arbitrary values. The difference is lifetime: useRef persists, createRef is recreated each render."
+      },
+      {
+        "optionText": "useRef triggers a re-render when .current changes; createRef does not.",
+        "isCorrect": false,
+        "explanation": "Neither triggers a re-render on .current change — that's the point of refs. If you need reactive updates, use useState instead."
+      },
+      {
+        "optionText": "They are identical — createRef is just the older name for useRef.",
+        "isCorrect": false,
+        "explanation": "They behave differently in function components. createRef is recreated on every render; useRef returns the same object throughout the component's lifetime."
+      }
+    ]
+  },
+  {
+    "topic": "react",
+    "question": "What are Pure Components?",
+    "options": [
+      {
+        "optionText": "Class components that do a shallow prop/state comparison in shouldComponentUpdate — skipping re-renders if nothing changed. Equivalent to React.memo for function components.",
+        "isCorrect": true,
+        "explanation": "Correct — PureComponent is the class equivalent of wrapping a function component in React.memo. Both do shallow comparison — deep objects may still cause unexpected renders."
+      },
+      {
+        "optionText": "Components that have no state — they only render based on props.",
+        "isCorrect": false,
+        "explanation": "Stateless components are presentational components. PureComponent is specifically about the shallow comparison optimisation in shouldComponentUpdate."
+      },
+      {
+        "optionText": "Components written without JSX — using pure React.createElement calls.",
+        "isCorrect": false,
+        "explanation": "Using createElement instead of JSX is possible but unrelated to PureComponent. Pure in this context means pure function (same input = same output)."
+      },
+      {
+        "optionText": "Server Components in Next.js that have no client-side interactivity.",
+        "isCorrect": false,
+        "explanation": "React Server Components are a Next.js App Router feature. PureComponent is a class component optimisation from legacy React."
+      }
+    ]
+  },
+  {
+    "topic": "react",
+    "question": "What does it mean for a component to be mounted?",
+    "options": [
+      {
+        "optionText": "Mounting is when React creates the component's elements and inserts them into the real DOM for the first time — useEffect([]) runs after this.",
+        "isCorrect": true,
+        "explanation": "Correct — on mount, React runs the component function, creates DOM nodes, and fires useEffect callbacks with empty deps. Unmounting removes the component and runs cleanup."
+      },
+      {
+        "optionText": "Mounting means attaching event listeners to a component's DOM nodes.",
+        "isCorrect": false,
+        "explanation": "Event listeners are managed by React's delegation system, not per-component mounting. Mounting refers to the first DOM insertion of a component."
+      },
+      {
+        "optionText": "A component is mounted when it receives its first props from a parent.",
+        "isCorrect": false,
+        "explanation": "Mounting is specifically about DOM insertion, not prop receipt. A component mounts when React inserts it into the DOM for the first time."
+      },
+      {
+        "optionText": "Mounting is the process of bundling a component into the production build.",
+        "isCorrect": false,
+        "explanation": "Bundling is a build-time process. Mounting is a runtime concept — the lifecycle phase when React first renders a component into the DOM."
+      }
+    ]
+  },
+  {
+    "topic": "react",
+    "question": "What are PropTypes in React?",
+    "options": [
+      {
+        "optionText": "A runtime type-checking library for component props — logs warnings in development when wrong types are passed. Superseded by TypeScript.",
+        "isCorrect": true,
+        "explanation": "Correct — import PropTypes from 'prop-types'. They catch type mismatches in development with console warnings. TypeScript provides compile-time checking and is preferred for new projects."
+      },
+      {
+        "optionText": "TypeScript types applied to component props — the same as an interface definition.",
+        "isCorrect": false,
+        "explanation": "TypeScript interfaces/types are compile-time checks. PropTypes is a separate library for runtime validation — they can be used together."
+      },
+      {
+        "optionText": "A way to set default values for props when none are provided.",
+        "isCorrect": false,
+        "explanation": "Default values use defaultProps or destructuring defaults. PropTypes validates the type of received props, not provides defaults."
+      },
+      {
+        "optionText": "A Redux action type declaration system for type-safe dispatching.",
+        "isCorrect": false,
+        "explanation": "Redux action types are string constants or createSlice types. PropTypes validates React component prop shapes — it's unrelated to Redux."
+      }
+    ]
   }
 ]

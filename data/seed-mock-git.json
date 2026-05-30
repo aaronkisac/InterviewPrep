@@ -414,5 +414,135 @@
         "explanation": "git bisect works with any commit SHAs or branch names — tags are not required."
       }
     ]
+  },
+  {
+    "topic": "git",
+    "question": "How does the Centralized Workflow work in Git?",
+    "options": [
+      {
+        "optionText": "All developers commit directly to a single main branch — no feature branches, similar to SVN.",
+        "isCorrect": true,
+        "explanation": "Correct — the centralised workflow is the simplest Git strategy. It works for small teams but creates bottlenecks and merge conflicts at scale."
+      },
+      {
+        "optionText": "Each developer has their own fork and submits pull requests to the central repo.",
+        "isCorrect": false,
+        "explanation": "That describes the Forking Workflow. Centralised workflow means everyone pushes directly to one shared branch."
+      },
+      {
+        "optionText": "Developers create feature branches and merge them via a release manager.",
+        "isCorrect": false,
+        "explanation": "That describes Gitflow or Feature Branch Workflow. Centralised workflow has no feature branches — everyone works on main."
+      },
+      {
+        "optionText": "The central repo is read-only; developers push to mirrors that sync nightly.",
+        "isCorrect": false,
+        "explanation": "The centralised workflow uses a writable shared repo. Read-only mirroring is a separate infrastructure concern."
+      }
+    ]
+  },
+  {
+    "topic": "git",
+    "question": "Explain the advantages of the Forking Workflow.",
+    "options": [
+      {
+        "optionText": "Each developer has their own server-side fork — contributions go through PRs, protecting the canonical repo from direct pushes.",
+        "isCorrect": true,
+        "explanation": "Correct — the Forking Workflow is standard for open-source: maintainers never grant write access; all changes are reviewed via pull requests."
+      },
+      {
+        "optionText": "All developers share one branch but each has a local copy — faster than feature branches.",
+        "isCorrect": false,
+        "explanation": "That describes the centralised workflow. Forking creates a separate server-side repo per developer, not just a local clone."
+      },
+      {
+        "optionText": "Forks automatically sync with the upstream repo, preventing merge conflicts.",
+        "isCorrect": false,
+        "explanation": "Forks do not auto-sync. Developers must manually fetch upstream changes and rebase or merge to stay current."
+      },
+      {
+        "optionText": "The Forking Workflow replaces branches entirely — no feature branches are needed.",
+        "isCorrect": false,
+        "explanation": "Forks and branches work together. Developers typically create feature branches inside their own fork before opening a PR."
+      }
+    ]
+  },
+  {
+    "topic": "git",
+    "question": "What is a \"bare\" Git repository and what is the difference between git clone, git clone --bare, and git clone --mirror?",
+    "options": [
+      {
+        "optionText": "A bare repo has no working tree — only the Git database. --bare omits the working tree; --mirror also syncs all refs including remotes.",
+        "isCorrect": true,
+        "explanation": "Correct — bare repos are used as shared remotes (GitHub stores bare repos). --mirror is a superset of --bare, copying all remote-tracking refs for full backups."
+      },
+      {
+        "optionText": "A bare repo is a regular repo with .git hidden — git clone --bare just hides the .git folder.",
+        "isCorrect": false,
+        "explanation": "A bare repo contains only the .git contents with no working tree at all. It's not about hiding the .git folder."
+      },
+      {
+        "optionText": "git clone --bare and --mirror are identical — both create a bare repository.",
+        "isCorrect": false,
+        "explanation": "--bare clones only the local refs; --mirror also copies all remote-tracking refs and sets up a mirror fetch refspec."
+      },
+      {
+        "optionText": "Bare repositories cannot be pushed to — they are read-only archives.",
+        "isCorrect": false,
+        "explanation": "Bare repos are the standard push target. GitHub, GitLab, and Bitbucket all store bare repos that developers push to."
+      }
+    ]
+  },
+  {
+    "topic": "git",
+    "question": "How do you undo a git rebase?",
+    "options": [
+      {
+        "optionText": "Use git reflog to find the pre-rebase SHA, then git reset --hard <sha> to restore it.",
+        "isCorrect": true,
+        "explanation": "Correct — git reflog records every HEAD movement. The entry before the rebase started is your recovery point. git reset --hard restores the branch instantly."
+      },
+      {
+        "optionText": "Run git rebase --undo — Git has a built-in undo command for rebases.",
+        "isCorrect": false,
+        "explanation": "There is no --undo flag on git rebase. Use git reflog + git reset --hard, or git rebase --abort if the rebase is still in progress."
+      },
+      {
+        "optionText": "Run git revert HEAD to reverse the rebase commits one by one.",
+        "isCorrect": false,
+        "explanation": "git revert adds new commits that undo changes — it doesn't restore the original branch shape. git reflog + reset is the correct approach."
+      },
+      {
+        "optionText": "Delete the .git/rebase-merge directory to cancel an in-progress rebase.",
+        "isCorrect": false,
+        "explanation": "Deleting internal Git files corrupts state. Use git rebase --abort to safely cancel an in-progress rebase."
+      }
+    ]
+  },
+  {
+    "topic": "git",
+    "question": "What is git bisect? How can you use it to determine the source of a regression bug?",
+    "options": [
+      {
+        "optionText": "A binary search through commit history — you mark good/bad commits and Git finds the first bad commit in O(log n) steps.",
+        "isCorrect": true,
+        "explanation": "Correct — git bisect start, git bisect bad, git bisect good <sha> begins the search. Git checks out the midpoint each time until it isolates the culprit."
+      },
+      {
+        "optionText": "git bisect compares two branches and shows the diff of all diverging commits.",
+        "isCorrect": false,
+        "explanation": "That describes git diff or git log <branch>..<branch>. bisect performs a binary search to find which specific commit introduced a bug."
+      },
+      {
+        "optionText": "git bisect automatically reverts commits until the bug disappears, then creates a fix branch.",
+        "isCorrect": false,
+        "explanation": "bisect only identifies the offending commit — it does not revert anything or create branches automatically."
+      },
+      {
+        "optionText": "git bisect requires a test file — it cannot be used without an automated test suite.",
+        "isCorrect": false,
+        "explanation": "bisect works manually (you mark good/bad interactively) or automated with git bisect run <script>. A test suite helps but is not required."
+      }
+    ]
   }
 ]

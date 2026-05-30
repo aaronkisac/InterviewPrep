@@ -414,5 +414,447 @@
         "explanation": ":root is common for global variables, but custom properties can be scoped to any selector and will inherit to child elements."
       }
     ]
+  },
+  {
+    "topic": "css",
+    "question": "What is a CSS rule?",
+    "options": [
+      {
+        "optionText": "A selector paired with a declaration block: h1 { color: red; font-size: 2rem; }",
+        "isCorrect": true,
+        "explanation": "Correct — a CSS rule has a selector (targets elements) and declarations (property: value pairs). Multiple declarations are separated by semicolons."
+      },
+      {
+        "optionText": "A JavaScript function that dynamically applies styles to DOM elements.",
+        "isCorrect": false,
+        "explanation": "That describes dynamic style manipulation via JS. A CSS rule is purely declarative markup in a stylesheet."
+      },
+      {
+        "optionText": "A browser setting that enforces how stylesheets are loaded and parsed.",
+        "isCorrect": false,
+        "explanation": "Browser settings are not CSS rules. A CSS rule is a selector + declaration block written in a stylesheet."
+      },
+      {
+        "optionText": "An !important declaration that overrides all other styles on an element.",
+        "isCorrect": false,
+        "explanation": "!important is a specificity modifier within a declaration, not a rule itself. A CSS rule is a selector paired with a declaration block."
+      }
+    ]
+  },
+  {
+    "topic": "css",
+    "question": "What are CSS selectors? Name some.",
+    "options": [
+      {
+        "optionText": "Patterns that target HTML elements — examples: element (div), class (.btn), ID (#header), pseudo-class (:hover), attribute ([type='text']).",
+        "isCorrect": true,
+        "explanation": "Correct — selectors define what a rule applies to. Combinators (>, +, ~) and pseudo-elements (::before) extend targeting. Specificity determines which rule wins."
+      },
+      {
+        "optionText": "CSS variables that store reusable values: --primary-color: blue.",
+        "isCorrect": false,
+        "explanation": "CSS custom properties use -- prefix. Selectors are patterns targeting HTML elements, not variable declarations."
+      },
+      {
+        "optionText": "Special keywords like inherit, initial, and unset that control value inheritance.",
+        "isCorrect": false,
+        "explanation": "Those are CSS keywords for property values. Selectors are the targeting patterns before the declaration block."
+      },
+      {
+        "optionText": "The @media, @keyframes, and @import directives in a stylesheet.",
+        "isCorrect": false,
+        "explanation": "Those are CSS at-rules. Selectors target HTML elements (e.g. div, .class, #id) and come before the { declaration block }."
+      }
+    ]
+  },
+  {
+    "topic": "css",
+    "question": "Explain the three main ways to apply CSS styles to a web page.",
+    "options": [
+      {
+        "optionText": "Inline (style attribute), internal (<style> in <head>), and external (<link> to a .css file).",
+        "isCorrect": true,
+        "explanation": "Correct — inline has highest specificity but is hardest to maintain. External stylesheets are preferred: cacheable, reusable, and separates concerns."
+      },
+      {
+        "optionText": "JavaScript injection (element.style), CSS Modules, and Tailwind utility classes.",
+        "isCorrect": false,
+        "explanation": "Those are modern tooling approaches. The three foundational ways are inline, internal (<style>), and external (linked .css file)."
+      },
+      {
+        "optionText": "Embedded, inherited, and cascaded — matching the three layers of the cascade.",
+        "isCorrect": false,
+        "explanation": "Cascaded/inherited describe how styles resolve conflicts, not how they are applied to the page. The three application methods are inline, internal, and external."
+      },
+      {
+        "optionText": "Server-side rendering, client-side rendering, and static generation.",
+        "isCorrect": false,
+        "explanation": "Those are web rendering strategies, not CSS application methods. CSS is applied inline, internally, or via an external file."
+      }
+    ]
+  },
+  {
+    "topic": "css",
+    "question": "What is Sass?",
+    "options": [
+      {
+        "optionText": "A CSS preprocessor that adds variables, nesting, mixins, and functions — compiled to plain CSS before the browser sees it.",
+        "isCorrect": true,
+        "explanation": "Correct — Sass (SCSS syntax) was transformative before CSS custom properties arrived. Today many Sass features are native in CSS, but Sass still offers mixins and functions."
+      },
+      {
+        "optionText": "A JavaScript library for animating CSS properties with spring physics.",
+        "isCorrect": false,
+        "explanation": "That describes libraries like Framer Motion. Sass is a CSS preprocessor that compiles to standard CSS."
+      },
+      {
+        "optionText": "A PostCSS plugin that adds vendor prefixes automatically to CSS properties.",
+        "isCorrect": false,
+        "explanation": "Autoprefixer (a PostCSS plugin) adds vendor prefixes. Sass is a separate preprocessor language with its own compiler."
+      },
+      {
+        "optionText": "A CSS-in-JS solution that generates class names at runtime in React components.",
+        "isCorrect": false,
+        "explanation": "CSS-in-JS (styled-components, Emotion) generates styles at runtime. Sass compiles to static CSS at build time — no runtime dependency."
+      }
+    ]
+  },
+  {
+    "topic": "css",
+    "question": "Describe floats and how they work.",
+    "options": [
+      {
+        "optionText": "float removes an element from normal flow and shifts it left/right, letting inline content wrap around it — now largely replaced by Flexbox/Grid.",
+        "isCorrect": true,
+        "explanation": "Correct — floats were the primary layout tool before Flexbox. Their main issue is collapsing parent height, fixed with clearfix or overflow: hidden."
+      },
+      {
+        "optionText": "float positions an element at a fixed point on the screen regardless of scrolling.",
+        "isCorrect": false,
+        "explanation": "That describes position: fixed. Float shifts elements within document flow, allowing text to wrap around them."
+      },
+      {
+        "optionText": "float is a CSS Grid property that controls how items overflow to the next row.",
+        "isCorrect": false,
+        "explanation": "CSS Grid uses grid-template-columns and auto-placement. Float is a separate, older layout property unrelated to Grid."
+      },
+      {
+        "optionText": "float: left makes an element sticky at the top-left of the viewport.",
+        "isCorrect": false,
+        "explanation": "Sticky positioning uses position: sticky. float: left shifts an element to the left within its container, not relative to the viewport."
+      }
+    ]
+  },
+  {
+    "topic": "css",
+    "question": "What is DOM (Document Object Model) and how is it linked to CSS?",
+    "options": [
+      {
+        "optionText": "The DOM is a tree of HTML elements in memory; CSS creates a CSSOM; the browser merges them into a render tree to paint the page.",
+        "isCorrect": true,
+        "explanation": "Correct — the critical rendering path: HTML → DOM, CSS → CSSOM, DOM + CSSOM → Render Tree → Layout → Paint → Composite."
+      },
+      {
+        "optionText": "The DOM stores CSS styles as inline style attributes on each element.",
+        "isCorrect": false,
+        "explanation": "Inline styles are one source of styles, but the DOM itself is an HTML structure. CSS is parsed separately into the CSSOM."
+      },
+      {
+        "optionText": "CSS directly modifies the DOM by adding and removing HTML elements.",
+        "isCorrect": false,
+        "explanation": "CSS adds visual styles, not HTML elements. JavaScript via the DOM API adds/removes elements. CSS can show/hide elements but doesn't modify DOM structure."
+      },
+      {
+        "optionText": "The DOM is only relevant to JavaScript — CSS interacts solely with the HTML source.",
+        "isCorrect": false,
+        "explanation": "The browser builds the DOM from HTML, then combines it with the CSSOM (parsed CSS) to form the render tree. Both are runtime constructs."
+      }
+    ]
+  },
+  {
+    "topic": "css",
+    "question": "How does CSS actually work under the hood of a browser?",
+    "options": [
+      {
+        "optionText": "Browser parses HTML → DOM and CSS → CSSOM, merges into render tree, then runs layout, paint, and composite steps.",
+        "isCorrect": true,
+        "explanation": "Correct — this is the critical rendering path. Render-blocking CSS delays FCP. Properties like transform and opacity skip layout/paint — only composite — making them fast to animate."
+      },
+      {
+        "optionText": "The browser sends CSS to a remote server for parsing and receives computed styles back.",
+        "isCorrect": false,
+        "explanation": "CSS parsing is entirely client-side in the browser. No network round-trip for style computation."
+      },
+      {
+        "optionText": "CSS is applied after JavaScript finishes executing — JS always runs first.",
+        "isCorrect": false,
+        "explanation": "CSS is render-blocking and parsed before JS in the critical rendering path. JS in <script> tags can block HTML parsing but doesn't determine CSS order."
+      },
+      {
+        "optionText": "The browser applies CSS rules from lowest to highest specificity and stops at the first match.",
+        "isCorrect": false,
+        "explanation": "The browser applies ALL matching rules and resolves conflicts via the cascade (specificity + source order). It doesn't stop at the first match."
+      }
+    ]
+  },
+  {
+    "topic": "css",
+    "question": "What's the difference between resetting and normalizing CSS? Which would you choose, and why?",
+    "options": [
+      {
+        "optionText": "Reset removes all browser defaults (blank slate); Normalize preserves useful defaults and fixes inconsistencies. Most projects use Normalize or Tailwind's Preflight.",
+        "isCorrect": true,
+        "explanation": "Correct — Meyer Reset strips everything including list styles and margins. Normalize.css targets only cross-browser inconsistencies. Tailwind's Preflight is a modern Normalize variant."
+      },
+      {
+        "optionText": "Reset and Normalize do the same thing — both remove all browser default styles.",
+        "isCorrect": false,
+        "explanation": "They differ significantly. Reset removes all defaults; Normalize only fixes cross-browser inconsistencies while keeping sensible defaults."
+      },
+      {
+        "optionText": "Normalize is the older approach; Reset is the modern best practice.",
+        "isCorrect": false,
+        "explanation": "It's the reverse — Meyer Reset (2004) predates Normalize.css (2011). Modern frameworks use Normalize-based approaches like Tailwind's Preflight."
+      },
+      {
+        "optionText": "Both are obsolete — modern browsers are consistent enough to need neither.",
+        "isCorrect": false,
+        "explanation": "Cross-browser inconsistencies still exist. Tailwind, styled-components, and CSS Modules all include some form of baseline normalisation."
+      }
+    ]
+  },
+  {
+    "topic": "css",
+    "question": "What is a Grid System in CSS?",
+    "options": [
+      {
+        "optionText": "A layout system that divides the page into columns/rows — Bootstrap used float-based grids; modern CSS Grid is native and more powerful.",
+        "isCorrect": true,
+        "explanation": "Correct — CSS Grid (2017) replaced the need for framework grid systems. It supports 2D layouts natively with grid-template-columns, grid-template-rows, and grid-area."
+      },
+      {
+        "optionText": "A CSS property that creates a visual table overlay for debugging alignment.",
+        "isCorrect": false,
+        "explanation": "Grid overlays are a browser DevTools feature. CSS Grid System refers to layout patterns using columns and rows."
+      },
+      {
+        "optionText": "A JavaScript library that calculates element positions for masonry layouts.",
+        "isCorrect": false,
+        "explanation": "Masonry libraries (Masonry.js) are separate tools. CSS Grid System refers to column-based layout patterns, native or framework-based."
+      },
+      {
+        "optionText": "The display: grid property — it is only for two-dimensional table-like data.",
+        "isCorrect": false,
+        "explanation": "CSS Grid is a general-purpose layout system for any 2D content, not just tables. display: grid enables it, but it's far more flexible than tables."
+      }
+    ]
+  },
+  {
+    "topic": "css",
+    "question": "What are the advantages/disadvantages of using CSS preprocessors?",
+    "options": [
+      {
+        "optionText": "Advantages: variables, nesting, mixins, functions. Disadvantages: build step required, debugging compiled output, and modern CSS now covers many features natively.",
+        "isCorrect": true,
+        "explanation": "Correct — CSS custom properties, :is(), @layer, and nesting (CSS Nesting Level 1) have reduced the need for preprocessors in modern projects."
+      },
+      {
+        "optionText": "Only advantages — preprocessors have no drawbacks and should always be used.",
+        "isCorrect": false,
+        "explanation": "Preprocessors add build complexity and source map debugging overhead. For small projects, plain CSS or Tailwind may be preferable."
+      },
+      {
+        "optionText": "Preprocessors are only useful for large teams — solo developers should avoid them.",
+        "isCorrect": false,
+        "explanation": "Preprocessors benefit any project with significant CSS complexity. The decision should be based on project needs, not team size."
+      },
+      {
+        "optionText": "CSS preprocessors run in the browser — they replace the browser's CSS parser.",
+        "isCorrect": false,
+        "explanation": "Preprocessors (Sass, Less, Stylus) compile to standard CSS at build time. The browser only sees the compiled output — never the preprocessor syntax."
+      }
+    ]
+  },
+  {
+    "topic": "css",
+    "question": "Explain the purpose of clearing floats in CSS.",
+    "options": [
+      {
+        "optionText": "Clearing prevents a parent container from collapsing when all its children are floated — using clearfix, overflow: hidden, or display: flow-root.",
+        "isCorrect": true,
+        "explanation": "Correct — floated elements are out of normal flow, so the parent has zero height. The modern solution is display: flow-root on the parent, which creates a new BFC."
+      },
+      {
+        "optionText": "Clearing removes float styles from elements so they return to normal document flow.",
+        "isCorrect": false,
+        "explanation": "clear: both on an element prevents it from sitting next to floats — it doesn't remove float from other elements. clearfix fixes parent height collapse."
+      },
+      {
+        "optionText": "float: none and clear: both are the same thing — both stop floating behaviour.",
+        "isCorrect": false,
+        "explanation": "float: none removes float from an element itself. clear: both prevents an element from appearing beside floated siblings."
+      },
+      {
+        "optionText": "Clearing is only needed in IE — modern browsers handle float parents automatically.",
+        "isCorrect": false,
+        "explanation": "Float parent collapse affects all browsers. Modern code avoids floats for layout (using Flexbox/Grid instead) but clearing is still relevant in legacy codebases."
+      }
+    ]
+  },
+  {
+    "topic": "css",
+    "question": "Can you explain the difference between coding a website to be responsive versus using a mobile-first strategy?",
+    "options": [
+      {
+        "optionText": "Responsive adapts to any screen; mobile-first means writing base styles for mobile and using min-width media queries to enhance for larger screens.",
+        "isCorrect": true,
+        "explanation": "Correct — mobile-first produces leaner CSS: mobile styles are the default, extras are added for wider screens. Tailwind and Bootstrap are mobile-first frameworks."
+      },
+      {
+        "optionText": "Mobile-first means building a separate mobile website; responsive means one site for all screens.",
+        "isCorrect": false,
+        "explanation": "Mobile-first is a CSS authoring strategy using min-width breakpoints, not a separate site. Both approaches produce one adaptive site."
+      },
+      {
+        "optionText": "Responsive design and mobile-first are the same concept with different names.",
+        "isCorrect": false,
+        "explanation": "Responsive design is the goal (adapts to screen size). Mobile-first is an implementation strategy (start from small screens). You can be responsive without being mobile-first."
+      },
+      {
+        "optionText": "Mobile-first uses max-width media queries; responsive design uses min-width media queries.",
+        "isCorrect": false,
+        "explanation": "It's the opposite — mobile-first uses min-width (add styles as screens get larger). Desktop-first uses max-width (override styles as screens get smaller)."
+      }
+    ]
+  },
+  {
+    "topic": "css",
+    "question": "Have you ever worked with retina graphics? If so, when and what techniques did you use?",
+    "options": [
+      {
+        "optionText": "Use SVG for icons/illustrations, srcset with 2x images for photos, and CSS with logical pixels — retina displays have 2× pixel density.",
+        "isCorrect": true,
+        "explanation": "Correct — on a 2× retina display, 1 CSS pixel = 2 physical pixels. Raster images at 1× look blurry; SVG scales perfectly. srcset lets browsers pick the right resolution."
+      },
+      {
+        "optionText": "Double all CSS pixel values — width: 200px becomes width: 400px for retina screens.",
+        "isCorrect": false,
+        "explanation": "CSS pixels are already device-independent. Doubling them would make elements twice as large on all screens, not sharper on retina."
+      },
+      {
+        "optionText": "Retina support requires JavaScript to detect devicePixelRatio and swap images at runtime.",
+        "isCorrect": false,
+        "explanation": "CSS srcset and <picture> handle resolution selection declaratively. JavaScript detection is a fallback for older browsers, not the primary technique."
+      },
+      {
+        "optionText": "Only PNG images need retina treatment — JPEGs are rendered at full resolution automatically.",
+        "isCorrect": false,
+        "explanation": "All raster formats (PNG, JPEG, WebP) suffer from retina blur at 1× resolution. Use 2× images for all raster content or switch to SVG."
+      }
+    ]
+  },
+  {
+    "topic": "css",
+    "question": "How do you optimize your webpages for print?",
+    "options": [
+      {
+        "optionText": "Use @media print to hide nav/ads, convert to black-and-white friendly colours, expand link URLs, and set sensible page margins.",
+        "isCorrect": true,
+        "explanation": "Correct — @media print styles apply only when printing. page-break-before/after controls pagination; display: none hides screen-only UI elements."
+      },
+      {
+        "optionText": "Add a print.css file and load it with <link media='all'> to apply it everywhere.",
+        "isCorrect": false,
+        "explanation": "Print stylesheets use <link media='print'> or @media print. Using media='all' would apply print styles on screen too."
+      },
+      {
+        "optionText": "JavaScript detects print events and removes elements before the browser renders the print preview.",
+        "isCorrect": false,
+        "explanation": "JS can listen to window.onbeforeprint but CSS @media print is the standard, predictable approach — no JS required."
+      },
+      {
+        "optionText": "Print optimisation is handled by the browser automatically — no CSS needed.",
+        "isCorrect": false,
+        "explanation": "Browsers apply basic print rendering but won't hide navbars, ads, or fix colours for ink efficiency. @media print rules are necessary for a good print experience."
+      }
+    ]
+  },
+  {
+    "topic": "css",
+    "question": "Explain the usage of the table-layout property.",
+    "options": [
+      {
+        "optionText": "table-layout: fixed makes column widths predictable (set by first row or col), making large table rendering much faster than auto.",
+        "isCorrect": true,
+        "explanation": "Correct — table-layout: auto scans all cells to calculate widths; fixed uses the first row's widths immediately. For long data tables, fixed + overflow: hidden is a significant performance win."
+      },
+      {
+        "optionText": "table-layout replaces display: table — it converts a div into a table element.",
+        "isCorrect": false,
+        "explanation": "display: table makes an element behave like a table. table-layout controls how column widths are calculated — it only applies to actual table elements."
+      },
+      {
+        "optionText": "table-layout: fixed forces the table to fill 100% of its container width.",
+        "isCorrect": false,
+        "explanation": "Fixed layout means widths come from the first row or col widths, not that the table fills its container. Use width: 100% for that."
+      },
+      {
+        "optionText": "table-layout is a deprecated property — use CSS Grid instead for all table layouts.",
+        "isCorrect": false,
+        "explanation": "table-layout is not deprecated and remains useful for HTML <table> elements with large datasets. CSS Grid is for div-based layouts, not semantic data tables."
+      }
+    ]
+  },
+  {
+    "topic": "css",
+    "question": "What are CSS architecture methodologies (BEM, OOCSS, SMACSS) and why do they matter?",
+    "options": [
+      {
+        "optionText": "Naming/organisation conventions for scalable CSS — BEM (Block__Element--Modifier), OOCSS (separate structure/skin), SMACSS (categorised rules).",
+        "isCorrect": true,
+        "explanation": "Correct — without conventions, CSS becomes unmaintainable at scale. BEM is most popular for component-based UIs. CSS Modules and Tailwind reduce the need for manual naming conventions."
+      },
+      {
+        "optionText": "CSS frameworks like Bootstrap, Tailwind, and Bulma — they provide ready-made components.",
+        "isCorrect": false,
+        "explanation": "BEM, OOCSS, SMACSS are methodology/naming conventions, not component libraries. Tailwind is a utility-first framework, separate from architecture methodologies."
+      },
+      {
+        "optionText": "CSS preprocessor plugins that auto-generate class names from component structure.",
+        "isCorrect": false,
+        "explanation": "Preprocessors like Sass compile styles; CSS Modules generate scoped class names. BEM/OOCSS/SMACSS are manual naming and organisation conventions."
+      },
+      {
+        "optionText": "Browser-specific hacks to fix rendering inconsistencies in older versions of IE.",
+        "isCorrect": false,
+        "explanation": "IE hacks used conditional comments or property-specific workarounds. CSS architectures are team conventions for writing maintainable, scalable stylesheets."
+      }
+    ]
+  },
+  {
+    "topic": "css",
+    "question": "How would you approach fixing browser-specific styling issues?",
+    "options": [
+      {
+        "optionText": "Use a CSS normalizer for baseline, write standard styles first (progressive enhancement), then target specific browsers with @supports or conditional workarounds.",
+        "isCorrect": true,
+        "explanation": "Correct — progressive enhancement means styles work everywhere first, then layer enhancements. @supports queries for feature detection are preferred over browser-sniffing hacks."
+      },
+      {
+        "optionText": "Use inline styles with !important — they override all browser defaults reliably.",
+        "isCorrect": false,
+        "explanation": "!important inline styles are a maintenance nightmare and hurt specificity. The correct approach is normalisation + progressive enhancement."
+      },
+      {
+        "optionText": "Write separate stylesheets per browser and serve them via server-side user-agent detection.",
+        "isCorrect": false,
+        "explanation": "UA sniffing is fragile and deprecated. Feature detection (@supports) and CSS normalisation handle cross-browser issues reliably."
+      },
+      {
+        "optionText": "Avoid CSS features until they have 100% browser support — only use widely supported properties.",
+        "isCorrect": false,
+        "explanation": "Waiting for 100% support blocks innovation. Progressive enhancement lets you use modern features safely with appropriate fallbacks."
+      }
+    ]
   }
 ]

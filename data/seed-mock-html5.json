@@ -518,5 +518,837 @@
         "explanation": "Web Components are framework-agnostic browser standards. React has its own component model that's distinct from Web Components."
       }
     ]
+  },
+  {
+    "topic": "html5",
+    "question": "What is Character Encoding?",
+    "options": [
+      {
+        "optionText": "A mapping that converts characters to bytes — UTF-8 is the standard for the web, declared with <meta charset='UTF-8'>.",
+        "isCorrect": true,
+        "explanation": "Correct — without a charset declaration, browsers may guess wrong and display garbled text. UTF-8 covers all Unicode characters including emoji."
+      },
+      {
+        "optionText": "A security technique that encrypts page content before sending it to the browser.",
+        "isCorrect": false,
+        "explanation": "Encryption is handled by HTTPS/TLS. Character encoding maps characters to byte sequences — it's about text representation, not security."
+      },
+      {
+        "optionText": "A compression algorithm that reduces HTML file size for faster transfer.",
+        "isCorrect": false,
+        "explanation": "Compression uses gzip/Brotli at the HTTP level. Character encoding is the byte-to-character mapping scheme (UTF-8, ASCII, etc.)."
+      },
+      {
+        "optionText": "The process of converting HTML special characters like < and > to &lt; and &gt;.",
+        "isCorrect": false,
+        "explanation": "That's HTML entity encoding (escaping). Character encoding is the lower-level byte-to-character mapping, e.g. UTF-8."
+      }
+    ]
+  },
+  {
+    "topic": "html5",
+    "question": "What is a self-closing tag?",
+    "options": [
+      {
+        "optionText": "A void element with no closing tag — e.g. <img>, <input>, <br>, <hr>, <meta>, <link>.",
+        "isCorrect": true,
+        "explanation": "Correct — void elements cannot have child content. In HTML5 the slash is optional: <br> and <br/> are both valid. In JSX and XHTML, the slash is required."
+      },
+      {
+        "optionText": "Any HTML tag that automatically closes when another tag opens — e.g. <p> closes before <div>.",
+        "isCorrect": false,
+        "explanation": "Optional tag omission (like <p> auto-closing) is a separate concept. Self-closing tags are void elements that can never have children."
+      },
+      {
+        "optionText": "A custom web component that manages its own shadow DOM lifecycle.",
+        "isCorrect": false,
+        "explanation": "Web Components have their own lifecycle callbacks. Self-closing tags are standard HTML void elements like <img> and <input>."
+      },
+      {
+        "optionText": "Tags that close themselves when the page loads via JavaScript.",
+        "isCorrect": false,
+        "explanation": "Self-closing is a markup concept — void elements have no closing tag in the HTML spec. JavaScript isn't involved."
+      }
+    ]
+  },
+  {
+    "topic": "html5",
+    "question": "How can you highlight text in HTML?",
+    "options": [
+      {
+        "optionText": "Use the <mark> element — it semantically marks text as highlighted, with a yellow background by default.",
+        "isCorrect": true,
+        "explanation": "Correct — <mark> is the semantic choice for highlighted/searched text. Use CSS to customise the colour. <span> with styling works but lacks semantic meaning."
+      },
+      {
+        "optionText": "Use <highlight> — it's a semantic HTML5 element for marked text.",
+        "isCorrect": false,
+        "explanation": "There is no <highlight> element in HTML. Use <mark> for semantic highlighting."
+      },
+      {
+        "optionText": "Use <em> — it highlights text with yellow background by default.",
+        "isCorrect": false,
+        "explanation": "<em> indicates emphasis (italic by default), not highlight. Use <mark> for highlighted text."
+      },
+      {
+        "optionText": "Use <b> with a yellow background inline style — <b style='background:yellow'>.",
+        "isCorrect": false,
+        "explanation": "<b> indicates keywords/bold without semantic meaning. <mark> is the correct semantic element for highlighted text."
+      }
+    ]
+  },
+  {
+    "topic": "html5",
+    "question": "What is the DOM?",
+    "options": [
+      {
+        "optionText": "A tree-like in-memory representation of an HTML document that JavaScript uses to read and manipulate the page.",
+        "isCorrect": true,
+        "explanation": "Correct — the DOM (Document Object Model) is a programming interface. JavaScript traverses it via document.querySelector(), and React/Vue update it via virtual DOM diffing."
+      },
+      {
+        "optionText": "The CSS Object Model — the browser's representation of stylesheets.",
+        "isCorrect": false,
+        "explanation": "That's the CSSOM (CSS Object Model). The DOM represents the HTML element tree. Both combine to form the render tree."
+      },
+      {
+        "optionText": "A JavaScript design pattern for managing state in web applications.",
+        "isCorrect": false,
+        "explanation": "DOM is a browser API, not a design pattern. State management patterns include MVC, Flux, and Redux."
+      },
+      {
+        "optionText": "The compiled output of an HTML file stored in browser cache for fast re-rendering.",
+        "isCorrect": false,
+        "explanation": "Browser cache stores HTTP responses. The DOM is a live in-memory tree created from parsed HTML on every page load."
+      }
+    ]
+  },
+  {
+    "topic": "html5",
+    "question": "Explain the difference between block elements and inline elements",
+    "options": [
+      {
+        "optionText": "Block elements start on a new line and take full width (<div>, <p>, <h1>); inline elements flow within text (<span>, <a>, <strong>).",
+        "isCorrect": true,
+        "explanation": "Correct — block elements create vertical stacking; inline elements sit within the text flow. CSS display: inline / block overrides the default behaviour."
+      },
+      {
+        "optionText": "Block elements are for layout; inline elements are only for text styling.",
+        "isCorrect": false,
+        "explanation": "Inline elements can do more than text styling (e.g. <a> links, <img> images). The distinction is about flow behaviour, not purpose."
+      },
+      {
+        "optionText": "Block elements load after inline elements — they are deferred for performance.",
+        "isCorrect": false,
+        "explanation": "Load order has nothing to do with block vs inline. The distinction is purely about CSS layout flow."
+      },
+      {
+        "optionText": "Inline elements cannot have CSS applied to them — they inherit parent styles only.",
+        "isCorrect": false,
+        "explanation": "Inline elements accept most CSS including color, font, padding (horizontal), border. Block-level properties like width/height don't apply to inline elements by default."
+      }
+    ]
+  },
+  {
+    "topic": "html5",
+    "question": "What is the difference between <b> and <strong>?",
+    "options": [
+      {
+        "optionText": "<strong> conveys semantic importance (screen readers stress it); <b> is purely visual bold with no semantic meaning.",
+        "isCorrect": true,
+        "explanation": "Correct — prefer <strong> for important text. Screen readers may emphasise it. <b> is for stylistically bold text (keywords, product names) without added importance."
+      },
+      {
+        "optionText": "<b> is the HTML5 tag; <strong> is deprecated.",
+        "isCorrect": false,
+        "explanation": "Both are valid in HTML5. <strong> is the semantically meaningful choice; <b> is preserved for bold without semantic importance."
+      },
+      {
+        "optionText": "They are completely identical — just two names for the same element.",
+        "isCorrect": false,
+        "explanation": "They render the same by default but have different semantics. <strong> signals importance to assistive technologies; <b> does not."
+      },
+      {
+        "optionText": "<strong> applies bold styling; <b> also makes the text larger.",
+        "isCorrect": false,
+        "explanation": "Neither element changes font size by default. Both render bold text. The difference is semantic: <strong> conveys importance, <b> does not."
+      }
+    ]
+  },
+  {
+    "topic": "html5",
+    "question": "Explain meta tags in HTML",
+    "options": [
+      {
+        "optionText": "<meta> elements in <head> provide machine-readable metadata: charset, viewport, description, Open Graph, and cache-control.",
+        "isCorrect": true,
+        "explanation": "Correct — key meta tags: charset (encoding), viewport (mobile scaling), description (SEO snippet), og:title/image (social sharing), robots (indexing)."
+      },
+      {
+        "optionText": "Meta tags are HTML comments — they're invisible to the browser and only for developers.",
+        "isCorrect": false,
+        "explanation": "Meta tags are parsed by browsers, crawlers, and social media scrapers. They control encoding, SEO, social previews, and viewport behaviour."
+      },
+      {
+        "optionText": "Meta tags define the CSS styles that apply globally across the page.",
+        "isCorrect": false,
+        "explanation": "Global styles go in <style> or linked <link> stylesheets. Meta tags provide document-level metadata, not styling."
+      },
+      {
+        "optionText": "Meta tags are only used for SEO — other uses are non-standard.",
+        "isCorrect": false,
+        "explanation": "Meta tags serve many purposes: charset declaration, viewport settings, social sharing (Open Graph), Twitter cards, and HTTP cache hints."
+      }
+    ]
+  },
+  {
+    "topic": "html5",
+    "question": "What were some of the key goals and motivations for the HTML5 specification?",
+    "options": [
+      {
+        "optionText": "Eliminate plugin dependency (Flash/Silverlight), standardise native audio/video/canvas, improve form inputs, and add semantic elements.",
+        "isCorrect": true,
+        "explanation": "Correct — HTML5 also introduced localStorage, WebWorkers, WebSockets, and the History API to support rich web apps without plugins."
+      },
+      {
+        "optionText": "Replace CSS and JavaScript with a unified declarative language.",
+        "isCorrect": false,
+        "explanation": "HTML5 kept the separation of HTML, CSS, and JS. Its goal was to enhance HTML with native capabilities, not replace the other web technologies."
+      },
+      {
+        "optionText": "Improve server-side rendering performance for PHP applications.",
+        "isCorrect": false,
+        "explanation": "HTML5 is a client-side specification. Server-side rendering is a separate concern handled by frameworks like Next.js or PHP templating."
+      },
+      {
+        "optionText": "Create a strict XML-based successor to HTML4 that all browsers must follow.",
+        "isCorrect": false,
+        "explanation": "That describes XHTML, which was abandoned. HTML5 was intentionally backward-compatible and error-tolerant, unlike strict XML."
+      }
+    ]
+  },
+  {
+    "topic": "html5",
+    "question": "What's the difference between an \"attribute\" and a \"property\" in HTML?",
+    "options": [
+      {
+        "optionText": "Attributes are in HTML markup (always strings); properties are on the live DOM object (typed values that can differ from the attribute).",
+        "isCorrect": true,
+        "explanation": "Correct — e.g. input.getAttribute('value') returns the initial HTML string; input.value returns the current value. They diverge after user interaction."
+      },
+      {
+        "optionText": "Attributes are for styling; properties are for behaviour.",
+        "isCorrect": false,
+        "explanation": "Both can affect styling and behaviour. The distinction is: attributes are in HTML source (strings), properties are on the DOM object (typed, live values)."
+      },
+      {
+        "optionText": "They are synonyms — 'attribute' is the HTML term and 'property' is the JavaScript term for the same thing.",
+        "isCorrect": false,
+        "explanation": "They start the same but can diverge. input value attribute = initial default; input.value property = current typed value. They're not synonyms."
+      },
+      {
+        "optionText": "Properties are read-only; attributes can be changed by JavaScript.",
+        "isCorrect": false,
+        "explanation": "Both can be read and changed via JavaScript. getAttribute/setAttribute modifies attributes; dot notation modifies properties. They may affect each other or not."
+      }
+    ]
+  },
+  {
+    "topic": "html5",
+    "question": "Where and why is the rel=\"noopener\" attribute used?",
+    "options": [
+      {
+        "optionText": "On <a target='_blank'> links — prevents the new tab from accessing window.opener and potentially redirecting the original page.",
+        "isCorrect": true,
+        "explanation": "Correct — without noopener, the new tab can call window.opener.location = 'phishing-site'. Modern browsers default to noopener but explicit is still best practice."
+      },
+      {
+        "optionText": "On <link> elements to tell browsers not to preload the stylesheet.",
+        "isCorrect": false,
+        "explanation": "noopener applies to <a> tags opening new windows/tabs. Stylesheet loading is controlled by rel='preload' or media attributes."
+      },
+      {
+        "optionText": "On <form> elements to prevent CSRF attacks by blocking cross-origin submissions.",
+        "isCorrect": false,
+        "explanation": "CSRF protection uses CSRF tokens or SameSite cookies, not rel attributes. noopener is for anchor tags opening new tabs."
+      },
+      {
+        "optionText": "On <script> tags to prevent the script from accessing parent window variables.",
+        "isCorrect": false,
+        "explanation": "Script isolation uses iframes with sandboxing or Content Security Policy. noopener is for <a target='_blank'> to prevent opener access."
+      }
+    ]
+  },
+  {
+    "topic": "html5",
+    "question": "Briefly describe the correct usage of HTML5 semantic elements: <header>, <article>, <section>, <footer>",
+    "options": [
+      {
+        "optionText": "<header>: introductory content for its parent; <article>: self-contained content; <section>: thematic grouping; <footer>: closing info for its parent.",
+        "isCorrect": true,
+        "explanation": "Correct — these can appear multiple times per page. An <article> can have its own <header> and <footer>. Semantic elements help screen readers and SEO crawlers understand page structure."
+      },
+      {
+        "optionText": "Each can only appear once per page — <header> at top, <footer> at bottom, one <main> in the middle.",
+        "isCorrect": false,
+        "explanation": "Multiple <header>, <footer>, <section>, and <article> elements are valid on one page. They scope to their nearest sectioning ancestor."
+      },
+      {
+        "optionText": "<section> replaces <div> entirely in HTML5 — divs are deprecated.",
+        "isCorrect": false,
+        "explanation": "<div> is still valid and widely used for non-semantic layout grouping. <section> is for thematic content grouping with a heading."
+      },
+      {
+        "optionText": "These elements are identical to <div> — they only differ in default CSS browser styles.",
+        "isCorrect": false,
+        "explanation": "Semantic elements carry meaning for screen readers, SEO, and outline algorithms. They have the same default display as <div> but very different semantic value."
+      }
+    ]
+  },
+  {
+    "topic": "html5",
+    "question": "Can a web page contain multiple <header> elements? What about <footer> elements?",
+    "options": [
+      {
+        "optionText": "Yes — both can appear multiple times, scoped to their nearest sectioning ancestor (<body>, <article>, <section>).",
+        "isCorrect": true,
+        "explanation": "Correct — a <header> inside an <article> is that article's header. Multiple <footer> elements for multiple sections are valid. Only <main> should appear once."
+      },
+      {
+        "optionText": "No — only one <header> and one <footer> per page, both in <body>.",
+        "isCorrect": false,
+        "explanation": "The HTML5 spec allows multiple <header> and <footer> elements. They scope to their nearest sectioning parent, not the entire page."
+      },
+      {
+        "optionText": "Multiple <header> elements are valid but multiple <footer> elements are not.",
+        "isCorrect": false,
+        "explanation": "Both can appear multiple times. The spec treats <header> and <footer> symmetrically — each scopes to its sectioning context."
+      },
+      {
+        "optionText": "Multiple headers/footers require the role ARIA attribute to be valid.",
+        "isCorrect": false,
+        "explanation": "ARIA roles help assistive technologies but are not required for multiple semantic elements. Valid HTML allows multiple <header>/<footer> without ARIA."
+      }
+    ]
+  },
+  {
+    "topic": "html5",
+    "question": "What is the purpose of cache busting and how can you achieve it?",
+    "options": [
+      {
+        "optionText": "Forces browsers to fetch fresh assets after a deploy — achieved by appending a content hash to filenames: main.a3f9b2.js.",
+        "isCorrect": true,
+        "explanation": "Correct — content-hashed filenames let you set cache headers to immutable (1 year). The filename changes only when content changes, so new deploys bust the cache automatically."
+      },
+      {
+        "optionText": "Clears the server-side cache by restarting the web server after each deploy.",
+        "isCorrect": false,
+        "explanation": "Server restart may clear server cache but doesn't affect files already cached in users' browsers. Cache busting targets the browser/CDN cache."
+      },
+      {
+        "optionText": "Adding Cache-Control: no-cache to all responses so browsers never cache assets.",
+        "isCorrect": false,
+        "explanation": "no-cache forces revalidation on every request — useful for HTML but terrible for static assets. Content hashing + long cache is the better pattern."
+      },
+      {
+        "optionText": "Using HTTP/2 push to send updated assets before the browser requests them.",
+        "isCorrect": false,
+        "explanation": "HTTP/2 push proactively sends resources but doesn't bust the existing cache. Cache busting changes the URL so cached old versions are bypassed."
+      }
+    ]
+  },
+  {
+    "topic": "html5",
+    "question": "Explain almost standard, full standard and quirks mode",
+    "options": [
+      {
+        "optionText": "Full standards: <!DOCTYPE html> triggers correct rendering; Quirks: missing doctype triggers legacy IE behaviour; Almost standards: old transitional doctypes.",
+        "isCorrect": true,
+        "explanation": "Correct — always use <!DOCTYPE html> (HTML5 doctype) to ensure full standards mode. Quirks mode activates ancient box model and layout bugs from IE5 era."
+      },
+      {
+        "optionText": "Quirks mode is a performance optimisation for mobile — it skips CSS parsing.",
+        "isCorrect": false,
+        "explanation": "Quirks mode activates legacy rendering behaviour for old broken HTML, not a performance feature. It causes layout inconsistencies."
+      },
+      {
+        "optionText": "Almost standard mode is triggered by adding <html strict> to the document.",
+        "isCorrect": false,
+        "explanation": "There is no <html strict> attribute. Rendering mode is determined by the DOCTYPE declaration at the top of the HTML file."
+      },
+      {
+        "optionText": "Full standards mode requires validating your HTML with the W3C validator before deployment.",
+        "isCorrect": false,
+        "explanation": "Standards mode is triggered purely by <!DOCTYPE html> — no validator run required. W3C validation catches errors but doesn't affect render mode."
+      }
+    ]
+  },
+  {
+    "topic": "html5",
+    "question": "Why is it generally a good idea to position CSS <link>s between <head> and JS <script>s just before </body>?",
+    "options": [
+      {
+        "optionText": "CSS in <head> loads before paint (preventing FOUC); scripts before </body> let the DOM parse first so JS can access elements without waiting.",
+        "isCorrect": true,
+        "explanation": "Correct — render-blocking CSS in <head> is necessary. Scripts at the bottom ensure DOM is ready. Modern alternative: use defer attribute on <script> and keep it in <head>."
+      },
+      {
+        "optionText": "CSS must go in <head> because browsers reject stylesheets elsewhere, and scripts must go in <body> by the HTML spec.",
+        "isCorrect": false,
+        "explanation": "The spec doesn't mandate these positions — they're performance best practices. Scripts can go in <head> with async/defer; CSS can technically go anywhere."
+      },
+      {
+        "optionText": "JavaScript files must load before CSS so they can modify styles before the first paint.",
+        "isCorrect": false,
+        "explanation": "Loading JS before CSS blocks rendering. CSS should load first so the browser can construct the CSSOM and paint without waiting for JS."
+      },
+      {
+        "optionText": "It doesn't matter — modern browsers parallelise all resource loading regardless of position.",
+        "isCorrect": false,
+        "explanation": "Browsers do parallelise fetches but parsing and execution are still sequential. CSS in <head> and defer on scripts remain important for FCP."
+      }
+    ]
+  },
+  {
+    "topic": "html5",
+    "question": "What are some differences that XHTML has compared to HTML?",
+    "options": [
+      {
+        "optionText": "XHTML requires all tags closed, lowercase tag names, quoted attributes, and a valid XML declaration — it's HTML as strict XML.",
+        "isCorrect": true,
+        "explanation": "Correct — XHTML errors break the entire page (unlike HTML's forgiving parser). It was superseded by HTML5 which is error-tolerant and more practical."
+      },
+      {
+        "optionText": "XHTML supports custom HTML elements natively; standard HTML does not.",
+        "isCorrect": false,
+        "explanation": "Custom elements are a Web Components API available in HTML5 — not unique to XHTML. XHTML is stricter XML syntax, not a feature superset."
+      },
+      {
+        "optionText": "XHTML is faster to parse because its strict rules allow the browser to skip error correction.",
+        "isCorrect": false,
+        "explanation": "XHTML was not significantly faster. HTML5's forgiving parser is now highly optimised. XHTML's strict error mode could also block entire pages on small mistakes."
+      },
+      {
+        "optionText": "XHTML replaced HTML5 as the current web standard.",
+        "isCorrect": false,
+        "explanation": "XHTML was abandoned in favour of HTML5. HTML5 is the current living standard maintained by WHATWG."
+      }
+    ]
+  },
+  {
+    "topic": "html5",
+    "question": "What is WebP?",
+    "options": [
+      {
+        "optionText": "A modern image format by Google with better compression than JPEG/PNG — supports transparency, animation, and lossless modes.",
+        "isCorrect": true,
+        "explanation": "Correct — WebP is ~25-35% smaller than JPEG at equivalent quality. Use <picture> with WebP source + JPEG fallback. AVIF is the next-gen successor."
+      },
+      {
+        "optionText": "A web protocol for streaming video — the successor to WebRTC.",
+        "isCorrect": false,
+        "explanation": "WebP is an image format, not a protocol. WebRTC is a real-time communication protocol. WebP stands for Web Picture."
+      },
+      {
+        "optionText": "A CSS property for optimising image rendering performance in browsers.",
+        "isCorrect": false,
+        "explanation": "image-rendering is the CSS property for rendering hints. WebP is a file format (.webp) for images with better compression."
+      },
+      {
+        "optionText": "A JavaScript API for processing images in Web Workers.",
+        "isCorrect": false,
+        "explanation": "Image processing in Workers uses Canvas API or OffscreenCanvas. WebP is an image file format, not a JavaScript API."
+      }
+    ]
+  },
+  {
+    "topic": "html5",
+    "question": "What are the building blocks of HTML5?",
+    "options": [
+      {
+        "optionText": "Semantic markup, native media (audio/video), Canvas API, form enhancements, Web Storage, Web Workers, WebSockets, and Geolocation.",
+        "isCorrect": true,
+        "explanation": "Correct — HTML5 is an umbrella term covering the HTML markup spec plus associated APIs. Together they enable rich web apps without plugins."
+      },
+      {
+        "optionText": "HTML, CSS, and JavaScript — the three core web technologies bundled into one spec.",
+        "isCorrect": false,
+        "explanation": "HTML5 is specifically the HTML specification — CSS and JS are separate standards. HTML5 introduced APIs that JS uses, but CSS remains its own spec."
+      },
+      {
+        "optionText": "React, Angular, and Vue — the component-based frameworks built on HTML5.",
+        "isCorrect": false,
+        "explanation": "Those are JavaScript frameworks that use HTML5 features. HTML5's building blocks are browser-native APIs like Canvas, Storage, and semantic elements."
+      },
+      {
+        "optionText": "DOCTYPE, head, and body — the three required sections of every HTML document.",
+        "isCorrect": false,
+        "explanation": "DOCTYPE, <head>, and <body> are structural parts of an HTML document, not the HTML5 feature set. HTML5 building blocks refers to its new APIs and elements."
+      }
+    ]
+  },
+  {
+    "topic": "html5",
+    "question": "How would you select SVG or Canvas for your site?",
+    "options": [
+      {
+        "optionText": "SVG for scalable vector graphics, charts, and icons (DOM nodes, accessible); Canvas for pixel manipulation, games, and real-time rendering (bitmap, JS-driven).",
+        "isCorrect": true,
+        "explanation": "Correct — SVG is retained-mode (shapes in DOM, CSS styleable, accessible). Canvas is immediate-mode (draw pixels, no DOM structure, not accessible by default)."
+      },
+      {
+        "optionText": "Canvas for all graphics — SVG is deprecated in modern browsers.",
+        "isCorrect": false,
+        "explanation": "SVG is not deprecated and is widely supported. It's preferred for scalable UI graphics, icons, and data visualisations that need accessibility."
+      },
+      {
+        "optionText": "SVG for photos and raster images; Canvas for vector icons.",
+        "isCorrect": false,
+        "explanation": "It's the opposite — SVG is for vectors (infinitely scalable); Canvas renders bitmap pixels. Photos use <img> with JPEG/WebP."
+      },
+      {
+        "optionText": "They are interchangeable — the choice is purely stylistic.",
+        "isCorrect": false,
+        "explanation": "They have fundamentally different architectures. SVG is DOM-based and accessible; Canvas is a blank pixel buffer. The choice depends on use case: UI/charts vs games/image processing."
+      }
+    ]
+  },
+  {
+    "topic": "html5",
+    "question": "Why do I need a doctype and what does it do?",
+    "options": [
+      {
+        "optionText": "<!DOCTYPE html> triggers standards mode rendering — without it, browsers fall back to quirks mode and apply legacy broken layout rules.",
+        "isCorrect": true,
+        "explanation": "Correct — the HTML5 doctype is the shortest valid form. It's not an HTML tag but a parser instruction. Always include it as the very first line of every HTML file."
+      },
+      {
+        "optionText": "DOCTYPE tells the browser which version of HTML to download from the W3C server.",
+        "isCorrect": false,
+        "explanation": "DOCTYPE is a local parser instruction — no download happens. It tells the browser's rendering engine which compatibility mode to use."
+      },
+      {
+        "optionText": "DOCTYPE is required for HTTPS — browsers block pages without it on secure connections.",
+        "isCorrect": false,
+        "explanation": "DOCTYPE has nothing to do with HTTPS or security. It controls CSS rendering mode (standards vs quirks). Missing DOCTYPE causes layout bugs, not security blocks."
+      },
+      {
+        "optionText": "DOCTYPE declares the page's character encoding — equivalent to <meta charset='UTF-8'>.",
+        "isCorrect": false,
+        "explanation": "Character encoding is declared with <meta charset='UTF-8'>. DOCTYPE triggers the rendering mode — it has no effect on character encoding."
+      }
+    ]
+  },
+  {
+    "topic": "html5",
+    "question": "Have you used different HTML templating languages before?",
+    "options": [
+      {
+        "optionText": "Yes — JSX (React), Pug, Handlebars, Nunjucks. JSX compiles to JS; others compile to HTML. JSX is most common in modern frontend stacks.",
+        "isCorrect": true,
+        "explanation": "Correct — JSX is the standard for React/Next.js. Pug (ex-Jade) uses indentation syntax. Handlebars and Nunjucks are logic-light templates popular in Node.js backends."
+      },
+      {
+        "optionText": "No — HTML templating languages are not used in modern development; raw HTML is always preferred.",
+        "isCorrect": false,
+        "explanation": "Templating languages are standard across frontend (JSX, Vue templates) and backend (Pug, Jinja2, EJS). They reduce repetition and improve maintainability."
+      },
+      {
+        "optionText": "Only Markdown — it compiles to HTML and is the standard for all web templating.",
+        "isCorrect": false,
+        "explanation": "Markdown is for content authoring, not UI templating. Templating languages like JSX, Pug, and Handlebars generate full HTML documents with dynamic data."
+      },
+      {
+        "optionText": "PHP — it's the only real HTML templating language with broad browser support.",
+        "isCorrect": false,
+        "explanation": "PHP is a server-side language, not a templating language per se, and it runs on the server — browsers never see PHP. JSX, Pug, and Handlebars are dedicated templating solutions."
+      }
+    ]
+  },
+  {
+    "topic": "html5",
+    "question": "What kind of things must you be wary of when designing or developing for multilingual sites?",
+    "options": [
+      {
+        "optionText": "Text expansion (translated text is longer), RTL support (Arabic/Hebrew), font coverage, date/number formatting, and hreflang attributes for SEO.",
+        "isCorrect": true,
+        "explanation": "Correct — German text can be 30% longer than English, breaking fixed layouts. Use lang and dir attributes, Unicode fonts, and Intl API for locale-aware formatting."
+      },
+      {
+        "optionText": "Only charset encoding — use UTF-8 and all multilingual concerns are covered.",
+        "isCorrect": false,
+        "explanation": "UTF-8 handles encoding but multilingual sites also need RTL layouts, locale-specific formatting, hreflang tags, font support, and flexible layouts for text expansion."
+      },
+      {
+        "optionText": "Multilingual sites require separate CSS files per language — shared styles don't work.",
+        "isCorrect": false,
+        "explanation": "Shared CSS with [lang='ar'] { direction: rtl } and [lang='de'] { font-size: 0.9em } selectors handles language differences. Separate files per language are not required."
+      },
+      {
+        "optionText": "Use only images for text — bitmap text looks the same in all languages.",
+        "isCorrect": false,
+        "explanation": "Image-based text is inaccessible (screen readers can't read it), hard to translate, and blurry on retina screens. Use real text with proper Unicode support."
+      }
+    ]
+  },
+  {
+    "topic": "html5",
+    "question": "How can I get indexed better by search engines?",
+    "options": [
+      {
+        "optionText": "Use semantic HTML, a descriptive <title> and meta description, fast load times (Core Web Vitals), structured data (JSON-LD), and proper hreflang for multilingual.",
+        "isCorrect": true,
+        "explanation": "Correct — semantic elements help crawlers understand structure. Core Web Vitals (LCP, CLS, INP) are ranking signals. JSON-LD structured data enables rich snippets."
+      },
+      {
+        "optionText": "Add as many <meta keywords> tags as possible — search engines prioritise keyword density.",
+        "isCorrect": false,
+        "explanation": "Google has ignored meta keywords since 2009. Keyword stuffing is penalised. Focus on semantic HTML, quality content, and performance."
+      },
+      {
+        "optionText": "Use JavaScript-rendered content — Google indexes JS apps the same as static HTML.",
+        "isCorrect": false,
+        "explanation": "Googlebot can render JavaScript but with delays and limitations. Server-rendered or statically generated HTML is indexed faster and more reliably."
+      },
+      {
+        "optionText": "Submit individual HTML files to Google Search Console — it indexes files directly.",
+        "isCorrect": false,
+        "explanation": "Search Console allows sitemap submission and URL inspection, not direct file uploads. Google crawls your live site via its search bot."
+      }
+    ]
+  },
+  {
+    "topic": "html5",
+    "question": "Discuss the differences between an HTML specification and a browser's implementation thereof.",
+    "options": [
+      {
+        "optionText": "The spec (WHATWG Living Standard) defines ideal behaviour; browsers implement it gradually and may have bugs, extensions, or lag behind the spec.",
+        "isCorrect": true,
+        "explanation": "Correct — caniuse.com tracks implementation status. Features may be behind flags or partial. The spec is normative; browser implementations are real-world approximations."
+      },
+      {
+        "optionText": "Browsers implement the spec perfectly — any deviation is a bug that gets immediately patched.",
+        "isCorrect": false,
+        "explanation": "Implementation gaps and bugs persist for years. CSS/HTML feature support varies. Use caniuse.com and progressive enhancement to handle differences."
+      },
+      {
+        "optionText": "Browser vendors write the spec — they implement their own features and the spec documents them after.",
+        "isCorrect": false,
+        "explanation": "Partially true historically, but today WHATWG and W3C maintain the spec through a consensus process. Browser vendors participate but the spec is not just post-hoc documentation."
+      },
+      {
+        "optionText": "The spec and browser implementation are identical — HTML is a binary standard with no room for variation.",
+        "isCorrect": false,
+        "explanation": "HTML is not a binary standard. Browser implementations differ in edge cases, performance, and feature support. Cross-browser testing remains essential."
+      }
+    ]
+  },
+  {
+    "topic": "html5",
+    "question": "What is an HTML preprocessor and have you used one?",
+    "options": [
+      {
+        "optionText": "A tool that compiles an extended markup syntax to HTML — e.g. Pug (indentation-based), Haml, or JSX (React's HTML-in-JS extension).",
+        "isCorrect": true,
+        "explanation": "Correct — preprocessors reduce repetition with includes, variables, and loops. JSX is the most common today, compiled by Babel/SWC as part of the React build."
+      },
+      {
+        "optionText": "A browser extension that reformats HTML source code for readability.",
+        "isCorrect": false,
+        "explanation": "Browser extensions (Prettier, HTML formatter) format code in the editor — they don't preprocess it into different HTML. Preprocessors transform syntax at build time."
+      },
+      {
+        "optionText": "A server that sends pre-compressed HTML responses to reduce transfer size.",
+        "isCorrect": false,
+        "explanation": "Gzip/Brotli compression handles transfer size. HTML preprocessors transform markup syntax (Pug, JSX) into standard HTML at build time."
+      },
+      {
+        "optionText": "HTML has no preprocessors — only CSS (Sass) and JavaScript (TypeScript) can be preprocessed.",
+        "isCorrect": false,
+        "explanation": "HTML preprocessors exist and are widely used — JSX is the most prominent. Pug, Haml, and Nunjucks are also HTML preprocessors."
+      }
+    ]
+  },
+  {
+    "topic": "html5",
+    "question": "When is it appropriate to use the <small> element?",
+    "options": [
+      {
+        "optionText": "For fine print, legal disclaimers, and side comments — secondary content that is subsidiary to the main text.",
+        "isCorrect": true,
+        "explanation": "Correct — <small> has semantic meaning: side comments and fine print. It renders smaller by default but should be chosen for semantics, not just font size (use CSS for that)."
+      },
+      {
+        "optionText": "Whenever you want smaller font size — it's a presentational element like <b> or <i>.",
+        "isCorrect": false,
+        "explanation": "Use CSS font-size for visual size changes. <small> is semantic — it marks fine print and disclaimers, not arbitrary smaller text."
+      },
+      {
+        "optionText": "<small> is deprecated in HTML5 — use CSS font-size: small instead.",
+        "isCorrect": false,
+        "explanation": "<small> was repurposed in HTML5 with semantic meaning (fine print). It's valid HTML5; only its purely presentational role from HTML4 is discouraged."
+      },
+      {
+        "optionText": "For captions below images — it's equivalent to <figcaption>.",
+        "isCorrect": false,
+        "explanation": "<figcaption> is the correct element for image captions. <small> is for legal fine print and disclaimers within text."
+      }
+    ]
+  },
+  {
+    "topic": "html5",
+    "question": "How do you change the direction of HTML text?",
+    "options": [
+      {
+        "optionText": "Use the dir attribute: dir='rtl' for Arabic/Hebrew, dir='ltr' for left-to-right. The <bdi> and <bdo> elements also control bidirectional text.",
+        "isCorrect": true,
+        "explanation": "Correct — set dir='rtl' on <html> for RTL pages. <bdi> isolates a span of text from surrounding direction; <bdo> forces a specific direction."
+      },
+      {
+        "optionText": "Use CSS text-align: right — this reverses text direction for RTL languages.",
+        "isCorrect": false,
+        "explanation": "text-align: right aligns text to the right margin but doesn't reverse character order for RTL scripts. Use dir='rtl' for proper bidirectional text."
+      },
+      {
+        "optionText": "Use the <rtl> HTML element introduced in HTML5 for right-to-left content.",
+        "isCorrect": false,
+        "explanation": "There is no <rtl> element. Use the dir attribute on any element or the <bdi>/<bdo> elements for bidirectional control."
+      },
+      {
+        "optionText": "JavaScript must reverse the string — HTML has no built-in RTL support.",
+        "isCorrect": false,
+        "explanation": "HTML has built-in RTL support via the dir attribute and Unicode Bidirectional Algorithm. No JavaScript is needed for proper RTL text."
+      }
+    ]
+  },
+  {
+    "topic": "html5",
+    "question": "What is an optional tag?",
+    "options": [
+      {
+        "optionText": "Tags the HTML parser can infer and that may legally be omitted — e.g. </li>, </td>, <html>, <head>, <body>.",
+        "isCorrect": true,
+        "explanation": "Correct — the HTML5 spec explicitly lists optional tags. Omitting them is valid but most style guides recommend keeping them for readability."
+      },
+      {
+        "optionText": "HTML5 attributes that have default values and don't need to be specified.",
+        "isCorrect": false,
+        "explanation": "Optional attributes (like type='text' on inputs) are a different concept. Optional tags are elements whose opening/closing tags can be omitted from the source."
+      },
+      {
+        "optionText": "Deprecated HTML4 tags that browsers still support but shouldn't be used.",
+        "isCorrect": false,
+        "explanation": "Deprecated elements (like <font>, <center>) are discouraged but not optional in the specification sense. Optional tags are those the parser can infer."
+      },
+      {
+        "optionText": "Self-closing tags like <br> and <img> — they're optional to close.",
+        "isCorrect": false,
+        "explanation": "Self-closing void elements (<br>, <img>) are a different concept — they can never have children. Optional tags are tags whose presence can be entirely omitted."
+      }
+    ]
+  },
+  {
+    "topic": "html5",
+    "question": "How do you set IE compatibility mode?",
+    "options": [
+      {
+        "optionText": "<meta http-equiv='X-UA-Compatible' content='IE=edge'> — forces IE to use its highest available rendering engine.",
+        "isCorrect": true,
+        "explanation": "Correct — IE=edge prevents IE from falling back to compatibility view. It's legacy configuration; modern projects only support evergreen browsers and can omit this."
+      },
+      {
+        "optionText": "Add a conditional comment: <!--[if IE]><html class='ie'><![endif]--> to target IE.",
+        "isCorrect": false,
+        "explanation": "Conditional comments control IE-specific HTML but don't set compatibility mode. The X-UA-Compatible meta tag controls which IE rendering engine is used."
+      },
+      {
+        "optionText": "Use document.compatMode = 'IE9' in JavaScript to switch modes at runtime.",
+        "isCorrect": false,
+        "explanation": "document.compatMode is read-only — it reports the current mode, not sets it. Use the X-UA-Compatible meta tag or HTTP header to set IE compat mode."
+      },
+      {
+        "optionText": "IE compatibility mode is set automatically based on the DOCTYPE — no developer action needed.",
+        "isCorrect": false,
+        "explanation": "DOCTYPE controls standards vs quirks mode. IE compatibility mode is a separate IE-specific feature requiring the X-UA-Compatible meta tag or header."
+      }
+    ]
+  },
+  {
+    "topic": "html5",
+    "question": "Why is it generally a good idea to position CSS <link>s between <head> and JS <script>s just before </body>? Do you know any exceptions?",
+    "options": [
+      {
+        "optionText": "CSS in <head> prevents FOUC; scripts before </body> let the DOM parse first. Exception: use defer/async on <script> in <head> instead.",
+        "isCorrect": true,
+        "explanation": "Correct — render-blocking CSS must load before paint. defer scripts download in parallel and execute after DOM parse — cleaner than moving scripts to the bottom."
+      },
+      {
+        "optionText": "CSS must be in <head> because the browser rejects stylesheets found elsewhere in the document.",
+        "isCorrect": false,
+        "explanation": "Browsers accept CSS links anywhere but defer rendering until CSSOM is built. Positioning in <head> is a best practice for performance, not a strict requirement."
+      },
+      {
+        "optionText": "Scripts before </body> prevent them from blocking CSS downloads.",
+        "isCorrect": false,
+        "explanation": "Modern browsers can parallelise CSS and script downloads. Scripts block HTML parsing, not CSS downloads. defer on <script> in <head> is the modern best practice."
+      },
+      {
+        "optionText": "There are no exceptions — this rule is absolute in HTML5.",
+        "isCorrect": false,
+        "explanation": "async and defer are important exceptions — they allow <script> to stay in <head> without blocking parsing. Critical inline scripts may also need to be in <head>."
+      }
+    ]
+  },
+  {
+    "topic": "html5",
+    "question": "Could you generate a public key in HTML?",
+    "options": [
+      {
+        "optionText": "The <keygen> element was designed for this but is now deprecated — use the Web Crypto API (window.crypto.subtle) instead.",
+        "isCorrect": true,
+        "explanation": "Correct — <keygen> generated a key pair and submitted the public key via a form. It's removed from the spec. The Web Crypto API is the modern, secure alternative."
+      },
+      {
+        "optionText": "Yes, using <input type='publickey'> — a new HTML5 input type for cryptographic keys.",
+        "isCorrect": false,
+        "explanation": "There is no type='publickey' input. Key generation requires JavaScript via the Web Crypto API (window.crypto.subtle.generateKey)."
+      },
+      {
+        "optionText": "HTML cannot generate keys — this requires a server-side language like PHP or Node.js.",
+        "isCorrect": false,
+        "explanation": "The Web Crypto API (window.crypto.subtle) enables client-side key generation in JavaScript. Server-side generation is one option but not the only one."
+      },
+      {
+        "optionText": "<keygen> is still the recommended HTML5 element for key generation in all modern browsers.",
+        "isCorrect": false,
+        "explanation": "<keygen> is deprecated and removed from all major browsers. Use the Web Crypto API for key generation in modern web applications."
+      }
+    ]
+  },
+  {
+    "topic": "html5",
+    "question": "What is an HTML preprocessor and are you using it?",
+    "options": [
+      {
+        "optionText": "A tool compiling extended markup to HTML — JSX (React/Next.js), Pug, and Haml are common. JSX is used in all modern React projects.",
+        "isCorrect": true,
+        "explanation": "Correct — JSX is the de-facto HTML preprocessor for React. It adds component composition and expressions to markup, compiled at build time by SWC or Babel."
+      },
+      {
+        "optionText": "A minifier that removes whitespace from HTML files — equivalent to UglifyJS for HTML.",
+        "isCorrect": false,
+        "explanation": "HTML minifiers reduce file size but don't transform syntax. Preprocessors like Pug and JSX introduce new markup syntax compiled to standard HTML."
+      },
+      {
+        "optionText": "A browser feature that pre-processes HTML before rendering to fix validation errors.",
+        "isCorrect": false,
+        "explanation": "Browsers have error-correction parsers but these are not 'preprocessors'. HTML preprocessors are build-time tools that transform extended syntax."
+      },
+      {
+        "optionText": "HTML preprocessors are no longer used — modern frameworks like React use plain HTML directly.",
+        "isCorrect": false,
+        "explanation": "React uses JSX, which is an HTML preprocessor. JSX is compiled by SWC/Babel on every build. HTML templating and preprocessing is more common than ever."
+      }
+    ]
   }
 ]

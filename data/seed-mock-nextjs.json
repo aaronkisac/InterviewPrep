@@ -544,5 +544,31 @@
         "explanation": "next.config.js is actively read at build time and affects how the app is built, rendered, and served."
       }
     ]
+  },
+  {
+    "topic": "nextjs",
+    "question": "How do you use TypeScript with Next.js?",
+    "options": [
+      {
+        "optionText": "Next.js has built-in TypeScript support — add a tsconfig.json and rename files to .ts/.tsx; the compiler is configured automatically.",
+        "isCorrect": true,
+        "explanation": "Correct — Next.js detects tsconfig.json and configures itself. create-next-app --typescript scaffolds everything. No extra webpack config needed."
+      },
+      {
+        "optionText": "Install ts-loader and add it to next.config.js — Next.js doesn't support TypeScript natively.",
+        "isCorrect": false,
+        "explanation": "Next.js has first-class TypeScript support since v9. No ts-loader or manual webpack config is needed."
+      },
+      {
+        "optionText": "TypeScript only works in Next.js Pages Router — App Router requires plain JavaScript.",
+        "isCorrect": false,
+        "explanation": "Both routers fully support TypeScript. App Router even provides generated types for route params and searchParams."
+      },
+      {
+        "optionText": "Use Babel with @babel/preset-typescript — tsc is not used in Next.js projects.",
+        "isCorrect": false,
+        "explanation": "Next.js uses SWC (not Babel) for TypeScript transpilation by default, and tsc for type checking via next build."
+      }
+    ]
   }
 ]

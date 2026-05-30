@@ -414,5 +414,291 @@
         "explanation": "A Kanban board can be physical or digital — but Kanban is the entire workflow management methodology, not just the board."
       }
     ]
+  },
+  {
+    "topic": "agile-scrum",
+    "question": "What is Sprint Planning?",
+    "options": [
+      {
+        "optionText": "A Scrum event at the start of each Sprint where the team defines the Sprint Goal and selects backlog items to deliver.",
+        "isCorrect": true,
+        "explanation": "Correct — Sprint Planning has two parts: What can be done (Sprint Goal + selected items) and How it will be done (tasks/design). Time-boxed to 8h for a 4-week Sprint."
+      },
+      {
+        "optionText": "A meeting where the Product Owner assigns tasks to individual developers for the upcoming Sprint.",
+        "isCorrect": false,
+        "explanation": "In Scrum, the Development Team self-organises and pulls work — the PO does not assign tasks to individuals."
+      },
+      {
+        "optionText": "A weekly recurring event where the team updates their estimates on the backlog.",
+        "isCorrect": false,
+        "explanation": "Backlog refinement is a separate ongoing activity. Sprint Planning happens once per Sprint to plan that Sprint's work."
+      },
+      {
+        "optionText": "A ceremony where the Scrum Master reviews team velocity and sets the Sprint capacity.",
+        "isCorrect": false,
+        "explanation": "The whole Scrum Team participates in Sprint Planning — not just the Scrum Master. Velocity informs capacity but the team makes commitments collaboratively."
+      }
+    ]
+  },
+  {
+    "topic": "agile-scrum",
+    "question": "What is Acceptance Criteria?",
+    "options": [
+      {
+        "optionText": "Conditions a User Story must satisfy to be accepted as complete — defined by the Product Owner before development.",
+        "isCorrect": true,
+        "explanation": "Correct — AC is written in concrete, testable terms (Given/When/Then or checklist). They prevent ambiguity and define the boundary of 'done' for a story."
+      },
+      {
+        "optionText": "The technical code review checklist the development team uses before merging a PR.",
+        "isCorrect": false,
+        "explanation": "Code review checklists are internal team agreements. Acceptance Criteria are business-facing conditions defined by the Product Owner."
+      },
+      {
+        "optionText": "The minimum performance benchmarks (latency, uptime) a feature must meet in production.",
+        "isCorrect": false,
+        "explanation": "Performance benchmarks may be part of AC but AC is broader — any condition the story must satisfy including functional behaviour."
+      },
+      {
+        "optionText": "The process of a senior developer accepting or rejecting another developer's work in a sprint.",
+        "isCorrect": false,
+        "explanation": "AC are predefined conditions, not a person's approval. The PO accepts a story when all AC are verified."
+      }
+    ]
+  },
+  {
+    "topic": "agile-scrum",
+    "question": "What is an Agile iteration?",
+    "options": [
+      {
+        "optionText": "A short, fixed-length development cycle (1–4 weeks) at the end of which potentially shippable software is produced.",
+        "isCorrect": true,
+        "explanation": "Correct — called a Sprint in Scrum. Each iteration starts with planning and ends with a working increment, enabling regular inspection and adaptation."
+      },
+      {
+        "optionText": "A loop in code that repeats a block — Agile borrowed the term from programming.",
+        "isCorrect": false,
+        "explanation": "In Agile, iteration is a time-boxed development cycle, not a code loop. The metaphor is about repeating the build-test-review cycle."
+      },
+      {
+        "optionText": "A six-month release cycle where all features are developed then released together.",
+        "isCorrect": false,
+        "explanation": "Six-month cycles describe Waterfall or traditional release planning. Agile iterations are short (1–4 weeks) to enable frequent feedback."
+      },
+      {
+        "optionText": "A meeting where the team iterates through the backlog prioritising each item.",
+        "isCorrect": false,
+        "explanation": "Backlog prioritisation happens in refinement sessions. An iteration is a full development cycle, not a meeting."
+      }
+    ]
+  },
+  {
+    "topic": "agile-scrum",
+    "question": "What is a Sprint Review?",
+    "options": [
+      {
+        "optionText": "An end-of-Sprint event where the team demos the Increment to stakeholders and collaboratively updates the Product Backlog.",
+        "isCorrect": true,
+        "explanation": "Correct — the Sprint Review is an inspect-and-adapt event for the product. It's not a status report — it's a working session to decide what to do next."
+      },
+      {
+        "optionText": "An internal team retrospective to review what went well and what to improve.",
+        "isCorrect": false,
+        "explanation": "That describes the Sprint Retrospective. The Sprint Review focuses on the product Increment and involves stakeholders."
+      },
+      {
+        "optionText": "A code review session where senior developers approve all PRs from the Sprint.",
+        "isCorrect": false,
+        "explanation": "Code reviews happen continuously during the Sprint. The Sprint Review is a product demo and backlog discussion, not a code review."
+      },
+      {
+        "optionText": "A meeting where the Scrum Master reviews the team's velocity against the Sprint commitment.",
+        "isCorrect": false,
+        "explanation": "Velocity review is informational and part of planning discussions. The Sprint Review is about inspecting the Increment with stakeholders."
+      }
+    ]
+  },
+  {
+    "topic": "agile-scrum",
+    "question": "What are the Scrum Values?",
+    "options": [
+      {
+        "optionText": "Commitment, Courage, Focus, Openness, and Respect — the five values that underpin Scrum team behaviour.",
+        "isCorrect": true,
+        "explanation": "Correct — these values guide how team members work together. Without them, Scrum events and artifacts become hollow ceremonies."
+      },
+      {
+        "optionText": "Individuals over processes, Working software, Customer collaboration, Responding to change.",
+        "isCorrect": false,
+        "explanation": "Those are the four values of the Agile Manifesto, not the five Scrum Values."
+      },
+      {
+        "optionText": "Transparency, Inspection, Adaptation — the three pillars of Scrum.",
+        "isCorrect": false,
+        "explanation": "Transparency, Inspection, and Adaptation are the three empirical pillars of Scrum, not the five Scrum Values."
+      },
+      {
+        "optionText": "Sprint, Backlog, Increment, Velocity, Retrospective.",
+        "isCorrect": false,
+        "explanation": "Those are Scrum artifacts and events. The Scrum Values are Commitment, Courage, Focus, Openness, and Respect."
+      }
+    ]
+  },
+  {
+    "topic": "agile-scrum",
+    "question": "What are the roles and responsibilities of a Scrum Master?",
+    "options": [
+      {
+        "optionText": "A servant-leader who coaches the team on Scrum, removes impediments, and facilitates Scrum events — not a project manager.",
+        "isCorrect": true,
+        "explanation": "Correct — the Scrum Master has no authority over the team. They protect the team from external interference and help the organisation adopt Scrum."
+      },
+      {
+        "optionText": "The Scrum Master assigns tasks, tracks individual performance, and reports to management.",
+        "isCorrect": false,
+        "explanation": "That describes a traditional project manager role. The Scrum Master does not assign tasks or manage individuals."
+      },
+      {
+        "optionText": "The Scrum Master owns the Product Backlog and prioritises items for each Sprint.",
+        "isCorrect": false,
+        "explanation": "The Product Owner owns and prioritises the backlog. The Scrum Master focuses on the team's process, not the product."
+      },
+      {
+        "optionText": "The Scrum Master is the technical lead who makes architecture decisions for the team.",
+        "isCorrect": false,
+        "explanation": "Technical decisions belong to the Development Team. The Scrum Master is a process coach, not a technical authority."
+      }
+    ]
+  },
+  {
+    "topic": "agile-scrum",
+    "question": "What is a Scrum Increment?",
+    "options": [
+      {
+        "optionText": "The sum of all completed Product Backlog items from the current Sprint plus all previous Increments — must meet the Definition of Done.",
+        "isCorrect": true,
+        "explanation": "Correct — the Increment is cumulative and must be potentially releasable. It's not just what was built this Sprint but the total working product."
+      },
+      {
+        "optionText": "The number of story points completed in a Sprint — used to measure team velocity.",
+        "isCorrect": false,
+        "explanation": "Story points measure effort; the Increment is the actual working product. Velocity is derived from story points, not from the Increment itself."
+      },
+      {
+        "optionText": "A document listing all features added during the Sprint for stakeholder sign-off.",
+        "isCorrect": false,
+        "explanation": "The Increment is working software, not documentation. Stakeholder sign-off happens in the Sprint Review but the Increment itself is the product."
+      },
+      {
+        "optionText": "The delta — only the new features built in the current Sprint, not including previous work.",
+        "isCorrect": false,
+        "explanation": "The Increment is cumulative — it includes everything built in this and all previous Sprints. Each Sprint adds to the total working product."
+      }
+    ]
+  },
+  {
+    "topic": "agile-scrum",
+    "question": "What is Scrum Theory based on?",
+    "options": [
+      {
+        "optionText": "Empirical process control — knowledge comes from experience, and decisions are based on what is known via Transparency, Inspection, and Adaptation.",
+        "isCorrect": true,
+        "explanation": "Correct — Scrum's three pillars (Transparency, Inspection, Adaptation) implement empiricism. This is why Scrum uses short Sprints: to get real feedback frequently."
+      },
+      {
+        "optionText": "Lean manufacturing principles from Toyota — eliminate waste, optimise flow.",
+        "isCorrect": false,
+        "explanation": "Lean and Kanban borrow from Toyota. Scrum's theoretical foundation is empirical process control, not lean manufacturing."
+      },
+      {
+        "optionText": "Waterfall with shorter phases — Scrum breaks one large plan into smaller sequential plans.",
+        "isCorrect": false,
+        "explanation": "Scrum is fundamentally different from Waterfall. It is iterative and adaptive — the plan evolves based on what is learned each Sprint."
+      },
+      {
+        "optionText": "Complexity theory — Scrum accepts that software projects are chaotic and uses strict rules to control chaos.",
+        "isCorrect": false,
+        "explanation": "Scrum acknowledges complexity but its foundation is empiricism, not chaos theory. The Cynefin framework associates Scrum with complex (not chaotic) domains."
+      }
+    ]
+  },
+  {
+    "topic": "agile-scrum",
+    "question": "Why is Continuous Integration important for Agile?",
+    "options": [
+      {
+        "optionText": "CI enables frequent delivery of working software by catching integration issues early — aligning with Agile's core principle of working software over documentation.",
+        "isCorrect": true,
+        "explanation": "Correct — without CI, merging code from multiple developers creates integration debt. CI ensures the codebase is always in a shippable state each Sprint."
+      },
+      {
+        "optionText": "CI replaces Sprint Planning — teams no longer need to plan because the pipeline manages deployments automatically.",
+        "isCorrect": false,
+        "explanation": "CI automates build and test, not planning. Sprint Planning, backlog refinement, and team alignment are still essential in Agile."
+      },
+      {
+        "optionText": "CI is only relevant for DevOps teams — Agile teams without infrastructure access don't benefit.",
+        "isCorrect": false,
+        "explanation": "CI benefits any team writing code collaboratively. It's a core Extreme Programming (XP) practice adopted across Agile methodologies."
+      },
+      {
+        "optionText": "CI is a Waterfall concept adapted for Agile — it ensures the final integration phase runs smoothly.",
+        "isCorrect": false,
+        "explanation": "CI was coined by Martin Fowler and popularised by XP as an Agile practice. It actively eliminates the 'final integration phase' of Waterfall."
+      }
+    ]
+  },
+  {
+    "topic": "agile-scrum",
+    "question": "What are the 12 Agile Principles?",
+    "options": [
+      {
+        "optionText": "Principles from the Agile Manifesto covering: early delivery, welcoming change, frequent working software, collaboration, motivated teams, face-to-face communication, working software as progress, sustainable pace, technical excellence, simplicity, self-organisation, and reflection.",
+        "isCorrect": true,
+        "explanation": "Correct — the 12 principles elaborate on the 4 Agile values. They emphasise continuous delivery, embracing change, and close collaboration between business and developers."
+      },
+      {
+        "optionText": "The 12 steps of a Sprint: Planning, Day 1–10 standups, Review, Retrospective.",
+        "isCorrect": false,
+        "explanation": "Those are Scrum events, not the 12 Agile Principles. The principles are philosophical guidelines from the Agile Manifesto, not a Sprint schedule."
+      },
+      {
+        "optionText": "Rules from the Scrum Guide defining how the Scrum framework must be implemented.",
+        "isCorrect": false,
+        "explanation": "The 12 Agile Principles come from the Agile Manifesto (2001), not the Scrum Guide. They apply across all Agile frameworks, not just Scrum."
+      },
+      {
+        "optionText": "The SOLID principles applied to Agile team organisation.",
+        "isCorrect": false,
+        "explanation": "SOLID is a set of OOP design principles. The 12 Agile Principles are about software development philosophy and team collaboration."
+      }
+    ]
+  },
+  {
+    "topic": "agile-scrum",
+    "question": "What is the difference between Extreme Programming (XP) and Scrum?",
+    "options": [
+      {
+        "optionText": "Scrum defines team process (roles, events, artifacts); XP defines engineering practices (TDD, pair programming, CI, refactoring).",
+        "isCorrect": true,
+        "explanation": "Correct — they complement each other well. Many teams use Scrum for structure and XP practices for technical excellence. Both are iterative and Agile."
+      },
+      {
+        "optionText": "XP uses 2-week Sprints; Scrum uses 4-week Sprints — the only difference is iteration length.",
+        "isCorrect": false,
+        "explanation": "Both frameworks allow variable iteration lengths. The real difference is scope: Scrum is a process framework, XP prescribes specific engineering practices."
+      },
+      {
+        "optionText": "XP is a project management methodology; Scrum is a software development framework.",
+        "isCorrect": false,
+        "explanation": "It's the reverse — Scrum is more of a project/team management framework; XP focuses on software engineering practices like TDD and pair programming."
+      },
+      {
+        "optionText": "XP has replaced Scrum in modern organisations because it provides more technical guidance.",
+        "isCorrect": false,
+        "explanation": "Both coexist. Scrum is more widely adopted for team organisation; XP practices like TDD and CI are used within Scrum teams to improve code quality."
+      }
+    ]
   }
 ]

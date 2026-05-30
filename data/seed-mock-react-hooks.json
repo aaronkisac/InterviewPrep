@@ -414,5 +414,343 @@
         "explanation": "Hooks cover state, effects, context, refs, reducers, memoization, and more — far beyond just state and lifecycle."
       }
     ]
+  },
+  {
+    "topic": "react-hooks",
+    "question": "Which lifecycle methods of class components are replaced by useEffect in functional components?",
+    "options": [
+      {
+        "optionText": "componentDidMount (empty deps), componentDidUpdate (specific deps), and componentWillUnmount (cleanup function).",
+        "isCorrect": true,
+        "explanation": "Correct — useEffect unifies three lifecycle methods. The cleanup function returned by useEffect runs on unmount and before each re-run."
+      },
+      {
+        "optionText": "Only componentDidMount — useEffect cannot replicate update or unmount behaviour.",
+        "isCorrect": false,
+        "explanation": "useEffect handles all three: mount (empty deps []), update (specific deps), and unmount (return cleanup). It's a unified API."
+      },
+      {
+        "optionText": "shouldComponentUpdate — useEffect controls when a component re-renders.",
+        "isCorrect": false,
+        "explanation": "shouldComponentUpdate controls re-render optimisation, which is handled by React.memo and useMemo — not useEffect."
+      },
+      {
+        "optionText": "componentWillMount and componentWillReceiveProps — the deprecated lifecycle methods.",
+        "isCorrect": false,
+        "explanation": "Those deprecated methods are not replaced by useEffect. useEffect handles mount, update, and unmount — not the legacy willMount/willReceiveProps patterns."
+      }
+    ]
+  },
+  {
+    "topic": "react-hooks",
+    "question": "What is batching in React and what are its advantages?",
+    "options": [
+      {
+        "optionText": "React groups multiple state updates from the same event into one re-render — React 18 extends this to async and setTimeout too.",
+        "isCorrect": true,
+        "explanation": "Correct — before React 18, batching only happened in event handlers. React 18's automatic batching covers promises, setTimeout, and native events, reducing renders."
+      },
+      {
+        "optionText": "Batching splits a large component into smaller chunks to improve code-splitting performance.",
+        "isCorrect": false,
+        "explanation": "That describes code splitting with React.lazy/Suspense. Batching is about grouping multiple state updates into a single render."
+      },
+      {
+        "optionText": "Batching means React pre-fetches data for the next render before the current one completes.",
+        "isCorrect": false,
+        "explanation": "Pre-fetching is unrelated to batching. Batching is the consolidation of multiple setState calls into one re-render cycle."
+      },
+      {
+        "optionText": "Batching only works with class components — functional components with hooks render immediately on each setState.",
+        "isCorrect": false,
+        "explanation": "Batching works with hooks. React 18 made automatic batching universal — it applies to useState, useReducer, and any state update."
+      }
+    ]
+  },
+  {
+    "topic": "react-hooks",
+    "question": "Does React useState Hook update immediately?",
+    "options": [
+      {
+        "optionText": "No — state updates are asynchronous. The new value is not available until the next render.",
+        "isCorrect": true,
+        "explanation": "Correct — calling setState schedules a re-render. Reading state immediately after calling the setter still returns the old value. Use the functional update form for derived state."
+      },
+      {
+        "optionText": "Yes — useState updates synchronously, so you can read the new value immediately after calling the setter.",
+        "isCorrect": false,
+        "explanation": "State updates are not synchronous. The setter schedules a re-render — the new value is only available after React re-renders the component."
+      },
+      {
+        "optionText": "It depends — useState is synchronous in event handlers but asynchronous in useEffect.",
+        "isCorrect": false,
+        "explanation": "useState is always asynchronous regardless of where the setter is called. The update is batched and applied on the next render."
+      },
+      {
+        "optionText": "useState updates immediately only when used with the functional update form: setState(prev => prev + 1).",
+        "isCorrect": false,
+        "explanation": "The functional form ensures you use the latest state as input, but the update itself is still asynchronous — not immediately available."
+      }
+    ]
+  },
+  {
+    "topic": "react-hooks",
+    "question": "How do I update state on a nested object with useState()?",
+    "options": [
+      {
+        "optionText": "Spread the previous state and override only the changed fields: setState(prev => ({ ...prev, address: { ...prev.address, city: 'London' } }))",
+        "isCorrect": true,
+        "explanation": "Correct — useState does not deep-merge like class component setState. You must spread all levels to avoid overwriting sibling fields."
+      },
+      {
+        "optionText": "Call setState multiple times, once for each field — React will merge them automatically.",
+        "isCorrect": false,
+        "explanation": "useState replaces state entirely on each call — it doesn't merge. Multiple calls will batch but each replaces the whole state object."
+      },
+      {
+        "optionText": "Use Object.assign(prevState, { city: 'London' }) — this mutates the object in place safely.",
+        "isCorrect": false,
+        "explanation": "Mutating state directly is forbidden in React. Always create a new object reference; React uses reference equality to detect changes."
+      },
+      {
+        "optionText": "Use useReducer instead — useState cannot handle nested objects.",
+        "isCorrect": false,
+        "explanation": "useState can handle nested objects — you just need to spread correctly. useReducer helps with complex update logic but isn't required for nested state."
+      }
+    ]
+  },
+  {
+    "topic": "react-hooks",
+    "question": "Are there any problems when using useCallback?",
+    "options": [
+      {
+        "optionText": "Yes — useCallback adds memoisation overhead and only helps when the child is wrapped in React.memo; overusing it can hurt performance.",
+        "isCorrect": true,
+        "explanation": "Correct — useCallback is a premature optimisation if the child re-renders anyway. Profile first; add useCallback only when measurable benefit exists."
+      },
+      {
+        "optionText": "No — useCallback always improves performance by preventing unnecessary function recreation.",
+        "isCorrect": false,
+        "explanation": "useCallback itself has a cost: comparing dependencies on every render. If the wrapped function is cheap, useCallback adds overhead without benefit."
+      },
+      {
+        "optionText": "useCallback can cause memory leaks by holding stale references to DOM nodes.",
+        "isCorrect": false,
+        "explanation": "Memory leaks from stale references are a useEffect concern (forgotten cleanup). useCallback memoises functions but doesn't retain DOM nodes."
+      },
+      {
+        "optionText": "useCallback breaks if the dependency array is empty — it must always list its dependencies.",
+        "isCorrect": false,
+        "explanation": "An empty dependency array is valid — it memoises the function for the component's lifetime. The linter may warn but it doesn't break."
+      }
+    ]
+  },
+  {
+    "topic": "react-hooks",
+    "question": "When would you want to avoid useEffect and use useLayoutEffect instead?",
+    "options": [
+      {
+        "optionText": "When you need to read or write DOM measurements before the browser paints — to avoid visible layout flicker.",
+        "isCorrect": true,
+        "explanation": "Correct — useLayoutEffect fires synchronously after DOM mutations but before paint. Use it for tooltips, scroll restoration, or measuring element sizes."
+      },
+      {
+        "optionText": "When fetching data — useLayoutEffect is faster than useEffect for API calls.",
+        "isCorrect": false,
+        "explanation": "useLayoutEffect blocks painting and should never be used for data fetching. Use useEffect or server-side data loading for async operations."
+      },
+      {
+        "optionText": "When you want effects to run only once — useLayoutEffect ignores the dependency array.",
+        "isCorrect": false,
+        "explanation": "useLayoutEffect uses the same dependency array API as useEffect. Pass [] for mount-only, specific deps for updates."
+      },
+      {
+        "optionText": "Always — useLayoutEffect is a strict replacement for useEffect with better timing.",
+        "isCorrect": false,
+        "explanation": "useLayoutEffect blocks the browser paint and can hurt performance. Use it only when visual consistency requires synchronous DOM reads before paint."
+      }
+    ]
+  },
+  {
+    "topic": "react-hooks",
+    "question": "When would you use flushSync in React?",
+    "options": [
+      {
+        "optionText": "When you need DOM updates to apply synchronously before continuing — e.g. scrolling to a newly added item immediately after adding it.",
+        "isCorrect": true,
+        "explanation": "Correct — flushSync opts out of batching for a specific update. Common use cases: third-party DOM libraries, scroll-to-new-item, or animations that depend on immediate state."
+      },
+      {
+        "optionText": "To flush stale cache entries from React Query or SWR.",
+        "isCorrect": false,
+        "explanation": "flushSync is a React DOM API for synchronous rendering — it has nothing to do with data cache invalidation in React Query or SWR."
+      },
+      {
+        "optionText": "flushSync should replace useEffect cleanup to synchronously cancel async operations.",
+        "isCorrect": false,
+        "explanation": "Cancelling async operations uses AbortController inside useEffect cleanup. flushSync forces synchronous DOM updates, not async cancellation."
+      },
+      {
+        "optionText": "flushSync is required when updating state in setTimeout — automatic batching doesn't work there.",
+        "isCorrect": false,
+        "explanation": "React 18 automatic batching covers setTimeout. flushSync is for the rare case you need synchronous DOM mutation, not to work around batching."
+      }
+    ]
+  },
+  {
+    "topic": "react-hooks",
+    "question": "How can I force a component to re-render with Hooks in React?",
+    "options": [
+      {
+        "optionText": "Use a dummy state counter: const [, forceRender] = useReducer(n => n + 1, 0) — call forceRender() to trigger a re-render.",
+        "isCorrect": true,
+        "explanation": "Correct — this is the idiomatic hooks pattern for forced re-renders. That said, needing a forced re-render usually indicates a state design problem worth revisiting."
+      },
+      {
+        "optionText": "Call this.forceUpdate() — it works in functional components with hooks.",
+        "isCorrect": false,
+        "explanation": "this.forceUpdate() is a class component API. Functional components have no this — use a state update to trigger a re-render."
+      },
+      {
+        "optionText": "Set a ref to a new value — changing a ref always triggers a re-render.",
+        "isCorrect": false,
+        "explanation": "Refs do not trigger re-renders. useRef mutations are invisible to React's rendering system — only state and prop changes cause re-renders."
+      },
+      {
+        "optionText": "Use ReactDOM.render() to re-mount the component from the outside.",
+        "isCorrect": false,
+        "explanation": "Re-mounting from outside destroys and recreates state. The idiomatic solution is an internal state update, not external re-mounting."
+      }
+    ]
+  },
+  {
+    "topic": "react-hooks",
+    "question": "What's the difference between useCallback and useMemo in practice?",
+    "options": [
+      {
+        "optionText": "useCallback memoises a function reference; useMemo memoises a computed value. useCallback(fn, deps) === useMemo(() => fn, deps).",
+        "isCorrect": true,
+        "explanation": "Correct — use useCallback when passing a stable callback to a memoised child; use useMemo when an expensive calculation should only recompute on specific dep changes."
+      },
+      {
+        "optionText": "useMemo is for functions; useCallback is for values — they are the reverse of each other.",
+        "isCorrect": false,
+        "explanation": "It's the opposite: useCallback memoises a function; useMemo memoises a value (the result of calling a function)."
+      },
+      {
+        "optionText": "useCallback works only with event handlers; useMemo works with any computation.",
+        "isCorrect": false,
+        "explanation": "useCallback can memoize any function, not just event handlers. The difference is what they return: a function vs a computed value."
+      },
+      {
+        "optionText": "They are interchangeable — pick whichever reads more clearly in context.",
+        "isCorrect": false,
+        "explanation": "While useCallback(fn, deps) is equivalent to useMemo(() => fn, deps), they signal different intent. Use the one that matches what you're memoising — function or value."
+      }
+    ]
+  },
+  {
+    "topic": "react-hooks",
+    "question": "When to use useCallback, useMemo, and useEffect?",
+    "options": [
+      {
+        "optionText": "useEffect: side effects & external sync. useMemo: expensive computations. useCallback: stable function references for memoised children.",
+        "isCorrect": true,
+        "explanation": "Correct — each has a clear domain. Mixing them (e.g. using useEffect for computation) leads to bugs. Start without memoisation and add useMemo/useCallback only when profiling shows benefit."
+      },
+      {
+        "optionText": "All three are interchangeable — use whichever makes the code most readable.",
+        "isCorrect": false,
+        "explanation": "They serve distinct purposes. useEffect manages side effects; useMemo and useCallback are optimisation tools. Using them interchangeably causes subtle bugs."
+      },
+      {
+        "optionText": "useCallback and useMemo should always be applied to every function and value for best performance.",
+        "isCorrect": false,
+        "explanation": "Over-memoising adds overhead from dependency comparisons. Apply useMemo/useCallback only where profiling shows a measurable win."
+      },
+      {
+        "optionText": "useEffect replaces useMemo — compute values inside useEffect and store them in state.",
+        "isCorrect": false,
+        "explanation": "Storing computed values in state via useEffect causes an extra render cycle. useMemo computes synchronously during render with no extra re-render."
+      }
+    ]
+  },
+  {
+    "topic": "react-hooks",
+    "question": "Is there any problem when using useContext Hook?",
+    "options": [
+      {
+        "optionText": "Yes — every consumer re-renders on any context value change, even if it uses only part of the value. Split contexts or memoize to fix.",
+        "isCorrect": true,
+        "explanation": "Correct — this is the main performance pitfall. Solutions: split into multiple contexts, use memo on consumers, or use a state manager like Zustand that supports fine-grained subscriptions."
+      },
+      {
+        "optionText": "No — useContext is optimised internally and only re-renders components that use changed fields.",
+        "isCorrect": false,
+        "explanation": "React does not track which fields a consumer reads. Any change to the context value triggers all consumers — field-level granularity must be implemented manually."
+      },
+      {
+        "optionText": "useContext causes infinite loops when used inside useEffect.",
+        "isCorrect": false,
+        "explanation": "useContext does not inherently cause infinite loops. Adding a context value to useEffect deps is fine as long as the context value is stable (memoised)."
+      },
+      {
+        "optionText": "useContext cannot be used in Server Components — it only works in Client Components.",
+        "isCorrect": false,
+        "explanation": "While React context requires Client Components in Next.js App Router, this is a framework constraint — not an inherent problem with useContext itself."
+      }
+    ]
+  },
+  {
+    "topic": "react-hooks",
+    "question": "How can I make use of Error Boundaries in functional React components?",
+    "options": [
+      {
+        "optionText": "Use a class component as the boundary (or a library like react-error-boundary), then wrap functional components with it.",
+        "isCorrect": true,
+        "explanation": "Correct — there are no error boundary hooks yet. react-error-boundary provides useErrorBoundary() and <ErrorBoundary> wrapper for functional components. In Next.js, error.tsx acts as a boundary."
+      },
+      {
+        "optionText": "Use try/catch inside the component body — this is the functional equivalent of Error Boundaries.",
+        "isCorrect": false,
+        "explanation": "try/catch cannot catch errors in JSX rendering or child components. Error Boundaries use componentDidCatch which has no hook equivalent."
+      },
+      {
+        "optionText": "Wrap the component in useErrorBoundary() from React core — it ships with React 18.",
+        "isCorrect": false,
+        "explanation": "useErrorBoundary is from the react-error-boundary library, not React core. React itself still requires class components for error boundary logic."
+      },
+      {
+        "optionText": "Use the onError prop available on every React component to catch child errors.",
+        "isCorrect": false,
+        "explanation": "There is no onError prop on React components. Error boundaries are implemented via class lifecycle methods or the react-error-boundary library."
+      }
+    ]
+  },
+  {
+    "topic": "react-hooks",
+    "question": "Can a custom React hook return JSX?",
+    "options": [
+      {
+        "optionText": "Technically yes, but it's an anti-pattern — returning JSX from a hook breaks composability and the separation between logic and rendering.",
+        "isCorrect": true,
+        "explanation": "Correct — if you need to return UI, create a component. Hooks should return data, state, and callbacks — not markup. Returning JSX from hooks confuses React's reconciler."
+      },
+      {
+        "optionText": "No — hooks can only return primitive values, arrays, or objects.",
+        "isCorrect": false,
+        "explanation": "Hooks can return anything technically. The restriction is a convention, not a runtime rule — returning JSX works but violates the hook/component separation."
+      },
+      {
+        "optionText": "Yes, and it's encouraged — this is the render prop pattern modernised for hooks.",
+        "isCorrect": false,
+        "explanation": "Render props return JSX from a prop function, not a hook. Custom hooks should handle logic; components should handle rendering."
+      },
+      {
+        "optionText": "Only if the hook name starts with useJSX — React validates hook names to enforce this.",
+        "isCorrect": false,
+        "explanation": "React only enforces that hook names start with 'use'. There is no useJSX convention — the restriction on returning JSX is a best practice, not enforced by React."
+      }
+    ]
   }
 ]

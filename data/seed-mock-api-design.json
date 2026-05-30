@@ -3,160 +3,1222 @@
     "topic": "api-design",
     "question": "What Is A REST API?",
     "options": [
-      { "optionText": "Representational State Transfer — POST is used to create a new resource.", "isCorrect": true, "explanation": "Correct — REST is an architectural style and POST is the conventional method for resource creation, returning 201 Created." },
-      { "optionText": "Remote Execution and State Transfer — PUT is used to create resources.", "isCorrect": false, "explanation": "REST stands for Representational State Transfer. PUT replaces an existing resource, not creates new ones by convention." },
-      { "optionText": "Representational State Transfer — GET is used to create resources by passing data in the URL.", "isCorrect": false, "explanation": "GET is for reading data only and must not modify state — use POST to create resources." },
-      { "optionText": "Resource Extraction and State Transfer — PATCH is used to create a resource.", "isCorrect": false, "explanation": "REST stands for Representational State Transfer and PATCH is for partial updates, not creation." }
+      {
+        "optionText": "Representational State Transfer — POST is used to create a new resource.",
+        "isCorrect": true,
+        "explanation": "Correct — REST is an architectural style and POST is the conventional method for resource creation, returning 201 Created."
+      },
+      {
+        "optionText": "Remote Execution and State Transfer — PUT is used to create resources.",
+        "isCorrect": false,
+        "explanation": "REST stands for Representational State Transfer. PUT replaces an existing resource, not creates new ones by convention."
+      },
+      {
+        "optionText": "Representational State Transfer — GET is used to create resources by passing data in the URL.",
+        "isCorrect": false,
+        "explanation": "GET is for reading data only and must not modify state — use POST to create resources."
+      },
+      {
+        "optionText": "Resource Extraction and State Transfer — PATCH is used to create a resource.",
+        "isCorrect": false,
+        "explanation": "REST stands for Representational State Transfer and PATCH is for partial updates, not creation."
+      }
     ]
   },
   {
     "topic": "api-design",
     "question": "What Are HTTP Status Codes And Why Do They Matter?",
     "options": [
-      { "optionText": "404 Not Found — the requested resource does not exist.", "isCorrect": true, "explanation": "Correct — 404 is the standard response when a resource cannot be found at the given URI." },
-      { "optionText": "400 Bad Request — the client made an error in their request.", "isCorrect": false, "explanation": "400 means the request itself is malformed (invalid syntax, missing fields) — not that the resource is absent." },
-      { "optionText": "200 OK with an empty body — the request succeeded but returned nothing.", "isCorrect": false, "explanation": "Returning 200 with an empty body for a missing resource hides the error — use 404 so clients know the resource doesn't exist." },
-      { "optionText": "500 Internal Server Error — the server could not locate the resource in time.", "isCorrect": false, "explanation": "500 means the server failed unexpectedly — a missing resource is the client's concern and should return 404." }
+      {
+        "optionText": "404 Not Found — the requested resource does not exist.",
+        "isCorrect": true,
+        "explanation": "Correct — 404 is the standard response when a resource cannot be found at the given URI."
+      },
+      {
+        "optionText": "400 Bad Request — the client made an error in their request.",
+        "isCorrect": false,
+        "explanation": "400 means the request itself is malformed (invalid syntax, missing fields) — not that the resource is absent."
+      },
+      {
+        "optionText": "200 OK with an empty body — the request succeeded but returned nothing.",
+        "isCorrect": false,
+        "explanation": "Returning 200 with an empty body for a missing resource hides the error — use 404 so clients know the resource doesn't exist."
+      },
+      {
+        "optionText": "500 Internal Server Error — the server could not locate the resource in time.",
+        "isCorrect": false,
+        "explanation": "500 means the server failed unexpectedly — a missing resource is the client's concern and should return 404."
+      }
     ]
   },
   {
     "topic": "api-design",
     "question": "What Is The Difference Between PUT And PATCH?",
     "options": [
-      { "optionText": "PUT replaces the entire resource; PATCH partially updates it with only the supplied fields.", "isCorrect": true, "explanation": "Correct — PUT requires a full representation and replaces; PATCH applies partial modifications." },
-      { "optionText": "PUT creates a new resource; PATCH updates an existing one.", "isCorrect": false, "explanation": "POST creates resources by convention — PUT replaces a resource at a known URL, PATCH partially updates it." },
-      { "optionText": "Both do the same thing; the choice is purely stylistic.", "isCorrect": false, "explanation": "They differ in semantics: PUT is replace-all, PATCH is partial update — using PUT for partial updates can delete fields." },
-      { "optionText": "PATCH is idempotent; PUT is not.", "isCorrect": false, "explanation": "PUT is defined as idempotent; PATCH may or may not be depending on implementation." }
+      {
+        "optionText": "PUT replaces the entire resource; PATCH partially updates it with only the supplied fields.",
+        "isCorrect": true,
+        "explanation": "Correct — PUT requires a full representation and replaces; PATCH applies partial modifications."
+      },
+      {
+        "optionText": "PUT creates a new resource; PATCH updates an existing one.",
+        "isCorrect": false,
+        "explanation": "POST creates resources by convention — PUT replaces a resource at a known URL, PATCH partially updates it."
+      },
+      {
+        "optionText": "Both do the same thing; the choice is purely stylistic.",
+        "isCorrect": false,
+        "explanation": "They differ in semantics: PUT is replace-all, PATCH is partial update — using PUT for partial updates can delete fields."
+      },
+      {
+        "optionText": "PATCH is idempotent; PUT is not.",
+        "isCorrect": false,
+        "explanation": "PUT is defined as idempotent; PATCH may or may not be depending on implementation."
+      }
     ]
   },
   {
     "topic": "api-design",
     "question": "What Is Rate Limiting And Why Should Every API Have It?",
     "options": [
-      { "optionText": "429 Too Many Requests, typically with a Retry-After header.", "isCorrect": true, "explanation": "Correct — 429 signals the client has exceeded the allowed request rate; Retry-After tells them when to try again." },
-      { "optionText": "503 Service Unavailable — the server is too busy to handle the request.", "isCorrect": false, "explanation": "503 means the server is down or overloaded (often temporarily) — 429 specifically signals rate limiting." },
-      { "optionText": "403 Forbidden — the client is not allowed to make this many requests.", "isCorrect": false, "explanation": "403 means the client is unauthorised for the resource — 429 is the specific code for rate limit exceeded." },
-      { "optionText": "400 Bad Request — the client is sending requests too frequently.", "isCorrect": false, "explanation": "400 indicates a malformed request — frequency issues are signalled with 429 Too Many Requests." }
+      {
+        "optionText": "429 Too Many Requests, typically with a Retry-After header.",
+        "isCorrect": true,
+        "explanation": "Correct — 429 signals the client has exceeded the allowed request rate; Retry-After tells them when to try again."
+      },
+      {
+        "optionText": "503 Service Unavailable — the server is too busy to handle the request.",
+        "isCorrect": false,
+        "explanation": "503 means the server is down or overloaded (often temporarily) — 429 specifically signals rate limiting."
+      },
+      {
+        "optionText": "403 Forbidden — the client is not allowed to make this many requests.",
+        "isCorrect": false,
+        "explanation": "403 means the client is unauthorised for the resource — 429 is the specific code for rate limit exceeded."
+      },
+      {
+        "optionText": "400 Bad Request — the client is sending requests too frequently.",
+        "isCorrect": false,
+        "explanation": "400 indicates a malformed request — frequency issues are signalled with 429 Too Many Requests."
+      }
     ]
   },
   {
     "topic": "api-design",
     "question": "What Is The Difference Between Authentication And Authorisation?",
     "options": [
-      { "optionText": "Authentication verifies who you are; authorisation determines what you're allowed to do.", "isCorrect": true, "explanation": "Correct — AuthN = identity (login), AuthZ = permissions (can this user delete this resource?)." },
-      { "optionText": "Authentication is server-side; authorisation is client-side.", "isCorrect": false, "explanation": "Both happen server-side — the distinction is about identity verification vs permission checking, not location." },
-      { "optionText": "Authentication uses JWT; authorisation uses OAuth 2.0.", "isCorrect": false, "explanation": "JWT and OAuth can be used for both — the terms describe the concepts, not the technology." },
-      { "optionText": "They are the same concept, just different spellings.", "isCorrect": false, "explanation": "They are distinct: authentication establishes identity, authorisation checks permissions after identity is known." }
+      {
+        "optionText": "Authentication verifies who you are; authorisation determines what you're allowed to do.",
+        "isCorrect": true,
+        "explanation": "Correct — AuthN = identity (login), AuthZ = permissions (can this user delete this resource?)."
+      },
+      {
+        "optionText": "Authentication is server-side; authorisation is client-side.",
+        "isCorrect": false,
+        "explanation": "Both happen server-side — the distinction is about identity verification vs permission checking, not location."
+      },
+      {
+        "optionText": "Authentication uses JWT; authorisation uses OAuth 2.0.",
+        "isCorrect": false,
+        "explanation": "JWT and OAuth can be used for both — the terms describe the concepts, not the technology."
+      },
+      {
+        "optionText": "They are the same concept, just different spellings.",
+        "isCorrect": false,
+        "explanation": "They are distinct: authentication establishes identity, authorisation checks permissions after identity is known."
+      }
     ]
   },
   {
     "topic": "api-design",
     "question": "How Do You Design Pagination For A REST API?",
     "options": [
-      { "optionText": "Uses a pointer to the last seen item; avoids full table scans making it O(log n) at any depth.", "isCorrect": true, "explanation": "Correct — cursor pagination uses indexed seeks instead of OFFSET, staying performant on large or frequently-updated datasets." },
-      { "optionText": "Uses a page number and limit; the DB skips rows to reach the right page.", "isCorrect": false, "explanation": "That describes offset pagination — the OFFSET clause scans all preceding rows, becoming slow as pages grow." },
-      { "optionText": "Loads all data into memory and slices it client-side for each page request.", "isCorrect": false, "explanation": "Client-side pagination doesn't scale — cursor pagination uses server-side DB queries with efficient index seeks." },
-      { "optionText": "Both are equivalent in performance; cursor pagination is just more complex for no benefit.", "isCorrect": false, "explanation": "Cursor pagination is significantly faster on large datasets because it uses indexed seeks instead of costly table scans." }
+      {
+        "optionText": "Uses a pointer to the last seen item; avoids full table scans making it O(log n) at any depth.",
+        "isCorrect": true,
+        "explanation": "Correct — cursor pagination uses indexed seeks instead of OFFSET, staying performant on large or frequently-updated datasets."
+      },
+      {
+        "optionText": "Uses a page number and limit; the DB skips rows to reach the right page.",
+        "isCorrect": false,
+        "explanation": "That describes offset pagination — the OFFSET clause scans all preceding rows, becoming slow as pages grow."
+      },
+      {
+        "optionText": "Loads all data into memory and slices it client-side for each page request.",
+        "isCorrect": false,
+        "explanation": "Client-side pagination doesn't scale — cursor pagination uses server-side DB queries with efficient index seeks."
+      },
+      {
+        "optionText": "Both are equivalent in performance; cursor pagination is just more complex for no benefit.",
+        "isCorrect": false,
+        "explanation": "Cursor pagination is significantly faster on large datasets because it uses indexed seeks instead of costly table scans."
+      }
     ]
   },
   {
     "topic": "api-design",
     "question": "What Is Idempotency And Why Does It Matter In API Design?",
     "options": [
-      { "optionText": "An operation that produces the same result whether called once or multiple times with the same input.", "isCorrect": true, "explanation": "Correct — idempotency means safe retries: GET /users/1 always returns the same user regardless of call count." },
-      { "optionText": "An operation that executes instantly without any asynchronous processing.", "isCorrect": false, "explanation": "Speed of execution is unrelated to idempotency — an idempotent operation can be slow or async." },
-      { "optionText": "An operation that modifies the database exactly once, even if called multiple times.", "isCorrect": false, "explanation": "True idempotency means the effect is the same — not that the DB is touched exactly once; it may process N times with equal results." },
-      { "optionText": "An operation that can only be performed by an authenticated user.", "isCorrect": false, "explanation": "Idempotency is about reproducibility of results, not access control or authentication requirements." }
+      {
+        "optionText": "An operation that produces the same result whether called once or multiple times with the same input.",
+        "isCorrect": true,
+        "explanation": "Correct — idempotency means safe retries: GET /users/1 always returns the same user regardless of call count."
+      },
+      {
+        "optionText": "An operation that executes instantly without any asynchronous processing.",
+        "isCorrect": false,
+        "explanation": "Speed of execution is unrelated to idempotency — an idempotent operation can be slow or async."
+      },
+      {
+        "optionText": "An operation that modifies the database exactly once, even if called multiple times.",
+        "isCorrect": false,
+        "explanation": "True idempotency means the effect is the same — not that the DB is touched exactly once; it may process N times with equal results."
+      },
+      {
+        "optionText": "An operation that can only be performed by an authenticated user.",
+        "isCorrect": false,
+        "explanation": "Idempotency is about reproducibility of results, not access control or authentication requirements."
+      }
     ]
   },
   {
     "topic": "api-design",
     "question": "What Is CORS And How Do You Handle It?",
     "options": [
-      { "optionText": "Cross-Origin Resource Sharing — enforced when JavaScript makes requests to a different origin (protocol + host + port).", "isCorrect": true, "explanation": "Correct — CORS is a browser security mechanism blocking cross-origin fetches unless the server explicitly allows them." },
-      { "optionText": "A server-side firewall that blocks requests from unknown IP addresses.", "isCorrect": false, "explanation": "CORS is a browser policy enforced on the client — servers don't need a firewall; the browser blocks the response." },
-      { "optionText": "A Content Security Policy header that prevents inline scripts from running.", "isCorrect": false, "explanation": "CSP prevents inline scripts — CORS controls cross-origin HTTP requests made by JavaScript." },
-      { "optionText": "A TLS handshake protocol that verifies the identity of remote servers.", "isCorrect": false, "explanation": "TLS/SSL handles encryption and server identity — CORS is an HTTP-level policy for cross-origin resource access." }
+      {
+        "optionText": "Cross-Origin Resource Sharing — enforced when JavaScript makes requests to a different origin (protocol + host + port).",
+        "isCorrect": true,
+        "explanation": "Correct — CORS is a browser security mechanism blocking cross-origin fetches unless the server explicitly allows them."
+      },
+      {
+        "optionText": "A server-side firewall that blocks requests from unknown IP addresses.",
+        "isCorrect": false,
+        "explanation": "CORS is a browser policy enforced on the client — servers don't need a firewall; the browser blocks the response."
+      },
+      {
+        "optionText": "A Content Security Policy header that prevents inline scripts from running.",
+        "isCorrect": false,
+        "explanation": "CSP prevents inline scripts — CORS controls cross-origin HTTP requests made by JavaScript."
+      },
+      {
+        "optionText": "A TLS handshake protocol that verifies the identity of remote servers.",
+        "isCorrect": false,
+        "explanation": "TLS/SSL handles encryption and server identity — CORS is an HTTP-level policy for cross-origin resource access."
+      }
     ]
   },
   {
     "topic": "api-design",
     "question": "What Is OpenAPI / Swagger And Why Should You Use It?",
     "options": [
-      { "optionText": "To describe a REST API's endpoints, schemas, and auth in a machine-readable format enabling auto-generated docs and clients.", "isCorrect": true, "explanation": "Correct — OpenAPI (Swagger) enables interactive docs, SDK generation, and contract validation from a single spec file." },
-      { "optionText": "To define database schemas and generate migration files automatically.", "isCorrect": false, "explanation": "Database schema tools (Prisma, Drizzle) handle migrations — OpenAPI describes HTTP API contracts, not DB schemas." },
-      { "optionText": "To standardise JSON formatting rules across different API providers.", "isCorrect": false, "explanation": "OpenAPI describes endpoint structure and schemas — JSON formatting conventions are a separate concern." },
-      { "optionText": "To replace REST with a more efficient binary protocol for API communication.", "isCorrect": false, "explanation": "OpenAPI documents REST APIs over HTTP — gRPC/Protobuf provides binary protocols, not OpenAPI." }
+      {
+        "optionText": "To describe a REST API's endpoints, schemas, and auth in a machine-readable format enabling auto-generated docs and clients.",
+        "isCorrect": true,
+        "explanation": "Correct — OpenAPI (Swagger) enables interactive docs, SDK generation, and contract validation from a single spec file."
+      },
+      {
+        "optionText": "To define database schemas and generate migration files automatically.",
+        "isCorrect": false,
+        "explanation": "Database schema tools (Prisma, Drizzle) handle migrations — OpenAPI describes HTTP API contracts, not DB schemas."
+      },
+      {
+        "optionText": "To standardise JSON formatting rules across different API providers.",
+        "isCorrect": false,
+        "explanation": "OpenAPI describes endpoint structure and schemas — JSON formatting conventions are a separate concern."
+      },
+      {
+        "optionText": "To replace REST with a more efficient binary protocol for API communication.",
+        "isCorrect": false,
+        "explanation": "OpenAPI documents REST APIs over HTTP — gRPC/Protobuf provides binary protocols, not OpenAPI."
+      }
     ]
   },
   {
     "topic": "api-design",
     "question": "What Is The N+1 Problem In APIs And How Do You Fix It?",
     "options": [
-      { "optionText": "Fetching a list of N items then making N additional queries to get related data — 1+N total queries instead of 1.", "isCorrect": true, "explanation": "Correct — N+1 is solved by JOINs, eager loading (Prisma include), or DataLoader batching." },
-      { "optionText": "An API versioning issue where v1 and v1+1 (v2) have incompatible schemas.", "isCorrect": false, "explanation": "N+1 is a database query performance problem — version incompatibility is a separate API design concern." },
-      { "optionText": "A rate limiting scenario where one extra request triggers a 429 response.", "isCorrect": false, "explanation": "Rate limiting enforces request ceilings — the N+1 problem describes excessive database queries from lazy loading." },
-      { "optionText": "A pagination strategy where page N requires fetching N+1 rows to detect the next page.", "isCorrect": false, "explanation": "Fetching limit+1 rows to detect hasMore is a valid pagination technique — but N+1 problem means one DB query per item in a list." }
+      {
+        "optionText": "Fetching a list of N items then making N additional queries to get related data — 1+N total queries instead of 1.",
+        "isCorrect": true,
+        "explanation": "Correct — N+1 is solved by JOINs, eager loading (Prisma include), or DataLoader batching."
+      },
+      {
+        "optionText": "An API versioning issue where v1 and v1+1 (v2) have incompatible schemas.",
+        "isCorrect": false,
+        "explanation": "N+1 is a database query performance problem — version incompatibility is a separate API design concern."
+      },
+      {
+        "optionText": "A rate limiting scenario where one extra request triggers a 429 response.",
+        "isCorrect": false,
+        "explanation": "Rate limiting enforces request ceilings — the N+1 problem describes excessive database queries from lazy loading."
+      },
+      {
+        "optionText": "A pagination strategy where page N requires fetching N+1 rows to detect the next page.",
+        "isCorrect": false,
+        "explanation": "Fetching limit+1 rows to detect hasMore is a valid pagination technique — but N+1 problem means one DB query per item in a list."
+      }
     ]
   },
   {
     "topic": "api-design",
     "question": "What Is A Webhook And How Does It Differ From Polling?",
     "options": [
-      { "optionText": "Webhooks are server-initiated pushes (event-driven); polling is client-initiated repeated requests on a schedule.", "isCorrect": true, "explanation": "Correct — webhooks are more efficient (no wasted calls) with near-zero latency, but require a public HTTPS endpoint." },
-      { "optionText": "Webhooks run inside the browser; polling runs on the server.", "isCorrect": false, "explanation": "Webhooks are server-to-server HTTP calls — the browser is not involved in webhook delivery." },
-      { "optionText": "Polling is real-time; webhooks have significant delivery delay.", "isCorrect": false, "explanation": "The opposite is true — webhooks deliver events in real-time, while polling has latency equal to the polling interval." },
-      { "optionText": "Webhooks require WebSocket connections; polling uses regular HTTP.", "isCorrect": false, "explanation": "Webhooks use standard HTTP POST requests — WebSockets are a different real-time technology." }
+      {
+        "optionText": "Webhooks are server-initiated pushes (event-driven); polling is client-initiated repeated requests on a schedule.",
+        "isCorrect": true,
+        "explanation": "Correct — webhooks are more efficient (no wasted calls) with near-zero latency, but require a public HTTPS endpoint."
+      },
+      {
+        "optionText": "Webhooks run inside the browser; polling runs on the server.",
+        "isCorrect": false,
+        "explanation": "Webhooks are server-to-server HTTP calls — the browser is not involved in webhook delivery."
+      },
+      {
+        "optionText": "Polling is real-time; webhooks have significant delivery delay.",
+        "isCorrect": false,
+        "explanation": "The opposite is true — webhooks deliver events in real-time, while polling has latency equal to the polling interval."
+      },
+      {
+        "optionText": "Webhooks require WebSocket connections; polling uses regular HTTP.",
+        "isCorrect": false,
+        "explanation": "Webhooks use standard HTTP POST requests — WebSockets are a different real-time technology."
+      }
     ]
   },
   {
     "topic": "api-design",
     "question": "What Is The BFF (Backend For Frontend) Pattern?",
     "options": [
-      { "optionText": "A dedicated backend layer per client type (web, mobile) that aggregates and shapes data for that specific client's needs.", "isCorrect": true, "explanation": "Correct — BFF eliminates over/under-fetching by giving each client a tailored API. Next.js Route Handlers naturally serve as a BFF." },
-      { "optionText": "A backend pattern where the frontend team maintains all server-side code.", "isCorrect": false, "explanation": "BFF is about dedicated backends per client type, not about who owns the backend code." },
-      { "optionText": "A caching strategy where the backend prefetches data based on predicted frontend needs.", "isCorrect": false, "explanation": "BFF is an architectural pattern about service boundaries, not a caching or prefetching strategy." },
-      { "optionText": "A pattern where frontends call microservices directly, bypassing an API gateway.", "isCorrect": false, "explanation": "BFF adds an intermediate layer between clients and services — the opposite of direct microservice calls from frontend." }
+      {
+        "optionText": "A dedicated backend layer per client type (web, mobile) that aggregates and shapes data for that specific client's needs.",
+        "isCorrect": true,
+        "explanation": "Correct — BFF eliminates over/under-fetching by giving each client a tailored API. Next.js Route Handlers naturally serve as a BFF."
+      },
+      {
+        "optionText": "A backend pattern where the frontend team maintains all server-side code.",
+        "isCorrect": false,
+        "explanation": "BFF is about dedicated backends per client type, not about who owns the backend code."
+      },
+      {
+        "optionText": "A caching strategy where the backend prefetches data based on predicted frontend needs.",
+        "isCorrect": false,
+        "explanation": "BFF is an architectural pattern about service boundaries, not a caching or prefetching strategy."
+      },
+      {
+        "optionText": "A pattern where frontends call microservices directly, bypassing an API gateway.",
+        "isCorrect": false,
+        "explanation": "BFF adds an intermediate layer between clients and services — the opposite of direct microservice calls from frontend."
+      }
     ]
   },
   {
     "topic": "api-design",
     "question": "How Do You Handle API Errors Consistently?",
     "options": [
-      { "optionText": "An appropriate HTTP status code, a machine-readable error code, and a human-readable message.", "isCorrect": true, "explanation": "Correct — consistent error envelopes let clients handle errors programmatically without string-matching messages." },
-      { "optionText": "Always return 200 OK with an error flag in the body to simplify client error handling.", "isCorrect": false, "explanation": "Hiding errors in 200 responses breaks HTTP conventions and makes monitoring, caching, and retries unreliable." },
-      { "optionText": "Include the full server stack trace so developers can debug the issue easily.", "isCorrect": false, "explanation": "Stack traces expose internal implementation details — log them server-side but never return them to clients in production." },
-      { "optionText": "Return only the HTTP status code with no body to keep responses small.", "isCorrect": false, "explanation": "A status code alone doesn't tell clients why it failed — include a structured body with an error code and message." }
+      {
+        "optionText": "An appropriate HTTP status code, a machine-readable error code, and a human-readable message.",
+        "isCorrect": true,
+        "explanation": "Correct — consistent error envelopes let clients handle errors programmatically without string-matching messages."
+      },
+      {
+        "optionText": "Always return 200 OK with an error flag in the body to simplify client error handling.",
+        "isCorrect": false,
+        "explanation": "Hiding errors in 200 responses breaks HTTP conventions and makes monitoring, caching, and retries unreliable."
+      },
+      {
+        "optionText": "Include the full server stack trace so developers can debug the issue easily.",
+        "isCorrect": false,
+        "explanation": "Stack traces expose internal implementation details — log them server-side but never return them to clients in production."
+      },
+      {
+        "optionText": "Return only the HTTP status code with no body to keep responses small.",
+        "isCorrect": false,
+        "explanation": "A status code alone doesn't tell clients why it failed — include a structured body with an error code and message."
+      }
     ]
   },
   {
     "topic": "api-design",
     "question": "What Is API Versioning And Why Is It Needed?",
     "options": [
-      { "optionText": "A strategy to evolve APIs without breaking existing clients — URL path versioning (/v1/, /v2/) is most common.", "isCorrect": true, "explanation": "Correct — URL versioning is visible, easy to route, and easy to test. Stripe, GitHub, and Twilio all use it." },
-      { "optionText": "Releasing new API features without any version identifier, relying on backwards compatibility.", "isCorrect": false, "explanation": "Additive-only changes can avoid versioning, but breaking changes still require version identifiers for existing clients." },
-      { "optionText": "Using semantic versioning in the Accept header: Accept: application/vnd.api.v2.3.1+json.", "isCorrect": false, "explanation": "Header versioning is valid but less common than URL versioning — it's less discoverable and harder to test in browsers." },
-      { "optionText": "Deprecating the entire API each year and requiring all clients to migrate at the same time.", "isCorrect": false, "explanation": "Forcing simultaneous migration breaks all clients at once — the purpose of versioning is to give clients time to migrate." }
+      {
+        "optionText": "A strategy to evolve APIs without breaking existing clients — URL path versioning (/v1/, /v2/) is most common.",
+        "isCorrect": true,
+        "explanation": "Correct — URL versioning is visible, easy to route, and easy to test. Stripe, GitHub, and Twilio all use it."
+      },
+      {
+        "optionText": "Releasing new API features without any version identifier, relying on backwards compatibility.",
+        "isCorrect": false,
+        "explanation": "Additive-only changes can avoid versioning, but breaking changes still require version identifiers for existing clients."
+      },
+      {
+        "optionText": "Using semantic versioning in the Accept header: Accept: application/vnd.api.v2.3.1+json.",
+        "isCorrect": false,
+        "explanation": "Header versioning is valid but less common than URL versioning — it's less discoverable and harder to test in browsers."
+      },
+      {
+        "optionText": "Deprecating the entire API each year and requiring all clients to migrate at the same time.",
+        "isCorrect": false,
+        "explanation": "Forcing simultaneous migration breaks all clients at once — the purpose of versioning is to give clients time to migrate."
+      }
     ]
   },
   {
     "topic": "api-design",
     "question": "What Is The Difference Between REST And GraphQL?",
     "options": [
-      { "optionText": "A query language where clients specify exactly what data they need, solving over-fetching and under-fetching.", "isCorrect": true, "explanation": "Correct — GraphQL lets clients request precise fields, reducing payload size and round-trips compared to fixed REST responses." },
-      { "optionText": "A database query language that replaces SQL for fetching data from relational databases.", "isCorrect": false, "explanation": "GraphQL is an API query language over HTTP — it abstracts over any data source, not just databases." },
-      { "optionText": "A binary protocol like gRPC that replaces HTTP for faster inter-service communication.", "isCorrect": false, "explanation": "GraphQL runs over HTTP and returns JSON — gRPC uses Protobuf binary encoding, which is a different technology." },
-      { "optionText": "A REST extension that adds real-time subscription support to existing REST endpoints.", "isCorrect": false, "explanation": "GraphQL is a distinct API paradigm with its own schema and query language — it's not an extension of REST." }
+      {
+        "optionText": "A query language where clients specify exactly what data they need, solving over-fetching and under-fetching.",
+        "isCorrect": true,
+        "explanation": "Correct — GraphQL lets clients request precise fields, reducing payload size and round-trips compared to fixed REST responses."
+      },
+      {
+        "optionText": "A database query language that replaces SQL for fetching data from relational databases.",
+        "isCorrect": false,
+        "explanation": "GraphQL is an API query language over HTTP — it abstracts over any data source, not just databases."
+      },
+      {
+        "optionText": "A binary protocol like gRPC that replaces HTTP for faster inter-service communication.",
+        "isCorrect": false,
+        "explanation": "GraphQL runs over HTTP and returns JSON — gRPC uses Protobuf binary encoding, which is a different technology."
+      },
+      {
+        "optionText": "A REST extension that adds real-time subscription support to existing REST endpoints.",
+        "isCorrect": false,
+        "explanation": "GraphQL is a distinct API paradigm with its own schema and query language — it's not an extension of REST."
+      }
     ]
   },
   {
     "topic": "api-design",
     "question": "What Is A JWT (JSON Web Token) And What Are Its Three Parts?",
     "options": [
-      { "optionText": "A signed, base64url-encoded token with three parts: Header (algorithm), Payload (claims), Signature.", "isCorrect": true, "explanation": "Correct — JWTs are stateless: the server validates the signature without a DB lookup. Payload is encoded, NOT encrypted." },
-      { "optionText": "An encrypted database session record with three fields: user ID, expiry, and permissions.", "isCorrect": false, "explanation": "JWTs are client-side tokens, not server-side session records. They are base64url-encoded, not encrypted by default." },
-      { "optionText": "A cookie-based authentication token containing the username, password hash, and CSRF token.", "isCorrect": false, "explanation": "JWTs never contain passwords. They are bearer tokens sent in the Authorization header, not necessarily cookies." },
-      { "optionText": "A three-part URL containing the auth server, client ID, and access scope.", "isCorrect": false, "explanation": "That describes an OAuth2 authorisation URL, not a JWT. JWTs are signed tokens: header.payload.signature." }
+      {
+        "optionText": "A signed, base64url-encoded token with three parts: Header (algorithm), Payload (claims), Signature.",
+        "isCorrect": true,
+        "explanation": "Correct — JWTs are stateless: the server validates the signature without a DB lookup. Payload is encoded, NOT encrypted."
+      },
+      {
+        "optionText": "An encrypted database session record with three fields: user ID, expiry, and permissions.",
+        "isCorrect": false,
+        "explanation": "JWTs are client-side tokens, not server-side session records. They are base64url-encoded, not encrypted by default."
+      },
+      {
+        "optionText": "A cookie-based authentication token containing the username, password hash, and CSRF token.",
+        "isCorrect": false,
+        "explanation": "JWTs never contain passwords. They are bearer tokens sent in the Authorization header, not necessarily cookies."
+      },
+      {
+        "optionText": "A three-part URL containing the auth server, client ID, and access scope.",
+        "isCorrect": false,
+        "explanation": "That describes an OAuth2 authorisation URL, not a JWT. JWTs are signed tokens: header.payload.signature."
+      }
+    ]
+  },
+  {
+    "topic": "api-design",
+    "question": "What Is An API Endpoint?",
+    "options": [
+      {
+        "optionText": "A specific URL where an API can be accessed to perform a particular operation — e.g. GET /users/42 retrieves a user.",
+        "isCorrect": true,
+        "explanation": "Correct — endpoints combine HTTP method + URL to define a unique operation. Well-named endpoints use nouns (resources) and HTTP verbs for the action."
+      },
+      {
+        "optionText": "A server that hosts an API and handles incoming HTTP requests.",
+        "isCorrect": false,
+        "explanation": "The server hosts the API; an endpoint is a specific URL+method combination on that server defining one operation."
+      },
+      {
+        "optionText": "A function in JavaScript that handles API responses on the client side.",
+        "isCorrect": false,
+        "explanation": "Client-side handlers are fetch callbacks or async functions. An endpoint is the server-side URL that the client calls."
+      },
+      {
+        "optionText": "The API key required to authenticate requests to the server.",
+        "isCorrect": false,
+        "explanation": "API keys are credentials for authentication. Endpoints are URLs defining accessible operations — e.g. POST /login, GET /products."
+      }
+    ]
+  },
+  {
+    "topic": "api-design",
+    "question": "What Is The Difference Between SOAP And REST?",
+    "options": [
+      {
+        "optionText": "SOAP is a strict XML protocol with a WSDL contract; REST is an architectural style using HTTP verbs on resources, returning any format (usually JSON).",
+        "isCorrect": true,
+        "explanation": "Correct — SOAP has built-in standards for security (WS-Security) and transactions. REST is simpler, cacheable, and dominant for modern web APIs."
+      },
+      {
+        "optionText": "SOAP is faster than REST because it uses binary encoding.",
+        "isCorrect": false,
+        "explanation": "SOAP uses XML (verbose). REST typically uses JSON (lighter). REST is generally faster in practice. SOAP's advantage is built-in enterprise standards, not speed."
+      },
+      {
+        "optionText": "REST uses XML; SOAP uses JSON — the difference is only the data format.",
+        "isCorrect": false,
+        "explanation": "It's the opposite: SOAP requires XML. REST is format-agnostic (JSON, XML, etc.) — JSON is most common."
+      },
+      {
+        "optionText": "SOAP and REST are the same thing — SOAP is the original name for REST.",
+        "isCorrect": false,
+        "explanation": "They are fundamentally different. SOAP is a protocol with strict standards; REST is an architectural style based on HTTP conventions."
+      }
+    ]
+  },
+  {
+    "topic": "api-design",
+    "question": "What Are Query Parameters vs Path Parameters?",
+    "options": [
+      {
+        "optionText": "Path params identify a specific resource (/users/42); query params filter/sort a collection (/users?role=admin&page=2).",
+        "isCorrect": true,
+        "explanation": "Correct — path params are mandatory identifiers; query params are optional modifiers. Use path params for resource identity, query params for filtering, pagination, and search."
+      },
+      {
+        "optionText": "Query parameters are sent in the request body; path parameters are in the URL.",
+        "isCorrect": false,
+        "explanation": "Query params are in the URL after ?: /users?role=admin. Path params are URL segments: /users/42. Neither goes in the request body."
+      },
+      {
+        "optionText": "Path parameters are only used in POST requests; query parameters in GET requests.",
+        "isCorrect": false,
+        "explanation": "Both can appear with any HTTP method. Path params identify resources on GET, PUT, DELETE etc. Query params filter collections on GET."
+      },
+      {
+        "optionText": "They are interchangeable — GET /users/42 and GET /users?id=42 are equally RESTful.",
+        "isCorrect": false,
+        "explanation": "Path params are preferred for resource identity (/users/42). Query params are for optional filtering. /users/42 is more idiomatic for a specific resource."
+      }
+    ]
+  },
+  {
+    "topic": "api-design",
+    "question": "How Do You Authenticate API Requests?",
+    "options": [
+      {
+        "optionText": "Common methods: API Keys (simple, for server-to-server), JWT Bearer tokens (stateless, for user sessions), OAuth 2.0 (delegated third-party access).",
+        "isCorrect": true,
+        "explanation": "Correct — API keys in headers (X-API-Key) for service accounts; JWT in Authorization: Bearer for user auth; OAuth for 'Login with Google/GitHub' flows."
+      },
+      {
+        "optionText": "Always use Basic Auth (username:password in headers) — it's the most secure standard.",
+        "isCorrect": false,
+        "explanation": "Basic Auth is insecure (base64-encoded, not encrypted) and should never be used without HTTPS, and even then is too weak for production APIs."
+      },
+      {
+        "optionText": "Authentication is the browser's responsibility — APIs don't need to verify callers.",
+        "isCorrect": false,
+        "explanation": "APIs must authenticate every request. The browser may store credentials but the server verifies them on each call."
+      },
+      {
+        "optionText": "HTTPS automatically authenticates the client — no additional auth mechanism needed.",
+        "isCorrect": false,
+        "explanation": "HTTPS encrypts the connection but only authenticates the server (via certificate). The client/user must still be authenticated via API keys, JWT, or OAuth."
+      }
+    ]
+  },
+  {
+    "topic": "api-design",
+    "question": "What Is The Difference Between JWT And Session-Based Auth?",
+    "options": [
+      {
+        "optionText": "JWT is stateless (token contains user data, no server lookup); session-based stores session ID server-side, requiring a DB or Redis lookup per request.",
+        "isCorrect": true,
+        "explanation": "Correct — JWT scales horizontally (any server validates the signature); sessions require shared storage. JWT downside: tokens can't be revoked until expiry without a denylist."
+      },
+      {
+        "optionText": "Session-based auth is more modern and recommended over JWT for all applications.",
+        "isCorrect": false,
+        "explanation": "Both are valid. JWT suits microservices/mobile (no shared session store); sessions are simpler for traditional server-rendered apps where revocation matters."
+      },
+      {
+        "optionText": "JWT stores the session in the database; sessions store the token in the browser.",
+        "isCorrect": false,
+        "explanation": "It's the opposite — JWT is a self-contained token in the browser/client; sessions store data server-side with only a session ID in the browser cookie."
+      },
+      {
+        "optionText": "They are identical — JWT is just a format for storing session IDs.",
+        "isCorrect": false,
+        "explanation": "JWT contains actual claims (user ID, roles, expiry) and is self-validating. Session IDs are opaque references requiring a server lookup."
+      }
+    ]
+  },
+  {
+    "topic": "api-design",
+    "question": "What Is OAuth 2.0 And How Does The Flow Work?",
+    "options": [
+      {
+        "optionText": "A delegated authorisation framework — users grant third-party apps access without sharing passwords. Authorization Code flow: redirect → auth server → code → exchange for token.",
+        "isCorrect": true,
+        "explanation": "Correct — OAuth 2.0 is used for 'Login with Google'. The auth server issues tokens; the app never sees the user's password. PKCE extension protects against code interception."
+      },
+      {
+        "optionText": "OAuth 2.0 is an encryption protocol that secures API payloads end-to-end.",
+        "isCorrect": false,
+        "explanation": "OAuth 2.0 is an authorisation framework, not an encryption protocol. HTTPS handles payload encryption; OAuth handles access delegation."
+      },
+      {
+        "optionText": "OAuth 2.0 requires users to create a new account on the third-party app.",
+        "isCorrect": false,
+        "explanation": "OAuth allows login without creating a new account — that's the point. Users authorise access via their existing account (Google, GitHub) without sharing credentials."
+      },
+      {
+        "optionText": "OAuth 2.0 only works for mobile apps — web apps use OpenID Connect instead.",
+        "isCorrect": false,
+        "explanation": "OAuth 2.0 works for web, mobile, and server-to-server. OpenID Connect is built on top of OAuth 2.0 and adds identity (who you are) to OAuth's authorisation."
+      }
+    ]
+  },
+  {
+    "topic": "api-design",
+    "question": "What Is Content Negotiation In HTTP?",
+    "options": [
+      {
+        "optionText": "A mechanism where the client specifies preferred response formats via Accept headers and the server responds accordingly — e.g. Accept: application/json vs text/xml.",
+        "isCorrect": true,
+        "explanation": "Correct — content negotiation allows one endpoint to serve multiple formats. The server responds with Content-Type matching the best accepted format."
+      },
+      {
+        "optionText": "A security handshake that negotiates the encryption algorithm between client and server.",
+        "isCorrect": false,
+        "explanation": "Encryption negotiation happens during the TLS handshake. Content negotiation is about data format (JSON, XML, HTML), not security."
+      },
+      {
+        "optionText": "A process where the API server chooses the language for error messages based on the user's location.",
+        "isCorrect": false,
+        "explanation": "Language negotiation uses the Accept-Language header, which is a related but separate mechanism. Content negotiation handles the response data format."
+      },
+      {
+        "optionText": "A caching strategy that stores different response formats at the CDN level.",
+        "isCorrect": false,
+        "explanation": "CDN caching uses Vary headers to cache different representations. Content negotiation is the mechanism that determines which representation to return."
+      }
+    ]
+  },
+  {
+    "topic": "api-design",
+    "question": "What Are RESTful Resource Naming Conventions?",
+    "options": [
+      {
+        "optionText": "Use nouns for resources (/users, /orders), plural names, lowercase with hyphens, and HTTP verbs for actions — avoid verbs in URLs (/getUser → GET /users/id).",
+        "isCorrect": true,
+        "explanation": "Correct — good URL design: GET /users (list), POST /users (create), GET /users/42 (read), PUT /users/42 (replace), DELETE /users/42 (delete). Keep URLs predictable."
+      },
+      {
+        "optionText": "Use verbs in URLs to make actions explicit: /createUser, /deleteOrder, /fetchProduct.",
+        "isCorrect": false,
+        "explanation": "Verbs in URLs are an anti-pattern in REST. HTTP methods (GET, POST, DELETE) provide the verb — the URL should be the noun (resource)."
+      },
+      {
+        "optionText": "Use uppercase for collection endpoints (/USERS) and lowercase for single resources (/users/42).",
+        "isCorrect": false,
+        "explanation": "URLs are conventionally lowercase. Uppercase URLs cause confusion and inconsistency. Use plural lowercase nouns: /users, /orders."
+      },
+      {
+        "optionText": "Resource names should match database table names exactly to keep the API consistent.",
+        "isCorrect": false,
+        "explanation": "API URLs are a public contract, decoupled from DB schema. Exposing table names leaks implementation details. Design URLs around business resources, not storage."
+      }
+    ]
+  },
+  {
+    "topic": "api-design",
+    "question": "How Do You Handle File Uploads In A REST API?",
+    "options": [
+      {
+        "optionText": "Use multipart/form-data to send files directly, or pre-signed URLs (S3) to upload straight to storage from the client, bypassing the API server.",
+        "isCorrect": true,
+        "explanation": "Correct — multipart works for small files. Pre-signed URLs are better for large files: the API generates a signed S3 URL; the client uploads directly to S3."
+      },
+      {
+        "optionText": "Base64-encode the file and include it in a JSON payload — REST only supports JSON.",
+        "isCorrect": false,
+        "explanation": "Base64 increases file size by ~33% and loads the API server unnecessarily. Use multipart/form-data or pre-signed URLs for file uploads."
+      },
+      {
+        "optionText": "Files must be uploaded via FTP — HTTP APIs cannot handle binary data.",
+        "isCorrect": false,
+        "explanation": "HTTP fully supports binary data via multipart/form-data and binary Content-Types. FTP is not used for modern API file uploads."
+      },
+      {
+        "optionText": "Use a GraphQL mutation — REST cannot handle file uploads without a plugin.",
+        "isCorrect": false,
+        "explanation": "REST handles file uploads natively via multipart/form-data. GraphQL file uploads require additional tooling (graphql-upload). REST is well-suited for file uploads."
+      }
+    ]
+  },
+  {
+    "topic": "api-design",
+    "question": "What Is API Throttling And How Is It Different From Rate Limiting?",
+    "options": [
+      {
+        "optionText": "Rate limiting is a hard cap (429 after N requests); throttling slows responses progressively instead of rejecting — both protect against abuse.",
+        "isCorrect": true,
+        "explanation": "Correct — throttling degrades gracefully: requests are queued and served slower. Rate limiting cuts off at a hard ceiling. Some APIs combine both strategies."
+      },
+      {
+        "optionText": "They are identical — throttling is just the American English term for rate limiting.",
+        "isCorrect": false,
+        "explanation": "They differ in behaviour: rate limiting rejects requests above the limit; throttling slows them down. Both protect API infrastructure from overload."
+      },
+      {
+        "optionText": "Throttling applies to the database layer; rate limiting applies to the API gateway.",
+        "isCorrect": false,
+        "explanation": "Both can be applied at any layer. The distinction is the response strategy: rejection (rate limit) vs degraded service (throttle)."
+      },
+      {
+        "optionText": "API throttling requires OAuth 2.0 — unauthenticated APIs cannot be throttled.",
+        "isCorrect": false,
+        "explanation": "Throttling can be applied to any request — authenticated or not — based on IP, API key, or user ID. OAuth is unrelated to throttling mechanics."
+      }
+    ]
+  },
+  {
+    "topic": "api-design",
+    "question": "How Do You Validate API Request Bodies?",
+    "options": [
+      {
+        "optionText": "Validate at the API boundary using a schema library (Zod, Joi) before processing — reject with 400 Bad Request and descriptive field-level errors.",
+        "isCorrect": true,
+        "explanation": "Correct — schema validation ensures type safety, required fields, and format rules. Return 400 with structured error details so clients know exactly what to fix."
+      },
+      {
+        "optionText": "Validate in the database layer — DB constraints prevent invalid data from being stored.",
+        "isCorrect": false,
+        "explanation": "DB constraints are a last line of defence, not the primary validation layer. Validate at the API boundary first to catch errors early and return readable error messages."
+      },
+      {
+        "optionText": "Only validate authenticated requests — unauthenticated requests should be rejected before validation.",
+        "isCorrect": false,
+        "explanation": "Authentication and validation are separate concerns. Auth checks who is making the request; validation checks what they're sending. Both apply to all requests."
+      },
+      {
+        "optionText": "TypeScript types on the server handle validation automatically at runtime.",
+        "isCorrect": false,
+        "explanation": "TypeScript types are erased at runtime — they don't validate incoming JSON. Use runtime schema libraries like Zod to validate request bodies."
+      }
+    ]
+  },
+  {
+    "topic": "api-design",
+    "question": "How Do You Document An API Effectively?",
+    "options": [
+      {
+        "optionText": "Use OpenAPI spec for machine-readable docs (Swagger UI), include request/response examples, authentication details, error codes, and a getting-started guide.",
+        "isCorrect": true,
+        "explanation": "Correct — good docs are the API's UX. OpenAPI enables interactive playgrounds. Code examples in multiple languages, clear error docs, and versioning notes make adoption easy."
+      },
+      {
+        "optionText": "Add code comments to the source files — developers read the code, not external docs.",
+        "isCorrect": false,
+        "explanation": "Code comments help maintainers but external consumers need structured docs, interactive playgrounds, and examples. Stripe and Twilio set the standard for API docs."
+      },
+      {
+        "optionText": "Create a PDF with all endpoints — PDFs are universally accessible and professional.",
+        "isCorrect": false,
+        "explanation": "PDFs are static and hard to navigate. OpenAPI-based docs (Swagger UI, Redoc) are interactive, searchable, and allow live API calls from the browser."
+      },
+      {
+        "optionText": "Documentation is optional if the API follows RESTful conventions — self-documenting APIs don't need docs.",
+        "isCorrect": false,
+        "explanation": "No API is truly self-documenting. Auth flows, error codes, rate limits, and business rules always need explanation. Good documentation directly affects developer adoption."
+      }
+    ]
+  },
+  {
+    "topic": "api-design",
+    "question": "What Is GraphQL Subscription And When Would You Use It?",
+    "options": [
+      {
+        "optionText": "A GraphQL real-time feature over WebSockets — the server pushes updates to subscribed clients when data changes.",
+        "isCorrect": true,
+        "explanation": "Correct — use subscriptions for live feeds: chat messages, notifications, live scores. For most apps, polling or REST SSE is simpler; subscriptions add WebSocket infrastructure complexity."
+      },
+      {
+        "optionText": "A billing feature that charges clients per GraphQL query they execute.",
+        "isCorrect": false,
+        "explanation": "GraphQL subscriptions are a real-time data mechanism using WebSockets, not a billing feature."
+      },
+      {
+        "optionText": "A way to cache frequently requested queries on the GraphQL server.",
+        "isCorrect": false,
+        "explanation": "GraphQL caching uses persisted queries or Apollo's response cache. Subscriptions are for real-time event streaming from server to client."
+      },
+      {
+        "optionText": "A method to batch multiple GraphQL mutations into a single network request.",
+        "isCorrect": false,
+        "explanation": "Batching queries combines multiple operations per HTTP request. Subscriptions maintain a persistent WebSocket connection for server-initiated push updates."
+      }
+    ]
+  },
+  {
+    "topic": "api-design",
+    "question": "How Do You Handle API Security Beyond Authentication?",
+    "options": [
+      {
+        "optionText": "Input validation, rate limiting, HTTPS-only, CORS policy, least-privilege authorisation, secrets management, and dependency auditing.",
+        "isCorrect": true,
+        "explanation": "Correct — the OWASP API Security Top 10 covers broken object-level auth, excessive data exposure, mass assignment, and injection. Auth is just the first layer."
+      },
+      {
+        "optionText": "Use a firewall — it blocks all malicious requests automatically without any API-level changes.",
+        "isCorrect": false,
+        "explanation": "Firewalls help but can't catch application-level attacks like injection, mass assignment, or broken auth. API-level validation and authorization are essential."
+      },
+      {
+        "optionText": "Only internal APIs need security measures — public APIs are inherently trusted by browsers.",
+        "isCorrect": false,
+        "explanation": "Public APIs are the most exposed. Both internal and external APIs need security — internal APIs are often the target of lateral movement attacks."
+      },
+      {
+        "optionText": "HTTPS encryption is sufficient — encrypted requests can't be tampered with.",
+        "isCorrect": false,
+        "explanation": "HTTPS protects transport security, not application security. Malicious but valid requests (SQL injection, excessive data requests) can still be sent over HTTPS."
+      }
+    ]
+  },
+  {
+    "topic": "api-design",
+    "question": "How Do You Implement Caching In A REST API?",
+    "options": [
+      {
+        "optionText": "HTTP Cache-Control headers (max-age, stale-while-revalidate), ETag/Last-Modified for conditional requests, and CDN or Redis for response caching.",
+        "isCorrect": true,
+        "explanation": "Correct — Cache-Control: public, max-age=60 lets CDNs cache. ETags enable 304 Not Modified responses for unchanged resources. Redis caches expensive DB queries."
+      },
+      {
+        "optionText": "Set all responses to Cache-Control: no-store — APIs must always return fresh data.",
+        "isCorrect": false,
+        "explanation": "no-store prevents all caching and increases load. Many API responses (product listings, reference data) are safe to cache for seconds or minutes."
+      },
+      {
+        "optionText": "Caching is the browser's responsibility — APIs don't need to set cache headers.",
+        "isCorrect": false,
+        "explanation": "APIs control cacheability via response headers. Without correct Cache-Control headers, browsers and CDNs can't cache or will cache incorrectly."
+      },
+      {
+        "optionText": "Only GraphQL APIs support caching — REST APIs are too dynamic to cache.",
+        "isCorrect": false,
+        "explanation": "REST's cacheable constraint is actually a core principle of REST. HTTP caching works natively with REST GET endpoints via Cache-Control and ETags."
+      }
+    ]
+  },
+  {
+    "topic": "api-design",
+    "question": "How Do You Design A Backwards-Compatible API?",
+    "options": [
+      {
+        "optionText": "Only add, never remove. New optional fields, new endpoints, new enum values — never remove or rename existing fields or change their types.",
+        "isCorrect": true,
+        "explanation": "Correct — the extend-only principle. When breaking changes are unavoidable, version the API (/v2/). Deprecate old versions with sunset headers and ample notice."
+      },
+      {
+        "optionText": "Release a new API version for every change — clients always migrate immediately.",
+        "isCorrect": false,
+        "explanation": "Versioning for every change forces clients to constantly migrate. Backwards-compatible changes (adding optional fields, new endpoints) don't need a version bump."
+      },
+      {
+        "optionText": "Use semantic versioning (MAJOR.MINOR.PATCH) in every API response header.",
+        "isCorrect": false,
+        "explanation": "SemVer in response headers is uncommon. API versioning is typically in the URL path (/v1/) or Accept header, and only for major breaking changes."
+      },
+      {
+        "optionText": "Mark all fields as optional — required fields break backwards compatibility.",
+        "isCorrect": false,
+        "explanation": "New optional fields are backwards-compatible; new required fields on existing endpoints break clients. The key is what you do to existing fields, not making everything optional."
+      }
+    ]
+  },
+  {
+    "topic": "api-design",
+    "question": "How Do You Design An API For High Availability?",
+    "options": [
+      {
+        "optionText": "Stateless services, load balancing, health checks, circuit breakers, graceful degradation, and multi-region deployment.",
+        "isCorrect": true,
+        "explanation": "Correct — stateless APIs can be horizontally scaled behind a load balancer. Health endpoints enable auto-removal of unhealthy instances. Circuit breakers prevent cascade failures."
+      },
+      {
+        "optionText": "Run the API on a single powerful server — horizontal scaling introduces complexity.",
+        "isCorrect": false,
+        "explanation": "A single server is a single point of failure. HA requires redundancy across multiple instances/regions. Horizontal scaling is essential for 99.9%+ uptime."
+      },
+      {
+        "optionText": "Cache all responses indefinitely — stale data is better than downtime.",
+        "isCorrect": false,
+        "explanation": "Indefinite caching serves stale data and can't be invalidated. HA balances availability with data freshness via appropriate TTLs and stale-while-revalidate."
+      },
+      {
+        "optionText": "Use WebSockets exclusively — long-lived connections are more efficient than HTTP request-response.",
+        "isCorrect": false,
+        "explanation": "WebSockets suit real-time features but are harder to load balance and scale. REST over HTTP is naturally stateless and load-balancer friendly for HA."
+      }
+    ]
+  },
+  {
+    "topic": "api-design",
+    "question": "What Is API Gateway And What Role Does It Play In Microservices?",
+    "options": [
+      {
+        "optionText": "A single entry point in front of all microservices handling cross-cutting concerns: auth, rate limiting, routing, SSL termination, and observability.",
+        "isCorrect": true,
+        "explanation": "Correct — API Gateway (Kong, AWS API Gateway, Nginx) decouples clients from the internal service topology. Clients call one URL; the gateway routes to the right service."
+      },
+      {
+        "optionText": "A database that stores API configurations and routing rules.",
+        "isCorrect": false,
+        "explanation": "API gateways may use a config database but they are reverse proxies/middleware, not databases themselves."
+      },
+      {
+        "optionText": "A payment gateway for processing API subscription billing.",
+        "isCorrect": false,
+        "explanation": "Payment gateways process payments (Stripe). API gateways handle HTTP routing, authentication, and cross-cutting concerns in microservice architectures."
+      },
+      {
+        "optionText": "A developer portal where API consumers browse and test endpoints.",
+        "isCorrect": false,
+        "explanation": "Developer portals are documentation/testing UIs. API gateways are runtime infrastructure — reverse proxies that sit in front of your services."
+      }
+    ]
+  },
+  {
+    "topic": "api-design",
+    "question": "What Is Event-Driven Architecture And How Does It Relate To APIs?",
+    "options": [
+      {
+        "optionText": "Services communicate by producing and consuming events via a broker (Kafka, SQS) — decoupling producers from consumers. APIs trigger events; webhooks deliver them.",
+        "isCorrect": true,
+        "explanation": "Correct — EDA enables async, resilient microservices. REST APIs can trigger events; webhooks are outbound event notifications. Kafka suits high-throughput event streams."
+      },
+      {
+        "optionText": "Event-driven means all API calls are asynchronous with no response returned.",
+        "isCorrect": false,
+        "explanation": "APIs can be synchronous (REST) or event-driven (webhooks, message queues). EDA is about decoupling services via events, not eliminating all synchronous responses."
+      },
+      {
+        "optionText": "Event-driven architecture is a frontend pattern — it refers to DOM event listeners.",
+        "isCorrect": false,
+        "explanation": "EDA is a distributed systems architecture pattern. DOM events are a browser-level concept — both use 'events' but in completely different contexts."
+      },
+      {
+        "optionText": "GraphQL subscriptions are the only API technology that supports event-driven patterns.",
+        "isCorrect": false,
+        "explanation": "Webhooks, WebSockets, Server-Sent Events, and message queues all support event-driven patterns. GraphQL subscriptions are one implementation, not the only option."
+      }
+    ]
+  },
+  {
+    "topic": "api-design",
+    "question": "What Is API Mocking And Why Is It Valuable?",
+    "options": [
+      {
+        "optionText": "Creating a simulated API that returns fake responses — enables frontend development and testing before the real API is ready.",
+        "isCorrect": true,
+        "explanation": "Correct — tools: MSW (Mock Service Worker) for browser/Node, json-server, Postman mock servers. Mocking unblocks teams, enables contract testing, and speeds up CI."
+      },
+      {
+        "optionText": "Writing unit tests that mock the database layer inside the API service.",
+        "isCorrect": false,
+        "explanation": "DB mocking is test isolation for unit tests. API mocking simulates the entire API surface for consumers (frontends, integration tests) to use."
+      },
+      {
+        "optionText": "A security technique to detect fake API clients pretending to be legitimate users.",
+        "isCorrect": false,
+        "explanation": "Detecting fake clients uses bot detection, rate limiting, and fraud signals. API mocking is a development/testing technique — not a security measure."
+      },
+      {
+        "optionText": "API mocking is only useful for third-party APIs — internal APIs should always be tested against production.",
+        "isCorrect": false,
+        "explanation": "Mocking is valuable for both internal and external APIs. Testing against production risks data corruption and is often impossible in CI pipelines."
+      }
+    ]
+  },
+  {
+    "topic": "api-design",
+    "question": "What Is The Difference Between Synchronous And Asynchronous APIs?",
+    "options": [
+      {
+        "optionText": "Synchronous: client waits for response (REST/RPC). Asynchronous: client gets immediate acknowledgement; result arrives later via webhook, polling, or message queue.",
+        "isCorrect": true,
+        "explanation": "Correct — async APIs suit long-running work: video encoding, report generation. Pattern: POST /jobs → 202 Accepted + job ID → poll GET /jobs/id or receive webhook."
+      },
+      {
+        "optionText": "Synchronous APIs use HTTP; asynchronous APIs use WebSockets — the protocol defines sync/async.",
+        "isCorrect": false,
+        "explanation": "Both sync and async patterns can run over HTTP. The distinction is whether the client waits for the result, not the transport protocol."
+      },
+      {
+        "optionText": "Asynchronous APIs are always faster — synchronous APIs are a legacy pattern.",
+        "isCorrect": false,
+        "explanation": "Async adds complexity (polling, webhooks, idempotency). Sync is simpler and often faster for short operations. Choose based on operation duration and UX needs."
+      },
+      {
+        "optionText": "Async APIs require GraphQL; sync APIs require REST.",
+        "isCorrect": false,
+        "explanation": "Both REST and GraphQL support sync and async patterns. REST supports async via 202 Accepted + polling; GraphQL supports async via subscriptions."
+      }
+    ]
+  },
+  {
+    "topic": "api-design",
+    "question": "How Do You Test An API Effectively?",
+    "options": [
+      {
+        "optionText": "Unit tests for pure functions, integration tests against a real DB, contract tests for API consumers, and load tests for performance — use Postman/Vitest/Supertest.",
+        "isCorrect": true,
+        "explanation": "Correct — integration tests are the most valuable layer for APIs. Contract tests (Pact) ensure the API and consumers stay in sync without end-to-end tests."
+      },
+      {
+        "optionText": "Only test the happy path — error handling is too unpredictable to test reliably.",
+        "isCorrect": false,
+        "explanation": "Error handling tests are essential. 400, 401, 404, 422, and 500 responses must be tested — they're often where bugs hide."
+      },
+      {
+        "optionText": "Manual testing in Postman is sufficient for production APIs — automated tests add overhead.",
+        "isCorrect": false,
+        "explanation": "Manual testing can't catch regressions. Automated API tests run in CI on every PR, preventing breaking changes from reaching production."
+      },
+      {
+        "optionText": "Test only with mocked services — real external calls are too slow for CI.",
+        "isCorrect": false,
+        "explanation": "Mocks speed up unit tests but integration tests must hit real services (or realistic replicas) to catch actual integration bugs. Use test databases in CI."
+      }
+    ]
+  },
+  {
+    "topic": "api-design",
+    "question": "What Is API Gateway Rate Limiting vs Application-Level Rate Limiting?",
+    "options": [
+      {
+        "optionText": "Gateway rate limiting (Nginx, Cloudflare) operates before requests hit your app; application-level uses middleware inside your service for fine-grained per-user logic.",
+        "isCorrect": true,
+        "explanation": "Correct — gateway limiting is faster (no app overhead) and protects infra; application limiting enables business-rule logic like 'free tier = 100 req/day'."
+      },
+      {
+        "optionText": "They are identical — use one or the other, never both.",
+        "isCorrect": false,
+        "explanation": "They complement each other. Gateway limiting for coarse infrastructure protection; app-level for fine-grained business logic. Using both is a defence-in-depth strategy."
+      },
+      {
+        "optionText": "Application-level rate limiting requires OAuth — the gateway can't track user identity.",
+        "isCorrect": false,
+        "explanation": "Gateways can rate limit by IP or API key without OAuth. Application-level limiting adds user-identity-aware logic after authentication."
+      },
+      {
+        "optionText": "Gateway rate limiting only works for authenticated requests.",
+        "isCorrect": false,
+        "explanation": "Gateway limiting works for any request — by IP, API key, or globally. It's often the first line of defence against unauthenticated floods."
+      }
+    ]
+  },
+  {
+    "topic": "api-design",
+    "question": "What Is tRPC And How Does It Change API Design For TypeScript Projects?",
+    "options": [
+      {
+        "optionText": "tRPC generates a fully type-safe API client from your server procedures — no code generation, no schema file, types flow automatically end-to-end.",
+        "isCorrect": true,
+        "explanation": "Correct — tRPC eliminates the type gap between server and client. Change a server return type and the client TypeScript error appears immediately. Ideal for Next.js full-stack."
+      },
+      {
+        "optionText": "tRPC is a REST framework that adds TypeScript types to Express routes.",
+        "isCorrect": false,
+        "explanation": "tRPC uses procedures (query/mutation), not REST routes. It's a separate paradigm — not REST with types added on top."
+      },
+      {
+        "optionText": "tRPC requires GraphQL — it's a TypeScript wrapper around the GraphQL schema.",
+        "isCorrect": false,
+        "explanation": "tRPC is independent of GraphQL. It uses TypeScript inference directly without a schema language. It's an alternative to both REST and GraphQL for TypeScript apps."
+      },
+      {
+        "optionText": "tRPC is only suitable for microservices — monolithic Next.js apps should use REST.",
+        "isCorrect": false,
+        "explanation": "tRPC is especially popular with Next.js monolithic apps (T3 Stack). Its end-to-end type safety shines in full-stack TypeScript projects."
+      }
+    ]
+  },
+  {
+    "topic": "api-design",
+    "question": "How Do You Design An API For Multiple Clients (Web, Mobile, Third-Party)?",
+    "options": [
+      {
+        "optionText": "BFF pattern (separate backend per client type), or a flexible core API with field selection/sparse fieldsets, combined with versioning for third-party stability.",
+        "isCorrect": true,
+        "explanation": "Correct — mobile needs smaller payloads; web may need richer data; third-party needs stability. BFF tailors data per client; GraphQL field selection also solves over-fetching."
+      },
+      {
+        "optionText": "Build one endpoint that returns all possible data — clients take what they need.",
+        "isCorrect": false,
+        "explanation": "Over-fetching wastes bandwidth (critical on mobile) and exposes unnecessary data. Design endpoints for the consumer's needs."
+      },
+      {
+        "optionText": "Build separate APIs entirely — one per client type with no shared code.",
+        "isCorrect": false,
+        "explanation": "Completely separate APIs duplicate business logic and multiply maintenance burden. The BFF pattern adds a thin client-specific layer on top of a shared core API."
+      },
+      {
+        "optionText": "Third-party clients should use GraphQL; first-party clients should use REST.",
+        "isCorrect": false,
+        "explanation": "Both GraphQL and REST can serve first- and third-party clients. The choice depends on use case, not client ownership."
+      }
+    ]
+  },
+  {
+    "topic": "api-design",
+    "question": "How Do You Handle Long-Running Operations In A REST API?",
+    "options": [
+      {
+        "optionText": "Return 202 Accepted with a job ID immediately, then let clients poll GET /jobs/{id} or receive a webhook when done.",
+        "isCorrect": true,
+        "explanation": "Correct — the async job pattern avoids HTTP timeouts and lets clients continue. The job resource tracks status: pending → processing → completed/failed."
+      },
+      {
+        "optionText": "Set a very long HTTP timeout — 10 minutes should cover any operation.",
+        "isCorrect": false,
+        "explanation": "Long timeouts block connections, waste resources, and break at proxies/load balancers. Async job patterns are the correct solution for long-running work."
+      },
+      {
+        "optionText": "Use WebSockets — REST can't handle long-running operations.",
+        "isCorrect": false,
+        "explanation": "REST handles long operations via the async job pattern (202 + polling/webhook). WebSockets are for real-time bidirectional communication, not the only option."
+      },
+      {
+        "optionText": "Stream the response progressively — chunked transfer encoding keeps the connection alive.",
+        "isCorrect": false,
+        "explanation": "Streaming works for some cases (logs, progress), but has timeout and infrastructure limitations. The 202+polling pattern is more robust for truly long operations."
+      }
+    ]
+  },
+  {
+    "topic": "api-design",
+    "question": "How Do You Implement Server-Sent Events In Next.js?",
+    "options": [
+      {
+        "optionText": "In a Route Handler, return a ReadableStream with Content-Type: text/event-stream — the client uses the EventSource API to receive events.",
+        "isCorrect": true,
+        "explanation": "Correct — SSE is one-directional (server→client) and works over HTTP. Simpler than WebSockets for notifications and live feeds. Next.js App Router Route Handlers support streaming responses."
+      },
+      {
+        "optionText": "SSE requires a WebSocket server — Next.js can't implement it with Route Handlers.",
+        "isCorrect": false,
+        "explanation": "SSE uses regular HTTP, not WebSockets. Next.js Route Handlers can return streaming responses with the correct Content-Type header."
+      },
+      {
+        "optionText": "Use the socket.io library — it's required for all real-time features in Next.js.",
+        "isCorrect": false,
+        "explanation": "Socket.io is optional and adds WebSocket complexity. SSE via ReadableStream is a native, lightweight alternative for server-to-client push."
+      },
+      {
+        "optionText": "SSE is deprecated — use GraphQL subscriptions instead for all real-time features.",
+        "isCorrect": false,
+        "explanation": "SSE is not deprecated and is simpler than GraphQL subscriptions for one-directional push. It works natively in browsers without additional libraries."
+      }
+    ]
+  },
+  {
+    "topic": "api-design",
+    "question": "How Do You Design A Search API?",
+    "options": [
+      {
+        "optionText": "Accept q (query string) + filter/sort/pagination params; return results with metadata (total, page, hasMore); back with Elasticsearch or Postgres full-text search.",
+        "isCorrect": true,
+        "explanation": "Correct — GET /products?q=laptop&category=electronics&sort=price&page=2 is idiomatic. Return pagination metadata so clients can render page controls."
+      },
+      {
+        "optionText": "Use POST for all searches — GET requests can't carry search parameters.",
+        "isCorrect": false,
+        "explanation": "GET requests support query parameters perfectly for search. POST search (with a body) is valid for complex queries but breaks HTTP caching and bookmarkability."
+      },
+      {
+        "optionText": "Return all matching results in one response — pagination adds unnecessary complexity.",
+        "isCorrect": false,
+        "explanation": "Returning all results can be millions of records. Cursor-based or offset pagination is essential for search APIs to be performant and usable."
+      },
+      {
+        "optionText": "Full-text search must be implemented in the API layer — databases can't handle it.",
+        "isCorrect": false,
+        "explanation": "PostgreSQL has built-in full-text search (tsvector); Elasticsearch and Typesense are purpose-built. The API delegates search logic to the appropriate backend."
+      }
+    ]
+  },
+  {
+    "topic": "api-design",
+    "question": "What Is GraphQL Persisted Queries And Why Are They Used?",
+    "options": [
+      {
+        "optionText": "Pre-registered query strings stored by hash on the server — clients send only the hash, reducing payload size and enabling query allowlisting for security.",
+        "isCorrect": true,
+        "explanation": "Correct — persisted queries (APQ) solve two problems: large query payloads over the wire, and arbitrary query execution security. Only pre-approved queries run in production."
+      },
+      {
+        "optionText": "Cached query results stored in Redis — they prevent the database from being queried twice.",
+        "isCorrect": false,
+        "explanation": "Response caching stores results; persisted queries store the query definition. They're separate optimisations."
+      },
+      {
+        "optionText": "A GraphQL feature that saves user query history for analytics purposes.",
+        "isCorrect": false,
+        "explanation": "Analytics on query usage is a separate concern. Persisted queries are a performance and security mechanism — they don't track user behaviour."
+      },
+      {
+        "optionText": "Subscriptions that stay active indefinitely — they 'persist' the WebSocket connection.",
+        "isCorrect": false,
+        "explanation": "Persistent subscriptions are a different concept. Persisted queries are pre-registered query strings identified by hash to reduce payload size and improve security."
+      }
+    ]
+  },
+  {
+    "topic": "api-design",
+    "question": "How Do You Monitor And Observe An API In Production?",
+    "options": [
+      {
+        "optionText": "Three pillars: Metrics (request rate, latency p99, error rate), Logs (structured JSON per request), Traces (distributed request flow across services). Use Datadog or Grafana.",
+        "isCorrect": true,
+        "explanation": "Correct — the observability trinity. Set SLOs on p99 latency and error rate. Alerts fire when thresholds are breached. Distributed tracing (OpenTelemetry) connects requests across microservices."
+      },
+      {
+        "optionText": "Check server logs manually after incidents — proactive monitoring adds unnecessary overhead.",
+        "isCorrect": false,
+        "explanation": "Reactive log checking misses issues before they escalate. Proactive alerting on metrics (error rate spike, latency degradation) catches problems before users report them."
+      },
+      {
+        "optionText": "Monitor only the database — API issues always originate from slow queries.",
+        "isCorrect": false,
+        "explanation": "API issues can originate from many sources: slow external calls, memory leaks, config errors, downstream failures. Monitor all layers."
+      },
+      {
+        "optionText": "Use console.log statements throughout the API code — they provide sufficient observability.",
+        "isCorrect": false,
+        "explanation": "Unstructured console.log output is unqueryable and hard to correlate. Structured logging (JSON with request ID, trace ID) with a log aggregation platform is the minimum."
+      }
+    ]
+  },
+  {
+    "topic": "api-design",
+    "question": "How Do You Approach API Design For A Greenfield Project?",
+    "options": [
+      {
+        "optionText": "Understand consumers first, design resources around business domain, choose REST/GraphQL/tRPC based on client needs, document with OpenAPI, and version from day one.",
+        "isCorrect": true,
+        "explanation": "Correct — start with the consumer (what data do they need, from where?) before implementation. Design-first using OpenAPI lets frontend and backend teams work in parallel."
+      },
+      {
+        "optionText": "Copy an existing internal API structure — consistency across APIs is more important than optimal design.",
+        "isCorrect": false,
+        "explanation": "Consistency matters but blind copying propagates existing mistakes. Greenfield is an opportunity to design correctly. Adopt patterns from successful public APIs (Stripe, GitHub)."
+      },
+      {
+        "optionText": "Build the database schema first, then generate the API from it automatically.",
+        "isCorrect": false,
+        "explanation": "DB-first design leaks implementation details into the API contract. Design the API for consumers first; let the DB schema follow the domain model."
+      },
+      {
+        "optionText": "Start coding immediately — over-planning an API is premature optimisation.",
+        "isCorrect": false,
+        "explanation": "API design decisions are expensive to change once clients depend on them. A design-first approach (OpenAPI mock → feedback → implement) prevents costly rework."
+      }
     ]
   }
 ]

@@ -1,0 +1,232 @@
+[
+  {
+    "topic": "typescript",
+    "question": "How do you perform string interpolation in TypeScript?",
+    "options": [
+      { "optionText": "Use template literals with backticks and ${} placeholders: `Hello ${name}`", "isCorrect": true, "explanation": "Correct — template literals (backtick strings) support embedded expressions and multi-line strings. TypeScript fully supports this ES6 feature." },
+      { "optionText": "Use the + operator: 'Hello ' + name", "isCorrect": false, "explanation": "Concatenation works but is not interpolation. Template literals with ${} are the modern, preferred syntax in TypeScript." },
+      { "optionText": "Use String.format('Hello %s', name) like in Java", "isCorrect": false, "explanation": "JavaScript/TypeScript has no String.format method. Use template literals: `Hello ${name}`." },
+      { "optionText": "Use double quotes with #{} placeholders: \"Hello #{name}\"", "isCorrect": false, "explanation": "#{} is Ruby syntax. TypeScript uses backtick template literals with ${} — double quotes are plain strings." }
+    ]
+  },
+  {
+    "topic": "typescript",
+    "question": "List the built-in types in TypeScript",
+    "options": [
+      { "optionText": "string, number, boolean, bigint, symbol, null, undefined, object, any, unknown, never, void", "isCorrect": true, "explanation": "Correct — these are TypeScript's primitive and special types. any opts out of type checking; unknown is the safe alternative; never is a bottom type for unreachable code." },
+      { "optionText": "string, int, float, bool, char, null", "isCorrect": false, "explanation": "TypeScript uses number (not int/float) and boolean (not bool). There is no char type — strings handle single characters." },
+      { "optionText": "String, Number, Boolean — all types are capitalised class wrappers", "isCorrect": false, "explanation": "Capitalised String/Number/Boolean are JS object wrappers — avoid them in TypeScript. Use lowercase string, number, boolean." },
+      { "optionText": "string, number, boolean, and array — all others are user-defined", "isCorrect": false, "explanation": "TypeScript has many more built-ins: bigint, symbol, null, undefined, any, unknown, never, void, tuple, enum, and more." }
+    ]
+  },
+  {
+    "topic": "typescript",
+    "question": "How do you create read-only arrays and tuples in TypeScript?",
+    "options": [
+      { "optionText": "Use readonly T[] or ReadonlyArray<T> for arrays, and readonly [A, B] for tuples.", "isCorrect": true, "explanation": "Correct — readonly prevents push, pop, splice and index assignment. The compiler rejects any mutation at compile time." },
+      { "optionText": "Use Object.freeze() — this makes arrays immutable in TypeScript.", "isCorrect": false, "explanation": "Object.freeze() is a runtime operation and not fully understood by the type system. readonly is the TypeScript-native compile-time solution." },
+      { "optionText": "Prefix the variable with const — const arrays are automatically read-only.", "isCorrect": false, "explanation": "const prevents reassignment of the variable but not mutation of the array's contents. Use readonly for that." },
+      { "optionText": "Use the Immutable<T> utility type to wrap any array.", "isCorrect": false, "explanation": "There is no built-in Immutable<T> type. TypeScript provides readonly T[] and ReadonlyArray<T> for this purpose." }
+    ]
+  },
+  {
+    "topic": "typescript",
+    "question": "How do you create an enum with string values?",
+    "options": [
+      { "optionText": "Assign a string literal to each member: enum Direction { Up = 'UP', Down = 'DOWN' }", "isCorrect": true, "explanation": "Correct — string enums require explicit initialisation for every member. They are safer than numeric enums because the values are readable in debuggers and serialised JSON." },
+      { "optionText": "enum Direction { 'UP', 'DOWN' } — just use string literals as member names.", "isCorrect": false, "explanation": "Enum members are identifiers, not strings. You must assign the string value: Up = 'UP', Down = 'DOWN'." },
+      { "optionText": "Use const enum — it automatically generates string values from member names.", "isCorrect": false, "explanation": "const enum inlines numeric values by default. String values must be explicitly assigned in both regular and const enums." },
+      { "optionText": "TypeScript enums only support numeric values — use a union of string literals instead.", "isCorrect": false, "explanation": "TypeScript supports both numeric and string enums. String enums require explicit assignments like Up = 'UP'." }
+    ]
+  },
+  {
+    "topic": "typescript",
+    "question": "What is a TypeScript map file (source map / declaration map)?",
+    "options": [
+      { "optionText": "A .map file maps compiled JS output back to the original TS source, enabling debuggers to show TS code.", "isCorrect": true, "explanation": "Correct — sourceMap: true emits .js.map files; declarationMap: true emits .d.ts.map files for navigating to source in libraries. Essential for debugging." },
+      { "optionText": "A file that maps TypeScript types to JavaScript runtime types for better performance.", "isCorrect": false, "explanation": "Map files are for debugging — they link output back to source. They have no effect on runtime performance." },
+      { "optionText": "A configuration file that maps module paths to their resolved locations.", "isCorrect": false, "explanation": "Path mapping is configured via paths in tsconfig.json, not .map files. Source maps are for debugger source navigation." },
+      { "optionText": "A file that stores the compiled TypeScript AST for incremental builds.", "isCorrect": false, "explanation": "Incremental build state is stored in .tsbuildinfo files, not .map files. Map files are solely for debugging." }
+    ]
+  },
+  {
+    "topic": "typescript",
+    "question": "Which access modifier is implied when none is specified?",
+    "options": [
+      { "optionText": "public — members are accessible everywhere by default.", "isCorrect": true, "explanation": "Correct — TypeScript class members are public unless marked private, protected, or # (hard private). Explicit public is optional but valid." },
+      { "optionText": "private — TypeScript defaults to hiding members for encapsulation.", "isCorrect": false, "explanation": "The default is public, not private. TypeScript requires you to explicitly opt in to private or protected." },
+      { "optionText": "protected — accessible within the class and its subclasses by default.", "isCorrect": false, "explanation": "protected must be stated explicitly. The implied default is public — accessible to any code with access to the instance." },
+      { "optionText": "internal — only accessible within the same file or module.", "isCorrect": false, "explanation": "TypeScript has no internal modifier. The default is public. Module-level encapsulation is handled by not exporting members." }
+    ]
+  },
+  {
+    "topic": "typescript",
+    "question": "What is type erasure in TypeScript?",
+    "options": [
+      { "optionText": "All TypeScript type information is removed during compilation — the emitted JS has no types at runtime.", "isCorrect": true, "explanation": "Correct — interfaces, type aliases, generics, and access modifiers exist only at compile time. At runtime you have plain JavaScript with no type safety." },
+      { "optionText": "TypeScript converts types to runtime checks like typeof and instanceof automatically.", "isCorrect": false, "explanation": "TypeScript does not emit runtime type checks. Types are erased entirely — you must write guards like typeof or instanceof yourself." },
+      { "optionText": "Type erasure is when TypeScript removes unused imports to reduce bundle size.", "isCorrect": false, "explanation": "Removing unused imports is a bundler/tree-shaking concern. Type erasure specifically means removing type annotations from compiled output." },
+      { "optionText": "TypeScript stores erased types in .d.ts files so they can be recovered at runtime.", "isCorrect": false, "explanation": ".d.ts files provide types for tooling (editors, tsc), not for runtime. At runtime, erased types are gone entirely." }
+    ]
+  },
+  {
+    "topic": "typescript",
+    "question": "What are decorators in TypeScript?",
+    "options": [
+      { "optionText": "Functions applied with @name syntax to classes, methods, or properties to add metadata or behaviour.", "isCorrect": true, "explanation": "Correct — decorators follow the TC39 Stage 3 proposal. They are widely used in frameworks like NestJS and Angular. Enable experimentalDecorators for the legacy API or use TS 5.0+ for standard decorators." },
+      { "optionText": "A TypeScript keyword that marks a class as abstract, preventing direct instantiation.", "isCorrect": false, "explanation": "That describes the abstract keyword. Decorators are @name functions that modify or annotate classes and their members." },
+      { "optionText": "Comment annotations like // @deprecated that TypeScript reads to suppress warnings.", "isCorrect": false, "explanation": "@deprecated is a JSDoc tag, not a decorator. Decorators use actual function calls with @ syntax: @Injectable(), @Component()." },
+      { "optionText": "Generic constraints that restrict which types can be passed to a function.", "isCorrect": false, "explanation": "Generic constraints use extends: <T extends User>. Decorators are @ functions applied to class declarations and members." }
+    ]
+  },
+  {
+    "topic": "typescript",
+    "question": "Can you use TypeScript on the backend, and how?",
+    "options": [
+      { "optionText": "Yes — compile with tsc to JS for Node.js, or use ts-node / tsx for direct execution, or Deno/Bun natively.", "isCorrect": true, "explanation": "Correct — TypeScript is widely used on the backend. ts-node and tsx execute TS directly during development; tsc compiles for production. Deno and Bun run TS natively without compilation." },
+      { "optionText": "No — TypeScript only works in browsers because it compiles to browser-compatible JavaScript.", "isCorrect": false, "explanation": "TypeScript compiles to JavaScript that runs anywhere JS does — including Node.js, Deno, and Bun on the server." },
+      { "optionText": "Yes, but only with a special @server decorator to mark server-side code.", "isCorrect": false, "explanation": "There is no @server decorator. TypeScript on the backend is standard Node.js with TypeScript — no special syntax required." },
+      { "optionText": "Only with a transpiler like Babel — tsc cannot produce backend-compatible output.", "isCorrect": false, "explanation": "tsc is perfectly capable of targeting Node.js. Set target and module in tsconfig.json appropriately (e.g. CommonJS or ESNext)." }
+    ]
+  },
+  {
+    "topic": "typescript",
+    "question": "Which object-oriented principles does TypeScript support?",
+    "options": [
+      { "optionText": "All four: Encapsulation (access modifiers), Inheritance (extends), Polymorphism (overrides/interfaces), Abstraction (abstract classes).", "isCorrect": true, "explanation": "Correct — TypeScript provides a full OOP toolkit on top of JavaScript's prototype chain, with compile-time enforcement of access rules." },
+      { "optionText": "Only Inheritance and Encapsulation — TypeScript lacks Polymorphism and Abstraction.", "isCorrect": false, "explanation": "TypeScript supports all four pillars. Polymorphism is enabled via interfaces and method overriding; Abstraction via abstract classes." },
+      { "optionText": "None — TypeScript is a functional language and does not support OOP.", "isCorrect": false, "explanation": "TypeScript is multi-paradigm. It fully supports OOP with classes, access modifiers, inheritance, and abstract classes alongside functional patterns." },
+      { "optionText": "Only Abstraction and Polymorphism — private/public modifiers are TypeScript-only and erased at runtime.", "isCorrect": false, "explanation": "While modifiers are erased at runtime, TypeScript supports all four OOP principles at compile time. Encapsulation and Inheritance are also fully supported." }
+    ]
+  },
+  {
+    "topic": "typescript",
+    "question": "How do you implement class constants in TypeScript?",
+    "options": [
+      { "optionText": "Use static readonly: static readonly MAX_RETRIES = 3 — shared across all instances and immutable.", "isCorrect": true, "explanation": "Correct — static makes it a class-level value; readonly prevents reassignment. Access it as ClassName.MAX_RETRIES." },
+      { "optionText": "Use const inside the class body: const MAX_RETRIES = 3.", "isCorrect": false, "explanation": "const is not valid inside a class body for properties. Use static readonly for class-level constants." },
+      { "optionText": "Use readonly without static — each instance will share the same value automatically.", "isCorrect": false, "explanation": "readonly without static creates an instance property — each instance gets its own copy. Use static readonly for a shared class constant." },
+      { "optionText": "Constants cannot be defined inside classes — declare them as module-level const instead.", "isCorrect": false, "explanation": "static readonly is the idiomatic way to define constants inside a TypeScript class, keeping them namespaced." }
+    ]
+  },
+  {
+    "topic": "typescript",
+    "question": "What are getters and setters in TypeScript?",
+    "options": [
+      { "optionText": "Accessors that look like properties: get value() runs on read, set value(v) runs on assignment — used to add validation or computed logic.", "isCorrect": true, "explanation": "Correct — getters/setters let you intercept property access. A common pattern is validation in the setter and lazy computation in the getter." },
+      { "optionText": "Special constructor parameters that automatically assign class properties.", "isCorrect": false, "explanation": "Auto-assigning constructor parameters use the shorthand constructor(public name: string). Getters/setters are accessor methods, not constructor params." },
+      { "optionText": "TypeScript equivalents of Java's getX() and setX() naming convention.", "isCorrect": false, "explanation": "Getters/setters in TypeScript use the get/set keyword syntax and look like property access, not method calls like getX()." },
+      { "optionText": "Functions that get and set values in a Map or object — used instead of bracket notation.", "isCorrect": false, "explanation": "Getters/setters are class accessor methods defined with get/set keywords. They are not related to Map access or bracket notation." }
+    ]
+  },
+  {
+    "topic": "typescript",
+    "question": "What is a mixin class in TypeScript?",
+    "options": [
+      { "optionText": "A function that takes a base class and returns an extended class, composing behaviour without multi-inheritance.", "isCorrect": true, "explanation": "Correct — mixins work around TypeScript's single-inheritance limit. Pattern: const Serializable = <T extends Constructor>(Base: T) => class extends Base { ... }" },
+      { "optionText": "A class that extends multiple base classes simultaneously using the implements keyword.", "isCorrect": false, "explanation": "TypeScript only allows single inheritance with extends. implements is for interfaces, not base classes. Mixins compose behaviour via functions." },
+      { "optionText": "A TypeScript decorator that merges two class prototypes at runtime.", "isCorrect": false, "explanation": "Mixins are a structural pattern using class-returning functions, not decorators. They're resolved at compile time through the type system." },
+      { "optionText": "An abstract class that provides default implementations for some methods.", "isCorrect": false, "explanation": "That describes an abstract class. Mixins are reusable behaviour composers applied to any base class via a higher-order function." }
+    ]
+  },
+  {
+    "topic": "typescript",
+    "question": "What does short-circuiting mean in TypeScript?",
+    "options": [
+      { "optionText": "Logical operators stop evaluating as soon as the result is determined: && returns first falsy, || returns first truthy.", "isCorrect": true, "explanation": "Correct — short-circuiting prevents unnecessary evaluation. user && user.profile.name avoids calling .profile on null/undefined." },
+      { "optionText": "TypeScript skips type-checking expressions marked with the ! non-null assertion operator.", "isCorrect": false, "explanation": "! asserts non-null but doesn't short-circuit evaluation — the expression still runs. Short-circuiting is a logical operator behaviour." },
+      { "optionText": "A performance optimisation where TypeScript caches the result of pure function calls.", "isCorrect": false, "explanation": "TypeScript has no built-in memoisation. Short-circuiting is a language semantics feature of logical operators, not a compiler optimisation." },
+      { "optionText": "When a try/catch block prevents an error from propagating to the caller.", "isCorrect": false, "explanation": "That describes error handling. Short-circuiting is specifically about logical operators (&&, ||, ??) stopping evaluation early." }
+    ]
+  },
+  {
+    "topic": "typescript",
+    "question": "What is the unique symbol type used for?",
+    "options": [
+      { "optionText": "To represent one specific Symbol value at the type level — only allowed on const declarations and readonly static properties.", "isCorrect": true, "explanation": "Correct — unique symbol creates a distinct brand so two symbols cannot be confused even if both are symbol. Useful for nominal typing and opaque keys." },
+      { "optionText": "To define a Symbol that can only be used as an object key, not as a value.", "isCorrect": false, "explanation": "All symbols can be used as object keys. unique symbol is about type-level uniqueness, not access restrictions." },
+      { "optionText": "A symbol that throws a compile error if the same value is used more than once.", "isCorrect": false, "explanation": "unique symbol creates a distinct type per declaration — it doesn't track usage or throw errors on reuse." },
+      { "optionText": "The return type of Symbol.iterator — used to mark classes as iterable.", "isCorrect": false, "explanation": "Symbol.iterator returns symbol (lowercase). unique symbol is a narrower subtype for constant symbol values used in nominal type patterns." }
+    ]
+  },
+  {
+    "topic": "typescript",
+    "question": "What is the difference between optional chaining (?.) and the non-null assertion operator (!)?",
+    "options": [
+      { "optionText": "?. is runtime-safe — returns undefined if nullish. ! is compile-time only — tells TypeScript to trust you, still crashes at runtime.", "isCorrect": true, "explanation": "Correct — ?. is a safe runtime guard. ! just suppresses the TS error; if the value is actually null, you still get a runtime TypeError. Prefer ?. over !." },
+      { "optionText": "Both do the same thing — they prevent null reference errors at runtime.", "isCorrect": false, "explanation": "Only ?. provides runtime safety by returning undefined. ! does nothing at runtime — it only silences the TypeScript compiler." },
+      { "optionText": "?. works on arrays; ! works on objects.", "isCorrect": false, "explanation": "Both work on any nullable type. The distinction is compile-time assertion (!) vs runtime short-circuit (?.)." },
+      { "optionText": "! is the newer syntax that replaces ?. in TypeScript 5+.", "isCorrect": false, "explanation": "Both have been in TypeScript for years and serve different purposes. ! is a type assertion; ?. is an optional access operator — neither replaced the other." }
+    ]
+  },
+  {
+    "topic": "typescript",
+    "question": "What are project references and their benefits?",
+    "options": [
+      { "optionText": "A tsconfig feature that splits a large codebase into sub-projects for faster incremental builds and cleaner dependency boundaries.", "isCorrect": true, "explanation": "Correct — with composite: true and references, TypeScript only recompiles changed sub-projects. Common in monorepos (e.g. shared/ui, shared/utils, apps)." },
+      { "optionText": "A way to import types from external npm packages without installing them.", "isCorrect": false, "explanation": "External types come from @types/* packages or bundled .d.ts files, not project references. References link local sub-projects." },
+      { "optionText": "A tsconfig option that allows circular imports between TypeScript files.", "isCorrect": false, "explanation": "Project references don't enable circular imports — TypeScript flags cycles as errors regardless. References create a DAG of project dependencies." },
+      { "optionText": "References to TypeScript version numbers to ensure compatibility across a team.", "isCorrect": false, "explanation": "TypeScript version pinning is done in package.json. Project references (via references array in tsconfig) split a project into independently compilable units." }
+    ]
+  },
+  {
+    "topic": "typescript",
+    "question": "How do you use plain JavaScript libraries in TypeScript?",
+    "options": [
+      { "optionText": "Install @types/library-name for community-maintained types, or write your own .d.ts declaration file if none exist.", "isCorrect": true, "explanation": "Correct — DefinitelyTyped (@types/*) covers thousands of popular libraries. For untyped packages, declare module 'library-name' with your own type shapes." },
+      { "optionText": "Rename the .js file to .ts — TypeScript will infer all types automatically.", "isCorrect": false, "explanation": "Renaming doesn't add types — the library code would need its own annotations. Use @types/* or a .d.ts file to type an external JS library." },
+      { "optionText": "Cast the import to any: const lib = require('lib') as any — this gives full TypeScript support.", "isCorrect": false, "explanation": "Casting to any silences errors but gives you zero type safety or autocomplete. Use @types/* for real type information." },
+      { "optionText": "TypeScript cannot import plain JavaScript — all dependencies must be written in TypeScript.", "isCorrect": false, "explanation": "TypeScript interops with JavaScript seamlessly. Use allowJs: true to import JS files directly, or @types/* for type information only." }
+    ]
+  },
+  {
+    "topic": "typescript",
+    "question": "How do you extend one interface from another in TypeScript?",
+    "options": [
+      { "optionText": "Use extends: interface Admin extends User { role: string } — Admin inherits all User members and adds role.", "isCorrect": true, "explanation": "Correct — interfaces can extend multiple other interfaces: interface A extends B, C { ... }. This is the idiomatic way to compose interface shapes." },
+      { "optionText": "Use implements: interface Admin implements User — same as class inheritance for interfaces.", "isCorrect": false, "explanation": "implements is for classes implementing an interface, not for interfaces extending each other. Use extends between interfaces." },
+      { "optionText": "Use the & intersection operator: type Admin = User & { role: string } — that's the only way.", "isCorrect": false, "explanation": "Intersection types work, but extending an interface with extends is also valid and preferred for interface-to-interface inheritance." },
+      { "optionText": "Interfaces cannot be extended — create a new one manually copying all members.", "isCorrect": false, "explanation": "Interfaces fully support extends. You can even extend multiple interfaces at once: interface Admin extends User, Auditable { ... }" }
+    ]
+  },
+  {
+    "topic": "typescript",
+    "question": "How does the override keyword work in TypeScript?",
+    "options": [
+      { "optionText": "Marks a method that intentionally overrides a base class method — the compiler errors if the base method doesn't exist.", "isCorrect": true, "explanation": "Correct — with noImplicitOverride: true in tsconfig, all overriding methods must use override. This catches typos and renamed base methods at compile time." },
+      { "optionText": "Forces TypeScript to ignore the base class implementation and always use the child's version.", "isCorrect": false, "explanation": "override is a compile-time safety annotation, not a runtime directive. It just validates that a matching method exists in the base class." },
+      { "optionText": "Equivalent to the abstract keyword — marks a method that must be implemented by subclasses.", "isCorrect": false, "explanation": "abstract requires subclass implementation; override confirms you are providing one. They are complementary but distinct keywords." },
+      { "optionText": "A TypeScript 5 decorator that replaces a method at class instantiation time.", "isCorrect": false, "explanation": "override is a plain keyword (not a decorator) introduced in TypeScript 4.3. It's a compile-time check, not a runtime replacement." }
+    ]
+  },
+  {
+    "topic": "typescript",
+    "question": "When should you use the declare keyword in TypeScript?",
+    "options": [
+      { "optionText": "When describing something that exists at runtime but wasn't written in TypeScript — ambient declarations in .d.ts files or global augmentations.", "isCorrect": true, "explanation": "Correct — declare const, declare function, declare module tell the compiler 'this exists' without emitting any JS. Essential for typing global scripts and third-party JS." },
+      { "optionText": "When you want to declare a variable without assigning a value — like let but stricter.", "isCorrect": false, "explanation": "declare is for ambient declarations only — it emits no code. For unassigned variables use let or const with a type annotation." },
+      { "optionText": "To mark a class as virtual, preventing TypeScript from emitting it in the compiled output.", "isCorrect": false, "explanation": "declare class creates an ambient class declaration, but its purpose is typing an existing JS class, not suppressing output for any class." },
+      { "optionText": "To explicitly tell TypeScript a value is non-null — equivalent to the ! operator.", "isCorrect": false, "explanation": "Non-null assertion uses the ! suffix. declare is for ambient type declarations — telling the compiler a JS value exists at runtime." }
+    ]
+  },
+  {
+    "topic": "typescript",
+    "question": "What is the benefit of import attributes (import assertions)?",
+    "options": [
+      { "optionText": "They let you attach metadata to an import — e.g. with { type: 'json' } — enabling safe, typed JSON imports without extra tooling.", "isCorrect": true, "explanation": "Correct — import data from './data.json' with { type: 'json' } is the TC39 standard way to import JSON and other non-JS modules safely." },
+      { "optionText": "They allow conditional imports — importing a module only if a runtime condition is met.", "isCorrect": false, "explanation": "Conditional loading uses dynamic import() with if checks. Import attributes attach metadata to any import, not conditionally execute it." },
+      { "optionText": "They replace triple-slash directives for referencing type declarations in .d.ts files.", "isCorrect": false, "explanation": "Triple-slash directives (/// <reference types='...' />) are a separate mechanism. Import attributes are for module metadata like type: 'json'." },
+      { "optionText": "They speed up compilation by telling TypeScript to skip type-checking the imported module.", "isCorrect": false, "explanation": "Import attributes have no effect on type checking. They communicate module type information to the runtime/loader, not to the TypeScript compiler." }
+    ]
+  },
+  {
+    "topic": "typescript",
+    "question": "What is one thing you would change about TypeScript?",
+    "options": [
+      { "optionText": "Nominal typing support — today two interfaces with the same shape are interchangeable even when they should be distinct types.", "isCorrect": true, "explanation": "Correct — TypeScript uses structural typing, which is powerful but means type USDAmount = number and EURAmount = number are identical. Nominal/branded types require workarounds like intersection with a unique symbol." },
+      { "optionText": "Remove generics — they make code too complex and should be replaced with any.", "isCorrect": false, "explanation": "Generics are one of TypeScript's most powerful features enabling reusable, type-safe abstractions. Replacing them with any would destroy type safety." },
+      { "optionText": "Make all types optional by default — requiring explicit annotation is too verbose.", "isCorrect": false, "explanation": "TypeScript's inference is already very strong. Removing required annotations would weaken the safety guarantees that make TypeScript valuable." },
+      { "optionText": "Replace the TypeScript compiler with Babel — tsc is too slow for large projects.", "isCorrect": false, "explanation": "Babel can strip types but doesn't type-check. Slow builds are better addressed with project references, isolatedModules, or esbuild/swc for transpilation alongside tsc for checking." }
+    ]
+  }
+]
