@@ -3,7 +3,7 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import { useTransition } from "react";
 
-import { LANGUAGES, LEVELS } from "@/lib/topics";
+import { LEVELS } from "@/lib/topics";
 import { cn } from "@/lib/utils";
 
 interface Topic {
@@ -13,9 +13,10 @@ interface Topic {
 
 interface QuestionFiltersProps {
   topics?: Topic[];
+  lang?: "en" | "tr";
 }
 
-export function QuestionFilters({ topics = [] }: QuestionFiltersProps) {
+export function QuestionFilters({ topics = [], lang = "en" }: QuestionFiltersProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [isPending, startTransition] = useTransition();
@@ -40,14 +41,13 @@ export function QuestionFilters({ topics = [] }: QuestionFiltersProps) {
     .filter((n) => n >= 1 && n <= 5) as (1 | 2 | 3 | 4 | 5)[];
 
   const currentQuery = searchParams.get("q") ?? "";
-  const currentLang = searchParams.get("lang") === "tr" ? "tr" : "en";
 
-  function update(key: "q" | "lang", value: string) {
+  function updateQuery(value: string) {
     const params = new URLSearchParams(searchParams.toString());
     if (value) {
-      params.set(key, value);
+      params.set("q", value);
     } else {
-      params.delete(key);
+      params.delete("q");
     }
     startTransition(() => {
       router.replace(`/questions?${params.toString()}`, { scroll: false });
@@ -70,7 +70,6 @@ export function QuestionFilters({ topics = [] }: QuestionFiltersProps) {
     });
   }
 
-  // colour per level value — button active state
   const levelColour: Record<number, string> = {
     1: "data-[active=true]:bg-emerald-950 data-[active=true]:border-emerald-800 data-[active=true]:text-emerald-400",
     2: "data-[active=true]:bg-emerald-950 data-[active=true]:border-emerald-800 data-[active=true]:text-emerald-400",
@@ -79,7 +78,6 @@ export function QuestionFilters({ topics = [] }: QuestionFiltersProps) {
     5: "data-[active=true]:bg-red-950 data-[active=true]:border-red-800 data-[active=true]:text-red-400",
   };
 
-  // dot colour per level (always visible, not dependent on active state)
   const dotColour: Record<number, string> = {
     1: "bg-emerald-500",
     2: "bg-emerald-500",
@@ -88,9 +86,16 @@ export function QuestionFilters({ topics = [] }: QuestionFiltersProps) {
     5: "bg-red-500",
   };
 
+  const levelLabels: Record<number, string> = lang === "tr"
+    ? { 1: "Başlangıç", 2: "Junior", 3: "Mid", 4: "Senior", 5: "Uzman" }
+    : { 1: "Entry", 2: "Junior", 3: "Mid", 4: "Senior", 5: "Expert" };
+
+  const topicAllLabel = lang === "tr" ? "Tüm konular" : "All topics";
+  const searchPlaceholder = lang === "tr" ? "Soruda anahtar kelime…" : "Keyword in question…";
+
   return (
     <div className={cn("space-y-3", isPending && "opacity-70")}>
-      {/* Topic select — used by E2E tests via #topic-filter */}
+      {/* Topic select */}
       {topics.length > 0 && (
         <select
           id="topic-filter"
@@ -98,7 +103,7 @@ export function QuestionFilters({ topics = [] }: QuestionFiltersProps) {
           onChange={(e) => updateTopic(e.currentTarget.value)}
           className="h-9 rounded-md border border-input bg-background px-3 text-sm shadow-sm outline-none transition focus:border-ring focus:ring-1 focus:ring-ring"
         >
-          <option value="">All topics</option>
+          <option value="">{topicAllLabel}</option>
           {topics.map((t) => (
             <option key={t.slug} value={t.slug}>
               {t.name}
@@ -107,49 +112,18 @@ export function QuestionFilters({ topics = [] }: QuestionFiltersProps) {
         </select>
       )}
 
-      {/* Row 1 — search + lang */}
+      {/* Search */}
       <div className="flex items-center gap-3">
         <input
           type="search"
-          placeholder="Keyword in question…"
+          placeholder={searchPlaceholder}
           defaultValue={currentQuery}
-          onChange={(e) => update("q", e.currentTarget.value)}
+          onChange={(e) => updateQuery(e.currentTarget.value)}
           className="h-9 flex-1 rounded-md border border-input bg-background px-3 text-sm shadow-sm outline-none transition focus:border-ring focus:ring-1 focus:ring-ring min-w-0"
         />
-
-        {/* Language toggle */}
-        <fieldset aria-label="Answer language">
-          <legend className="sr-only">Answer language</legend>
-          <div className="inline-flex overflow-hidden rounded-md border border-input">
-            {LANGUAGES.map((lang) => {
-              const checked = currentLang === lang.value;
-              return (
-                <label
-                  key={lang.value}
-                  className={cn(
-                    "cursor-pointer px-3 py-1.5 text-xs font-medium transition",
-                    checked
-                      ? "bg-foreground text-background"
-                      : "bg-background text-foreground hover:bg-accent",
-                  )}
-                >
-                  <input
-                    type="radio"
-                    name="lang"
-                    value={lang.value}
-                    checked={checked}
-                    onChange={(e) => update("lang", e.currentTarget.value)}
-                    className="sr-only"
-                  />
-                  {lang.label}
-                </label>
-              );
-            })}
-          </div>
-        </fieldset>
       </div>
 
-      {/* Row 2 — level pills */}
+      {/* Level pills */}
       <div className="flex flex-wrap items-center gap-2">
         {LEVELS.map((lvl) => {
           const active = currentLevels.includes(lvl.value);
@@ -167,7 +141,7 @@ export function QuestionFilters({ topics = [] }: QuestionFiltersProps) {
                 levelColour[lvl.value],
               )}
             >
-              <span>{lvl.label}</span>
+              <span>{levelLabels[lvl.value] ?? lvl.label}</span>
               <span className="flex items-center gap-[3px]">
                 {Array.from({ length: 5 }).map((_, i) => (
                   <span

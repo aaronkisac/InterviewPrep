@@ -6,14 +6,15 @@ import { MarkdownContent } from "@/components/markdown-content";
 import { getQuestionById } from "@/lib/questions";
 import { listSystemTopics } from "@/lib/actions/admin-topics";
 import { listTerms } from "@/lib/terms";
-import { parseLanguage, TR_FALLBACK } from "@/lib/topics";
+import { TR_FALLBACK } from "@/lib/topics";
+import { getLang } from "@/lib/lang";
+import { i18nQuestionDetail } from "@/lib/i18n";
 
 import { PersonalExample } from "./_components/personal-example";
 
 export const dynamic = "force-dynamic";
 
 type Params = Promise<{ id: string }>;
-type SearchParams = Promise<{ lang?: string }>;
 
 export async function generateMetadata({ params }: { params: Params }) {
   const { id } = await params;
@@ -25,14 +26,11 @@ export async function generateMetadata({ params }: { params: Params }) {
 
 export default async function QuestionDetailPage({
   params,
-  searchParams,
 }: {
   params: Params;
-  searchParams: SearchParams;
 }) {
   const { id } = await params;
-  const { lang: langParam } = await searchParams;
-  const lang = parseLanguage(langParam);
+  const lang = await getLang();
   const [question, terms, systemTopics] = await Promise.all([
     getQuestionById(id),
     listTerms(),
@@ -52,23 +50,13 @@ export default async function QuestionDetailPage({
   const personal =
     lang === "tr" ? question.answer_personal_tr : question.answer_personal;
 
-  const i18n = {
-    back: lang === "tr" ? "← Tüm sorular" : "← All questions",
-    summary: lang === "tr" ? "Özet" : "Summary",
-    deepDive: lang === "tr" ? "Detaylı anlatım" : "Deep dive",
-    noDetail:
-      lang === "tr"
-        ? "Detaylı anlatım yakında eklenecek."
-        : "Deep-dive content coming soon.",
-    noAnswer:
-      lang === "tr" ? "Henüz cevap yazılmadı." : "No answer authored yet.",
-  };
+  const i18n = i18nQuestionDetail[lang];
 
   return (
     <main className="mx-auto w-full max-w-[1200px] px-4 sm:px-6 lg:px-8 py-10">
       <nav className="mb-6 flex items-center gap-2 text-sm text-muted-foreground">
         <Link
-          href={`/questions${lang === "tr" ? "?lang=tr" : ""}`}
+          href="/questions"
           className="hover:underline"
         >
           {i18n.back}
@@ -78,13 +66,13 @@ export default async function QuestionDetailPage({
       <header className="border-b border-border pb-6">
         <div className="flex flex-wrap items-center gap-2 text-xs">
           <Link
-            href={`/questions?topic=${question.topic}${lang === "tr" ? "&lang=tr" : ""}`}
+            href={`/questions?topic=${question.topic}`}
             className="rounded bg-secondary px-1.5 py-0.5 font-medium text-secondary-foreground hover:opacity-80"
           >
             {topicLabels[question.topic] ?? question.topic}
           </Link>
           <Link
-            href={`/questions?level=${question.level}${lang === "tr" ? "&lang=tr" : ""}`}
+            href={`/questions?level=${question.level}`}
             className="text-muted-foreground hover:underline"
           >
             {question.level_label}

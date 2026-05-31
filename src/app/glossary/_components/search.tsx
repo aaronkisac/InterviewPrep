@@ -3,7 +3,7 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import { useTransition } from "react";
 
-export function GlossarySearch() {
+export function GlossarySearch({ placeholder = "Search terms…" }: { placeholder?: string }) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [, startTransition] = useTransition();
@@ -25,7 +25,7 @@ export function GlossarySearch() {
   return (
     <input
       type="search"
-      placeholder="Search terms…"
+      placeholder={placeholder}
       defaultValue={currentQuery}
       onChange={(e) => updateQuery(e.currentTarget.value)}
       className="h-9 w-full rounded-md border border-input bg-background px-3 text-sm shadow-sm outline-none transition focus:border-ring focus:ring-1 focus:ring-ring"

@@ -6,6 +6,8 @@ import { useEffect, useRef, useState } from "react";
 
 import { saveMockSession, saveTopicMastery } from "@/lib/actions/user-tracking";
 import type { MockOption, MockQuestion } from "@/lib/mock-shared";
+import type { Language } from "@/lib/supabase/types";
+import { i18nMockSession } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 
 const OPTION_LABELS = ["A", "B", "C", "D"] as const;
@@ -17,10 +19,13 @@ function correctOption(question: MockQuestion): MockOption | undefined {
 export function MockSession({
   questions,
   topicLabels = {},
+  lang = "en",
 }: {
   questions: MockQuestion[];
   topicLabels?: Record<string, string>;
+  lang?: Language;
 }) {
+  const i18n = i18nMockSession[lang];
   const router = useRouter();
   const [index, setIndex] = useState(0);
   const [selected, setSelected] = useState<(string | null)[]>(() =>
@@ -32,7 +37,6 @@ export function MockSession({
   const current = questions[index];
   const saveCalledRef = useRef(false);
 
-  // Save session to DB once finished (fire-and-forget — failures are silent)
   useEffect(() => {
     if (!finished || saveCalledRef.current) return;
     saveCalledRef.current = true;
@@ -94,14 +98,13 @@ export function MockSession({
     const pct = Math.round((score / total) * 100);
     const grade =
       pct === 100
-        ? { label: "Perfect", color: "text-emerald-600 dark:text-emerald-400" }
+        ? { label: lang === "tr" ? "Mükemmel" : "Perfect", color: "text-emerald-600 dark:text-emerald-400" }
         : pct >= 80
-          ? { label: "Strong", color: "text-emerald-600 dark:text-emerald-400" }
+          ? { label: lang === "tr" ? "Güçlü" : "Strong", color: "text-emerald-600 dark:text-emerald-400" }
           : pct >= 60
-            ? { label: "Decent", color: "text-amber-600 dark:text-amber-400" }
-            : { label: "Needs work", color: "text-rose-600 dark:text-rose-400" };
+            ? { label: lang === "tr" ? "İyi" : "Decent", color: "text-amber-600 dark:text-amber-400" }
+            : { label: lang === "tr" ? "Geliştirilmeli" : "Needs work", color: "text-rose-600 dark:text-rose-400" };
 
-    // Per-topic breakdown
     const topicMap = new Map<string, { correct: number; total: number }>();
     questions.forEach((q, i) => {
       const key = q.topic;
@@ -117,7 +120,7 @@ export function MockSession({
       <div className="space-y-6">
         <div className="rounded-lg border border-border bg-card p-6 text-center">
           <p className="text-sm font-medium text-muted-foreground">
-            Session complete
+            {i18n.sessionComplete}
           </p>
           <p className="mt-2 text-4xl font-semibold tracking-tight">
             {score} / {total}
@@ -127,7 +130,7 @@ export function MockSession({
           </p>
           {score === total && (
             <p className="mt-1 text-sm text-muted-foreground">
-              Clean sweep — every answer correct.
+              {lang === "tr" ? "Tüm sorular doğru — mükemmel!" : "Clean sweep — every answer correct."}
             </p>
           )}
         </div>
@@ -135,7 +138,7 @@ export function MockSession({
         {topicBreakdown.length > 1 && (
           <div className="rounded-lg border border-border bg-card p-4">
             <p className="mb-3 text-xs font-medium text-muted-foreground">
-              By topic
+              {lang === "tr" ? "Konuya göre" : "By topic"}
             </p>
             <div className="flex flex-wrap gap-2">
               {topicBreakdown.map(([topic, { correct, total: t }]) => {
@@ -153,9 +156,7 @@ export function MockSession({
                     )}
                   >
                     {topicLabels[topic as string] ?? topic}
-                    <span className="opacity-70">
-                      {correct}/{t}
-                    </span>
+                    <span className="opacity-70">{correct}/{t}</span>
                   </span>
                 );
               })}
@@ -163,11 +164,10 @@ export function MockSession({
           </div>
         )}
 
-
         {missed.length > 0 && (
           <div className="space-y-3">
             <h2 className="text-sm font-medium text-muted-foreground">
-              Review missed questions
+              {i18n.reviewAnswers}
             </h2>
             {missed.map(({ q, picked }) => {
               const answer = correctOption(q);
@@ -180,19 +180,17 @@ export function MockSession({
                     <span className="rounded bg-secondary px-1.5 py-0.5 font-medium text-secondary-foreground">
                       {topicLabels[q.topic] ?? q.topic}
                     </span>
-                    <span className="text-muted-foreground">
-                      {q.levelLabel}
-                    </span>
+                    <span className="text-muted-foreground">{q.levelLabel}</span>
                   </div>
-                  <p className="mt-2 text-sm font-medium leading-snug">
-                    {q.question}
-                  </p>
+                  <p className="mt-2 text-sm font-medium leading-snug">{q.question}</p>
                   <p className="mt-3 text-sm text-rose-600 dark:text-rose-400">
-                    <span className="font-medium">Your answer:</span>{" "}
-                    {picked ? picked.text : "Not answered"}
+                    <span className="font-medium">
+                      {lang === "tr" ? "Cevabın:" : "Your answer:"}
+                    </span>{" "}
+                    {picked ? picked.text : (lang === "tr" ? "Cevaplanmadı" : "Not answered")}
                   </p>
                   <p className="mt-1 text-sm text-emerald-700 dark:text-emerald-400">
-                    <span className="font-medium">Correct answer:</span>{" "}
+                    <span className="font-medium">{i18n.correctAnswer}</span>{" "}
                     {answer?.text}
                   </p>
                   {answer?.explanation && (
@@ -212,19 +210,19 @@ export function MockSession({
             onClick={() => router.refresh()}
             className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition hover:opacity-90"
           >
-            Restart with same settings
+            {i18n.restart}
           </button>
           <Link
             href="/mock"
             className="rounded-md border border-border px-4 py-2 text-sm font-medium transition hover:bg-accent"
           >
-            New session
+            {i18n.newSession}
           </Link>
           <Link
             href="/questions"
             className="rounded-md border border-border px-4 py-2 text-sm font-medium transition hover:bg-accent"
           >
-            Back to question bank
+            {i18n.backToBank}
           </Link>
         </div>
       </div>
@@ -239,11 +237,9 @@ export function MockSession({
     <div className="space-y-5">
       <div>
         <div className="flex items-center justify-between text-xs text-muted-foreground">
-          <span>
-            Question {index + 1} of {total}
-          </span>
+          <span>{i18n.questionOf(index + 1, total)}</span>
           <Link href="/mock" className="hover:text-foreground hover:underline">
-            Quit
+            {i18n.quit}
           </Link>
         </div>
         <div
@@ -285,17 +281,11 @@ export function MockSession({
                   aria-pressed={isPicked}
                   className={cn(
                     "flex w-full items-start gap-3 rounded-md border p-3 text-left text-sm transition",
-                    !isAnswered &&
-                      "border-input hover:border-foreground/40 hover:bg-accent",
+                    !isAnswered && "border-input hover:border-foreground/40 hover:bg-accent",
                     isAnswered && "cursor-default",
-                    showCorrect &&
-                      "border-emerald-500 bg-emerald-50 dark:bg-emerald-950/40",
-                    showWrong &&
-                      "border-rose-500 bg-rose-50 dark:bg-rose-950/40",
-                    isAnswered &&
-                      !showCorrect &&
-                      !showWrong &&
-                      "border-border opacity-60",
+                    showCorrect && "border-emerald-500 bg-emerald-50 dark:bg-emerald-950/40",
+                    showWrong && "border-rose-500 bg-rose-50 dark:bg-rose-950/40",
+                    isAnswered && !showCorrect && !showWrong && "border-border opacity-60",
                   )}
                 >
                   <span
@@ -311,9 +301,7 @@ export function MockSession({
                   >
                     {OPTION_LABELS[optionIndex]}
                   </span>
-                  <span className="flex-1 pt-0.5 leading-snug">
-                    {option.text}
-                  </span>
+                  <span className="flex-1 pt-0.5 leading-snug">{option.text}</span>
                 </button>
               </li>
             );
@@ -331,16 +319,14 @@ export function MockSession({
             aria-live="polite"
           >
             <p className="font-medium">
-              {pickedOption?.isCorrect ? "Correct" : "Not quite"}
+              {pickedOption?.isCorrect ? i18n.correct : i18n.notQuite}
             </p>
             {pickedOption?.explanation && (
               <p className="mt-1">{pickedOption.explanation}</p>
             )}
             {!pickedOption?.isCorrect && answer && (
               <p className="mt-2 text-muted-foreground">
-                <span className="font-medium text-foreground">
-                  Correct answer:
-                </span>{" "}
+                <span className="font-medium text-foreground">{i18n.correctAnswer}</span>{" "}
                 {answer.text}
               </p>
             )}
@@ -355,7 +341,7 @@ export function MockSession({
           disabled={!isAnswered}
           className="rounded-md bg-primary px-5 py-2 text-sm font-medium text-primary-foreground transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
         >
-          {isLast ? "Finish" : "Next"}
+          {isLast ? i18n.finish : i18n.next}
         </button>
       </div>
     </div>

@@ -2,14 +2,19 @@ import Link from "next/link";
 
 import { auth, signOut } from "@/lib/auth";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { getLang } from "@/lib/lang";
+import { i18nNav } from "@/lib/i18n";
 import { NavLink } from "@/components/nav-link";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { ThemeSelector } from "@/components/theme-selector";
 import { MobileNav } from "@/components/mobile-nav";
+import { LangToggle } from "@/components/lang-toggle";
 
 export async function Navbar() {
   const session = await auth().catch(() => null);
   const user = session?.user;
+  const lang = await getLang();
+  const nav = i18nNav[lang];
 
   let isAdmin = false;
   if (user?.id) {
@@ -44,21 +49,24 @@ export async function Navbar() {
 
         {/* Desktop nav — hidden below 800px */}
         <div className="hidden min-[800px]:flex items-center gap-1">
-          <NavLink href="/questions">Questions</NavLink>
-          {user && <NavLink href="/mock">Mock</NavLink>}
-          {user && <NavLink href="/glossary">Glossary</NavLink>}
+          <NavLink href="/questions">{nav.questions}</NavLink>
+          {user && <NavLink href="/mock">{nav.mock}</NavLink>}
+          {user && <NavLink href="/glossary">{nav.glossary}</NavLink>}
           {isAdmin && (
             <NavLink
               href="/admin/questions"
               className="text-violet-600 hover:text-violet-700 dark:text-violet-400"
             >
-              Admin
+              {nav.admin}
             </NavLink>
           )}
         </div>
 
         {/* Spacer */}
         <div className="flex-1" />
+
+        {/* Language toggle */}
+        <LangToggle current={lang} />
 
         {/* Theme controls */}
         <ThemeSelector />
@@ -68,14 +76,14 @@ export async function Navbar() {
         {user ? (
           <div className="hidden min-[800px]:flex items-center gap-1">
             <NavLink href="/dashboard" exact>
-              Dashboard
+              {nav.dashboard}
             </NavLink>
             <form action={handleSignOut}>
               <button
                 type="submit"
                 className="rounded-md px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-accent/60 hover:text-foreground"
               >
-                Sign out
+                {nav.signOut}
               </button>
             </form>
           </div>
@@ -84,7 +92,7 @@ export async function Navbar() {
             href="/signin"
             className="hidden min-[800px]:inline-flex rounded-md bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground hover:opacity-90"
           >
-            Sign in
+            {nav.signIn}
           </Link>
         )}
 

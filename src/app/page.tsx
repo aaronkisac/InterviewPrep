@@ -1,38 +1,18 @@
 import Link from "next/link";
 
 import { auth } from "@/lib/auth";
+import { getLang } from "@/lib/lang";
+import { i18nHome } from "@/lib/i18n";
 import { getTopicStats } from "@/lib/questions";
 import { listSystemTopics } from "@/lib/actions/admin-topics";
 
 export const dynamic = "force-dynamic";
 
-const FEATURES = [
-  {
-    title: "Q&A bank",
-    description:
-      "Questions across 13 topics with general and personal answers. Filter by topic and seniority level.",
-    href: "/questions",
-    cta: "Browse questions",
-  },
-  {
-    title: "Mock interviews",
-    description:
-      "Pick a topic, answer multiple-choice questions under simulated interview conditions, and review your score.",
-    href: "/mock",
-    cta: "Start a session",
-  },
-  {
-    title: "Glossary",
-    description:
-      "105 frontend terms with concise definitions — auto-linked inline as you read through answers.",
-    href: "/glossary",
-    cta: "Explore terms",
-  },
-] as const;
-
 export default async function HomePage() {
   const session = await auth().catch(() => null);
   const user = session?.user;
+  const lang = await getLang();
+  const i18n = i18nHome[lang];
 
   const [topicStats, systemTopics] = await Promise.all([
     getTopicStats().catch(() => ({}) as Record<string, number>),
@@ -46,17 +26,13 @@ export default async function HomePage() {
       <section className="space-y-5">
         <div className="space-y-3">
           <p className="text-sm font-medium text-muted-foreground">
-            Frontend Interview Prep
+            {i18n.tagline}
           </p>
           <h1 className="text-4xl font-semibold tracking-tight">
-            React · TypeScript · Next.js
+            {i18n.headline}
           </h1>
           <p className="max-w-lg text-base text-muted-foreground">
-            {totalQuestions > 0
-              ? `${totalQuestions}+ questions`
-              : "Hundreds of questions"}{" "}
-            across {systemTopics.length} topics. Structured Q&amp;A, a term glossary,
-            and timed mock interview sessions.
+            {i18n.heroDesc(totalQuestions, systemTopics.length)}
           </p>
         </div>
 
@@ -65,19 +41,19 @@ export default async function HomePage() {
             href="/questions"
             className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:opacity-90"
           >
-            Browse questions
+            {i18n.browseQuestions}
           </Link>
           <Link
             href="/mock"
             className="rounded-md border border-border px-4 py-2 text-sm font-medium hover:bg-accent"
           >
-            Start mock interview
+            {i18n.startMock}
           </Link>
           <Link
             href="/glossary"
             className="rounded-md border border-border px-4 py-2 text-sm font-medium hover:bg-accent"
           >
-            Glossary
+            {i18n.glossary}
           </Link>
         </div>
       </section>
@@ -87,19 +63,18 @@ export default async function HomePage() {
         <section className="flex items-center justify-between gap-4 rounded-lg border border-border bg-card px-5 py-4">
           <div>
             <p className="text-sm font-medium">
-              Welcome back
+              {i18n.welcomeBack}
               {user.name ? `, ${user.name.split(" ")[0]}` : ""}
             </p>
             <p className="mt-0.5 text-xs text-muted-foreground">
-              Track your sessions, bookmarks, and topic progress on your
-              dashboard.
+              {i18n.welcomeSub}
             </p>
           </div>
           <Link
             href="/dashboard"
             className="shrink-0 rounded-md border border-border px-3 py-1.5 text-xs font-medium hover:bg-accent"
           >
-            View dashboard →
+            {i18n.viewDashboard}
           </Link>
         </section>
       )}
@@ -107,10 +82,10 @@ export default async function HomePage() {
       {/* ── Features ── */}
       <section className="space-y-4">
         <h2 className="text-sm font-medium text-muted-foreground">
-          What&apos;s inside
+          {i18n.whatsInside}
         </h2>
         <div className="grid gap-4 sm:grid-cols-3">
-          {FEATURES.map((f) => (
+          {i18n.features.map((f) => (
             <Link
               key={f.href}
               href={f.href}
@@ -130,7 +105,7 @@ export default async function HomePage() {
 
       {/* ── Topic grid ── */}
       <section className="space-y-4">
-        <h2 className="text-sm font-medium text-muted-foreground">Topics</h2>
+        <h2 className="text-sm font-medium text-muted-foreground">{i18n.topics}</h2>
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
           {systemTopics.map((topic) => {
             const count = topicStats[topic.slug] ?? 0;
@@ -142,7 +117,7 @@ export default async function HomePage() {
               >
                 <p className="text-sm font-medium">{topic.name}</p>
                 <p className="mt-1 text-xs text-muted-foreground">
-                  {count > 0 ? `${count} questions` : "Coming soon"}
+                  {i18n.questions(count)}
                 </p>
               </Link>
             );
@@ -153,22 +128,21 @@ export default async function HomePage() {
       {/* ── Sign-in CTA (guests only) ── */}
       {!user && (
         <section className="rounded-lg border border-dashed border-border px-6 py-10 text-center">
-          <p className="text-sm font-semibold">Track your progress</p>
+          <p className="text-sm font-semibold">{i18n.trackProgress}</p>
           <p className="mx-auto mt-2 max-w-sm text-sm text-muted-foreground">
-            Sign in to save mock session results, bookmark questions, and
-            monitor your improvement over time.
+            {i18n.trackProgressSub}
           </p>
           <Link
             href="/signin"
             className="mt-6 inline-block rounded-md bg-primary px-5 py-2 text-sm font-medium text-primary-foreground hover:opacity-90"
           >
-            Sign in to get started
+            {i18n.signInCta}
           </Link>
         </section>
       )}
 
       <footer className="border-t border-border pt-6 text-xs text-muted-foreground">
-        Interview Prep — built for Senior Frontend Engineers
+        {i18n.footer}
       </footer>
     </main>
   );

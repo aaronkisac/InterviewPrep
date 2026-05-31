@@ -5,6 +5,7 @@ import { getCustomTopic } from "@/lib/actions/custom-topics";
 import { listQuestions } from "@/lib/questions";
 import { listSystemTopics } from "@/lib/actions/admin-topics";
 import { getMasteredIds } from "@/lib/actions/user-tracking";
+import { getLang } from "@/lib/lang";
 import type { FlashcardQuestion } from "./_components/flashcard-session";
 import { FlashcardSession } from "./_components/flashcard-session";
 
@@ -28,6 +29,7 @@ export default async function FlashcardPage({
   if (!session?.user?.id) redirect("/signin");
 
   const params = await searchParams;
+  const lang = await getLang();
 
   // Support both ?topic= (legacy single-topic) and ?topics= (multi-topic from MockConfigTabs)
   const rawTopics = params.topics
@@ -128,16 +130,18 @@ export default async function FlashcardPage({
   return (
     <main className="mx-auto w-full max-w-[1200px] px-4 sm:px-6 lg:px-8 py-10">
       <header className="mb-6">
-        <p className="text-sm font-medium text-muted-foreground">Flashcard session</p>
+        <p className="text-sm font-medium text-muted-foreground">
+          {lang === "tr" ? "Kart oturumu" : "Flashcard session"}
+        </p>
         <h1 className="mt-1 text-2xl font-semibold tracking-tight">{topicName}</h1>
         <p className="mt-1 text-sm text-muted-foreground">
-          {questions.length} {questions.length === 1 ? "card" : "cards"}
-          {isMulti && ` · ${rawTopics.length} topics`}
-          {hasPrivate && " · includes private topics"}
+          {questions.length} {lang === "tr" ? "kart" : (questions.length === 1 ? "card" : "cards")}
+          {isMulti && ` · ${rawTopics.length} ${lang === "tr" ? "topic" : "topics"}`}
+          {hasPrivate && (lang === "tr" ? " · özel topicler dahil" : " · includes private topics")}
         </p>
       </header>
 
-      <FlashcardSession questions={questions} topicName={topicName} />
+      <FlashcardSession questions={questions} topicName={topicName} lang={lang} />
     </main>
    );
 }

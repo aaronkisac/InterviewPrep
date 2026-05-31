@@ -11,6 +11,7 @@ import { listSystemTopics } from "@/lib/actions/admin-topics";
 import { getCustomMockQuestions, listCustomTopics } from "@/lib/actions/custom-topics";
 import { getMasteredIds } from "@/lib/actions/user-tracking";
 import { LEVELS } from "@/lib/topics";
+import { getLang } from "@/lib/lang";
 import type { MockQuestion, Level } from "@/lib/mock-shared";
 
 import { MockSession } from "./_components/mock-session";
@@ -30,6 +31,7 @@ export default async function MockSessionPage({
   searchParams: SearchParams;
 }) {
   const params = await searchParams;
+  const lang = await getLang();
   const allTopics = parseTopicList(params.topics);
   const minLevel = parseLevelOr(params.min, 1);
   const maxLevel = parseLevelOr(params.max, 5);
@@ -48,9 +50,11 @@ export default async function MockSessionPage({
     return (
       <main className="mx-auto w-full max-w-[1200px] px-4 sm:px-6 lg:px-8 py-10">
         <div className="rounded-lg border border-dashed border-border p-8 text-center">
-          <p className="text-sm text-muted-foreground">No questions matched this session</p>
+          <p className="text-sm text-muted-foreground">
+            {lang === "tr" ? "Bu oturuma uyan soru bulunamadı" : "No questions matched this session"}
+          </p>
           <Link href="/mock" className="mt-4 inline-block rounded-md border border-border px-4 py-2 text-sm font-medium transition hover:bg-accent">
-            Back to config
+            {lang === "tr" ? "Ayarlara dön" : "Back to config"}
           </Link>
         </div>
       </main>
@@ -145,13 +149,15 @@ export default async function MockSessionPage({
       <main className="mx-auto w-full max-w-[1200px] px-4 sm:px-6 lg:px-8 py-10">
         <div className="rounded-lg border border-dashed border-border p-8 text-center">
           <p className="text-sm text-muted-foreground">
-            No questions matched this session. Try a wider topic or difficulty range.
+            {lang === "tr"
+              ? "Bu oturuma uyan soru bulunamadı. Daha geniş topic veya zorluk aralığı dene."
+              : "No questions matched this session. Try a wider topic or difficulty range."}
           </p>
           <Link
             href="/mock"
             className="mt-4 inline-block rounded-md border border-border px-4 py-2 text-sm font-medium transition hover:bg-accent"
           >
-            Back to config
+            {lang === "tr" ? "Ayarlara dön" : "Back to config"}
           </Link>
         </div>
       </main>
@@ -164,7 +170,7 @@ export default async function MockSessionPage({
 
   return (
     <main className="mx-auto w-full max-w-[1200px] px-4 sm:px-6 lg:px-8 py-10">
-      <MockSession key={sessionKey} questions={combined} topicLabels={topicLabels} />
+      <MockSession key={sessionKey} questions={combined} topicLabels={topicLabels} lang={lang} />
     </main>
   );
 }

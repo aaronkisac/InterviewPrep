@@ -11,6 +11,8 @@ import {
   type SessionLength,
 } from "@/lib/mock-shared";
 import { LEVELS } from "@/lib/topics";
+import { i18nMock, LEVEL_LABELS_TR } from "@/lib/i18n";
+import type { Language } from "@/lib/supabase/types";
 import { cn } from "@/lib/utils";
 
 type Tab = "mock" | "flashcard";
@@ -33,15 +35,16 @@ export function MockConfigTabs({
   flashcardTopics,
   topicLabels = {},
   topicStats,
+  lang = "en",
 }: {
   mockMeta: MockReadyMeta[];
-  /** Topics selectable in mock tab (have mock-ready questions) */
   mockTopics: TopicEntry[];
-  /** Topics selectable in flashcard tab (have any questions) */
   flashcardTopics: TopicEntry[];
   topicLabels?: Record<string, string>;
   topicStats?: TopicStats;
+  lang?: Language;
 }) {
+  const i18n = i18nMock[lang];
   const router = useRouter();
   const [tab, setTab] = useState<Tab>("mock");
 
@@ -134,16 +137,11 @@ export function MockConfigTabs({
   }
 
   // ── Topic totals (for "mastered/total" chip display) ─────────────────────────
-  // Mock total: count of mock-ready questions per topic key from mockMeta
   const mockTotals = useMemo(() => {
     const map: Record<string, number> = {};
     for (const m of mockMeta) map[m.topic] = (map[m.topic] ?? 0) + 1;
     return map;
   }, [mockMeta]);
-
-  // Flashcard total: question_count from TopicEntry (passed as `total` prop — not available here)
-  // We re-use mockTotals for flashcard too; page can extend this later.
-  // flashcardTopics don't carry a total count, so we show mastered/– when total unknown.
 
   // ── Derived ──────────────────────────────────────────────────────────────────
   const mockEffective = Math.min(mockAvailable, length);
@@ -179,6 +177,11 @@ export function MockConfigTabs({
     );
   }
 
+  function levelLabel(value: number): string {
+    if (lang === "tr") return LEVEL_LABELS_TR[value] ?? String(value);
+    return LEVELS.find((l) => l.value === value)?.label ?? String(value);
+  }
+
   return (
     <div className="rounded-lg border border-border bg-card">
       {/* ── Tabs ── */}
@@ -195,7 +198,7 @@ export function MockConfigTabs({
                 : "text-muted-foreground hover:text-foreground",
             )}
           >
-            {t === "mock" ? "Mock interview" : "Flashcard"}
+            {t === "mock" ? i18n.tabMock : i18n.tabFlashcard}
           </button>
         ))}
       </div>
@@ -204,22 +207,24 @@ export function MockConfigTabs({
         {/* ── Topics ── */}
         <fieldset className="space-y-3">
           <div className="flex items-center justify-between">
-            <legend className="text-sm font-medium">Topics</legend>
+            <legend className="text-sm font-medium">{i18n.topics}</legend>
             <button
               type="button"
               onClick={toggleAll}
               disabled={currentTopics.length === 0}
               className="text-xs text-muted-foreground underline-offset-2 transition hover:text-foreground hover:underline disabled:cursor-not-allowed disabled:opacity-40"
             >
-              {currentAllSelected ? "Deselect all" : "Select all"}
+              {currentAllSelected ? i18n.deselectAll : i18n.selectAll}
             </button>
           </div>
 
           {currentTopics.length === 0 ? (
             <p className="text-sm text-muted-foreground">
               {isMock
-                ? "No mock-ready questions yet. Add 4 options to questions to enable mock mode."
-                : "No topics with questions available."}
+                ? (lang === "tr"
+                  ? "Henüz mock'a hazır soru yok. Mock modunu etkinleştirmek için sorulara 4 seçenek ekle."
+                  : "No mock-ready questions yet. Add 4 options to questions to enable mock mode.")
+                : i18n.noTopics}
             </p>
           ) : (
             <>
@@ -281,11 +286,11 @@ export function MockConfigTabs({
 
         {/* ── Difficulty range ── */}
         <fieldset className="space-y-3">
-          <legend className="text-sm font-medium">Difficulty range</legend>
+          <legend className="text-sm font-medium">{i18n.difficultyRange}</legend>
           <div className="flex flex-wrap items-end gap-3">
             <div className="flex flex-col gap-1.5">
               <label htmlFor="min-level" className="text-xs font-medium text-muted-foreground">
-                From
+                {i18n.from}
               </label>
               <select
                 id="min-level"
@@ -294,14 +299,16 @@ export function MockConfigTabs({
                 className="h-9 rounded-md border border-input bg-background px-2 text-sm shadow-sm outline-none transition focus:border-ring focus:ring-1 focus:ring-ring"
               >
                 {LEVELS.map((l) => (
-                  <option key={l.value} value={l.value}>{l.label}</option>
+                  <option key={l.value} value={l.value}>{levelLabel(l.value)}</option>
                 ))}
               </select>
             </div>
-            <span className="pb-2 text-sm text-muted-foreground">to</span>
+            <span className="pb-2 text-sm text-muted-foreground">
+              {lang === "tr" ? "→" : "to"}
+            </span>
             <div className="flex flex-col gap-1.5">
               <label htmlFor="max-level" className="text-xs font-medium text-muted-foreground">
-                To
+                {i18n.to}
               </label>
               <select
                 id="max-level"
@@ -310,7 +317,7 @@ export function MockConfigTabs({
                 className="h-9 rounded-md border border-input bg-background px-2 text-sm shadow-sm outline-none transition focus:border-ring focus:ring-1 focus:ring-ring"
               >
                 {LEVELS.map((l) => (
-                  <option key={l.value} value={l.value}>{l.label}</option>
+                  <option key={l.value} value={l.value}>{levelLabel(l.value)}</option>
                 ))}
               </select>
             </div>
@@ -320,7 +327,7 @@ export function MockConfigTabs({
         {/* ── Session length ── */}
         <fieldset className="space-y-3">
           <legend className="text-sm font-medium">
-            {isMock ? "Session length" : "Card limit"}
+            {isMock ? i18n.sessionLength : (lang === "tr" ? "Kart limiti" : "Card limit")}
           </legend>
           <div className="inline-flex overflow-hidden rounded-md border border-input">
             {SESSION_LENGTHS.map((len) => {
@@ -355,17 +362,17 @@ export function MockConfigTabs({
           {isMock && (
             <p className="text-sm text-muted-foreground" aria-live="polite">
               {mockAvailable === 0
-                ? "No questions match this selection."
-                : mockEffective < length
-                  ? `Only ${mockAvailable} question${mockAvailable === 1 ? "" : "s"} available — session will use all ${mockEffective}.`
-                  : `${mockEffective} questions ready for this session.`}
+                ? i18n.noMatch
+                : i18n.available(mockAvailable, mockEffective)}
             </p>
           )}
           {!isMock && (
             <p className="text-sm text-muted-foreground" aria-live="polite">
               {flashSelected.size === 0
-                ? "Select at least one topic."
-                : `${flashSelected.size} topic${flashSelected.size === 1 ? "" : "s"} selected — up to ${length} cards.`}
+                ? (lang === "tr" ? "En az bir topic seçin." : "Select at least one topic.")
+                : lang === "tr"
+                  ? `${flashSelected.size} topic seçildi — en fazla ${length} kart.`
+                  : `${flashSelected.size} topic${flashSelected.size === 1 ? "" : "s"} selected — up to ${length} cards.`}
             </p>
           )}
           <button
@@ -375,10 +382,10 @@ export function MockConfigTabs({
             className="mt-4 w-full rounded-md bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
           >
             {isStarting
-              ? "Starting…"
+              ? i18n.starting
               : isMock
-                ? "Start mock interview"
-                : "Start flashcard session"}
+                ? i18n.startMock
+                : i18n.startFlashcard}
           </button>
         </div>
       </div>

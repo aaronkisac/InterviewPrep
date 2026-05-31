@@ -23,7 +23,7 @@ export function PersonalExample({
         aria-controls="personal-example-content"
         className="flex w-full items-center justify-between rounded-lg border border-border bg-card px-4 py-3 text-left text-sm font-medium transition hover:bg-accent/50"
       >
-        <span>{lang === "tr" ? "Kişisel örnek" : "Personal example"}</span>
+        <span>{lang === "tr" ? "Kişisel örnek" : "Personal example" }</span>
         <span
           className={cn(
             "text-xs text-muted-foreground transition-transform",

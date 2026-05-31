@@ -3,6 +3,8 @@ import { getMockReadyMeta } from "@/lib/mock";
 import { listSystemTopics } from "@/lib/actions/admin-topics";
 import { listCustomTopics, getCustomMockReadyMeta } from "@/lib/actions/custom-topics";
 import { getTopicMasteryStats } from "@/lib/actions/user-tracking";
+import { getLang } from "@/lib/lang";
+import { i18nMock } from "@/lib/i18n";
 import type { MockReadyMeta } from "@/lib/mock-shared";
 
 import { MockConfigTabs, type TopicEntry, type TopicStats } from "./_components/mock-config-tabs";
@@ -12,6 +14,7 @@ export const dynamic = "force-dynamic";
 export default async function MockPage() {
   const session = await auth().catch(() => null);
   const userId = session?.user?.id;
+  const lang = await getLang();
 
   const [systemMeta, systemTopics, customTopics, customMockMeta] = await Promise.all([
     getMockReadyMeta(),
@@ -80,13 +83,19 @@ export default async function MockPage() {
     flashcard: flashMasteryStats,
   };
 
+  const i18n = i18nMock[lang];
+
   return (
     <main className="mx-auto w-full max-w-[1200px] px-4 sm:px-6 lg:px-8 py-10 space-y-8">
       <header>
-        <p className="text-sm font-medium text-muted-foreground">Practice</p>
-        <h1 className="mt-1 text-2xl font-semibold tracking-tight">Configure your session</h1>
+        <p className="text-sm font-medium text-muted-foreground">
+          {lang === "tr" ? "Pratik" : "Practice"}
+        </p>
+        <h1 className="mt-1 text-2xl font-semibold tracking-tight">{i18n.pageTitle}</h1>
         <p className="mt-2 text-sm text-muted-foreground">
-          Pick a mode, choose your topics and difficulty, then start.
+          {lang === "tr"
+            ? "Bir mod seç, konularını ve zorluğunu belirle, sonra başla."
+            : "Pick a mode, choose your topics and difficulty, then start."}
         </p>
       </header>
       <MockConfigTabs
@@ -95,6 +104,7 @@ export default async function MockPage() {
         flashcardTopics={flashcardTopics}
         topicLabels={topicLabels}
         topicStats={topicStats}
+        lang={lang}
       />
     </main>
   );

@@ -3,6 +3,8 @@ import Link from "next/link";
 import { groupByTopic, listTerms } from "@/lib/terms";
 import type { Topic } from "@/lib/supabase/types";
 import { listSystemTopics } from "@/lib/actions/admin-topics";
+import { getLang } from "@/lib/lang";
+import { i18nGlossary } from "@/lib/i18n";
 
 import { GlossaryTopicTabs } from "./_components/topic-tabs";
 import { GlossarySearch } from "./_components/search";
@@ -21,27 +23,26 @@ export default async function GlossaryPage({
   const selectedTopic = params.topic ?? "";
   const searchQuery = params.q?.trim().toLowerCase() ?? "";
 
+  const lang = await getLang();
+  const i18n = i18nGlossary[lang];
+
   const [allTerms, systemTopics] = await Promise.all([listTerms(), listSystemTopics()]);
   const groups = groupByTopic(allTerms);
 
-  // Build section order from DB topics + "general" at the end
   const SECTION_ORDER: Array<{ key: Topic | "general"; label: string }> = [
     ...systemTopics.map((t) => ({ key: t.slug as Topic, label: t.name })),
-    { key: "general", label: "General" },
+    { key: "general", label: lang === "tr" ? "Genel" : "General" },
   ];
 
-  // Build available tabs — only topics that have terms
   const availableTabs = SECTION_ORDER
     .filter((s) => (groups[s.key]?.length ?? 0) > 0)
     .map((s) => ({ value: s.key, label: s.label }));
 
-  // Filter terms by selected topic
   const topicFiltered =
     selectedTopic && selectedTopic !== "all"
       ? (groups[selectedTopic as Topic | "general"] ?? [])
       : allTerms;
 
-  // Filter by search query (label + tooltip)
   const filtered = searchQuery
     ? topicFiltered.filter(
         (t) =>
@@ -51,55 +52,45 @@ export default async function GlossaryPage({
     : topicFiltered;
 
   const hasFilter = Boolean(selectedTopic) || Boolean(searchQuery);
-
-  // When a specific topic is selected (or search active), flat list — no section headers
-  // When "All" with no search, group by section
   const showSections = !selectedTopic && !searchQuery;
 
   return (
     <main className="mx-auto w-full max-w-[1200px] px-4 py-8 sm:px-6 lg:px-8">
       {/* Header */}
       <header className="mb-5">
-        <p className="text-sm font-medium text-muted-foreground">Glossary</p>
+        <p className="text-sm font-medium text-muted-foreground">{i18n.title}</p>
         <h1 className="mt-1 text-2xl font-semibold tracking-tight">
-          Terms reference
+          {i18n.sub}
         </h1>
       </header>
 
       <TooltipDemo />
 
-      {/* Search — always visible */}
       <div className="mb-4 mt-5">
-        <GlossarySearch />
+        <GlossarySearch placeholder={i18n.searchPlaceholder} />
       </div>
 
-      {/* Tabs + Panel */}
       <div>
-        <GlossaryTopicTabs availableTabs={availableTabs} />
+        <GlossaryTopicTabs availableTabs={availableTabs} allLabel={i18n.allTopics} />
 
         <div className="rounded-b-lg border-x border-b border-border bg-card px-4 pb-4 pt-3">
-          {/* Count + clear */}
           <div className="mb-3 flex items-center justify-between text-sm text-muted-foreground">
-            <span>
-              {filtered.length} {filtered.length === 1 ? "term" : "terms"}
-              {hasFilter ? " match" : " across all topics"}
-            </span>
+            <span>{i18n.termCount(filtered.length)}</span>
             {hasFilter && (
               <Link
                 href="/glossary"
                 className="text-xs text-foreground hover:underline"
               >
-                Clear filters
+                {lang === "tr" ? "Filtreleri temizle" : "Clear filters"}
               </Link>
             )}
           </div>
 
           {filtered.length === 0 ? (
             <p className="rounded-lg border border-dashed border-border p-8 text-center text-sm text-muted-foreground">
-              No terms match your search.
+              {i18n.noResults}
             </p>
           ) : showSections ? (
-            // All + no search: grouped sections
             <div className="space-y-8">
               {SECTION_ORDER.map((section) => {
                 const items = groups[section.key];
@@ -129,7 +120,6 @@ export default async function GlossaryPage({
               })}
             </div>
           ) : (
-            // Topic selected or search active: flat list, no headers
             <ul className="space-y-1.5">
               {filtered.map((term) => (
                 <li key={term.id}>

@@ -9,7 +9,7 @@ import {
   parseTopic,
 } from "@/lib/questions";
 import { listTerms } from "@/lib/terms";
-import { parseLanguage } from "@/lib/topics";
+import { getLang } from "@/lib/lang";
 import { listSystemTopics } from "@/lib/actions/admin-topics";
 import { listCustomTopics, getCustomTopic, getCustomBookmarkIds } from "@/lib/actions/custom-topics";
 
@@ -25,7 +25,6 @@ type SearchParams = Promise<{
   mytopic?: string;
   levels?: string;
   q?: string;
-  lang?: string;
 }>;
 
 const GUEST_MAX_LEVEL = 2;
@@ -67,7 +66,7 @@ export default async function QuestionsPage({
   searchParams: SearchParams;
 }) {
   const params = await searchParams;
-  const lang = parseLanguage(params.lang);
+  const lang = await getLang();
   const i18n = t[lang];
 
   const isBookmarkedTab = params.topic === "bookmarked";
@@ -186,7 +185,7 @@ export default async function QuestionsPage({
 
       {/* ── Filters ── */}
       <div className="mb-4">
-        <QuestionFilters topics={systemTopics} />
+        <QuestionFilters topics={systemTopics} lang={lang} />
       </div>
 
       {/* ── Tabs + Panel ── */}

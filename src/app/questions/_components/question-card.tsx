@@ -9,6 +9,7 @@ import { LevelDots } from "@/components/level-dots";
 import type { GlossaryTerm } from "@/lib/glossary-match";
 import type { Language } from "@/lib/supabase/types";
 import { TR_FALLBACK } from "@/lib/topics";
+import { i18nQuestionCard } from "@/lib/i18n";
 import type { QuestionListItem } from "@/lib/questions";
 import { cn } from "@/lib/utils";
 
@@ -53,6 +54,7 @@ export function QuestionCard({
   const [open, setOpen] = useState(false);
   const [personalOpen, setPersonalOpen] = useState(false);
   const { general, personal, isFallback } = pickAnswer(question, lang);
+  const card = i18nQuestionCard[lang];
 
   return (
     <li className="rounded-lg border border-border bg-background transition hover:border-foreground/30">
@@ -142,7 +144,7 @@ export function QuestionCard({
                 >
                   ▸
                 </span>
-                {lang === "tr" ? "Kişisel örnek" : "Personal example"}
+                {card.personalExample}
               </button>
               {personalOpen && (
                 <p className="mt-2 rounded border border-dashed border-border bg-background p-3 text-sm leading-relaxed text-foreground/85">
@@ -163,18 +165,14 @@ export function QuestionCard({
               <Link
                 href={
                   isLoggedIn
-                    ? `/questions/${question.id}?lang=${lang}`
+                    ? `/questions/${question.id}`
                     : "/signin"
                 }
                 className="text-xs font-medium text-muted-foreground hover:text-foreground hover:underline"
               >
                 {isLoggedIn
-                  ? lang === "tr"
-                    ? "Detaylı sayfa →"
-                    : "Detail page →"
-                  : lang === "tr"
-                    ? "Detaylar için giriş yap →"
-                    : "Sign in for full details →"}
+                  ? card.detailPage
+                  : card.signInForDetails}
               </Link>
             </div>
           </div>

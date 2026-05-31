@@ -41,8 +41,10 @@ function Tab({
 
 export function GlossaryTopicTabs({
   availableTabs,
+  allLabel = "All",
 }: {
   availableTabs: GlossaryTabItem[];
+  allLabel?: string;
 }) {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -62,7 +64,7 @@ export function GlossaryTopicTabs({
     });
   }
 
-  const allTab: GlossaryTabItem = { value: "", label: "All" };
+  const allTab: GlossaryTabItem = { value: "", label: allLabel };
 
   // Active tab moves to index 1 (next to All) for wrap-reverse bottom-row placement
   const activeTab = availableTabs.find((t) => t.value === currentTopic);
