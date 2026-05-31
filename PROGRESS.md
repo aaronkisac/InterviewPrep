@@ -76,6 +76,7 @@ Last updated: 2026-05-29 (mock options audit + glossary expansion)
 | Custom topic question fixes | `CustomQuestionCard` now shows `LevelDots`. Custom questions can now be bookmarked via new `custom_question_bookmarks` table (migration `20260529000001`). `toggleCustomBookmark` + `getCustomBookmarkIds` actions added to `custom-topics.ts`. |
 | Mock options audit + glossary expansion | Fixed seed-mock question text mismatches across 8 topics (api-design 13/16, software-architecture 16/16, agile-scrum 2, css/html5/nextjs/websockets/design-patterns 1 each). Added 5 new batch questions: `api-design-batch-6` (JWT, id 1547), `software-architecture-batch-6` (CDN, stateful/stateless, circuit breaker, sync/async comm, message queue, ids 1490–1494). Added new `agile-scrum-batch-6` (Kanban, id 1027). Glossary expanded from 105 → 129 terms: 10 software-architecture, 10 api-design, 4 additions to react/typescript/nextjs. |
 | Full mock_options coverage | Generated mock_options for all previously uncovered questions. New seed files: `seed-mock-react-extra.json` (19 q), `seed-mock-software-architecture-extra-1.json` (46 q), `seed-mock-software-architecture-extra-2.json` (32 q), `seed-mock-design-patterns-extra.json` (1 q). Total mock-ready: React 70, SA 94, all others unchanged. 608 questions now mock-ready across all 15 topics. |
+| detailMdTr complete | Turkish deep-dive translations added to all remaining topics. React (50 q, batches 1–9), HTML5 (51 q, batches 1–7), Software Architecture (94 q, batches 1–6), API Design (47 q, batches 1–6). All topics now have full `detailMdTr` coverage. Previously complete: TypeScript, Next.js, Redux, CSS, React Hooks, Git, Agile & Scrum, WebSockets, Unit Testing, Design Patterns. JavaScript had `detailMdTr` from the start. |
 
 ---
 
@@ -102,8 +103,7 @@ pnpm test:e2e
 GitHub Secrets needed: `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, `NEXTAUTH_SECRET`, `AUTH_SECRET`
 
 ### Still missing (optional / future):
-- `detailMdTr` (Turkish deep dives) for all banks except JavaScript
-- `answerPersonal` for most new questions (add from Aaron's real interview experience)
+- `answerPersonal` / `answerPersonalTr` for most questions (add from Aaron's real interview experience)
 
 ---
 
