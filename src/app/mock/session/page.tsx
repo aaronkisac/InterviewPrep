@@ -154,4 +154,27 @@ export default async function MockSessionPage({
           </p>
           <Link
             href="/mock"
-            className="mt-4 inline-block rounded-md bord
+            className="mt-4 inline-block rounded-md border border-border px-4 py-2 text-sm font-medium transition hover:bg-accent"
+          >
+            {i18nMockSession[lang].backToConfig}
+          </Link>
+        </div>
+      </main>
+    );
+  }
+
+  const sessionKey = `${allTopics.join("-")}-${lo}-${hi}-${length}-${Math.random()
+    .toString(36)
+    .slice(2)}`;
+
+  return (
+    <main className="mx-auto w-full max-w-[1200px] px-4 sm:px-6 lg:px-8 py-10">
+      <MockSession
+        key={sessionKey}
+        questions={combined}
+        topicLabels={topicLabels}
+        lang={lang}
+      />
+    </main>
+  );
+}

@@ -221,4 +221,13 @@ export function FlashcardSession({
           <button
             type="button"
             onClick={() => answer("known")}
-            className="flex flex-1 items-center justify-center gap-2 rounded-lg bord
+            className="flex flex-1 items-center justify-center gap-2 rounded-lg border border-emerald-500/30 bg-emerald-50 py-3 text-sm font-medium text-emerald-700 hover:bg-emerald-100 dark:bg-emerald-950/30 dark:text-emerald-300 dark:hover:bg-emerald-950/50 transition-colors"
+          >
+            <CheckCircle2 className="size-4" />
+            {i18n.knewIt}
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
