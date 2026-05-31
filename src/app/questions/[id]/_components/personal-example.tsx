@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 
+import { i18nQuestionDetail } from "@/lib/i18n";
 import type { Language } from "@/lib/supabase/types";
 import { cn } from "@/lib/utils";
 
@@ -12,6 +13,7 @@ export function PersonalExample({
   text: string;
   lang?: Language;
 }) {
+  const i18n = i18nQuestionDetail[lang];
   const [open, setOpen] = useState(false);
 
   return (
@@ -23,7 +25,7 @@ export function PersonalExample({
         aria-controls="personal-example-content"
         className="flex w-full items-center justify-between rounded-lg border border-border bg-card px-4 py-3 text-left text-sm font-medium transition hover:bg-accent/50"
       >
-        <span>{lang === "tr" ? "Kişisel örnek" : "Personal example" }</span>
+        <span>{i18n.personalExample}</span>
         <span
           className={cn(
             "text-xs text-muted-foreground transition-transform",

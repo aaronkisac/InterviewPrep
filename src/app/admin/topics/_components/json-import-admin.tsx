@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import { CheckCircle2, XCircle, Upload } from "lucide-react";
 
 import { bulkImportSystemQuestions, type BulkImportQuestion, type MockOption } from "@/lib/actions/admin-topics";
+import { i18nAdmin } from "@/lib/i18n";
+import type { Language } from "@/lib/supabase/types";
 import { cn } from "@/lib/utils";
 
 type ValidationResult = {
@@ -115,7 +117,7 @@ export function JsonImportAdmin({ topicSlug, topicName }: { topicSlug: string; t
         setResult(null);
         router.refresh();
       } else {
-        setParseError(res.error ?? "Import failed");
+        setParseError(res.error ?? i18n.importFailed);
       }
     });
   }
@@ -168,7 +170,7 @@ export function JsonImportAdmin({ topicSlug, topicName }: { topicSlug: string; t
       <textarea
         value={text}
         onChange={(e) => handleChange(e.target.value)}
-        placeholder="Paste JSON array here…"
+        placeholder={i18n.pastePlaceholder}
         rows={8}
         className="w-full resize-y rounded-md border border-input bg-background px-3 py-2 font-mono text-xs outline-none focus:border-ring focus:ring-1 focus:ring-ring"
       />
@@ -206,7 +208,7 @@ export function JsonImportAdmin({ topicSlug, topicName }: { topicSlug: string; t
               </p>
               {result.invalid.length > 0 && (
                 <details className="text-xs text-muted-foreground">
-                  <summary className="cursor-pointer hover:text-foreground">Show skipped</summary>
+                  <summary className="cursor-pointer hover:text-foreground">{i18n.showSkipped}</summary>
                   <ul className="mt-1 space-y-0.5 pl-3">
                     {result.invalid.map((inv) => (
                       <li key={inv.index} className="text-amber-600 dark:text-amber-400">
@@ -234,7 +236,7 @@ export function JsonImportAdmin({ topicSlug, topicName }: { topicSlug: string; t
         className="flex items-center gap-1.5 rounded-md bg-foreground px-4 py-2 text-xs font-medium text-background hover:opacity-80 disabled:opacity-40 transition-opacity"
       >
         <Upload className="size-3" />
-        {isPending ? "Importing…" : `Import ${result?.valid.length ?? 0} question${(result?.valid.length ?? 0) !== 1 ? "s" : ""}`}
+        {isPending ? i18n.importing : i18n.import(result?.valid.length ?? 0)}
       </button>
     </div>
   );

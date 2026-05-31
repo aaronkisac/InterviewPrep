@@ -7,7 +7,7 @@ import { getUserSubmissions } from "@/lib/actions/questions";
 import { listTopicsWithQuestions } from "@/lib/actions/custom-topics";
 import { listSystemTopics } from "@/lib/actions/admin-topics";
 import { getLang } from "@/lib/lang";
-import { i18nDashboard } from "@/lib/i18n";
+import { i18nCommon, i18nDashboard } from "@/lib/i18n";
 import type { Language } from "@/lib/supabase/types";
 
 // suppress unused-import lint for type-only usage above
@@ -25,17 +25,7 @@ function formatDate(iso: string, lang: Language): string {
   });
 }
 
-type DashboardI18n = {
-  private: string;
-  pendingReview: string;
-  published: string;
-  rejected: string;
-  perfect: string;
-  strong: string;
-  decent: string;
-  needsWork: string;
-  [key: string]: unknown;
-};
+type DashboardI18n = (typeof i18nDashboard)[Language];
 
 function StatusChip({
   status,
@@ -74,15 +64,16 @@ function StatusChip({
   );
 }
 
-function GradeChip({ pct, i18n }: { pct: number; i18n: DashboardI18n }) {
+function GradeChip({ pct, lang }: { pct: number; lang: Language }) {
+  const common = i18nCommon[lang];
   const { label, cls } =
     pct === 100
-      ? { label: i18n.perfect, cls: "border-emerald-500/40 bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300" }
+      ? { label: common.perfect, cls: "border-emerald-500/40 bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300" }
       : pct >= 80
-        ? { label: i18n.strong, cls: "border-emerald-500/40 bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300" }
+        ? { label: common.strong, cls: "border-emerald-500/40 bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300" }
         : pct >= 60
-          ? { label: i18n.decent, cls: "border-amber-500/40 bg-amber-50 text-amber-700 dark:bg-amber-950/40 dark:text-amber-300" }
-          : { label: i18n.needsWork, cls: "border-rose-500/40 bg-rose-50 text-rose-700 dark:bg-rose-950/40 dark:text-rose-300" };
+          ? { label: common.decent, cls: "border-amber-500/40 bg-amber-50 text-amber-700 dark:bg-amber-950/40 dark:text-amber-300" }
+          : { label: common.needsWork, cls: "border-rose-500/40 bg-rose-50 text-rose-700 dark:bg-rose-950/40 dark:text-rose-300" };
 
   return (
     <span className={cn("rounded-md border px-2 py-0.5 text-xs font-medium", cls)}>
@@ -110,7 +101,7 @@ export default async function DashboardPage() {
     <main className="mx-auto w-full max-w-[1200px] px-4 sm:px-6 lg:px-8 py-10 space-y-8">
       <div>
         <p className="text-sm font-medium text-muted-foreground">
-          {lang === "tr" ? "İlerlemeniz" : "Your progress"}
+          {i18n.progressHeading}
         </p>
         <h1 className="mt-1 text-2xl font-semibold tracking-tight">{i18n.title}</h1>
       </div>
@@ -120,7 +111,7 @@ export default async function DashboardPage() {
         <div className="rounded-lg border border-border bg-card p-4 text-center">
           <p className="text-2xl font-semibold">{data?.mockSessions.length ?? 0}</p>
           <p className="mt-1 text-xs text-muted-foreground">
-            {lang === "tr" ? "Oturum" : "Sessions"}
+            {i18n.sessions}
           </p>
         </div>
         <div className="rounded-lg border border-border bg-card p-4 text-center">
@@ -128,7 +119,7 @@ export default async function DashboardPage() {
             {data?.topicProgress.reduce((s, t) => s + t.seen, 0) ?? 0}
           </p>
           <p className="mt-1 text-xs text-muted-foreground">
-            {lang === "tr" ? "Cevaplanan soru" : "Questions answered"}
+            {i18n.questionsAnswered}
           </p>
         </div>
         <div className="rounded-lg border border-border bg-card p-4 text-center">
@@ -169,7 +160,7 @@ export default async function DashboardPage() {
                       </div>
                     </div>
                     <span className="w-24 text-right text-xs text-muted-foreground">
-                      {correct}/{seen} {lang === "tr" ? "doğru" : "correct"}
+                      {correct}/{seen} {i18n.correct}
                     </span>
                   </div>
                 );
@@ -195,7 +186,7 @@ export default async function DashboardPage() {
                     <span className="text-sm font-semibold">
                       {s.score} / {s.total}
                     </span>
-                    <GradeChip pct={s.pct} i18n={i18n} />
+                    <GradeChip pct={s.pct} lang={lang} />
                   </div>
                   <span className="text-xs text-muted-foreground">
                     {formatDate(s.createdAt, lang)}
@@ -230,7 +221,7 @@ export default async function DashboardPage() {
               href="/questions"
               className="mt-3 inline-block rounded-md border border-border px-4 py-2 text-sm font-medium hover:bg-accent"
             >
-              {lang === "tr" ? "Sorulara git" : "Browse questions"}
+              {i18n.submitQuestionBtn}
             </Link>
           </div>
         </section>
@@ -240,6 +231,7 @@ export default async function DashboardPage() {
       <MyTopicsSection
         initialTopics={customTopics}
         initialQuestionsMap={questionsMap}
+        lang={lang}
       />
 
       {/* My submissions */}
@@ -250,7 +242,7 @@ export default async function DashboardPage() {
             href="/questions/new"
             className="rounded-md border border-border px-3 py-1 text-xs font-medium hover:bg-accent"
           >
-            {lang === "tr" ? "+ Soru gönder" : "+ Submit question"}
+            {i18n.submitQuestionBtn}
           </Link>
         </div>
 
@@ -290,22 +282,20 @@ export default async function DashboardPage() {
       {(!data || (data.mockSessions.length === 0 && data.topicProgress.length === 0)) && (
         <div className="rounded-lg border border-dashed border-border p-10 text-center">
           <p className="text-sm text-muted-foreground">
-            {lang === "tr"
-              ? "Henüz aktivite yok. İlerlemenizi görmek için mock oturumu başlatın veya sorulara göz atın."
-              : "No activity yet. Start a mock session or browse questions to see your progress here."}
+            {i18n.noTopicActivity}
           </p>
           <div className="mt-4 flex justify-center gap-3">
             <Link
               href="/mock"
               className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:opacity-90"
             >
-              {lang === "tr" ? "Mock mülakat başlat" : "Start mock interview"}
+              {i18n.startMockCta}
             </Link>
             <Link
               href="/questions"
               className="rounded-md border border-border px-4 py-2 text-sm font-medium hover:bg-accent"
             >
-              {lang === "tr" ? "Sorulara göz at" : "Browse questions"}
+              {i18n.browseQuestionsCta}
             </Link>
           </div>
         </div>

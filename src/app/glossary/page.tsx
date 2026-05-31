@@ -31,7 +31,7 @@ export default async function GlossaryPage({
 
   const SECTION_ORDER: Array<{ key: Topic | "general"; label: string }> = [
     ...systemTopics.map((t) => ({ key: t.slug as Topic, label: t.name })),
-    { key: "general", label: lang === "tr" ? "Genel" : "General" },
+    { key: "general", label: i18n.general },
   ];
 
   const availableTabs = SECTION_ORDER
@@ -64,7 +64,7 @@ export default async function GlossaryPage({
         </h1>
       </header>
 
-      <TooltipDemo />
+      <TooltipDemo lang={lang} />
 
       <div className="mb-4 mt-5">
         <GlossarySearch placeholder={i18n.searchPlaceholder} />
@@ -81,7 +81,7 @@ export default async function GlossaryPage({
                 href="/glossary"
                 className="text-xs text-foreground hover:underline"
               >
-                {lang === "tr" ? "Filtreleri temizle" : "Clear filters"}
+                {i18n.clearFilters}
               </Link>
             )}
           </div>

@@ -16,22 +16,26 @@ import {
 import { JsonImportUser } from "@/app/dashboard/_components/json-import-user";
 import { LevelDots } from "@/components/level-dots";
 import { LEVELS } from "@/lib/topics";
+import { i18nMyTopics, i18nLevels } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
+import type { Language } from "@/lib/supabase/types";
 
 // ── Mock options editor ───────────────────────────────────────────────────────
 
 function MockOptionsEditor({
   value,
   onChange,
+  i18n,
 }: {
   value: MockOption[];
   onChange: (opts: MockOption[]) => void;
+  i18n: typeof i18nMyTopics.en;
 }) {
   return (
     <div className="space-y-2">
       <p className="text-xs font-medium text-muted-foreground">
-        Mock options{" "}
-        <span className="font-normal">(4 options, exactly 1 correct → enables standard mock)</span>
+        {i18n.mockOptionsLabel}{" "}
+        <span className="font-normal">{i18n.mockOptionsHint}</span>
       </p>
       {value.map((opt, i) => (
         <div key={i} className="flex items-start gap-2">
@@ -43,7 +47,7 @@ function MockOptionsEditor({
               onChange(value.map((o, j) => ({ ...o, isCorrect: j === i })))
             }
             className="mt-2 shrink-0"
-            title="Mark as correct"
+            title={i18n.markCorrect}
           />
           <div className="flex-1 space-y-1">
             <input
@@ -51,7 +55,7 @@ function MockOptionsEditor({
               onChange={(e) =>
                 onChange(value.map((o, j) => j === i ? { ...o, optionText: e.target.value } : o))
               }
-              placeholder={`Option ${String.fromCharCode(65 + i)}…`}
+              placeholder={i18n.mockOptionPlaceholder(String.fromCharCode(65 + i))}
               className="w-full rounded-md border border-input bg-background px-2.5 py-1 text-xs outline-none focus:border-ring focus:ring-1 focus:ring-ring"
             />
             <input
@@ -59,7 +63,7 @@ function MockOptionsEditor({
               onChange={(e) =>
                 onChange(value.map((o, j) => j === i ? { ...o, explanation: e.target.value } : o))
               }
-              placeholder="Explanation (optional)…"
+              placeholder={i18n.explanationPlaceholder}
               className="w-full rounded-md border border-input bg-background px-2.5 py-1 text-xs text-muted-foreground outline-none focus:border-ring focus:ring-1 focus:ring-ring"
             />
           </div>
@@ -76,11 +80,15 @@ function QuestionForm({
   initial,
   onSave,
   onCancel,
+  i18n,
+  lang,
 }: {
   topicId: string;
   initial?: CustomQuestion;
   onSave: (q: CustomQuestion) => void;
   onCancel: () => void;
+  i18n: typeof i18nMyTopics.en;
+  lang: Language;
 }) {
   const [question, setQuestion] = useState(initial?.question ?? "");
   const [answer, setAnswer] = useState(initial?.answer ?? "");
@@ -137,13 +145,13 @@ function QuestionForm({
       {/* Question */}
       <div>
         <label className="mb-1 block text-xs font-medium text-muted-foreground">
-          Question <span className="text-destructive">*</span>
+          {i18n.questionLabel} <span className="text-destructive">*</span>
         </label>
         <textarea
           autoFocus
           value={question}
           onChange={(e) => setQuestion(e.target.value)}
-          placeholder="e.g. What is the difference between useMemo and useCallback?"
+          placeholder={i18n.questionPlaceholder}
           rows={2}
           className="w-full resize-y rounded-md border border-input bg-background px-3 py-1.5 text-sm outline-none focus:border-ring focus:ring-1 focus:ring-ring"
         />
@@ -151,7 +159,7 @@ function QuestionForm({
 
       {/* Level */}
       <div>
-        <label className="mb-1 block text-xs font-medium text-muted-foreground">Level</label>
+        <label className="mb-1 block text-xs font-medium text-muted-foreground">{i18n.levelLabel}</label>
         <select
           value={level}
           onChange={(e) => setLevel(Number(e.target.value))}
@@ -159,7 +167,7 @@ function QuestionForm({
         >
           {LEVELS.map((l) => (
             <option key={l.value} value={l.value}>
-              {l.value} — {l.label}
+              {l.value} — {i18nLevels[lang][l.value as keyof typeof i18nLevels.en] ?? l.label}
             </option>
           ))}
         </select>
@@ -168,12 +176,12 @@ function QuestionForm({
       {/* Answer */}
       <div>
         <label className="mb-1 block text-xs font-medium text-muted-foreground">
-          Answer <span className="text-destructive">*</span>
+          {i18n.answerLabel} <span className="text-destructive">*</span>
         </label>
         <textarea
           value={answer}
           onChange={(e) => setAnswer(e.target.value)}
-          placeholder="General answer / explanation…"
+          placeholder={i18n.answerPlaceholder}
           rows={3}
           className="w-full resize-y rounded-md border border-input bg-background px-3 py-1.5 text-sm outline-none focus:border-ring focus:ring-1 focus:ring-ring"
         />
@@ -182,12 +190,12 @@ function QuestionForm({
       {/* Personal note */}
       <div>
         <label className="mb-1 block text-xs font-medium text-muted-foreground">
-          Personal note <span className="text-muted-foreground/60">(optional)</span>
+          {i18n.personalNoteLabel} <span className="text-muted-foreground/60">{i18n.personalNoteOptional}</span>
         </label>
         <textarea
           value={answerPersonal}
           onChange={(e) => setAnswerPersonal(e.target.value)}
-          placeholder="Your personal experience or example…"
+          placeholder={i18n.personalNotePlaceholder}
           rows={2}
           className="w-full resize-y rounded-md border border-input bg-background px-3 py-1.5 text-sm outline-none focus:border-ring focus:ring-1 focus:ring-ring"
         />
@@ -201,14 +209,14 @@ function QuestionForm({
           className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
         >
           {showMock ? <ChevronDown className="size-3" /> : <ChevronRight className="size-3" />}
-          {showMock ? "Hide mock options" : "+ Add mock options (A/B/C/D)"}
+          {showMock ? i18n.hideMockOptions : i18n.showMockOptions}
         </button>
         {showMock && (
           <div className="mt-2">
-            <MockOptionsEditor value={mockOptions} onChange={setMockOptions} />
+            <MockOptionsEditor value={mockOptions} onChange={setMockOptions} i18n={i18n} />
             {showMock && !validMock && mockOptions.some((o) => o.optionText.trim()) && (
               <p className="mt-1 text-xs text-amber-600 dark:text-amber-400">
-                Fill all 4 options and mark exactly 1 as correct to enable standard mock.
+                {i18n.mockOptionsWarning}
               </p>
             )}
           </div>
@@ -223,14 +231,14 @@ function QuestionForm({
           className="flex items-center gap-1 rounded-md bg-foreground px-3 py-1.5 text-xs font-medium text-background hover:opacity-80 disabled:opacity-40 transition-opacity"
         >
           <Check className="size-3" />
-          {initial ? "Save" : "Add"}
+          {initial ? i18n.save : i18n.add}
         </button>
         <button
           type="button"
           onClick={onCancel}
           className="flex items-center gap-1 rounded-md border border-border px-3 py-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
         >
-          <X className="size-3" /> Cancel
+          <X className="size-3" /> {i18n.cancel}
         </button>
       </div>
     </form>
@@ -243,17 +251,21 @@ function QuestionRow({
   q,
   onUpdate,
   onDelete,
+  i18n,
+  lang,
 }: {
   q: CustomQuestion;
   onUpdate: (updated: CustomQuestion) => void;
   onDelete: (id: string) => void;
+  i18n: typeof i18nMyTopics.en;
+  lang: Language;
 }) {
   const [open, setOpen] = useState(false);
   const [editing, setEditing] = useState(false);
   const [isPending, startTransition] = useTransition();
 
   function remove() {
-    if (!confirm("Delete this question?")) return;
+    if (!confirm(i18n.deleteQuestion)) return;
     startTransition(async () => {
       const result = await deleteCustomQuestion(q.id);
       if (result.ok) onDelete(q.id);
@@ -267,7 +279,10 @@ function QuestionRow({
         initial={q}
         onSave={(updated) => { onUpdate(updated); setEditing(false); }}
         onCancel={() => setEditing(false)}
+        i18n={i18n}
+        lang={lang}
       />
+
     );
   }
 
@@ -299,7 +314,7 @@ function QuestionRow({
         <button
           type="button"
           onClick={() => setEditing(true)}
-          aria-label="Edit"
+          aria-label={i18n.edit}
           className="rounded p-1 text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
         >
           <Pencil className="size-3" />
@@ -308,7 +323,7 @@ function QuestionRow({
           type="button"
           onClick={remove}
           disabled={isPending}
-          aria-label="Delete"
+          aria-label={i18n.delete}
           className="rounded p-1 text-muted-foreground hover:text-destructive hover:bg-destructive/10 disabled:opacity-40 transition-colors"
         >
           <Trash2 className="size-3" />
@@ -321,16 +336,16 @@ function QuestionRow({
             <p className="whitespace-pre-wrap text-sm leading-relaxed text-foreground/85">{q.answer}</p>
           ) : (
             <p className="text-sm italic text-muted-foreground">
-              No answer yet.{" "}
+              {i18n.noAnswer}{" "}
               <button type="button" onClick={() => setEditing(true)} className="underline hover:text-foreground">
-                Add one
+                {i18n.addOne}
               </button>
             </p>
           )}
           {q.answer_personal && (
             <div className="rounded-md border border-violet-500/20 bg-violet-50/50 px-3 py-2 dark:bg-violet-950/20">
               <p className="mb-0.5 text-[10px] font-medium uppercase tracking-wider text-violet-600 dark:text-violet-400">
-                Personal note
+                {i18n.personalNoteHeading}
               </p>
               <p className="whitespace-pre-wrap text-xs text-foreground/80">{q.answer_personal}</p>
             </div>
@@ -347,10 +362,14 @@ function TopicAccordion({
   topic,
   initialQuestions,
   onDeleteTopic,
+  i18n,
+  lang,
 }: {
   topic: CustomTopic;
   initialQuestions: CustomQuestion[];
   onDeleteTopic: (id: string) => void;
+  i18n: typeof i18nMyTopics.en;
+  lang: Language;
 }) {
   const [open, setOpen] = useState(false);
   const [questions, setQuestions] = useState<CustomQuestion[]>(initialQuestions);
@@ -358,7 +377,7 @@ function TopicAccordion({
   const [isPending, startTransition] = useTransition();
 
   function removeTopic() {
-    if (!confirm(`Delete "${topic.name}" and all its questions?`)) return;
+    if (!confirm(i18n.deleteTopicConfirm(topic.name))) return;
     startTransition(async () => {
       const result = await deleteCustomTopic(topic.id);
       if (result.ok) onDeleteTopic(topic.id);
@@ -381,7 +400,7 @@ function TopicAccordion({
           />
           <span className="font-medium">{topic.name}</span>
           <span className="text-xs text-muted-foreground">
-            {questions.length} {questions.length === 1 ? "q" : "qs"}
+            {i18n.questionCount(questions.length)}
           </span>
         </button>
         <JsonImportUser
@@ -392,7 +411,7 @@ function TopicAccordion({
           type="button"
           onClick={removeTopic}
           disabled={isPending}
-          aria-label="Delete topic"
+          aria-label={i18n.deleteTopic}
           className="rounded p-1 text-muted-foreground hover:text-destructive hover:bg-destructive/10 disabled:opacity-40 transition-colors"
         >
           <Trash2 className="size-3.5" />
@@ -411,6 +430,8 @@ function TopicAccordion({
                     setQuestions((prev) => prev.map((x) => (x.id === updated.id ? updated : x)))
                   }
                   onDelete={(id) => setQuestions((prev) => prev.filter((x) => x.id !== id))}
+                  i18n={i18n}
+                  lang={lang}
                 />
               ))}
             </ul>
@@ -421,6 +442,8 @@ function TopicAccordion({
               topicId={topic.id}
               onSave={(q) => { setQuestions((prev) => [...prev, q]); setAddingQuestion(false); }}
               onCancel={() => setAddingQuestion(false)}
+              i18n={i18n}
+              lang={lang}
             />
           ) : (
             <button
@@ -428,7 +451,7 @@ function TopicAccordion({
               onClick={() => setAddingQuestion(true)}
               className="flex w-full items-center justify-center gap-1.5 rounded-lg border border-dashed border-border py-2 text-xs text-muted-foreground hover:border-foreground/30 hover:text-foreground transition-colors"
             >
-              <Plus className="size-3" /> Add question
+              <Plus className="size-3" /> {i18n.addQuestion}
             </button>
           )}
         </div>
@@ -442,10 +465,13 @@ function TopicAccordion({
 export function MyTopicsSection({
   initialTopics,
   initialQuestionsMap,
+  lang,
 }: {
   initialTopics: CustomTopic[];
   initialQuestionsMap: Record<string, CustomQuestion[]>;
+  lang: Language;
 }) {
+  const i18n = i18nMyTopics[lang];
   const [topics, setTopics] = useState<CustomTopic[]>(initialTopics);
   const [questionsMap, setQuestionsMap] = useState<Record<string, CustomQuestion[]>>(initialQuestionsMap);
   const [newName, setNewName] = useState("");
@@ -467,14 +493,14 @@ export function MyTopicsSection({
   return (
     <section>
       <div className="mb-3 flex items-center justify-between">
-        <h2 className="text-sm font-medium text-muted-foreground">My Topics</h2>
+        <h2 className="text-sm font-medium text-muted-foreground">{i18n.heading}</h2>
         {!showForm && (
           <button
             type="button"
             onClick={() => setShowForm(true)}
             className="rounded-md border border-border px-3 py-1 text-xs font-medium hover:bg-accent transition-colors"
           >
-            + New topic
+            {i18n.newTopic}
           </button>
         )}
       </div>
@@ -485,7 +511,7 @@ export function MyTopicsSection({
             autoFocus
             value={newName}
             onChange={(e) => setNewName(e.target.value)}
-            placeholder="Topic name…"
+            placeholder={i18n.topicNamePlaceholder}
             maxLength={80}
             className="h-8 flex-1 rounded-md border border-input bg-background px-3 text-sm outline-none focus:border-ring focus:ring-1 focus:ring-ring"
           />
@@ -494,14 +520,14 @@ export function MyTopicsSection({
             disabled={isPending || !newName.trim()}
             className="h-8 rounded-md bg-foreground px-3 text-xs font-medium text-background hover:opacity-80 disabled:opacity-40 transition-opacity"
           >
-            {isPending ? "Creating…" : "Create"}
+            {isPending ? i18n.creating : i18n.create}
           </button>
           <button
             type="button"
             onClick={() => { setShowForm(false); setNewName(""); setError(""); }}
             className="h-8 rounded-md border border-border px-3 text-xs text-muted-foreground hover:text-foreground transition-colors"
           >
-            Cancel
+            {i18n.cancel}
           </button>
           {error && <p className="text-xs text-destructive">{error}</p>}
         </form>
@@ -509,9 +535,13 @@ export function MyTopicsSection({
 
       {topics.length === 0 && !showForm ? (
         <div className="rounded-lg border border-dashed border-border px-5 py-6 text-center">
-          <p className="text-sm text-muted-foreground">No personal topics yet.</p>
-          <button type="button" onClick={() => setShowForm(true)} className="mt-2 text-sm font-medium hover:underline">
-            Create your first topic →
+          <p className="text-sm text-muted-foreground">{i18n.noTopics}</p>
+          <button
+            type="button"
+            onClick={() => setShowForm(true)}
+            className="mt-2 text-sm font-medium hover:underline"
+          >
+            {i18n.createFirst}
           </button>
         </div>
       ) : (
@@ -523,8 +553,14 @@ export function MyTopicsSection({
               initialQuestions={questionsMap[topic.id] ?? []}
               onDeleteTopic={(id) => {
                 setTopics((prev) => prev.filter((t) => t.id !== id));
-                setQuestionsMap((prev) => { const next = { ...prev }; delete next[id]; return next; });
+                setQuestionsMap((prev) => {
+                  const next = { ...prev };
+                  delete next[id];
+                  return next;
+                });
               }}
+              i18n={i18n}
+              lang={lang}
             />
           ))}
         </div>

@@ -10,6 +10,7 @@ import {
 } from "@/lib/questions";
 import { listTerms } from "@/lib/terms";
 import { getLang } from "@/lib/lang";
+import { i18nQuestions } from "@/lib/i18n";
 import { listSystemTopics } from "@/lib/actions/admin-topics";
 import { listCustomTopics, getCustomTopic, getCustomBookmarkIds } from "@/lib/actions/custom-topics";
 
@@ -29,37 +30,6 @@ type SearchParams = Promise<{
 
 const GUEST_MAX_LEVEL = 2;
 
-const t = {
-  en: {
-    bank: "Question bank",
-    title: "All questions",
-    countSuffix: (n: number, active: boolean) =>
-      `${n} ${n === 1 ? "question" : "questions"}${active ? " match" : " total"}`,
-    clear: "Clear filters",
-    empty: "No questions match these filters yet.",
-    emptyCustom: "No questions in this topic yet. Add some from your dashboard.",
-    loginForBookmarks: "Sign in to save bookmarks.",
-    guestBanner: (total: number) =>
-      `You're viewing ${total} junior & entry-level questions. Sign in to unlock all levels, mock interviews, and the glossary.`,
-    signIn: "Sign in",
-    privateTopic: "Private topic",
-  },
-  tr: {
-    bank: "Soru bankası",
-    title: "Tüm sorular",
-    countSuffix: (n: number, active: boolean) =>
-      `${n} soru${active ? " eşleşiyor" : " toplam"}`,
-    clear: "Filtreleri temizle",
-    empty: "Bu filtrelere uyan soru yok.",
-    emptyCustom: "Bu topic'te henüz soru yok. Dashboard'dan ekleyebilirsin.",
-    loginForBookmarks: "Yer imlerini görmek için giriş yap.",
-    guestBanner: (total: number) =>
-      `${total} junior ve başlangıç seviyesi soru görüntülüyorsunuz. Tüm seviyeleri, mock mülakatları ve sözlüğü açmak için giriş yapın.`,
-    signIn: "Giriş yap",
-    privateTopic: "Özel topic",
-  },
-} as const;
-
 export default async function QuestionsPage({
   searchParams,
 }: {
@@ -67,7 +37,7 @@ export default async function QuestionsPage({
 }) {
   const params = await searchParams;
   const lang = await getLang();
-  const i18n = t[lang];
+  const i18n = i18nQuestions[lang];
 
   const isBookmarkedTab = params.topic === "bookmarked";
   const myTopicSlug = params.mytopic?.trim() || undefined;
@@ -157,14 +127,14 @@ export default async function QuestionsPage({
                 href="/dashboard"
                 className="rounded-md border border-border px-3 py-1.5 text-xs font-medium text-muted-foreground hover:bg-accent hover:text-foreground"
               >
-                ← Dashboard
+                ← {i18n.dashboardBtn}
               </Link>
             )}
             <Link
               href="/questions/new"
               className="rounded-md border border-border px-3 py-1.5 text-xs font-medium hover:bg-accent"
             >
-              + Submit question
+             {i18n.submitQuestion}
             </Link>
           </div>
         )}
@@ -225,7 +195,7 @@ export default async function QuestionsPage({
                   href="/dashboard"
                   className="mt-3 inline-block text-xs font-medium hover:underline"
                 >
-                  Go to Dashboard →
+                  {i18n.dashboardBtn} →
                 </Link>
               </div>
             ) : (
@@ -235,6 +205,7 @@ export default async function QuestionsPage({
                     key={q.id}
                     question={q}
                     index={i + 1}
+                    lang={lang}
                     initialBookmarked={customBookmarkedSet.has(q.id)}
                   />
                 ))}

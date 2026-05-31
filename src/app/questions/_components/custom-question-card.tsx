@@ -8,20 +8,25 @@ import type { CustomQuestion } from "@/lib/actions/custom-topics";
 import { toggleCustomBookmark } from "@/lib/actions/custom-topics";
 import { LevelDots } from "@/components/level-dots";
 import { cn } from "@/lib/utils";
+import { i18nNav, i18nQuestionCard } from "@/lib/i18n";
+import type { Language } from "@/lib/supabase/types";
 
 export function CustomQuestionCard({
   question,
   index,
+  lang,
   initialBookmarked = false,
 }: {
   question: CustomQuestion;
   index: number;
+  lang: Language;
   initialBookmarked?: boolean;
 }) {
   const [open, setOpen] = useState(false);
   const [bookmarked, setBookmarked] = useState(initialBookmarked);
   const [isPending, startTransition] = useTransition();
-
+  const i18n = i18nQuestionCard[lang];
+  const dashboardLabel = i18nNav[lang].dashboard;
   function handleBookmark(e: React.MouseEvent) {
     e.stopPropagation();
     startTransition(async () => {
@@ -117,11 +122,11 @@ export function CustomQuestionCard({
             </p>
           ) : (
             <p className="text-sm italic text-muted-foreground">
-              No answer added yet. Edit this question from your{" "}
+              {i18n.customNoAnswerBefore}{" "}
               <a href="/dashboard" className="underline hover:text-foreground">
-                dashboard
+                {dashboardLabel}
               </a>
-              .
+              {i18n.customNoAnswerAfter}
             </p>
           )}
         </div>

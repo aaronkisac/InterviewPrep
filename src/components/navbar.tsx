@@ -37,7 +37,7 @@ export async function Navbar() {
   }
 
   return (
-    <nav className="sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <nav className="fixed top-0 left-0 right-0 z-40 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="mx-auto flex max-w-[1200px] items-center gap-2 px-4 sm:px-6 py-2">
         {/* Brand */}
         <Link

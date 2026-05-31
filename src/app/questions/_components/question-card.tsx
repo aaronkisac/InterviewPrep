@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 
 import { GlossaryText } from "@/components/glossary-text";
+import { CardMarkdown } from "@/components/card-markdown";
 import { BookmarkButton } from "@/app/questions/_components/bookmark-button";
 import { LevelDots } from "@/components/level-dots";
 import type { GlossaryTerm } from "@/lib/glossary-match";
@@ -114,7 +115,7 @@ export function QuestionCard({
         >
           <div
             className={cn(
-              "whitespace-pre-wrap text-sm leading-relaxed",
+              "text-sm leading-relaxed",
               isFallback
                 ? "italic text-muted-foreground"
                 : "text-foreground/90",
@@ -123,7 +124,7 @@ export function QuestionCard({
             {isFallback ? (
               general
             ) : (
-              <GlossaryText text={general} terms={terms} isLoggedIn={isLoggedIn} />
+              <CardMarkdown text={general} />
             )}
           </div>
 

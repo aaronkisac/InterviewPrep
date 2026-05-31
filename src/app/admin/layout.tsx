@@ -3,6 +3,8 @@ import { redirect } from "next/navigation";
 import { auth } from "@/lib/auth";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { NavLink } from "@/components/nav-link";
+import { getLang } from "@/lib/lang";
+import { i18nAdmin } from "@/lib/i18n";
 
 async function getRole(userId: string): Promise<string | null> {
   const sb = createAdminClient();
@@ -25,6 +27,9 @@ export default async function AdminLayout({
   const role = await getRole(session.user.id);
   if (role !== "admin" && role !== "super_admin") redirect("/");
 
+  const lang = await getLang();
+  const i18n = i18nAdmin[lang];
+
   return (
     <div className="flex flex-1 flex-col">
       {/* Admin sub-nav — sits below the global Navbar */}
@@ -33,9 +38,9 @@ export default async function AdminLayout({
           <span className="mr-3 text-xs font-medium uppercase tracking-widest text-muted-foreground">
             Admin
           </span>
-          <NavLink href="/admin/questions">Questions</NavLink>
-          <NavLink href="/admin/users">Users</NavLink>
-          <NavLink href="/admin/topics">Topics</NavLink>
+          <NavLink href="/admin/questions">{i18n.navQuestions}</NavLink>
+          <NavLink href="/admin/users">{i18n.navUsers}</NavLink>
+          <NavLink href="/admin/topics">{i18n.navTopics}</NavLink>
         </div>
       </div>
 

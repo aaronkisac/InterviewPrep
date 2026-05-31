@@ -7,7 +7,7 @@ import { useEffect, useRef, useState } from "react";
 import { saveMockSession, saveTopicMastery } from "@/lib/actions/user-tracking";
 import type { MockOption, MockQuestion } from "@/lib/mock-shared";
 import type { Language } from "@/lib/supabase/types";
-import { i18nMockSession } from "@/lib/i18n";
+import { i18nCommon, i18nMockSession } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 
 const OPTION_LABELS = ["A", "B", "C", "D"] as const;
@@ -26,6 +26,7 @@ export function MockSession({
   lang?: Language;
 }) {
   const i18n = i18nMockSession[lang];
+  const common = i18nCommon[lang];
   const router = useRouter();
   const [index, setIndex] = useState(0);
   const [selected, setSelected] = useState<(string | null)[]>(() =>
@@ -98,12 +99,12 @@ export function MockSession({
     const pct = Math.round((score / total) * 100);
     const grade =
       pct === 100
-        ? { label: lang === "tr" ? "Mükemmel" : "Perfect", color: "text-emerald-600 dark:text-emerald-400" }
+        ? { label: common.perfect, color: "text-emerald-600 dark:text-emerald-400" }
         : pct >= 80
-          ? { label: lang === "tr" ? "Güçlü" : "Strong", color: "text-emerald-600 dark:text-emerald-400" }
+          ? { label: common.strong, color: "text-emerald-600 dark:text-emerald-400" }
           : pct >= 60
-            ? { label: lang === "tr" ? "İyi" : "Decent", color: "text-amber-600 dark:text-amber-400" }
-            : { label: lang === "tr" ? "Geliştirilmeli" : "Needs work", color: "text-rose-600 dark:text-rose-400" };
+            ? { label: common.decent, color: "text-amber-600 dark:text-amber-400" }
+            : { label: common.needsWork, color: "text-rose-600 dark:text-rose-400" };
 
     const topicMap = new Map<string, { correct: number; total: number }>();
     questions.forEach((q, i) => {
@@ -130,7 +131,7 @@ export function MockSession({
           </p>
           {score === total && (
             <p className="mt-1 text-sm text-muted-foreground">
-              {lang === "tr" ? "Tüm sorular doğru — mükemmel!" : "Clean sweep — every answer correct."}
+              {i18n.cleanSweep}
             </p>
           )}
         </div>
@@ -138,7 +139,7 @@ export function MockSession({
         {topicBreakdown.length > 1 && (
           <div className="rounded-lg border border-border bg-card p-4">
             <p className="mb-3 text-xs font-medium text-muted-foreground">
-              {lang === "tr" ? "Konuya göre" : "By topic"}
+              {i18n.byTopic}
             </p>
             <div className="flex flex-wrap gap-2">
               {topicBreakdown.map(([topic, { correct, total: t }]) => {
@@ -185,9 +186,9 @@ export function MockSession({
                   <p className="mt-2 text-sm font-medium leading-snug">{q.question}</p>
                   <p className="mt-3 text-sm text-rose-600 dark:text-rose-400">
                     <span className="font-medium">
-                      {lang === "tr" ? "Cevabın:" : "Your answer:"}
+                      {i18n.yourAnswer}
                     </span>{" "}
-                    {picked ? picked.text : (lang === "tr" ? "Cevaplanmadı" : "Not answered")}
+                    {picked ? picked.text : i18n.notAnswered}
                   </p>
                   <p className="mt-1 text-sm text-emerald-700 dark:text-emerald-400">
                     <span className="font-medium">{i18n.correctAnswer}</span>{" "}
@@ -216,7 +217,7 @@ export function MockSession({
             href="/mock"
             className="rounded-md border border-border px-4 py-2 text-sm font-medium transition hover:bg-accent"
           >
-            {i18n.newSession}
+            {common.newSession}
           </Link>
           <Link
             href="/questions"
@@ -239,7 +240,7 @@ export function MockSession({
         <div className="flex items-center justify-between text-xs text-muted-foreground">
           <span>{i18n.questionOf(index + 1, total)}</span>
           <Link href="/mock" className="hover:text-foreground hover:underline">
-            {i18n.quit}
+            {common.quit}
           </Link>
         </div>
         <div
@@ -347,3 +348,4 @@ export function MockSession({
     </div>
   );
 }
+                                                                                                                                                                                                                               

@@ -12,6 +12,7 @@ import { getCustomMockQuestions, listCustomTopics } from "@/lib/actions/custom-t
 import { getMasteredIds } from "@/lib/actions/user-tracking";
 import { LEVELS } from "@/lib/topics";
 import { getLang } from "@/lib/lang";
+import { i18nLevels, i18nMockSession } from "@/lib/i18n";
 import type { MockQuestion, Level } from "@/lib/mock-shared";
 
 import { MockSession } from "./_components/mock-session";
@@ -51,10 +52,10 @@ export default async function MockSessionPage({
       <main className="mx-auto w-full max-w-[1200px] px-4 sm:px-6 lg:px-8 py-10">
         <div className="rounded-lg border border-dashed border-border p-8 text-center">
           <p className="text-sm text-muted-foreground">
-            {lang === "tr" ? "Bu oturuma uyan soru bulunamadı" : "No questions matched this session"}
+            {i18nMockSession[lang].noQuestions}
           </p>
           <Link href="/mock" className="mt-4 inline-block rounded-md border border-border px-4 py-2 text-sm font-medium transition hover:bg-accent">
-            {lang === "tr" ? "Ayarlara dön" : "Back to config"}
+            {i18nMockSession[lang].backToConfig}
           </Link>
         </div>
       </main>
@@ -89,7 +90,7 @@ export default async function MockSessionPage({
     .map((q) => {
       const opts = q.mock_options!;
       const level = Math.min(5, Math.max(1, q.level ?? 1)) as Level;
-      const levelLabel = LEVELS.find((l) => l.value === level)?.label ?? "Entry";
+      const levelLabel = i18nLevels[lang][level as keyof typeof i18nLevels.en] ?? LEVELS.find((l) => l.value === level)?.label ?? "Entry";
       const topicSlug = customTopicList.find((t) =>
         t.id === q.topic_id,
       )?.slug ?? q.topic_id;
@@ -149,28 +150,8 @@ export default async function MockSessionPage({
       <main className="mx-auto w-full max-w-[1200px] px-4 sm:px-6 lg:px-8 py-10">
         <div className="rounded-lg border border-dashed border-border p-8 text-center">
           <p className="text-sm text-muted-foreground">
-            {lang === "tr"
-              ? "Bu oturuma uyan soru bulunamadı. Daha geniş topic veya zorluk aralığı dene."
-              : "No questions matched this session. Try a wider topic or difficulty range."}
+            {i18nMockSession[lang].noMatch}
           </p>
           <Link
             href="/mock"
-            className="mt-4 inline-block rounded-md border border-border px-4 py-2 text-sm font-medium transition hover:bg-accent"
-          >
-            {lang === "tr" ? "Ayarlara dön" : "Back to config"}
-          </Link>
-        </div>
-      </main>
-    );
-  }
-
-  const sessionKey = `${allTopics.join("-")}-${lo}-${hi}-${length}-${Math.random()
-    .toString(36)
-    .slice(2)}`;
-
-  return (
-    <main className="mx-auto w-full max-w-[1200px] px-4 sm:px-6 lg:px-8 py-10">
-      <MockSession key={sessionKey} questions={combined} topicLabels={topicLabels} lang={lang} />
-    </main>
-  );
-}
+            className="mt-4 inline-block rounded-md bord

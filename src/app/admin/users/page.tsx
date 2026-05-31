@@ -1,5 +1,8 @@
 import { redirect } from "next/navigation";
 
+import { getLang } from "@/lib/lang";
+import { i18nAdmin } from "@/lib/i18n";
+
 import { auth } from "@/lib/auth";
 import { listAllUsers, listSuperAdmins, setUserRole } from "@/lib/actions/admin";
 import type { UserRole } from "@/lib/supabase/types";
@@ -16,6 +19,8 @@ export default async function AdminUsersPage({
   if (!session?.user?.id) redirect("/signin");
 
   const isSuperAdmin = session.user.role === "super_admin";
+  const lang = await getLang();
+  const i18n = i18nAdmin[lang];
 
   const params = await searchParams;
   const message = params.message;
@@ -43,17 +48,16 @@ export default async function AdminUsersPage({
   return (
     <main className="mx-auto w-full max-w-[1200px] px-4 sm:px-6 lg:px-8 py-12 space-y-10">
       <div>
-        <h1 className="text-2xl font-semibold tracking-tight">Users</h1>
+        <h1 className="text-2xl font-semibold tracking-tight">{i18n.usersTitle}</h1>
         <p className="mt-1 text-sm text-muted-foreground">
-          {users.length} registered {users.length === 1 ? "user" : "users"}.
-          Assign or revoke the admin role below.
+          {i18n.usersCount(users.length)}
         </p>
       </div>
 
       {/* Flash messages */}
       {message === "updated" && (
         <div className="rounded-md border border-emerald-500/40 bg-emerald-50 px-4 py-3 text-sm text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300">
-          ✓ Role updated successfully.
+          {i18n.roleUpdated}
         </div>
       )}
       {errorMsg && (
@@ -65,7 +69,7 @@ export default async function AdminUsersPage({
       {/* ── Regular users list ── */}
       {users.length === 0 ? (
         <div className="rounded-lg border border-dashed border-border px-6 py-12 text-center">
-          <p className="text-sm text-muted-foreground">No users yet.</p>
+          <p className="text-sm text-muted-foreground">{i18n.noUsers}</p>
         </div>
       ) : (
         <div className="rounded-lg border border-border bg-card divide-y divide-border">
@@ -103,13 +107,13 @@ export default async function AdminUsersPage({
                       type="submit"
                       className="rounded-md border border-border px-3 py-1 text-xs font-medium hover:bg-accent"
                     >
-                      {u.role === "admin" ? "Revoke admin" : "Make admin"}
+                      {u.role === "admin" ? i18n.revokeAdmin : i18n.makeAdmin}
                     </button>
                   </form>
                 )}
 
                 <span className="shrink-0 text-xs text-muted-foreground hidden sm:block">
-                  {new Date(u.created_at).toLocaleDateString("en-GB", {
+                  {new Date(u.created_at).toLocaleDateString(lang === "tr" ? "tr-TR" : "en-GB", {
                     day: "numeric",
                     month: "short",
                     year: "numeric",
@@ -125,9 +129,9 @@ export default async function AdminUsersPage({
       {isSuperAdmin && (
         <section>
           <div className="mb-3">
-            <h2 className="text-sm font-medium">Super Admins</h2>
+            <h2 className="text-sm font-medium">{i18n.superAdmins}</h2>
             <p className="mt-0.5 text-xs text-muted-foreground">
-              Full system access. Role changes require a database migration.
+              {i18n.superAdminsSub}
             </p>
           </div>
           <div className="rounded-lg border border-amber-500/30 bg-amber-50/40 dark:bg-amber-950/20 divide-y divide-amber-500/20">
@@ -154,7 +158,7 @@ export default async function AdminUsersPage({
                 </span>
 
                 <span className="shrink-0 text-xs text-muted-foreground hidden sm:block">
-                  {new Date(u.created_at).toLocaleDateString("en-GB", {
+                  {new Date(u.created_at).toLocaleDateString(lang === "tr" ? "tr-TR" : "en-GB", {
                     day: "numeric",
                     month: "short",
                     year: "numeric",

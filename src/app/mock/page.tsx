@@ -89,13 +89,11 @@ export default async function MockPage() {
     <main className="mx-auto w-full max-w-[1200px] px-4 sm:px-6 lg:px-8 py-10 space-y-8">
       <header>
         <p className="text-sm font-medium text-muted-foreground">
-          {lang === "tr" ? "Pratik" : "Practice"}
+          {i18n.practice}
         </p>
         <h1 className="mt-1 text-2xl font-semibold tracking-tight">{i18n.pageTitle}</h1>
         <p className="mt-2 text-sm text-muted-foreground">
-          {lang === "tr"
-            ? "Bir mod seç, konularını ve zorluğunu belirle, sonra başla."
-            : "Pick a mode, choose your topics and difficulty, then start."}
+          {i18n.subtitle}
         </p>
       </header>
       <MockConfigTabs

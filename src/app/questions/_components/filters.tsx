@@ -4,6 +4,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useTransition } from "react";
 
 import { LEVELS } from "@/lib/topics";
+import { i18nLevels, i18nQuestions } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 
 interface Topic {
@@ -86,12 +87,10 @@ export function QuestionFilters({ topics = [], lang = "en" }: QuestionFiltersPro
     5: "bg-red-500",
   };
 
-  const levelLabels: Record<number, string> = lang === "tr"
-    ? { 1: "Başlangıç", 2: "Junior", 3: "Mid", 4: "Senior", 5: "Uzman" }
-    : { 1: "Entry", 2: "Junior", 3: "Mid", 4: "Senior", 5: "Expert" };
+  const levelLabels = i18nLevels[lang];
 
-  const topicAllLabel = lang === "tr" ? "Tüm konular" : "All topics";
-  const searchPlaceholder = lang === "tr" ? "Soruda anahtar kelime…" : "Keyword in question…";
+  const topicAllLabel = i18nQuestions[lang].allTopics;
+  const searchPlaceholder = i18nQuestions[lang].keywordPlaceholder;
 
   return (
     <div className={cn("space-y-3", isPending && "opacity-70")}>

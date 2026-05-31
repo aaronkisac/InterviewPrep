@@ -6,6 +6,7 @@ import { CheckCircle2, XCircle, Eye, ArrowRight, RotateCcw } from "lucide-react"
 
 import { saveTopicMastery } from "@/lib/actions/user-tracking";
 import { LevelDots } from "@/components/level-dots";
+import { i18nCommon, i18nFlashcard } from "@/lib/i18n";
 import type { Language } from "@/lib/supabase/types";
 import { cn } from "@/lib/utils";
 
@@ -30,6 +31,8 @@ export function FlashcardSession({
   lang?: Language;
 }) {
   const router = useRouter();
+  const i18n = i18nFlashcard[lang];
+  const common = i18nCommon[lang];
   const [index, setIndex] = useState(0);
   const [revealed, setRevealed] = useState(false);
   const [results, setResults] = useState<Result[]>([]);
@@ -77,12 +80,12 @@ export function FlashcardSession({
   if (done) {
     const grade =
       pct === 100
-        ? { label: lang === "tr" ? "Mükemmel" : "Perfect", cls: "text-emerald-600 dark:text-emerald-400" }
+        ? { label: common.perfect, cls: "text-emerald-600 dark:text-emerald-400" }
         : pct >= 80
-          ? { label: lang === "tr" ? "Güçlü" : "Strong", cls: "text-emerald-600 dark:text-emerald-400" }
+          ? { label: common.strong, cls: "text-emerald-600 dark:text-emerald-400" }
           : pct >= 60
-            ? { label: lang === "tr" ? "İyi" : "Decent", cls: "text-amber-600 dark:text-amber-400" }
-            : { label: lang === "tr" ? "Geliştirilmeli" : "Needs work", cls: "text-rose-600 dark:text-rose-400" };
+            ? { label: common.decent, cls: "text-amber-600 dark:text-amber-400" }
+            : { label: common.needsWork, cls: "text-rose-600 dark:text-rose-400" };
 
     const missed = questions.filter((_, i) => results[i] === "unknown");
 
@@ -93,7 +96,7 @@ export function FlashcardSession({
           <p className={cn("text-4xl font-bold", grade.cls)}>{pct}%</p>
           <p className="mt-1 text-sm font-medium text-muted-foreground">{grade.label}</p>
           <p className="mt-3 text-sm text-muted-foreground">
-            {known} / {total} {lang === "tr" ? "bilindi" : "known"}
+            {known} / {total} {i18n.known}
           </p>
         </div>
 
@@ -101,7 +104,7 @@ export function FlashcardSession({
         {missed.length > 0 && (
           <section>
             <h2 className="mb-2 text-sm font-medium">
-              {lang === "tr" ? `Kaçırılanları gözden geçir (${missed.length})` : `Review missed (${missed.length})`}
+              {i18n.reviewMissed(missed.length)}
             </h2>
             <div className="space-y-2">
               {missed.map((q) => (
@@ -126,14 +129,14 @@ export function FlashcardSession({
             className="flex items-center gap-1.5 rounded-md border border-border px-4 py-2 text-sm font-medium hover:bg-accent transition-colors"
           >
             <RotateCcw className="size-3.5" />
-            {lang === "tr" ? "Yeniden başla" : "Restart"}
+            {i18n.restart}
           </button>
           <button
             type="button"
             onClick={() => router.push("/mock")}
             className="flex items-center gap-1.5 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:opacity-90 transition-opacity"
           >
-            {lang === "tr" ? "Mock'a dön" : "Back to mock"}
+            {i18n.backToMock}
             <ArrowRight className="size-3.5" />
           </button>
         </div>
@@ -175,19 +178,19 @@ export function FlashcardSession({
               className="flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
             >
               <Eye className="size-4" />
-              {lang === "tr" ? "Cevabı göster" : "Show answer"}
+              {i18n.showAnswer}
             </button>
           </div>
         ) : (
           <div className="border-t border-border px-6 py-4 space-y-3">
             <div>
               <p className="mb-1 text-xs font-medium uppercase tracking-wider text-muted-foreground">
-                {lang === "tr" ? "Cevap" : "Answer"}
+                {i18n.answer}
               </p>
               <p className="whitespace-pre-wrap text-sm leading-relaxed text-foreground/85">
                 {current.answer || (
                   <span className="italic text-muted-foreground">
-                    {lang === "tr" ? "Cevap yok." : "No answer provided."}
+                    {i18n.noAnswer}
                   </span>
                 )}
               </p>
@@ -195,7 +198,7 @@ export function FlashcardSession({
             {current.answer_personal && (
               <div className="rounded-md border border-violet-500/20 bg-violet-50/50 px-3 py-2 dark:bg-violet-950/20">
                 <p className="mb-0.5 text-[10px] font-medium uppercase tracking-wider text-violet-600 dark:text-violet-400">
-                  {lang === "tr" ? "Kişisel not" : "Personal note"}
+                  {i18n.personalNote}
                 </p>
                 <p className="whitespace-pre-wrap text-xs text-foreground/80">{current.answer_personal}</p>
               </div>
@@ -213,18 +216,9 @@ export function FlashcardSession({
             className="flex flex-1 items-center justify-center gap-2 rounded-lg border border-rose-500/30 bg-rose-50 py-3 text-sm font-medium text-rose-700 hover:bg-rose-100 dark:bg-rose-950/30 dark:text-rose-300 dark:hover:bg-rose-950/50 transition-colors"
           >
             <XCircle className="size-4" />
-            {lang === "tr" ? "Bilmiyordum" : "Didn't know"}
+            {i18n.didntKnow}
           </button>
           <button
             type="button"
             onClick={() => answer("known")}
-            className="flex flex-1 items-center justify-center gap-2 rounded-lg border border-emerald-500/30 bg-emerald-50 py-3 text-sm font-medium text-emerald-700 hover:bg-emerald-100 dark:bg-emerald-950/30 dark:text-emerald-300 dark:hover:bg-emerald-950/50 transition-colors"
-          >
-            <CheckCircle2 className="size-4" />
-            {lang === "tr" ? "Biliyordum" : "I knew it"}
-          </button>
-        </div>
-      )}
-    </div>
-  );
-}
+            className="flex flex-1 items-center justify-center gap-2 rounded-lg bord

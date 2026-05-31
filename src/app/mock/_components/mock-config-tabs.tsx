@@ -11,7 +11,7 @@ import {
   type SessionLength,
 } from "@/lib/mock-shared";
 import { LEVELS } from "@/lib/topics";
-import { i18nMock, LEVEL_LABELS_TR } from "@/lib/i18n";
+import { i18nMock, i18nLevels } from "@/lib/i18n";
 import type { Language } from "@/lib/supabase/types";
 import { cn } from "@/lib/utils";
 
@@ -178,8 +178,7 @@ export function MockConfigTabs({
   }
 
   function levelLabel(value: number): string {
-    if (lang === "tr") return LEVEL_LABELS_TR[value] ?? String(value);
-    return LEVELS.find((l) => l.value === value)?.label ?? String(value);
+    return i18nLevels[lang][value as keyof typeof i18nLevels.en] ?? String(value);
   }
 
   return (
@@ -220,11 +219,7 @@ export function MockConfigTabs({
 
           {currentTopics.length === 0 ? (
             <p className="text-sm text-muted-foreground">
-              {isMock
-                ? (lang === "tr"
-                  ? "Henüz mock'a hazır soru yok. Mock modunu etkinleştirmek için sorulara 4 seçenek ekle."
-                  : "No mock-ready questions yet. Add 4 options to questions to enable mock mode.")
-                : i18n.noTopics}
+              {isMock ? i18n.noMockReady : i18n.noTopics}
             </p>
           ) : (
             <>
@@ -304,7 +299,7 @@ export function MockConfigTabs({
               </select>
             </div>
             <span className="pb-2 text-sm text-muted-foreground">
-              {lang === "tr" ? "→" : "to"}
+              {i18n.rangeArrow}
             </span>
             <div className="flex flex-col gap-1.5">
               <label htmlFor="max-level" className="text-xs font-medium text-muted-foreground">
@@ -327,7 +322,7 @@ export function MockConfigTabs({
         {/* ── Session length ── */}
         <fieldset className="space-y-3">
           <legend className="text-sm font-medium">
-            {isMock ? i18n.sessionLength : (lang === "tr" ? "Kart limiti" : "Card limit")}
+            {isMock ? i18n.sessionLength : i18n.cardLimit}
           </legend>
           <div className="inline-flex overflow-hidden rounded-md border border-input">
             {SESSION_LENGTHS.map((len) => {
@@ -369,10 +364,8 @@ export function MockConfigTabs({
           {!isMock && (
             <p className="text-sm text-muted-foreground" aria-live="polite">
               {flashSelected.size === 0
-                ? (lang === "tr" ? "En az bir topic seçin." : "Select at least one topic.")
-                : lang === "tr"
-                  ? `${flashSelected.size} topic seçildi — en fazla ${length} kart.`
-                  : `${flashSelected.size} topic${flashSelected.size === 1 ? "" : "s"} selected — up to ${length} cards.`}
+                ? i18n.selectAtLeastOne
+                : i18n.flashSelected(flashSelected.size, length)}
             </p>
           )}
           <button
