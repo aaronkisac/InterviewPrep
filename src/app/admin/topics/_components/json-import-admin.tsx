@@ -89,7 +89,16 @@ const EXAMPLE = JSON.stringify(
   2,
 );
 
-export function JsonImportAdmin({ topicSlug, topicName }: { topicSlug: string; topicName: string }) {
+export function JsonImportAdmin({
+  topicSlug,
+  topicName,
+  lang = "en",
+}: {
+  topicSlug: string;
+  topicName: string;
+  lang?: Language;
+}) {
+  const i18n = i18nAdmin[lang];
   const [open, setOpen] = useState(false);
   const [text, setText] = useState("");
   const [result, setResult] = useState<ValidationResult | null>(null);

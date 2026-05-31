@@ -2,7 +2,7 @@
 // Keep this file free of server-only dependencies (no next/headers, no
 // supabase/server) so Client Components can import it safely.
 
-import type { LevelLabel, Topic } from "@/lib/supabase/types";
+import type { Topic } from "@/lib/supabase/types";
 
 export const SESSION_LENGTHS = [5, 10, 20] as const;
 export type SessionLength = (typeof SESSION_LENGTHS)[number];
@@ -20,7 +20,8 @@ export type MockQuestion = {
   id: string;
   topic: Topic;
   level: Level;
-  levelLabel: LevelLabel;
+  /** Localized display label (from DB or i18nLevels). */
+  levelLabel: string;
   question: string;
   options: MockOption[];
 };

@@ -20,6 +20,8 @@ import { i18nMyTopics, i18nLevels } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import type { Language } from "@/lib/supabase/types";
 
+type MyTopicsI18n = (typeof i18nMyTopics)[Language];
+
 // ── Mock options editor ───────────────────────────────────────────────────────
 
 function MockOptionsEditor({
@@ -29,7 +31,7 @@ function MockOptionsEditor({
 }: {
   value: MockOption[];
   onChange: (opts: MockOption[]) => void;
-  i18n: typeof i18nMyTopics.en;
+  i18n: MyTopicsI18n;
 }) {
   return (
     <div className="space-y-2">
@@ -87,7 +89,7 @@ function QuestionForm({
   initial?: CustomQuestion;
   onSave: (q: CustomQuestion) => void;
   onCancel: () => void;
-  i18n: typeof i18nMyTopics.en;
+  i18n: MyTopicsI18n;
   lang: Language;
 }) {
   const [question, setQuestion] = useState(initial?.question ?? "");
@@ -257,7 +259,7 @@ function QuestionRow({
   q: CustomQuestion;
   onUpdate: (updated: CustomQuestion) => void;
   onDelete: (id: string) => void;
-  i18n: typeof i18nMyTopics.en;
+  i18n: MyTopicsI18n;
   lang: Language;
 }) {
   const [open, setOpen] = useState(false);
@@ -368,7 +370,7 @@ function TopicAccordion({
   topic: CustomTopic;
   initialQuestions: CustomQuestion[];
   onDeleteTopic: (id: string) => void;
-  i18n: typeof i18nMyTopics.en;
+  i18n: MyTopicsI18n;
   lang: Language;
 }) {
   const [open, setOpen] = useState(false);
