@@ -20,7 +20,7 @@ test.describe("/mock config page", () => {
   test("loads with the correct heading", async ({ page }) => {
     await page.goto("/mock");
     await expect(
-      page.getByRole("heading", { name: "Configure your session" }),
+      page.getByRole("heading", { name: "Mock interview" }),
     ).toBeVisible();
   });
 

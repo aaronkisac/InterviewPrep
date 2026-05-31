@@ -22,14 +22,17 @@ test.describe("/glossary page", () => {
   test("loads with the correct heading", async ({ page }) => {
     await page.goto("/glossary");
     await expect(
-      page.getByRole("heading", { name: "Terms reference", level: 1 }),
+      page.getByRole("heading", {
+        name: "Frontend terms auto-linked in answers as you read.",
+        level: 1,
+      }),
     ).toBeVisible();
   });
 
   test("shows total term count in the subtitle", async ({ page }) => {
     await page.goto("/glossary");
-    // e.g. "105 terms across all topics"
-    await expect(page.getByText(/\d+ terms? across all topics/)).toBeVisible();
+    // e.g. "105 terms"
+    await expect(page.getByText(/^\d+ terms?$/)).toBeVisible();
   });
 
   test("all 14 topic sections are present", async ({ page }) => {

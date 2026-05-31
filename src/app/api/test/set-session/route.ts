@@ -23,7 +23,7 @@ export async function GET() {
 
   const token = await encode({
     token: {
-      sub: "test-user-00000000-0000-0000-0000-000000000001",
+      sub: "00000000-0000-0000-0000-000000000001",
       role: "user",
       name: "Test User",
       email: "playwright@example.com",

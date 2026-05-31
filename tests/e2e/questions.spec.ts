@@ -61,14 +61,16 @@ test.describe("/questions page", () => {
 
   test("EN/TR language toggle switches answer language", async ({ page }) => {
     await page.goto("/questions");
-    // Labels wrap sr-only radio inputs — click the label directly
-    await page.locator("label").filter({ hasText: /^TR$/ }).click();
-    await expect(page).toHaveURL(/lang=tr/);
+    const langToggle = page.getByRole("button", { name: "Toggle language" });
+    await expect(langToggle).toHaveText("EN");
+
+    await langToggle.click();
     await expect(
       page.getByRole("heading", { name: "Tüm sorular" }),
     ).toBeVisible();
+    await expect(langToggle).toHaveText("TR");
 
-    await page.locator("label").filter({ hasText: /^EN$/ }).click();
+    await langToggle.click();
     await expect(
       page.getByRole("heading", { name: "All questions" }),
     ).toBeVisible();
