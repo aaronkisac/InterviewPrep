@@ -6,22 +6,30 @@
       {
         "optionText": "A pattern that uses closures to create private scope, exposing only a public API — encapsulating state and behaviour within a single object.",
         "isCorrect": true,
-        "explanation": "Correct — the Module pattern leverages IIFE closures to keep implementation details private while returning a public interface."
+        "explanation": "Correct — the Module pattern leverages IIFE closures to keep implementation details private while returning a public interface.",
+        "optionTextTr": "Alt sınıfların belirli adımları geçersiz kılmasına izin verirken bir algoritmanın iskeletini tanımlayan behavioral desen.",
+        "explanationTr": "Doğru — React sınıf bileşenlerinin lifecycle metodları Template Method uygular."
       },
       {
         "optionText": "A pattern where each module extends a base class and overrides its methods to customise behaviour.",
         "isCorrect": false,
-        "explanation": "That describes inheritance / the Template Method pattern, not the Module pattern."
+        "explanation": "That describes inheritance / the Template Method pattern, not the Module pattern.",
+        "optionTextTr": "Karmaşık bir alt sisteme basitleştirilmiş arayüz sağlayan structural desen.",
+        "explanationTr": "Bu Facade'ı tanımlar — Template Method bir abstract sınıfta algoritma adımlarını tanımlar."
       },
       {
         "optionText": "A pattern that registers modules in a central registry so they can be loaded on demand at runtime.",
         "isCorrect": false,
-        "explanation": "That describes a Service Locator or lazy-loading strategy, not the classic Module pattern."
+        "explanation": "That describes a Service Locator or lazy-loading strategy, not the classic Module pattern.",
+        "optionTextTr": "İşlevleri nesneler olarak kapsayarak geri almayı ve kuyruğa almayı destekleyen behavioral desen.",
+        "explanationTr": "Bu Command'ı tanımlar — Template Method algoritma adımları sırasının şablonuyla ilgilidir."
       },
       {
         "optionText": "A pattern where modules communicate exclusively through a shared event bus, keeping them fully decoupled.",
         "isCorrect": false,
-        "explanation": "That describes the Observer / Event Emitter pattern, not the Module pattern."
+        "explanation": "That describes the Observer / Event Emitter pattern, not the Module pattern.",
+        "optionTextTr": "Değiştirilebilir algoritmalar ailesi tanımlayan ve çalışma zamanında seçim yapılmasını sağlayan behavioral desen.",
+        "explanationTr": "Bu Strategy'yi tanımlar. Strategy çalışma zamanında değiştirme sağlar; Template Method ise sabit sırayı derleme zamanında tanımlar."
       }
     ]
   }

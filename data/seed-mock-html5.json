@@ -6,22 +6,30 @@
       {
         "optionText": "Provides alternative text for screen readers and displays when the image fails to load — essential for accessibility and SEO",
         "isCorrect": true,
-        "explanation": "The alt attribute serves two purposes: screen readers announce it to visually impaired users, and browsers display it when the image can't load. It also gives search engines context. Decorative images should have alt='' (empty) to be skipped by screen readers."
+        "explanation": "The alt attribute serves two purposes: screen readers announce it to visually impaired users, and browsers display it when the image can't load. It also gives search engines context. Decorative images should have alt='' (empty) to be skipped by screen readers.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Sets the title tooltip that appears on mouse hover over the image",
         "isCorrect": false,
-        "explanation": "Hover tooltips are set with the title attribute. alt is for accessibility and fallback text."
+        "explanation": "Hover tooltips are set with the title attribute. alt is for accessibility and fallback text.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Defines the image dimensions to prevent layout shift during loading",
         "isCorrect": false,
-        "explanation": "Width and height attributes prevent layout shift. alt is for alternative text."
+        "explanation": "Width and height attributes prevent layout shift. alt is for alternative text.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "A required attribute that browsers use to pre-load images faster",
         "isCorrect": false,
-        "explanation": "Pre-loading uses the link rel='preload' element or the loading attribute. alt is for alternative text."
+        "explanation": "Pre-loading uses the link rel='preload' element or the loading attribute. alt is for alternative text.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -32,22 +40,30 @@
       {
         "optionText": "div is a block-level element that takes full width; span is an inline element that wraps text without breaking flow",
         "isCorrect": true,
-        "explanation": "div creates a block that starts on a new line. span is inline — it wraps text or inline content without affecting the surrounding flow. Both are generic containers with no semantic meaning."
+        "explanation": "div creates a block that starts on a new line. span is inline — it wraps text or inline content without affecting the surrounding flow. Both are generic containers with no semantic meaning.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "span has semantic meaning; div is purely presentational",
         "isCorrect": false,
-        "explanation": "Both div and span are non-semantic containers. For semantic meaning, use elements like section, article, nav, p, strong etc."
+        "explanation": "Both div and span are non-semantic containers. For semantic meaning, use elements like section, article, nav, p, strong etc.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "div can contain any elements; span can only contain text",
         "isCorrect": false,
-        "explanation": "span is an inline element and should only contain inline elements (text, img, other spans). But this is about valid nesting, not a strict rule of span vs div."
+        "explanation": "span is an inline element and should only contain inline elements (text, img, other spans). But this is about valid nesting, not a strict rule of span vs div.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "They are identical — div and span are just old names for the same element",
         "isCorrect": false,
-        "explanation": "They have different default display values: div is block, span is inline."
+        "explanation": "They have different default display values: div is block, span is inline.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -58,22 +74,30 @@
       {
         "optionText": "Tells the browser which HTML version to use — <!DOCTYPE html> triggers standards mode in all modern browsers",
         "isCorrect": true,
-        "explanation": "Without a doctype, browsers enter 'quirks mode' and emulate old buggy behavior. <!DOCTYPE html> (HTML5 doctype) activates standards mode. It's not an HTML tag — it's a document type declaration."
+        "explanation": "Without a doctype, browsers enter 'quirks mode' and emulate old buggy behavior. <!DOCTYPE html> (HTML5 doctype) activates standards mode. It's not an HTML tag — it's a document type declaration.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "DOCTYPE defines the website's title shown in the browser tab",
         "isCorrect": false,
-        "explanation": "The page title is set with the <title> element inside <head>. DOCTYPE tells the browser the document type."
+        "explanation": "The page title is set with the <title> element inside <head>. DOCTYPE tells the browser the document type.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "DOCTYPE prevents search engines from indexing the page",
         "isCorrect": false,
-        "explanation": "Search engine indexing is controlled by robots.txt and meta robots tags, not DOCTYPE."
+        "explanation": "Search engine indexing is controlled by robots.txt and meta robots tags, not DOCTYPE.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "DOCTYPE is required to load external CSS files correctly",
         "isCorrect": false,
-        "explanation": "CSS loading works regardless of DOCTYPE. However, without DOCTYPE, rendering may differ in quirks mode."
+        "explanation": "CSS loading works regardless of DOCTYPE. However, without DOCTYPE, rendering may differ in quirks mode.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -84,22 +108,30 @@
       {
         "optionText": "Semantic elements (article, section, nav), Canvas and SVG, video/audio elements, Web Storage, Web Workers, Geolocation, WebSockets, and new form input types",
         "isCorrect": true,
-        "explanation": "HTML5 significantly expanded the web platform: semantic markup for accessibility/SEO, native multimedia without Flash, client-side storage, background threads, and APIs for location, offline caching, drag-and-drop, and real-time communication."
+        "explanation": "HTML5 significantly expanded the web platform: semantic markup for accessibility/SEO, native multimedia without Flash, client-side storage, background threads, and APIs for location, offline caching, drag-and-drop, and real-time communication.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "HTML5 replaced CSS entirely — all styling is now done with HTML attributes",
         "isCorrect": false,
-        "explanation": "CSS is still the styling layer. HTML5 added new APIs and elements, not styling capabilities."
+        "explanation": "CSS is still the styling layer. HTML5 added new APIs and elements, not styling capabilities.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "HTML5 added server-side scripting directly in HTML files using PHP syntax",
         "isCorrect": false,
-        "explanation": "HTML5 is a client-side markup standard. Server-side scripting remains a separate concern (PHP, Node.js etc)."
+        "explanation": "HTML5 is a client-side markup standard. Server-side scripting remains a separate concern (PHP, Node.js etc).",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "HTML5 is only relevant for mobile — desktop browsers still use HTML4",
         "isCorrect": false,
-        "explanation": "HTML5 is the current standard for all browsers — mobile and desktop. HTML4 is obsolete."
+        "explanation": "HTML5 is the current standard for all browsers — mobile and desktop. HTML4 is obsolete.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -110,22 +142,30 @@
       {
         "optionText": "Both download scripts in parallel without blocking HTML parsing; async executes immediately when downloaded (possibly out of order); defer executes in order after HTML parsing completes",
         "isCorrect": true,
-        "explanation": "Without attributes: blocks parsing. async: downloads parallel, runs immediately when ready (good for analytics). defer: downloads parallel, runs in order after DOM is ready (good for most scripts). Both avoid blocking the parser."
+        "explanation": "Without attributes: blocks parsing. async: downloads parallel, runs immediately when ready (good for analytics). defer: downloads parallel, runs in order after DOM is ready (good for most scripts). Both avoid blocking the parser.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "defer executes the script immediately; async waits until after the page loads",
         "isCorrect": false,
-        "explanation": "It's the opposite: defer waits until HTML parsing completes; async runs as soon as the script downloads."
+        "explanation": "It's the opposite: defer waits until HTML parsing completes; async runs as soon as the script downloads.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Both async and defer make scripts execute synchronously",
         "isCorrect": false,
-        "explanation": "Both attributes make script loading non-blocking/asynchronous. Synchronous is the default (no attributes)."
+        "explanation": "Both attributes make script loading non-blocking/asynchronous. Synchronous is the default (no attributes).",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "async and defer only work in the <body> tag — they have no effect in <head>",
         "isCorrect": false,
-        "explanation": "async and defer are specifically useful in <head> to avoid parser blocking while keeping the script in the right place."
+        "explanation": "async and defer are specifically useful in <head> to avoid parser blocking while keeping the script in the right place.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -136,22 +176,30 @@
       {
         "optionText": "Cookies: sent with every HTTP request, configurable expiry, accessible server-side. sessionStorage: browser tab lifetime, not sent to server. localStorage: persists indefinitely, not sent to server. Both storage APIs are ~5MB",
         "isCorrect": true,
-        "explanation": "Cookies are the only one sent to the server on requests. sessionStorage is cleared when the tab closes. localStorage persists until explicitly cleared. Both Web Storage APIs are only accessible via JavaScript."
+        "explanation": "Cookies are the only one sent to the server on requests. sessionStorage is cleared when the tab closes. localStorage persists until explicitly cleared. Both Web Storage APIs are only accessible via JavaScript.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "All three are sent to the server on every HTTP request",
         "isCorrect": false,
-        "explanation": "Only cookies are sent with HTTP requests. sessionStorage and localStorage are client-only JavaScript APIs."
+        "explanation": "Only cookies are sent with HTTP requests. sessionStorage and localStorage are client-only JavaScript APIs.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "localStorage is cleared when the browser closes; sessionStorage persists indefinitely",
         "isCorrect": false,
-        "explanation": "It's the opposite: sessionStorage clears when the tab/window closes; localStorage persists until explicitly cleared."
+        "explanation": "It's the opposite: sessionStorage clears when the tab/window closes; localStorage persists until explicitly cleared.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Cookies have a 50MB storage limit; localStorage has only 4KB like cookies",
         "isCorrect": false,
-        "explanation": "Cookies are limited to ~4KB. localStorage and sessionStorage can store ~5-10MB (browser-dependent)."
+        "explanation": "Cookies are limited to ~4KB. localStorage and sessionStorage can store ~5-10MB (browser-dependent).",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -162,22 +210,30 @@
       {
         "optionText": "They convey meaning to browsers, screen readers, and search engines — improving accessibility, SEO, and code maintainability over generic divs",
         "isCorrect": true,
-        "explanation": "<article>, <nav>, <main>, <header>, <footer>, <aside>, <section> communicate structure and intent. Screen readers can navigate by landmarks. Search engines weight semantic headings. Developers understand the layout at a glance."
+        "explanation": "<article>, <nav>, <main>, <header>, <footer>, <aside>, <section> communicate structure and intent. Screen readers can navigate by landmarks. Search engines weight semantic headings. Developers understand the layout at a glance.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Semantic tags load faster than div elements due to browser optimisation",
         "isCorrect": false,
-        "explanation": "There's no meaningful performance difference. The benefit is semantic meaning, not speed."
+        "explanation": "There's no meaningful performance difference. The benefit is semantic meaning, not speed.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Semantic tags apply built-in CSS styles automatically",
         "isCorrect": false,
-        "explanation": "Semantic tags have minimal browser default styles (similar to div/span). They don't style your page for you."
+        "explanation": "Semantic tags have minimal browser default styles (similar to div/span). They don't style your page for you.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Semantic tags are required — browsers refuse to render pages using only divs",
         "isCorrect": false,
-        "explanation": "Divs work fine. Semantic tags are a best practice for accessibility and maintainability, not a technical requirement."
+        "explanation": "Divs work fine. Semantic tags are a best practice for accessibility and maintainability, not a technical requirement.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -188,22 +244,30 @@
       {
         "optionText": "Plain <script> blocks HTML parsing until downloaded and executed; async downloads in parallel and runs immediately; defer downloads in parallel and runs after HTML is fully parsed, in order",
         "isCorrect": true,
-        "explanation": "For most scripts, defer is the right choice — it doesn't block parsing and respects script order. async suits independent scripts like analytics. Plain script in <head> without defer/async blocks the browser."
+        "explanation": "For most scripts, defer is the right choice — it doesn't block parsing and respects script order. async suits independent scripts like analytics. Plain script in <head> without defer/async blocks the browser.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "async scripts always run before defer scripts regardless of download order",
         "isCorrect": false,
-        "explanation": "async scripts run when their download completes, regardless of other scripts. defer scripts run after HTML parsing, in document order."
+        "explanation": "async scripts run when their download completes, regardless of other scripts. defer scripts run after HTML parsing, in document order.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Adding defer to a script makes it execute on a background thread",
         "isCorrect": false,
-        "explanation": "defer changes when a script executes, not on which thread. JavaScript is always single-threaded (Web Workers are separate)."
+        "explanation": "defer changes when a script executes, not on which thread. JavaScript is always single-threaded (Web Workers are separate).",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "async and defer are only valid for external scripts; inline scripts always block",
         "isCorrect": false,
-        "explanation": "Correct — async and defer only apply to scripts with a src attribute. Inline scripts always execute synchronously and block parsing."
+        "explanation": "Correct — async and defer only apply to scripts with a src attribute. Inline scripts always execute synchronously and block parsing.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -214,22 +278,30 @@
       {
         "optionText": "Client-side key-value storage APIs: localStorage persists across sessions; sessionStorage is limited to the current tab's lifetime — both store strings and are not sent to the server",
         "isCorrect": true,
-        "explanation": "Both use the same API (setItem, getItem, removeItem, clear). They're synchronous and store strings (use JSON.stringify/parse for objects). Neither is accessible from other origins (same-origin policy)."
+        "explanation": "Both use the same API (setItem, getItem, removeItem, clear). They're synchronous and store strings (use JSON.stringify/parse for objects). Neither is accessible from other origins (same-origin policy).",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Web Storage is a NoSQL database built into the browser, similar to MongoDB",
         "isCorrect": false,
-        "explanation": "Web Storage is a simple synchronous key-value store. IndexedDB is the browser's more database-like option."
+        "explanation": "Web Storage is a simple synchronous key-value store. IndexedDB is the browser's more database-like option.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "sessionStorage data is shared between all browser tabs on the same domain",
         "isCorrect": false,
-        "explanation": "sessionStorage is isolated to the specific tab. localStorage is shared across all tabs of the same origin."
+        "explanation": "sessionStorage is isolated to the specific tab. localStorage is shared across all tabs of the same origin.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Both localStorage and sessionStorage can store any JavaScript type including functions",
         "isCorrect": false,
-        "explanation": "Both only store strings. Functions cannot be stored. Objects must be serialized with JSON.stringify."
+        "explanation": "Both only store strings. Functions cannot be stored. Objects must be serialized with JSON.stringify.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -240,22 +312,30 @@
       {
         "optionText": "Techniques that display content to the user as quickly as possible rather than waiting for the full page to load — includes lazy loading, above-the-fold prioritisation, and streaming HTML",
         "isCorrect": true,
-        "explanation": "Progressive rendering: send critical HTML first, render visible content immediately, lazy load below-fold images (loading='lazy'), async/defer scripts, and split heavy CSS. React/Next.js support streaming server rendering for this."
+        "explanation": "Progressive rendering: send critical HTML first, render visible content immediately, lazy load below-fold images (loading='lazy'), async/defer scripts, and split heavy CSS. React/Next.js support streaming server rendering for this.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "A CSS animation technique that gradually reveals elements as users scroll",
         "isCorrect": false,
-        "explanation": "Scroll animations are separate (Intersection Observer). Progressive rendering is about loading strategy."
+        "explanation": "Scroll animations are separate (Intersection Observer). Progressive rendering is about loading strategy.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "A browser feature that automatically optimises images to progressive JPEG format",
         "isCorrect": false,
-        "explanation": "Progressive JPEG is an image format. Progressive rendering is a broader strategy for incremental content delivery."
+        "explanation": "Progressive JPEG is an image format. Progressive rendering is a broader strategy for incremental content delivery.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Progressive rendering requires Service Workers to work correctly",
         "isCorrect": false,
-        "explanation": "Service Workers help with offline support and caching. Progressive rendering can be achieved without them."
+        "explanation": "Service Workers help with offline support and caching. Progressive rendering can be achieved without them.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -266,22 +346,30 @@
       {
         "optionText": "An inline frame that embeds another HTML document within the current page — the embedded page has its own browsing context, separate JavaScript and CSS scope",
         "isCorrect": true,
-        "explanation": "iframes create isolated browsing contexts. The parent and child pages communicate via postMessage. Used for embedding maps, payments (Stripe), social widgets, and sandboxed third-party content. The sandbox attribute restricts what the iframe can do."
+        "explanation": "iframes create isolated browsing contexts. The parent and child pages communicate via postMessage. Used for embedding maps, payments (Stripe), social widgets, and sandboxed third-party content. The sandbox attribute restricts what the iframe can do.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "An iframe is a React component that renders child components inside a shadow DOM",
         "isCorrect": false,
-        "explanation": "iframes are native HTML elements, not React-specific. Shadow DOM is a Web Components concept."
+        "explanation": "iframes are native HTML elements, not React-specific. Shadow DOM is a Web Components concept.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "iframes share JavaScript and CSS with the parent page automatically",
         "isCorrect": false,
-        "explanation": "iframes are isolated. The embedded page has its own window, document, scripts, and styles — they don't bleed into the parent."
+        "explanation": "iframes are isolated. The embedded page has its own window, document, scripts, and styles — they don't bleed into the parent.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "iframes can only embed content from the same domain for security reasons",
         "isCorrect": false,
-        "explanation": "iframes can embed cross-origin content. The X-Frame-Options or Content-Security-Policy headers control whether a page allows itself to be embedded, not the parent."
+        "explanation": "iframes can embed cross-origin content. The X-Frame-Options or Content-Security-Policy headers control whether a page allows itself to be embedded, not the parent.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -292,22 +380,30 @@
       {
         "optionText": "Storing custom data in HTML elements that can be read by JavaScript via dataset — a clean way to embed configuration without using classes or hidden inputs",
         "isCorrect": true,
-        "explanation": "<button data-id='123' data-action='delete'>. Access via element.dataset.id and element.dataset.action. Useful for attaching data to DOM elements without extra network requests or JS variables."
+        "explanation": "<button data-id='123' data-action='delete'>. Access via element.dataset.id and element.dataset.action. Useful for attaching data to DOM elements without extra network requests or JS variables.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "They are used to bind CSS styles directly in HTML — replacing the need for CSS classes",
         "isCorrect": false,
-        "explanation": "data-* attributes store data, not styles. CSS can select on them ([data-state='active']), but they don't apply styles."
+        "explanation": "data-* attributes store data, not styles. CSS can select on them ([data-state='active']), but they don't apply styles.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "data-* attributes automatically sync values to a database when changed",
         "isCorrect": false,
-        "explanation": "There's no built-in sync. data-* attributes are static HTML attributes read by JavaScript."
+        "explanation": "There's no built-in sync. data-* attributes are static HTML attributes read by JavaScript.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "data-* attributes are required for all HTML5 custom elements",
         "isCorrect": false,
-        "explanation": "Custom elements use a different specification (Web Components). data-* attributes are available on any HTML element for custom metadata."
+        "explanation": "Custom elements use a different specification (Web Components). data-* attributes are available on any HTML element for custom metadata.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -318,22 +414,30 @@
       {
         "optionText": "Accessibility ensures usability for people with disabilities; ARIA roles add semantic meaning to non-semantic elements so assistive technologies understand their purpose",
         "isCorrect": true,
-        "explanation": "ARIA (Accessible Rich Internet Applications) fills gaps where native HTML semantics are absent. role='dialog', aria-label, aria-expanded, aria-live let screen readers understand custom widgets. Rule of thumb: prefer native HTML elements over ARIA when possible."
+        "explanation": "ARIA (Accessible Rich Internet Applications) fills gaps where native HTML semantics are absent. role='dialog', aria-label, aria-expanded, aria-live let screen readers understand custom widgets. Rule of thumb: prefer native HTML elements over ARIA when possible.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "ARIA roles apply CSS styles to elements for visual accessibility indicators",
         "isCorrect": false,
-        "explanation": "ARIA is about semantics communicated to assistive technologies, not visual styling."
+        "explanation": "ARIA is about semantics communicated to assistive technologies, not visual styling.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Accessibility is automatically handled by browsers — developers don't need to worry about it",
         "isCorrect": false,
-        "explanation": "Browsers provide some defaults but developers must write accessible markup, maintain focus management, provide alt text, ensure contrast, and use ARIA where needed."
+        "explanation": "Browsers provide some defaults but developers must write accessible markup, maintain focus management, provide alt text, ensure contrast, and use ARIA where needed.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "ARIA roles replace the need for semantic HTML elements like nav, main, and article",
         "isCorrect": false,
-        "explanation": "The first rule of ARIA is 'don't use ARIA if a native HTML element exists'. Use nav instead of div role='navigation' where possible."
+        "explanation": "The first rule of ARIA is 'don't use ARIA if a native HTML element exists'. Use nav instead of div role='navigation' where possible.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -344,22 +448,30 @@
       {
         "optionText": "Set lang attribute on <html>, use the Content-Language header, serve different HTML per locale via URL routing (/en/, /tr/), and use hreflang for SEO",
         "isCorrect": true,
-        "explanation": "<html lang='en'> tells browsers and screen readers the language. hreflang links tell search engines about alternate language versions. Content negotiation via Accept-Language header or URL routing serves the right language version."
+        "explanation": "<html lang='en'> tells browsers and screen readers the language. hreflang links tell search engines about alternate language versions. Content negotiation via Accept-Language header or URL routing serves the right language version.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Use the translate='yes' attribute on every element that needs to be translated",
         "isCorrect": false,
-        "explanation": "translate attribute hints browsers about machine translation, but doesn't serve different languages. Full i18n needs routing and content management."
+        "explanation": "translate attribute hints browsers about machine translation, but doesn't serve different languages. Full i18n needs routing and content management.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "JavaScript automatically detects the user's language and translates HTML content",
         "isCorrect": false,
-        "explanation": "Browsers can offer auto-translation (Google Translate integration) but this is not the correct approach for a multi-language site — provide actual translated content."
+        "explanation": "Browsers can offer auto-translation (Google Translate integration) but this is not the correct approach for a multi-language site — provide actual translated content.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Multiple languages require separate domain names — path-based routing doesn't work",
         "isCorrect": false,
-        "explanation": "Both subdirectories (/en/), subdomains (en.example.com), and separate domains work for i18n. Path-based routing is widely used."
+        "explanation": "Both subdirectories (/en/), subdomains (en.example.com), and separate domains work for i18n. Path-based routing is widely used.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -370,22 +482,30 @@
       {
         "optionText": "An obsolete browser API for SQL-based client-side storage — deprecated in favour of IndexedDB and never standardised by W3C",
         "isCorrect": true,
-        "explanation": "WebSQL used SQLite under the hood in some browsers. The W3C stopped development after key implementors disagreed on the spec. IndexedDB is the modern standard for structured client-side storage."
+        "explanation": "WebSQL used SQLite under the hood in some browsers. The W3C stopped development after key implementors disagreed on the spec. IndexedDB is the modern standard for structured client-side storage.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "A JavaScript library for querying REST APIs using SQL-like syntax",
         "isCorrect": false,
-        "explanation": "WebSQL was a native browser API, not a third-party library."
+        "explanation": "WebSQL was a native browser API, not a third-party library.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "A server-side SQL extension for WebSockets, used for real-time database queries",
         "isCorrect": false,
-        "explanation": "WebSQL has nothing to do with WebSockets. It was a client-side browser storage API."
+        "explanation": "WebSQL has nothing to do with WebSockets. It was a client-side browser storage API.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "WebSQL is the current W3C standard for browser-based database storage",
         "isCorrect": false,
-        "explanation": "WebSQL was abandoned. The W3C standard for structured browser storage is IndexedDB."
+        "explanation": "WebSQL was abandoned. The W3C standard for structured browser storage is IndexedDB.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -396,22 +516,30 @@
       {
         "optionText": "JavaScript scripts running in background threads — they can't access the DOM but enable CPU-intensive tasks (image processing, encryption) without blocking the main thread",
         "isCorrect": true,
-        "explanation": "const worker = new Worker('worker.js'). Communication is via postMessage. Web Workers have no access to the DOM, window, or document. Shared Workers can be accessed by multiple tabs. Use for heavy computation that would freeze the UI."
+        "explanation": "const worker = new Worker('worker.js'). Communication is via postMessage. Web Workers have no access to the DOM, window, or document. Shared Workers can be accessed by multiple tabs. Use for heavy computation that would freeze the UI.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Server-side worker processes that handle HTTP requests in Node.js",
         "isCorrect": false,
-        "explanation": "Web Workers are browser-side. Node.js has worker_threads for server-side parallelism."
+        "explanation": "Web Workers are browser-side. Node.js has worker_threads for server-side parallelism.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Web Workers are JavaScript functions that execute on a schedule like cron jobs",
         "isCorrect": false,
-        "explanation": "Scheduled background tasks are handled by Service Workers with background sync, not Web Workers."
+        "explanation": "Scheduled background tasks are handled by Service Workers with background sync, not Web Workers.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Web Workers are the same as Service Workers — both intercept network requests",
         "isCorrect": false,
-        "explanation": "They're different. Web Workers are for CPU-intensive computation. Service Workers intercept network requests and manage caching."
+        "explanation": "They're different. Web Workers are for CPU-intensive computation. Service Workers intercept network requests and manage caching.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -422,22 +550,30 @@
       {
         "optionText": "Marks the dominant, unique content of the page — there should be only one <main> per page, and it's a landmark region for screen reader navigation",
         "isCorrect": true,
-        "explanation": "<main> identifies the primary content, excluding headers, footers, sidebars, and navigation. Screen reader users can jump directly to <main> to skip repetitive navigation. Only one visible <main> should exist per page."
+        "explanation": "<main> identifies the primary content, excluding headers, footers, sidebars, and navigation. Screen reader users can jump directly to <main> to skip repetitive navigation. Only one visible <main> should exist per page.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "<main> is the required wrapper for all page content — removing it breaks layout",
         "isCorrect": false,
-        "explanation": "<main> is semantic and optional. Pages render fine without it, but you lose the accessibility landmark."
+        "explanation": "<main> is semantic and optional. Pages render fine without it, but you lose the accessibility landmark.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "<main> applies a fixed-width container style automatically",
         "isCorrect": false,
-        "explanation": "<main> is a semantic element with no default layout constraints. Styling is your responsibility."
+        "explanation": "<main> is a semantic element with no default layout constraints. Styling is your responsibility.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "<main> is equivalent to <body> — they can be used interchangeably",
         "isCorrect": false,
-        "explanation": "<body> is the root of all visible content. <main> is a semantic landmark within body that marks the primary content area."
+        "explanation": "<body> is the root of all visible content. <main> is a semantic landmark within body that marks the primary content area.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -448,22 +584,30 @@
       {
         "optionText": "A low-level browser API for storing large amounts of structured data client-side with indexes for fast retrieval — asynchronous and supports transactions",
         "isCorrect": true,
-        "explanation": "IndexedDB can store JSON objects (not just strings like localStorage), files, and blobs. It's transaction-based, async, and can hold hundreds of MB. Wrapped by libraries like Dexie.js for a friendlier API. Used in PWAs for offline data."
+        "explanation": "IndexedDB can store JSON objects (not just strings like localStorage), files, and blobs. It's transaction-based, async, and can hold hundreds of MB. Wrapped by libraries like Dexie.js for a friendlier API. Used in PWAs for offline data.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "A cached version of the server database that automatically syncs on reconnection",
         "isCorrect": false,
-        "explanation": "IndexedDB doesn't auto-sync. You build sync logic manually or with libraries like PouchDB."
+        "explanation": "IndexedDB doesn't auto-sync. You build sync logic manually or with libraries like PouchDB.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "IndexedDB is the same as localStorage but with a higher storage limit",
         "isCorrect": false,
-        "explanation": "They're fundamentally different: IndexedDB is asynchronous, stores any JS value, supports indexes and transactions. localStorage is synchronous and only stores strings."
+        "explanation": "They're fundamentally different: IndexedDB is asynchronous, stores any JS value, supports indexes and transactions. localStorage is synchronous and only stores strings.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "IndexedDB is only available in Chrome — other browsers use SQLite",
         "isCorrect": false,
-        "explanation": "IndexedDB is supported in all modern browsers. WebSQL (which used SQLite) is deprecated and was never universally supported."
+        "explanation": "IndexedDB is supported in all modern browsers. WebSQL (which used SQLite) is deprecated and was never universally supported.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -474,22 +618,30 @@
       {
         "optionText": "srcset provides multiple image resolutions; the browser selects the best one based on the device's screen density (DPR) and viewport size — avoiding unnecessarily large images on small screens",
         "isCorrect": true,
-        "explanation": "<img srcset='small.jpg 480w, large.jpg 1080w' sizes='(max-width: 600px) 480px, 1080px'>. Browser calculates: viewport width × DPR ÷ sizes hint → picks the smallest src that covers that resolution. Saves bandwidth on mobile."
+        "explanation": "<img srcset='small.jpg 480w, large.jpg 1080w' sizes='(max-width: 600px) 480px, 1080px'>. Browser calculates: viewport width × DPR ÷ sizes hint → picks the smallest src that covers that resolution. Saves bandwidth on mobile.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "srcset loads all listed images in parallel to reduce latency",
         "isCorrect": false,
-        "explanation": "The browser picks one appropriate image and downloads only that one. It doesn't download all options."
+        "explanation": "The browser picks one appropriate image and downloads only that one. It doesn't download all options.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "srcset is used to define fallback images if the primary src fails to load",
         "isCorrect": false,
-        "explanation": "Error fallback is handled differently (onerror handler). srcset is for responsive images based on screen size."
+        "explanation": "Error fallback is handled differently (onerror handler). srcset is for responsive images based on screen size.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "srcset requires JavaScript to work — without JS, only the src image loads",
         "isCorrect": false,
-        "explanation": "srcset is processed by the browser natively without JavaScript. The parser evaluates it during resource loading."
+        "explanation": "srcset is processed by the browser natively without JavaScript. The parser evaluates it during resource loading.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -500,22 +652,30 @@
       {
         "optionText": "A set of native browser APIs — Custom Elements, Shadow DOM, and HTML Templates — that let you create reusable, encapsulated HTML elements without any framework",
         "isCorrect": true,
-        "explanation": "Custom Elements define new HTML tags. Shadow DOM provides style encapsulation (styles inside don't leak out). HTML Templates (<template>) hold inert markup. Together they create framework-agnostic components usable in React, Vue, or plain HTML."
+        "explanation": "Custom Elements define new HTML tags. Shadow DOM provides style encapsulation (styles inside don't leak out). HTML Templates (<template>) hold inert markup. Together they create framework-agnostic components usable in React, Vue, or plain HTML.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Web Components is a JavaScript framework similar to React and Vue",
         "isCorrect": false,
-        "explanation": "Web Components are native browser standards, not a framework. They can be used with or without frameworks."
+        "explanation": "Web Components are native browser standards, not a framework. They can be used with or without frameworks.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Web Components require TypeScript to function correctly",
         "isCorrect": false,
-        "explanation": "Web Components are standard JavaScript APIs — no TypeScript required."
+        "explanation": "Web Components are standard JavaScript APIs — no TypeScript required.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Web Components are React components that are optimised for the web",
         "isCorrect": false,
-        "explanation": "Web Components are framework-agnostic browser standards. React has its own component model that's distinct from Web Components."
+        "explanation": "Web Components are framework-agnostic browser standards. React has its own component model that's distinct from Web Components.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -526,22 +686,30 @@
       {
         "optionText": "A mapping that converts characters to bytes — UTF-8 is the standard for the web, declared with <meta charset='UTF-8'>.",
         "isCorrect": true,
-        "explanation": "Correct — without a charset declaration, browsers may guess wrong and display garbled text. UTF-8 covers all Unicode characters including emoji."
+        "explanation": "Correct — without a charset declaration, browsers may guess wrong and display garbled text. UTF-8 covers all Unicode characters including emoji.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "A security technique that encrypts page content before sending it to the browser.",
         "isCorrect": false,
-        "explanation": "Encryption is handled by HTTPS/TLS. Character encoding maps characters to byte sequences — it's about text representation, not security."
+        "explanation": "Encryption is handled by HTTPS/TLS. Character encoding maps characters to byte sequences — it's about text representation, not security.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "A compression algorithm that reduces HTML file size for faster transfer.",
         "isCorrect": false,
-        "explanation": "Compression uses gzip/Brotli at the HTTP level. Character encoding is the byte-to-character mapping scheme (UTF-8, ASCII, etc.)."
+        "explanation": "Compression uses gzip/Brotli at the HTTP level. Character encoding is the byte-to-character mapping scheme (UTF-8, ASCII, etc.).",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "The process of converting HTML special characters like < and > to &lt; and &gt;.",
         "isCorrect": false,
-        "explanation": "That's HTML entity encoding (escaping). Character encoding is the lower-level byte-to-character mapping, e.g. UTF-8."
+        "explanation": "That's HTML entity encoding (escaping). Character encoding is the lower-level byte-to-character mapping, e.g. UTF-8.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -552,22 +720,30 @@
       {
         "optionText": "A void element with no closing tag — e.g. <img>, <input>, <br>, <hr>, <meta>, <link>.",
         "isCorrect": true,
-        "explanation": "Correct — void elements cannot have child content. In HTML5 the slash is optional: <br> and <br/> are both valid. In JSX and XHTML, the slash is required."
+        "explanation": "Correct — void elements cannot have child content. In HTML5 the slash is optional: <br> and <br/> are both valid. In JSX and XHTML, the slash is required.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Any HTML tag that automatically closes when another tag opens — e.g. <p> closes before <div>.",
         "isCorrect": false,
-        "explanation": "Optional tag omission (like <p> auto-closing) is a separate concept. Self-closing tags are void elements that can never have children."
+        "explanation": "Optional tag omission (like <p> auto-closing) is a separate concept. Self-closing tags are void elements that can never have children.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "A custom web component that manages its own shadow DOM lifecycle.",
         "isCorrect": false,
-        "explanation": "Web Components have their own lifecycle callbacks. Self-closing tags are standard HTML void elements like <img> and <input>."
+        "explanation": "Web Components have their own lifecycle callbacks. Self-closing tags are standard HTML void elements like <img> and <input>.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Tags that close themselves when the page loads via JavaScript.",
         "isCorrect": false,
-        "explanation": "Self-closing is a markup concept — void elements have no closing tag in the HTML spec. JavaScript isn't involved."
+        "explanation": "Self-closing is a markup concept — void elements have no closing tag in the HTML spec. JavaScript isn't involved.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -578,22 +754,30 @@
       {
         "optionText": "Use the <mark> element — it semantically marks text as highlighted, with a yellow background by default.",
         "isCorrect": true,
-        "explanation": "Correct — <mark> is the semantic choice for highlighted/searched text. Use CSS to customise the colour. <span> with styling works but lacks semantic meaning."
+        "explanation": "Correct — <mark> is the semantic choice for highlighted/searched text. Use CSS to customise the colour. <span> with styling works but lacks semantic meaning.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Use <highlight> — it's a semantic HTML5 element for marked text.",
         "isCorrect": false,
-        "explanation": "There is no <highlight> element in HTML. Use <mark> for semantic highlighting."
+        "explanation": "There is no <highlight> element in HTML. Use <mark> for semantic highlighting.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Use <em> — it highlights text with yellow background by default.",
         "isCorrect": false,
-        "explanation": "<em> indicates emphasis (italic by default), not highlight. Use <mark> for highlighted text."
+        "explanation": "<em> indicates emphasis (italic by default), not highlight. Use <mark> for highlighted text.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Use <b> with a yellow background inline style — <b style='background:yellow'>.",
         "isCorrect": false,
-        "explanation": "<b> indicates keywords/bold without semantic meaning. <mark> is the correct semantic element for highlighted text."
+        "explanation": "<b> indicates keywords/bold without semantic meaning. <mark> is the correct semantic element for highlighted text.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -604,22 +788,30 @@
       {
         "optionText": "A tree-like in-memory representation of an HTML document that JavaScript uses to read and manipulate the page.",
         "isCorrect": true,
-        "explanation": "Correct — the DOM (Document Object Model) is a programming interface. JavaScript traverses it via document.querySelector(), and React/Vue update it via virtual DOM diffing."
+        "explanation": "Correct — the DOM (Document Object Model) is a programming interface. JavaScript traverses it via document.querySelector(), and React/Vue update it via virtual DOM diffing.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "The CSS Object Model — the browser's representation of stylesheets.",
         "isCorrect": false,
-        "explanation": "That's the CSSOM (CSS Object Model). The DOM represents the HTML element tree. Both combine to form the render tree."
+        "explanation": "That's the CSSOM (CSS Object Model). The DOM represents the HTML element tree. Both combine to form the render tree.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "A JavaScript design pattern for managing state in web applications.",
         "isCorrect": false,
-        "explanation": "DOM is a browser API, not a design pattern. State management patterns include MVC, Flux, and Redux."
+        "explanation": "DOM is a browser API, not a design pattern. State management patterns include MVC, Flux, and Redux.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "The compiled output of an HTML file stored in browser cache for fast re-rendering.",
         "isCorrect": false,
-        "explanation": "Browser cache stores HTTP responses. The DOM is a live in-memory tree created from parsed HTML on every page load."
+        "explanation": "Browser cache stores HTTP responses. The DOM is a live in-memory tree created from parsed HTML on every page load.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -630,22 +822,30 @@
       {
         "optionText": "Block elements start on a new line and take full width (<div>, <p>, <h1>); inline elements flow within text (<span>, <a>, <strong>).",
         "isCorrect": true,
-        "explanation": "Correct — block elements create vertical stacking; inline elements sit within the text flow. CSS display: inline / block overrides the default behaviour."
+        "explanation": "Correct — block elements create vertical stacking; inline elements sit within the text flow. CSS display: inline / block overrides the default behaviour.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Block elements are for layout; inline elements are only for text styling.",
         "isCorrect": false,
-        "explanation": "Inline elements can do more than text styling (e.g. <a> links, <img> images). The distinction is about flow behaviour, not purpose."
+        "explanation": "Inline elements can do more than text styling (e.g. <a> links, <img> images). The distinction is about flow behaviour, not purpose.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Block elements load after inline elements — they are deferred for performance.",
         "isCorrect": false,
-        "explanation": "Load order has nothing to do with block vs inline. The distinction is purely about CSS layout flow."
+        "explanation": "Load order has nothing to do with block vs inline. The distinction is purely about CSS layout flow.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Inline elements cannot have CSS applied to them — they inherit parent styles only.",
         "isCorrect": false,
-        "explanation": "Inline elements accept most CSS including color, font, padding (horizontal), border. Block-level properties like width/height don't apply to inline elements by default."
+        "explanation": "Inline elements accept most CSS including color, font, padding (horizontal), border. Block-level properties like width/height don't apply to inline elements by default.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -656,22 +856,30 @@
       {
         "optionText": "<strong> conveys semantic importance (screen readers stress it); <b> is purely visual bold with no semantic meaning.",
         "isCorrect": true,
-        "explanation": "Correct — prefer <strong> for important text. Screen readers may emphasise it. <b> is for stylistically bold text (keywords, product names) without added importance."
+        "explanation": "Correct — prefer <strong> for important text. Screen readers may emphasise it. <b> is for stylistically bold text (keywords, product names) without added importance.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "<b> is the HTML5 tag; <strong> is deprecated.",
         "isCorrect": false,
-        "explanation": "Both are valid in HTML5. <strong> is the semantically meaningful choice; <b> is preserved for bold without semantic importance."
+        "explanation": "Both are valid in HTML5. <strong> is the semantically meaningful choice; <b> is preserved for bold without semantic importance.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "They are completely identical — just two names for the same element.",
         "isCorrect": false,
-        "explanation": "They render the same by default but have different semantics. <strong> signals importance to assistive technologies; <b> does not."
+        "explanation": "They render the same by default but have different semantics. <strong> signals importance to assistive technologies; <b> does not.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "<strong> applies bold styling; <b> also makes the text larger.",
         "isCorrect": false,
-        "explanation": "Neither element changes font size by default. Both render bold text. The difference is semantic: <strong> conveys importance, <b> does not."
+        "explanation": "Neither element changes font size by default. Both render bold text. The difference is semantic: <strong> conveys importance, <b> does not.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -682,22 +890,30 @@
       {
         "optionText": "<meta> elements in <head> provide machine-readable metadata: charset, viewport, description, Open Graph, and cache-control.",
         "isCorrect": true,
-        "explanation": "Correct — key meta tags: charset (encoding), viewport (mobile scaling), description (SEO snippet), og:title/image (social sharing), robots (indexing)."
+        "explanation": "Correct — key meta tags: charset (encoding), viewport (mobile scaling), description (SEO snippet), og:title/image (social sharing), robots (indexing).",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Meta tags are HTML comments — they're invisible to the browser and only for developers.",
         "isCorrect": false,
-        "explanation": "Meta tags are parsed by browsers, crawlers, and social media scrapers. They control encoding, SEO, social previews, and viewport behaviour."
+        "explanation": "Meta tags are parsed by browsers, crawlers, and social media scrapers. They control encoding, SEO, social previews, and viewport behaviour.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Meta tags define the CSS styles that apply globally across the page.",
         "isCorrect": false,
-        "explanation": "Global styles go in <style> or linked <link> stylesheets. Meta tags provide document-level metadata, not styling."
+        "explanation": "Global styles go in <style> or linked <link> stylesheets. Meta tags provide document-level metadata, not styling.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Meta tags are only used for SEO — other uses are non-standard.",
         "isCorrect": false,
-        "explanation": "Meta tags serve many purposes: charset declaration, viewport settings, social sharing (Open Graph), Twitter cards, and HTTP cache hints."
+        "explanation": "Meta tags serve many purposes: charset declaration, viewport settings, social sharing (Open Graph), Twitter cards, and HTTP cache hints.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -708,22 +924,30 @@
       {
         "optionText": "Eliminate plugin dependency (Flash/Silverlight), standardise native audio/video/canvas, improve form inputs, and add semantic elements.",
         "isCorrect": true,
-        "explanation": "Correct — HTML5 also introduced localStorage, WebWorkers, WebSockets, and the History API to support rich web apps without plugins."
+        "explanation": "Correct — HTML5 also introduced localStorage, WebWorkers, WebSockets, and the History API to support rich web apps without plugins.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Replace CSS and JavaScript with a unified declarative language.",
         "isCorrect": false,
-        "explanation": "HTML5 kept the separation of HTML, CSS, and JS. Its goal was to enhance HTML with native capabilities, not replace the other web technologies."
+        "explanation": "HTML5 kept the separation of HTML, CSS, and JS. Its goal was to enhance HTML with native capabilities, not replace the other web technologies.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Improve server-side rendering performance for PHP applications.",
         "isCorrect": false,
-        "explanation": "HTML5 is a client-side specification. Server-side rendering is a separate concern handled by frameworks like Next.js or PHP templating."
+        "explanation": "HTML5 is a client-side specification. Server-side rendering is a separate concern handled by frameworks like Next.js or PHP templating.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Create a strict XML-based successor to HTML4 that all browsers must follow.",
         "isCorrect": false,
-        "explanation": "That describes XHTML, which was abandoned. HTML5 was intentionally backward-compatible and error-tolerant, unlike strict XML."
+        "explanation": "That describes XHTML, which was abandoned. HTML5 was intentionally backward-compatible and error-tolerant, unlike strict XML.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -734,22 +958,30 @@
       {
         "optionText": "Attributes are in HTML markup (always strings); properties are on the live DOM object (typed values that can differ from the attribute).",
         "isCorrect": true,
-        "explanation": "Correct — e.g. input.getAttribute('value') returns the initial HTML string; input.value returns the current value. They diverge after user interaction."
+        "explanation": "Correct — e.g. input.getAttribute('value') returns the initial HTML string; input.value returns the current value. They diverge after user interaction.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Attributes are for styling; properties are for behaviour.",
         "isCorrect": false,
-        "explanation": "Both can affect styling and behaviour. The distinction is: attributes are in HTML source (strings), properties are on the DOM object (typed, live values)."
+        "explanation": "Both can affect styling and behaviour. The distinction is: attributes are in HTML source (strings), properties are on the DOM object (typed, live values).",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "They are synonyms — 'attribute' is the HTML term and 'property' is the JavaScript term for the same thing.",
         "isCorrect": false,
-        "explanation": "They start the same but can diverge. input value attribute = initial default; input.value property = current typed value. They're not synonyms."
+        "explanation": "They start the same but can diverge. input value attribute = initial default; input.value property = current typed value. They're not synonyms.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Properties are read-only; attributes can be changed by JavaScript.",
         "isCorrect": false,
-        "explanation": "Both can be read and changed via JavaScript. getAttribute/setAttribute modifies attributes; dot notation modifies properties. They may affect each other or not."
+        "explanation": "Both can be read and changed via JavaScript. getAttribute/setAttribute modifies attributes; dot notation modifies properties. They may affect each other or not.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -760,22 +992,30 @@
       {
         "optionText": "On <a target='_blank'> links — prevents the new tab from accessing window.opener and potentially redirecting the original page.",
         "isCorrect": true,
-        "explanation": "Correct — without noopener, the new tab can call window.opener.location = 'phishing-site'. Modern browsers default to noopener but explicit is still best practice."
+        "explanation": "Correct — without noopener, the new tab can call window.opener.location = 'phishing-site'. Modern browsers default to noopener but explicit is still best practice.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "On <link> elements to tell browsers not to preload the stylesheet.",
         "isCorrect": false,
-        "explanation": "noopener applies to <a> tags opening new windows/tabs. Stylesheet loading is controlled by rel='preload' or media attributes."
+        "explanation": "noopener applies to <a> tags opening new windows/tabs. Stylesheet loading is controlled by rel='preload' or media attributes.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "On <form> elements to prevent CSRF attacks by blocking cross-origin submissions.",
         "isCorrect": false,
-        "explanation": "CSRF protection uses CSRF tokens or SameSite cookies, not rel attributes. noopener is for anchor tags opening new tabs."
+        "explanation": "CSRF protection uses CSRF tokens or SameSite cookies, not rel attributes. noopener is for anchor tags opening new tabs.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "On <script> tags to prevent the script from accessing parent window variables.",
         "isCorrect": false,
-        "explanation": "Script isolation uses iframes with sandboxing or Content Security Policy. noopener is for <a target='_blank'> to prevent opener access."
+        "explanation": "Script isolation uses iframes with sandboxing or Content Security Policy. noopener is for <a target='_blank'> to prevent opener access.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -786,22 +1026,30 @@
       {
         "optionText": "<header>: introductory content for its parent; <article>: self-contained content; <section>: thematic grouping; <footer>: closing info for its parent.",
         "isCorrect": true,
-        "explanation": "Correct — these can appear multiple times per page. An <article> can have its own <header> and <footer>. Semantic elements help screen readers and SEO crawlers understand page structure."
+        "explanation": "Correct — these can appear multiple times per page. An <article> can have its own <header> and <footer>. Semantic elements help screen readers and SEO crawlers understand page structure.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Each can only appear once per page — <header> at top, <footer> at bottom, one <main> in the middle.",
         "isCorrect": false,
-        "explanation": "Multiple <header>, <footer>, <section>, and <article> elements are valid on one page. They scope to their nearest sectioning ancestor."
+        "explanation": "Multiple <header>, <footer>, <section>, and <article> elements are valid on one page. They scope to their nearest sectioning ancestor.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "<section> replaces <div> entirely in HTML5 — divs are deprecated.",
         "isCorrect": false,
-        "explanation": "<div> is still valid and widely used for non-semantic layout grouping. <section> is for thematic content grouping with a heading."
+        "explanation": "<div> is still valid and widely used for non-semantic layout grouping. <section> is for thematic content grouping with a heading.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "These elements are identical to <div> — they only differ in default CSS browser styles.",
         "isCorrect": false,
-        "explanation": "Semantic elements carry meaning for screen readers, SEO, and outline algorithms. They have the same default display as <div> but very different semantic value."
+        "explanation": "Semantic elements carry meaning for screen readers, SEO, and outline algorithms. They have the same default display as <div> but very different semantic value.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -812,22 +1060,30 @@
       {
         "optionText": "Yes — both can appear multiple times, scoped to their nearest sectioning ancestor (<body>, <article>, <section>).",
         "isCorrect": true,
-        "explanation": "Correct — a <header> inside an <article> is that article's header. Multiple <footer> elements for multiple sections are valid. Only <main> should appear once."
+        "explanation": "Correct — a <header> inside an <article> is that article's header. Multiple <footer> elements for multiple sections are valid. Only <main> should appear once.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "No — only one <header> and one <footer> per page, both in <body>.",
         "isCorrect": false,
-        "explanation": "The HTML5 spec allows multiple <header> and <footer> elements. They scope to their nearest sectioning parent, not the entire page."
+        "explanation": "The HTML5 spec allows multiple <header> and <footer> elements. They scope to their nearest sectioning parent, not the entire page.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Multiple <header> elements are valid but multiple <footer> elements are not.",
         "isCorrect": false,
-        "explanation": "Both can appear multiple times. The spec treats <header> and <footer> symmetrically — each scopes to its sectioning context."
+        "explanation": "Both can appear multiple times. The spec treats <header> and <footer> symmetrically — each scopes to its sectioning context.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Multiple headers/footers require the role ARIA attribute to be valid.",
         "isCorrect": false,
-        "explanation": "ARIA roles help assistive technologies but are not required for multiple semantic elements. Valid HTML allows multiple <header>/<footer> without ARIA."
+        "explanation": "ARIA roles help assistive technologies but are not required for multiple semantic elements. Valid HTML allows multiple <header>/<footer> without ARIA.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -838,22 +1094,30 @@
       {
         "optionText": "Forces browsers to fetch fresh assets after a deploy — achieved by appending a content hash to filenames: main.a3f9b2.js.",
         "isCorrect": true,
-        "explanation": "Correct — content-hashed filenames let you set cache headers to immutable (1 year). The filename changes only when content changes, so new deploys bust the cache automatically."
+        "explanation": "Correct — content-hashed filenames let you set cache headers to immutable (1 year). The filename changes only when content changes, so new deploys bust the cache automatically.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Clears the server-side cache by restarting the web server after each deploy.",
         "isCorrect": false,
-        "explanation": "Server restart may clear server cache but doesn't affect files already cached in users' browsers. Cache busting targets the browser/CDN cache."
+        "explanation": "Server restart may clear server cache but doesn't affect files already cached in users' browsers. Cache busting targets the browser/CDN cache.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Adding Cache-Control: no-cache to all responses so browsers never cache assets.",
         "isCorrect": false,
-        "explanation": "no-cache forces revalidation on every request — useful for HTML but terrible for static assets. Content hashing + long cache is the better pattern."
+        "explanation": "no-cache forces revalidation on every request — useful for HTML but terrible for static assets. Content hashing + long cache is the better pattern.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Using HTTP/2 push to send updated assets before the browser requests them.",
         "isCorrect": false,
-        "explanation": "HTTP/2 push proactively sends resources but doesn't bust the existing cache. Cache busting changes the URL so cached old versions are bypassed."
+        "explanation": "HTTP/2 push proactively sends resources but doesn't bust the existing cache. Cache busting changes the URL so cached old versions are bypassed.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -864,22 +1128,30 @@
       {
         "optionText": "Full standards: <!DOCTYPE html> triggers correct rendering; Quirks: missing doctype triggers legacy IE behaviour; Almost standards: old transitional doctypes.",
         "isCorrect": true,
-        "explanation": "Correct — always use <!DOCTYPE html> (HTML5 doctype) to ensure full standards mode. Quirks mode activates ancient box model and layout bugs from IE5 era."
+        "explanation": "Correct — always use <!DOCTYPE html> (HTML5 doctype) to ensure full standards mode. Quirks mode activates ancient box model and layout bugs from IE5 era.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Quirks mode is a performance optimisation for mobile — it skips CSS parsing.",
         "isCorrect": false,
-        "explanation": "Quirks mode activates legacy rendering behaviour for old broken HTML, not a performance feature. It causes layout inconsistencies."
+        "explanation": "Quirks mode activates legacy rendering behaviour for old broken HTML, not a performance feature. It causes layout inconsistencies.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Almost standard mode is triggered by adding <html strict> to the document.",
         "isCorrect": false,
-        "explanation": "There is no <html strict> attribute. Rendering mode is determined by the DOCTYPE declaration at the top of the HTML file."
+        "explanation": "There is no <html strict> attribute. Rendering mode is determined by the DOCTYPE declaration at the top of the HTML file.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Full standards mode requires validating your HTML with the W3C validator before deployment.",
         "isCorrect": false,
-        "explanation": "Standards mode is triggered purely by <!DOCTYPE html> — no validator run required. W3C validation catches errors but doesn't affect render mode."
+        "explanation": "Standards mode is triggered purely by <!DOCTYPE html> — no validator run required. W3C validation catches errors but doesn't affect render mode.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -890,22 +1162,30 @@
       {
         "optionText": "CSS in <head> loads before paint (preventing FOUC); scripts before </body> let the DOM parse first so JS can access elements without waiting.",
         "isCorrect": true,
-        "explanation": "Correct — render-blocking CSS in <head> is necessary. Scripts at the bottom ensure DOM is ready. Modern alternative: use defer attribute on <script> and keep it in <head>."
+        "explanation": "Correct — render-blocking CSS in <head> is necessary. Scripts at the bottom ensure DOM is ready. Modern alternative: use defer attribute on <script> and keep it in <head>.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "CSS must go in <head> because browsers reject stylesheets elsewhere, and scripts must go in <body> by the HTML spec.",
         "isCorrect": false,
-        "explanation": "The spec doesn't mandate these positions — they're performance best practices. Scripts can go in <head> with async/defer; CSS can technically go anywhere."
+        "explanation": "The spec doesn't mandate these positions — they're performance best practices. Scripts can go in <head> with async/defer; CSS can technically go anywhere.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "JavaScript files must load before CSS so they can modify styles before the first paint.",
         "isCorrect": false,
-        "explanation": "Loading JS before CSS blocks rendering. CSS should load first so the browser can construct the CSSOM and paint without waiting for JS."
+        "explanation": "Loading JS before CSS blocks rendering. CSS should load first so the browser can construct the CSSOM and paint without waiting for JS.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "It doesn't matter — modern browsers parallelise all resource loading regardless of position.",
         "isCorrect": false,
-        "explanation": "Browsers do parallelise fetches but parsing and execution are still sequential. CSS in <head> and defer on scripts remain important for FCP."
+        "explanation": "Browsers do parallelise fetches but parsing and execution are still sequential. CSS in <head> and defer on scripts remain important for FCP.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -916,22 +1196,30 @@
       {
         "optionText": "XHTML requires all tags closed, lowercase tag names, quoted attributes, and a valid XML declaration — it's HTML as strict XML.",
         "isCorrect": true,
-        "explanation": "Correct — XHTML errors break the entire page (unlike HTML's forgiving parser). It was superseded by HTML5 which is error-tolerant and more practical."
+        "explanation": "Correct — XHTML errors break the entire page (unlike HTML's forgiving parser). It was superseded by HTML5 which is error-tolerant and more practical.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "XHTML supports custom HTML elements natively; standard HTML does not.",
         "isCorrect": false,
-        "explanation": "Custom elements are a Web Components API available in HTML5 — not unique to XHTML. XHTML is stricter XML syntax, not a feature superset."
+        "explanation": "Custom elements are a Web Components API available in HTML5 — not unique to XHTML. XHTML is stricter XML syntax, not a feature superset.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "XHTML is faster to parse because its strict rules allow the browser to skip error correction.",
         "isCorrect": false,
-        "explanation": "XHTML was not significantly faster. HTML5's forgiving parser is now highly optimised. XHTML's strict error mode could also block entire pages on small mistakes."
+        "explanation": "XHTML was not significantly faster. HTML5's forgiving parser is now highly optimised. XHTML's strict error mode could also block entire pages on small mistakes.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "XHTML replaced HTML5 as the current web standard.",
         "isCorrect": false,
-        "explanation": "XHTML was abandoned in favour of HTML5. HTML5 is the current living standard maintained by WHATWG."
+        "explanation": "XHTML was abandoned in favour of HTML5. HTML5 is the current living standard maintained by WHATWG.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -942,22 +1230,30 @@
       {
         "optionText": "A modern image format by Google with better compression than JPEG/PNG — supports transparency, animation, and lossless modes.",
         "isCorrect": true,
-        "explanation": "Correct — WebP is ~25-35% smaller than JPEG at equivalent quality. Use <picture> with WebP source + JPEG fallback. AVIF is the next-gen successor."
+        "explanation": "Correct — WebP is ~25-35% smaller than JPEG at equivalent quality. Use <picture> with WebP source + JPEG fallback. AVIF is the next-gen successor.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "A web protocol for streaming video — the successor to WebRTC.",
         "isCorrect": false,
-        "explanation": "WebP is an image format, not a protocol. WebRTC is a real-time communication protocol. WebP stands for Web Picture."
+        "explanation": "WebP is an image format, not a protocol. WebRTC is a real-time communication protocol. WebP stands for Web Picture.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "A CSS property for optimising image rendering performance in browsers.",
         "isCorrect": false,
-        "explanation": "image-rendering is the CSS property for rendering hints. WebP is a file format (.webp) for images with better compression."
+        "explanation": "image-rendering is the CSS property for rendering hints. WebP is a file format (.webp) for images with better compression.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "A JavaScript API for processing images in Web Workers.",
         "isCorrect": false,
-        "explanation": "Image processing in Workers uses Canvas API or OffscreenCanvas. WebP is an image file format, not a JavaScript API."
+        "explanation": "Image processing in Workers uses Canvas API or OffscreenCanvas. WebP is an image file format, not a JavaScript API.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -968,22 +1264,30 @@
       {
         "optionText": "Semantic markup, native media (audio/video), Canvas API, form enhancements, Web Storage, Web Workers, WebSockets, and Geolocation.",
         "isCorrect": true,
-        "explanation": "Correct — HTML5 is an umbrella term covering the HTML markup spec plus associated APIs. Together they enable rich web apps without plugins."
+        "explanation": "Correct — HTML5 is an umbrella term covering the HTML markup spec plus associated APIs. Together they enable rich web apps without plugins.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "HTML, CSS, and JavaScript — the three core web technologies bundled into one spec.",
         "isCorrect": false,
-        "explanation": "HTML5 is specifically the HTML specification — CSS and JS are separate standards. HTML5 introduced APIs that JS uses, but CSS remains its own spec."
+        "explanation": "HTML5 is specifically the HTML specification — CSS and JS are separate standards. HTML5 introduced APIs that JS uses, but CSS remains its own spec.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "React, Angular, and Vue — the component-based frameworks built on HTML5.",
         "isCorrect": false,
-        "explanation": "Those are JavaScript frameworks that use HTML5 features. HTML5's building blocks are browser-native APIs like Canvas, Storage, and semantic elements."
+        "explanation": "Those are JavaScript frameworks that use HTML5 features. HTML5's building blocks are browser-native APIs like Canvas, Storage, and semantic elements.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "DOCTYPE, head, and body — the three required sections of every HTML document.",
         "isCorrect": false,
-        "explanation": "DOCTYPE, <head>, and <body> are structural parts of an HTML document, not the HTML5 feature set. HTML5 building blocks refers to its new APIs and elements."
+        "explanation": "DOCTYPE, <head>, and <body> are structural parts of an HTML document, not the HTML5 feature set. HTML5 building blocks refers to its new APIs and elements.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -994,22 +1298,30 @@
       {
         "optionText": "SVG for scalable vector graphics, charts, and icons (DOM nodes, accessible); Canvas for pixel manipulation, games, and real-time rendering (bitmap, JS-driven).",
         "isCorrect": true,
-        "explanation": "Correct — SVG is retained-mode (shapes in DOM, CSS styleable, accessible). Canvas is immediate-mode (draw pixels, no DOM structure, not accessible by default)."
+        "explanation": "Correct — SVG is retained-mode (shapes in DOM, CSS styleable, accessible). Canvas is immediate-mode (draw pixels, no DOM structure, not accessible by default).",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Canvas for all graphics — SVG is deprecated in modern browsers.",
         "isCorrect": false,
-        "explanation": "SVG is not deprecated and is widely supported. It's preferred for scalable UI graphics, icons, and data visualisations that need accessibility."
+        "explanation": "SVG is not deprecated and is widely supported. It's preferred for scalable UI graphics, icons, and data visualisations that need accessibility.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "SVG for photos and raster images; Canvas for vector icons.",
         "isCorrect": false,
-        "explanation": "It's the opposite — SVG is for vectors (infinitely scalable); Canvas renders bitmap pixels. Photos use <img> with JPEG/WebP."
+        "explanation": "It's the opposite — SVG is for vectors (infinitely scalable); Canvas renders bitmap pixels. Photos use <img> with JPEG/WebP.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "They are interchangeable — the choice is purely stylistic.",
         "isCorrect": false,
-        "explanation": "They have fundamentally different architectures. SVG is DOM-based and accessible; Canvas is a blank pixel buffer. The choice depends on use case: UI/charts vs games/image processing."
+        "explanation": "They have fundamentally different architectures. SVG is DOM-based and accessible; Canvas is a blank pixel buffer. The choice depends on use case: UI/charts vs games/image processing.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -1020,22 +1332,30 @@
       {
         "optionText": "<!DOCTYPE html> triggers standards mode rendering — without it, browsers fall back to quirks mode and apply legacy broken layout rules.",
         "isCorrect": true,
-        "explanation": "Correct — the HTML5 doctype is the shortest valid form. It's not an HTML tag but a parser instruction. Always include it as the very first line of every HTML file."
+        "explanation": "Correct — the HTML5 doctype is the shortest valid form. It's not an HTML tag but a parser instruction. Always include it as the very first line of every HTML file.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "DOCTYPE tells the browser which version of HTML to download from the W3C server.",
         "isCorrect": false,
-        "explanation": "DOCTYPE is a local parser instruction — no download happens. It tells the browser's rendering engine which compatibility mode to use."
+        "explanation": "DOCTYPE is a local parser instruction — no download happens. It tells the browser's rendering engine which compatibility mode to use.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "DOCTYPE is required for HTTPS — browsers block pages without it on secure connections.",
         "isCorrect": false,
-        "explanation": "DOCTYPE has nothing to do with HTTPS or security. It controls CSS rendering mode (standards vs quirks). Missing DOCTYPE causes layout bugs, not security blocks."
+        "explanation": "DOCTYPE has nothing to do with HTTPS or security. It controls CSS rendering mode (standards vs quirks). Missing DOCTYPE causes layout bugs, not security blocks.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "DOCTYPE declares the page's character encoding — equivalent to <meta charset='UTF-8'>.",
         "isCorrect": false,
-        "explanation": "Character encoding is declared with <meta charset='UTF-8'>. DOCTYPE triggers the rendering mode — it has no effect on character encoding."
+        "explanation": "Character encoding is declared with <meta charset='UTF-8'>. DOCTYPE triggers the rendering mode — it has no effect on character encoding.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -1046,22 +1366,30 @@
       {
         "optionText": "Yes — JSX (React), Pug, Handlebars, Nunjucks. JSX compiles to JS; others compile to HTML. JSX is most common in modern frontend stacks.",
         "isCorrect": true,
-        "explanation": "Correct — JSX is the standard for React/Next.js. Pug (ex-Jade) uses indentation syntax. Handlebars and Nunjucks are logic-light templates popular in Node.js backends."
+        "explanation": "Correct — JSX is the standard for React/Next.js. Pug (ex-Jade) uses indentation syntax. Handlebars and Nunjucks are logic-light templates popular in Node.js backends.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "No — HTML templating languages are not used in modern development; raw HTML is always preferred.",
         "isCorrect": false,
-        "explanation": "Templating languages are standard across frontend (JSX, Vue templates) and backend (Pug, Jinja2, EJS). They reduce repetition and improve maintainability."
+        "explanation": "Templating languages are standard across frontend (JSX, Vue templates) and backend (Pug, Jinja2, EJS). They reduce repetition and improve maintainability.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Only Markdown — it compiles to HTML and is the standard for all web templating.",
         "isCorrect": false,
-        "explanation": "Markdown is for content authoring, not UI templating. Templating languages like JSX, Pug, and Handlebars generate full HTML documents with dynamic data."
+        "explanation": "Markdown is for content authoring, not UI templating. Templating languages like JSX, Pug, and Handlebars generate full HTML documents with dynamic data.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "PHP — it's the only real HTML templating language with broad browser support.",
         "isCorrect": false,
-        "explanation": "PHP is a server-side language, not a templating language per se, and it runs on the server — browsers never see PHP. JSX, Pug, and Handlebars are dedicated templating solutions."
+        "explanation": "PHP is a server-side language, not a templating language per se, and it runs on the server — browsers never see PHP. JSX, Pug, and Handlebars are dedicated templating solutions.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -1072,22 +1400,30 @@
       {
         "optionText": "Text expansion (translated text is longer), RTL support (Arabic/Hebrew), font coverage, date/number formatting, and hreflang attributes for SEO.",
         "isCorrect": true,
-        "explanation": "Correct — German text can be 30% longer than English, breaking fixed layouts. Use lang and dir attributes, Unicode fonts, and Intl API for locale-aware formatting."
+        "explanation": "Correct — German text can be 30% longer than English, breaking fixed layouts. Use lang and dir attributes, Unicode fonts, and Intl API for locale-aware formatting.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Only charset encoding — use UTF-8 and all multilingual concerns are covered.",
         "isCorrect": false,
-        "explanation": "UTF-8 handles encoding but multilingual sites also need RTL layouts, locale-specific formatting, hreflang tags, font support, and flexible layouts for text expansion."
+        "explanation": "UTF-8 handles encoding but multilingual sites also need RTL layouts, locale-specific formatting, hreflang tags, font support, and flexible layouts for text expansion.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Multilingual sites require separate CSS files per language — shared styles don't work.",
         "isCorrect": false,
-        "explanation": "Shared CSS with [lang='ar'] { direction: rtl } and [lang='de'] { font-size: 0.9em } selectors handles language differences. Separate files per language are not required."
+        "explanation": "Shared CSS with [lang='ar'] { direction: rtl } and [lang='de'] { font-size: 0.9em } selectors handles language differences. Separate files per language are not required.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Use only images for text — bitmap text looks the same in all languages.",
         "isCorrect": false,
-        "explanation": "Image-based text is inaccessible (screen readers can't read it), hard to translate, and blurry on retina screens. Use real text with proper Unicode support."
+        "explanation": "Image-based text is inaccessible (screen readers can't read it), hard to translate, and blurry on retina screens. Use real text with proper Unicode support.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -1098,22 +1434,30 @@
       {
         "optionText": "Use semantic HTML, a descriptive <title> and meta description, fast load times (Core Web Vitals), structured data (JSON-LD), and proper hreflang for multilingual.",
         "isCorrect": true,
-        "explanation": "Correct — semantic elements help crawlers understand structure. Core Web Vitals (LCP, CLS, INP) are ranking signals. JSON-LD structured data enables rich snippets."
+        "explanation": "Correct — semantic elements help crawlers understand structure. Core Web Vitals (LCP, CLS, INP) are ranking signals. JSON-LD structured data enables rich snippets.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Add as many <meta keywords> tags as possible — search engines prioritise keyword density.",
         "isCorrect": false,
-        "explanation": "Google has ignored meta keywords since 2009. Keyword stuffing is penalised. Focus on semantic HTML, quality content, and performance."
+        "explanation": "Google has ignored meta keywords since 2009. Keyword stuffing is penalised. Focus on semantic HTML, quality content, and performance.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Use JavaScript-rendered content — Google indexes JS apps the same as static HTML.",
         "isCorrect": false,
-        "explanation": "Googlebot can render JavaScript but with delays and limitations. Server-rendered or statically generated HTML is indexed faster and more reliably."
+        "explanation": "Googlebot can render JavaScript but with delays and limitations. Server-rendered or statically generated HTML is indexed faster and more reliably.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Submit individual HTML files to Google Search Console — it indexes files directly.",
         "isCorrect": false,
-        "explanation": "Search Console allows sitemap submission and URL inspection, not direct file uploads. Google crawls your live site via its search bot."
+        "explanation": "Search Console allows sitemap submission and URL inspection, not direct file uploads. Google crawls your live site via its search bot.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -1124,22 +1468,30 @@
       {
         "optionText": "The spec (WHATWG Living Standard) defines ideal behaviour; browsers implement it gradually and may have bugs, extensions, or lag behind the spec.",
         "isCorrect": true,
-        "explanation": "Correct — caniuse.com tracks implementation status. Features may be behind flags or partial. The spec is normative; browser implementations are real-world approximations."
+        "explanation": "Correct — caniuse.com tracks implementation status. Features may be behind flags or partial. The spec is normative; browser implementations are real-world approximations.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Browsers implement the spec perfectly — any deviation is a bug that gets immediately patched.",
         "isCorrect": false,
-        "explanation": "Implementation gaps and bugs persist for years. CSS/HTML feature support varies. Use caniuse.com and progressive enhancement to handle differences."
+        "explanation": "Implementation gaps and bugs persist for years. CSS/HTML feature support varies. Use caniuse.com and progressive enhancement to handle differences.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Browser vendors write the spec — they implement their own features and the spec documents them after.",
         "isCorrect": false,
-        "explanation": "Partially true historically, but today WHATWG and W3C maintain the spec through a consensus process. Browser vendors participate but the spec is not just post-hoc documentation."
+        "explanation": "Partially true historically, but today WHATWG and W3C maintain the spec through a consensus process. Browser vendors participate but the spec is not just post-hoc documentation.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "The spec and browser implementation are identical — HTML is a binary standard with no room for variation.",
         "isCorrect": false,
-        "explanation": "HTML is not a binary standard. Browser implementations differ in edge cases, performance, and feature support. Cross-browser testing remains essential."
+        "explanation": "HTML is not a binary standard. Browser implementations differ in edge cases, performance, and feature support. Cross-browser testing remains essential.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -1150,22 +1502,30 @@
       {
         "optionText": "A tool that compiles an extended markup syntax to HTML — e.g. Pug (indentation-based), Haml, or JSX (React's HTML-in-JS extension).",
         "isCorrect": true,
-        "explanation": "Correct — preprocessors reduce repetition with includes, variables, and loops. JSX is the most common today, compiled by Babel/SWC as part of the React build."
+        "explanation": "Correct — preprocessors reduce repetition with includes, variables, and loops. JSX is the most common today, compiled by Babel/SWC as part of the React build.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "A browser extension that reformats HTML source code for readability.",
         "isCorrect": false,
-        "explanation": "Browser extensions (Prettier, HTML formatter) format code in the editor — they don't preprocess it into different HTML. Preprocessors transform syntax at build time."
+        "explanation": "Browser extensions (Prettier, HTML formatter) format code in the editor — they don't preprocess it into different HTML. Preprocessors transform syntax at build time.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "A server that sends pre-compressed HTML responses to reduce transfer size.",
         "isCorrect": false,
-        "explanation": "Gzip/Brotli compression handles transfer size. HTML preprocessors transform markup syntax (Pug, JSX) into standard HTML at build time."
+        "explanation": "Gzip/Brotli compression handles transfer size. HTML preprocessors transform markup syntax (Pug, JSX) into standard HTML at build time.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "HTML has no preprocessors — only CSS (Sass) and JavaScript (TypeScript) can be preprocessed.",
         "isCorrect": false,
-        "explanation": "HTML preprocessors exist and are widely used — JSX is the most prominent. Pug, Haml, and Nunjucks are also HTML preprocessors."
+        "explanation": "HTML preprocessors exist and are widely used — JSX is the most prominent. Pug, Haml, and Nunjucks are also HTML preprocessors.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -1176,22 +1536,30 @@
       {
         "optionText": "For fine print, legal disclaimers, and side comments — secondary content that is subsidiary to the main text.",
         "isCorrect": true,
-        "explanation": "Correct — <small> has semantic meaning: side comments and fine print. It renders smaller by default but should be chosen for semantics, not just font size (use CSS for that)."
+        "explanation": "Correct — <small> has semantic meaning: side comments and fine print. It renders smaller by default but should be chosen for semantics, not just font size (use CSS for that).",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Whenever you want smaller font size — it's a presentational element like <b> or <i>.",
         "isCorrect": false,
-        "explanation": "Use CSS font-size for visual size changes. <small> is semantic — it marks fine print and disclaimers, not arbitrary smaller text."
+        "explanation": "Use CSS font-size for visual size changes. <small> is semantic — it marks fine print and disclaimers, not arbitrary smaller text.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "<small> is deprecated in HTML5 — use CSS font-size: small instead.",
         "isCorrect": false,
-        "explanation": "<small> was repurposed in HTML5 with semantic meaning (fine print). It's valid HTML5; only its purely presentational role from HTML4 is discouraged."
+        "explanation": "<small> was repurposed in HTML5 with semantic meaning (fine print). It's valid HTML5; only its purely presentational role from HTML4 is discouraged.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "For captions below images — it's equivalent to <figcaption>.",
         "isCorrect": false,
-        "explanation": "<figcaption> is the correct element for image captions. <small> is for legal fine print and disclaimers within text."
+        "explanation": "<figcaption> is the correct element for image captions. <small> is for legal fine print and disclaimers within text.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -1202,22 +1570,30 @@
       {
         "optionText": "Use the dir attribute: dir='rtl' for Arabic/Hebrew, dir='ltr' for left-to-right. The <bdi> and <bdo> elements also control bidirectional text.",
         "isCorrect": true,
-        "explanation": "Correct — set dir='rtl' on <html> for RTL pages. <bdi> isolates a span of text from surrounding direction; <bdo> forces a specific direction."
+        "explanation": "Correct — set dir='rtl' on <html> for RTL pages. <bdi> isolates a span of text from surrounding direction; <bdo> forces a specific direction.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Use CSS text-align: right — this reverses text direction for RTL languages.",
         "isCorrect": false,
-        "explanation": "text-align: right aligns text to the right margin but doesn't reverse character order for RTL scripts. Use dir='rtl' for proper bidirectional text."
+        "explanation": "text-align: right aligns text to the right margin but doesn't reverse character order for RTL scripts. Use dir='rtl' for proper bidirectional text.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Use the <rtl> HTML element introduced in HTML5 for right-to-left content.",
         "isCorrect": false,
-        "explanation": "There is no <rtl> element. Use the dir attribute on any element or the <bdi>/<bdo> elements for bidirectional control."
+        "explanation": "There is no <rtl> element. Use the dir attribute on any element or the <bdi>/<bdo> elements for bidirectional control.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "JavaScript must reverse the string — HTML has no built-in RTL support.",
         "isCorrect": false,
-        "explanation": "HTML has built-in RTL support via the dir attribute and Unicode Bidirectional Algorithm. No JavaScript is needed for proper RTL text."
+        "explanation": "HTML has built-in RTL support via the dir attribute and Unicode Bidirectional Algorithm. No JavaScript is needed for proper RTL text.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -1228,22 +1604,30 @@
       {
         "optionText": "Tags the HTML parser can infer and that may legally be omitted — e.g. </li>, </td>, <html>, <head>, <body>.",
         "isCorrect": true,
-        "explanation": "Correct — the HTML5 spec explicitly lists optional tags. Omitting them is valid but most style guides recommend keeping them for readability."
+        "explanation": "Correct — the HTML5 spec explicitly lists optional tags. Omitting them is valid but most style guides recommend keeping them for readability.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "HTML5 attributes that have default values and don't need to be specified.",
         "isCorrect": false,
-        "explanation": "Optional attributes (like type='text' on inputs) are a different concept. Optional tags are elements whose opening/closing tags can be omitted from the source."
+        "explanation": "Optional attributes (like type='text' on inputs) are a different concept. Optional tags are elements whose opening/closing tags can be omitted from the source.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Deprecated HTML4 tags that browsers still support but shouldn't be used.",
         "isCorrect": false,
-        "explanation": "Deprecated elements (like <font>, <center>) are discouraged but not optional in the specification sense. Optional tags are those the parser can infer."
+        "explanation": "Deprecated elements (like <font>, <center>) are discouraged but not optional in the specification sense. Optional tags are those the parser can infer.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Self-closing tags like <br> and <img> — they're optional to close.",
         "isCorrect": false,
-        "explanation": "Self-closing void elements (<br>, <img>) are a different concept — they can never have children. Optional tags are tags whose presence can be entirely omitted."
+        "explanation": "Self-closing void elements (<br>, <img>) are a different concept — they can never have children. Optional tags are tags whose presence can be entirely omitted.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -1254,22 +1638,30 @@
       {
         "optionText": "<meta http-equiv='X-UA-Compatible' content='IE=edge'> — forces IE to use its highest available rendering engine.",
         "isCorrect": true,
-        "explanation": "Correct — IE=edge prevents IE from falling back to compatibility view. It's legacy configuration; modern projects only support evergreen browsers and can omit this."
+        "explanation": "Correct — IE=edge prevents IE from falling back to compatibility view. It's legacy configuration; modern projects only support evergreen browsers and can omit this.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Add a conditional comment: <!--[if IE]><html class='ie'><![endif]--> to target IE.",
         "isCorrect": false,
-        "explanation": "Conditional comments control IE-specific HTML but don't set compatibility mode. The X-UA-Compatible meta tag controls which IE rendering engine is used."
+        "explanation": "Conditional comments control IE-specific HTML but don't set compatibility mode. The X-UA-Compatible meta tag controls which IE rendering engine is used.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Use document.compatMode = 'IE9' in JavaScript to switch modes at runtime.",
         "isCorrect": false,
-        "explanation": "document.compatMode is read-only — it reports the current mode, not sets it. Use the X-UA-Compatible meta tag or HTTP header to set IE compat mode."
+        "explanation": "document.compatMode is read-only — it reports the current mode, not sets it. Use the X-UA-Compatible meta tag or HTTP header to set IE compat mode.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "IE compatibility mode is set automatically based on the DOCTYPE — no developer action needed.",
         "isCorrect": false,
-        "explanation": "DOCTYPE controls standards vs quirks mode. IE compatibility mode is a separate IE-specific feature requiring the X-UA-Compatible meta tag or header."
+        "explanation": "DOCTYPE controls standards vs quirks mode. IE compatibility mode is a separate IE-specific feature requiring the X-UA-Compatible meta tag or header.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -1280,22 +1672,30 @@
       {
         "optionText": "CSS in <head> prevents FOUC; scripts before </body> let the DOM parse first. Exception: use defer/async on <script> in <head> instead.",
         "isCorrect": true,
-        "explanation": "Correct — render-blocking CSS must load before paint. defer scripts download in parallel and execute after DOM parse — cleaner than moving scripts to the bottom."
+        "explanation": "Correct — render-blocking CSS must load before paint. defer scripts download in parallel and execute after DOM parse — cleaner than moving scripts to the bottom.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "CSS must be in <head> because the browser rejects stylesheets found elsewhere in the document.",
         "isCorrect": false,
-        "explanation": "Browsers accept CSS links anywhere but defer rendering until CSSOM is built. Positioning in <head> is a best practice for performance, not a strict requirement."
+        "explanation": "Browsers accept CSS links anywhere but defer rendering until CSSOM is built. Positioning in <head> is a best practice for performance, not a strict requirement.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Scripts before </body> prevent them from blocking CSS downloads.",
         "isCorrect": false,
-        "explanation": "Modern browsers can parallelise CSS and script downloads. Scripts block HTML parsing, not CSS downloads. defer on <script> in <head> is the modern best practice."
+        "explanation": "Modern browsers can parallelise CSS and script downloads. Scripts block HTML parsing, not CSS downloads. defer on <script> in <head> is the modern best practice.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "There are no exceptions — this rule is absolute in HTML5.",
         "isCorrect": false,
-        "explanation": "async and defer are important exceptions — they allow <script> to stay in <head> without blocking parsing. Critical inline scripts may also need to be in <head>."
+        "explanation": "async and defer are important exceptions — they allow <script> to stay in <head> without blocking parsing. Critical inline scripts may also need to be in <head>.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -1306,22 +1706,30 @@
       {
         "optionText": "The <keygen> element was designed for this but is now deprecated — use the Web Crypto API (window.crypto.subtle) instead.",
         "isCorrect": true,
-        "explanation": "Correct — <keygen> generated a key pair and submitted the public key via a form. It's removed from the spec. The Web Crypto API is the modern, secure alternative."
+        "explanation": "Correct — <keygen> generated a key pair and submitted the public key via a form. It's removed from the spec. The Web Crypto API is the modern, secure alternative.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Yes, using <input type='publickey'> — a new HTML5 input type for cryptographic keys.",
         "isCorrect": false,
-        "explanation": "There is no type='publickey' input. Key generation requires JavaScript via the Web Crypto API (window.crypto.subtle.generateKey)."
+        "explanation": "There is no type='publickey' input. Key generation requires JavaScript via the Web Crypto API (window.crypto.subtle.generateKey).",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "HTML cannot generate keys — this requires a server-side language like PHP or Node.js.",
         "isCorrect": false,
-        "explanation": "The Web Crypto API (window.crypto.subtle) enables client-side key generation in JavaScript. Server-side generation is one option but not the only one."
+        "explanation": "The Web Crypto API (window.crypto.subtle) enables client-side key generation in JavaScript. Server-side generation is one option but not the only one.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "<keygen> is still the recommended HTML5 element for key generation in all modern browsers.",
         "isCorrect": false,
-        "explanation": "<keygen> is deprecated and removed from all major browsers. Use the Web Crypto API for key generation in modern web applications."
+        "explanation": "<keygen> is deprecated and removed from all major browsers. Use the Web Crypto API for key generation in modern web applications.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -1332,22 +1740,30 @@
       {
         "optionText": "A tool compiling extended markup to HTML — JSX (React/Next.js), Pug, and Haml are common. JSX is used in all modern React projects.",
         "isCorrect": true,
-        "explanation": "Correct — JSX is the de-facto HTML preprocessor for React. It adds component composition and expressions to markup, compiled at build time by SWC or Babel."
+        "explanation": "Correct — JSX is the de-facto HTML preprocessor for React. It adds component composition and expressions to markup, compiled at build time by SWC or Babel.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "A minifier that removes whitespace from HTML files — equivalent to UglifyJS for HTML.",
         "isCorrect": false,
-        "explanation": "HTML minifiers reduce file size but don't transform syntax. Preprocessors like Pug and JSX introduce new markup syntax compiled to standard HTML."
+        "explanation": "HTML minifiers reduce file size but don't transform syntax. Preprocessors like Pug and JSX introduce new markup syntax compiled to standard HTML.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "A browser feature that pre-processes HTML before rendering to fix validation errors.",
         "isCorrect": false,
-        "explanation": "Browsers have error-correction parsers but these are not 'preprocessors'. HTML preprocessors are build-time tools that transform extended syntax."
+        "explanation": "Browsers have error-correction parsers but these are not 'preprocessors'. HTML preprocessors are build-time tools that transform extended syntax.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "HTML preprocessors are no longer used — modern frameworks like React use plain HTML directly.",
         "isCorrect": false,
-        "explanation": "React uses JSX, which is an HTML preprocessor. JSX is compiled by SWC/Babel on every build. HTML templating and preprocessing is more common than ever."
+        "explanation": "React uses JSX, which is an HTML preprocessor. JSX is compiled by SWC/Babel on every build. HTML templating and preprocessing is more common than ever.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   }

@@ -10,6 +10,7 @@ export type GlossaryTerm = {
   slug: string;
   label: string;
   tooltip: string;
+  tooltip_tr?: string;
 };
 
 export type GlossaryMatcher = {
@@ -20,7 +21,7 @@ export type GlossaryMatcher = {
 
 export type Segment =
   | { kind: "text"; value: string }
-  | { kind: "term"; slug: string; tooltip: string; value: string };
+  | { kind: "term"; slug: string; tooltip: string; tooltip_tr?: string; value: string };
 
 function escapeRegExp(input: string): string {
   return input.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -87,6 +88,7 @@ export function splitText(
       kind: "term",
       slug: term.slug,
       tooltip: term.tooltip,
+      tooltip_tr: term.tooltip_tr,
       value: full,
     });
     cursor = match.index + full.length;

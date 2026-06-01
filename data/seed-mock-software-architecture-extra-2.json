@@ -6,22 +6,30 @@
       {
         "optionText": "Fail Fast surfaces errors immediately (crash early, report loudly); Robust software handles errors gracefully and continues operating. Use Fail Fast internally during development; favour robustness at system boundaries.",
         "isCorrect": true,
-        "explanation": "Correct — both have their place. Fail Fast aids debugging; robustness prevents cascading failures at integration points."
+        "explanation": "Correct — both have their place. Fail Fast aids debugging; robustness prevents cascading failures at integration points.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Fail Fast is always better — crashing loudly prevents data corruption and makes bugs obvious.",
         "isCorrect": false,
-        "explanation": "Fail Fast is valuable internally but crashing at user-facing boundaries provides a poor experience. Robustness is needed at system edges."
+        "explanation": "Fail Fast is valuable internally but crashing at user-facing boundaries provides a poor experience. Robustness is needed at system edges.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Robust software never throws exceptions; Fail Fast software throws exceptions for every edge case.",
         "isCorrect": false,
-        "explanation": "Robustness means handling errors gracefully, not swallowing them silently. Exceptions are still appropriate in robust code."
+        "explanation": "Robustness means handling errors gracefully, not swallowing them silently. Exceptions are still appropriate in robust code.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "They are mutually exclusive — a system must choose one approach and apply it consistently throughout.",
         "isCorrect": false,
-        "explanation": "Good systems often combine both: Fail Fast in internal validation and Robust error handling at external boundaries."
+        "explanation": "Good systems often combine both: Fail Fast in internal validation and Robust error handling at external boundaries.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -32,22 +40,30 @@
       {
         "optionText": "Repository Pattern when you want a clean separation between domain logic and data access, enabling testability; smart business objects (Active Record) when the application is simple and the overhead of repositories isn't justified.",
         "isCorrect": true,
-        "explanation": "Correct — the choice depends on complexity. Repository Pattern suits rich domains; Active Record is pragmatic for simple CRUD apps."
+        "explanation": "Correct — the choice depends on complexity. Repository Pattern suits rich domains; Active Record is pragmatic for simple CRUD apps.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Always use the Repository Pattern — smart business objects violate the Single Responsibility Principle.",
         "isCorrect": false,
-        "explanation": "Active Record is a valid pattern for simpler applications. Dogmatic use of Repository Pattern in simple apps adds unnecessary complexity."
+        "explanation": "Active Record is a valid pattern for simpler applications. Dogmatic use of Repository Pattern in simple apps adds unnecessary complexity.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Always use smart business objects — they are faster because they skip the repository abstraction layer.",
         "isCorrect": false,
-        "explanation": "Performance difference is negligible for most applications. The choice should be driven by design needs, not micro-optimisation."
+        "explanation": "Performance difference is negligible for most applications. The choice should be driven by design needs, not micro-optimisation.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Use smart business objects only with NoSQL databases and Repository Pattern only with SQL databases.",
         "isCorrect": false,
-        "explanation": "Both patterns are database-agnostic. The choice is about domain complexity, not database type."
+        "explanation": "Both patterns are database-agnostic. The choice is about domain complexity, not database type.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -58,22 +74,30 @@
       {
         "optionText": "No — Repository Pattern separates domain objects from persistence logic; Active Record embeds persistence directly in the domain object, making it responsible for its own saving and loading.",
         "isCorrect": true,
-        "explanation": "Correct — Repository is Data Mapper style (domain + separate mapper); Active Record collapses both into one class."
+        "explanation": "Correct — Repository is Data Mapper style (domain + separate mapper); Active Record collapses both into one class.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Yes — both patterns abstract database access behind a class that encapsulates queries.",
         "isCorrect": false,
-        "explanation": "Both do abstract DB access, but differently. Active Record puts persistence in the entity; Repository separates them."
+        "explanation": "Both do abstract DB access, but differently. Active Record puts persistence in the entity; Repository separates them.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Active Record is the ORM layer; Repository Pattern is the service layer on top of it.",
         "isCorrect": false,
-        "explanation": "Active Record is a domain object pattern, not just an ORM term. ORMs like Rails ActiveRecord implement the Active Record pattern."
+        "explanation": "Active Record is a domain object pattern, not just an ORM term. ORMs like Rails ActiveRecord implement the Active Record pattern.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Repository Pattern is used for read operations; Active Record is used for write operations.",
         "isCorrect": false,
-        "explanation": "Both handle reads and writes. The distinction is about responsibility placement, not operation type."
+        "explanation": "Both handle reads and writes. The distinction is about responsibility placement, not operation type.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -84,22 +108,30 @@
       {
         "optionText": "Group repositories by aggregate root — one repository per aggregate (e.g. OrderRepository, not OrderLineRepository), reflecting DDD boundaries.",
         "isCorrect": true,
-        "explanation": "Correct — in DDD, only aggregate roots have repositories. Child entities are accessed through the aggregate root, maintaining consistency boundaries."
+        "explanation": "Correct — in DDD, only aggregate roots have repositories. Child entities are accessed through the aggregate root, maintaining consistency boundaries.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Create one repository per database table for a one-to-one mapping with the schema.",
         "isCorrect": false,
-        "explanation": "Table-per-repository couples your design to the DB schema. DDD repositories group by aggregate, not by table."
+        "explanation": "Table-per-repository couples your design to the DB schema. DDD repositories group by aggregate, not by table.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Group all repositories into a single GenericRepository<T> to avoid code duplication.",
         "isCorrect": false,
-        "explanation": "A single generic repository leaks query logic everywhere, negating the encapsulation benefit of the pattern."
+        "explanation": "A single generic repository leaks query logic everywhere, negating the encapsulation benefit of the pattern.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Create one repository per use case so each service method has its own specialised data access class.",
         "isCorrect": false,
-        "explanation": "Use-case-per-repository creates explosion of classes and duplicates query logic. Repositories should be domain-centric, not use-case-centric."
+        "explanation": "Use-case-per-repository creates explosion of classes and duplicates query logic. Repositories should be domain-centric, not use-case-centric.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -110,22 +142,30 @@
       {
         "optionText": "High-level modules should not depend on low-level modules — both should depend on abstractions. It decouples stable business logic from volatile implementation details like databases or frameworks.",
         "isCorrect": true,
-        "explanation": "Correct — DIP is the D in SOLID. By depending on interfaces, you can swap implementations (DB, HTTP client, etc.) without changing business logic."
+        "explanation": "Correct — DIP is the D in SOLID. By depending on interfaces, you can swap implementations (DB, HTTP client, etc.) without changing business logic.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "It means you should inject dependencies through the constructor rather than creating them inside the class.",
         "isCorrect": false,
-        "explanation": "Constructor injection is Dependency Injection (DI), which implements DIP. DIP itself is the principle about abstraction direction, not the injection mechanism."
+        "explanation": "Constructor injection is Dependency Injection (DI), which implements DIP. DIP itself is the principle about abstraction direction, not the injection mechanism.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "It inverts the call stack so that low-level functions call high-level functions for better performance.",
         "isCorrect": false,
-        "explanation": "DIP inverts the direction of dependencies in the module graph, not the runtime call stack."
+        "explanation": "DIP inverts the direction of dependencies in the module graph, not the runtime call stack.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "It requires all classes to be abstract so concrete implementations can never be referenced directly.",
         "isCorrect": false,
-        "explanation": "DIP doesn't ban concrete classes — it says high-level policy modules shouldn't depend on them. Concrete classes implement the abstractions."
+        "explanation": "DIP doesn't ban concrete classes — it says high-level policy modules shouldn't depend on them. Concrete classes implement the abstractions.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -136,22 +176,30 @@
       {
         "optionText": "Repositories handle querying and CRUD for aggregates; Unit of Work tracks changes across multiple repositories in a single operation and commits them in one transaction.",
         "isCorrect": true,
-        "explanation": "Correct — they work together: repositories provide the domain API for data access; UoW coordinates the transaction boundary across multiple repositories."
+        "explanation": "Correct — they work together: repositories provide the domain API for data access; UoW coordinates the transaction boundary across multiple repositories.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Unit of Work is a wrapper around a single repository that adds retry logic on database failures.",
         "isCorrect": false,
-        "explanation": "UoW coordinates multiple repositories; it is not a retry wrapper for a single repository."
+        "explanation": "UoW coordinates multiple repositories; it is not a retry wrapper for a single repository.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Repository Pattern replaces Unit of Work in modern architectures — UoW is considered legacy.",
         "isCorrect": false,
-        "explanation": "Both patterns are complementary and still used together. Neither has made the other obsolete."
+        "explanation": "Both patterns are complementary and still used together. Neither has made the other obsolete.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "They are identical — a Unit of Work is simply another name for a repository that spans multiple entities.",
         "isCorrect": false,
-        "explanation": "They have different responsibilities. Repositories are domain-centric data access; UoW is a transaction coordination mechanism."
+        "explanation": "They have different responsibilities. Repositories are domain-centric data access; UoW is a transaction coordination mechanism.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -162,22 +210,30 @@
       {
         "optionText": "Basically Available, Soft state, Eventual consistency — the relaxed consistency model favoured by distributed NoSQL systems that prioritise availability over strong consistency.",
         "isCorrect": true,
-        "explanation": "Correct — BASE is the alternative to ACID in distributed systems, accepting eventual consistency to gain higher availability and partition tolerance."
+        "explanation": "Correct — BASE is the alternative to ACID in distributed systems, accepting eventual consistency to gain higher availability and partition tolerance.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Batch, Asynchronous, Scalable, Elastic — describing the properties of a modern event-driven architecture.",
         "isCorrect": false,
-        "explanation": "The correct expansion is Basically Available, Soft state, Eventual consistency — not the given acronym."
+        "explanation": "The correct expansion is Basically Available, Soft state, Eventual consistency — not the given acronym.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "It is another name for ACID, used specifically for NoSQL databases.",
         "isCorrect": false,
-        "explanation": "BASE is explicitly the opposite of ACID. ACID guarantees strong consistency; BASE accepts eventual consistency."
+        "explanation": "BASE is explicitly the opposite of ACID. ACID guarantees strong consistency; BASE accepts eventual consistency.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "BASE systems guarantee that all nodes have the same data within one second of a write.",
         "isCorrect": false,
-        "explanation": "BASE does not specify a time bound for eventual consistency. Convergence time depends on the system design."
+        "explanation": "BASE does not specify a time bound for eventual consistency. Convergence time depends on the system design.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -188,22 +244,30 @@
       {
         "optionText": "Use optimistic concurrency (check stock version before commit) or a distributed lock/reservation system — reserve stock atomically and let the second customer know it's unavailable.",
         "isCorrect": true,
-        "explanation": "Correct — this is a classic lost-update problem. Optimistic locking or atomic DB operations ensure only one purchase succeeds."
+        "explanation": "Correct — this is a classic lost-update problem. Optimistic locking or atomic DB operations ensure only one purchase succeeds.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Allow both purchases and email the second customer that their order can't be fulfilled.",
         "isCorrect": false,
-        "explanation": "Overselling damages trust and creates operational problems. The system should prevent the conflict, not apologise after it."
+        "explanation": "Overselling damages trust and creates operational problems. The system should prevent the conflict, not apologise after it.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Queue all basket additions in a single-threaded queue so only one can proceed at a time, serialising all operations.",
         "isCorrect": false,
-        "explanation": "A global serialisation queue is a throughput bottleneck. Targeted locking per product is far more scalable."
+        "explanation": "A global serialisation queue is a throughput bottleneck. Targeted locking per product is far more scalable.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Display stock as always available and deduct on payment, accepting that occasional oversells are a business decision.",
         "isCorrect": false,
-        "explanation": "While some businesses accept this, it is a business policy choice, not the technical solution to the concurrency problem."
+        "explanation": "While some businesses accept this, it is a business policy choice, not the technical solution to the concurrency problem.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -214,22 +278,30 @@
       {
         "optionText": "The ability to access a resource or service without needing to know its physical location — the network or runtime abstracts away where the resource lives.",
         "isCorrect": true,
-        "explanation": "Correct — location transparency is a property of distributed systems and service meshes, enabling resources to move or scale without client changes."
+        "explanation": "Correct — location transparency is a property of distributed systems and service meshes, enabling resources to move or scale without client changes.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "A security practice where server IP addresses are hidden behind a load balancer to prevent DDoS attacks.",
         "isCorrect": false,
-        "explanation": "IP masking is a security technique. Location transparency is a broader architectural property about abstracting physical location from consumers."
+        "explanation": "IP masking is a security technique. Location transparency is a broader architectural property about abstracting physical location from consumers.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "A UI principle requiring that error messages show the exact file and line number where the error occurred.",
         "isCorrect": false,
-        "explanation": "That describes stack trace verbosity in error reporting, not location transparency."
+        "explanation": "That describes stack trace verbosity in error reporting, not location transparency.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Deploying services to multiple geographic regions so users always connect to the nearest data centre.",
         "isCorrect": false,
-        "explanation": "Multi-region deployment can leverage location transparency but the definition is about abstracting physical location, not the deployment strategy itself."
+        "explanation": "Multi-region deployment can leverage location transparency but the definition is about abstracting physical location, not the deployment strategy itself.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -240,22 +312,30 @@
       {
         "optionText": "An Error is a deviation from expected behaviour at the code/component level; a Failure is when the system as a whole no longer provides its required service to users.",
         "isCorrect": true,
-        "explanation": "Correct — errors may be tolerated or recovered from; a failure means the service has stopped working from the user's perspective."
+        "explanation": "Correct — errors may be tolerated or recovered from; a failure means the service has stopped working from the user's perspective.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Error and Failure are synonyms — both mean the system has crashed and must be restarted.",
         "isCorrect": false,
-        "explanation": "Errors can occur and be handled without causing a failure. A well-designed system tolerates many errors before a failure occurs."
+        "explanation": "Errors can occur and be handled without causing a failure. A well-designed system tolerates many errors before a failure occurs.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Errors are caused by bugs; Failures are caused by hardware issues — they require different fixes.",
         "isCorrect": false,
-        "explanation": "Both errors and failures can stem from bugs, hardware, network, or configuration issues. The distinction is scope, not cause."
+        "explanation": "Both errors and failures can stem from bugs, hardware, network, or configuration issues. The distinction is scope, not cause.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Failures are logged; Errors are not — errors are expected and handled silently by the runtime.",
         "isCorrect": false,
-        "explanation": "Both errors and failures should be observed. The distinction is about impact level, not logging behaviour."
+        "explanation": "Both errors and failures should be observed. The distinction is about impact level, not logging behaviour.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -266,22 +346,30 @@
       {
         "optionText": "Horizontally partitioning a database so that each shard holds a subset of the data, distributing load across multiple servers to enable scaling beyond a single node's capacity.",
         "isCorrect": true,
-        "explanation": "Correct — sharding splits data by a shard key (e.g. user ID range) so each server handles a fraction of the total dataset."
+        "explanation": "Correct — sharding splits data by a shard key (e.g. user ID range) so each server handles a fraction of the total dataset.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Creating multiple read replicas of a primary database to distribute read traffic.",
         "isCorrect": false,
-        "explanation": "Read replicas are replication, not sharding. Sharding partitions the data itself; replicas copy all data."
+        "explanation": "Read replicas are replication, not sharding. Sharding partitions the data itself; replicas copy all data.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Compressing database indexes to reduce storage space and speed up queries.",
         "isCorrect": false,
-        "explanation": "Index compression is a storage optimisation, not sharding."
+        "explanation": "Index compression is a storage optimisation, not sharding.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Splitting a monolithic application into microservices, each owning its own database.",
         "isCorrect": false,
-        "explanation": "Service decomposition with separate databases is a microservices pattern, not database sharding."
+        "explanation": "Service decomposition with separate databases is a microservices pattern, not database sharding.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -292,22 +380,30 @@
       {
         "optionText": "Routing requests from the same client IP to the same server by hashing the IP address, ensuring session consistency without storing session mapping.",
         "isCorrect": true,
-        "explanation": "Correct — IP hash load balancing is a form of sticky session that requires no central session store, though it can cause uneven distribution."
+        "explanation": "Correct — IP hash load balancing is a form of sticky session that requires no central session store, though it can cause uneven distribution.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Whitelisting specific IP addresses to access premium servers with lower latency.",
         "isCorrect": false,
-        "explanation": "IP whitelisting is an access control mechanism, not a load balancing affinity technique."
+        "explanation": "IP whitelisting is an access control mechanism, not a load balancing affinity technique.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Assigning a dedicated server to each client IP address for maximum isolation.",
         "isCorrect": false,
-        "explanation": "Dedicated servers per IP would be prohibitively expensive and doesn't describe IP affinity load balancing."
+        "explanation": "Dedicated servers per IP would be prohibitively expensive and doesn't describe IP affinity load balancing.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Using Anycast routing so all requests to the same IP reach the geographically nearest data centre.",
         "isCorrect": false,
-        "explanation": "Anycast is a network routing technique for geo-distribution, not IP affinity load balancing within a cluster."
+        "explanation": "Anycast is a network routing technique for geo-distribution, not IP affinity load balancing within a cluster.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -318,22 +414,30 @@
       {
         "optionText": "So that UI changes don't force changes to business rules and vice versa — domain entities represent stable business concepts while the presentation layer is volatile.",
         "isCorrect": true,
-        "explanation": "Correct — isolating domain from presentation keeps core business logic reusable, testable, and independent of UI framework changes."
+        "explanation": "Correct — isolating domain from presentation keeps core business logic reusable, testable, and independent of UI framework changes.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Because domain entities are too large to serialise efficiently to JSON for the front end.",
         "isCorrect": false,
-        "explanation": "Serialisation size is a practical concern but not the architectural reason for isolating domain entities."
+        "explanation": "Serialisation size is a practical concern but not the architectural reason for isolating domain entities.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "To prevent front-end developers from accidentally changing business rules they don't understand.",
         "isCorrect": false,
-        "explanation": "While isolation does enforce boundaries, the architectural reason is design stability and separation of concerns, not team access control."
+        "explanation": "While isolation does enforce boundaries, the architectural reason is design stability and separation of concerns, not team access control.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Because the presentation layer runs in the browser and domain entities can only run on the server.",
         "isCorrect": false,
-        "explanation": "Domain isolation is an architectural concern applicable to all environments, not a browser/server platform constraint."
+        "explanation": "Domain isolation is an architectural concern applicable to all environments, not a browser/server platform constraint.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -344,22 +448,30 @@
       {
         "optionText": "Component-based structure groups all code for a feature together (routes, services, models, tests), making it easier to understand, modify, and potentially extract — compared to technical layering which scatters a feature across folders.",
         "isCorrect": true,
-        "explanation": "Correct — feature/component grouping aligns code organisation with the business domain, reducing navigation overhead when working on a feature."
+        "explanation": "Correct — feature/component grouping aligns code organisation with the business domain, reducing navigation overhead when working on a feature.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Component structure is required by most frameworks — Next.js and React don't work without it.",
         "isCorrect": false,
-        "explanation": "Frameworks don't mandate a specific folder structure philosophy. Component-based structure is a design choice."
+        "explanation": "Frameworks don't mandate a specific folder structure philosophy. Component-based structure is a design choice.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "It makes the build faster because the bundler can skip components that haven't changed.",
         "isCorrect": false,
-        "explanation": "Incremental builds are a build tool feature, not a consequence of folder structure."
+        "explanation": "Incremental builds are a build tool feature, not a consequence of folder structure.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "It ensures each component is deployed independently as a microservice.",
         "isCorrect": false,
-        "explanation": "Component structure is a code organisation strategy. Components within a monolith don't need to be independently deployed."
+        "explanation": "Component structure is a code organisation strategy. Components within a monolith don't need to be independently deployed.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -370,22 +482,30 @@
       {
         "optionText": "Layering separates concerns and controls dependency direction. Bad example: a domain entity that imports from the HTTP controller layer, or a data access class that calls a UI rendering function.",
         "isCorrect": true,
-        "explanation": "Correct — layering defines rules about who can depend on whom. Violations (like domain knowing about HTTP) create tight coupling and hinder testing."
+        "explanation": "Correct — layering defines rules about who can depend on whom. Violations (like domain knowing about HTTP) create tight coupling and hinder testing.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Layering is important to ensure each layer runs on a different server for horizontal scaling.",
         "isCorrect": false,
-        "explanation": "Layering is a logical/code organisation concern. Physical tier distribution is a deployment concern."
+        "explanation": "Layering is a logical/code organisation concern. Physical tier distribution is a deployment concern.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Bad layering example: having both GET and POST handlers in the same controller class.",
         "isCorrect": false,
-        "explanation": "Grouping HTTP methods in one controller is fine. Bad layering is about dependency direction violations between layers."
+        "explanation": "Grouping HTTP methods in one controller is fine. Bad layering is about dependency direction violations between layers.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Layering ensures all database queries are cached automatically between layers.",
         "isCorrect": false,
-        "explanation": "Caching is a cross-cutting concern. Layering is about dependency control, not automatic caching."
+        "explanation": "Caching is a cross-cutting concern. Layering is about dependency control, not automatic caching.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -396,22 +516,30 @@
       {
         "optionText": "Imagine a restaurant kitchen with one cook (single thread) vs multiple cooks (multi-thread). One cook does tasks one at a time; multiple cooks work simultaneously on different dishes, finishing faster but needing coordination to avoid bumping into each other.",
         "isCorrect": true,
-        "explanation": "Correct — this analogy captures concurrency (multiple tasks) and the coordination overhead (synchronisation) of multi-threading."
+        "explanation": "Correct — this analogy captures concurrency (multiple tasks) and the coordination overhead (synchronisation) of multi-threading.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Threads are like chapters in a book — the computer reads one chapter at a time and must finish before starting the next.",
         "isCorrect": false,
-        "explanation": "Chapters are sequential, like a single-threaded program. Threads introduce concurrency, which the analogy misses."
+        "explanation": "Chapters are sequential, like a single-threaded program. Threads introduce concurrency, which the analogy misses.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Threads are like phone calls — you can only have one conversation at a time on a single phone line.",
         "isCorrect": false,
-        "explanation": "A phone line analogy describes a single thread. Threads specifically enable simultaneous work, like having multiple phone lines."
+        "explanation": "A phone line analogy describes a single thread. Threads specifically enable simultaneous work, like having multiple phone lines.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Threads are like pages in a spreadsheet — each page holds different data but they all belong to the same file.",
         "isCorrect": false,
-        "explanation": "Spreadsheet pages share storage, not execution. Threads share memory and run code concurrently, which this analogy doesn't capture."
+        "explanation": "Spreadsheet pages share storage, not execution. Threads share memory and run code concurrently, which this analogy doesn't capture.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -422,22 +550,30 @@
       {
         "optionText": "A concurrency model where actors are independent units that communicate only by passing immutable messages, never sharing memory — avoiding locks and race conditions.",
         "isCorrect": true,
-        "explanation": "Correct — the actor model (Erlang, Akka) eliminates shared-state concurrency bugs by making message-passing the only interaction mechanism."
+        "explanation": "Correct — the actor model (Erlang, Akka) eliminates shared-state concurrency bugs by making message-passing the only interaction mechanism.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "A design pattern where objects play different roles (actor roles) depending on the context they are used in.",
         "isCorrect": false,
-        "explanation": "That describes the Role Object or Strategy pattern, not the actor model."
+        "explanation": "That describes the Role Object or Strategy pattern, not the actor model.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "A JavaScript concept where each React component is an actor that manages its own rendering lifecycle.",
         "isCorrect": false,
-        "explanation": "React components are not actors in the formal sense. The actor model is a concurrency primitive, not a UI rendering concept."
+        "explanation": "React components are not actors in the formal sense. The actor model is a concurrency primitive, not a UI rendering concept.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "A runtime model where the language VM schedules goroutines/threads automatically without developer intervention.",
         "isCorrect": false,
-        "explanation": "That describes green threads or coroutines. The actor model specifically requires message-passing as the only form of communication."
+        "explanation": "That describes green threads or coroutines. The actor model specifically requires message-passing as the only form of communication.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -448,22 +584,30 @@
       {
         "optionText": "Throw domain-specific exceptions from the domain layer; catch and translate them at layer boundaries (e.g. service → controller) into appropriate error responses — avoiding leaking implementation details up the stack.",
         "isCorrect": true,
-        "explanation": "Correct — each layer should speak its own language. Controllers translate domain exceptions to HTTP codes; domain logic knows nothing about HTTP."
+        "explanation": "Correct — each layer should speak its own language. Controllers translate domain exceptions to HTTP codes; domain logic knows nothing about HTTP.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Catch all exceptions at the lowest layer and return null to callers to keep error handling simple.",
         "isCorrect": false,
-        "explanation": "Swallowing exceptions and returning null hides errors and makes debugging extremely difficult."
+        "explanation": "Swallowing exceptions and returning null hides errors and makes debugging extremely difficult.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Let all exceptions propagate to the UI layer where a global error boundary handles all of them uniformly.",
         "isCorrect": false,
-        "explanation": "Unhandled exceptions bubbling through multiple layers leak internals and prevent proper recovery at the appropriate layer."
+        "explanation": "Unhandled exceptions bubbling through multiple layers leak internals and prevent proper recovery at the appropriate layer.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Use a single try-catch block at the application entry point and log every exception with the full stack trace.",
         "isCorrect": false,
-        "explanation": "A single top-level catch logs but can't recover gracefully. Exceptions should be handled at the layer where recovery is possible."
+        "explanation": "A single top-level catch logs but can't recover gracefully. Exceptions should be handled at the layer where recovery is possible.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -474,22 +618,30 @@
       {
         "optionText": "A class that knows too much or does too much — it violates SRP by accumulating responsibilities, making it hard to test, maintain, or change without unintended side effects.",
         "isCorrect": true,
-        "explanation": "Correct — God classes become a maintenance liability. Changes to one responsibility risk breaking others, and they can't be tested in isolation."
+        "explanation": "Correct — God classes become a maintenance liability. Changes to one responsibility risk breaking others, and they can't be tested in isolation.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "A class that extends all other classes to provide universal behaviour — it should be avoided because it breaks encapsulation.",
         "isCorrect": false,
-        "explanation": "A God class doesn't necessarily use inheritance — it's about accumulating too many responsibilities, regardless of how it's structured."
+        "explanation": "A God class doesn't necessarily use inheritance — it's about accumulating too many responsibilities, regardless of how it's structured.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "A singleton class that holds global application state — avoid it because singletons are hard to mock in tests.",
         "isCorrect": false,
-        "explanation": "Singletons are one common form but God class specifically refers to any class with too many responsibilities, not just singletons."
+        "explanation": "Singletons are one common form but God class specifically refers to any class with too many responsibilities, not just singletons.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "A framework base class that provides common utilities — avoid it because framework coupling makes testing harder.",
         "isCorrect": false,
-        "explanation": "Framework base classes serve a legitimate purpose. A God class is an anti-pattern about responsibility accumulation, not framework use."
+        "explanation": "Framework base classes serve a legitimate purpose. A God class is an anti-pattern about responsibility accumulation, not framework use.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -500,22 +652,30 @@
       {
         "optionText": "Monoliths are simpler to develop, deploy, debug, and test in the early stages — there's no network overhead, no distributed tracing complexity, and the team can iterate quickly without inter-service coordination.",
         "isCorrect": true,
-        "explanation": "Correct — monoliths are often the right choice for small teams and early-stage products. Microservices add complexity that only pays off at scale."
+        "explanation": "Correct — monoliths are often the right choice for small teams and early-stage products. Microservices add complexity that only pays off at scale.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Monoliths scale better than microservices because they have a single codebase that's easier to optimise.",
         "isCorrect": false,
-        "explanation": "Monoliths are harder to scale horizontally than microservices at large scale — that's a genuine weakness, not a strength."
+        "explanation": "Monoliths are harder to scale horizontally than microservices at large scale — that's a genuine weakness, not a strength.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Monoliths are preferred in modern cloud environments because containers work better with single-process apps.",
         "isCorrect": false,
-        "explanation": "Containers work well for both monoliths and microservices. This is not a well-founded defence of monolithic architecture."
+        "explanation": "Containers work well for both monoliths and microservices. This is not a well-founded defence of monolithic architecture.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Monoliths are more secure because all code runs in the same process and there's no network between components.",
         "isCorrect": false,
-        "explanation": "Security is not a primary advantage of monoliths — in-process communication doesn't inherently make code more secure."
+        "explanation": "Security is not a primary advantage of monoliths — in-process communication doesn't inherently make code more secure.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -526,22 +686,30 @@
       {
         "optionText": "An architecture where each node is fully independent with no shared memory or disk — nodes scale horizontally by adding more independent nodes, eliminating synchronisation bottlenecks.",
         "isCorrect": true,
-        "explanation": "Correct — Shared Nothing (used by databases like Cassandra, Vitess) achieves linear scalability because nodes don't contend for shared resources."
+        "explanation": "Correct — Shared Nothing (used by databases like Cassandra, Vitess) achieves linear scalability because nodes don't contend for shared resources.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "An architecture where microservices share no code libraries, each bundling its own versions of all dependencies.",
         "isCorrect": false,
-        "explanation": "Shared Nothing refers to shared infrastructure (memory, disk), not shared code libraries."
+        "explanation": "Shared Nothing refers to shared infrastructure (memory, disk), not shared code libraries.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "A security pattern where services are forbidden from reading each other's data to enforce data isolation.",
         "isCorrect": false,
-        "explanation": "Data isolation is a side effect of Shared Nothing, but the pattern is about scalability and eliminating contention, not primarily security."
+        "explanation": "Data isolation is a side effect of Shared Nothing, but the pattern is about scalability and eliminating contention, not primarily security.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "A caching strategy where each user session stores data locally in the browser rather than on the server.",
         "isCorrect": false,
-        "explanation": "Client-side storage is a different concept. Shared Nothing Architecture is a server/infrastructure pattern."
+        "explanation": "Client-side storage is a different concept. Shared Nothing Architecture is a server/infrastructure pattern.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -552,22 +720,30 @@
       {
         "optionText": "The speedup from parallelising a program is limited by its sequential fraction — if 20% of the work must run serially, the maximum speedup is 5x regardless of how many processors you add.",
         "isCorrect": true,
-        "explanation": "Correct — Amdahl's Law sets a theoretical ceiling on parallelism benefits, emphasising that serial bottlenecks dominate at scale."
+        "explanation": "Correct — Amdahl's Law sets a theoretical ceiling on parallelism benefits, emphasising that serial bottlenecks dominate at scale.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Every time you double the number of servers, you double the throughput — a linear scalability guarantee.",
         "isCorrect": false,
-        "explanation": "Amdahl's Law says the opposite — linear speedup is impossible because of the serial fraction. Perfect doubling is an idealisation."
+        "explanation": "Amdahl's Law says the opposite — linear speedup is impossible because of the serial fraction. Perfect doubling is an idealisation.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Adding more developers to a late project makes it later — the coordination overhead outweighs the extra capacity.",
         "isCorrect": false,
-        "explanation": "That's Brooks's Law, not Amdahl's Law. Amdahl's Law concerns parallel computation limits."
+        "explanation": "That's Brooks's Law, not Amdahl's Law. Amdahl's Law concerns parallel computation limits.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "A system can only be as fast as its slowest component — applicable to dependency chains in microservices.",
         "isCorrect": false,
-        "explanation": "The slowest-link observation is related to Little's Law and queuing theory. Amdahl's Law specifically addresses parallel speedup limits."
+        "explanation": "The slowest-link observation is related to Little's Law and queuing theory. Amdahl's Law specifically addresses parallel speedup limits.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -578,22 +754,30 @@
       {
         "optionText": "Test through the public interface — if a private method is hard to test indirectly, it's a signal the class may need refactoring. Only expose internals as a last resort via package-level access or reflection.",
         "isCorrect": true,
-        "explanation": "Correct — private members are implementation details. Tests should verify behaviour via the public contract; testability drives better design."
+        "explanation": "Correct — private members are implementation details. Tests should verify behaviour via the public contract; testability drives better design.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Make all methods public during testing by using a test-only subclass that exposes them.",
         "isCorrect": false,
-        "explanation": "Exposing internals for testing couples tests to implementation. Refactor instead so behaviour is testable via the public API."
+        "explanation": "Exposing internals for testing couples tests to implementation. Refactor instead so behaviour is testable via the public API.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Skip testing private methods — only public methods matter because users only interact with the public API.",
         "isCorrect": false,
-        "explanation": "Private methods are exercised when you test public behaviour. If a private method is complex, test it indirectly through the public API."
+        "explanation": "Private methods are exercised when you test public behaviour. If a private method is complex, test it indirectly through the public API.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Use a mocking library to intercept private method calls and replace them with stubs.",
         "isCorrect": false,
-        "explanation": "Mocking private methods is a code smell — it tightly couples tests to internals. Test via public behaviour."
+        "explanation": "Mocking private methods is a code smell — it tightly couples tests to internals. Test via public behaviour.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -604,22 +788,30 @@
       {
         "optionText": "Cohesion measures how closely related the responsibilities within a module are (high is good); Coupling measures how dependent modules are on each other (low is good).",
         "isCorrect": true,
-        "explanation": "Correct — the goal is high cohesion and low coupling: modules that do one thing well and depend on each other as little as possible."
+        "explanation": "Correct — the goal is high cohesion and low coupling: modules that do one thing well and depend on each other as little as possible.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Coupling is about the number of methods in a class; Cohesion is about the number of classes in a package.",
         "isCorrect": false,
-        "explanation": "Neither is measured by counts of methods or classes. They describe relationships and responsibilities."
+        "explanation": "Neither is measured by counts of methods or classes. They describe relationships and responsibilities.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "High coupling is desirable because tightly integrated modules share more functionality; low cohesion is acceptable in small projects.",
         "isCorrect": false,
-        "explanation": "High coupling makes systems brittle and hard to change. Low cohesion leads to scattered, hard-to-understand code. Both should be avoided."
+        "explanation": "High coupling makes systems brittle and hard to change. Low cohesion leads to scattered, hard-to-understand code. Both should be avoided.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "They are opposites — increasing cohesion always decreases coupling automatically.",
         "isCorrect": false,
-        "explanation": "While they often correlate, they are independent dimensions. You can have a highly cohesive module that is still tightly coupled to others."
+        "explanation": "While they often correlate, they are independent dimensions. You can have a highly cohesive module that is still tightly coupled to others.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -630,22 +822,30 @@
       {
         "optionText": "Yes — CQRS and Event Sourcing are independent patterns. CQRS separates read/write models; Event Sourcing stores state as a sequence of events. They complement each other but neither requires the other.",
         "isCorrect": true,
-        "explanation": "Correct — many teams implement CQRS with separate read/write databases but persist state conventionally, without storing event logs."
+        "explanation": "Correct — many teams implement CQRS with separate read/write databases but persist state conventionally, without storing event logs.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "No — CQRS requires Event Sourcing to populate the read model whenever the write model changes.",
         "isCorrect": false,
-        "explanation": "Read models can be updated via database triggers, polling, or direct dual writes — Event Sourcing is one option, not a requirement."
+        "explanation": "Read models can be updated via database triggers, polling, or direct dual writes — Event Sourcing is one option, not a requirement.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "No — without Event Sourcing, the write model and read model will always become out of sync.",
         "isCorrect": false,
-        "explanation": "Consistency between models can be maintained through various mechanisms. Event Sourcing is not the only way."
+        "explanation": "Consistency between models can be maintained through various mechanisms. Event Sourcing is not the only way.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Yes, but only if you use a relational database — Event Sourcing is only needed with NoSQL stores.",
         "isCorrect": false,
-        "explanation": "The choice of CQRS with or without Event Sourcing is independent of the database type."
+        "explanation": "The choice of CQRS with or without Event Sourcing is independent of the database type.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -656,22 +856,30 @@
       {
         "optionText": "The Saga pattern — coordinate distributed transactions through a sequence of local transactions with compensating transactions for rollback, using either choreography (events) or orchestration (central coordinator).",
         "isCorrect": true,
-        "explanation": "Correct — distributed ACID transactions (2PC) are generally avoided in microservices. Sagas provide eventual consistency without distributed locks."
+        "explanation": "Correct — distributed ACID transactions (2PC) are generally avoided in microservices. Sagas provide eventual consistency without distributed locks.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Two-Phase Commit (2PC) — lock all services involved, prepare, then commit atomically across all of them.",
         "isCorrect": false,
-        "explanation": "2PC introduces blocking and is a single point of failure. It's generally avoided in microservices due to availability and performance concerns."
+        "explanation": "2PC introduces blocking and is a single point of failure. It's generally avoided in microservices due to availability and performance concerns.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Each service writes directly to other services' databases within a single database transaction.",
         "isCorrect": false,
-        "explanation": "Services sharing databases violates microservices principles. Cross-database writes undermine service independence."
+        "explanation": "Services sharing databases violates microservices principles. Cross-database writes undermine service independence.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Use global locks on all involved services until the transaction commits across all participants.",
         "isCorrect": false,
-        "explanation": "Global locks are a form of 2PC and are avoided due to the availability and deadlock risks they introduce."
+        "explanation": "Global locks are a form of 2PC and are avoided due to the availability and deadlock risks they introduce.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -682,22 +890,30 @@
       {
         "optionText": "In the Application Service Layer — DTOs are transport objects that cross layer boundaries; the Domain Layer should be free of external-facing concerns like serialisation formats.",
         "isCorrect": true,
-        "explanation": "Correct — keeping DTOs in the Application layer prevents the domain from being polluted by concerns about how data is transferred or presented."
+        "explanation": "Correct — keeping DTOs in the Application layer prevents the domain from being polluted by concerns about how data is transferred or presented.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "In the Domain Layer — DTOs represent domain concepts and should be co-located with domain entities.",
         "isCorrect": false,
-        "explanation": "DTOs are structural/transport objects, not domain concepts. Mixing them into the domain layer couples domain logic to external data formats."
+        "explanation": "DTOs are structural/transport objects, not domain concepts. Mixing them into the domain layer couples domain logic to external data formats.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "In the Presentation Layer — DTOs are only needed by the UI and shouldn't be visible to the service layer.",
         "isCorrect": false,
-        "explanation": "DTOs are used to transfer data between layers, including from the application service to the UI. They belong at the boundary, not purely in the presentation layer."
+        "explanation": "DTOs are used to transfer data between layers, including from the application service to the UI. They belong at the boundary, not purely in the presentation layer.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "In a dedicated DTO project — they should live in their own assembly to avoid circular dependencies.",
         "isCorrect": false,
-        "explanation": "While this is sometimes done in .NET projects, the general principle is that DTOs belong in the Application Service layer that produces them."
+        "explanation": "While this is sometimes done in .NET projects, the general principle is that DTOs belong in the Application Service layer that produces them.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -708,22 +924,30 @@
       {
         "optionText": "Exceptions thrown by transaction coordinators when a resource makes a unilateral decision (commit or rollback) based on a heuristic after a failure, potentially creating inconsistency.",
         "isCorrect": true,
-        "explanation": "Correct — heuristic exceptions arise in distributed transactions when a node acts independently during a coordinator failure, risking partial commits."
+        "explanation": "Correct — heuristic exceptions arise in distributed transactions when a node acts independently during a coordinator failure, risking partial commits.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Custom exceptions that developers define based on business rules, such as InsufficientFundsException.",
         "isCorrect": false,
-        "explanation": "Those are domain exceptions, not heuristic exceptions. Heuristic exceptions are specifically a distributed transactions concept."
+        "explanation": "Those are domain exceptions, not heuristic exceptions. Heuristic exceptions are specifically a distributed transactions concept.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Exceptions that the compiler warns about but doesn't enforce — the developer uses judgment on whether to handle them.",
         "isCorrect": false,
-        "explanation": "That describes unchecked/runtime exceptions in languages like Java, not heuristic exceptions."
+        "explanation": "That describes unchecked/runtime exceptions in languages like Java, not heuristic exceptions.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Exceptions generated by static analysis tools when code violates heuristic rules about complexity or naming.",
         "isCorrect": false,
-        "explanation": "Static analysis warnings are lint/code quality issues, not heuristic exceptions in the transaction coordination sense."
+        "explanation": "Static analysis warnings are lint/code quality issues, not heuristic exceptions in the transaction coordination sense.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -734,22 +958,30 @@
       {
         "optionText": "Cache with a composite key (user + sort criteria + page), use short TTLs or event-driven invalidation, and mark pages as stale on data changes rather than evicting eagerly.",
         "isCorrect": true,
-        "explanation": "Correct — paginated result caches must reflect sort and filter parameters. Short TTLs and event-driven invalidation balance freshness with performance."
+        "explanation": "Correct — paginated result caches must reflect sort and filter parameters. Short TTLs and event-driven invalidation balance freshness with performance.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Cache only the first page since most users never scroll past it, and always fetch subsequent pages fresh.",
         "isCorrect": false,
-        "explanation": "Caching strategy should cover all pages, not just the first. Subsequent pages are also frequently requested."
+        "explanation": "Caching strategy should cover all pages, not just the first. Subsequent pages are also frequently requested.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Disable caching for paginated results entirely — the complexity isn't worth it.",
         "isCorrect": false,
-        "explanation": "Paginated caching is complex but valuable for high-traffic lists. Abandoning it unnecessarily increases DB load."
+        "explanation": "Paginated caching is complex but valuable for high-traffic lists. Abandoning it unnecessarily increases DB load.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Cache the full result set for each user and paginate in memory on every request.",
         "isCorrect": false,
-        "explanation": "Storing the full result set per user doesn't scale with large datasets or large user bases."
+        "explanation": "Storing the full result set per user doesn't scale with large datasets or large user bases.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -760,22 +992,30 @@
       {
         "optionText": "Yes — 12-Factor is a methodology for building SaaS apps: one codebase, explicit dependencies, config in env vars, backing services as attached resources, strict dev/prod parity, and stateless processes among others.",
         "isCorrect": true,
-        "explanation": "Correct — the 12 factors define best practices for cloud-native app portability, scalability, and maintainability."
+        "explanation": "Correct — the 12 factors define best practices for cloud-native app portability, scalability, and maintainability.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Yes — 12-Factor requires exactly 12 microservices, one for each business capability.",
         "isCorrect": false,
-        "explanation": "The 12 factors are application design principles, not a microservices count prescription."
+        "explanation": "The 12 factors are application design principles, not a microservices count prescription.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Yes — 12-Factor is a testing framework requiring 12 different test types (unit, integration, e2e, etc.) before deployment.",
         "isCorrect": false,
-        "explanation": "12-Factor is about application architecture and operational best practices, not a testing methodology."
+        "explanation": "12-Factor is about application architecture and operational best practices, not a testing methodology.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Yes — 12-Factor mandates using Docker containers and Kubernetes for all production deployments.",
         "isCorrect": false,
-        "explanation": "12-Factor predates Kubernetes and is container-agnostic. It defines principles that containerisation helps achieve, but doesn't mandate specific tools."
+        "explanation": "12-Factor predates Kubernetes and is container-agnostic. It defines principles that containerisation helps achieve, but doesn't mandate specific tools.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -786,22 +1026,30 @@
       {
         "optionText": "Use a mutex/lock so only one request rebuilds the cache while others wait or serve stale data; alternatively use probabilistic early expiry to proactively refresh before expiry under high load.",
         "isCorrect": true,
-        "explanation": "Correct — these are the main strategies: mutex (one rebuilder), stale-while-revalidate (serve stale while refreshing), and probabilistic early refresh."
+        "explanation": "Correct — these are the main strategies: mutex (one rebuilder), stale-while-revalidate (serve stale while refreshing), and probabilistic early refresh.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Disable caching entirely during peak traffic to avoid stampedes — serve all requests directly from the database.",
         "isCorrect": false,
-        "explanation": "Removing caching during high traffic dramatically increases DB load — the opposite of what you want."
+        "explanation": "Removing caching during high traffic dramatically increases DB load — the opposite of what you want.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Set all cache TTLs to infinity so items are never evicted and stampedes can't occur.",
         "isCorrect": false,
-        "explanation": "Infinite TTL means stale data is served indefinitely. Cache invalidation is necessary for data freshness."
+        "explanation": "Infinite TTL means stale data is served indefinitely. Cache invalidation is necessary for data freshness.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Rate-limit incoming requests during cache rebuilding so the database isn't overwhelmed.",
         "isCorrect": false,
-        "explanation": "Rate limiting can help but it degrades user experience. Mutex or stale-while-revalidate strategies handle this more gracefully."
+        "explanation": "Rate limiting can help but it degrades user experience. Mutex or stale-while-revalidate strategies handle this more gracefully.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   },
@@ -812,22 +1060,30 @@
       {
         "optionText": "Software is inherently complex (essential complexity) — requirements change, systems interact unexpectedly, and implicit assumptions accumulate. Maintenance is hard because code must be understood before changed, and changes have non-obvious ripple effects.",
         "isCorrect": true,
-        "explanation": "Correct — Fred Brooks' 'No Silver Bullet' identifies essential complexity as unavoidable. Accidental complexity (poor design) compounds it."
+        "explanation": "Correct — Fred Brooks' 'No Silver Bullet' identifies essential complexity as unavoidable. Accidental complexity (poor design) compounds it.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Software is difficult because programming languages are too low-level — higher abstractions would make it easy.",
         "isCorrect": false,
-        "explanation": "Higher abstractions help but don't solve the fundamental complexity. Requirements ambiguity and changing domains remain regardless of language."
+        "explanation": "Higher abstractions help but don't solve the fundamental complexity. Requirements ambiguity and changing domains remain regardless of language.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Software is hard only for junior developers — experienced engineers find it straightforward.",
         "isCorrect": false,
-        "explanation": "Software complexity challenges everyone. Experienced developers manage it better but don't eliminate it."
+        "explanation": "Software complexity challenges everyone. Experienced developers manage it better but don't eliminate it.",
+        "optionTextTr": "",
+        "explanationTr": ""
       },
       {
         "optionText": "Maintenance is hard only because developers don't write enough comments — better documentation would fix it.",
         "isCorrect": false,
-        "explanation": "Documentation helps but doesn't address structural complexity, changing requirements, or emergent system behaviour."
+        "explanation": "Documentation helps but doesn't address structural complexity, changing requirements, or emergent system behaviour.",
+        "optionTextTr": "",
+        "explanationTr": ""
       }
     ]
   }

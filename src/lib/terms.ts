@@ -3,14 +3,14 @@ import type { TermRow, Topic } from "@/lib/supabase/types";
 
 export type TermListItem = Pick<
   TermRow,
-  "id" | "slug" | "label" | "topic" | "tooltip"
+  "id" | "slug" | "label" | "topic" | "tooltip" | "tooltip_tr"
 >;
 
 export async function listTerms(): Promise<TermListItem[]> {
   const supabase = await createServerSupabaseClient();
   const { data, error } = await supabase
     .from("terms")
-    .select("id, slug, label, topic, tooltip")
+    .select("id, slug, label, topic, tooltip, tooltip_tr")
     .order("label", { ascending: true });
 
   if (error) throw new Error(`Failed to load terms: ${error.message}`);
@@ -34,7 +34,7 @@ export async function getRelatedTerms(slugs: string[]): Promise<TermListItem[]> 
   const supabase = await createServerSupabaseClient();
   const { data, error } = await supabase
     .from("terms")
-    .select("id, slug, label, topic, tooltip")
+    .select("id, slug, label, topic, tooltip, tooltip_tr")
     .in("slug", slugs);
 
   if (error) throw new Error(`Failed to load related terms: ${error.message}`);

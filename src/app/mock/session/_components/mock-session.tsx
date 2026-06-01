@@ -192,15 +192,15 @@ export function MockSession({
                     <span className="font-medium">
                       {i18n.yourAnswer}
                     </span>{" "}
-                    {picked ? picked.text : i18n.notAnswered}
+                    {picked ? (lang === "tr" && picked.textTr ? picked.textTr : picked.text) : i18n.notAnswered}
                   </p>
                   <p className="mt-1 text-sm text-emerald-700 dark:text-emerald-400">
                     <span className="font-medium">{i18n.correctAnswer}</span>{" "}
-                    {answer?.text}
+                    {answer ? (lang === "tr" && answer.textTr ? answer.textTr : answer.text) : null}
                   </p>
                   {answer?.explanation && (
                     <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                      {answer.explanation}
+                      {lang === "tr" && answer.explanationTr ? answer.explanationTr : answer.explanation}
                     </p>
                   )}
                 </div>
@@ -306,7 +306,7 @@ export function MockSession({
                   >
                     {OPTION_LABELS[optionIndex]}
                   </span>
-                  <span className="flex-1 pt-0.5 leading-snug">{option.text}</span>
+                  <span className="flex-1 pt-0.5 leading-snug">{lang === "tr" && option.textTr ? option.textTr : option.text}</span>
                 </button>
               </li>
             );
@@ -327,12 +327,12 @@ export function MockSession({
               {pickedOption?.isCorrect ? i18n.correct : i18n.notQuite}
             </p>
             {pickedOption?.explanation && (
-              <p className="mt-1">{pickedOption.explanation}</p>
+              <p className="mt-1">{lang === "tr" && pickedOption.explanationTr ? pickedOption.explanationTr : pickedOption.explanation}</p>
             )}
             {!pickedOption?.isCorrect && answer && (
               <p className="mt-2 text-muted-foreground">
                 <span className="font-medium text-foreground">{i18n.correctAnswer}</span>{" "}
-                {answer.text}
+                {lang === "tr" && answer.textTr ? answer.textTr : answer.text}
               </p>
             )}
           </div>

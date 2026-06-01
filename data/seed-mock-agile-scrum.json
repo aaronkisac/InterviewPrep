@@ -6,22 +6,30 @@
       {
         "optionText": "An iterative software development approach emphasising collaboration, working software, customer feedback, and adapting to change over rigid upfront planning.",
         "isCorrect": true,
-        "explanation": "Correct — Agile values and principles are defined in the Agile Manifesto (2001)."
+        "explanation": "Correct — Agile values and principles are defined in the Agile Manifesto (2001).",
+        "optionTextTr": "Agile'ın değerleri ve ilkeleri Agile Manifesto'nda (2001) tanımlanmış, işbirliğini, çalışan yazılımı, müşteri geri bildirimini ve değişime uyumu ön plana alan iteratif yazılım geliştirme yaklaşımı.",
+        "explanationTr": "Doğru — Agile'ın değerleri ve ilkeleri 2001'de yayımlanan Agile Manifesto'da tanımlanmıştır."
       },
       {
         "optionText": "A specific project management tool like Jira or Trello.",
         "isCorrect": false,
-        "explanation": "Jira and Trello are tools that support Agile workflows — Agile itself is a set of values and principles, not a tool."
+        "explanation": "Jira and Trello are tools that support Agile workflows — Agile itself is a set of values and principles, not a tool.",
+        "optionTextTr": "Jira veya Trello gibi belirli bir proje yönetimi aracı.",
+        "explanationTr": "Jira ve Trello, Agile iş akışlarını destekleyen araçlardır — Agile'ın kendisi bir araç değil, değerler ve ilkeler bütünüdür."
       },
       {
         "optionText": "A waterfall methodology where requirements are fully defined before development begins.",
         "isCorrect": false,
-        "explanation": "That describes waterfall — Agile is specifically an alternative to upfront, rigid planning."
+        "explanation": "That describes waterfall — Agile is specifically an alternative to upfront, rigid planning.",
+        "optionTextTr": "Geliştirmeye başlamadan önce gereksinimlerin tamamen tanımlandığı şelale metodolojisi.",
+        "explanationTr": "Bu, şelaleci yaklaşımı tanımlar — Agile ise tam olarak katı, önceden planlamaya karşı geliştirilmiştir."
       },
       {
         "optionText": "A programming paradigm for writing modular, testable code.",
         "isCorrect": false,
-        "explanation": "Agile is a project management and product development philosophy, not a programming paradigm."
+        "explanation": "Agile is a project management and product development philosophy, not a programming paradigm.",
+        "optionTextTr": "Modüler, test edilebilir kod yazmak için bir programlama paradigması.",
+        "explanationTr": "Agile, bir programlama paradigması değil; bir proje yönetim ve ürün geliştirme felsefesidir."
       }
     ]
   },
@@ -32,22 +40,30 @@
       {
         "optionText": "An Agile framework that organises work into time-boxed sprints with defined roles (Product Owner, Scrum Master, Developers) and ceremonies (Planning, Standup, Review, Retrospective).",
         "isCorrect": true,
-        "explanation": "Correct — Scrum is one implementation of Agile principles, not Agile itself."
+        "explanation": "Correct — Scrum is one implementation of Agile principles, not Agile itself.",
+        "optionTextTr": "Sprint'leri, tanımlı rolleri (Product Owner, Scrum Master, Developers) ve törenleri (Planlama, Standup, İnceleme, Retrospektif) kullanarak iş organize eden bir Agile çerçevesi.",
+        "explanationTr": "Doğru — Scrum, Agile ilkelerinin bir uygulamasıdır; Agile'ın kendisi değil."
       },
       {
         "optionText": "A synonym for Agile — Scrum and Agile mean the same thing.",
         "isCorrect": false,
-        "explanation": "Scrum is one framework for implementing Agile principles — Kanban and XP are other Agile frameworks."
+        "explanation": "Scrum is one framework for implementing Agile principles — Kanban and XP are other Agile frameworks.",
+        "optionTextTr": "Scrum ve Agile aynı anlama gelir.",
+        "explanationTr": "Scrum, Agile ilkelerini uygulamanın bir çerçevesidir — Kanban ve XP de başka Agile çerçeveleridir."
       },
       {
         "optionText": "A tool for managing GitHub pull requests and code reviews in a team.",
         "isCorrect": false,
-        "explanation": "Scrum is a project management framework — it is not a code review tool."
+        "explanation": "Scrum is a project management framework — it is not a code review tool.",
+        "optionTextTr": "GitHub pull request'lerini ve kod incelemelerini bir ekipte yönetmek için bir araç.",
+        "explanationTr": "Scrum, bir proje yönetim çerçevesidir — kod inceleme aracı değildir."
       },
       {
         "optionText": "A methodology that eliminates all planning in favour of continuous delivery.",
         "isCorrect": false,
-        "explanation": "Scrum includes structured planning — Sprint Planning defines what will be done in each sprint."
+        "explanation": "Scrum includes structured planning — Sprint Planning defines what will be done in each sprint.",
+        "optionTextTr": "Sürekli teslimat adına tüm planlamayı ortadan kaldıran bir metodoloji.",
+        "explanationTr": "Scrum yapılandırılmış planlama içerir — Sprint Planlama her sprint'te yapılacakları tanımlar."
       }
     ]
   },
@@ -58,22 +74,30 @@
       {
         "optionText": "A fixed time-box (usually 1–4 weeks) during which the team builds a potentially shippable product increment from selected backlog items.",
         "isCorrect": true,
-        "explanation": "Correct — sprints have a fixed end date; unfinished work is not automatically rolled over."
+        "explanation": "Correct — sprints have a fixed end date; unfinished work is not automatically rolled over.",
+        "optionTextTr": "Ekibin seçilmiş backlog öğelerinden potansiyel olarak gönderilebilir bir ürün artışı oluşturduğu sabit zaman dilimi (genellikle 1-4 hafta).",
+        "explanationTr": "Doğru — sprint'lerin sabit bir bitiş tarihi vardır; tamamlanmayan işler otomatik olarak devredilmez."
       },
       {
         "optionText": "A sprint is a rush to complete all remaining work before a major release.",
         "isCorrect": false,
-        "explanation": "A sprint is a regular, fixed-length iteration — not an emergency push before a deadline."
+        "explanation": "A sprint is a regular, fixed-length iteration — not an emergency push before a deadline.",
+        "optionTextTr": "Sprint, büyük bir sürümden önce kalan tüm işi tamamlamak için yapılan aceledir.",
+        "explanationTr": "Sprint, acil bir son dakika baskısı değil; düzenli, sabit uzunlukta bir iterasyondur."
       },
       {
         "optionText": "An optional Scrum ceremony held when the team needs extra time to fix bugs.",
         "isCorrect": false,
-        "explanation": "Sprints are the core time-boxing mechanism of Scrum — they are not optional bug-fixing periods."
+        "explanation": "Sprints are the core time-boxing mechanism of Scrum — they are not optional bug-fixing periods.",
+        "optionTextTr": "Ekibin hataları düzeltmek için ekstra zaman ihtiyaç duyduğunda yapılan isteğe bağlı bir Scrum töreni.",
+        "explanationTr": "Sprint'ler, Scrum'ın temel zamanlama mekanizmasıdır — isteğe bağlı hata düzeltme dönemleri değil."
       },
       {
         "optionText": "A sprint is a branch in Git where all sprint work is committed before being merged to main.",
         "isCorrect": false,
-        "explanation": "A sprint is a time-box in Scrum — it is a project management concept, not a Git workflow."
+        "explanation": "A sprint is a time-box in Scrum — it is a project management concept, not a Git workflow.",
+        "optionTextTr": "Sprint, tüm sprint çalışmasının ana branch'e birleştirilmeden önce commit edildiği bir Git branch'idir.",
+        "explanationTr": "Sprint, Scrum'daki bir zaman dilimidir — bir proje yönetim kavramıdır, Git iş akışı değil."
       }
     ]
   },
@@ -84,22 +108,30 @@
       {
         "optionText": "A 2001 document with 4 values: Individuals & interactions over processes & tools; Working software over comprehensive documentation; Customer collaboration over contract negotiation; Responding to change over following a plan.",
         "isCorrect": true,
-        "explanation": "Correct — the manifesto values the right-hand items but explicitly states the left-hand items are valued more."
+        "explanation": "Correct — the manifesto values the right-hand items but explicitly states the left-hand items are valued more.",
+        "optionTextTr": "2001 tarihli, 4 değeri olan belge: Bireyler & etkileşimler > süreçler & araçlar; Çalışan yazılım > kapsamlı dokümantasyon; Müşteri işbirliği > sözleşme müzakeresi; Değişime yanıt verme > bir planı izleme.",
+        "explanationTr": "Doğru — manifesto sağ taraftaki öğelere değer verir, ancak sol taraftakilerin daha değerli olduğunu açıkça belirtir."
       },
       {
         "optionText": "A management framework with 4 values: Speed, Efficiency, Documentation, and Planning.",
         "isCorrect": false,
-        "explanation": "Those are not the Agile Manifesto values — the manifesto explicitly deprioritises documentation and rigid planning."
+        "explanation": "Those are not the Agile Manifesto values — the manifesto explicitly deprioritises documentation and rigid planning.",
+        "optionTextTr": "4 değeri olan bir yönetim çerçevesi: Hız, Verimlilik, Dokümantasyon ve Planlama.",
+        "explanationTr": "Bunlar Agile Manifesto değerleri değildir — manifesto açıkça dokümantasyonu ve katı planlamayı öncelikten düşürür."
       },
       {
         "optionText": "A 2010 update to waterfall methodology adding iterative checkpoints.",
         "isCorrect": false,
-        "explanation": "The Agile Manifesto was written in 2001 as an alternative to waterfall, not an update to it."
+        "explanation": "The Agile Manifesto was written in 2001 as an alternative to waterfall, not an update to it.",
+        "optionTextTr": "Şelale metodolojisine iteratif kontrol noktaları ekleyen 2010 tarihli bir güncelleme.",
+        "explanationTr": "Agile Manifesto 2001'de şelaleye alternatif olarak yazılmıştır — onun bir güncellemesi değil."
       },
       {
         "optionText": "A contract between developers and clients defining 4 deliverables per quarter.",
         "isCorrect": false,
-        "explanation": "The manifesto is a philosophical document — it explicitly values customer collaboration over contract negotiation."
+        "explanation": "The manifesto is a philosophical document — it explicitly values customer collaboration over contract negotiation.",
+        "optionTextTr": "Geliştiriciler ile müşteriler arasında çeyrek başına 4 teslimat tanımlayan bir sözleşme.",
+        "explanationTr": "Manifesto felsefi bir belgedir — müşteri işbirliğini sözleşme müzakeresinin önüne açıkça koyar."
       }
     ]
   },
@@ -110,22 +142,30 @@
       {
         "optionText": "Epic = large feature broken into multiple stories; User Story = feature from user's perspective; Task = technical implementation step within a story.",
         "isCorrect": true,
-        "explanation": "Correct — they form a hierarchy: Epic → Stories → Tasks."
+        "explanation": "Correct — they form a hierarchy: Epic → Stories → Tasks.",
+        "optionTextTr": "Epic = birden fazla story'ye ayrılan büyük özellik; User Story = kullanıcı perspektifinden özellik; Task = bir story içindeki teknik uygulama adımı.",
+        "explanationTr": "Doğru — bir hiyerarşi oluştururlar: Epic → Story'ler → Görevler."
       },
       {
         "optionText": "They are three names for the same concept — the team chooses which term to use.",
         "isCorrect": false,
-        "explanation": "Each has a distinct scope — epics are larger than stories which are larger than tasks."
+        "explanation": "Each has a distinct scope — epics are larger than stories which are larger than tasks.",
+        "optionTextTr": "Bunlar aynı kavramın üç farklı adıdır — ekip hangisini kullanacağını seçer.",
+        "explanationTr": "Her birinin farklı bir kapsamı vardır — epic'ler story'lerden, story'ler ise task'lerden büyüktür."
       },
       {
         "optionText": "Epics are written by managers; User Stories by developers; Tasks by QA engineers.",
         "isCorrect": false,
-        "explanation": "Who writes them varies by team — the distinction is scope and granularity, not authorship."
+        "explanation": "Who writes them varies by team — the distinction is scope and granularity, not authorship.",
+        "optionTextTr": "Epic'ler yöneticiler, User Story'ler geliştiriciler, Task'ler QA mühendisleri tarafından yazılır.",
+        "explanationTr": "Kim yazdığı ekipten ekibe değişir — ayrım kapsam ve ayrıntı düzeyiyle ilgilidir, yazarlıkla değil."
       },
       {
         "optionText": "User Stories are optional — teams can use only Epics and Tasks for planning.",
         "isCorrect": false,
-        "explanation": "User Stories are the core unit of Agile estimation and sprint planning — epics are split into stories before sprint planning."
+        "explanation": "User Stories are the core unit of Agile estimation and sprint planning — epics are split into stories before sprint planning.",
+        "optionTextTr": "User Story'ler isteğe bağlıdır — ekipler yalnızca Epic ve Task kullanarak planlama yapabilir.",
+        "explanationTr": "User Story'ler, Agile tahmininin ve sprint planlamasının temel birimidir; sprint planlamadan önce epic'ler story'lere bölünür."
       }
     ]
   },
@@ -136,22 +176,30 @@
       {
         "optionText": "Product Owner (prioritises backlog, owns the what/why), Scrum Master (facilitates, removes impediments), and Developers (build the product, own the how).",
         "isCorrect": true,
-        "explanation": "Correct — the 2020 Scrum Guide renamed 'Development Team' to 'Developers' to include testers and designers."
+        "explanation": "Correct — the 2020 Scrum Guide renamed 'Development Team' to 'Developers' to include testers and designers.",
+        "optionTextTr": "Product Owner (neyi/neden önceliklendiriyor), Scrum Master (kolaylaştırır, engelleri kaldırır), Developers (ürünü inşa eder, nasılın sahibidir).",
+        "explanationTr": "Doğru — 2020 Scrum Kılavuzu, testçi ve tasarımcıları da kapsayacak şekilde 'Geliştirme Ekibi'ni 'Developers' olarak yeniden adlandırdı."
       },
       {
         "optionText": "Project Manager, Tech Lead, and Junior Developers.",
         "isCorrect": false,
-        "explanation": "Those are traditional hierarchical roles — Scrum's three roles are specifically Product Owner, Scrum Master, and Developers."
+        "explanation": "Those are traditional hierarchical roles — Scrum's three roles are specifically Product Owner, Scrum Master, and Developers.",
+        "optionTextTr": "Proje Yöneticisi, Teknik Lider ve Junior Geliştiriciler.",
+        "explanationTr": "Bunlar geleneksel hiyerarşik rollerdir — Scrum'ın üç rolü özellikle Product Owner, Scrum Master ve Developers'tır."
       },
       {
         "optionText": "CEO, CTO, and Engineering Team.",
         "isCorrect": false,
-        "explanation": "Scrum roles are within the delivery team — executive titles are not Scrum roles."
+        "explanation": "Scrum roles are within the delivery team — executive titles are not Scrum roles.",
+        "optionTextTr": "CEO, CTO ve Mühendislik Ekibi.",
+        "explanationTr": "Scrum rolleri teslimat ekibi içindedir — yönetici unvanları Scrum rolleri değildir."
       },
       {
         "optionText": "Scrum has no defined roles — it is a self-organising system where anyone does anything.",
         "isCorrect": false,
-        "explanation": "Scrum has three well-defined roles with specific accountabilities — self-organisation applies within those boundaries."
+        "explanation": "Scrum has three well-defined roles with specific accountabilities — self-organisation applies within those boundaries.",
+        "optionTextTr": "Scrum'ın tanımlı rolleri yoktur — herkesin her şeyi yapabildiği öz-organize bir sistemdir.",
+        "explanationTr": "Scrum'ın belirli sorumlulukları olan üç iyi tanımlı rolü vardır — öz-organizasyon bu sınırlar içinde geçerlidir."
       }
     ]
   },
@@ -162,22 +210,30 @@
       {
         "optionText": "Sprint Planning, Daily Scrum (standup), Sprint Review, and Sprint Retrospective — plus the Sprint itself as the overarching container.",
         "isCorrect": true,
-        "explanation": "Correct — all five are defined in the Scrum Guide as formal opportunities to inspect and adapt."
+        "explanation": "Correct — all five are defined in the Scrum Guide as formal opportunities to inspect and adapt.",
+        "optionTextTr": "Sprint Planlama, Daily Scrum (standup), Sprint İncelemesi ve Sprint Retrospektifi — artı kapsayıcı konteyner olarak Sprint'in kendisi.",
+        "explanationTr": "Doğru — Scrum Kılavuzu'nda beşi de inceleme ve uyum için resmi fırsatlar olarak tanımlanmıştır."
       },
       {
         "optionText": "Kickoff meeting, mid-sprint check-in, and release celebration.",
         "isCorrect": false,
-        "explanation": "Those are informal team practices — the four Scrum ceremonies are Planning, Standup, Review, and Retrospective."
+        "explanation": "Those are informal team practices — the four Scrum ceremonies are Planning, Standup, Review, and Retrospective.",
+        "optionTextTr": "Başlangıç toplantısı, sprint ortası kontrol ve sürüm kutlaması.",
+        "explanationTr": "Bunlar gayri resmi ekip uygulamalarıdır — dört resmi Scrum töreni Planlama, Standup, İnceleme ve Retrospektif'tir."
       },
       {
         "optionText": "Backlog grooming, estimation session, code review, and deployment.",
         "isCorrect": false,
-        "explanation": "Backlog refinement is an ongoing activity — the formal Scrum events are the four ceremonies."
+        "explanation": "Backlog refinement is an ongoing activity — the formal Scrum events are the four ceremonies.",
+        "optionTextTr": "Backlog grooming, tahmin oturumu, kod incelemesi ve dağıtım.",
+        "explanationTr": "Backlog geliştirme süregelen bir etkinliktir — resmi Scrum etkinlikleri dört törendir."
       },
       {
         "optionText": "Scrum has no defined ceremonies — teams hold meetings whenever they feel necessary.",
         "isCorrect": false,
-        "explanation": "The Scrum Guide defines specific ceremonies with time-boxes and purposes — they are not ad-hoc."
+        "explanation": "The Scrum Guide defines specific ceremonies with time-boxes and purposes — they are not ad-hoc.",
+        "optionTextTr": "Scrum'ın tanımlı törenleri yoktur — ekipler gerekli gördüklerinde toplantı yapar.",
+        "explanationTr": "Scrum Kılavuzu, zaman sınırlı ve amaçlı belirli törenler tanımlar — bunlar geçici değildir."
       }
     ]
   },
@@ -188,22 +244,30 @@
       {
         "optionText": "A relative unit of effort (complexity + uncertainty) used to estimate user stories — typically Fibonacci scale (1,2,3,5,8,13). Never convert to hours.",
         "isCorrect": true,
-        "explanation": "Correct — story points are relative to each other within the team; converting them to hours defeats their purpose."
+        "explanation": "Correct — story points are relative to each other within the team; converting them to hours defeats their purpose.",
+        "optionTextTr": "Kullanıcı story'lerini tahmin etmek için kullanılan göreli çaba birimi (karmaşıklık + belirsizlik) — tipik olarak Fibonacci ölçeği (1,2,3,5,8,13). Asla saate dönüştürülmez.",
+        "explanationTr": "Doğru — story point'ler ekip içinde birbirine görelidir; saate dönüştürmek amacını ortadan kaldırır."
       },
       {
         "optionText": "Story points represent hours of work — a 5-point story takes exactly 5 hours to complete.",
         "isCorrect": false,
-        "explanation": "Story points are not hours — they measure relative effort and uncertainty, not calendar time."
+        "explanation": "Story points are not hours — they measure relative effort and uncertainty, not calendar time.",
+        "optionTextTr": "Story point'ler çalışma saatlerini temsil eder — 5 puanlık story tam olarak 5 saatte tamamlanır.",
+        "explanationTr": "Story point'ler saat değildir — takvim süresi değil, göreli çabayı ve belirsizliği ölçerler."
       },
       {
         "optionText": "Story points are assigned by the Scrum Master based on team velocity.",
         "isCorrect": false,
-        "explanation": "The development team estimates story points collaboratively — the Scrum Master facilitates but does not assign them."
+        "explanation": "The development team estimates story points collaboratively — the Scrum Master facilitates but does not assign them.",
+        "optionTextTr": "Story point'ler, Scrum Master tarafından ekip velocity'sine göre atanır.",
+        "explanationTr": "Geliştirme ekibi story point'leri işbirliğiyle tahmin eder — Scrum Master kolaylaştırır ama atamazlar."
       },
       {
         "optionText": "Story points are used to measure and compare developer performance across sprints.",
         "isCorrect": false,
-        "explanation": "Using story points to measure individual performance is an anti-pattern — they measure team velocity, not individual output."
+        "explanation": "Using story points to measure individual performance is an anti-pattern — they measure team velocity, not individual output.",
+        "optionTextTr": "Story point'ler, sprint'ler boyunca bireysel geliştirici performansını ölçmek ve karşılaştırmak için kullanılır.",
+        "explanationTr": "Bireysel performansı ölçmek için story point kullanmak bir anti-pattern'dir — ekip velocity'sini ölçerler, bireysel çıktıyı değil."
       }
     ]
   },
@@ -214,22 +278,30 @@
       {
         "optionText": "Product Backlog = prioritised list of all potential work owned by the PO; Sprint Backlog = subset selected for the current sprint, owned by the Developers.",
         "isCorrect": true,
-        "explanation": "Correct — the Product Backlog is ever-evolving; the Sprint Backlog is locked for the sprint duration."
+        "explanation": "Correct — the Product Backlog is ever-evolving; the Sprint Backlog is locked for the sprint duration.",
+        "optionTextTr": "Product Backlog = PO tarafından sahiplenilen önceliklendirilmiş tüm potansiyel iş listesi; Sprint Backlog = geçerli sprint için seçilen alt küme, Developers tarafından sahiplenilir.",
+        "explanationTr": "Doğru — Product Backlog sürekli değişir; Sprint Backlog sprint süresi boyunca sabitlenir."
       },
       {
         "optionText": "They are the same list — the Sprint Backlog is just what the Product Backlog looks like during a sprint.",
         "isCorrect": false,
-        "explanation": "They are distinct: the Product Backlog covers all future work; the Sprint Backlog is the current sprint's committed items."
+        "explanation": "They are distinct: the Product Backlog covers all future work; the Sprint Backlog is the current sprint's committed items.",
+        "optionTextTr": "Bunlar aynı listedir — Sprint Backlog, Product Backlog'un sprint sırasındaki görünümüdür.",
+        "explanationTr": "Bunlar farklıdır: Product Backlog gelecekteki tüm işi kapsar; Sprint Backlog mevcut sprint'in taahhüt edilen öğelerini içerir."
       },
       {
         "optionText": "The Product Backlog is maintained in Jira; the Sprint Backlog is maintained in a physical whiteboard.",
         "isCorrect": false,
-        "explanation": "Tool choice is irrelevant — the distinction is ownership and scope, not the tool used."
+        "explanation": "Tool choice is irrelevant — the distinction is ownership and scope, not the tool used.",
+        "optionTextTr": "Product Backlog Jira'da tutulur; Sprint Backlog fiziksel bir beyaz tahta üzerinde.",
+        "explanationTr": "Araç seçimi alakasızdır — ayrım sahiplik ve kapsama ilişkindir, kullanılan araçla değil."
       },
       {
         "optionText": "The Sprint Backlog includes all items from the Product Backlog that haven't been completed yet.",
         "isCorrect": false,
-        "explanation": "The Sprint Backlog is only the items selected for the current sprint — not all remaining backlog items."
+        "explanation": "The Sprint Backlog is only the items selected for the current sprint — not all remaining backlog items.",
+        "optionTextTr": "Sprint Backlog, Product Backlog'daki henüz tamamlanmamış tüm öğeleri içerir.",
+        "explanationTr": "Sprint Backlog yalnızca mevcut sprint için seçilen öğeleri içerir — kalan tüm backlog öğelerini değil."
       }
     ]
   },
@@ -240,22 +312,30 @@
       {
         "optionText": "A shared checklist of quality criteria that every increment must meet before it can be called Done — e.g. code reviewed, tests passing, deployed to staging.",
         "isCorrect": true,
-        "explanation": "Correct — DoD ensures consistent quality across all work items, separate from per-story acceptance criteria."
+        "explanation": "Correct — DoD ensures consistent quality across all work items, separate from per-story acceptance criteria.",
+        "optionTextTr": "Her artışın Tamamlandı sayılmadan önce karşılaması gereken paylaşılan bir kalite kriterleri kontrol listesi — örn. kod incelendi, testler geçiyor, staging'e dağıtıldı.",
+        "explanationTr": "Doğru — DoD, hikaye bazlı kabul kriterlerinden ayrı olarak tüm iş öğelerinde tutarlı kaliteyi sağlar."
       },
       {
         "optionText": "The acceptance criteria written for each individual user story.",
         "isCorrect": false,
-        "explanation": "Acceptance criteria are story-specific; the Definition of Done is a universal quality baseline for all stories."
+        "explanation": "Acceptance criteria are story-specific; the Definition of Done is a universal quality baseline for all stories.",
+        "optionTextTr": "Her bireysel kullanıcı hikayesi için yazılan kabul kriterleri.",
+        "explanationTr": "Kabul kriterleri hikayeye özgüdür; Tamamlanma Tanımı tüm hikayeler için evrensel bir kalite tabanıdır."
       },
       {
         "optionText": "A document signed by the Product Owner confirming a feature is complete.",
         "isCorrect": false,
-        "explanation": "DoD is a team agreement — it is not a document requiring sign-off for each story."
+        "explanation": "DoD is a team agreement — it is not a document requiring sign-off for each story.",
+        "optionTextTr": "Product Owner'ın bir özelliğin tamamlandığını onayladığı imzalanmış belge.",
+        "explanationTr": "DoD bir ekip anlaşmasıdır — her hikaye için onay gerektiren bir belge değildir."
       },
       {
         "optionText": "The date when the sprint ends and all work must be submitted.",
         "isCorrect": false,
-        "explanation": "DoD is about quality criteria, not a deadline — it defines what 'complete' means, not when it's due."
+        "explanation": "DoD is about quality criteria, not a deadline — it defines what 'complete' means, not when it's due.",
+        "optionTextTr": "Sprint'in bittiği ve tüm işin teslim edilmesi gereken tarih.",
+        "explanationTr": "DoD kalite kriterleriyle ilgilidir, son tarihle değil — 'tamamlandı'nın ne anlama geldiğini tanımlar, ne zaman teslim edileceğini değil."
       }
     ]
   },
@@ -266,22 +346,30 @@
       {
         "optionText": "A time-boxed ceremony at the end of each sprint where the team inspects how they worked and agrees on concrete process improvements for the next sprint.",
         "isCorrect": true,
-        "explanation": "Correct — the output is actionable improvements, not just discussion. Psychological safety is essential for honest retrospectives."
+        "explanation": "Correct — the output is actionable improvements, not just discussion. Psychological safety is essential for honest retrospectives.",
+        "optionTextTr": "Her sprint sonunda ekibin nasıl çalıştığını incelediği ve bir sonraki sprint için somut süreç iyileştirmeleri üzerinde uzlaştığı zaman sınırlı tören.",
+        "explanationTr": "Doğru — çıktı, yalnızca tartışma değil, uygulanabilir iyileştirmelerdir. Dürüst retrospektifler için psikolojik güvenlik şarttır."
       },
       {
         "optionText": "A meeting where the team demos completed features to stakeholders for approval.",
         "isCorrect": false,
-        "explanation": "That is the Sprint Review — the Retrospective focuses on team process, not product demonstration."
+        "explanation": "That is the Sprint Review — the Retrospective focuses on team process, not product demonstration.",
+        "optionTextTr": "Ekibin tamamlanan özellikleri paydaşlara onay için sunduğu toplantı.",
+        "explanationTr": "Bu Sprint İncelemesi'ni tanımlar — Retrospektif, ürün demosu değil ekip süreci üzerine odaklanır."
       },
       {
         "optionText": "A planning session held at the start of each sprint to select backlog items.",
         "isCorrect": false,
-        "explanation": "That is Sprint Planning — the Retrospective happens at the end to improve how the team works."
+        "explanation": "That is Sprint Planning — the Retrospective happens at the end to improve how the team works.",
+        "optionTextTr": "Her sprint başında backlog öğelerini seçmek için yapılan planlama oturumu.",
+        "explanationTr": "Bu Sprint Planlama'dır — Retrospektif, ekibin nasıl çalıştığını iyileştirmek için sonunda gerçekleşir."
       },
       {
         "optionText": "An optional meeting held only when the sprint went poorly.",
         "isCorrect": false,
-        "explanation": "Retrospectives are held after every sprint regardless of how it went — you learn from good sprints too."
+        "explanation": "Retrospectives are held after every sprint regardless of how it went — you learn from good sprints too.",
+        "optionTextTr": "Yalnızca sprint kötü gittiğinde yapılan isteğe bağlı bir toplantı.",
+        "explanationTr": "Retrospektifler, sprint'in nasıl gittiğinden bağımsız olarak her sprint sonunda yapılır — iyi sprint'lerden de öğrenilir."
       }
     ]
   },
@@ -292,22 +380,30 @@
       {
         "optionText": "The average story points completed per sprint (typically last 3–5 sprints) — used for release forecasting, not as a performance metric.",
         "isCorrect": true,
-        "explanation": "Correct — using velocity to compare teams or grade developers is an anti-pattern."
+        "explanation": "Correct — using velocity to compare teams or grade developers is an anti-pattern.",
+        "optionTextTr": "Sprint başına tamamlanan ortalama story point sayısı (tipik olarak son 3-5 sprint) — performans metriği değil, sürüm tahmininde kullanılır.",
+        "explanationTr": "Doğru — velocity'yi ekipleri karşılaştırmak veya geliştiricileri değerlendirmek için kullanmak bir anti-pattern'dir."
       },
       {
         "optionText": "The speed at which code is deployed to production — measured in deployments per day.",
         "isCorrect": false,
-        "explanation": "Deployment frequency is a DevOps metric — velocity specifically measures story points completed per sprint."
+        "explanation": "Deployment frequency is a DevOps metric — velocity specifically measures story points completed per sprint.",
+        "optionTextTr": "Kodun production'a dağıtılma hızı — günlük dağıtım sayısıyla ölçülür.",
+        "explanationTr": "Dağıtım sıklığı bir DevOps metriğidir — velocity özellikle sprint başına tamamlanan story point'leri ölçer."
       },
       {
         "optionText": "A KPI used by management to rank developer productivity and set performance goals.",
         "isCorrect": false,
-        "explanation": "Using velocity to evaluate individual performance is explicitly an anti-pattern in Agile — it leads to inflated estimates."
+        "explanation": "Using velocity to evaluate individual performance is explicitly an anti-pattern in Agile — it leads to inflated estimates.",
+        "optionTextTr": "Yönetim tarafından geliştirici verimliliğini sıralamak ve performans hedefleri belirlemek için kullanılan KPI.",
+        "explanationTr": "Velocity'yi bireysel performansı değerlendirmek için kullanmak Agile'da açıkça bir anti-pattern'dir — şişirilmiş tahminlere yol açar."
       },
       {
         "optionText": "Velocity measures how quickly the team can respond to urgent production bugs.",
         "isCorrect": false,
-        "explanation": "Velocity tracks planned sprint work completion — response time to incidents is a different operational metric."
+        "explanation": "Velocity tracks planned sprint work completion — response time to incidents is a different operational metric.",
+        "optionTextTr": "Velocity, ekibin acil production hatalarına ne kadar hızlı yanıt verebildiğini ölçer.",
+        "explanationTr": "Velocity, planlanan sprint çalışmasının tamamlanmasını izler — olaylara yanıt süresi farklı bir operasyonel metriktir."
       }
     ]
   },
@@ -318,22 +414,30 @@
       {
         "optionText": "Burn-down shows remaining work decreasing toward zero over the sprint; burn-up shows completed work increasing toward the total scope, making scope changes visible.",
         "isCorrect": true,
-        "explanation": "Correct — burn-up is better for communicating scope creep; burn-down is more common for sprint progress."
+        "explanation": "Correct — burn-up is better for communicating scope creep; burn-down is more common for sprint progress.",
+        "optionTextTr": "Burn-down, sprint boyunca kalan işin sıfıra doğru azaldığını; burn-up, tamamlanan işin toplam kapsama doğru arttığını gösterir ve kapsam değişikliklerini görünür kılar.",
+        "explanationTr": "Doğru — burn-up kapsam sürünmesini iletmek için daha iyidir; burn-down sprint ilerlemesi için daha yaygındır."
       },
       {
         "optionText": "Both charts show the same data — the difference is only visual styling.",
         "isCorrect": false,
-        "explanation": "Burn-up explicitly shows scope as a separate line, making scope changes visible — burn-down hides scope changes."
+        "explanation": "Burn-up explicitly shows scope as a separate line, making scope changes visible — burn-down hides scope changes.",
+        "optionTextTr": "Her iki grafik de aynı veriyi gösterir — fark yalnızca görsel stildir.",
+        "explanationTr": "Burn-up, kapsamı ayrı bir satır olarak açıkça gösterir ve kapsam değişikliklerini görünür kılar — burn-down kapsam değişikliklerini gizler."
       },
       {
         "optionText": "Burn-down tracks bug count; burn-up tracks feature count.",
         "isCorrect": false,
-        "explanation": "Both track work (typically story points) — not specific work types."
+        "explanation": "Both track work (typically story points) — not specific work types.",
+        "optionTextTr": "Burn-down hata sayısını; burn-up özellik sayısını izler.",
+        "explanationTr": "Her ikisi de çalışmayı (genellikle story point'leri) izler — belirli iş türlerini değil."
       },
       {
         "optionText": "These charts are used to track individual developer output across sprints.",
         "isCorrect": false,
-        "explanation": "Burn charts track team-level sprint progress, not individual developer output."
+        "explanation": "Burn charts track team-level sprint progress, not individual developer output.",
+        "optionTextTr": "Bu grafikler, sprint'ler boyunca bireysel geliştirici çıktısını izlemek için kullanılır.",
+        "explanationTr": "Burn grafikleri ekip düzeyinde sprint ilerlemesini izler, bireysel geliştirici çıktısını değil."
       }
     ]
   },
@@ -344,22 +448,30 @@
       {
         "optionText": "Agile is a philosophy/mindset with values and principles; Scrum is a specific framework implementing Agile using sprints, roles, and ceremonies.",
         "isCorrect": true,
-        "explanation": "Correct — you can be Agile without using Scrum; Scrum is one of several Agile frameworks alongside Kanban, XP, and SAFe."
+        "explanation": "Correct — you can be Agile without using Scrum; Scrum is one of several Agile frameworks alongside Kanban, XP, and SAFe.",
+        "optionTextTr": "Agile, değerleri ve ilkeleri olan bir felsefe/zihin yapısıdır; Scrum ise sprint'ler, roller ve törenler kullanarak Agile'ı uygulayan belirli bir çerçevedir.",
+        "explanationTr": "Doğru — Scrum kullanmadan Agile olabilirsiniz; Scrum, Kanban, XP ve SAFe ile birlikte birçok Agile çerçevesinden biridir."
       },
       {
         "optionText": "Agile is modern; Scrum is the legacy version that was replaced by Agile.",
         "isCorrect": false,
-        "explanation": "Agile (2001) and Scrum (early 1990s) both exist today — Scrum implements Agile values."
+        "explanation": "Agile (2001) and Scrum (early 1990s) both exist today — Scrum implements Agile values.",
+        "optionTextTr": "Agile modern; Scrum ise Agile tarafından yerini alan eski versiyon.",
+        "explanationTr": "Agile (2001) ve Scrum (1990'ların başı) bugün hâlâ var — Scrum, Agile değerlerini uygular."
       },
       {
         "optionText": "Scrum is for software teams; Agile is for project managers and executives.",
         "isCorrect": false,
-        "explanation": "Both apply to software delivery teams — the distinction is philosophy vs framework, not audience."
+        "explanation": "Both apply to software delivery teams — the distinction is philosophy vs framework, not audience.",
+        "optionTextTr": "Scrum yazılım ekipleri için; Agile proje yöneticileri ve yöneticiler için.",
+        "explanationTr": "Her ikisi de yazılım teslimat ekiplerine uygulanır — ayrım felsefe ile çerçeve arasındadır, hedef kitle arasında değil."
       },
       {
         "optionText": "They are identical — 'Agile' and 'Scrum' are used interchangeably in the industry.",
         "isCorrect": false,
-        "explanation": "While often conflated, they are distinct: Agile is the philosophy; Scrum is one framework to implement it."
+        "explanation": "While often conflated, they are distinct: Agile is the philosophy; Scrum is one framework to implement it.",
+        "optionTextTr": "Bunlar özdeştir — 'Agile' ve 'Scrum' sektörde birbirinin yerine kullanılır.",
+        "explanationTr": "Sıklıkla karıştırılsalar da farklıdırlar: Agile felsefedir; Scrum onu uygulamak için bir çerçevedir."
       }
     ]
   },
@@ -370,22 +482,30 @@
       {
         "optionText": "Incremental = add new pieces of functionality over time; Iterative = repeatedly refine the same piece based on feedback until it is right.",
         "isCorrect": true,
-        "explanation": "Correct — Agile combines both: each sprint adds increments (incremental) AND refines previous work based on feedback (iterative)."
+        "explanation": "Correct — Agile combines both: each sprint adds increments (incremental) AND refines previous work based on feedback (iterative).",
+        "optionTextTr": "Artımlı = zamanla yeni işlevsellik parçaları ekleme; Yinelemeli = geri bildirime dayalı olarak aynı parçayı doğru olana kadar tekrar tekrar iyileştirme.",
+        "explanationTr": "Doğru — Agile ikisini birleştirir: her sprint artışlar ekler (artımlı) VE geri bildirime dayalı önceki işi iyileştirir (yinelemeli)."
       },
       {
         "optionText": "They are the same concept described from different team perspectives.",
         "isCorrect": false,
-        "explanation": "They are genuinely distinct approaches — incremental is additive; iterative is refinement-based."
+        "explanation": "They are genuinely distinct approaches — incremental is additive; iterative is refinement-based.",
+        "optionTextTr": "Bunlar farklı ekip perspektiflerinden tanımlanan aynı kavramdır.",
+        "explanationTr": "Bunlar gerçekten farklı yaklaşımlardır — artımlı ilave bazlıdır; yinelemeli iyileştirme bazlıdır."
       },
       {
         "optionText": "Incremental is used for features; iterative is used for bug fixes.",
         "isCorrect": false,
-        "explanation": "The distinction is about development approach, not work type."
+        "explanation": "The distinction is about development approach, not work type.",
+        "optionTextTr": "Artımlı özellikler için; yinelemeli hata düzeltmeleri için kullanılır.",
+        "explanationTr": "Ayrım, iş türüyle değil; geliştirme yaklaşımıyla ilgilidir."
       },
       {
         "optionText": "Iterative development requires more upfront planning than incremental development.",
         "isCorrect": false,
-        "explanation": "Planning requirements depend on the specific process, not the incremental vs iterative distinction."
+        "explanation": "Planning requirements depend on the specific process, not the incremental vs iterative distinction.",
+        "optionTextTr": "Yinelemeli geliştirme, artımlı geliştirmeden daha fazla ön planlama gerektirir.",
+        "explanationTr": "Planlama gereksinimleri, artımlı-yinelemeli ayrımından değil; belirli süreçten bağımsız olarak değişir."
       }
     ]
   },
@@ -396,22 +516,30 @@
       {
         "optionText": "A lean workflow management method using a visual board with WIP limits to visualise work, limit multitasking, and surface bottlenecks — no fixed sprints or prescribed roles.",
         "isCorrect": true,
-        "explanation": "Correct — Kanban suits interrupt-driven work (support, ops); Scrum suits planned feature delivery."
+        "explanation": "Correct — Kanban suits interrupt-driven work (support, ops); Scrum suits planned feature delivery.",
+        "optionTextTr": "İşi görselleştirmek, çoklu görevi sınırlamak ve darboğazları ortaya çıkarmak için WIP limitleri olan görsel bir pano kullanan yalın iş akışı yönetim yöntemi — sabit sprint veya öngörülen roller yok.",
+        "explanationTr": "Doğru — Kanban, kesintiye uğramış çalışmalar için uygundur (destek, operasyonlar); Scrum ise planlanan özellik teslimatı için uygundur."
       },
       {
         "optionText": "A Japanese project management tool used exclusively in manufacturing.",
         "isCorrect": false,
-        "explanation": "Kanban originated in manufacturing (Toyota) but is widely used in software development teams."
+        "explanation": "Kanban originated in manufacturing (Toyota) but is widely used in software development teams.",
+        "optionTextTr": "Yalnızca üretimde kullanılan bir Japon proje yönetimi aracı.",
+        "explanationTr": "Kanban, üretimden (Toyota) kaynaklanır ancak yazılım geliştirme ekiplerinde yaygın olarak kullanılır."
       },
       {
         "optionText": "A Scrum ceremony held mid-sprint to review the current sprint board status.",
         "isCorrect": false,
-        "explanation": "Kanban is a distinct methodology — it is not a Scrum ceremony."
+        "explanation": "Kanban is a distinct methodology — it is not a Scrum ceremony.",
+        "optionTextTr": "Mevcut sprint panosu durumunu gözden geçirmek için sprint ortasında yapılan bir Scrum töreni.",
+        "explanationTr": "Kanban farklı bir metodolojidır — bir Scrum töreni değildir."
       },
       {
         "optionText": "A burndown chart variant that shows work items on a physical sticky-note board.",
         "isCorrect": false,
-        "explanation": "A Kanban board can be physical or digital — but Kanban is the entire workflow management methodology, not just the board."
+        "explanation": "A Kanban board can be physical or digital — but Kanban is the entire workflow management methodology, not just the board.",
+        "optionTextTr": "Çalışma öğelerini fiziksel yapışkan not panosunda gösteren bir burn-down grafik varyantı.",
+        "explanationTr": "Bir Kanban panosu fiziksel veya dijital olabilir — Kanban ise sadece pano değil, tüm iş akışı yönetimi metodolojisidir."
       }
     ]
   },
@@ -422,22 +550,30 @@
       {
         "optionText": "A Scrum event at the start of each Sprint where the team defines the Sprint Goal and selects backlog items to deliver.",
         "isCorrect": true,
-        "explanation": "Correct — Sprint Planning has two parts: What can be done (Sprint Goal + selected items) and How it will be done (tasks/design). Time-boxed to 8h for a 4-week Sprint."
+        "explanation": "Correct — Sprint Planning has two parts: What can be done (Sprint Goal + selected items) and How it will be done (tasks/design). Time-boxed to 8h for a 4-week Sprint.",
+        "optionTextTr": "Her Sprint başında ekibin Sprint Hedefini tanımladığı ve teslimat için backlog öğelerini seçtiği Scrum etkinliği.",
+        "explanationTr": "Doğru — Sprint Planlamanın iki bölümü vardır: Ne yapılabilir (Sprint Hedefi + seçilen öğeler) ve Nasıl yapılacak (görevler/tasarım). 4 haftalık Sprint için 8 saat zaman sınırı."
       },
       {
         "optionText": "A meeting where the Product Owner assigns tasks to individual developers for the upcoming Sprint.",
         "isCorrect": false,
-        "explanation": "In Scrum, the Development Team self-organises and pulls work — the PO does not assign tasks to individuals."
+        "explanation": "In Scrum, the Development Team self-organises and pulls work — the PO does not assign tasks to individuals.",
+        "optionTextTr": "Product Owner'ın bireysel geliştiricilere gelecek Sprint için görev atadığı toplantı.",
+        "explanationTr": "Scrum'da Geliştirme Ekibi öz-organize olur ve işi kendisi çeker — PO bireylere görev atamaz."
       },
       {
         "optionText": "A weekly recurring event where the team updates their estimates on the backlog.",
         "isCorrect": false,
-        "explanation": "Backlog refinement is a separate ongoing activity. Sprint Planning happens once per Sprint to plan that Sprint's work."
+        "explanation": "Backlog refinement is a separate ongoing activity. Sprint Planning happens once per Sprint to plan that Sprint's work.",
+        "optionTextTr": "Ekibin backlog tahminlerini güncellediği haftalık tekrarlayan etkinlik.",
+        "explanationTr": "Backlog geliştirme ayrı bir süregelen etkinliktir. Sprint Planlaması, o Sprint'in çalışmasını planlamak için Sprint başına bir kez yapılır."
       },
       {
         "optionText": "A ceremony where the Scrum Master reviews team velocity and sets the Sprint capacity.",
         "isCorrect": false,
-        "explanation": "The whole Scrum Team participates in Sprint Planning — not just the Scrum Master. Velocity informs capacity but the team makes commitments collaboratively."
+        "explanation": "The whole Scrum Team participates in Sprint Planning — not just the Scrum Master. Velocity informs capacity but the team makes commitments collaboratively.",
+        "optionTextTr": "Scrum Master'ın ekip velocity'sini inceleyip Sprint kapasitesini belirlediği tören.",
+        "explanationTr": "Sprint Planlamasına tüm Scrum Ekibi katılır — yalnızca Scrum Master değil. Velocity kapasiteyi bilgilendirir ama ekip taahhütleri işbirliğiyle yapar."
       }
     ]
   },
@@ -448,22 +584,30 @@
       {
         "optionText": "Conditions a User Story must satisfy to be accepted as complete — defined by the Product Owner before development.",
         "isCorrect": true,
-        "explanation": "Correct — AC is written in concrete, testable terms (Given/When/Then or checklist). They prevent ambiguity and define the boundary of 'done' for a story."
+        "explanation": "Correct — AC is written in concrete, testable terms (Given/When/Then or checklist). They prevent ambiguity and define the boundary of 'done' for a story.",
+        "optionTextTr": "Geliştirmeden önce Product Owner tarafından tanımlanan, bir User Story'nin tamamlandı kabul edilmesi için karşılaması gereken koşullar.",
+        "explanationTr": "Doğru — AC, somut, test edilebilir terimlerle yazılır (Given/When/Then veya kontrol listesi). Belirsizliği önler ve bir hikaye için 'tamamlandı'nın sınırını tanımlar."
       },
       {
         "optionText": "The technical code review checklist the development team uses before merging a PR.",
         "isCorrect": false,
-        "explanation": "Code review checklists are internal team agreements. Acceptance Criteria are business-facing conditions defined by the Product Owner."
+        "explanation": "Code review checklists are internal team agreements. Acceptance Criteria are business-facing conditions defined by the Product Owner.",
+        "optionTextTr": "Geliştirme ekibinin bir PR'ı birleştirmeden önce kullandığı teknik kod inceleme kontrol listesi.",
+        "explanationTr": "Kod inceleme kontrol listeleri, dahili ekip anlaşmalarıdır. Kabul Kriterleri, Product Owner tarafından tanımlanan iş odaklı koşullardır."
       },
       {
         "optionText": "The minimum performance benchmarks (latency, uptime) a feature must meet in production.",
         "isCorrect": false,
-        "explanation": "Performance benchmarks may be part of AC but AC is broader — any condition the story must satisfy including functional behaviour."
+        "explanation": "Performance benchmarks may be part of AC but AC is broader — any condition the story must satisfy including functional behaviour.",
+        "optionTextTr": "Bir özelliğin production'da karşılaması gereken minimum performans kriterleri (gecikme, çalışma süresi).",
+        "explanationTr": "Performans kriterleri AC'nin parçası olabilir, ancak AC daha geniştir — işlevsel davranış dahil hikayenin karşılaması gereken her koşul."
       },
       {
         "optionText": "The process of a senior developer accepting or rejecting another developer's work in a sprint.",
         "isCorrect": false,
-        "explanation": "AC are predefined conditions, not a person's approval. The PO accepts a story when all AC are verified."
+        "explanation": "AC are predefined conditions, not a person's approval. The PO accepts a story when all AC are verified.",
+        "optionTextTr": "Bir kıdemli geliştiricinin sprint'te başka bir geliştiricinin çalışmasını kabul etme veya reddetme süreci.",
+        "explanationTr": "AC, önceden tanımlanmış koşullardır, bir kişinin onayı değil. PO, tüm AC doğrulandığında bir hikayeyi kabul eder."
       }
     ]
   },
@@ -474,22 +618,30 @@
       {
         "optionText": "A short, fixed-length development cycle (1–4 weeks) at the end of which potentially shippable software is produced.",
         "isCorrect": true,
-        "explanation": "Correct — called a Sprint in Scrum. Each iteration starts with planning and ends with a working increment, enabling regular inspection and adaptation."
+        "explanation": "Correct — called a Sprint in Scrum. Each iteration starts with planning and ends with a working increment, enabling regular inspection and adaptation.",
+        "optionTextTr": "Sonunda potansiyel olarak gönderilebilir yazılım üretilen kısa, sabit uzunlukta geliştirme döngüsü (1-4 hafta).",
+        "explanationTr": "Doğru — Scrum'da Sprint olarak adlandırılır. Her iterasyon planlamayla başlar ve çalışan bir artışla biter; düzenli inceleme ve uyuma olanak tanır."
       },
       {
         "optionText": "A loop in code that repeats a block — Agile borrowed the term from programming.",
         "isCorrect": false,
-        "explanation": "In Agile, iteration is a time-boxed development cycle, not a code loop. The metaphor is about repeating the build-test-review cycle."
+        "explanation": "In Agile, iteration is a time-boxed development cycle, not a code loop. The metaphor is about repeating the build-test-review cycle.",
+        "optionTextTr": "Bir kod bloğunu tekrarlayan döngü — Agile bu terimi programlamadan ödünç almıştır.",
+        "explanationTr": "Agile'da iterasyon, zaman sınırlı bir geliştirme döngüsüdür, kod döngüsü değil. Metafor, derleme-test-inceleme döngüsünün tekrarlanmasıyla ilgilidir."
       },
       {
         "optionText": "A six-month release cycle where all features are developed then released together.",
         "isCorrect": false,
-        "explanation": "Six-month cycles describe Waterfall or traditional release planning. Agile iterations are short (1–4 weeks) to enable frequent feedback."
+        "explanation": "Six-month cycles describe Waterfall or traditional release planning. Agile iterations are short (1–4 weeks) to enable frequent feedback.",
+        "optionTextTr": "Tüm özelliklerin geliştirilip birlikte yayınlandığı altı aylık sürüm döngüsü.",
+        "explanationTr": "Altı aylık döngüler, Şelale veya geleneksel sürüm planlamasını tanımlar. Agile iterasyonları kısa (1-4 hafta) olup sık geri bildirim almayı sağlar."
       },
       {
         "optionText": "A meeting where the team iterates through the backlog prioritising each item.",
         "isCorrect": false,
-        "explanation": "Backlog prioritisation happens in refinement sessions. An iteration is a full development cycle, not a meeting."
+        "explanation": "Backlog prioritisation happens in refinement sessions. An iteration is a full development cycle, not a meeting.",
+        "optionTextTr": "Ekibin her öğeyi önceliklendirerek backlog üzerinden geçtiği toplantı.",
+        "explanationTr": "Backlog önceliklendirmesi geliştirme oturumlarında gerçekleşir. İterasyon, bir toplantı değil; tam bir geliştirme döngüsüdür."
       }
     ]
   },
@@ -500,22 +652,30 @@
       {
         "optionText": "An end-of-Sprint event where the team demos the Increment to stakeholders and collaboratively updates the Product Backlog.",
         "isCorrect": true,
-        "explanation": "Correct — the Sprint Review is an inspect-and-adapt event for the product. It's not a status report — it's a working session to decide what to do next."
+        "explanation": "Correct — the Sprint Review is an inspect-and-adapt event for the product. It's not a status report — it's a working session to decide what to do next.",
+        "optionTextTr": "Ekibin Artışı paydaşlara sunduğu ve Product Backlog'u işbirliği içinde güncellediği Sprint sonu etkinliği.",
+        "explanationTr": "Doğru — Sprint İncelemesi, ürün için bir inceleme ve uyum etkinliğidir. Durum raporu değil, sırada ne yapılacağına karar verilecek çalışma oturumudur."
       },
       {
         "optionText": "An internal team retrospective to review what went well and what to improve.",
         "isCorrect": false,
-        "explanation": "That describes the Sprint Retrospective. The Sprint Review focuses on the product Increment and involves stakeholders."
+        "explanation": "That describes the Sprint Retrospective. The Sprint Review focuses on the product Increment and involves stakeholders.",
+        "optionTextTr": "Neyin iyi gittiğini ve neyin iyileştirileceğini inceleyen dahili ekip retrospektifi.",
+        "explanationTr": "Bu Sprint Retrospektifini tanımlar. Sprint İncelemesi, ürün Artışına odaklanır ve paydaşları içerir."
       },
       {
         "optionText": "A code review session where senior developers approve all PRs from the Sprint.",
         "isCorrect": false,
-        "explanation": "Code reviews happen continuously during the Sprint. The Sprint Review is a product demo and backlog discussion, not a code review."
+        "explanation": "Code reviews happen continuously during the Sprint. The Sprint Review is a product demo and backlog discussion, not a code review.",
+        "optionTextTr": "Kıdemli geliştiricilerin Sprint'teki tüm PR'ları onayladığı kod inceleme oturumu.",
+        "explanationTr": "Kod incelemeleri Sprint boyunca sürekli gerçekleşir. Sprint İncelemesi, paydaşlarla yapılan bir ürün demosu ve backlog tartışmasıdır."
       },
       {
         "optionText": "A meeting where the Scrum Master reviews the team's velocity against the Sprint commitment.",
         "isCorrect": false,
-        "explanation": "Velocity review is informational and part of planning discussions. The Sprint Review is about inspecting the Increment with stakeholders."
+        "explanation": "Velocity review is informational and part of planning discussions. The Sprint Review is about inspecting the Increment with stakeholders.",
+        "optionTextTr": "Scrum Master'ın ekip velocity'sini Sprint taahhüdüne karşı incelediği toplantı.",
+        "explanationTr": "Velocity incelemesi bilgilendirici niteliktedir ve planlama tartışmalarının bir parçasıdır. Sprint İncelemesi, Artışı paydaşlarla incelemekle ilgilidir."
       }
     ]
   },
@@ -526,22 +686,30 @@
       {
         "optionText": "Commitment, Courage, Focus, Openness, and Respect — the five values that underpin Scrum team behaviour.",
         "isCorrect": true,
-        "explanation": "Correct — these values guide how team members work together. Without them, Scrum events and artifacts become hollow ceremonies."
+        "explanation": "Correct — these values guide how team members work together. Without them, Scrum events and artifacts become hollow ceremonies.",
+        "optionTextTr": "Ekibi Scrum konusunda koçluk yapan, engelleri kaldıran ve Scrum etkinliklerini kolaylaştıran hizmetkar lider — proje yöneticisi değil.",
+        "explanationTr": "Doğru — Scrum Master'ın ekip üzerinde hiçbir yetkisi yoktur. Ekibi dışarıdan gelecek müdahalelerden korur ve organizasyonun Scrum'ı benimsemesine yardımcı olur."
       },
       {
         "optionText": "Individuals over processes, Working software, Customer collaboration, Responding to change.",
         "isCorrect": false,
-        "explanation": "Those are the four values of the Agile Manifesto, not the five Scrum Values."
+        "explanation": "Those are the four values of the Agile Manifesto, not the five Scrum Values.",
+        "optionTextTr": "Scrum Master görev atar, bireysel performansı izler ve yönetime rapor verir.",
+        "explanationTr": "Bu, geleneksel bir proje yöneticisi rolünü tanımlar. Scrum Master, görev atamaz veya bireyleri yönetmez."
       },
       {
         "optionText": "Transparency, Inspection, Adaptation — the three pillars of Scrum.",
         "isCorrect": false,
-        "explanation": "Transparency, Inspection, and Adaptation are the three empirical pillars of Scrum, not the five Scrum Values."
+        "explanation": "Transparency, Inspection, and Adaptation are the three empirical pillars of Scrum, not the five Scrum Values.",
+        "optionTextTr": "Scrum Master, Product Backlog'un sahibidir ve her Sprint için öğeleri önceliklendirir.",
+        "explanationTr": "Product Owner, backlog'un sahibidir ve önceliklendirir. Scrum Master, ürüne değil; ekibin sürecine odaklanır."
       },
       {
         "optionText": "Sprint, Backlog, Increment, Velocity, Retrospective.",
         "isCorrect": false,
-        "explanation": "Those are Scrum artifacts and events. The Scrum Values are Commitment, Courage, Focus, Openness, and Respect."
+        "explanation": "Those are Scrum artifacts and events. The Scrum Values are Commitment, Courage, Focus, Openness, and Respect.",
+        "optionTextTr": "Scrum Master, ekip için mimari kararlar alan teknik liderdir.",
+        "explanationTr": "Teknik kararlar Geliştirme Ekibine aittir. Scrum Master, teknik bir otorite değil; bir süreç koçudur."
       }
     ]
   },
@@ -552,22 +720,30 @@
       {
         "optionText": "A servant-leader who coaches the team on Scrum, removes impediments, and facilitates Scrum events — not a project manager.",
         "isCorrect": true,
-        "explanation": "Correct — the Scrum Master has no authority over the team. They protect the team from external interference and help the organisation adopt Scrum."
+        "explanation": "Correct — the Scrum Master has no authority over the team. They protect the team from external interference and help the organisation adopt Scrum.",
+        "optionTextTr": "Mevcut Sprint'teki tüm tamamlanan Product Backlog öğelerinin artı tüm önceki Artışların toplamı — Tamamlanma Tanımını karşılamalıdır.",
+        "explanationTr": "Doğru — Artış birikimlidir ve potansiyel olarak yayınlanabilir olmalıdır. Yalnızca bu Sprint'te yapılanları değil; toplam çalışan ürünü içerir."
       },
       {
         "optionText": "The Scrum Master assigns tasks, tracks individual performance, and reports to management.",
         "isCorrect": false,
-        "explanation": "That describes a traditional project manager role. The Scrum Master does not assign tasks or manage individuals."
+        "explanation": "That describes a traditional project manager role. The Scrum Master does not assign tasks or manage individuals.",
+        "optionTextTr": "Sprint'te tamamlanan story point sayısı — ekip velocity'sini ölçmek için kullanılır.",
+        "explanationTr": "Story point'ler çabayı ölçer; Artış ise gerçek çalışan üründür. Velocity, Artıştan değil story point'lerden türetilir."
       },
       {
         "optionText": "The Scrum Master owns the Product Backlog and prioritises items for each Sprint.",
         "isCorrect": false,
-        "explanation": "The Product Owner owns and prioritises the backlog. The Scrum Master focuses on the team's process, not the product."
+        "explanation": "The Product Owner owns and prioritises the backlog. The Scrum Master focuses on the team's process, not the product.",
+        "optionTextTr": "Paydaş onayı için Sprint sırasında eklenen tüm özellikleri listeleyen belge.",
+        "explanationTr": "Artış, çalışan yazılımdır — dokümantasyon değil. Paydaş onayı Sprint İncelemesinde gerçekleşir, ancak Artışın kendisi üründür."
       },
       {
         "optionText": "The Scrum Master is the technical lead who makes architecture decisions for the team.",
         "isCorrect": false,
-        "explanation": "Technical decisions belong to the Development Team. The Scrum Master is a process coach, not a technical authority."
+        "explanation": "Technical decisions belong to the Development Team. The Scrum Master is a process coach, not a technical authority.",
+        "optionTextTr": "Delta — yalnızca mevcut Sprint'te geliştirilen yeni özellikler, önceki çalışmalar dahil değil.",
+        "explanationTr": "Artış birikimlidir — bu ve tüm önceki Sprint'lerde yapılanları içerir. Her Sprint, toplam çalışan ürüne ekler."
       }
     ]
   },
@@ -578,22 +754,30 @@
       {
         "optionText": "The sum of all completed Product Backlog items from the current Sprint plus all previous Increments — must meet the Definition of Done.",
         "isCorrect": true,
-        "explanation": "Correct — the Increment is cumulative and must be potentially releasable. It's not just what was built this Sprint but the total working product."
+        "explanation": "Correct — the Increment is cumulative and must be potentially releasable. It's not just what was built this Sprint but the total working product.",
+        "optionTextTr": "Ampirik süreç kontrolü — bilgi deneyimden gelir ve kararlar, Şeffaflık, Denetim ve Uyum yoluyla bilinenlere dayalı alınır.",
+        "explanationTr": "Doğru — Scrum'ın üç sütunu (Şeffaflık, Denetim, Uyum) empirizmi uygular. Bu nedenle Scrum kısa Sprint'ler kullanır: gerçek geri bildirimi sık almak için."
       },
       {
         "optionText": "The number of story points completed in a Sprint — used to measure team velocity.",
         "isCorrect": false,
-        "explanation": "Story points measure effort; the Increment is the actual working product. Velocity is derived from story points, not from the Increment itself."
+        "explanation": "Story points measure effort; the Increment is the actual working product. Velocity is derived from story points, not from the Increment itself.",
+        "optionTextTr": "Toyota'nın yalın üretim ilkeleri — israfı ortadan kaldır, akışı optimize et.",
+        "explanationTr": "Lean ve Kanban Toyota'dan ödünç alır. Scrum'ın teorik temeli, yalın üretim değil; ampirik süreç kontrolüdür."
       },
       {
         "optionText": "A document listing all features added during the Sprint for stakeholder sign-off.",
         "isCorrect": false,
-        "explanation": "The Increment is working software, not documentation. Stakeholder sign-off happens in the Sprint Review but the Increment itself is the product."
+        "explanation": "The Increment is working software, not documentation. Stakeholder sign-off happens in the Sprint Review but the Increment itself is the product.",
+        "optionTextTr": "Daha kısa aşamalarla Şelale — Scrum, bir büyük planı daha küçük sıralı planlara böler.",
+        "explanationTr": "Scrum, Şelaleden temelden farklıdır. Yinelemeli ve uyarlanabilirdir — plan her Sprint'te öğrenilenler temelinde gelişir."
       },
       {
         "optionText": "The delta — only the new features built in the current Sprint, not including previous work.",
         "isCorrect": false,
-        "explanation": "The Increment is cumulative — it includes everything built in this and all previous Sprints. Each Sprint adds to the total working product."
+        "explanation": "The Increment is cumulative — it includes everything built in this and all previous Sprints. Each Sprint adds to the total working product.",
+        "optionTextTr": "Karmaşıklık teorisi — Scrum, yazılım projelerinin kaotik olduğunu kabul eder ve kaosla baş etmek için katı kurallar kullanır.",
+        "explanationTr": "Scrum karmaşıklığı kabul eder, ancak temeli empirizm, kaos teorisi değildir."
       }
     ]
   },
@@ -604,22 +788,30 @@
       {
         "optionText": "Empirical process control — knowledge comes from experience, and decisions are based on what is known via Transparency, Inspection, and Adaptation.",
         "isCorrect": true,
-        "explanation": "Correct — Scrum's three pillars (Transparency, Inspection, Adaptation) implement empiricism. This is why Scrum uses short Sprints: to get real feedback frequently."
+        "explanation": "Correct — Scrum's three pillars (Transparency, Inspection, Adaptation) implement empiricism. This is why Scrum uses short Sprints: to get real feedback frequently.",
+        "optionTextTr": "CI, entegrasyon sorunlarını erken yakalayarak çalışan yazılımın sık teslimini sağlar — Agile'ın çalışan yazılım üzerine temel ilkesiyle örtüşür.",
+        "explanationTr": "Doğru — CI olmadan birden fazla geliştiricinin kodunu birleştirmek entegrasyon borcu yaratır. CI, kod tabanının her Sprint'te her zaman gönderilebilir durumda olmasını sağlar."
       },
       {
         "optionText": "Lean manufacturing principles from Toyota — eliminate waste, optimise flow.",
         "isCorrect": false,
-        "explanation": "Lean and Kanban borrow from Toyota. Scrum's theoretical foundation is empirical process control, not lean manufacturing."
+        "explanation": "Lean and Kanban borrow from Toyota. Scrum's theoretical foundation is empirical process control, not lean manufacturing.",
+        "optionTextTr": "CI, Sprint Planlamanın yerini alır — pipeline dağıtımları otomatik yönettiğinden ekiplerin artık planlama yapması gerekmez.",
+        "explanationTr": "CI, derleme ve testi otomatize eder, planlamayı değil. Sprint Planlama, backlog geliştirme ve ekip uyumu Agile'da hâlâ gereklidir."
       },
       {
         "optionText": "Waterfall with shorter phases — Scrum breaks one large plan into smaller sequential plans.",
         "isCorrect": false,
-        "explanation": "Scrum is fundamentally different from Waterfall. It is iterative and adaptive — the plan evolves based on what is learned each Sprint."
+        "explanation": "Scrum is fundamentally different from Waterfall. It is iterative and adaptive — the plan evolves based on what is learned each Sprint.",
+        "optionTextTr": "CI yalnızca DevOps ekipleri için geçerlidir — altyapıya erişimi olmayan Agile ekipler fayda görmez.",
+        "explanationTr": "CI, kod yazan her ekibe fayda sağlar. Extreme Programming (XP)'in temel bir pratiğidir ve Agile metodolojiler genelinde benimsenmektedir."
       },
       {
         "optionText": "Complexity theory — Scrum accepts that software projects are chaotic and uses strict rules to control chaos.",
         "isCorrect": false,
-        "explanation": "Scrum acknowledges complexity but its foundation is empiricism, not chaos theory. The Cynefin framework associates Scrum with complex (not chaotic) domains."
+        "explanation": "Scrum acknowledges complexity but its foundation is empiricism, not chaos theory. The Cynefin framework associates Scrum with complex (not chaotic) domains.",
+        "optionTextTr": "CI, son entegrasyon aşamasının sorunsuz çalışmasını sağlayan, Agile için uyarlanmış bir Şelale kavramıdır.",
+        "explanationTr": "CI, Martin Fowler tarafından ortaya konulmuş ve XP tarafından bir Agile uygulaması olarak popülerleştirilmiştir. Şelale'nin 'son entegrasyon aşamasını' aktif olarak ortadan kaldırır."
       }
     ]
   },
@@ -630,22 +822,30 @@
       {
         "optionText": "CI enables frequent delivery of working software by catching integration issues early — aligning with Agile's core principle of working software over documentation.",
         "isCorrect": true,
-        "explanation": "Correct — without CI, merging code from multiple developers creates integration debt. CI ensures the codebase is always in a shippable state each Sprint."
+        "explanation": "Correct — without CI, merging code from multiple developers creates integration debt. CI ensures the codebase is always in a shippable state each Sprint.",
+        "optionTextTr": "Agile Manifesto'dan ilkeler: erken teslimat, değişimi karşılama, sık çalışan yazılım, işbirliği, motive ekipler, yüz yüze iletişim, çalışan yazılım olarak ilerleme, sürdürülebilir tempo, teknik mükemmellik, basitlik, öz-organizasyon ve yansıma.",
+        "explanationTr": "Doğru — 12 ilke, 4 Agile değerini ayrıntılandırır. Sürekli teslimatı, değişimi kucaklamayı ve iş ile geliştiriciler arasındaki yakın işbirliğini vurgular."
       },
       {
         "optionText": "CI replaces Sprint Planning — teams no longer need to plan because the pipeline manages deployments automatically.",
         "isCorrect": false,
-        "explanation": "CI automates build and test, not planning. Sprint Planning, backlog refinement, and team alignment are still essential in Agile."
+        "explanation": "CI automates build and test, not planning. Sprint Planning, backlog refinement, and team alignment are still essential in Agile.",
+        "optionTextTr": "Sprint'in 12 adımı: Planlama, 1-10. gün standup'ları, İnceleme, Retrospektif.",
+        "explanationTr": "Bunlar Scrum etkinlikleridir, 12 Agile İlkesi değil. İlkeler, Sprint programı değil; Agile Manifesto'dan felsefi rehberlerdir."
       },
       {
         "optionText": "CI is only relevant for DevOps teams — Agile teams without infrastructure access don't benefit.",
         "isCorrect": false,
-        "explanation": "CI benefits any team writing code collaboratively. It's a core Extreme Programming (XP) practice adopted across Agile methodologies."
+        "explanation": "CI benefits any team writing code collaboratively. It's a core Extreme Programming (XP) practice adopted across Agile methodologies.",
+        "optionTextTr": "Scrum Kılavuzu'ndan Scrum çerçevesinin nasıl uygulanması gerektiğini tanımlayan kurallar.",
+        "explanationTr": "12 Agile İlkesi, Scrum Kılavuzu'ndan değil; Agile Manifesto'dan (2001) gelir. Yalnızca Scrum'a değil, tüm Agile çerçevelerine uygulanırlar."
       },
       {
         "optionText": "CI is a Waterfall concept adapted for Agile — it ensures the final integration phase runs smoothly.",
         "isCorrect": false,
-        "explanation": "CI was coined by Martin Fowler and popularised by XP as an Agile practice. It actively eliminates the 'final integration phase' of Waterfall."
+        "explanation": "CI was coined by Martin Fowler and popularised by XP as an Agile practice. It actively eliminates the 'final integration phase' of Waterfall.",
+        "optionTextTr": "Agile ekip organizasyonuna uygulanan SOLID ilkeleri.",
+        "explanationTr": "SOLID, OOP tasarım ilkeleri kümesidir. 12 Agile İlkesi, yazılım geliştirme felsefesi ve ekip işbirliğiyle ilgilidir."
       }
     ]
   },
@@ -656,22 +856,30 @@
       {
         "optionText": "Principles from the Agile Manifesto covering: early delivery, welcoming change, frequent working software, collaboration, motivated teams, face-to-face communication, working software as progress, sustainable pace, technical excellence, simplicity, self-organisation, and reflection.",
         "isCorrect": true,
-        "explanation": "Correct — the 12 principles elaborate on the 4 Agile values. They emphasise continuous delivery, embracing change, and close collaboration between business and developers."
+        "explanation": "Correct — the 12 principles elaborate on the 4 Agile values. They emphasise continuous delivery, embracing change, and close collaboration between business and developers.",
+        "optionTextTr": "Scrum, ekip sürecini tanımlar (roller, etkinlikler, yapılar); XP, mühendislik uygulamalarını tanımlar (TDD, çift programlama, CI, refactoring).",
+        "explanationTr": "Doğru — birbirlerini tamamlarlar. Pek çok ekip, yapı için Scrum'ı ve teknik mükemmellik için XP uygulamalarını kullanır."
       },
       {
         "optionText": "The 12 steps of a Sprint: Planning, Day 1–10 standups, Review, Retrospective.",
         "isCorrect": false,
-        "explanation": "Those are Scrum events, not the 12 Agile Principles. The principles are philosophical guidelines from the Agile Manifesto, not a Sprint schedule."
+        "explanation": "Those are Scrum events, not the 12 Agile Principles. The principles are philosophical guidelines from the Agile Manifesto, not a Sprint schedule.",
+        "optionTextTr": "XP 2 haftalık Sprint kullanır; Scrum 4 haftalık Sprint — tek fark iterasyon uzunluğudur.",
+        "explanationTr": "Her iki çerçeve de değişken iterasyon uzunluklarına izin verir. Gerçek fark kapsama ilişkindir: Scrum bir süreç çerçevesidir; XP TDD ve çift programlama gibi belirli mühendislik uygulamalarını öngörür."
       },
       {
         "optionText": "Rules from the Scrum Guide defining how the Scrum framework must be implemented.",
         "isCorrect": false,
-        "explanation": "The 12 Agile Principles come from the Agile Manifesto (2001), not the Scrum Guide. They apply across all Agile frameworks, not just Scrum."
+        "explanation": "The 12 Agile Principles come from the Agile Manifesto (2001), not the Scrum Guide. They apply across all Agile frameworks, not just Scrum.",
+        "optionTextTr": "XP bir proje yönetim metodolojisidir; Scrum bir yazılım geliştirme çerçevesidir.",
+        "explanationTr": "Tersi doğrudur — Scrum daha çok bir takım/proje yönetim çerçevesidir; XP ise TDD ve çift programlama gibi yazılım mühendisliği uygulamalarına odaklanır."
       },
       {
         "optionText": "The SOLID principles applied to Agile team organisation.",
         "isCorrect": false,
-        "explanation": "SOLID is a set of OOP design principles. The 12 Agile Principles are about software development philosophy and team collaboration."
+        "explanation": "SOLID is a set of OOP design principles. The 12 Agile Principles are about software development philosophy and team collaboration.",
+        "optionTextTr": "XP, daha fazla teknik rehberlik sağladığı için modern organizasyonlarda Scrum'ın yerini almıştır.",
+        "explanationTr": "Her ikisi de bir arada var olmaktadır. Scrum, ekip organizasyonu için daha yaygın olarak benimsenmektedir; TDD ve CI gibi XP uygulamaları ise kod kalitesini iyileştirmek için Scrum ekipleri tarafından kullanılmaktadır."
       }
     ]
   },
@@ -682,22 +890,30 @@
       {
         "optionText": "Scrum defines team process (roles, events, artifacts); XP defines engineering practices (TDD, pair programming, CI, refactoring).",
         "isCorrect": true,
-        "explanation": "Correct — they complement each other well. Many teams use Scrum for structure and XP practices for technical excellence. Both are iterative and Agile."
+        "explanation": "Correct — they complement each other well. Many teams use Scrum for structure and XP practices for technical excellence. Both are iterative and Agile.",
+        "optionTextTr": "Scrum ekip sürecini tanımlar (roller, etkinlikler, yapılar); XP mühendislik uygulamalarını tanımlar (TDD, çift programlama, CI, refactoring).",
+        "explanationTr": "Doğru — birbirlerini tamamlarlar. Pek çok ekip Scrum yapısı + XP uygulamaları kombinasyonunu kullanır."
       },
       {
         "optionText": "XP uses 2-week Sprints; Scrum uses 4-week Sprints — the only difference is iteration length.",
         "isCorrect": false,
-        "explanation": "Both frameworks allow variable iteration lengths. The real difference is scope: Scrum is a process framework, XP prescribes specific engineering practices."
+        "explanation": "Both frameworks allow variable iteration lengths. The real difference is scope: Scrum is a process framework, XP prescribes specific engineering practices.",
+        "optionTextTr": "XP 2 haftalık Sprint kullanır; Scrum 4 haftalık Sprint — tek fark iterasyon uzunluğudur.",
+        "explanationTr": "Her iki çerçeve de değişken iterasyon uzunluklarına izin verir. Gerçek fark, Scrum süreç odaklıyken XP mühendislik uygulamaları öngörür."
       },
       {
         "optionText": "XP is a project management methodology; Scrum is a software development framework.",
         "isCorrect": false,
-        "explanation": "It's the reverse — Scrum is more of a project/team management framework; XP focuses on software engineering practices like TDD and pair programming."
+        "explanation": "It's the reverse — Scrum is more of a project/team management framework; XP focuses on software engineering practices like TDD and pair programming.",
+        "optionTextTr": "XP bir proje yönetim metodolojisidir; Scrum bir yazılım geliştirme çerçevesidir.",
+        "explanationTr": "Tam tersi doğrudur — Scrum daha çok süreç/ekip yönetim çerçevesidir; XP TDD ve çift programlama gibi mühendislik uygulamalarına odaklanır."
       },
       {
         "optionText": "XP has replaced Scrum in modern organisations because it provides more technical guidance.",
         "isCorrect": false,
-        "explanation": "Both coexist. Scrum is more widely adopted for team organisation; XP practices like TDD and CI are used within Scrum teams to improve code quality."
+        "explanation": "Both coexist. Scrum is more widely adopted for team organisation; XP practices like TDD and CI are used within Scrum teams to improve code quality.",
+        "optionTextTr": "XP daha fazla teknik rehberlik sağladığından modern organizasyonlarda Scrum'ın yerini almıştır.",
+        "explanationTr": "Her ikisi de bir arada var olmaktadır. Scrum ekip organizasyonunda daha yaygın benimsenmektedir; TDD ve CI gibi XP uygulamaları Scrum ekipleri tarafından kod kalitesini iyileştirmek için kullanılmaktadır."
       }
     ]
   }

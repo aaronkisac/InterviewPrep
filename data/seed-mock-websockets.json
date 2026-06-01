@@ -6,22 +6,30 @@
       {
         "optionText": "A protocol providing full-duplex, bidirectional communication over a single persistent TCP connection.",
         "isCorrect": true,
-        "explanation": "Correct — unlike HTTP, WebSocket stays open so both sides can send messages independently at any time."
+        "explanation": "Correct — unlike HTTP, WebSocket stays open so both sides can send messages independently at any time.",
+        "optionTextTr": "Tek kalıcı TCP bağlantısı üzerinde tam çift yönlü, çift yönlü iletişim sağlayan protokol.",
+        "explanationTr": "Doğru — HTTP'nin aksine WebSocket bağlantısı açık kalır ve her iki taraf da istediği zaman veri gönderebilir."
       },
       {
         "optionText": "An HTTP method for pushing data from the server to the client.",
         "isCorrect": false,
-        "explanation": "There is no HTTP method for pushing — WebSocket is a separate protocol, not an HTTP method."
+        "explanation": "There is no HTTP method for pushing — WebSocket is a separate protocol, not an HTTP method.",
+        "optionTextTr": "Sunucudan istemciye veri itmek için kullanılan HTTP metodu.",
+        "explanationTr": "HTTP bu şekilde çalışmaz — WebSocket, HTTP Upgrade ile başlar ve ardından ayrı bir protokole geçer."
       },
       {
         "optionText": "A browser API for storing data offline, similar to localStorage.",
         "isCorrect": false,
-        "explanation": "That describes Service Workers and IndexedDB — WebSocket is for real-time bidirectional network communication."
+        "explanation": "That describes Service Workers and IndexedDB — WebSocket is for real-time bidirectional network communication.",
+        "optionTextTr": "localStorage'a benzer şekilde çevrimdışı veri depolamak için tarayıcı API'si.",
+        "explanationTr": "Bu Web Storage API'sini tanımlar — WebSocket gerçek zamanlı ağ iletişimiyle ilgilidir."
       },
       {
         "optionText": "A REST API technique that uses long polling to simulate real-time updates.",
         "isCorrect": false,
-        "explanation": "Long polling uses repeated HTTP requests — WebSocket maintains a persistent connection without repeated requests."
+        "explanation": "Long polling uses repeated HTTP requests — WebSocket maintains a persistent connection without repeated requests.",
+        "optionTextTr": "Gerçek zamanlı güncellemeleri simüle etmek için uzun yoklamayı kullanan REST API tekniği.",
+        "explanationTr": "WebSocket kalıcı çift yönlü bağlantı kullanır — REST üzerinden yoklama gibi HTTP istek/yanıt döngüsü değil."
       }
     ]
   },
@@ -32,22 +40,30 @@
       {
         "optionText": "WebSocket enables full-duplex real-time communication with low latency, avoiding the overhead of repeated HTTP request-response cycles.",
         "isCorrect": true,
-        "explanation": "Correct — HTTP requires a new request for each message; WebSocket keeps one connection open for instant bidirectional messaging."
+        "explanation": "Correct — HTTP requires a new request for each message; WebSocket keeps one connection open for instant bidirectional messaging.",
+        "optionTextTr": "WebSocket, düşük gecikmeyle tam çift yönlü gerçek zamanlı iletişimi, başına yüksek bağlantı başlatma ek yükü olmadan sağlar.",
+        "explanationTr": "Doğru — HTTP başlık ek yükü ve el sıkışması her istekte tekrarlanırken, WebSocket bağlantısı bir kez kurulur ve açık kalır."
       },
       {
         "optionText": "WebSocket is more secure than HTTPS because it encrypts data at the application layer.",
         "isCorrect": false,
-        "explanation": "wss:// uses TLS like HTTPS — security is comparable; the advantage of WebSocket is real-time bidirectional communication."
+        "explanation": "wss:// uses TLS like HTTPS — security is comparable; the advantage of WebSocket is real-time bidirectional communication.",
+        "optionTextTr": "WebSocket, uygulama katmanında veriyi şifrelediğinden HTTPS'ten daha güvenlidir.",
+        "explanationTr": "WebSocket, tıpkı HTTPS gibi TLS kullanır (wss://). Farklı şifreleme mekanizması sunmaz."
       },
       {
         "optionText": "WebSocket replaces REST APIs entirely and is better for all types of client-server communication.",
         "isCorrect": false,
-        "explanation": "WebSocket is best for real-time use cases — REST is simpler and more appropriate for request-response data fetching."
+        "explanation": "WebSocket is best for real-time use cases — REST is simpler and more appropriate for request-response data fetching.",
+        "optionTextTr": "WebSocket REST API'lerin tamamen yerini alır ve her tür iletişim için daha iyidir.",
+        "explanationTr": "WebSocket, gerçek zamanlı çift yönlü iletişim için mükemmeldir; ancak stateless istek/yanıt için REST hâlâ uygundur."
       },
       {
         "optionText": "WebSocket eliminates the need for a backend server because browsers can communicate directly.",
         "isCorrect": false,
-        "explanation": "WebSocket still requires a server — it enables persistent client-server connections, not peer-to-peer without a server."
+        "explanation": "WebSocket still requires a server — it enables persistent client-server connections, not peer-to-peer without a server.",
+        "optionTextTr": "WebSocket, tarayıcılar birbirleriyle doğrudan iletişim kurebildiğinden bir backend sunucusuna ihtiyaç duymayı ortadan kaldırır.",
+        "explanationTr": "WebSocket hâlâ bir sunucu gerektirir. Tarayıcılar arası P2P için WebRTC kullanılır."
       }
     ]
   },
@@ -58,22 +74,30 @@
       {
         "optionText": "The client sends HTTP requests at a fixed interval to check for updates — wasteful because most requests return no new data.",
         "isCorrect": true,
-        "explanation": "Correct — short polling works but burns bandwidth and server resources sending empty responses constantly."
+        "explanation": "Correct — short polling works but burns bandwidth and server resources sending empty responses constantly.",
+        "optionTextTr": "İstemci, sabit aralıklarla sunucu güncellemelerini kontrol etmek için HTTP istekleri gönderir. Sorunlar: gereksiz istekler, gecikme, sunucu yükü.",
+        "explanationTr": "Doğru — kısa yoklama basittir ancak verimsizdir; çoğunlukla güncelleme olmadığında bile istekler gönderilir."
       },
       {
         "optionText": "A technique where the server sends data to the client at short intervals using a persistent connection.",
         "isCorrect": false,
-        "explanation": "That describes Server-Sent Events — short polling uses repeated client-initiated HTTP requests."
+        "explanation": "That describes Server-Sent Events — short polling uses repeated client-initiated HTTP requests.",
+        "optionTextTr": "Sunucunun istemciye kısa aralıklarla veri gönderdiği teknik.",
+        "explanationTr": "Bu, sunucu tarafından başlatılan SSE veya WebSocket push'unu tanımlar — kısa yoklama istemci tarafından başlatılır."
       },
       {
         "optionText": "A WebSocket optimisation that sends smaller data frames to reduce latency.",
         "isCorrect": false,
-        "explanation": "Frame size is a WebSocket protocol detail — short polling is an HTTP-based technique, not WebSocket."
+        "explanation": "Frame size is a WebSocket protocol detail — short polling is an HTTP-based technique, not WebSocket.",
+        "optionTextTr": "Gecikmeyi azaltmak için daha küçük veri çerçeveleri gönderen WebSocket optimizasyonu.",
+        "explanationTr": "Bu, WebSocket çerçeveleme yapılandırmasını tanımlar — kısa yoklama HTTP tabanlı bir tekniktir."
       },
       {
         "optionText": "Short polling is always preferable to WebSocket because it works without special server support.",
         "isCorrect": false,
-        "explanation": "Short polling's bandwidth waste and latency make it a poor choice when WebSocket or SSE is available."
+        "explanation": "Short polling's bandwidth waste and latency make it a poor choice when WebSocket or SSE is available.",
+        "optionTextTr": "Kısa yoklama, bağlantısız çalıştığından her zaman WebSocket'ten tercih edilmelidir.",
+        "explanationTr": "Kısa yoklama basittir ancak gereksiz istekler nedeniyle verimsizdir; WebSocket gerçek zamanlı ihtiyaçlar için daha uygundur."
       }
     ]
   },
@@ -84,22 +108,30 @@
       {
         "optionText": "The client makes an HTTP request; the server holds it open until data is available, then responds — the client immediately re-requests.",
         "isCorrect": true,
-        "explanation": "Correct — long polling simulates push by holding requests open, reducing empty responses compared to short polling."
+        "explanation": "Correct — long polling simulates push by holding requests open, reducing empty responses compared to short polling.",
+        "optionTextTr": "İstemci bir HTTP isteği yapar; sunucu, veri mevcut olana veya zaman aşımına uğrayana kadar açık tutar, ardından yanıtlar.",
+        "explanationTr": "Doğru — uzun yoklama, gerçek zamanlı simülasyonu sağlar ancak her yanıt için yeni bağlantı açılması gerekir."
       },
       {
         "optionText": "An HTTP technique where the client sends very large payloads to reduce request frequency.",
         "isCorrect": false,
-        "explanation": "Payload size is unrelated to polling strategy — long polling is about the server holding the connection until data is ready."
+        "explanation": "Payload size is unrelated to polling strategy — long polling is about the server holding the connection until data is ready.",
+        "optionTextTr": "İstemcinin gönderdiği yük boyutunu azaltmak için çok büyük yükler gönderdiği HTTP tekniği.",
+        "explanationTr": "Bu uzun yoklamayı tanımlamaz — istek boyutuyla ilgili değil; sunucunun yanıt öncesinde bekleme davranışıyla ilgili."
       },
       {
         "optionText": "A WebSocket configuration option that increases the keep-alive timeout.",
         "isCorrect": false,
-        "explanation": "Long polling is an HTTP technique predating WebSocket — it is not a WebSocket configuration."
+        "explanation": "Long polling is an HTTP technique predating WebSocket — it is not a WebSocket configuration.",
+        "optionTextTr": "Keep-alive zaman aşımını artıran WebSocket yapılandırma seçeneği.",
+        "explanationTr": "Uzun yoklama bir WebSocket yapılandırması değil; HTTP üzerinde gerçek zamanlı iletişim simüle eden ayrı bir tekniktir."
       },
       {
         "optionText": "A browser feature that automatically retries failed HTTP requests after a delay.",
         "isCorrect": false,
-        "explanation": "Automatic retries are a different concern — long polling is a deliberate server-hold technique for near-real-time updates."
+        "explanation": "Automatic retries are a different concern — long polling is a deliberate server-hold technique for near-real-time updates.",
+        "optionTextTr": "Başarısız HTTP isteklerini otomatik olarak yeniden deneyen tarayıcı özelliği.",
+        "explanationTr": "Bu tarayıcı yeniden deneme mantığını tanımlar; uzun yoklama ise kasıtlı olarak sunucunun yanıt öncesinde beklemesini sağlayan bir istemci tekniğidir."
       }
     ]
   },
@@ -110,22 +142,30 @@
       {
         "optionText": "Short polling, long polling, Server-Sent Events (SSE), WebSocket, and WebRTC — each with different trade-offs for latency, direction, and complexity.",
         "isCorrect": true,
-        "explanation": "Correct — choosing the right technique depends on whether you need bidirectional communication, browser compatibility, and infrastructure constraints."
+        "explanation": "Correct — choosing the right technique depends on whether you need bidirectional communication, browser compatibility, and infrastructure constraints.",
+        "optionTextTr": "Kısa yoklama, uzun yoklama, Server-Sent Events (SSE), WebSocket ve WebRTC — her birinin farklı kullanım durumları vardır.",
+        "explanationTr": "Doğru — bunların her biri farklı ödünleşimler sunar; en iyisi gerçek zamanlılık, yön ve tarayıcı desteği gereksinimlerine bağlıdır."
       },
       {
         "optionText": "Only WebSocket exists for real-time web communication — all other techniques are deprecated.",
         "isCorrect": false,
-        "explanation": "SSE, long polling, and WebRTC are all actively used — the best choice depends on the use case."
+        "explanation": "SSE, long polling, and WebRTC are all actively used — the best choice depends on the use case.",
+        "optionTextTr": "Gerçek zamanlı web iletişimi için yalnızca WebSocket vardır — diğer tüm teknikler kullanımdan kalkmıştır.",
+        "explanationTr": "Tüm teknikler hâlâ kullanılmaktadır ve farklı kullanım durumları için geçerlidir."
       },
       {
         "optionText": "Real-time communication requires a native mobile app — browsers cannot do true real-time.",
         "isCorrect": false,
-        "explanation": "Browsers support WebSocket, SSE, and WebRTC natively for real-time communication."
+        "explanation": "Browsers support WebSocket, SSE, and WebRTC natively for real-time communication.",
+        "optionTextTr": "Gerçek zamanlı iletişim yerel mobil uygulama gerektirir — tarayıcılar bunu doğal olarak destekleyemez.",
+        "explanationTr": "Modern tarayıcılar WebSocket, SSE ve WebRTC aracılığıyla gerçek zamanlı iletişimi doğal olarak destekler."
       },
       {
         "optionText": "HTTP/2 server push has replaced all other real-time techniques.",
         "isCorrect": false,
-        "explanation": "HTTP/2 server push is limited and largely deprecated in browsers — WebSocket and SSE remain the primary techniques."
+        "explanation": "HTTP/2 server push is limited and largely deprecated in browsers — WebSocket and SSE remain the primary techniques.",
+        "optionTextTr": "HTTP/2 server push, diğer tüm gerçek zamanlı tekniklerin yerini almıştır.",
+        "explanationTr": "HTTP/2 server push belirli senaryolarda kullanışlıdır; ancak WebSocket, SSE ve WebRTC'nin yerini almamıştır."
       }
     ]
   },
@@ -136,22 +176,30 @@
       {
         "optionText": "A W3C standard for one-directional server-to-client streaming over HTTP, with automatic reconnection via the EventSource API.",
         "isCorrect": true,
-        "explanation": "Correct — SSE is simpler than WebSocket for pure server-push use cases like notifications and streaming AI responses."
+        "explanation": "Correct — SSE is simpler than WebSocket for pure server-push use cases like notifications and streaming AI responses.",
+        "optionTextTr": "Düzenli HTTP bağlantıları üzerinden tek yönlü sunucu→istemci akışı için W3C standardı; tarayıcı otomatik yeniden bağlanmayı yönetir.",
+        "explanationTr": "Doğru — SSE, bildirimler ve canlı güncellemeler gibi yalnızca sunucudan istemciye yayın gerektiren durumlarda WebSocket'ten daha basittir."
       },
       {
         "optionText": "A bidirectional protocol where both client and server can send messages at any time.",
         "isCorrect": false,
-        "explanation": "SSE is one-directional (server → client only) — bidirectional communication requires WebSocket."
+        "explanation": "SSE is one-directional (server → client only) — bidirectional communication requires WebSocket.",
+        "optionTextTr": "Hem istemcinin hem de sunucunun mesaj gönderebileceği çift yönlü protokol.",
+        "explanationTr": "Bu WebSocket'i tanımlar — SSE yalnızca sunucu→istemci yönünde çalışır."
       },
       {
         "optionText": "A browser API for subscribing to server-side events using MQTT protocol.",
         "isCorrect": false,
-        "explanation": "SSE uses plain HTTP, not MQTT — EventSource is the browser API for consuming SSE streams."
+        "explanation": "SSE uses plain HTTP, not MQTT — EventSource is the browser API for consuming SSE streams.",
+        "optionTextTr": "MQTT protokolünü kullanarak sunucu tarafı olaylarına abone olmak için tarayıcı API'si.",
+        "explanationTr": "SSE, MQTT değil HTTP üzerinde çalışır. MQTT, farklı uygulama alanları olan IoT protokolüdür."
       },
       {
         "optionText": "An extension of WebSocket that reduces overhead by compressing frames.",
         "isCorrect": false,
-        "explanation": "SSE is a completely separate technique from WebSocket — it uses chunked HTTP transfer, not WebSocket frames."
+        "explanation": "SSE is a completely separate technique from WebSocket — it uses chunked HTTP transfer, not WebSocket frames.",
+        "optionTextTr": "Çerçeveleri sıkıştırarak ek yükü azaltan WebSocket uzantısı.",
+        "explanationTr": "SSE, WebSocket uzantısı değil; ayrı bir protokoldür."
       }
     ]
   },
@@ -162,22 +210,30 @@
       {
         "optionText": "WebSocket is full-duplex (both directions); SSE is server-to-client only. SSE uses plain HTTP; WebSocket uses a separate ws:// protocol.",
         "isCorrect": true,
-        "explanation": "Correct — SSE is simpler for push-only, WebSocket is needed for bidirectional real-time communication."
+        "explanation": "Correct — SSE is simpler for push-only, WebSocket is needed for bidirectional real-time communication.",
+        "optionTextTr": "WebSocket tam çift yönlüdür (her iki yön); SSE yalnızca sunucu→istemci yönünde, özel yeniden bağlanma desteğiyle HTTP üzerinde çalışır.",
+        "explanationTr": "Doğru — SSE, tarayıcıların otomatik yeniden bağlanmayı yönetmesiyle daha basit bir API sunar; WebSocket ise çift yönlü iletişim gerektiğinde daha uygundur."
       },
       {
         "optionText": "SSE requires a binary protocol; WebSocket uses plain text only.",
         "isCorrect": false,
-        "explanation": "This is backwards — WebSocket supports binary frames; SSE uses text over HTTP."
+        "explanation": "This is backwards — WebSocket supports binary frames; SSE uses text over HTTP.",
+        "optionTextTr": "SSE ikili protokol gerektirir; WebSocket yalnızca düz metin kullanır.",
+        "explanationTr": "Her ikisi de ikili ve metin verisi taşıyabilir — ikili protokol gereksinimiyle aralarında bir fark yoktur."
       },
       {
         "optionText": "WebSocket is supported only in Chrome; SSE works in all browsers.",
         "isCorrect": false,
-        "explanation": "Both are widely supported in modern browsers — WebSocket has broader support if anything."
+        "explanation": "Both are widely supported in modern browsers — WebSocket has broader support if anything.",
+        "optionTextTr": "WebSocket yalnızca Chrome'da desteklenir; SSE tüm tarayıcılarda çalışır.",
+        "explanationTr": "WebSocket, tüm modern tarayıcılarda geniş çapta desteklenir; SSE de öyledir. IE'yi desteklemeniz gerekmiyorsa bu sınırlama geçerli değildir."
       },
       {
         "optionText": "They are identical — the difference is only in naming convention between browser vendors.",
         "isCorrect": false,
-        "explanation": "They are fundamentally different protocols with different capabilities, connection models, and use cases."
+        "explanation": "They are fundamentally different protocols with different capabilities, connection models, and use cases.",
+        "optionTextTr": "Bunlar özdeştir — fark yalnızca adlandırma kuralındadır.",
+        "explanationTr": "WebSocket çift yönlüdür ve ikili çerçeve protokolü kullanır; SSE tek yönlüdür ve HTTP metin akışı üzerinde çalışır."
       }
     ]
   },
@@ -188,22 +244,30 @@
       {
         "optionText": "Socket.IO adds rooms, namespaces, automatic reconnection, and HTTP fallback on top of WebSocket — but a Socket.IO client cannot connect to a plain WebSocket server.",
         "isCorrect": true,
-        "explanation": "Correct — Socket.IO is a higher-level abstraction; its custom protocol is incompatible with raw WebSocket."
+        "explanation": "Correct — Socket.IO is a higher-level abstraction; its custom protocol is incompatible with raw WebSocket.",
+        "optionTextTr": "Socket.IO odalar, namespace'ler, otomatik yeniden bağlanma ve HTTP geri dönüşü ekler; ham WebSocket'e kıyasla daha büyük yük ve özgün bir protocol kullanır.",
+        "explanationTr": "Doğru — Socket.IO güçlü özellikler sunar ama ek bağımlılık ve protokol farklılığı nedeniyle ham WebSocket istemcileriyle doğrudan birlikte çalışamaz."
       },
       {
         "optionText": "Socket.IO is a drop-in replacement for the browser WebSocket API with the same interface.",
         "isCorrect": false,
-        "explanation": "Socket.IO has its own protocol and API — it is not a drop-in for the native WebSocket object."
+        "explanation": "Socket.IO has its own protocol and API — it is not a drop-in for the native WebSocket object.",
+        "optionTextTr": "Socket.IO, ek konfigürasyon olmadan tarayıcı WebSocket API'sinin yerine geçebilir.",
+        "explanationTr": "Socket.IO kendi protokolünü kullanır — ham WebSocket istemcileriyle uyumlu değildir."
       },
       {
         "optionText": "Socket.IO only works in Node.js environments and cannot be used in the browser.",
         "isCorrect": false,
-        "explanation": "Socket.IO has both a client (browser) library and a server (Node.js) library."
+        "explanation": "Socket.IO has both a client (browser) library and a server (Node.js) library.",
+        "optionTextTr": "Socket.IO yalnızca Node.js ortamlarında çalışır ve tarayıcılarda kullanılamaz.",
+        "explanationTr": "Socket.IO'nun hem sunucu hem de istemci kütüphaneleri vardır; tarayıcılarda çalışır."
       },
       {
         "optionText": "Socket.IO is slower than raw WebSocket and should only be used when IE11 support is required.",
         "isCorrect": false,
-        "explanation": "Socket.IO's overhead is minimal for most apps — its features (rooms, reconnection) justify its use beyond IE11 support."
+        "explanation": "Socket.IO's overhead is minimal for most apps — its features (rooms, reconnection) justify its use beyond IE11 support.",
+        "optionTextTr": "Socket.IO ham WebSocket'ten daha yavaştır ve yalnızca IE desteği gerektiğinde kullanılmalıdır.",
+        "explanationTr": "Socket.IO ham WebSocket'e kıyasla biraz ek yük getirir, ancak yalnızca IE desteği için değil; odalar ve namespace'ler gibi özellikler için değerlidir."
       }
     ]
   },
@@ -214,22 +278,30 @@
       {
         "optionText": "WebSocket for continuous real-time streams (live prices, chat, collaboration); REST for request-response data fetching where real-time is not needed.",
         "isCorrect": true,
-        "explanation": "Correct — REST's simplicity wins for standard data fetching; WebSocket's persistent connection wins for high-frequency bidirectional updates."
+        "explanation": "Correct — REST's simplicity wins for standard data fetching; WebSocket's persistent connection wins for high-frequency bidirectional updates.",
+        "optionTextTr": "Sürekli gerçek zamanlı akışlar için WebSocket (canlı fiyatlar, sohbet, işbirlikli düzenleme); istek/yanıt için REST (ürün arama, form gönderme).",
+        "explanationTr": "Doğru — uygun teknolojiyi kullanım örüntüsüne göre seç; WebSocket her durumda REST'in yerini almaz."
       },
       {
         "optionText": "Always use WebSocket — it is strictly better than REST in every scenario.",
         "isCorrect": false,
-        "explanation": "REST's simplicity, cachability, and browser tooling support make it better for most request-response use cases."
+        "explanation": "REST's simplicity, cachability, and browser tooling support make it better for most request-response use cases.",
+        "optionTextTr": "Her zaman WebSocket kullan — her senaryoda REST'ten kesinlikle daha iyidir.",
+        "explanationTr": "WebSocket, gerçek zamanlı çift yönlü senaryolar için en iyisidir. Stateless istek/yanıt için REST daha basit, önbelleğe alınabilir ve anlaşılır durumda kalır."
       },
       {
         "optionText": "REST is always preferable because WebSocket connections are too complex to manage at scale.",
         "isCorrect": false,
-        "explanation": "WebSocket scales well with the right infrastructure — for live dashboards and chat, it is clearly the right choice."
+        "explanation": "WebSocket scales well with the right infrastructure — for live dashboards and chat, it is clearly the right choice.",
+        "optionTextTr": "REST her zaman tercih edilmelidir çünkü WebSocket bağlantıları çok karmaşıktır.",
+        "explanationTr": "WebSocket daha fazla durum gerektirir, ancak gerçek zamanlı kullanım durumlarında HTTP yoklamasından açıkça üstündür."
       },
       {
         "optionText": "The choice depends solely on message size — use WebSocket for large payloads, REST for small ones.",
         "isCorrect": false,
-        "explanation": "The key factor is communication pattern (bidirectional real-time vs request-response), not payload size."
+        "explanation": "The key factor is communication pattern (bidirectional real-time vs request-response), not payload size.",
+        "optionTextTr": "Seçim tamamen mesaj boyutuna bağlıdır.",
+        "explanationTr": "Mesaj boyutu ikincil bir faktördür — birincil faktör iletişim modelidir: çift yönlü gerçek zamanlı mı yoksa istek/yanıt mı?"
       }
     ]
   },
@@ -240,22 +312,30 @@
       {
         "optionText": "When communication is one-directional (server → client only) — e.g. live feeds, notifications, streaming AI responses — because SSE is simpler and traverses proxies easily.",
         "isCorrect": true,
-        "explanation": "Correct — SSE uses standard HTTP so it works without WebSocket-aware proxy configuration."
+        "explanation": "Correct — SSE uses standard HTTP so it works without WebSocket-aware proxy configuration.",
+        "optionTextTr": "İletişim tek yönlü olduğunda (yalnızca sunucu→istemci) — örn. canlı haberler, bildirimler, AI token akışı.",
+        "explanationTr": "Doğru — SSE, istemci geri bildirim göndermesi gerekmediğinde WebSocket kurulum karmaşıklığı olmadan mükemmeldir."
       },
       {
         "optionText": "When you need bidirectional communication but want to save bandwidth.",
         "isCorrect": false,
-        "explanation": "SSE is one-directional — you cannot send messages from client to server over an SSE connection."
+        "explanation": "SSE is one-directional — you cannot send messages from client to server over an SSE connection.",
+        "optionTextTr": "Çift yönlü iletişime ihtiyaç duyduğunuzda ama bant genişliğinden tasarruf etmek istediğinizde.",
+        "explanationTr": "SSE tek yönlüdür — çift yönlü iletişim için WebSocket gereklidir."
       },
       {
         "optionText": "SSE is always preferable to WebSocket because it requires no handshake.",
         "isCorrect": false,
-        "explanation": "WebSocket's persistent connection is more efficient for high-frequency bidirectional messaging than SSE."
+        "explanation": "WebSocket's persistent connection is more efficient for high-frequency bidirectional messaging than SSE.",
+        "optionTextTr": "SSE el sıkışma gerektirmediğinden her zaman WebSocket'ten tercih edilmelidir.",
+        "explanationTr": "Her ikisi de başlangıç bağlantısı gerektirir. SSE, yalnızca tek yönlü iletişim yeterliyse daha basittir."
       },
       {
         "optionText": "When you need to broadcast to millions of users — SSE scales better than WebSocket.",
         "isCorrect": false,
-        "explanation": "Scalability depends on infrastructure, not the protocol choice — both require horizontal scaling for large user counts."
+        "explanation": "Scalability depends on infrastructure, not the protocol choice — both require horizontal scaling for large user counts.",
+        "optionTextTr": "Milyonlarca kullanıcıya yayın yapmanız gerektiğinde — SSE WebSocket'ten daha iyi ölçeklenir.",
+        "explanationTr": "İkisi de büyük ölçekte ölçeklenebilir; seçim, tek yönlü veya çift yönlü iletişim gereksinimine bağlıdır."
       }
     ]
   },
@@ -266,22 +346,30 @@
       {
         "optionText": "WebSocket eliminates repeated HTTP request/response overhead — one persistent connection handles all messages with much lower latency and bandwidth consumption.",
         "isCorrect": true,
-        "explanation": "Correct — long polling re-establishes HTTP connections for every message; WebSocket reuses one TCP connection."
+        "explanation": "Correct — long polling re-establishes HTTP connections for every message; WebSocket reuses one TCP connection.",
+        "optionTextTr": "WebSocket tekrarlayan HTTP istek/yanıt ek yükünü ortadan kaldırır — bağlantı başına tek el sıkışma ve düşük çerçeveleme ek yükü.",
+        "explanationTr": "Doğru — uzun yoklama her yanıt için yeni bağlantı kurma maliyetini taşır; WebSocket bunu istek başına tek seferlik maliyet olarak önceden öder."
       },
       {
         "optionText": "WebSocket compresses data automatically; long polling sends data uncompressed.",
         "isCorrect": false,
-        "explanation": "Both can use compression — the performance advantage is connection reuse, not built-in compression."
+        "explanation": "Both can use compression — the performance advantage is connection reuse, not built-in compression.",
+        "optionTextTr": "WebSocket tüm veriyi otomatik olarak sıkıştırır; uzun yoklama verileri sıkıştırmadan gönderir.",
+        "explanationTr": "Sıkıştırma, her iki teknoloji için de ayrı ayrı yapılandırılabilir — WebSocket'in tanımlayıcı avantajı bu değildir."
       },
       {
         "optionText": "Long polling is faster because it uses fewer server resources than maintaining persistent connections.",
         "isCorrect": false,
-        "explanation": "Long polling holds connections open too — WebSocket's efficiency comes from not re-establishing the connection per message."
+        "explanation": "Long polling holds connections open too — WebSocket's efficiency comes from not re-establishing the connection per message.",
+        "optionTextTr": "Uzun yoklama daha az sunucu kaynağı kullandığından daha hızlıdır.",
+        "explanationTr": "Uzun yoklama genellikle daha fazla kaynak tüketir çünkü her yanıtta yeni HTTP bağlantısı kurulur."
       },
       {
         "optionText": "WebSocket performance is identical to long polling — the choice is purely stylistic.",
         "isCorrect": false,
-        "explanation": "WebSocket has measurably lower latency and bandwidth usage for high-frequency messaging compared to long polling."
+        "explanation": "WebSocket has measurably lower latency and bandwidth usage for high-frequency messaging compared to long polling.",
+        "optionTextTr": "WebSocket ile uzun yoklamanın performansı aynıdır — seçim salt tercih meselesidir.",
+        "explanationTr": "WebSocket gerçek zamanlı uygulamalarda uzun yoklamaya kıyasla ölçülebilir ek yük avantajı sunar."
       }
     ]
   },
@@ -292,22 +380,30 @@
       {
         "optionText": "For peer-to-peer audio/video streaming and low-latency data channels directly between browsers — WebRTC avoids routing media through a central server.",
         "isCorrect": true,
-        "explanation": "Correct — WebRTC is designed for real-time media; WebSocket routes everything through a server."
+        "explanation": "Correct — WebRTC is designed for real-time media; WebSocket routes everything through a server.",
+        "optionTextTr": "Doğrudan sunucu üzerinden yönlendirilen düşük gecikmeli P2P ses/video akışı ve veri kanalları için.",
+        "explanationTr": "Doğru — WebRTC sunucu maliyetini azaltan eşler arası bağlantıları optimize eder; WebSocket ise istemci-sunucu mimarileri için kullanılır."
       },
       {
         "optionText": "When you need a more secure connection than WebSocket provides.",
         "isCorrect": false,
-        "explanation": "Both wss:// and WebRTC use TLS — security is not the differentiator."
+        "explanation": "Both wss:// and WebRTC use TLS — security is not the differentiator.",
+        "optionTextTr": "WebSocket'ten daha güvenli bağlantı ihtiyacı duyduğunuzda.",
+        "explanationTr": "Her ikisi de TLS'yi destekler. WebRTC'nin amacı daha fazla güvenlik değil; P2P bağlantısıdır."
       },
       {
         "optionText": "WebRTC should replace WebSocket for all chat applications because it is lower latency.",
         "isCorrect": false,
-        "explanation": "WebRTC adds NAT traversal complexity unsuitable for simple text chat — WebSocket is simpler and appropriate for most chat."
+        "explanation": "WebRTC adds NAT traversal complexity unsuitable for simple text chat — WebSocket is simpler and appropriate for most chat.",
+        "optionTextTr": "WebRTC, tüm sohbet uygulamaları için WebSocket'in yerini almalıdır.",
+        "explanationTr": "WebRTC eşler arası iletişim için değerlidir; sunucu aracılığıyla çalışan sohbet uygulamaları için WebSocket hâlâ uygundur."
       },
       {
         "optionText": "WebRTC is only for mobile applications — WebSocket is used on the web.",
         "isCorrect": false,
-        "explanation": "WebRTC runs natively in all modern browsers — it is a web standard, not a mobile-only technology."
+        "explanation": "WebRTC runs natively in all modern browsers — it is a web standard, not a mobile-only technology.",
+        "optionTextTr": "WebRTC yalnızca mobil uygulamalar için geçerlidir.",
+        "explanationTr": "WebRTC, tüm modern tarayıcılarda desteklenen bir web standardıdır."
       }
     ]
   },
@@ -318,22 +414,30 @@
       {
         "optionText": "Use sticky sessions (session affinity) so all messages from a client hit the same server, plus a pub/sub layer (Redis) to broadcast messages across servers.",
         "isCorrect": true,
-        "explanation": "Correct — stateful WebSocket connections require sticky sessions; Redis pub/sub ensures messages reach all subscribed clients across nodes."
+        "explanation": "Correct — stateful WebSocket connections require sticky sessions; Redis pub/sub ensures messages reach all subscribed clients across nodes.",
+        "optionTextTr": "Yapışkan oturumlar (session affinity) kullanın, böylece bir istemciden gelen tüm mesajlar aynı sunucuya yönlendirilir; veya Redis pub/sub gibi paylaşımlı mesaj broker'ı kullanın.",
+        "explanationTr": "Doğru — yapışkan oturumlar basit ama esnekliği sınırlıdır; paylaşımlı broker daha büyük ölçekte daha sağlam bir çözümdür."
       },
       {
         "optionText": "Round-robin load balancing works identically for WebSocket as for HTTP — no special handling needed.",
         "isCorrect": false,
-        "explanation": "Round-robin can break WebSocket connections mid-session — sticky sessions are required because the connection is stateful."
+        "explanation": "Round-robin can break WebSocket connections mid-session — sticky sessions are required because the connection is stateful.",
+        "optionTextTr": "Round-robin yük dengeleme, HTTP ile aynı şekilde WebSocket için de çalışır.",
+        "explanationTr": "Round-robin olmaz çünkü WebSocket bağlantıları bir durumu korur ve aynı sunucuya bağlı kalmaları gerekir."
       },
       {
         "optionText": "WebSocket cannot be load balanced — you must use a single server for all WebSocket traffic.",
         "isCorrect": false,
-        "explanation": "WebSocket can be load balanced with sticky sessions and a shared pub/sub layer like Redis."
+        "explanation": "WebSocket can be load balanced with sticky sessions and a shared pub/sub layer like Redis.",
+        "optionTextTr": "WebSocket yük dengelenemez — tüm bağlantılar için tek bir sunucu kullanılmalıdır.",
+        "explanationTr": "WebSocket, yapışkan oturumlar veya yayın broker'ları gibi stratejilerle yük dengelenebilir."
       },
       {
         "optionText": "Load balancing WebSocket requires switching to a binary protocol — JSON messages cannot be load balanced.",
         "isCorrect": false,
-        "explanation": "Message format is irrelevant to load balancing — the challenge is connection statefulness, not data encoding."
+        "explanation": "Message format is irrelevant to load balancing — the challenge is connection statefulness, not data encoding.",
+        "optionTextTr": "WebSocket yük dengelemesi için ikili protokole geçiş gerekir.",
+        "explanationTr": "Protokol türü yük dengeleme stratejisini belirlemez — bağlantı affiniti veya mesaj geçişi gereklidir."
       }
     ]
   },
@@ -344,22 +448,30 @@
       {
         "optionText": "Use wss:// (TLS), authenticate on connection establishment (JWT in first message or cookie), validate all incoming messages, and apply rate limiting.",
         "isCorrect": true,
-        "explanation": "Correct — wss:// encrypts the channel; auth at connect time prevents unauthorised connections."
+        "explanation": "Correct — wss:// encrypts the channel; auth at connect time prevents unauthorised connections.",
+        "optionTextTr": "wss:// (TLS) kullanın, bağlantı kurulumunda kimlik doğrulama yapın (ilk mesajda JWT), origin'leri doğrulayın ve kötüye kullanımı önlemek için hız sınırı ekleyin.",
+        "explanationTr": "Doğru — WebSocket, HTTP güvenlik başlıkları gibi tarayıcı güvenlik mekanizmalarının bazılarını devre dışı bırakır; bu nedenle açık kimlik doğrulama gereklidir."
       },
       {
         "optionText": "WebSocket is inherently secure — no additional security measures are needed.",
         "isCorrect": false,
-        "explanation": "ws:// sends data in plaintext — always use wss://, and authentication is essential to prevent unauthorised access."
+        "explanation": "ws:// sends data in plaintext — always use wss://, and authentication is essential to prevent unauthorised access.",
+        "optionTextTr": "WebSocket doğası gereği güvenlidir — ek güvenlik önlemi gerekmez.",
+        "explanationTr": "WebSocket, otomatik kimlik doğrulama veya yetkilendirme sağlamaz — tüm bunların açıkça uygulanması gerekir."
       },
       {
         "optionText": "Use API keys in the WebSocket URL query string for authentication.",
         "isCorrect": false,
-        "explanation": "Query strings appear in server logs — use cookies or an initial authenticated message to pass credentials."
+        "explanation": "Query strings appear in server logs — use cookies or an initial authenticated message to pass credentials.",
+        "optionTextTr": "Kimlik doğrulama için WebSocket URL query string'inde API anahtarları kullanın.",
+        "explanationTr": "URL'deki anahtarlar sunucu günlüklerinde görünür ve şifreli olsa bile URL'lerin sızma olasılığı daha yüksektir."
       },
       {
         "optionText": "Security is the browser's responsibility — server-side code does not need to validate WebSocket messages.",
         "isCorrect": false,
-        "explanation": "Never trust client input — validate and sanitise all messages server-side regardless of the transport protocol."
+        "explanation": "Never trust client input — validate and sanitise all messages server-side regardless of the transport protocol.",
+        "optionTextTr": "Güvenlik tarayıcının sorumluluğundadır — sunucu tarafındaki kod buna ihtiyaç duymaz.",
+        "explanationTr": "Sunucu tarafı güvenliği şarttır: kimlik doğrulama, yetkilendirme ve giriş doğrulama sunucuda yapılmalıdır."
       }
     ]
   },
@@ -370,22 +482,30 @@
       {
         "optionText": "Yes, with a distributed architecture: horizontal scaling, sticky load balancers, Redis pub/sub for cross-node messaging, and connection-efficient async server runtimes.",
         "isCorrect": true,
-        "explanation": "Correct — systems like Slack and Discord handle millions of connections by distributing across many nodes."
+        "explanation": "Correct — systems like Slack and Discord handle millions of connections by distributing across many nodes.",
+        "optionTextTr": "Evet, dağıtık mimariye sahip olarak: yatay ölçekleme, yapışkan yük dengeleme ve sunucular arası mesaj geçişi için Redis pub/sub.",
+        "explanationTr": "Doğru — tek bir sunucu bu kapasiteye ulaşamaz; yatay ölçekleme ve mesaj koordinasyonu gereklidir."
       },
       {
         "optionText": "No — WebSocket is limited to ~1000 connections per server by the TCP stack.",
         "isCorrect": false,
-        "explanation": "Modern async servers can handle tens of thousands of connections per instance — 1M is achievable with horizontal scaling."
+        "explanation": "Modern async servers can handle tens of thousands of connections per instance — 1M is achievable with horizontal scaling.",
+        "optionTextTr": "Hayır — WebSocket, TCP soket sınırı nedeniyle sunucu başına ~1000 bağlantıyla sınırlıdır.",
+        "explanationTr": "Bu yanlış — modern sunucular doğru ayarlandığında (dosya tanımlayıcısı sınırları, Nginx vb.) yüz binlerce WebSocket bağlantısını işleyebilir."
       },
       {
         "optionText": "Yes, a single Node.js server can handle 1M WebSocket connections without any special configuration.",
         "isCorrect": false,
-        "explanation": "A single server has memory and file descriptor limits — 1M requires horizontal scaling across multiple nodes."
+        "explanation": "A single server has memory and file descriptor limits — 1M requires horizontal scaling across multiple nodes.",
+        "optionTextTr": "Evet, tek bir Node.js sunucusu ekstra yapılandırma gerekmeden 1 milyon WebSocket bağlantısını kaldırabilir.",
+        "explanationTr": "Teorik olarak mümkün olmakla birlikte pratikte 1M bağlantı yatay ölçekleme, özel sunucu ve dikkatli kaynak yönetimi gerektirir."
       },
       {
         "optionText": "WebSocket connections are too resource-intensive — use SSE instead for large numbers of clients.",
         "isCorrect": false,
-        "explanation": "SSE also holds persistent connections — the scalability challenge is the same; the solution is horizontal scaling."
+        "explanation": "SSE also holds persistent connections — the scalability challenge is the same; the solution is horizontal scaling.",
+        "optionTextTr": "WebSocket bağlantıları çok kaynak yoğundur — büyük ölçekte SSE kullanın.",
+        "explanationTr": "Doğru ölçekte SSE iyi bir alternatif olabilir, ancak WebSocket da yatay ölçeklenebilir."
       }
     ]
   },
@@ -396,22 +516,30 @@
       {
         "optionText": "It starts with an HTTP/1.1 Upgrade handshake; once accepted (101 Switching Protocols), the TCP connection carries lightweight frames instead of HTTP messages.",
         "isCorrect": true,
-        "explanation": "Correct — the handshake reuses HTTP for initial negotiation, then the connection is 'upgraded' to the WebSocket framing protocol."
+        "explanation": "Correct — the handshake reuses HTTP for initial negotiation, then the connection is 'upgraded' to the WebSocket framing protocol.",
+        "optionTextTr": "Bir HTTP/1.1 Upgrade el sıkışmasıyla başlar; kabul edildiğinde (101 Switching Protocols), TCP bağlantısı WebSocket çerçeve protokolüne geçer — daha düşük ek yükle ikili veya metin çerçeveleri.",
+        "explanationTr": "Doğru — bu geçiş WebSocket'in hem web uyumluluğunu (HTTP ile başlar) hem de verimliliğini (çerçeve ek yükü minimum) açıklar."
       },
       {
         "optionText": "WebSocket opens a new UDP connection per message for low-latency delivery.",
         "isCorrect": false,
-        "explanation": "WebSocket uses TCP, not UDP — reliability is provided by TCP; WebRTC uses UDP for media streams."
+        "explanation": "WebSocket uses TCP, not UDP — reliability is provided by TCP; WebRTC uses UDP for media streams.",
+        "optionTextTr": "WebSocket, düşük gecikmeli teslimat için mesaj başına yeni bir UDP bağlantısı açar.",
+        "explanationTr": "WebSocket, UDP değil TCP üzerinde çalışır. UDP, WebRTC'de kullanılır."
       },
       {
         "optionText": "WebSocket wraps every message in an HTTP request with a Connection: keep-alive header.",
         "isCorrect": false,
-        "explanation": "After the initial upgrade, WebSocket messages are not HTTP — they are binary frames on the raw TCP connection."
+        "explanation": "After the initial upgrade, WebSocket messages are not HTTP — they are binary frames on the raw TCP connection.",
+        "optionTextTr": "WebSocket her mesajı Connection: keep-alive içeren bir HTTP isteğine sarar.",
+        "explanationTr": "WebSocket el sıkışmasından sonra HTTP kullanmaz — doğrudan TCP üzerinde ikili çerçeve protokolü kullanır."
       },
       {
         "optionText": "WebSocket uses a polling mechanism internally but abstracts it behind an event-based API.",
         "isCorrect": false,
-        "explanation": "WebSocket is a genuine persistent connection — it does not poll internally."
+        "explanation": "WebSocket is a genuine persistent connection — it does not poll internally.",
+        "optionTextTr": "WebSocket dahili olarak yoklama mekanizması kullanır ama bunu geliştiriciden saklar.",
+        "explanationTr": "WebSocket yoklama kullanmaz — kalıcı bağlantı üzerinde gerçek çift yönlü mesaj tabanlı iletişim sağlar."
       }
     ]
   },
@@ -422,22 +550,30 @@
       {
         "optionText": "A frame is the basic data unit in WebSocket. Client-to-server frames must be masked (XOR with a random key) to prevent cache poisoning by intermediary proxies.",
         "isCorrect": true,
-        "explanation": "Correct — masking prevents intermediary infrastructure (proxies) from being confused by raw byte patterns that resemble HTTP."
+        "explanation": "Correct — masking prevents intermediary infrastructure (proxies) from being confused by raw byte patterns that resemble HTTP.",
+        "optionTextTr": "Çerçeve, WebSocket'teki temel veri birimidir. İstemciden sunucuya gönderilen çerçeveler maskelenmek zorundadır (protokol standardı), sunucudan istemciye gönderilenlerde maskeleme yoktur.",
+        "explanationTr": "Doğru — maskeleme, istemcilerden gelen çerçevelerin proxy önbellek zehirlenmesine yol açmasını önler, şifreleme sağlamaz."
       },
       {
         "optionText": "Masking encrypts the WebSocket payload to provide confidentiality — it replaces TLS.",
         "isCorrect": false,
-        "explanation": "Masking is not encryption and provides no confidentiality — TLS (wss://) is required for encryption."
+        "explanation": "Masking is not encryption and provides no confidentiality — TLS (wss://) is required for encryption.",
+        "optionTextTr": "Maskeleme, WebSocket yükünü şifreleyerek gizlilik sağlar.",
+        "explanationTr": "Maskeleme şifreleme değildir — gizlilik için TLS (wss://) gereklidir. Maskeleme belirli saldırıların önlenmesi için tasarlanmıştır."
       },
       {
         "optionText": "Frames are only used for binary data — text messages in WebSocket do not use the framing protocol.",
         "isCorrect": false,
-        "explanation": "All WebSocket messages, both text and binary, are sent as frames — the frame header includes a type bit distinguishing them."
+        "explanation": "All WebSocket messages, both text and binary, are sent as frames — the frame header includes a type bit distinguishing them.",
+        "optionTextTr": "Çerçeveler yalnızca ikili veri için kullanılır — WebSocket'teki metin mesajları çerçeve kullanmaz.",
+        "explanationTr": "Hem ikili hem de metin mesajları WebSocket çerçevelerini kullanır; yük türünü belirtmek için bir bayrak bulunur."
       },
       {
         "optionText": "Frame masking is optional and is typically disabled in production for performance.",
         "isCorrect": false,
-        "explanation": "The WebSocket spec mandates masking for client-to-server frames — it is not optional."
+        "explanation": "The WebSocket spec mandates masking for client-to-server frames — it is not optional.",
+        "optionTextTr": "Çerçeve maskeleme isteğe bağlıdır ve genellikle performans için production'da devre dışı bırakılır.",
+        "explanationTr": "RFC 6455'e göre istemci çerçevelerinin maskelenmesi zorunludur — bu bir seçenek değildir."
       }
     ]
   },
@@ -448,22 +584,30 @@
       {
         "optionText": "WebSocket runs over TCP but adds a message-framing layer and an HTTP-compatible handshake, allowing it to traverse existing web infrastructure (proxies, firewalls, load balancers).",
         "isCorrect": true,
-        "explanation": "Correct — raw TCP has no message boundaries or HTTP upgrade path; WebSocket solves both problems for browser environments."
+        "explanation": "Correct — raw TCP has no message boundaries or HTTP upgrade path; WebSocket solves both problems for browser environments.",
+        "optionTextTr": "WebSocket TCP üzerinde çalışır ama bir mesaj çerçeveleme katmanı ve HTTP uyumlu bir yükseltme mekanizması ekler; tarayıcı güvenliği ve mevcut altyapıyla entegrasyon sağlar.",
+        "explanationTr": "Doğru — WebSocket, ham TCP yerine HTTP'den yükseltilerek ateş duvarı ve proxy geçişini kolaylaştırır ve tarayıcı CORS gibi güvenlik modeliyle uyumlu çalışır."
       },
       {
         "optionText": "WebSocket is faster than raw TCP because it compresses all payloads by default.",
         "isCorrect": false,
-        "explanation": "WebSocket does not compress by default — performance relative to raw TCP depends on framing overhead, not compression."
+        "explanation": "WebSocket does not compress by default — performance relative to raw TCP depends on framing overhead, not compression.",
+        "optionTextTr": "WebSocket, tüm yükleri varsayılan olarak %50 sıkıştırdığından ham TCP'den daha hızlıdır.",
+        "explanationTr": "WebSocket ham TCP'den daha hızlı değildir — aksine mesaj çerçeveleme için biraz daha fazla ek yük ekler."
       },
       {
         "optionText": "WebSocket replaces TCP with a more reliable transport layer protocol.",
         "isCorrect": false,
-        "explanation": "WebSocket runs on top of TCP — it does not replace TCP's reliability mechanism."
+        "explanation": "WebSocket runs on top of TCP — it does not replace TCP's reliability mechanism.",
+        "optionTextTr": "WebSocket, TCP'yi daha güvenilir bir transport katmanı protokolüyle değiştirir.",
+        "explanationTr": "WebSocket, TCP'nin yerini almaz — TCP üzerinde çalışır."
       },
       {
         "optionText": "The only difference is that WebSocket uses port 80/443 while raw TCP uses port 8080.",
         "isCorrect": false,
-        "explanation": "Port choice is incidental — the key differences are framing, the HTTP handshake, and browser accessibility."
+        "explanation": "Port choice is incidental — the key differences are framing, the HTTP handshake, and browser accessibility.",
+        "optionTextTr": "Tek fark WebSocket'in 80/443 portunun kullanması, ham TCP'nin farklı portlar kullanmasıdır.",
+        "explanationTr": "Port kullanımının ötesinde WebSocket, çerçeveleme, el sıkışma ve tarayıcı güvenlik modeli uyumluluğu sağlar."
       }
     ]
   }

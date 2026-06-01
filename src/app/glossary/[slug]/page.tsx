@@ -5,6 +5,7 @@ import { GlossaryText } from "@/components/glossary-text";
 import { MarkdownContent } from "@/components/markdown-content";
 import { getRelatedTerms, getTermBySlug, listTerms } from "@/lib/terms";
 import { listSystemTopics } from "@/lib/actions/admin-topics";
+import { getLang } from "@/lib/lang";
 
 export const dynamic = "force-dynamic";
 
@@ -24,10 +25,11 @@ export default async function TermDetailPage({
   params: Params;
 }) {
   const { slug } = await params;
-  const [term, allTerms, systemTopics] = await Promise.all([
+  const [term, allTerms, systemTopics, lang] = await Promise.all([
     getTermBySlug(slug),
     listTerms(),
     listSystemTopics(),
+    getLang(),
   ]);
   const topicLabels = Object.fromEntries(systemTopics.map((t) => [t.slug, t.name]));
   if (!term) notFound();
@@ -55,7 +57,7 @@ export default async function TermDetailPage({
           {term.label}
         </h1>
         <p className="mt-3 text-base leading-relaxed text-muted-foreground">
-          {term.tooltip}
+          {lang === "tr" && term.definition_tr ? term.tooltip_tr || term.tooltip : term.tooltip}
         </p>
       </header>
 
@@ -63,9 +65,10 @@ export default async function TermDetailPage({
         <h2 className="sr-only">Definition</h2>
         <div className="whitespace-pre-wrap text-base leading-relaxed text-foreground/90">
           <GlossaryText
-            text={term.definition}
+            text={lang === "tr" && term.definition_tr ? term.definition_tr : term.definition}
             terms={allTerms}
             excludeSlugs={[term.slug]}
+            lang={lang}
           />
         </div>
       </section>
@@ -95,7 +98,7 @@ export default async function TermDetailPage({
                 >
                   <p className="font-medium">{rel.label}</p>
                   <p className="mt-0.5 text-xs leading-snug text-muted-foreground">
-                    {rel.tooltip}
+                    {lang === "tr" && rel.tooltip_tr ? rel.tooltip_tr : rel.tooltip}
                   </p>
                 </Link>
               </li>

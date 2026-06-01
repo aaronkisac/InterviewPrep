@@ -9,7 +9,9 @@
     "relatedSlugs": [
       "reconciliation",
       "hydration"
-    ]
+    ],
+    "tooltipTr": "Gerçek DOM'un bellek içi temsili. React, minimum DOM güncellemelerini hesaplamak için eski ve yeni versiyonları karşılaştırır.",
+    "definitionTr": "Virtual DOM, React'in UI ağacının bellek içi temsilidir. State değiştiğinde React yeni bir virtual ağaç kurar, öncekiyle karşılaştırır ve yalnızca farkı gerçek DOM'a uygular. Böylece her değişimde tüm UI yeniden render ediliyormuş gibi yazabilirsin; React bunu verimli hale getirir."
   },
   {
     "slug": "reconciliation",
@@ -20,7 +22,9 @@
     "codeExample": "// Same type → React updates in place\n<button className={on ? 'on' : 'off'}>Toggle</button>\n\n// Type change → React tears down and rebuilds\n{on ? <ButtonOn /> : <ButtonOff />}",
     "relatedSlugs": [
       "virtual-dom"
-    ]
+    ],
+    "tooltipTr": "React'in state veya props değiştiğinde UI'ı güncellemek için gereken minimum DOM işlemlerini bulduğu algoritma.",
+    "definitionTr": "Reconciliation, React'in önceki element ağacını yenisiyle karşılaştırmak için kullandığı algoritmadır. İki sezgisel kural kullanır: farklı element tipleri farklı ağaçlar üretir (tip değişimi unmount/remount tetikler), kararlı `key` prop'ları ise render'lar arasında child'ları tanımlar. Reconciliation'ı anlamak; key'leri, kararlı component kimliklerini ve alt ağaç remount hatalarını kavramana yardımcı olur."
   },
   {
     "slug": "hook",
@@ -32,7 +36,9 @@
     "relatedSlugs": [
       "server-component",
       "strict-mode"
-    ]
+    ],
+    "tooltipTr": "Function component'lerin state, lifecycle ve context gibi React özelliklerine erişmesini sağlayan bir fonksiyon (useState, useEffect vb.).",
+    "definitionTr": "Hook'lar, `use` ile başlayan ve function component'lerin daha önce class component gerektiren state, yan etki, ref, context ve diğer React özelliklerine erişmesini sağlayan fonksiyonlardır. Kurallar: hook'ları en üst seviyede çağır (döngü, koşul veya iç içe fonksiyon içinde değil), yalnızca React fonksiyonlarından çağır."
   },
   {
     "slug": "strict-mode",
@@ -44,7 +50,9 @@
     "relatedSlugs": [
       "hook",
       "reconciliation"
-    ]
+    ],
+    "tooltipTr": "Effect'leri ve reducer'ları çift çağırarak sorunları gün yüzüne çıkaran, yalnızca geliştirme ortamında çalışan bir sarmalayıcı.",
+    "definitionTr": "StrictMode, React uygulamalarında olası sorunları vurgulayan bir geliştirme aracıdır. Bileşenleri iki kez render ederek saf olmayan render'ları, effect'leri iki kez çalıştırarak temizleme eksikliklerini ve kullanımdan kaldırılmış API'leri tespit eder. Üretim build'larını etkilemez."
   },
   {
     "slug": "hydration",
@@ -56,7 +64,9 @@
     "relatedSlugs": [
       "virtual-dom",
       "server-component"
-    ]
+    ],
+    "tooltipTr": "React'in olay yöneticilerini ve state'i sunucu tarafında render edilmiş HTML'e bağlama süreci.",
+    "definitionTr": "Hydration, sunucu tarafından oluşturulmuş HTML'in istemci tarafında React ile 'canlandırılması' sürecidir. React, DOM'u yeniden oluşturmak yerine sunucunun ürettiği HTML üzerinde event listener'ları bağlar. Hydration hataları genellikle sunucu ve istemci render çıktıları eşleşmediğinde ortaya çıkar."
   },
   {
     "slug": "generic",
@@ -68,7 +78,9 @@
     "relatedSlugs": [
       "type-inference",
       "discriminated-union"
-    ]
+    ],
+    "tooltipTr": "Bir fonksiyonun veya tipin tip güvenliğini korurken birden fazla giriş tipiyle çalışmasını sağlayan tip parametresi.",
+    "definitionTr": "Generic'ler, tipleri değişken gibi kullanmanı sağlar: `function identity<T>(x: T): T`. Derleme zamanında tür güvenliği korurken, tekrar kullanılabilir ve esnek kod yazmanı mümkün kılar. Yerleşik örnek: `Array<T>`, `Promise<T>`."
   },
   {
     "slug": "type-inference",
@@ -80,7 +92,9 @@
     "relatedSlugs": [
       "generic",
       "structural-typing"
-    ]
+    ],
+    "tooltipTr": "Derleyicinin bir tipi bağlamdan çıkarabilme yeteneği; böylece her yerde açıkça belirtmen gerekmez.",
+    "definitionTr": "TypeScript, bir değişkene atanan değerden, fonksiyon dönüş değerinden veya nesne literal'inden tipi otomatik olarak çıkarır. Her şeyi açıkça belirtmek yerine anlamlı yerlerde tip notasyonu kullan: genel fonksiyonlar, karmaşık dönüş tipleri ve API sınırları."
   },
   {
     "slug": "discriminated-union",
@@ -92,7 +106,9 @@
     "relatedSlugs": [
       "generic",
       "structural-typing"
-    ]
+    ],
+    "tooltipTr": "Her varyantın, derleyicinin hangi şeklin söz konusu olduğunu anlamak için kullanabileceği bir literal özelliğe sahip olduğu bir union tipi.",
+    "definitionTr": "Discriminated union, her üyenin ortak bir literal tipin `kind` veya `type` gibi bir özelliği taşıdığı bir union tipidir. TypeScript, switch veya if ile bu alana göre tipi daraltır, bu da eksik durumları derleme zamanında yakalamanı sağlar."
   },
   {
     "slug": "structural-typing",
@@ -104,7 +120,9 @@
     "relatedSlugs": [
       "type-inference",
       "discriminated-union"
-    ]
+    ],
+    "tooltipTr": "TypeScript tipleri isme değil şekle göre eşleştirir — derleyici desteğiyle duck typing.",
+    "definitionTr": "TypeScript'te bir tip, beklenen şekle sahipse uyumludur — açıkça uygulanmış olması gerekmez. Bu, arayüzleri açıkça implement etmeden dışarıdan gelen nesneleri kullanmayı kolaylaştırır, ancak aşırı yüklenmiş nesne literallerinin yakalanmaması gibi beklenmedik uyumluluklara yol açabilir."
   },
   {
     "slug": "const-assertion",
@@ -116,7 +134,9 @@
     "relatedSlugs": [
       "type-inference",
       "discriminated-union"
-    ]
+    ],
+    "tooltipTr": "`as const`, TS'nin mümkün olan en dar tipi çıkarmasını söyler — string literaller string yerine literal tip olarak kalır.",
+    "definitionTr": "`as const`, TypeScript'e bir nesne veya diziyi salt okunur ve en dar şekilde type etmesini söyler. `{ status: 'ok' } as const` ifadesi `{ readonly status: 'ok' }` tipini verir, `{ status: string }` değil. Sabit setler ve discriminated union etiketleri için kullanışlıdır."
   },
   {
     "slug": "app-router",
@@ -129,7 +149,9 @@
       "server-component",
       "route-handler",
       "isr"
-    ]
+    ],
+    "tooltipTr": "Next.js 13+'nın app/ dizininde yaşayan, React Server Component'ler üzerine inşa edilmiş routing sistemi.",
+    "definitionTr": "App Router, dosya sistemi tabanlı routing için RSC (React Server Component) ve Suspense'i benimseyen Next.js routing mimarisidir. Klasör adlarıyla tanımlanan rotalar, özel dosyalar (page.tsx, layout.tsx, loading.tsx, error.tsx) içerir. Pages Router'ın aksine bileşenler varsayılan olarak sunucu tarafındadır."
   },
   {
     "slug": "server-component",
@@ -141,7 +163,9 @@
     "relatedSlugs": [
       "app-router",
       "hydration"
-    ]
+    ],
+    "tooltipTr": "Sunucuda render olan ve tarayıcıya JS göndermeyen, veri tabanlarına ve sunucu servislerine doğrudan erişebilen React bileşeni.",
+    "definitionTr": "React Server Component'ler yalnızca sunucuda render olur, bu sayede bundle boyutu sıfırdır. Async/await ile doğrudan veritabanı sorgusu yapabilir, secret'lara erişebilir ve tüm ağır bağımlılıkları sunucuda tutabilirler. Etkileşim için state, event handler veya browser API kullanamaz — bunlar için Client Component gerekir."
   },
   {
     "slug": "isr",
@@ -153,7 +177,9 @@
     "relatedSlugs": [
       "app-router",
       "server-component"
-    ]
+    ],
+    "tooltipTr": "Statik sayfaları sunup arka planda yenileyen Incremental Static Regeneration. Sonraki istekte taze sayfayı sunar.",
+    "definitionTr": "ISR, Next.js'te statik ve dinamik özellikler arasında denge kurmana olanak tanır. Sayfalar build sırasında oluşturulur ve bir revalidate süresi belirlenir; süre dolduğunda arka planda yeniden oluşturulur. Ziyaretçiler hiçbir zaman boş sayfayla karşılaşmaz."
   },
   {
     "slug": "route-handler",
@@ -165,7 +191,9 @@
     "relatedSlugs": [
       "app-router",
       "server-component"
-    ]
+    ],
+    "tooltipTr": "API rotalarının App Router karşılığı. HTTP metod fonksiyonları export eden bir route.ts dosyası.",
+    "definitionTr": "Route Handler'lar, App Router'da API endpoint'leri oluşturmak için kullanılır. `app/api/*/route.ts` dosyaları `GET`, `POST` vb. async fonksiyon export eder. Standart `Request`/`Response` nesnesini kullanır, dinamik segment ve query string'lere erişebilir."
   },
   {
     "slug": "middleware",
@@ -177,7 +205,9 @@
     "relatedSlugs": [
       "app-router",
       "route-handler"
-    ]
+    ],
+    "tooltipTr": "Bir isteğin rotaya ulaşmadan önce Edge'de çalışan kod — auth kontrolü, yönlendirme ve başlık değişikliği için kullanılır.",
+    "definitionTr": "Next.js Middleware'i, bir istek karşılanmadan önce Edge Runtime'da çalışır. Kimlik doğrulama, yönlendirme, A/B testi ve başlık düzenleme için kullanışlıdır. `middleware.ts` dosyası proje kökünde yaşar ve `matcher` pattern'leri ile hangi rotaların etkileneceğini kontrol eder."
   },
   {
     "slug": "redux-store",
@@ -190,7 +220,9 @@
       "redux-reducer",
       "redux-action",
       "redux-dispatch"
-    ]
+    ],
+    "tooltipTr": "Redux uygulamasında tüm uygulama state ağacını tutan tek nesne.",
+    "definitionTr": "Redux Store, uygulamanın state'ini tutan tek bir JavaScript nesnesidir. `createStore` veya Redux Toolkit'teki `configureStore` ile oluşturulur. State'i okumak için `getState()`, değiştirmek için `dispatch()` ve değişiklikleri dinlemek için `subscribe()` kullanılır."
   },
   {
     "slug": "redux-reducer",
@@ -204,7 +236,9 @@
       "redux-action",
       "immer",
       "combine-reducers"
-    ]
+    ],
+    "tooltipTr": "Redux'ta state'in nasıl değiştiğini tanımlayan saf bir (state, action) => newState fonksiyonu.",
+    "definitionTr": "Reducer, önceki state ve bir action alarak yeni state döndüren saf bir fonksiyondur. State'i doğrudan mutate etmemeli; her zaman yeni bir nesne döndürmelidir. Immer ile Redux Toolkit, mutating görünümlü sözdizimini güvenli bir şekilde yazmana izin verir."
   },
   {
     "slug": "redux-action",
@@ -217,7 +251,9 @@
       "redux-dispatch",
       "redux-reducer",
       "redux-store"
-    ]
+    ],
+    "tooltipTr": "Uygulamada ne olduğunu tanımlayan, `type` alanına sahip sıradan bir JS nesnesi.",
+    "definitionTr": "Action, store'a gönderilen ve ne olduğunu açıklayan bir plain nesnedir. `type` alanı zorunludur; ek veri genellikle `payload` adıyla taşınır. Redux Toolkit'teki `createAction` ve `createSlice`, action creator ve tip güvenliğini otomatik olarak üretir."
   },
   {
     "slug": "redux-dispatch",
@@ -230,7 +266,9 @@
       "redux-action",
       "redux-store",
       "thunk"
-    ]
+    ],
+    "tooltipTr": "Bir action'ı middleware'den geçirip root reducer'a ileten store metodu.",
+    "definitionTr": "`dispatch(action)`, bir action'ı Redux pipeline'ına girer. Middleware (örn. thunk) önce bunu yakalar, sonra reducer'a ulaşır. Async işlemler için `dispatch(thunkAction)` veya RTK'nın `createAsyncThunk`'unu kullanırsın."
   },
   {
     "slug": "thunk",
@@ -243,7 +281,9 @@
       "redux-dispatch",
       "redux-middleware",
       "redux-saga"
-    ]
+    ],
+    "tooltipTr": "Plain action nesnesi yerine Redux store'a gönderilen, async iş mantığı için kullanılan fonksiyon.",
+    "definitionTr": "Thunk, dispatch edilebilen ve `dispatch` ile `getState` alan bir fonksiyondur. Redux Thunk middleware'i bu deseni etkinleştirir. RTK'nın `createAsyncThunk`'u pending/fulfilled/rejected yaşam döngüsü action'larını otomatik oluşturur."
   },
   {
     "slug": "redux-selector",
@@ -255,7 +295,9 @@
     "relatedSlugs": [
       "redux-store",
       "reselect"
-    ]
+    ],
+    "tooltipTr": "Redux store'dan veri okuyan ve türeten, genellikle Reselect ile memoize edilen fonksiyon.",
+    "definitionTr": "Selector, state'i parametre alan ve veri döndüren bir fonksiyondur. Basit selector'lar sadece okur; Reselect ile oluşturulan selector'lar türetilen değerleri memoize eder ve gereksiz render'ları azaltır."
   },
   {
     "slug": "redux-middleware",
@@ -268,7 +310,9 @@
       "thunk",
       "redux-saga",
       "redux-store"
-    ]
+    ],
+    "tooltipTr": "Dispatch edilen action'ları reducer'a ulaşmadan yakalayan fonksiyon — logging, async işlemler ve hata yakalama için kullanılır.",
+    "definitionTr": "Redux middleware, `store => next => action => ...` imzalı bir fonksiyondur. Action akışını durdurabilir, dönüştürebilir veya geciktirebilir. Yaygın örnekler: redux-thunk (async), redux-logger (logging), redux-saga."
   },
   {
     "slug": "redux-saga",
@@ -280,7 +324,9 @@
     "relatedSlugs": [
       "thunk",
       "redux-middleware"
-    ]
+    ],
+    "tooltipTr": "ES6 generator fonksiyonları ile async yan etkileri yöneten middleware kütüphanesi.",
+    "definitionTr": "Redux Saga, generator fonksiyonlarını (saga) kullanarak yan etkileri (API çağrıları, WebSocket mesajları) yönetir. `takeEvery`, `takeLatest` ve `put` gibi effect creator'lar test edilebilir, okunabilir async akışları mümkün kılar."
   },
   {
     "slug": "flux",
@@ -293,7 +339,9 @@
       "redux-store",
       "redux-action",
       "redux-reducer"
-    ]
+    ],
+    "tooltipTr": "Facebook'un tek yönlü veri akışı mimarisi — Redux'u doğrudan etkileyen örüntü.",
+    "definitionTr": "Flux, Action → Dispatcher → Store → View → Action döngüsüyle çalışır. Redux bunu single store ve pure reducer kavramlarıyla basitleştirir. Flux'un kendisi bir kütüphane değil, bir örüntüdür."
   },
   {
     "slug": "redux-toolkit",
@@ -307,7 +355,9 @@
       "redux-reducer",
       "immer",
       "reselect"
-    ]
+    ],
+    "tooltipTr": "Resmi, görüşlü Redux araç seti — configureStore, createSlice, createAsyncThunk.",
+    "definitionTr": "Redux Toolkit (RTK), Redux boilerplate'ini azaltır. `createSlice` reducer ve action'ları birlikte oluşturur; `createAsyncThunk` async yaşam döngüsünü yönetir; `configureStore` middleware'i otomatik olarak ekler. Tüm yeni Redux projeleri RTK ile başlamalıdır."
   },
   {
     "slug": "immer",
@@ -319,7 +369,9 @@
     "relatedSlugs": [
       "redux-reducer",
       "redux-toolkit"
-    ]
+    ],
+    "tooltipTr": "Aslında yeni bir immutable değer üreten, mutasyon benzeri görünen kod yazmanı sağlayan kütüphane.",
+    "definitionTr": "Immer, bir 'draft' nesnesi sağlar; üzerinde yapılan değişiklikler gerçek state'i mutate etmez, yapısal paylaşımlı yeni bir nesne üretir. Redux Toolkit, Immer'i dahili olarak kullanır; bu sayede `state.value++` gibi görünen kod aslında güvenlidir."
   },
   {
     "slug": "reselect",
@@ -331,7 +383,9 @@
     "relatedSlugs": [
       "redux-selector",
       "redux-toolkit"
-    ]
+    ],
+    "tooltipTr": "Memoize edilmiş selector kütüphanesi. createSelector, input selector'lar değişmediğinde yeniden hesaplama yapmaz.",
+    "definitionTr": "Reselect'teki `createSelector`, giriş selector'larından türetilmiş veri üretir ve sonucu önbelleğe alır. Giriş değerleri değişmediğinde önceki sonucu döndürür; bu, gereksiz render'ları önler ve pahalı hesaplamaları atlar."
   },
   {
     "slug": "combine-reducers",
@@ -343,7 +397,9 @@
     "relatedSlugs": [
       "redux-reducer",
       "redux-store"
-    ]
+    ],
+    "tooltipTr": "Birden fazla slice reducer'ı, her birinin kendi state diliminden sorumlu olduğu tek bir root reducer'da birleştiren yardımcı.",
+    "definitionTr": "`combineReducers({ users: usersReducer, posts: postsReducer })` çağrısı, her reducer'ın yalnızca kendi slice'ını gördüğü ve güncellediği bütünleşik bir state ağacı oluşturur. RTK'nın `createSlice` ile birlikte kullanıldığında bu genellikle arka planda otomatik gerçekleşir."
   },
   {
     "slug": "closure",
@@ -356,7 +412,9 @@
       "scope",
       "iife",
       "module-pattern-js"
-    ]
+    ],
+    "tooltipTr": "Dış kapsamındaki değişkenlere, dıştaki fonksiyon yürütmesi tamamlandıktan sonra bile erişimi koruyan fonksiyon.",
+    "definitionTr": "Bir fonksiyon oluşturulduğunda, içinde bulunduğu scope'u 'kapatır'. Bu sayede iç fonksiyon, dış fonksiyon döndükten sonra bile dış değişkenlere erişebilir. React hook'ları bu mekanizmaya dayanır — useEffect'teki bir callback, render sırasındaki state değerini yakalar."
   },
   {
     "slug": "scope",
@@ -368,7 +426,9 @@
     "relatedSlugs": [
       "closure",
       "hoisting-js"
-    ]
+    ],
+    "tooltipTr": "Bir değişkene erişilebilir kod bölgesi. JavaScript'te global, fonksiyon ve blok (let/const) scope'u vardır.",
+    "definitionTr": "JavaScript'te scope, değişken görünürlüğünü belirler. `var` fonksiyon scope'ludur; `let` ve `const` blok scope'ludur. Modüller kendi scope'larını oluşturur. Scope zinciri, JavaScript'in bir değişkeni bulana kadar kapsayan scope'ları yukarı doğru aradığı mekanizmadır."
   },
   {
     "slug": "hoisting-js",
@@ -380,7 +440,9 @@
     "relatedSlugs": [
       "scope",
       "closure"
-    ]
+    ],
+    "tooltipTr": "JavaScript'in `var` bildirimlerini ve fonksiyon tanımlarını scope'larının başına taşıma davranışı.",
+    "definitionTr": "Hoist etme, `var` bildirimleri ve fonksiyon tanımlarını kodu çalıştırmadan önce scope'larının başına alır. `var x` undefined olarak hoist edilir; fonksiyon bildirimleri ise gövdeleriyle birlikte hoist edilir. `let` ve `const` hoist edilir ama başlatılmaz — TDZ (temporal dead zone) oluşturur."
   },
   {
     "slug": "iife",
@@ -392,7 +454,9 @@
     "relatedSlugs": [
       "closure",
       "scope"
-    ]
+    ],
+    "tooltipTr": "Tanımlanır tanımlanmaz çalışan fonksiyon ifadesi — değişken sızıntısını önlemek için kullanılır.",
+    "definitionTr": "IIFE `(function() { ... })()`, kapsüllenmiş bir scope oluşturmak için kullanılırdı. ES modülleri ve block scope (`let`/`const`) yaygınlaşmadan önce global namespace kirliliğini önlemenin standart yoluydu. Günümüzde modüller bu ihtiyacı karşıladığından nadiren kullanılır."
   },
   {
     "slug": "event-loop",
@@ -404,7 +468,9 @@
     "relatedSlugs": [
       "promise-js",
       "async-await"
-    ]
+    ],
+    "tooltipTr": "JavaScript'in, ağır işlemleri boşa çıkan thread'e devrederek non-blocking operasyonlar yapmasını sağlayan mekanizma.",
+    "definitionTr": "JavaScript single-thread'lidir. Event loop, call stack boşaldığında callback queue veya microtask queue'dan işleri alır. Promise'ler microtask olarak önceliklidir, setTimeout ise macrotask'e gider. Bu anlayış, async/await davranışını ve stale closure hatalarını açıklar."
   },
   {
     "slug": "promise-js",
@@ -416,7 +482,9 @@
     "relatedSlugs": [
       "async-await",
       "event-loop"
-    ]
+    ],
+    "tooltipTr": "Asenkron bir işlemin nihai tamamlanmasını veya başarısızlığını temsil eden nesne.",
+    "definitionTr": "Promise, pending, fulfilled veya rejected olmak üzere üç durumdan birinde bulunur. `.then()` zinciri fulfilled değeri dönüştürür; `.catch()` hataları yakalar; `.finally()` her iki durumda da çalışır. `Promise.all`, `Promise.race` ve `Promise.allSettled` çoklu promise'leri koordine eder."
   },
   {
     "slug": "async-await",
@@ -428,7 +496,9 @@
     "relatedSlugs": [
       "promise-js",
       "event-loop"
-    ]
+    ],
+    "tooltipTr": "Asenkron kodun senkronmuş gibi okunmasını sağlayan, Promise'ler üzerine inşa edilmiş sözdizimsel şeker.",
+    "definitionTr": "`async` fonksiyonlar her zaman bir Promise döndürür. `await`, Promise çözülene kadar fonksiyonu duraklatır — thread'i bloklamaz. Hataları yakalamak için `try/catch` kullan; paralel çalışma için `Promise.all` ile birleştir."
   },
   {
     "slug": "prototype-chain",
@@ -440,7 +510,9 @@
     "relatedSlugs": [
       "closure",
       "scope"
-    ]
+    ],
+    "tooltipTr": "JavaScript'in, mevcut nesnede bulunmayan bir özelliği ararken gezdiği bağlantılı nesne zinciri.",
+    "definitionTr": "JavaScript'te her nesnenin bir `[[Prototype]]` bağlantısı vardır. Bir özelliğe erişildiğinde JS önce nesneyi, sonra prototype'ını, sonra prototype'ının prototype'ını arar — `null`'a ulaşana kadar. `class` sözdizimi bu mekanizmayı örter ama altında hâlâ prototype kalıtımı vardır."
   },
   {
     "slug": "event-delegation",
@@ -451,7 +523,9 @@
     "codeExample": "const list = document.querySelector('#todo-list');\n\nlist.addEventListener('click', (e) => {\n  const item = e.target.closest('[data-id]');\n  if (!item) return;\n\n  if (e.target.matches('.delete-btn')) {\n    deleteItem(item.dataset.id);\n  } else if (e.target.matches('.complete-btn')) {\n    toggleComplete(item.dataset.id);\n  }\n});\n// Works for items added later — no re-binding needed",
     "relatedSlugs": [
       "event-loop"
-    ]
+    ],
+    "tooltipTr": "Tüm çocuklardan gelen olayları yönetmek için üst öğeye tek bir event listener bağlama tekniği.",
+    "definitionTr": "Event delegation, DOM olaylarının kabarcıklanma (bubbling) özelliğinden yararlanır. Yüzlerce öğeye listener eklemek yerine tek bir üst öğeye listener eklersin ve `event.target` ile hangi çocuktan geldiğini anlarsın. Dinamik olarak eklenen öğeler için de çalışır."
   },
   {
     "slug": "debounce",
@@ -463,7 +537,9 @@
     "relatedSlugs": [
       "throttle",
       "event-loop"
-    ]
+    ],
+    "tooltipTr": "Belirli bir sessizlik süresi dolana kadar fonksiyon çağrısını geciktiren teknik — hızlı input olayları için kullanışlıdır.",
+    "definitionTr": "Debounce, hızlı çağrıları tek bir çağrıya indirger. Arama input'u: kullanıcı yazmayı bıraktıktan 300ms sonra API'yi çağırırsın. Her yeni çağrı zamanlayıcıyı sıfırlar. Throttle ile farkı: throttle düzenli aralıklarla çalışır; debounce yalnızca aktivite durduğunda çalışır."
   },
   {
     "slug": "throttle",
@@ -475,7 +551,9 @@
     "relatedSlugs": [
       "debounce",
       "event-loop"
-    ]
+    ],
+    "tooltipTr": "Bir fonksiyonu belirli aralıklarla en fazla bir kez çalıştırmaya sınırlayan teknik — kaydırma olayları için kullanışlıdır.",
+    "definitionTr": "Throttle, fonksiyonu belirli bir süre içinde yalnızca bir kez çalışmaya zorlar. Scroll pozisyonu takibi veya pencere boyutlandırma: saniyede 10'dan fazla güncelleme gerekmez. Debounce'tan farkı: throttle her zaman belirli aralıklarla çalışırken, debounce yalnızca duraksama sonrasında çalışır."
   },
   {
     "slug": "generator-js",
@@ -487,7 +565,9 @@
     "relatedSlugs": [
       "event-loop",
       "async-await"
-    ]
+    ],
+    "tooltipTr": "`yield` ile çalışmasını durdurabilen ve daha sonra devam edebilen, değerler dizisi üreten fonksiyon.",
+    "definitionTr": "Generator fonksiyonlar `function*` ile tanımlanır ve `yield` ile değer üretir. `gen.next()` ile bir sonraki `yield`'e kadar ilerlersin. Sonsuz diziler, lazy evaluation ve Redux Saga gibi senaryolarda kullanılır. `for...of` döngüsüyle doğrudan iterate edilebilir."
   },
   {
     "slug": "symbol-js",
@@ -498,7 +578,9 @@
     "codeExample": "const ID = Symbol('id');\nconst user = { name: 'Alice', [ID]: 42 };\n\nconsole.log(Object.keys(user)); // ['name'] — Symbol hidden\nconsole.log(user[ID]);          // 42\n\n// Well-known symbol: custom iteration\nclass Range {\n  constructor(a, b) { this.a = a; this.b = b; }\n  [Symbol.iterator]() {\n    let i = this.a;\n    return { next: () => i <= this.b ? { value: i++, done: false } : { done: true } };\n  }\n}\nfor (const n of new Range(1, 3)) console.log(n); // 1 2 3",
     "relatedSlugs": [
       "prototype-chain"
-    ]
+    ],
+    "tooltipTr": "Her oluşturulduğunda benzersiz olması garanti edilen ilkel değer — genellikle nesne anahtar çakışmalarını önlemek için kullanılır.",
+    "definitionTr": "Symbol, her zaman benzersiz bir değerdir: `Symbol('desc') !== Symbol('desc')`. Nesne özelliklerini gizli tutmak veya özel protokoller tanımlamak (örn. `Symbol.iterator`) için kullanılır. `JSON.stringify` ve `for...in` döngüleri Symbol'leri atlar."
   },
   {
     "slug": "web-worker",
@@ -509,7 +591,9 @@
     "codeExample": "// main.js\nconst worker = new Worker('/worker.js');\nworker.postMessage({ data: largeArray });\nworker.onmessage = (e) => console.log('Result:', e.data.result);\n\n// worker.js\nself.onmessage = (e) => {\n  const result = e.data.data.reduce((a, b) => a + b, 0);\n  self.postMessage({ result });\n};",
     "relatedSlugs": [
       "event-loop"
-    ]
+    ],
+    "tooltipTr": "Ana thread'i engellemeden JavaScript çalıştıran tarayıcı arka plan thread'i.",
+    "definitionTr": "Web Worker'lar, ağır hesaplamalar için ayrı bir thread sağlar. Ana thread ve Worker, `postMessage` ile iletişim kurar. DOM'a erişemezler ama `fetch`, `IndexedDB` ve Crypto API'ye erişebilirler. CPU yoğun görevlerde UI'ın dondurulmasını önler."
   },
   {
     "slug": "unit-test",
@@ -523,7 +607,9 @@
       "test-double",
       "arrange-act-assert",
       "integration-test"
-    ]
+    ],
+    "tooltipTr": "Tek bir fonksiyon veya bileşeni, tüm bağımlılıklar mock'lanmış şekilde izole eden test.",
+    "definitionTr": "Unit testler hızlıdır, deterministiktir ve sık çalıştırılır. Harici sistemlere bağımlılığı ortadan kaldırmak için bağımlılıklar mock'lanır veya stub'lanır. İyi bir unit test: bağımlılıkların değil, davranışın doğru olduğunu kanıtlar."
   },
   {
     "slug": "integration-test",
@@ -536,7 +622,9 @@
       "unit-test",
       "mock",
       "test-double"
-    ]
+    ],
+    "tooltipTr": "Birden fazla birimin gerçek (veya gerçeğe yakın) bağımlılıklarla birlikte doğru çalıştığını doğrulayan test.",
+    "definitionTr": "Entegrasyon testleri, birden fazla birimi birlikte test eder — gerçek veritabanı, ağ isteği veya dosya sistemi dahil olabilir. Unit testlerden daha yavaş ama daha yüksek güven verir. React Testing Library, bileşeni gerçek DOM üzerinde render ederek entegrasyon testini teşvik eder."
   },
   {
     "slug": "mock",
@@ -549,7 +637,9 @@
       "spy",
       "test-double",
       "unit-test"
-    ]
+    ],
+    "tooltipTr": "Gerçek bir bağımlılığın yerine geçen ve çağrıları kaydeden, doğrulama yapmanı sağlayan kontrollü sahte.",
+    "definitionTr": "Mock, bir nesneyi hem kontrol eder hem de gözlemler. Gerçek implementasyonu çalıştırmaz; belirli değerler döndürmek üzere programlanabilir. `jest.fn()` veya `vi.fn()` ile oluşturulur. 'Çağrıldı mı?', 'Doğru argümanlarla çağrıldı mı?' sorularını yanıtlar."
   },
   {
     "slug": "spy",
@@ -561,7 +651,9 @@
     "relatedSlugs": [
       "mock",
       "test-double"
-    ]
+    ],
+    "tooltipTr": "Gerçek implementasyonu çalıştırırken çağrıları kaydeden test double.",
+    "definitionTr": "Spy, gerçek fonksiyonu sarmalar ve çalışmasına izin verir ama çağrıları kaydeder. Mock ile farkı: Mock gerçek implementasyonu çalıştırmaz. `jest.spyOn(obj, 'method')` orijinal uygulamayı değiştirmeden hangi argümanların geçtiğini izlemeni sağlar."
   },
   {
     "slug": "tdd",
@@ -574,7 +666,9 @@
       "unit-test",
       "arrange-act-assert",
       "code-coverage"
-    ]
+    ],
+    "tooltipTr": "Kodu yazmadan önce başarısız bir test yazma pratiği — Test-Driven Development.",
+    "definitionTr": "TDD döngüsü şudur: Kırmızı (başarısız testi yaz) → Yeşil (minimum kodu geç) → Refactor (temizle). Bu yaklaşım, testlerin kodu şekillendirmesini sağlar ve tasarımı genellikle daha modüler yapar. Başlangıçta yavaş gibi görünse de hata ayıklama süresini azaltır."
   },
   {
     "slug": "arrange-act-assert",
@@ -586,7 +680,9 @@
     "relatedSlugs": [
       "unit-test",
       "tdd"
-    ]
+    ],
+    "tooltipTr": "Unit testleri üç aşamaya bölen örüntü: kurulum, çalıştırma, doğrulama.",
+    "definitionTr": "Arrange (düzenle): test için gerekli state ve bağımlılıkları hazırla. Act (çalıştır): test edilen kodu çalıştır. Assert (doğrula): sonucun beklenenle örtüştüğünü kontrol et. Bu yapı testleri okunabilir ve tutarlı kılar."
   },
   {
     "slug": "code-coverage",
@@ -599,7 +695,9 @@
       "unit-test",
       "tdd",
       "arrange-act-assert"
-    ]
+    ],
+    "tooltipTr": "Testlerin kod tabanının yüzde kaçını çalıştırdığını ölçen metrik — satır, dal ve fonksiyon coverage olarak ayrılır.",
+    "definitionTr": "Coverage, hangi kod satırlarının, dalların ve fonksiyonların test tarafından çalıştırıldığını gösterir. %100 coverage hatalardan azade olduğun anlamına gelmez; yanlış davranışı doğrulayan testler de coverage sağlar. En kritik iş mantığını önceliklendir."
   },
   {
     "slug": "test-double",
@@ -612,7 +710,9 @@
       "mock",
       "spy",
       "unit-test"
-    ]
+    ],
+    "tooltipTr": "Bir testte gerçek bağımlılığın yerine geçen her türlü nesnenin genel adı — mock, stub, spy ve fake dahil.",
+    "definitionTr": "Test double'lar yalıtım sağlar: birim testlerin gerçek veritabanı, API veya saat gerektirmemesini sağlar. Alt türler: Stub (önceden belirlenmiş değer döndürür), Mock (doğrulama için çağrıları kaydeder), Spy (gerçek implementasyonu sarmalar), Fake (çalışan ama basitleştirilmiş implementasyon)."
   },
   {
     "slug": "singleton",
@@ -624,7 +724,9 @@
     "relatedSlugs": [
       "design-pattern",
       "dependency-injection"
-    ]
+    ],
+    "tooltipTr": "Bir sınıfın yalnızca bir örneğe sahip olmasını ve buna global erişim noktası sağlamasını garantileyen yaratımsal örüntü.",
+    "definitionTr": "Singleton, bir sınıfın yalnızca tek bir instance'ının oluşturulmasını sağlar ve bu instance'a global erişim noktası sunar. Veritabanı bağlantısı veya yapılandırma nesnesi gibi senaryolar için kullanılır. Ancak global state ve test edilebilirlik sorunlarına yol açabileceğinden dikkatli kullanılmalıdır."
   },
   {
     "slug": "observer-pattern",
@@ -636,7 +738,9 @@
     "relatedSlugs": [
       "strategy-pattern",
       "command-pattern"
-    ]
+    ],
+    "tooltipTr": "Bir konunun, abone olan tüm gözlemcileri otomatik olarak bildirdiği davranışsal örüntü.",
+    "definitionTr": "Observer örüntüsünde, bir 'subject' nesnesi 'observer' listesi tutar. State değiştiğinde tüm observer'ları bildirir. React'te bu mantık EventEmitter, RxJS Subject veya context + useEffect ile uygulanabilir. DOM event listener'ları da bu örüntüyü kullanır."
   },
   {
     "slug": "strategy-pattern",
@@ -649,7 +753,9 @@
       "observer-pattern",
       "command-pattern",
       "design-pattern"
-    ]
+    ],
+    "tooltipTr": "Değiştirilebilir algoritmalar ailesi tanımlayan ve çalışma zamanında seçim yapılmasını sağlayan davranışsal örüntü.",
+    "definitionTr": "Strategy örüntüsü, bir algoritmanın birden fazla implementasyonunu kapsüller ve bunları birbirinin yerine kullanılabilir hale getirir. Örnek: çeşitli ödeme yöntemlerini (kredi kartı, PayPal, Bitcoin) tek bir ödeme arayüzü arkasında birleştirme. Open/Closed prensibini destekler."
   },
   {
     "slug": "decorator-pattern",
@@ -662,7 +768,9 @@
       "design-pattern",
       "facade-pattern",
       "adapter-pattern"
-    ]
+    ],
+    "tooltipTr": "Nesneyi değiştirmeden davranış eklemek için onu sarmayan yapısal örüntü.",
+    "definitionTr": "Decorator, mevcut bir nesneyi sararak yeni sorumluluklar ekler. TypeScript'teki `@decorator` sözdizimi bu örüntüyü kullanır. Higher-order component'ler ve middleware zincirleri de decorator örüntüsünün varyasyonlarıdır."
   },
   {
     "slug": "facade-pattern",
@@ -675,7 +783,9 @@
       "adapter-pattern",
       "decorator-pattern",
       "design-pattern"
-    ]
+    ],
+    "tooltipTr": "Karmaşık bir alt sisteme basitleştirilmiş arayüz sunan yapısal örüntü.",
+    "definitionTr": "Facade, karmaşık API'lerin veya sistemlerin arkasını saklayan basit bir arayüz sağlar. Örnek: birden fazla üçüncü taraf servisi tek bir `NotificationService` arkasında birleştirme. Bağımlılığı azaltır ve kullanımı kolaylaştırır."
   },
   {
     "slug": "adapter-pattern",
@@ -688,7 +798,9 @@
       "facade-pattern",
       "decorator-pattern",
       "design-pattern"
-    ]
+    ],
+    "tooltipTr": "Bir arayüzü, istemcilerin beklediği başka bir arayüze dönüştüren yapısal örüntü.",
+    "definitionTr": "Adapter, uyumsuz arayüzlere sahip sınıfların birlikte çalışmasını sağlar. Örnek: üçüncü taraf bir API'nin response formatını uygulamanın beklediği formata çeviren bir wrapper. Birlikte çalışabilirlik sorunlarını kaynak kodu değiştirmeden çözer."
   },
   {
     "slug": "dependency-injection",
@@ -701,7 +813,9 @@
       "singleton",
       "facade-pattern",
       "design-pattern"
-    ]
+    ],
+    "tooltipTr": "Sınıfın bağımlılıklarını kendisi oluşturmak yerine dışarıdan almasını sağlayan teknik.",
+    "definitionTr": "DI ile bağımlılıklar, sınıf içinde `new Dependency()` ile oluşturulmak yerine constructor veya parametre olarak geçirilir. Bu, test sırasında gerçek implementasyonu mock ile değiştirmeyi kolaylaştırır ve Inversion of Control prensibini destekler."
   },
   {
     "slug": "design-pattern",
@@ -717,7 +831,9 @@
       "decorator-pattern",
       "facade-pattern",
       "adapter-pattern"
-    ]
+    ],
+    "tooltipTr": "Yazılım tasarımında sık karşılaşılan bir probleme yönelik adlandırılmış, yeniden kullanılabilir çözüm.",
+    "definitionTr": "Design pattern'ler, önceden tanımlanmış, iyi test edilmiş çözümlerdir. GoF kitabındaki 23 klasik örüntü: Creational (Singleton, Factory, Builder), Structural (Adapter, Decorator, Facade) ve Behavioral (Observer, Strategy, Command) olmak üzere üç kategoriye ayrılır."
   },
   {
     "slug": "css-box-model",
@@ -729,7 +845,9 @@
     "relatedSlugs": [
       "css-specificity",
       "css-flexbox"
-    ]
+    ],
+    "tooltipTr": "Her öğe; içerik, padding, border ve margin'den oluşan dikdörtgen bir kutudur. box-sizing bu hesaplamayı etkiler.",
+    "definitionTr": "Kutu modeli, bir öğenin kapladığı alanı tanımlar. `box-sizing: content-box` (varsayılan) ile genişlik yalnızca içeriği kapsar; padding ve border eklenir. `box-sizing: border-box` ile genişlik içeriği, padding ve border'ı birlikte kapsar — bu çoğu zaman daha sezgiseldir."
   },
   {
     "slug": "css-specificity",
@@ -741,7 +859,9 @@
     "relatedSlugs": [
       "css-cascade",
       "css-box-model"
-    ]
+    ],
+    "tooltipTr": "Birden fazla kural aynı öğeyi hedeflediğinde hangi CSS kuralının geçerli olacağına karar veren algoritma.",
+    "definitionTr": "Specificity şu şekilde hesaplanır: inline stiller (1000) > ID seçiciler (100) > sınıf/attribute/pseudo-class (10) > element (1). Eşit specificity durumunda sonraki kural kazanır. `!important` bu hesaplamayı geçersiz kılar ama kötü uygulama olarak kabul edilir."
   },
   {
     "slug": "css-cascade",
@@ -753,7 +873,9 @@
     "relatedSlugs": [
       "css-specificity",
       "css-custom-property"
-    ]
+    ],
+    "tooltipTr": "Birden fazla kural hedeflediğinde hangi CSS bildiriminin uygulanacağını belirleyen algoritma.",
+    "definitionTr": "Cascade şu öncelik sırasına göre çalışır: origin (user-agent, user, author), specificity ve kaynak sırası. Cascade katmanları (`@layer`) bu sırayı daha ayrıntılı kontrol etmeni sağlar. CSS Modules ve Tailwind, kural çakışmalarını önlemek için cascade'i minimize eder."
   },
   {
     "slug": "css-flexbox",
@@ -765,7 +887,9 @@
     "relatedSlugs": [
       "css-grid",
       "css-box-model"
-    ]
+    ],
+    "tooltipTr": "Öğeleri tek bir eksen (satır veya sütun) boyunca hizalamak ve alanı dağıtmak için bir boyutlu layout sistemi.",
+    "definitionTr": "Flexbox, `display: flex` ile etkinleşir. Container özellikleri: `flex-direction`, `justify-content`, `align-items`, `flex-wrap`. Item özellikleri: `flex-grow`, `flex-shrink`, `flex-basis`, `align-self`. Mükemmel dikey ortalama ve dinamik alanı paylaşma için ideal."
   },
   {
     "slug": "css-grid",
@@ -777,7 +901,9 @@
     "relatedSlugs": [
       "css-flexbox",
       "css-media-query"
-    ]
+    ],
+    "tooltipTr": "Öğeleri satır ve sütunlara aynı anda yerleştirmek için iki boyutlu layout sistemi.",
+    "definitionTr": "CSS Grid, `display: grid` ile etkinleşir. `grid-template-columns`, `grid-template-rows` ile ızgarayı tanımlar; `grid-column` ve `grid-row` ile öğeleri yerleştirirsin. Flexbox tek eksende güçlüdür; Grid ise iki boyutlu layout'lar için idealdir. İkisi birlikte kullanılabilir."
   },
   {
     "slug": "css-custom-property",
@@ -789,7 +915,9 @@
     "relatedSlugs": [
       "css-cascade",
       "css-media-query"
-    ]
+    ],
+    "tooltipTr": "DOM ağacı üzerinden miras alınan, `--` öneki ile bildirilen CSS değişkenleri.",
+    "definitionTr": "CSS özel özellikleri (değişkenler) `--color-primary: blue` şeklinde tanımlanır ve `var(--color-primary)` ile kullanılır. Belirli bir kapsama özgü olarak tanımlanabilir; JS ile okunup yazılabilir. Dinamik temalar ve tasarım tokenleri için mükemmeldir."
   },
   {
     "slug": "css-pseudo-class",
@@ -801,7 +929,9 @@
     "relatedSlugs": [
       "css-specificity",
       "css-cascade"
-    ]
+    ],
+    "tooltipTr": "`:hover`, `:focus`, `:nth-child` gibi belirli bir durumu hedefleyen seçiciye eklenen anahtar kelime.",
+    "definitionTr": "Pseudo-class'lar öğenin durumuna göre stil uygulanmasını sağlar. `:hover` (üzerine gelindiğinde), `:focus` (odaklandığında), `:checked` (işaretlendiğinde), `:nth-child(n)` (sıra numarasına göre). Pseudo-element'lerden farkı: `::before` ve `::after` içerik üretirken pseudo-class'lar yalnızca durumu hedefler."
   },
   {
     "slug": "css-media-query",
@@ -813,7 +943,9 @@
     "relatedSlugs": [
       "css-grid",
       "css-custom-property"
-    ]
+    ],
+    "tooltipTr": "Ekran boyutu, cihaz özellikleri veya kullanıcı tercihine bağlı olarak stil uygulayan CSS kuralı.",
+    "definitionTr": "`@media (max-width: 768px) { ... }` örneğiyle, mobil cihazlar için farklı stiller tanımlarsın. `prefers-color-scheme: dark` sistem temasını, `prefers-reduced-motion` ise animasyon tercihini kontrol eder. Responsive tasarımın temel aracıdır."
   },
   {
     "slug": "css-stacking-context",
@@ -825,7 +957,9 @@
     "relatedSlugs": [
       "css-specificity",
       "css-cascade"
-    ]
+    ],
+    "tooltipTr": "Z-index değerlerinin yalnızca kendi içinde karşılaştırıldığı, z ekseninde izole bir katman.",
+    "definitionTr": "Yeni bir stacking context; `position: relative` + `z-index`, `opacity < 1`, `transform`, `filter` gibi özelliklerle oluşturulur. Bir öğenin z-index'i, farklı stacking context'lerdeki öğeleri doğrudan etkilemez. Beklenmedik örtüşme sorunları genellikle istem dışı oluşan stacking context'lerden kaynaklanır."
   },
   {
     "slug": "css-bfc",
@@ -837,7 +971,9 @@
     "relatedSlugs": [
       "css-box-model",
       "css-flexbox"
-    ]
+    ],
+    "tooltipTr": "Blok düzeyindeki kutularının bağımsız olarak yerleştirildiği yalıtılmış biçimlendirme bölgesi.",
+    "definitionTr": "Block Formatting Context (BFC), `overflow: hidden`, `float`, `display: flow-root` veya `position: absolute/fixed` ile oluşturulur. Float'ları temizler, dış margin çökmesini önler ve öğenin float'ların yanından değil altından başlamasını sağlar."
   },
   {
     "slug": "use-state",
@@ -850,7 +986,9 @@
       "use-reducer",
       "use-effect",
       "use-memo"
-    ]
+    ],
+    "tooltipTr": "Function component'e local state ekleyen hook — mevcut değeri ve güncelleyici fonksiyonu döndürür.",
+    "definitionTr": "`const [count, setCount] = useState(0)` şeklinde kullanılır. State güncellemesi asenkron ve batch'lenmiş olabilir. Fonksiyon biçimindeki güncelleyici `setCount(c => c + 1)` önceki değeri güvenle okur. Her render en güncel state'i yansıtır."
   },
   {
     "slug": "use-effect",
@@ -863,7 +1001,9 @@
       "use-state",
       "use-ref",
       "use-callback"
-    ]
+    ],
+    "tooltipTr": "Veri çekme, subscription ve DOM mutasyonu gibi yan etkileri çalıştıran hook — render sonrası çalışır.",
+    "definitionTr": "`useEffect(fn, deps)`: deps dizisindeki değerler değiştiğinde fn çalışır. Boş dizi `[]` yalnızca mount/unmount'ta çalıştırır. Cleanup için fn'den bir fonksiyon döndür. Sık hata: bağımlılıkları eksik belirtmek, stale closure'a yol açar."
   },
   {
     "slug": "use-memo",
@@ -876,7 +1016,9 @@
       "use-callback",
       "use-state",
       "use-ref"
-    ]
+    ],
+    "tooltipTr": "Pahalı hesaplanmış bir değeri memoize eden, yalnızca bağımlılıklar değiştiğinde yeniden hesaplayan hook.",
+    "definitionTr": "`useMemo(() => computeExpensiveValue(a, b), [a, b])` — bağımlılıklar değişmediğinde önceki sonucu döndürür. Nesne referansı kararlılığı için de kullanışlıdır. Erken optimizasyon tuzağına düşme: gerçek bir performans sorunu olmadan kullanmak gereksiz karmaşıklık yaratır."
   },
   {
     "slug": "use-callback",
@@ -888,7 +1030,9 @@
     "relatedSlugs": [
       "use-memo",
       "use-state"
-    ]
+    ],
+    "tooltipTr": "Yalnızca bağımlılıklar değiştiğinde değişen memoize edilmiş fonksiyon referansı döndürür.",
+    "definitionTr": "`useCallback(fn, deps)`, `useMemo(() => fn, deps)` ile eşdeğerdir ama okunabilirliği artırır. Genellikle `React.memo` ile sarmalanmış child component'lere callback geçerken kullanılır, böylece gereksiz render'lar önlenir. Her yerde kullanmak performansı artırmaz."
   },
   {
     "slug": "use-ref",
@@ -901,7 +1045,9 @@
       "use-state",
       "use-effect",
       "use-memo"
-    ]
+    ],
+    "tooltipTr": "`.current` özelliği render'lar arasında kalıcı olan ve değiştirildiğinde render tetiklemeyen mutable ref nesnesi döndürür.",
+    "definitionTr": "`useRef` iki kullanım senaryosu vardır: DOM node'larına erişim (`ref={myRef}`) ve render tetiklemeden değer saklamak (zamanlayıcı ID, önceki değer). Ref güncellemeleri senkrondur ama re-render tetiklemez; bu onu state'ten farklı kılar."
   },
   {
     "slug": "use-context",
@@ -913,7 +1059,9 @@
     "relatedSlugs": [
       "use-state",
       "use-reducer"
-    ]
+    ],
+    "tooltipTr": "Bir React context'e abone olan, context değeri değiştiğinde yeniden render eden hook.",
+    "definitionTr": "`useContext(MyContext)` en yakın `Provider`'ın değerini okur. Provider'sız kullanıldığında default değeri döndürür. Context, prop drilling'i önler ama tüm consumer'ları yeniden render edebileceğinden performansa dikkat etmek gerekir."
   },
   {
     "slug": "use-reducer",
@@ -926,7 +1074,9 @@
       "use-state",
       "use-context",
       "redux-reducer"
-    ]
+    ],
+    "tooltipTr": "Karmaşık state mantığı için useState alternatifi — (state, action) => newState ile state yönetir.",
+    "definitionTr": "`const [state, dispatch] = useReducer(reducer, initialState)`. Birden fazla alt değer içeren veya bir sonraki state'in öncekine bağlı olduğu durumlarda tercih edilir. Redux'a benzer ama yerel component düzeyinde. Context ile birleştirildiğinde hafif küresel state çözümü sunar."
   },
   {
     "slug": "use-id",
@@ -938,7 +1088,9 @@
     "relatedSlugs": [
       "use-ref",
       "use-state"
-    ]
+    ],
+    "tooltipTr": "Form etiketlerini inputlara bağlamak için stable, benzersiz ID üretir — server-client uyumunu korur.",
+    "definitionTr": "`useId`, SSR ve CSR arasında hidratasyon hatası olmadan benzersiz ID'ler üretir. Erişilebilir form ilişkilendirmeleri için kullanılır: `<label htmlFor={id}>` ve `<input id={id}>`. Listeler için `key` prop'u olarak kullanılmamalıdır."
   },
   {
     "slug": "use-transition",
@@ -950,7 +1102,9 @@
     "relatedSlugs": [
       "use-state",
       "use-memo"
-    ]
+    ],
+    "tooltipTr": "UI'ın duyarlı kalmasını sağlamak için bir state güncellemesini acil olmayan olarak işaretleyen hook.",
+    "definitionTr": "`const [isPending, startTransition] = useTransition()`. `startTransition` içinde sarılan güncellemeler, urgent güncellemeler (input yazma gibi) tarafından kesintiye uğratılabilir. Büyük listeler veya sayfa geçişleri için kullanışlıdır — kullanıcı yazmaya devam ederken arama sonuçları arka planda hesaplanır."
   },
   {
     "slug": "git-commit",
@@ -962,7 +1116,9 @@
     "relatedSlugs": [
       "git-branch",
       "git-rebase"
-    ]
+    ],
+    "tooltipTr": "Depodaki state'in belirli bir andaki anlık görüntüsü, SHA hash ile tanımlanır.",
+    "definitionTr": "Git commit, staged değişikliklerden bir snapshot oluşturur. Her commit; ağaç, ebeveyn commit(ler), yazar, zaman damgası ve mesajı içerir. İyi commit mesajları özetler (neden değil ne); `git log --oneline` ile tarih okunabilir olur."
   },
   {
     "slug": "git-branch",
@@ -975,7 +1131,9 @@
       "git-commit",
       "git-merge",
       "git-rebase"
-    ]
+    ],
+    "tooltipTr": "Commit'e işaret eden hafif, hareketli pointer — iş izole etmenin standart yolu.",
+    "definitionTr": "Branch, bir commit'e işaret eden tek bir referanstır. `git checkout -b feature/x` yeni branch oluşturur; commit yaptıkça pointer ilerler. Branch'ler ucuzdur ve oluşturulmaları anlıktır. Ana branch'i korumak için feature branch'lerde çalış."
   },
   {
     "slug": "git-rebase",
@@ -988,7 +1146,9 @@
       "git-merge",
       "git-commit",
       "git-branch"
-    ]
+    ],
+    "tooltipTr": "Commit'leri başka bir branch üzerine yeniden oynatarak merge commit olmaksızın doğrusal tarih üretir.",
+    "definitionTr": "`git rebase main`, mevcut branch'deki commit'leri main'in tepesine yeniden uygular. Commit SHA'ları değişir çünkü commit'ler yeniden yazılır. Temiz doğrusal tarih sağlar ama paylaşılan branch'lerde force-push gerektirebilir. `merge` ise tarihi korur."
   },
   {
     "slug": "git-merge",
@@ -1001,7 +1161,9 @@
       "git-rebase",
       "git-branch",
       "git-commit"
-    ]
+    ],
+    "tooltipTr": "İki branch'i, her ikisini parent olarak gösteren bir merge commit oluşturarak birleştiren komut.",
+    "definitionTr": "`git merge feature` komutu, feature branch'teki değişiklikleri mevcut branch'e dahil eder. Fast-forward mümkünse yeni commit oluşturmaz. `--no-ff` ile her zaman merge commit oluşturursun. Rebase ile fark: merge tarihi olduğu gibi saklar."
   },
   {
     "slug": "git-stash",
@@ -1013,7 +1175,9 @@
     "relatedSlugs": [
       "git-commit",
       "git-branch"
-    ]
+    ],
+    "tooltipTr": "Commit edilmemiş değişiklikleri geçici olarak kaydeden, bağlamı değiştirip daha sonra geri dönmenizi sağlayan komut.",
+    "definitionTr": "`git stash` staged ve unstaged değişiklikleri bir stack'e kaydeder ve working directory'yi temizler. `git stash pop` değişiklikleri geri getirir. `git stash list` ile stash'leri görürsün. Çoklu stash için `stash apply stash@{2}` kullanabilirsin."
   },
   {
     "slug": "git-cherry-pick",
@@ -1025,7 +1189,9 @@
     "relatedSlugs": [
       "git-commit",
       "git-rebase"
-    ]
+    ],
+    "tooltipTr": "Belirli bir commit'i, merge etmeden başka bir branch'ten mevcut branch'e uygular.",
+    "definitionTr": "`git cherry-pick abc1234`, belirtilen commit'in değişikliklerini mevcut branch'e uygular. Tek bir hata düzeltmesini bir sürüm branch'ine almak için kullanışlıdır. Yeni commit SHA oluşturulur — aynı değişiklik iki farklı geçmişte görünür."
   },
   {
     "slug": "git-reset",
@@ -1037,7 +1203,9 @@
     "relatedSlugs": [
       "git-commit",
       "git-rebase"
-    ]
+    ],
+    "tooltipTr": "HEAD'i önceki commit'e taşır — `--soft` değişiklikleri staged bırakır, `--mixed` unstaged yapar, `--hard` atar.",
+    "definitionTr": "`git reset --soft HEAD~1` son commit'i geri alır, değişiklikleri staged bırakır. `--mixed` değişiklikleri unstaged yapar. `--hard` değişiklikleri tamamen atar — dikkatli kullan. Paylaşılan branch'lerde geçmişi yeniden yazdığından sorun çıkarabilir."
   },
   {
     "slug": "pull-request",
@@ -1050,7 +1218,9 @@
       "git-branch",
       "git-merge",
       "git-rebase"
-    ]
+    ],
+    "tooltipTr": "GitHub/GitLab'ın değişiklikleri önermek, incelemek, tartışmak ve birleştirmek için kullandığı mekanizma.",
+    "definitionTr": "PR, branch'deki değişiklikleri diğerleriyle incelettirmek için açılır. İnceleyenler yorum yapabilir, değişiklik isteyebilir veya onaylayabilir. Genellikle CI/CD pipeline'ı tetikler ve branch koruma kuralları zorunlu kılınır. Kod kalitesini ve bilgi paylaşımını artırır."
   },
   {
     "slug": "sprint",
@@ -1064,7 +1234,9 @@
       "velocity",
       "retrospective",
       "standup"
-    ]
+    ],
+    "tooltipTr": "Scrum ekibinin belirli hedefler için çalıştığı sabit zaman dilimi, genellikle 1-4 hafta.",
+    "definitionTr": "Sprint, Scrum'ın temel zaman dilimidir. Sprint planlama ile başlar; daily standup'lar ilerleyişi takip eder; sprint review ürünü gösterir; retrospektif ise süreci iyileştirir. Sprint ortasında kapsamı değiştirmemek önerilir."
   },
   {
     "slug": "user-story",
@@ -1077,7 +1249,9 @@
       "sprint",
       "backlog",
       "story-point"
-    ]
+    ],
+    "tooltipTr": "Kullanıcı perspektifinden yazılan kısa özellik açıklaması: 'Bir [rol] olarak, [faydayı] elde etmek için [özelliği] istiyorum.'",
+    "definitionTr": "User story, bir özelliğin kullanıcıya sağladığı değeri açıklar. İyi story'ler INVEST kriterlerini karşılar: Independent (bağımsız), Negotiable (müzakere edilebilir), Valuable (değerli), Estimable (tahmin edilebilir), Small (küçük), Testable (test edilebilir). Kabul kriterleri, 'tamamlandı' tanımını netleştirir."
   },
   {
     "slug": "backlog",
@@ -1090,7 +1264,9 @@
       "user-story",
       "sprint",
       "story-point"
-    ]
+    ],
+    "tooltipTr": "Ekibin üzerinde çalışabileceği tüm özellik, hata ve teknik borcun öncelik sırasına göre düzenlenmiş listesi.",
+    "definitionTr": "Product backlog, Product Owner tarafından yönetilir. Öğeler, sprint'e girenler için detaylandırılır ve tahmin edilir; uzak gelecektekiler daha kaba kalabilir. Backlog grooming/refinement, önceliklerin güncel tutulmasını sağlar."
   },
   {
     "slug": "retrospective",
@@ -1102,7 +1278,9 @@
     "relatedSlugs": [
       "sprint",
       "standup"
-    ]
+    ],
+    "tooltipTr": "Her sprint sonunda ekibin süreçlerini değerlendirdiği ve iyileştirme kararları aldığı toplantı.",
+    "definitionTr": "Retrospektif, 'Ne iyi gitti?', 'Ne daha iyi olabilirdi?', 'Ne değiştireceksiniz?' sorularını yanıtlar. Blamasız bir kültür, açık tartışmayı teşvik eder. Etkili retrospektifler, bir sonraki sprint'te uygulanacak somut eylem öğeleriyle biter."
   },
   {
     "slug": "velocity",
@@ -1115,7 +1293,9 @@
       "sprint",
       "story-point",
       "backlog"
-    ]
+    ],
+    "tooltipTr": "Ekibin sprint başına tamamladığı ortalama story point sayısı — sürüm tahmini için kullanılır.",
+    "definitionTr": "Velocity, son birkaç sprint'in ortalamasından hesaplanır. Sürüm tarihi tahmini için kullanılır; farklı ekiplerle karşılaştırma yapmak için değil. İlk sprint'lerde tutarsız; birkaç sprint sonra daha güvenilir hale gelir."
   },
   {
     "slug": "story-point",
@@ -1128,7 +1308,9 @@
       "user-story",
       "velocity",
       "sprint"
-    ]
+    ],
+    "tooltipTr": "User story'leri tahmin etmek için kullanılan karmaşıklık, belirsizlik ve çabayı ölçen göreli birim.",
+    "definitionTr": "Story point'ler saat değil göreli karmaşıklığı ölçer. Fibonacci serisi (1, 2, 3, 5, 8, 13...) yaygın olarak kullanılır. Planning poker, ekibin konsensüse ulaşmasını sağlar. Farklı ekiplerin point'lerini karşılaştırmak anlamsızdır — her ekibin ölçeği kendine özgüdür."
   },
   {
     "slug": "standup",
@@ -1140,7 +1322,9 @@
     "relatedSlugs": [
       "sprint",
       "retrospective"
-    ]
+    ],
+    "tooltipTr": "Ekibin ilerlemeyi, planları ve engelleri paylaştığı kısa günlük senkronizasyon (max 15 dakika).",
+    "definitionTr": "Standup üç soruya cevap arar: Dün ne yaptın? Bugün ne yapacaksın? Bir engel var mı? Ayrıntılı tartışmalar, standup sonrasına bırakılır. Uzak ekiplerde asenkron olarak (Slack bot, yazılı mesaj) da yapılabilir."
   },
   {
     "slug": "definition-of-done",
@@ -1152,7 +1336,9 @@
     "relatedSlugs": [
       "sprint",
       "user-story"
-    ]
+    ],
+    "tooltipTr": "Herhangi bir iş öğesi için 'tamamlandı' tanımını belirleyen paylaşılan kontrol listesi.",
+    "definitionTr": "DoD, ekibin standartlarını netleştirir: kod review edildi, testler yazıldı, CI geçti, dokümantasyon güncellendi vb. Yeni öğeler teslim edilmeden DoD karşılanmalıdır. Kalite tutarsızlıklarını önler ve gizli teknik borcu azaltır."
   },
   {
     "slug": "kanban",
@@ -1164,7 +1350,9 @@
     "relatedSlugs": [
       "sprint",
       "backlog"
-    ]
+    ],
+    "tooltipTr": "WIP limitleriyle görsel pano kullanan ve sürekli akışa odaklanan yalın iş akışı yönetim yöntemi.",
+    "definitionTr": "Kanban, sabit sprint yerine sürekli akışa odaklanır. WIP (Work In Progress) limitleri darboğazları ortaya çıkarır. Sütunlar iş akışı aşamalarını temsil eder: Backlog → Geliştirme → Review → Test → Tamamlandı. Scrum'a kıyasla daha esnek bir çerçevedir."
   },
   {
     "slug": "websocket",
@@ -1177,7 +1365,9 @@
       "ws-handshake",
       "ws-heartbeat",
       "server-sent-events"
-    ]
+    ],
+    "tooltipTr": "Tek kalıcı TCP bağlantısı üzerinden tam çift yönlü iletişim sağlayan protokol.",
+    "definitionTr": "WebSocket, HTTP Upgrade el sıkışması ile başlar, ardından her iki tarafın da mesaj gönderebileceği kalıcı bir bağlantı kurar. HTTP'den farklı olarak istemci her istek için yeni bağlantı açmak zorunda kalmaz. Gerçek zamanlı sohbet, canlı bildirimler ve işbirlikçi düzenleme için idealdir."
   },
   {
     "slug": "ws-handshake",
@@ -1189,7 +1379,9 @@
     "relatedSlugs": [
       "websocket",
       "ws-heartbeat"
-    ]
+    ],
+    "tooltipTr": "Bir WebSocket bağlantısı kuran ve protokolü değiştiren HTTP Upgrade isteği.",
+    "definitionTr": "WebSocket el sıkışması bir HTTP GET isteği ile başlar; `Upgrade: websocket` ve `Connection: Upgrade` başlıkları içerir. Sunucu `101 Switching Protocols` ile yanıt verir. Bundan sonra bağlantı HTTP yerine WebSocket çerçeve protokolüne geçer."
   },
   {
     "slug": "ws-heartbeat",
@@ -1201,7 +1393,9 @@
     "relatedSlugs": [
       "websocket",
       "ws-reconnect"
-    ]
+    ],
+    "tooltipTr": "Ölü bağlantıları tespit etmek için periyodik olarak değiştirilen mesajlar — güvenlik duvarları sessizce bağlantıları kesebilir.",
+    "definitionTr": "WebSocket heartbeat (ping/pong), uzun süreli sessiz bağlantıların güvenlik duvarları tarafından kapatılmasını önler. Sunucu veya istemci ping gönderir; karşı taraf pong ile yanıt verir. Yanıt gelmezse bağlantı kesilmiş sayılır ve yeniden bağlanma başlar."
   },
   {
     "slug": "ws-reconnect",
@@ -1213,7 +1407,9 @@
     "relatedSlugs": [
       "websocket",
       "ws-heartbeat"
-    ]
+    ],
+    "tooltipTr": "Bağlantı kesilmesinin ardından WebSocket bağlantısını otomatik olarak yeniden kurma örüntüsü.",
+    "definitionTr": "Sağlam WebSocket istemcileri, exponential backoff (2s, 4s, 8s... gibi üstel artan bekleme) ile yeniden bağlanmayı dener. Yeniden bağlanma sonrası durum senkronizasyonu önemlidir — kaçırılan mesajları kurtarmak için sunucu taraflı mesaj arabelleği veya oturum yönetimi gerekebilir."
   },
   {
     "slug": "server-sent-events",
@@ -1225,7 +1421,9 @@
     "relatedSlugs": [
       "websocket",
       "ws-heartbeat"
-    ]
+    ],
+    "tooltipTr": "Sunucunun tarayıcıya güncellemeleri gönderdiği tek yönlü HTTP akış mekanizması.",
+    "definitionTr": "SSE, `text/event-stream` MIME tipiyle tek bir HTTP bağlantısı üzerinde çalışır. Tarayıcının `EventSource` API'si otomatik yeniden bağlanmayı yönetir. Yalnızca sunucudan istemciye veri akışı gerektiğinde WebSocket'ten daha basit bir alternatiftir: bildirimler, haber akışları, AI token yayınlama."
   },
   {
     "slug": "socket-io",
@@ -1237,7 +1435,9 @@
     "relatedSlugs": [
       "websocket",
       "ws-reconnect"
-    ]
+    ],
+    "tooltipTr": "WebSocket'i oda, namespace, otomatik yeniden bağlanma ve polling fallback ile saran kütüphane.",
+    "definitionTr": "Socket.IO, WebSocket olmadığında long-polling'e otomatik geri döner. Odalar ile mesajları istemci gruplarına yayınlayabilir, namespace'lerle ise bağlantıları mantıksal olarak ayırabilirsin. Ancak ek bir katman getirdiğinden, yalnızca WebSocket'in tüm özelliklerine ihtiyaç duyduğunda tercih et."
   },
   {
     "slug": "semantic-html",
@@ -1249,7 +1449,9 @@
     "relatedSlugs": [
       "aria",
       "service-worker"
-    ]
+    ],
+    "tooltipTr": "nav, main, article, section gibi anlamı tanımlayan HTML elementlerinin kullanılması — erişilebilirlik ve SEO için kritik.",
+    "definitionTr": "Semantic HTML, içeriğin amacını açıklar. Ekran okuyucular `nav`, `main`, `article` gibi landmark elementleri kullanarak sayfa yapısını iletir. Arama motorları anlamı anlamak için semantiği kullanır. `div` yerine doğru elementi seçmek, hem erişilebilirliği hem de bakım kolaylığını artırır."
   },
   {
     "slug": "aria",
@@ -1260,7 +1462,9 @@
     "codeExample": "<!-- Native — no ARIA needed -->\n<button type=\"submit\">Save</button>\n\n<!-- Custom dialog needs ARIA -->\n<div role=\"dialog\" aria-modal=\"true\" aria-labelledby=\"dialog-title\">\n  <h2 id=\"dialog-title\">Confirm Delete</h2>\n</div>\n\n<!-- Live region -->\n<div aria-live=\"polite\">{statusMessage}</div>",
     "relatedSlugs": [
       "semantic-html"
-    ]
+    ],
+    "tooltipTr": "Etkileşimli widget'ları yardımcı teknolojilere tanıtan erişilebilirlik özellik seti — Accessible Rich Internet Applications.",
+    "definitionTr": "ARIA özelliklerinin üç türü vardır: Roller (`role='button'`), Özellikler (`aria-label`, `aria-required`) ve Durumlar (`aria-expanded`, `aria-checked`). Kural: yerel HTML semantiği önce gelir — `<button>` varken `role='button'` ekleme. ARIA, doğal semantiği olmayan dinamik widget'lar içindir."
   },
   {
     "slug": "web-storage",
@@ -1272,7 +1476,9 @@
     "relatedSlugs": [
       "service-worker",
       "semantic-html"
-    ]
+    ],
+    "tooltipTr": "Anahtar-değer string verilerini depolamak için tarayıcı API'leri: oturum bazlı sessionStorage ve kalıcı localStorage.",
+    "definitionTr": "localStorage sekmeler ve oturumlar arasında kalıcıdır; sessionStorage yalnızca sekme açık olduğu sürece. Her ikisi de 5MB civarında limit sunar, yalnızca string depolar ve senkrondur — büyük veriler için IndexedDB'yi tercih et. Secret veya token saklamak için güvenli değildir."
   },
   {
     "slug": "service-worker",
@@ -1284,7 +1490,9 @@
     "relatedSlugs": [
       "web-storage",
       "semantic-html"
-    ]
+    ],
+    "tooltipTr": "Çevrimdışı önbellekleme, push bildirim ve arka plan senkronizasyonunu etkinleştiren arka plan thread scripti.",
+    "definitionTr": "Service Worker, tarayıcı ve ağ arasında proxy görevi görür. Cache API ile kaynakları önbelleğe alır; ağ isteğini keserek önbellekten sunar. PWA'ların çevrimdışı çalışmasını sağlar. HTTPS gerektirir. `install`, `activate` ve `fetch` event'larıyla yaşam döngüsü yönetilir."
   },
   {
     "slug": "canvas-html",
@@ -1296,7 +1504,9 @@
     "relatedSlugs": [
       "semantic-html",
       "web-storage"
-    ]
+    ],
+    "tooltipTr": "2D grafikleri programatik olarak çizmek için JavaScript API'ye sahip HTML elementi — oyunlar ve görselleştirmeler için kullanılır.",
+    "definitionTr": "Canvas, `<canvas>` elementi ve 2D context (`getContext('2d')`) üzerinden piksel bazlı render yapar. SVG'den farkı: vektör değil bitmap'tir — ölçekleme kaliteyi düşürür. Oyunlar, veri görselleştirme ve görüntü işleme için uygundur. `requestAnimationFrame` ile düzgün animasyon yapılır."
   },
   {
     "slug": "monolith",
@@ -1308,7 +1518,9 @@
     "relatedSlugs": [
       "microservice",
       "soa"
-    ]
+    ],
+    "tooltipTr": "Tüm uygulama mantığını içeren tek deploy edilebilir birim.",
+    "definitionTr": "Monolith, tüm işlevselliği tek bir dağıtılabilir birimde toplar. Başlangıçta basit ve geliştirmesi hızlıdır. Ölçekleme zorlaştıkça veya ekipler büyüdükçe bakımı güçleşebilir. Microservice'e geçmeden önce monolitin avantajlarını değerlendirmek önemlidir."
   },
   {
     "slug": "microservice",
@@ -1321,7 +1533,9 @@
       "monolith",
       "api-gateway",
       "message-queue"
-    ]
+    ],
+    "tooltipTr": "Tek bir iş kapasitesinden sorumlu, bağımsız olarak dağıtılabilir küçük servis.",
+    "definitionTr": "Microservice'ler, teknolojiyi ve dağıtımı bağımsız olarak seçmenize izin verir. Her servis kendi veritabanına sahip olabilir. Ağ gecikmesi, dağıtık sistem karmaşıklığı ve operasyonel yük dezavantajları arasındadır. İyi sınır tanımlaması (domain-driven design) kritik öneme sahiptir."
   },
   {
     "slug": "cap-theorem",
@@ -1332,7 +1546,9 @@
     "codeExample": null,
     "relatedSlugs": [
       "eventual-consistency"
-    ]
+    ],
+    "tooltipTr": "Dağıtık sistem en fazla 2'sini garanti edebilir: Tutarlılık, Kullanılabilirlik, Bölünme Toleransı.",
+    "definitionTr": "CAP teoremi, ağ bölünmesi (P) kaçınılmaz olduğundan CP (tutarlılık öncelikli) veya AP (kullanılabilirlik öncelikli) arasında seçim yapılmasını gerektirir. Gerçek dünyada çoğu sistem bu dengeyi ayarlayabilir — örn. eventual consistency ile AP sistemlere yaklaşılır."
   },
   {
     "slug": "eventual-consistency",
@@ -1343,7 +1559,9 @@
     "codeExample": null,
     "relatedSlugs": [
       "cap-theorem"
-    ]
+    ],
+    "tooltipTr": "Tüm node'lar aynı veriye yakınsayacak — ancak geçici olarak eskimiş veri sunabilir.",
+    "definitionTr": "Eventual consistency, dağıtık sistemlerde güncelleme yapıldıktan sonra tüm kopyaların zamanla aynı değere ulaşacağını garanti eder. DNS, sosyal medya beğeni sayıları ve dağıtık önbellekler bu modeli kullanır. Güçlü tutarlılık gerektiren bankacılık gibi senaryolarda kullanılmaz."
   },
   {
     "slug": "circuit-breaker",
@@ -1354,7 +1572,9 @@
     "codeExample": null,
     "relatedSlugs": [
       "microservice"
-    ]
+    ],
+    "tooltipTr": "Kademeli başarısızlıkları önlemek için başarısız olan servise yapılan çağrıları durdurur.",
+    "definitionTr": "Circuit breaker örüntüsü; Closed (normal), Open (istekler reddediliyor) ve Half-Open (test isteği) durumlarında çalışır. Hata oranı eşiği aşıldığında Open'a geçer; belirli süre sonra Half-Open ile servisi test eder. Hystrix ve Resilience4j bu örüntüyü uygular."
   },
   {
     "slug": "event-sourcing",
@@ -1366,7 +1586,9 @@
     "relatedSlugs": [
       "cqrs",
       "message-queue"
-    ]
+    ],
+    "tooltipTr": "State, mevcut değerler yerine değişmez eventler dizisi olarak saklanır.",
+    "definitionTr": "Event sourcing, her state değişikliğini event olarak saklar. Mevcut state, tüm eventler yeniden oynatılarak elde edilir. Tam denetim izi sağlar, geçmişe dönük hata ayıklamaya izin verir ve CQRS ile sıklıkla birlikte kullanılır. Eventlerin değişmezliği ve event schema evrimi karmaşıklık getirir."
   },
   {
     "slug": "cqrs",
@@ -1377,7 +1599,9 @@
     "codeExample": null,
     "relatedSlugs": [
       "event-sourcing"
-    ]
+    ],
+    "tooltipTr": "Command Query Responsibility Segregation — okuma ve yazma modellerini ayırır.",
+    "definitionTr": "CQRS, okuma (query) ve yazma (command) sorumluluklarını ayrı modellere böler. Yazma tarafı event kaydeder; okuma tarafı denormalize view'lar sunar. Yüksek ölçeklenebilirlik ve karmaşık domain mantığı için uygun; basit uygulamalarda gereksiz karmaşıklık ekler."
   },
   {
     "slug": "message-queue",
@@ -1389,7 +1613,9 @@
     "relatedSlugs": [
       "microservice",
       "event-sourcing"
-    ]
+    ],
+    "tooltipTr": "Async işleme için üreticileri tüketicilerden ayıran dayanıklı tampon.",
+    "definitionTr": "Message queue (RabbitMQ, SQS, Kafka), üretici servis mesajı kuyruğa yazar; tüketici hazır olduğunda alır. Yük dengeleme, yeniden deneme ve hata toleransı sağlar. Kafka özellikle yüksek hacimli event streaming için tercih edilir."
   },
   {
     "slug": "load-balancer",
@@ -1401,7 +1627,9 @@
     "relatedSlugs": [
       "horizontal-scaling",
       "microservice"
-    ]
+    ],
+    "tooltipTr": "Gelen trafiği birden fazla sunucu instance'ı arasında dağıtan bileşen.",
+    "definitionTr": "Load balancer, round-robin, least-connections veya IP hash gibi algoritmalarla istekleri dağıtır. Horizontal ölçeklemeyi mümkün kılar, tek nokta başarısızlığını azaltır. L4 (TCP/UDP) veya L7 (HTTP) katmanında çalışabilir; L7 içerik tabanlı yönlendirme sağlar."
   },
   {
     "slug": "cdn",
@@ -1412,7 +1640,9 @@
     "codeExample": null,
     "relatedSlugs": [
       "load-balancer"
-    ]
+    ],
+    "tooltipTr": "İçerik Dağıtım Ağı — statik kaynakları kullanıcılara yakın edge node'lardan sunar.",
+    "definitionTr": "CDN, statik içeriği (resimler, JS, CSS) kullanıcıya en yakın sunucudan sunar, böylece gecikme azalır ve origin sunucu yükü düşer. Cloudflare, CloudFront ve Fastly popüler CDN sağlayıcılarıdır. Edge caching TTL ve cache busting stratejileri kritik yapılandırmalar arasındadır."
   },
   {
     "slug": "rest",
@@ -1425,7 +1655,9 @@
       "graphql",
       "openapi",
       "idempotency"
-    ]
+    ],
+    "tooltipTr": "Durumsuz HTTP API'leri için mimari stil — Representational State Transfer.",
+    "definitionTr": "REST; kaynak tabanlı URL'ler (/users/1), HTTP metodları (GET, POST, PUT, DELETE, PATCH) ve durumsuz istekler kullanır. Kısıtlamalar: istemci-sunucu ayrımı, durumsuzluk, önbellek yeteneği, uniform arayüz. REST bir standart değil mimari stildir — HATEOAS gibi kısıtlamalar uygulamaya bağlıdır."
   },
   {
     "slug": "graphql",
@@ -1437,7 +1669,9 @@
     "relatedSlugs": [
       "rest",
       "n-plus-one"
-    ]
+    ],
+    "tooltipTr": "İstemcilerin tam olarak ihtiyaç duydukları veriyi belirleyebildiği sorgu dili.",
+    "definitionTr": "GraphQL, tek endpoint (`/graphql`) üzerinde tip güvenli sorgular sunar. İstemci tam olarak istediği alanları belirtir — over-fetching ve under-fetching önlenir. Mutation ile veri değiştirilir; Subscription ile gerçek zamanlı güncelleme alınır. Karmaşık sorgularda N+1 problemi dikkat gerektirir."
   },
   {
     "slug": "jwt",
@@ -1449,7 +1683,9 @@
     "relatedSlugs": [
       "rest",
       "oauth"
-    ]
+    ],
+    "tooltipTr": "Durumsuz, imzalı token — Header.Payload.Signature formatında.",
+    "definitionTr": "JWT (JSON Web Token), bilgileri güvenli bir şekilde taşıyan kompakt bir token formatıdır. İmza doğrulaması için sunucu oturuma ihtiyaç duymaz. Payload Base64 ile kodlanmıştır — şifrelenmemiştir, hassas veri koyma. `exp` claim'i gereklidir; rotation için refresh token kullan."
   },
   {
     "slug": "oauth",
@@ -1460,7 +1696,9 @@
     "codeExample": null,
     "relatedSlugs": [
       "jwt"
-    ]
+    ],
+    "tooltipTr": "Kullanıcıların şifrelerini paylaşmadan uygulamalara erişim izni vermesini sağlayan yetkilendirme çerçevesi.",
+    "definitionTr": "OAuth 2.0, yetkilendirme akışları (flow) tanımlar: Authorization Code (web), PKCE (SPA/mobil), Client Credentials (makine-makine). Kimlik doğrulama için OpenID Connect (OIDC) OAuth üzerine kurulur. Refresh token'lar uzun süreli erişim için kullanılır."
   },
   {
     "slug": "rate-limiting",
@@ -1471,7 +1709,9 @@
     "codeExample": "// Typical response headers\nX-RateLimit-Limit: 100\nX-RateLimit-Remaining: 0\nRetry-After: 60",
     "relatedSlugs": [
       "rest"
-    ]
+    ],
+    "tooltipTr": "Bir istemcinin zaman penceresi içinde yapabileceği istek sayısını sınırlayan mekanizma — aşıldığında 429 döner.",
+    "definitionTr": "Rate limiting, kötüye kullanım ve DDoS'a karşı koruma sağlar ve API kullanımını adil paylaşır. Algoritma örnekleri: fixed window, sliding window, token bucket, leaky bucket. Başlıklar: `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `Retry-After`."
   },
   {
     "slug": "idempotency",
@@ -1482,7 +1722,9 @@
     "codeExample": "// Safe to retry — same result\nDELETE /users/1  // deletes once; subsequent calls return 404\nPUT /users/1 { name: 'Aaron' }  // same final state",
     "relatedSlugs": [
       "rest"
-    ]
+    ],
+    "tooltipTr": "Kaç kez çağrılırsa çağrılsın aynı sonucu üreten işlem.",
+    "definitionTr": "GET, PUT ve DELETE idempotenttir; POST genellikle değildir. İdempotency key (istemcinin ürettiği benzersiz ID) ile POST işlemleri idempotent yapılabilir — ağ yeniden denemelerinde çift işlem önlenir. Dağıtık sistemlerde güvenlik için kritiktir."
   },
   {
     "slug": "webhook",
@@ -1493,7 +1735,9 @@
     "codeExample": "// Verify Stripe webhook signature\nconst event = stripe.webhooks.constructEvent(\n  body, sig, process.env.STRIPE_WEBHOOK_SECRET\n)",
     "relatedSlugs": [
       "rest"
-    ]
+    ],
+    "tooltipTr": "Sunucu tarafından başlatılan HTTP callback — polling yerine event'leri endpoint'ine iter.",
+    "definitionTr": "Webhook, bir olay gerçekleştiğinde dış sistemin belirttiğin URL'ye HTTP POST gönderdiği örüntüdür. Ödeme bildirimi, CI/CD tetikleme ve içerik güncelleme yaygın kullanım alanlarıdır. Güvenlik için imza doğrulama (HMAC) ve idempotency key uygulamalısın."
   },
   {
     "slug": "openapi",
@@ -1504,7 +1748,9 @@
     "codeExample": "# openapi.yaml\npaths:\n  /users/{id}:\n    get:\n      summary: Get user by ID\n      responses:\n        '200':\n          content:\n            application/json:\n              schema:\n                $ref: '#/components/schemas/User'",
     "relatedSlugs": [
       "rest"
-    ]
+    ],
+    "tooltipTr": "Otomatik dokümantasyon ve kod üretimini sağlayan makine okunabilir API spesifikasyon formatı (eski adıyla Swagger).",
+    "definitionTr": "OpenAPI spesifikasyonu, API endpoint'lerini, parametrelerini, istek/cevap şemalarını ve authentication yöntemlerini tanımlar. Swagger UI interaktif dokümantasyon, kod generator'lar ise client ve server stub üretir. tRPC ve GraphQL şemaları da benzer amaç için kullanılır."
   },
   {
     "slug": "n-plus-one",
@@ -1516,7 +1762,9 @@
     "relatedSlugs": [
       "graphql",
       "rest"
-    ]
+    ],
+    "tooltipTr": "N öğeyi çekip her biri için N ek sorgu göndermek — eager loading veya DataLoader ile önlenir.",
+    "definitionTr": "N+1 problemi: 10 kullanıcı çekip her biri için ayrı gönderi sorgusu yaparsan 11 sorgu gönderirsin. Çözümler: SQL'de JOIN veya IN ile tek sorgu, ORM'de eager loading, GraphQL'de DataLoader (batch ve cache). İlişkisel veritabanlarında yaygın performans sorunudur."
   },
   {
     "slug": "cors",
@@ -1528,7 +1776,9 @@
     "relatedSlugs": [
       "rest",
       "webhook"
-    ]
+    ],
+    "tooltipTr": "Tarayıcının cross-origin isteklerini engelleyen politikası — `Access-Control-Allow-Origin` başlığıyla kontrol edilir.",
+    "definitionTr": "CORS, tarayıcının farklı origin'e yapılan fetch/XHR isteklerini kısıtladığı güvenlik mekanizmasıdır. Preflight (OPTIONS) isteği, basit olmayan metod ve başlıklar için sunucunun onayını alır. Sunucu `Access-Control-Allow-Origin`, `Access-Control-Allow-Methods` gibi başlıklarla izin verir. API ve frontend farklı origin'deyse yapılandırılması gerekir."
   },
   {
     "slug": "error-boundary",
@@ -1539,7 +1789,9 @@
     "codeExample": "// app/dashboard/error.tsx\n'use client'\nexport default function Error({ error, reset }: { error: Error; reset: () => void }) {\n  return <button onClick={reset}>Try again</button>\n}",
     "relatedSlugs": [
       "suspense"
-    ]
+    ],
+    "tooltipTr": "Alt ağacındaki JS hatalarını yakalayan ve fallback UI gösteren React bileşeni.",
+    "definitionTr": "Error Boundary, `componentDidCatch` ve `getDerivedStateFromError` lifecycle metodlarını uygulayan class component'tir. Tüm uygulamanın çökmesini önlemek için kritik bölümleri sarar. Event handler hataları ve async hataları yakalamaz — bunlar için try/catch kullan."
   },
   {
     "slug": "suspense",
@@ -1551,7 +1803,9 @@
     "relatedSlugs": [
       "hook",
       "error-boundary"
-    ]
+    ],
+    "tooltipTr": "Child'lar yüklenirken fallback gösteren, async yükleme durumlarını deklaratif olarak yöneten bileşen.",
+    "definitionTr": "Suspense, async veri yüklemeyi deklaratif hale getirir. `<Suspense fallback={<Spinner />}>` ile sarılmış component'ler hazır olana kadar fallback gösterilir. React 18 ile `use(promise)` hook'u ve Server Component streaming desteği gelmiştir. Code splitting için `React.lazy` ile birlikte kullanılır."
   },
   {
     "slug": "type-guard",
@@ -1563,7 +1817,9 @@
     "relatedSlugs": [
       "discriminated-union",
       "generic"
-    ]
+    ],
+    "tooltipTr": "Koşullu blok içinde TypeScript tipini daraltan runtime kontrolü.",
+    "definitionTr": "Type guard, `typeof`, `instanceof` veya `in` operatörü ya da kullanıcı tanımlı type guard fonksiyonu (`is` anahtar kelimesi) olabilir. `function isCat(pet: Animal): pet is Cat { return (pet as Cat).meow !== undefined }` örneği, fonksiyon içinde güvenli tip dönüşümü sağlar."
   },
   {
     "slug": "server-actions",
@@ -1575,6 +1831,8 @@
     "relatedSlugs": [
       "server-component",
       "app-router"
-    ]
+    ],
+    "tooltipTr": "Client component'lerden doğrudan çağrılan async sunucu fonksiyonları — API route'u gerektirmez.",
+    "definitionTr": "Server Actions, Next.js App Router'da `'use server'` direktifi ile tanımlanır. Client tarafından doğrudan çağrılabilir, ancak sunucuda çalışır — veritabanı erişimi ve mutasyonlar için API route yazmaya gerek kalmaz. Form action'larıyla doğrudan entegre çalışır ve aşamalı geliştirmeyi (progressive enhancement) destekler."
   }
 ]

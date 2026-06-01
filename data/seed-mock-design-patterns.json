@@ -6,22 +6,30 @@
       {
         "optionText": "A reusable, named solution to a commonly recurring software design problem, providing shared vocabulary and proven approaches.",
         "isCorrect": true,
-        "explanation": "Correct — patterns are templates encoding collective design wisdom, not reusable code."
+        "explanation": "Correct — patterns are templates encoding collective design wisdom, not reusable code.",
+        "optionTextTr": "Yazılım tasarımında sıkça tekrarlanan bir soruna yönelik yeniden kullanılabilir, adlandırılmış çözüm; bağlamdan bağımsız koddur.",
+        "explanationTr": "Doğru — desenler kavramsal çözümler sunar, kopyalanıp yapıştırılan kod değil."
       },
       {
         "optionText": "A specific code snippet you copy and paste into your project to solve a common problem.",
         "isCorrect": false,
-        "explanation": "Patterns are templates describing a solution structure, not copy-paste code."
+        "explanation": "Patterns are templates describing a solution structure, not copy-paste code.",
+        "optionTextTr": "Bir sorunu çözmek için projeye kopyalayıp yapıştırdığınız belirli bir kod parçası.",
+        "explanationTr": "Tasarım desenleri, belirli uygulamalar değil; kavramsal şablonlardır."
       },
       {
         "optionText": "A type of algorithm optimised for performance-critical operations.",
         "isCorrect": false,
-        "explanation": "Algorithms solve computational problems; design patterns solve structural/architectural ones."
+        "explanation": "Algorithms solve computational problems; design patterns solve structural/architectural ones.",
+        "optionTextTr": "Performans açısından kritik işlemler için optimize edilmiş bir algoritma türü.",
+        "explanationTr": "Tasarım desenleri, algoritma optimizasyonu değil; sıkça görülen tasarım sorunlarına yönelik yapısal çözümlerdir."
       },
       {
         "optionText": "A CSS naming convention like BEM or SMACSS used to organise stylesheets.",
         "isCorrect": false,
-        "explanation": "CSS naming conventions are a separate concern — design patterns apply to software architecture."
+        "explanation": "CSS naming conventions are a separate concern — design patterns apply to software architecture.",
+        "optionTextTr": "Stilleri düzenlemek için kullanılan BEM veya SMACSS gibi bir CSS adlandırma kuralı.",
+        "explanationTr": "BEM ve SMACSS, CSS organizasyon kurallarıdır — GoF tasarım desenleri değil."
       }
     ]
   },
@@ -32,22 +40,30 @@
       {
         "optionText": "A creational pattern that ensures a class has only one instance and provides a global access point to it.",
         "isCorrect": true,
-        "explanation": "Correct — Singleton restricts instantiation to one object, e.g. a Supabase client or Redux store."
+        "explanation": "Correct — Singleton restricts instantiation to one object, e.g. a Supabase client or Redux store.",
+        "optionTextTr": "Bir sınıfın yalnızca bir instance'a sahip olmasını sağlayan ve buna global bir erişim noktası sunan creational desen.",
+        "explanationTr": "Doğru — Singleton belirli senaryolarda kullanışlıdır ancak global state ve test edilebilirlik sorunları nedeniyle dikkatli kullanılmalıdır."
       },
       {
         "optionText": "A pattern that creates multiple instances of a class from a single factory function.",
         "isCorrect": false,
-        "explanation": "That describes the Factory pattern — Singleton guarantees only ONE instance exists."
+        "explanation": "That describes the Factory pattern — Singleton guarantees only ONE instance exists.",
+        "optionTextTr": "Tek bir şablondan bir sınıfın birden fazla instance'ını oluşturan desen.",
+        "explanationTr": "Bu Singleton'ın tam tersidir — Singleton yalnızca bir instance'ı zorlar."
       },
       {
         "optionText": "A behavioral pattern that lets one object notify many dependents when its state changes.",
         "isCorrect": false,
-        "explanation": "That is the Observer pattern — Singleton is about limiting instantiation, not notification."
+        "explanation": "That is the Observer pattern — Singleton is about limiting instantiation, not notification.",
+        "optionTextTr": "Bir nesnenin birden fazla bağımlıyı bilgilendirmesini sağlayan behavioral desen.",
+        "explanationTr": "Bu Observer desenini tanımlar — Singleton değil."
       },
       {
         "optionText": "A structural pattern that wraps an object to add new behaviour without modifying the original.",
         "isCorrect": false,
-        "explanation": "That is the Decorator pattern — Singleton is a creational pattern focused on instance control."
+        "explanation": "That is the Decorator pattern — Singleton is a creational pattern focused on instance control.",
+        "optionTextTr": "Davranış eklemek için bir nesneyi sarmalayan structural desen.",
+        "explanationTr": "Bu Decorator desenini tanımlar — Singleton değil."
       }
     ]
   },
@@ -58,22 +74,30 @@
       {
         "optionText": "Creational = object creation, Structural = object composition, Behavioral = object communication.",
         "isCorrect": true,
-        "explanation": "Correct — the three GoF categories each address a different design concern."
+        "explanation": "Correct — the three GoF categories each address a different design concern.",
+        "optionTextTr": "Creational = nesne oluşturma, Structural = nesne bileşimi, Behavioral = nesne etkileşimi.",
+        "explanationTr": "Doğru — GoF, 23 deseni bu üç kategoride sınıflandırır."
       },
       {
         "optionText": "Creational = UI components, Structural = database schemas, Behavioral = API endpoints.",
         "isCorrect": false,
-        "explanation": "The GoF categories are not tied to specific layers — they are universal object-oriented design concerns."
+        "explanation": "The GoF categories are not tied to specific layers — they are universal object-oriented design concerns.",
+        "optionTextTr": "Creational = UI bileşenleri, Structural = veritabanı şemaları, Behavioral = iş mantığı.",
+        "explanationTr": "Bu eşleştirme yanlış — kategoriler, ilgili oldukları uygulama alanını değil; sorunun doğasını tanımlar."
       },
       {
         "optionText": "Creational = frontend, Structural = backend, Behavioral = DevOps.",
         "isCorrect": false,
-        "explanation": "Design patterns apply across all layers — the categories describe how objects relate, not where code runs."
+        "explanation": "Design patterns apply across all layers — the categories describe how objects relate, not where code runs.",
+        "optionTextTr": "Creational = frontend, Structural = backend, Behavioral = DevOps.",
+        "explanationTr": "Tasarım deseni kategorileri, yığın katmanlarıyla değil; nesne etkileşim türleriyle ilgilidir."
       },
       {
         "optionText": "Creational = algorithms, Structural = data structures, Behavioral = design workflows.",
         "isCorrect": false,
-        "explanation": "These categories describe OOP design approaches, not algorithms or data structures."
+        "explanation": "These categories describe OOP design approaches, not algorithms or data structures.",
+        "optionTextTr": "Creational = algoritmalar, Structural = veri yapıları, Behavioral = ağ işlemleri.",
+        "explanationTr": "Bu eşleştirme yanlış — kategoriler, yazılım nesne tasarım sorununun doğasını ifade eder."
       }
     ]
   },
@@ -84,22 +108,30 @@
       {
         "optionText": "A behavioral pattern defining a one-to-many dependency so all observers are notified automatically when the subject changes state.",
         "isCorrect": true,
-        "explanation": "Correct — DOM addEventListener, Zustand subscriptions, and Node.js EventEmitter all implement Observer."
+        "explanation": "Correct — DOM addEventListener, Zustand subscriptions, and Node.js EventEmitter all implement Observer.",
+        "optionTextTr": "Tüm gözlemcilerin otomatik olarak bilgilendirildiği, bire-çok bağımlılığı tanımlayan behavioral desen.",
+        "explanationTr": "Doğru — DOM olay listener'ları, RxJS ve EventEmitter Observer örüntüsünü kullanır."
       },
       {
         "optionText": "A pattern that watches the network and logs all HTTP requests for debugging.",
         "isCorrect": false,
-        "explanation": "Observer is an OOP pattern about object relationships, not network monitoring."
+        "explanation": "Observer is an OOP pattern about object relationships, not network monitoring.",
+        "optionTextTr": "Ağı izleyen ve tüm HTTP isteklerini hata ayıklama için kaydeden desen.",
+        "explanationTr": "Bu, ağ izlemeyi tanımlar — Observer deseni veri akışından bağımsız olarak nesneler arasındaki bildirimi tanımlar."
       },
       {
         "optionText": "A structural pattern that adds a monitoring wrapper around every function call.",
         "isCorrect": false,
-        "explanation": "Observer is behavioral — about event subscriptions, not function wrapping."
+        "explanation": "Observer is behavioral — about event subscriptions, not function wrapping.",
+        "optionTextTr": "Her nesneye izleme wrapper'ı ekleyen structural desen.",
+        "explanationTr": "Bu Decorator'a daha çok benzer — Observer ise bildirim akışı modeliyle ilgilidir."
       },
       {
         "optionText": "A creational pattern that creates observable objects using the Proxy API.",
         "isCorrect": false,
-        "explanation": "Observer is a behavioral pattern; Proxy is a separate structural pattern."
+        "explanation": "Observer is a behavioral pattern; Proxy is a separate structural pattern.",
+        "optionTextTr": "Proxy API'yi kullanarak gözlemlenebilir nesneler oluşturan creational desen.",
+        "explanationTr": "Observer bir behavioral desendir; Proxy bir structural desen ve ayrı bir JavaScript API'sidir."
       }
     ]
   },
@@ -110,22 +142,30 @@
       {
         "optionText": "A creational pattern that delegates object creation to a factory function or class, decoupling the caller from the concrete implementation.",
         "isCorrect": true,
-        "explanation": "Correct — the caller asks for an object without knowing which concrete class will be instantiated."
+        "explanation": "Correct — the caller asks for an object without knowing which concrete class will be instantiated.",
+        "optionTextTr": "Nesne oluşturmayı, tam sınıfı belirtmeden somut bir türü döndüren factory metoduna devreden creational desen.",
+        "explanationTr": "Doğru — Factory, bağımlılık oluşturma ile kullanımı ayırır."
       },
       {
         "optionText": "A pattern that manufactures CSS class names dynamically based on component props.",
         "isCorrect": false,
-        "explanation": "Factory is a creational OOP pattern about object instantiation, not CSS."
+        "explanation": "Factory is a creational OOP pattern about object instantiation, not CSS.",
+        "optionTextTr": "Bileşen durumuna göre dinamik olarak CSS sınıf adları üreten desen.",
+        "explanationTr": "Bu dinamik CSS oluşturmayı tanımlar — Factory deseni nesne oluşturmayla ilgilidir."
       },
       {
         "optionText": "A behavioral pattern that swaps different algorithms at runtime.",
         "isCorrect": false,
-        "explanation": "That is the Strategy pattern — Factory is about how objects are created, not which algorithm runs."
+        "explanation": "That is the Strategy pattern — Factory is about how objects are created, not which algorithm runs.",
+        "optionTextTr": "Çalışma zamanında farklı algoritmalar arasında geçiş yapan behavioral desen.",
+        "explanationTr": "Bu Strategy desenini tanımlar — Factory değil."
       },
       {
         "optionText": "A utility that converts factory functions into React components automatically.",
         "isCorrect": false,
-        "explanation": "Factory is a general OOP pattern — React.createElement is a factory but the pattern is language-agnostic."
+        "explanation": "Factory is a general OOP pattern — React.createElement is a factory but the pattern is language-agnostic.",
+        "optionTextTr": "Factory fonksiyonlarını React bileşenlerine dönüştüren yardımcı.",
+        "explanationTr": "Bu React'e özgü bir yardımcıdır — tasarım deseni değil."
       }
     ]
   },
@@ -136,22 +176,30 @@
       {
         "optionText": "A pattern that uses closures or ES modules to create private scope, exposing only a public API.",
         "isCorrect": true,
-        "explanation": "Correct — ES module exports are the modern form; IIFE was the pre-ES6 equivalent."
+        "explanation": "Correct — ES module exports are the modern form; IIFE was the pre-ES6 equivalent.",
+        "optionTextTr": "Özel kapsam oluşturmak için closure veya ES modülleri kullanan, genel ad alanını kirlenmekten koruyan desen.",
+        "explanationTr": "Doğru — ES modülleri bu deseni yerel olarak çözer; closure tabanlı varyant eski uyumluluk için hâlâ kullanılır."
       },
       {
         "optionText": "A pattern that splits a React component into a .jsx file and a .css file.",
         "isCorrect": false,
-        "explanation": "File splitting is a file organisation choice — the Module pattern is about encapsulation via scope."
+        "explanation": "File splitting is a file organisation choice — the Module pattern is about encapsulation via scope.",
+        "optionTextTr": "Bir React bileşenini .jsx dosyası ve .css dosyasına bölen desen.",
+        "explanationTr": "Bu dosya organizasyonu kuralıdır — JavaScript modül deseni değil."
       },
       {
         "optionText": "A Node.js-specific pattern using require() to load third-party packages.",
         "isCorrect": false,
-        "explanation": "The Module pattern predates Node.js and is about encapsulation, not package loading."
+        "explanation": "The Module pattern predates Node.js and is about encapsulation, not package loading.",
+        "optionTextTr": "Üçüncü taraf paketleri yüklemek için require() kullanan Node.js'e özgü desen.",
+        "explanationTr": "require() bir CommonJS yükleme mekanizmasıdır; modül deseni, özel durumu özel kapsamla kapsüllemeyi tanımlar."
       },
       {
         "optionText": "A pattern for dynamically importing code to reduce initial bundle size.",
         "isCorrect": false,
-        "explanation": "Dynamic import() is a performance technique — the Module pattern is about private scope and encapsulation."
+        "explanation": "Dynamic import() is a performance technique — the Module pattern is about private scope and encapsulation.",
+        "optionTextTr": "İlk bundle boyutunu azaltmak için kodu dinamik olarak içe aktaran desen.",
+        "explanationTr": "Bu code splitting / lazy loading'i tanımlar — modül gizlilik deseni değil."
       }
     ]
   },
@@ -162,22 +210,30 @@
       {
         "optionText": "A structural pattern that wraps an object to add behaviour dynamically without modifying the original class.",
         "isCorrect": true,
-        "explanation": "Correct — React HOCs like withAuth() and Higher-Order Functions like memoize() are functional decorators."
+        "explanation": "Correct — React HOCs like withAuth() and Higher-Order Functions like memoize() are functional decorators.",
+        "optionTextTr": "Davranış eklemek için bir nesneyi dinamik olarak sarmayan, orijinal sınıfı değiştirmeyen structural desen.",
+        "explanationTr": "Doğru — TypeScript decorator'ları ve HOC'lar bu deseni uygular."
       },
       {
         "optionText": "A CSS technique for adding visual effects using ::before and ::after pseudo-elements.",
         "isCorrect": false,
-        "explanation": "CSS pseudo-elements are unrelated to the Decorator design pattern."
+        "explanation": "CSS pseudo-elements are unrelated to the Decorator design pattern.",
+        "optionTextTr": "::before ve ::after kullanarak görsel efektler ekleyen CSS tekniği.",
+        "explanationTr": "CSS pseudo-element'ler görsel dekorasyon ekler — Decorator deseni, nesne davranışını programatik olarak değiştirir."
       },
       {
         "optionText": "A TypeScript keyword that marks a class member as private.",
         "isCorrect": false,
-        "explanation": "TypeScript's @decorator syntax is inspired by the pattern, but the pattern itself is about dynamic behaviour addition."
+        "explanation": "TypeScript's @decorator syntax is inspired by the pattern, but the pattern itself is about dynamic behaviour addition.",
+        "optionTextTr": "Bir sınıf üyesini özel olarak işaretleyen TypeScript anahtar kelimesi.",
+        "explanationTr": "private, erişim modifikatörüdür — Decorator deseni değil."
       },
       {
         "optionText": "A creational pattern that produces a family of related objects.",
         "isCorrect": false,
-        "explanation": "That describes the Abstract Factory pattern — Decorator is structural and adds behaviour to existing objects."
+        "explanation": "That describes the Abstract Factory pattern — Decorator is structural and adds behaviour to existing objects.",
+        "optionTextTr": "İlgili nesneler ailesi üreten creational desen.",
+        "explanationTr": "Bu Abstract Factory desenini tanımlar — Decorator değil."
       }
     ]
   },
@@ -188,22 +244,30 @@
       {
         "optionText": "A behavioral pattern that defines a family of interchangeable algorithms and lets you swap them at runtime without modifying the context.",
         "isCorrect": true,
-        "explanation": "Correct — e.g. passing different sort functions or validators to the same component/hook."
+        "explanation": "Correct — e.g. passing different sort functions or validators to the same component/hook.",
+        "optionTextTr": "Değiştirilebilir algoritmalar ailesi tanımlayan ve çalışma zamanında seçim yapılmasını sağlayan behavioral desen.",
+        "explanationTr": "Doğru — Strategy, koşullu dallara olan ihtiyacı ortadan kaldırır; aynı arayüzü paylaşan somut uygulamalar arasında geçiş yaparsın."
       },
       {
         "optionText": "A pattern for planning which features to ship in the next sprint.",
         "isCorrect": false,
-        "explanation": "Strategy is an OOP design pattern about runtime algorithm selection, not product planning."
+        "explanation": "Strategy is an OOP design pattern about runtime algorithm selection, not product planning.",
+        "optionTextTr": "Bir sonraki sprint'te hangi özelliklerin gönderileceğini planlama deseni.",
+        "explanationTr": "Bu proje yönetimidir — Strategy deseni değil."
       },
       {
         "optionText": "A structural pattern that provides a unified interface over a complex subsystem.",
         "isCorrect": false,
-        "explanation": "That is the Facade pattern — Strategy is behavioral and focuses on swappable algorithms."
+        "explanation": "That is the Facade pattern — Strategy is behavioral and focuses on swappable algorithms.",
+        "optionTextTr": "Karmaşık bir sistem üzerine birleşik arayüz sunan structural desen.",
+        "explanationTr": "Bu Facade desenini tanımlar — Strategy değil."
       },
       {
         "optionText": "A pattern that caches the result of a function call to avoid re-computation.",
         "isCorrect": false,
-        "explanation": "Caching is a performance optimisation (Memoisation) — Strategy is about interchangeable behaviour, not caching."
+        "explanation": "Caching is a performance optimisation (Memoisation) — Strategy is about interchangeable behaviour, not caching.",
+        "optionTextTr": "Yeniden hesaplamayı önlemek için fonksiyon çağrısı sonucunu önbelleğe alan desen.",
+        "explanationTr": "Bu memoization'ı tanımlar — Strategy değil."
       }
     ]
   },
@@ -214,22 +278,30 @@
       {
         "optionText": "A structural pattern that provides a surrogate object controlling access to another object — for access control, lazy loading, caching, or validation.",
         "isCorrect": true,
-        "explanation": "Correct — JavaScript's built-in Proxy object and React.lazy are both implementations of this pattern."
+        "explanation": "Correct — JavaScript's built-in Proxy object and React.lazy are both implementations of this pattern.",
+        "optionTextTr": "Erişimi kontrol etmek, önbelleğe almak veya davranış enjekte etmek için nesneye bir vekil sağlayan structural desen.",
+        "explanationTr": "Doğru — JavaScript'in yerleşik Proxy API'si, React'in lazy() fonksiyonu ve sanallaştırma kütüphaneleri bu deseni kullanır."
       },
       {
         "optionText": "A network technique for routing traffic through an intermediary server.",
         "isCorrect": false,
-        "explanation": "Network proxies share the concept but the Proxy design pattern is about object access control in code."
+        "explanation": "Network proxies share the concept but the Proxy design pattern is about object access control in code.",
+        "optionTextTr": "Trafiği aracı sunucu üzerinden yönlendiren ağ tekniği.",
+        "explanationTr": "Ağ proxy'leri ilgili kavramlardır, ancak Proxy deseni nesne erişim kontrolüyle ilgili bir yazılım desenidir."
       },
       {
         "optionText": "A behavioral pattern that encapsulates actions as objects to support undo/redo.",
         "isCorrect": false,
-        "explanation": "That is the Command pattern — Proxy is structural and about controlled access to another object."
+        "explanation": "That is the Command pattern — Proxy is structural and about controlled access to another object.",
+        "optionTextTr": "Geri almayı desteklemek için eylemleri nesne olarak kapsayan behavioral desen.",
+        "explanationTr": "Bu Command desenini tanımlar — Proxy değil."
       },
       {
         "optionText": "A creational pattern that clones existing objects instead of creating new ones.",
         "isCorrect": false,
-        "explanation": "That is the Prototype pattern — Proxy wraps an existing object to intercept access."
+        "explanation": "That is the Prototype pattern — Proxy wraps an existing object to intercept access.",
+        "optionTextTr": "Yeni nesne oluşturmak yerine mevcut nesneleri klonlayan creational desen.",
+        "explanationTr": "Bu Prototype desenini tanımlar — Proxy değil."
       }
     ]
   },
@@ -240,22 +312,30 @@
       {
         "optionText": "A behavioral pattern that encapsulates a request as an object, enabling undo/redo, queuing, and logging of operations.",
         "isCorrect": true,
-        "explanation": "Correct — Redux actions are Commands; the history stack enabling undo is classic Command pattern."
+        "explanation": "Correct — Redux actions are Commands; the history stack enabling undo is classic Command pattern.",
+        "optionTextTr": "Bir isteği nesne olarak kapsayan, geri almayı, kuyruğa almayı ve parametre geçirmeyi destekleyen behavioral desen.",
+        "explanationTr": "Doğru — Command, işlemleri birinci sınıf nesneler haline getirir; geri alma geçmişi ve işlem kuyruğu için kullanışlıdır."
       },
       {
         "optionText": "A terminal command for running npm or pnpm scripts in a project.",
         "isCorrect": false,
-        "explanation": "The Command design pattern is about encapsulating operations as objects, not CLI commands."
+        "explanation": "The Command design pattern is about encapsulating operations as objects, not CLI commands.",
+        "optionTextTr": "Bir projede npm veya pnpm scriptlerini çalıştırmak için terminal komutu.",
+        "explanationTr": "Bu terminal komutlarını tanımlar — Command deseni değil."
       },
       {
         "optionText": "A structural pattern for composing tree structures where individual items and groups are treated uniformly.",
         "isCorrect": false,
-        "explanation": "That is the Composite pattern — Command is behavioral and about encapsulating actions."
+        "explanation": "That is the Composite pattern — Command is behavioral and about encapsulating actions.",
+        "optionTextTr": "Ağaç yapıları oluşturan structural desen.",
+        "explanationTr": "Bu Composite desenini tanımlar — Command değil."
       },
       {
         "optionText": "A creational pattern that constructs complex objects step by step via method chaining.",
         "isCorrect": false,
-        "explanation": "That is the Builder pattern — Command encapsulates actions as first-class objects."
+        "explanation": "That is the Builder pattern — Command encapsulates actions as first-class objects.",
+        "optionTextTr": "Karmaşık nesneleri adım adım inşa eden creational desen.",
+        "explanationTr": "Bu Builder desenini tanımlar — Command değil."
       }
     ]
   },
@@ -266,22 +346,30 @@
       {
         "optionText": "A structural pattern providing a simplified interface to a complex subsystem — e.g. authService.login() hiding fetch, token storage, and refresh logic.",
         "isCorrect": true,
-        "explanation": "Correct — custom hooks wrapping TanStack Query are another common frontend facade."
+        "explanation": "Correct — custom hooks wrapping TanStack Query are another common frontend facade.",
+        "optionTextTr": "Karmaşık bir alt sisteme basitleştirilmiş arayüz sağlayan structural desen.",
+        "explanationTr": "Doğru — Frontend örnekleri: birden fazla state yönetim çağrısını saran bir servis, birden fazla API uç noktasını tek bir hook'ta birleştiren veri katmanı."
       },
       {
         "optionText": "A pattern for decorating the visual appearance of a UI component with a wrapper element.",
         "isCorrect": false,
-        "explanation": "Facade is about API simplification, not visual decoration."
+        "explanation": "Facade is about API simplification, not visual decoration.",
+        "optionTextTr": "Bir UI bileşeninin görsel görünümünü dekore eden desen.",
+        "explanationTr": "Bu görsel dekorasyonu tanımlar — Facade bir bileşen karmaşıklığını gizler."
       },
       {
         "optionText": "A behavioral pattern where a subject notifies multiple listeners automatically.",
         "isCorrect": false,
-        "explanation": "That is the Observer pattern — Facade is structural and hides subsystem complexity."
+        "explanation": "That is the Observer pattern — Facade is structural and hides subsystem complexity.",
+        "optionTextTr": "Konunun birden fazla dinleyiciyi bildirdiği behavioral desen.",
+        "explanationTr": "Bu Observer desenini tanımlar — Facade değil."
       },
       {
         "optionText": "A pattern that converts one interface into another to make incompatible systems work together.",
         "isCorrect": false,
-        "explanation": "That is the Adapter pattern — Facade simplifies an existing interface rather than translating between two."
+        "explanation": "That is the Adapter pattern — Facade simplifies an existing interface rather than translating between two.",
+        "optionTextTr": "Uyumsuz arayüzleri birlikte çalışabilir hale getiren desen.",
+        "explanationTr": "Bu Adapter desenini tanımlar — Facade değil."
       }
     ]
   },
@@ -292,22 +380,30 @@
       {
         "optionText": "A structural pattern that converts one interface into another the client expects — making incompatible interfaces work together.",
         "isCorrect": true,
-        "explanation": "Correct — normalising a third-party API response into your app's expected shape is a classic adapter."
+        "explanation": "Correct — normalising a third-party API response into your app's expected shape is a classic adapter.",
+        "optionTextTr": "Bir arayüzü, client'ların beklediği başka bir arayüze dönüştüren structural desen.",
+        "explanationTr": "Doğru — istemci kodunu değiştirmeden uyumsuz API'lerle çalışmayı sağlar."
       },
       {
         "optionText": "A pattern that adapts a React component to work in both web and React Native environments.",
         "isCorrect": false,
-        "explanation": "Cross-platform rendering is a different concern — the Adapter pattern is about interface translation."
+        "explanation": "Cross-platform rendering is a different concern — the Adapter pattern is about interface translation.",
+        "optionTextTr": "React bileşenini hem web hem de React Native'de çalışır hale getiren desen.",
+        "explanationTr": "Bu cross-platform soyutlamayı tanımlar — Adapter genel bir yapısal desendir."
       },
       {
         "optionText": "A pattern that simplifies a complex subsystem by hiding its internal details.",
         "isCorrect": false,
-        "explanation": "Simplification is the Facade pattern — Adapter translates one interface into another."
+        "explanation": "Simplification is the Facade pattern — Adapter translates one interface into another.",
+        "optionTextTr": "Karmaşık bir alt sistemi gizleyerek basitleştiren desen.",
+        "explanationTr": "Bu Facade desenini tanımlar — Adapter değil."
       },
       {
         "optionText": "A creational pattern that produces objects without specifying their concrete classes.",
         "isCorrect": false,
-        "explanation": "That is the Factory pattern — Adapter is structural and bridges two incompatible interfaces."
+        "explanation": "That is the Factory pattern — Adapter is structural and bridges two incompatible interfaces.",
+        "optionTextTr": "Tam sınıfı belirtmeden nesne üreten creational desen.",
+        "explanationTr": "Bu Factory/Abstract Factory'yi tanımlar — Adapter değil."
       }
     ]
   },
@@ -318,22 +414,30 @@
       {
         "optionText": "A structural pattern that composes objects into tree structures, treating individual objects and groups uniformly.",
         "isCorrect": true,
-        "explanation": "Correct — React's component tree is a Composite: leaf components and parent components share the same interface."
+        "explanation": "Correct — React's component tree is a Composite: leaf components and parent components share the same interface.",
+        "optionTextTr": "Nesneleri ağaç yapılarında oluşturan; tek nesneler ve bileşimlerle aynı şekilde davranılmasını sağlayan structural desen.",
+        "explanationTr": "Doğru — React bileşen ağacı ve DOM'un kendisi Composite desenini somutlaştırır."
       },
       {
         "optionText": "A React technique for sharing logic by composing multiple hooks inside a component.",
         "isCorrect": false,
-        "explanation": "Hook composition is a React practice — the Composite pattern is a structural OOP pattern about tree structures."
+        "explanation": "Hook composition is a React practice — the Composite pattern is a structural OOP pattern about tree structures.",
+        "optionTextTr": "Birden fazla hook oluşturarak mantığı paylaşan React tekniği.",
+        "explanationTr": "Bu custom hook bileşimini tanımlar — Composite deseni ağaç yapısı organizasyonuyla ilgilidir."
       },
       {
         "optionText": "A CSS layout technique using grid or flexbox to compose layouts from smaller pieces.",
         "isCorrect": false,
-        "explanation": "CSS composition is a styling concept — the Composite pattern is about uniform treatment of objects and collections."
+        "explanation": "CSS composition is a styling concept — the Composite pattern is about uniform treatment of objects and collections.",
+        "optionTextTr": "Grid veya flexbox kullanan CSS layout tekniği.",
+        "explanationTr": "Bu CSS layout'u tanımlar — Composite deseni değil."
       },
       {
         "optionText": "A behavioral pattern that chains operations in sequence using method chaining.",
         "isCorrect": false,
-        "explanation": "Method chaining is a Builder/fluent API technique — Composite is structural and about tree hierarchies."
+        "explanation": "Method chaining is a Builder/fluent API technique — Composite is structural and about tree hierarchies.",
+        "optionTextTr": "Metot zincirlemesi kullanarak işlemleri sıralayan behavioral desen.",
+        "explanationTr": "Bu Builder veya Fluent arayüzünü tanımlar — Composite değil."
       }
     ]
   },
@@ -344,22 +448,30 @@
       {
         "optionText": "Structural: HOC = Decorator, component tree = Composite, React.lazy = Proxy. Behavioral: Context/Zustand = Observer, custom hooks = Strategy, useReducer = State.",
         "isCorrect": true,
-        "explanation": "Correct — React's idioms map directly to classic GoF patterns even without explicit pattern language."
+        "explanation": "Correct — React's idioms map directly to classic GoF patterns even without explicit pattern language.",
+        "optionTextTr": "Structural: HOC = Decorator, bileşen ağacı = Composite, React.lazy = Proxy; Behavioral: onClick = Observer, useState = State, context = Mediator.",
+        "explanationTr": "Doğru — desenler her yerde mevcuttur; React API'leri bunları uygular."
       },
       {
         "optionText": "React uses only Behavioral patterns; Structural patterns belong to backend architecture.",
         "isCorrect": false,
-        "explanation": "React uses all three GoF categories — HOC is Decorator (Structural), and component trees are Composite (Structural)."
+        "explanation": "React uses all three GoF categories — HOC is Decorator (Structural), and component trees are Composite (Structural).",
+        "optionTextTr": "React yalnızca Behavioral desenler kullanır; Structural desenler backend'e aittir.",
+        "explanationTr": "React bileşen ağaçları ve HOC'lar Structural desenleri; olay yönetimi ise Behavioral desenleri uygular."
       },
       {
         "optionText": "React replaces all design patterns with hooks, making GoF patterns obsolete.",
         "isCorrect": false,
-        "explanation": "Hooks implement the same patterns — useState/useReducer is the State pattern, useContext is Observer — the patterns remain relevant."
+        "explanation": "Hooks implement the same patterns — useState/useReducer is the State pattern, useContext is Observer — the patterns remain relevant.",
+        "optionTextTr": "React, hook'larla tüm tasarım desenlerinin yerini alır.",
+        "explanationTr": "Hook'lar, birçok deseni daha basit uygular ama temel pattern düşüncesini ortadan kaldırmaz."
       },
       {
         "optionText": "Design patterns don't apply to frontend because JavaScript is not an object-oriented language.",
         "isCorrect": false,
-        "explanation": "JavaScript supports OOP and functional styles; GoF patterns apply to JS/React, often expressed as functions rather than classes."
+        "explanation": "JavaScript supports OOP and functional styles; GoF patterns apply to JS/React, often expressed as functions rather than classes.",
+        "optionTextTr": "Tasarım desenleri, JavaScript nesne tabanlı olmadığı için frontend'e uygulanamaz.",
+        "explanationTr": "JavaScript nesne tabanlıdır ve web'de tasarım desenleri yaygın biçimde kullanılır."
       }
     ]
   },
@@ -370,22 +482,30 @@
       {
         "optionText": "A creational pattern that constructs a complex object step by step via method chaining — used in query builders, test data factories, and URL constructors.",
         "isCorrect": true,
-        "explanation": "Correct — the fluent API pattern (chain .select().where().limit().build()) is the most common frontend expression of Builder."
+        "explanation": "Correct — the fluent API pattern (chain .select().where().limit().build()) is the most common frontend expression of Builder.",
+        "optionTextTr": "Bir nesneyi adım adım inşa eden creational desen; karmaşık yapılandırma nesneleri ve query builder'lar için kullanışlı.",
+        "explanationTr": "Doğru — Builder, isteğe bağlı parametreleri çok sayıda constructor aşırı yüklemesi olmadan yönetir."
       },
       {
         "optionText": "A Webpack/Vite configuration pattern for defining how assets are built and bundled.",
         "isCorrect": false,
-        "explanation": "Build tools are unrelated to the Builder design pattern, which is about constructing complex objects."
+        "explanation": "Build tools are unrelated to the Builder design pattern, which is about constructing complex objects.",
+        "optionTextTr": "Varlıkların nasıl derleneceğini tanımlayan Webpack/Vite yapılandırma deseni.",
+        "explanationTr": "Bu build aracı yapılandırmasını tanımlar — Builder deseni değil."
       },
       {
         "optionText": "A pattern that creates a single instance of a complex configuration object shared across the app.",
         "isCorrect": false,
-        "explanation": "Sharing a single instance is the Singleton pattern — Builder focuses on step-by-step construction."
+        "explanation": "Sharing a single instance is the Singleton pattern — Builder focuses on step-by-step construction.",
+        "optionTextTr": "Karmaşık yapılandırmanın tek bir instance'ını oluşturan desen.",
+        "explanationTr": "Bu Singleton'a yakındır — Builder nesneyi adım adım inşa etmekle ilgilidir."
       },
       {
         "optionText": "A React component that renders its children using a render prop, building the UI incrementally.",
         "isCorrect": false,
-        "explanation": "Render props are a React composition pattern — the Builder pattern is about constructing complex data objects."
+        "explanation": "Render props are a React composition pattern — the Builder pattern is about constructing complex data objects.",
+        "optionTextTr": "Children'ı render prop kullanan React bileşeni.",
+        "explanationTr": "Bu render prop desenini tanımlar — Builder değil."
       }
     ]
   },
@@ -396,22 +516,30 @@
       {
         "optionText": "DI passes dependencies explicitly via constructor/props (visible, testable); Service Locator uses a global registry (hidden coupling). Prefer DI.",
         "isCorrect": true,
-        "explanation": "Correct — DI makes dependencies explicit in the signature; Service Locator hides them, making testing and reasoning harder."
+        "explanation": "Correct — DI makes dependencies explicit in the signature; Service Locator hides them, making testing and reasoning harder.",
+        "optionTextTr": "DI bağımlılıkları constructor/props aracılığıyla açıkça iletir (görünür, test edilebilir); Service Locator gizli bir kayıt defterinden çeker (gizli bağımlılıklar). DI tercih edin.",
+        "explanationTr": "Doğru — Service Locator bağımlılıkları gizler; DI ise onları açık hale getirir ve test edilebilirliği artırır."
       },
       {
         "optionText": "Service Locator is preferred because it centralises all dependencies in one place, reducing boilerplate.",
         "isCorrect": false,
-        "explanation": "Centralisation comes at the cost of hidden coupling and harder testing — DI is the recommended approach."
+        "explanation": "Centralisation comes at the cost of hidden coupling and harder testing — DI is the recommended approach.",
+        "optionTextTr": "Service Locator, tüm bağımlılıkları merkezileştirdiği için tercih edilir.",
+        "explanationTr": "Service Locator gizli bağımlılık sorununa yol açabilir — DI'nin açık doğası genellikle test edilebilirliği artırır."
       },
       {
         "optionText": "They are equivalent patterns — the choice is purely stylistic with no practical difference.",
         "isCorrect": false,
-        "explanation": "They have significant differences in testability, explicitness, and coupling — DI is strongly preferred for most use cases."
+        "explanation": "They have significant differences in testability, explicitness, and coupling — DI is strongly preferred for most use cases.",
+        "optionTextTr": "Bunlar eşdeğer desenlerdir — seçim salt stilistiktir.",
+        "explanationTr": "Bunlar farklı ödünleşimlere sahip farklı desenlerdir; DI genellikle açıklığı nedeniyle tercih edilir."
       },
       {
         "optionText": "Dependency Injection requires a DI framework like Angular's injector; it cannot be used in React.",
         "isCorrect": false,
-        "explanation": "React uses DI idiomatically through props, Context, and hook parameters — no framework is needed."
+        "explanation": "React uses DI idiomatically through props, Context, and hook parameters — no framework is needed.",
+        "optionTextTr": "Dependency Injection, Angular'ın enjektörü gibi bir DI çerçevesi gerektirir.",
+        "explanationTr": "DI, constructor parametre geçişiyle manuel olarak uygulanabilir — Angular gibi çerçeveler yalnızca bunu otomatize eder."
       }
     ]
   }

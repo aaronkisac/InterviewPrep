@@ -36,8 +36,10 @@ export type MockOptionRow = {
   id: string;
   question_id: string;
   option_text: string;
+  option_text_tr: string;
   is_correct: boolean;
   explanation: string;
+  explanation_tr: string;
 };
 
 export type TermRow = {
@@ -45,7 +47,9 @@ export type TermRow = {
   slug: string;
   label: string;
   tooltip: string;
+  tooltip_tr: string;
   definition: string;
+  definition_tr: string;
   code_example: string | null;
   topic: Topic | null;
   related_slugs: string[];

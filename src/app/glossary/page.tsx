@@ -109,7 +109,7 @@ export default async function GlossaryPage({
                           >
                             <p className="text-sm font-medium">{term.label}</p>
                             <p className="mt-0.5 text-xs leading-snug text-muted-foreground">
-                              {term.tooltip}
+                              {lang === "tr" && term.tooltip_tr ? term.tooltip_tr : term.tooltip}
                             </p>
                           </Link>
                         </li>

@@ -12,8 +12,10 @@ export type Level = 1 | 2 | 3 | 4 | 5;
 export type MockOption = {
   id: string;
   text: string;
+  textTr: string;
   isCorrect: boolean;
   explanation: string;
+  explanationTr: string;
 };
 
 export type MockQuestion = {

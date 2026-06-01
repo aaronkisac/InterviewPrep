@@ -6,22 +6,30 @@
       {
         "optionText": "A JavaScript library for building user interfaces out of small, reusable components.",
         "isCorrect": true,
-        "explanation": "Correct — React is a view-layer library; you compose UIs from components."
+        "explanation": "Correct — React is a view-layer library; you compose UIs from components.",
+        "optionTextTr": "Küçük, yeniden kullanılabilir bileşenlerden kullanıcı arayüzleri oluşturmak için JavaScript kütüphanesi.",
+        "explanationTr": "Doğru — React yalnızca görünüm katmanıdır; routing, veri çekme ve form yönetimi gibi konular harici kütüphanelere bırakılır."
       },
       {
         "optionText": "A full backend framework with a built-in database and ORM.",
         "isCorrect": false,
-        "explanation": "React is frontend-only — it has no database or server layer."
+        "explanation": "React is frontend-only — it has no database or server layer.",
+        "optionTextTr": "Yerleşik veritabanı ve ORM ile tam bir backend framework.",
+        "explanationTr": "Bu Ruby on Rails veya Django gibi backend framework'leri tanımlar — React değil."
       },
       {
         "optionText": "A CSS preprocessor for generating stylesheets.",
         "isCorrect": false,
-        "explanation": "That describes tools like Sass; React handles UI logic, not styling syntax."
+        "explanation": "That describes tools like Sass; React handles UI logic, not styling syntax.",
+        "optionTextTr": "Stil sayfaları oluşturmak için CSS ön işleyici.",
+        "explanationTr": "Bu Sass/Less'i tanımlar — React değil."
       },
       {
         "optionText": "A programming language that compiles down to JavaScript.",
         "isCorrect": false,
-        "explanation": "That describes TypeScript; React is a library written in JavaScript."
+        "explanation": "That describes TypeScript; React is a library written in JavaScript.",
+        "optionTextTr": "JavaScript'e derlenen bir programlama dili.",
+        "explanationTr": "Bu TypeScript veya CoffeeScript'i tanımlar — React yalnızca JavaScript kütüphanesidir."
       }
     ]
   },
@@ -32,22 +40,30 @@
       {
         "optionText": "Pass an object to the style prop with camelCased keys: style={{ backgroundColor: \"tomato\" }}.",
         "isCorrect": true,
-        "explanation": "Correct — the style prop takes a JS object and CSS property names are camelCased."
+        "explanation": "Correct — the style prop takes a JS object and CSS property names are camelCased.",
+        "optionTextTr": "style prop'a camelCase anahtarlı nesne geçin: style={{ backgroundColor: 'domates' }}",
+        "explanationTr": "Doğru — React style prop'u bir nesne bekler, CSS string'i değil; özellik adları camelCase'dir."
       },
       {
         "optionText": "Pass a CSS string: style=\"background-color: tomato\".",
         "isCorrect": false,
-        "explanation": "That is the plain DOM API; React's style prop expects an object, not a string."
+        "explanation": "That is the plain DOM API; React's style prop expects an object, not a string.",
+        "optionTextTr": "CSS string'i geçin: style=\"background-color: domates\"",
+        "explanationTr": "Bu plain HTML sözdizimi — React'te style prop'u nesne bekler, string değil."
       },
       {
         "optionText": "Use a css prop: css={{ backgroundColor: \"tomato\" }}.",
         "isCorrect": false,
-        "explanation": "There is no built-in css prop — that is a styled-components / Emotion convention."
+        "explanation": "There is no built-in css prop — that is a styled-components / Emotion convention.",
+        "optionTextTr": "css prop kullanın: css={{ backgroundColor: 'domates' }}",
+        "explanationTr": "css prop yerleşik değil — styled-components veya Emotion convention'ı."
       },
       {
         "optionText": "Pass an object with kebab-case keys: style={{ \"background-color\": \"tomato\" }}.",
         "isCorrect": false,
-        "explanation": "React style keys are camelCased (backgroundColor), not kebab-case."
+        "explanation": "React style keys are camelCased (backgroundColor), not kebab-case.",
+        "optionTextTr": "kebab-case anahtarlı nesne geçin: style={{ 'background-color': 'domates' }}",
+        "explanationTr": "React style anahtarları camelCase olmalıdır: backgroundColor."
       }
     ]
   },
@@ -58,22 +74,30 @@
       {
         "optionText": "A JavaScript test runner from Meta, usually paired with React Testing Library.",
         "isCorrect": true,
-        "explanation": "Correct — Jest bundles a runner, assertions, mocking, and snapshots in one tool."
+        "explanation": "Correct — Jest bundles a runner, assertions, mocking, and snapshots in one tool.",
+        "optionTextTr": "Meta'nın JavaScript test runner'ı, genellikle React Testing Library ile birlikte kullanılır.",
+        "explanationTr": "Doğru — Jest snapshot testi, mock'lama ve test coverage sunar."
       },
       {
         "optionText": "A global state management library similar to Redux.",
         "isCorrect": false,
-        "explanation": "Jest is for testing, not state management."
+        "explanation": "Jest is for testing, not state management.",
+        "optionTextTr": "Redux'a benzer global state yönetim kütüphanesi.",
+        "explanationTr": "Bu state yönetim kütüphanelerini tanımlar — Jest değil."
       },
       {
         "optionText": "A module bundler that replaces Webpack.",
         "isCorrect": false,
-        "explanation": "Jest runs tests; it is not a bundler."
+        "explanation": "Jest runs tests; it is not a bundler.",
+        "optionTextTr": "Webpack'in yerini alan module bundler.",
+        "explanationTr": "Bu Vite veya esbuild'i tanımlar — Jest değil."
       },
       {
         "optionText": "A React hook for fetching data inside components.",
         "isCorrect": false,
-        "explanation": "Jest is a test tool, not a hook or a runtime API."
+        "explanation": "Jest is a test tool, not a hook or a runtime API.",
+        "optionTextTr": "Bileşenler içinde veri çekmek için React hook'u.",
+        "explanationTr": "Bu SWR veya React Query hook'larını tanımlar — Jest değil."
       }
     ]
   },
@@ -84,22 +108,30 @@
       {
         "optionText": "Composable, reusable components plus a declarative model React turns into efficient DOM updates.",
         "isCorrect": true,
-        "explanation": "Correct — composition, the virtual DOM diff, and a large ecosystem are the core advantages."
+        "explanation": "Correct — composition, the virtual DOM diff, and a large ecosystem are the core advantages.",
+        "optionTextTr": "Bileşenlenebilir, yeniden kullanılabilir bileşenler artı React'in verimli güncellemeler için kullandığı deklaratif model.",
+        "explanationTr": "Doğru — React'in bileşen modeli UI'ı küçük parçalara ayırmayı ve her yerden yeniden kullanmayı sağlar."
       },
       {
         "optionText": "It removes the need for any build step or tooling.",
         "isCorrect": false,
-        "explanation": "JSX still needs a build step — that is a cost, not an advantage."
+        "explanation": "JSX still needs a build step — that is a cost, not an advantage.",
+        "optionTextTr": "Herhangi bir build adımı veya araç ihtiyacını ortadan kaldırır.",
+        "explanationTr": "Modern React gelişimi build araçları (Vite, Webpack vb.) gerektirir."
       },
       {
         "optionText": "It guarantees the app works with JavaScript disabled.",
         "isCorrect": false,
-        "explanation": "A React app needs JavaScript to render on the client."
+        "explanation": "A React app needs JavaScript to render on the client.",
+        "optionTextTr": "JavaScript devre dışıyken uygulamanın çalışmasını garanti eder.",
+        "explanationTr": "React JavaScript'e bağımlıdır — SSR ile bazı içerik JS olmadan görüntülenebilir ama interaktivite için JS gerekir."
       },
       {
         "optionText": "It ships with a built-in router and data-fetching layer.",
         "isCorrect": false,
-        "explanation": "React is view-only — routing and data fetching are bring-your-own."
+        "explanation": "React is view-only — routing and data fetching are bring-your-own.",
+        "optionTextTr": "Yerleşik router ve veri çekme katmanı ile gelir.",
+        "explanationTr": "React bu özellikleri yerleşik olarak sağlamaz — harici kütüphaneler kullanılır."
       }
     ]
   },
@@ -110,22 +142,30 @@
       {
         "optionText": "A unidirectional data-flow pattern: actions go through a dispatcher into stores, then out to views.",
         "isCorrect": true,
-        "explanation": "Correct — Flux is the one-way data-flow pattern Meta proposed alongside React."
+        "explanation": "Correct — Flux is the one-way data-flow pattern Meta proposed alongside React.",
+        "optionTextTr": "Tek yönlü veri akışı deseni: action'lar dispatcher aracılığıyla store'lara gider, store'lar view'ları günceller.",
+        "explanationTr": "Doğru — Redux, Flux'tan esinlenerek oluşturulmuş ve basitleştirilmiştir."
       },
       {
         "optionText": "A two-way data-binding system that syncs views and models automatically.",
         "isCorrect": false,
-        "explanation": "Flux is deliberately one-directional — the opposite of two-way binding."
+        "explanation": "Flux is deliberately one-directional — the opposite of two-way binding.",
+        "optionTextTr": "View'ları ve model'leri otomatik senkronize eden iki yönlü veri bağlama sistemi.",
+        "explanationTr": "Bu Angular'ın two-way binding modelini tanımlar — Flux değil."
       },
       {
         "optionText": "A React hook for managing global state.",
         "isCorrect": false,
-        "explanation": "Flux predates hooks; it is an architectural pattern, not an API."
+        "explanation": "Flux predates hooks; it is an architectural pattern, not an API.",
+        "optionTextTr": "Global state yönetimi için React hook'u.",
+        "explanationTr": "Flux bir hook değil; mimari desendir."
       },
       {
         "optionText": "A CSS-in-JS styling approach.",
         "isCorrect": false,
-        "explanation": "Flux is about data flow, not styling."
+        "explanation": "Flux is about data flow, not styling.",
+        "optionTextTr": "CSS-in-JS stil yaklaşımı.",
+        "explanationTr": "Bu styled-components gibi araçları tanımlar — Flux değil."
       }
     ]
   },
@@ -136,22 +176,30 @@
       {
         "optionText": "They weren't — error boundaries didn't exist until React 16 (componentDidCatch / getDerivedStateFromError).",
         "isCorrect": true,
-        "explanation": "Correct — before React 16 an uncaught error unmounted the whole tree."
+        "explanation": "Correct — before React 16 an uncaught error unmounted the whole tree.",
+        "optionTextTr": "Mevcut değildi — hata sınırları React 15'te olmayıp React 16 ile (componentDidCatch) geldi.",
+        "explanationTr": "Doğru — React 15'te hataların düzgün yakalanması ve kullanıcı dostu geri dönüş gösterimi mümkün değildi."
       },
       {
         "optionText": "With a built-in <ErrorBoundary> component shipped in React 15.",
         "isCorrect": false,
-        "explanation": "No such built-in component exists; you write your own boundary class."
+        "explanation": "No such built-in component exists; you write your own boundary class.",
+        "optionTextTr": "React 15'te gönderilen yerleşik <ErrorBoundary> bileşeniyle.",
+        "explanationTr": "React 15'te yerleşik <ErrorBoundary> bileşeni yoktu."
       },
       {
         "optionText": "By wrapping every component's render in a try/catch block.",
         "isCorrect": false,
-        "explanation": "A try/catch in render does not catch errors thrown by child components."
+        "explanation": "A try/catch in render does not catch errors thrown by child components.",
+        "optionTextTr": "Her bileşenin render'ını try/catch bloğuyla sararak.",
+        "explanationTr": "Bu React'in hata sınırlarına yaklaşımı değildi — React 16'da componentDidCatch eklendi."
       },
       {
         "optionText": "With the built-in useErrorBoundary hook.",
         "isCorrect": false,
-        "explanation": "There is no built-in error-boundary hook — boundaries are class components."
+        "explanation": "There is no built-in error-boundary hook — boundaries are class components.",
+        "optionTextTr": "Yerleşik useErrorBoundary hook'uyla.",
+        "explanationTr": "useErrorBoundary, React çekirdeğinde değil — react-error-boundary kütüphanesinden gelen bir hook'tur."
       }
     ]
   },
@@ -162,22 +210,30 @@
       {
         "optionText": "It's only a view library — routing, data fetching, and forms are bring-your-own, and JSX needs a build step.",
         "isCorrect": true,
-        "explanation": "Correct — React leaves many decisions to you, which adds setup cost."
+        "explanation": "Correct — React leaves many decisions to you, which adds setup cost.",
+        "optionTextTr": "Yalnızca görünüm kütüphanesidir — routing, veri çekme ve formlar için üçüncü taraf çözümler gerekir.",
+        "explanationTr": "Doğru — bu bir sınırlama ve bilinçli bir tasarım kararıdır; belirli bir kullanım alanına odaklanmayı sağlar."
       },
       {
         "optionText": "It cannot render lists or conditional UI.",
         "isCorrect": false,
-        "explanation": "React renders lists and conditional UI easily — that is core functionality."
+        "explanation": "React renders lists and conditional UI easily — that is core functionality.",
+        "optionTextTr": "Liste veya koşullu UI render edemez.",
+        "explanationTr": "React liste ve koşullu render'ı tam olarak destekler."
       },
       {
         "optionText": "It only supports class components, not function components.",
         "isCorrect": false,
-        "explanation": "Function components with hooks are the modern default."
+        "explanation": "Function components with hooks are the modern default.",
+        "optionTextTr": "Yalnızca class bileşenleri destekler, function bileşeni desteklemez.",
+        "explanationTr": "Modern React öncelikle function bileşenlerini ve hook'ları kullanır."
       },
       {
         "optionText": "It requires a specific backend language to run.",
         "isCorrect": false,
-        "explanation": "React is backend-agnostic — it runs against any API."
+        "explanation": "React is backend-agnostic — it runs against any API.",
+        "optionTextTr": "Çalıştırmak için belirli bir backend dil gerektirir.",
+        "explanationTr": "React herhangi bir backend veya yalnızca statik hosting ile çalışır."
       }
     ]
   },
@@ -188,22 +244,30 @@
       {
         "optionText": "An Element is a plain object describing UI; a Component is the function or class that returns Elements.",
         "isCorrect": true,
-        "explanation": "Correct — Elements describe, Components produce."
+        "explanation": "Correct — Elements describe, Components produce.",
+        "optionTextTr": "Element, UI'ı tanımlayan düz nesnedir; Component, element döndüren fonksiyon veya class'tır.",
+        "explanationTr": "Doğru — <MyButton /> gibi JSX, React.createElement çağrısına dönüşür ve Element üretir."
       },
       {
         "optionText": "An Element is reusable; a Component is a single one-off instance.",
         "isCorrect": false,
-        "explanation": "That is reversed — Components are the reusable definitions."
+        "explanation": "That is reversed — Components are the reusable definitions.",
+        "optionTextTr": "Element yeniden kullanılabilir; Component tek seferlik instance'tır.",
+        "explanationTr": "Bu tam tersidir — Component yeniden kullanılabilir; Element tek bir UI anlık görüntüsüdür."
       },
       {
         "optionText": "They are the same thing under two different names.",
         "isCorrect": false,
-        "explanation": "They are distinct: one is data, the other is the code that returns it."
+        "explanation": "They are distinct: one is data, the other is the code that returns it.",
+        "optionTextTr": "İkisi aynı şeyin iki farklı adıdır.",
+        "explanationTr": "Bunlar farklı kavramlardır: Element sonuç, Component üreticidir."
       },
       {
         "optionText": "An Element holds state; a Component is always stateless.",
         "isCorrect": false,
-        "explanation": "Elements are immutable data; state lives in Components."
+        "explanation": "Elements are immutable data; state lives in Components.",
+        "optionTextTr": "Element state tutar; Component her zaman state'sizdir.",
+        "explanationTr": "Bu tam tersidir — Component'ler state yönetebilir; Element'ler state tutmaz."
       }
     ]
   },
@@ -214,22 +278,30 @@
       {
         "optionText": "A component that owns and manages its own state, usually via useState or useReducer.",
         "isCorrect": true,
-        "explanation": "Correct — stateful components hold internal data that drives what they render."
+        "explanation": "Correct — stateful components hold internal data that drives what they render.",
+        "optionTextTr": "Genellikle useState veya useReducer aracılığıyla kendi state'ini sahip ve yöneten bileşen.",
+        "explanationTr": "Doğru — state'li bileşenler state değiştiğinde yeniden render olur ve kendi verisini yönetir."
       },
       {
         "optionText": "A component that only receives props and renders them.",
         "isCorrect": false,
-        "explanation": "That describes a stateless component."
+        "explanation": "That describes a stateless component.",
+        "optionTextTr": "Yalnızca prop'ları alıp render eden bileşen.",
+        "explanationTr": "Bu state'siz/sunum bileşenini tanımlar."
       },
       {
         "optionText": "A component that can never re-render after mounting.",
         "isCorrect": false,
-        "explanation": "Re-rendering on state change is exactly what stateful components do."
+        "explanation": "Re-rendering on state change is exactly what stateful components do.",
+        "optionTextTr": "Mount sonrası asla yeniden render olamayan bileşen.",
+        "explanationTr": "State'li bileşenler state değiştikçe yeniden render olur."
       },
       {
         "optionText": "Any component written using the class syntax.",
         "isCorrect": false,
-        "explanation": "Class vs function is unrelated — function components can be stateful too."
+        "explanation": "Class vs function is unrelated — function components can be stateful too.",
+        "optionTextTr": "Herhangi bir class sözdizimi kullanılarak yazılmış bileşen.",
+        "explanationTr": "State'li bileşenler hem class hem de function bileşenleri olabilir."
       }
     ]
   },
@@ -240,22 +312,30 @@
       {
         "optionText": "A component that takes props and returns JSX with no internal state.",
         "isCorrect": true,
-        "explanation": "Correct — a pure mapping from props to UI, easy to test and reuse."
+        "explanation": "Correct — a pure mapping from props to UI, easy to test and reuse.",
+        "optionTextTr": "Prop alıp JSX döndüren, dahili state veya yan etkisi olmayan bileşen.",
+        "explanationTr": "Doğru — state'siz bileşenler tahmin edilebilir ve test edilmesi kolaydır."
       },
       {
         "optionText": "A component that manages the application's global state.",
         "isCorrect": false,
-        "explanation": "That is the opposite — a stateless component holds no state."
+        "explanation": "That is the opposite — a stateless component holds no state.",
+        "optionTextTr": "Uygulamanın global state'ini yöneten bileşen.",
+        "explanationTr": "Bu container bileşeni veya Redux bağlantılı bileşeni tanımlar."
       },
       {
         "optionText": "A component that cannot accept any props.",
         "isCorrect": false,
-        "explanation": "Stateless components commonly take props; they just hold no state."
+        "explanation": "Stateless components commonly take props; they just hold no state.",
+        "optionTextTr": "Hiçbir prop kabul edemeyen bileşen.",
+        "explanationTr": "State'siz bileşenler prop alabilir — yalnızca dahili state'leri yoktur."
       },
       {
         "optionText": "A component that must be written as a class.",
         "isCorrect": false,
-        "explanation": "Stateless components are typically plain functions."
+        "explanation": "Stateless components are typically plain functions.",
+        "optionTextTr": "Class olarak yazılması gereken bileşen.",
+        "explanationTr": "State'siz bileşenler function bileşenler olarak yazılır."
       }
     ]
   },
@@ -266,22 +346,30 @@
       {
         "optionText": "createElement builds a brand-new Element; cloneElement copies an existing one with merged props.",
         "isCorrect": true,
-        "explanation": "Correct — createElement is what JSX compiles to; cloneElement clones and overrides props."
+        "explanation": "Correct — createElement is what JSX compiles to; cloneElement clones and overrides props.",
+        "optionTextTr": "createElement, tamamen yeni Element oluşturur; cloneElement, mevcut birini kopyalar ve prop'ları birleştirir.",
+        "explanationTr": "Doğru — cloneElement, kapsayıcı bileşenlerin ek prop'ları child'lara geçirmek için kullanışlıdır."
       },
       {
         "optionText": "createElement copies an existing element while cloneElement builds a new one.",
         "isCorrect": false,
-        "explanation": "That is reversed."
+        "explanation": "That is reversed.",
+        "optionTextTr": "createElement mevcut öğeyi kopyalar; cloneElement yeni oluşturur.",
+        "explanationTr": "Bu tanımlar yer değiştirmiş — createElement yeni, cloneElement kopyalar."
       },
       {
         "optionText": "Both build brand-new elements — the names are interchangeable.",
         "isCorrect": false,
-        "explanation": "cloneElement starts from an existing element, not from scratch."
+        "explanation": "cloneElement starts from an existing element, not from scratch.",
+        "optionTextTr": "Her ikisi de yeni element oluşturur — adlar birbirinin yerine kullanılabilir.",
+        "explanationTr": "Farklı amaçlara hizmet ederler ve birbirinin yerine kullanılamazlar."
       },
       {
         "optionText": "cloneElement deep-clones the entire rendered DOM subtree.",
         "isCorrect": false,
-        "explanation": "cloneElement copies the Element object and its props, not DOM nodes."
+        "explanation": "cloneElement copies the Element object and its props, not DOM nodes.",
+        "optionTextTr": "cloneElement, render edilmiş DOM alt ağacını derin klonlar.",
+        "explanationTr": "cloneElement, DOM'u değil React element nesnesini kopyalar."
       }
     ]
   },
@@ -292,22 +380,30 @@
       {
         "optionText": "Write a function component (no this to bind), or use a class-field arrow method.",
         "isCorrect": true,
-        "explanation": "Correct — function components have no this; class-field arrows auto-bind to the instance."
+        "explanation": "Correct — function components have no this; class-field arrows auto-bind to the instance.",
+        "optionTextTr": "Function bileşeni yazın (bağlanacak this yok) veya class alanı arrow function kullanın: handleClick = () => {}",
+        "explanationTr": "Doğru — modern React, bu sorunu tamamen ortadan kaldıran function bileşenleri ve hook'ları tercih eder."
       },
       {
         "optionText": "Call .bind(this) inside render on every pass.",
         "isCorrect": false,
-        "explanation": "That binds on every render and creates a new function each time — the pattern to avoid."
+        "explanation": "That binds on every render and creates a new function each time — the pattern to avoid.",
+        "optionTextTr": "Render içinde her seferinde .bind(this) çağırın.",
+        "explanationTr": "Bu çalışır ama her render'da yeni fonksiyon referansı oluşturduğundan tercih edilmez."
       },
       {
         "optionText": "Use the React.autoBind helper to bind all methods.",
         "isCorrect": false,
-        "explanation": "There is no such API."
+        "explanation": "There is no such API.",
+        "optionTextTr": "Tüm metodları bağlamak için React.autoBind yardımcısını kullanın.",
+        "explanationTr": "React.autoBind diye bir API yoktur."
       },
       {
         "optionText": "Wrap the component in StrictMode.",
         "isCorrect": false,
-        "explanation": "StrictMode surfaces dev-time issues; it has nothing to do with this binding."
+        "explanation": "StrictMode surfaces dev-time issues; it has nothing to do with this binding.",
+        "optionTextTr": "Bileşeni StrictMode'a sarın.",
+        "explanationTr": "StrictMode, bağlama sorunlarını çözmez — geliştirme problemlerini tespit etmek içindir."
       }
     ]
   },
@@ -318,22 +414,30 @@
       {
         "optionText": "No side effects — no fetching, subscriptions, mutations, or setState; render must stay pure.",
         "isCorrect": true,
-        "explanation": "Correct — calling setState in render causes an infinite loop; effects belong in useEffect."
+        "explanation": "Correct — calling setState in render causes an infinite loop; effects belong in useEffect.",
+        "optionTextTr": "Yan etki yok — render içinde fetch, subscription, mutasyon veya setState çağırmayın.",
+        "explanationTr": "Doğru — render saf olmalıdır: aynı prop/state için her seferinde aynı çıktı; yan etkiler useEffect'e aittir."
       },
       {
         "optionText": "You shouldn't return JSX from render.",
         "isCorrect": false,
-        "explanation": "Returning Elements is exactly what render is for."
+        "explanation": "Returning Elements is exactly what render is for.",
+        "optionTextTr": "Render'dan JSX döndürmemelisiniz.",
+        "explanationTr": "JSX döndürmek render metodunun tam amacıdır."
       },
       {
         "optionText": "You shouldn't read props or state inside render.",
         "isCorrect": false,
-        "explanation": "Render reads props and state — that is how it describes the UI."
+        "explanation": "Render reads props and state — that is how it describes the UI.",
+        "optionTextTr": "Render içinde prop veya state okumamalısınız.",
+        "explanationTr": "Prop ve state okumak render metodunun temel işlevidir."
       },
       {
         "optionText": "You shouldn't use any conditional logic in render.",
         "isCorrect": false,
-        "explanation": "Conditional rendering is fine and common."
+        "explanation": "Conditional rendering is fine and common.",
+        "optionTextTr": "Render içinde koşullu mantık kullanmamalısınız.",
+        "explanationTr": "Render içinde koşullu render tamamen geçerlidir."
       }
     ]
   },
@@ -344,22 +448,30 @@
       {
         "optionText": "Keys give list items a stable identity so React can move nodes instead of rebuilding them.",
         "isCorrect": true,
-        "explanation": "Correct — stable keys let reconciliation reorder DOM nodes efficiently and keep state."
+        "explanation": "Correct — stable keys let reconciliation reorder DOM nodes efficiently and keep state.",
+        "optionTextTr": "Key'ler liste öğelerine kararlı kimlik verir; böylece React render'lar arasında ekleme/kaldırma/yeniden sıralama yaparken node'ları taşıyabilir.",
+        "explanationTr": "Doğru — kararlı key'ler gereksiz mount/unmount'u önler ve animasyonlar ile focused input state'ini korur."
       },
       {
         "optionText": "Keys are required to apply CSS styles to list items.",
         "isCorrect": false,
-        "explanation": "Keys are about identity for diffing, not styling."
+        "explanation": "Keys are about identity for diffing, not styling.",
+        "optionTextTr": "Key'ler, liste öğelerine CSS stili uygulamak için gereklidir.",
+        "explanationTr": "Key'ler stil uygulamaz — React'in reconciliation algoritması içindir."
       },
       {
         "optionText": "A key caches the component so it never re-renders.",
         "isCorrect": false,
-        "explanation": "Keys do not memoise — they identify items across renders."
+        "explanation": "Keys do not memoise — they identify items across renders.",
+        "optionTextTr": "Key, bileşeni önbelleğe alır ve asla yeniden render olmaz.",
+        "explanationTr": "Key önbelleğe almaz — yalnızca reconciliation için kimlik sağlar."
       },
       {
         "optionText": "The array index is always the best value to use as a key.",
         "isCorrect": false,
-        "explanation": "Index keys break when the list reorders or items are inserted."
+        "explanation": "Index keys break when the list reorders or items are inserted.",
+        "optionTextTr": "Dizi index'i key olarak kullanmak her zaman en iyisidir.",
+        "explanationTr": "Index, liste yeniden sıralanabiliyorsa kötü key'dir — yeniden render performans sorunlarına yol açar."
       }
     ]
   },
@@ -370,22 +482,30 @@
       {
         "optionText": "Map the array to JSX and give each element a stable key, usually the row's id.",
         "isCorrect": true,
-        "explanation": "Correct — items.map(item => <Row key={item.id} {...item} />) is the standard pattern."
+        "explanation": "Correct — items.map(item => <Row key={item.id} {...item} />) is the standard pattern.",
+        "optionTextTr": "Diziyi JSX'e map'leyin ve her öğeye genellikle veri ID'sinden gelen kararlı key verin.",
+        "explanationTr": "Doğru — map + key kombinasyonu, React'te listeler oluşturmanın deyimsel yoludur."
       },
       {
         "optionText": "Use a plain for loop directly inside the JSX return.",
         "isCorrect": false,
-        "explanation": "JSX expects an expression — you map (or build an array in a loop), not loop inline."
+        "explanation": "JSX expects an expression — you map (or build an array in a loop), not loop inline.",
+        "optionTextTr": "JSX return içinde doğrudan düz for döngüsü kullanın.",
+        "explanationTr": "Düz for döngüleri JSX içinde doğrudan çalışmaz — map ifadesini kullanın."
       },
       {
         "optionText": "Call ReactDOM.render once per item in the array.",
         "isCorrect": false,
-        "explanation": "You render the list within one tree, not with separate render calls."
+        "explanation": "You render the list within one tree, not with separate render calls.",
+        "optionTextTr": "Dizideki her öğe için bir kez ReactDOM.render çağırın.",
+        "explanationTr": "ReactDOM.render, çok sayıda bileşen için değil kök bağlama içindir."
       },
       {
         "optionText": "Map the array and use the index as the key for best performance.",
         "isCorrect": false,
-        "explanation": "Index keys are unsafe when the list can reorder — prefer a stable id."
+        "explanation": "Index keys are unsafe when the list can reorder — prefer a stable id.",
+        "optionTextTr": "Diziye map yapın ve index'i en iyi performans için key olarak kullanın.",
+        "explanationTr": "Listenin sırası değişebiliyorsa index en iyi key değildir."
       }
     ]
   },
@@ -396,22 +516,30 @@
       {
         "optionText": "In a class component, render returns the Elements to display for the current props and state, and must be pure.",
         "isCorrect": true,
-        "explanation": "Correct — render is the pure description of what to draw; same inputs, same output."
+        "explanation": "Correct — render is the pure description of what to draw; same inputs, same output.",
+        "optionTextTr": "Class bileşende render, bileşenin mevcut render'ı için görüntülenecek Element'leri döndürür.",
+        "explanationTr": "Doğru — render, React'in gerçek DOM'u güncelleme zamanını bilmesi için her state/prop değişiminde çağrılır."
       },
       {
         "optionText": "render performs data fetching and other side effects.",
         "isCorrect": false,
-        "explanation": "Side effects belong in lifecycle methods / effects, not render."
+        "explanation": "Side effects belong in lifecycle methods / effects, not render.",
+        "optionTextTr": "render, veri çekme ve diğer yan etkileri gerçekleştirir.",
+        "explanationTr": "Yan etkiler useEffect veya componentDidMount'a aittir — render saf olmalıdır."
       },
       {
         "optionText": "render directly manipulates the real DOM.",
         "isCorrect": false,
-        "explanation": "React applies DOM changes; render only returns a description."
+        "explanation": "React applies DOM changes; render only returns a description.",
+        "optionTextTr": "render, gerçek DOM'u doğrudan manipüle eder.",
+        "explanationTr": "render, React'e ne oluşturması gerektiğini söyler; gerçek DOM'u doğrudan değiştirmez."
       },
       {
         "optionText": "render is where you call setState to update the UI.",
         "isCorrect": false,
-        "explanation": "Calling setState in render triggers an infinite loop."
+        "explanation": "Calling setState in render triggers an infinite loop.",
+        "optionTextTr": "render'da setState çağrılarak UI güncellenir.",
+        "explanationTr": "render içinde setState çağırmak sonsuz döngüye yol açar."
       }
     ]
   },
@@ -422,22 +550,30 @@
       {
         "optionText": "JS methods don't carry their this — passed as a callback, this becomes undefined unless you bind it.",
         "isCorrect": true,
-        "explanation": "Correct — binding (or a class-field arrow) fixes this to the component instance."
+        "explanation": "Correct — binding (or a class-field arrow) fixes this to the component instance.",
+        "optionTextTr": "JS metodları this'i taşımaz — callback olarak geçirildiğinde this, undefined veya window olur.",
+        "explanationTr": "Doğru — .bind(this), constructor'daki sınıf property arrow fonksiyonu veya function bileşeni bu sorunu çözer."
       },
       {
         "optionText": "Because React deletes any unbound methods at runtime.",
         "isCorrect": false,
-        "explanation": "React does not remove methods — the issue is the lost this reference."
+        "explanation": "React does not remove methods — the issue is the lost this reference.",
+        "optionTextTr": "Çünkü React, bağlanmamış metodları çalışma zamanında siler.",
+        "explanationTr": "React, bağlanmamış metodları silmez — JavaScript'in this bağlama kurallarıyla ilgilidir."
       },
       {
         "optionText": "Because binding makes the component re-render faster.",
         "isCorrect": false,
-        "explanation": "Binding is about this, not render performance."
+        "explanation": "Binding is about this, not render performance.",
+        "optionTextTr": "Çünkü bağlama, bileşenin daha hızlı yeniden render olmasını sağlar.",
+        "explanationTr": "Bağlama performansı etkilemez — this bağlamasının doğruluğu için gereklidir."
       },
       {
         "optionText": "Because function components also require manual binding.",
         "isCorrect": false,
-        "explanation": "Function components have no this, so there is nothing to bind."
+        "explanation": "Function components have no this, so there is nothing to bind.",
+        "optionTextTr": "Çünkü function bileşenler de manuel bağlama gerektirir.",
+        "explanationTr": "Function bileşenler bu sorunu tamamen ortadan kaldırır; this kullanılmaz."
       }
     ]
   },
@@ -448,22 +584,30 @@
       {
         "optionText": "The algorithm React uses to compute the minimal DOM updates between the old and new trees.",
         "isCorrect": true,
-        "explanation": "Correct — React diffs by element type and key to find the smallest set of changes."
+        "explanation": "Correct — React diffs by element type and key to find the smallest set of changes.",
+        "optionTextTr": "React'in render'lar arasında minimum DOM güncellemelerini hesaplamak için kullandığı algoritma.",
+        "explanationTr": "Doğru — reconciliation, sanal ağaç diffing'ini kullanarak gerçek DOM değişikliklerini en aza indirir."
       },
       {
         "optionText": "The process of compiling JSX into JavaScript.",
         "isCorrect": false,
-        "explanation": "That is what a compiler like Babel/SWC does, not reconciliation."
+        "explanation": "That is what a compiler like Babel/SWC does, not reconciliation.",
+        "optionTextTr": "JSX'i JavaScript'e derleme süreci.",
+        "explanationTr": "Bu derlemeyi tanımlar — reconciliation değil."
       },
       {
         "optionText": "Re-fetching data from the server whenever props change.",
         "isCorrect": false,
-        "explanation": "Reconciliation is about the UI tree diff, not data fetching."
+        "explanation": "Reconciliation is about the UI tree diff, not data fetching.",
+        "optionTextTr": "Prop'lar değiştiğinde sunucudan veriyi yeniden çekme.",
+        "explanationTr": "Reconciliation DOM güncellemeyle ilgilidir — veri çekme değil."
       },
       {
         "optionText": "Merging several setState calls into a single update.",
         "isCorrect": false,
-        "explanation": "That is batching — a separate optimisation from reconciliation."
+        "explanation": "That is batching — a separate optimisation from reconciliation.",
+        "optionTextTr": "Birkaç setState çağrısını tek güncellemede birleştirme.",
+        "explanationTr": "Bu batching'i tanımlar — reconciliation değil."
       }
     ]
   },
@@ -474,22 +618,30 @@
       {
         "optionText": "Elements are immutable plain objects ({type, props, children}); Components return Elements, and type can be a string or a component.",
         "isCorrect": true,
-        "explanation": "Correct — Elements describe UI; type may be a host string like 'div' or a component."
+        "explanation": "Correct — Elements describe UI; type may be a host string like 'div' or a component.",
+        "optionTextTr": "Element'ler değişmez düz nesnelerdir ({type, props, children}); Component'ler Element döndüren fonksiyon veya class'tır.",
+        "explanationTr": "Doğru — React.createElement('div', null, 'Merhaba') bir Element üretir; function App() {} bir Component'tir."
       },
       {
         "optionText": "Elements and Components are both mutable objects you edit in place.",
         "isCorrect": false,
-        "explanation": "Elements are immutable — you create new ones rather than mutating them."
+        "explanation": "Elements are immutable — you create new ones rather than mutating them.",
+        "optionTextTr": "Element ve Component'lerin ikisi de yerinde düzenlediğiniz mutable nesnelerdir.",
+        "explanationTr": "Element'ler değişmezdir — Component'ler değişebilir state'e sahip olabilir."
       },
       {
         "optionText": "A Component is just a rendered Element stored in the DOM.",
         "isCorrect": false,
-        "explanation": "A Component is the function or class; Elements are its output."
+        "explanation": "A Component is the function or class; Elements are its output.",
+        "optionTextTr": "Component, DOM'da saklanan render edilmiş Element'tir.",
+        "explanationTr": "Component'ler DOM'da saklanmaz — Element üretirler; React onları DOM'a uygular."
       },
       {
         "optionText": "Elements can only describe host elements like 'div', never components.",
         "isCorrect": false,
-        "explanation": "An Element's type can also be a component function or class."
+        "explanation": "An Element's type can also be a component function or class.",
+        "optionTextTr": "Element'ler yalnızca 'div' gibi host element'leri tanımlayabilir, Component'leri değil.",
+        "explanationTr": "Element'ler hem 'div' gibi string tip hem de Component fonksiyon tipini tutabilir."
       }
     ]
   },
@@ -500,22 +652,30 @@
       {
         "optionText": "A dev-only wrapper that surfaces problems by double-invoking effects and reducers and flagging deprecated APIs; a no-op in production.",
         "isCorrect": true,
-        "explanation": "Correct — StrictMode helps catch impure effects and legacy APIs during development."
+        "explanation": "Correct — StrictMode helps catch impure effects and legacy APIs during development.",
+        "optionTextTr": "Effect'leri ve reducer'ları çift çağırarak sorunları ortaya çıkaran yalnızca geliştirme ortamında çalışan sarmalayıcı.",
+        "explanationTr": "Doğru — StrictMode, production build'larını etkilemez ama yan etkilerdeki eksik cleanup'ları tespit eder."
       },
       {
         "optionText": "A production optimisation that strips unused code from the bundle.",
         "isCorrect": false,
-        "explanation": "StrictMode does nothing in production — it is purely a dev aid."
+        "explanation": "StrictMode does nothing in production — it is purely a dev aid.",
+        "optionTextTr": "Bundle'dan kullanılmayan kodu ayıklayan production optimizasyonu.",
+        "explanationTr": "Bu tree-shaking'i tanımlar — StrictMode değil."
       },
       {
         "optionText": "A mode that enforces TypeScript strict type-checking.",
         "isCorrect": false,
-        "explanation": "StrictMode is a runtime React wrapper, unrelated to TypeScript config."
+        "explanation": "StrictMode is a runtime React wrapper, unrelated to TypeScript config.",
+        "optionTextTr": "TypeScript strict tip denetimini zorunlu kılan mod.",
+        "explanationTr": "StrictMode React'e özgüdür — TypeScript'in strictness ayarlarıyla ilgisi yoktur."
       },
       {
         "optionText": "A wrapper that prevents components inside it from re-rendering.",
         "isCorrect": false,
-        "explanation": "StrictMode actually double-invokes some functions in dev — it does not block renders."
+        "explanation": "StrictMode actually double-invokes some functions in dev — it does not block renders.",
+        "optionTextTr": "İçindeki bileşenlerin yeniden render olmasını engelleyen sarmalayıcı.",
+        "explanationTr": "StrictMode yeniden render'ı engellemez — sorunları tespit etmek için çift render yapar."
       }
     ]
   },
@@ -526,22 +686,30 @@
       {
         "optionText": "{/* comment */} — wrap in braces and use block comment syntax inside JSX.",
         "isCorrect": true,
-        "explanation": "Correct — JSX braces drop into JavaScript, where block comments are valid. HTML-style <!-- --> comments don't work in JSX."
+        "explanation": "Correct — JSX braces drop into JavaScript, where block comments are valid. HTML-style <!-- --> comments don't work in JSX.",
+        "optionTextTr": "{/* yorum */} — JSX içinde süslü parantezle sarın ve blok yorum sözdizimi kullanın.",
+        "explanationTr": "Doğru — çünkü JSX bir ifade slotu içindedir ve /* */ yorum hiçbir şeye evaluate edilmez."
       },
       {
         "optionText": "<!-- comment --> — JSX supports HTML comment syntax.",
         "isCorrect": false,
-        "explanation": "HTML comments don't work in JSX. Use {/* comment */} instead."
+        "explanation": "HTML comments don't work in JSX. Use {/* comment */} instead.",
+        "optionTextTr": "<!-- yorum --> — JSX HTML yorum sözdizimini destekler.",
+        "explanationTr": "JSX HTML değildir — <!-- --> JSX içinde metin olarak render edilir."
       },
       {
         "optionText": "// comment — single-line comments work anywhere inside JSX.",
         "isCorrect": false,
-        "explanation": "Single-line comments work in JSX only outside JSX tags (in JS expressions). Inside JSX use {/* block comment */}."
+        "explanation": "Single-line comments work in JSX only outside JSX tags (in JS expressions). Inside JSX use {/* block comment */}.",
+        "optionTextTr": "// yorum — tek satır yorumlar JSX içinde her yerde çalışır.",
+        "explanationTr": "// JSX işaretlemesinde metin olarak render edilir; curly brace içinde bile risklidir."
       },
       {
         "optionText": "# comment — React supports Python-style comments for readability.",
         "isCorrect": false,
-        "explanation": "# is not a comment syntax in JavaScript or JSX. Use {/* comment */} for inline JSX comments."
+        "explanation": "# is not a comment syntax in JavaScript or JSX. Use {/* comment */} for inline JSX comments.",
+        "optionTextTr": "# yorum — React Python stili yorumları destekler.",
+        "explanationTr": "JavaScript/JSX # yorum sözdizimini desteklemez."
       }
     ]
   },
@@ -552,22 +720,30 @@
       {
         "optionText": "A lightweight in-memory tree of JS objects representing the UI — React diffs it against the previous version and patches only changed real DOM nodes.",
         "isCorrect": true,
-        "explanation": "Correct — reconciliation compares virtual DOM trees and produces minimal real DOM mutations, which are expensive. This is why React is performant for dynamic UIs."
+        "explanation": "Correct — reconciliation compares virtual DOM trees and produces minimal real DOM mutations, which are expensive. This is why React is performant for dynamic UIs.",
+        "optionTextTr": "Bellekte UI'ı temsil eden hafif JS nesneler ağacı — React değişiklikleri hesaplayarak yalnızca minimum DOM güncellemelerini uygular.",
+        "explanationTr": "Doğru — virtual DOM, gerçek DOM işlemleri pahalı olduğundan tüm UI'yı yeniden oluşturabiliyormuş gibi yazmanızı sağlar."
       },
       {
         "optionText": "A server-side copy of the DOM used for server-side rendering.",
         "isCorrect": false,
-        "explanation": "SSR renders to HTML strings, not a virtual DOM copy. The virtual DOM is an in-memory abstraction used by React's reconciler for diffing."
+        "explanation": "SSR renders to HTML strings, not a virtual DOM copy. The virtual DOM is an in-memory abstraction used by React's reconciler for diffing.",
+        "optionTextTr": "Server-side rendering için kullanılan DOM'un sunucu tarafı kopyası.",
+        "explanationTr": "Virtual DOM SSR için değil; istemci tarafında diffing için kullanılır."
       },
       {
         "optionText": "A browser API that stores a snapshot of the DOM for fast re-rendering.",
         "isCorrect": false,
-        "explanation": "The virtual DOM is a React-level abstraction, not a browser API. Browsers have no built-in virtual DOM concept."
+        "explanation": "The virtual DOM is a React-level abstraction, not a browser API. Browsers have no built-in virtual DOM concept.",
+        "optionTextTr": "DOM anlık görüntüsünü hızlı yeniden render için saklayan tarayıcı API'si.",
+        "explanationTr": "Virtual DOM, React içi mekanizmadır — tarayıcı API'si değil."
       },
       {
         "optionText": "Shadow DOM — a web standard for encapsulating component styles.",
         "isCorrect": false,
-        "explanation": "Shadow DOM is a browser API for style encapsulation (used by Web Components). React's virtual DOM is a separate in-memory diffing mechanism."
+        "explanation": "Shadow DOM is a browser API for style encapsulation (used by Web Components). React's virtual DOM is a separate in-memory diffing mechanism.",
+        "optionTextTr": "Bileşen stillerini kapsülleyen web standardı Shadow DOM.",
+        "explanationTr": "Shadow DOM Web Components standardıdır — React'in virtual DOM'u farklı bir kavramdır."
       }
     ]
   },
@@ -578,22 +754,30 @@
       {
         "optionText": "Inputs passed from parent to child — read-only data that customise a component's output.",
         "isCorrect": true,
-        "explanation": "Correct — props flow down the tree. They are immutable inside the child. If a component needs to change a value, that value should be state, not props."
+        "explanation": "Correct — props flow down the tree. They are immutable inside the child. If a component needs to change a value, that value should be state, not props.",
+        "optionTextTr": "Ebeveynden child'a geçirilen girdi — bileşeni özelleştiren salt okunur veri.",
+        "explanationTr": "Doğru — prop'lar veriyi aşağı doğru taşır; callback'ler genellikle çocukların ebeveynle iletişimini sağlar."
       },
       {
         "optionText": "Internal component data that can be updated with setState.",
         "isCorrect": false,
-        "explanation": "Internal updatable data is state, not props. Props are read-only inputs provided by the parent."
+        "explanation": "Internal updatable data is state, not props. Props are read-only inputs provided by the parent.",
+        "optionTextTr": "setState ile güncellenebilen dahili bileşen verisi.",
+        "explanationTr": "Bu state'i tanımlar — prop değil."
       },
       {
         "optionText": "Event listeners attached to a component — onClick, onChange, etc.",
         "isCorrect": false,
-        "explanation": "Event handlers are passed as props but 'props' is the broader term for all parent-to-child inputs, not just events."
+        "explanation": "Event handlers are passed as props but 'props' is the broader term for all parent-to-child inputs, not just events.",
+        "optionTextTr": "Bileşene eklenen olay dinleyicileri — onClick, onChange vb.",
+        "explanationTr": "onClick ve onChange prop'lardır ama prop'ların tanımı bunların ötesine geçer."
       },
       {
         "optionText": "CSS class names passed via the className attribute.",
         "isCorrect": false,
-        "explanation": "className is one specific prop but props encompasses all parent-to-child data: strings, numbers, functions, objects, and JSX."
+        "explanation": "className is one specific prop but props encompasses all parent-to-child data: strings, numbers, functions, objects, and JSX.",
+        "optionTextTr": "className özelliği aracılığıyla geçirilen CSS sınıf adları.",
+        "explanationTr": "className bir prop'tur ama prop'lar yalnızca CSS sınıf adlarını değil; bileşeni yapılandırmak için her türlü veriyi kapsar."
       }
     ]
   },
@@ -604,22 +788,30 @@
       {
         "optionText": "Virtual DOM diffing, JSX syntax, one-way data flow, component-based architecture, and hooks for state/side effects.",
         "isCorrect": true,
-        "explanation": "Correct — these are React's core pillars. One-way data flow (top-down props) makes data tracing predictable. Hooks replaced class lifecycle methods in React 16.8."
+        "explanation": "Correct — these are React's core pillars. One-way data flow (top-down props) makes data tracing predictable. Hooks replaced class lifecycle methods in React 16.8.",
+        "optionTextTr": "Virtual DOM diffing, JSX sözdizimi, tek yönlü veri akışı, bileşen tabanlı mimari ve hook'lar.",
+        "explanationTr": "Doğru — bunlar React'in temel tasarım özellikleridir."
       },
       {
         "optionText": "Two-way data binding, built-in router, HTTP client, and a full MVC framework.",
         "isCorrect": false,
-        "explanation": "Two-way binding and a full framework describes AngularJS. React is a view library — routing (React Router) and HTTP (fetch/axios) are separate."
+        "explanation": "Two-way binding and a full framework describes AngularJS. React is a view library — routing (React Router) and HTTP (fetch/axios) are separate.",
+        "optionTextTr": "İki yönlü veri bağlama, yerleşik router, HTTP client ve tam MVC framework.",
+        "explanationTr": "Bunlar React'te yerleşik değildir — Angular'a daha yakın özellikler."
       },
       {
         "optionText": "Server-side rendering only, no client-side interactivity without Next.js.",
         "isCorrect": false,
-        "explanation": "React works client-side without Next.js — create-react-app is a pure client-side setup. Next.js adds SSR/SSG on top."
+        "explanation": "React works client-side without Next.js — create-react-app is a pure client-side setup. Next.js adds SSR/SSG on top.",
+        "optionTextTr": "Yalnızca server-side rendering, istemci tarafı interaktivite yok.",
+        "explanationTr": "React hem client hem de server-side rendering'i destekler."
       },
       {
         "optionText": "Shadow DOM encapsulation, web components, and built-in CSS scoping.",
         "isCorrect": false,
-        "explanation": "Shadow DOM is a browser API used by Web Components — not React. React uses a virtual DOM and relies on CSS Modules/Tailwind for style scoping."
+        "explanation": "Shadow DOM is a browser API used by Web Components — not React. React uses a virtual DOM and relies on CSS Modules/Tailwind for style scoping.",
+        "optionTextTr": "Shadow DOM kapsülleme, web component'leri ve yerleşik CSS kapsama.",
+        "explanationTr": "Bunlar Web Components standartlarıdır — React özellikleri değil."
       }
     ]
   },
@@ -630,22 +822,30 @@
       {
         "optionText": "A syntax extension that lets you write HTML-like markup in JavaScript — compiled by Babel/SWC to React.createElement() calls.",
         "isCorrect": true,
-        "explanation": "Correct — JSX is syntactic sugar. <Button label='OK' /> compiles to React.createElement(Button, { label: 'OK' }). You can write React without JSX but JSX is far more readable."
+        "explanation": "Correct — JSX is syntactic sugar. <Button label='OK' /> compiles to React.createElement(Button, { label: 'OK' }). You can write React without JSX but JSX is far more readable.",
+        "optionTextTr": "JSX'i kullanan ve HTML benzeri işaretleme yazmanıza izin veren sözdizim uzantısı; Babel/SWC bunu React.createElement çağrılarına derler.",
+        "explanationTr": "Doğru — JSX isteğe bağlıdır ama neredeyse evrensel olarak kullanılır; alternatif okumak çok daha zordur."
       },
       {
         "optionText": "A new programming language created by Facebook to replace JavaScript.",
         "isCorrect": false,
-        "explanation": "JSX is a syntax extension, not a language. It compiles to standard JavaScript — browsers never see JSX directly."
+        "explanation": "JSX is a syntax extension, not a language. It compiles to standard JavaScript — browsers never see JSX directly.",
+        "optionTextTr": "JavaScript'i değiştirmek için Facebook tarafından oluşturulan yeni programlama dili.",
+        "explanationTr": "JSX yeni dil değil; bir sözdizim uzantısıdır."
       },
       {
         "optionText": "A template engine like Handlebars that runs inside the browser at runtime.",
         "isCorrect": false,
-        "explanation": "JSX is compiled at build time, not evaluated at runtime. Unlike template engines, JSX is transformed to plain JS function calls before the browser sees it."
+        "explanation": "JSX is compiled at build time, not evaluated at runtime. Unlike template engines, JSX is transformed to plain JS function calls before the browser sees it.",
+        "optionTextTr": "Çalışma zamanında tarayıcının içinde çalışan Handlebars benzeri template motoru.",
+        "explanationTr": "JSX derleme zamanında dönüştürülür — runtime template motoru değil."
       },
       {
         "optionText": "A JSON format for describing component trees that React parses at runtime.",
         "isCorrect": false,
-        "explanation": "JSX resembles HTML markup, not JSON. It's a compile-time transform, not a runtime data format."
+        "explanation": "JSX resembles HTML markup, not JSON. It's a compile-time transform, not a runtime data format.",
+        "optionTextTr": "React'in çalışma zamanında ayrıştırdığı bileşen ağaçlarını tanımlayan JSON formatı.",
+        "explanationTr": "JSX JSON değil — JavaScript'in sözdizim uzantısıdır."
       }
     ]
   },
@@ -656,22 +856,30 @@
       {
         "optionText": "A way to pass data through the component tree without prop drilling — any descendant can consume it via useContext.",
         "isCorrect": true,
-        "explanation": "Correct — context suits global data: theme, locale, auth user. Beware: any context change re-renders all consumers, so split contexts for unrelated data."
+        "explanation": "Correct — context suits global data: theme, locale, auth user. Beware: any context change re-renders all consumers, so split contexts for unrelated data.",
+        "optionTextTr": "Prop drilling olmadan bileşen ağacında veri geçirmenin yolu.",
+        "explanationTr": "Doğru — context, theme/auth/locale gibi birden fazla bileşene ihtiyaç duyan veriler için uygundur."
       },
       {
         "optionText": "The execution context (this) inside a React class component.",
         "isCorrect": false,
-        "explanation": "The JS this keyword is the execution context in class components. React Context is a separate API for sharing data across the tree."
+        "explanation": "The JS this keyword is the execution context in class components. React Context is a separate API for sharing data across the tree.",
+        "optionTextTr": "React class bileşeni içindeki yürütme bağlamı (this).",
+        "explanationTr": "Execution context (this) 'context' ile benzer ada sahip ama farklı kavramdır."
       },
       {
         "optionText": "A Redux replacement that provides full state management with reducers.",
         "isCorrect": false,
-        "explanation": "Context provides a transport mechanism, not state management. It doesn't include reducers or devtools. For complex state, use Redux or Zustand."
+        "explanation": "Context provides a transport mechanism, not state management. It doesn't include reducers or devtools. For complex state, use Redux or Zustand.",
+        "optionTextTr": "Redux'un yerini tutan, reducer ile tam state yönetimi sağlayan yapı.",
+        "explanationTr": "Context state yönetimi sunar ama Redux kadar özellikli değildir; özellikle sık güncellemeler için."
       },
       {
         "optionText": "A higher-order component that wraps the app and provides router information.",
         "isCorrect": false,
-        "explanation": "React Router uses context internally, but React Context is the general API. Routers are one use case, not the definition."
+        "explanation": "React Router uses context internally, but React Context is the general API. Routers are one use case, not the definition.",
+        "optionTextTr": "Uygulamayı sarmalayıp router bilgisi sağlayan higher-order component.",
+        "explanationTr": "Bu React Router'ın Provider'ını tanımlar — genel context kavramı değil."
       }
     ]
   },
@@ -682,22 +890,30 @@
       {
         "optionText": "An escape hatch holding a mutable reference (usually a DOM node) that persists across renders without triggering re-renders.",
         "isCorrect": true,
-        "explanation": "Correct — use refs for: focusing inputs, reading scroll position, integrating third-party DOM libraries, storing previous values, and interval IDs."
+        "explanation": "Correct — use refs for: focusing inputs, reading scroll position, integrating third-party DOM libraries, storing previous values, and interval IDs.",
+        "optionTextTr": "DOM node'larına veya render'lar arasında değer saklamak için mutable referans tutan, yeniden render tetiklemeyen kaçış kapısı.",
+        "explanationTr": "Doğru — ref'ler doğrudan DOM erişimi (focus, ölçüm), zamanlayıcı ID ve önceki değer için kullanılır."
       },
       {
         "optionText": "References to parent components — used to call methods on a parent from a child.",
         "isCorrect": false,
-        "explanation": "Calling parent methods uses callback props or useImperativeHandle. Refs primarily reference DOM nodes or store mutable values."
+        "explanation": "Calling parent methods uses callback props or useImperativeHandle. Refs primarily reference DOM nodes or store mutable values.",
+        "optionTextTr": "Ebeveyn bileşene referanslar — child üzerinden ebeveyn metodları çağırmak için.",
+        "explanationTr": "Bu useImperativeHandle ile olası bir kullanım durumudur ama ref'lerin genel tanımı değil."
       },
       {
         "optionText": "A way to pass data between sibling components without going through a parent.",
         "isCorrect": false,
-        "explanation": "Sibling communication uses lifting state up or a context/store. Refs are local mutable containers, not inter-component communication channels."
+        "explanation": "Sibling communication uses lifting state up or a context/store. Refs are local mutable containers, not inter-component communication channels.",
+        "optionTextTr": "Context olmadan sibling bileşenler arasında veri geçirmenin yolu.",
+        "explanationTr": "Ref'ler sibling iletişimi için kullanılmaz — bunun için state lift veya context kullanılır."
       },
       {
         "optionText": "Aliases for state variables — ref.current is the same as state.",
         "isCorrect": false,
-        "explanation": "Refs and state are fundamentally different: changing ref.current does NOT trigger a re-render; changing state does."
+        "explanation": "Refs and state are fundamentally different: changing ref.current does NOT trigger a re-render; changing state does.",
+        "optionTextTr": "State değişkenlerinin alias'ı — ref.current state ile aynıdır.",
+        "explanationTr": "Ref'ler yeniden render tetiklemez; state tetikler. Bunlar farklı kavramlardır."
       }
     ]
   },
@@ -708,22 +924,30 @@
       {
         "optionText": "A way to return multiple elements from a component without adding an extra DOM node — written as <></> or <React.Fragment>.",
         "isCorrect": true,
-        "explanation": "Correct — without fragments you'd need a wrapping <div>, polluting the DOM. The short syntax <></> doesn't support the key prop; use <React.Fragment key={id}> when needed."
+        "explanation": "Correct — without fragments you'd need a wrapping <div>, polluting the DOM. The short syntax <></> doesn't support the key prop; use <React.Fragment key={id}> when needed.",
+        "optionTextTr": "Fazladan DOM node eklemeden bileşenden birden fazla element döndürme yöntemi.",
+        "explanationTr": "Doğru — Fragment'ler CSS layout'u veya erişilebilirliği bozan gereksiz wrapper div'leri önler."
       },
       {
         "optionText": "Lazy-loaded components that only render when they come into the viewport.",
         "isCorrect": false,
-        "explanation": "Lazy loading uses React.lazy + Suspense. Fragments are a grouping mechanism with no DOM output."
+        "explanation": "Lazy loading uses React.lazy + Suspense. Fragments are a grouping mechanism with no DOM output.",
+        "optionTextTr": "Yalnızca görünüme girdiğinde render olan lazy-loaded bileşenler.",
+        "explanationTr": "Bu React.lazy veya sanallaştırma kütüphanelerini tanımlar — Fragment değil."
       },
       {
         "optionText": "CSS class fragments that apply partial styles to a component.",
         "isCorrect": false,
-        "explanation": "CSS fragments don't exist in React. React.Fragment is a rendering concept — it groups JSX children without a DOM wrapper."
+        "explanation": "CSS fragments don't exist in React. React.Fragment is a rendering concept — it groups JSX children without a DOM wrapper.",
+        "optionTextTr": "Bileşene kısmi stil uygulayan CSS sınıf parçaları.",
+        "explanationTr": "CSS fragmanlarıyla kavramsal benzerlik olabilir ama React Fragment farklı bir kavramdır."
       },
       {
         "optionText": "Code splitting points where React splits the bundle into smaller chunks.",
         "isCorrect": false,
-        "explanation": "Code splitting uses React.lazy() and dynamic import(). Fragments are a JSX grouping tool — they have no impact on bundles."
+        "explanation": "Code splitting uses React.lazy() and dynamic import(). Fragments are a JSX grouping tool — they have no impact on bundles.",
+        "optionTextTr": "React'in bundle'ı daha küçük parçalara böldüğü code splitting noktaları.",
+        "explanationTr": "Bu React.lazy ve code splitting'i tanımlar — Fragment değil."
       }
     ]
   },
@@ -734,22 +958,30 @@
       {
         "optionText": "JSX uses case to distinguish components from HTML elements — lowercase is a built-in element, uppercase is a user-defined component.",
         "isCorrect": true,
-        "explanation": "Correct — <button> compiles to createElement('button', …); <Button> compiles to createElement(Button, …). React resolves the uppercase name to the function/class."
+        "explanation": "Correct — <button> compiles to createElement('button', …); <Button> compiles to createElement(Button, …). React resolves the uppercase name to the function/class.",
+        "optionTextTr": "JSX, bileşenleri HTML element'lerinden ayırt etmek için büyük/küçük harf kullanır — küçük harf 'div', büyük harf '<MyComponent>' React bileşenidir.",
+        "explanationTr": "Doğru — React, 'div' gibi string'leri HTML element'i; büyük harfli değerleri ise bileşen referansı olarak işler."
       },
       {
         "optionText": "React enforces PascalCase for linting purposes only — it has no runtime effect.",
         "isCorrect": false,
-        "explanation": "It has a definite runtime effect: <button /> creates a DOM element; <Button /> creates a React component. The case distinction is fundamental to JSX compilation."
+        "explanation": "It has a definite runtime effect: <button /> creates a DOM element; <Button /> creates a React component. The case distinction is fundamental to JSX compilation.",
+        "optionTextTr": "React yalnızca linting amacıyla PascalCase zorunlu kılar — teknik bir etkisi yoktur.",
+        "explanationTr": "Büyük/küçük harf, bileşenleri HTML element'lerinden ayırt etmek için teknik olarak önemlidir."
       },
       {
         "optionText": "Capitalised components are class components; lowercase ones are function components.",
         "isCorrect": false,
-        "explanation": "Both class and function components must be capitalised. The case signals 'component' vs 'DOM element', not class vs function."
+        "explanation": "Both class and function components must be capitalised. The case signals 'component' vs 'DOM element', not class vs function.",
+        "optionTextTr": "Büyük harfli bileşenler class; küçük harfli olanlar function bileşendir.",
+        "explanationTr": "Bu yanlıştır — büyük/küçük harf, class veya function olduğunu değil; bileşen ile HTML ayrımını belirler."
       },
       {
         "optionText": "It's a convention from JavaScript class naming — classes must start with uppercase.",
         "isCorrect": false,
-        "explanation": "While JS classes are conventionally PascalCase, the JSX rule applies to function components too and is enforced by the compiler, not just convention."
+        "explanation": "While JS classes are conventionally PascalCase, the JSX rule applies to function components too and is enforced by the compiler, not just convention.",
+        "optionTextTr": "Bu JavaScript class adlandırma kuralından gelir — class'lar büyük harfle başlamalıdır.",
+        "explanationTr": "Bu convention var olsa da JSX'te büyük harf kullanımının teknik nedeni ayrımdır: bileşen mi, HTML element mi."
       }
     ]
   },
@@ -760,22 +992,30 @@
       {
         "optionText": "Using && for short-circuit rendering or the ternary operator ? : for if/else — both work because JSX accepts any JS expression.",
         "isCorrect": true,
-        "explanation": "Correct — {isLoggedIn && <Dashboard />} renders Dashboard only when true. {isLoggedIn ? <Dashboard /> : <Login />} handles both branches. Avoid 0 && … (renders '0')."
+        "explanation": "Correct — {isLoggedIn && <Dashboard />} renders Dashboard only when true. {isLoggedIn ? <Dashboard /> : <Login />} handles both branches. Avoid 0 && … (renders '0').",
+        "optionTextTr": "Kısa devre render için && veya koşul için ternary operatörü ? :, JSX ifade slotlarının içinde kullanılır.",
+        "explanationTr": "Doğru — bunlar React'te koşullu render'ın deyimsel yollarıdır."
       },
       {
         "optionText": "The if/else statement inside JSX — you write if (condition) return <A /> else return <B />.",
         "isCorrect": false,
-        "explanation": "if statements are not expressions and can't go inside JSX braces. Use ternary (? :) or && for conditional rendering inside JSX."
+        "explanation": "if statements are not expressions and can't go inside JSX braces. Use ternary (? :) or && for conditional rendering inside JSX.",
+        "optionTextTr": "JSX içinde if/else ifadesi — şu şekilde yazılır: if (koşul) return...",
+        "explanationTr": "if/else, JSX ifade slotları içinde doğrudan çalışmaz — ancak JSX döndürmeden önce JavaScript'te kullanılabilir."
       },
       {
         "optionText": "The style prop for applying conditional inline CSS: style={{ color: isError ? 'red' : 'black' }}.",
         "isCorrect": false,
-        "explanation": "That's conditional inline styling. Inline conditional expressions refer to the pattern of conditionally rendering JSX elements, not styles."
+        "explanation": "That's conditional inline styling. Inline conditional expressions refer to the pattern of conditionally rendering JSX elements, not styles.",
+        "optionTextTr": "Koşullu inline CSS uygulayan style prop: style={{ color: koşul ? 'kırmızı' : 'mavi' }}",
+        "explanationTr": "Bu koşullu stil uygulamadır — genel koşullu render değil."
       },
       {
         "optionText": "switch statements inside JSX curly braces for multi-branch rendering.",
         "isCorrect": false,
-        "explanation": "switch is a statement, not an expression — it can't go inside JSX {}. Use an IIFE, a helper function, or object lookup for multi-branch logic."
+        "explanation": "switch is a statement, not an expression — it can't go inside JSX {}. Use an IIFE, a helper function, or object lookup for multi-branch logic.",
+        "optionTextTr": "Çok dallı render için JSX kıvrımlı parantezlerinin içinde switch ifadeleri.",
+        "explanationTr": "Switch ifadeler JSX içinde doğrudan çalışmaz — koşullu render için ternary veya if-else pattern'leri kullanılır."
       }
     ]
   },
@@ -786,22 +1026,30 @@
       {
         "optionText": "A hook that adds local state to a function component — returns [value, setter] and triggers a re-render when the setter is called.",
         "isCorrect": true,
-        "explanation": "Correct — const [count, setCount] = useState(0). The setter can take a new value or a function: setCount(prev => prev + 1). Updates are batched in React 18."
+        "explanation": "Correct — const [count, setCount] = useState(0). The setter can take a new value or a function: setCount(prev => prev + 1). Updates are batched in React 18.",
+        "optionTextTr": "Function bileşene local state ekleyen hook — [value, setValue] döndürür.",
+        "explanationTr": "Doğru — yeniden render, güncelleyici çağrıldığında zamanlanır; her render kendi state anlık görüntüsüne sahiptir."
       },
       {
         "optionText": "A hook that reads global Redux state inside a component.",
         "isCorrect": false,
-        "explanation": "Reading Redux state uses useSelector. useState manages local component state with no connection to Redux."
+        "explanation": "Reading Redux state uses useSelector. useState manages local component state with no connection to Redux.",
+        "optionTextTr": "Bileşen içinde global Redux state'ini okuyan hook.",
+        "explanationTr": "Bu useSelector'ı tanımlar — useState değil."
       },
       {
         "optionText": "A lifecycle method that runs when state changes — equivalent to componentDidUpdate.",
         "isCorrect": false,
-        "explanation": "componentDidUpdate is replaced by useEffect. useState declares state; it's not a lifecycle method."
+        "explanation": "componentDidUpdate is replaced by useEffect. useState declares state; it's not a lifecycle method.",
+        "optionTextTr": "State değiştiğinde çalışan lifecycle metodu — componentDidUpdate'e eşdeğer.",
+        "explanationTr": "Bu bir lifecycle metodunu tanımlar — useState hook'u değil."
       },
       {
         "optionText": "A way to share state between components without props — similar to context.",
         "isCorrect": false,
-        "explanation": "useState is strictly local to the component. Sharing state uses lifting state up, context, or external stores like Redux."
+        "explanation": "useState is strictly local to the component. Sharing state uses lifting state up, context, or external stores like Redux.",
+        "optionTextTr": "Prop'lar olmadan bileşenler arasında state paylaşmanın yolu — context'e benzer.",
+        "explanationTr": "useState, bileşenler arasında paylaşmaz — context veya harici store gerektirir."
       }
     ]
   },
@@ -812,22 +1060,30 @@
       {
         "optionText": "Functions (useState, useEffect, useContext…) that let function components use state, lifecycle behaviour, and other React features without classes.",
         "isCorrect": true,
-        "explanation": "Correct — hooks enable logic reuse via custom hooks, reduce boilerplate vs class components, and co-locate related logic instead of splitting it across lifecycle methods."
+        "explanation": "Correct — hooks enable logic reuse via custom hooks, reduce boilerplate vs class components, and co-locate related logic instead of splitting it across lifecycle methods.",
+        "optionTextTr": "useState, useEffect, useContext gibi fonksiyonlar, function bileşenlerin state ve lifecycle özelliklerine erişmesini sağlar.",
+        "explanationTr": "Doğru — hook'lar, class boilerplate'ini ortadan kaldırır ve mantığın yeniden kullanımını daha kolay hale getirir."
       },
       {
         "optionText": "Event listeners attached to DOM nodes that React cleans up automatically.",
         "isCorrect": false,
-        "explanation": "Event listeners are handled in JSX (onClick, etc.) or useEffect. Hooks are a broader API for state, side effects, refs, and more."
+        "explanation": "Event listeners are handled in JSX (onClick, etc.) or useEffect. Hooks are a broader API for state, side effects, refs, and more.",
+        "optionTextTr": "React'in temizlediği DOM node'larına eklenen olay dinleyicileri.",
+        "explanationTr": "Bu olay dinleyicilerini tanımlar — hook'ları değil."
       },
       {
         "optionText": "Methods on the React class that run at specific lifecycle stages.",
         "isCorrect": false,
-        "explanation": "Lifecycle methods belong to class components. Hooks are functions for function components — they achieve the same results without classes."
+        "explanation": "Lifecycle methods belong to class components. Hooks are functions for function components — they achieve the same results without classes.",
+        "optionTextTr": "Belirli lifecycle aşamalarında çalışan React class metodları.",
+        "explanationTr": "Bunlar lifecycle metodları — hook'lar değil."
       },
       {
         "optionText": "CSS hooks that apply styles conditionally based on component state.",
         "isCorrect": false,
-        "explanation": "CSS hooks don't exist in React. React Hooks are JS functions for state and lifecycle features. Conditional styles are handled via className logic or CSS-in-JS."
+        "explanation": "CSS hooks don't exist in React. React Hooks are JS functions for state and lifecycle features. Conditional styles are handled via className logic or CSS-in-JS.",
+        "optionTextTr": "Bileşen durumuna göre koşullu stil uygulayan CSS hook'ları.",
+        "explanationTr": "CSS hook'ları React'in dahili hook'larıyla benzer adlandırmaya sahip ama farklı bir kavramdır."
       }
     ]
   },
@@ -838,22 +1094,30 @@
       {
         "optionText": "Props are read-only inputs from the parent; state is mutable data owned by the component itself.",
         "isCorrect": true,
-        "explanation": "Correct — a component cannot change its own props. State is internal and triggers re-renders when updated. Both influence what renders."
+        "explanation": "Correct — a component cannot change its own props. State is internal and triggers re-renders when updated. Both influence what renders.",
+        "optionTextTr": "Prop'lar, bileşeni yapılandıran ebeveynden salt okunur girdilerdir; state, bileşenin sahip olduğu ve değişebilen dahili veridir.",
+        "explanationTr": "Doğru — bu ayrım React'in veri akışını anlamak için temeldir."
       },
       {
         "optionText": "State is for strings and numbers; props can hold any data type including functions.",
         "isCorrect": false,
-        "explanation": "Both can hold any type — functions, objects, arrays, primitives. The distinction is ownership: props come from outside, state lives inside."
+        "explanation": "Both can hold any type — functions, objects, arrays, primitives. The distinction is ownership: props come from outside, state lives inside.",
+        "optionTextTr": "State string ve sayılar için; prop'lar her türlü veriyi tutabilir.",
+        "explanationTr": "Her ikisi de herhangi bir JavaScript değerini tutabilir — ayrım veri türüne göre değil."
       },
       {
         "optionText": "Props are asynchronous; state updates are synchronous.",
         "isCorrect": false,
-        "explanation": "It's the opposite — state updates (setState, useState setters) are asynchronous and batched. Props are just values passed down synchronously."
+        "explanation": "It's the opposite — state updates (setState, useState setters) are asynchronous and batched. Props are just values passed down synchronously.",
+        "optionTextTr": "Prop'lar asenkron; state güncellemeleri senkrondur.",
+        "explanationTr": "Her ikisi de asenkron güncellemeye sahiptir — ayrım mülkiyet ve değişkenlikle ilgilidir."
       },
       {
         "optionText": "State is global across the app; props are local to one component.",
         "isCorrect": false,
-        "explanation": "useState is local to a component. Global state needs Redux, Context, or Zustand. Props are per-component inputs from the parent."
+        "explanation": "useState is local to a component. Global state needs Redux, Context, or Zustand. Props are per-component inputs from the parent.",
+        "optionTextTr": "State uygulama genelinde global; prop'lar bir bileşene yerel.",
+        "explanationTr": "State yerel (veya harici bir store aracılığıyla paylaşılan); prop'lar ise ebeveynden aktarılan bağlam içinde geçerlidir."
       }
     ]
   },
@@ -864,22 +1128,30 @@
       {
         "optionText": "Data a component owns that can change over time — updates trigger a re-render so the UI stays in sync.",
         "isCorrect": true,
-        "explanation": "Correct — state is React's mechanism for reactive UI. Only change state via the setter (useState) or setState — never mutate directly."
+        "explanation": "Correct — state is React's mechanism for reactive UI. Only change state via the setter (useState) or setState — never mutate directly.",
+        "optionTextTr": "Bir bileşenin sahip olduğu ve zaman içinde değişebilen veri — güncellemeler yeniden render tetikler.",
+        "explanationTr": "Doğru — React state'in neden değiştiğini izler ve sadece gerekli güncellemeleri yapar."
       },
       {
         "optionText": "A JavaScript object passed from parent to child to configure a component.",
         "isCorrect": false,
-        "explanation": "That describes props. State is data the component itself manages internally and can update."
+        "explanation": "That describes props. State is data the component itself manages internally and can update.",
+        "optionTextTr": "Bileşeni yapılandırmak için ebeveynden child'a geçirilen JavaScript nesnesi.",
+        "explanationTr": "Bu prop'ları tanımlar — state değil."
       },
       {
         "optionText": "The browser's storage (localStorage/sessionStorage) accessed inside React components.",
         "isCorrect": false,
-        "explanation": "Browser storage is a Web API, not React state. React state lives in memory and resets on page refresh unless explicitly persisted."
+        "explanation": "Browser storage is a Web API, not React state. React state lives in memory and resets on page refresh unless explicitly persisted.",
+        "optionTextTr": "Bileşen içinden erişilen tarayıcı storage'ı (localStorage/sessionStorage).",
+        "explanationTr": "localStorage state'in bir parçası değildir — tarayıcı API'sidir."
       },
       {
         "optionText": "The Redux store — React components read it to render correctly.",
         "isCorrect": false,
-        "explanation": "The Redux store is external state management. React's built-in state (useState/useReducer) is local to a component."
+        "explanation": "The Redux store is external state management. React's built-in state (useState/useReducer) is local to a component.",
+        "optionTextTr": "Redux store — React bileşenleri doğru render için onu okur.",
+        "explanationTr": "Redux store, harici bir state yönetim aracıdır — dahili React state değil."
       }
     ]
   },
@@ -890,22 +1162,30 @@
       {
         "optionText": "Portals render children into a different DOM node while keeping them in the React tree — ideal for modals, tooltips, and dropdowns.",
         "isCorrect": true,
-        "explanation": "Correct — ReactDOM.createPortal(child, domNode) renders outside the parent's DOM but events still bubble through the React tree. The portal is part of the component logically."
+        "explanation": "Correct — ReactDOM.createPortal(child, domNode) renders outside the parent's DOM but events still bubble through the React tree. The portal is part of the component logically.",
+        "optionTextTr": "Portal'lar, React tree'de event'ler ve context desteğini korurken child'ları farklı DOM node'una render eder.",
+        "explanationTr": "Doğru — modal, tooltip ve dropdown için kullanışlıdır; overflow: hidden ile sınırlandırılmış parent'lardan kaçmak için."
       },
       {
         "optionText": "A routing mechanism that navigates between React component 'pages'.",
         "isCorrect": false,
-        "explanation": "Routing is handled by React Router or Next.js. Portals are a rendering technique to escape the parent DOM node, not a navigation feature."
+        "explanation": "Routing is handled by React Router or Next.js. Portals are a rendering technique to escape the parent DOM node, not a navigation feature.",
+        "optionTextTr": "React bileşen 'sayfaları' arasında navigasyon sağlayan routing mekanizması.",
+        "explanationTr": "Bu React Router'ı tanımlar — portal değil."
       },
       {
         "optionText": "A way to share state between two distant components without context.",
         "isCorrect": false,
-        "explanation": "Portals are about DOM placement, not state sharing. State sharing uses Context, Redux, or Zustand."
+        "explanation": "Portals are about DOM placement, not state sharing. State sharing uses Context, Redux, or Zustand.",
+        "optionTextTr": "Context olmadan uzak iki bileşen arasında state paylaşmanın yolu.",
+        "explanationTr": "Portal'lar state paylaşımı için değil; DOM rendering hedefi için kullanılır."
       },
       {
         "optionText": "Server-side entry points where React hydrates the page on load.",
         "isCorrect": false,
-        "explanation": "Hydration uses ReactDOM.hydrateRoot. Portals are client-side DOM escape hatches for rendering inside a different DOM container."
+        "explanation": "Hydration uses ReactDOM.hydrateRoot. Portals are client-side DOM escape hatches for rendering inside a different DOM container.",
+        "optionTextTr": "React'in sayfa yüklendiğinde hydrate ettiği sunucu tarafı giriş noktaları.",
+        "explanationTr": "Bu SSR hydration'ı tanımlar — portal değil."
       }
     ]
   },
@@ -916,22 +1196,30 @@
       {
         "optionText": "Class components use lifecycle methods and this.state; function components use hooks — function components are now preferred.",
         "isCorrect": true,
-        "explanation": "Correct — hooks (React 16.8+) gave function components all the capabilities of class components. New code should use function components; classes are legacy."
+        "explanation": "Correct — hooks (React 16.8+) gave function components all the capabilities of class components. New code should use function components; classes are legacy.",
+        "optionTextTr": "Class bileşenler lifecycle metodları ve this.state kullanır; function bileşenler hook'lar ve closures kullanır.",
+        "explanationTr": "Doğru — modern React, function bileşenleri ve hook'ları class bileşenlerin yerine önerir."
       },
       {
         "optionText": "Class components are faster because they avoid hook overhead on every render.",
         "isCorrect": false,
-        "explanation": "Performance difference is negligible in practice. Function components with hooks are preferred for readability and logic reuse via custom hooks."
+        "explanation": "Performance difference is negligible in practice. Function components with hooks are preferred for readability and logic reuse via custom hooks.",
+        "optionTextTr": "Class bileşenler her render'da hook ek yükü olmadığından daha hızlıdır.",
+        "explanationTr": "Class bileşenler ve function bileşenler arasında ölçülebilir bir performans farkı yoktur."
       },
       {
         "optionText": "Function components cannot hold state — they are purely presentational.",
         "isCorrect": false,
-        "explanation": "useState and useReducer give function components full state capabilities. This was true before hooks (React 16.8) but no longer applies."
+        "explanation": "useState and useReducer give function components full state capabilities. This was true before hooks (React 16.8) but no longer applies.",
+        "optionTextTr": "Function bileşenler state tutamaz — tamamen sunum odaklıdır.",
+        "explanationTr": "Hook'larla function bileşenler state ve yan etki yönetebilir."
       },
       {
         "optionText": "Class components are required for routing; function components are for leaf UI.",
         "isCorrect": false,
-        "explanation": "React Router and Next.js work entirely with function components. Class components have no special role in routing."
+        "explanation": "React Router and Next.js work entirely with function components. Class components have no special role in routing.",
+        "optionTextTr": "Class bileşenler routing için; function bileşenler form için gereklidir.",
+        "explanationTr": "Bileşen türü, routing veya form kullanımını belirlemez."
       }
     ]
   },
@@ -942,22 +1230,30 @@
       {
         "optionText": "Form inputs whose value is driven by React state — every change goes through onChange → setState → re-render.",
         "isCorrect": true,
-        "explanation": "Correct — controlled inputs make React the single source of truth. You can validate on every keystroke, format input, and derive other UI from the value easily."
+        "explanation": "Correct — controlled inputs make React the single source of truth. You can validate on every keystroke, format input, and derive other UI from the value easily.",
+        "optionTextTr": "React state tarafından yönetilen değere sahip form girdileri — her değişiklik bir onChange handler aracılığıyla state'i günceller.",
+        "explanationTr": "Doğru — controlled bileşenler, her tuş vuruşunda state'i güvenilir biçimde yansıtır."
       },
       {
         "optionText": "Components wrapped in React.memo to prevent unnecessary re-renders.",
         "isCorrect": false,
-        "explanation": "React.memo is for render optimisation. Controlled components refer to form inputs whose value is managed by React state."
+        "explanation": "React.memo is for render optimisation. Controlled components refer to form inputs whose value is managed by React state.",
+        "optionTextTr": "Gereksiz yeniden render'ları önlemek için React.memo ile sarmalanmış bileşenler.",
+        "explanationTr": "Bu memoization'ı tanımlar — controlled bileşenler değil."
       },
       {
         "optionText": "Child components that can only receive data from their parent via props.",
         "isCorrect": false,
-        "explanation": "All components receive props from parents — that's not what 'controlled' means. Controlled is specifically about form input value management."
+        "explanation": "All components receive props from parents — that's not what 'controlled' means. Controlled is specifically about form input value management.",
+        "optionTextTr": "Yalnızca ebeveyninden veri alabilen child bileşenler.",
+        "explanationTr": "Bu prop yalnızca akışı tanımlar — controlled bileşenler form input yönetimi ile ilgilidir."
       },
       {
         "optionText": "Components connected to Redux — the store 'controls' their data.",
         "isCorrect": false,
-        "explanation": "Redux-connected components are sometimes called 'smart' components. Controlled components is a form input pattern about React state managing the value."
+        "explanation": "Redux-connected components are sometimes called 'smart' components. Controlled components is a form input pattern about React state managing the value.",
+        "optionTextTr": "Redux'a bağlı bileşenler — store onların verisini 'kontrol eder'.",
+        "explanationTr": "Redux bağlantısı ile controlled bileşenler farklı kavramlardır."
       }
     ]
   },
@@ -968,22 +1264,30 @@
       {
         "optionText": "Three phases: mounting (created & inserted into DOM), updating (re-rendering on state/props change), and unmounting (removed from DOM).",
         "isCorrect": true,
-        "explanation": "Correct — in function components: useEffect([]) = mount, useEffect([dep]) = update, useEffect cleanup = unmount. Class components use explicit lifecycle methods."
+        "explanation": "Correct — in function components: useEffect([]) = mount, useEffect([dep]) = update, useEffect cleanup = unmount. Class components use explicit lifecycle methods.",
+        "optionTextTr": "Üç aşama: mounting (DOM'a oluşturulup eklenir), updating (yeniden render), unmounting (DOM'dan çıkarılır).",
+        "explanationTr": "Doğru — bu lifecycle'ı anlamak, effect'ler ne zaman çalışır ve ne zaman cleanup gerekir sorusunu yanıtlar."
       },
       {
         "optionText": "Two phases: render (create virtual DOM) and commit (update real DOM).",
         "isCorrect": false,
-        "explanation": "Those are React's internal phases for a single render pass. The component lifecycle refers to mount → update → unmount stages across a component's life."
+        "explanation": "Those are React's internal phases for a single render pass. The component lifecycle refers to mount → update → unmount stages across a component's life.",
+        "optionTextTr": "İki aşama: render (virtual DOM) ve commit (gerçek DOM).",
+        "explanationTr": "Bu React'in dahili render pipeline'ını tanımlar — tam component lifecycle değil."
       },
       {
         "optionText": "The order in which components render from parent to child — top-down always.",
         "isCorrect": false,
-        "explanation": "Render order is a rendering concept, not the lifecycle. Lifecycle describes the stages a single component goes through from creation to removal."
+        "explanation": "Render order is a rendering concept, not the lifecycle. Lifecycle describes the stages a single component goes through from creation to removal.",
+        "optionTextTr": "Bileşenlerin ebeveynden child'a render sırası — yukarıdan aşağıya.",
+        "explanationTr": "Bu render sırasını tanımlar — tam component lifecycle döngüsü değil."
       },
       {
         "optionText": "The lifecycle of a Redux action: dispatched → reducer → store → component re-render.",
         "isCorrect": false,
-        "explanation": "That's the Redux data flow, not the React component lifecycle. Component lifecycle covers mounting, updating, and unmounting."
+        "explanation": "That's the Redux data flow, not the React component lifecycle. Component lifecycle covers mounting, updating, and unmounting.",
+        "optionTextTr": "Redux action'ın lifecycle'ı: dispatch → reducer → store → component.",
+        "explanationTr": "Bu Redux veri akışını tanımlar — React component lifecycle'ı değil."
       }
     ]
   },
@@ -994,22 +1298,30 @@
       {
         "optionText": "Wrap in an arrow function: onClick={() => handleClick(id)} — the arrow function is called by the event and calls your handler with the param.",
         "isCorrect": true,
-        "explanation": "Correct — this is the standard pattern. Avoid onClick={handleClick(id)} (calls immediately on render). The arrow wrapper defers execution to the click event."
+        "explanation": "Correct — this is the standard pattern. Avoid onClick={handleClick(id)} (calls immediately on render). The arrow wrapper defers execution to the click event.",
+        "optionTextTr": "Arrow function'a sarın: onClick={() => handleClick(id)} — handler doğrudan çağrılmaz.",
+        "explanationTr": "Doğru — arrow function, handler'ı çağırmak yerine referansını geçer; param nasıl geçirileceğini kontrol eder."
       },
       {
         "optionText": "Pass the parameter as a second argument to onClick: onClick={handleClick, id}.",
         "isCorrect": false,
-        "explanation": "onClick only accepts a single function. Pass params via an arrow function wrapper: onClick={() => handleClick(id)}."
+        "explanation": "onClick only accepts a single function. Pass params via an arrow function wrapper: onClick={() => handleClick(id)}.",
+        "optionTextTr": "onClick'e ikinci argüman olarak parametreyi geçin: onClick={handleClick, id}",
+        "explanationTr": "React event handler ikinci argüman kabul etmez — sadece bir fonksiyon geçirilir."
       },
       {
         "optionText": "Use data-* attributes and read them from event.target.dataset inside the handler.",
         "isCorrect": false,
-        "explanation": "data attributes work but are limited to strings. The arrow function pattern is simpler and type-safe for passing any parameter."
+        "explanation": "data attributes work but are limited to strings. The arrow function pattern is simpler and type-safe for passing any parameter.",
+        "optionTextTr": "data-* öznitelikleri kullanın ve event.target.dataset'ten okuyun.",
+        "explanationTr": "Bu alternatif bir yöntemdir ama daha az yaygındır."
       },
       {
         "optionText": "Call bind on the handler: onClick={handleClick.bind(this, id)} in function components.",
         "isCorrect": false,
-        "explanation": "bind works but creates a new function on every render (same issue as arrow functions but less readable). Arrow function wrappers are the idiomatic React pattern."
+        "explanation": "bind works but creates a new function on every render (same issue as arrow functions but less readable). Arrow function wrappers are the idiomatic React pattern.",
+        "optionTextTr": "Handler üzerinde bind çağırın: onClick={handleClick.bind(this, id)}",
+        "explanationTr": "Bu çalışır ama her render'da yeni fonksiyon oluşturduğundan tercih edilmez."
       }
     ]
   },
@@ -1020,22 +1332,30 @@
       {
         "optionText": "React schedules a re-render — state is not updated immediately. The new value is available on the next render.",
         "isCorrect": true,
-        "explanation": "Correct — React batches updates for performance. Reading state immediately after calling the setter returns the old value. Use the functional form setState(prev => …) for derived updates."
+        "explanation": "Correct — React batches updates for performance. Reading state immediately after calling the setter returns the old value. Use the functional form setState(prev => …) for derived updates.",
+        "optionTextTr": "React bir yeniden render zamanlar — state hemen güncellenmez. Yeni değer bir sonraki render'da mevcuttur.",
+        "explanationTr": "Doğru — setState çağrısından sonra hemen state okumak stale değer döndürür."
       },
       {
         "optionText": "The component re-renders synchronously before setState returns.",
         "isCorrect": false,
-        "explanation": "setState is asynchronous and batched. The re-render is scheduled, not immediate. React 18 batches even async setState calls."
+        "explanation": "setState is asynchronous and batched. The re-render is scheduled, not immediate. React 18 batches even async setState calls.",
+        "optionTextTr": "Bileşen, setState dönmeden önce senkron olarak yeniden render olur.",
+        "explanationTr": "React state güncellemeleri asenkrondur — senkron değil."
       },
       {
         "optionText": "setState directly mutates the state object in place.",
         "isCorrect": false,
-        "explanation": "Never mutate state directly — React won't detect the change. Always pass a new value or object to the setter."
+        "explanation": "Never mutate state directly — React won't detect the change. Always pass a new value or object to the setter.",
+        "optionTextTr": "setState, state nesnesini doğrudan mutate eder.",
+        "explanationTr": "React state immutable olmalıdır — setState yeni state ile yeniden render zamanlar."
       },
       {
         "optionText": "The entire React tree re-renders from the root down.",
         "isCorrect": false,
-        "explanation": "Only the component that called setState and its descendants re-render (unless memoized). React does not re-render the whole tree on every state change."
+        "explanation": "Only the component that called setState and its descendants re-render (unless memoized). React does not re-render the whole tree on every state change.",
+        "optionTextTr": "Tüm React ağacı kökten aşağıya yeniden render olur.",
+        "explanationTr": "Yalnızca ilgili bileşen ve children'ları yeniden render olur — tüm ağaç değil."
       }
     ]
   },
@@ -1046,22 +1366,30 @@
       {
         "optionText": "React uses SyntheticEvents delegated to the root — you attach handlers via JSX props like onClick, onChange instead of addEventListener.",
         "isCorrect": true,
-        "explanation": "Correct — React attaches one listener at the root and dispatches synthetic events to the right component. SyntheticEvents normalise cross-browser differences."
+        "explanation": "Correct — React attaches one listener at the root and dispatches synthetic events to the right component. SyntheticEvents normalise cross-browser differences.",
+        "optionTextTr": "React, root'a delege edilen SyntheticEvent'ler kullanır — handler'ları prop olarak eklersiniz; React yönetir.",
+        "explanationTr": "Doğru — SyntheticEvent, çapraz tarayıcı normalleştirme sağlar ve etkinliklerden sonra havuza geri döner."
       },
       {
         "optionText": "React uses addEventListener directly on each DOM node for performance.",
         "isCorrect": false,
-        "explanation": "React uses event delegation — one listener at the root, not one per element. This is more efficient for dynamic lists and reduces memory use."
+        "explanation": "React uses event delegation — one listener at the root, not one per element. This is more efficient for dynamic lists and reduces memory use.",
+        "optionTextTr": "React, performans için her DOM node'una addEventListener doğrudan ekler.",
+        "explanationTr": "React, bireysel DOM node'larına değil; event delegation kullanır."
       },
       {
         "optionText": "React events are identical to native DOM events — no wrapping or normalisation.",
         "isCorrect": false,
-        "explanation": "React wraps native events in SyntheticEvent, normalising cross-browser differences. The API looks similar but is not the native event object."
+        "explanation": "React wraps native events in SyntheticEvent, normalising cross-browser differences. The API looks similar but is not the native event object.",
+        "optionTextTr": "React olayları yerel DOM olaylarıyla özdeştir — sarmalama veya normalleştirme yok.",
+        "explanationTr": "React SyntheticEvent'ler, tarayıcılar arasında normalleştirilmiş davranış sağlar."
       },
       {
         "optionText": "Events must be handled in class components — function components cannot attach event handlers.",
         "isCorrect": false,
-        "explanation": "Function components attach handlers via JSX props (onClick={handleClick}) just like class components. Hooks replaced lifecycle-based event logic."
+        "explanation": "Function components attach handlers via JSX props (onClick={handleClick}) just like class components. Hooks replaced lifecycle-based event logic.",
+        "optionTextTr": "Olaylar yalnızca class bileşenlerde işlenebilir — function bileşenler olay alamaz.",
+        "explanationTr": "Function bileşenler olay dinleyicileri tam olarak destekler."
       }
     ]
   },
@@ -1072,22 +1400,30 @@
       {
         "optionText": "Inside useEffect with an empty dependency array for mount-only fetches — or use React Query/SWR for data fetching with caching.",
         "isCorrect": true,
-        "explanation": "Correct — in Next.js App Router, async Server Components are the preferred place. In client components, useEffect or a data-fetching library handles it."
+        "explanation": "Correct — in Next.js App Router, async Server Components are the preferred place. In client components, useEffect or a data-fetching library handles it.",
+        "optionTextTr": "Yalnızca mount fetch için boş bağımlılık dizisiyle useEffect içinde.",
+        "explanationTr": "Doğru — bu deyimsel React yaklaşımıdır; veri çekme, cleanup ve bağımlılık yönetimi için useEffect kullanılır."
       },
       {
         "optionText": "Directly in the component body outside any hook — it runs before render.",
         "isCorrect": false,
-        "explanation": "Fetching in the component body runs on every render and can't be cleaned up. useEffect is the correct place for side effects like data fetching."
+        "explanation": "Fetching in the component body runs on every render and can't be cleaned up. useEffect is the correct place for side effects like data fetching.",
+        "optionTextTr": "Herhangi bir hook dışında, bileşen gövdesinde doğrudan.",
+        "explanationTr": "Bileşen gövdesinde doğrudan fetch, her render'da gerçekleşir — sonsuz döngüye yol açar."
       },
       {
         "optionText": "Inside the JSX return statement so data loads while the UI renders.",
         "isCorrect": false,
-        "explanation": "The render/return must be synchronous. Side effects like fetching belong in useEffect or async Server Components, not inside JSX."
+        "explanation": "The render/return must be synchronous. Side effects like fetching belong in useEffect or async Server Components, not inside JSX.",
+        "optionTextTr": "JSX return ifadesinin içinde, UI render olurken veri yüklensin.",
+        "explanationTr": "JSX ifadeler içinde async işlem yapılamaz — yan etkiler useEffect'e aittir."
       },
       {
         "optionText": "In a Redux reducer — reducers handle all external data including API responses.",
         "isCorrect": false,
-        "explanation": "Reducers must be pure and synchronous — no side effects. API calls go in thunks, sagas, or React Query, not reducers."
+        "explanation": "Reducers must be pure and synchronous — no side effects. API calls go in thunks, sagas, or React Query, not reducers.",
+        "optionTextTr": "Reducer içinde — reducer'lar harici veri de dahil tüm verileri işler.",
+        "explanationTr": "Reducer'lar saf senkron fonksiyonlar olmalıdır — async işlem yapamaz."
       }
     ]
   },
@@ -1098,22 +1434,30 @@
       {
         "optionText": "Controlled: value in React state, updated via onChange. Uncontrolled: value in the DOM, read via ref on demand.",
         "isCorrect": true,
-        "explanation": "Correct — controlled inputs are predictable and easy to validate; uncontrolled are simpler for file inputs or integrating third-party DOM libraries."
+        "explanation": "Correct — controlled inputs are predictable and easy to validate; uncontrolled are simpler for file inputs or integrating third-party DOM libraries.",
+        "optionTextTr": "Controlled: değer React state'te, onChange ile güncellenir. Uncontrolled: değer DOM'da, ref ile okunur.",
+        "explanationTr": "Doğru — controlled daha tahmin edilebilirdir; uncontrolled dosya girdileri ve performans kritik formlar için kullanışlıdır."
       },
       {
         "optionText": "Controlled components use Redux; uncontrolled components use local state.",
         "isCorrect": false,
-        "explanation": "Both terms are about where form input value lives: React state (controlled) vs DOM (uncontrolled). Redux is unrelated to this distinction."
+        "explanation": "Both terms are about where form input value lives: React state (controlled) vs DOM (uncontrolled). Redux is unrelated to this distinction.",
+        "optionTextTr": "Controlled Redux kullanır; uncontrolled local state kullanır.",
+        "explanationTr": "Bu ayrım Redux kullanımıyla ilgili değil — form değerinin nerede saklandığıyla ilgilidir."
       },
       {
         "optionText": "Uncontrolled components cannot be validated — only controlled ones support validation.",
         "isCorrect": false,
-        "explanation": "Uncontrolled components can be validated on submit by reading ref.current.value. Controlled components validate on every keystroke."
+        "explanation": "Uncontrolled components can be validated on submit by reading ref.current.value. Controlled components validate on every keystroke.",
+        "optionTextTr": "Uncontrolled bileşenler validate edilemez — yalnızca controlled olanlar validate edilebilir.",
+        "explanationTr": "Her ikisi de validate edilebilir — controlled validation daha kolaydır."
       },
       {
         "optionText": "Controlled = class components; uncontrolled = function components.",
         "isCorrect": false,
-        "explanation": "Both patterns work in both component types. The distinction is about value management (state vs DOM ref), not component type."
+        "explanation": "Both patterns work in both component types. The distinction is about value management (state vs DOM ref), not component type.",
+        "optionTextTr": "Controlled = class bileşenler; uncontrolled = function bileşenler.",
+        "explanationTr": "Her iki bileşen türü de controlled veya uncontrolled form girişleri uygulayabilir."
       }
     ]
   },
@@ -1124,22 +1468,30 @@
       {
         "optionText": "Return null from the component — React renders nothing while keeping the component mounted and its lifecycle active.",
         "isCorrect": true,
-        "explanation": "Correct — null renders no DOM output. The component still mounts/unmounts normally. For performance, use React.memo to skip re-renders when props haven't changed."
+        "explanation": "Correct — null renders no DOM output. The component still mounts/unmounts normally. For performance, use React.memo to skip re-renders when props haven't changed.",
+        "optionTextTr": "Bileşenden null döndürün — React lifecycle'ı çalıştırmaya devam ederken hiçbir şey render etmez.",
+        "explanationTr": "Doğru — null döndürmek, koşullu render için en temiz yoldur."
       },
       {
         "optionText": "Set display: none via inline style — this prevents the component from rendering.",
         "isCorrect": false,
-        "explanation": "display: none hides the element visually but it still renders and exists in the DOM. Returning null skips rendering entirely."
+        "explanation": "display: none hides the element visually but it still renders and exists in the DOM. Returning null skips rendering entirely.",
+        "optionTextTr": "Inline style ile display: none ayarlayın — bileşenin render olmasını engeller.",
+        "explanationTr": "display: none bileşeni gizler ama mount'u durdurmaz ve DOM'dan kaldırmaz."
       },
       {
         "optionText": "Call stopPropagation() on the component to prevent its render from bubbling up.",
         "isCorrect": false,
-        "explanation": "stopPropagation prevents event bubbling — it has no effect on rendering. Return null or use React.memo to prevent renders."
+        "explanation": "stopPropagation prevents event bubbling — it has no effect on rendering. Return null or use React.memo to prevent renders.",
+        "optionTextTr": "Render yayılmasını önlemek için bileşende stopPropagation() çağırın.",
+        "explanationTr": "stopPropagation() olaylarla ilgilidir — bileşen render'ıyla değil."
       },
       {
         "optionText": "Use shouldComponentUpdate returning false — this works in both class and function components.",
         "isCorrect": false,
-        "explanation": "shouldComponentUpdate is class-component only. Function components use React.memo for render skipping. Returning null from render also stops output."
+        "explanation": "shouldComponentUpdate is class-component only. Function components use React.memo for render skipping. Returning null from render also stops output.",
+        "optionTextTr": "shouldComponentUpdate false döndürerek — bu hem class hem function bileşenlerde çalışır.",
+        "explanationTr": "shouldComponentUpdate, yalnızca class bileşenlerde çalışır; function bileşenler için React.memo kullanılır."
       }
     ]
   },
@@ -1150,22 +1502,30 @@
       {
         "optionText": "Call e.preventDefault() on the SyntheticEvent — e.g. in onSubmit to stop a form from reloading the page.",
         "isCorrect": true,
-        "explanation": "Correct — React's SyntheticEvent supports preventDefault() just like native events. Always use it over returning false (which doesn't work in React)."
+        "explanation": "Correct — React's SyntheticEvent supports preventDefault() just like native events. Always use it over returning false (which doesn't work in React).",
+        "optionTextTr": "SyntheticEvent üzerinde e.preventDefault() çağırın — ör. form gönderiminde varsayılan tarayıcı davranışını önlemek için onSubmit.",
+        "explanationTr": "Doğru — React SyntheticEvent'leri tarayıcılar genelinde normalleştirilmiş preventDefault() sunar."
       },
       {
         "optionText": "Return false from the event handler — React recognises this as 'prevent default'.",
         "isCorrect": false,
-        "explanation": "Returning false prevents default in jQuery and plain HTML but NOT in React. You must call e.preventDefault() explicitly."
+        "explanation": "Returning false prevents default in jQuery and plain HTML but NOT in React. You must call e.preventDefault() explicitly.",
+        "optionTextTr": "Event handler'dan false döndürün — React bunu 'preventDefault' olarak tanır.",
+        "explanationTr": "React'te handler'dan false döndürmek preventDefault yapmaz — açıkça çağrılmalıdır."
       },
       {
         "optionText": "Use e.stopPropagation() — this prevents the default browser action.",
         "isCorrect": false,
-        "explanation": "stopPropagation stops the event from bubbling to parent handlers. preventDefault stops the browser's default action. They are separate methods."
+        "explanation": "stopPropagation stops the event from bubbling to parent handlers. preventDefault stops the browser's default action. They are separate methods.",
+        "optionTextTr": "e.stopPropagation() kullanın — bu varsayılan tarayıcı davranışını önler.",
+        "explanationTr": "stopPropagation, event yayılmasını durdurur — varsayılan davranışı değil."
       },
       {
         "optionText": "Add the passive: false option to addEventListener before attaching the handler.",
         "isCorrect": false,
-        "explanation": "passive: false is for addEventListener in vanilla JS. In React, event handlers are set via JSX props — call e.preventDefault() inside the handler."
+        "explanation": "passive: false is for addEventListener in vanilla JS. In React, event handlers are set via JSX props — call e.preventDefault() inside the handler.",
+        "optionTextTr": "addEventListener'a passive: false seçeneği ekleyin.",
+        "explanationTr": "passive özelliği doğrudan eklenmiş dinleyiciler içindir — React SyntheticEvent'ler için değil."
       }
     ]
   },
@@ -1176,22 +1536,30 @@
       {
         "optionText": "Spread syntax — spreads props onto a component (<Button {...props} />) or merges objects; rest syntax collects remaining props.",
         "isCorrect": true,
-        "explanation": "Correct — spread props forward all properties from an object. Rest collects remaining props: function Card({ title, ...rest }) lets you pass remaining props to a child."
+        "explanation": "Correct — spread props forward all properties from an object. Rest collects remaining props: function Card({ title, ...rest }) lets you pass remaining props to a child.",
+        "optionTextTr": "Spread sözdizimi — prop'ları bileşene yayar: <Button {...props} /> veya dizileri birleştirir.",
+        "explanationTr": "Doğru — bileşen prop'larını dağıtmak için kullanışlıdır ama gereğinden fazla prop geçilmemesine dikkat edilmeli."
       },
       {
         "optionText": "An async operator indicating that the following expression returns a Promise.",
         "isCorrect": false,
-        "explanation": "Async operations use async/await keywords. The ... operator is spread/rest syntax — it has nothing to do with Promises."
+        "explanation": "Async operations use async/await keywords. The ... operator is spread/rest syntax — it has nothing to do with Promises.",
+        "optionTextTr": "Aşağıdaki ifadenin Promise döndüreceğini belirten async operatörü.",
+        "explanationTr": "... await ile ilişkili değildir — async operatör değildir."
       },
       {
         "optionText": "A JSX comment shorthand — equivalent to {/* */}.",
         "isCorrect": false,
-        "explanation": "JSX comments use {/* */}. The spread ... operator is for copying properties into objects or JSX props."
+        "explanation": "JSX comments use {/* */}. The spread ... operator is for copying properties into objects or JSX props.",
+        "optionTextTr": "JSX yorum kısaltması — {/* */} ile eşdeğer.",
+        "explanationTr": "Bu yorum sözdizimi değil — spread operatörüdür."
       },
       {
         "optionText": "An optional chaining operator that safely accesses nested properties.",
         "isCorrect": false,
-        "explanation": "Optional chaining uses ?. (two characters). The spread/rest operator uses ... (three dots) and is for object/array spreading."
+        "explanation": "Optional chaining uses ?. (two characters). The spread/rest operator uses ... (three dots) and is for object/array spreading.",
+        "optionTextTr": "İç içe özelliklere güvenle erişen optional chaining operatörü.",
+        "explanationTr": "Optional chaining ?. sözdizimini kullanır, ... değil."
       }
     ]
   },
@@ -1202,22 +1570,30 @@
       {
         "optionText": "Functions that take a component and return an enhanced component — a pattern for reusing logic across components (largely replaced by hooks).",
         "isCorrect": true,
-        "explanation": "Correct — HOCs like withAuth(Component) or connect() wrap components to add behaviour. Custom hooks are now preferred for logic reuse as they're simpler and composable."
+        "explanation": "Correct — HOCs like withAuth(Component) or connect() wrap components to add behaviour. Custom hooks are now preferred for logic reuse as they're simpler and composable.",
+        "optionTextTr": "Bir bileşen alıp, genellikle ek prop veya davranış ekleyerek, geliştirilmiş bileşen döndüren fonksiyon.",
+        "explanationTr": "Doğru — HOC'lar cross-cutting concerns için kullanışlıdır; hook'ların yaygınlaşmasıyla artık daha az kullanılıyor."
       },
       {
         "optionText": "Components that render other components as children — the render prop pattern.",
         "isCorrect": false,
-        "explanation": "Render props are another reuse pattern. HOCs are specifically functions that take a component and return a new (wrapped) component."
+        "explanation": "Render props are another reuse pattern. HOCs are specifically functions that take a component and return a new (wrapped) component.",
+        "optionTextTr": "Children'ı child olarak render eden bileşenler — render prop deseni.",
+        "explanationTr": "Bu render prop desenini tanımlar — HOC değil."
       },
       {
         "optionText": "Class components that extend PureComponent instead of Component.",
         "isCorrect": false,
-        "explanation": "PureComponent adds shouldComponentUpdate. HOCs are a wrapping pattern — they're independent of class vs function component type."
+        "explanation": "PureComponent adds shouldComponentUpdate. HOCs are a wrapping pattern — they're independent of class vs function component type.",
+        "optionTextTr": "PureComponent yerine Component'i genişleten class bileşenler.",
+        "explanationTr": "Bu class hiyerarşisini tanımlar — HOC kavramı değil."
       },
       {
         "optionText": "Components at the top of the component tree that manage global state.",
         "isCorrect": false,
-        "explanation": "Top-level state managers use Context or Redux providers. HOCs are a code-reuse pattern wrapping any component, not a architectural position."
+        "explanation": "Top-level state managers use Context or Redux providers. HOCs are a code-reuse pattern wrapping any component, not a architectural position.",
+        "optionTextTr": "Global state yöneten, bileşen ağacının tepesindeki bileşenler.",
+        "explanationTr": "Bu root veya provider bileşenleri tanımlar — HOC değil."
       }
     ]
   },
@@ -1228,22 +1604,30 @@
       {
         "optionText": "useRef persists the same ref object across renders; createRef creates a new ref every render — so createRef in function components is wasteful.",
         "isCorrect": true,
-        "explanation": "Correct — use useRef in function components. createRef is for class components (created once in constructor). In function components, createRef recreates on every render."
+        "explanation": "Correct — use useRef in function components. createRef is for class components (created once in constructor). In function components, createRef recreates on every render.",
+        "optionTextTr": "useRef, render'lar arasında aynı ref nesnesini korur; createRef her render'da yeni nesne oluşturur.",
+        "explanationTr": "Doğru — bu nedenle createRef function bileşenlerde render başına yeni ref oluşturur; useRef kullanılmalıdır."
       },
       {
         "optionText": "createRef is for DOM nodes; useRef is for storing arbitrary values.",
         "isCorrect": false,
-        "explanation": "Both can reference DOM nodes and store arbitrary values. The difference is lifetime: useRef persists, createRef is recreated each render."
+        "explanation": "Both can reference DOM nodes and store arbitrary values. The difference is lifetime: useRef persists, createRef is recreated each render.",
+        "optionTextTr": "createRef DOM node'ları için; useRef keyfi değerler için.",
+        "explanationTr": "Her ikisi de DOM node'ları ve keyfi değerler için kullanılabilir — temel fark kalıcılıktır."
       },
       {
         "optionText": "useRef triggers a re-render when .current changes; createRef does not.",
         "isCorrect": false,
-        "explanation": "Neither triggers a re-render on .current change — that's the point of refs. If you need reactive updates, use useState instead."
+        "explanation": "Neither triggers a re-render on .current change — that's the point of refs. If you need reactive updates, use useState instead.",
+        "optionTextTr": "useRef, .current değiştiğinde yeniden render tetikler; createRef tetiklemez.",
+        "explanationTr": "Tam tersi doğrudur — useRef yeniden render tetiklemez; bu onun state'ten farkıdır."
       },
       {
         "optionText": "They are identical — createRef is just the older name for useRef.",
         "isCorrect": false,
-        "explanation": "They behave differently in function components. createRef is recreated on every render; useRef returns the same object throughout the component's lifetime."
+        "explanation": "They behave differently in function components. createRef is recreated on every render; useRef returns the same object throughout the component's lifetime.",
+        "optionTextTr": "Bunlar özdeştir — createRef, useRef'in eski adıdır.",
+        "explanationTr": "Bunlar farklıdır: createRef her render'da yeni nesne, useRef aynı nesneyi döndürür."
       }
     ]
   },
@@ -1254,22 +1638,30 @@
       {
         "optionText": "Class components that do a shallow prop/state comparison in shouldComponentUpdate — skipping re-renders if nothing changed. Equivalent to React.memo for function components.",
         "isCorrect": true,
-        "explanation": "Correct — PureComponent is the class equivalent of wrapping a function component in React.memo. Both do shallow comparison — deep objects may still cause unexpected renders."
+        "explanation": "Correct — PureComponent is the class equivalent of wrapping a function component in React.memo. Both do shallow comparison — deep objects may still cause unexpected renders.",
+        "optionTextTr": "shouldComponentUpdate'te shallow prop/state karşılaştırması yapan class bileşenler — gereksiz yeniden render'ları önler.",
+        "explanationTr": "Doğru — function bileşenlerde eşdeğeri React.memo'dur."
       },
       {
         "optionText": "Components that have no state — they only render based on props.",
         "isCorrect": false,
-        "explanation": "Stateless components are presentational components. PureComponent is specifically about the shallow comparison optimisation in shouldComponentUpdate."
+        "explanation": "Stateless components are presentational components. PureComponent is specifically about the shallow comparison optimisation in shouldComponentUpdate.",
+        "optionTextTr": "State'siz bileşenler — yalnızca prop'lara dayalı render ederler.",
+        "explanationTr": "Saf bileşenler (Pure Component) state tutabilir; ayrım shallow comparison optimizasyonundadır."
       },
       {
         "optionText": "Components written without JSX — using pure React.createElement calls.",
         "isCorrect": false,
-        "explanation": "Using createElement instead of JSX is possible but unrelated to PureComponent. Pure in this context means pure function (same input = same output)."
+        "explanation": "Using createElement instead of JSX is possible but unrelated to PureComponent. Pure in this context means pure function (same input = same output).",
+        "optionTextTr": "JSX olmadan saf React.createElement çağrılarıyla yazılmış bileşenler.",
+        "explanationTr": "Bu JSX kullanımını tanımlar — Pure Component değil."
       },
       {
         "optionText": "Server Components in Next.js that have no client-side interactivity.",
         "isCorrect": false,
-        "explanation": "React Server Components are a Next.js App Router feature. PureComponent is a class component optimisation from legacy React."
+        "explanation": "React Server Components are a Next.js App Router feature. PureComponent is a class component optimisation from legacy React.",
+        "optionTextTr": "Client tarafı interaktivite olmayan Next.js Server Component'leri.",
+        "explanationTr": "Server Component'ler Pure Component tanımını karşılamaz."
       }
     ]
   },
@@ -1280,22 +1672,30 @@
       {
         "optionText": "Mounting is when React creates the component's elements and inserts them into the real DOM for the first time — useEffect([]) runs after this.",
         "isCorrect": true,
-        "explanation": "Correct — on mount, React runs the component function, creates DOM nodes, and fires useEffect callbacks with empty deps. Unmounting removes the component and runs cleanup."
+        "explanation": "Correct — on mount, React runs the component function, creates DOM nodes, and fires useEffect callbacks with empty deps. Unmounting removes the component and runs cleanup.",
+        "optionTextTr": "Mounting, React'in bileşenin elementlerini oluşturup DOM'a ilk kez eklediği zamandır.",
+        "explanationTr": "Doğru — componentDidMount veya mount'ta useEffect çalışma anıdır."
       },
       {
         "optionText": "Mounting means attaching event listeners to a component's DOM nodes.",
         "isCorrect": false,
-        "explanation": "Event listeners are managed by React's delegation system, not per-component mounting. Mounting refers to the first DOM insertion of a component."
+        "explanation": "Event listeners are managed by React's delegation system, not per-component mounting. Mounting refers to the first DOM insertion of a component.",
+        "optionTextTr": "Mounting, bileşenin DOM node'larına event listener eklemek anlamına gelir.",
+        "explanationTr": "Event listener eklemek mounting'in yan etkisi olabilir ama mounting'in tanımı değildir."
       },
       {
         "optionText": "A component is mounted when it receives its first props from a parent.",
         "isCorrect": false,
-        "explanation": "Mounting is specifically about DOM insertion, not prop receipt. A component mounts when React inserts it into the DOM for the first time."
+        "explanation": "Mounting is specifically about DOM insertion, not prop receipt. A component mounts when React inserts it into the DOM for the first time.",
+        "optionTextTr": "Bileşen, ebeveynden ilk prop'larını aldığında mount'lanmış olur.",
+        "explanationTr": "Mounting, prop'lar hakkında değil; bileşenin DOM'a eklenmesiyle ilgilidir."
       },
       {
         "optionText": "Mounting is the process of bundling a component into the production build.",
         "isCorrect": false,
-        "explanation": "Bundling is a build-time process. Mounting is a runtime concept — the lifecycle phase when React first renders a component into the DOM."
+        "explanation": "Bundling is a build-time process. Mounting is a runtime concept — the lifecycle phase when React first renders a component into the DOM.",
+        "optionTextTr": "Mounting, bileşeni production bundle'a paketleme sürecidir.",
+        "explanationTr": "Bu build sürecini tanımlar — component lifecycle değil."
       }
     ]
   },
@@ -1306,22 +1706,30 @@
       {
         "optionText": "A runtime type-checking library for component props — logs warnings in development when wrong types are passed. Superseded by TypeScript.",
         "isCorrect": true,
-        "explanation": "Correct — import PropTypes from 'prop-types'. They catch type mismatches in development with console warnings. TypeScript provides compile-time checking and is preferred for new projects."
+        "explanation": "Correct — import PropTypes from 'prop-types'. They catch type mismatches in development with console warnings. TypeScript provides compile-time checking and is preferred for new projects.",
+        "optionTextTr": "Bileşen prop'ları için çalışma zamanı tip denetimi kütüphanesi — geliştirme modunda uyarılar kaydeder.",
+        "explanationTr": "Doğru — TypeScript yaygınlaştıkça PropTypes daha az kullanılıyor ama hâlâ JS projelerinde değerlidir."
       },
       {
         "optionText": "TypeScript types applied to component props — the same as an interface definition.",
         "isCorrect": false,
-        "explanation": "TypeScript interfaces/types are compile-time checks. PropTypes is a separate library for runtime validation — they can be used together."
+        "explanation": "TypeScript interfaces/types are compile-time checks. PropTypes is a separate library for runtime validation — they can be used together.",
+        "optionTextTr": "Bileşen prop'larına uygulanan TypeScript tipleri — interface ile aynı.",
+        "explanationTr": "PropTypes ve TypeScript farklıdır: PropTypes runtime çalışır; TypeScript compile-time'da çalışır."
       },
       {
         "optionText": "A way to set default values for props when none are provided.",
         "isCorrect": false,
-        "explanation": "Default values use defaultProps or destructuring defaults. PropTypes validates the type of received props, not provides defaults."
+        "explanation": "Default values use defaultProps or destructuring defaults. PropTypes validates the type of received props, not provides defaults.",
+        "optionTextTr": "Prop sağlanmadığında varsayılan değer ayarlama yöntemi.",
+        "explanationTr": "Bu defaultProps'u tanımlar — PropTypes değil."
       },
       {
         "optionText": "A Redux action type declaration system for type-safe dispatching.",
         "isCorrect": false,
-        "explanation": "Redux action types are string constants or createSlice types. PropTypes validates React component prop shapes — it's unrelated to Redux."
+        "explanation": "Redux action types are string constants or createSlice types. PropTypes validates React component prop shapes — it's unrelated to Redux.",
+        "optionTextTr": "Tip güvenli dispatch için Redux action tip bildirimi sistemi.",
+        "explanationTr": "Bu Redux Toolkit'teki action tip desenlerini tanımlar — PropTypes değil."
       }
     ]
   }

@@ -6,22 +6,30 @@
       {
         "optionText": "Functions starting with 'use' that let function components access React features like state, effects, refs, and context without class components.",
         "isCorrect": true,
-        "explanation": "Correct — hooks were introduced in React 16.8 and follow two rules: call at top level, call only from React functions."
+        "explanation": "Correct — hooks were introduced in React 16.8 and follow two rules: call at top level, call only from React functions.",
+        "optionTextTr": "'use' ile başlayan ve function component'lerin state, yan etki, ref, context ve diğer React özelliklerine erişmesini sağlayan fonksiyonlar.",
+        "explanationTr": "Doğru — hook'lar React'in API'sinin bir parçasıdır; üçüncü taraf eklenti veya HTML özelliği değil."
       },
       {
         "optionText": "Lifecycle methods that replace componentDidMount and componentDidUpdate in class components.",
         "isCorrect": false,
-        "explanation": "Hooks are for function components — they replace class components, not just lifecycle methods."
+        "explanation": "Hooks are for function components — they replace class components, not just lifecycle methods.",
+        "optionTextTr": "componentDidMount ve componentDidUpdate'in yerini alan lifecycle metodları.",
+        "explanationTr": "Hook'lar lifecycle metodlarının yerini almaz — function component'lerin benzer davranışı ifade etmesinin farklı bir yoludur."
       },
       {
         "optionText": "Third-party plugins that extend React with additional functionality.",
         "isCorrect": false,
-        "explanation": "Hooks are a core React feature, not third-party plugins."
+        "explanation": "Hooks are a core React feature, not third-party plugins.",
+        "optionTextTr": "React'i ek işlevsellikle genişleten üçüncü taraf eklentiler.",
+        "explanationTr": "Hook'lar React çekirdeğinin bir parçasıdır — üçüncü taraf eklentiler değil."
       },
       {
         "optionText": "Special HTML attributes that hook into browser events like onclick and onchange.",
         "isCorrect": false,
-        "explanation": "HTML event attributes are unrelated to React Hooks — hooks are JavaScript functions that tap into React's internal state system."
+        "explanation": "HTML event attributes are unrelated to React Hooks — hooks are JavaScript functions that tap into React's internal state system.",
+        "optionTextTr": "onclick gibi tarayıcı olaylarına bağlanan özel HTML özellikler.",
+        "explanationTr": "Bunlar DOM olay özelliklerini tanımlar — React hook'larının tamamen farklı bir kavramıdır."
       }
     ]
   },
@@ -32,22 +40,30 @@
       {
         "optionText": "A hook that declares a state variable and returns the current value plus a setter function. Calling the setter schedules a re-render.",
         "isCorrect": true,
-        "explanation": "Correct — always use the function form of the setter (setCount(c => c + 1)) when new state depends on previous state."
+        "explanation": "Correct — always use the function form of the setter (setCount(c => c + 1)) when new state depends on previous state.",
+        "optionTextTr": "Bir state değişkeni bildiren ve mevcut değeri ile güncelleyici fonksiyonu döndüren hook.",
+        "explanationTr": "Doğru — yeniden render, güncelleyici çağrıldığında başlar; her render kendi state anlık görüntüsüne sahiptir."
       },
       {
         "optionText": "A hook that stores state in the browser's localStorage for persistence across page refreshes.",
         "isCorrect": false,
-        "explanation": "useState keeps state in React's memory — for persistence, you need to sync to localStorage separately."
+        "explanation": "useState keeps state in React's memory — for persistence, you need to sync to localStorage separately.",
+        "optionTextTr": "Kalıcılık için state'i tarayıcının localStorage'ında saklayan hook.",
+        "explanationTr": "useState state'i bellekte tutar — localStorage'a erişmez; bunu için özel hook veya useEffect gerekir."
       },
       {
         "optionText": "A hook that provides access to global Redux state without a store setup.",
         "isCorrect": false,
-        "explanation": "useState manages local component state — for global state use Redux, Zustand, or Context."
+        "explanation": "useState manages local component state — for global state use Redux, Zustand, or Context.",
+        "optionTextTr": "Bir store olmadan global Redux state'ine erişim sağlayan hook.",
+        "explanationTr": "Bu useSelector'u tanımlar — useState yerel bileşen state'i içindir."
       },
       {
         "optionText": "A hook that re-renders the component on every state change and all parent state changes.",
         "isCorrect": false,
-        "explanation": "useState only causes the component to re-render when its own state changes, not parent state (unless props change)."
+        "explanation": "useState only causes the component to re-render when its own state changes, not parent state (unless props change).",
+        "optionTextTr": "Her state değişiminde bileşeni yeniden render eden ve aynı zamanda efektler çalıştıran hook.",
+        "explanationTr": "useState yeniden render tetikler ama efekt çalıştırmaz — bunun için useEffect vardır."
       }
     ]
   },
@@ -58,22 +74,30 @@
       {
         "optionText": "Pass an empty dependency array [] as the second argument — the effect runs once on mount and the cleanup runs on unmount.",
         "isCorrect": true,
-        "explanation": "Correct — [] tells React the effect has no dependencies and should not re-run after the initial render."
+        "explanation": "Correct — [] tells React the effect has no dependencies and should not re-run after the initial render.",
+        "optionTextTr": "İkinci argüman olarak boş bağımlılık dizisi [] geçin — efekt yalnızca mount'ta çalışır.",
+        "explanationTr": "Doğru — boş dizi, bağımlılık olmadığı anlamına gelir; efekt yalnızca bileşen ilk render edildiğinde çalışır."
       },
       {
         "optionText": "Call useEffect without a second argument — effects without a dependency array run only once.",
         "isCorrect": false,
-        "explanation": "Without a dependency array, useEffect runs after every render — you must pass [] to run it once."
+        "explanation": "Without a dependency array, useEffect runs after every render — you must pass [] to run it once.",
+        "optionTextTr": "İkinci argüman olmadan useEffect çağırın.",
+        "explanationTr": "İkinci argüman olmadan useEffect her render'dan sonra çalışır — yalnızca bir kez değil."
       },
       {
         "optionText": "Wrap the function in useCallback with an empty array and call it inside useEffect.",
         "isCorrect": false,
-        "explanation": "useCallback memoises a function reference — the key to running an effect once is the [] dependency array."
+        "explanation": "useCallback memoises a function reference — the key to running an effect once is the [] dependency array.",
+        "optionTextTr": "Fonksiyonu boş dizi ile useCallback'e sarın ve içinde çağırın.",
+        "explanationTr": "Bu yöntemi stabilize eder ama useEffect çalışma sıklığını kontrol etmez."
       },
       {
         "optionText": "Use useState to track whether the function has been called, and skip on subsequent renders.",
         "isCorrect": false,
-        "explanation": "That is a workaround — passing [] to useEffect is the correct, built-in solution."
+        "explanation": "That is a workaround — passing [] to useEffect is the correct, built-in solution.",
+        "optionTextTr": "Fonksiyonun çağrılıp çağrılmadığını takip etmek için useState kullanın.",
+        "explanationTr": "Bu işe yarar ama [] bağımlılık dizisi kadar özlü değildir."
       }
     ]
   },
@@ -84,22 +108,30 @@
       {
         "optionText": "Create a ref with useRef(null), attach it to the element via the ref prop, then access the DOM node via ref.current.",
         "isCorrect": true,
-        "explanation": "Correct — React sets ref.current to the DOM node after mount and null on unmount."
+        "explanation": "Correct — React sets ref.current to the DOM node after mount and null on unmount.",
+        "optionTextTr": "useRef(null) ile ref oluşturun, ref özelliğiyle öğeye bağlayın, DOM node'una ref.current üzerinden erişin.",
+        "explanationTr": "Doğru — bu React'in DOM erişimi için önerilen yaklaşımıdır; senkron ve component lifecycle'ına bağlıdır."
       },
       {
         "optionText": "Use document.getElementById() inside a useEffect — this is the recommended approach.",
         "isCorrect": false,
-        "explanation": "Direct DOM queries bypass React's rendering model — useRef is the idiomatic React way to access DOM nodes."
+        "explanation": "Direct DOM queries bypass React's rendering model — useRef is the idiomatic React way to access DOM nodes.",
+        "optionTextTr": "Bir useEffect içinde document.getElementById() kullanın.",
+        "explanationTr": "Bu çalışır ama React deyimsel değildir — useRef, React'te DOM erişimi için daha temiz yoldur."
       },
       {
         "optionText": "Access DOM elements via the event.target property from any event handler.",
         "isCorrect": false,
-        "explanation": "event.target works for the specific element that triggered the event, but useRef is for direct DOM access without waiting for an event."
+        "explanation": "event.target works for the specific element that triggered the event, but useRef is for direct DOM access without waiting for an event.",
+        "optionTextTr": "Herhangi bir olay handler'ından event.target üzerinden DOM öğelerine erişin.",
+        "explanationTr": "event.target, olay işleme için kullanışlıdır ama element referanslarını rastgele depolamak için değil."
       },
       {
         "optionText": "Use useState to store a reference to the DOM node after the component first renders.",
         "isCorrect": false,
-        "explanation": "useState triggers re-renders when updated — useRef stores mutable values without causing re-renders."
+        "explanation": "useState triggers re-renders when updated — useRef stores mutable values without causing re-renders.",
+        "optionTextTr": "DOM node'una referans saklamak için useState kullanın.",
+        "explanationTr": "Bu teknik olarak çalışır ama hatalı: setState gereksiz render'lar tetikler; DOM ref'leri için useRef kullanılır."
       }
     ]
   },
@@ -110,22 +142,30 @@
       {
         "optionText": "Simpler code (no class boilerplate), easier logic reuse via custom hooks, co-location of related logic, and better TypeScript inference.",
         "isCorrect": true,
-        "explanation": "Correct — custom hooks allow sharing stateful logic without HOCs or render props, which were the pre-hooks solutions."
+        "explanation": "Correct — custom hooks allow sharing stateful logic without HOCs or render props, which were the pre-hooks solutions.",
+        "optionTextTr": "Daha basit kod (sınıf boilerplate yok), özel hook'larla kolay mantık yeniden kullanımı, daha iyi test edilebilirlik ve daha küçük bundle boyutları.",
+        "explanationTr": "Doğru — hook'lar, sınıf yaşam döngüsü ve render prop'larının dağıttığı ilgili mantığı konumsal olarak bir araya toplar."
       },
       {
         "optionText": "Hooks make React components render faster by bypassing the virtual DOM.",
         "isCorrect": false,
-        "explanation": "Hooks do not bypass the virtual DOM — they work within React's existing rendering model."
+        "explanation": "Hooks do not bypass the virtual DOM — they work within React's existing rendering model.",
+        "optionTextTr": "Hook'lar, virtual DOM'u atlayarak React bileşenlerini daha hızlı render eder.",
+        "explanationTr": "Hook'lar virtual DOM'u atlamamaz — component rendering optimizasyonu useCallback ve useMemo ile yapılır."
       },
       {
         "optionText": "Hooks allow React components to run on the server without any modifications.",
         "isCorrect": false,
-        "explanation": "Server-side rendering is handled separately — hooks are a component authoring API, not an SSR optimisation."
+        "explanation": "Server-side rendering is handled separately — hooks are a component authoring API, not an SSR optimisation.",
+        "optionTextTr": "Hook'lar, React bileşenlerinin herhangi bir değişiklik yapmadan sunucuda çalışmasını sağlar.",
+        "explanationTr": "Sunucu render desteği, hook'lardan değil; React'in mimarisinden kaynaklanır — bazı hook'lar SSR'da dikkat gerektirir."
       },
       {
         "optionText": "Hooks automatically memoize all computed values to prevent unnecessary re-renders.",
         "isCorrect": false,
-        "explanation": "Memoization requires explicit use of useMemo and useCallback — hooks do not memoize automatically."
+        "explanation": "Memoization requires explicit use of useMemo and useCallback — hooks do not memoize automatically.",
+        "optionTextTr": "Hook'lar, gereksiz hesaplamaları önlemek için tüm hesaplanan değerleri otomatik olarak memoize eder.",
+        "explanationTr": "Hook'lar otomatik memoize etmez — bunun için useMemo ve useCallback açıkça kullanılmalıdır."
       }
     ]
   },
@@ -136,22 +176,30 @@
       {
         "optionText": "A custom hook must start with 'use', can call other hooks internally, and follows hook rules. A normal function cannot call hooks.",
         "isCorrect": true,
-        "explanation": "Correct — the 'use' prefix signals to React (and linters) that hook rules apply — calls other hooks at the top level."
+        "explanation": "Correct — the 'use' prefix signals to React (and linters) that hook rules apply — calls other hooks at the top level.",
+        "optionTextTr": "Özel hook 'use' ile başlamalı, dahili olarak diğer hook'ları çağırabilir ve bileşene özgü değil paylaşılabilir mantık döndürür.",
+        "explanationTr": "Doğru — bu ayrım, React'in hook'ları özel fonksiyonlarda tanımasını sağlar ve hook kurallarını zorunlu kılar."
       },
       {
         "optionText": "Custom hooks are defined outside the component; normal functions are defined inside.",
         "isCorrect": false,
-        "explanation": "Both can be defined outside components — the distinction is the 'use' prefix and the ability to call other hooks."
+        "explanation": "Both can be defined outside components — the distinction is the 'use' prefix and the ability to call other hooks.",
+        "optionTextTr": "Özel hook'lar bileşen dışında tanımlanır; normal fonksiyonlar içinde tanımlanır.",
+        "explanationTr": "Normal fonksiyonlar da bileşen dışında tanımlanabilir — asıl fark 'use' ön eki ve hook'lar çağırabilme yeteneğidir."
       },
       {
         "optionText": "Custom hooks automatically re-render the component when called; normal functions do not.",
         "isCorrect": false,
-        "explanation": "A custom hook re-renders the component only if it contains hooks like useState or useContext that trigger renders."
+        "explanation": "A custom hook re-renders the component only if it contains hooks like useState or useContext that trigger renders.",
+        "optionTextTr": "Özel hook'lar çağrıldığında otomatik olarak bileşeni yeniden render eder; normal fonksiyonlar etmez.",
+        "explanationTr": "Özel hook yalnızca içinde state veya context güncellendiğinde re-render tetikler — her çağrıda değil."
       },
       {
         "optionText": "Custom hooks require a return statement; normal functions do not.",
         "isCorrect": false,
-        "explanation": "Both can return anything or nothing — the distinction is hook rule compliance, not syntax."
+        "explanation": "Both can return anything or nothing — the distinction is hook rule compliance, not syntax.",
+        "optionTextTr": "Özel hook'lar return ifadesi gerektirirken; normal fonksiyonlar gerektirmez.",
+        "explanationTr": "Her iki fonksiyon türü de return ifadesi ile veya olmadan yazılabilir."
       }
     ]
   },
@@ -162,22 +210,30 @@
       {
         "optionText": "No — each component that calls a hook gets its own independent state. Hooks don't create shared singletons.",
         "isCorrect": true,
-        "explanation": "Correct — to share state between components, lift it up or use Context/external stores like Zustand."
+        "explanation": "Correct — to share state between components, lift it up or use Context/external stores like Zustand.",
+        "optionTextTr": "Hayır — her hook çağıran bileşen kendi bağımsız state anlık görüntüsünü alır.",
+        "explanationTr": "Doğru — özel hook'lar mantığı paylaşır, state'i değil; paylaşılan state için context veya harici store kullanılır."
       },
       {
         "optionText": "Yes — state is shared between all components that use the same custom hook.",
         "isCorrect": false,
-        "explanation": "Each hook call creates isolated state — hooks are a per-instance mechanism."
+        "explanation": "Each hook call creates isolated state — hooks are a per-instance mechanism.",
+        "optionTextTr": "Evet — aynı özel hook'u kullanan tüm bileşenler arasında state paylaşılır.",
+        "explanationTr": "Bu yanlıştır — her hook çağrısı bağımsız olarak izole edilmiş state üretir."
       },
       {
         "optionText": "It depends on whether the hook is exported as a singleton from a module.",
         "isCorrect": false,
-        "explanation": "How a hook is exported is irrelevant — each invocation of a hook creates independent state."
+        "explanation": "How a hook is exported is irrelevant — each invocation of a hook creates independent state.",
+        "optionTextTr": "Hook'un singleton olarak modülden export edilip edilmediğine bağlıdır.",
+        "explanationTr": "Export şekli hook state izolasyonunu etkilemez — her çağrı bağımsız state alır."
       },
       {
         "optionText": "State is shared only if both components are in the same component tree.",
         "isCorrect": false,
-        "explanation": "Being in the same tree does not cause hook state to be shared — each component call creates its own state."
+        "explanation": "Being in the same tree does not cause hook state to be shared — each component call creates its own state.",
+        "optionTextTr": "State yalnızca her iki bileşen aynı bileşen ağacındaysa paylaşılır.",
+        "explanationTr": "Ağaç konumu hook state paylaşımını etkilemez — context veya dış store gerektirir."
       }
     ]
   },
@@ -188,22 +244,30 @@
       {
         "optionText": "When a value (theme, auth, locale) needs to be available to many components at different nesting levels without prop drilling. Create context, wrap with Provider, consume with useContext.",
         "isCorrect": true,
-        "explanation": "Correct — useContext is React's dependency injection — avoid using it for frequently-changing values as it re-renders all consumers."
+        "explanation": "Correct — useContext is React's dependency injection — avoid using it for frequently-changing values as it re-renders all consumers.",
+        "optionTextTr": "Bir değerin (tema, auth, locale) prop drilling olmadan bileşen ağacında birden fazla bileşene erişilebilir olması gerektiğinde.",
+        "explanationTr": "Doğru — context, çok sık değişmeyen veriler için prop drilling'in güzel alternatifidir."
       },
       {
         "optionText": "Whenever you need to share state between sibling components that have no common parent.",
         "isCorrect": false,
-        "explanation": "Sibling components can share state via a common ancestor — context is for deep trees, not specifically siblings."
+        "explanation": "Sibling components can share state via a common ancestor — context is for deep trees, not specifically siblings.",
+        "optionTextTr": "Sibling bileşenler arasında state paylaşmanız gerektiğinde.",
+        "explanationTr": "Sibling state paylaşımı için state'i ortak parent'a taşıyın — context bunu yapabilir ama genellikle aşırıya kaçmaktır."
       },
       {
         "optionText": "useContext replaces Redux for all state management needs.",
         "isCorrect": false,
-        "explanation": "Context re-renders all consumers on any value change — for complex/frequent state updates, Redux or Zustand scale better."
+        "explanation": "Context re-renders all consumers on any value change — for complex/frequent state updates, Redux or Zustand scale better.",
+        "optionTextTr": "useContext tüm state yönetimi ihtiyaçları için Redux'un yerini alır.",
+        "explanationTr": "useContext yüzeysel state için uygundur ama karmaşık state güncellemeleri için Redux veya Zustand'a kıyasla sınırlıdır."
       },
       {
         "optionText": "useContext allows you to access browser APIs like localStorage and navigator.",
         "isCorrect": false,
-        "explanation": "Browser APIs are accessed directly — context is for sharing React state through the component tree."
+        "explanation": "Browser APIs are accessed directly — context is for sharing React state through the component tree.",
+        "optionTextTr": "useContext, localStorage gibi tarayıcı API'lerine erişmenizi sağlar.",
+        "explanationTr": "useContext React context'ine erişir — tarayıcı API'leri useEffect veya özel hook'lar aracılığıyla doğrudan çağrılır."
       }
     ]
   },
@@ -214,22 +278,30 @@
       {
         "optionText": "useState for simple independent values; useReducer for complex state with multiple sub-values, inter-dependent transitions, or when the next state depends on the action type.",
         "isCorrect": true,
-        "explanation": "Correct — useReducer also centralises update logic, making each transition independently testable."
+        "explanation": "Correct — useReducer also centralises update logic, making each transition independently testable.",
+        "optionTextTr": "Basit bağımsız değerler için useState; karmaşık state mantığı, çok sayıda alt değer veya birbirine bağlı güncellemeler için useReducer.",
+        "explanationTr": "Doğru — geçiş noktası genellikle birden fazla ilgili state parçasını veya önceki state'e bağlı güncellemeleri yönetirken belirir."
       },
       {
         "optionText": "useReducer requires Redux — useState is the built-in React alternative.",
         "isCorrect": false,
-        "explanation": "useReducer is built into React and does not require Redux — it is a simpler, local version of the Redux pattern."
+        "explanation": "useReducer is built into React and does not require Redux — it is a simpler, local version of the Redux pattern.",
+        "optionTextTr": "useReducer, Redux gerektirir — useState ise yerleşik React alternatifidir.",
+        "explanationTr": "useReducer tamamen React'e özgüdür ve Redux gerektirmez."
       },
       {
         "optionText": "useState is for primitive values; useReducer is for objects and arrays.",
         "isCorrect": false,
-        "explanation": "useState handles objects and arrays fine — the distinction is complexity and transition logic, not data type."
+        "explanation": "useState handles objects and arrays fine — the distinction is complexity and transition logic, not data type.",
+        "optionTextTr": "useState primitive değerler için; useReducer nesneler ve diziler için.",
+        "explanationTr": "Her ikisi de herhangi bir JS değerini saklayabilir — ayrım veri türü değil; mantık karmaşıklığıdır."
       },
       {
         "optionText": "useReducer is deprecated in React 18 — always use useState with the functional updater pattern.",
         "isCorrect": false,
-        "explanation": "useReducer is not deprecated — it is actively recommended for complex state logic."
+        "explanation": "useReducer is not deprecated — it is actively recommended for complex state logic.",
+        "optionTextTr": "useReducer, React 18'de kullanımdan kalkmıştır.",
+        "explanationTr": "useReducer React 18'de kullanımdan kalkmamıştır — hâlâ önerilip aktif olarak kullanılmaktadır."
       }
     ]
   },
@@ -240,22 +312,30 @@
       {
         "optionText": "Storing DOM node references for direct manipulation (focus, measure), and storing mutable values that survive renders without triggering re-renders (interval IDs, previous values).",
         "isCorrect": true,
-        "explanation": "Correct — unlike useState, mutating ref.current does not schedule a re-render."
+        "explanation": "Correct — unlike useState, mutating ref.current does not schedule a re-render.",
+        "optionTextTr": "Doğrudan manipülasyon için DOM node referansları depolama (focus, ölçüm, animasyon) ve render tetiklemeden değerlerin kalıcı tutulması.",
+        "explanationTr": "Doğru — useRef iki farklı amaç için kullanılır: DOM ref'leri ve render döngüsünün dışında render'lara karşı dirençli değerlerin saklanması."
       },
       {
         "optionText": "useRef is used exclusively for accessing DOM elements — state values should use useState.",
         "isCorrect": false,
-        "explanation": "useRef is also used for any mutable value that should persist across renders without causing re-renders."
+        "explanation": "useRef is also used for any mutable value that should persist across renders without causing re-renders.",
+        "optionTextTr": "useRef yalnızca DOM öğelerine erişmek için kullanılır.",
+        "explanationTr": "useRef aynı zamanda zamanlayıcı ID, önceki değer veya bayrak gibi render dışı değerler depolamak için de kullanılır."
       },
       {
         "optionText": "useRef persists data to localStorage so it survives page refreshes.",
         "isCorrect": false,
-        "explanation": "useRef stores values in React's memory for the component's lifetime — it does not persist beyond the component unmounting."
+        "explanation": "useRef stores values in React's memory for the component's lifetime — it does not persist beyond the component unmounting.",
+        "optionTextTr": "useRef, sayfa yenilemelerinden varlığını sürdürmesi için veriyi localStorage'a kaydeder.",
+        "explanationTr": "useRef yalnızca bellekte kalıcıdır — localStorage gibi depolamaya yazma yapan API değildir."
       },
       {
         "optionText": "useRef memoises expensive calculations between renders, like useMemo.",
         "isCorrect": false,
-        "explanation": "useRef stores a mutable value — useMemo caches computed values and re-runs when dependencies change."
+        "explanation": "useRef stores a mutable value — useMemo caches computed values and re-runs when dependencies change.",
+        "optionTextTr": "useRef, useMemo gibi render'lar arasında pahalı hesaplamaları memoize eder.",
+        "explanationTr": "Bu useMemo'yu tanımlar — useRef hesaplamayı memoize etmez, bir değer referansını render'lar arasında saklar."
       }
     ]
   },
@@ -266,22 +346,30 @@
       {
         "optionText": "useState triggers a re-render when updated; useRef does not. Both persist values across renders, but only useState drives UI updates.",
         "isCorrect": true,
-        "explanation": "Correct — this is why useRef is ideal for storing timer IDs or previous values that shouldn't cause renders."
+        "explanation": "Correct — this is why useRef is ideal for storing timer IDs or previous values that shouldn't cause renders.",
+        "optionTextTr": "useState güncellendiğinde re-render tetikler; useRef tetiklemez. Her ikisi de render'lar arasında değerlerini korur.",
+        "explanationTr": "Doğru — bu temel ayrım, hangisini kullanacağınızı belirler: UI'ı güncellemeniz mi gerekiyor, yoksa yalnızca değer saklamak mı?"
       },
       {
         "optionText": "useState is for strings and numbers; useRef is for objects and DOM elements.",
         "isCorrect": false,
-        "explanation": "Both handle any value type — the distinction is re-render behaviour, not data type."
+        "explanation": "Both handle any value type — the distinction is re-render behaviour, not data type.",
+        "optionTextTr": "useState string ve sayılar için; useRef nesneler ve DOM için.",
+        "explanationTr": "Her iki hook da herhangi bir değer türünü tutabilir — ayrım veri türü değil; re-render davranışıdır."
       },
       {
         "optionText": "useRef is a newer hook that replaces useState in React 18.",
         "isCorrect": false,
-        "explanation": "Both coexist in React 18 with distinct purposes — useRef does not replace useState."
+        "explanation": "Both coexist in React 18 with distinct purposes — useRef does not replace useState.",
+        "optionTextTr": "useRef, React 18'de useState'in yerini alan yeni bir hook'tur.",
+        "explanationTr": "useRef, useState'in yerini almaz — her ikisi de React 18'de farklı amaçlar için mevcuttur."
       },
       {
         "optionText": "useState values are synchronous; useRef values are updated asynchronously.",
         "isCorrect": false,
-        "explanation": "Both are synchronous in terms of mutation — state updates are batched for rendering, not asynchronous updates."
+        "explanation": "Both are synchronous in terms of mutation — state updates are batched for rendering, not asynchronous updates.",
+        "optionTextTr": "useState değerleri senkrondur; useRef değerleri asenkron olarak güncellenir.",
+        "explanationTr": "useState güncellemeleri asenkrondur (render sonrası); useRef güncellemeleri hemen uygulanır — tam tersi."
       }
     ]
   },
@@ -292,22 +380,30 @@
       {
         "optionText": "When a computation is genuinely expensive (filtering thousands of items, complex maths) and runs on frequent re-renders — memoize to avoid redundant work.",
         "isCorrect": true,
-        "explanation": "Correct — don't reach for useMemo by default; profile first. Most computations are fast enough without it."
+        "explanation": "Correct — don't reach for useMemo by default; profile first. Most computations are fast enough without it.",
+        "optionTextTr": "Hesaplama gerçekten pahalı olduğunda (binlerce öğeyi filtrelemek, karmaşık veri dönüştürme), çok sık render olan büyük bir component tree'de.",
+        "explanationTr": "Doğru — useMemo profilden sonra uygulanmalıdır; önceden optimizasyon genellikle okunabilirliği gereksiz yere zorlaştırır."
       },
       {
         "optionText": "Always wrap every computed value in useMemo to make the component as fast as possible.",
         "isCorrect": false,
-        "explanation": "useMemo has overhead (memory, comparison cost) — over-using it can make performance worse."
+        "explanation": "useMemo has overhead (memory, comparison cost) — over-using it can make performance worse.",
+        "optionTextTr": "Her hesaplanan değeri performans için her zaman useMemo'ya sarın.",
+        "explanationTr": "Her yerde useMemo kullanmak memoize etmenin ek yükünü ekler — yalnızca ölçülen bottleneck'lere uygulanmalıdır."
       },
       {
         "optionText": "useMemo is for memoising function references to prevent child re-renders — that's its primary use.",
         "isCorrect": false,
-        "explanation": "Memoising functions is useCallback — useMemo is for memoising computed values."
+        "explanation": "Memoising functions is useCallback — useMemo is for memoising computed values.",
+        "optionTextTr": "useMemo, child re-render'larını önlemek için fonksiyon referanslarını memoize etmek içindir.",
+        "explanationTr": "Bu useCallback'i tanımlar — useMemo hesaplanan değerleri memoize eder, fonksiyon referanslarını değil."
       },
       {
         "optionText": "useMemo prevents re-renders caused by parent component state changes.",
         "isCorrect": false,
-        "explanation": "useMemo memoises a value but doesn't prevent re-renders — wrap the component in React.memo to skip renders."
+        "explanation": "useMemo memoises a value but doesn't prevent re-renders — wrap the component in React.memo to skip renders.",
+        "optionTextTr": "useMemo, parent bileşen state değişiminden kaynaklanan re-render'ları önler.",
+        "explanationTr": "useMemo, child re-render'larını değil; pahalı hesaplamaları memoize eder. Child re-render'ları için React.memo kullanılır."
       }
     ]
   },
@@ -318,22 +414,30 @@
       {
         "optionText": "Stabilising function references passed to React.memo-wrapped children, and dependencies in useEffect or other hooks where a new function reference would trigger unnecessary re-runs.",
         "isCorrect": true,
-        "explanation": "Correct — without useCallback, a new function is created every render, potentially causing memoized children to re-render."
+        "explanation": "Correct — without useCallback, a new function is created every render, potentially causing memoized children to re-render.",
+        "optionTextTr": "React.memo ile sarmalanmış child bileşenlere geçirilen fonksiyon referanslarını stabilize etmek ve sabit bağımlılık dizisi gerektiren hook'lara callback geçirmek.",
+        "explanationTr": "Doğru — useCallback yalnızca tüketici referansı karşılaştırdığında (React.memo veya bağımlılık dizisi) fayda sağlar."
       },
       {
         "optionText": "useCallback is used to cache the result of asynchronous API calls between renders.",
         "isCorrect": false,
-        "explanation": "Caching API results is handled by TanStack Query or useMemo — useCallback memoises function references."
+        "explanation": "Caching API results is handled by TanStack Query or useMemo — useCallback memoises function references.",
+        "optionTextTr": "useCallback, asenkron API çağrılarının sonucunu önbelleğe almak için kullanılır.",
+        "explanationTr": "Bu useMemo veya veri çekme kütüphanelerini tanımlar — useCallback fonksiyon referansını memoize eder, asenkron sonucu değil."
       },
       {
         "optionText": "useCallback prevents the function from being called more than once during a render cycle.",
         "isCorrect": false,
-        "explanation": "useCallback does not limit how many times a function is called — it stabilises the reference."
+        "explanation": "useCallback does not limit how many times a function is called — it stabilises the reference.",
+        "optionTextTr": "useCallback, fonksiyonun birden fazla kez çağrılmasını önler.",
+        "explanationTr": "useCallback çağrı frekansını kontrol etmez — yalnızca fonksiyon referansını stabil tutar."
       },
       {
         "optionText": "useCallback is used to debounce event handlers in React components.",
         "isCorrect": false,
-        "explanation": "Debouncing requires a timer (usually in a useRef or useMemo) — useCallback just memoises the function reference."
+        "explanation": "Debouncing requires a timer (usually in a useRef or useMemo) — useCallback just memoises the function reference.",
+        "optionTextTr": "useCallback, React component'lerinde event handler'ları debounce etmek için kullanılır.",
+        "explanationTr": "Debouncing için lodash.debounce veya özel hook kullanılır — useCallback debounce uygulamaz."
       }
     ]
   },
@@ -344,22 +448,30 @@
       {
         "optionText": "React.memo wraps a component to skip re-rendering if props haven't changed; useMemo caches a computed value inside a component.",
         "isCorrect": true,
-        "explanation": "Correct — React.memo is a component-level optimisation; useMemo is a value-level optimisation within a component."
+        "explanation": "Correct — React.memo is a component-level optimisation; useMemo is a value-level optimisation within a component.",
+        "optionTextTr": "React.memo, props değişmediyse component'in yeniden render edilmesini atlar; useMemo, bağımlılıklar değişmediğinde hesaplanan bir değeri memoize eder.",
+        "explanationTr": "Doğru — React.memo component'leri, useMemo ise değerleri memoize eder."
       },
       {
         "optionText": "React.memo is for class components; useMemo is for function components.",
         "isCorrect": false,
-        "explanation": "Both apply to function components — React.memo wraps the component; useMemo is a hook inside it."
+        "explanation": "Both apply to function components — React.memo wraps the component; useMemo is a hook inside it.",
+        "optionTextTr": "React.memo class component'ler için; useMemo function component'ler için.",
+        "explanationTr": "Her ikisi de function component'ler içindir — React.memo bileşeni sarar; useMemo değeri memoize eder."
       },
       {
         "optionText": "They are identical — React.memo is the JSX syntax for useMemo.",
         "isCorrect": false,
-        "explanation": "They are completely different tools — React.memo prevents component re-renders; useMemo caches computed values."
+        "explanation": "They are completely different tools — React.memo prevents component re-renders; useMemo caches computed values.",
+        "optionTextTr": "Bunlar özdeştir — React.memo, useMemo'nun JSX sözdizimi.",
+        "explanationTr": "Bunlar farklıdır: React.memo component wrapper'ı, useMemo ise hook'tur."
       },
       {
         "optionText": "useMemo is deprecated in React 18 in favour of React.memo.",
         "isCorrect": false,
-        "explanation": "Both are actively used in React 18 — they solve different problems and are not interchangeable."
+        "explanation": "Both are actively used in React 18 — they solve different problems and are not interchangeable.",
+        "optionTextTr": "useMemo, React 18'de React.memo lehine kullanımdan kaldırılmıştır.",
+        "explanationTr": "Her ikisi de React 18'de aktif olarak kullanılmakta ve önerilmektedir."
       }
     ]
   },
@@ -370,22 +482,30 @@
       {
         "optionText": "Largely yes — custom hooks share stateful logic more cleanly without wrapper nesting. But HOCs still have valid uses (e.g. third-party library integrations, code splitting boundaries).",
         "isCorrect": true,
-        "explanation": "Correct — hooks reduce 'wrapper hell' from deeply nested HOCs and render props, but don't completely obsolete HOCs."
+        "explanation": "Correct — hooks reduce 'wrapper hell' from deeply nested HOCs and render props, but don't completely obsolete HOCs.",
+        "optionTextTr": "Büyük ölçüde evet — özel hook'lar, ağaç karmaşıklığı (HOC nesting, render prop callback hell) olmadan state mantığını daha temiz paylaşır.",
+        "explanationTr": "Doğru — hook'lar genellikle HOC veya render prop'lardan daha basit bir çözüm sunar; eski kod tabanlarında hâlâ HOC kullanılıyor."
       },
       {
         "optionText": "No — hooks, HOCs, and render props solve completely different problems and cannot replace each other.",
         "isCorrect": false,
-        "explanation": "Hooks do overlap significantly with HOCs and render props for stateful logic sharing — custom hooks are now the preferred approach."
+        "explanation": "Hooks do overlap significantly with HOCs and render props for stateful logic sharing — custom hooks are now the preferred approach.",
+        "optionTextTr": "Hayır — hook'lar, HOC'lar ve render prop'lar tamamen farklı sorunları çözer.",
+        "explanationTr": "Örtüşen kullanım durumları mevcuttur — hook'lar genellikle HOC ve render prop'lara daha temiz bir alternatif sunar."
       },
       {
         "optionText": "Yes completely — HOCs and render props are deprecated as of React 16.8.",
         "isCorrect": false,
-        "explanation": "HOCs and render props are not deprecated — they remain valid patterns, though hooks are preferred for logic sharing."
+        "explanation": "HOCs and render props are not deprecated — they remain valid patterns, though hooks are preferred for logic sharing.",
+        "optionTextTr": "Evet tamamen — HOC'lar ve render prop'lar React 18'de kullanımdan kaldırılmıştır.",
+        "explanationTr": "HOC'lar ve render prop'lar kullanımdan kaldırılmamıştır — hook'lar ise çoğu durumda tercih edilen yoldur."
       },
       {
         "optionText": "Only render props are replaced by hooks — HOCs are still the recommended pattern for cross-cutting concerns.",
         "isCorrect": false,
-        "explanation": "Hooks largely replace both render props and HOCs for logic sharing, though HOCs retain some valid use cases."
+        "explanation": "Hooks largely replace both render props and HOCs for logic sharing, though HOCs retain some valid use cases.",
+        "optionTextTr": "Yalnızca render prop'lar hook'larla değiştirilir — HOC'lar hâlâ önerilir.",
+        "explanationTr": "Her ikisi de genellikle özel hook'larla değiştirilebilir; HOC'lar hâlâ geçerlidir ama artık birincil pattern değil."
       }
     ]
   },
@@ -396,22 +516,30 @@
       {
         "optionText": "Almost — the only missing hook is getSnapshotBeforeUpdate and (until React 19) error boundaries. All other class lifecycle functionality has hook equivalents.",
         "isCorrect": true,
-        "explanation": "Correct — error boundaries still require class components (or third-party wrappers like react-error-boundary) as of React 18."
+        "explanation": "Correct — error boundaries still require class components (or third-party wrappers like react-error-boundary) as of React 18.",
+        "optionTextTr": "Neredeyse — tek eksik hook getSnapshotBeforeUpdate ve (kararlı olarak) componentDidCatch. Error Boundary için class component hâlâ gereklidir.",
+        "explanationTr": "Doğru — pratikte bu nadiren sınırlayıcıdır; Error Boundary, kütüphane sarmalayıcısı veya tek sınıf bileşeniyle çözülür."
       },
       {
         "optionText": "Yes completely — there is no reason to ever use a class component with hooks available.",
         "isCorrect": false,
-        "explanation": "Error boundaries are a notable exception — they still require class components in React 18."
+        "explanation": "Error boundaries are a notable exception — they still require class components in React 18.",
+        "optionTextTr": "Evet tamamen — class component kullanmak için hiçbir neden yoktur.",
+        "explanationTr": "Hâlâ class gerektiren iki gap mevcuttur: getSnapshotBeforeUpdate ve Error Boundary."
       },
       {
         "optionText": "No — class components are fundamentally more capable and hooks are a simplified subset.",
         "isCorrect": false,
-        "explanation": "Hooks cover virtually all class component use cases — the React team recommends hooks for new code."
+        "explanation": "Hooks cover virtually all class component use cases — the React team recommends hooks for new code.",
+        "optionTextTr": "Hayır — class component'ler temelden daha yeteneklidir.",
+        "explanationTr": "Pratikte hook'lar class özelliklerin neredeyse tamamını kapsar; sınırlı durum gerçekten marjinaldir."
       },
       {
         "optionText": "Hooks only cover useState and lifecycle methods — complex patterns still require class components.",
         "isCorrect": false,
-        "explanation": "Hooks cover state, effects, context, refs, reducers, memoization, and more — far beyond just state and lifecycle."
+        "explanation": "Hooks cover state, effects, context, refs, reducers, memoization, and more — far beyond just state and lifecycle.",
+        "optionTextTr": "Hook'lar yalnızca useState ve lifecycle metodları için — karmaşık desenler class gerektirir.",
+        "explanationTr": "Hook'lar context, reducer, ref, memoize ve özel mantık da dahil olmak üzere geniş yetenekler sunar."
       }
     ]
   },
@@ -422,22 +550,30 @@
       {
         "optionText": "componentDidMount (empty deps), componentDidUpdate (specific deps), and componentWillUnmount (cleanup function).",
         "isCorrect": true,
-        "explanation": "Correct — useEffect unifies three lifecycle methods. The cleanup function returned by useEffect runs on unmount and before each re-run."
+        "explanation": "Correct — useEffect unifies three lifecycle methods. The cleanup function returned by useEffect runs on unmount and before each re-run.",
+        "optionTextTr": "componentDidMount (boş bağımlılık), componentDidUpdate (belirli bağımlılıklar), componentWillUnmount (cleanup fonksiyonu).",
+        "explanationTr": "Doğru — tek useEffect, bağımlılık dizisi ve cleanup return değeriyle bu üç lifecycle'ı ifade eder."
       },
       {
         "optionText": "Only componentDidMount — useEffect cannot replicate update or unmount behaviour.",
         "isCorrect": false,
-        "explanation": "useEffect handles all three: mount (empty deps []), update (specific deps), and unmount (return cleanup). It's a unified API."
+        "explanation": "useEffect handles all three: mount (empty deps []), update (specific deps), and unmount (return cleanup). It's a unified API.",
+        "optionTextTr": "Yalnızca componentDidMount — useEffect update veya unmount'u çoğaltamaz.",
+        "explanationTr": "useEffect, tüm üç lifecycle davranışını modelleyebilir."
       },
       {
         "optionText": "shouldComponentUpdate — useEffect controls when a component re-renders.",
         "isCorrect": false,
-        "explanation": "shouldComponentUpdate controls re-render optimisation, which is handled by React.memo and useMemo — not useEffect."
+        "explanation": "shouldComponentUpdate controls re-render optimisation, which is handled by React.memo and useMemo — not useEffect.",
+        "optionTextTr": "shouldComponentUpdate — useEffect ne zaman yeniden render edileceğini kontrol eder.",
+        "explanationTr": "shouldComponentUpdate, render optimizasyonuyla ilgilidir; React.memo ve hook'larda useCallback/useMemo ile ele alınır."
       },
       {
         "optionText": "componentWillMount and componentWillReceiveProps — the deprecated lifecycle methods.",
         "isCorrect": false,
-        "explanation": "Those deprecated methods are not replaced by useEffect. useEffect handles mount, update, and unmount — not the legacy willMount/willReceiveProps patterns."
+        "explanation": "Those deprecated methods are not replaced by useEffect. useEffect handles mount, update, and unmount — not the legacy willMount/willReceiveProps patterns.",
+        "optionTextTr": "componentWillMount ve componentWillReceiveProps — kullanımdan kalkan lifecycle'lar.",
+        "explanationTr": "Bunlar kullanımdan kaldırılmıştır ve useEffect onların yerini almaz — özellikle componentWillMount artık önerilmez."
       }
     ]
   },
@@ -448,22 +584,30 @@
       {
         "optionText": "React groups multiple state updates from the same event into one re-render — React 18 extends this to async and setTimeout too.",
         "isCorrect": true,
-        "explanation": "Correct — before React 18, batching only happened in event handlers. React 18's automatic batching covers promises, setTimeout, and native events, reducing renders."
+        "explanation": "Correct — before React 18, batching only happened in event handlers. React 18's automatic batching covers promises, setTimeout, and native events, reducing renders.",
+        "optionTextTr": "React, performansı iyileştirmek için aynı olaydan gelen birden fazla state güncellemesini tek bir re-render içinde gruplandırır.",
+        "explanationTr": "Doğru — React 18, setTimeout ve native event handler'larda da otomatik batching getirdi."
       },
       {
         "optionText": "Batching splits a large component into smaller chunks to improve code-splitting performance.",
         "isCorrect": false,
-        "explanation": "That describes code splitting with React.lazy/Suspense. Batching is about grouping multiple state updates into a single render."
+        "explanation": "That describes code splitting with React.lazy/Suspense. Batching is about grouping multiple state updates into a single render.",
+        "optionTextTr": "Batching, büyük bir bileşeni performans için daha küçük parçalara böler.",
+        "explanationTr": "Bu code splitting veya lazy loading'i tanımlar — batching state güncellemelerini gruplandırmakla ilgilidir."
       },
       {
         "optionText": "Batching means React pre-fetches data for the next render before the current one completes.",
         "isCorrect": false,
-        "explanation": "Pre-fetching is unrelated to batching. Batching is the consolidation of multiple setState calls into one re-render cycle."
+        "explanation": "Pre-fetching is unrelated to batching. Batching is the consolidation of multiple setState calls into one re-render cycle.",
+        "optionTextTr": "Batching, React'in bir sonraki render için veriyi önceden getirmesi anlamına gelir.",
+        "explanationTr": "Bu veri prefetching'i tanımlar — batching render döngüsünü optimize eder."
       },
       {
         "optionText": "Batching only works with class components — functional components with hooks render immediately on each setState.",
         "isCorrect": false,
-        "explanation": "Batching works with hooks. React 18 made automatic batching universal — it applies to useState, useReducer, and any state update."
+        "explanation": "Batching works with hooks. React 18 made automatic batching universal — it applies to useState, useReducer, and any state update.",
+        "optionTextTr": "Batching yalnızca class bileşenlerinde çalışır.",
+        "explanationTr": "Batching hem class hem de function bileşenlerinde çalışır; React 18 onu async bağlamlara genişletti."
       }
     ]
   },
@@ -474,22 +618,30 @@
       {
         "optionText": "No — state updates are asynchronous. The new value is not available until the next render.",
         "isCorrect": true,
-        "explanation": "Correct — calling setState schedules a re-render. Reading state immediately after calling the setter still returns the old value. Use the functional update form for derived state."
+        "explanation": "Correct — calling setState schedules a re-render. Reading state immediately after calling the setter still returns the old value. Use the functional update form for derived state.",
+        "optionTextTr": "Hayır — state güncellemeleri asenkrondur. Yeni değer bir sonraki render'a kadar mevcut değildir.",
+        "explanationTr": "Doğru — güncellemeden hemen sonra state'i okumak stale değer döndürür; yeni değeri kullanmak için fonksiyonel güncelleme veya useEffect kullanın."
       },
       {
         "optionText": "Yes — useState updates synchronously, so you can read the new value immediately after calling the setter.",
         "isCorrect": false,
-        "explanation": "State updates are not synchronous. The setter schedules a re-render — the new value is only available after React re-renders the component."
+        "explanation": "State updates are not synchronous. The setter schedules a re-render — the new value is only available after React re-renders the component.",
+        "optionTextTr": "Evet — useState senkron olarak güncellenir, yeni değeri hemen okuyabilirsiniz.",
+        "explanationTr": "useState güncellemeleri asenkrondur — güncelleme çağrısından sonra hemen yeni state'i okumak doğru değer döndürmez."
       },
       {
         "optionText": "It depends — useState is synchronous in event handlers but asynchronous in useEffect.",
         "isCorrect": false,
-        "explanation": "useState is always asynchronous regardless of where the setter is called. The update is batched and applied on the next render."
+        "explanation": "useState is always asynchronous regardless of where the setter is called. The update is batched and applied on the next render.",
+        "optionTextTr": "Bağlıdır — useState event handler'larda senkron, başka yerlerde asenkron.",
+        "explanationTr": "useState güncellemeleri asenkrondur — bağlam farketmez; yeni değer her zaman bir sonraki render'da gelir."
       },
       {
         "optionText": "useState updates immediately only when used with the functional update form: setState(prev => prev + 1).",
         "isCorrect": false,
-        "explanation": "The functional form ensures you use the latest state as input, but the update itself is still asynchronous — not immediately available."
+        "explanation": "The functional form ensures you use the latest state as input, but the update itself is still asynchronous — not immediately available.",
+        "optionTextTr": "useState yalnızca fonksiyonel güncelleme sözdizimi kullanıldığında hemen güncellenir.",
+        "explanationTr": "Fonksiyonel güncelleme en güncel state'i garantiler ama onu senkronize yapmaz."
       }
     ]
   },
@@ -500,22 +652,30 @@
       {
         "optionText": "Spread the previous state and override only the changed fields: setState(prev => ({ ...prev, address: { ...prev.address, city: 'London' } }))",
         "isCorrect": true,
-        "explanation": "Correct — useState does not deep-merge like class component setState. You must spread all levels to avoid overwriting sibling fields."
+        "explanation": "Correct — useState does not deep-merge like class component setState. You must spread all levels to avoid overwriting sibling fields.",
+        "optionTextTr": "Önceki state'i spread edip yalnızca değiştirilen alanları override edin: setState(prev => ({ ...prev, address: { ...prev.address, city: 'London' } })).",
+        "explanationTr": "Doğru — React state'ini asla doğrudan mutate etmeyin; her zaman immutable güncellemeler üretin."
       },
       {
         "optionText": "Call setState multiple times, once for each field — React will merge them automatically.",
         "isCorrect": false,
-        "explanation": "useState replaces state entirely on each call — it doesn't merge. Multiple calls will batch but each replaces the whole state object."
+        "explanation": "useState replaces state entirely on each call — it doesn't merge. Multiple calls will batch but each replaces the whole state object.",
+        "optionTextTr": "setState'i birden fazla kez çağırın, her alan için bir kez.",
+        "explanationTr": "Birden fazla setState, tek yeniden render içinde batch'lenir; ancak her çağrı tam state'i spread etmeden önceki alanları atabilir."
       },
       {
         "optionText": "Use Object.assign(prevState, { city: 'London' }) — this mutates the object in place safely.",
         "isCorrect": false,
-        "explanation": "Mutating state directly is forbidden in React. Always create a new object reference; React uses reference equality to detect changes."
+        "explanation": "Mutating state directly is forbidden in React. Always create a new object reference; React uses reference equality to detect changes.",
+        "optionTextTr": "Object.assign(prevState, { city: 'London' }) kullanın — bu prevState'i mutate eder.",
+        "explanationTr": "State'i doğrudan mutate etmek React anti-pattern'idir ve state tutarsızlığına yol açar."
       },
       {
         "optionText": "Use useReducer instead — useState cannot handle nested objects.",
         "isCorrect": false,
-        "explanation": "useState can handle nested objects — you just need to spread correctly. useReducer helps with complex update logic but isn't required for nested state."
+        "explanation": "useState can handle nested objects — you just need to spread correctly. useReducer helps with complex update logic but isn't required for nested state.",
+        "optionTextTr": "useState iç içe nesneleri kaldıramaz — yerine useReducer kullanın.",
+        "explanationTr": "useState iç içe state'i yönetebilir — spread ile immutable güncelleme her zaman çalışır."
       }
     ]
   },
@@ -526,22 +686,30 @@
       {
         "optionText": "Yes — useCallback adds memoisation overhead and only helps when the child is wrapped in React.memo; overusing it can hurt performance.",
         "isCorrect": true,
-        "explanation": "Correct — useCallback is a premature optimisation if the child re-renders anyway. Profile first; add useCallback only when measurable benefit exists."
+        "explanation": "Correct — useCallback is a premature optimisation if the child re-renders anyway. Profile first; add useCallback only when measurable benefit exists.",
+        "optionTextTr": "Evet — useCallback, memoize etmenin ek yükünü ekler ve yalnızca tüketici referans karşılaştırdığında (React.memo, deps dizisi) yardımcı olur.",
+        "explanationTr": "Doğru — profilleme olmadan useCallback uygulamak genellikle nötr veya hafif negatif performans etkisi yaratır."
       },
       {
         "optionText": "No — useCallback always improves performance by preventing unnecessary function recreation.",
         "isCorrect": false,
-        "explanation": "useCallback itself has a cost: comparing dependencies on every render. If the wrapped function is cheap, useCallback adds overhead without benefit."
+        "explanation": "useCallback itself has a cost: comparing dependencies on every render. If the wrapped function is cheap, useCallback adds overhead without benefit.",
+        "optionTextTr": "Hayır — useCallback, gereksiz re-render'ları önleyerek her zaman performansı iyileştirir.",
+        "explanationTr": "useCallback her zaman performansı iyileştirmez — memoize etme ek yükü, sık değişen bağımlılıklarla faydasını geçebilir."
       },
       {
         "optionText": "useCallback can cause memory leaks by holding stale references to DOM nodes.",
         "isCorrect": false,
-        "explanation": "Memory leaks from stale references are a useEffect concern (forgotten cleanup). useCallback memoises functions but doesn't retain DOM nodes."
+        "explanation": "Memory leaks from stale references are a useEffect concern (forgotten cleanup). useCallback memoises functions but doesn't retain DOM nodes.",
+        "optionTextTr": "useCallback, eski referanslar tutarak bellek sızıntısına neden olabilir.",
+        "explanationTr": "Bu teorik bir endişe ama pratikte nadir; sızıntılar genellikle yanlış temizlenmiş efektlerden kaynaklanır."
       },
       {
         "optionText": "useCallback breaks if the dependency array is empty — it must always list its dependencies.",
         "isCorrect": false,
-        "explanation": "An empty dependency array is valid — it memoises the function for the component's lifetime. The linter may warn but it doesn't break."
+        "explanation": "An empty dependency array is valid — it memoises the function for the component's lifetime. The linter may warn but it doesn't break.",
+        "optionTextTr": "useCallback, bağımlılık dizisi boşsa bozulur.",
+        "explanationTr": "Boş bağımlılık dizisi geçerlidir — fonksiyon yalnızca mount'ta oluşturulur ve asla değişmez."
       }
     ]
   },
@@ -552,22 +720,30 @@
       {
         "optionText": "When you need to read or write DOM measurements before the browser paints — to avoid visible layout flicker.",
         "isCorrect": true,
-        "explanation": "Correct — useLayoutEffect fires synchronously after DOM mutations but before paint. Use it for tooltips, scroll restoration, or measuring element sizes."
+        "explanation": "Correct — useLayoutEffect fires synchronously after DOM mutations but before paint. Use it for tooltips, scroll restoration, or measuring element sizes.",
+        "optionTextTr": "Tarayıcı boyamadan önce DOM ölçümlerini okumak veya yazmak gerektiğinde — örn. tooltip konumlandırma, fokus yönetimi.",
+        "explanationTr": "Doğru — useLayoutEffect, useEffect gibi render sonrası ama tarayıcının paint etmesinden önce çalışır, bu sayede görsel titreme önlenir."
       },
       {
         "optionText": "When fetching data — useLayoutEffect is faster than useEffect for API calls.",
         "isCorrect": false,
-        "explanation": "useLayoutEffect blocks painting and should never be used for data fetching. Use useEffect or server-side data loading for async operations."
+        "explanation": "useLayoutEffect blocks painting and should never be used for data fetching. Use useEffect or server-side data loading for async operations.",
+        "optionTextTr": "Veri çekerken — useLayoutEffect, useEffect'ten daha hızlıdır.",
+        "explanationTr": "Veri çekme için useEffect veya özel hook kullanın — useLayoutEffect async işlemi bloklar."
       },
       {
         "optionText": "When you want effects to run only once — useLayoutEffect ignores the dependency array.",
         "isCorrect": false,
-        "explanation": "useLayoutEffect uses the same dependency array API as useEffect. Pass [] for mount-only, specific deps for updates."
+        "explanation": "useLayoutEffect uses the same dependency array API as useEffect. Pass [] for mount-only, specific deps for updates.",
+        "optionTextTr": "Efektlerin yalnızca bir kez çalışmasını istediğinizde — useLayoutEffect bağımlılık dizisini yok sayar.",
+        "explanationTr": "Bu yanlıştır — useLayoutEffect de bağımlılık dizisini dikkate alır."
       },
       {
         "optionText": "Always — useLayoutEffect is a strict replacement for useEffect with better timing.",
         "isCorrect": false,
-        "explanation": "useLayoutEffect blocks the browser paint and can hurt performance. Use it only when visual consistency requires synchronous DOM reads before paint."
+        "explanation": "useLayoutEffect blocks the browser paint and can hurt performance. Use it only when visual consistency requires synchronous DOM reads before paint.",
+        "optionTextTr": "Her zaman — useLayoutEffect, useEffect'in katı bir yerine geçmesidir.",
+        "explanationTr": "useLayoutEffect, DOM tabanlı ölçüm gereken özel senaryolar içindir — genellikle useEffect tercih edilmelidir."
       }
     ]
   },
@@ -578,22 +754,30 @@
       {
         "optionText": "When you need DOM updates to apply synchronously before continuing — e.g. scrolling to a newly added item immediately after adding it.",
         "isCorrect": true,
-        "explanation": "Correct — flushSync opts out of batching for a specific update. Common use cases: third-party DOM libraries, scroll-to-new-item, or animations that depend on immediate state."
+        "explanation": "Correct — flushSync opts out of batching for a specific update. Common use cases: third-party DOM libraries, scroll-to-new-item, or animations that depend on immediate state.",
+        "optionTextTr": "DOM güncellemelerinin okumadan veya harici koda gitmeden önce senkron olarak uygulanması gerektiğinde.",
+        "explanationTr": "Doğru — flushSync, batch'lerin dışına çıkmaya zorlar; dikkatli kullanılmalıdır çünkü performansı etkileyebilir."
       },
       {
         "optionText": "To flush stale cache entries from React Query or SWR.",
         "isCorrect": false,
-        "explanation": "flushSync is a React DOM API for synchronous rendering — it has nothing to do with data cache invalidation in React Query or SWR."
+        "explanation": "flushSync is a React DOM API for synchronous rendering — it has nothing to do with data cache invalidation in React Query or SWR.",
+        "optionTextTr": "React Query veya SWR'den eski cache girişlerini temizlemek için.",
+        "explanationTr": "Bu kütüphane cache yönetimini tanımlar — flushSync state güncellemelerini senkron olarak zorlar."
       },
       {
         "optionText": "flushSync should replace useEffect cleanup to synchronously cancel async operations.",
         "isCorrect": false,
-        "explanation": "Cancelling async operations uses AbortController inside useEffect cleanup. flushSync forces synchronous DOM updates, not async cancellation."
+        "explanation": "Cancelling async operations uses AbortController inside useEffect cleanup. flushSync forces synchronous DOM updates, not async cancellation.",
+        "optionTextTr": "useEffect cleanup'ı senkron iptal etmek için flushSync, useEffect'in yerini almalıdır.",
+        "explanationTr": "flushSync cleanup değil; state güncellemelerini senkronize etmek içindir."
       },
       {
         "optionText": "flushSync is required when updating state in setTimeout — automatic batching doesn't work there.",
         "isCorrect": false,
-        "explanation": "React 18 automatic batching covers setTimeout. flushSync is for the rare case you need synchronous DOM mutation, not to work around batching."
+        "explanation": "React 18 automatic batching covers setTimeout. flushSync is for the rare case you need synchronous DOM mutation, not to work around batching.",
+        "optionTextTr": "setTimeout'ta state güncellemek için flushSync gereklidir.",
+        "explanationTr": "React 18, setTimeout da dahil olmak üzere otomatik batch yapar; senkron güncelleme gerektirmedikçe flushSync gerekmez."
       }
     ]
   },
@@ -604,22 +788,30 @@
       {
         "optionText": "Use a dummy state counter: const [, forceRender] = useReducer(n => n + 1, 0) — call forceRender() to trigger a re-render.",
         "isCorrect": true,
-        "explanation": "Correct — this is the idiomatic hooks pattern for forced re-renders. That said, needing a forced re-render usually indicates a state design problem worth revisiting."
+        "explanation": "Correct — this is the idiomatic hooks pattern for forced re-renders. That said, needing a forced re-render usually indicates a state design problem worth revisiting.",
+        "optionTextTr": "Sahte state sayacı kullanın: const [, forceRender] = useReducer(n => n + 1, 0).",
+        "explanationTr": "Doğru — bu deyimsel yaklaşımdır. Kullanmadan önce re-render'ın gerçekten gerekli olup olmadığını sorgulayın."
       },
       {
         "optionText": "Call this.forceUpdate() — it works in functional components with hooks.",
         "isCorrect": false,
-        "explanation": "this.forceUpdate() is a class component API. Functional components have no this — use a state update to trigger a re-render."
+        "explanation": "this.forceUpdate() is a class component API. Functional components have no this — use a state update to trigger a re-render.",
+        "optionTextTr": "this.forceUpdate() çağırın — functional component'lerde hook ile çalışır.",
+        "explanationTr": "this.forceUpdate() class bileşenlerine özgüdür — function component'lerde mevcut değildir."
       },
       {
         "optionText": "Set a ref to a new value — changing a ref always triggers a re-render.",
         "isCorrect": false,
-        "explanation": "Refs do not trigger re-renders. useRef mutations are invisible to React's rendering system — only state and prop changes cause re-renders."
+        "explanation": "Refs do not trigger re-renders. useRef mutations are invisible to React's rendering system — only state and prop changes cause re-renders.",
+        "optionTextTr": "Bir ref'e yeni değer atayın — ref değiştirmek her zaman re-render tetikler.",
+        "explanationTr": "Ref güncellemeleri re-render tetiklemez — bu useRef'in useState'ten temel farkıdır."
       },
       {
         "optionText": "Use ReactDOM.render() to re-mount the component from the outside.",
         "isCorrect": false,
-        "explanation": "Re-mounting from outside destroys and recreates state. The idiomatic solution is an internal state update, not external re-mounting."
+        "explanation": "Re-mounting from outside destroys and recreates state. The idiomatic solution is an internal state update, not external re-mounting.",
+        "optionTextTr": "ReactDOM.render() ile dışarıdan bileşeni yeniden bağlayın.",
+        "explanationTr": "ReactDOM.render() React 18'de kullanımdan kaldırıldı ve bileşeni yeniden bağlamak, state'i de sıfırlar."
       }
     ]
   },
@@ -630,22 +822,30 @@
       {
         "optionText": "useCallback memoises a function reference; useMemo memoises a computed value. useCallback(fn, deps) === useMemo(() => fn, deps).",
         "isCorrect": true,
-        "explanation": "Correct — use useCallback when passing a stable callback to a memoised child; use useMemo when an expensive calculation should only recompute on specific dep changes."
+        "explanation": "Correct — use useCallback when passing a stable callback to a memoised child; use useMemo when an expensive calculation should only recompute on specific dep changes.",
+        "optionTextTr": "useCallback, fonksiyon referansını memoize eder; useMemo, hesaplanan bir değeri memoize eder — useMemo(() => fn, deps) == useCallback(fn, deps).",
+        "explanationTr": "Doğru — useMemo daha geneldir; useCallback yaygın fonksiyon memoize durumu için okunabilirlik sağlar."
       },
       {
         "optionText": "useMemo is for functions; useCallback is for values — they are the reverse of each other.",
         "isCorrect": false,
-        "explanation": "It's the opposite: useCallback memoises a function; useMemo memoises a value (the result of calling a function)."
+        "explanation": "It's the opposite: useCallback memoises a function; useMemo memoises a value (the result of calling a function).",
+        "optionTextTr": "useMemo fonksiyonlar için; useCallback değerler için.",
+        "explanationTr": "Tam tersi: useCallback fonksiyon referansları, useMemo değerler için kullanılır."
       },
       {
         "optionText": "useCallback works only with event handlers; useMemo works with any computation.",
         "isCorrect": false,
-        "explanation": "useCallback can memoize any function, not just event handlers. The difference is what they return: a function vs a computed value."
+        "explanation": "useCallback can memoize any function, not just event handlers. The difference is what they return: a function vs a computed value.",
+        "optionTextTr": "useCallback yalnızca event handler'larla çalışır; useMemo her şeyle çalışır.",
+        "explanationTr": "useCallback, event handler olmayan fonksiyon referansları dahil her fonksiyon için kullanılabilir."
       },
       {
         "optionText": "They are interchangeable — pick whichever reads more clearly in context.",
         "isCorrect": false,
-        "explanation": "While useCallback(fn, deps) is equivalent to useMemo(() => fn, deps), they signal different intent. Use the one that matches what you're memoising — function or value."
+        "explanation": "While useCallback(fn, deps) is equivalent to useMemo(() => fn, deps), they signal different intent. Use the one that matches what you're memoising — function or value.",
+        "optionTextTr": "Bunlar birbirinin yerine geçebilir — hangisinin daha okunabilir olduğunu seçin.",
+        "explanationTr": "Bunlar birbirinin yerine geçemez — useCallback fonksiyonları, useMemo değerleri memoize eder."
       }
     ]
   },
@@ -656,22 +856,30 @@
       {
         "optionText": "useEffect: side effects & external sync. useMemo: expensive computations. useCallback: stable function references for memoised children.",
         "isCorrect": true,
-        "explanation": "Correct — each has a clear domain. Mixing them (e.g. using useEffect for computation) leads to bugs. Start without memoisation and add useMemo/useCallback only when profiling shows benefit."
+        "explanation": "Correct — each has a clear domain. Mixing them (e.g. using useEffect for computation) leads to bugs. Start without memoisation and add useMemo/useCallback only when profiling shows benefit.",
+        "optionTextTr": "useEffect: yan etkiler ve dış senkronizasyon. useMemo: pahalı hesaplamaları memoize etme. useCallback: fonksiyon referanslarını stabil tutma.",
+        "explanationTr": "Doğru — her birinin farklı amacı vardır; birbirinin yerine geçmek karmaşıklık ve hatalara yol açar."
       },
       {
         "optionText": "All three are interchangeable — use whichever makes the code most readable.",
         "isCorrect": false,
-        "explanation": "They serve distinct purposes. useEffect manages side effects; useMemo and useCallback are optimisation tools. Using them interchangeably causes subtle bugs."
+        "explanation": "They serve distinct purposes. useEffect manages side effects; useMemo and useCallback are optimisation tools. Using them interchangeably causes subtle bugs.",
+        "optionTextTr": "Üçü de birbirinin yerine geçebilir — kodu en okunabilir yapan hangisiyse kullanın.",
+        "explanationTr": "Bunların farklı amaçları vardır ve birbirinin yerine geçemez — her birini doğru kullanın."
       },
       {
         "optionText": "useCallback and useMemo should always be applied to every function and value for best performance.",
         "isCorrect": false,
-        "explanation": "Over-memoising adds overhead from dependency comparisons. Apply useMemo/useCallback only where profiling shows a measurable win."
+        "explanation": "Over-memoising adds overhead from dependency comparisons. Apply useMemo/useCallback only where profiling shows a measurable win.",
+        "optionTextTr": "useCallback ve useMemo her fonksiyon ve değere uygulanmalıdır.",
+        "explanationTr": "Toplu memoize etme, memoize etmenin ek yükü nedeniyle performansı sıklıkla düşürür."
       },
       {
         "optionText": "useEffect replaces useMemo — compute values inside useEffect and store them in state.",
         "isCorrect": false,
-        "explanation": "Storing computed values in state via useEffect causes an extra render cycle. useMemo computes synchronously during render with no extra re-render."
+        "explanation": "Storing computed values in state via useEffect causes an extra render cycle. useMemo computes synchronously during render with no extra re-render.",
+        "optionTextTr": "useEffect, useMemo'nun yerini alır — değerleri useEffect içinde hesaplayın ve state'e depolayın.",
+        "explanationTr": "Türetilen değerleri useEffect aracılığıyla state'e koymak gereksiz re-render'lara yol açar — useMemo kullanın."
       }
     ]
   },
@@ -682,22 +890,30 @@
       {
         "optionText": "Yes — every consumer re-renders on any context value change, even if it uses only part of the value. Split contexts or memoize to fix.",
         "isCorrect": true,
-        "explanation": "Correct — this is the main performance pitfall. Solutions: split into multiple contexts, use memo on consumers, or use a state manager like Zustand that supports fine-grained subscriptions."
+        "explanation": "Correct — this is the main performance pitfall. Solutions: split into multiple contexts, use memo on consumers, or use a state manager like Zustand that supports fine-grained subscriptions.",
+        "optionTextTr": "Evet — herhangi bir context değeri değiştiğinde, değişimin o consumer'ı etkileyip etkilemediğinden bağımsız olarak her consumer yeniden render olur.",
+        "explanationTr": "Doğru — bu context'i sık değişen veriler için yavaş yapabilir; context'i bölmek veya selector hook kullanmak çözümdür."
       },
       {
         "optionText": "No — useContext is optimised internally and only re-renders components that use changed fields.",
         "isCorrect": false,
-        "explanation": "React does not track which fields a consumer reads. Any change to the context value triggers all consumers — field-level granularity must be implemented manually."
+        "explanation": "React does not track which fields a consumer reads. Any change to the context value triggers all consumers — field-level granularity must be implemented manually.",
+        "optionTextTr": "Hayır — useContext dahili olarak optimize edilmiştir ve yalnızca ilgili consumer'ları yeniden render eder.",
+        "explanationTr": "useContext optimizasyon yapmaz — herhangi bir context değişiminde tüm consumer'lar yeniden render edilir."
       },
       {
         "optionText": "useContext causes infinite loops when used inside useEffect.",
         "isCorrect": false,
-        "explanation": "useContext does not inherently cause infinite loops. Adding a context value to useEffect deps is fine as long as the context value is stable (memoised)."
+        "explanation": "useContext does not inherently cause infinite loops. Adding a context value to useEffect deps is fine as long as the context value is stable (memoised).",
+        "optionTextTr": "useContext, useEffect içinde kullanıldığında sonsuz döngülere neden olur.",
+        "explanationTr": "useEffect bağımlılık dizisinde context değeri listelenirse sonsuz döngü oluşabilir; bu useContext'e özgü değil genel bir hook hatasıdır."
       },
       {
         "optionText": "useContext cannot be used in Server Components — it only works in Client Components.",
         "isCorrect": false,
-        "explanation": "While React context requires Client Components in Next.js App Router, this is a framework constraint — not an inherent problem with useContext itself."
+        "explanation": "While React context requires Client Components in Next.js App Router, this is a framework constraint — not an inherent problem with useContext itself.",
+        "optionTextTr": "useContext yalnızca Client Component'lerde çalışır — Server Component'lerde kullanılamaz.",
+        "explanationTr": "Bu doğrudur — Server Component'ler context sağlayamaz veya kullanamaz; bu geçerli bir sınırlamadır."
       }
     ]
   },
@@ -708,22 +924,30 @@
       {
         "optionText": "Use a class component as the boundary (or a library like react-error-boundary), then wrap functional components with it.",
         "isCorrect": true,
-        "explanation": "Correct — there are no error boundary hooks yet. react-error-boundary provides useErrorBoundary() and <ErrorBoundary> wrapper for functional components. In Next.js, error.tsx acts as a boundary."
+        "explanation": "Correct — there are no error boundary hooks yet. react-error-boundary provides useErrorBoundary() and <ErrorBoundary> wrapper for functional components. In Next.js, error.tsx acts as a boundary.",
+        "optionTextTr": "Error Boundary için class bileşen kullanın (veya react-error-boundary gibi kütüphane) ve onu function component'in etrafına sarın.",
+        "explanationTr": "Doğru — Error Boundary hâlâ class bileşeni gerektirir; react-error-boundary, useErrorBoundary hook'unu sunar."
       },
       {
         "optionText": "Use try/catch inside the component body — this is the functional equivalent of Error Boundaries.",
         "isCorrect": false,
-        "explanation": "try/catch cannot catch errors in JSX rendering or child components. Error Boundaries use componentDidCatch which has no hook equivalent."
+        "explanation": "try/catch cannot catch errors in JSX rendering or child components. Error Boundaries use componentDidCatch which has no hook equivalent.",
+        "optionTextTr": "Bileşen gövdesinde try/catch kullanın.",
+        "explanationTr": "try/catch render sırasında throw edilen hataları yakalamaz — Error Boundary için class veya kütüphane gereklidir."
       },
       {
         "optionText": "Wrap the component in useErrorBoundary() from React core — it ships with React 18.",
         "isCorrect": false,
-        "explanation": "useErrorBoundary is from the react-error-boundary library, not React core. React itself still requires class components for error boundary logic."
+        "explanation": "useErrorBoundary is from the react-error-boundary library, not React core. React itself still requires class components for error boundary logic.",
+        "optionTextTr": "React çekirdeğinden useErrorBoundary() kullanın.",
+        "explanationTr": "useErrorBoundary, React çekirdeğinde değil — react-error-boundary kütüphanesinin bir özelliğidir."
       },
       {
         "optionText": "Use the onError prop available on every React component to catch child errors.",
         "isCorrect": false,
-        "explanation": "There is no onError prop on React components. Error boundaries are implemented via class lifecycle methods or the react-error-boundary library."
+        "explanation": "There is no onError prop on React components. Error boundaries are implemented via class lifecycle methods or the react-error-boundary library.",
+        "optionTextTr": "Hataları yakalamak için her React bileşeninde bulunan onError prop'unu kullanın.",
+        "explanationTr": "React bileşenlerinde yerleşik onError prop'u yoktur — Error Boundary class bileşeni veya kütüphane kullanılır."
       }
     ]
   },
@@ -734,22 +958,30 @@
       {
         "optionText": "Technically yes, but it's an anti-pattern — returning JSX from a hook breaks composability and the separation between logic and rendering.",
         "isCorrect": true,
-        "explanation": "Correct — if you need to return UI, create a component. Hooks should return data, state, and callbacks — not markup. Returning JSX from hooks confuses React's reconciler."
+        "explanation": "Correct — if you need to return UI, create a component. Hooks should return data, state, and callbacks — not markup. Returning JSX from hooks confuses React's reconciler.",
+        "optionTextTr": "Teknik olarak evet, ama anti-pattern'dir — JSX döndüren hook'lar, component'lerin ve hook'ların endişelerini karıştırır.",
+        "explanationTr": "Doğru — JSX döndürmeye ihtiyacınız varsa, muhtemelen custom hook değil; component yazmanız gerekiyordur."
       },
       {
         "optionText": "No — hooks can only return primitive values, arrays, or objects.",
         "isCorrect": false,
-        "explanation": "Hooks can return anything technically. The restriction is a convention, not a runtime rule — returning JSX works but violates the hook/component separation."
+        "explanation": "Hooks can return anything technically. The restriction is a convention, not a runtime rule — returning JSX works but violates the hook/component separation.",
+        "optionTextTr": "Hayır — hook'lar yalnızca primitive değerler, diziler veya nesneler döndürebilir.",
+        "explanationTr": "Hook'lar JSX dahil herhangi bir değer döndürebilir — ama bu önerilmez."
       },
       {
         "optionText": "Yes, and it's encouraged — this is the render prop pattern modernised for hooks.",
         "isCorrect": false,
-        "explanation": "Render props return JSX from a prop function, not a hook. Custom hooks should handle logic; components should handle rendering."
+        "explanation": "Render props return JSX from a prop function, not a hook. Custom hooks should handle logic; components should handle rendering.",
+        "optionTextTr": "Evet ve teşvik edilir — bu, hook'ların uyguladığı modern render prop desenidir.",
+        "explanationTr": "JSX döndüren hook'lar genellikle anti-pattern olarak kabul edilir — endişeleri karıştırır."
       },
       {
         "optionText": "Only if the hook name starts with useJSX — React validates hook names to enforce this.",
         "isCorrect": false,
-        "explanation": "React only enforces that hook names start with 'use'. There is no useJSX convention — the restriction on returning JSX is a best practice, not enforced by React."
+        "explanation": "React only enforces that hook names start with 'use'. There is no useJSX convention — the restriction on returning JSX is a best practice, not enforced by React.",
+        "optionTextTr": "Yalnızca hook adı useJSX ile başlarsa.",
+        "explanationTr": "useJSX diye özel bir kural yoktur — 'use' ile başlaması yeterlidir, ama JSX döndürmek hâlâ önerilmez."
       }
     ]
   }

@@ -6,22 +6,30 @@
       {
         "optionText": "Representational State Transfer — POST is used to create a new resource.",
         "isCorrect": true,
-        "explanation": "Correct — REST is an architectural style and POST is the conventional method for resource creation, returning 201 Created."
+        "explanation": "Correct — REST is an architectural style and POST is the conventional method for resource creation, returning 201 Created.",
+        "optionTextTr": "Representational State Transfer — POST yeni kaynak oluşturur, GET okur, PUT günceller, DELETE siler.",
+        "explanationTr": "Doğru — REST durumsuz, HTTP tabanlı bir mimari stildir; şartname veya protokol değildir."
       },
       {
         "optionText": "Remote Execution and State Transfer — PUT is used to create resources.",
         "isCorrect": false,
-        "explanation": "REST stands for Representational State Transfer. PUT replaces an existing resource, not creates new ones by convention."
+        "explanation": "REST stands for Representational State Transfer. PUT replaces an existing resource, not creates new ones by convention.",
+        "optionTextTr": "Remote Execution and State Transfer — PUT kaynak oluşturur.",
+        "explanationTr": "Bu yanlış bir açılım ve yanlış metodları tanımlar."
       },
       {
         "optionText": "Representational State Transfer — GET is used to create resources by passing data in the URL.",
         "isCorrect": false,
-        "explanation": "GET is for reading data only and must not modify state — use POST to create resources."
+        "explanation": "GET is for reading data only and must not modify state — use POST to create resources.",
+        "optionTextTr": "Representational State Transfer — GET kaynak oluşturur.",
+        "explanationTr": "GET okuma içindir — veri değiştirmez; bu yanlış tanım."
       },
       {
         "optionText": "Resource Extraction and State Transfer — PATCH is used to create a resource.",
         "isCorrect": false,
-        "explanation": "REST stands for Representational State Transfer and PATCH is for partial updates, not creation."
+        "explanation": "REST stands for Representational State Transfer and PATCH is for partial updates, not creation.",
+        "optionTextTr": "Resource Extraction and State Transfer — PATCH kaynak oluşturur.",
+        "explanationTr": "Yanlış açılım ve yanlış metod — PATCH kısmi güncelleme içindir."
       }
     ]
   },
@@ -32,22 +40,30 @@
       {
         "optionText": "404 Not Found — the requested resource does not exist.",
         "isCorrect": true,
-        "explanation": "Correct — 404 is the standard response when a resource cannot be found at the given URI."
+        "explanation": "Correct — 404 is the standard response when a resource cannot be found at the given URI.",
+        "optionTextTr": "404 Not Found — istenen kaynak mevcut değil.",
+        "explanationTr": "Doğru — 2xx başarı, 4xx istemci hatası, 5xx sunucu hatasıdır. Doğru durum kodu, istemcilerin tepkilerini uyarlamasına olanak tanır."
       },
       {
         "optionText": "400 Bad Request — the client made an error in their request.",
         "isCorrect": false,
-        "explanation": "400 means the request itself is malformed (invalid syntax, missing fields) — not that the resource is absent."
+        "explanation": "400 means the request itself is malformed (invalid syntax, missing fields) — not that the resource is absent.",
+        "optionTextTr": "400 Bad Request — istemci isteğinde hata yaptı.",
+        "explanationTr": "400, istemcinin düzeltmesi gereken geçersiz sözdizimi veya parametre için kullanılır — 404 değil."
       },
       {
         "optionText": "200 OK with an empty body — the request succeeded but returned nothing.",
         "isCorrect": false,
-        "explanation": "Returning 200 with an empty body for a missing resource hides the error — use 404 so clients know the resource doesn't exist."
+        "explanation": "Returning 200 with an empty body for a missing resource hides the error — use 404 so clients know the resource doesn't exist.",
+        "optionTextTr": "200 OK ile boş gövde — istek başarılı ama sonuç yok.",
+        "explanationTr": "Boş başarılı yanıtlar için 200 OK değil 204 No Content uygun olur; bu soru 404 değil."
       },
       {
         "optionText": "500 Internal Server Error — the server could not locate the resource in time.",
         "isCorrect": false,
-        "explanation": "500 means the server failed unexpectedly — a missing resource is the client's concern and should return 404."
+        "explanation": "500 means the server failed unexpectedly — a missing resource is the client's concern and should return 404.",
+        "optionTextTr": "500 Internal Server Error — sunucu kaynağı bulamadı.",
+        "explanationTr": "Kaynak bulunamama 404'tür; 500 ise beklenmedik sunucu tarafı hatalarını gösterir."
       }
     ]
   },
@@ -58,22 +74,30 @@
       {
         "optionText": "PUT replaces the entire resource; PATCH partially updates it with only the supplied fields.",
         "isCorrect": true,
-        "explanation": "Correct — PUT requires a full representation and replaces; PATCH applies partial modifications."
+        "explanation": "Correct — PUT requires a full representation and replaces; PATCH applies partial modifications.",
+        "optionTextTr": "PUT tüm kaynağı değiştirir; PATCH yalnızca gönderilen alanlarla kısmen günceller.",
+        "explanationTr": "Doğru — PUT idempotent ama tam temsil gerektirir; PATCH daha az bant genişliği kullanır."
       },
       {
         "optionText": "PUT creates a new resource; PATCH updates an existing one.",
         "isCorrect": false,
-        "explanation": "POST creates resources by convention — PUT replaces a resource at a known URL, PATCH partially updates it."
+        "explanation": "POST creates resources by convention — PUT replaces a resource at a known URL, PATCH partially updates it.",
+        "optionTextTr": "PUT yeni kaynak oluşturur; PATCH mevcutu günceller.",
+        "explanationTr": "Her iki metod da güncelleme içindir; oluşturma POST veya bilinen kimlikle PUT ile yapılır."
       },
       {
         "optionText": "Both do the same thing; the choice is purely stylistic.",
         "isCorrect": false,
-        "explanation": "They differ in semantics: PUT is replace-all, PATCH is partial update — using PUT for partial updates can delete fields."
+        "explanation": "They differ in semantics: PUT is replace-all, PATCH is partial update — using PUT for partial updates can delete fields.",
+        "optionTextTr": "Her ikisi aynı şeyi yapar; seçim tamamen stilistiktir.",
+        "explanationTr": "Bunlar farklı semantiğe sahiptir: PUT tam değiştirme, PATCH kısmi güncelleme."
       },
       {
         "optionText": "PATCH is idempotent; PUT is not.",
         "isCorrect": false,
-        "explanation": "PUT is defined as idempotent; PATCH may or may not be depending on implementation."
+        "explanation": "PUT is defined as idempotent; PATCH may or may not be depending on implementation.",
+        "optionTextTr": "PATCH idempotent; PUT değil.",
+        "explanationTr": "PUT idempotent; PATCH uygulamaya göre değişir — bu tanım tersine çevrilmiş."
       }
     ]
   },
@@ -84,22 +108,30 @@
       {
         "optionText": "429 Too Many Requests, typically with a Retry-After header.",
         "isCorrect": true,
-        "explanation": "Correct — 429 signals the client has exceeded the allowed request rate; Retry-After tells them when to try again."
+        "explanation": "Correct — 429 signals the client has exceeded the allowed request rate; Retry-After tells them when to try again.",
+        "optionTextTr": "429 Too Many Requests, genellikle Retry-After başlığıyla.",
+        "explanationTr": "Doğru — rate limiting kötüye kullanımı önler, kaynakları adil paylaşır ve pahalı operasyonları korur."
       },
       {
         "optionText": "503 Service Unavailable — the server is too busy to handle the request.",
         "isCorrect": false,
-        "explanation": "503 means the server is down or overloaded (often temporarily) — 429 specifically signals rate limiting."
+        "explanation": "503 means the server is down or overloaded (often temporarily) — 429 specifically signals rate limiting.",
+        "optionTextTr": "503 Service Unavailable — sunucu çok meşgul.",
+        "explanationTr": "503, genel bakım veya aşırı yük içindir; rate limiting özellikle 429 döndürür."
       },
       {
         "optionText": "403 Forbidden — the client is not allowed to make this many requests.",
         "isCorrect": false,
-        "explanation": "403 means the client is unauthorised for the resource — 429 is the specific code for rate limit exceeded."
+        "explanation": "403 means the client is unauthorised for the resource — 429 is the specific code for rate limit exceeded.",
+        "optionTextTr": "403 Forbidden — istemcinin bu kadar istek yapmasına izin yok.",
+        "explanationTr": "403 yetki yokluğu içindir; rate limiting özellikle 429 kullanır."
       },
       {
         "optionText": "400 Bad Request — the client is sending requests too frequently.",
         "isCorrect": false,
-        "explanation": "400 indicates a malformed request — frequency issues are signalled with 429 Too Many Requests."
+        "explanation": "400 indicates a malformed request — frequency issues are signalled with 429 Too Many Requests.",
+        "optionTextTr": "400 Bad Request — istemci çok sık istek gönderiyor.",
+        "explanationTr": "400 geçersiz istek yapısı içindir; rate limiting aşımı için 429 kullanılır."
       }
     ]
   },
@@ -110,22 +142,30 @@
       {
         "optionText": "Authentication verifies who you are; authorisation determines what you're allowed to do.",
         "isCorrect": true,
-        "explanation": "Correct — AuthN = identity (login), AuthZ = permissions (can this user delete this resource?)."
+        "explanation": "Correct — AuthN = identity (login), AuthZ = permissions (can this user delete this resource?).",
+        "optionTextTr": "Authentication kimin olduğunu doğrular; authorization ne yapabileceğini belirler.",
+        "explanationTr": "Doğru — bunları karıştırmak yaygın bir hatadır; bir API'yi authenticate olmak, belirli kaynaklara erişim izni vermez."
       },
       {
         "optionText": "Authentication is server-side; authorisation is client-side.",
         "isCorrect": false,
-        "explanation": "Both happen server-side — the distinction is about identity verification vs permission checking, not location."
+        "explanation": "Both happen server-side — the distinction is about identity verification vs permission checking, not location.",
+        "optionTextTr": "Authentication sunucu taraflı; authorization istemci taraflı.",
+        "explanationTr": "Her ikisi de genellikle sunucu tarafında uygulanır — bu ayrım yanıltıcı."
       },
       {
         "optionText": "Authentication uses JWT; authorisation uses OAuth 2.0.",
         "isCorrect": false,
-        "explanation": "JWT and OAuth can be used for both — the terms describe the concepts, not the technology."
+        "explanation": "JWT and OAuth can be used for both — the terms describe the concepts, not the technology.",
+        "optionTextTr": "Authentication JWT; authorization OAuth 2.0 kullanır.",
+        "explanationTr": "Bunlar araçlardır — kavramları tanımlamaz; hem authentication hem authorization için her ikisi de kullanılabilir."
       },
       {
         "optionText": "They are the same concept, just different spellings.",
         "isCorrect": false,
-        "explanation": "They are distinct: authentication establishes identity, authorisation checks permissions after identity is known."
+        "explanation": "They are distinct: authentication establishes identity, authorisation checks permissions after identity is known.",
+        "optionTextTr": "Bunlar aynı kavram, yalnızca farklı yazım.",
+        "explanationTr": "Bunlar farklı kavramlardır — kimlik doğrulama ve yetkilendirme birbirinden ayrı işlemlerdir."
       }
     ]
   },
@@ -136,22 +176,30 @@
       {
         "optionText": "Uses a pointer to the last seen item; avoids full table scans making it O(log n) at any depth.",
         "isCorrect": true,
-        "explanation": "Correct — cursor pagination uses indexed seeks instead of OFFSET, staying performant on large or frequently-updated datasets."
+        "explanation": "Correct — cursor pagination uses indexed seeks instead of OFFSET, staying performant on large or frequently-updated datasets.",
+        "optionTextTr": "Son görülen öğeye işaretçi kullanır; tam tablo taramasından kaçınır, büyük veri kümeleri için tutarlı performans sağlar.",
+        "explanationTr": "Doğru — bu cursor tabanlı sayfalamadır; offset/limit'ten daha ölçeklenebilirdir."
       },
       {
         "optionText": "Uses a page number and limit; the DB skips rows to reach the right page.",
         "isCorrect": false,
-        "explanation": "That describes offset pagination — the OFFSET clause scans all preceding rows, becoming slow as pages grow."
+        "explanation": "That describes offset pagination — the OFFSET clause scans all preceding rows, becoming slow as pages grow.",
+        "optionTextTr": "Sayfa numarası ve limit kullanır; DB doğru satıra ulaşmak için satırları atlar.",
+        "explanationTr": "Bu offset/limit sayfalamadır — büyük offset'lerde yavaştır."
       },
       {
         "optionText": "Loads all data into memory and slices it client-side for each page request.",
         "isCorrect": false,
-        "explanation": "Client-side pagination doesn't scale — cursor pagination uses server-side DB queries with efficient index seeks."
+        "explanation": "Client-side pagination doesn't scale — cursor pagination uses server-side DB queries with efficient index seeks.",
+        "optionTextTr": "Tüm veriyi belleğe yükler ve her sayfa için istemci tarafında dilimler.",
+        "explanationTr": "Bu son derece verimsizdir ve gerçek üretim API'sında kullanılmamalıdır."
       },
       {
         "optionText": "Both are equivalent in performance; cursor pagination is just more complex for no benefit.",
         "isCorrect": false,
-        "explanation": "Cursor pagination is significantly faster on large datasets because it uses indexed seeks instead of costly table scans."
+        "explanation": "Cursor pagination is significantly faster on large datasets because it uses indexed seeks instead of costly table scans.",
+        "optionTextTr": "Her ikisi de performans açısından eşdeğerdir.",
+        "explanationTr": "Cursor sayfalama, büyük veri kümeleri için offset'ten belirgin biçimde daha iyi performans gösterir."
       }
     ]
   },
@@ -162,22 +210,30 @@
       {
         "optionText": "An operation that produces the same result whether called once or multiple times with the same input.",
         "isCorrect": true,
-        "explanation": "Correct — idempotency means safe retries: GET /users/1 always returns the same user regardless of call count."
+        "explanation": "Correct — idempotency means safe retries: GET /users/1 always returns the same user regardless of call count.",
+        "optionTextTr": "Bir kez veya birden fazla çağrılsın, aynı sonucu üreten işlem.",
+        "explanationTr": "Doğru — GET, PUT ve DELETE idempotent; POST değil. Ağ yeniden denemeleri için kritik öneme sahiptir."
       },
       {
         "optionText": "An operation that executes instantly without any asynchronous processing.",
         "isCorrect": false,
-        "explanation": "Speed of execution is unrelated to idempotency — an idempotent operation can be slow or async."
+        "explanation": "Speed of execution is unrelated to idempotency — an idempotent operation can be slow or async.",
+        "optionTextTr": "Asenkron işlem olmadan anında çalışan işlem.",
+        "explanationTr": "Bu senkron işlemi tanımlar — idempotency değil."
       },
       {
         "optionText": "An operation that modifies the database exactly once, even if called multiple times.",
         "isCorrect": false,
-        "explanation": "True idempotency means the effect is the same — not that the DB is touched exactly once; it may process N times with equal results."
+        "explanation": "True idempotency means the effect is the same — not that the DB is touched exactly once; it may process N times with equal results.",
+        "optionTextTr": "Birden fazla çağrılsa bile veritabanını yalnızca bir kez değiştiren işlem.",
+        "explanationTr": "Bu idempotency değildir — idempotency aynı sonuç sağlar, tek değişiklik değil."
       },
       {
         "optionText": "An operation that can only be performed by an authenticated user.",
         "isCorrect": false,
-        "explanation": "Idempotency is about reproducibility of results, not access control or authentication requirements."
+        "explanation": "Idempotency is about reproducibility of results, not access control or authentication requirements.",
+        "optionTextTr": "Yalnızca kimliği doğrulanmış kullanıcı tarafından gerçekleştirilebilen işlem.",
+        "explanationTr": "Bu authorization'ı tanımlar — idempotency değil."
       }
     ]
   },
@@ -188,22 +244,30 @@
       {
         "optionText": "Cross-Origin Resource Sharing — enforced when JavaScript makes requests to a different origin (protocol + host + port).",
         "isCorrect": true,
-        "explanation": "Correct — CORS is a browser security mechanism blocking cross-origin fetches unless the server explicitly allows them."
+        "explanation": "Correct — CORS is a browser security mechanism blocking cross-origin fetches unless the server explicitly allows them.",
+        "optionTextTr": "Cross-Origin Resource Sharing — JavaScript farklı kaynağa istek yaptığında uygulanır; sunucu Allow-Origin başlıklarıyla izin verir.",
+        "explanationTr": "Doğru — CORS, tarayıcı güvenlik mekanizmasıdır; sunucu tarafı güvenlik duvarı değil; sunucu başlıklarıyla yapılandırılır."
       },
       {
         "optionText": "A server-side firewall that blocks requests from unknown IP addresses.",
         "isCorrect": false,
-        "explanation": "CORS is a browser policy enforced on the client — servers don't need a firewall; the browser blocks the response."
+        "explanation": "CORS is a browser policy enforced on the client — servers don't need a firewall; the browser blocks the response.",
+        "optionTextTr": "Bilinmeyen IP'lerden gelen istekleri engelleyen sunucu tarafı güvenlik duvarı.",
+        "explanationTr": "CORS, tarayıcı politikası mekanizmasıdır — sunucu güvenlik duvarı değil."
       },
       {
         "optionText": "A Content Security Policy header that prevents inline scripts from running.",
         "isCorrect": false,
-        "explanation": "CSP prevents inline scripts — CORS controls cross-origin HTTP requests made by JavaScript."
+        "explanation": "CSP prevents inline scripts — CORS controls cross-origin HTTP requests made by JavaScript.",
+        "optionTextTr": "Inline script'leri önleyen Content Security Policy başlığı.",
+        "explanationTr": "CSP, CORS'tan farklı bir güvenlik mekanizmasıdır."
       },
       {
         "optionText": "A TLS handshake protocol that verifies the identity of remote servers.",
         "isCorrect": false,
-        "explanation": "TLS/SSL handles encryption and server identity — CORS is an HTTP-level policy for cross-origin resource access."
+        "explanation": "TLS/SSL handles encryption and server identity — CORS is an HTTP-level policy for cross-origin resource access.",
+        "optionTextTr": "Uzak sunucu kimliğini doğrulayan TLS handshake protokolü.",
+        "explanationTr": "Bu TLS/SSL'i tanımlar — CORS değil."
       }
     ]
   },
@@ -214,22 +278,30 @@
       {
         "optionText": "To describe a REST API's endpoints, schemas, and auth in a machine-readable format enabling auto-generated docs and clients.",
         "isCorrect": true,
-        "explanation": "Correct — OpenAPI (Swagger) enables interactive docs, SDK generation, and contract validation from a single spec file."
+        "explanation": "Correct — OpenAPI (Swagger) enables interactive docs, SDK generation, and contract validation from a single spec file.",
+        "optionTextTr": "REST API'nin endpoint'lerini, şemalarını ve auth'unu makine okunabilir formatta (YAML/JSON) tanımlamak için.",
+        "explanationTr": "Doğru — OpenAPI, otomatik dokümantasyon, istemci SDK üretimi ve mock sunucu için temel sağlar."
       },
       {
         "optionText": "To define database schemas and generate migration files automatically.",
         "isCorrect": false,
-        "explanation": "Database schema tools (Prisma, Drizzle) handle migrations — OpenAPI describes HTTP API contracts, not DB schemas."
+        "explanation": "Database schema tools (Prisma, Drizzle) handle migrations — OpenAPI describes HTTP API contracts, not DB schemas.",
+        "optionTextTr": "Veritabanı şemalarını tanımlamak ve migration dosyaları otomatik üretmek için.",
+        "explanationTr": "Bu Prisma veya Sequelize gibi ORM araçlarını tanımlar — OpenAPI değil."
       },
       {
         "optionText": "To standardise JSON formatting rules across different API providers.",
         "isCorrect": false,
-        "explanation": "OpenAPI describes endpoint structure and schemas — JSON formatting conventions are a separate concern."
+        "explanation": "OpenAPI describes endpoint structure and schemas — JSON formatting conventions are a separate concern.",
+        "optionTextTr": "Farklı API sağlayıcıları genelinde JSON biçimlendirme kurallarını standartlaştırmak için.",
+        "explanationTr": "OpenAPI JSON biçimlendirmesini değil; API yapısını tanımlar."
       },
       {
         "optionText": "To replace REST with a more efficient binary protocol for API communication.",
         "isCorrect": false,
-        "explanation": "OpenAPI documents REST APIs over HTTP — gRPC/Protobuf provides binary protocols, not OpenAPI."
+        "explanation": "OpenAPI documents REST APIs over HTTP — gRPC/Protobuf provides binary protocols, not OpenAPI.",
+        "optionTextTr": "REST'i daha verimli ikili protokolle değiştirmek için.",
+        "explanationTr": "Bu gRPC'yi tanımlar — OpenAPI mevcut REST API'lerini tanımlar."
       }
     ]
   },
@@ -240,22 +312,30 @@
       {
         "optionText": "Fetching a list of N items then making N additional queries to get related data — 1+N total queries instead of 1.",
         "isCorrect": true,
-        "explanation": "Correct — N+1 is solved by JOINs, eager loading (Prisma include), or DataLoader batching."
+        "explanation": "Correct — N+1 is solved by JOINs, eager loading (Prisma include), or DataLoader batching.",
+        "optionTextTr": "N öğe listesi çekip her biri için N ek sorgu yapmak — eager loading veya DataLoader ile çözülür.",
+        "explanationTr": "Doğru — örn. 10 kullanıcı + her biri için ayrı sipariş sorgusu = 11 sorgu; JOIN veya batch yükleme ile 2'ye düşer."
       },
       {
         "optionText": "An API versioning issue where v1 and v1+1 (v2) have incompatible schemas.",
         "isCorrect": false,
-        "explanation": "N+1 is a database query performance problem — version incompatibility is a separate API design concern."
+        "explanation": "N+1 is a database query performance problem — version incompatibility is a separate API design concern.",
+        "optionTextTr": "v1 ve v2'nin uyumsuz şemaya sahip olduğu API versiyonlama sorunu.",
+        "explanationTr": "Bu API versiyonlama sorunlarını tanımlar — N+1 değil."
       },
       {
         "optionText": "A rate limiting scenario where one extra request triggers a 429 response.",
         "isCorrect": false,
-        "explanation": "Rate limiting enforces request ceilings — the N+1 problem describes excessive database queries from lazy loading."
+        "explanation": "Rate limiting enforces request ceilings — the N+1 problem describes excessive database queries from lazy loading.",
+        "optionTextTr": "Bir fazla istek 429 tetikleyen rate limiting senaryosu.",
+        "explanationTr": "N+1, rate limiting değil; veritabanı sorgu verimliliği sorunudur."
       },
       {
         "optionText": "A pagination strategy where page N requires fetching N+1 rows to detect the next page.",
         "isCorrect": false,
-        "explanation": "Fetching limit+1 rows to detect hasMore is a valid pagination technique — but N+1 problem means one DB query per item in a list."
+        "explanation": "Fetching limit+1 rows to detect hasMore is a valid pagination technique — but N+1 problem means one DB query per item in a list.",
+        "optionTextTr": "Sayfa N'nin N+1 satır çekmeyi gerektirdiği sayfalama stratejisi.",
+        "explanationTr": "Bu cursor sayfalama uygulamasını tanımlar — N+1 sorgu problemi değil."
       }
     ]
   },
@@ -266,22 +346,30 @@
       {
         "optionText": "Webhooks are server-initiated pushes (event-driven); polling is client-initiated repeated requests on a schedule.",
         "isCorrect": true,
-        "explanation": "Correct — webhooks are more efficient (no wasted calls) with near-zero latency, but require a public HTTPS endpoint."
+        "explanation": "Correct — webhooks are more efficient (no wasted calls) with near-zero latency, but require a public HTTPS endpoint.",
+        "optionTextTr": "Webhook'lar sunucu başlatmalı push (event-driven); polling istemcinin sunucuyu periyodik sorgulamasıdır.",
+        "explanationTr": "Doğru — webhook'lar gerçek zamanlı ve verimli; polling gecikme ve gereksiz istek içerir."
       },
       {
         "optionText": "Webhooks run inside the browser; polling runs on the server.",
         "isCorrect": false,
-        "explanation": "Webhooks are server-to-server HTTP calls — the browser is not involved in webhook delivery."
+        "explanation": "Webhooks are server-to-server HTTP calls — the browser is not involved in webhook delivery.",
+        "optionTextTr": "Webhook'lar tarayıcıda çalışır; polling sunucuda çalışır.",
+        "explanationTr": "Webhook'lar harici sunuculara HTTP callback'tir — tarayıcıda çalışmaz."
       },
       {
         "optionText": "Polling is real-time; webhooks have significant delivery delay.",
         "isCorrect": false,
-        "explanation": "The opposite is true — webhooks deliver events in real-time, while polling has latency equal to the polling interval."
+        "explanation": "The opposite is true — webhooks deliver events in real-time, while polling has latency equal to the polling interval.",
+        "optionTextTr": "Polling gerçek zamanlı; webhook'ların önemli teslimat gecikmesi var.",
+        "explanationTr": "Tam tersi doğrudur — webhook'lar hemen push yapar; polling aralıklı çalışır."
       },
       {
         "optionText": "Webhooks require WebSocket connections; polling uses regular HTTP.",
         "isCorrect": false,
-        "explanation": "Webhooks use standard HTTP POST requests — WebSockets are a different real-time technology."
+        "explanation": "Webhooks use standard HTTP POST requests — WebSockets are a different real-time technology.",
+        "optionTextTr": "Webhook'lar WebSocket gerektirir; polling normal HTTP kullanır.",
+        "explanationTr": "Webhook'lar WebSocket gerektirmez — düzenli HTTP POST callback'tir."
       }
     ]
   },
@@ -292,22 +380,30 @@
       {
         "optionText": "A dedicated backend layer per client type (web, mobile) that aggregates and shapes data for that specific client's needs.",
         "isCorrect": true,
-        "explanation": "Correct — BFF eliminates over/under-fetching by giving each client a tailored API. Next.js Route Handlers naturally serve as a BFF."
+        "explanation": "Correct — BFF eliminates over/under-fetching by giving each client a tailored API. Next.js Route Handlers naturally serve as a BFF.",
+        "optionTextTr": "İstemci türü başına (web, mobil) özel backend katmanı, hangi mikroservislerin çağrılacağını birleştirir ve yanıtları biçimlendirir.",
+        "explanationTr": "Doğru — BFF, istemciye özgü mantığı mikroservis sözleşmelerini kirletmeden merkezileştirir."
       },
       {
         "optionText": "A backend pattern where the frontend team maintains all server-side code.",
         "isCorrect": false,
-        "explanation": "BFF is about dedicated backends per client type, not about who owns the backend code."
+        "explanation": "BFF is about dedicated backends per client type, not about who owns the backend code.",
+        "optionTextTr": "Frontend ekibinin tüm sunucu tarafı kodu sürdürdüğü backend deseni.",
+        "explanationTr": "BFF tanımı bu değildir — her istemci için ihtisaslaşmış backend katmanıdır."
       },
       {
         "optionText": "A caching strategy where the backend prefetches data based on predicted frontend needs.",
         "isCorrect": false,
-        "explanation": "BFF is an architectural pattern about service boundaries, not a caching or prefetching strategy."
+        "explanation": "BFF is an architectural pattern about service boundaries, not a caching or prefetching strategy.",
+        "optionTextTr": "Backend'in önceden veri önbelleğe alan strateji.",
+        "explanationTr": "Bu önbellek stratejilerini tanımlar — BFF deseni değil."
       },
       {
         "optionText": "A pattern where frontends call microservices directly, bypassing an API gateway.",
         "isCorrect": false,
-        "explanation": "BFF adds an intermediate layer between clients and services — the opposite of direct microservice calls from frontend."
+        "explanation": "BFF adds an intermediate layer between clients and services — the opposite of direct microservice calls from frontend.",
+        "optionTextTr": "Frontend'lerin API gateway'i atlatarak mikroservisleri doğrudan çağırdığı desen.",
+        "explanationTr": "Bu BFF deseninin tam tersidir — BFF doğrudan bağlantıyı önler."
       }
     ]
   },
@@ -318,22 +414,30 @@
       {
         "optionText": "An appropriate HTTP status code, a machine-readable error code, and a human-readable message.",
         "isCorrect": true,
-        "explanation": "Correct — consistent error envelopes let clients handle errors programmatically without string-matching messages."
+        "explanation": "Correct — consistent error envelopes let clients handle errors programmatically without string-matching messages.",
+        "optionTextTr": "Uygun HTTP durum kodu, makine okunabilir hata kodu ve insan okunabilir mesaj içeren tutarlı JSON yapısı.",
+        "explanationTr": "Doğru — tutarlı hata yanıtları, istemcilerin hataları programlı olarak ele almasını sağlar."
       },
       {
         "optionText": "Always return 200 OK with an error flag in the body to simplify client error handling.",
         "isCorrect": false,
-        "explanation": "Hiding errors in 200 responses breaks HTTP conventions and makes monitoring, caching, and retries unreliable."
+        "explanation": "Hiding errors in 200 responses breaks HTTP conventions and makes monitoring, caching, and retries unreliable.",
+        "optionTextTr": "İstemci işlemeyi basitleştirmek için her zaman 200 OK ve gövdede hata bayrağı döndür.",
+        "explanationTr": "Hata durumları için her zaman 200 döndürmek, HTTP anlamını bozar ve istemci hata yönetimini karmaşıklaştırır."
       },
       {
         "optionText": "Include the full server stack trace so developers can debug the issue easily.",
         "isCorrect": false,
-        "explanation": "Stack traces expose internal implementation details — log them server-side but never return them to clients in production."
+        "explanation": "Stack traces expose internal implementation details — log them server-side but never return them to clients in production.",
+        "optionTextTr": "Geliştiricilerin hatayı ayıklaması için tam sunucu yığın izini dahil et.",
+        "explanationTr": "Yığın izleri hassas sistem bilgisi sızdırabilir — üretimde expose edilmemelidir."
       },
       {
         "optionText": "Return only the HTTP status code with no body to keep responses small.",
         "isCorrect": false,
-        "explanation": "A status code alone doesn't tell clients why it failed — include a structured body with an error code and message."
+        "explanation": "A status code alone doesn't tell clients why it failed — include a structured body with an error code and message.",
+        "optionTextTr": "Yanıtları küçük tutmak için yalnızca HTTP durum kodu döndür.",
+        "explanationTr": "Gövde olmadan yalnızca durum kodu, istemcilerin düzgün hata yönetimi için gerekli bağlamı vermez."
       }
     ]
   },
@@ -344,22 +448,30 @@
       {
         "optionText": "A strategy to evolve APIs without breaking existing clients — URL path versioning (/v1/, /v2/) is most common.",
         "isCorrect": true,
-        "explanation": "Correct — URL versioning is visible, easy to route, and easy to test. Stripe, GitHub, and Twilio all use it."
+        "explanation": "Correct — URL versioning is visible, easy to route, and easy to test. Stripe, GitHub, and Twilio all use it.",
+        "optionTextTr": "Mevcut istemcileri bozmadan API'leri geliştirme stratejisi — URL versiyonlama (/v1/), başlıklar veya Accept başlığı.",
+        "explanationTr": "Doğru — versiyonlama, çalışan istemcileri bozmadan API'yi geliştirmenizi sağlar."
       },
       {
         "optionText": "Releasing new API features without any version identifier, relying on backwards compatibility.",
         "isCorrect": false,
-        "explanation": "Additive-only changes can avoid versioning, but breaking changes still require version identifiers for existing clients."
+        "explanation": "Additive-only changes can avoid versioning, but breaking changes still require version identifiers for existing clients.",
+        "optionTextTr": "Hiçbir versiyon tanımlayıcısı olmadan yeni özellikler yayınlamak, istemcilerin uyum sağlamasına güvenmek.",
+        "explanationTr": "Bu kırıcı değişiklikler yaratır — versiyonlama tam olarak bunu önlemek içindir."
       },
       {
         "optionText": "Using semantic versioning in the Accept header: Accept: application/vnd.api.v2.3.1+json.",
         "isCorrect": false,
-        "explanation": "Header versioning is valid but less common than URL versioning — it's less discoverable and harder to test in browsers."
+        "explanation": "Header versioning is valid but less common than URL versioning — it's less discoverable and harder to test in browsers.",
+        "optionTextTr": "Accept başlığında semantic versioning kullanmak: Accept: application/json;version=1.2.3",
+        "explanationTr": "Bu geçerli bir yaklaşım olsa da yaygın değildir — URL versiyonlama ve özel başlıklar daha sık kullanılır."
       },
       {
         "optionText": "Deprecating the entire API each year and requiring all clients to migrate at the same time.",
         "isCorrect": false,
-        "explanation": "Forcing simultaneous migration breaks all clients at once — the purpose of versioning is to give clients time to migrate."
+        "explanation": "Forcing simultaneous migration breaks all clients at once — the purpose of versioning is to give clients time to migrate.",
+        "optionTextTr": "API'yi her yıl tamamen kullanımdan kaldırmak ve tüm istemcilerin göç etmesini zorunlu kılmak.",
+        "explanationTr": "Bu aşırı agresif bir strateji — geriye dönük uyumluluk iyi API tasarımının temelidir."
       }
     ]
   },
@@ -370,22 +482,30 @@
       {
         "optionText": "A query language where clients specify exactly what data they need, solving over-fetching and under-fetching.",
         "isCorrect": true,
-        "explanation": "Correct — GraphQL lets clients request precise fields, reducing payload size and round-trips compared to fixed REST responses."
+        "explanation": "Correct — GraphQL lets clients request precise fields, reducing payload size and round-trips compared to fixed REST responses.",
+        "optionTextTr": "İstemcilerin ihtiyaç duydukları tam veriyi belirtebildiği sorgu dili — tek endpoint üzerinden.",
+        "explanationTr": "Doğru — GraphQL, over-fetching ve under-fetching sorunlarını çözer ama N+1 ve sorgu karmaşıklığı konularında dikkat gerektirir."
       },
       {
         "optionText": "A database query language that replaces SQL for fetching data from relational databases.",
         "isCorrect": false,
-        "explanation": "GraphQL is an API query language over HTTP — it abstracts over any data source, not just databases."
+        "explanation": "GraphQL is an API query language over HTTP — it abstracts over any data source, not just databases.",
+        "optionTextTr": "REST için SQL'in yerini alan veritabanı sorgu dili.",
+        "explanationTr": "GraphQL veritabanı sorgu dili değil — API sorgu dilidir."
       },
       {
         "optionText": "A binary protocol like gRPC that replaces HTTP for faster inter-service communication.",
         "isCorrect": false,
-        "explanation": "GraphQL runs over HTTP and returns JSON — gRPC uses Protobuf binary encoding, which is a different technology."
+        "explanation": "GraphQL runs over HTTP and returns JSON — gRPC uses Protobuf binary encoding, which is a different technology.",
+        "optionTextTr": "Daha hızlı servisler arası iletişim için HTTP'nin yerini alan gRPC gibi ikili protokol.",
+        "explanationTr": "Bu gRPC'yi tanımlar — GraphQL HTTP üzerinde çalışır."
       },
       {
         "optionText": "A REST extension that adds real-time subscription support to existing REST endpoints.",
         "isCorrect": false,
-        "explanation": "GraphQL is a distinct API paradigm with its own schema and query language — it's not an extension of REST."
+        "explanation": "GraphQL is a distinct API paradigm with its own schema and query language — it's not an extension of REST.",
+        "optionTextTr": "Mevcut REST endpoint'lerine gerçek zamanlı subscription desteği ekleyen uzantı.",
+        "explanationTr": "GraphQL bağımsız bir teknolojidir; REST'in uzantısı değil."
       }
     ]
   },
@@ -396,22 +516,30 @@
       {
         "optionText": "A signed, base64url-encoded token with three parts: Header (algorithm), Payload (claims), Signature.",
         "isCorrect": true,
-        "explanation": "Correct — JWTs are stateless: the server validates the signature without a DB lookup. Payload is encoded, NOT encrypted."
+        "explanation": "Correct — JWTs are stateless: the server validates the signature without a DB lookup. Payload is encoded, NOT encrypted.",
+        "optionTextTr": "İmzalı, base64url kodlu token: Header (algoritma), Payload (claim'ler), Signature.",
+        "explanationTr": "Doğru — payload şifreli değil; yalnızca kodlanmıştır — hassas veri koyma. İmza, token'ın kurcalanmadığını doğrular."
       },
       {
         "optionText": "An encrypted database session record with three fields: user ID, expiry, and permissions.",
         "isCorrect": false,
-        "explanation": "JWTs are client-side tokens, not server-side session records. They are base64url-encoded, not encrypted by default."
+        "explanation": "JWTs are client-side tokens, not server-side session records. They are base64url-encoded, not encrypted by default.",
+        "optionTextTr": "Üç alanlı şifreli veritabanı oturum kaydı: kullanıcı ID'si, rol ve zaman damgası.",
+        "explanationTr": "JWT, veritabanı kaydı değil — sunucu tarafında depolama gerektirmeyen bağımsız token'dır."
       },
       {
         "optionText": "A cookie-based authentication token containing the username, password hash, and CSRF token.",
         "isCorrect": false,
-        "explanation": "JWTs never contain passwords. They are bearer tokens sent in the Authorization header, not necessarily cookies."
+        "explanation": "JWTs never contain passwords. They are bearer tokens sent in the Authorization header, not necessarily cookies.",
+        "optionTextTr": "Kullanıcı adı, şifre ve oturum ID içeren cookie tabanlı kimlik doğrulama token'ı.",
+        "explanationTr": "JWT cookie tabanlı değildir — imzalı token olarak taşınır; şifre asla dahil edilmez."
       },
       {
         "optionText": "A three-part URL containing the auth server, client ID, and access scope.",
         "isCorrect": false,
-        "explanation": "That describes an OAuth2 authorisation URL, not a JWT. JWTs are signed tokens: header.payload.signature."
+        "explanation": "That describes an OAuth2 authorisation URL, not a JWT. JWTs are signed tokens: header.payload.signature.",
+        "optionTextTr": "Auth sunucusu, istemci ID ve erişim kapsamı içeren üç parçalı URL.",
+        "explanationTr": "Bu OAuth yetkilendirme URL'sini tanımlar — JWT formatı değil."
       }
     ]
   },
@@ -422,22 +550,30 @@
       {
         "optionText": "A specific URL where an API can be accessed to perform a particular operation — e.g. GET /users/42 retrieves a user.",
         "isCorrect": true,
-        "explanation": "Correct — endpoints combine HTTP method + URL to define a unique operation. Well-named endpoints use nouns (resources) and HTTP verbs for the action."
+        "explanation": "Correct — endpoints combine HTTP method + URL to define a unique operation. Well-named endpoints use nouns (resources) and HTTP verbs for the action.",
+        "optionTextTr": "Belirli bir işlemi gerçekleştirmek için API'ye erişilebilen belirli URL.",
+        "explanationTr": "Doğru — endpoint URL, HTTP metod ve parametrelerden oluşur."
       },
       {
         "optionText": "A server that hosts an API and handles incoming HTTP requests.",
         "isCorrect": false,
-        "explanation": "The server hosts the API; an endpoint is a specific URL+method combination on that server defining one operation."
+        "explanation": "The server hosts the API; an endpoint is a specific URL+method combination on that server defining one operation.",
+        "optionTextTr": "Gelen HTTP isteklerini işleyen API barındıran sunucu.",
+        "explanationTr": "Bu sunucu altyapısını tanımlar — endpoint değil."
       },
       {
         "optionText": "A function in JavaScript that handles API responses on the client side.",
         "isCorrect": false,
-        "explanation": "Client-side handlers are fetch callbacks or async functions. An endpoint is the server-side URL that the client calls."
+        "explanation": "Client-side handlers are fetch callbacks or async functions. An endpoint is the server-side URL that the client calls.",
+        "optionTextTr": "İstemci tarafında API yanıtlarını işleyen JavaScript fonksiyonu.",
+        "explanationTr": "Bu istemci tarafı işleyicisini tanımlar — API endpoint değil."
       },
       {
         "optionText": "The API key required to authenticate requests to the server.",
         "isCorrect": false,
-        "explanation": "API keys are credentials for authentication. Endpoints are URLs defining accessible operations — e.g. POST /login, GET /products."
+        "explanation": "API keys are credentials for authentication. Endpoints are URLs defining accessible operations — e.g. POST /login, GET /products.",
+        "optionTextTr": "İstekleri kimlik doğrulamak için gereken API anahtarı.",
+        "explanationTr": "API anahtarı bir kimlik bilgisidir — endpoint değil."
       }
     ]
   },
@@ -448,22 +584,30 @@
       {
         "optionText": "SOAP is a strict XML protocol with a WSDL contract; REST is an architectural style using HTTP verbs on resources, returning any format (usually JSON).",
         "isCorrect": true,
-        "explanation": "Correct — SOAP has built-in standards for security (WS-Security) and transactions. REST is simpler, cacheable, and dominant for modern web APIs."
+        "explanation": "Correct — SOAP has built-in standards for security (WS-Security) and transactions. REST is simpler, cacheable, and dominant for modern web APIs.",
+        "optionTextTr": "SOAP, WSDL sözleşmesiyle katı XML protokolüdür; REST, HTTP kullanan esnek mimari stildir.",
+        "explanationTr": "Doğru — SOAP güçlü sözleşmeler sunar ama ağır; REST hafif ve insan okunabilir."
       },
       {
         "optionText": "SOAP is faster than REST because it uses binary encoding.",
         "isCorrect": false,
-        "explanation": "SOAP uses XML (verbose). REST typically uses JSON (lighter). REST is generally faster in practice. SOAP's advantage is built-in enterprise standards, not speed."
+        "explanation": "SOAP uses XML (verbose). REST typically uses JSON (lighter). REST is generally faster in practice. SOAP's advantage is built-in enterprise standards, not speed.",
+        "optionTextTr": "SOAP, ikili kodlama kullandığından REST'ten daha hızlıdır.",
+        "explanationTr": "SOAP genellikle verbose XML nedeniyle REST'ten daha yavaştır — ikili kodlama kullanan gRPC farklıdır."
       },
       {
         "optionText": "REST uses XML; SOAP uses JSON — the difference is only the data format.",
         "isCorrect": false,
-        "explanation": "It's the opposite: SOAP requires XML. REST is format-agnostic (JSON, XML, etc.) — JSON is most common."
+        "explanation": "It's the opposite: SOAP requires XML. REST is format-agnostic (JSON, XML, etc.) — JSON is most common.",
+        "optionTextTr": "REST XML; SOAP JSON kullanır.",
+        "explanationTr": "Tam tersi daha yaygın: SOAP tipik olarak XML; REST genellikle JSON kullanır."
       },
       {
         "optionText": "SOAP and REST are the same thing — SOAP is the original name for REST.",
         "isCorrect": false,
-        "explanation": "They are fundamentally different. SOAP is a protocol with strict standards; REST is an architectural style based on HTTP conventions."
+        "explanation": "They are fundamentally different. SOAP is a protocol with strict standards; REST is an architectural style based on HTTP conventions.",
+        "optionTextTr": "SOAP ve REST aynıdır — SOAP, REST'in orijinal adıdır.",
+        "explanationTr": "Bunlar tamamen farklı yaklaşımlardır — SOAP protokol; REST mimari stil."
       }
     ]
   },
@@ -474,22 +618,30 @@
       {
         "optionText": "Path params identify a specific resource (/users/42); query params filter/sort a collection (/users?role=admin&page=2).",
         "isCorrect": true,
-        "explanation": "Correct — path params are mandatory identifiers; query params are optional modifiers. Use path params for resource identity, query params for filtering, pagination, and search."
+        "explanation": "Correct — path params are mandatory identifiers; query params are optional modifiers. Use path params for resource identity, query params for filtering, pagination, and search.",
+        "optionTextTr": "Path paramları belirli bir kaynağı tanımlar (/users/42); query paramları filtreler, sıralar veya sayfalama yapar.",
+        "explanationTr": "Doğru — path paramları kimlik için; query paramları seçenekler ve filtreler için kullanılır."
       },
       {
         "optionText": "Query parameters are sent in the request body; path parameters are in the URL.",
         "isCorrect": false,
-        "explanation": "Query params are in the URL after ?: /users?role=admin. Path params are URL segments: /users/42. Neither goes in the request body."
+        "explanation": "Query params are in the URL after ?: /users?role=admin. Path params are URL segments: /users/42. Neither goes in the request body.",
+        "optionTextTr": "Query parametreleri istek gövdesinde; path parametreleri URL'de gönderilir.",
+        "explanationTr": "Query parametreleri URL'de (?key=value); path parametreleri URL yolunda (/resource/{id}) olur."
       },
       {
         "optionText": "Path parameters are only used in POST requests; query parameters in GET requests.",
         "isCorrect": false,
-        "explanation": "Both can appear with any HTTP method. Path params identify resources on GET, PUT, DELETE etc. Query params filter collections on GET."
+        "explanation": "Both can appear with any HTTP method. Path params identify resources on GET, PUT, DELETE etc. Query params filter collections on GET.",
+        "optionTextTr": "Path parametreleri yalnızca POST isteklerinde; query parametreleri yalnızca GET'te kullanılır.",
+        "explanationTr": "Her ikisi de herhangi bir HTTP metoduyla kullanılabilir."
       },
       {
         "optionText": "They are interchangeable — GET /users/42 and GET /users?id=42 are equally RESTful.",
         "isCorrect": false,
-        "explanation": "Path params are preferred for resource identity (/users/42). Query params are for optional filtering. /users/42 is more idiomatic for a specific resource."
+        "explanation": "Path params are preferred for resource identity (/users/42). Query params are for optional filtering. /users/42 is more idiomatic for a specific resource.",
+        "optionTextTr": "Bunlar birbirinin yerine geçebilir — GET /users/42 ile GET /users?id=42 özdeştir.",
+        "explanationTr": "İşlevsel olarak benzer olsa da semantik açıdan farklıdır: path kimlik, query filtreleme için."
       }
     ]
   },
@@ -500,22 +652,30 @@
       {
         "optionText": "Common methods: API Keys (simple, for server-to-server), JWT Bearer tokens (stateless, for user sessions), OAuth 2.0 (delegated third-party access).",
         "isCorrect": true,
-        "explanation": "Correct — API keys in headers (X-API-Key) for service accounts; JWT in Authorization: Bearer for user auth; OAuth for 'Login with Google/GitHub' flows."
+        "explanation": "Correct — API keys in headers (X-API-Key) for service accounts; JWT in Authorization: Bearer for user auth; OAuth for 'Login with Google/GitHub' flows.",
+        "optionTextTr": "Yaygın yöntemler: API Anahtarları (basit, sunucudan sunucuya), JWT Bearer token'lar (OAuth 2.0), mTLS.",
+        "explanationTr": "Doğru — her yöntemin farklı güvenlik ve karmaşıklık ödünleşimleri vardır."
       },
       {
         "optionText": "Always use Basic Auth (username:password in headers) — it's the most secure standard.",
         "isCorrect": false,
-        "explanation": "Basic Auth is insecure (base64-encoded, not encrypted) and should never be used without HTTPS, and even then is too weak for production APIs."
+        "explanation": "Basic Auth is insecure (base64-encoded, not encrypted) and should never be used without HTTPS, and even then is too weak for production APIs.",
+        "optionTextTr": "Her zaman Basic Auth kullanın (başlıklarda kullanıcı adı:şifre).",
+        "explanationTr": "Basic Auth, TLS ile birlikte kullanıldığında güvenlidir ama modern API'lerde genellikle tercih edilmez."
       },
       {
         "optionText": "Authentication is the browser's responsibility — APIs don't need to verify callers.",
         "isCorrect": false,
-        "explanation": "APIs must authenticate every request. The browser may store credentials but the server verifies them on each call."
+        "explanation": "APIs must authenticate every request. The browser may store credentials but the server verifies them on each call.",
+        "optionTextTr": "Authentication tarayıcının sorumluluğundadır — API'lerin authentication'a ihtiyacı yoktur.",
+        "explanationTr": "API'ler kimlik doğrulamayı backend'de uygulamalıdır — tarayıcıya güvenilemez."
       },
       {
         "optionText": "HTTPS automatically authenticates the client — no additional auth mechanism needed.",
         "isCorrect": false,
-        "explanation": "HTTPS encrypts the connection but only authenticates the server (via certificate). The client/user must still be authenticated via API keys, JWT, or OAuth."
+        "explanation": "HTTPS encrypts the connection but only authenticates the server (via certificate). The client/user must still be authenticated via API keys, JWT, or OAuth.",
+        "optionTextTr": "HTTPS, istemciyi otomatik authenticate eder.",
+        "explanationTr": "HTTPS transit şifreleme sağlar ama kimlik doğrulama yapmaz."
       }
     ]
   },
@@ -526,22 +686,30 @@
       {
         "optionText": "JWT is stateless (token contains user data, no server lookup); session-based stores session ID server-side, requiring a DB or Redis lookup per request.",
         "isCorrect": true,
-        "explanation": "Correct — JWT scales horizontally (any server validates the signature); sessions require shared storage. JWT downside: tokens can't be revoked until expiry without a denylist."
+        "explanation": "Correct — JWT scales horizontally (any server validates the signature); sessions require shared storage. JWT downside: tokens can't be revoked until expiry without a denylist.",
+        "optionTextTr": "JWT durumsuz (token kullanıcı verisini içerir, sunucu araması gerekmez); session tabanlı sunucu tarafı store gerektirir.",
+        "explanationTr": "Doğru — JWT, session store olmadan ölçekleme için avantajlı; ancak token iptali daha zordur."
       },
       {
         "optionText": "Session-based auth is more modern and recommended over JWT for all applications.",
         "isCorrect": false,
-        "explanation": "Both are valid. JWT suits microservices/mobile (no shared session store); sessions are simpler for traditional server-rendered apps where revocation matters."
+        "explanation": "Both are valid. JWT suits microservices/mobile (no shared session store); sessions are simpler for traditional server-rendered apps where revocation matters.",
+        "optionTextTr": "Session tabanlı auth daha modern ve tüm kullanım durumları için JWT üzerinden önerilir.",
+        "explanationTr": "Her iki yaklaşımın da avantajları vardır — session tabanlı iptal için daha kolay."
       },
       {
         "optionText": "JWT stores the session in the database; sessions store the token in the browser.",
         "isCorrect": false,
-        "explanation": "It's the opposite — JWT is a self-contained token in the browser/client; sessions store data server-side with only a session ID in the browser cookie."
+        "explanation": "It's the opposite — JWT is a self-contained token in the browser/client; sessions store data server-side with only a session ID in the browser cookie.",
+        "optionTextTr": "JWT oturumu veritabanında saklar; session token'ı saklar.",
+        "explanationTr": "Tam tersi doğrudur — JWT, sunucu tarafı depolama olmadan bağımsızdır."
       },
       {
         "optionText": "They are identical — JWT is just a format for storing session IDs.",
         "isCorrect": false,
-        "explanation": "JWT contains actual claims (user ID, roles, expiry) and is self-validating. Session IDs are opaque references requiring a server lookup."
+        "explanation": "JWT contains actual claims (user ID, roles, expiry) and is self-validating. Session IDs are opaque references requiring a server lookup.",
+        "optionTextTr": "Bunlar özdeştir — JWT yalnızca oturum ID'lerini depolamak için format.",
+        "explanationTr": "JWT ve session auth temel farklılıklara sahiptir: state ve depolama gereksinimleri."
       }
     ]
   },
@@ -552,22 +720,30 @@
       {
         "optionText": "A delegated authorisation framework — users grant third-party apps access without sharing passwords. Authorization Code flow: redirect → auth server → code → exchange for token.",
         "isCorrect": true,
-        "explanation": "Correct — OAuth 2.0 is used for 'Login with Google'. The auth server issues tokens; the app never sees the user's password. PKCE extension protects against code interception."
+        "explanation": "Correct — OAuth 2.0 is used for 'Login with Google'. The auth server issues tokens; the app never sees the user's password. PKCE extension protects against code interception.",
+        "optionTextTr": "Yetki devredilmiş çerçeve — kullanıcılar şifre paylaşmadan üçüncü taraf uygulamalara erişim izni verir.",
+        "explanationTr": "Doğru — OAuth 2.0, kimlik doğrulama değil; yetkilendirme için tasarlanmıştır. OpenID Connect, kimlik için ekler."
       },
       {
         "optionText": "OAuth 2.0 is an encryption protocol that secures API payloads end-to-end.",
         "isCorrect": false,
-        "explanation": "OAuth 2.0 is an authorisation framework, not an encryption protocol. HTTPS handles payload encryption; OAuth handles access delegation."
+        "explanation": "OAuth 2.0 is an authorisation framework, not an encryption protocol. HTTPS handles payload encryption; OAuth handles access delegation.",
+        "optionTextTr": "API payload'larını uçtan uca şifreleyen şifreleme protokolü.",
+        "explanationTr": "OAuth 2.0, şifreleme protokolü değil; yetkilendirme çerçevesidir."
       },
       {
         "optionText": "OAuth 2.0 requires users to create a new account on the third-party app.",
         "isCorrect": false,
-        "explanation": "OAuth allows login without creating a new account — that's the point. Users authorise access via their existing account (Google, GitHub) without sharing credentials."
+        "explanation": "OAuth allows login without creating a new account — that's the point. Users authorise access via their existing account (Google, GitHub) without sharing credentials.",
+        "optionTextTr": "Kullanıcıların üçüncü taraf sitede yeni hesap oluşturmasını gerektirir.",
+        "explanationTr": "OAuth 2.0'ın amacı bu değil — mevcut hesaplara izin vermeye olanak tanır."
       },
       {
         "optionText": "OAuth 2.0 only works for mobile apps — web apps use OpenID Connect instead.",
         "isCorrect": false,
-        "explanation": "OAuth 2.0 works for web, mobile, and server-to-server. OpenID Connect is built on top of OAuth 2.0 and adds identity (who you are) to OAuth's authorisation."
+        "explanation": "OAuth 2.0 works for web, mobile, and server-to-server. OpenID Connect is built on top of OAuth 2.0 and adds identity (who you are) to OAuth's authorisation.",
+        "optionTextTr": "OAuth 2.0 yalnızca mobil uygulamalar için; web uygulamaları OpenID Connect kullanır.",
+        "explanationTr": "OAuth 2.0, hem web hem mobil hem de sunucudan sunucuya akışları destekler."
       }
     ]
   },
@@ -578,22 +754,30 @@
       {
         "optionText": "A mechanism where the client specifies preferred response formats via Accept headers and the server responds accordingly — e.g. Accept: application/json vs text/xml.",
         "isCorrect": true,
-        "explanation": "Correct — content negotiation allows one endpoint to serve multiple formats. The server responds with Content-Type matching the best accepted format."
+        "explanation": "Correct — content negotiation allows one endpoint to serve multiple formats. The server responds with Content-Type matching the best accepted format.",
+        "optionTextTr": "Accept ve Content-Type başlıklarıyla istemcinin tercih edilen yanıt formatını (JSON, XML, HTML) belirttiği mekanizma.",
+        "explanationTr": "Doğru — content negotiation, istemcilere format tercihini belirtme ve sunuculara uyum sağlama imkânı verir."
       },
       {
         "optionText": "A security handshake that negotiates the encryption algorithm between client and server.",
         "isCorrect": false,
-        "explanation": "Encryption negotiation happens during the TLS handshake. Content negotiation is about data format (JSON, XML, HTML), not security."
+        "explanation": "Encryption negotiation happens during the TLS handshake. Content negotiation is about data format (JSON, XML, HTML), not security.",
+        "optionTextTr": "Şifreleme algoritmasını müzakere eden güvenlik handshake.",
+        "explanationTr": "Bu TLS cipher suite müzakeresini tanımlar — HTTP content negotiation değil."
       },
       {
         "optionText": "A process where the API server chooses the language for error messages based on the user's location.",
         "isCorrect": false,
-        "explanation": "Language negotiation uses the Accept-Language header, which is a related but separate mechanism. Content negotiation handles the response data format."
+        "explanation": "Language negotiation uses the Accept-Language header, which is a related but separate mechanism. Content negotiation handles the response data format.",
+        "optionTextTr": "API sunucusunun hata mesajları için dil seçtiği süreç.",
+        "explanationTr": "Accept-Language başlığı dil tercihini ifade edebilir ama bu tanım eksik."
       },
       {
         "optionText": "A caching strategy that stores different response formats at the CDN level.",
         "isCorrect": false,
-        "explanation": "CDN caching uses Vary headers to cache different representations. Content negotiation is the mechanism that determines which representation to return."
+        "explanation": "CDN caching uses Vary headers to cache different representations. Content negotiation is the mechanism that determines which representation to return.",
+        "optionTextTr": "Farklı yanıt formatlarını CDN'de saklayan caching stratejisi.",
+        "explanationTr": "Bu Vary başlıklı çeşitlendirilmiş önbelleğe almayı tanımlar — content negotiation değil."
       }
     ]
   },
@@ -604,22 +788,30 @@
       {
         "optionText": "Use nouns for resources (/users, /orders), plural names, lowercase with hyphens, and HTTP verbs for actions — avoid verbs in URLs (/getUser → GET /users/id).",
         "isCorrect": true,
-        "explanation": "Correct — good URL design: GET /users (list), POST /users (create), GET /users/42 (read), PUT /users/42 (replace), DELETE /users/42 (delete). Keep URLs predictable."
+        "explanation": "Correct — good URL design: GET /users (list), POST /users (create), GET /users/42 (read), PUT /users/42 (replace), DELETE /users/42 (delete). Keep URLs predictable.",
+        "optionTextTr": "Kaynaklar için isimler kullanın (/users, /orders), çoğul adlar, küçük harf, kebab-case, hiyerarşik ilişkiler için iç içe.",
+        "explanationTr": "Doğru — tutarlı adlandırma, API'yi sezgisel ve keşfedilmesi kolay kılar."
       },
       {
         "optionText": "Use verbs in URLs to make actions explicit: /createUser, /deleteOrder, /fetchProduct.",
         "isCorrect": false,
-        "explanation": "Verbs in URLs are an anti-pattern in REST. HTTP methods (GET, POST, DELETE) provide the verb — the URL should be the noun (resource)."
+        "explanation": "Verbs in URLs are an anti-pattern in REST. HTTP methods (GET, POST, DELETE) provide the verb — the URL should be the noun (resource).",
+        "optionTextTr": "Eylemleri açıkça belirtmek için URL'lerde fiil kullanın: /createUser, /deleteOrder.",
+        "explanationTr": "REST URL'lerinde fiil kullanılmamalıdır — HTTP metodları eylemi ifade eder; URL kaynağı."
       },
       {
         "optionText": "Use uppercase for collection endpoints (/USERS) and lowercase for single resources (/users/42).",
         "isCorrect": false,
-        "explanation": "URLs are conventionally lowercase. Uppercase URLs cause confusion and inconsistency. Use plural lowercase nouns: /users, /orders."
+        "explanation": "URLs are conventionally lowercase. Uppercase URLs cause confusion and inconsistency. Use plural lowercase nouns: /users, /orders.",
+        "optionTextTr": "Collection endpoint'ler için büyük harf (/USERS) tek kaynak için küçük harf.",
+        "explanationTr": "URL'lerde büyük harf kullanımı geleneksel değildir ve yaygın olarak önerilmez."
       },
       {
         "optionText": "Resource names should match database table names exactly to keep the API consistent.",
         "isCorrect": false,
-        "explanation": "API URLs are a public contract, decoupled from DB schema. Exposing table names leaks implementation details. Design URLs around business resources, not storage."
+        "explanation": "API URLs are a public contract, decoupled from DB schema. Exposing table names leaks implementation details. Design URLs around business resources, not storage.",
+        "optionTextTr": "Kaynak adları uyumu korumak için veritabanı tablo adlarıyla tam eşleşmeli.",
+        "explanationTr": "API kaynakları ve veritabanı tabloları bağımsız olarak evrimleşebilir ve bağımsız olmalıdır."
       }
     ]
   },
@@ -630,22 +822,30 @@
       {
         "optionText": "Use multipart/form-data to send files directly, or pre-signed URLs (S3) to upload straight to storage from the client, bypassing the API server.",
         "isCorrect": true,
-        "explanation": "Correct — multipart works for small files. Pre-signed URLs are better for large files: the API generates a signed S3 URL; the client uploads directly to S3."
+        "explanation": "Correct — multipart works for small files. Pre-signed URLs are better for large files: the API generates a signed S3 URL; the client uploads directly to S3.",
+        "optionTextTr": "Dosyaları doğrudan göndermek için multipart/form-data veya doğrudan yüklemek için pre-signed URL (S3 vb.) kullanın.",
+        "explanationTr": "Doğru — pre-signed URL, dosya yükünü sunucudan depolamaya doğrudan taşıyarak API sunucusunun bant genişliğini azaltır."
       },
       {
         "optionText": "Base64-encode the file and include it in a JSON payload — REST only supports JSON.",
         "isCorrect": false,
-        "explanation": "Base64 increases file size by ~33% and loads the API server unnecessarily. Use multipart/form-data or pre-signed URLs for file uploads."
+        "explanation": "Base64 increases file size by ~33% and loads the API server unnecessarily. Use multipart/form-data or pre-signed URLs for file uploads.",
+        "optionTextTr": "Dosyayı Base64 olarak kodlayın ve JSON payload'a dahil edin.",
+        "explanationTr": "Base64 kodlama, yük boyutunu ~%33 artırır ve büyük dosyalar için verimsizdir."
       },
       {
         "optionText": "Files must be uploaded via FTP — HTTP APIs cannot handle binary data.",
         "isCorrect": false,
-        "explanation": "HTTP fully supports binary data via multipart/form-data and binary Content-Types. FTP is not used for modern API file uploads."
+        "explanation": "HTTP fully supports binary data via multipart/form-data and binary Content-Types. FTP is not used for modern API file uploads.",
+        "optionTextTr": "Dosyalar FTP aracılığıyla yüklenmeli — HTTP API'leri ikili veri işleyemez.",
+        "explanationTr": "Modern HTTP API'leri ikili dosyaları multipart/form-data ile tam olarak işleyebilir."
       },
       {
         "optionText": "Use a GraphQL mutation — REST cannot handle file uploads without a plugin.",
         "isCorrect": false,
-        "explanation": "REST handles file uploads natively via multipart/form-data. GraphQL file uploads require additional tooling (graphql-upload). REST is well-suited for file uploads."
+        "explanation": "REST handles file uploads natively via multipart/form-data. GraphQL file uploads require additional tooling (graphql-upload). REST is well-suited for file uploads.",
+        "optionTextTr": "GraphQL mutation kullanın — REST dosya yüklemeyi desteklemez.",
+        "explanationTr": "REST, multipart/form-data ile dosya yüklemeyi destekler — GraphQL'e özgü değil."
       }
     ]
   },
@@ -656,22 +856,30 @@
       {
         "optionText": "Rate limiting is a hard cap (429 after N requests); throttling slows responses progressively instead of rejecting — both protect against abuse.",
         "isCorrect": true,
-        "explanation": "Correct — throttling degrades gracefully: requests are queued and served slower. Rate limiting cuts off at a hard ceiling. Some APIs combine both strategies."
+        "explanation": "Correct — throttling degrades gracefully: requests are queued and served slower. Rate limiting cuts off at a hard ceiling. Some APIs combine both strategies.",
+        "optionTextTr": "Rate limiting sabit sınır (N istekten sonra 429); throttling yavaşlatma başlamak için istekleri kısıtlar.",
+        "explanationTr": "Doğru — bazı sistemler her ikisini birlikte uygular: hard cap koruma için, throttling esnek kontrolün sağlanması için."
       },
       {
         "optionText": "They are identical — throttling is just the American English term for rate limiting.",
         "isCorrect": false,
-        "explanation": "They differ in behaviour: rate limiting rejects requests above the limit; throttling slows them down. Both protect API infrastructure from overload."
+        "explanation": "They differ in behaviour: rate limiting rejects requests above the limit; throttling slows them down. Both protect API infrastructure from overload.",
+        "optionTextTr": "Bunlar özdeştir — throttling yalnızca Amerikan İngilizce terimidir.",
+        "explanationTr": "Bunlar nüanslı farklılıklara sahip farklı kavramlardır."
       },
       {
         "optionText": "Throttling applies to the database layer; rate limiting applies to the API gateway.",
         "isCorrect": false,
-        "explanation": "Both can be applied at any layer. The distinction is the response strategy: rejection (rate limit) vs degraded service (throttle)."
+        "explanation": "Both can be applied at any layer. The distinction is the response strategy: rejection (rate limit) vs degraded service (throttle).",
+        "optionTextTr": "Throttling veritabanı katmanına; rate limiting API katmanına uygulanır.",
+        "explanationTr": "Her ikisi de API katmanında uygulanabilir — throttling mutlaka DB katmanına ait değildir."
       },
       {
         "optionText": "API throttling requires OAuth 2.0 — unauthenticated APIs cannot be throttled.",
         "isCorrect": false,
-        "explanation": "Throttling can be applied to any request — authenticated or not — based on IP, API key, or user ID. OAuth is unrelated to throttling mechanics."
+        "explanation": "Throttling can be applied to any request — authenticated or not — based on IP, API key, or user ID. OAuth is unrelated to throttling mechanics.",
+        "optionTextTr": "API throttling, OAuth 2.0 gerektirir.",
+        "explanationTr": "Throttling, kimlik doğrulama mekanizmasına bağlı değildir."
       }
     ]
   },
@@ -682,22 +890,30 @@
       {
         "optionText": "Validate at the API boundary using a schema library (Zod, Joi) before processing — reject with 400 Bad Request and descriptive field-level errors.",
         "isCorrect": true,
-        "explanation": "Correct — schema validation ensures type safety, required fields, and format rules. Return 400 with structured error details so clients know exactly what to fix."
+        "explanation": "Correct — schema validation ensures type safety, required fields, and format rules. Return 400 with structured error details so clients know exactly what to fix.",
+        "optionTextTr": "API sınırında şema kütüphanesi (Zod, Joi) ile doğrulama yapın; backend mantığına geçmeden önce.",
+        "explanationTr": "Doğru — erken doğrulama açık hata mesajları üretir ve iş mantığının geçersiz girdi görme riskini azaltır."
       },
       {
         "optionText": "Validate in the database layer — DB constraints prevent invalid data from being stored.",
         "isCorrect": false,
-        "explanation": "DB constraints are a last line of defence, not the primary validation layer. Validate at the API boundary first to catch errors early and return readable error messages."
+        "explanation": "DB constraints are a last line of defence, not the primary validation layer. Validate at the API boundary first to catch errors early and return readable error messages.",
+        "optionTextTr": "Yalnızca veritabanı katmanında doğrulayın — DB kısıtlamaları geçersiz veriyi engeller.",
+        "explanationTr": "Veritabanı kısıtlamaları son savunma hattıdır — kullanıcıya dönük hatalar için API katmanında doğrulama daha iyi."
       },
       {
         "optionText": "Only validate authenticated requests — unauthenticated requests should be rejected before validation.",
         "isCorrect": false,
-        "explanation": "Authentication and validation are separate concerns. Auth checks who is making the request; validation checks what they're sending. Both apply to all requests."
+        "explanation": "Authentication and validation are separate concerns. Auth checks who is making the request; validation checks what they're sending. Both apply to all requests.",
+        "optionTextTr": "Yalnızca kimliği doğrulanmış istekleri doğrulayın.",
+        "explanationTr": "Tüm istekler, özellikle kötü niyetli girişimlerin daha yaygın olduğu kimlik doğrulanmamış olanlar doğrulanmalıdır."
       },
       {
         "optionText": "TypeScript types on the server handle validation automatically at runtime.",
         "isCorrect": false,
-        "explanation": "TypeScript types are erased at runtime — they don't validate incoming JSON. Use runtime schema libraries like Zod to validate request bodies."
+        "explanation": "TypeScript types are erased at runtime — they don't validate incoming JSON. Use runtime schema libraries like Zod to validate request bodies.",
+        "optionTextTr": "Sunucudaki TypeScript tipleri doğrulamayı otomatik yönetir.",
+        "explanationTr": "TypeScript compile-time tipleri, runtime request gövdelerini doğrulamaz — Zod gibi kütüphaneler kullanılır."
       }
     ]
   },
@@ -708,22 +924,30 @@
       {
         "optionText": "Use OpenAPI spec for machine-readable docs (Swagger UI), include request/response examples, authentication details, error codes, and a getting-started guide.",
         "isCorrect": true,
-        "explanation": "Correct — good docs are the API's UX. OpenAPI enables interactive playgrounds. Code examples in multiple languages, clear error docs, and versioning notes make adoption easy."
+        "explanation": "Correct — good docs are the API's UX. OpenAPI enables interactive playgrounds. Code examples in multiple languages, clear error docs, and versioning notes make adoption easy.",
+        "optionTextTr": "OpenAPI spec (Swagger UI) için makine okunabilir dokümantasyon, gerçek istek/yanıt örnekleri, değişiklik günlüğü.",
+        "explanationTr": "Doğru — iyi API dokümanları, geliştirici deneyimini doğrudan etkiler ve benimsemeyi hızlandırır."
       },
       {
         "optionText": "Add code comments to the source files — developers read the code, not external docs.",
         "isCorrect": false,
-        "explanation": "Code comments help maintainers but external consumers need structured docs, interactive playgrounds, and examples. Stripe and Twilio set the standard for API docs."
+        "explanation": "Code comments help maintainers but external consumers need structured docs, interactive playgrounds, and examples. Stripe and Twilio set the standard for API docs.",
+        "optionTextTr": "Kaynak dosyalara yorum ekleyin — geliştiriciler kodu okur.",
+        "explanationTr": "Kaynak yorumlar değerli ama standart, erişilebilir harici dokümanlar üretemez."
       },
       {
         "optionText": "Create a PDF with all endpoints — PDFs are universally accessible and professional.",
         "isCorrect": false,
-        "explanation": "PDFs are static and hard to navigate. OpenAPI-based docs (Swagger UI, Redoc) are interactive, searchable, and allow live API calls from the browser."
+        "explanation": "PDFs are static and hard to navigate. OpenAPI-based docs (Swagger UI, Redoc) are interactive, searchable, and allow live API calls from the browser.",
+        "optionTextTr": "Tüm endpoint'leri listeleyen PDF oluşturun.",
+        "explanationTr": "PDF'ler güncellenmesi zor ve aranması güçtür — interaktif dokümanlar (Swagger UI) tercih edilir."
       },
       {
         "optionText": "Documentation is optional if the API follows RESTful conventions — self-documenting APIs don't need docs.",
         "isCorrect": false,
-        "explanation": "No API is truly self-documenting. Auth flows, error codes, rate limits, and business rules always need explanation. Good documentation directly affects developer adoption."
+        "explanation": "No API is truly self-documenting. Auth flows, error codes, rate limits, and business rules always need explanation. Good documentation directly affects developer adoption.",
+        "optionTextTr": "RESTful conventions izleniyorsa dokümanlar isteğe bağlıdır.",
+        "explanationTr": "İyi tasarlanmış API'ler bile doküman gerektirir — endpoint'ler, parametreler ve örnekler içeren dokümanlar şarttır."
       }
     ]
   },
@@ -734,22 +958,30 @@
       {
         "optionText": "A GraphQL real-time feature over WebSockets — the server pushes updates to subscribed clients when data changes.",
         "isCorrect": true,
-        "explanation": "Correct — use subscriptions for live feeds: chat messages, notifications, live scores. For most apps, polling or REST SSE is simpler; subscriptions add WebSocket infrastructure complexity."
+        "explanation": "Correct — use subscriptions for live feeds: chat messages, notifications, live scores. For most apps, polling or REST SSE is simpler; subscriptions add WebSocket infrastructure complexity.",
+        "optionTextTr": "WebSocket üzerinde GraphQL gerçek zamanlı özelliği — sunucu, client'ın aboneliğine yanıt olarak güncellemeler iter.",
+        "explanationTr": "Doğru — canlı veri, bildirimler ve işbirlikçi araçlar için kullanışlıdır."
       },
       {
         "optionText": "A billing feature that charges clients per GraphQL query they execute.",
         "isCorrect": false,
-        "explanation": "GraphQL subscriptions are a real-time data mechanism using WebSockets, not a billing feature."
+        "explanation": "GraphQL subscriptions are a real-time data mechanism using WebSockets, not a billing feature.",
+        "optionTextTr": "İstemcilerin çalıştırdıkları GraphQL sorgusuna göre ücretlendiren faturalandırma özelliği.",
+        "explanationTr": "GraphQL Subscription, faturalandırma özelliği değil — gerçek zamanlı veri mekanizmasıdır."
       },
       {
         "optionText": "A way to cache frequently requested queries on the GraphQL server.",
         "isCorrect": false,
-        "explanation": "GraphQL caching uses persisted queries or Apollo's response cache. Subscriptions are for real-time event streaming from server to client."
+        "explanation": "GraphQL caching uses persisted queries or Apollo's response cache. Subscriptions are for real-time event streaming from server to client.",
+        "optionTextTr": "Sık istenen sorguları GraphQL sunucusunda önbelleğe alan yol.",
+        "explanationTr": "Bu query caching'i tanımlar — Subscription değil."
       },
       {
         "optionText": "A method to batch multiple GraphQL mutations into a single network request.",
         "isCorrect": false,
-        "explanation": "Batching queries combines multiple operations per HTTP request. Subscriptions maintain a persistent WebSocket connection for server-initiated push updates."
+        "explanation": "Batching queries combines multiple operations per HTTP request. Subscriptions maintain a persistent WebSocket connection for server-initiated push updates.",
+        "optionTextTr": "Birden fazla GraphQL mutation'ı tek ağ isteğinde gruplatma yöntemi.",
+        "explanationTr": "Bu mutation batching'i tanımlar — Subscription değil."
       }
     ]
   },
@@ -760,22 +992,30 @@
       {
         "optionText": "Input validation, rate limiting, HTTPS-only, CORS policy, least-privilege authorisation, secrets management, and dependency auditing.",
         "isCorrect": true,
-        "explanation": "Correct — the OWASP API Security Top 10 covers broken object-level auth, excessive data exposure, mass assignment, and injection. Auth is just the first layer."
+        "explanation": "Correct — the OWASP API Security Top 10 covers broken object-level auth, excessive data exposure, mass assignment, and injection. Auth is just the first layer.",
+        "optionTextTr": "Girdi doğrulama, rate limiting, yalnızca HTTPS, CORS politikası, en az ayrıcalık prensibi, log, bağımlılık güncelleme.",
+        "explanationTr": "Doğru — API güvenliği savunma katmanlarını gerektirir; kimlik doğrulama tek başına yeterli değildir."
       },
       {
         "optionText": "Use a firewall — it blocks all malicious requests automatically without any API-level changes.",
         "isCorrect": false,
-        "explanation": "Firewalls help but can't catch application-level attacks like injection, mass assignment, or broken auth. API-level validation and authorization are essential."
+        "explanation": "Firewalls help but can't catch application-level attacks like injection, mass assignment, or broken auth. API-level validation and authorization are essential.",
+        "optionTextTr": "Güvenlik duvarı kullanın — tüm kötü niyetli istekleri otomatik engeller.",
+        "explanationTr": "Güvenlik duvarları yardımcı olur ama uygulama düzeyi güvenlik kontrollerinin yerini alamaz."
       },
       {
         "optionText": "Only internal APIs need security measures — public APIs are inherently trusted by browsers.",
         "isCorrect": false,
-        "explanation": "Public APIs are the most exposed. Both internal and external APIs need security — internal APIs are often the target of lateral movement attacks."
+        "explanation": "Public APIs are the most exposed. Both internal and external APIs need security — internal APIs are often the target of lateral movement attacks.",
+        "optionTextTr": "Yalnızca dahili API'ler güvenlik önlemi gerektirir — public API'ler doğası gereği güvenlidir.",
+        "explanationTr": "Public API'ler kötüye kullanım, DDoS ve güvenlik açıklarına karşı daha savunmasızdır."
       },
       {
         "optionText": "HTTPS encryption is sufficient — encrypted requests can't be tampered with.",
         "isCorrect": false,
-        "explanation": "HTTPS protects transport security, not application security. Malicious but valid requests (SQL injection, excessive data requests) can still be sent over HTTPS."
+        "explanation": "HTTPS protects transport security, not application security. Malicious but valid requests (SQL injection, excessive data requests) can still be sent over HTTPS.",
+        "optionTextTr": "HTTPS şifreleme yeterlidir.",
+        "explanationTr": "HTTPS iletim güvenliği sağlar ama uygulama güvenlik açıklarını (enjeksiyon, aşırı erişim vb.) kapsamaz."
       }
     ]
   },
@@ -786,22 +1026,30 @@
       {
         "optionText": "HTTP Cache-Control headers (max-age, stale-while-revalidate), ETag/Last-Modified for conditional requests, and CDN or Redis for response caching.",
         "isCorrect": true,
-        "explanation": "Correct — Cache-Control: public, max-age=60 lets CDNs cache. ETags enable 304 Not Modified responses for unchanged resources. Redis caches expensive DB queries."
+        "explanation": "Correct — Cache-Control: public, max-age=60 lets CDNs cache. ETags enable 304 Not Modified responses for unchanged resources. Redis caches expensive DB queries.",
+        "optionTextTr": "HTTP Cache-Control başlıkları (max-age, stale-while-revalidate), ETag ve kaynak değişmemişse 304 Not Modified.",
+        "explanationTr": "Doğru — HTTP caching protokolünü kullanmak, proxy ve CDN ile birlikte çalışarak en fazla kapsama sağlar."
       },
       {
         "optionText": "Set all responses to Cache-Control: no-store — APIs must always return fresh data.",
         "isCorrect": false,
-        "explanation": "no-store prevents all caching and increases load. Many API responses (product listings, reference data) are safe to cache for seconds or minutes."
+        "explanation": "no-store prevents all caching and increases load. Many API responses (product listings, reference data) are safe to cache for seconds or minutes.",
+        "optionTextTr": "Tüm yanıtları Cache-Control: no-store olarak ayarlayın.",
+        "explanationTr": "Bu tüm önbelleği devre dışı bırakır — yalnızca gerçek zamanlı veya hassas veri için uygundur."
       },
       {
         "optionText": "Caching is the browser's responsibility — APIs don't need to set cache headers.",
         "isCorrect": false,
-        "explanation": "APIs control cacheability via response headers. Without correct Cache-Control headers, browsers and CDNs can't cache or will cache incorrectly."
+        "explanation": "APIs control cacheability via response headers. Without correct Cache-Control headers, browsers and CDNs can't cache or will cache incorrectly.",
+        "optionTextTr": "Caching tarayıcının sorumluluğundadır — API'lerin başlık ayarlaması gerekmez.",
+        "explanationTr": "API'ler Cache-Control başlıkları aracılığıyla caching davranışını açıkça yönetmelidir."
       },
       {
         "optionText": "Only GraphQL APIs support caching — REST APIs are too dynamic to cache.",
         "isCorrect": false,
-        "explanation": "REST's cacheable constraint is actually a core principle of REST. HTTP caching works natively with REST GET endpoints via Cache-Control and ETags."
+        "explanation": "REST's cacheable constraint is actually a core principle of REST. HTTP caching works natively with REST GET endpoints via Cache-Control and ETags.",
+        "optionTextTr": "Yalnızca GraphQL API'leri caching destekler — REST çok dinamik.",
+        "explanationTr": "REST, HTTP caching protokolünü GraphQL'den daha doğal destekler."
       }
     ]
   },
@@ -812,22 +1060,30 @@
       {
         "optionText": "Only add, never remove. New optional fields, new endpoints, new enum values — never remove or rename existing fields or change their types.",
         "isCorrect": true,
-        "explanation": "Correct — the extend-only principle. When breaking changes are unavoidable, version the API (/v2/). Deprecate old versions with sunset headers and ample notice."
+        "explanation": "Correct — the extend-only principle. When breaking changes are unavoidable, version the API (/v2/). Deprecate old versions with sunset headers and ample notice.",
+        "optionTextTr": "Yalnızca ekle, asla kaldırma. Yeni isteğe bağlı alanlar, yeni endpoint'ler, yeni enum değerleri — mevcut endpoint'lerde kırıcı değişiklik yapma.",
+        "explanationTr": "Doğru — geriye dönük uyumluluk, mevcut istemcilerin minimum değişiklikle çalışmaya devam etmesini sağlar."
       },
       {
         "optionText": "Release a new API version for every change — clients always migrate immediately.",
         "isCorrect": false,
-        "explanation": "Versioning for every change forces clients to constantly migrate. Backwards-compatible changes (adding optional fields, new endpoints) don't need a version bump."
+        "explanation": "Versioning for every change forces clients to constantly migrate. Backwards-compatible changes (adding optional fields, new endpoints) don't need a version bump.",
+        "optionTextTr": "Her değişiklik için yeni API versiyonu yayınlayın — istemciler her zaman taşınsın.",
+        "explanationTr": "Bu servis bakım yükü yaratır ve geliştiricileri hayal kırıklığına uğratır."
       },
       {
         "optionText": "Use semantic versioning (MAJOR.MINOR.PATCH) in every API response header.",
         "isCorrect": false,
-        "explanation": "SemVer in response headers is uncommon. API versioning is typically in the URL path (/v1/) or Accept header, and only for major breaking changes."
+        "explanation": "SemVer in response headers is uncommon. API versioning is typically in the URL path (/v1/) or Accept header, and only for major breaking changes.",
+        "optionTextTr": "Her API yanıtında semantic versioning (MAJOR.MINOR.PATCH) kullanın.",
+        "explanationTr": "Bu versiyonlamayı iletebilir ama tek başına geriye dönük uyumluluğu sağlamaz."
       },
       {
         "optionText": "Mark all fields as optional — required fields break backwards compatibility.",
         "isCorrect": false,
-        "explanation": "New optional fields are backwards-compatible; new required fields on existing endpoints break clients. The key is what you do to existing fields, not making everything optional."
+        "explanation": "New optional fields are backwards-compatible; new required fields on existing endpoints break clients. The key is what you do to existing fields, not making everything optional.",
+        "optionTextTr": "Tüm alanları isteğe bağlı işaretleyin — gerekli alanlar geriye dönük uyumluluğu bozar.",
+        "explanationTr": "İstemcilerin beklediği mevcut gerekli alanları değiştirmek hâlâ kırıcı değişiklik sayılır."
       }
     ]
   },
@@ -838,22 +1094,30 @@
       {
         "optionText": "Stateless services, load balancing, health checks, circuit breakers, graceful degradation, and multi-region deployment.",
         "isCorrect": true,
-        "explanation": "Correct — stateless APIs can be horizontally scaled behind a load balancer. Health endpoints enable auto-removal of unhealthy instances. Circuit breakers prevent cascade failures."
+        "explanation": "Correct — stateless APIs can be horizontally scaled behind a load balancer. Health endpoints enable auto-removal of unhealthy instances. Circuit breakers prevent cascade failures.",
+        "optionTextTr": "Durumsuz servisler, yük dengeleme, sağlık kontrolleri, devre kesici ve birden fazla availability zone'da yedeklilik.",
+        "explanationTr": "Doğru — yüksek kullanılabilirlik, dağıtık mimari ve çok katmanlı dayanıklılık stratejisi gerektirir."
       },
       {
         "optionText": "Run the API on a single powerful server — horizontal scaling introduces complexity.",
         "isCorrect": false,
-        "explanation": "A single server is a single point of failure. HA requires redundancy across multiple instances/regions. Horizontal scaling is essential for 99.9%+ uptime."
+        "explanation": "A single server is a single point of failure. HA requires redundancy across multiple instances/regions. Horizontal scaling is essential for 99.9%+ uptime.",
+        "optionTextTr": "API'yi tek güçlü sunucuda çalıştırın — yatay ölçekleme karmaşıklık katar.",
+        "explanationTr": "Tek sunucu tek hata noktası oluşturur — yatay ölçekleme yüksek kullanılabilirlik için gereklidir."
       },
       {
         "optionText": "Cache all responses indefinitely — stale data is better than downtime.",
         "isCorrect": false,
-        "explanation": "Indefinite caching serves stale data and can't be invalidated. HA balances availability with data freshness via appropriate TTLs and stale-while-revalidate."
+        "explanation": "Indefinite caching serves stale data and can't be invalidated. HA balances availability with data freshness via appropriate TTLs and stale-while-revalidate.",
+        "optionTextTr": "Tüm yanıtları süresiz önbelleğe alın — bayat veri kesintiden iyidir.",
+        "explanationTr": "Süresiz önbellekleme veri tutarsızlığına yol açar; TTL ve geçersiz kılma politikaları zorunludur."
       },
       {
         "optionText": "Use WebSockets exclusively — long-lived connections are more efficient than HTTP request-response.",
         "isCorrect": false,
-        "explanation": "WebSockets suit real-time features but are harder to load balance and scale. REST over HTTP is naturally stateless and load-balancer friendly for HA."
+        "explanation": "WebSockets suit real-time features but are harder to load balance and scale. REST over HTTP is naturally stateless and load-balancer friendly for HA.",
+        "optionTextTr": "Yalnızca WebSocket kullanın — uzun ömürlü bağlantılar daha verimlidir.",
+        "explanationTr": "REST/HTTP, API trafiğinin büyük çoğunluğu için hâlâ en uygun ve yaygın protokoldür."
       }
     ]
   },
@@ -864,22 +1128,30 @@
       {
         "optionText": "A single entry point in front of all microservices handling cross-cutting concerns: auth, rate limiting, routing, SSL termination, and observability.",
         "isCorrect": true,
-        "explanation": "Correct — API Gateway (Kong, AWS API Gateway, Nginx) decouples clients from the internal service topology. Clients call one URL; the gateway routes to the right service."
+        "explanation": "Correct — API Gateway (Kong, AWS API Gateway, Nginx) decouples clients from the internal service topology. Clients call one URL; the gateway routes to the right service.",
+        "optionTextTr": "Tüm mikroservislerin önünde tek giriş noktası; cross-cutting concerns (auth, rate limiting, logging) yönetir.",
+        "explanationTr": "Doğru — API Gateway, servis keşfi ve dış istemci arayüzünü basitleştirir."
       },
       {
         "optionText": "A database that stores API configurations and routing rules.",
         "isCorrect": false,
-        "explanation": "API gateways may use a config database but they are reverse proxies/middleware, not databases themselves."
+        "explanation": "API gateways may use a config database but they are reverse proxies/middleware, not databases themselves.",
+        "optionTextTr": "API yapılandırmalarını ve yönlendirme kurallarını saklayan veritabanı.",
+        "explanationTr": "API Gateway bir veritabanı değil — proxy ve middleware katmanıdır."
       },
       {
         "optionText": "A payment gateway for processing API subscription billing.",
         "isCorrect": false,
-        "explanation": "Payment gateways process payments (Stripe). API gateways handle HTTP routing, authentication, and cross-cutting concerns in microservice architectures."
+        "explanation": "Payment gateways process payments (Stripe). API gateways handle HTTP routing, authentication, and cross-cutting concerns in microservice architectures.",
+        "optionTextTr": "API subscription faturalamasını işleyen ödeme gateway'i.",
+        "explanationTr": "Ödeme gateway'i ve API gateway farklı kavramlardır."
       },
       {
         "optionText": "A developer portal where API consumers browse and test endpoints.",
         "isCorrect": false,
-        "explanation": "Developer portals are documentation/testing UIs. API gateways are runtime infrastructure — reverse proxies that sit in front of your services."
+        "explanation": "Developer portals are documentation/testing UIs. API gateways are runtime infrastructure — reverse proxies that sit in front of your services.",
+        "optionTextTr": "API tüketicilerinin endpoint'leri taradığı ve test ettiği geliştirici portalı.",
+        "explanationTr": "Bu geliştirici portalını tanımlar — API Gateway değil."
       }
     ]
   },
@@ -890,22 +1162,30 @@
       {
         "optionText": "Services communicate by producing and consuming events via a broker (Kafka, SQS) — decoupling producers from consumers. APIs trigger events; webhooks deliver them.",
         "isCorrect": true,
-        "explanation": "Correct — EDA enables async, resilient microservices. REST APIs can trigger events; webhooks are outbound event notifications. Kafka suits high-throughput event streams."
+        "explanation": "Correct — EDA enables async, resilient microservices. REST APIs can trigger events; webhooks are outbound event notifications. Kafka suits high-throughput event streams.",
+        "optionTextTr": "Servisler broker (Kafka, RabbitMQ) aracılığıyla event üreterek ve tüketerek iletişim kurar; REST API'lardan bağımsız.",
+        "explanationTr": "Doğru — EDA, doğrudan REST çağrıları yerine zaman uyumsuzluk ve servis ayrışması sağlar."
       },
       {
         "optionText": "Event-driven means all API calls are asynchronous with no response returned.",
         "isCorrect": false,
-        "explanation": "APIs can be synchronous (REST) or event-driven (webhooks, message queues). EDA is about decoupling services via events, not eliminating all synchronous responses."
+        "explanation": "APIs can be synchronous (REST) or event-driven (webhooks, message queues). EDA is about decoupling services via events, not eliminating all synchronous responses.",
+        "optionTextTr": "Event-driven, tüm API çağrılarının yanıtsız asenkron olduğu anlamına gelir.",
+        "explanationTr": "EDA, yanıt olmadığı anlamına gelmez — REST'e karşı zaman uyumsuzluk ödünleşimlerini tanımlar."
       },
       {
         "optionText": "Event-driven architecture is a frontend pattern — it refers to DOM event listeners.",
         "isCorrect": false,
-        "explanation": "EDA is a distributed systems architecture pattern. DOM events are a browser-level concept — both use 'events' but in completely different contexts."
+        "explanation": "EDA is a distributed systems architecture pattern. DOM events are a browser-level concept — both use 'events' but in completely different contexts.",
+        "optionTextTr": "Event-driven mimari, DOM olaylarına atıfta bulunan frontend desenidir.",
+        "explanationTr": "EDA backend mimarisini tanımlar — yalnızca frontend değil."
       },
       {
         "optionText": "GraphQL subscriptions are the only API technology that supports event-driven patterns.",
         "isCorrect": false,
-        "explanation": "Webhooks, WebSockets, Server-Sent Events, and message queues all support event-driven patterns. GraphQL subscriptions are one implementation, not the only option."
+        "explanation": "Webhooks, WebSockets, Server-Sent Events, and message queues all support event-driven patterns. GraphQL subscriptions are one implementation, not the only option.",
+        "optionTextTr": "Yalnızca GraphQL subscription, event-driven mimariyi destekleyen API teknolojisidir.",
+        "explanationTr": "Event-driven mimari, GraphQL subscription'a bağımlı değildir — mesaj broker'ları ve webhook'lar da destekler."
       }
     ]
   },
@@ -916,22 +1196,30 @@
       {
         "optionText": "Creating a simulated API that returns fake responses — enables frontend development and testing before the real API is ready.",
         "isCorrect": true,
-        "explanation": "Correct — tools: MSW (Mock Service Worker) for browser/Node, json-server, Postman mock servers. Mocking unblocks teams, enables contract testing, and speeds up CI."
+        "explanation": "Correct — tools: MSW (Mock Service Worker) for browser/Node, json-server, Postman mock servers. Mocking unblocks teams, enables contract testing, and speeds up CI.",
+        "optionTextTr": "Sahte yanıtlar döndüren simüle edilmiş API oluşturma — frontend ve backend bağımsız geliştirme sağlar.",
+        "explanationTr": "Doğru — API mocking, bağımlı servisler hazır olmadan paralel geliştirmeye ve güvenilir test ortamlarına olanak tanır."
       },
       {
         "optionText": "Writing unit tests that mock the database layer inside the API service.",
         "isCorrect": false,
-        "explanation": "DB mocking is test isolation for unit tests. API mocking simulates the entire API surface for consumers (frontends, integration tests) to use."
+        "explanation": "DB mocking is test isolation for unit tests. API mocking simulates the entire API surface for consumers (frontends, integration tests) to use.",
+        "optionTextTr": "API sunucusunun içinde veritabanı katmanını mock'layan unit test yazma.",
+        "explanationTr": "Bu test mock'lamasını tanımlar — API mocking değil."
       },
       {
         "optionText": "A security technique to detect fake API clients pretending to be legitimate users.",
         "isCorrect": false,
-        "explanation": "Detecting fake clients uses bot detection, rate limiting, and fraud signals. API mocking is a development/testing technique — not a security measure."
+        "explanation": "Detecting fake clients uses bot detection, rate limiting, and fraud signals. API mocking is a development/testing technique — not a security measure.",
+        "optionTextTr": "Sahte API istemcilerini tespit eden güvenlik tekniği.",
+        "explanationTr": "Bu dolandırıcılık tespitini tanımlar — API mocking değil."
       },
       {
         "optionText": "API mocking is only useful for third-party APIs — internal APIs should always be tested against production.",
         "isCorrect": false,
-        "explanation": "Mocking is valuable for both internal and external APIs. Testing against production risks data corruption and is often impossible in CI pipelines."
+        "explanation": "Mocking is valuable for both internal and external APIs. Testing against production risks data corruption and is often impossible in CI pipelines.",
+        "optionTextTr": "API mocking yalnızca üçüncü taraf API'ler için yararlıdır.",
+        "explanationTr": "API mocking, hem dahili hem harici API'ler için değerlidir."
       }
     ]
   },
@@ -942,22 +1230,30 @@
       {
         "optionText": "Synchronous: client waits for response (REST/RPC). Asynchronous: client gets immediate acknowledgement; result arrives later via webhook, polling, or message queue.",
         "isCorrect": true,
-        "explanation": "Correct — async APIs suit long-running work: video encoding, report generation. Pattern: POST /jobs → 202 Accepted + job ID → poll GET /jobs/id or receive webhook."
+        "explanation": "Correct — async APIs suit long-running work: video encoding, report generation. Pattern: POST /jobs → 202 Accepted + job ID → poll GET /jobs/id or receive webhook.",
+        "optionTextTr": "Senkron: istemci yanıtı bekler (REST/RPC). Asenkron: istemci devam eder; webhook veya polling ile bildirim alır.",
+        "explanationTr": "Doğru — asenkron API'ler, uzun süren işlemler ve yüksek verimli sistemler için uygundur."
       },
       {
         "optionText": "Synchronous APIs use HTTP; asynchronous APIs use WebSockets — the protocol defines sync/async.",
         "isCorrect": false,
-        "explanation": "Both sync and async patterns can run over HTTP. The distinction is whether the client waits for the result, not the transport protocol."
+        "explanation": "Both sync and async patterns can run over HTTP. The distinction is whether the client waits for the result, not the transport protocol.",
+        "optionTextTr": "Senkron API'ler HTTP; asenkron API'ler WebSocket kullanır.",
+        "explanationTr": "HTTP, hem senkron hem asenkron desenleri destekler — ayrım protokol değil iletişim modelidir."
       },
       {
         "optionText": "Asynchronous APIs are always faster — synchronous APIs are a legacy pattern.",
         "isCorrect": false,
-        "explanation": "Async adds complexity (polling, webhooks, idempotency). Sync is simpler and often faster for short operations. Choose based on operation duration and UX needs."
+        "explanation": "Async adds complexity (polling, webhooks, idempotency). Sync is simpler and often faster for short operations. Choose based on operation duration and UX needs.",
+        "optionTextTr": "Asenkron API'ler her zaman daha hızlıdır.",
+        "explanationTr": "Asenkron API'ler ölçeklenebilirliği artırır ama bireysel işlemler için aynı veya daha yüksek gecikme içerebilir."
       },
       {
         "optionText": "Async APIs require GraphQL; sync APIs require REST.",
         "isCorrect": false,
-        "explanation": "Both REST and GraphQL support sync and async patterns. REST supports async via 202 Accepted + polling; GraphQL supports async via subscriptions."
+        "explanation": "Both REST and GraphQL support sync and async patterns. REST supports async via 202 Accepted + polling; GraphQL supports async via subscriptions.",
+        "optionTextTr": "Async API'ler GraphQL; senkron API'ler REST gerektirir.",
+        "explanationTr": "Her iki desen de REST veya GraphQL ile uygulanabilir."
       }
     ]
   },
@@ -968,22 +1264,30 @@
       {
         "optionText": "Unit tests for pure functions, integration tests against a real DB, contract tests for API consumers, and load tests for performance — use Postman/Vitest/Supertest.",
         "isCorrect": true,
-        "explanation": "Correct — integration tests are the most valuable layer for APIs. Contract tests (Pact) ensure the API and consumers stay in sync without end-to-end tests."
+        "explanation": "Correct — integration tests are the most valuable layer for APIs. Contract tests (Pact) ensure the API and consumers stay in sync without end-to-end tests.",
+        "optionTextTr": "Saf fonksiyonlar için unit test, gerçek DB ve dış servisler için entegrasyon testi, contract test.",
+        "explanationTr": "Doğru — katmanlı test stratejisi, yüksek güven ve hızlı geri bildirim kombinasyonu sağlar."
       },
       {
         "optionText": "Only test the happy path — error handling is too unpredictable to test reliably.",
         "isCorrect": false,
-        "explanation": "Error handling tests are essential. 400, 401, 404, 422, and 500 responses must be tested — they're often where bugs hide."
+        "explanation": "Error handling tests are essential. 400, 401, 404, 422, and 500 responses must be tested — they're often where bugs hide.",
+        "optionTextTr": "Yalnızca başarılı yolu test edin — hata yönetimi çok tahmin edilemez.",
+        "explanationTr": "Hata yönetimi test edilmeli — kullanıcılar çoğunlukla kenar durumlarla karşılaşır."
       },
       {
         "optionText": "Manual testing in Postman is sufficient for production APIs — automated tests add overhead.",
         "isCorrect": false,
-        "explanation": "Manual testing can't catch regressions. Automated API tests run in CI on every PR, preventing breaking changes from reaching production."
+        "explanation": "Manual testing can't catch regressions. Automated API tests run in CI on every PR, preventing breaking changes from reaching production.",
+        "optionTextTr": "Postman'da manuel test, üretim API'leri için yeterlidir.",
+        "explanationTr": "Manuel test, regression koruması veya CI entegrasyonu sağlamaz."
       },
       {
         "optionText": "Test only with mocked services — real external calls are too slow for CI.",
         "isCorrect": false,
-        "explanation": "Mocks speed up unit tests but integration tests must hit real services (or realistic replicas) to catch actual integration bugs. Use test databases in CI."
+        "explanation": "Mocks speed up unit tests but integration tests must hit real services (or realistic replicas) to catch actual integration bugs. Use test databases in CI.",
+        "optionTextTr": "Yalnızca mock servislerle test edin — gerçek harici çağrılar çok yavaş.",
+        "explanationTr": "Gerçek harici çağrılar, entegrasyon testlerinde değerli güven sağlar; yalnızca stratejik olarak mock'lanmalıdır."
       }
     ]
   },
@@ -994,22 +1298,30 @@
       {
         "optionText": "Gateway rate limiting (Nginx, Cloudflare) operates before requests hit your app; application-level uses middleware inside your service for fine-grained per-user logic.",
         "isCorrect": true,
-        "explanation": "Correct — gateway limiting is faster (no app overhead) and protects infra; application limiting enables business-rule logic like 'free tier = 100 req/day'."
+        "explanation": "Correct — gateway limiting is faster (no app overhead) and protects infra; application limiting enables business-rule logic like 'free tier = 100 req/day'.",
+        "optionTextTr": "Gateway rate limiting (Nginx, Cloudflare), istekler sunucuya ulaşmadan önce çalışır; uygulama düzeyinde daha ayrıntılı (kullanıcı başına) kontrol sağlar.",
+        "explanationTr": "Doğru — her ikisi de tamamlayıcıdır: gateway kaba trafik koruma; uygulama ince taneli kural uygular."
       },
       {
         "optionText": "They are identical — use one or the other, never both.",
         "isCorrect": false,
-        "explanation": "They complement each other. Gateway limiting for coarse infrastructure protection; app-level for fine-grained business logic. Using both is a defence-in-depth strategy."
+        "explanation": "They complement each other. Gateway limiting for coarse infrastructure protection; app-level for fine-grained business logic. Using both is a defence-in-depth strategy.",
+        "optionTextTr": "Bunlar özdeştir — birini veya diğerini kullanın, asla ikisini birlikte değil.",
+        "explanationTr": "Her ikisi de tamamlayıcı roller oynar; çoğu üretim sistemi her iki katmana da sahiptir."
       },
       {
         "optionText": "Application-level rate limiting requires OAuth — the gateway can't track user identity.",
         "isCorrect": false,
-        "explanation": "Gateways can rate limit by IP or API key without OAuth. Application-level limiting adds user-identity-aware logic after authentication."
+        "explanation": "Gateways can rate limit by IP or API key without OAuth. Application-level limiting adds user-identity-aware logic after authentication.",
+        "optionTextTr": "Uygulama düzeyi rate limiting, OAuth gerektirir.",
+        "explanationTr": "Rate limiting, auth mekanizmasından bağımsız uygulanabilir."
       },
       {
         "optionText": "Gateway rate limiting only works for authenticated requests.",
         "isCorrect": false,
-        "explanation": "Gateway limiting works for any request — by IP, API key, or globally. It's often the first line of defence against unauthenticated floods."
+        "explanation": "Gateway limiting works for any request — by IP, API key, or globally. It's often the first line of defence against unauthenticated floods.",
+        "optionTextTr": "Gateway rate limiting yalnızca kimliği doğrulanmış istekler için çalışır.",
+        "explanationTr": "Gateway rate limiting anonim ve kimliği doğrulanmış isteklere uygulanabilir."
       }
     ]
   },
@@ -1020,22 +1332,30 @@
       {
         "optionText": "tRPC generates a fully type-safe API client from your server procedures — no code generation, no schema file, types flow automatically end-to-end.",
         "isCorrect": true,
-        "explanation": "Correct — tRPC eliminates the type gap between server and client. Change a server return type and the client TypeScript error appears immediately. Ideal for Next.js full-stack."
+        "explanation": "Correct — tRPC eliminates the type gap between server and client. Change a server return type and the client TypeScript error appears immediately. Ideal for Next.js full-stack.",
+        "optionTextTr": "tRPC, şema veya kod üretmeden sunucu prosedürlerinizden tam tip güvenli API istemcisi üretir.",
+        "explanationTr": "Doğru — tRPC, TypeScript projelerinde API katmanını sıfır kod üretimiyle ortadan kaldırır."
       },
       {
         "optionText": "tRPC is a REST framework that adds TypeScript types to Express routes.",
         "isCorrect": false,
-        "explanation": "tRPC uses procedures (query/mutation), not REST routes. It's a separate paradigm — not REST with types added on top."
+        "explanation": "tRPC uses procedures (query/mutation), not REST routes. It's a separate paradigm — not REST with types added on top.",
+        "optionTextTr": "tRPC, Express rotalarına TypeScript tipleri ekleyen REST framework'ü.",
+        "explanationTr": "Bu REST framework'lerini tanımlar — tRPC, HTTP semantiği yerine prosedür çağrısı modelini kullanır."
       },
       {
         "optionText": "tRPC requires GraphQL — it's a TypeScript wrapper around the GraphQL schema.",
         "isCorrect": false,
-        "explanation": "tRPC is independent of GraphQL. It uses TypeScript inference directly without a schema language. It's an alternative to both REST and GraphQL for TypeScript apps."
+        "explanation": "tRPC is independent of GraphQL. It uses TypeScript inference directly without a schema language. It's an alternative to both REST and GraphQL for TypeScript apps.",
+        "optionTextTr": "tRPC GraphQL gerektirir.",
+        "explanationTr": "tRPC, GraphQL'den bağımsızdır — kendi tip güvenli RPC katmanını oluşturur."
       },
       {
         "optionText": "tRPC is only suitable for microservices — monolithic Next.js apps should use REST.",
         "isCorrect": false,
-        "explanation": "tRPC is especially popular with Next.js monolithic apps (T3 Stack). Its end-to-end type safety shines in full-stack TypeScript projects."
+        "explanation": "tRPC is especially popular with Next.js monolithic apps (T3 Stack). Its end-to-end type safety shines in full-stack TypeScript projects.",
+        "optionTextTr": "tRPC yalnızca mikroservisler için uygun — monolitik Next.js uygulamaları için değil.",
+        "explanationTr": "tRPC, özellikle Next.js projelerinde kullanışlıdır; monolitik veya mikroservis için uygundur."
       }
     ]
   },
@@ -1046,22 +1366,30 @@
       {
         "optionText": "BFF pattern (separate backend per client type), or a flexible core API with field selection/sparse fieldsets, combined with versioning for third-party stability.",
         "isCorrect": true,
-        "explanation": "Correct — mobile needs smaller payloads; web may need richer data; third-party needs stability. BFF tailors data per client; GraphQL field selection also solves over-fetching."
+        "explanation": "Correct — mobile needs smaller payloads; web may need richer data; third-party needs stability. BFF tailors data per client; GraphQL field selection also solves over-fetching.",
+        "optionTextTr": "BFF deseni (istemci türü başına ayrı backend) veya bir çekirdek API ve istemciye özgü BFF katmanı kombinasyonu.",
+        "explanationTr": "Doğru — BFF, farklı istemci gereksinimlerini genel API'yi kirletmeden karşılar."
       },
       {
         "optionText": "Build one endpoint that returns all possible data — clients take what they need.",
         "isCorrect": false,
-        "explanation": "Over-fetching wastes bandwidth (critical on mobile) and exposes unnecessary data. Design endpoints for the consumer's needs."
+        "explanation": "Over-fetching wastes bandwidth (critical on mobile) and exposes unnecessary data. Design endpoints for the consumer's needs.",
+        "optionTextTr": "Tüm olası veriyi döndüren tek endpoint — istemciler ihtiyaç duymadıklarını atar.",
+        "explanationTr": "Bu over-fetching sorununu yaratır — mobil istemciler için özellikle verimsizdir."
       },
       {
         "optionText": "Build separate APIs entirely — one per client type with no shared code.",
         "isCorrect": false,
-        "explanation": "Completely separate APIs duplicate business logic and multiply maintenance burden. The BFF pattern adds a thin client-specific layer on top of a shared core API."
+        "explanation": "Completely separate APIs duplicate business logic and multiply maintenance burden. The BFF pattern adds a thin client-specific layer on top of a shared core API.",
+        "optionTextTr": "Her istemci türü için ayrı tam API inşa et — paylaşım yok.",
+        "explanationTr": "Bu önemli kod tekrarına yol açar — BFF paylaşılan çekirdeği korurken istemciye özgü katman ekler."
       },
       {
         "optionText": "Third-party clients should use GraphQL; first-party clients should use REST.",
         "isCorrect": false,
-        "explanation": "Both GraphQL and REST can serve first- and third-party clients. The choice depends on use case, not client ownership."
+        "explanation": "Both GraphQL and REST can serve first- and third-party clients. The choice depends on use case, not client ownership.",
+        "optionTextTr": "Üçüncü taraf istemciler GraphQL; birinci taraf istemciler REST kullanmalı.",
+        "explanationTr": "İstemci türü API teknoloji seçimini zorunlu kılmaz."
       }
     ]
   },
@@ -1072,22 +1400,30 @@
       {
         "optionText": "Return 202 Accepted with a job ID immediately, then let clients poll GET /jobs/{id} or receive a webhook when done.",
         "isCorrect": true,
-        "explanation": "Correct — the async job pattern avoids HTTP timeouts and lets clients continue. The job resource tracks status: pending → processing → completed/failed."
+        "explanation": "Correct — the async job pattern avoids HTTP timeouts and lets clients continue. The job resource tracks status: pending → processing → completed/failed.",
+        "optionTextTr": "Hemen 202 Accepted ve iş ID'si döndür; istemciler durum endpoint'ini polling yapabilir veya webhook bekleyebilir.",
+        "explanationTr": "Doğru — bu asenkron iş deseni, uzun HTTP timeout'ları olmadan uzun çalışan operasyonlar için standarttır."
       },
       {
         "optionText": "Set a very long HTTP timeout — 10 minutes should cover any operation.",
         "isCorrect": false,
-        "explanation": "Long timeouts block connections, waste resources, and break at proxies/load balancers. Async job patterns are the correct solution for long-running work."
+        "explanation": "Long timeouts block connections, waste resources, and break at proxies/load balancers. Async job patterns are the correct solution for long-running work.",
+        "optionTextTr": "Çok uzun HTTP timeout ayarlayın — 10 dakika tüm operasyonları kapsar.",
+        "explanationTr": "Uzun timeout'lar bağlantı tükenmesine yol açar ve kullanıcı deneyimini bozar."
       },
       {
         "optionText": "Use WebSockets — REST can't handle long-running operations.",
         "isCorrect": false,
-        "explanation": "REST handles long operations via the async job pattern (202 + polling/webhook). WebSockets are for real-time bidirectional communication, not the only option."
+        "explanation": "REST handles long operations via the async job pattern (202 + polling/webhook). WebSockets are for real-time bidirectional communication, not the only option.",
+        "optionTextTr": "WebSocket kullanın — REST uzun süren operasyonları kaldıramaz.",
+        "explanationTr": "REST, asenkron iş deseni ve polling ile uzun süren operasyonları destekler."
       },
       {
         "optionText": "Stream the response progressively — chunked transfer encoding keeps the connection alive.",
         "isCorrect": false,
-        "explanation": "Streaming works for some cases (logs, progress), but has timeout and infrastructure limitations. The 202+polling pattern is more robust for truly long operations."
+        "explanation": "Streaming works for some cases (logs, progress), but has timeout and infrastructure limitations. The 202+polling pattern is more robust for truly long operations.",
+        "optionTextTr": "Yanıtı kademeli olarak stream edin — chunked transfer encoding bağlantıyı açık tutar.",
+        "explanationTr": "Streaming bazı durumlarda işe yarar ama asenkron iş + status polling daha yaygın çözümdür."
       }
     ]
   },
@@ -1098,22 +1434,30 @@
       {
         "optionText": "In a Route Handler, return a ReadableStream with Content-Type: text/event-stream — the client uses the EventSource API to receive events.",
         "isCorrect": true,
-        "explanation": "Correct — SSE is one-directional (server→client) and works over HTTP. Simpler than WebSockets for notifications and live feeds. Next.js App Router Route Handlers support streaming responses."
+        "explanation": "Correct — SSE is one-directional (server→client) and works over HTTP. Simpler than WebSockets for notifications and live feeds. Next.js App Router Route Handlers support streaming responses.",
+        "optionTextTr": "Route Handler içinde Content-Type: text/event-stream ile ReadableStream döndürün.",
+        "explanationTr": "Doğru — Next.js App Router Route Handler'ları SSE akışları için ReadableStream destekler."
       },
       {
         "optionText": "SSE requires a WebSocket server — Next.js can't implement it with Route Handlers.",
         "isCorrect": false,
-        "explanation": "SSE uses regular HTTP, not WebSockets. Next.js Route Handlers can return streaming responses with the correct Content-Type header."
+        "explanation": "SSE uses regular HTTP, not WebSockets. Next.js Route Handlers can return streaming responses with the correct Content-Type header.",
+        "optionTextTr": "SSE, WebSocket sunucusu gerektirir — Next.js bunu desteklemez.",
+        "explanationTr": "Next.js Route Handler'ları, WebSocket gerektirmeden SSE'yi destekler."
       },
       {
         "optionText": "Use the socket.io library — it's required for all real-time features in Next.js.",
         "isCorrect": false,
-        "explanation": "Socket.io is optional and adds WebSocket complexity. SSE via ReadableStream is a native, lightweight alternative for server-to-client push."
+        "explanation": "Socket.io is optional and adds WebSocket complexity. SSE via ReadableStream is a native, lightweight alternative for server-to-client push.",
+        "optionTextTr": "socket.io kütüphanesi gereklidir.",
+        "explanationTr": "SSE için socket.io gerekmez — yerleşik stream API'leri yeterlidir."
       },
       {
         "optionText": "SSE is deprecated — use GraphQL subscriptions instead for all real-time features.",
         "isCorrect": false,
-        "explanation": "SSE is not deprecated and is simpler than GraphQL subscriptions for one-directional push. It works natively in browsers without additional libraries."
+        "explanation": "SSE is not deprecated and is simpler than GraphQL subscriptions for one-directional push. It works natively in browsers without additional libraries.",
+        "optionTextTr": "SSE kullanımdan kalktı — tüm gerçek zamanlı özellikler için GraphQL subscription kullanın.",
+        "explanationTr": "SSE hâlâ yaygın ve geçerli; GraphQL subscription ile birbirini dışlamaz."
       }
     ]
   },
@@ -1124,22 +1468,30 @@
       {
         "optionText": "Accept q (query string) + filter/sort/pagination params; return results with metadata (total, page, hasMore); back with Elasticsearch or Postgres full-text search.",
         "isCorrect": true,
-        "explanation": "Correct — GET /products?q=laptop&category=electronics&sort=price&page=2 is idiomatic. Return pagination metadata so clients can render page controls."
+        "explanation": "Correct — GET /products?q=laptop&category=electronics&sort=price&page=2 is idiomatic. Return pagination metadata so clients can render page controls.",
+        "optionTextTr": "q (sorgu dizisi) + filtre/sırala/sayfalama paramları kabul edin; anlamlı sonuçlar için alakalılık puanı, facet ve toplam döndürün.",
+        "explanationTr": "Doğru — iyi arama API'leri anlamlı sonuçlar için zengin filtreleme ve sıralama seçenekleri sunar."
       },
       {
         "optionText": "Use POST for all searches — GET requests can't carry search parameters.",
         "isCorrect": false,
-        "explanation": "GET requests support query parameters perfectly for search. POST search (with a body) is valid for complex queries but breaks HTTP caching and bookmarkability."
+        "explanation": "GET requests support query parameters perfectly for search. POST search (with a body) is valid for complex queries but breaks HTTP caching and bookmarkability.",
+        "optionTextTr": "Tüm aramalar için POST kullanın — GET istekleri arama parametrelerini taşıyamaz.",
+        "explanationTr": "GET, sorgu parametreleri aracılığıyla arama yüklerini mükemmel biçimde taşıyabilir."
       },
       {
         "optionText": "Return all matching results in one response — pagination adds unnecessary complexity.",
         "isCorrect": false,
-        "explanation": "Returning all results can be millions of records. Cursor-based or offset pagination is essential for search APIs to be performant and usable."
+        "explanation": "Returning all results can be millions of records. Cursor-based or offset pagination is essential for search APIs to be performant and usable.",
+        "optionTextTr": "Tüm eşleşen sonuçları tek yanıtta döndürün — sayfalama gereksiz karmaşıklık ekler.",
+        "explanationTr": "Büyük sonuç kümelerinde sayfalama şarttır — tek yanıtta tüm sonuç performans felaketi olur."
       },
       {
         "optionText": "Full-text search must be implemented in the API layer — databases can't handle it.",
         "isCorrect": false,
-        "explanation": "PostgreSQL has built-in full-text search (tsvector); Elasticsearch and Typesense are purpose-built. The API delegates search logic to the appropriate backend."
+        "explanation": "PostgreSQL has built-in full-text search (tsvector); Elasticsearch and Typesense are purpose-built. The API delegates search logic to the appropriate backend.",
+        "optionTextTr": "Tam metin arama API katmanında uygulanmalı — veritabanları yapamaz.",
+        "explanationTr": "PostgreSQL, Elasticsearch ve diğerleri güçlü tam metin arama yeteneklerine sahiptir."
       }
     ]
   },
@@ -1150,22 +1502,30 @@
       {
         "optionText": "Pre-registered query strings stored by hash on the server — clients send only the hash, reducing payload size and enabling query allowlisting for security.",
         "isCorrect": true,
-        "explanation": "Correct — persisted queries (APQ) solve two problems: large query payloads over the wire, and arbitrary query execution security. Only pre-approved queries run in production."
+        "explanation": "Correct — persisted queries (APQ) solve two problems: large query payloads over the wire, and arbitrary query execution security. Only pre-approved queries run in production.",
+        "optionTextTr": "Hash ile sunucuda saklanan önceden kayıtlı sorgu dizileri — istemciler tam sorgu yerine hash gönderir, saldırı yüzeyini azaltır.",
+        "explanationTr": "Doğru — kalıcı sorgular hem güvenliği (sorgu enjeksiyonu önleme) hem de performansı (önceden doğrulama) artırır."
       },
       {
         "optionText": "Cached query results stored in Redis — they prevent the database from being queried twice.",
         "isCorrect": false,
-        "explanation": "Response caching stores results; persisted queries store the query definition. They're separate optimisations."
+        "explanation": "Response caching stores results; persisted queries store the query definition. They're separate optimisations.",
+        "optionTextTr": "Veritabanının tekrar sorgulanmasını önlemek için Redis'te saklanan önbelleğe alınmış sorgu sonuçları.",
+        "explanationTr": "Bu sorgu sonuç önbelleğini tanımlar — kalıcı sorgular değil."
       },
       {
         "optionText": "A GraphQL feature that saves user query history for analytics purposes.",
         "isCorrect": false,
-        "explanation": "Analytics on query usage is a separate concern. Persisted queries are a performance and security mechanism — they don't track user behaviour."
+        "explanation": "Analytics on query usage is a separate concern. Persisted queries are a performance and security mechanism — they don't track user behaviour.",
+        "optionTextTr": "Analitik amaçlı kullanıcı sorgu geçmişini kaydeden GraphQL özelliği.",
+        "explanationTr": "Kalıcı sorgular analitik kayıt değil — güvenlik ve performans optimizasyonu içindir."
       },
       {
         "optionText": "Subscriptions that stay active indefinitely — they 'persist' the WebSocket connection.",
         "isCorrect": false,
-        "explanation": "Persistent subscriptions are a different concept. Persisted queries are pre-registered query strings identified by hash to reduce payload size and improve security."
+        "explanation": "Persistent subscriptions are a different concept. Persisted queries are pre-registered query strings identified by hash to reduce payload size and improve security.",
+        "optionTextTr": "Süresiz aktif kalan subscription'lar — bağlantıyı 'kalıcı' tutan.",
+        "explanationTr": "Bu WebSocket bağlantı dayanıklılığını tanımlar — kalıcı sorgular değil."
       }
     ]
   },
@@ -1176,22 +1536,30 @@
       {
         "optionText": "Three pillars: Metrics (request rate, latency p99, error rate), Logs (structured JSON per request), Traces (distributed request flow across services). Use Datadog or Grafana.",
         "isCorrect": true,
-        "explanation": "Correct — the observability trinity. Set SLOs on p99 latency and error rate. Alerts fire when thresholds are breached. Distributed tracing (OpenTelemetry) connects requests across microservices."
+        "explanation": "Correct — the observability trinity. Set SLOs on p99 latency and error rate. Alerts fire when thresholds are breached. Distributed tracing (OpenTelemetry) connects requests across microservices.",
+        "optionTextTr": "Üç sütun: Metrikler (istek hızı, gecikme p99, hata oranı), Günlükler (yapılandırılmış), İzler (dağıtık). Uyarılar ve gösterge paneli.",
+        "explanationTr": "Doğru — proaktif gözlemlenebilirlik, sorun tespitini reaktif log incelemesinden önce sağlar."
       },
       {
         "optionText": "Check server logs manually after incidents — proactive monitoring adds unnecessary overhead.",
         "isCorrect": false,
-        "explanation": "Reactive log checking misses issues before they escalate. Proactive alerting on metrics (error rate spike, latency degradation) catches problems before users report them."
+        "explanation": "Reactive log checking misses issues before they escalate. Proactive alerting on metrics (error rate spike, latency degradation) catches problems before users report them.",
+        "optionTextTr": "Olaylardan sonra sunucu loglarını manuel inceleyin.",
+        "explanationTr": "Reaktif log incelemesi yetersizdir — proaktif izleme ve uyarı şarttır."
       },
       {
         "optionText": "Monitor only the database — API issues always originate from slow queries.",
         "isCorrect": false,
-        "explanation": "API issues can originate from many sources: slow external calls, memory leaks, config errors, downstream failures. Monitor all layers."
+        "explanation": "API issues can originate from many sources: slow external calls, memory leaks, config errors, downstream failures. Monitor all layers.",
+        "optionTextTr": "Yalnızca veritabanını izleyin — API sorunları her zaman yavaş sorgulardan kaynaklanır.",
+        "explanationTr": "API sorunları ağ, harici servisler ve uygulama mantığından da kaynaklanabilir."
       },
       {
         "optionText": "Use console.log statements throughout the API code — they provide sufficient observability.",
         "isCorrect": false,
-        "explanation": "Unstructured console.log output is unqueryable and hard to correlate. Structured logging (JSON with request ID, trace ID) with a log aggregation platform is the minimum."
+        "explanation": "Unstructured console.log output is unqueryable and hard to correlate. Structured logging (JSON with request ID, trace ID) with a log aggregation platform is the minimum.",
+        "optionTextTr": "API kodu genelinde console.log kullanın — kapsamlı veri sağlar.",
+        "explanationTr": "Yapılandırılmamış console.log, üretimde yönetilmesi güç log hacmi oluşturur; yapılandırılmış loglama tercih edilir."
       }
     ]
   },
@@ -1202,22 +1570,30 @@
       {
         "optionText": "Understand consumers first, design resources around business domain, choose REST/GraphQL/tRPC based on client needs, document with OpenAPI, and version from day one.",
         "isCorrect": true,
-        "explanation": "Correct — start with the consumer (what data do they need, from where?) before implementation. Design-first using OpenAPI lets frontend and backend teams work in parallel."
+        "explanation": "Correct — start with the consumer (what data do they need, from where?) before implementation. Design-first using OpenAPI lets frontend and backend teams work in parallel.",
+        "optionTextTr": "Önce tüketicileri anlayın, kaynakları iş alanına göre tasarlayın, küçük başlayın ve gerçek kullanım verisine göre yineleyin.",
+        "explanationTr": "Doğru — consumer-first tasarım, gereksiz endpoint'leri ve kötü soyutlamaları önler."
       },
       {
         "optionText": "Copy an existing internal API structure — consistency across APIs is more important than optimal design.",
         "isCorrect": false,
-        "explanation": "Consistency matters but blind copying propagates existing mistakes. Greenfield is an opportunity to design correctly. Adopt patterns from successful public APIs (Stripe, GitHub)."
+        "explanation": "Consistency matters but blind copying propagates existing mistakes. Greenfield is an opportunity to design correctly. Adopt patterns from successful public APIs (Stripe, GitHub).",
+        "optionTextTr": "Mevcut dahili API yapısını kopyalayın — API'ler genelinde tutarlılık önemlidir.",
+        "explanationTr": "Uyumu körü körüne kopyalamak, gereksinimlerle uyumsuz API'lere yol açabilir."
       },
       {
         "optionText": "Build the database schema first, then generate the API from it automatically.",
         "isCorrect": false,
-        "explanation": "DB-first design leaks implementation details into the API contract. Design the API for consumers first; let the DB schema follow the domain model."
+        "explanation": "DB-first design leaks implementation details into the API contract. Design the API for consumers first; let the DB schema follow the domain model.",
+        "optionTextTr": "Önce veritabanı şeması oluşturun, sonra API'yi otomatik üretin.",
+        "explanationTr": "Veritabanı şeması API'yi sürüklememelidir — business domain API'yi, veritabanını sürüklemeli."
       },
       {
         "optionText": "Start coding immediately — over-planning an API is premature optimisation.",
         "isCorrect": false,
-        "explanation": "API design decisions are expensive to change once clients depend on them. A design-first approach (OpenAPI mock → feedback → implement) prevents costly rework."
+        "explanation": "API design decisions are expensive to change once clients depend on them. A design-first approach (OpenAPI mock → feedback → implement) prevents costly rework.",
+        "optionTextTr": "Hemen kodlamaya başlayın — API'yi aşırı planlamak erken optimizasyondur.",
+        "explanationTr": "API yüzeyi bir kez yayınlandıktan sonra değiştirmek maliyetli olduğundan planlamak kritik öneme sahiptir."
       }
     ]
   }

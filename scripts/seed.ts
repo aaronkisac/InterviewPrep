@@ -190,7 +190,9 @@ type SeedTerm = {
   label: string;
   topic: Topic | null;
   tooltip: string;
+  tooltipTr?: string;
   definition: string;
+  definitionTr?: string;
   codeExample?: string | null;
   relatedSlugs?: string[];
 };
@@ -201,7 +203,9 @@ type TermInsert = Pick<
   | "label"
   | "topic"
   | "tooltip"
+  | "tooltip_tr"
   | "definition"
+  | "definition_tr"
   | "code_example"
   | "related_slugs"
 >;
@@ -220,7 +224,9 @@ function termToInsert(t: SeedTerm): TermInsert {
     label: t.label,
     topic: t.topic,
     tooltip: t.tooltip,
+    tooltip_tr: t.tooltipTr ?? "",
     definition: t.definition,
+    definition_tr: t.definitionTr ?? "",
     code_example: t.codeExample ?? null,
     related_slugs: t.relatedSlugs ?? [],
   };
@@ -271,8 +277,10 @@ async function upsertTerms(
 
 type SeedMockOption = {
   optionText: string;
+  optionTextTr?: string;
   isCorrect: boolean;
   explanation: string;
+  explanationTr?: string;
 };
 
 type SeedMockEntry = {
@@ -349,8 +357,10 @@ async function seedMockOptions(
     const rows = entry.options.map((o) => ({
       question_id: question.id,
       option_text: o.optionText.trim(),
+      option_text_tr: o.optionTextTr?.trim() ?? "",
       is_correct: o.isCorrect,
       explanation: o.explanation.trim(),
+      explanation_tr: o.explanationTr?.trim() ?? "",
     }));
     const { error: insertError } = await supabase
       .from("mock_options")

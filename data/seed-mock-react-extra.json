@@ -6,22 +6,30 @@
       {
         "optionText": "React builds a virtual DOM in memory, diffs it against the previous render, and patches only the changed parts of the real DOM.",
         "isCorrect": true,
-        "explanation": "Correct — the virtual DOM reconciliation algorithm is the core of how React updates the UI efficiently."
+        "explanation": "Correct — the virtual DOM reconciliation algorithm is the core of how React updates the UI efficiently.",
+        "optionTextTr": "React bellekte virtual DOM oluşturur, önceki render ile fark alır ve yalnızca değişen gerçek DOM node'larını günceller.",
+        "explanationTr": "Doğru — bu dolaylı katman, her state değişiminde tüm UI'ı yeniden oluşturabiliyormuş gibi yazmanızı sağlarken React verimli güncellemeleri yönetir."
       },
       {
         "optionText": "React directly manipulates the real DOM on every state change, using CSS animations to make updates appear smooth.",
         "isCorrect": false,
-        "explanation": "React avoids direct DOM manipulation on every change — it uses a virtual DOM to batch and minimise real DOM writes."
+        "explanation": "React avoids direct DOM manipulation on every change — it uses a virtual DOM to batch and minimise real DOM writes.",
+        "optionTextTr": "React her state değişiminde gerçek DOM'u doğrudan CSS class değiştirerek manipüle eder.",
+        "explanationTr": "React gerçek DOM'u doğrudan manipüle etmez — virtual DOM diffing aracılığıyla güncelleme yapar."
       },
       {
         "optionText": "React compiles JSX to native browser events at build time, bypassing the DOM entirely for maximum performance.",
         "isCorrect": false,
-        "explanation": "JSX compiles to React.createElement calls, not native events. The DOM is still used at runtime."
+        "explanation": "JSX compiles to React.createElement calls, not native events. The DOM is still used at runtime.",
+        "optionTextTr": "React JSX'i build zamanında yerel tarayıcı event'lerine derler.",
+        "explanationTr": "JSX, React.createElement çağrılarına derlenir — yerel tarayıcı event'lerine değil."
       },
       {
         "optionText": "React uses two-way data binding to automatically sync component state with the DOM without any diffing step.",
         "isCorrect": false,
-        "explanation": "React uses one-way data flow, not two-way binding. Diffing (reconciliation) is central to how it works."
+        "explanation": "React uses one-way data flow, not two-way binding. Diffing (reconciliation) is central to how it works.",
+        "optionTextTr": "React bileşen state ile veriyi otomatik senkronize etmek için çift yönlü veri bağlama kullanır.",
+        "explanationTr": "React tek yönlü veri akışı kullanır — çift yönlü bağlama Angular'ın yaklaşımıdır."
       }
     ]
   },
@@ -32,22 +40,30 @@
       {
         "optionText": "By writing function components that return JSX, or class components that extend React.Component and implement a render() method.",
         "isCorrect": true,
-        "explanation": "Correct — both function and class components are valid. Function components with hooks are the modern standard."
+        "explanation": "Correct — both function and class components are valid. Function components with hooks are the modern standard.",
+        "optionTextTr": "JSX döndüren function component'ler yazarak veya render() metodu olan class component'ler tanımlayarak.",
+        "explanationTr": "Doğru — modern React uygulamaları hemen hemen tamamen function component ve hook'ları kullanır."
       },
       {
         "optionText": "By calling ReactDOM.create() with a template string and attaching it to a DOM element.",
         "isCorrect": false,
-        "explanation": "ReactDOM.create() doesn't exist for components. Components are plain functions or classes, not created via ReactDOM."
+        "explanation": "ReactDOM.create() doesn't exist for components. Components are plain functions or classes, not created via ReactDOM.",
+        "optionTextTr": "ReactDOM.create() ile template string geçerek ve DOM'a bağlayarak.",
+        "explanationTr": "ReactDOM.create() diye API yoktur — ReactDOM.createRoot() root bağlama içindir, bileşen oluşturma için değil."
       },
       {
         "optionText": "By registering components globally with React.register() before they can be used in JSX.",
         "isCorrect": false,
-        "explanation": "There is no React.register(). Components are just exported JavaScript functions or classes."
+        "explanation": "There is no React.register(). Components are just exported JavaScript functions or classes.",
+        "optionTextTr": "Görünmeden önce React.register() ile global olarak kayıt yaparak.",
+        "explanationTr": "React.register() diye bir API yoktur — React bileşenleri sadece import edilir ve kullanılır."
       },
       {
         "optionText": "By defining custom HTML elements using the Web Components API and importing them into React.",
         "isCorrect": false,
-        "explanation": "React components are not Web Components — they are JavaScript constructs specific to React."
+        "explanation": "React components are not Web Components — they are JavaScript constructs specific to React.",
+        "optionTextTr": "Web Components API ile özel HTML element tanımlayarak ve React'e import ederek.",
+        "explanationTr": "Web Components React bileşeni oluşturmanın standart yolu değildir; teknik olarak çalışabilir ama deyimsel değil."
       }
     ]
   },
@@ -58,22 +74,30 @@
       {
         "optionText": "It calls the React.Component constructor so that this.props is correctly set before any code in the constructor runs.",
         "isCorrect": true,
-        "explanation": "Correct — without super(props), this.props would be undefined inside the constructor body."
+        "explanation": "Correct — without super(props), this.props would be undefined inside the constructor body.",
+        "optionTextTr": "this.props'un class component içinde doğru ayarlanması için React.Component constructor'ını çağırır.",
+        "explanationTr": "Doğru — super(props) çağrısı yapılmazsa this.props constructor içinde undefined olur."
       },
       {
         "optionText": "It clones the parent component's state into the child so both share the same data.",
         "isCorrect": false,
-        "explanation": "super(props) doesn't copy state — it initialises the base class so the component instance is set up properly."
+        "explanation": "super(props) doesn't copy state — it initialises the base class so the component instance is set up properly.",
+        "optionTextTr": "Parent bileşenin state'ini child ile klonlar, ikisi de paylaşır.",
+        "explanationTr": "Bu tamamen yanlıştır — super(props) parent state'ini kopyalamaz."
       },
       {
         "optionText": "It is required to register lifecycle methods with React's scheduler.",
         "isCorrect": false,
-        "explanation": "Lifecycle methods are not registered via super — they are inherited through the class prototype."
+        "explanation": "Lifecycle methods are not registered via super — they are inherited through the class prototype.",
+        "optionTextTr": "Lifecycle metodlarını React'in zamanlayıcısına kaydetmek için zorunludur.",
+        "explanationTr": "super(props), React lifecycle kayıtlarıyla değil; base class constructor çağrısıyla ilgilidir."
       },
       {
         "optionText": "It enables two-way binding between props and state in class components.",
         "isCorrect": false,
-        "explanation": "React doesn't have two-way binding. super(props) simply initialises the parent class with the props object."
+        "explanation": "React doesn't have two-way binding. super(props) simply initialises the parent class with the props object.",
+        "optionTextTr": "Class component'lerde props ve state arasında çift yönlü bağlama sağlar.",
+        "explanationTr": "super(props) çift yönlü bağlama sağlamaz — yalnızca base class constructor'ı çağırır."
       }
     ]
   },
@@ -84,22 +108,30 @@
       {
         "optionText": "Using React.createRef() in class components or the useRef() hook in function components, then passing the ref to a JSX element via the ref attribute.",
         "isCorrect": true,
-        "explanation": "Correct — createRef / useRef both produce a mutable object with a .current property that React populates after mounting."
+        "explanation": "Correct — createRef / useRef both produce a mutable object with a .current property that React populates after mounting.",
+        "optionTextTr": "Class bileşenlerde React.createRef() veya function bileşenlerde useRef() hook'u kullanarak.",
+        "explanationTr": "Doğru — ref'ler, DOM node'larına erişmek veya render'lar arasında değer saklamak için kullanılır."
       },
       {
         "optionText": "By querying the DOM directly with document.getElementById() and storing the result in component state.",
         "isCorrect": false,
-        "explanation": "Direct DOM queries bypass React's ref system and can cause issues with SSR and React's lifecycle. useRef is the correct approach."
+        "explanation": "Direct DOM queries bypass React's ref system and can cause issues with SSR and React's lifecycle. useRef is the correct approach.",
+        "optionTextTr": "document.getElementById() ile DOM'u doğrudan sorgulayarak.",
+        "explanationTr": "Bu çalışır ama React uygulamalarında önerilmez — ref'ler React component lifecycle'ıyla uyumlu yoldur."
       },
       {
         "optionText": "By adding a data-ref attribute to the JSX element and reading it from props inside the component.",
         "isCorrect": false,
-        "explanation": "data-ref is not a React concept. Refs are created with createRef or useRef and attached via the ref prop."
+        "explanation": "data-ref is not a React concept. Refs are created with createRef or useRef and attached via the ref prop.",
+        "optionTextTr": "JSX öğesine data-ref özelliği ekleyerek ve props'tan okuyarak.",
+        "explanationTr": "data-ref özel bir React ref mekanizması değildir — sadece özel veri özelliğidir."
       },
       {
         "optionText": "By dispatching a REF_CREATED Redux action and storing the DOM reference in the global store.",
         "isCorrect": false,
-        "explanation": "Storing DOM nodes in Redux is an anti-pattern. Refs should live locally in the component via React's ref APIs."
+        "explanation": "Storing DOM nodes in Redux is an anti-pattern. Refs should live locally in the component via React's ref APIs.",
+        "optionTextTr": "Redux action dispatch ederek ve DOM referansı store'da saklayarak.",
+        "explanationTr": "DOM referansları Redux'ta saklanmamalıdır — bu anti-pattern'dir."
       }
     ]
   },
@@ -110,22 +142,30 @@
       {
         "optionText": "It is invoked after the state update is applied and the component has re-rendered, making it safe to read the updated state.",
         "isCorrect": true,
-        "explanation": "Correct — setState is asynchronous; the callback fires after the update is flushed, unlike code immediately after the setState call."
+        "explanation": "Correct — setState is asynchronous; the callback fires after the update is flushed, unlike code immediately after the setState call.",
+        "optionTextTr": "State güncellemesi uygulandıktan ve bileşen yeniden render edildikten sonra çağrılır — güncel DOM değerlerini okumak için kullanılır.",
+        "explanationTr": "Doğru — bu, React'in asenkron state güncellemesinden sonra DOM'u okumayı garanti eder."
       },
       {
         "optionText": "It is called before the state update to allow you to cancel it if certain conditions aren't met.",
         "isCorrect": false,
-        "explanation": "The callback fires after the update, not before. You can't cancel a setState via this callback."
+        "explanation": "The callback fires after the update, not before. You can't cancel a setState via this callback.",
+        "optionTextTr": "State güncellemesinden önce çağrılır, belirli koşullarda iptal etmenize izin verir.",
+        "explanationTr": "setState callback'i güncellemeden önce değil, sonra çağrılır — iptal etme mekanizması değildir."
       },
       {
         "optionText": "It replaces shouldComponentUpdate and tells React whether to re-render the component.",
         "isCorrect": false,
-        "explanation": "The setState callback does not affect rendering decisions — that is shouldComponentUpdate's or React.memo's responsibility."
+        "explanation": "The setState callback does not affect rendering decisions — that is shouldComponentUpdate's or React.memo's responsibility.",
+        "optionTextTr": "shouldComponentUpdate'in yerini alır ve React'e yeniden render edilip edilmeyeceğini söyler.",
+        "explanationTr": "setState callback, render kararlarını etkilemez — shouldComponentUpdate bunu yapar."
       },
       {
         "optionText": "It receives the previous state as an argument so you can undo the change if needed.",
         "isCorrect": false,
-        "explanation": "The callback receives no arguments. To base updates on previous state, use the functional form of setState: setState(prev => ...)."
+        "explanation": "The callback receives no arguments. To base updates on previous state, use the functional form of setState: setState(prev => ...).",
+        "optionTextTr": "Değişikliği geri almak için önceki state'i argüman olarak alır.",
+        "explanationTr": "setState callback'in imzası: (state, props) => void — state'i geri almaz, yalnızca bildirim sağlar."
       }
     ]
   },
@@ -136,22 +176,30 @@
       {
         "optionText": "A package that provides DOM-specific methods such as ReactDOM.render() / createRoot() to mount React trees into the browser DOM.",
         "isCorrect": true,
-        "explanation": "Correct — ReactDOM bridges React's component model to the actual browser DOM and is separate from the core React package."
+        "explanation": "Correct — ReactDOM bridges React's component model to the actual browser DOM and is separate from the core React package.",
+        "optionTextTr": "ReactDOM.render(), createPortal() ve createRoot() gibi DOM'a özgü metodlar sağlayan paket.",
+        "explanationTr": "Doğru — ReactDOM, platformdan bağımsız React core'undan ayrılmış, DOM rendering motorudur."
       },
       {
         "optionText": "A built-in browser API that React wraps to provide cross-browser compatibility for DOM events.",
         "isCorrect": false,
-        "explanation": "ReactDOM is a React-specific npm package, not a browser API."
+        "explanation": "ReactDOM is a React-specific npm package, not a browser API.",
+        "optionTextTr": "React'in çapraz tarayıcı uyumluluğu için sardığı yerleşik tarayıcı API'si.",
+        "explanationTr": "ReactDOM, yerleşik tarayıcı API'si değil; npm paketi olarak ayrı gelen bağımsız bir pakettir."
       },
       {
         "optionText": "The virtual DOM implementation used internally by React to track component state changes.",
         "isCorrect": false,
-        "explanation": "The virtual DOM is an internal React concept; ReactDOM is the renderer that outputs to the real browser DOM."
+        "explanation": "The virtual DOM is an internal React concept; ReactDOM is the renderer that outputs to the real browser DOM.",
+        "optionTextTr": "React'in bileşen güncellemelerini izlemek için dahili olarak kullandığı virtual DOM implementasyonu.",
+        "explanationTr": "Virtual DOM React'in çekirdek algoritmalarında yaşar — ReactDOM DOM render spesifik yöntemler içindir."
       },
       {
         "optionText": "A CSS-in-JS library that injects styles directly into the DOM alongside React component output.",
         "isCorrect": false,
-        "explanation": "ReactDOM has nothing to do with CSS-in-JS. It mounts and updates React component trees in the DOM."
+        "explanation": "ReactDOM has nothing to do with CSS-in-JS. It mounts and updates React component trees in the DOM.",
+        "optionTextTr": "DOM'a bileşenlerin yanı sıra stil enjekte eden CSS-in-JS kütüphanesi.",
+        "explanationTr": "Bu styled-components veya emotion'ı tanımlar — ReactDOM değil."
       }
     ]
   },
@@ -162,22 +210,30 @@
       {
         "optionText": "Presentational components focus on how things look (receive data via props, no business logic); container components handle data fetching, state, and pass data down to presentational ones.",
         "isCorrect": true,
-        "explanation": "Correct — this separation of concerns pattern (Dan Abramov) keeps UI components reusable and logic components testable."
+        "explanation": "Correct — this separation of concerns pattern (Dan Abramov) keeps UI components reusable and logic components testable.",
+        "optionTextTr": "Sunum bileşenleri görünüme odaklanır (prop'larla veri alır); container bileşenler store'a bağlanır ve veriyi aşağı geçirir.",
+        "explanationTr": "Doğru — bu ayrım artık hook'lar lehine daha az katı ama state bağlama sorumluluğunu düşünmek hâlâ değerlidir."
       },
       {
         "optionText": "Presentational components use class syntax while container components must be function components with hooks.",
         "isCorrect": false,
-        "explanation": "The distinction is about responsibility (UI vs logic), not syntax. Either type can be a class or function component."
+        "explanation": "The distinction is about responsibility (UI vs logic), not syntax. Either type can be a class or function component.",
+        "optionTextTr": "Sunum bileşenleri class sözdizimi; container bileşenler function sözdizimi kullanır.",
+        "explanationTr": "Sözdizimi, sunum/container ayrımını tanımlamaz — sorumluluk bunu tanımlar."
       },
       {
         "optionText": "Container components render inside a <div> wrapper, while presentational components render directly into the body.",
         "isCorrect": false,
-        "explanation": "The naming has nothing to do with DOM structure — it's a design pattern about separating concerns."
+        "explanation": "The naming has nothing to do with DOM structure — it's a design pattern about separating concerns.",
+        "optionTextTr": "Container bileşenler <div> wrapper içinde render olur; sunum bileşenler olmaz.",
+        "explanationTr": "HTML wrapper varlığı bu ayrımı tanımlamaz."
       },
       {
         "optionText": "Presentational components manage global state with Redux; container components manage local state with useState.",
         "isCorrect": false,
-        "explanation": "It's the opposite — containers typically connect to global stores, while presentational components are pure/dumb."
+        "explanation": "It's the opposite — containers typically connect to global stores, while presentational components are pure/dumb.",
+        "optionTextTr": "Sunum bileşenleri Redux ile global state yönetir; container bileşenler UI render eder.",
+        "explanationTr": "Bu tam tersidir — container'lar state'i yönetir; sunum bileşenleri prop'larla UI render eder."
       }
     ]
   },
@@ -188,22 +244,30 @@
       {
         "optionText": "React is a UI library using one-way data flow and a virtual DOM; AngularJS is a full MVC framework with two-way data binding and dirty checking.",
         "isCorrect": true,
-        "explanation": "Correct — React handles only the view layer; AngularJS prescribes a full application structure with built-in two-way binding."
+        "explanation": "Correct — React handles only the view layer; AngularJS prescribes a full application structure with built-in two-way binding.",
+        "optionTextTr": "React, tek yönlü veri akışı ve virtual DOM kullanan UI kütüphanesi; AngularJS, two-way binding ve dirty-checking kullanan tam framework.",
+        "explanationTr": "Doğru — React görünüm katmanına odaklanırken AngularJS daha kapsamlı bir çerçeve sunar."
       },
       {
         "optionText": "React uses TypeScript exclusively while AngularJS supports only JavaScript.",
         "isCorrect": false,
-        "explanation": "React works with both JS and TS. AngularJS (v1) is JavaScript-based; Angular (v2+) embraces TypeScript."
+        "explanation": "React works with both JS and TS. AngularJS (v1) is JavaScript-based; Angular (v2+) embraces TypeScript.",
+        "optionTextTr": "React yalnızca TypeScript kullanır; AngularJS yalnızca JavaScript destekler.",
+        "explanationTr": "Her ikisi de hem TypeScript hem JavaScript ile kullanılabilir."
       },
       {
         "optionText": "AngularJS uses a virtual DOM for diffing while React manipulates the real DOM directly.",
         "isCorrect": false,
-        "explanation": "It's the opposite — React uses a virtual DOM. AngularJS uses dirty checking ($digest cycle) on the real DOM."
+        "explanation": "It's the opposite — React uses a virtual DOM. AngularJS uses dirty checking ($digest cycle) on the real DOM.",
+        "optionTextTr": "AngularJS diffing için virtual DOM kullanır; React gerçek DOM'u doğrudan manipüle eder.",
+        "explanationTr": "Bu tam tersidir — React virtual DOM kullanır; AngularJS dirty-checking kullanır."
       },
       {
         "optionText": "React requires a build step while AngularJS can run directly in the browser without any compilation.",
         "isCorrect": false,
-        "explanation": "While AngularJS can be included via a script tag, this isn't the meaningful architectural difference between the two."
+        "explanation": "While AngularJS can be included via a script tag, this isn't the meaningful architectural difference between the two.",
+        "optionTextTr": "React bir build adımı gerektirirken AngularJS doğrudan tarayıcıda çalışabilir.",
+        "explanationTr": "Her ikisinin de build araçlarıyla birlikte kullanımı yaygındır; bu temel fark değildir."
       }
     ]
   },
@@ -214,22 +278,30 @@
       {
         "optionText": "In a single centralised Redux store, with components reading slices of state via selectors and dispatching actions to update it.",
         "isCorrect": true,
-        "explanation": "Correct — Redux's core principle is a single source of truth: one store holds the entire application state tree."
+        "explanation": "Correct — Redux's core principle is a single source of truth: one store holds the entire application state tree.",
+        "optionTextTr": "Tek merkezi Redux store'da, bileşenler useSelector ile store slice'larını okur ve action dispatch eder.",
+        "explanationTr": "Doğru — hem React local state hem de Redux store bir arada kullanılabilir; Redux genellikle paylaşılan state içindir."
       },
       {
         "optionText": "In each component's local useState hook, with Redux used only for routing between pages.",
         "isCorrect": false,
-        "explanation": "Redux holds shared/global state. Using Redux only for routing misses its primary purpose."
+        "explanation": "Redux holds shared/global state. Using Redux only for routing misses its primary purpose.",
+        "optionTextTr": "Her bileşenin local useState'inde, Redux yalnızca routing için kullanılır.",
+        "explanationTr": "Redux yalnızca routing için kullanılan bir araç değil; state yönetimi içindir."
       },
       {
         "optionText": "In the browser's localStorage, with Redux acting as a sync layer between localStorage and components.",
         "isCorrect": false,
-        "explanation": "Redux stores state in memory (a JavaScript object). localStorage persistence requires middleware like redux-persist."
+        "explanation": "Redux stores state in memory (a JavaScript object). localStorage persistence requires middleware like redux-persist.",
+        "optionTextTr": "Tarayıcının localStorage'ında, Redux senkronizasyon katmanı olarak çalışır.",
+        "explanationTr": "Redux localStorage'ı sarmaz — bellek içi store olarak çalışır; kalıcılık için redux-persist gibi araçlar kullanılır."
       },
       {
         "optionText": "Across multiple context providers — Redux creates one context per reducer slice to avoid unnecessary re-renders.",
         "isCorrect": false,
-        "explanation": "Redux uses a single store, not multiple contexts. React-Redux's Provider exposes one store to the component tree."
+        "explanation": "Redux uses a single store, not multiple contexts. React-Redux's Provider exposes one store to the component tree.",
+        "optionTextTr": "Birden fazla context provider'da — Redux her reducer için bir context oluşturur.",
+        "explanationTr": "Redux tek bir context/Provider kullanır, her reducer için birden fazla oluşturmaz."
       }
     ]
   },
@@ -240,22 +312,30 @@
       {
         "optionText": "React targets web browsers via the DOM; React Native targets iOS and Android, rendering native platform UI components instead of HTML.",
         "isCorrect": true,
-        "explanation": "Correct — they share the same component model and hooks API but use different renderers for different platforms."
+        "explanation": "Correct — they share the same component model and hooks API but use different renderers for different platforms.",
+        "optionTextTr": "React tarayıcıları DOM aracılığıyla hedefler; React Native iOS ve Android'i yerel UI bileşenleriyle hedefler.",
+        "explanationTr": "Doğru — her iki kütüphane de aynı bileşen paradigmasını paylaşır ama farklı render motorları kullanır."
       },
       {
         "optionText": "React Native is a newer version of React that includes built-in state management and routing.",
         "isCorrect": false,
-        "explanation": "React Native is a separate project targeting mobile platforms, not a newer version of React."
+        "explanation": "React Native is a separate project targeting mobile platforms, not a newer version of React.",
+        "optionTextTr": "React Native, yerleşik state yönetimi içeren React'in daha yeni versiyonudur.",
+        "explanationTr": "React Native, React'in yeni versiyonu değil; yerel mobil geliştirme için ayrı render hedefidir."
       },
       {
         "optionText": "React Native compiles JavaScript to native machine code, while React interprets JSX at runtime in the browser.",
         "isCorrect": false,
-        "explanation": "React Native uses a JS bridge (or JSI) to communicate with native components — it doesn't compile to machine code."
+        "explanation": "React Native uses a JS bridge (or JSI) to communicate with native components — it doesn't compile to machine code.",
+        "optionTextTr": "React Native JavaScript'i yerel makine koduna derler; React ise yorumlanmış kod çalıştırır.",
+        "explanationTr": "Her ikisi de JavaScript çalıştırır — React Native JS'yi bridge aracılığıyla yerel UI'ya bağlar, WASM/native code'a derlemez."
       },
       {
         "optionText": "React is maintained by Meta while React Native is maintained by the open-source community independently.",
         "isCorrect": false,
-        "explanation": "Both React and React Native are maintained by Meta (Facebook) alongside open-source contributors."
+        "explanation": "Both React and React Native are maintained by Meta (Facebook) alongside open-source contributors.",
+        "optionTextTr": "React Meta tarafından; React Native açık kaynak topluluk tarafından sürdürülür.",
+        "explanationTr": "Her ikisi de Meta ve açık kaynak topluluğu tarafından desteklenmektedir."
       }
     ]
   },
@@ -266,22 +346,30 @@
       {
         "optionText": "To provide a predictable, centralised state container with strict rules (pure reducers, actions) that make state changes traceable and testable.",
         "isCorrect": true,
-        "explanation": "Correct — Redux's value is predictability and debuggability (time-travel, DevTools) for complex shared state."
+        "explanation": "Correct — Redux's value is predictability and debuggability (time-travel, DevTools) for complex shared state.",
+        "optionTextTr": "Bileşenler arasında paylaşılan state için katı kurallarla tahmin edilebilir merkezi state container sağlamak.",
+        "explanationTr": "Doğru — Redux; zaman yolculuğu debugging, middleware ve tek state kaynağı ile uygulama genelinde state yönetimini basitleştirir."
       },
       {
         "optionText": "To replace React's rendering engine with a faster diffing algorithm for large component trees.",
         "isCorrect": false,
-        "explanation": "Redux manages state — it has nothing to do with React's rendering or reconciliation algorithm."
+        "explanation": "Redux manages state — it has nothing to do with React's rendering or reconciliation algorithm.",
+        "optionTextTr": "React'in rendering motorunu daha hızlı diffing algoritmasıyla değiştirmek.",
+        "explanationTr": "Redux rendering ile ilgili değildir — state yönetim kütüphanesidir."
       },
       {
         "optionText": "To enable server-side rendering by serialising component props into JSON and hydrating them on the client.",
         "isCorrect": false,
-        "explanation": "SSR serialisation is a separate concern. Redux can assist with it, but that's not its core purpose."
+        "explanation": "SSR serialisation is a separate concern. Redux can assist with it, but that's not its core purpose.",
+        "optionTextTr": "Bileşen prop'larını JSON'a serileştirerek server-side rendering sağlamak.",
+        "explanationTr": "Redux SSR'yi kolaylaştırabilir ama bu birincil amacı değildir."
       },
       {
         "optionText": "To eliminate the need for props entirely by allowing all components to communicate directly via events.",
         "isCorrect": false,
-        "explanation": "Redux doesn't eliminate props; it provides shared state via a store accessed through connect() or useSelector()."
+        "explanation": "Redux doesn't eliminate props; it provides shared state via a store accessed through connect() or useSelector().",
+        "optionTextTr": "Tüm bileşenlerin doğrudan değiştirebilmesiyle prop'lara olan ihtiyacı tamamen ortadan kaldırmak.",
+        "explanationTr": "Redux, prop'ları ortadan kaldırmaz — store'dan veri okuma için dispatch/select mekanizması sağlar."
       }
     ]
   },
@@ -292,22 +380,30 @@
       {
         "optionText": "A static type checker for JavaScript developed by Meta, used to annotate and catch type errors in React codebases without a compile step.",
         "isCorrect": true,
-        "explanation": "Correct — Flow adds type annotations to JavaScript and checks them statically. It was popular in React projects before TypeScript became dominant."
+        "explanation": "Correct — Flow adds type annotations to JavaScript and checks them statically. It was popular in React projects before TypeScript became dominant.",
+        "optionTextTr": "Meta tarafından geliştirilen, JavaScript kodu için tip ek açıklamaları sağlayan statik tip denetleyicisi.",
+        "explanationTr": "Doğru — TypeScript'in yaygınlaşmasıyla Flow giderek daha az kullanılmaktadır; TypeScript büyük ölçüde yerini aldı."
       },
       {
         "optionText": "A React built-in hook that manages the flow of data between parent and child components via context.",
         "isCorrect": false,
-        "explanation": "No such hook exists. Flow is a standalone static type checker, not a React API."
+        "explanation": "No such hook exists. Flow is a standalone static type checker, not a React API.",
+        "optionTextTr": "Ebeveyn ve child bileşenler arasındaki veri akışını yöneten yerleşik React hook'u.",
+        "explanationTr": "Flow yerleşik React hook'u değildir."
       },
       {
         "optionText": "A CSS animation library used with React to create smooth transitions between component states.",
         "isCorrect": false,
-        "explanation": "Flow has nothing to do with CSS animations. It is a static type system for JavaScript."
+        "explanation": "Flow has nothing to do with CSS animations. It is a static type system for JavaScript.",
+        "optionTextTr": "Geçişler için React ile kullanılan CSS animasyon kütüphanesi.",
+        "explanationTr": "Bu Framer Motion gibi animasyon kütüphanelerini tanımlar — Flow değil."
       },
       {
         "optionText": "A Redux middleware that controls the order in which actions are dispatched to the store.",
         "isCorrect": false,
-        "explanation": "Flow is a type checker, not a Redux middleware. Action ordering is handled by middleware like redux-saga or redux-thunk."
+        "explanation": "Flow is a type checker, not a Redux middleware. Action ordering is handled by middleware like redux-saga or redux-thunk.",
+        "optionTextTr": "Action'ların dispatch edilme sırasını kontrol eden Redux middleware.",
+        "explanationTr": "Bu Redux middleware'ini tanımlar — Flow değil."
       }
     ]
   },
@@ -318,22 +414,30 @@
       {
         "optionText": "To let you bail out of an expensive re-render by returning false when the component's output won't change given the new props or state.",
         "isCorrect": true,
-        "explanation": "Correct — returning false from shouldComponentUpdate skips render(), componentDidUpdate() and the virtual DOM diff for that cycle."
+        "explanation": "Correct — returning false from shouldComponentUpdate skips render(), componentDidUpdate() and the virtual DOM diff for that cycle.",
+        "optionTextTr": "Prop'lar değişmediğinde pahalı yeniden render'dan çıkmak için false döndürmenize izin verir.",
+        "explanationTr": "Doğru — React.PureComponent ve React.memo da benzer optimizasyonları otomatik sağlar."
       },
       {
         "optionText": "To trigger a forced re-render even when state hasn't changed, ensuring the UI is always in sync.",
         "isCorrect": false,
-        "explanation": "shouldComponentUpdate is an optimisation to prevent unnecessary renders, not to force them."
+        "explanation": "shouldComponentUpdate is an optimisation to prevent unnecessary renders, not to force them.",
+        "optionTextTr": "State değişmese bile zorunlu yeniden render tetiklemek için.",
+        "explanationTr": "shouldComponentUpdate tam tersi amaçla kullanılır — yeniden render'ı gereksizse engellemek için."
       },
       {
         "optionText": "To intercept Redux actions before they reach the store and decide whether to apply them to the component.",
         "isCorrect": false,
-        "explanation": "shouldComponentUpdate is a React lifecycle method with no connection to Redux or action dispatch."
+        "explanation": "shouldComponentUpdate is a React lifecycle method with no connection to Redux or action dispatch.",
+        "optionTextTr": "Store'a ulaşmadan önce Redux action'larını durdurmak için.",
+        "explanationTr": "shouldComponentUpdate React component lifecycle'ına aittir, Redux işlemine değil."
       },
       {
         "optionText": "To schedule an asynchronous side effect (like an API call) before the component renders.",
         "isCorrect": false,
-        "explanation": "Side effects before render are handled by componentDidMount / useEffect, not shouldComponentUpdate."
+        "explanation": "Side effects before render are handled by componentDidMount / useEffect, not shouldComponentUpdate.",
+        "optionTextTr": "Bileşen render'dan önce API çağrısı gibi asenkron yan efekt planlamak için.",
+        "explanationTr": "Bu useEffect veya componentDidMount'u tanımlar — shouldComponentUpdate'i değil."
       }
     ]
   },
@@ -344,22 +448,30 @@
       {
         "optionText": "Its component model, one-way data flow, and large ecosystem make it easy to build predictable UIs; hooks enable clean, reusable logic without class boilerplate.",
         "isCorrect": true,
-        "explanation": "Correct — this is a representative, balanced answer covering React's core strengths."
+        "explanation": "Correct — this is a representative, balanced answer covering React's core strengths.",
+        "optionTextTr": "Bileşen modeli, tek yönlü veri akışı ve geniş ekosistemi, karmaşık UI'ı tahmin edilebilir şekilde oluşturmayı kolaylaştırır.",
+        "explanationTr": "Doğru — bunlar React'in en sık övülen özelliklerini yansıtır."
       },
       {
         "optionText": "It ships with a built-in router, state manager, and CSS solution so you never need third-party libraries.",
         "isCorrect": false,
-        "explanation": "React intentionally ships as just the UI layer — routing, state, and styling are left to the ecosystem."
+        "explanation": "React intentionally ships as just the UI layer — routing, state, and styling are left to the ecosystem.",
+        "optionTextTr": "Yerleşik router, state manager ve CSS çözümüyle her şey dahil gelir.",
+        "explanationTr": "React kasıtlı olarak yalnızca UI katmanını kapsar — routing, state ve CSS harici kütüphanelere bırakılır."
       },
       {
         "optionText": "Its two-way data binding eliminates the need to write event handlers for form inputs.",
         "isCorrect": false,
-        "explanation": "React uses one-way data flow, not two-way binding. Forms require onChange handlers."
+        "explanation": "React uses one-way data flow, not two-way binding. Forms require onChange handlers.",
+        "optionTextTr": "Çift yönlü veri bağlama event handler yazma ihtiyacını ortadan kaldırır.",
+        "explanationTr": "React çift yönlü bağlama kullanmaz — tek yönlü veri akışı React'in tasarım tercihidir."
       },
       {
         "optionText": "It automatically optimises bundle size by tree-shaking unused components at runtime.",
         "isCorrect": false,
-        "explanation": "Tree-shaking is a build-time optimisation handled by bundlers like webpack or Vite, not React itself."
+        "explanation": "Tree-shaking is a build-time optimisation handled by bundlers like webpack or Vite, not React itself.",
+        "optionTextTr": "Kullanılmayan bileşenleri otomatik tree-shaking ile bundle boyutunu optimize eder.",
+        "explanationTr": "React bileşen tree-shaking yapmaz — bu bundler (Webpack, Vite) sorumluluğundadır."
       }
     ]
   },
@@ -370,22 +482,30 @@
       {
         "optionText": "redux-thunk (for simple async functions), redux-saga (for complex flows with generators), and RTK Query (for data fetching with caching).",
         "isCorrect": true,
-        "explanation": "Correct — these are the most common choices, ranging from simple (thunk) to powerful (saga) to batteries-included (RTK Query)."
+        "explanation": "Correct — these are the most common choices, ranging from simple (thunk) to powerful (saga) to batteries-included (RTK Query).",
+        "optionTextTr": "redux-thunk (basit async fonksiyonlar), redux-saga (karmaşık akışlar), RTK Query (sunucu state).",
+        "explanationTr": "Doğru — seçim ihtiyaca bağlıdır; RTK Query modern projeler için giderek popülerleşmektedir."
       },
       {
         "optionText": "React Suspense and Error Boundaries — Redux delegates all async handling to React's built-in concurrency features.",
         "isCorrect": false,
-        "explanation": "Suspense and Error Boundaries are React features, not Redux middleware. They can coexist but are separate concerns."
+        "explanation": "Suspense and Error Boundaries are React features, not Redux middleware. They can coexist but are separate concerns.",
+        "optionTextTr": "React Suspense ve Error Boundary — Redux tüm async yönetimi bunlara devreder.",
+        "explanationTr": "React Suspense, veri çekme UI'ı için kullanışlıdır ama Redux middleware'i tamamen değiştirmez."
       },
       {
         "optionText": "Redux itself handles async calls natively via the built-in async reducer option.",
         "isCorrect": false,
-        "explanation": "Redux reducers must be pure synchronous functions. Async logic requires middleware."
+        "explanation": "Redux reducers must be pure synchronous functions. Async logic requires middleware.",
+        "optionTextTr": "Redux kendisi yerleşik async reducer ile async çağrıları yönetir.",
+        "explanationTr": "Redux reducer'ları saf senkron fonksiyonlar olmalıdır — async middleware gerektirir."
       },
       {
         "optionText": "Axios and Fetch — these HTTP clients double as Redux middleware when imported inside action creators.",
         "isCorrect": false,
-        "explanation": "Axios and Fetch are HTTP libraries, not Redux middleware. You use them inside thunks or sagas."
+        "explanation": "Axios and Fetch are HTTP libraries, not Redux middleware. You use them inside thunks or sagas.",
+        "optionTextTr": "Axios ve Fetch — bu HTTP client'lar import edildiğinde Redux middleware görevi görür.",
+        "explanationTr": "Axios ve Fetch HTTP kütüphaneleridir; otomatik olarak Redux middleware haline gelmezler."
       }
     ]
   },
@@ -396,22 +516,30 @@
       {
         "optionText": "UI dispatches an action → middleware handles side effects → reducer updates the store → connected components re-render with new state.",
         "isCorrect": true,
-        "explanation": "Correct — this unidirectional flow is the foundation of Redux: action → reducer → store → view."
+        "explanation": "Correct — this unidirectional flow is the foundation of Redux: action → reducer → store → view.",
+        "optionTextTr": "UI action dispatch eder → middleware yan etkileri yönetir → reducer state günceller → bileşenler yeniden render olur.",
+        "explanationTr": "Doğru — bu Redux'ın temel veri akış döngüsüdür; tek yönlü ve tahmin edilebilir."
       },
       {
         "optionText": "Store pushes updates directly to the DOM, then React re-reads the DOM to sync component state.",
         "isCorrect": false,
-        "explanation": "Redux never touches the DOM directly. React-Redux triggers component re-renders when subscribed state changes."
+        "explanation": "Redux never touches the DOM directly. React-Redux triggers component re-renders when subscribed state changes.",
+        "optionTextTr": "Store DOM'u doğrudan günceller, sonra React DOM'u yeniden okur.",
+        "explanationTr": "Redux, DOM'u doğrudan güncellemez — React, store güncellemelerine yanıt olarak DOM'u render eder."
       },
       {
         "optionText": "Components update the store via two-way binding, and the store propagates changes back through props automatically.",
         "isCorrect": false,
-        "explanation": "Redux uses one-way data flow: components dispatch actions, they don't bind directly to the store."
+        "explanation": "Redux uses one-way data flow: components dispatch actions, they don't bind directly to the store.",
+        "optionTextTr": "Bileşenler çift yönlü bağlama ile store'u günceller.",
+        "explanationTr": "Redux tek yönlü veri akışı kullanır — çift yönlü bağlama yoktur."
       },
       {
         "optionText": "Reducers call API endpoints, update the store, then notify the router to navigate to the updated view.",
         "isCorrect": false,
-        "explanation": "Reducers must be pure — no side effects, no API calls. API calls belong in middleware (thunks, sagas)."
+        "explanation": "Reducers must be pure — no side effects, no API calls. API calls belong in middleware (thunks, sagas).",
+        "optionTextTr": "Reducer'lar API endpoint'lerini çağırır, store'u günceller, router'ı bilgilendirir.",
+        "explanationTr": "Reducer'lar saf fonksiyonlardır — API çağrısı yapamaz; bunu thunk veya saga yapar."
       }
     ]
   },
@@ -422,22 +550,30 @@
       {
         "optionText": "Set NODE_ENV=production (e.g. via your bundler). This removes development warnings, disables propTypes checks, and enables minification — significantly reducing bundle size.",
         "isCorrect": true,
-        "explanation": "Correct — production mode strips React's runtime warnings and development-only code paths for a smaller, faster bundle."
+        "explanation": "Correct — production mode strips React's runtime warnings and development-only code paths for a smaller, faster bundle.",
+        "optionTextTr": "NODE_ENV=production ayarlayın. Bu geliştirici uyarılarını kaldırır, kodu küçültür ve production için optimize eder.",
+        "explanationTr": "Doğru — Vite, Webpack ve Next.js gibi bundler'lar bu flag'i production build'larında otomatik ayarlar."
       },
       {
         "optionText": "Run react-scripts eject and enable the production flag in the generated webpack config.",
         "isCorrect": false,
-        "explanation": "Ejecting is not needed. create-react-app's npm run build sets NODE_ENV=production automatically."
+        "explanation": "Ejecting is not needed. create-react-app's npm run build sets NODE_ENV=production automatically.",
+        "optionTextTr": "react-scripts eject çalıştırın ve production flag'ini etkinleştirin.",
+        "explanationTr": "eject, Create React App yapılandırmasını açığa çıkarır; production build yapmak için gerekli değildir."
       },
       {
         "optionText": "Add the production plugin to .babelrc — this compiles JSX directly to native browser JavaScript without React overhead.",
         "isCorrect": false,
-        "explanation": "There is no production Babel plugin that removes React. Production mode is controlled by NODE_ENV."
+        "explanation": "There is no production Babel plugin that removes React. Production mode is controlled by NODE_ENV.",
+        "optionTextTr": "JSX'i doğrudan native code'a derleyen production plugin'ini .babelrc'ye ekleyin.",
+        "explanationTr": "JSX her zaman JavaScript'e derlenir — native code değil. .babelrc yaklaşımı da doğru değildir."
       },
       {
         "optionText": "Import from react/production instead of react — this loads the production build with lazy-loaded components by default.",
         "isCorrect": false,
-        "explanation": "No such path exists. Production mode is triggered by NODE_ENV, not by a different import path."
+        "explanation": "No such path exists. Production mode is triggered by NODE_ENV, not by a different import path.",
+        "optionTextTr": "react yerine react/production'dan import edin.",
+        "explanationTr": "react/production diye modül yoktur — production modunu NODE_ENV flag'i ile bundler yönetir."
       }
     ]
   },
@@ -448,22 +584,30 @@
       {
         "optionText": "Larger ecosystem and community, JSX as a full JavaScript expression, better TypeScript support, and stronger adoption in enterprise and large-scale applications.",
         "isCorrect": true,
-        "explanation": "Correct — these are widely cited React advantages. Vue has its own strengths (gentler learning curve, SFC), making the choice context-dependent."
+        "explanation": "Correct — these are widely cited React advantages. Vue has its own strengths (gentler learning curve, SFC), making the choice context-dependent.",
+        "optionTextTr": "Daha büyük ekosistem ve topluluk, JSX'in tam JavaScript ifadesi olması, büyük ölçekli uygulamalar için daha güçlü TypeScript entegrasyonu.",
+        "explanationTr": "Doğru — bunlar objektif gözlemlenebilir farklılıklardır; Vue'nun da kendi güçlü yönleri vardır."
       },
       {
         "optionText": "React ships with two-way data binding out of the box, making form handling simpler than Vue's v-model.",
         "isCorrect": false,
-        "explanation": "React uses one-way data flow. Vue's v-model is actually one of Vue's conveniences over React."
+        "explanation": "React uses one-way data flow. Vue's v-model is actually one of Vue's conveniences over React.",
+        "optionTextTr": "React yerleşik çift yönlü veri bağlamayla gelir.",
+        "explanationTr": "React çift yönlü bağlama içermez — bu Vue'nun v-model özelliğinin açıklaması olabilir."
       },
       {
         "optionText": "React's template syntax is cleaner and more readable than Vue's JSX-based render functions.",
         "isCorrect": false,
-        "explanation": "React uses JSX, not templates. Vue uses templates by default; Vue also supports JSX but it's not the primary approach."
+        "explanation": "React uses JSX, not templates. Vue uses templates by default; Vue also supports JSX but it's not the primary approach.",
+        "optionTextTr": "React'in template sözdizimi Vue'nun JSX tabanlı sözdiziminden daha temizdir.",
+        "explanationTr": "Bu ters: Vue template sözdizimi kullanır; React JSX kullanır. Tercih öznel olmakla birlikte yanlış tanımlanmış."
       },
       {
         "optionText": "React has a built-in CLI that generates production-ready apps with routing and state management pre-configured.",
         "isCorrect": false,
-        "explanation": "React doesn't have an opinionated CLI beyond create-react-app (now largely superseded). Vue CLI and Nuxt are more opinionated out of the box."
+        "explanation": "React doesn't have an opinionated CLI beyond create-react-app (now largely superseded). Vue CLI and Nuxt are more opinionated out of the box.",
+        "optionTextTr": "React, rota ve state'li production-ready uygulamalar üreten yerleşik CLI içerir.",
+        "explanationTr": "React'in resmi CLI'si (Create React App) kullanımdan kalkıyor; Vue CLI ve Vite gibi araçlarla kıyaslandığında daha az özellikli."
       }
     ]
   },
@@ -474,22 +618,30 @@
       {
         "optionText": "Arrow functions lexically bind 'this', so event handlers defined as arrow functions don't need .bind(this) in class component constructors.",
         "isCorrect": true,
-        "explanation": "Correct — arrow functions capture 'this' from the enclosing scope, eliminating the need for explicit binding in class components."
+        "explanation": "Correct — arrow functions capture 'this' from the enclosing scope, eliminating the need for explicit binding in class components.",
+        "optionTextTr": "Arrow function'lar 'this'i lexical olarak bağlar; class bileşenlerindeki event handler'lar constructor'da .bind(this) gerektirmez.",
+        "explanationTr": "Doğru — class bileşenlerinde bu önemli bir kullanışlılık sağladı; function bileşenler ve hook'larla bu sorun artık mevcut değil."
       },
       {
         "optionText": "Arrow functions trigger React's memoisation system automatically, preventing unnecessary re-renders.",
         "isCorrect": false,
-        "explanation": "Arrow functions defined inline actually create a new reference each render, which can cause unnecessary re-renders unless wrapped in useCallback."
+        "explanation": "Arrow functions defined inline actually create a new reference each render, which can cause unnecessary re-renders unless wrapped in useCallback.",
+        "optionTextTr": "Arrow function'lar React'in memoization sistemini otomatik tetikler.",
+        "explanationTr": "Arrow function'lar otomatik memoization tetiklemez — bunun için useCallback veya React.memo gerekir."
       },
       {
         "optionText": "Arrow functions are faster than regular functions because React's compiler optimises them specifically.",
         "isCorrect": false,
-        "explanation": "Arrow functions don't receive special optimisation from React's compiler. Performance differences are negligible."
+        "explanation": "Arrow functions don't receive special optimisation from React's compiler. Performance differences are negligible.",
+        "optionTextTr": "Arrow function'lar React'in compiler'ı tarafından optimize edildiğinden daha hızlıdır.",
+        "explanationTr": "React compiler'ı arrow function'ları özellikle optimize etmez — bu yanlış bir iddia."
       },
       {
         "optionText": "Arrow functions bypass React's synthetic event system, giving direct access to native browser events.",
         "isCorrect": false,
-        "explanation": "Arrow functions have no effect on React's event system. Event handlers always receive SyntheticEvent regardless of function syntax."
+        "explanation": "Arrow functions have no effect on React's event system. Event handlers always receive SyntheticEvent regardless of function syntax.",
+        "optionTextTr": "Arrow function'lar React'in sentetik event sistemini atlayarak DOM event'lerine doğrudan erişim sağlar.",
+        "explanationTr": "Arrow function'lar React'in event sistemini atlamaz — sentetik event'ler hâlâ kullanılır."
       }
     ]
   }

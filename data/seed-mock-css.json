@@ -6,22 +6,30 @@
       {
         "optionText": "A styling language that describes the presentation of HTML documents",
         "isCorrect": true,
-        "explanation": "CSS (Cascading Style Sheets) controls how HTML elements look — colors, layout, fonts, spacing, and more."
+        "explanation": "CSS (Cascading Style Sheets) controls how HTML elements look — colors, layout, fonts, spacing, and more.",
+        "optionTextTr": "HTML belgelerinin sunumunu (renkler, layout, tipografi) tanımlayan stil dili.",
+        "explanationTr": "Doğru — CSS (Cascading Style Sheets), HTML yapısını görsel tasarımdan ayırır."
       },
       {
         "optionText": "A programming language used to build web servers",
         "isCorrect": false,
-        "explanation": "CSS is not a programming language and doesn't run on servers. That's the domain of Node.js, Python, etc."
+        "explanation": "CSS is not a programming language and doesn't run on servers. That's the domain of Node.js, Python, etc.",
+        "optionTextTr": "Web sunucuları inşa etmek için kullanılan programlama dili.",
+        "explanationTr": "Bu sunucu tarafı dillerini (Node.js, Python vb.) tanımlar — CSS değil."
       },
       {
         "optionText": "A markup language for structuring web content",
         "isCorrect": false,
-        "explanation": "HTML is the markup language for structure. CSS handles presentation."
+        "explanation": "HTML is the markup language for structure. CSS handles presentation.",
+        "optionTextTr": "Web içeriğini yapılandırmak için işaretleme dili.",
+        "explanationTr": "Bu HTML'yi tanımlar — CSS, stil için kullanılır; yapı için değil."
       },
       {
         "optionText": "A database query language for web applications",
         "isCorrect": false,
-        "explanation": "CSS has nothing to do with databases. SQL is the query language for relational databases."
+        "explanation": "CSS has nothing to do with databases. SQL is the query language for relational databases.",
+        "optionTextTr": "Web uygulamaları için veritabanı sorgu dili.",
+        "explanationTr": "Bu SQL'i tanımlar — CSS değil."
       }
     ]
   },
@@ -32,22 +40,30 @@
       {
         "optionText": "IDs are unique per page and have higher specificity; classes can be reused on multiple elements",
         "isCorrect": true,
-        "explanation": "An ID (#) must be unique in the document and has specificity of (0,1,0,0). A class (.) can be applied to many elements and has specificity of (0,0,1,0)."
+        "explanation": "An ID (#) must be unique in the document and has specificity of (0,1,0,0). A class (.) can be applied to many elements and has specificity of (0,0,1,0).",
+        "optionTextTr": "ID'ler sayfa başına benzersizdir ve daha yüksek özgüllüğe sahiptir; sınıflar birden fazla öğede yeniden kullanılabilir.",
+        "explanationTr": "Doğru — genel bir kural olarak: ID'leri benzersiz kimlik, sınıfları ise yeniden kullanılabilir stiller için kullanın."
       },
       {
         "optionText": "Classes are unique per page; IDs can be reused on multiple elements",
         "isCorrect": false,
-        "explanation": "It's the other way around — IDs should be unique, classes are reusable."
+        "explanation": "It's the other way around — IDs should be unique, classes are reusable.",
+        "optionTextTr": "Sınıflar sayfa başına benzersizdir; ID'ler birden fazla öğede yeniden kullanılabilir.",
+        "explanationTr": "Bu tam tersidir — ID'ler benzersiz olmalıdır; sınıflar yeniden kullanılabilirdir."
       },
       {
         "optionText": "IDs and classes have identical specificity and can both be reused",
         "isCorrect": false,
-        "explanation": "Their specificity differs significantly: an ID selector outweighs any number of class selectors."
+        "explanation": "Their specificity differs significantly: an ID selector outweighs any number of class selectors.",
+        "optionTextTr": "ID'ler ve sınıflar özdeş özgüllüğe sahiptir ve her ikisi de yeniden kullanılabilir.",
+        "explanationTr": "ID'ler class seçicilerden daha yüksek özgüllüğe sahiptir (100 vs 10)."
       },
       {
         "optionText": "IDs apply styles inline; classes apply styles globally",
         "isCorrect": false,
-        "explanation": "Both are external/internal stylesheet selectors. Inline styles use the style attribute directly on the element."
+        "explanation": "Both are external/internal stylesheet selectors. Inline styles use the style attribute directly on the element.",
+        "optionTextTr": "ID'ler inline stil uygular; sınıflar global stil uygular.",
+        "explanationTr": "Her ikisi de sayfada herhangi bir yerden uygulanabilir; ayrım uygulama yöntemiyle değil özgüllük ve kullanımla ilgilidir."
       }
     ]
   },
@@ -58,22 +74,30 @@
       {
         "optionText": "Content, padding, border, and margin — each wrapping the previous layer outward",
         "isCorrect": true,
-        "explanation": "The box model defines how space is calculated: content area → padding → border → margin, from inner to outer."
+        "explanation": "The box model defines how space is calculated: content area → padding → border → margin, from inner to outer.",
+        "optionTextTr": "İçerik, padding, border ve margin — her biri bir öncekini sarar.",
+        "explanationTr": "Doğru — box model, her öğenin kaplayacağı alanı tanımlar; box-sizing bu hesaplamayı etkiler."
       },
       {
         "optionText": "Width, height, color, and font-size properties applied to every element",
         "isCorrect": false,
-        "explanation": "Those are CSS properties, not the box model layers."
+        "explanation": "Those are CSS properties, not the box model layers.",
+        "optionTextTr": "Her öğeye uygulanan genişlik, yükseklik, renk ve font-size özellikleri.",
+        "explanationTr": "Bunlar CSS özellikleridir — kutu modelinin kendisi değil."
       },
       {
         "optionText": "Header, body, footer, and sidebar sections of a web page",
         "isCorrect": false,
-        "explanation": "Those are page layout regions, not the CSS box model."
+        "explanation": "Those are page layout regions, not the CSS box model.",
+        "optionTextTr": "Bir web sayfasının header, body, footer ve sidebar bölümleri.",
+        "explanationTr": "Bunlar HTML/sayfa yapısı bölümleridir — CSS kutu modeli değil."
       },
       {
         "optionText": "Flexbox, Grid, Float, and Position layout systems in CSS",
         "isCorrect": false,
-        "explanation": "Those are layout mechanisms, separate from the box model concept."
+        "explanation": "Those are layout mechanisms, separate from the box model concept.",
+        "optionTextTr": "CSS'teki Flexbox, Grid, Float ve Position layout sistemleri.",
+        "explanationTr": "Bunlar layout sistemleridir — kutu modeli öğe boyutlandırmasını tanımlar."
       }
     ]
   },
@@ -84,22 +108,30 @@
       {
         "optionText": "Static is default flow; relative offsets from its normal position; absolute positions relative to nearest positioned ancestor; fixed positions relative to the viewport",
         "isCorrect": true,
-        "explanation": "position: static is the default. relative moves the element but keeps its space. absolute removes it from flow, anchored to a positioned ancestor. fixed anchors to the viewport and doesn't scroll."
+        "explanation": "position: static is the default. relative moves the element but keeps its space. absolute removes it from flow, anchored to a positioned ancestor. fixed anchors to the viewport and doesn't scroll.",
+        "optionTextTr": "Statik varsayılan akıştır; göreceli normal konumundan kaydırır; mutlak konumlandırılmış ataya göredir; sabit viewport'a göredir.",
+        "explanationTr": "Doğru — bu dört değerin temel farkını anlamak düzen sorunlarını çözmenin anahtarıdır."
       },
       {
         "optionText": "All four values position elements relative to the viewport",
         "isCorrect": false,
-        "explanation": "Only fixed positions relative to the viewport. The others use different reference points."
+        "explanation": "Only fixed positions relative to the viewport. The others use different reference points.",
+        "optionTextTr": "Dört değer de öğeleri viewport'a göre konumlandırır.",
+        "explanationTr": "Yalnızca sabit konumlandırma viewport'a göredir; mutlak ve göreceli farklı referans noktaları kullanır."
       },
       {
         "optionText": "Absolute and fixed are the same; relative and static are the same",
         "isCorrect": false,
-        "explanation": "They are all distinct values with different layout behavior."
+        "explanation": "They are all distinct values with different layout behavior.",
+        "optionTextTr": "Mutlak ve sabit aynıdır; göreceli ve statik aynıdır.",
+        "explanationTr": "Bunların hiçbiri doğru değildir — dördü de farklı konumlandırma davranışlarına sahiptir."
       },
       {
         "optionText": "Relative removes the element from document flow; absolute keeps it in flow",
         "isCorrect": false,
-        "explanation": "It's the opposite — absolute removes the element from normal document flow; relative keeps its reserved space."
+        "explanation": "It's the opposite — absolute removes the element from normal document flow; relative keeps its reserved space.",
+        "optionTextTr": "Göreceli öğeyi document akışından çıkarır; mutlak tutar.",
+        "explanationTr": "Tam tersi doğrudur — mutlak, öğeyi document akışından çıkarır; göreceli akışta kalır ama kaydırılır."
       }
     ]
   },
@@ -110,22 +142,30 @@
       {
         "optionText": "A tool that extends CSS with variables, nesting, mixins, and functions, then compiles to standard CSS",
         "isCorrect": true,
-        "explanation": "Preprocessors like Sass and Less add programming-like features to CSS, improving maintainability and reducing repetition. The output is plain CSS browsers can read."
+        "explanation": "Preprocessors like Sass and Less add programming-like features to CSS, improving maintainability and reducing repetition. The output is plain CSS browsers can read.",
+        "optionTextTr": "CSS'i değişkenler, iç içe yazma, mixin'ler ve fonksiyonlarla genişleten araç; sonra saf CSS'e derlenir.",
+        "explanationTr": "Doğru — Sass, Less ve Stylus en popüler CSS ön işleyicileridir."
       },
       {
         "optionText": "A browser extension that applies CSS styles faster than the standard parser",
         "isCorrect": false,
-        "explanation": "Preprocessors are build-time tools, not runtime browser extensions."
+        "explanation": "Preprocessors are build-time tools, not runtime browser extensions.",
+        "optionTextTr": "CSS stillerini standart tarayıcıdan daha hızlı uygulayan tarayıcı uzantısı.",
+        "explanationTr": "CSS ön işleyiciler tarayıcı uzantısı değil; derleme araçlarıdır."
       },
       {
         "optionText": "A JavaScript library that adds animations to CSS properties",
         "isCorrect": false,
-        "explanation": "Preprocessors are not JavaScript libraries and don't add animation capabilities."
+        "explanation": "Preprocessors are not JavaScript libraries and don't add animation capabilities.",
+        "optionTextTr": "CSS özelliklerine animasyon ekleyen JavaScript kütüphanesi.",
+        "explanationTr": "Bu GSAP gibi animasyon kütüphanelerini tanımlar — CSS ön işleyici değil."
       },
       {
         "optionText": "A minification tool that removes whitespace and comments from CSS files",
         "isCorrect": false,
-        "explanation": "Minification is a separate optimization step. Preprocessors add authoring features rather than reduce file size."
+        "explanation": "Minification is a separate optimization step. Preprocessors add authoring features rather than reduce file size.",
+        "optionTextTr": "CSS dosyalarından boşluk ve yorum kaldıran küçültme aracı.",
+        "explanationTr": "Bu CSS minifier'ı tanımlar — ön işleyici değil."
       }
     ]
   },
@@ -136,22 +176,30 @@
       {
         "optionText": "Virtual elements created via CSS (::before, ::after) used to insert decorative content or style specific parts of an element",
         "isCorrect": true,
-        "explanation": "Pseudo-elements like ::before, ::after, ::first-line, ::first-letter target sub-parts of elements or insert generated content without extra HTML markup."
+        "explanation": "Pseudo-elements like ::before, ::after, ::first-line, ::first-letter target sub-parts of elements or insert generated content without extra HTML markup.",
+        "optionTextTr": "CSS aracılığıyla oluşturulan sanal öğeler (::before, ::after) içerik eklemek veya dekoratif efektler için kullanılır.",
+        "explanationTr": "Doğru — sözde öğeler, HTML değiştirmeden görsel içerik veya dekor ekler."
       },
       {
         "optionText": "HTML elements that are hidden from screen readers",
         "isCorrect": false,
-        "explanation": "Pseudo-elements are CSS constructs, not hidden HTML elements."
+        "explanation": "Pseudo-elements are CSS constructs, not hidden HTML elements.",
+        "optionTextTr": "Ekran okuyuculardan gizlenen HTML öğeleri.",
+        "explanationTr": "Bu erişilebilirlik tekniklerini tanımlar — sözde öğeler değil."
       },
       {
         "optionText": "JavaScript methods that manipulate the CSS of an element at runtime",
         "isCorrect": false,
-        "explanation": "Pseudo-elements are purely a CSS concept defined in stylesheets."
+        "explanation": "Pseudo-elements are purely a CSS concept defined in stylesheets.",
+        "optionTextTr": "Çalışma zamanında öğenin CSS'ini manipüle eden JavaScript metodları.",
+        "explanationTr": "Bu DOM stil manipülasyonunu tanımlar — CSS sözde öğeleri değil."
       },
       {
         "optionText": "Selectors that target elements based on user interaction states like hover or focus",
         "isCorrect": false,
-        "explanation": "Those are pseudo-classes (:hover, :focus). Pseudo-elements (::before) are different — they create or target sub-parts rather than states."
+        "explanation": "Those are pseudo-classes (:hover, :focus). Pseudo-elements (::before) are different — they create or target sub-parts rather than states.",
+        "optionTextTr": "Kullanıcı etkileşim durumlarını hedefleyen seçiciler.",
+        "explanationTr": "Bu sözde sınıfları (:hover, :focus) tanımlar — sözde öğeler (::before, ::after) farklıdır."
       }
     ]
   },
@@ -162,22 +210,30 @@
       {
         "optionText": "Yes — Flexbox is one-dimensional (row or column) ideal for component layout; Grid is two-dimensional ideal for page layout",
         "isCorrect": true,
-        "explanation": "Flexbox handles single-axis alignment (nav bars, card rows). Grid handles two-dimensional layouts (full page grids, dashboard). They complement each other and are often used together."
+        "explanation": "Flexbox handles single-axis alignment (nav bars, card rows). Grid handles two-dimensional layouts (full page grids, dashboard). They complement each other and are often used together.",
+        "optionTextTr": "Evet — Flexbox tek boyutludur (satır veya sütun), bileşen düzeni için ideal; Grid iki boyutludur, sayfa düzeni için güçlüdür.",
+        "explanationTr": "Doğru — modern CSS geliştirmesi her ikisine de hakim olmayı gerektirir; bunlar tamamlayıcı araçlardır."
       },
       {
         "optionText": "Flexbox and Grid are identical in functionality; Grid is just the newer version",
         "isCorrect": false,
-        "explanation": "They solve different problems. Flexbox is one-dimensional; Grid is two-dimensional."
+        "explanation": "They solve different problems. Flexbox is one-dimensional; Grid is two-dimensional.",
+        "optionTextTr": "Flexbox ve Grid işlevsel olarak özdeştir; Grid Flexbox'ın daha yeni adıdır.",
+        "explanationTr": "Bunlar farklı güçlü yönlere sahip farklı layout sistemleridir."
       },
       {
         "optionText": "Flexbox is for vertical layouts only; Grid is for horizontal layouts only",
         "isCorrect": false,
-        "explanation": "Flexbox works on either axis (row or column). Grid handles both simultaneously."
+        "explanation": "Flexbox works on either axis (row or column). Grid handles both simultaneously.",
+        "optionTextTr": "Flexbox yalnızca dikey; Grid yalnızca yatay düzenler içindir.",
+        "explanationTr": "Her ikisi de her iki yönde de çalışabilir — ayrım tek eksen vs. iki eksen yönetimidir."
       },
       {
         "optionText": "Grid replaced Flexbox and Flexbox is now deprecated",
         "isCorrect": false,
-        "explanation": "Neither is deprecated. Both are modern, widely supported, and serve complementary purposes."
+        "explanation": "Neither is deprecated. Both are modern, widely supported, and serve complementary purposes.",
+        "optionTextTr": "Grid, Flexbox'ın yerini aldı ve Flexbox artık kullanımdan kalktı.",
+        "explanationTr": "Her ikisi de aktif olarak desteklenmekte ve kullanılmaktadır; genellikle birlikte kullanılır."
       }
     ]
   },
@@ -188,22 +244,30 @@
       {
         "optionText": "A single image file containing multiple images, displayed individually using background-position to reduce HTTP requests",
         "isCorrect": true,
-        "explanation": "CSS sprites combine icons/images into one file, then use background-image + background-position to show only the needed portion. This was crucial for performance before HTTP/2."
+        "explanation": "CSS sprites combine icons/images into one file, then use background-image + background-position to show only the needed portion. This was crucial for performance before HTTP/2.",
+        "optionTextTr": "Birden fazla görüntüyü içeren tek bir görüntü dosyası; background-position ile bireysel görüntüler gösterilir.",
+        "explanationTr": "Doğru — sprite'lar HTTP isteği sayısını azaltır; ancak HTTP/2 ve modern formatlarla kullanımları azaldı."
       },
       {
         "optionText": "Animated CSS keyframe sequences applied to HTML elements",
         "isCorrect": false,
-        "explanation": "CSS animations use @keyframes. Sprites are about combining static images into one file."
+        "explanation": "CSS animations use @keyframes. Sprites are about combining static images into one file.",
+        "optionTextTr": "HTML öğelerine uygulanan animasyonlu CSS keyframe dizileri.",
+        "explanationTr": "Bu CSS animasyonlarını tanımlar — sprite değil."
       },
       {
         "optionText": "A JavaScript library for creating sprite-based games in the browser",
         "isCorrect": false,
-        "explanation": "CSS sprites are a CSS technique for icon management, not a game development library."
+        "explanation": "CSS sprites are a CSS technique for icon management, not a game development library.",
+        "optionTextTr": "Tarayıcıda sprite tabanlı oyunlar oluşturmak için JavaScript kütüphanesi.",
+        "explanationTr": "Bu oyun kütüphanelerini tanımlar — CSS sprite'ları değil."
       },
       {
         "optionText": "SVG icons embedded directly inside HTML markup",
         "isCorrect": false,
-        "explanation": "Inline SVG is a different technique. Sprites use a single raster (or SVG) file with background-position offsets."
+        "explanation": "Inline SVG is a different technique. Sprites use a single raster (or SVG) file with background-position offsets.",
+        "optionTextTr": "HTML işaretlemesine doğrudan gömülü SVG ikonlar.",
+        "explanationTr": "Bu inline SVG'yi tanımlar — CSS sprite'ları değil."
       }
     ]
   },
@@ -214,22 +278,30 @@
       {
         "optionText": "z-index controls the stack order of overlapping elements; a stacking context is created by positioned elements with z-index, opacity < 1, transforms, and similar properties",
         "isCorrect": true,
-        "explanation": "z-index only works on positioned or flex/grid items. A new stacking context is formed by position + z-index, opacity < 1, transform, filter, will-change, isolation: isolate, etc. Elements inside a context are ordered independently."
+        "explanation": "z-index only works on positioned or flex/grid items. A new stacking context is formed by position + z-index, opacity < 1, transform, filter, will-change, isolation: isolate, etc. Elements inside a context are ordered independently.",
+        "optionTextTr": "z-index, örtüşen öğelerin yığın sırasını kontrol eder; yığın bağlamı position + z-index, opacity, transform vb. ile oluşturulur.",
+        "explanationTr": "Doğru — her yığın bağlamı bağımsız bir katman oluşturur; z-index yalnızca aynı bağlam içinde karşılaştırılır."
       },
       {
         "optionText": "z-index applies to every element regardless of its position property",
         "isCorrect": false,
-        "explanation": "z-index only applies to positioned elements (not static) or flex/grid children."
+        "explanation": "z-index only applies to positioned elements (not static) or flex/grid children.",
+        "optionTextTr": "z-index, position özelliğinden bağımsız olarak her öğeye uygulanır.",
+        "explanationTr": "z-index yalnızca position değeri static olmayan öğelerde çalışır."
       },
       {
         "optionText": "A higher z-index always wins regardless of stacking contexts",
         "isCorrect": false,
-        "explanation": "z-index comparisons only apply within the same stacking context. A z-index of 9999 inside a low-priority context can still appear behind a z-index: 1 in a parent context."
+        "explanation": "z-index comparisons only apply within the same stacking context. A z-index of 9999 inside a low-priority context can still appear behind a z-index: 1 in a parent context.",
+        "optionTextTr": "Daha yüksek z-index her zaman yığın bağlamlarından bağımsız olarak kazanır.",
+        "explanationTr": "Bu yanlıştır — z-index yalnızca aynı yığın bağlamındaki öğeler arasında karşılaştırılır."
       },
       {
         "optionText": "Stacking context is another name for the CSS cascade",
         "isCorrect": false,
-        "explanation": "The cascade determines which style rule wins. Stacking context determines how elements overlap visually on the z-axis."
+        "explanation": "The cascade determines which style rule wins. Stacking context determines how elements overlap visually on the z-axis.",
+        "optionTextTr": "Yığın bağlamı, CSS cascade'inin başka bir adıdır.",
+        "explanationTr": "Yığın bağlamı z ekseniyle; cascade ise stil önceliğiyle ilgilidir. Bunlar farklı kavramlardır."
       }
     ]
   },
@@ -240,22 +312,30 @@
       {
         "optionText": "Specificity is scored as (inline, ID, class/attr/pseudo-class, element) — higher score wins when multiple rules target the same element",
         "isCorrect": true,
-        "explanation": "Specificity is calculated as a four-part tuple: inline styles > IDs > classes/attributes/pseudo-classes > elements/pseudo-elements. !important overrides all but is best avoided."
+        "explanation": "Specificity is calculated as a four-part tuple: inline styles > IDs > classes/attributes/pseudo-classes > elements/pseudo-elements. !important overrides all but is best avoided.",
+        "optionTextTr": "Özgüllük şu şekilde puanlanır: inline stil > ID > class/öznitelik/sözde sınıf > element.",
+        "explanationTr": "Doğru — !important bu hesaplamayı geçersiz kılsa da kötü uygulama olarak kabul edilir."
       },
       {
         "optionText": "The last rule written in the stylesheet always wins regardless of selectors",
         "isCorrect": false,
-        "explanation": "Order matters only when specificity is equal. Higher specificity always overrides later rules with lower specificity."
+        "explanation": "Order matters only when specificity is equal. Higher specificity always overrides later rules with lower specificity.",
+        "optionTextTr": "Stil sayfasına en son yazılan kural, özgüllükten bağımsız olarak her zaman kazanır.",
+        "explanationTr": "Kaynak sırası eşit özgüllükte belirleyicidir ama daha yüksek özgüllüğü geçersiz kılmaz."
       },
       {
         "optionText": "Specificity only applies to class selectors, not IDs or elements",
         "isCorrect": false,
-        "explanation": "All selector types contribute to specificity."
+        "explanation": "All selector types contribute to specificity.",
+        "optionTextTr": "Özgüllük yalnızca class seçicilere uygulanır, ID veya element seçicilere değil.",
+        "explanationTr": "Özgüllük tüm seçici türleri için geçerlidir — sadece class seçiciler için değil."
       },
       {
         "optionText": "Specificity is reset to zero after each CSS rule block",
         "isCorrect": false,
-        "explanation": "Specificity is a property of each selector, calculated per-rule — there's no reset mechanism."
+        "explanation": "Specificity is a property of each selector, calculated per-rule — there's no reset mechanism.",
+        "optionTextTr": "Özgüllük her CSS kural bloğundan sonra sıfırlanır.",
+        "explanationTr": "Özgüllük sıfırlanmaz — her kural, hedeflediği her öğe için birlikte değerlendirilir."
       }
     ]
   },
@@ -266,22 +346,30 @@
       {
         "optionText": "Makes padding and border included in the element's declared width/height, making layout calculations more predictable",
         "isCorrect": true,
-        "explanation": "With border-box, a 200px wide element stays 200px wide even after adding padding or border. Without it (content-box), padding and border add to the declared width, causing unexpected overflow."
+        "explanation": "With border-box, a 200px wide element stays 200px wide even after adding padding or border. Without it (content-box), padding and border add to the declared width, causing unexpected overflow.",
+        "optionTextTr": "Padding ve border'ı öğenin bildirilen genişliğine dahil eder — daha sezgisel boyutlandırma yapar.",
+        "explanationTr": "Doğru — content-box varsayılanında padding ve border genişliği artırır; border-box'ta dahil olur."
       },
       {
         "optionText": "Removes all default browser margins and paddings from every element",
         "isCorrect": false,
-        "explanation": "That's what a CSS reset does. box-sizing: border-box only changes how width/height are calculated."
+        "explanation": "That's what a CSS reset does. box-sizing: border-box only changes how width/height are calculated.",
+        "optionTextTr": "Her öğeden tüm varsayılan tarayıcı margin ve padding'lerini kaldırır.",
+        "explanationTr": "Bu CSS reset'ini tanımlar — box-sizing değil."
       },
       {
         "optionText": "Makes every element display as a block-level element",
         "isCorrect": false,
-        "explanation": "box-sizing has nothing to do with display type."
+        "explanation": "box-sizing has nothing to do with display type.",
+        "optionTextTr": "Her öğeyi blok düzeyinde öğe olarak gösterir.",
+        "explanationTr": "Bu display: block'u tanımlar — box-sizing değil."
       },
       {
         "optionText": "Adds a visible border to every element for debugging purposes",
         "isCorrect": false,
-        "explanation": "box-sizing: border-box doesn't add any visible borders. It changes the box model calculation."
+        "explanation": "box-sizing: border-box doesn't add any visible borders. It changes the box model calculation.",
+        "optionTextTr": "Debug için her öğeye görünür kenarlık ekler.",
+        "explanationTr": "Bu yaygın bir debug tekniğidir ama box-sizing: border-box'ın işlevi değil."
       }
     ]
   },
@@ -292,22 +380,30 @@
       {
         "optionText": "Use a visually-hidden utility class with position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0)",
         "isCorrect": true,
-        "explanation": "This technique keeps content in the DOM and accessible to screen readers while hiding it visually. display: none and visibility: hidden both remove content from the accessibility tree."
+        "explanation": "This technique keeps content in the DOM and accessible to screen readers while hiding it visually. display: none and visibility: hidden both remove content from the accessibility tree.",
+        "optionTextTr": "Bir visually-hidden utility class kullanın: position: absolute; width: 1px; height: 1px; overflow: hidden;",
+        "explanationTr": "Doğru — bu standart erişilebilirlik tekniğidir; görsel olarak gizler ama ekran okuyucular için DOM'da kalır."
       },
       {
         "optionText": "Use display: none to hide the element from sighted users while screen readers still read it",
         "isCorrect": false,
-        "explanation": "display: none removes the element from both visual rendering AND the accessibility tree, so screen readers ignore it too."
+        "explanation": "display: none removes the element from both visual rendering AND the accessibility tree, so screen readers ignore it too.",
+        "optionTextTr": "display: none ile öğeyi görme engelli kullanıcılardan gizleyin.",
+        "explanationTr": "display: none, öğeyi ekran okuyuculardan da gizler — erişilebilirlik için geçerli değildir."
       },
       {
         "optionText": "Use opacity: 0 to make content invisible but readable by screen readers",
         "isCorrect": false,
-        "explanation": "opacity: 0 hides the content visually but the element is still interactive and takes up space — not ideal for screen-reader-only content."
+        "explanation": "opacity: 0 hides the content visually but the element is still interactive and takes up space — not ideal for screen-reader-only content.",
+        "optionTextTr": "opacity: 0 kullanarak içeriği görünmez ama ekran okuyucu tarafından okunabilir yapın.",
+        "explanationTr": "opacity: 0, içeriği görsel olarak gizler ama tıklanabilir alanda bırakır; ekran okuyucu davranışı değişkendir."
       },
       {
         "optionText": "Use visibility: hidden — screen readers will still announce the content",
         "isCorrect": false,
-        "explanation": "visibility: hidden hides the element from both sighted users and screen readers. Use the visually-hidden pattern instead."
+        "explanation": "visibility: hidden hides the element from both sighted users and screen readers. Use the visually-hidden pattern instead.",
+        "optionTextTr": "visibility: hidden kullanın — ekran okuyucular içeriği hâlâ duyurur.",
+        "explanationTr": "visibility: hidden, içeriği ekran okuyuculardan da genellikle gizler — bu doğru değil."
       }
     ]
   },
@@ -318,22 +414,30 @@
       {
         "optionText": "Yes — translate() uses GPU compositing and doesn't trigger layout reflow, making animations smoother and more performant",
         "isCorrect": true,
-        "explanation": "translate() is processed on the compositor thread (with will-change or transform), avoiding expensive layout and paint steps. Absolute positioning changes geometry and triggers reflow on every frame."
+        "explanation": "translate() is processed on the compositor thread (with will-change or transform), avoiding expensive layout and paint steps. Absolute positioning changes geometry and triggers reflow on every frame.",
+        "optionTextTr": "Evet — translate() GPU compositing kullanır ve layout yeniden hesaplaması tetiklemez; absolute konumlandırma layout değişikliklerine neden olabilir.",
+        "explanationTr": "Doğru — translate() animasyon için tercih edilir; layout/paint aşamalarını atlayan composite aşamasında çalışır."
       },
       {
         "optionText": "No — absolute positioning and translate() have identical performance characteristics",
         "isCorrect": false,
-        "explanation": "They are very different in performance. translate() avoids layout; absolute positioning triggers it."
+        "explanation": "They are very different in performance. translate() avoids layout; absolute positioning triggers it.",
+        "optionTextTr": "Hayır — absolute konumlandırma ve translate() özdeş performansa sahiptir.",
+        "explanationTr": "translate() ve absolute konumlandırmanın farklı rendering maliyetleri vardır — translate() genellikle daha verimlidir."
       },
       {
         "optionText": "translate() is only available in CSS animations, not for static positioning",
         "isCorrect": false,
-        "explanation": "transform: translate() can be used statically on any element, not just inside animations."
+        "explanation": "transform: translate() can be used statically on any element, not just inside animations.",
+        "optionTextTr": "translate() yalnızca CSS animasyonlarında kullanılabilir, statik konumlandırma için değil.",
+        "explanationTr": "translate(), hem statik hem animasyon bağlamlarında kullanılabilir."
       },
       {
         "optionText": "absolute positioning always creates a new GPU layer; translate() does not",
         "isCorrect": false,
-        "explanation": "It's the other way — transform (including translate) promotes elements to their own compositing layer, which is why they're faster for animations."
+        "explanation": "It's the other way — transform (including translate) promotes elements to their own compositing layer, which is why they're faster for animations.",
+        "optionTextTr": "absolute konumlandırma her zaman yeni bir GPU katmanı oluşturur; translate() oluşturmaz.",
+        "explanationTr": "Bu tam tersidir — transform: translateZ(0) veya will-change GPU katmanı oluşturabilir."
       }
     ]
   },
@@ -344,22 +448,30 @@
       {
         "optionText": "Writing CSS that ensures sufficient color contrast, focus visibility, readable font sizes, and no content hidden from assistive technologies unintentionally",
         "isCorrect": true,
-        "explanation": "Accessibility in CSS means: WCAG-compliant contrast ratios, visible :focus styles, scalable units (rem/em over px), not using display: none or visibility: hidden to hide meaningful content from screen readers."
+        "explanation": "Accessibility in CSS means: WCAG-compliant contrast ratios, visible :focus styles, scalable units (rem/em over px), not using display: none or visibility: hidden to hide meaningful content from screen readers.",
+        "optionTextTr": "Yeterli renk kontrastı, odak görünürlüğü ve uygun yazı boyutu sağlayan CSS yazmak.",
+        "explanationTr": "Doğru — CSS erişilebilirliği: kontrast oranları, odak göstergeleri, hareket tercihleri ve responsive metin boyutlarını kapsar."
       },
       {
         "optionText": "Using only black and white colors to ensure universal readability",
         "isCorrect": false,
-        "explanation": "Color is fine; what matters is sufficient contrast ratio (4.5:1 for normal text per WCAG AA)."
+        "explanation": "Color is fine; what matters is sufficient contrast ratio (4.5:1 for normal text per WCAG AA).",
+        "optionTextTr": "Evrensel okunabilirliği sağlamak için yalnızca siyah ve beyaz renk kullanmak.",
+        "explanationTr": "Erişilebilirlik yalnızca renkle sınırlı değil; yeterli kontrast ve çeşitli engellilik gereksinimleriyle ilgilidir."
       },
       {
         "optionText": "Adding ARIA attributes to CSS selectors",
         "isCorrect": false,
-        "explanation": "ARIA attributes are HTML attributes, not CSS. CSS can style based on ARIA attributes but cannot add them."
+        "explanation": "ARIA attributes are HTML attributes, not CSS. CSS can style based on ARIA attributes but cannot add them.",
+        "optionTextTr": "CSS seçicilere ARIA özelliği eklemek.",
+        "explanationTr": "ARIA, HTML özelliklerinde kullanılır — CSS seçicilerde değil."
       },
       {
         "optionText": "Minifying CSS files so they load faster for users with slow connections",
         "isCorrect": false,
-        "explanation": "Performance optimization is valuable but not what a11y specifically means in a CSS context."
+        "explanation": "Performance optimization is valuable but not what a11y specifically means in a CSS context.",
+        "optionTextTr": "CSS dosyalarını küçülterek yavaş bağlantılı kullanıcılar için hızlı yükleme sağlamak.",
+        "explanationTr": "Erişilebilirlik, algısal ve işlevsel tasarım kararlarıyla ilgilidir — yalnızca performans optimizasyonu değil."
       }
     ]
   },
@@ -370,22 +482,30 @@
       {
         "optionText": "SCSS uses CSS-like curly brace syntax; Sass (indented syntax) uses indentation with no braces or semicolons — both compile to CSS",
         "isCorrect": true,
-        "explanation": "Both are syntaxes of the same Sass preprocessor. SCSS (.scss) is the more popular choice as it's a superset of CSS. Sass (.sass) uses indentation-based syntax similar to Python/YAML."
+        "explanation": "Both are syntaxes of the same Sass preprocessor. SCSS (.scss) is the more popular choice as it's a superset of CSS. Sass (.sass) uses indentation-based syntax similar to Python/YAML.",
+        "optionTextTr": "SCSS kıvrımlı parantez sözdizimi kullanır (CSS gibi); Sass girintili sözdizimi kullanır (parantez yok).",
+        "explanationTr": "Doğru — SCSS daha yaygın olarak benimseniyor çünkü mevcut CSS dosyalarına daha çok benziyor."
       },
       {
         "optionText": "Sass is a newer version of SCSS with additional features",
         "isCorrect": false,
-        "explanation": "Neither is newer — they're two syntaxes of the same tool. SCSS was introduced later but is not 'more advanced'."
+        "explanation": "Neither is newer — they're two syntaxes of the same tool. SCSS was introduced later but is not 'more advanced'.",
+        "optionTextTr": "Sass, ek özelliklerle birlikte gelen SCSS'in daha yeni sürümüdür.",
+        "explanationTr": "Sass, SCSS'ten daha eski olup iki farklı sözdiziminden biridir — daha yeni versiyonu değil."
       },
       {
         "optionText": "SCSS requires a build step; Sass runs natively in the browser",
         "isCorrect": false,
-        "explanation": "Both require a build step to compile to CSS. Neither runs natively in browsers."
+        "explanation": "Both require a build step to compile to CSS. Neither runs natively in browsers.",
+        "optionTextTr": "SCSS bir build adımı gerektirir; Sass tarayıcıda yerel çalışır.",
+        "explanationTr": "Her ikisi de derleme gerektirir — hiçbiri tarayıcıda yerel çalışmaz."
       },
       {
         "optionText": "SCSS is for React projects; Sass is for plain HTML projects",
         "isCorrect": false,
-        "explanation": "Both can be used in any project type. The choice is purely syntax preference."
+        "explanation": "Both can be used in any project type. The choice is purely syntax preference.",
+        "optionTextTr": "SCSS React projeleri için; Sass saf HTML projeleri için.",
+        "explanationTr": "Her ikisi de herhangi bir web projesiyle kullanılabilir — proje türüne göre kısıtlama yoktur."
       }
     ]
   },
@@ -396,22 +516,30 @@
       {
         "optionText": "CSS custom properties (--name) are resolved at runtime in the browser, support cascade/inheritance, and can be changed with JavaScript — unlike Sass variables which are compiled away",
         "isCorrect": true,
-        "explanation": "CSS variables (--primary-color: blue) are live in the browser. They cascade, inherit, and can be updated via JS (element.style.setProperty). Sass variables are static — compiled out before the browser sees them."
+        "explanation": "CSS variables (--primary-color: blue) are live in the browser. They cascade, inherit, and can be updated via JS (element.style.setProperty). Sass variables are static — compiled out before the browser sees them.",
+        "optionTextTr": "CSS özel özellikleri (--name) tarayıcıda çalışma zamanında çözümlenir, JS ile değiştirilebilir ve medya sorgularında cascade'den geçer.",
+        "explanationTr": "Doğru — bu, Sass değişkenlerinin derleme zamanında çözümlenmesinden temel bir fark oluşturur."
       },
       {
         "optionText": "CSS custom properties and Sass variables are functionally identical at runtime",
         "isCorrect": false,
-        "explanation": "Sass variables don't exist at runtime — they're compiled to static values. CSS custom properties are dynamic browser values."
+        "explanation": "Sass variables don't exist at runtime — they're compiled to static values. CSS custom properties are dynamic browser values.",
+        "optionTextTr": "CSS özel özellikleri ve Sass değişkenleri işlevsel olarak özdeştir.",
+        "explanationTr": "Bunlar farklıdır: CSS özel özellikleri runtime'dadır; Sass değişkenleri derleme zamanındadır."
       },
       {
         "optionText": "CSS custom properties are only available in CSS Grid and Flexbox contexts",
         "isCorrect": false,
-        "explanation": "CSS custom properties work everywhere in CSS — they're not limited to any layout system."
+        "explanation": "CSS custom properties work everywhere in CSS — they're not limited to any layout system.",
+        "optionTextTr": "CSS özel özellikleri yalnızca CSS Grid ve Flexbox'ta mevcuttur.",
+        "explanationTr": "CSS özel özellikleri herhangi bir CSS bağlamında kullanılabilir, yalnızca layout sistemlerinde değil."
       },
       {
         "optionText": "CSS custom properties must be declared in the :root selector and cannot be scoped to components",
         "isCorrect": false,
-        "explanation": ":root is common for global variables, but custom properties can be scoped to any selector and will inherit to child elements."
+        "explanation": ":root is common for global variables, but custom properties can be scoped to any selector and will inherit to child elements.",
+        "optionTextTr": "CSS özel özellikleri yalnızca :root seçicide tanımlanmalıdır.",
+        "explanationTr": "Özel özellikler herhangi bir seçicide tanımlanabilir — :root global kapsam için yaygındır ama zorunlu değildir."
       }
     ]
   },
@@ -422,22 +550,30 @@
       {
         "optionText": "A selector paired with a declaration block: h1 { color: red; font-size: 2rem; }",
         "isCorrect": true,
-        "explanation": "Correct — a CSS rule has a selector (targets elements) and declarations (property: value pairs). Multiple declarations are separated by semicolons."
+        "explanation": "Correct — a CSS rule has a selector (targets elements) and declarations (property: value pairs). Multiple declarations are separated by semicolons.",
+        "optionTextTr": "Seçici ile bildirim bloğu çifti: h1 { color: red; font-size: 2rem; }",
+        "explanationTr": "Doğru — seçici hedefi tanımlar; bildirim bloğu property: value çiftleri içerir."
       },
       {
         "optionText": "A JavaScript function that dynamically applies styles to DOM elements.",
         "isCorrect": false,
-        "explanation": "That describes dynamic style manipulation via JS. A CSS rule is purely declarative markup in a stylesheet."
+        "explanation": "That describes dynamic style manipulation via JS. A CSS rule is purely declarative markup in a stylesheet.",
+        "optionTextTr": "DOM öğelerine dinamik olarak stil uygulayan JavaScript fonksiyonu.",
+        "explanationTr": "Bu JavaScript DOM manipülasyonunu tanımlar — CSS kuralı değil."
       },
       {
         "optionText": "A browser setting that enforces how stylesheets are loaded and parsed.",
         "isCorrect": false,
-        "explanation": "Browser settings are not CSS rules. A CSS rule is a selector + declaration block written in a stylesheet."
+        "explanation": "Browser settings are not CSS rules. A CSS rule is a selector + declaration block written in a stylesheet.",
+        "optionTextTr": "Stil sayfalarının nasıl yükleneceğini zorunlu kılan tarayıcı ayarı.",
+        "explanationTr": "Bu tarayıcı politikasını tanımlar — CSS kuralı değil."
       },
       {
         "optionText": "An !important declaration that overrides all other styles on an element.",
         "isCorrect": false,
-        "explanation": "!important is a specificity modifier within a declaration, not a rule itself. A CSS rule is a selector paired with a declaration block."
+        "explanation": "!important is a specificity modifier within a declaration, not a rule itself. A CSS rule is a selector paired with a declaration block.",
+        "optionTextTr": "Diğer tüm stilleri geçersiz kılan !important bildirimi.",
+        "explanationTr": "!important, bir CSS kuralı değil; belirli bir öncelik mekanizmasıdır."
       }
     ]
   },
@@ -448,22 +584,30 @@
       {
         "optionText": "Patterns that target HTML elements — examples: element (div), class (.btn), ID (#header), pseudo-class (:hover), attribute ([type='text']).",
         "isCorrect": true,
-        "explanation": "Correct — selectors define what a rule applies to. Combinators (>, +, ~) and pseudo-elements (::before) extend targeting. Specificity determines which rule wins."
+        "explanation": "Correct — selectors define what a rule applies to. Combinators (>, +, ~) and pseudo-elements (::before) extend targeting. Specificity determines which rule wins.",
+        "optionTextTr": "HTML öğelerini hedefleyen kalıplar — örnekler: element (div), sınıf (.btn), ID (#header), öznitelik ([type='text']), sözde sınıf (:hover).",
+        "explanationTr": "Doğru — CSS seçiciler, stillerin hangi öğelere uygulanacağını belirler."
       },
       {
         "optionText": "CSS variables that store reusable values: --primary-color: blue.",
         "isCorrect": false,
-        "explanation": "CSS custom properties use -- prefix. Selectors are patterns targeting HTML elements, not variable declarations."
+        "explanation": "CSS custom properties use -- prefix. Selectors are patterns targeting HTML elements, not variable declarations.",
+        "optionTextTr": "Yeniden kullanılabilir değerleri saklayan CSS değişkenleri: --primary-color: blue.",
+        "explanationTr": "Bu CSS özel özelliklerini tanımlar — seçiciler değil."
       },
       {
         "optionText": "Special keywords like inherit, initial, and unset that control value inheritance.",
         "isCorrect": false,
-        "explanation": "Those are CSS keywords for property values. Selectors are the targeting patterns before the declaration block."
+        "explanation": "Those are CSS keywords for property values. Selectors are the targeting patterns before the declaration block.",
+        "optionTextTr": "cascade değerlerini kontrol eden inherit, initial ve unset gibi özel anahtar kelimeler.",
+        "explanationTr": "Bunlar CSS değerleri — seçiciler değil."
       },
       {
         "optionText": "The @media, @keyframes, and @import directives in a stylesheet.",
         "isCorrect": false,
-        "explanation": "Those are CSS at-rules. Selectors target HTML elements (e.g. div, .class, #id) and come before the { declaration block }."
+        "explanation": "Those are CSS at-rules. Selectors target HTML elements (e.g. div, .class, #id) and come before the { declaration block }.",
+        "optionTextTr": "Stil sayfasındaki @media, @keyframes ve @import yönergeleri.",
+        "explanationTr": "Bunlar at-kurallarıdır — seçiciler değil."
       }
     ]
   },
@@ -474,22 +618,30 @@
       {
         "optionText": "Inline (style attribute), internal (<style> in <head>), and external (<link> to a .css file).",
         "isCorrect": true,
-        "explanation": "Correct — inline has highest specificity but is hardest to maintain. External stylesheets are preferred: cacheable, reusable, and separates concerns."
+        "explanation": "Correct — inline has highest specificity but is hardest to maintain. External stylesheets are preferred: cacheable, reusable, and separates concerns.",
+        "optionTextTr": "Inline (style özelliği), dahili (<head>'de <style>) ve harici (bağlantılı .css dosyası).",
+        "explanationTr": "Doğru — harici stil sayfaları bakım kolaylığı ve tarayıcı önbelleklemesi için en iyi uygulama olarak kabul edilir."
       },
       {
         "optionText": "JavaScript injection (element.style), CSS Modules, and Tailwind utility classes.",
         "isCorrect": false,
-        "explanation": "Those are modern tooling approaches. The three foundational ways are inline, internal (<style>), and external (linked .css file)."
+        "explanation": "Those are modern tooling approaches. The three foundational ways are inline, internal (<style>), and external (linked .css file).",
+        "optionTextTr": "JavaScript enjeksiyonu, CSS Modülleri ve Tailwind yardımcı sınıfları.",
+        "explanationTr": "Bunlar modern yaklaşımlardır ama üç temel yöntemi tanımlamaz."
       },
       {
         "optionText": "Embedded, inherited, and cascaded — matching the three layers of the cascade.",
         "isCorrect": false,
-        "explanation": "Cascaded/inherited describe how styles resolve conflicts, not how they are applied to the page. The three application methods are inline, internal, and external."
+        "explanation": "Cascaded/inherited describe how styles resolve conflicts, not how they are applied to the page. The three application methods are inline, internal, and external.",
+        "optionTextTr": "Gömülü, devralınan ve cascade'den geçmiş.",
+        "explanationTr": "Bunlar CSS uygulama kategorileri değil — cascade davranışını tanımlar."
       },
       {
         "optionText": "Server-side rendering, client-side rendering, and static generation.",
         "isCorrect": false,
-        "explanation": "Those are web rendering strategies, not CSS application methods. CSS is applied inline, internally, or via an external file."
+        "explanation": "Those are web rendering strategies, not CSS application methods. CSS is applied inline, internally, or via an external file.",
+        "optionTextTr": "Sunucu tarafı rendering, istemci tarafı rendering ve statik üretim.",
+        "explanationTr": "Bunlar rendering stratejileri — CSS uygulama yöntemleri değil."
       }
     ]
   },
@@ -500,22 +652,30 @@
       {
         "optionText": "A CSS preprocessor that adds variables, nesting, mixins, and functions — compiled to plain CSS before the browser sees it.",
         "isCorrect": true,
-        "explanation": "Correct — Sass (SCSS syntax) was transformative before CSS custom properties arrived. Today many Sass features are native in CSS, but Sass still offers mixins and functions."
+        "explanation": "Correct — Sass (SCSS syntax) was transformative before CSS custom properties arrived. Today many Sass features are native in CSS, but Sass still offers mixins and functions.",
+        "optionTextTr": "Değişkenler, iç içe yazma, mixin'ler ve fonksiyonlar ekleyen CSS ön işleyicisi; düz CSS'e derlenir.",
+        "explanationTr": "Doğru — Sass, CSS yazmayı daha sürdürülebilir ve DRY hale getirir."
       },
       {
         "optionText": "A JavaScript library for animating CSS properties with spring physics.",
         "isCorrect": false,
-        "explanation": "That describes libraries like Framer Motion. Sass is a CSS preprocessor that compiles to standard CSS."
+        "explanation": "That describes libraries like Framer Motion. Sass is a CSS preprocessor that compiles to standard CSS.",
+        "optionTextTr": "CSS özelliklerini yay fiziğiyle animasyonlandıran JavaScript kütüphanesi.",
+        "explanationTr": "Bu Framer Motion veya GSAP gibi animasyon kütüphanelerini tanımlar — Sass değil."
       },
       {
         "optionText": "A PostCSS plugin that adds vendor prefixes automatically to CSS properties.",
         "isCorrect": false,
-        "explanation": "Autoprefixer (a PostCSS plugin) adds vendor prefixes. Sass is a separate preprocessor language with its own compiler."
+        "explanation": "Autoprefixer (a PostCSS plugin) adds vendor prefixes. Sass is a separate preprocessor language with its own compiler.",
+        "optionTextTr": "CSS özelliklerine otomatik olarak vendor prefix ekleyen PostCSS eklentisi.",
+        "explanationTr": "Bu Autoprefixer'ı tanımlar — Sass değil."
       },
       {
         "optionText": "A CSS-in-JS solution that generates class names at runtime in React components.",
         "isCorrect": false,
-        "explanation": "CSS-in-JS (styled-components, Emotion) generates styles at runtime. Sass compiles to static CSS at build time — no runtime dependency."
+        "explanation": "CSS-in-JS (styled-components, Emotion) generates styles at runtime. Sass compiles to static CSS at build time — no runtime dependency.",
+        "optionTextTr": "React'te çalışma zamanında class adları üreten CSS-in-JS çözümü.",
+        "explanationTr": "Bu styled-components veya Emotion'ı tanımlar — Sass değil."
       }
     ]
   },
@@ -526,22 +686,30 @@
       {
         "optionText": "float removes an element from normal flow and shifts it left/right, letting inline content wrap around it — now largely replaced by Flexbox/Grid.",
         "isCorrect": true,
-        "explanation": "Correct — floats were the primary layout tool before Flexbox. Their main issue is collapsing parent height, fixed with clearfix or overflow: hidden."
+        "explanation": "Correct — floats were the primary layout tool before Flexbox. Their main issue is collapsing parent height, fixed with clearfix or overflow: hidden.",
+        "optionTextTr": "float öğeyi normal akıştan çıkarır ve komşu içeriğin etrafını sarmasını sağlayacak şekilde sola/sağa kaydırır.",
+        "explanationTr": "Doğru — float, özellikle metin sarma için değerlidir; layout için Flexbox ve Grid'e kıyasla artık daha az kullanılır."
       },
       {
         "optionText": "float positions an element at a fixed point on the screen regardless of scrolling.",
         "isCorrect": false,
-        "explanation": "That describes position: fixed. Float shifts elements within document flow, allowing text to wrap around them."
+        "explanation": "That describes position: fixed. Float shifts elements within document flow, allowing text to wrap around them.",
+        "optionTextTr": "float öğeyi ekranda sabit bir noktaya konumlandırır.",
+        "explanationTr": "Bu position: fixed'i tanımlar — float değil."
       },
       {
         "optionText": "float is a CSS Grid property that controls how items overflow to the next row.",
         "isCorrect": false,
-        "explanation": "CSS Grid uses grid-template-columns and auto-placement. Float is a separate, older layout property unrelated to Grid."
+        "explanation": "CSS Grid uses grid-template-columns and auto-placement. Float is a separate, older layout property unrelated to Grid.",
+        "optionTextTr": "float, öğelerin taşmasını kontrol eden bir CSS Grid özelliğidir.",
+        "explanationTr": "float, Grid özelliği değil; eski bir konumlandırma mekanizmasıdır."
       },
       {
         "optionText": "float: left makes an element sticky at the top-left of the viewport.",
         "isCorrect": false,
-        "explanation": "Sticky positioning uses position: sticky. float: left shifts an element to the left within its container, not relative to the viewport."
+        "explanation": "Sticky positioning uses position: sticky. float: left shifts an element to the left within its container, not relative to the viewport.",
+        "optionTextTr": "float: left öğeyi viewport'ın sol üstüne yapıştırır.",
+        "explanationTr": "Bu sticky/fixed davranışını tanımlar — float bu şekilde çalışmaz."
       }
     ]
   },
@@ -552,22 +720,30 @@
       {
         "optionText": "The DOM is a tree of HTML elements in memory; CSS creates a CSSOM; the browser merges them into a render tree to paint the page.",
         "isCorrect": true,
-        "explanation": "Correct — the critical rendering path: HTML → DOM, CSS → CSSOM, DOM + CSSOM → Render Tree → Layout → Paint → Composite."
+        "explanation": "Correct — the critical rendering path: HTML → DOM, CSS → CSSOM, DOM + CSSOM → Render Tree → Layout → Paint → Composite.",
+        "optionTextTr": "DOM bellekteki HTML öğelerinin ağacıdır; CSS bir CSSOM oluşturur; tarayıcı bunları Render Tree'de birleştirir.",
+        "explanationTr": "Doğru — CSSOM + DOM → Render Tree → Layout → Paint → Composite."
       },
       {
         "optionText": "The DOM stores CSS styles as inline style attributes on each element.",
         "isCorrect": false,
-        "explanation": "Inline styles are one source of styles, but the DOM itself is an HTML structure. CSS is parsed separately into the CSSOM."
+        "explanation": "Inline styles are one source of styles, but the DOM itself is an HTML structure. CSS is parsed separately into the CSSOM.",
+        "optionTextTr": "DOM, CSS stillerini her öğede inline style özelliği olarak saklar.",
+        "explanationTr": "Bu doğru değildir — CSS CSSOM'da ayrı olarak saklanır."
       },
       {
         "optionText": "CSS directly modifies the DOM by adding and removing HTML elements.",
         "isCorrect": false,
-        "explanation": "CSS adds visual styles, not HTML elements. JavaScript via the DOM API adds/removes elements. CSS can show/hide elements but doesn't modify DOM structure."
+        "explanation": "CSS adds visual styles, not HTML elements. JavaScript via the DOM API adds/removes elements. CSS can show/hide elements but doesn't modify DOM structure.",
+        "optionTextTr": "CSS, HTML öğeleri ekleyip kaldırarak DOM'u doğrudan değiştirir.",
+        "explanationTr": "CSS DOM'u değiştirmez — yalnızca mevcut öğeleri stillendirir."
       },
       {
         "optionText": "The DOM is only relevant to JavaScript — CSS interacts solely with the HTML source.",
         "isCorrect": false,
-        "explanation": "The browser builds the DOM from HTML, then combines it with the CSSOM (parsed CSS) to form the render tree. Both are runtime constructs."
+        "explanation": "The browser builds the DOM from HTML, then combines it with the CSSOM (parsed CSS) to form the render tree. Both are runtime constructs.",
+        "optionTextTr": "DOM yalnızca JavaScript ile ilgilidir — CSS yalnızca stil sayfalarıyla etkileşime girer.",
+        "explanationTr": "DOM ve CSS birbirine sıkı sıkıya bağlıdır; birlikte Render Tree oluştururlar."
       }
     ]
   },
@@ -578,22 +754,30 @@
       {
         "optionText": "Browser parses HTML → DOM and CSS → CSSOM, merges into render tree, then runs layout, paint, and composite steps.",
         "isCorrect": true,
-        "explanation": "Correct — this is the critical rendering path. Render-blocking CSS delays FCP. Properties like transform and opacity skip layout/paint — only composite — making them fast to animate."
+        "explanation": "Correct — this is the critical rendering path. Render-blocking CSS delays FCP. Properties like transform and opacity skip layout/paint — only composite — making them fast to animate.",
+        "optionTextTr": "Tarayıcı HTML'i ayrıştırır → DOM ve CSS → CSSOM, render ağacında birleştirir, layout/paint/composite aşamalarında boyar.",
+        "explanationTr": "Doğru — bu pipeline'ı anlamak performans darboğazlarının (layout thrashing, paint storms) belirlenmesine yardımcı olur."
       },
       {
         "optionText": "The browser sends CSS to a remote server for parsing and receives computed styles back.",
         "isCorrect": false,
-        "explanation": "CSS parsing is entirely client-side in the browser. No network round-trip for style computation."
+        "explanation": "CSS parsing is entirely client-side in the browser. No network round-trip for style computation.",
+        "optionTextTr": "Tarayıcı CSS'i ayrıştırma için uzak sunucuya gönderir.",
+        "explanationTr": "CSS tarayıcı tarafından yerel olarak ayrıştırılır — uzak sunucu gerekmez."
       },
       {
         "optionText": "CSS is applied after JavaScript finishes executing — JS always runs first.",
         "isCorrect": false,
-        "explanation": "CSS is render-blocking and parsed before JS in the critical rendering path. JS in <script> tags can block HTML parsing but doesn't determine CSS order."
+        "explanation": "CSS is render-blocking and parsed before JS in the critical rendering path. JS in <script> tags can block HTML parsing but doesn't determine CSS order.",
+        "optionTextTr": "CSS, JavaScript çalışmasını tamamladıktan sonra uygulanır.",
+        "explanationTr": "CSS ayrıştırma JavaScript'in ardından gelmez — paralel olarak gerçekleşir ve render engelleme davranışı daha nüanslıdır."
       },
       {
         "optionText": "The browser applies CSS rules from lowest to highest specificity and stops at the first match.",
         "isCorrect": false,
-        "explanation": "The browser applies ALL matching rules and resolves conflicts via the cascade (specificity + source order). It doesn't stop at the first match."
+        "explanation": "The browser applies ALL matching rules and resolves conflicts via the cascade (specificity + source order). It doesn't stop at the first match.",
+        "optionTextTr": "Tarayıcı CSS kurallarını en düşük özgüllükten en yükseğe uygular.",
+        "explanationTr": "Tarayıcı stillerini özgüllüğe ve cascade kurallarına göre hesaplar — düşükten yükseğe sıra boyunca değil."
       }
     ]
   },
@@ -604,22 +788,30 @@
       {
         "optionText": "Reset removes all browser defaults (blank slate); Normalize preserves useful defaults and fixes inconsistencies. Most projects use Normalize or Tailwind's Preflight.",
         "isCorrect": true,
-        "explanation": "Correct — Meyer Reset strips everything including list styles and margins. Normalize.css targets only cross-browser inconsistencies. Tailwind's Preflight is a modern Normalize variant."
+        "explanation": "Correct — Meyer Reset strips everything including list styles and margins. Normalize.css targets only cross-browser inconsistencies. Tailwind's Preflight is a modern Normalize variant.",
+        "optionTextTr": "Reset tüm tarayıcı varsayılanlarını kaldırır (boş zemin); Normalize tutarsızlıkları düzeltirken faydalı varsayılanları korur.",
+        "explanationTr": "Doğru — Normalize genellikle daha az agresif olduğundan modern projelerde tercih edilir."
       },
       {
         "optionText": "Reset and Normalize do the same thing — both remove all browser default styles.",
         "isCorrect": false,
-        "explanation": "They differ significantly. Reset removes all defaults; Normalize only fixes cross-browser inconsistencies while keeping sensible defaults."
+        "explanation": "They differ significantly. Reset removes all defaults; Normalize only fixes cross-browser inconsistencies while keeping sensible defaults.",
+        "optionTextTr": "Reset ve Normalize aynı şeyi yapar — her ikisi de tüm tarayıcı varsayılanlarını kaldırır.",
+        "explanationTr": "Bunlar farklıdır: Reset agresif sıfırlama yapar; Normalize tutarsızlıkları koruyarak düzeltir."
       },
       {
         "optionText": "Normalize is the older approach; Reset is the modern best practice.",
         "isCorrect": false,
-        "explanation": "It's the reverse — Meyer Reset (2004) predates Normalize.css (2011). Modern frameworks use Normalize-based approaches like Tailwind's Preflight."
+        "explanation": "It's the reverse — Meyer Reset (2004) predates Normalize.css (2011). Modern frameworks use Normalize-based approaches like Tailwind's Preflight.",
+        "optionTextTr": "Normalize daha eski yaklaşımdır; Reset modern en iyi uygulamadır.",
+        "explanationTr": "Tam tersi — Normalize daha modern ve yaygın kullanılan yaklaşımdır."
       },
       {
         "optionText": "Both are obsolete — modern browsers are consistent enough to need neither.",
         "isCorrect": false,
-        "explanation": "Cross-browser inconsistencies still exist. Tailwind, styled-components, and CSS Modules all include some form of baseline normalisation."
+        "explanation": "Cross-browser inconsistencies still exist. Tailwind, styled-components, and CSS Modules all include some form of baseline normalisation.",
+        "optionTextTr": "Her ikisi de artık geçersizdir — modern tarayıcılar normalize etme gerekmeyecek kadar tutarlıdır.",
+        "explanationTr": "Tarayıcı tutarsızlıkları azalsa da sıfırlama/normalleştirme hâlâ yaygın uygulamadır."
       }
     ]
   },
@@ -630,22 +822,30 @@
       {
         "optionText": "A layout system that divides the page into columns/rows — Bootstrap used float-based grids; modern CSS Grid is native and more powerful.",
         "isCorrect": true,
-        "explanation": "Correct — CSS Grid (2017) replaced the need for framework grid systems. It supports 2D layouts natively with grid-template-columns, grid-template-rows, and grid-area."
+        "explanation": "Correct — CSS Grid (2017) replaced the need for framework grid systems. It supports 2D layouts natively with grid-template-columns, grid-template-rows, and grid-area.",
+        "optionTextTr": "Sayfayı sütun/satırlara bölen layout sistemi — Bootstrap 12 sütun grid; CSS Grid yerleşik layout içindir.",
+        "explanationTr": "Doğru — grid sistemleri responsive layout'u standartlaştırmak için onlarca yıldır kullanılmaktadır; CSS Grid bunu yerel olarak sağlar."
       },
       {
         "optionText": "A CSS property that creates a visual table overlay for debugging alignment.",
         "isCorrect": false,
-        "explanation": "Grid overlays are a browser DevTools feature. CSS Grid System refers to layout patterns using columns and rows."
+        "explanation": "Grid overlays are a browser DevTools feature. CSS Grid System refers to layout patterns using columns and rows.",
+        "optionTextTr": "Debug için görsel tablo overlay oluşturan CSS özelliği.",
+        "explanationTr": "display: grid debug için tablo overlay oluşturmaz."
       },
       {
         "optionText": "A JavaScript library that calculates element positions for masonry layouts.",
         "isCorrect": false,
-        "explanation": "Masonry libraries (Masonry.js) are separate tools. CSS Grid System refers to column-based layout patterns, native or framework-based."
+        "explanation": "Masonry libraries (Masonry.js) are separate tools. CSS Grid System refers to column-based layout patterns, native or framework-based.",
+        "optionTextTr": "Masonry element konumlarını hesaplayan JavaScript kütüphanesi.",
+        "explanationTr": "Bu Masonry.js gibi kütüphaneleri tanımlar — CSS grid sistemi değil."
       },
       {
         "optionText": "The display: grid property — it is only for two-dimensional table-like data.",
         "isCorrect": false,
-        "explanation": "CSS Grid is a general-purpose layout system for any 2D content, not just tables. display: grid enables it, but it's far more flexible than tables."
+        "explanation": "CSS Grid is a general-purpose layout system for any 2D content, not just tables. display: grid enables it, but it's far more flexible than tables.",
+        "optionTextTr": "display: grid özelliği — yalnızca iki boyutlu tablolar içindir.",
+        "explanationTr": "CSS Grid, tablo verileri değil; her tür layout için güçlü bir araçtır."
       }
     ]
   },
@@ -656,22 +856,30 @@
       {
         "optionText": "Advantages: variables, nesting, mixins, functions. Disadvantages: build step required, debugging compiled output, and modern CSS now covers many features natively.",
         "isCorrect": true,
-        "explanation": "Correct — CSS custom properties, :is(), @layer, and nesting (CSS Nesting Level 1) have reduced the need for preprocessors in modern projects."
+        "explanation": "Correct — CSS custom properties, :is(), @layer, and nesting (CSS Nesting Level 1) have reduced the need for preprocessors in modern projects.",
+        "optionTextTr": "Avantajlar: değişkenler, iç içe yazma, mixin'ler, fonksiyonlar. Dezavantajlar: derleme adımı, debug karmaşıklığı, ekstra bağımlılık.",
+        "explanationTr": "Doğru — ön işleyiciler güçlüdür ama sürüm sürüklenmesi ve derleme kurulumu gibi operasyonel karmaşıklık getirir."
       },
       {
         "optionText": "Only advantages — preprocessors have no drawbacks and should always be used.",
         "isCorrect": false,
-        "explanation": "Preprocessors add build complexity and source map debugging overhead. For small projects, plain CSS or Tailwind may be preferable."
+        "explanation": "Preprocessors add build complexity and source map debugging overhead. For small projects, plain CSS or Tailwind may be preferable.",
+        "optionTextTr": "Yalnızca avantajlar — ön işleyicilerin dezavantajı yoktur ve her zaman kullanılmalıdır.",
+        "explanationTr": "Derleme adımı ve araç bağımlılığı gibi gerçek dezavantajları vardır."
       },
       {
         "optionText": "Preprocessors are only useful for large teams — solo developers should avoid them.",
         "isCorrect": false,
-        "explanation": "Preprocessors benefit any project with significant CSS complexity. The decision should be based on project needs, not team size."
+        "explanation": "Preprocessors benefit any project with significant CSS complexity. The decision should be based on project needs, not team size.",
+        "optionTextTr": "Ön işleyiciler yalnızca büyük ekipler için kullanışlıdır — tek geliştiriciler fayda görmez.",
+        "explanationTr": "Ön işleyiciler, herhangi bir boyuttaki proje için değerli olabilir."
       },
       {
         "optionText": "CSS preprocessors run in the browser — they replace the browser's CSS parser.",
         "isCorrect": false,
-        "explanation": "Preprocessors (Sass, Less, Stylus) compile to standard CSS at build time. The browser only sees the compiled output — never the preprocessor syntax."
+        "explanation": "Preprocessors (Sass, Less, Stylus) compile to standard CSS at build time. The browser only sees the compiled output — never the preprocessor syntax.",
+        "optionTextTr": "CSS ön işleyiciler tarayıcıda çalışır — tarayıcının yerel CSS motorunu değiştirir.",
+        "explanationTr": "Ön işleyiciler, sunucu tarafında veya build sürecinde çalışır — tarayıcıda değil."
       }
     ]
   },
@@ -682,22 +890,30 @@
       {
         "optionText": "Clearing prevents a parent container from collapsing when all its children are floated — using clearfix, overflow: hidden, or display: flow-root.",
         "isCorrect": true,
-        "explanation": "Correct — floated elements are out of normal flow, so the parent has zero height. The modern solution is display: flow-root on the parent, which creates a new BFC."
+        "explanation": "Correct — floated elements are out of normal flow, so the parent has zero height. The modern solution is display: flow-root on the parent, which creates a new BFC.",
+        "optionTextTr": "Float içindeki tüm çocuklar float olduğunda parent container'ın çökmesini önler.",
+        "explanationTr": "Doğru — clearfix hack'i (overflow: hidden veya ::after pseudo-element) float parent'ların yüksekliğini korur."
       },
       {
         "optionText": "Clearing removes float styles from elements so they return to normal document flow.",
         "isCorrect": false,
-        "explanation": "clear: both on an element prevents it from sitting next to floats — it doesn't remove float from other elements. clearfix fixes parent height collapse."
+        "explanation": "clear: both on an element prevents it from sitting next to floats — it doesn't remove float from other elements. clearfix fixes parent height collapse.",
+        "optionTextTr": "Clearing, float stillerini öğelerden kaldırarak normal akışa dönmelerini sağlar.",
+        "explanationTr": "Bu temizlemenin değil; float kaldırmanın (float: none) tanımıdır."
       },
       {
         "optionText": "float: none and clear: both are the same thing — both stop floating behaviour.",
         "isCorrect": false,
-        "explanation": "float: none removes float from an element itself. clear: both prevents an element from appearing beside floated siblings."
+        "explanation": "float: none removes float from an element itself. clear: both prevents an element from appearing beside floated siblings.",
+        "optionTextTr": "float: none ve clear: both aynı şeydir.",
+        "explanationTr": "Farklıdırlar: float: none float'ı devre dışı bırakır; clear: both float komşuluktan etkilenmeyi durdurur."
       },
       {
         "optionText": "Clearing is only needed in IE — modern browsers handle float parents automatically.",
         "isCorrect": false,
-        "explanation": "Float parent collapse affects all browsers. Modern code avoids floats for layout (using Flexbox/Grid instead) but clearing is still relevant in legacy codebases."
+        "explanation": "Float parent collapse affects all browsers. Modern code avoids floats for layout (using Flexbox/Grid instead) but clearing is still relevant in legacy codebases.",
+        "optionTextTr": "Temizleme yalnızca IE'de gereklidir — modern tarayıcılar float parent'ları otomatik işler.",
+        "explanationTr": "Bu doğru değildir — modern tarayıcılarda da float parent çökmesi görülür."
       }
     ]
   },
@@ -708,22 +924,30 @@
       {
         "optionText": "Responsive adapts to any screen; mobile-first means writing base styles for mobile and using min-width media queries to enhance for larger screens.",
         "isCorrect": true,
-        "explanation": "Correct — mobile-first produces leaner CSS: mobile styles are the default, extras are added for wider screens. Tailwind and Bootstrap are mobile-first frameworks."
+        "explanation": "Correct — mobile-first produces leaner CSS: mobile styles are the default, extras are added for wider screens. Tailwind and Bootstrap are mobile-first frameworks.",
+        "optionTextTr": "Responsive her ekrana uyar; mobile-first, küçük ekranlar için temel stiller yazmak ve büyümek için min-width medya sorguları kullanmak anlamına gelir.",
+        "explanationTr": "Doğru — mobile-first, en küçük viewport'u varsayılan yaparak ve min-width breakpoint'lerle kademeli iyileştirme sağlar."
       },
       {
         "optionText": "Mobile-first means building a separate mobile website; responsive means one site for all screens.",
         "isCorrect": false,
-        "explanation": "Mobile-first is a CSS authoring strategy using min-width breakpoints, not a separate site. Both approaches produce one adaptive site."
+        "explanation": "Mobile-first is a CSS authoring strategy using min-width breakpoints, not a separate site. Both approaches produce one adaptive site.",
+        "optionTextTr": "Mobile-first, ayrı bir mobil web sitesi oluşturmak anlamına gelir; responsive her şeyi tek sitede işler.",
+        "explanationTr": "Mobile-first, ayrı site değil; tek bir site için stil stratejisidir."
       },
       {
         "optionText": "Responsive design and mobile-first are the same concept with different names.",
         "isCorrect": false,
-        "explanation": "Responsive design is the goal (adapts to screen size). Mobile-first is an implementation strategy (start from small screens). You can be responsive without being mobile-first."
+        "explanation": "Responsive design is the goal (adapts to screen size). Mobile-first is an implementation strategy (start from small screens). You can be responsive without being mobile-first.",
+        "optionTextTr": "Responsive tasarım ve mobile-first, farklı adlarla aynı kavramdır.",
+        "explanationTr": "Bunlar ilgilidir ama farklıdır — mobile-first, responsive tasarımın uygulanma yaklaşımını tanımlar."
       },
       {
         "optionText": "Mobile-first uses max-width media queries; responsive design uses min-width media queries.",
         "isCorrect": false,
-        "explanation": "It's the opposite — mobile-first uses min-width (add styles as screens get larger). Desktop-first uses max-width (override styles as screens get smaller)."
+        "explanation": "It's the opposite — mobile-first uses min-width (add styles as screens get larger). Desktop-first uses max-width (override styles as screens get smaller).",
+        "optionTextTr": "Mobile-first max-width; responsive min-width medya sorguları kullanır.",
+        "explanationTr": "Tam tersi doğrudur — mobile-first min-width kullanır (küçükten büyüğe genişleme)."
       }
     ]
   },
@@ -734,22 +958,30 @@
       {
         "optionText": "Use SVG for icons/illustrations, srcset with 2x images for photos, and CSS with logical pixels — retina displays have 2× pixel density.",
         "isCorrect": true,
-        "explanation": "Correct — on a 2× retina display, 1 CSS pixel = 2 physical pixels. Raster images at 1× look blurry; SVG scales perfectly. srcset lets browsers pick the right resolution."
+        "explanation": "Correct — on a 2× retina display, 1 CSS pixel = 2 physical pixels. Raster images at 1× look blurry; SVG scales perfectly. srcset lets browsers pick the right resolution.",
+        "optionTextTr": "İkonlar/illüstrasyonlar için SVG, fotoğraflar için srcset ile 2x görüntüler, CSS'te yüksek-DPI için medya sorgusu @media (min-resolution).",
+        "explanationTr": "Doğru — SVG doğası gereği çözünürlükten bağımsızdır; srcset tarayıcının uygun görüntüyü seçmesini sağlar."
       },
       {
         "optionText": "Double all CSS pixel values — width: 200px becomes width: 400px for retina screens.",
         "isCorrect": false,
-        "explanation": "CSS pixels are already device-independent. Doubling them would make elements twice as large on all screens, not sharper on retina."
+        "explanation": "CSS pixels are already device-independent. Doubling them would make elements twice as large on all screens, not sharper on retina.",
+        "optionTextTr": "Retina için tüm CSS piksel değerlerini ikiye katlayın: width: 200px → width: 400px.",
+        "explanationTr": "Bu her şeyi büyütür ama sorunu çözmez; 2x görüntü kaynakları gerektirir."
       },
       {
         "optionText": "Retina support requires JavaScript to detect devicePixelRatio and swap images at runtime.",
         "isCorrect": false,
-        "explanation": "CSS srcset and <picture> handle resolution selection declaratively. JavaScript detection is a fallback for older browsers, not the primary technique."
+        "explanation": "CSS srcset and <picture> handle resolution selection declaratively. JavaScript detection is a fallback for older browsers, not the primary technique.",
+        "optionTextTr": "Retina desteği, devicePixelRatio'yu tespit etmek ve görüntüleri değiştirmek için JavaScript gerektirir.",
+        "explanationTr": "CSS medya sorguları ve srcset, JavaScript olmadan retina desteği sağlayabilir."
       },
       {
         "optionText": "Only PNG images need retina treatment — JPEGs are rendered at full resolution automatically.",
         "isCorrect": false,
-        "explanation": "All raster formats (PNG, JPEG, WebP) suffer from retina blur at 1× resolution. Use 2× images for all raster content or switch to SVG."
+        "explanation": "All raster formats (PNG, JPEG, WebP) suffer from retina blur at 1× resolution. Use 2× images for all raster content or switch to SVG.",
+        "optionTextTr": "Yalnızca PNG görüntüler retina için işlem gerektirir — JPEG'ler tam çözünürlükte render edilir.",
+        "explanationTr": "Her görüntü formatı retina için 2x versiyona ihtiyaç duyabilir."
       }
     ]
   },
@@ -760,22 +992,30 @@
       {
         "optionText": "Use @media print to hide nav/ads, convert to black-and-white friendly colours, expand link URLs, and set sensible page margins.",
         "isCorrect": true,
-        "explanation": "Correct — @media print styles apply only when printing. page-break-before/after controls pagination; display: none hides screen-only UI elements."
+        "explanation": "Correct — @media print styles apply only when printing. page-break-before/after controls pagination; display: none hides screen-only UI elements.",
+        "optionTextTr": "@media print kullanarak nav/reklam gizleyin, yazdırma dostu renkler uygulayın ve içeriğin sayfa sınırlarına göre düzenlenmesini sağlayın.",
+        "explanationTr": "Doğru — iyi print CSS, baskı bütçesini boşa harcayan menü ve reklam gibi navigasyon elementlerini gizler."
       },
       {
         "optionText": "Add a print.css file and load it with <link media='all'> to apply it everywhere.",
         "isCorrect": false,
-        "explanation": "Print stylesheets use <link media='print'> or @media print. Using media='all' would apply print styles on screen too."
+        "explanation": "Print stylesheets use <link media='print'> or @media print. Using media='all' would apply print styles on screen too.",
+        "optionTextTr": "Tüm öğelere uygulamak için <link media='all'> ile print.css dosyası yükleyin.",
+        "explanationTr": "media='all', tüm cihazlar için geçerlidir — yalnızca yazdırma için değil; media='print' olmalıdır."
       },
       {
         "optionText": "JavaScript detects print events and removes elements before the browser renders the print preview.",
         "isCorrect": false,
-        "explanation": "JS can listen to window.onbeforeprint but CSS @media print is the standard, predictable approach — no JS required."
+        "explanation": "JS can listen to window.onbeforeprint but CSS @media print is the standard, predictable approach — no JS required.",
+        "optionTextTr": "JavaScript yazdırma olaylarını algılar ve yazdırmadan önce öğeleri kaldırır.",
+        "explanationTr": "Bu çalışabilir ama @media print CSS'den daha karmaşık ve az güvenilirdir."
       },
       {
         "optionText": "Print optimisation is handled by the browser automatically — no CSS needed.",
         "isCorrect": false,
-        "explanation": "Browsers apply basic print rendering but won't hide navbars, ads, or fix colours for ink efficiency. @media print rules are necessary for a good print experience."
+        "explanation": "Browsers apply basic print rendering but won't hide navbars, ads, or fix colours for ink efficiency. @media print rules are necessary for a good print experience.",
+        "optionTextTr": "Yazdırma optimizasyonu tarayıcı tarafından otomatik yapılır — CSS gerekli değildir.",
+        "explanationTr": "Tarayıcılar bazı düzenlemeler yapsa da, iyi baskı deneyimi için @media print CSS önerilir."
       }
     ]
   },
@@ -786,22 +1026,30 @@
       {
         "optionText": "table-layout: fixed makes column widths predictable (set by first row or col), making large table rendering much faster than auto.",
         "isCorrect": true,
-        "explanation": "Correct — table-layout: auto scans all cells to calculate widths; fixed uses the first row's widths immediately. For long data tables, fixed + overflow: hidden is a significant performance win."
+        "explanation": "Correct — table-layout: auto scans all cells to calculate widths; fixed uses the first row's widths immediately. For long data tables, fixed + overflow: hidden is a significant performance win.",
+        "optionTextTr": "table-layout: fixed, sütun genişliklerini ilk satıra göre tahmin edilebilir yapar ve render performansını artırır.",
+        "explanationTr": "Doğru — fixed layout, tarayıcının tüm içeriği okumadan sütunları render etmesini sağlar."
       },
       {
         "optionText": "table-layout replaces display: table — it converts a div into a table element.",
         "isCorrect": false,
-        "explanation": "display: table makes an element behave like a table. table-layout controls how column widths are calculated — it only applies to actual table elements."
+        "explanation": "display: table makes an element behave like a table. table-layout controls how column widths are calculated — it only applies to actual table elements.",
+        "optionTextTr": "table-layout, display: table'ın yerini alır — div'i tabloya dönüştürür.",
+        "explanationTr": "table-layout, display: table için mevcut tablonun sütun genişliğini kontrol eder; div'leri dönüştürmez."
       },
       {
         "optionText": "table-layout: fixed forces the table to fill 100% of its container width.",
         "isCorrect": false,
-        "explanation": "Fixed layout means widths come from the first row or col widths, not that the table fills its container. Use width: 100% for that."
+        "explanation": "Fixed layout means widths come from the first row or col widths, not that the table fills its container. Use width: 100% for that.",
+        "optionTextTr": "table-layout: fixed, tabloyu container'ın %100'ünü doldurmaya zorlar.",
+        "explanationTr": "table-layout, genişliği değil; sütun genişliği hesaplamasını kontrol eder."
       },
       {
         "optionText": "table-layout is a deprecated property — use CSS Grid instead for all table layouts.",
         "isCorrect": false,
-        "explanation": "table-layout is not deprecated and remains useful for HTML <table> elements with large datasets. CSS Grid is for div-based layouts, not semantic data tables."
+        "explanation": "table-layout is not deprecated and remains useful for HTML <table> elements with large datasets. CSS Grid is for div-based layouts, not semantic data tables.",
+        "optionTextTr": "table-layout kullanımdan kaldırılmıştır — tablolar için CSS Grid kullanın.",
+        "explanationTr": "table-layout, HTML tabloları için hâlâ geçerli bir CSS özelliğidir."
       }
     ]
   },
@@ -812,22 +1060,30 @@
       {
         "optionText": "Naming/organisation conventions for scalable CSS — BEM (Block__Element--Modifier), OOCSS (separate structure/skin), SMACSS (categorised rules).",
         "isCorrect": true,
-        "explanation": "Correct — without conventions, CSS becomes unmaintainable at scale. BEM is most popular for component-based UIs. CSS Modules and Tailwind reduce the need for manual naming conventions."
+        "explanation": "Correct — without conventions, CSS becomes unmaintainable at scale. BEM is most popular for component-based UIs. CSS Modules and Tailwind reduce the need for manual naming conventions.",
+        "optionTextTr": "CSS için adlandırma/organizasyon kuralları — BEM (Block__Element--Modifier), OOCSS, SMACSS. Büyük ekiplerde ölçeklenebilirlik için değerlidir.",
+        "explanationTr": "Doğru — bu metodolojiler, tutarlı ve bakımı kolay CSS yazımını standartlaştırmak için yardımcı olur."
       },
       {
         "optionText": "CSS frameworks like Bootstrap, Tailwind, and Bulma — they provide ready-made components.",
         "isCorrect": false,
-        "explanation": "BEM, OOCSS, SMACSS are methodology/naming conventions, not component libraries. Tailwind is a utility-first framework, separate from architecture methodologies."
+        "explanation": "BEM, OOCSS, SMACSS are methodology/naming conventions, not component libraries. Tailwind is a utility-first framework, separate from architecture methodologies.",
+        "optionTextTr": "Bootstrap, Tailwind ve Bulma gibi CSS framework'leri.",
+        "explanationTr": "Bunlar CSS framework'lerini tanımlar — mimari metodolojiler değil."
       },
       {
         "optionText": "CSS preprocessor plugins that auto-generate class names from component structure.",
         "isCorrect": false,
-        "explanation": "Preprocessors like Sass compile styles; CSS Modules generate scoped class names. BEM/OOCSS/SMACSS are manual naming and organisation conventions."
+        "explanation": "Preprocessors like Sass compile styles; CSS Modules generate scoped class names. BEM/OOCSS/SMACSS are manual naming and organisation conventions.",
+        "optionTextTr": "Bileşenlerden otomatik class adı üreten CSS ön işleyici eklentileri.",
+        "explanationTr": "Bu CSS Modules veya CSS-in-JS araçlarını tanımlar — BEM/OOCSS değil."
       },
       {
         "optionText": "Browser-specific hacks to fix rendering inconsistencies in older versions of IE.",
         "isCorrect": false,
-        "explanation": "IE hacks used conditional comments or property-specific workarounds. CSS architectures are team conventions for writing maintainable, scalable stylesheets."
+        "explanation": "IE hacks used conditional comments or property-specific workarounds. CSS architectures are team conventions for writing maintainable, scalable stylesheets.",
+        "optionTextTr": "Daha eski tarayıcılardaki render tutarsızlıklarını düzelten tarayıcıya özgü hackler.",
+        "explanationTr": "Bu tarayıcı uyumluluğu hacklerini tanımlar — CSS mimari metodolojileri değil."
       }
     ]
   },
@@ -838,22 +1094,30 @@
       {
         "optionText": "Use a CSS normalizer for baseline, write standard styles first (progressive enhancement), then target specific browsers with @supports or conditional workarounds.",
         "isCorrect": true,
-        "explanation": "Correct — progressive enhancement means styles work everywhere first, then layer enhancements. @supports queries for feature detection are preferred over browser-sniffing hacks."
+        "explanation": "Correct — progressive enhancement means styles work everywhere first, then layer enhancements. @supports queries for feature detection are preferred over browser-sniffing hacks.",
+        "optionTextTr": "Temel için CSS normalizer kullanın, önce standart stiller yazın (progressive enhancement), özellik algılama (Modernizr veya @supports) ekleyin.",
+        "explanationTr": "Doğru — tarayıcıya özgü sorguları geçici çözüm olarak kullanın; özellikler test edildiğinde bunları kaldırmayı planlayın."
       },
       {
         "optionText": "Use inline styles with !important — they override all browser defaults reliably.",
         "isCorrect": false,
-        "explanation": "!important inline styles are a maintenance nightmare and hurt specificity. The correct approach is normalisation + progressive enhancement."
+        "explanation": "!important inline styles are a maintenance nightmare and hurt specificity. The correct approach is normalisation + progressive enhancement.",
+        "optionTextTr": "Tüm tarayıcı varsayılanlarını geçersiz kılmak için !important ile inline stiller kullanın.",
+        "explanationTr": "Bu kötü uygulama — bakımı zor !important çakışmaları yaratır."
       },
       {
         "optionText": "Write separate stylesheets per browser and serve them via server-side user-agent detection.",
         "isCorrect": false,
-        "explanation": "UA sniffing is fragile and deprecated. Feature detection (@supports) and CSS normalisation handle cross-browser issues reliably."
+        "explanation": "UA sniffing is fragile and deprecated. Feature detection (@supports) and CSS normalisation handle cross-browser issues reliably.",
+        "optionTextTr": "Her tarayıcı için ayrı stil sayfaları yazın ve sunucu aracılığıyla sunun.",
+        "explanationTr": "Bu sürdürülemez bir yaklaşımdır; feature detection ve progressive enhancement daha sağlamdır."
       },
       {
         "optionText": "Avoid CSS features until they have 100% browser support — only use widely supported properties.",
         "isCorrect": false,
-        "explanation": "Waiting for 100% support blocks innovation. Progressive enhancement lets you use modern features safely with appropriate fallbacks."
+        "explanation": "Waiting for 100% support blocks innovation. Progressive enhancement lets you use modern features safely with appropriate fallbacks.",
+        "optionTextTr": "Yalnızca %100 tarayıcı desteğine sahip CSS özelliklerini kullanın.",
+        "explanationTr": "Bu performansı önemli ölçüde sınırlar; progressive enhancement ve fallback'ler daha pratik bir yoldur."
       }
     ]
   }

@@ -6,22 +6,30 @@
       {
         "optionText": "Built-in SSR/SSG/ISR, file-based routing, image optimisation, API routes, and zero-config TypeScript — reducing the need for manual Webpack/Babel setup",
         "isCorrect": true,
-        "explanation": "Next.js provides production-ready defaults: server rendering strategies, automatic code splitting, the Image and Link components, built-in CSS support, and an App Router with React Server Components."
+        "explanation": "Next.js provides production-ready defaults: server rendering strategies, automatic code splitting, the Image and Link components, built-in CSS support, and an App Router with React Server Components.",
+        "optionTextTr": "Yerleşik SSR/SSG/ISR, dosya tabanlı routing, görüntü optimizasyonu, API rotaları ve Web Vitals iyileştirmeleri.",
+        "explanationTr": "Doğru — Next.js bu özellikleri sıfırdan yapılandırma gereksinimini ortadan kaldırarak entegre eder."
       },
       {
         "optionText": "Next.js removes the need for JavaScript entirely by generating pure HTML",
         "isCorrect": false,
-        "explanation": "Next.js still uses React and JavaScript. It enhances the developer experience and rendering strategies, not eliminates JS."
+        "explanation": "Next.js still uses React and JavaScript. It enhances the developer experience and rendering strategies, not eliminates JS.",
+        "optionTextTr": "Next.js, saf HTML üreterek JavaScript ihtiyacını tamamen ortadan kaldırır.",
+        "explanationTr": "Next.js JavaScript kullanır — SSR, interaktif istemci kodunu değil; sunucu tarafı HTML üretimini kapsar."
       },
       {
         "optionText": "Next.js only works with GraphQL APIs and requires Apollo Client",
         "isCorrect": false,
-        "explanation": "Next.js is API-agnostic. It works with REST, GraphQL, tRPC, or any data source."
+        "explanation": "Next.js is API-agnostic. It works with REST, GraphQL, tRPC, or any data source.",
+        "optionTextTr": "Next.js yalnızca GraphQL API'leriyle çalışır ve Apollo Client gerektirir.",
+        "explanationTr": "Next.js REST, GraphQL veya herhangi bir veri kaynağıyla çalışır."
       },
       {
         "optionText": "Next.js replaces the need for a backend — no server-side code is possible",
         "isCorrect": false,
-        "explanation": "Next.js has robust server-side capabilities: API Routes, Server Actions, Route Handlers, and full SSR support."
+        "explanation": "Next.js has robust server-side capabilities: API Routes, Server Actions, Route Handlers, and full SSR support.",
+        "optionTextTr": "Next.js backend ihtiyacını ortadan kaldırır — sunucu tarafı kod mümkün değildir.",
+        "explanationTr": "Next.js Route Handler ve Server Action'larla sunucu tarafı kodunu destekler."
       }
     ]
   },
@@ -32,22 +40,30 @@
       {
         "optionText": "Link enables client-side navigation without full page reloads, prefetches pages in the viewport, and preserves React state across navigations",
         "isCorrect": true,
-        "explanation": "Using <Link href='/'> instead of <a href='/'> keeps the React app alive during navigation, prefetches linked pages automatically in production, and avoids losing client-side state."
+        "explanation": "Using <Link href='/'> instead of <a href='/'> keeps the React app alive during navigation, prefetches linked pages automatically in production, and avoids losing client-side state.",
+        "optionTextTr": "Link, tam sayfa yeniden yükleme olmadan istemci tarafı navigasyon sağlar, rotaları önceden yükler ve daha iyi performans sunar.",
+        "explanationTr": "Doğru — Link, bağlantılar görünüme girdiğinde JavaScript'i önceden yükler; <a> ise tam sayfa yeniden yükleme yapar."
       },
       {
         "optionText": "Link is only for external URLs; anchor tags are used for internal navigation",
         "isCorrect": false,
-        "explanation": "It's the opposite — Link is used for internal Next.js routes. External URLs can use plain anchor tags."
+        "explanation": "It's the opposite — Link is used for internal Next.js routes. External URLs can use plain anchor tags.",
+        "optionTextTr": "Link yalnızca harici URL'ler için; anchor tag'lar dahili navigasyon için.",
+        "explanationTr": "Tam tersi doğrudur — Link dahili Next.js rotaları için; harici bağlantılar için <a> tercih edilir."
       },
       {
         "optionText": "Link and anchor tags are identical in Next.js — Link is just a styled anchor",
         "isCorrect": false,
-        "explanation": "Link handles client-side routing with prefetching. A plain anchor tag causes a full browser navigation and page reload."
+        "explanation": "Link handles client-side routing with prefetching. A plain anchor tag causes a full browser navigation and page reload.",
+        "optionTextTr": "Link ve anchor tag'lar Next.js'te özdeştir — Link yalnızca stillendirilmiş bir anchor.",
+        "explanationTr": "Bunlar davranış olarak farklıdır: Link istemci tarafı navigasyon ve prefetching yaparken <a> tam sayfa yeniden yükleme yapar."
       },
       {
         "optionText": "Link adds authentication checks before navigation occurs",
         "isCorrect": false,
-        "explanation": "Link handles navigation only. Authentication checks are typically done in middleware or server components."
+        "explanation": "Link handles navigation only. Authentication checks are typically done in middleware or server components.",
+        "optionTextTr": "Link, navigasyon gerçekleşmeden önce kimlik doğrulama kontrolleri ekler.",
+        "explanationTr": "Link yerleşik kimlik doğrulama sunmaz — bunun için middleware veya layout koruması kullanılır."
       }
     ]
   },
@@ -58,22 +74,30 @@
       {
         "optionText": "Automatic code splitting, image optimisation (next/image), font optimisation (next/font), route prefetching, and bundling optimisations via Turbopack",
         "isCorrect": true,
-        "explanation": "Next.js ships per-page JS bundles (code splitting), optimises images to WebP/AVIF with lazy loading, self-hosts fonts to avoid layout shift, prefetches visible links, and uses Turbopack for faster builds."
+        "explanation": "Next.js ships per-page JS bundles (code splitting), optimises images to WebP/AVIF with lazy loading, self-hosts fonts to avoid layout shift, prefetches visible links, and uses Turbopack for faster builds.",
+        "optionTextTr": "Otomatik kod bölümleme, görüntü optimizasyonu (next/image), font optimizasyonu (next/font) ve route tabanlı prefetching.",
+        "explanationTr": "Doğru — bu optimizasyonlar minimum yapılandırmayla varsayılan olarak aktif gelir."
       },
       {
         "optionText": "Next.js only optimises images — all other optimisations must be added manually",
         "isCorrect": false,
-        "explanation": "Next.js has many built-in optimisations beyond images."
+        "explanation": "Next.js has many built-in optimisations beyond images.",
+        "optionTextTr": "Next.js yalnızca görüntüleri optimize eder — diğer optimizasyonlar elle eklenmeli.",
+        "explanationTr": "Next.js, yalnızca görüntülerin ötesinde pek çok dahili optimizasyon sunar."
       },
       {
         "optionText": "Next.js optimises CSS using inline styles automatically",
         "isCorrect": false,
-        "explanation": "Next.js doesn't convert CSS to inline styles. It supports CSS Modules, Tailwind, and other styling approaches with standard bundling."
+        "explanation": "Next.js doesn't convert CSS to inline styles. It supports CSS Modules, Tailwind, and other styling approaches with standard bundling.",
+        "optionTextTr": "Next.js, CSS'i otomatik olarak inline style'a dönüştürerek optimize eder.",
+        "explanationTr": "Next.js CSS Modules ve Tailwind kullanır — CSS'i otomatik olarak inline style'a dönüştürmez."
       },
       {
         "optionText": "Performance optimisations require the use of a CDN — Next.js alone provides none",
         "isCorrect": false,
-        "explanation": "Next.js provides significant built-in optimisations that work without a CDN, though a CDN further improves performance."
+        "explanation": "Next.js provides significant built-in optimisations that work without a CDN, though a CDN further improves performance.",
+        "optionTextTr": "Performans optimizasyonları CDN kullanımı gerektirir — Next.js tek başına herhangi bir şey sağlamaz.",
+        "explanationTr": "Next.js, CDN olmadan da yerleşik optimizasyonlar sunar; ikisini birlikte kullanmak ideal olsa da zorunlu değildir."
       }
     ]
   },
@@ -84,22 +108,30 @@
       {
         "optionText": "Define them in .env.local (server-only) or prefix with NEXT_PUBLIC_ to expose to the browser; use process.env.VAR_NAME to access them",
         "isCorrect": true,
-        "explanation": ".env.local variables are only available server-side. NEXT_PUBLIC_ prefix makes them available in client-side code (inlined at build time). Never put secrets in NEXT_PUBLIC_ variables."
+        "explanation": ".env.local variables are only available server-side. NEXT_PUBLIC_ prefix makes them available in client-side code (inlined at build time). Never put secrets in NEXT_PUBLIC_ variables.",
+        "optionTextTr": ".env.local (yalnızca sunucu) veya istemci tarafına açmak için NEXT_PUBLIC_ öneki ile tanımlayın.",
+        "explanationTr": "Doğru — NEXT_PUBLIC_ öneki olmayan değişkenler yalnızca sunucu tarafında erişilebilir; bu, gizli anahtarları korur."
       },
       {
         "optionText": "All environment variables are automatically available in both server and client code",
         "isCorrect": false,
-        "explanation": "Without the NEXT_PUBLIC_ prefix, variables are server-only. Exposing them to the client requires the prefix."
+        "explanation": "Without the NEXT_PUBLIC_ prefix, variables are server-only. Exposing them to the client requires the prefix.",
+        "optionTextTr": "Tüm ortam değişkenleri hem sunucu hem istemci tarafında otomatik olarak erişilebilir.",
+        "explanationTr": "NEXT_PUBLIC_ ön eki olmadan değişkenler sunucu tarafında kalır — güvenlik açısından kritik öneme sahiptir."
       },
       {
         "optionText": "Environment variables in Next.js must be declared in next.config.js, not .env files",
         "isCorrect": false,
-        "explanation": ".env files are the standard approach. next.config.js can expose env variables too, but .env.local is the primary mechanism."
+        "explanation": ".env files are the standard approach. next.config.js can expose env variables too, but .env.local is the primary mechanism.",
+        "optionTextTr": "Ortam değişkenleri Next.js'te .env dosyalarında değil next.config.js'de tanımlanmalıdır.",
+        "explanationTr": ".env.local ve diğer .env dosyaları Next.js'te desteklenen standart yoldur."
       },
       {
         "optionText": "Next.js reads environment variables from the browser's localStorage",
         "isCorrect": false,
-        "explanation": "Environment variables come from the server environment or are inlined at build time. They have nothing to do with localStorage."
+        "explanation": "Environment variables come from the server environment or are inlined at build time. They have nothing to do with localStorage.",
+        "optionTextTr": "Next.js ortam değişkenlerini tarayıcının localStorage'ından okur.",
+        "explanationTr": "Ortam değişkenleri sunucu tarafında build sürecinde okunur — localStorage'dan değil."
       }
     ]
   },
@@ -110,22 +142,30 @@
       {
         "optionText": "Create an error.tsx file in a route segment — it becomes an Error Boundary and receives the error and reset props; not-found.tsx handles 404s",
         "isCorrect": true,
-        "explanation": "error.tsx must be a Client Component ('use client') since Error Boundaries require it. It catches errors thrown during rendering in that segment and its children. not-found.tsx is shown when notFound() is called in a Server Component."
+        "explanation": "error.tsx must be a Client Component ('use client') since Error Boundaries require it. It catches errors thrown during rendering in that segment and its children. not-found.tsx is shown when notFound() is called in a Server Component.",
+        "optionTextTr": "Bir rota segmentine error.tsx dosyası ekleyin — otomatik olarak Error Boundary haline gelir; önceki çalışan bir UI göstermek için birden fazla nested segment kullanabilirsiniz.",
+        "explanationTr": "Doğru — error.tsx, kullanıcıyı bilgilendirmek ve yeniden deneme seçeneği sunmak için varsayılan olarak reset() fonksiyonunu alır."
       },
       {
         "optionText": "All errors must be caught in a global try/catch in the root layout.tsx",
         "isCorrect": false,
-        "explanation": "While you can add error handling in layout, the proper mechanism is error.tsx files scoped to each segment."
+        "explanation": "While you can add error handling in layout, the proper mechanism is error.tsx files scoped to each segment.",
+        "optionTextTr": "Tüm hatalar root layout.tsx'de global try/catch ile yakalanmalıdır.",
+        "explanationTr": "Bu pratik değildir — App Router, granüler hata yönetimi için segment bazında error.tsx dosyalarını kullanır."
       },
       {
         "optionText": "Next.js App Router has no error boundary support — you must use React's ErrorBoundary class component",
         "isCorrect": false,
-        "explanation": "error.tsx is Next.js's file-convention way to create Error Boundaries, abstracting the class component requirement."
+        "explanation": "error.tsx is Next.js's file-convention way to create Error Boundaries, abstracting the class component requirement.",
+        "optionTextTr": "Next.js App Router hata sınırı desteği sunmaz.",
+        "explanationTr": "App Router, error.tsx dosyaları aracılığıyla yerleşik Error Boundary desteği sunar."
       },
       {
         "optionText": "Errors are handled by the next.config.js redirects configuration",
         "isCorrect": false,
-        "explanation": "Redirects in next.config.js are for URL redirects, not runtime error handling."
+        "explanation": "Redirects in next.config.js are for URL redirects, not runtime error handling.",
+        "optionTextTr": "Hatalar next.config.js yönlendirme yapılandırması tarafından işlenir.",
+        "explanationTr": "Yönlendirmeler URL navigasyonunu yönetir — çalışma zamanı hatalarını değil."
       }
     ]
   },
@@ -136,22 +176,30 @@
       {
         "optionText": "Export a static metadata object or a generateMetadata() async function from any page or layout to set <head> tags like title, description, and Open Graph",
         "isCorrect": true,
-        "explanation": "Static: export const metadata = { title: 'Page' }. Dynamic: export async function generateMetadata({ params }) { return { title: await fetchTitle(params.id) } }. Next.js merges metadata from layouts and pages."
+        "explanation": "Static: export const metadata = { title: 'Page' }. Dynamic: export async function generateMetadata({ params }) { return { title: await fetchTitle(params.id) } }. Next.js merges metadata from layouts and pages.",
+        "optionTextTr": "Her rota segmentinde statik metadata nesnesi veya generateMetadata() async fonksiyonu export edin; Next.js bunları birleştirir.",
+        "explanationTr": "Doğru — generateMetadata(), dinamik title ve açıklamaların veri bazlı oluşturulmasını sağlar."
       },
       {
         "optionText": "Metadata is set by adding <meta> tags directly inside the JSX of each page component",
         "isCorrect": false,
-        "explanation": "In the App Router, metadata is defined via the Metadata API, not by writing JSX meta tags directly (which wouldn't work correctly in Server Components)."
+        "explanation": "In the App Router, metadata is defined via the Metadata API, not by writing JSX meta tags directly (which wouldn't work correctly in Server Components).",
+        "optionTextTr": "Meta veriler her sayfanın JSX'ine doğrudan <meta> tag'ları eklenerek ayarlanır.",
+        "explanationTr": "App Router'da <meta> tag'larını JSX'e doğrudan eklemek önerilmez — Metadata API kullanılır."
       },
       {
         "optionText": "Metadata can only be set globally in layout.tsx — individual pages cannot override it",
         "isCorrect": false,
-        "explanation": "Pages can export their own metadata that overrides or extends the parent layout's metadata."
+        "explanation": "Pages can export their own metadata that overrides or extends the parent layout's metadata.",
+        "optionTextTr": "Meta veri yalnızca layout.tsx'de global olarak ayarlanabilir.",
+        "explanationTr": "Her sayfa ve layout, kendi metadata'sını export edebilir; bunlar hiyerarşik olarak birleştirilir."
       },
       {
         "optionText": "The Metadata API requires a separate third-party package like react-helmet",
         "isCorrect": false,
-        "explanation": "The Metadata API is built into Next.js App Router. react-helmet is a Pages Router / plain React solution."
+        "explanation": "The Metadata API is built into Next.js App Router. react-helmet is a Pages Router / plain React solution.",
+        "optionTextTr": "Metadata API için react-helmet gibi ayrı bir üçüncü taraf paket gerekir.",
+        "explanationTr": "Metadata API, Next.js'te yerleşik olarak gelir — ek paket gerektirmez."
       }
     ]
   },
@@ -162,22 +210,30 @@
       {
         "optionText": "next/dynamic wraps React.lazy to code-split components on demand, with optional SSR disabling for browser-only libraries and a loading placeholder",
         "isCorrect": true,
-        "explanation": "dynamic(() => import('./HeavyComponent'), { loading: () => <Spinner />, ssr: false }) loads the component only when needed. Use it for large third-party libraries, charts, maps, or anything that shouldn't be in the initial bundle."
+        "explanation": "dynamic(() => import('./HeavyComponent'), { loading: () => <Spinner />, ssr: false }) loads the component only when needed. Use it for large third-party libraries, charts, maps, or anything that shouldn't be in the initial bundle.",
+        "optionTextTr": "next/dynamic, opsiyonel SSR desteği ve loading state ile bileşenleri talep üzerine kod bölmek için React.lazy'yi sarar.",
+        "explanationTr": "Doğru — ağır kütüphaneleri, ekrana görünmeden önce yüklenmesi gerekmeyen bileşenleri ve SSR devre dışı bırakılacak bileşenleri bölmek için kullanışlıdır."
       },
       {
         "optionText": "Dynamic imports in Next.js are only for loading JSON data files at runtime",
         "isCorrect": false,
-        "explanation": "Dynamic imports load JavaScript modules including React components, not just JSON files."
+        "explanation": "Dynamic imports load JavaScript modules including React components, not just JSON files.",
+        "optionTextTr": "Next.js'te dinamik importlar yalnızca çalışma zamanında JSON veri dosyaları yüklemek içindir.",
+        "explanationTr": "next/dynamic, bileşenler içindir; JSON verisi için standart fetch veya import() kullanılır."
       },
       {
         "optionText": "Dynamic imports require a REST API endpoint to serve the component code",
         "isCorrect": false,
-        "explanation": "Dynamic imports are handled by the bundler (webpack/Turbopack) at build time. No API endpoint is needed."
+        "explanation": "Dynamic imports are handled by the bundler (webpack/Turbopack) at build time. No API endpoint is needed.",
+        "optionTextTr": "Dinamik importlar bileşen kodunu sunmak için REST API endpoint'i gerektirir.",
+        "explanationTr": "Dinamik importlar, JavaScript bundle'larını yüklemeyle ilgilidir — API endpoint'leriyle değil."
       },
       {
         "optionText": "next/dynamic is deprecated — use React.lazy() with Suspense in the App Router",
         "isCorrect": false,
-        "explanation": "Both work. next/dynamic is still valid and adds the ssr option not available in plain React.lazy."
+        "explanation": "Both work. next/dynamic is still valid and adds the ssr option not available in plain React.lazy.",
+        "optionTextTr": "next/dynamic kullanımdan kaldırılmıştır — App Router'da Suspense ile React.lazy() kullanın.",
+        "explanationTr": "next/dynamic hâlâ geçerlidir; App Router'da React.lazy() ve Suspense de kullanılabilir — next/dynamic, SSR devre dışı gibi ekstra özellikler sunar."
       }
     ]
   },
@@ -188,22 +244,30 @@
       {
         "optionText": "Server-rendered HTML is immediately crawlable by search engines without waiting for JavaScript execution, and the Metadata API generates proper <head> tags per page",
         "isCorrect": true,
-        "explanation": "SPAs require JS execution before crawlers see content — Next.js SSR/SSG sends complete HTML on first request. The Metadata API ensures unique, SEO-optimised title and meta tags per page."
+        "explanation": "SPAs require JS execution before crawlers see content — Next.js SSR/SSG sends complete HTML on first request. The Metadata API ensures unique, SEO-optimised title and meta tags per page.",
+        "optionTextTr": "Sunucu tarafında render edilen HTML, JavaScript çalıştırmadan arama motorları tarafından hemen taranabilir.",
+        "explanationTr": "Doğru — Google, JavaScript'i çalıştırabilir ama bu gecikmeli olabilir; SSR, içeriğin hemen indekslenebilir olmasını sağlar."
       },
       {
         "optionText": "Next.js automatically submits sitemaps to Google Search Console",
         "isCorrect": false,
-        "explanation": "Next.js doesn't automatically submit sitemaps. You can generate one using next-sitemap or a Route Handler, but submission is manual."
+        "explanation": "Next.js doesn't automatically submit sitemaps. You can generate one using next-sitemap or a Route Handler, but submission is manual.",
+        "optionTextTr": "Next.js siteharitaları otomatik olarak Google Search Console'a gönderir.",
+        "explanationTr": "Next.js sitemap.ts veya sitemap.xml üretimi sağlar ama Google Search Console'a otomatik gönderim yapmaz."
       },
       {
         "optionText": "Next.js improves SEO by removing all JavaScript from the page",
         "isCorrect": false,
-        "explanation": "Next.js still uses JavaScript. The SEO benefit comes from sending pre-rendered HTML, not removing JS."
+        "explanation": "Next.js still uses JavaScript. The SEO benefit comes from sending pre-rendered HTML, not removing JS.",
+        "optionTextTr": "Next.js, sayfadan tüm JavaScript'i kaldırarak SEO'yu iyileştirir.",
+        "explanationTr": "Next.js JavaScript kaldırmaz — taranabilir içerik için HTML önceden render eder."
       },
       {
         "optionText": "SEO in Next.js is identical to a plain React SPA since Google executes JavaScript",
         "isCorrect": false,
-        "explanation": "While Googlebot can execute JS, SSR still provides faster indexing, better crawl efficiency, and avoids potential rendering issues with JS-dependent content."
+        "explanation": "While Googlebot can execute JS, SSR still provides faster indexing, better crawl efficiency, and avoids potential rendering issues with JS-dependent content.",
+        "optionTextTr": "Next.js'te SEO, Google'ın SPA'ları çalıştırmasıyla özdeştir.",
+        "explanationTr": "Bu teknik olarak mümkün olsa da SSR, daha hızlı ve güvenilir indekslemeyi garantiler."
       }
     ]
   },
@@ -214,22 +278,30 @@
       {
         "optionText": "Supports CSS Modules (scoped styles), global CSS (imported in layout), Tailwind CSS, CSS-in-JS (with restrictions in Server Components), and styled-jsx",
         "isCorrect": true,
-        "explanation": "Next.js is flexible: CSS Modules automatically scope class names; global CSS goes in a root layout; Tailwind is fully supported; CSS-in-JS solutions using client-only APIs need 'use client'. styled-jsx is built in."
+        "explanation": "Next.js is flexible: CSS Modules automatically scope class names; global CSS goes in a root layout; Tailwind is fully supported; CSS-in-JS solutions using client-only APIs need 'use client'. styled-jsx is built in.",
+        "optionTextTr": "CSS Modules (scoped stiller), global CSS (layout'ta içe aktarılır), Tailwind CSS ve styled-jsx gibi CSS-in-JS çözümlerini destekler.",
+        "explanationTr": "Doğru — Next.js belirli bir styling çözümü zorunlu kılmaz ama CSS Modules ve Tailwind önerilir."
       },
       {
         "optionText": "Next.js only supports inline styles — external CSS files are not supported",
         "isCorrect": false,
-        "explanation": "Next.js has extensive CSS support including CSS Modules, Tailwind, and global stylesheets."
+        "explanation": "Next.js has extensive CSS support including CSS Modules, Tailwind, and global stylesheets.",
+        "optionTextTr": "Next.js yalnızca inline style destekler — harici CSS dosyaları desteklenmez.",
+        "explanationTr": "Next.js CSS dosyalarını tam olarak destekler — bu yanlış bir ifadedir."
       },
       {
         "optionText": "All CSS in Next.js must be written as CSS-in-JS using the built-in style() function",
         "isCorrect": false,
-        "explanation": "There is no built-in style() function. Next.js supports multiple styling approaches."
+        "explanation": "There is no built-in style() function. Next.js supports multiple styling approaches.",
+        "optionTextTr": "Next.js'teki tüm CSS yerleşik CSS-in-JS kullanılarak yazılmalıdır.",
+        "explanationTr": "Next.js özel CSS-in-JS zorunlu kılmaz — CSS Modules ve global CSS desteklenir."
       },
       {
         "optionText": "CSS files in Next.js can only be imported in _app.tsx, not in individual components",
         "isCorrect": false,
-        "explanation": "That restriction only applies to global CSS files. CSS Modules can be imported in any component file."
+        "explanation": "That restriction only applies to global CSS files. CSS Modules can be imported in any component file.",
+        "optionTextTr": "CSS dosyaları Next.js'te yalnızca _app.tsx'e import edilebilir.",
+        "explanationTr": "Bu Pages Router kısıtlamasıdır — App Router'da CSS, layout ve bileşen dosyalarından import edilebilir."
       }
     ]
   },
@@ -240,22 +312,30 @@
       {
         "optionText": "Server state via React Server Components and fetch caching; client state via useState/useReducer, Zustand, or Redux in Client Components",
         "isCorrect": true,
-        "explanation": "Next.js App Router encourages keeping state on the server when possible (RSC fetch + caching). For client-side interactivity, use React hooks or a client state library. URL state via searchParams is also a clean approach."
+        "explanation": "Next.js App Router encourages keeping state on the server when possible (RSC fetch + caching). For client-side interactivity, use React hooks or a client state library. URL state via searchParams is also a clean approach.",
+        "optionTextTr": "Sunucu state'i React Server Component ve fetch önbelleği; istemci state'i useState/useReducer; global state için Zustand/Redux.",
+        "explanationTr": "Doğru — App Router ile state'i sunucuda tutmak ve yalnızca gerektiğinde istemciye geçirmek en iyi yaklaşımdır."
       },
       {
         "optionText": "All state in Next.js must be stored in the database — no client-side state is allowed",
         "isCorrect": false,
-        "explanation": "Client Components in Next.js support the full React state API."
+        "explanation": "Client Components in Next.js support the full React state API.",
+        "optionTextTr": "Next.js'teki tüm state veritabanında saklanmalıdır — istemci tarafı state yoktur.",
+        "explanationTr": "İstemci state'i Next.js'te hem gerekli hem de desteklenmektedir."
       },
       {
         "optionText": "Next.js has its own built-in global state manager that replaces Redux",
         "isCorrect": false,
-        "explanation": "Next.js has no built-in global state manager. It leaves client state management to external libraries."
+        "explanation": "Next.js has no built-in global state manager. It leaves client state management to external libraries.",
+        "optionTextTr": "Next.js, Redux'un yerini alan yerleşik global state yöneticisine sahiptir.",
+        "explanationTr": "Next.js yerleşik global state yönetimi sunmaz — Redux, Zustand veya Context kullanılır."
       },
       {
         "optionText": "State in Next.js can only be managed via URL query parameters",
         "isCorrect": false,
-        "explanation": "URL state is useful but not the only option. React hooks and client state libraries are commonly used."
+        "explanation": "URL state is useful but not the only option. React hooks and client state libraries are commonly used.",
+        "optionTextTr": "Next.js'te state yalnızca URL query parametreleriyle yönetilebilir.",
+        "explanationTr": "URL state bazı durumlarda kullanışlıdır ama Next.js tüm standart state yönetimi yöntemlerini destekler."
       }
     ]
   },
@@ -266,22 +346,30 @@
       {
         "optionText": "Vercel (zero-config), or self-host via 'next build' + 'next start' on Node.js, Docker, or as a static export with 'next export'",
         "isCorrect": true,
-        "explanation": "Vercel is the easiest option and supports all Next.js features. Self-hosting requires a Node.js server. Static export (output: 'export') works for fully static sites but disables SSR features."
+        "explanation": "Vercel is the easiest option and supports all Next.js features. Self-hosting requires a Node.js server. Static export (output: 'export') works for fully static sites but disables SSR features.",
+        "optionTextTr": "Vercel (sıfır yapılandırma) veya 'next build' + 'next start' ile Node.js sunucusu, Docker veya çeşitli PaaS platformlarında kendi barındırma.",
+        "explanationTr": "Doğru — Next.js açık kaynaklıdır ve kendi barındırma dahil birden fazla dağıtım hedefi destekler."
       },
       {
         "optionText": "Next.js can only be deployed on Vercel — no other deployment options exist",
         "isCorrect": false,
-        "explanation": "Next.js can be deployed on any Node.js-capable platform: AWS, GCP, Azure, Railway, Render, Docker, etc."
+        "explanation": "Next.js can be deployed on any Node.js-capable platform: AWS, GCP, Azure, Railway, Render, Docker, etc.",
+        "optionTextTr": "Next.js yalnızca Vercel'e dağıtılabilir.",
+        "explanationTr": "Next.js açık kaynaklıdır ve Railway, Render, AWS, Fly.io veya kendi sunucu dahil pek çok platformda çalışır."
       },
       {
         "optionText": "Deploying requires converting the app to PHP before hosting on shared hosting",
         "isCorrect": false,
-        "explanation": "Next.js is a Node.js application. It doesn't convert to PHP."
+        "explanation": "Next.js is a Node.js application. It doesn't convert to PHP.",
+        "optionTextTr": "Dağıtım için uygulamayı PHP'ye dönüştürme gerekir.",
+        "explanationTr": "Bu tamamen yanlıştır — Next.js Node.js tabanlıdır."
       },
       {
         "optionText": "next build outputs static HTML files that can be served from any file server",
         "isCorrect": false,
-        "explanation": "next build alone produces a Node.js server bundle. You need output: 'export' in next.config.js to generate fully static HTML files."
+        "explanation": "next build alone produces a Node.js server bundle. You need output: 'export' in next.config.js to generate fully static HTML files.",
+        "optionTextTr": "next build, herhangi bir dosya sunucusundan sunulabilecek statik HTML dosyaları üretir.",
+        "explanationTr": "Yalnızca statik dışa aktarma (next export veya output: 'export') için geçerlidir — dinamik rotalar için Node.js sunucusu gerekir."
       }
     ]
   },
@@ -292,22 +380,30 @@
       {
         "optionText": "_app.tsx wraps all pages (persistent layout, global state, styles); _document.tsx customises the HTML shell (html, head, body tags) rendered server-side",
         "isCorrect": true,
-        "explanation": "_app.tsx is the component that wraps every page — ideal for layouts, providers, and global CSS. _document.tsx lets you add custom attributes to <html>, <body>, load fonts, or add meta tags that apply to every page."
+        "explanation": "_app.tsx is the component that wraps every page — ideal for layouts, providers, and global CSS. _document.tsx lets you add custom attributes to <html>, <body>, load fonts, or add meta tags that apply to every page.",
+        "optionTextTr": "_app.tsx tüm sayfaları sarar (kalıcı layout, global state, stiller); _document.tsx HTML şablonunu özelleştirir (lang, fontlar, üçüncü taraf scriptler).",
+        "explanationTr": "Doğru — App Router bunların yerine layout.tsx ve <html> yapılandırması ile gelir."
       },
       {
         "optionText": "_app.tsx handles API routes; _document.tsx handles page components",
         "isCorrect": false,
-        "explanation": "API routes live in the pages/api/ directory. _app.tsx wraps page components; _document.tsx customises the HTML document."
+        "explanation": "API routes live in the pages/api/ directory. _app.tsx wraps page components; _document.tsx customises the HTML document.",
+        "optionTextTr": "_app.tsx API rotalarını işler; _document.tsx sayfa bileşenlerini işler.",
+        "explanationTr": "Bu tanımlar yanlıştır — API rotaları pages/api/ içinde; _app.tsx global sayfa sarmayı yönetir."
       },
       {
         "optionText": "Both files are required in every Next.js project and cannot be omitted",
         "isCorrect": false,
-        "explanation": "Both are optional. Next.js provides defaults for both."
+        "explanation": "Both are optional. Next.js provides defaults for both.",
+        "optionTextTr": "Her iki dosya da her Next.js projesinde zorunludur.",
+        "explanationTr": "Her iki dosya da isteğe bağlıdır — Next.js, varsayılan davranış için bunlara ihtiyaç duymadan çalışır."
       },
       {
         "optionText": "_app.tsx and _document.tsx exist in the App Router as well as the Pages Router",
         "isCorrect": false,
-        "explanation": "These are Pages Router conventions. The App Router uses layout.tsx and the Metadata API instead."
+        "explanation": "These are Pages Router conventions. The App Router uses layout.tsx and the Metadata API instead.",
+        "optionTextTr": "_app.tsx ve _document.tsx hem App Router hem Pages Router'da mevcuttur.",
+        "explanationTr": "Bunlar yalnızca Pages Router'a özgüdür — App Router bunların yerine layout.tsx ve metadata API kullanır."
       }
     ]
   },
@@ -318,22 +414,30 @@
       {
         "optionText": "Use NextAuth.js (Auth.js) for OAuth/credentials auth with session management, protect routes via middleware.ts, and use server-side session checks in Server Components",
         "isCorrect": true,
-        "explanation": "NextAuth v5 integrates with Next.js App Router. middleware.ts runs on the Edge and can redirect unauthenticated users before rendering. Server Components can read the session server-side for data-level protection."
+        "explanation": "NextAuth v5 integrates with Next.js App Router. middleware.ts runs on the Edge and can redirect unauthenticated users before rendering. Server Components can read the session server-side for data-level protection.",
+        "optionTextTr": "OAuth/credentials auth için NextAuth.js (Auth.js) kullanın; session yönetimi için HttpOnly cookie; middleware ile korumalı rotaları kontrol edin.",
+        "explanationTr": "Doğru — NextAuth.js, güvenli oturum yönetimi ve çok sayıda provider için en yaygın tercihdir."
       },
       {
         "optionText": "Authentication must be handled entirely client-side using localStorage tokens",
         "isCorrect": false,
-        "explanation": "Storing auth tokens in localStorage is a security risk (XSS). Server-side sessions with HttpOnly cookies are the recommended approach."
+        "explanation": "Storing auth tokens in localStorage is a security risk (XSS). Server-side sessions with HttpOnly cookies are the recommended approach.",
+        "optionTextTr": "Kimlik doğrulama localStorage kullanan tamamen istemci tarafında yapılmalıdır.",
+        "explanationTr": "Hassas auth token'larını localStorage'da saklamak XSS'e karşı güvensizdir; HttpOnly cookie tercih edilir."
       },
       {
         "optionText": "Next.js has built-in username/password authentication without any additional library",
         "isCorrect": false,
-        "explanation": "Next.js has no built-in auth system. You need NextAuth, Clerk, Lucia, or a custom implementation."
+        "explanation": "Next.js has no built-in auth system. You need NextAuth, Clerk, Lucia, or a custom implementation.",
+        "optionTextTr": "Next.js ek paket gerektirmeden yerleşik kullanıcı adı/şifre kimlik doğrulaması sunar.",
+        "explanationTr": "Next.js yerleşik auth sunmaz — NextAuth.js, Clerk veya özel implementasyon kullanılır."
       },
       {
         "optionText": "Route protection in Next.js can only be done inside each page component",
         "isCorrect": false,
-        "explanation": "middleware.ts is the recommended approach for route protection — it runs before the page renders."
+        "explanation": "middleware.ts is the recommended approach for route protection — it runs before the page renders.",
+        "optionTextTr": "Next.js'te rota koruması yalnızca her sayfa bileşeninin içinde yapılabilir.",
+        "explanationTr": "Middleware, merkezi rota koruması için daha verimli bir yol sunar."
       }
     ]
   },
@@ -344,22 +448,30 @@
       {
         "optionText": "Use the built-in i18n routing config in next.config.js for locale detection and routing, combined with a library like next-intl or next-i18next for translations",
         "isCorrect": true,
-        "explanation": "next.config.js supports i18n: { locales: ['en', 'tr'], defaultLocale: 'en' } for automatic locale routing. next-intl or next-i18next handle the translation strings and provide hooks like useTranslations()."
+        "explanation": "next.config.js supports i18n: { locales: ['en', 'tr'], defaultLocale: 'en' } for automatic locale routing. next-intl or next-i18next handle the translation strings and provide hooks like useTranslations().",
+        "optionTextTr": "next.config.js'de yerel algılama ve URL yönlendirme için yerleşik i18n routing yapılandırmasını kullanın; çeviriler için next-intl gibi kütüphane ekleyin.",
+        "explanationTr": "Doğru — Next.js yerel algılamayı yönetir; çeviri yönetimi için i18n kütüphanesi tercih edilir."
       },
       {
         "optionText": "Next.js doesn't support i18n — you must build routing from scratch",
         "isCorrect": false,
-        "explanation": "Next.js has built-in i18n routing support in both Pages and App Router."
+        "explanation": "Next.js has built-in i18n routing support in both Pages and App Router.",
+        "optionTextTr": "Next.js i18n desteklemez — routing'i sıfırdan inşa etmeniz gerekir.",
+        "explanationTr": "Next.js'in hem Pages Router hem App Router'da i18n desteği mevcuttur."
       },
       {
         "optionText": "Internationalisation in Next.js requires a separate Express.js server for each locale",
         "isCorrect": false,
-        "explanation": "Next.js handles locale routing natively. No additional server is needed."
+        "explanation": "Next.js handles locale routing natively. No additional server is needed.",
+        "optionTextTr": "Next.js'te çeviri ayrı bir Express.js sunucusu gerektirir.",
+        "explanationTr": "i18n, Express.js gerektirmeden Next.js'in kendisinde yapılandırılabilir."
       },
       {
         "optionText": "All translations must be stored in a database and fetched on every request",
         "isCorrect": false,
-        "explanation": "Translations are typically stored in static JSON files bundled with the app, loaded at build time or on the edge."
+        "explanation": "Translations are typically stored in static JSON files bundled with the app, loaded at build time or on the edge.",
+        "optionTextTr": "Tüm çeviriler bir veritabanında saklanmalı ve her istekte çekilmeli.",
+        "explanationTr": "Çeviriler genellikle JSON dosyaları veya i18n kütüphanesiyle derleme zamanında yüklenir."
       }
     ]
   },
@@ -370,22 +482,30 @@
       {
         "optionText": "Validate all Server Action inputs, use HttpOnly cookies for auth tokens, set security headers in next.config.js, sanitize user content, and protect API routes with auth checks",
         "isCorrect": true,
-        "explanation": "Key security practices: Server Actions need input validation (use Zod); auth tokens in HttpOnly+Secure cookies prevent XSS theft; Content-Security-Policy, X-Frame-Options etc. via headers(); never trust client-sent data."
+        "explanation": "Key security practices: Server Actions need input validation (use Zod); auth tokens in HttpOnly+Secure cookies prevent XSS theft; Content-Security-Policy, X-Frame-Options etc. via headers(); never trust client-sent data.",
+        "optionTextTr": "Tüm Server Action girişlerini doğrulayın, auth token'lar için HttpOnly cookie kullanın, CSP başlıkları ekleyin ve bağımlılıkları güncel tutun.",
+        "explanationTr": "Doğru — Next.js belirli güvenlik mekanizmalarını otomatik olarak ele alır ama dikkatli girdi doğrulama ve başlık yapılandırması hâlâ gereklidir."
       },
       {
         "optionText": "Next.js is inherently secure — no additional security measures are needed",
         "isCorrect": false,
-        "explanation": "No framework is inherently secure. Application-level security is always the developer's responsibility."
+        "explanation": "No framework is inherently secure. Application-level security is always the developer's responsibility.",
+        "optionTextTr": "Next.js doğası gereği güvenlidir — ek güvenlik önlemi gerekmez.",
+        "explanationTr": "Hiçbir framework tam güvenlik sağlamaz — girdi doğrulama, auth ve başlık yapılandırması her zaman gereklidir."
       },
       {
         "optionText": "Security in Next.js is handled by Vercel automatically on deployment",
         "isCorrect": false,
-        "explanation": "Vercel provides infrastructure security, but application security (auth, input validation, XSS prevention) must be implemented by the developer."
+        "explanation": "Vercel provides infrastructure security, but application security (auth, input validation, XSS prevention) must be implemented by the developer.",
+        "optionTextTr": "Güvenlik, dağıtımda Vercel tarafından otomatik olarak yönetilir.",
+        "explanationTr": "Vercel bazı güvenlik özellikleri sunar ancak uygulama düzeyindeki güvenlik geliştiricinin sorumluluğundadır."
       },
       {
         "optionText": "HTTPS is sufficient for Next.js security — no other measures are required",
         "isCorrect": false,
-        "explanation": "HTTPS encrypts data in transit but doesn't protect against XSS, CSRF, injection attacks, or broken authentication."
+        "explanation": "HTTPS encrypts data in transit but doesn't protect against XSS, CSRF, injection attacks, or broken authentication.",
+        "optionTextTr": "Next.js güvenliği için HTTPS yeterlidir.",
+        "explanationTr": "HTTPS transit şifreleme sağlar ama XSS, CSRF ve girdi doğrulama gibi uygulama katmanı güvenliklerini kapsamaz."
       }
     ]
   },
@@ -396,22 +516,30 @@
       {
         "optionText": "Use next/third-parties for Google Analytics or similar; track route changes via the App Router's layout or a Client Component using usePathname and useEffect",
         "isCorrect": true,
-        "explanation": "next/third-parties provides optimised third-party script loading. In the App Router, route change tracking requires a Client Component that watches usePathname() since there's no router event equivalent to Pages Router's router.events."
+        "explanation": "next/third-parties provides optimised third-party script loading. In the App Router, route change tracking requires a Client Component that watches usePathname() since there's no router event equivalent to Pages Router's router.events.",
+        "optionTextTr": "Route değişikliklerini takip etmek için next/third-parties kullanın; App Router'da yerleşik web analytics Next.js tarafından sunulur.",
+        "explanationTr": "Doğru — next/third-parties, Google Analytics ve diğer araçları optimum şekilde yüklemenin önerilen yolunu sunar."
       },
       {
         "optionText": "Analytics only works in Next.js Pages Router — App Router breaks all tracking",
         "isCorrect": false,
-        "explanation": "Analytics works in the App Router but requires a Client Component to track navigation since router events work differently."
+        "explanation": "Analytics works in the App Router but requires a Client Component to track navigation since router events work differently.",
+        "optionTextTr": "Analytics yalnızca Next.js Pages Router'da çalışır — App Router tüm izleme scriptlerini bozar.",
+        "explanationTr": "Bu doğru değildir — App Router'da analytics tam olarak desteklenir."
       },
       {
         "optionText": "Next.js includes built-in Google Analytics integration that works without configuration",
         "isCorrect": false,
-        "explanation": "next/third-parties simplifies loading analytics scripts, but you still need to configure your tracking ID."
+        "explanation": "next/third-parties simplifies loading analytics scripts, but you still need to configure your tracking ID.",
+        "optionTextTr": "Next.js yerleşik Google Analytics entegrasyonu içerir.",
+        "explanationTr": "next/third-parties, Google Analytics bileşeni içerir ama 'yerleşik' olarak nitelendirilemez — ayrı olarak eklenmelidir."
       },
       {
         "optionText": "Analytics scripts must be placed in _document.tsx for them to fire correctly",
         "isCorrect": false,
-        "explanation": "In the App Router, scripts go in layout.tsx using next/script. _document.tsx is a Pages Router concept."
+        "explanation": "In the App Router, scripts go in layout.tsx using next/script. _document.tsx is a Pages Router concept.",
+        "optionTextTr": "Analytics scriptleri doğru tetiklenmesi için _document.tsx'e yerleştirilmelidir.",
+        "explanationTr": "Bu Pages Router'da geçerliydi — App Router'da scriptler layout.tsx veya next/script ile eklenir."
       }
     ]
   },
@@ -422,22 +550,30 @@
       {
         "optionText": "A feature that bypasses static generation and renders pages dynamically to preview unpublished CMS content without it being publicly visible",
         "isCorrect": true,
-        "explanation": "Draft Mode sets a cookie that tells Next.js to skip the static cache and render server-side. A headless CMS (Contentful, Sanity) calls a draft route handler to enable it, allowing editors to preview draft content on the production site."
+        "explanation": "Draft Mode sets a cookie that tells Next.js to skip the static cache and render server-side. A headless CMS (Contentful, Sanity) calls a draft route handler to enable it, allowing editors to preview draft content on the production site.",
+        "optionTextTr": "Statik oluşturmayı atlayan ve sayfaları dinamik olarak render eden, CMS preview'ları için ideal bir özellik.",
+        "explanationTr": "Doğru — Draft Mode, Headless CMS içerik preview akışları için tasarlanmıştır."
       },
       {
         "optionText": "Draft Mode saves partially completed forms in the browser automatically",
         "isCorrect": false,
-        "explanation": "Draft Mode is a rendering mode for CMS previews, not a form state feature."
+        "explanation": "Draft Mode is a rendering mode for CMS previews, not a form state feature.",
+        "optionTextTr": "Draft Mode, tarayıcıda kısmen tamamlanmış formları otomatik olarak kaydeder.",
+        "explanationTr": "Bu form kalıcılığını tanımlar — Draft Mode CMS preview rendering ile ilgilidir."
       },
       {
         "optionText": "Draft Mode is a development-only tool that disables code minification",
         "isCorrect": false,
-        "explanation": "Draft Mode works in production too — it's specifically designed for CMS preview workflows."
+        "explanation": "Draft Mode works in production too — it's specifically designed for CMS preview workflows.",
+        "optionTextTr": "Draft Mode, kod küçültmeyi devre dışı bırakan yalnızca geliştirme ortamı aracıdır.",
+        "explanationTr": "Bu geliştirme ortamı yapılandırmasını tanımlar — Draft Mode production'da da çalışır."
       },
       {
         "optionText": "Draft Mode is the same as Next.js development mode (next dev)",
         "isCorrect": false,
-        "explanation": "next dev is the development server. Draft Mode is a runtime rendering toggle for preview content."
+        "explanation": "next dev is the development server. Draft Mode is a runtime rendering toggle for preview content.",
+        "optionTextTr": "Draft Mode, Next.js geliştirme modu ile (next dev) aynıdır.",
+        "explanationTr": "Draft Mode, next dev ile farklıdır — production'da çalışan ve statik önbelleği atlayan ayrı bir özelliktir."
       }
     ]
   },
@@ -448,22 +584,30 @@
       {
         "optionText": "Next.js automatically splits JavaScript by route — each page only loads its own JS bundle, shared code goes into a common chunk, and dynamic imports split further on demand",
         "isCorrect": true,
-        "explanation": "Next.js uses webpack/Turbopack to create per-page bundles. Shared dependencies (React, common utilities) are extracted to shared chunks. dynamic() creates additional split points loaded only when that component is rendered."
+        "explanation": "Next.js uses webpack/Turbopack to create per-page bundles. Shared dependencies (React, common utilities) are extracted to shared chunks. dynamic() creates additional split points loaded only when that component is rendered.",
+        "optionTextTr": "Next.js rota başına JavaScript'i otomatik olarak böler — her sayfa yalnızca ihtiyaç duyduğu kodu yükler.",
+        "explanationTr": "Doğru — bu, tüm bundle'ın tek seferde indirilmeden uygulamanın hızlı açılmasını sağlar."
       },
       {
         "optionText": "Code splitting in Next.js requires manually configuring webpack entry points",
         "isCorrect": false,
-        "explanation": "Next.js handles code splitting automatically. Manual webpack configuration is rarely needed and could break the defaults."
+        "explanation": "Next.js handles code splitting automatically. Manual webpack configuration is rarely needed and could break the defaults.",
+        "optionTextTr": "Next.js'te kod bölümleme webpack entry noktalarını manuel yapılandırmayı gerektirir.",
+        "explanationTr": "Otomatik kod bölümleme varsayılan olarak gelir — manuel webpack yapılandırması gerekmez."
       },
       {
         "optionText": "Next.js loads the entire application JavaScript bundle on the first page visit",
         "isCorrect": false,
-        "explanation": "This is a SPA anti-pattern. Next.js ships only the code needed for the current route."
+        "explanation": "This is a SPA anti-pattern. Next.js ships only the code needed for the current route.",
+        "optionTextTr": "Next.js, ilk sayfada tüm uygulama JavaScript bundle'ını yükler.",
+        "explanationTr": "Bu Next.js'in tam tersidir — otomatik kod bölümleme ilk yükleme boyutunu önemli ölçüde azaltır."
       },
       {
         "optionText": "Code splitting only works with CSS — JavaScript is always bundled into a single file",
         "isCorrect": false,
-        "explanation": "Code splitting is specifically about JavaScript bundles. CSS is handled separately via CSS Modules or global stylesheets."
+        "explanation": "Code splitting is specifically about JavaScript bundles. CSS is handled separately via CSS Modules or global stylesheets.",
+        "optionTextTr": "Kod bölümleme yalnızca CSS için çalışır — JavaScript her zaman tek bundle'da paketlenir.",
+        "explanationTr": "Kod bölümleme Next.js'te öncelikle JavaScript içindir; CSS de CSS Modules ile scope'lanır."
       }
     ]
   },
@@ -474,22 +618,30 @@
       {
         "optionText": "Place files in the /public directory — they're served at the root URL path (e.g., /public/logo.png is accessible at /logo.png)",
         "isCorrect": true,
-        "explanation": "The public/ folder is the static file directory in Next.js. Files there are served directly. Reference them with an absolute path starting with / in your code."
+        "explanation": "The public/ folder is the static file directory in Next.js. Files there are served directly. Reference them with an absolute path starting with / in your code.",
+        "optionTextTr": "/public dizinine dosyaları yerleştirin — root URL'den (ör. /public/logo.png → /logo.png) sunulurlar.",
+        "explanationTr": "Doğru — /public içindeki dosyalar statik olarak sunulur ve build sırasında referans alınmazlar."
       },
       {
         "optionText": "Static files must be imported as modules and processed by webpack",
         "isCorrect": false,
-        "explanation": "Files in public/ bypass webpack entirely and are served as-is. Images and other assets can also be imported as modules, but public/ is for unprocessed static files."
+        "explanation": "Files in public/ bypass webpack entirely and are served as-is. Images and other assets can also be imported as modules, but public/ is for unprocessed static files.",
+        "optionTextTr": "Statik dosyalar modül olarak içe aktarılmalı ve webpack tarafından işlenmelidir.",
+        "explanationTr": "Bu, işlenmesi gereken (ör. CSS, görüntü optimizasyonu) dosyalar için geçerlidir — /public dosyaları ham haliyle sunulur."
       },
       {
         "optionText": "Static files are served from the /static directory in Next.js",
         "isCorrect": false,
-        "explanation": "The directory is /public, not /static. /static was used in older Next.js versions."
+        "explanation": "The directory is /public, not /static. /static was used in older Next.js versions.",
+        "optionTextTr": "Statik dosyalar Next.js'te /static dizininden sunulur.",
+        "explanationTr": "Doğru dizin /public — /static Pages Router'ın eski bir kuralıdır."
       },
       {
         "optionText": "Next.js doesn't support static file serving — use a CDN for all static assets",
         "isCorrect": false,
-        "explanation": "Next.js serves static files from public/ natively. A CDN is an optional enhancement, not a requirement."
+        "explanation": "Next.js serves static files from public/ natively. A CDN is an optional enhancement, not a requirement.",
+        "optionTextTr": "Next.js statik dosya sunumunu desteklemez — tüm statik içerik için CDN kullanın.",
+        "explanationTr": "Next.js /public dizini aracılığıyla statik dosya sunumunu tam olarak destekler."
       }
     ]
   },
@@ -500,22 +652,30 @@
       {
         "optionText": "A React-aware hot module replacement that updates only the changed component while preserving component state and without a full page reload",
         "isCorrect": true,
-        "explanation": "Fast Refresh (built on React's hot reloading) replaces only the edited component's module. It preserves useState/useReducer state across edits, shows errors inline with an error overlay, and recovers automatically when errors are fixed."
+        "explanation": "Fast Refresh (built on React's hot reloading) replaces only the edited component's module. It preserves useState/useReducer state across edits, shows errors inline with an error overlay, and recovers automatically when errors are fixed.",
+        "optionTextTr": "React farkında HMR — değişen bileşeni yalnızca state kaybetmeden günceller; hataları konsola güzelce raporlar.",
+        "explanationTr": "Doğru — Fast Refresh, bileşeni tam yeniden yüklemeden React state ve bağlamı korur."
       },
       {
         "optionText": "Fast Refresh is a caching strategy that serves previously fetched API responses",
         "isCorrect": false,
-        "explanation": "Fast Refresh is a development DX feature for hot reloading code changes — nothing to do with API caching."
+        "explanation": "Fast Refresh is a development DX feature for hot reloading code changes — nothing to do with API caching.",
+        "optionTextTr": "Fast Refresh, daha önce getirilen API yanıtlarını sunan bir önbellekleme stratejisidir.",
+        "explanationTr": "Bu veri önbelleklemeyi tanımlar — Fast Refresh, geliştirme sırasında bileşen güncellemesiyle ilgilidir."
       },
       {
         "optionText": "Fast Refresh performs a full browser reload on every file save",
         "isCorrect": false,
-        "explanation": "The whole point of Fast Refresh is to avoid full reloads by only re-rendering the affected component."
+        "explanation": "The whole point of Fast Refresh is to avoid full reloads by only re-rendering the affected component.",
+        "optionTextTr": "Fast Refresh, her dosya kaydında tam tarayıcı yeniden yüklemesi yapar.",
+        "explanationTr": "Bu tam tersidir — Fast Refresh, tam yeniden yükleme olmadan bileşenleri günceller."
       },
       {
         "optionText": "Fast Refresh is a build optimisation that reduces production bundle size",
         "isCorrect": false,
-        "explanation": "Fast Refresh only works in development (next dev). It has no effect on production builds."
+        "explanation": "Fast Refresh only works in development (next dev). It has no effect on production builds.",
+        "optionTextTr": "Fast Refresh, production bundle boyutunu azaltan bir derleme optimizasyonudur.",
+        "explanationTr": "Fast Refresh, geliştirme araçlarına özgüdür — production build'larını değil; geliştirme döngüsünü etkiler."
       }
     ]
   },
@@ -526,22 +686,30 @@
       {
         "optionText": "The Next.js configuration file — supports redirects, rewrites, headers, image domains, environment variables, i18n, experimental features, and webpack customisation",
         "isCorrect": true,
-        "explanation": "next.config.js (or .mjs) exports a config object. Key options: redirects() for URL redirects, rewrites() for URL proxying, headers() for HTTP headers, images.domains for allowed image sources, and the experimental object for App Router flags."
+        "explanation": "next.config.js (or .mjs) exports a config object. Key options: redirects() for URL redirects, rewrites() for URL proxying, headers() for HTTP headers, images.domains for allowed image sources, and the experimental object for App Router flags.",
+        "optionTextTr": "Next.js yapılandırma dosyası — yönlendirme, yeniden yazma, başlıklar, görüntü alanları, environment ve webpack uzantıları desteklenir.",
+        "explanationTr": "Doğru — next.config.js, framework davranışını özelleştirmenin merkezi yeridir."
       },
       {
         "optionText": "next.config.js is only for setting the port number the dev server runs on",
         "isCorrect": false,
-        "explanation": "Port is set via the --port flag or PORT env variable, not next.config.js. The config file handles much more."
+        "explanation": "Port is set via the --port flag or PORT env variable, not next.config.js. The config file handles much more.",
+        "optionTextTr": "next.config.js yalnızca dev sunucusunun çalıştığı port numarasını belirler.",
+        "explanationTr": "Port yapılandırma yalnızca kullanım durumlarından biridir — next.config.js çok daha geniş kapsamlıdır."
       },
       {
         "optionText": "next.config.js replaces package.json and defines project dependencies",
         "isCorrect": false,
-        "explanation": "Dependencies are defined in package.json. next.config.js is purely a Next.js runtime/build configuration file."
+        "explanation": "Dependencies are defined in package.json. next.config.js is purely a Next.js runtime/build configuration file.",
+        "optionTextTr": "next.config.js, package.json'ın yerini alarak proje bağımlılıklarını tanımlar.",
+        "explanationTr": "next.config.js, Next.js framework yapılandırması içindir — bağımlılık yönetimi için package.json kullanılır."
       },
       {
         "optionText": "next.config.js is optional metadata only — Next.js ignores its contents at build time",
         "isCorrect": false,
-        "explanation": "next.config.js is actively read at build time and affects how the app is built, rendered, and served."
+        "explanation": "next.config.js is actively read at build time and affects how the app is built, rendered, and served.",
+        "optionTextTr": "next.config.js yalnızca isteğe bağlı metadata içerir — Next.js içeriğini yok sayar.",
+        "explanationTr": "Next.js, next.config.js'yi aktif olarak okur ve routing, optimizasyon ile derleme davranışını kontrol etmek için kullanır."
       }
     ]
   },
@@ -552,22 +720,30 @@
       {
         "optionText": "Next.js has built-in TypeScript support — add a tsconfig.json and rename files to .ts/.tsx; the compiler is configured automatically.",
         "isCorrect": true,
-        "explanation": "Correct — Next.js detects tsconfig.json and configures itself. create-next-app --typescript scaffolds everything. No extra webpack config needed."
+        "explanation": "Correct — Next.js detects tsconfig.json and configures itself. create-next-app --typescript scaffolds everything. No extra webpack config needed.",
+        "optionTextTr": "Next.js yerleşik TypeScript desteğine sahiptir — tsconfig.json ekleyin ve dosyaları .tsx/.ts olarak yeniden adlandırın, gerisini Next.js halleder.",
+        "explanationTr": "Doğru — Next.js gerektiğinde tsconfig.json oluşturur ve TypeScript'i yerel olarak derler; ek yapılandırma gerekmez."
       },
       {
         "optionText": "Install ts-loader and add it to next.config.js — Next.js doesn't support TypeScript natively.",
         "isCorrect": false,
-        "explanation": "Next.js has first-class TypeScript support since v9. No ts-loader or manual webpack config is needed."
+        "explanation": "Next.js has first-class TypeScript support since v9. No ts-loader or manual webpack config is needed.",
+        "optionTextTr": "ts-loader kurun ve next.config.js'e ekleyin — Next.js TypeScript'i desteklemez.",
+        "explanationTr": "Next.js, ts-loader gerektirmeden TypeScript'i yerleşik olarak destekler."
       },
       {
         "optionText": "TypeScript only works in Next.js Pages Router — App Router requires plain JavaScript.",
         "isCorrect": false,
-        "explanation": "Both routers fully support TypeScript. App Router even provides generated types for route params and searchParams."
+        "explanation": "Both routers fully support TypeScript. App Router even provides generated types for route params and searchParams.",
+        "optionTextTr": "TypeScript yalnızca Next.js Pages Router'da çalışır — App Router plain JavaScript gerektirir.",
+        "explanationTr": "TypeScript, hem Pages Router hem App Router'da tam olarak desteklenir."
       },
       {
         "optionText": "Use Babel with @babel/preset-typescript — tsc is not used in Next.js projects.",
         "isCorrect": false,
-        "explanation": "Next.js uses SWC (not Babel) for TypeScript transpilation by default, and tsc for type checking via next build."
+        "explanation": "Next.js uses SWC (not Babel) for TypeScript transpilation by default, and tsc for type checking via next build.",
+        "optionTextTr": "Babel ve @babel/preset-typescript kullanın — Next.js'te tsc kullanılmaz.",
+        "explanationTr": "Next.js tür denetimi için tsc kullanır; hızlı dönüşüm için SWC tercih edilir. Babel mümkün olsa da varsayılan değildir."
       }
     ]
   }

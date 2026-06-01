@@ -48,7 +48,7 @@ export function rehypeGlossary(terms: GlossaryTerm[]) {
               next.push({
                 type: "element",
                 tagName: "glossaryterm",
-                properties: { slug: seg.slug, tip: seg.tooltip },
+                properties: { slug: seg.slug, tip: seg.tooltip, tipTr: seg.tooltip_tr ?? "" },
                 children: [{ type: "text", value: seg.value }],
               });
             }

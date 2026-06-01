@@ -19,16 +19,21 @@ import { cn } from "@/lib/utils";
 export function TermTooltip({
   slug,
   tooltip,
+  tooltipTr,
+  lang = "en",
   children,
   className,
   isLoggedIn = true,
 }: {
   slug: string;
   tooltip: string;
+  tooltipTr?: string;
+  lang?: "en" | "tr";
   children: React.ReactNode;
   className?: string;
   isLoggedIn?: boolean;
 }) {
+  const displayTooltip = lang === "tr" && tooltipTr ? tooltipTr : tooltip;
   const definitionHref = isLoggedIn ? `/glossary/${slug}` : "/signin";
 
   return (
@@ -49,7 +54,7 @@ export function TermTooltip({
           className="z-50 w-72 rounded-lg border border-border bg-card p-3 text-sm shadow-md outline-none"
           sideOffset={4}
         >
-          <p className="leading-relaxed text-foreground/90">{tooltip}</p>
+          <p className="leading-relaxed text-foreground/90">{displayTooltip}</p>
           <Link
             href={definitionHref}
             className="mt-2 inline-block text-xs font-medium text-muted-foreground hover:text-foreground hover:underline"

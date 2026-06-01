@@ -27,18 +27,26 @@ const HIGHLIGHT_OPTIONS = { detect: true, ignoreMissing: true };
 // and tooltip from the raw hast node properties.
 function GlossaryTermNode({
   node,
+  lang = "en",
   children,
 }: {
   node?: { properties?: Record<string, unknown> };
+  lang?: "en" | "tr";
   children?: React.ReactNode;
 }) {
   const slug = node?.properties?.slug;
   const tip = node?.properties?.tip;
+  const tipTr = node?.properties?.tipTr;
   if (typeof slug !== "string" || typeof tip !== "string") {
     return <>{children}</>;
   }
   return (
-    <TermTooltip slug={slug} tooltip={tip}>
+    <TermTooltip
+      slug={slug}
+      tooltip={tip}
+      tooltipTr={typeof tipTr === "string" ? tipTr : undefined}
+      lang={lang}
+    >
       {children}
     </TermTooltip>
   );
@@ -48,11 +56,13 @@ export function MarkdownContent({
   source,
   className,
   glossaryTerms,
+  lang = "en",
 }: {
   source: string;
   className?: string;
   /** When supplied, glossary terms in the prose become hover/focus tooltips. */
   glossaryTerms?: GlossaryTerm[];
+  lang?: "en" | "tr";
 }) {
   const useGlossary = Boolean(glossaryTerms && glossaryTerms.length > 0);
 
@@ -65,8 +75,11 @@ export function MarkdownContent({
       : [[rehypeHighlight, HIGHLIGHT_OPTIONS]]
   ) as unknown as RehypePlugins;
 
+  const GlossaryTermNodeWithLang = (props: Parameters<typeof GlossaryTermNode>[0]) =>
+    GlossaryTermNode({ ...props, lang });
+
   const components = (
-    useGlossary ? { glossaryterm: GlossaryTermNode } : undefined
+    useGlossary ? { glossaryterm: GlossaryTermNodeWithLang } : undefined
   ) as unknown as MarkdownComponents;
 
   return (

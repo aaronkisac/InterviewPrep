@@ -6,22 +6,30 @@
       {
         "optionText": "A distributed version control system that tracks changes in files, enabling collaboration and history management.",
         "isCorrect": true,
-        "explanation": "Correct — every developer has a full copy of the repository history locally."
+        "explanation": "Correct — every developer has a full copy of the repository history locally.",
+        "optionTextTr": "Dosyalardaki değişiklikleri takip eden, her klonun tam geçmişe sahip olduğu dağıtık versiyon kontrol sistemi.",
+        "explanationTr": "Doğru — Git, merkezi sunucuya ihtiyaç duymadan tam geçmişle çevrimdışı çalışmaya izin verir."
       },
       {
         "optionText": "A cloud hosting platform for storing code, like GitHub or Bitbucket.",
         "isCorrect": false,
-        "explanation": "GitHub/Bitbucket are hosting platforms — Git is the underlying version control system."
+        "explanation": "GitHub/Bitbucket are hosting platforms — Git is the underlying version control system.",
+        "optionTextTr": "GitHub veya Bitbucket gibi kod depolamak için bulut barındırma platformu.",
+        "explanationTr": "GitHub ve Bitbucket, Git repository barındırma hizmetleridir — Git'in kendisi yerel çalışan versiyon kontrol sistemidir."
       },
       {
         "optionText": "A package manager for installing JavaScript dependencies.",
         "isCorrect": false,
-        "explanation": "npm and pnpm are package managers — Git tracks code history."
+        "explanation": "npm and pnpm are package managers — Git tracks code history.",
+        "optionTextTr": "JavaScript bağımlılıklarını yüklemek için paket yöneticisi.",
+        "explanationTr": "Bu npm veya pnpm gibi paket yöneticilerini tanımlar — Git değil."
       },
       {
         "optionText": "A programming language used to write deployment scripts.",
         "isCorrect": false,
-        "explanation": "Git is a version control tool, not a programming language."
+        "explanation": "Git is a version control tool, not a programming language.",
+        "optionTextTr": "Dağıtım scriptleri yazmak için kullanılan programlama dili.",
+        "explanationTr": "Git, bir programlama dili değil; bir versiyon kontrol sistemidir."
       }
     ]
   },
@@ -32,22 +40,30 @@
       {
         "optionText": "Git is distributed (every clone has full history); SVN is centralised (one server holds the history). Git enables offline commits; SVN requires server connectivity.",
         "isCorrect": true,
-        "explanation": "Correct — Git's distributed model enables branching, offline work, and faster operations."
+        "explanation": "Correct — Git's distributed model enables branching, offline work, and faster operations.",
+        "optionTextTr": "Git dağıtıktır (her klon tam geçmişe sahiptir); SVN merkezidir (sunucu tek yetkili kaynaktır).",
+        "explanationTr": "Doğru — dağıtık yapı, Git'in çevrimdışı işlemler, dallama hızı ve esnekliği açısından avantajını açıklar."
       },
       {
         "optionText": "Git is only for open-source projects; SVN is used in enterprise environments.",
         "isCorrect": false,
-        "explanation": "Both are used in all types of environments — the difference is architecture, not intended audience."
+        "explanation": "Both are used in all types of environments — the difference is architecture, not intended audience.",
+        "optionTextTr": "Git yalnızca açık kaynak projeler içindir; SVN kurumsal ortamlarda kullanılır.",
+        "explanationTr": "Git, açık ve kapalı kaynak kuruluşlarda yaygın olarak kullanılır. SVN hâlâ bazı kurumsal ortamlarda bulunur."
       },
       {
         "optionText": "Git supports binary files; SVN only supports text files.",
         "isCorrect": false,
-        "explanation": "Both support binary files — the key difference is centralised vs distributed architecture."
+        "explanation": "Both support binary files — the key difference is centralised vs distributed architecture.",
+        "optionTextTr": "Git ikili dosyaları destekler; SVN yalnızca metin dosyalarını destekler.",
+        "explanationTr": "Her ikisi de ikili dosyaları işleyebilir, ancak ikisi de metin tabanlı değişiklikler için daha iyi optimize edilmiştir."
       },
       {
         "optionText": "Git is faster only because it is written in C; SVN would be equally fast if rewritten in C.",
         "isCorrect": false,
-        "explanation": "Git's performance advantage is architectural — local operations don't need network access."
+        "explanation": "Git's performance advantage is architectural — local operations don't need network access.",
+        "optionTextTr": "Git yalnızca C ile yazıldığı için daha hızlıdır; SVN eşit hızda olurdu.",
+        "explanationTr": "Git'in hız avantajı öncelikle mimarisinden kaynaklanır — yerel işlemler ağ çağrısı gerektirmez."
       }
     ]
   },
@@ -58,22 +74,30 @@
       {
         "optionText": "git commit -m \"Your message\" — or git commit to open the default editor for a multi-line message.",
         "isCorrect": true,
-        "explanation": "Correct — -m is the inline message flag; omitting it opens $EDITOR for a full commit message."
+        "explanation": "Correct — -m is the inline message flag; omitting it opens $EDITOR for a full commit message.",
+        "optionTextTr": "git commit -m 'Mesajın' — ya da varsayılan düzenleyiciyi açmak için git commit.",
+        "explanationTr": "Doğru — kısa mesajlar için -m bayrağı yaygındır; daha ayrıntılı mesajlar için editör tercih edilir."
       },
       {
         "optionText": "git message \"Your commit message\"",
         "isCorrect": false,
-        "explanation": "There is no git message command — use git commit -m."
+        "explanation": "There is no git message command — use git commit -m.",
+        "optionTextTr": "git message 'Commit mesajın'",
+        "explanationTr": "git message diye bir komut yoktur — git commit -m kullanılır."
       },
       {
         "optionText": "git save -m \"Your message\"",
         "isCorrect": false,
-        "explanation": "git save is not a Git command — use git commit -m."
+        "explanation": "git save is not a Git command — use git commit -m.",
+        "optionTextTr": "git save -m 'Mesajın'",
+        "explanationTr": "git save diye bir komut yoktur — git commit -m veya git stash kullanılır."
       },
       {
         "optionText": "git log --message \"Your message\"",
         "isCorrect": false,
-        "explanation": "git log reads history — git commit -m writes a new commit."
+        "explanation": "git log reads history — git commit -m writes a new commit.",
+        "optionTextTr": "git log --message 'Mesajın'",
+        "explanationTr": "git log geçmişi görüntüler — commit mesajı kaydetmez."
       }
     ]
   },
@@ -84,22 +108,30 @@
       {
         "optionText": "A branch is a movable pointer to commits; a pull request is a platform feature (GitHub/GitLab) to propose, review, and merge a branch's changes.",
         "isCorrect": true,
-        "explanation": "Correct — branches are a core Git concept; pull requests are a collaboration workflow built on top by hosting platforms."
+        "explanation": "Correct — branches are a core Git concept; pull requests are a collaboration workflow built on top by hosting platforms.",
+        "optionTextTr": "Branch, commit'lere işaret eden hareketli bir pointer'dır; pull request, branch'i birleştirmek için inceleme talep eden bir platform mekanizmasıdır.",
+        "explanationTr": "Doğru — branch bir Git kavramıdır; pull request ise GitHub/GitLab gibi hosting platformlarında bir iş akışı mekanizmasıdır."
       },
       {
         "optionText": "A pull request is a Git command; a branch is a GitHub/GitLab concept.",
         "isCorrect": false,
-        "explanation": "This is backwards — branches are core Git; pull requests are a hosting platform feature."
+        "explanation": "This is backwards — branches are core Git; pull requests are a hosting platform feature.",
+        "optionTextTr": "Pull request bir Git komutudur; branch ise bir GitHub/GitLab kavramıdır.",
+        "explanationTr": "Tam tersi doğrudur — branch bir Git kavramıdır; pull request platform özelliğidir."
       },
       {
         "optionText": "They are the same thing — 'pull request' is the GitHub term for a branch.",
         "isCorrect": false,
-        "explanation": "A branch is a reference to commits; a PR is a review/merge workflow built around a branch."
+        "explanation": "A branch is a reference to commits; a PR is a review/merge workflow built around a branch.",
+        "optionTextTr": "Bunlar aynı şeydir — 'pull request', branch'in GitHub terimidir.",
+        "explanationTr": "Bunlar farklıdır: branch, geliştirme alanını izole eder; pull request, branch'i birleştirmek için inceleme talep eder."
       },
       {
         "optionText": "A pull request downloads code from the remote; a branch pushes code to the remote.",
         "isCorrect": false,
-        "explanation": "git pull fetches from remote — a pull request is a code review mechanism, not a Git command."
+        "explanation": "git pull fetches from remote — a pull request is a code review mechanism, not a Git command.",
+        "optionTextTr": "Pull request uzaktan kod indirir; branch, kodu iter.",
+        "explanationTr": "Bu tanımlamaların ikisi de yanlıştır — pull request bir inceleme iş akışı mekanizmasıdır."
       }
     ]
   },
@@ -110,22 +142,30 @@
       {
         "optionText": "Fork = server-side copy of a repo under your account; Clone = local copy of a repo; Branch = a movable pointer within a repo.",
         "isCorrect": true,
-        "explanation": "Correct — forks enable contributing to repos you don't have write access to; branches isolate work within a repo."
+        "explanation": "Correct — forks enable contributing to repos you don't have write access to; branches isolate work within a repo.",
+        "optionTextTr": "Fork = hesabınız altında sunucu tarafı repo kopyası; Clone = yerel bilgisayara kopyalama; Branch = repo içinde ayrı geliştirme hattı.",
+        "explanationTr": "Doğru — fork, farklı sahiplikle ayrı bir uzak repo oluştururken; clone yerel çalışma kopyanızı oluşturur."
       },
       {
         "optionText": "Fork and clone are identical operations; branch is a fork within the same repository.",
         "isCorrect": false,
-        "explanation": "Fork creates a server-side copy; clone creates a local copy — they are distinct operations."
+        "explanation": "Fork creates a server-side copy; clone creates a local copy — they are distinct operations.",
+        "optionTextTr": "Fork ve clone özdeş işlemlerdir; branch ise bir fork içindeki daldır.",
+        "explanationTr": "Fork, sunucu tarafı bir kopya oluşturur; clone, mevcut repo'yu yerel makinenize kopyalar."
       },
       {
         "optionText": "A fork is a long-lived branch; a clone is a short-lived branch; a branch is a commit reference.",
         "isCorrect": false,
-        "explanation": "Forks and clones are repository copies (at different locations); branches are lightweight pointers within a repo."
+        "explanation": "Forks and clones are repository copies (at different locations); branches are lightweight pointers within a repo.",
+        "optionTextTr": "Fork uzun ömürlü bir branch'tir; clone kısa ömürlü bir branch'tir.",
+        "explanationTr": "Bunların hiçbiri doğru değildir — fork ayrı bir repo; clone yerel bir kopyadır."
       },
       {
         "optionText": "Cloning creates a read-only copy; forking creates a writable copy; branching requires elevated permissions.",
         "isCorrect": false,
-        "explanation": "Clones are fully writable locally; fork/branch permissions depend on repository settings, not the operations themselves."
+        "explanation": "Clones are fully writable locally; fork/branch permissions depend on repository settings, not the operations themselves.",
+        "optionTextTr": "Clone salt okunur bir kopya oluşturur; fork yazılabilir bir kopya.",
+        "explanationTr": "Her ikisi de yazılabilirdir — fork ayrı bir uzak repo; clone mevcut repo'nun yerel kopyasıdır."
       }
     ]
   },
@@ -136,22 +176,30 @@
       {
         "optionText": "git fetch downloads remote changes without merging; git pull = git fetch + git merge (or rebase) into the current branch.",
         "isCorrect": true,
-        "explanation": "Correct — git fetch is safe to run anytime; git pull immediately modifies your working branch."
+        "explanation": "Correct — git fetch is safe to run anytime; git pull immediately modifies your working branch.",
+        "optionTextTr": "git fetch uzak değişiklikleri birleştirmeden indirir; git pull = git fetch + git merge.",
+        "explanationTr": "Doğru — fetch, izleme branch'lerini günceller ama yerel branch'i değiştirmez; pull hem indirir hem birleştirir."
       },
       {
         "optionText": "git pull downloads only new commits; git fetch downloads the full repository history.",
         "isCorrect": false,
-        "explanation": "Both download changes incrementally — the difference is whether the downloaded changes are merged."
+        "explanation": "Both download changes incrementally — the difference is whether the downloaded changes are merged.",
+        "optionTextTr": "git pull yalnızca yeni commit'leri indirir; git fetch tam repo'yu indirir.",
+        "explanationTr": "Her ikisi de uzak değişiklikleri indirir — fark birleştirme davranışındadır."
       },
       {
         "optionText": "git fetch is for fetching from GitHub; git pull is for fetching from GitLab.",
         "isCorrect": false,
-        "explanation": "Both work with any remote — the difference is automatic merging, not the hosting platform."
+        "explanation": "Both work with any remote — the difference is automatic merging, not the hosting platform.",
+        "optionTextTr": "git fetch GitHub'dan; git pull GitLab'dan almak içindir.",
+        "explanationTr": "Her ikisi de herhangi bir uzak sunucudan almak için kullanılır — platform farkı yoktur."
       },
       {
         "optionText": "git pull is safer than git fetch because it previews changes before applying them.",
         "isCorrect": false,
-        "explanation": "This is backwards — git fetch is safer because it doesn't modify your working branch."
+        "explanation": "This is backwards — git fetch is safer because it doesn't modify your working branch.",
+        "optionTextTr": "git pull, değişiklikleri önizlediği için git fetch'ten daha güvenlidir.",
+        "explanationTr": "Aslında git fetch daha güvenlidir çünkü değişiklikleri önce inceleyebilirsiniz; git pull indir ve birleştir işlemini tek adımda yapar."
       }
     ]
   },
@@ -162,22 +210,30 @@
       {
         "optionText": "git revert <sha> creates a new commit that undoes the changes — safe for shared branches. git reset moves HEAD back, rewriting history — only for local branches.",
         "isCorrect": true,
-        "explanation": "Correct — revert is the safe choice for shared branches; reset rewrites history and should not be used on pushed commits."
+        "explanation": "Correct — revert is the safe choice for shared branches; reset rewrites history and should not be used on pushed commits.",
+        "optionTextTr": "git revert <sha>, değişiklikleri geri alan yeni bir commit oluşturur — geçmişi yeniden yazmaz, paylaşılan branch'ler için güvenlidir.",
+        "explanationTr": "Doğru — git revert mevcut geçmişi korur ve geri alınanın takibini sağlar."
       },
       {
         "optionText": "git undo <sha> — Git has a built-in undo command for reverting commits.",
         "isCorrect": false,
-        "explanation": "There is no git undo command — use git revert (safe) or git reset (history-rewriting)."
+        "explanation": "There is no git undo command — use git revert (safe) or git reset (history-rewriting).",
+        "optionTextTr": "git undo <sha> — Git'in commit geri almak için yerleşik undo komutu vardır.",
+        "explanationTr": "git undo diye bir komut yoktur — git revert veya git reset kullanılır."
       },
       {
         "optionText": "git delete <sha> removes the commit from history without creating a new commit.",
         "isCorrect": false,
-        "explanation": "There is no git delete command — removing commits requires git reset or interactive rebase."
+        "explanation": "There is no git delete command — removing commits requires git reset or interactive rebase.",
+        "optionTextTr": "git delete <sha> commit'i geçmiş oluşturmadan geçmişten kaldırır.",
+        "explanationTr": "git delete diye bir komut yoktur — git reset veya git rebase --interactive kullanılabilir."
       },
       {
         "optionText": "You cannot revert commits in Git without rewriting the entire repository history.",
         "isCorrect": false,
-        "explanation": "git revert is specifically designed to undo commits without rewriting history."
+        "explanation": "git revert is specifically designed to undo commits without rewriting history.",
+        "optionTextTr": "Git'te tüm repo'yu yeniden yazmadan commit geri alamazsınız.",
+        "explanationTr": "git revert, geçmişi yeniden yazmadan güvenli biçimde geri almanın standart yoludur."
       }
     ]
   },
@@ -188,22 +244,30 @@
       {
         "optionText": "When you need to switch branches or pull changes but have uncommitted work you're not ready to commit — stash saves it temporarily.",
         "isCorrect": true,
-        "explanation": "Correct — stash is a temporary shelf for WIP changes; prefer a WIP commit for longer-term storage."
+        "explanation": "Correct — stash is a temporary shelf for WIP changes; prefer a WIP commit for longer-term storage.",
+        "optionTextTr": "Commit edilmemiş değişiklikleriniz varken branch değiştirmeniz veya değişiklik çekmeniz gerektiğinde.",
+        "explanationTr": "Doğru — stash, geçici olarak değişiklikleri kaydedip temiz bir working tree ile başka bir şey yapmanızı sağlar."
       },
       {
         "optionText": "git stash permanently deletes uncommitted changes — use it to clean up dirty work.",
         "isCorrect": false,
-        "explanation": "git stash saves changes to a stack — they can be restored with git stash pop. git checkout -- . discards changes permanently."
+        "explanation": "git stash saves changes to a stack — they can be restored with git stash pop. git checkout -- . discards changes permanently.",
+        "optionTextTr": "git stash commit edilmemiş değişiklikleri kalıcı olarak siler.",
+        "explanationTr": "git stash değişiklikleri siler değil; yığında saklar — geri almak için git stash pop kullanılır."
       },
       {
         "optionText": "git stash should be used instead of committing to keep the commit history clean.",
         "isCorrect": false,
-        "explanation": "Stash is temporary — for anything longer than a few minutes, a WIP commit on a branch is safer."
+        "explanation": "Stash is temporary — for anything longer than a few minutes, a WIP commit on a branch is safer.",
+        "optionTextTr": "git stash, commit geçmişini temiz tutmak için commit yapmak yerine kullanılmalıdır.",
+        "explanationTr": "Stash geçici bağlam değişimi içindir — düzenli commit'lerin yerine geçmez."
       },
       {
         "optionText": "git stash only works for staged changes — unstaged changes must be committed first.",
         "isCorrect": false,
-        "explanation": "git stash saves both staged and unstaged changes by default."
+        "explanation": "git stash saves both staged and unstaged changes by default.",
+        "optionTextTr": "git stash yalnızca staged değişiklikler için çalışır — staged olmayan değişiklikler elle yönetilmeli.",
+        "explanationTr": "git stash varsayılan olarak hem staged hem de unstaged değişiklikleri saklar; -u bayrağıyla untracked dosyaları da saklayabilirsiniz."
       }
     ]
   },
@@ -214,22 +278,30 @@
       {
         "optionText": "HEAD = last commit (where you are); working tree = files on disk; index (staging area) = what will go into the next commit.",
         "isCorrect": true,
-        "explanation": "Correct — these three areas are the core model behind git status, git add, and git commit."
+        "explanation": "Correct — these three areas are the core model behind git status, git add, and git commit.",
+        "optionTextTr": "HEAD = son commit (bulunduğunuz yer); working tree = diskteki dosyalar; index = bir sonraki commit için hazırlanan staged değişiklikler.",
+        "explanationTr": "Doğru — 'git diff' working tree ile index'i; 'git diff --cached' index ile HEAD'i karşılaştırır."
       },
       {
         "optionText": "HEAD is the remote branch; working tree is the local branch; index is the merge result.",
         "isCorrect": false,
-        "explanation": "HEAD is the current local commit; the index is the staging area — neither relates to remote branches."
+        "explanation": "HEAD is the current local commit; the index is the staging area — neither relates to remote branches.",
+        "optionTextTr": "HEAD uzak branch'tir; working tree yerel branch'tir; index commit geçmişidir.",
+        "explanationTr": "Bunların hepsi yanlıştır — HEAD son commit'tir, working tree diskteki dosyalar, index staged değişikliklerdir."
       },
       {
         "optionText": "HEAD, working tree, and index are three names for the same thing.",
         "isCorrect": false,
-        "explanation": "They are three distinct areas — understanding the difference is essential for understanding git add, reset, and diff."
+        "explanation": "They are three distinct areas — understanding the difference is essential for understanding git add, reset, and diff.",
+        "optionTextTr": "HEAD, working tree ve index aynı şeyin üç adıdır.",
+        "explanationTr": "Bunlar Git içinde üç ayrı kavramdır — her birinin farklı anlamı ve davranışı vardır."
       },
       {
         "optionText": "The index stores the full commit history; HEAD is a pointer to the next planned commit.",
         "isCorrect": false,
-        "explanation": "The index (staging area) holds the next commit's snapshot; HEAD points to the last commit."
+        "explanation": "The index (staging area) holds the next commit's snapshot; HEAD points to the last commit.",
+        "optionTextTr": "Index tam commit geçmişini saklar; HEAD yalnızca branch işaretçisidir.",
+        "explanationTr": "Index yalnızca bir sonraki commit için stage edilmiş anlık görüntüyü saklar, tam geçmişi değil."
       }
     ]
   },
@@ -240,22 +312,30 @@
       {
         "optionText": "Applies one or more specific commits from another branch onto the current branch, creating new commits with the same diff but different SHAs.",
         "isCorrect": true,
-        "explanation": "Correct — useful for backporting a bug fix to a release branch without merging all of main."
+        "explanation": "Correct — useful for backporting a bug fix to a release branch without merging all of main.",
+        "optionTextTr": "Bir veya daha fazla belirli commit'i mevcut branch'e başka bir branch'ten uygular.",
+        "explanationTr": "Doğru — cherry-pick, seçici commit uygulaması için kullanışlıdır ancak yinelenen commit'lerin karışık geçmiş oluşturabileceğini farkında olun."
       },
       {
         "optionText": "Selects the best commits from a branch based on code quality metrics.",
         "isCorrect": false,
-        "explanation": "Cherry-pick selects commits by SHA — there is no automatic quality evaluation."
+        "explanation": "Cherry-pick selects commits by SHA — there is no automatic quality evaluation.",
+        "optionTextTr": "Bir branch'ten kod kalite metriklerine göre en iyi commit'leri seçer.",
+        "explanationTr": "git cherry-pick kaliteye göre seçmez — belirli commit SHA'ları hedefler."
       },
       {
         "optionText": "Merges a branch and automatically resolves conflicts by picking the newer version.",
         "isCorrect": false,
-        "explanation": "Cherry-pick applies specific commits, not a whole branch — it does not auto-resolve conflicts."
+        "explanation": "Cherry-pick applies specific commits, not a whole branch — it does not auto-resolve conflicts.",
+        "optionTextTr": "Bir branch'i birleştirir ve çakışmaları otomatik olarak çözer.",
+        "explanationTr": "Bu otomatik çakışma çözümü yoktur — cherry-pick çakışmalar için manuel çözüm gerektirebilir."
       },
       {
         "optionText": "Removes unwanted commits from the history by cherry-picking only the good ones.",
         "isCorrect": false,
-        "explanation": "Cherry-pick copies commits to the current branch — to remove commits from history, use interactive rebase."
+        "explanation": "Cherry-pick copies commits to the current branch — to remove commits from history, use interactive rebase.",
+        "optionTextTr": "İstenmeyen commit'leri geçmişten kaldırır.",
+        "explanationTr": "Cherry-pick commit'leri kaldırmaz — yalnızca değişikliklerini başka bir branch'e kopyalar."
       }
     ]
   },
@@ -266,22 +346,30 @@
       {
         "optionText": "Gitflow uses long-lived main and develop branches, feature branches off develop, release branches for stabilisation, and hotfix branches off main for production fixes.",
         "isCorrect": true,
-        "explanation": "Correct — Gitflow is suited to scheduled release cycles; trunk-based development is preferred for continuous delivery."
+        "explanation": "Correct — Gitflow is suited to scheduled release cycles; trunk-based development is preferred for continuous delivery.",
+        "optionTextTr": "Gitflow uzun ömürlü main ve develop branch'leri, özellik branch'leri, sürüm branch'leri ve hotfix branch'leri kullanır.",
+        "explanationTr": "Doğru — Gitflow birçok büyük ekip için iyi çalışır ama trunk-based development daha sık dağıtım yapan ekiplerin tercihidir."
       },
       {
         "optionText": "Gitflow is GitHub's internal branching strategy where all code is committed directly to main.",
         "isCorrect": false,
-        "explanation": "Committing directly to main is trunk-based development — Gitflow uses multiple long-lived branches."
+        "explanation": "Committing directly to main is trunk-based development — Gitflow uses multiple long-lived branches.",
+        "optionTextTr": "Gitflow, GitHub'ın tüm kodun doğrudan main'e iletildiği dahili dallanma stratejisidir.",
+        "explanationTr": "Bu trunk-based development'ı tanımlar — Gitflow birden fazla branch türüyle daha yapılandırılmıştır."
       },
       {
         "optionText": "Gitflow requires exactly two developers — one for features, one for releases.",
         "isCorrect": false,
-        "explanation": "Gitflow scales to any team size — the two refers to the two long-lived branches (main and develop), not the number of developers."
+        "explanation": "Gitflow scales to any team size — the two refers to the two long-lived branches (main and develop), not the number of developers.",
+        "optionTextTr": "Gitflow tam olarak iki geliştirici gerektirir.",
+        "explanationTr": "Gitflow herhangi bir boyuttaki ekip için tasarlanmıştır — iki kişilik kısıtlama yoktur."
       },
       {
         "optionText": "In Gitflow, hotfixes are applied directly to the develop branch and released in the next sprint.",
         "isCorrect": false,
-        "explanation": "Hotfixes branch off main and are merged back to both main and develop — they bypass the develop cycle for urgent production fixes."
+        "explanation": "Hotfixes branch off main and are merged back to both main and develop — they bypass the develop cycle for urgent production fixes.",
+        "optionTextTr": "Gitflow'da hotfix'ler doğrudan develop branch'ine uygulanır.",
+        "explanationTr": "Gitflow hotfix'leri, hem main hem de develop'a birleştirilmek üzere main'den branching yapar."
       }
     ]
   },
@@ -292,22 +380,30 @@
       {
         "optionText": "git reset moves HEAD (and the branch pointer) to a previous commit. --soft keeps staged changes, --mixed unstages them, --hard discards them entirely.",
         "isCorrect": true,
-        "explanation": "Correct — the three modes give granular control over whether staged and working tree changes are kept."
+        "explanation": "Correct — the three modes give granular control over whether staged and working tree changes are kept.",
+        "optionTextTr": "git reset, HEAD'i (ve branch işaretçisini) önceki bir commit'e taşır; --soft staged bırakır, --mixed unstaged yapar, --hard her şeyi atar.",
+        "explanationTr": "Doğru — paylaşılan branch'lerde history rewriting dikkatli yapılmalı; alternatif olarak git revert kullanılabilir."
       },
       {
         "optionText": "git reset downloads a fresh copy of the repository from the remote.",
         "isCorrect": false,
-        "explanation": "git reset operates locally on HEAD and the working tree — use git fetch/pull for remote changes."
+        "explanation": "git reset operates locally on HEAD and the working tree — use git fetch/pull for remote changes.",
+        "optionTextTr": "git reset repo'nun uzaktan taze bir kopyasını indirir.",
+        "explanationTr": "Bu git clone veya git fetch'i tanımlar — git reset yerel history navigation içindir."
       },
       {
         "optionText": "git reset permanently deletes the commits it removes — they cannot be recovered.",
         "isCorrect": false,
-        "explanation": "Commits removed by reset are still reachable via git reflog for a period — they are recoverable."
+        "explanation": "Commits removed by reset are still reachable via git reflog for a period — they are recoverable.",
+        "optionTextTr": "git reset kaldırdığı commit'leri kalıcı olarak siler.",
+        "explanationTr": "git reset ile kaldırılan commit'ler git reflog ile kurtarılabilir — gerçek anlamda kaybolmaz."
       },
       {
         "optionText": "git reset --hard stages all changes so they are ready to be committed.",
         "isCorrect": false,
-        "explanation": "--hard discards all changes in both the index and working tree — it is the most destructive mode."
+        "explanation": "--hard discards all changes in both the index and working tree — it is the most destructive mode.",
+        "optionTextTr": "git reset --hard tüm değişiklikleri commit için hazırlar.",
+        "explanationTr": "Bu yanlış — git reset --hard staged ve unstaged değişiklikleri atar, stage etmez."
       }
     ]
   },
@@ -318,22 +414,30 @@
       {
         "optionText": "git stash pop applies the latest stash and removes it from the stack; git stash apply applies it but leaves it on the stack — useful for applying to multiple branches.",
         "isCorrect": true,
-        "explanation": "Correct — prefer pop when done with the stash; use apply when you need to apply the same stash to several branches."
+        "explanation": "Correct — prefer pop when done with the stash; use apply when you need to apply the same stash to several branches.",
+        "optionTextTr": "git stash pop son stash'i uygular ve yığından kaldırır; git stash apply son stash'i uygular ama yığında bırakır.",
+        "explanationTr": "Doğru — apply, stash'i birden fazla branch'e uygulamak istediğinizde kullanışlıdır."
       },
       {
         "optionText": "git stash pop applies all stashes at once; git stash apply applies only one.",
         "isCorrect": false,
-        "explanation": "Both apply one stash at a time — the difference is whether the stash is removed from the stack."
+        "explanation": "Both apply one stash at a time — the difference is whether the stash is removed from the stack.",
+        "optionTextTr": "git stash pop tüm stash'leri bir anda uygular; git stash apply yalnızca birini uygular.",
+        "explanationTr": "Her ikisi de varsayılan olarak yalnızca en son stash'i uygular — pop onu yığından kaldırır, apply kaldırmaz."
       },
       {
         "optionText": "git stash apply creates a new commit; git stash pop only modifies the working tree.",
         "isCorrect": false,
-        "explanation": "Neither creates a commit — both restore changes to the working tree and staging area."
+        "explanation": "Neither creates a commit — both restore changes to the working tree and staging area.",
+        "optionTextTr": "git stash apply yeni commit oluşturur; git stash pop yalnızca working tree'yi değiştirir.",
+        "explanationTr": "Her ikisi de commit oluşturmaz — sadece değişiklikleri working tree ve index'e geri uygular."
       },
       {
         "optionText": "They are identical — the difference is only in the name.",
         "isCorrect": false,
-        "explanation": "The key difference is stack management: pop removes the stash entry; apply keeps it."
+        "explanation": "The key difference is stack management: pop removes the stash entry; apply keeps it.",
+        "optionTextTr": "Bunlar özdeştir — fark yalnızca isimde.",
+        "explanationTr": "Önemli bir fark vardır: pop stash'i yığından kaldırırken; apply bırakır."
       }
     ]
   },
@@ -344,22 +448,30 @@
       {
         "optionText": "Scripts that Git executes automatically at certain lifecycle points. Pre-commit (lint/test before commit), commit-msg (validate message format), pre-push (run tests before push), post-merge, etc.",
         "isCorrect": true,
-        "explanation": "Correct — hooks enable automated quality gates; tools like Husky manage them in JavaScript projects."
+        "explanation": "Correct — hooks enable automated quality gates; tools like Husky manage them in JavaScript projects.",
+        "optionTextTr": "Git'in belirli lifecycle noktalarında otomatik olarak çalıştırdığı scriptler — pre-commit (linting), commit-msg (format doğrulama), post-merge (npm install).",
+        "explanationTr": "Doğru — hook'lar .git/hooks dizininde yaşar; Husky gibi araçlar bunları takımlar arasında paylaşılabilir hale getirir."
       },
       {
         "optionText": "Git hooks are webhooks that GitHub fires to external services when events occur.",
         "isCorrect": false,
-        "explanation": "GitHub webhooks are different — git hooks are local scripts in .git/hooks/ that run on your machine."
+        "explanation": "GitHub webhooks are different — git hooks are local scripts in .git/hooks/ that run on your machine.",
+        "optionTextTr": "Git hook'ları, commit push'landığında GitHub'ın dış servislere tetiklediği webhook'lardır.",
+        "explanationTr": "GitHub webhook'ları repo olaylarında HTTP callback'lerdir — Git hook'ları yerel scriptlerdir."
       },
       {
         "optionText": "Git hooks are a premium feature available only in enterprise Git hosting plans.",
         "isCorrect": false,
-        "explanation": "Git hooks are a core Git feature available in any local repository — they do not require a hosting plan."
+        "explanation": "Git hooks are a core Git feature available in any local repository — they do not require a hosting plan.",
+        "optionTextTr": "Git hook'ları yalnızca kurumsal Git lisansında premium özelliktir.",
+        "explanationTr": "Git hook'ları tüm Git kurulumlarında ücretsiz olarak mevcuttur."
       },
       {
         "optionText": "Git hooks can only be written in Bash — other languages are not supported.",
         "isCorrect": false,
-        "explanation": "Git hooks can be written in any executable — Python, Node.js, and Ruby are common choices."
+        "explanation": "Git hooks can be written in any executable — Python, Node.js, and Ruby are common choices.",
+        "optionTextTr": "Git hook'ları yalnızca Bash ile yazılabilir.",
+        "explanationTr": "Hook'lar herhangi bir çalıştırılabilir script ile yazılabilir: Python, Node.js, Ruby vb."
       }
     ]
   },
@@ -370,22 +482,30 @@
       {
         "optionText": "Rebase for cleaning up local feature branches before a PR (linear history); merge for integrating finished features into shared branches (preserves full history).",
         "isCorrect": true,
-        "explanation": "Correct — the golden rule: never rebase commits already pushed to a shared branch."
+        "explanation": "Correct — the golden rule: never rebase commits already pushed to a shared branch.",
+        "optionTextTr": "Doğrusal tarih için PR'dan önce yerel özellik branch'lerini temizlemek için rebase; birleşme geçmişini korumak için merge.",
+        "explanationTr": "Doğru — altın kural: paylaşılan branch'lerde rebase yapma çünkü SHA'lar değişir ve ekip üyeleri için karışıklık yaratır."
       },
       {
         "optionText": "Always rebase — merge commits clutter the history and should be avoided entirely.",
         "isCorrect": false,
-        "explanation": "Merge commits provide an audit trail of when features were integrated — squashing that history has trade-offs."
+        "explanation": "Merge commits provide an audit trail of when features were integrated — squashing that history has trade-offs.",
+        "optionTextTr": "Her zaman rebase kullanın — merge commit'ler geçmişi kirletir.",
+        "explanationTr": "Merge commit'lerin değeri vardır: paralel geliştirmeyi ve ne zaman birleştirildiğini kaydeder."
       },
       {
         "optionText": "Always merge — rebasing is dangerous and should never be used in professional projects.",
         "isCorrect": false,
-        "explanation": "Rebase is a standard professional tool for clean history — the risk is only when rebasing shared/public branches."
+        "explanation": "Rebase is a standard professional tool for clean history — the risk is only when rebasing shared/public branches.",
+        "optionTextTr": "Her zaman merge kullanın — rebase tehlikelidir.",
+        "explanationTr": "Rebase tehlikeli değildir, sadece dikkat gerektirir — özellikle paylaşılmayan branch'ler için mükemmeldir."
       },
       {
         "optionText": "Use rebase when files conflict and merge when they don't — conflicts determine the strategy.",
         "isCorrect": false,
-        "explanation": "Both rebase and merge handle conflicts — the choice is about history shape, not conflict presence."
+        "explanation": "Both rebase and merge handle conflicts — the choice is about history shape, not conflict presence.",
+        "optionTextTr": "Dosyalar çakışırsa rebase, çakışmıyorsa merge kullanın.",
+        "explanationTr": "Çakışma varlığı tercih faktörü değildir — paylaşılan vs paylaşılmayan branch'ler ve istenen tarih yapısı belirleyicidir."
       }
     ]
   },
@@ -396,22 +516,30 @@
       {
         "optionText": "git bisect start, then mark a known bad commit and a known good commit — Git binary-searches the history, checking out commits for you to test until the culprit is found.",
         "isCorrect": true,
-        "explanation": "Correct — git bisect run <test-script> can fully automate the search if you have a deterministic test."
+        "explanation": "Correct — git bisect run <test-script> can fully automate the search if you have a deterministic test.",
+        "optionTextTr": "git bisect start, ardından bilinen bir hatalı commit ve bilinen iyi bir commit işaretleyin — Git binary search ile aynıyı ikiye böler; her adımda iyi/kötü işaretlersiniz.",
+        "explanationTr": "Doğru — git bisect'i test scripti ile otomatikleştirebilirsiniz: git bisect run npm test."
       },
       {
         "optionText": "git bisect scans commit messages for keywords like 'bug' or 'fix' to find the regression.",
         "isCorrect": false,
-        "explanation": "git bisect uses a binary search on the commit graph — it requires you (or a script) to classify each commit as good or bad."
+        "explanation": "git bisect uses a binary search on the commit graph — it requires you (or a script) to classify each commit as good or bad.",
+        "optionTextTr": "git bisect, 'bug' veya 'fix' gibi anahtar kelimeler için commit mesajlarını tarar.",
+        "explanationTr": "git bisect, commit mesajlarını anahtar kelimeyle değil; iyi/kötü işaretlemeyle binary search yapar."
       },
       {
         "optionText": "git bisect requires you to check out each commit manually — it does not automate the search.",
         "isCorrect": false,
-        "explanation": "git bisect automates the checkout — git bisect run can even automate the testing with a script."
+        "explanation": "git bisect automates the checkout — git bisect run can even automate the testing with a script.",
+        "optionTextTr": "git bisect, her commit'i manuel olarak kontrol etmenizi gerektirir — otomatikleştiremezsiniz.",
+        "explanationTr": "git bisect run ile bir test scripti sağlayarak otomatikleştirilebilir."
       },
       {
         "optionText": "git bisect only works if commits are tagged with version numbers.",
         "isCorrect": false,
-        "explanation": "git bisect works with any commit SHAs or branch names — tags are not required."
+        "explanation": "git bisect works with any commit SHAs or branch names — tags are not required.",
+        "optionTextTr": "git bisect yalnızca commit'ler versiyon numarasıyla etiketlenmişse çalışır.",
+        "explanationTr": "git bisect etiket gerektirmez — yalnızca bilinen iyi ve kötü SHA'ları belirtirsiniz."
       }
     ]
   },
@@ -422,22 +550,30 @@
       {
         "optionText": "All developers commit directly to a single main branch — no feature branches, similar to SVN.",
         "isCorrect": true,
-        "explanation": "Correct — the centralised workflow is the simplest Git strategy. It works for small teams but creates bottlenecks and merge conflicts at scale."
+        "explanation": "Correct — the centralised workflow is the simplest Git strategy. It works for small teams but creates bottlenecks and merge conflicts at scale.",
+        "optionTextTr": "Tüm geliştiriciler özellik branch'i olmadan doğrudan tek bir main branch'e commit yapar.",
+        "explanationTr": "Doğru — basit ama küçük ekiplerle sınırlıdır; çakışmalar sıktır. GitHub Flow veya Gitflow, büyük ekipler için daha iyi ölçeklenir."
       },
       {
         "optionText": "Each developer has their own fork and submits pull requests to the central repo.",
         "isCorrect": false,
-        "explanation": "That describes the Forking Workflow. Centralised workflow means everyone pushes directly to one shared branch."
+        "explanation": "That describes the Forking Workflow. Centralised workflow means everyone pushes directly to one shared branch.",
+        "optionTextTr": "Her geliştiricinin kendi fork'u vardır ve pull request ile katkıda bulunur.",
+        "explanationTr": "Bu Forking Workflow'u tanımlar — Merkezi Workflow değil."
       },
       {
         "optionText": "Developers create feature branches and merge them via a release manager.",
         "isCorrect": false,
-        "explanation": "That describes Gitflow or Feature Branch Workflow. Centralised workflow has no feature branches — everyone works on main."
+        "explanation": "That describes Gitflow or Feature Branch Workflow. Centralised workflow has no feature branches — everyone works on main.",
+        "optionTextTr": "Geliştiriciler özellik branch'leri oluşturur ve release manager aracılığıyla birleştirir.",
+        "explanationTr": "Bu Gitflow veya Release Branch Workflow'a benzer — Merkezi Workflow değil."
       },
       {
         "optionText": "The central repo is read-only; developers push to mirrors that sync nightly.",
         "isCorrect": false,
-        "explanation": "The centralised workflow uses a writable shared repo. Read-only mirroring is a separate infrastructure concern."
+        "explanation": "The centralised workflow uses a writable shared repo. Read-only mirroring is a separate infrastructure concern.",
+        "optionTextTr": "Merkezi repo salt okunurdur; geliştiriciler sync eden mirror'lara iter.",
+        "explanationTr": "Bu Forking veya Mirror Workflow senaryosunu tanımlar — Merkezi Workflow değil."
       }
     ]
   },
@@ -448,22 +584,30 @@
       {
         "optionText": "Each developer has their own server-side fork — contributions go through PRs, protecting the canonical repo from direct pushes.",
         "isCorrect": true,
-        "explanation": "Correct — the Forking Workflow is standard for open-source: maintainers never grant write access; all changes are reviewed via pull requests."
+        "explanation": "Correct — the Forking Workflow is standard for open-source: maintainers never grant write access; all changes are reviewed via pull requests.",
+        "optionTextTr": "Her geliştiricinin kendi sunucu tarafı fork'u vardır — katkılar pull request aracılığıyla upstream'e gider, mainline asla doğrudan etkilenmez.",
+        "explanationTr": "Doğru — açık kaynak projelerde idealdir: geliştiriciler izin olmadan katkıda bulunabilir; maintainer'lar inceleme kapısını kontrol eder."
       },
       {
         "optionText": "All developers share one branch but each has a local copy — faster than feature branches.",
         "isCorrect": false,
-        "explanation": "That describes the centralised workflow. Forking creates a separate server-side repo per developer, not just a local clone."
+        "explanation": "That describes the centralised workflow. Forking creates a separate server-side repo per developer, not just a local clone.",
+        "optionTextTr": "Tüm geliştiriciler tek branch paylaşır ama her birinin yerel kopyası var.",
+        "explanationTr": "Bu Merkezi Workflow'u tanımlar — Forking Workflow değil."
       },
       {
         "optionText": "Forks automatically sync with the upstream repo, preventing merge conflicts.",
         "isCorrect": false,
-        "explanation": "Forks do not auto-sync. Developers must manually fetch upstream changes and rebase or merge to stay current."
+        "explanation": "Forks do not auto-sync. Developers must manually fetch upstream changes and rebase or merge to stay current.",
+        "optionTextTr": "Fork'lar upstream repo ile otomatik olarak senkronize olur ve merge çakışmalarını önler.",
+        "explanationTr": "Fork'lar otomatik olarak senkronize olmaz — upstream'den değişiklikleri getirmek için manuel fetch/merge gerekir."
       },
       {
         "optionText": "The Forking Workflow replaces branches entirely — no feature branches are needed.",
         "isCorrect": false,
-        "explanation": "Forks and branches work together. Developers typically create feature branches inside their own fork before opening a PR."
+        "explanation": "Forks and branches work together. Developers typically create feature branches inside their own fork before opening a PR.",
+        "optionTextTr": "Forking Workflow branch'leri tamamen değiştirir.",
+        "explanationTr": "Forking Workflow genellikle fork içinde feature branch'lerle birlikte kullanılır."
       }
     ]
   },
@@ -474,22 +618,30 @@
       {
         "optionText": "A bare repo has no working tree — only the Git database. --bare omits the working tree; --mirror also syncs all refs including remotes.",
         "isCorrect": true,
-        "explanation": "Correct — bare repos are used as shared remotes (GitHub stores bare repos). --mirror is a superset of --bare, copying all remote-tracking refs for full backups."
+        "explanation": "Correct — bare repos are used as shared remotes (GitHub stores bare repos). --mirror is a superset of --bare, copying all remote-tracking refs for full backups.",
+        "optionTextTr": "Bare repo'nun working tree'si yoktur — yalnızca Git veritabanı. --bare merkezi paylaşılan repo'lar için; --mirror fetch sırasında tüm ref'leri günceller.",
+        "explanationTr": "Doğru — GitHub gibi remote sunucular bare repo'ları barındırır; --mirror, tam yedekleme ve replikasyon için kullanılır."
       },
       {
         "optionText": "A bare repo is a regular repo with .git hidden — git clone --bare just hides the .git folder.",
         "isCorrect": false,
-        "explanation": "A bare repo contains only the .git contents with no working tree at all. It's not about hiding the .git folder."
+        "explanation": "A bare repo contains only the .git contents with no working tree at all. It's not about hiding the .git folder.",
+        "optionTextTr": "Bare repo, .git gizlenmiş normal repo'dur.",
+        "explanationTr": "Bare repo, .git dizinini gizlemez — working tree olmayan yalnızca Git veritabanıdır."
       },
       {
         "optionText": "git clone --bare and --mirror are identical — both create a bare repository.",
         "isCorrect": false,
-        "explanation": "--bare clones only the local refs; --mirror also copies all remote-tracking refs and sets up a mirror fetch refspec."
+        "explanation": "--bare clones only the local refs; --mirror also copies all remote-tracking refs and sets up a mirror fetch refspec.",
+        "optionTextTr": "git clone --bare ve --mirror özdeştir.",
+        "explanationTr": "Önemli fark vardır: --mirror, upstream'den fetch sırasında tüm ref'leri senkronize eder."
       },
       {
         "optionText": "Bare repositories cannot be pushed to — they are read-only archives.",
         "isCorrect": false,
-        "explanation": "Bare repos are the standard push target. GitHub, GitLab, and Bitbucket all store bare repos that developers push to."
+        "explanation": "Bare repos are the standard push target. GitHub, GitLab, and Bitbucket all store bare repos that developers push to.",
+        "optionTextTr": "Bare repository'lere push yapılamaz — salt okunur arşivlerdir.",
+        "explanationTr": "Bare repo'lar push'u destekler — gerçekten merkezi paylaşılan repo'ların kurulum şekli budur."
       }
     ]
   },
@@ -500,22 +652,30 @@
       {
         "optionText": "Use git reflog to find the pre-rebase SHA, then git reset --hard <sha> to restore it.",
         "isCorrect": true,
-        "explanation": "Correct — git reflog records every HEAD movement. The entry before the rebase started is your recovery point. git reset --hard restores the branch instantly."
+        "explanation": "Correct — git reflog records every HEAD movement. The entry before the rebase started is your recovery point. git reset --hard restores the branch instantly.",
+        "optionTextTr": "git reflog ile rebase öncesi SHA'yı bul, ardından git reset --hard <sha> ile geri dön.",
+        "explanationTr": "Doğru — reflog, tüm HEAD hareketi günlüğünü tutar; SHA'lar kaybolmaz, yalnızca referanssız kalır."
       },
       {
         "optionText": "Run git rebase --undo — Git has a built-in undo command for rebases.",
         "isCorrect": false,
-        "explanation": "There is no --undo flag on git rebase. Use git reflog + git reset --hard, or git rebase --abort if the rebase is still in progress."
+        "explanation": "There is no --undo flag on git rebase. Use git reflog + git reset --hard, or git rebase --abort if the rebase is still in progress.",
+        "optionTextTr": "git rebase --undo çalıştırın.",
+        "explanationTr": "git rebase --undo diye bir komut yoktur — in-progress rebase için git rebase --abort; sonrasında git reflog kullanılır."
       },
       {
         "optionText": "Run git revert HEAD to reverse the rebase commits one by one.",
         "isCorrect": false,
-        "explanation": "git revert adds new commits that undo changes — it doesn't restore the original branch shape. git reflog + reset is the correct approach."
+        "explanation": "git revert adds new commits that undo changes — it doesn't restore the original branch shape. git reflog + reset is the correct approach.",
+        "optionTextTr": "git revert HEAD ile rebase commit'lerini birer birer tersine çevirin.",
+        "explanationTr": "Bu yalnızca son commit'i tersine çevirir — rebase öncesi haline döndürmez."
       },
       {
         "optionText": "Delete the .git/rebase-merge directory to cancel an in-progress rebase.",
         "isCorrect": false,
-        "explanation": "Deleting internal Git files corrupts state. Use git rebase --abort to safely cancel an in-progress rebase."
+        "explanation": "Deleting internal Git files corrupts state. Use git rebase --abort to safely cancel an in-progress rebase.",
+        "optionTextTr": ".git/rebase-merge dizinini silerek devam eden rebase'i iptal edin.",
+        "explanationTr": "Bu in-progress rebase'i iptal eder ama sonlandırılmış rebase için geçerli değildir."
       }
     ]
   },
@@ -526,22 +686,30 @@
       {
         "optionText": "A binary search through commit history — you mark good/bad commits and Git finds the first bad commit in O(log n) steps.",
         "isCorrect": true,
-        "explanation": "Correct — git bisect start, git bisect bad, git bisect good <sha> begins the search. Git checks out the midpoint each time until it isolates the culprit."
+        "explanation": "Correct — git bisect start, git bisect bad, git bisect good <sha> begins the search. Git checks out the midpoint each time until it isolates the culprit.",
+        "optionTextTr": "Commit geçmişinde binary search — iyi/kötü commit'leri işaretlersiniz; Git sizi testler yarıya indirir.",
+        "explanationTr": "Doğru — bisect, büyük geçmiş için regresyonu manuel aramadan O(log n) kadar verimli bulur."
       },
       {
         "optionText": "git bisect compares two branches and shows the diff of all diverging commits.",
         "isCorrect": false,
-        "explanation": "That describes git diff or git log <branch>..<branch>. bisect performs a binary search to find which specific commit introduced a bug."
+        "explanation": "That describes git diff or git log <branch>..<branch>. bisect performs a binary search to find which specific commit introduced a bug.",
+        "optionTextTr": "git bisect, iki branch'i karşılaştırır ve tüm ayrışan commit'lerin farkını gösterir.",
+        "explanationTr": "Bu git log branch1..branch2 veya git diff'i tanımlar — bisect değil."
       },
       {
         "optionText": "git bisect automatically reverts commits until the bug disappears, then creates a fix branch.",
         "isCorrect": false,
-        "explanation": "bisect only identifies the offending commit — it does not revert anything or create branches automatically."
+        "explanation": "bisect only identifies the offending commit — it does not revert anything or create branches automatically.",
+        "optionTextTr": "git bisect, hata kaybolana kadar commit'leri otomatik olarak geri alır.",
+        "explanationTr": "bisect commit'leri geri almaz — iyi/kötü işaretlemelerle regresyonu binary search yapar."
       },
       {
         "optionText": "git bisect requires a test file — it cannot be used without an automated test suite.",
         "isCorrect": false,
-        "explanation": "bisect works manually (you mark good/bad interactively) or automated with git bisect run <script>. A test suite helps but is not required."
+        "explanation": "bisect works manually (you mark good/bad interactively) or automated with git bisect run <script>. A test suite helps but is not required.",
+        "optionTextTr": "git bisect test dosyası gerektirir — otomatik test olmadan kullanılamaz.",
+        "explanationTr": "bisect her türlü test scriptini ya da manuel doğrulamayı destekler — test dosyası zorunlu değildir."
       }
     ]
   }

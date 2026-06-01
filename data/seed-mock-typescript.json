@@ -6,22 +6,30 @@
       {
         "optionText": "Use super() inside the child class constructor before accessing 'this'",
         "isCorrect": true,
-        "explanation": "In TypeScript (and JavaScript classes), super() must be the first statement in a child constructor. It calls the parent's constructor and is required when using inheritance."
+        "explanation": "In TypeScript (and JavaScript classes), super() must be the first statement in a child constructor. It calls the parent's constructor and is required when using inheritance.",
+        "optionTextTr": "Child sınıf constructor'ında 'this'e erişmeden önce super() kullanın.",
+        "explanationTr": "Doğru — super() çağrısı, child constructor içinde this'e erişilmeden önce yapılmalıdır; aksi hâlde runtime hatası oluşur."
       },
       {
         "optionText": "Use parent() method to call the base class constructor",
         "isCorrect": false,
-        "explanation": "There is no parent() method in TypeScript. The keyword is super()."
+        "explanation": "There is no parent() method in TypeScript. The keyword is super().",
+        "optionTextTr": "Base sınıf constructor'ını çağırmak için parent() metodunu kullanın.",
+        "explanationTr": "TypeScript/JavaScript'te parent() diye bir anahtar kelime yoktur — super() kullanılır."
       },
       {
         "optionText": "Call the base class constructor using BaseClass.constructor()",
         "isCorrect": false,
-        "explanation": "Constructors are not callable as static methods. super() is the only way to call the parent constructor."
+        "explanation": "Constructors are not callable as static methods. super() is the only way to call the parent constructor.",
+        "optionTextTr": "Base sınıf constructor'ını BaseClass.constructor() ile çağırın.",
+        "explanationTr": "Bu geçerli sözdizimi değildir — super() child constructor içinde kullanılır."
       },
       {
         "optionText": "Use this.super() inside the child class constructor",
         "isCorrect": false,
-        "explanation": "super is a keyword, not a method on 'this'. It's called as super(), not this.super()."
+        "explanation": "super is a keyword, not a method on 'this'. It's called as super(), not this.super().",
+        "optionTextTr": "Child sınıf constructor'ında this.super() kullanın.",
+        "explanationTr": "this.super() geçerli değildir — doğrusu super()'dır."
       }
     ]
   },
@@ -32,22 +40,30 @@
       {
         "optionText": "Type parameters that let you write reusable, type-safe code that works with multiple types without losing type information",
         "isCorrect": true,
-        "explanation": "Generics use type variables like <T> to create functions, classes, or interfaces that work with any type while maintaining type safety. Example: function identity<T>(arg: T): T — the return type matches the input type."
+        "explanation": "Generics use type variables like <T> to create functions, classes, or interfaces that work with any type while maintaining type safety. Example: function identity<T>(arg: T): T — the return type matches the input type.",
+        "optionTextTr": "Birden fazla giriş tipiyle çalışan, tip güvenliğini koruyan yeniden kullanılabilir kod yazmanıza izin veren tip parametreleri.",
+        "explanationTr": "Doğru — <T> ile tip parametresi oluşturursunuz; Array<T>, Promise<T> bunların yerleşik örnekleridir."
       },
       {
         "optionText": "A way to declare variables without specifying a type, equivalent to using 'any'",
         "isCorrect": false,
-        "explanation": "Generics preserve type information — the opposite of 'any'. With generics, TypeScript tracks the actual type passed in."
+        "explanation": "Generics preserve type information — the opposite of 'any'. With generics, TypeScript tracks the actual type passed in.",
+        "optionTextTr": "Tip belirtmeden değişken bildirmenin yolu, any kullanımına eşdeğer.",
+        "explanationTr": "Generic'ler any'den farklıdır — tip güvenliğini korurken esneklik sağlarlar."
       },
       {
         "optionText": "Built-in TypeScript classes like Array, Map, and Set",
         "isCorrect": false,
-        "explanation": "Those are generic types, but generics is the mechanism that makes them possible — not the built-in types themselves."
+        "explanation": "Those are generic types, but generics is the mechanism that makes them possible — not the built-in types themselves.",
+        "optionTextTr": "Array, Map ve Set gibi yerleşik TypeScript sınıfları.",
+        "explanationTr": "Bunlar generic kullanan örneklerdir — generic'lerin kendisi bu sınıflar değildir."
       },
       {
         "optionText": "A runtime type checking feature that validates types during execution",
         "isCorrect": false,
-        "explanation": "TypeScript types including generics are erased at runtime. They only exist at compile time."
+        "explanation": "TypeScript types including generics are erased at runtime. They only exist at compile time.",
+        "optionTextTr": "Çalışma zamanında tipleri doğrulayan runtime tip denetimi özelliği.",
+        "explanationTr": "Generic'ler compile-time kavramıdır — JavaScript'e derlendikten sonra çoğu generic bilgisi silinir."
       }
     ]
   },
@@ -58,22 +74,30 @@
       {
         "optionText": "It creates a union type — a value can be one of several specified types",
         "isCorrect": true,
-        "explanation": "string | number means the value can be either a string or a number. Union types are fundamental to TypeScript — they let you express 'this or that' precisely."
+        "explanation": "string | number means the value can be either a string or a number. Union types are fundamental to TypeScript — they let you express 'this or that' precisely.",
+        "optionTextTr": "Union tipi oluşturur — değer belirtilen tiplerden biri olabilir.",
+        "explanationTr": "Doğru — string | number, bir değerin string veya number olabileceği anlamına gelir."
       },
       {
         "optionText": "It is the bitwise OR operator used for number calculations",
         "isCorrect": false,
-        "explanation": "While | is bitwise OR in JavaScript, in TypeScript type position (type annotations) it creates union types."
+        "explanation": "While | is bitwise OR in JavaScript, in TypeScript type position (type annotations) it creates union types.",
+        "optionTextTr": "Sayı hesaplamaları için kullanılan bitwise OR operatörü.",
+        "explanationTr": "TypeScript tip bağlamında | union tipini tanımlar; değer bağlamında ise bitwise OR'dur — farkı context belirler."
       },
       {
         "optionText": "It creates an intersection type — a value must satisfy both types simultaneously",
         "isCorrect": false,
-        "explanation": "Intersection types use the & operator. The | operator creates union types."
+        "explanation": "Intersection types use the & operator. The | operator creates union types.",
+        "optionTextTr": "Kesişim tipi oluşturur — değer her iki tipi aynı anda sağlamalıdır.",
+        "explanationTr": "Kesişim tipi & operatörü ile oluşturulur; | union içindir."
       },
       {
         "optionText": "It separates optional properties from required properties in an interface",
         "isCorrect": false,
-        "explanation": "Optional properties use the ? suffix (name?: string). The | creates union types."
+        "explanation": "Optional properties use the ? suffix (name?: string). The | creates union types.",
+        "optionTextTr": "Bir interface'de isteğe bağlı özellikleri zorunlu olanlardan ayırır.",
+        "explanationTr": "İsteğe bağlı özellikler ? ile işaretlenir, | ile değil."
       }
     ]
   },
@@ -84,22 +108,30 @@
       {
         "optionText": "string (lowercase) is the primitive type; String (uppercase) is the wrapper object type — always prefer lowercase string",
         "isCorrect": true,
-        "explanation": "string refers to the JavaScript primitive. String is the object wrapper class. They're not interchangeable — a String object is not assignable to string. Using String in type annotations is almost always wrong."
+        "explanation": "string refers to the JavaScript primitive. String is the object wrapper class. They're not interchangeable — a String object is not assignable to string. Using String in type annotations is almost always wrong.",
+        "optionTextTr": "string (küçük harf) primitive tip; String (büyük harf) ise wrapper nesnesi.",
+        "explanationTr": "Doğru — TypeScript'te birincil tipler için string, number, boolean gibi küçük harfli formlar kullanılır."
       },
       {
         "optionText": "They are identical — TypeScript treats them the same way",
         "isCorrect": false,
-        "explanation": "They are different types. string is the primitive; String is an object. TypeScript will flag mismatches."
+        "explanation": "They are different types. string is the primitive; String is an object. TypeScript will flag mismatches.",
+        "optionTextTr": "Bunlar özdeştir — TypeScript ikisini aynı şekilde değerlendirir.",
+        "explanationTr": "TypeScript'te string ve String farklıdır — primitive ve wrapper nesne ayrımı önemlidir."
       },
       {
         "optionText": "String is the TypeScript type; string is the JavaScript type, used only for JS interop",
         "isCorrect": false,
-        "explanation": "Both exist in TypeScript. string (primitive) is the correct one to use in type annotations."
+        "explanation": "Both exist in TypeScript. string (primitive) is the correct one to use in type annotations.",
+        "optionTextTr": "String TypeScript tipi; string JavaScript tipidir ve yalnızca .js dosyalarında kullanılır.",
+        "explanationTr": "Her ikisi de TypeScript'te mevcuttur; string tercih edilen primitive tipidir."
       },
       {
         "optionText": "String supports additional methods not available on string primitives",
         "isCorrect": false,
-        "explanation": "String primitive methods are auto-boxed in JavaScript, so 'hello'.toUpperCase() works fine. You don't need the String object for methods."
+        "explanation": "String primitive methods are auto-boxed in JavaScript, so 'hello'.toUpperCase() works fine. You don't need the String object for methods.",
+        "optionTextTr": "String, string primitive'de bulunmayan ek metodlar destekler.",
+        "explanationTr": "Her ikisi de aynı prototype metodlara erişir; ama String wrapper'ı gereksiz sarmalamadır."
       }
     ]
   },
@@ -110,22 +142,30 @@
       {
         "optionText": "Functions that assert a condition and narrow the type if they don't throw — declared with asserts condition or asserts arg is Type in the return type",
         "isCorrect": true,
-        "explanation": "Example: function assert(val: unknown): asserts val is string { if (typeof val !== 'string') throw new Error('not a string') }. After calling assert(x), TypeScript knows x is string in the following code."
+        "explanation": "Example: function assert(val: unknown): asserts val is string { if (typeof val !== 'string') throw new Error('not a string') }. After calling assert(x), TypeScript knows x is string in the following code.",
+        "optionTextTr": "Bir koşulu assert eden ve fırlatamazlarsa tipi daraltan fonksiyonlar — asserts x is T sözdizimini kullanır.",
+        "explanationTr": "Doğru — assertion fonksiyonları, tip guard'lar gibi çalışır ama bunların yerine throw kullanır."
       },
       {
         "optionText": "Functions that use the as keyword to cast any value to any type without checking",
         "isCorrect": false,
-        "explanation": "Type assertions (as Type) are different from assertion functions. Assertion functions validate at runtime and narrow types."
+        "explanation": "Type assertions (as Type) are different from assertion functions. Assertion functions validate at runtime and narrow types.",
+        "optionTextTr": "Herhangi bir değeri herhangi bir tipe güvensizce cast etmek için as anahtar kelimesini kullanan fonksiyonlar.",
+        "explanationTr": "Bu as tip assertion'ı tanımlar — assertion fonksiyonları farklıdır ve tür güvenliği sağlar."
       },
       {
         "optionText": "Built-in TypeScript functions like assert() available in all projects",
         "isCorrect": false,
-        "explanation": "TypeScript has no built-in assert() function in the type system. You define assertion functions yourself. Node.js has assert, but that's a separate module."
+        "explanation": "TypeScript has no built-in assert() function in the type system. You define assertion functions yourself. Node.js has assert, but that's a separate module.",
+        "optionTextTr": "Tüm projelerde mevcut olan yerleşik TypeScript fonksiyonları.",
+        "explanationTr": "TypeScript'te yerleşik assert() yoktur — assertion fonksiyonları kullanıcı tarafından tanımlanır."
       },
       {
         "optionText": "Functions used only in test files to validate TypeScript types at compile time",
         "isCorrect": false,
-        "explanation": "Assertion functions can be used in any TypeScript code, not just tests."
+        "explanation": "Assertion functions can be used in any TypeScript code, not just tests.",
+        "optionTextTr": "Yalnızca test dosyalarında compile zamanında TypeScript tiplerini doğrulamak için kullanılan fonksiyonlar.",
+        "explanationTr": "Assertion fonksiyonları test dosyalarıyla sınırlı değildir; üretim kodunda runtime doğrulama için kullanılır."
       }
     ]
   },
@@ -136,22 +176,30 @@
       {
         "optionText": "Types that use the T extends U ? X : Y syntax to select between types based on a condition, enabling advanced type inference and transformation",
         "isCorrect": true,
-        "explanation": "Example: type IsString<T> = T extends string ? true : false. They power many utility types — NonNullable<T> is T extends null | undefined ? never : T. Combined with infer, they extract type information."
+        "explanation": "Example: type IsString<T> = T extends string ? true : false. They power many utility types — NonNullable<T> is T extends null | undefined ? never : T. Combined with infer, they extract type information.",
+        "optionTextTr": "T extends U ? X : Y sözdizimini kullanan, tip ilişkilerine göre tipler arasında seçim yapan tipler.",
+        "explanationTr": "Doğru — koşullu tipler, Exclude<T, U> ve ReturnType<T> gibi utility tiplerin temelini oluşturur."
       },
       {
         "optionText": "TypeScript's equivalent of if/else statements that run at runtime",
         "isCorrect": false,
-        "explanation": "Conditional types are compile-time constructs that resolve to a type. They don't execute at runtime."
+        "explanation": "Conditional types are compile-time constructs that resolve to a type. They don't execute at runtime.",
+        "optionTextTr": "Runtime'da çalışan TypeScript'in if/else ifadelerine karşılığı.",
+        "explanationTr": "Koşullu tipler compile-time kavramıdır — runtime'da çalışmaz."
       },
       {
         "optionText": "A way to make object properties conditional based on environment variables",
         "isCorrect": false,
-        "explanation": "Conditional types operate on the type system level, not environment variables."
+        "explanation": "Conditional types operate on the type system level, not environment variables.",
+        "optionTextTr": "Nesne özelliklerini ortam değişkenlerine göre koşullu yapmanın yolu.",
+        "explanationTr": "Bu doğru bir tanım değildir — koşullu tipler, tip sistemi içinde tip seçimiyle ilgilidir."
       },
       {
         "optionText": "The type equivalent of the JavaScript ternary operator for runtime values",
         "isCorrect": false,
-        "explanation": "While the syntax looks similar to a ternary, conditional types operate on types at compile time, not on values at runtime."
+        "explanation": "While the syntax looks similar to a ternary, conditional types operate on types at compile time, not on values at runtime.",
+        "optionTextTr": "Runtime değerleri için JavaScript ternary operatörünün tip karşılığı.",
+        "explanationTr": "Koşullu tipler tip düzeyindedir; JavaScript ternary ise değer düzeyindedir."
       }
     ]
   },
@@ -162,22 +210,30 @@
       {
         "optionText": "Types that use template literal syntax to construct string types, enabling type-safe string manipulation and pattern matching",
         "isCorrect": true,
-        "explanation": "type EventName = `on${Capitalize<string>}` matches 'onClick', 'onChange' etc. They're used for typed event names, CSS-in-JS property names, API path typing, and more precise string types."
+        "explanation": "type EventName = `on${Capitalize<string>}` matches 'onClick', 'onChange' etc. They're used for typed event names, CSS-in-JS property names, API path typing, and more precise string types.",
+        "optionTextTr": "Template literal sözdizimini kullanarak string tiplerini oluşturan, type-safe string manipülasyonu sağlayan tipler.",
+        "explanationTr": "Doğru — örn. type EventName = `on${string}` yalnızca 'on' ile başlayan stringleri kabul eder."
       },
       {
         "optionText": "Template literal types are the TypeScript equivalent of template strings for runtime string building",
         "isCorrect": false,
-        "explanation": "Template strings (backticks with ${}) are runtime JavaScript. Template literal types are compile-time TypeScript constructs."
+        "explanation": "Template strings (backticks with ${}) are runtime JavaScript. Template literal types are compile-time TypeScript constructs.",
+        "optionTextTr": "Template literal tipler, TypeScript'te template string'lerin karşılığıdır.",
+        "explanationTr": "Template literal tipler, string oluşturmaz — tip sistemi için string pattern'leri tanımlar."
       },
       {
         "optionText": "They allow embedding JavaScript expressions inside TypeScript interfaces",
         "isCorrect": false,
-        "explanation": "TypeScript types are static — they can't contain runtime expressions."
+        "explanation": "TypeScript types are static — they can't contain runtime expressions.",
+        "optionTextTr": "TypeScript interface'lerinin içine JavaScript ifadelerini yerleştirmeye izin verir.",
+        "explanationTr": "Bu JavaScript template literal'ları tanımlar — TypeScript tip seviyesindeki kavramla karıştırılmamalıdır."
       },
       {
         "optionText": "Template literal types are used to import external type definition files",
         "isCorrect": false,
-        "explanation": "Type definitions are imported with import type or via @types packages, not template literal types."
+        "explanation": "Type definitions are imported with import type or via @types packages, not template literal types.",
+        "optionTextTr": "Template literal tipler, harici tip tanım dosyalarını içe aktarmak için kullanılır.",
+        "explanationTr": "Tip tanım dosyalarını içe aktarmak için import ve @types kullanılır — template literal tipleri ile ilgisi yoktur."
       }
     ]
   },
@@ -188,22 +244,30 @@
       {
         "optionText": "#field is truly private at runtime (JS WeakMap-based); private keyword is only TypeScript compile-time enforcement — it's accessible at runtime via any type cast",
         "isCorrect": true,
-        "explanation": "class Foo { #x = 1; private y = 2 } — #x cannot be accessed outside the class even in compiled JS. y becomes a regular property that TypeScript flags but JS allows access to."
+        "explanation": "class Foo { #x = 1; private y = 2 } — #x cannot be accessed outside the class even in compiled JS. y becomes a regular property that TypeScript flags but JS allows access to.",
+        "optionTextTr": "#field runtime'da gerçekten private'tır (JS WeakMap tabanlı); private anahtar kelimesi yalnızca compile-time denetimi sağlar.",
+        "explanationTr": "Doğru — erişim denetimi güvenlik açısından kritikse #field kullanın; private anahtar kelimesi yalnızca TypeScript tarafından zorunlu kılınır."
       },
       {
         "optionText": "Both # and private are identical — they provide the same level of encapsulation",
         "isCorrect": false,
-        "explanation": "They differ significantly at runtime. # provides hard encapsulation; private is erased to a regular property."
+        "explanation": "They differ significantly at runtime. # provides hard encapsulation; private is erased to a regular property.",
+        "optionTextTr": "# ve private özdeştir — aynı kapsülleme düzeyini sağlarlar.",
+        "explanationTr": "Bunlar farklıdır: # runtime'da gerçekten gizlidir; private yalnızca TypeScript'te kontrol edilir."
       },
       {
         "optionText": "The private keyword is stronger than # — it prevents access in both TypeScript and JavaScript",
         "isCorrect": false,
-        "explanation": "It's the opposite. The private keyword only enforces at compile time. # provides true runtime encapsulation."
+        "explanation": "It's the opposite. The private keyword only enforces at compile time. # provides true runtime encapsulation.",
+        "optionTextTr": "private anahtar kelimesi #'ten daha güçlüdür.",
+        "explanationTr": "Tam tersi doğrudur — # runtime'da gerçekten özeldir."
       },
       {
         "optionText": "# fields are deprecated in TypeScript in favour of the private keyword",
         "isCorrect": false,
-        "explanation": "Private class fields (#) are a JavaScript standard feature. Neither is deprecated."
+        "explanation": "Private class fields (#) are a JavaScript standard feature. Neither is deprecated.",
+        "optionTextTr": "# alanları TypeScript'te private anahtar kelimesi lehine kullanımdan kaldırılmıştır.",
+        "explanationTr": "Her ikisi de geçerlidir; tercih bağlama göre değişir."
       }
     ]
   },
@@ -214,22 +278,30 @@
       {
         "optionText": "Use the Omit<Type, Keys> utility type: type WithoutName = Omit<User, 'name'>",
         "isCorrect": true,
-        "explanation": "Omit<T, K> creates a new type with all properties of T except those in K. You can omit multiple: Omit<User, 'name' | 'email'>. The opposite is Pick<T, K> to keep only specified properties."
+        "explanation": "Omit<T, K> creates a new type with all properties of T except those in K. You can omit multiple: Omit<User, 'name' | 'email'>. The opposite is Pick<T, K> to keep only specified properties.",
+        "optionTextTr": "Omit<Type, Keys> utility tipini kullanın: type WithoutName = Omit<User, 'name'>.",
+        "explanationTr": "Doğru — Omit belirtilen anahtarları hariç tutarak yeni bir tip oluşturur."
       },
       {
         "optionText": "Use the Exclude<Type, Keys> utility type to remove properties",
         "isCorrect": false,
-        "explanation": "Exclude<T, U> works on union types, not object properties. It removes union members. Omit<T, K> removes object properties."
+        "explanation": "Exclude<T, U> works on union types, not object properties. It removes union members. Omit<T, K> removes object properties.",
+        "optionTextTr": "Özellikleri kaldırmak için Exclude<Type, Keys> utility tipini kullanın.",
+        "explanationTr": "Exclude, union tiplerinden değerleri hariç tutar — nesne özelliklerini değil. Nesne özellikleri için Omit kullanılır."
       },
       {
         "optionText": "Set the property to never: type Modified = User & { name: never }",
         "isCorrect": false,
-        "explanation": "While this technically makes name unusable, it's not the idiomatic approach. Omit<User, 'name'> is cleaner and correct."
+        "explanation": "While this technically makes name unusable, it's not the idiomatic approach. Omit<User, 'name'> is cleaner and correct.",
+        "optionTextTr": "Özelliği never olarak ayarlayın: type Modified = User & { name: never }.",
+        "explanationTr": "Bu teknik olarak işe yarar ama deyimsel değildir; Omit önerilen yoldur."
       },
       {
         "optionText": "Use the delete keyword in the type definition",
         "isCorrect": false,
-        "explanation": "delete is a runtime JavaScript operator for objects. TypeScript types use utility types like Omit."
+        "explanation": "delete is a runtime JavaScript operator for objects. TypeScript types use utility types like Omit.",
+        "optionTextTr": "Tip tanımında delete anahtar kelimesini kullanın.",
+        "explanationTr": "delete, JavaScript runtime operatörüdür — TypeScript tip tanımında çalışmaz."
       }
     ]
   },
@@ -240,22 +312,30 @@
       {
         "optionText": "A type annotation allowing an object to have properties with dynamic keys of a specified type: { [key: string]: number }",
         "isCorrect": true,
-        "explanation": "Index signatures define the shape of objects with unknown property names. Example: interface StringMap { [key: string]: string }. Used for dictionaries, lookup tables, or objects where keys are only known at runtime."
+        "explanation": "Index signatures define the shape of objects with unknown property names. Example: interface StringMap { [key: string]: string }. Used for dictionaries, lookup tables, or objects where keys are only known at runtime.",
+        "optionTextTr": "Nesnenin dinamik anahtarlı özelliklere sahip olabileceğini belirten tip notu, örn. { [key: string]: number }.",
+        "explanationTr": "Doğru — index signature, bilinen string anahtarlarını önceden listelemek yerine record benzeri nesneleri modellemek için kullanışlıdır."
       },
       {
         "optionText": "A numeric index used to access array elements in TypeScript",
         "isCorrect": false,
-        "explanation": "Arrays use numeric indices, but index signatures are about object types with dynamic string or number keys."
+        "explanation": "Arrays use numeric indices, but index signatures are about object types with dynamic string or number keys.",
+        "optionTextTr": "TypeScript'te dizi elemanlarına erişmek için kullanılan sayısal index.",
+        "explanationTr": "Bu dizi erişimini tanımlar — index signature farklıdır; dinamik anahtar tipleri için kullanılır."
       },
       {
         "optionText": "A way to define the order in which class methods are executed",
         "isCorrect": false,
-        "explanation": "Method execution order is determined by call order, not index signatures."
+        "explanation": "Method execution order is determined by call order, not index signatures.",
+        "optionTextTr": "Sınıf metodlarının çalıştırılma sırasını tanımlamanın yolu.",
+        "explanationTr": "Bu metodların çalıştırılma sırası ile ilgili değildir — index signature nesne özellik tipini tanımlar."
       },
       {
         "optionText": "A reference to the position of a type in a TypeScript union",
         "isCorrect": false,
-        "explanation": "Unions don't have positional indices. Index signatures are about object property typing."
+        "explanation": "Unions don't have positional indices. Index signatures are about object property typing.",
+        "optionTextTr": "TypeScript union içindeki tipin konumuna referans.",
+        "explanationTr": "Index signature, union konumuyla değil; nesne anahtar-değer tipleriyle ilgilidir."
       }
     ]
   },
@@ -266,22 +346,30 @@
       {
         "optionText": "Use typeof for primitives, instanceof for class instances, and custom type guards (is) for complex types",
         "isCorrect": true,
-        "explanation": "typeof val === 'string' works for primitives. val instanceof Date works for class instances. For interfaces (erased at runtime), write a type guard: function isUser(val: unknown): val is User { return typeof val.name === 'string' }"
+        "explanation": "typeof val === 'string' works for primitives. val instanceof Date works for class instances. For interfaces (erased at runtime), write a type guard: function isUser(val: unknown): val is User { return typeof val.name === 'string' }",
+        "optionTextTr": "Primitive'ler için typeof, sınıf örnekleri için instanceof ve özel type guard fonksiyonları kullanın.",
+        "explanationTr": "Doğru — TypeScript tipleri compile-time'da silinir; runtime'da typeof ve instanceof gibi JavaScript mekanizmalarını kullanmanız gerekir."
       },
       {
         "optionText": "Use TypeScript's built-in checkType() function",
         "isCorrect": false,
-        "explanation": "There is no checkType() function in TypeScript."
+        "explanation": "There is no checkType() function in TypeScript.",
+        "optionTextTr": "TypeScript'in yerleşik checkType() fonksiyonunu kullanın.",
+        "explanationTr": "checkType() diye bir yerleşik TypeScript fonksiyonu yoktur."
       },
       {
         "optionText": "Use the as keyword to cast and then check the type",
         "isCorrect": false,
-        "explanation": "Type assertions (as) tell TypeScript to treat a value as a type — they don't check or validate at runtime."
+        "explanation": "Type assertions (as) tell TypeScript to treat a value as a type — they don't check or validate at runtime.",
+        "optionTextTr": "as anahtar kelimesiyle cast edin, sonra tipi kontrol edin.",
+        "explanationTr": "as tip doğrulama yapmaz — yalnızca TypeScript'e tipi söyler, runtime'da doğrulamaz."
       },
       {
         "optionText": "TypeScript types are available at runtime so you can use type directly in conditions",
         "isCorrect": false,
-        "explanation": "TypeScript types are erased at compile time. They don't exist at runtime."
+        "explanation": "TypeScript types are erased at compile time. They don't exist at runtime.",
+        "optionTextTr": "TypeScript tipleri runtime'da mevcut olduğundan type'ı doğrudan kullanabilirsiniz.",
+        "explanationTr": "TypeScript tipleri compile zamanında silinir — JavaScript'e dönüştürüldükten sonra runtime'da mevcut değildir."
       }
     ]
   },
@@ -292,22 +380,30 @@
       {
         "optionText": "private members are only accessible within the declaring class; protected members are accessible in the declaring class and all subclasses",
         "isCorrect": true,
-        "explanation": "class Animal { private secret = 1; protected name = 'dog' }. A subclass Dog can access this.name but not this.secret. Both are TypeScript-only enforcement (erased at runtime unless using # for true privacy)."
+        "explanation": "class Animal { private secret = 1; protected name = 'dog' }. A subclass Dog can access this.name but not this.secret. Both are TypeScript-only enforcement (erased at runtime unless using # for true privacy).",
+        "optionTextTr": "private üyeler yalnızca bildiren sınıfta erişilebilir; protected üyeler bildiren sınıfta ve subclass'larında erişilebilir.",
+        "explanationTr": "Doğru — protected, kalıtım aracılığıyla paylaşılması gereken dahili implementasyon detayları için kullanışlıdır."
       },
       {
         "optionText": "protected members are more restrictive than private — they can only be accessed in abstract classes",
         "isCorrect": false,
-        "explanation": "protected is less restrictive than private — it allows subclass access. private is the most restrictive."
+        "explanation": "protected is less restrictive than private — it allows subclass access. private is the most restrictive.",
+        "optionTextTr": "protected, private'tan daha kısıtlayıcıdır.",
+        "explanationTr": "Tam tersi doğrudur — protected, subclass'lara erişim izni verdiğinden daha az kısıtlayıcıdır."
       },
       {
         "optionText": "Both private and protected restrict access to the same level — they are interchangeable",
         "isCorrect": false,
-        "explanation": "They have different accessibility scopes. private = class only. protected = class + subclasses."
+        "explanation": "They have different accessibility scopes. private = class only. protected = class + subclasses.",
+        "optionTextTr": "Her ikisi de aynı erişim düzeyini kısıtlar.",
+        "explanationTr": "Bunlar farklı erişim seviyelerine sahiptir — private yalnızca bildiren sınıf; protected ise alt sınıfları da kapsar."
       },
       {
         "optionText": "private members can be accessed by other instances of the same class; protected cannot",
         "isCorrect": false,
-        "explanation": "Actually, TypeScript private members can be accessed on other instances of the same class (e.g., a.#x in class A). protected adds subclass access."
+        "explanation": "Actually, TypeScript private members can be accessed on other instances of the same class (e.g., a.#x in class A). protected adds subclass access.",
+        "optionTextTr": "private üyeler aynı sınıfın diğer örnekleri tarafından erişilebilir.",
+        "explanationTr": "TypeScript'teki private, diğer örneklerden erişime izin verir — bu dil davranışıdır. Runtime gizlilik için # kullanılır."
       }
     ]
   },
@@ -318,22 +414,30 @@
       {
         "optionText": "Abstract classes cannot be instantiated directly and define a contract — abstract methods must be implemented by all non-abstract subclasses",
         "isCorrect": true,
-        "explanation": "abstract class Shape { abstract area(): number } cannot be constructed. Subclasses (Circle, Rectangle) must implement area(). This enforces a contract while allowing the base class to provide shared functionality."
+        "explanation": "abstract class Shape { abstract area(): number } cannot be constructed. Subclasses (Circle, Rectangle) must implement area(). This enforces a contract while allowing the base class to provide shared functionality.",
+        "optionTextTr": "Abstract sınıflar doğrudan örnekleştirilemez ve subclass'ların uygulaması gereken sözleşme tanımlar.",
+        "explanationTr": "Doğru — abstract, hem zorunlu arayüzü (abstract metodlar) hem de paylaşılan implement edilmiş davranışı (concrete metodlar) tanımlamak için kullanılır."
       },
       {
         "optionText": "Abstract classes are private classes that can only be used within the same file",
         "isCorrect": false,
-        "explanation": "Abstract is about instantiation and implementation contracts, not access control."
+        "explanation": "Abstract is about instantiation and implementation contracts, not access control.",
+        "optionTextTr": "Abstract sınıflar, yalnızca aynı dosya içinde kullanılabilen private sınıflardır.",
+        "explanationTr": "abstract, erişim kısıtlamasıyla değil; örnekleştirme yasağı ile ilgilidir."
       },
       {
         "optionText": "Abstract methods are optional implementation hints — subclasses can choose to ignore them",
         "isCorrect": false,
-        "explanation": "Non-abstract subclasses must implement all abstract methods. TypeScript enforces this at compile time."
+        "explanation": "Non-abstract subclasses must implement all abstract methods. TypeScript enforces this at compile time.",
+        "optionTextTr": "Abstract metodlar isteğe bağlı uygulama ipuçlarıdır.",
+        "explanationTr": "Abstract metodlar abstract class'ları genişleten alt sınıflar için zorunludur — isteğe bağlı değildir."
       },
       {
         "optionText": "The abstract keyword makes a class immutable — its properties cannot be reassigned",
         "isCorrect": false,
-        "explanation": "Immutability uses readonly. abstract is about class instantiation and method implementation contracts."
+        "explanation": "Immutability uses readonly. abstract is about class instantiation and method implementation contracts.",
+        "optionTextTr": "abstract anahtar kelimesi bir sınıfı immutable yapar.",
+        "explanationTr": "abstract sınıfı immutable yapmaz — örnekleştirilemezlik ve sözleşme ile ilgilidir."
       }
     ]
   },
@@ -344,22 +448,30 @@
       {
         "optionText": "Enables incremental compilation — TypeScript saves build info to .tsbuildinfo so only changed files are recompiled on subsequent builds",
         "isCorrect": true,
-        "explanation": "With --incremental (or incremental: true in tsconfig.json), TypeScript writes a .tsbuildinfo file after each build. Next builds read this file and skip recompiling unchanged files, significantly speeding up compilation in large projects."
+        "explanation": "With --incremental (or incremental: true in tsconfig.json), TypeScript writes a .tsbuildinfo file after each build. Next builds read this file and skip recompiling unchanged files, significantly speeding up compilation in large projects.",
+        "optionTextTr": "Artımlı derlemeyi etkinleştirir — TypeScript derleme bilgilerini .tsbuildinfo dosyasına kaydeder; değişmemiş dosyalar atlanır.",
+        "explanationTr": "Doğru — büyük projelerde derleme süresini önemli ölçüde azaltır."
       },
       {
         "optionText": "Makes TypeScript add one to every numeric value automatically",
         "isCorrect": false,
-        "explanation": "The incremental flag is a build optimisation, not a numeric operation."
+        "explanation": "The incremental flag is a build optimisation, not a numeric operation.",
+        "optionTextTr": "TypeScript'in her sayısal değere otomatik olarak bir eklemesini sağlar.",
+        "explanationTr": "Bu tamamen yanlıştır — --incremental derleme hızlandırmayla ilgilidir."
       },
       {
         "optionText": "Enables TypeScript to compile to older JavaScript versions incrementally",
         "isCorrect": false,
-        "explanation": "Target JS version is controlled by the target option in tsconfig. --incremental only affects build speed."
+        "explanation": "Target JS version is controlled by the target option in tsconfig. --incremental only affects build speed.",
+        "optionTextTr": "TypeScript'in daha eski JavaScript sürümlerine kademeli olarak derlenmesini sağlar.",
+        "explanationTr": "Hedef JavaScript sürümü --target ile yapılandırılır, --incremental ile değil."
       },
       {
         "optionText": "Increases the strictness of TypeScript checks one level at a time",
         "isCorrect": false,
-        "explanation": "TypeScript strictness is controlled by the strict family of flags in tsconfig. --incremental is purely about compilation speed."
+        "explanation": "TypeScript strictness is controlled by the strict family of flags in tsconfig. --incremental is purely about compilation speed.",
+        "optionTextTr": "TypeScript kontrollerinin katılığını birer seviye artırır.",
+        "explanationTr": "Katılık --strict, --noImplicitAny vb. ile yapılandırılır — --incremental derleme performansıyla ilgilidir."
       }
     ]
   },
@@ -370,22 +482,30 @@
       {
         "optionText": "The language itself (syntax + type system), the TypeScript compiler (tsc), and the language service (powers editor tooling like autocomplete and error highlighting)",
         "isCorrect": true,
-        "explanation": "TypeScript has three layers: the language (types, interfaces, generics), tsc which compiles TS to JS, and the language server protocol (LSP) implementation that powers IDE features in VS Code and other editors."
+        "explanation": "TypeScript has three layers: the language (types, interfaces, generics), tsc which compiles TS to JS, and the language server protocol (LSP) implementation that powers IDE features in VS Code and other editors.",
+        "optionTextTr": "Dilin kendisi (sözdizimi + tip sistemi), TypeScript derleyicisi (tsc) ve IDE entegrasyonu için dil servisi.",
+        "explanationTr": "Doğru — bu üç bileşen birlikte TypeScript'in geliştirme deneyimini oluşturur."
       },
       {
         "optionText": "Components, services, and modules — identical to Angular's architecture",
         "isCorrect": false,
-        "explanation": "Those are Angular concepts. TypeScript's components are the language, compiler, and language service."
+        "explanation": "Those are Angular concepts. TypeScript's components are the language, compiler, and language service.",
+        "optionTextTr": "Bileşenler, servisler ve modüller — Angular'ın mimarisiyle özdeş.",
+        "explanationTr": "Bunlar Angular kavramlarıdır — TypeScript bileşenlerini tanımlamaz."
       },
       {
         "optionText": "The type checker, runtime engine, and package manager",
         "isCorrect": false,
-        "explanation": "TypeScript doesn't have its own runtime engine (Node.js is the runtime) or package manager (npm/pnpm handle that)."
+        "explanation": "TypeScript doesn't have its own runtime engine (Node.js is the runtime) or package manager (npm/pnpm handle that).",
+        "optionTextTr": "Tip denetleyici, runtime motoru ve paket yöneticisi.",
+        "explanationTr": "TypeScript, ayrı bir runtime motoruna sahip değildir — JavaScript'e derlenir; paket yönetimi ise ayrı bir araçtır."
       },
       {
         "optionText": "TypeScript is a single monolithic tool with no distinct components",
         "isCorrect": false,
-        "explanation": "TypeScript has three distinct components with different roles."
+        "explanation": "TypeScript has three distinct components with different roles.",
+        "optionTextTr": "TypeScript, farklı bileşenleri olmayan tek parçalı bir araçtır.",
+        "explanationTr": "TypeScript'in birbirinden ayrı bileşenleri vardır: dil, derleyici ve dil servisi."
       }
     ]
   },
@@ -396,22 +516,30 @@
       {
         "optionText": "Use keyof T to get a union of property name strings, or typeof obj for a type with specific value types",
         "isCorrect": true,
-        "explanation": "keyof User gives 'id' | 'name' | 'email' (union of property names). For property value types: type UserValues = User[keyof User]. Combined: type ID = Pick<User, 'id'>['id'] extracts the id type."
+        "explanation": "keyof User gives 'id' | 'name' | 'email' (union of property names). For property value types: type UserValues = User[keyof User]. Combined: type ID = Pick<User, 'id'>['id'] extracts the id type.",
+        "optionTextTr": "Özellik adlarının string union'ını almak için keyof T; çalışma zamanı nesnesinden union almak için typeof obj kullanın.",
+        "explanationTr": "Doğru — keyof T, compile-time'da property adlarını literal string union olarak üretir."
       },
       {
         "optionText": "Use Object.keys() at compile time to extract property names as a union",
         "isCorrect": false,
-        "explanation": "Object.keys() is a runtime function that returns string[]. keyof is the compile-time TypeScript equivalent."
+        "explanation": "Object.keys() is a runtime function that returns string[]. keyof is the compile-time TypeScript equivalent.",
+        "optionTextTr": "Derleme zamanında özellik adlarını union olarak çıkarmak için Object.keys() kullanın.",
+        "explanationTr": "Object.keys() runtime'da string[] döndürür — keyof, compile-time tip seviyesinde çalışır."
       },
       {
         "optionText": "Use the spread operator (...) to merge interface properties into a union",
         "isCorrect": false,
-        "explanation": "Spread (...) in type context creates intersection types, not unions. Unions use |."
+        "explanation": "Spread (...) in type context creates intersection types, not unions. Unions use |.",
+        "optionTextTr": "Interface özelliklerini union'a birleştirmek için spread operatörünü (...) kullanın.",
+        "explanationTr": "Spread operatörü nesneleri değer düzeyinde birleştirir — tip seviyesinde değil."
       },
       {
         "optionText": "Union types cannot be derived from object types — they must be written manually",
         "isCorrect": false,
-        "explanation": "keyof, template literal types, and indexed access types all let you derive union types from object types."
+        "explanation": "keyof, template literal types, and indexed access types all let you derive union types from object types.",
+        "optionTextTr": "Union tipler nesne tiplerinden türetilemez — elle yazılmalıdır.",
+        "explanationTr": "keyof, nesne tiplerinden union tipleri türetmenin standart yoludur."
       }
     ]
   },
@@ -422,22 +550,30 @@
       {
         "optionText": "Use strict null checks (strictNullChecks: true) and check with === null / === undefined, optional chaining (?.), or nullish coalescing (??)",
         "isCorrect": true,
-        "explanation": "With strictNullChecks enabled, null and undefined are separate types that must be explicitly handled. Use if (val !== null && val !== undefined), val?.property, or val ?? defaultValue to narrow types."
+        "explanation": "With strictNullChecks enabled, null and undefined are separate types that must be explicitly handled. Use if (val !== null && val !== undefined), val?.property, or val ?? defaultValue to narrow types.",
+        "optionTextTr": "Strict null kontrollerini (strictNullChecks: true) etkinleştirin ve === null veya === undefined ile kontrol edin; ?? ve ?. operatörlerini kullanın.",
+        "explanationTr": "Doğru — strictNullChecks, null/undefined değerlerin yanlışlıkla kullanımını derleme zamanında yakalar."
       },
       {
         "optionText": "TypeScript automatically handles null checks — no explicit checks are needed",
         "isCorrect": false,
-        "explanation": "With strictNullChecks, TypeScript requires explicit null handling. Without it, null and undefined are ignored — but that's less safe."
+        "explanation": "With strictNullChecks, TypeScript requires explicit null handling. Without it, null and undefined are ignored — but that's less safe.",
+        "optionTextTr": "TypeScript null kontrollerini otomatik olarak yönetir — açık kontrol gerekmez.",
+        "explanationTr": "strictNullChecks'i etkinleştirmeden TypeScript, null kontrollerini zorunlu kılmaz."
       },
       {
         "optionText": "Use the ! non-null assertion operator to tell TypeScript a value is never null",
         "isCorrect": false,
-        "explanation": "! suppresses the null/undefined error without actually checking. It's a type assertion, not a runtime check — use it only when you're certain."
+        "explanation": "! suppresses the null/undefined error without actually checking. It's a type assertion, not a runtime check — use it only when you're certain.",
+        "optionTextTr": "TypeScript'e bir değerin asla null olmadığını söylemek için ! non-null assertion operatörünü kullanın.",
+        "explanationTr": "! assertion, kontrolü atlar — null'u işlemez. Dikkatli kullanılmalıdır."
       },
       {
         "optionText": "Use typeof val === 'null' to check for null values",
         "isCorrect": false,
-        "explanation": "typeof null returns 'object' in JavaScript — a famous quirk. Use val === null instead."
+        "explanation": "typeof null returns 'object' in JavaScript — a famous quirk. Use val === null instead.",
+        "optionTextTr": "Null değerleri kontrol etmek için typeof val === 'null' kullanın.",
+        "explanationTr": "typeof null, 'null' değil 'object' döndürür — null kontrolü için === null kullanılır."
       }
     ]
   },
@@ -448,22 +584,30 @@
       {
         "optionText": "Specifies which built-in API type definitions to include — e.g., lib: ['ES2022', 'DOM'] adds typings for modern JS and browser APIs",
         "isCorrect": true,
-        "explanation": "The lib array controls what global types are available. 'DOM' adds window, document, fetch etc. 'ES2022' adds Promise, Array.at() etc. Without DOM, TypeScript won't know about browser APIs. Without ESNext libs, newer JS features have no types."
+        "explanation": "The lib array controls what global types are available. 'DOM' adds window, document, fetch etc. 'ES2022' adds Promise, Array.at() etc. Without DOM, TypeScript won't know about browser APIs. Without ESNext libs, newer JS features have no types.",
+        "optionTextTr": "Hangi yerleşik API tip tanımlarının dahil edileceğini belirtir — ör. lib: ['es2020', 'dom'].",
+        "explanationTr": "Doğru — lib, TypeScript'e hangi global API'lerin mevcut olduğunu söyler ve hedef ortam için tip güvenliği sağlar."
       },
       {
         "optionText": "Defines the path to external library files used by the project",
         "isCorrect": false,
-        "explanation": "External type definitions come from @types/* packages or declaration files, not the lib option."
+        "explanation": "External type definitions come from @types/* packages or declaration files, not the lib option.",
+        "optionTextTr": "Proje tarafından kullanılan harici kütüphane dosyalarının yolunu tanımlar.",
+        "explanationTr": "Bu paths veya baseUrl yapılandırmasını tanımlar — lib dahil edilecek yerleşik tip tanımlarını belirtir."
       },
       {
         "optionText": "Sets the minimum Node.js version required to run the compiled output",
         "isCorrect": false,
-        "explanation": "Node.js version requirements are configured in package.json engines field. lib is about available type definitions."
+        "explanation": "Node.js version requirements are configured in package.json engines field. lib is about available type definitions.",
+        "optionTextTr": "Derlenen çıktıyı çalıştırmak için gereken minimum Node.js sürümünü ayarlar.",
+        "explanationTr": "lib, Node.js sürümünü değil; dahil edilecek tip tanım kümelerini belirtir."
       },
       {
         "optionText": "Specifies which npm packages TypeScript should automatically import types for",
         "isCorrect": false,
-        "explanation": "Third-party package types come from @types/* packages. lib only covers built-in JavaScript and DOM APIs."
+        "explanation": "Third-party package types come from @types/* packages. lib only covers built-in JavaScript and DOM APIs.",
+        "optionTextTr": "TypeScript'in hangi npm paketlerinin tiplerini otomatik olarak içe aktaracağını belirtir.",
+        "explanationTr": "Npm paket tipleri @types aracılığıyla yönetilir — lib yalnızca yerleşik JavaScript/DOM tip tanımları içindir."
       }
     ]
   },
@@ -474,22 +618,30 @@
       {
         "optionText": "import() returns a Promise that resolves to the module, enabling code splitting and lazy loading of modules at runtime",
         "isCorrect": true,
-        "explanation": "const mod = await import('./heavy-module') loads the module only when called. TypeScript infers the type of the resolved module. This is how bundlers (webpack, Rollup) know to code-split."
+        "explanation": "const mod = await import('./heavy-module') loads the module only when called. TypeScript infers the type of the resolved module. This is how bundlers (webpack, Rollup) know to code-split.",
+        "optionTextTr": "import(), modülü resolve eden bir Promise döndürür; bu sayede talep üzerine kod bölümleme sağlanır.",
+        "explanationTr": "Doğru — import(), hem tarayıcıda hem Node.js'te çalışır ve route tabanlı kod bölümleme için temel oluşturur."
       },
       {
         "optionText": "A TypeScript feature that automatically imports missing types when you use them",
         "isCorrect": false,
-        "explanation": "TypeScript doesn't auto-import at runtime. Dynamic imports are explicit import() calls."
+        "explanation": "TypeScript doesn't auto-import at runtime. Dynamic imports are explicit import() calls.",
+        "optionTextTr": "Tip yazarken eksik tipleri otomatik olarak içe aktaran TypeScript özelliği.",
+        "explanationTr": "Bu, IDE otomatik import önerilerini tanımlar — dynamic import ifadesi değil."
       },
       {
         "optionText": "An ES module syntax that replaces static imports with variables",
         "isCorrect": false,
-        "explanation": "Dynamic imports are a separate syntax (import()) from static imports. Static imports are always at the top of the file."
+        "explanation": "Dynamic imports are a separate syntax (import()) from static imports. Static imports are always at the top of the file.",
+        "optionTextTr": "Static import'ları değişkenlerle değiştiren ES modül sözdizimi.",
+        "explanationTr": "Dynamic import, statik import'ların yerine geçmez; koşullu veya gecikmeli yüklemeye olanak tanır."
       },
       {
         "optionText": "A way to conditionally apply TypeScript types based on runtime values",
         "isCorrect": false,
-        "explanation": "Dynamic imports load JavaScript modules. Runtime conditional types don't exist — TypeScript types are compile-time only."
+        "explanation": "Dynamic imports load JavaScript modules. Runtime conditional types don't exist — TypeScript types are compile-time only.",
+        "optionTextTr": "Runtime değerlerine göre koşullu TypeScript tipleri uygulamanın yolu.",
+        "explanationTr": "Bu koşullu tipleri tanımlar — dynamic import modülleri runtime'da yüklemek içindir."
       }
     ]
   },
@@ -500,22 +652,30 @@
       {
         "optionText": "Any file with a top-level import or export is a module with its own scope; files without imports/exports are scripts sharing the global scope",
         "isCorrect": true,
-        "explanation": "TypeScript follows ES module semantics. A file is a module if it has import/export statements — its declarations are local to that file. Without them, declarations merge into the global scope (ambient scripts)."
+        "explanation": "TypeScript follows ES module semantics. A file is a module if it has import/export statements — its declarations are local to that file. Without them, declarations merge into the global scope (ambient scripts).",
+        "optionTextTr": "Üst düzey import veya export içeren her dosya, kendi scope'una sahip modüldür; bunlar olmadan dosya script olarak kabul edilir.",
+        "explanationTr": "Doğru — ayrım önemlidir: global scope kirliliği modül kullanmayan dosyalar için bir risk faktörüdür."
       },
       {
         "optionText": "Modules in TypeScript are the same as classes — they encapsulate related logic",
         "isCorrect": false,
-        "explanation": "Classes are objects. Modules are file-level scope boundaries. They serve different purposes."
+        "explanation": "Classes are objects. Modules are file-level scope boundaries. They serve different purposes.",
+        "optionTextTr": "TypeScript'teki modüller sınıflarla aynıdır — ilgili kodu kapsüller.",
+        "explanationTr": "Modüller dosya tabanlıdır; sınıflar ise nesne şemalarıdır — bunlar farklı kavramlardır."
       },
       {
         "optionText": "TypeScript modules are only available when compiling to CommonJS",
         "isCorrect": false,
-        "explanation": "TypeScript modules work with ESM, CommonJS, AMD, UMD, and other module formats depending on the module option in tsconfig."
+        "explanation": "TypeScript modules work with ESM, CommonJS, AMD, UMD, and other module formats depending on the module option in tsconfig.",
+        "optionTextTr": "TypeScript modülleri yalnızca CommonJS'e derlenirken kullanılabilir.",
+        "explanationTr": "TypeScript modülleri ESM, CommonJS veya diğer formatları hedefleyecek şekilde derlenebilir."
       },
       {
         "optionText": "Modules require the module keyword similar to Python or Rust",
         "isCorrect": false,
-        "explanation": "TypeScript uses ES module syntax: import and export. There is no module keyword for defining modules."
+        "explanation": "TypeScript uses ES module syntax: import and export. There is no module keyword for defining modules.",
+        "optionTextTr": "Modüller, Python veya Rust'takine benzer module anahtar kelimesi gerektirir.",
+        "explanationTr": "TypeScript/JavaScript'te module anahtar kelimesi yoktur — modüller import/export ifadesiyle tanımlanır."
       }
     ]
   }

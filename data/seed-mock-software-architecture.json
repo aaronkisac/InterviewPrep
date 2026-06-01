@@ -3,160 +3,544 @@
     "topic": "software-architecture",
     "question": "What is meant by the KISS principle?",
     "options": [
-      { "optionText": "Keep It Simple, Stupid — avoid unnecessary complexity in your design.", "isCorrect": true, "explanation": "Correct — KISS encourages simplicity as a primary design goal, avoiding over-engineering." },
-      { "optionText": "Keep It Scalable and Secure — prioritise performance and safety above all.", "isCorrect": false, "explanation": "KISS is about simplicity, not specifically scalability or security." },
-      { "optionText": "Keep Implementing Standard Specifications — follow industry standards strictly.", "isCorrect": false, "explanation": "KISS is a general design heuristic, not about following standards." },
-      { "optionText": "Keep It Separated and Stateless — enforce strict service boundaries.", "isCorrect": false, "explanation": "Separation and statelessness are separate architectural concerns, not what KISS means." }
+      {
+        "optionText": "Keep It Simple, Stupid — avoid unnecessary complexity in your design.",
+        "isCorrect": true,
+        "explanation": "Correct — KISS encourages simplicity as a primary design goal, avoiding over-engineering.",
+        "optionTextTr": "Her Şeyi Basit Tut — tasarımında gereksiz karmaşıklıktan kaçın.",
+        "explanationTr": "Doğru — KISS, sadeliğin anlaşılabilirliği, bakımı ve güvenilirliği artırdığını savunur."
+      },
+      {
+        "optionText": "Keep It Scalable and Secure — prioritise performance and safety above all.",
+        "isCorrect": false,
+        "explanation": "KISS is about simplicity, not specifically scalability or security.",
+        "optionTextTr": "Ölçeklenebilir ve Güvenli Tut — performans ve güvenliği ön planda tut.",
+        "explanationTr": "Bu KISS'in tanımı değildir — yanlış açılım."
+      },
+      {
+        "optionText": "Keep Implementing Standard Specifications — follow industry standards strictly.",
+        "isCorrect": false,
+        "explanation": "KISS is a general design heuristic, not about following standards.",
+        "optionTextTr": "Standart Spesifikasyonları Uygula — endüstri standartlarını takip et.",
+        "explanationTr": "Bu yanlış açılımdır — KISS sadelikle ilgilidir."
+      },
+      {
+        "optionText": "Keep It Separated and Stateless — enforce strict service boundaries.",
+        "isCorrect": false,
+        "explanation": "Separation and statelessness are separate architectural concerns, not what KISS means.",
+        "optionTextTr": "Ayrık ve Durumsuz Tut — katı servis sınırları uygula.",
+        "explanationTr": "Bu KISS değildir — farklı mimari prensipleri tanımlar."
+      }
     ]
   },
   {
     "topic": "software-architecture",
     "question": "What Is Scalability?",
     "options": [
-      { "optionText": "Vertical = add more power to one machine; horizontal = add more machines.", "isCorrect": true, "explanation": "Correct — scale up (bigger server) vs scale out (more servers) is the core distinction." },
-      { "optionText": "Vertical = add more servers; horizontal = add more CPU/RAM to a server.", "isCorrect": false, "explanation": "These are reversed — vertical scaling adds resources to one machine, horizontal adds machines." },
-      { "optionText": "Vertical = database scaling; horizontal = application server scaling.", "isCorrect": false, "explanation": "Both terms apply to any tier — DB, app, cache — not specific layers." },
-      { "optionText": "Vertical = synchronous scaling; horizontal = asynchronous scaling.", "isCorrect": false, "explanation": "Scaling direction (up vs out) is unrelated to sync/async operation mode." }
+      {
+        "optionText": "Vertical = add more power to one machine; horizontal = add more machines.",
+        "isCorrect": true,
+        "explanation": "Correct — scale up (bigger server) vs scale out (more servers) is the core distinction.",
+        "optionTextTr": "Dikey = bir makineye daha fazla güç ekle; yatay = daha fazla makine ekle (scale out).",
+        "explanationTr": "Doğru — yatay ölçekleme (scale out) modern dağıtık sistemlerde genellikle tercih edilir."
+      },
+      {
+        "optionText": "Vertical = add more servers; horizontal = add more CPU/RAM to a server.",
+        "isCorrect": false,
+        "explanation": "These are reversed — vertical scaling adds resources to one machine, horizontal adds machines.",
+        "optionTextTr": "Dikey = daha fazla sunucu ekle; yatay = sunucuya daha fazla CPU/RAM ekle.",
+        "explanationTr": "Bu tam tersidir — dikey ölçekleme mevcut makineye güç ekler; yatay daha fazla makine ekler."
+      },
+      {
+        "optionText": "Vertical = database scaling; horizontal = application server scaling.",
+        "isCorrect": false,
+        "explanation": "Both terms apply to any tier — DB, app, cache — not specific layers.",
+        "optionTextTr": "Dikey = veritabanı ölçekleme; yatay = uygulama sunucusu ölçekleme.",
+        "explanationTr": "Ölçekleme stratejisi katmana göre değil; kaynağın nasıl eklendiğiyle tanımlanır."
+      },
+      {
+        "optionText": "Vertical = synchronous scaling; horizontal = asynchronous scaling.",
+        "isCorrect": false,
+        "explanation": "Scaling direction (up vs out) is unrelated to sync/async operation mode.",
+        "optionTextTr": "Dikey = senkron ölçekleme; yatay = asenkron ölçekleme.",
+        "explanationTr": "Bu yanlıştır — ölçekleme türü iletişim moduna değil; kaynak ekleme yöntemine göre tanımlanır."
+      }
     ]
   },
   {
     "topic": "software-architecture",
     "question": "What Is Load Balancing?",
     "options": [
-      { "optionText": "Routes traffic across servers sequentially — each server gets requests in turn.", "isCorrect": true, "explanation": "Correct — Round Robin distributes requests evenly in a repeating cycle: A→B→C→A…" },
-      { "optionText": "Routes all traffic to the server with the most available memory.", "isCorrect": false, "explanation": "That describes a capacity-aware algorithm, not Round Robin." },
-      { "optionText": "Routes each client to the same server they connected to first, forever.", "isCorrect": false, "explanation": "That describes sticky sessions or IP Hash, not Round Robin." },
-      { "optionText": "Routes traffic based on geographic proximity of the client.", "isCorrect": false, "explanation": "Geo-routing is a CDN/DNS concern, not the Round Robin algorithm." }
+      {
+        "optionText": "Routes traffic across servers sequentially — each server gets requests in turn.",
+        "isCorrect": true,
+        "explanation": "Correct — Round Robin distributes requests evenly in a repeating cycle: A→B→C→A…",
+        "optionTextTr": "Trafiği sırayla sunucular arasında dağıtır — en yaygın algoritma: round-robin.",
+        "explanationTr": "Doğru — load balancer algoritmaları arasında round-robin, least-connections ve IP hash sayılabilir."
+      },
+      {
+        "optionText": "Routes all traffic to the server with the most available memory.",
+        "isCorrect": false,
+        "explanation": "That describes a capacity-aware algorithm, not Round Robin.",
+        "optionTextTr": "Tüm trafiği en fazla belleği olan sunucuya yönlendirir.",
+        "explanationTr": "Bu standart load balancing algoritması değildir — load balancing yükü dağıtmak için çalışır, biriktirmek için değil."
+      },
+      {
+        "optionText": "Routes each client to the same server they connected to first, forever.",
+        "isCorrect": false,
+        "explanation": "That describes sticky sessions or IP Hash, not Round Robin.",
+        "optionTextTr": "Her istemciyi ilk bağlandığı sunucuya kalıcı olarak yönlendirir.",
+        "explanationTr": "Bu yapışkan session (sticky session) tanımıdır — genel load balancing değil."
+      },
+      {
+        "optionText": "Routes traffic based on geographic proximity of the client.",
+        "isCorrect": false,
+        "explanation": "Geo-routing is a CDN/DNS concern, not the Round Robin algorithm.",
+        "optionTextTr": "Trafiği istemcinin coğrafi yakınlığına göre yönlendirir.",
+        "explanationTr": "Bu coğrafi yük dengeleme veya CDN yönlendirmesini tanımlar; genel load balancing değil."
+      }
     ]
   },
   {
     "topic": "software-architecture",
     "question": "What Is CAP Theorem?",
     "options": [
-      { "optionText": "A distributed system can guarantee at most 2 of: Consistency, Availability, and Partition Tolerance.", "isCorrect": true, "explanation": "Correct — CAP theorem (Brewer's theorem) states you must sacrifice one guarantee when a network partition occurs." },
-      { "optionText": "A distributed system must always sacrifice performance when scaling beyond 3 nodes.", "isCorrect": false, "explanation": "CAP is about consistency, availability, and partition tolerance — not performance." },
-      { "optionText": "A system can be fully Consistent, Available, and Partition-Tolerant simultaneously.", "isCorrect": false, "explanation": "The theorem specifically proves this is impossible — hence the 'at most 2' constraint." },
-      { "optionText": "CAP means Cache, API, and Persistence — the three layers of a web app.", "isCorrect": false, "explanation": "CAP stands for Consistency, Availability, Partition Tolerance in distributed systems theory." }
+      {
+        "optionText": "A distributed system can guarantee at most 2 of: Consistency, Availability, and Partition Tolerance.",
+        "isCorrect": true,
+        "explanation": "Correct — CAP theorem (Brewer's theorem) states you must sacrifice one guarantee when a network partition occurs.",
+        "optionTextTr": "Dağıtık sistem en fazla 2'sini garanti edebilir: Tutarlılık, Kullanılabilirlik, Bölünme Toleransı.",
+        "explanationTr": "Doğru — çoğu modern sistem ağ bölünmesinin (P) kaçınılmaz olduğunu kabul eder; CP veya AP arasında seçim yapar."
+      },
+      {
+        "optionText": "A distributed system must always sacrifice performance when scaling beyond 3 nodes.",
+        "isCorrect": false,
+        "explanation": "CAP is about consistency, availability, and partition tolerance — not performance.",
+        "optionTextTr": "Dağıtık sistem ölçeklendikçe her zaman performanstan fedakarlık etmeli.",
+        "explanationTr": "CAP teoremi performans hakkında değil; tutarlılık, kullanılabilirlik ve bölünme toleransı arasındaki ödünleşimlerle ilgilidir."
+      },
+      {
+        "optionText": "A system can be fully Consistent, Available, and Partition-Tolerant simultaneously.",
+        "isCorrect": false,
+        "explanation": "The theorem specifically proves this is impossible — hence the 'at most 2' constraint.",
+        "optionTextTr": "Bir sistem aynı anda tam Tutarlı, Kullanılabilir ve Bölünme Toleranslı olabilir.",
+        "explanationTr": "CAP teoremi bunu mümkün olmadığını kanıtlar — üçü birden elde edilemez."
+      },
+      {
+        "optionText": "CAP means Cache, API, and Persistence — the three layers of a web app.",
+        "isCorrect": false,
+        "explanation": "CAP stands for Consistency, Availability, Partition Tolerance in distributed systems theory.",
+        "optionTextTr": "CAP; Önbellek, API ve Kalıcılık anlamına gelir — web uygulamasının üç katmanı.",
+        "explanationTr": "Bu yanlış bir kısaltmadır — CAP, Tutarlılık, Kullanılabilirlik ve Bölünme Toleransı içindir."
+      }
     ]
   },
   {
     "topic": "software-architecture",
     "question": "What does SOLID stand for? What are its principles?",
     "options": [
-      { "optionText": "Single Responsibility, Open/Closed, Liskov Substitution, Interface Segregation, Dependency Inversion.", "isCorrect": true, "explanation": "Correct — these five principles guide maintainable, extensible object-oriented design." },
-      { "optionText": "Scalable, Observable, Lightweight, Isolated, and Distributed.", "isCorrect": false, "explanation": "These are distributed systems properties, not the SOLID OOP principles." },
-      { "optionText": "Stateless, Open-source, Layered, Idempotent, and Documented.", "isCorrect": false, "explanation": "These describe API design qualities, not the SOLID acronym." },
-      { "optionText": "Single Responsibility, Optimised, Loosely-coupled, Idiomatic, and Declarative.", "isCorrect": false, "explanation": "The correct expansion is Single Responsibility, Open/Closed, Liskov, Interface Segregation, Dependency Inversion." }
+      {
+        "optionText": "Single Responsibility, Open/Closed, Liskov Substitution, Interface Segregation, Dependency Inversion.",
+        "isCorrect": true,
+        "explanation": "Correct — these five principles guide maintainable, extensible object-oriented design.",
+        "optionTextTr": "Single Responsibility, Open/Closed, Liskov Substitution, Interface Segregation, Dependency Inversion.",
+        "explanationTr": "Doğru — SOLID prensipleri, bakımı kolay nesne yönelimli tasarım için temel rehberdir."
+      },
+      {
+        "optionText": "Scalable, Observable, Lightweight, Isolated, and Distributed.",
+        "isCorrect": false,
+        "explanation": "These are distributed systems properties, not the SOLID OOP principles.",
+        "optionTextTr": "Ölçeklenebilir, Gözlemlenebilir, Hafif, İzole ve Dağıtılmış.",
+        "explanationTr": "Bunlar mikroservis nitelikleri olabilir ama SOLID prensipleri değildir."
+      },
+      {
+        "optionText": "Stateless, Open-source, Layered, Idempotent, and Documented.",
+        "isCorrect": false,
+        "explanation": "These describe API design qualities, not the SOLID acronym.",
+        "optionTextTr": "Durumsuz, Açık kaynak, Katmanlı, Idempotent ve Belgelenmiş.",
+        "explanationTr": "Bu yanlış açılımdır — SOLID, OOP tasarım prensiplerini ifade eder."
+      },
+      {
+        "optionText": "Single Responsibility, Optimised, Loosely-coupled, Idiomatic, and Declarative.",
+        "isCorrect": false,
+        "explanation": "The correct expansion is Single Responsibility, Open/Closed, Liskov, Interface Segregation, Dependency Inversion.",
+        "optionTextTr": "Single Responsibility, Optimize Edilmiş, Gevşek Bağlı, Deyimsel ve Deklaratif.",
+        "explanationTr": "Bu SOLID'in doğru açılımı değildir."
+      }
     ]
   },
   {
     "topic": "software-architecture",
     "question": "What Does Eventually Consistent Mean?",
     "options": [
-      { "optionText": "All nodes will have the same data eventually, but may serve stale data in the short term.", "isCorrect": true, "explanation": "Correct — eventual consistency trades immediate consistency for availability and partition tolerance." },
-      { "optionText": "All reads always return the most recently written value, guaranteed.", "isCorrect": false, "explanation": "That describes strong consistency, not eventual consistency." },
-      { "optionText": "Data is permanently lost if a node fails before syncing.", "isCorrect": false, "explanation": "Eventual consistency means data converges — it doesn't mean data is lost." },
-      { "optionText": "Consistency is only guaranteed for the primary database node.", "isCorrect": false, "explanation": "Eventual consistency applies across all nodes, not just the primary." }
+      {
+        "optionText": "All nodes will have the same data eventually, but may serve stale data in the short term.",
+        "isCorrect": true,
+        "explanation": "Correct — eventual consistency trades immediate consistency for availability and partition tolerance.",
+        "optionTextTr": "Tüm node'lar sonunda aynı veriye sahip olacak, ancak geçici olarak eski veri sunabilir.",
+        "explanationTr": "Doğru — eventual consistency AP sistemlerde kullanılır; DNS, sosyal medya sayaçları bu modeli benimser."
+      },
+      {
+        "optionText": "All reads always return the most recently written value, guaranteed.",
+        "isCorrect": false,
+        "explanation": "That describes strong consistency, not eventual consistency.",
+        "optionTextTr": "Tüm okumalar her zaman en son yazılan değeri döndürür, garanti altında.",
+        "explanationTr": "Bu güçlü tutarlılığı tanımlar, eventual consistency'yi değil."
+      },
+      {
+        "optionText": "Data is permanently lost if a node fails before syncing.",
+        "isCorrect": false,
+        "explanation": "Eventual consistency means data converges — it doesn't mean data is lost.",
+        "optionTextTr": "Bir node senkronizasyon yapmadan önce çökerse veri kalıcı olarak kaybolur.",
+        "explanationTr": "Bu doğru değildir — eventual consistency genellikle replikasyon ve event sourcing ile kalıcılığı sağlar."
+      },
+      {
+        "optionText": "Consistency is only guaranteed for the primary database node.",
+        "isCorrect": false,
+        "explanation": "Eventual consistency applies across all nodes, not just the primary.",
+        "optionTextTr": "Tutarlılık yalnızca birincil veritabanı node'u için garanti edilir.",
+        "explanationTr": "Bu primary-replica replikasyonunu tanımlar — eventual consistency'yi değil."
+      }
     ]
   },
   {
     "topic": "software-architecture",
     "question": "What's the difference between principles YAGNI and KISS?",
     "options": [
-      { "optionText": "You Aren't Gonna Need It — don't implement features until they are actually needed.", "isCorrect": true, "explanation": "Correct — YAGNI prevents over-engineering by discouraging speculative feature development." },
-      { "optionText": "You Always Get New Integrations — embrace third-party integrations for all features.", "isCorrect": false, "explanation": "YAGNI stands for 'You Aren't Gonna Need It' and is about avoiding premature implementation." },
-      { "optionText": "Your Architecture Gets Naturally Improved — refactor continuously as you ship.", "isCorrect": false, "explanation": "Continuous refactoring is a valid practice, but not what YAGNI means." },
-      { "optionText": "You Authorise Generic Network Interfaces — standardise all service APIs.", "isCorrect": false, "explanation": "YAGNI is a development philosophy about not building features ahead of need." }
+      {
+        "optionText": "You Aren't Gonna Need It — don't implement features until they are actually needed.",
+        "isCorrect": true,
+        "explanation": "Correct — YAGNI prevents over-engineering by discouraging speculative feature development.",
+        "optionTextTr": "YAGNI = Buna İhtiyacın Olmayacak — gerçekten gerekli olana kadar özelliği uygulamama. KISS = gereksiz karmaşıklıktan kaçın.",
+        "explanationTr": "Doğru — her ikisi de sadeliği teşvik eder: YAGNI önceden kapsam eklemeye, KISS gereksiz karmaşıklığa karşı durur."
+      },
+      {
+        "optionText": "You Always Get New Integrations — embrace third-party integrations for all features.",
+        "isCorrect": false,
+        "explanation": "YAGNI stands for 'You Aren't Gonna Need It' and is about avoiding premature implementation.",
+        "optionTextTr": "Her Zaman Yeni Entegrasyonlar Al — üçüncü taraf entegrasyonları özellik geliştirme için benimse.",
+        "explanationTr": "Bu YAGNI'yi tamamen yanlış tanımlar."
+      },
+      {
+        "optionText": "Your Architecture Gets Naturally Improved — refactor continuously as you ship.",
+        "isCorrect": false,
+        "explanation": "Continuous refactoring is a valid practice, but not what YAGNI means.",
+        "optionTextTr": "Mimariniz Doğal Olarak İyileşir — büyüdükçe sürekli refactor yap.",
+        "explanationTr": "Bu YAGNI değildir — yanlış açılım."
+      },
+      {
+        "optionText": "You Authorise Generic Network Interfaces — standardise all service APIs.",
+        "isCorrect": false,
+        "explanation": "YAGNI is a development philosophy about not building features ahead of need.",
+        "optionTextTr": "Genel Ağ Arayüzlerini Yetkilendir — tüm servis API'lerini standartlaştır.",
+        "explanationTr": "Bu YAGNI değildir."
+      }
     ]
   },
   {
     "topic": "software-architecture",
     "question": "Define Microservice Architecture",
     "options": [
-      { "optionText": "An application composed of small, independently deployable services each responsible for a specific business capability.", "isCorrect": true, "explanation": "Correct — microservices replace a monolith with focused services that can be scaled and deployed independently." },
-      { "optionText": "An architecture where all application logic runs in a single process with separate database tables.", "isCorrect": false, "explanation": "That describes a modular monolith — microservices have separate deployable processes." },
-      { "optionText": "A pattern where every function is deployed as a separate serverless function.", "isCorrect": false, "explanation": "Serverless functions are a deployment mechanism — microservices are architectural units, not necessarily serverless." },
-      { "optionText": "An architecture where the frontend is split into micro-frontends served by different teams.", "isCorrect": false, "explanation": "Micro-frontends are a separate pattern — microservices refer to backend service decomposition." }
+      {
+        "optionText": "An application composed of small, independently deployable services each responsible for a specific business capability.",
+        "isCorrect": true,
+        "explanation": "Correct — microservices replace a monolith with focused services that can be scaled and deployed independently.",
+        "optionTextTr": "Her birinin açıkça tanımlanmış sorumluluğu olan, bağımsız olarak dağıtılabilen küçük servislerden oluşan uygulama.",
+        "explanationTr": "Doğru — mikroservisler bağımsız ölçekleme ve dağıtım sağlar; ancak dağıtık sistem karmaşıklığı ile birlikte gelir."
+      },
+      {
+        "optionText": "An architecture where all application logic runs in a single process with separate database tables.",
+        "isCorrect": false,
+        "explanation": "That describes a modular monolith — microservices have separate deployable processes.",
+        "optionTextTr": "Tüm uygulama mantığının tek bir süreçte çalıştığı mimari.",
+        "explanationTr": "Bu monoliti tanımlar — mikroservis mimarisini değil."
+      },
+      {
+        "optionText": "A pattern where every function is deployed as a separate serverless function.",
+        "isCorrect": false,
+        "explanation": "Serverless functions are a deployment mechanism — microservices are architectural units, not necessarily serverless.",
+        "optionTextTr": "Her fonksiyonun ayrı serverless fonksiyon olarak dağıtıldığı desen.",
+        "explanationTr": "Bu serverless/FaaS mimarisini tanımlar — tam mikroservis değil."
+      },
+      {
+        "optionText": "An architecture where the frontend is split into micro-frontends served by different teams.",
+        "isCorrect": false,
+        "explanation": "Micro-frontends are a separate pattern — microservices refer to backend service decomposition.",
+        "optionTextTr": "Frontend'in CDN'ler aracılığıyla sunulan mikro-frontend'lere ayrıldığı mimari.",
+        "explanationTr": "Bu mikro-frontend mimarisini tanımlar — backend mikroservisleri değil."
+      }
     ]
   },
   {
     "topic": "software-architecture",
     "question": "What is the difference between Monolithic, SOA and Microservices Architecture?",
     "options": [
-      { "optionText": "A monolith is a single deployable unit; microservices are independently deployable components.", "isCorrect": true, "explanation": "Correct — the key distinction is deployment: monoliths deploy as one, microservices deploy separately." },
-      { "optionText": "A monolith uses one database; microservices must use separate programming languages.", "isCorrect": false, "explanation": "Microservices may use different languages but the core distinction is deployment, not language diversity." },
-      { "optionText": "Monoliths are always faster; microservices are always more reliable.", "isCorrect": false, "explanation": "Neither is universally faster or more reliable — it depends on the use case and implementation." },
-      { "optionText": "A monolith is a frontend pattern; microservices are a backend-only pattern.", "isCorrect": false, "explanation": "Both patterns apply to backend architecture — the frontend has its own patterns like micro-frontends." }
+      {
+        "optionText": "A monolith is a single deployable unit; microservices are independently deployable components.",
+        "isCorrect": true,
+        "explanation": "Correct — the key distinction is deployment: monoliths deploy as one, microservices deploy separately.",
+        "optionTextTr": "Monolith tek dağıtılabilir birimdir; mikroservisler bağımsız olarak dağıtılabilir; SOA bunlar arasında — büyük servisler, genellikle paylaşılan ESB.",
+        "explanationTr": "Doğru — SOA genellikle kurumsal kapsamda merkezi ESB kullanır; mikroservisler bağımsız iletişim tercih eder."
+      },
+      {
+        "optionText": "A monolith uses one database; microservices must use separate programming languages.",
+        "isCorrect": false,
+        "explanation": "Microservices may use different languages but the core distinction is deployment, not language diversity.",
+        "optionTextTr": "Monolith tek veritabanı kullanır; mikroservisler farklı programlama dilleri kullanmalıdır.",
+        "explanationTr": "Veritabanı veya dil seçimi bu mimariler arasındaki temel farkı tanımlamaz."
+      },
+      {
+        "optionText": "Monoliths are always faster; microservices are always more reliable.",
+        "isCorrect": false,
+        "explanation": "Neither is universally faster or more reliable — it depends on the use case and implementation.",
+        "optionTextTr": "Monolitler her zaman daha hızlı; mikroservisler her zaman daha güvenilir.",
+        "explanationTr": "Bunların hiçbiri mutlak değildir — her mimarinin avantajları ve dezavantajları bağlama göre değişir."
+      },
+      {
+        "optionText": "A monolith is a frontend pattern; microservices are a backend-only pattern.",
+        "isCorrect": false,
+        "explanation": "Both patterns apply to backend architecture — the frontend has its own patterns like micro-frontends.",
+        "optionTextTr": "Monolith frontend deseni; mikroservisler yalnızca backend desenidir.",
+        "explanationTr": "Her ikisi de hem frontend hem de backend mimarilerini etkileyebilir."
+      }
     ]
   },
   {
     "topic": "software-architecture",
     "question": "What Is A CDN (Content Delivery Network) And How Does It Improve Performance?",
     "options": [
-      { "optionText": "A geographically distributed network of servers that caches content close to users, reducing latency.", "isCorrect": true, "explanation": "Correct — CDNs serve assets from edge nodes near the user rather than from a single origin server." },
-      { "optionText": "A database replication strategy that copies data to multiple regions for disaster recovery.", "isCorrect": false, "explanation": "CDNs cache HTTP responses at the network edge — they're distinct from DB replication." },
-      { "optionText": "A container orchestration system that distributes workloads across cloud zones.", "isCorrect": false, "explanation": "Container orchestration (Kubernetes) distributes compute — CDNs distribute cached content." },
-      { "optionText": "A code delivery pipeline that deploys to multiple environments simultaneously.", "isCorrect": false, "explanation": "CDN is a content delivery network for caching responses, not a CI/CD pipeline." }
+      {
+        "optionText": "A geographically distributed network of servers that caches content close to users, reducing latency.",
+        "isCorrect": true,
+        "explanation": "Correct — CDNs serve assets from edge nodes near the user rather than from a single origin server.",
+        "optionTextTr": "İçeriği kullanıcılara yakın önbelleğe alan coğrafi olarak dağıtılmış sunucu ağı, gecikmeyi ve origin yükünü azaltır.",
+        "explanationTr": "Doğru — CDN statik varlıklar, video ve API yanıtları için kritik performans iyileştirmesi sağlar."
+      },
+      {
+        "optionText": "A database replication strategy that copies data to multiple regions for disaster recovery.",
+        "isCorrect": false,
+        "explanation": "CDNs cache HTTP responses at the network edge — they're distinct from DB replication.",
+        "optionTextTr": "Birden fazla bölgede veri kopyalayan veritabanı replikasyon stratejisi.",
+        "explanationTr": "Bu veritabanı replikasyonunu tanımlar — CDN değil."
+      },
+      {
+        "optionText": "A container orchestration system that distributes workloads across cloud zones.",
+        "isCorrect": false,
+        "explanation": "Container orchestration (Kubernetes) distributes compute — CDNs distribute cached content.",
+        "optionTextTr": "Bulut genelinde iş yüklerini dağıtan konteyner orkestrasyon sistemi.",
+        "explanationTr": "Bu Kubernetes gibi konteyner orkestrasyon sistemlerini tanımlar — CDN değil."
+      },
+      {
+        "optionText": "A code delivery pipeline that deploys to multiple environments simultaneously.",
+        "isCorrect": false,
+        "explanation": "CDN is a content delivery network for caching responses, not a CI/CD pipeline.",
+        "optionTextTr": "Birden fazla ortama dağıtım yapan kod dağıtım pipeline'ı.",
+        "explanationTr": "Bu CI/CD pipeline'ı tanımlar — CDN değil."
+      }
     ]
   },
   {
     "topic": "software-architecture",
     "question": "What Is The Difference Between Stateful And Stateless Services?",
     "options": [
-      { "optionText": "Stateless services store no session data server-side; each request is self-contained.", "isCorrect": true, "explanation": "Correct — stateless services are easier to scale horizontally because any instance can handle any request." },
-      { "optionText": "Stateless services are read-only; stateful services handle writes.", "isCorrect": false, "explanation": "Read/write capability is unrelated to stateful vs stateless — both can perform writes." },
-      { "optionText": "Stateful services use Redis; stateless services use relational databases.", "isCorrect": false, "explanation": "The storage technology doesn't define stateful vs stateless — it's about whether session state lives on the server." },
-      { "optionText": "Stateless services never persist data to disk; stateful services always do.", "isCorrect": false, "explanation": "Statelessness refers to request-level session state, not whether data is persisted to a database." }
+      {
+        "optionText": "Stateless services store no session data server-side; each request is self-contained.",
+        "isCorrect": true,
+        "explanation": "Correct — stateless services are easier to scale horizontally because any instance can handle any request.",
+        "optionTextTr": "Durumsuz servisler sunucu tarafında session verisi saklamaz; her istek tam bilgi taşır ve herhangi bir instance tarafından işlenebilir.",
+        "explanationTr": "Doğru — durumsuzluk, yatay ölçeklemeyi basitleştirir; durum saklama gerektiğinde Redis gibi harici cache kullanılır."
+      },
+      {
+        "optionText": "Stateless services are read-only; stateful services handle writes.",
+        "isCorrect": false,
+        "explanation": "Read/write capability is unrelated to stateful vs stateless — both can perform writes.",
+        "optionTextTr": "Durumsuz servisler salt okunurdur; durum bilgili servisler yazmayı işler.",
+        "explanationTr": "Durum bilgisi, okuma/yazma ayrımını değil; session verisi saklamayı tanımlar."
+      },
+      {
+        "optionText": "Stateful services use Redis; stateless services use relational databases.",
+        "isCorrect": false,
+        "explanation": "The storage technology doesn't define stateful vs stateless — it's about whether session state lives on the server.",
+        "optionTextTr": "Durum bilgili servisler Redis kullanır; durumsuz servisler ilişkisel veritabanı kullanır.",
+        "explanationTr": "Teknoloji seçimi mimarinin özelliğini tanımlamaz."
+      },
+      {
+        "optionText": "Stateless services never persist data to disk; stateful services always do.",
+        "isCorrect": false,
+        "explanation": "Statelessness refers to request-level session state, not whether data is persisted to a database.",
+        "optionTextTr": "Durumsuz servisler asla diske veri kaydetmez; durum bilgili servisler her zaman kaydeder.",
+        "explanationTr": "Bu basitleştirilmiştir — durumsuz servisler veritabanına yazabilir; fark session verisi depolama konusundadır."
+      }
     ]
   },
   {
     "topic": "software-architecture",
     "question": "What Is The Circuit Breaker Pattern?",
     "options": [
-      { "optionText": "A pattern that stops calls to a failing service to prevent cascade failures, then retries after a timeout.", "isCorrect": true, "explanation": "Correct — the circuit breaker opens when failures exceed a threshold, fails fast, and closes after the service recovers." },
-      { "optionText": "A pattern that encrypts all communication between microservices.", "isCorrect": false, "explanation": "Encryption between services is mTLS — the circuit breaker handles failure resilience, not security." },
-      { "optionText": "A database connection pattern that limits the number of simultaneous queries.", "isCorrect": false, "explanation": "Connection pooling limits DB connections — circuit breakers manage inter-service call resilience." },
-      { "optionText": "A pattern for rolling back database transactions when an error occurs.", "isCorrect": false, "explanation": "Transaction rollback is a database concern — circuit breakers manage distributed service call failures." }
+      {
+        "optionText": "A pattern that stops calls to a failing service to prevent cascade failures, then retries after a timeout.",
+        "isCorrect": true,
+        "explanation": "Correct — the circuit breaker opens when failures exceed a threshold, fails fast, and closes after the service recovers.",
+        "optionTextTr": "Kademeli başarısızlıkları önlemek için başarısız olan servise yapılan çağrıları durduran desen.",
+        "explanationTr": "Doğru — circuit breaker; Closed, Open ve Half-Open durumları arasında geçiş yaparak toleranslı servis iletişimi sağlar."
+      },
+      {
+        "optionText": "A pattern that encrypts all communication between microservices.",
+        "isCorrect": false,
+        "explanation": "Encryption between services is mTLS — the circuit breaker handles failure resilience, not security.",
+        "optionTextTr": "Mikroservisler arasındaki tüm iletişimi şifreleyen desen.",
+        "explanationTr": "Bu mTLS veya servis mesh şifrelemesini tanımlar — circuit breaker değil."
+      },
+      {
+        "optionText": "A database connection pattern that limits the number of simultaneous queries.",
+        "isCorrect": false,
+        "explanation": "Connection pooling limits DB connections — circuit breakers manage inter-service call resilience.",
+        "optionTextTr": "Eş zamanlı sorgu sayısını sınırlayan veritabanı bağlantı deseni.",
+        "explanationTr": "Bu bağlantı havuzu desenini tanımlar — circuit breaker değil."
+      },
+      {
+        "optionText": "A pattern for rolling back database transactions when an error occurs.",
+        "isCorrect": false,
+        "explanation": "Transaction rollback is a database concern — circuit breakers manage distributed service call failures.",
+        "optionTextTr": "Hata oluştuğunda veritabanı işlemlerini geri alan desen.",
+        "explanationTr": "Bu veritabanı transaction rollback'ini tanımlar — circuit breaker değil."
+      }
     ]
   },
   {
     "topic": "software-architecture",
     "question": "Describe what is the Event Sourcing Pattern",
     "options": [
-      { "optionText": "Storing state as a sequence of immutable events rather than the current value, allowing full history replay.", "isCorrect": true, "explanation": "Correct — event sourcing replaces state mutation with event append; current state is derived by replaying events." },
-      { "optionText": "A pattern where events are published to a message queue and consumed asynchronously.", "isCorrect": false, "explanation": "Event-driven messaging is related but distinct — event sourcing specifically uses events as the primary persistence mechanism." },
-      { "optionText": "A logging strategy that captures all system events for debugging purposes.", "isCorrect": false, "explanation": "Audit logs capture events for observation — event sourcing uses events as the source of truth for application state." },
-      { "optionText": "An architectural pattern where each microservice triggers the next via webhooks.", "isCorrect": false, "explanation": "Webhook chaining is one form of event-driven communication — event sourcing is about persistence strategy, not service communication." }
+      {
+        "optionText": "Storing state as a sequence of immutable events rather than the current value, allowing full history replay.",
+        "isCorrect": true,
+        "explanation": "Correct — event sourcing replaces state mutation with event append; current state is derived by replaying events.",
+        "optionTextTr": "State'i mevcut değerler yerine değişmez event'ler dizisi olarak saklama.",
+        "explanationTr": "Doğru — event sourcing, tam denetim izi sağlar ve CQRS ile sıklıkla birlikte kullanılır."
+      },
+      {
+        "optionText": "A pattern where events are published to a message queue and consumed asynchronously.",
+        "isCorrect": false,
+        "explanation": "Event-driven messaging is related but distinct — event sourcing specifically uses events as the primary persistence mechanism.",
+        "optionTextTr": "Event'lerin mesaj kuyruğuna yayınlandığı ve asenkron tüketildiği desen.",
+        "explanationTr": "Bu mesaj queue'su tabanlı publish/subscribe'ı tanımlar — event sourcing değil."
+      },
+      {
+        "optionText": "A logging strategy that captures all system events for debugging purposes.",
+        "isCorrect": false,
+        "explanation": "Audit logs capture events for observation — event sourcing uses events as the source of truth for application state.",
+        "optionTextTr": "Tüm sistem event'lerini debug için yakalayan log stratejisi.",
+        "explanationTr": "Event sourcing logging değil; state yönetim desenidir."
+      },
+      {
+        "optionText": "An architectural pattern where each microservice triggers the next via webhooks.",
+        "isCorrect": false,
+        "explanation": "Webhook chaining is one form of event-driven communication — event sourcing is about persistence strategy, not service communication.",
+        "optionTextTr": "Her mikroservisin bir sonrakini event aracılığıyla tetiklediği mimari desen.",
+        "explanationTr": "Bu event-driven choreography'yi tanımlar — event sourcing değil."
+      }
     ]
   },
   {
     "topic": "software-architecture",
     "question": "What are the DRY and DIE principles?",
     "options": [
-      { "optionText": "Don't Repeat Yourself — every piece of knowledge should have a single, authoritative representation.", "isCorrect": true, "explanation": "Correct — DRY reduces duplication so changes only need to be made in one place, reducing bugs." },
-      { "optionText": "Deploy Reliably Yourself — own the deployment pipeline for your own services.", "isCorrect": false, "explanation": "DRY is about code duplication, not deployment ownership." },
-      { "optionText": "Define Reusable Yaml — use infrastructure-as-code templates for all deployments.", "isCorrect": false, "explanation": "DRY is a general software design principle, not specifically about YAML or infrastructure." },
-      { "optionText": "Delete Redundant Years — remove legacy code every annual refactoring cycle.", "isCorrect": false, "explanation": "DRY means 'Don't Repeat Yourself' and applies continuously to all code, not just legacy removal." }
+      {
+        "optionText": "Don't Repeat Yourself — every piece of knowledge should have a single, authoritative representation.",
+        "isCorrect": true,
+        "explanation": "Correct — DRY reduces duplication so changes only need to be made in one place, reducing bugs.",
+        "optionTextTr": "Tekrar Etme — her bilgi parçasının tek ve net kaynağı olmalı.",
+        "explanationTr": "Doğru — DRY kod tekrarını azaltır; DIE (Duplication Is Evil) aynı ilkenin daha güçlü ifadesidir."
+      },
+      {
+        "optionText": "Deploy Reliably Yourself — own the deployment pipeline for your own services.",
+        "isCorrect": false,
+        "explanation": "DRY is about code duplication, not deployment ownership.",
+        "optionTextTr": "Güvenilir Biçimde Kendin Dağıt — kendi servisin için dağıtım pipeline'ına sahip ol.",
+        "explanationTr": "Bu DRY'yi tanımlamaz — yanlış açılım."
+      },
+      {
+        "optionText": "Define Reusable Yaml — use infrastructure-as-code templates for all deployments.",
+        "isCorrect": false,
+        "explanation": "DRY is a general software design principle, not specifically about YAML or infrastructure.",
+        "optionTextTr": "Yeniden Kullanılabilir Yaml Tanımla — tüm dağıtım için infrastructure-as-code kullan.",
+        "explanationTr": "Bu yanlış açılımdır — DRY kod tekrarını önlemeyle ilgilidir."
+      },
+      {
+        "optionText": "Delete Redundant Years — remove legacy code every annual refactoring cycle.",
+        "isCorrect": false,
+        "explanation": "DRY means 'Don't Repeat Yourself' and applies continuously to all code, not just legacy removal.",
+        "optionTextTr": "Eski Kod Sil — her yıllık yeniden yapılanmada legacy kodu kaldır.",
+        "explanationTr": "Bu yanlış açılımdır — DRY kod bilgisinin tekrar etmemesiyle ilgilidir."
+      }
     ]
   },
   {
     "topic": "software-architecture",
     "question": "What Is The Difference Between Synchronous And Asynchronous Communication In Microservices?",
     "options": [
-      { "optionText": "Synchronous: caller waits for response (HTTP/gRPC). Asynchronous: caller publishes and continues without waiting (message queues).", "isCorrect": true, "explanation": "Correct — sync communication blocks until response arrives; async decouples services via message brokers." },
-      { "optionText": "Synchronous uses REST; asynchronous uses GraphQL. The protocol defines the communication pattern.", "isCorrect": false, "explanation": "GraphQL can also be synchronous — the sync/async distinction is about whether the caller waits, not the protocol." },
-      { "optionText": "Synchronous is always faster; asynchronous is always more reliable.", "isCorrect": false, "explanation": "Async can be faster (non-blocking) and sync can be more reliable for critical paths — it's context-dependent." },
-      { "optionText": "Synchronous services share a database; asynchronous services have separate databases.", "isCorrect": false, "explanation": "Database sharing is a separate architectural decision unrelated to synchronous vs asynchronous communication." }
+      {
+        "optionText": "Synchronous: caller waits for response (HTTP/gRPC). Asynchronous: caller publishes and continues without waiting (message queues).",
+        "isCorrect": true,
+        "explanation": "Correct — sync communication blocks until response arrives; async decouples services via message brokers.",
+        "optionTextTr": "Senkron: çağıran yanıtı bekler (HTTP/gRPC). Asenkron: çağıran devam eder; mesaj queue veya event bus kullanılır.",
+        "explanationTr": "Doğru — senkron basit ama sıkı bağlı; asenkron esneklik sağlar ama nihai tutarlılık gerektirir."
+      },
+      {
+        "optionText": "Synchronous uses REST; asynchronous uses GraphQL. The protocol defines the communication pattern.",
+        "isCorrect": false,
+        "explanation": "GraphQL can also be synchronous — the sync/async distinction is about whether the caller waits, not the protocol.",
+        "optionTextTr": "Senkron REST kullanır; asenkron GraphQL kullanır.",
+        "explanationTr": "Protokol seçimi iletişim modelini tanımlamaz — REST asenkron da olabilir."
+      },
+      {
+        "optionText": "Synchronous is always faster; asynchronous is always more reliable.",
+        "isCorrect": false,
+        "explanation": "Async can be faster (non-blocking) and sync can be more reliable for critical paths — it's context-dependent.",
+        "optionTextTr": "Senkron her zaman daha hızlı; asenkron her zaman daha güvenilir.",
+        "explanationTr": "Bunların hiçbiri mutlak değildir — her ikisinin de kendi ödünleşimleri var."
+      },
+      {
+        "optionText": "Synchronous services share a database; asynchronous services have separate databases.",
+        "isCorrect": false,
+        "explanation": "Database sharing is a separate architectural decision unrelated to synchronous vs asynchronous communication.",
+        "optionTextTr": "Senkron servisler veritabanı paylaşır; asenkron servisler ayrı veritabanlarına sahip.",
+        "explanationTr": "Veritabanı mimarisi iletişim modeliyle doğrudan ilgili değildir."
+      }
     ]
   },
   {
     "topic": "software-architecture",
     "question": "What Is A Message Queue And What Problem Does It Solve?",
     "options": [
-      { "optionText": "A buffer that decouples producers from consumers, enabling async processing and absorbing traffic spikes.", "isCorrect": true, "explanation": "Correct — queues (RabbitMQ, SQS) let producers publish work without waiting for consumers, smoothing load." },
-      { "optionText": "A caching layer that stores recently queried database results in memory.", "isCorrect": false, "explanation": "That describes a cache (Redis, Memcached) — message queues handle async inter-service communication." },
-      { "optionText": "A database table that stores pending HTTP requests until servers are available.", "isCorrect": false, "explanation": "Message queues are dedicated infrastructure, not a database workaround for pending HTTP requests." },
-      { "optionText": "A load balancer algorithm that queues excess requests and processes them in order.", "isCorrect": false, "explanation": "Load balancers distribute requests — message queues decouple entire services and support async workflows." }
+      {
+        "optionText": "A buffer that decouples producers from consumers, enabling async processing and absorbing traffic spikes.",
+        "isCorrect": true,
+        "explanation": "Correct — queues (RabbitMQ, SQS) let producers publish work without waiting for consumers, smoothing load.",
+        "optionTextTr": "Üreticileri tüketicilerden ayıran, asenkron işleme sağlayan ve yük dengesi ile dayanıklılık sunan tampon.",
+        "explanationTr": "Doğru — RabbitMQ, SQS ve Kafka gibi mesaj queue'ları bağımsız ölçekleme ve hata toleransı sağlar."
+      },
+      {
+        "optionText": "A caching layer that stores recently queried database results in memory.",
+        "isCorrect": false,
+        "explanation": "That describes a cache (Redis, Memcached) — message queues handle async inter-service communication.",
+        "optionTextTr": "Son sorgulanan veritabanı sonuçlarını bellekte saklayan önbellek katmanı.",
+        "explanationTr": "Bu Redis gibi önbellek katmanını tanımlar — mesaj queue'su değil."
+      },
+      {
+        "optionText": "A database table that stores pending HTTP requests until servers are available.",
+        "isCorrect": false,
+        "explanation": "Message queues are dedicated infrastructure, not a database workaround for pending HTTP requests.",
+        "optionTextTr": "Sunucular hazır olana kadar bekleyen HTTP isteklerini saklayan veritabanı tablosu.",
+        "explanationTr": "Mesaj queue'ları HTTP istekleri için değil; asenkron görev işleme içindir."
+      },
+      {
+        "optionText": "A load balancer algorithm that queues excess requests and processes them in order.",
+        "isCorrect": false,
+        "explanation": "Load balancers distribute requests — message queues decouple entire services and support async workflows.",
+        "optionTextTr": "Fazla istekleri sıraya alıp işleyen yük dengeleme algoritması.",
+        "explanationTr": "Bu load balancer queue'lamasını tanımlar — mesaj queue'su mimarisini değil."
+      }
     ]
   }
 ]

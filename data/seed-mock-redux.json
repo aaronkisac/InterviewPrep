@@ -6,22 +6,30 @@
       {
         "optionText": "A predictable state container for JavaScript apps that stores all application state in a single immutable store",
         "isCorrect": true,
-        "explanation": "Redux centralises app state in one store. State changes happen only through dispatched actions processed by pure reducer functions, making state predictable and debuggable."
+        "explanation": "Redux centralises app state in one store. State changes happen only through dispatched actions processed by pure reducer functions, making state predictable and debuggable.",
+        "optionTextTr": "Tüm uygulama state'ini tek bir yerde saklayan, JavaScript uygulamaları için tahmin edilebilir state container.",
+        "explanationTr": "Doğru — Redux; özellikle prop drilling olmadan birden fazla bileşenden erişilmesi gereken state için uygundur."
       },
       {
         "optionText": "A CSS-in-JS library for managing component styles in React",
         "isCorrect": false,
-        "explanation": "Redux manages application state, not styles. Styled-components or Emotion handle CSS-in-JS."
+        "explanation": "Redux manages application state, not styles. Styled-components or Emotion handle CSS-in-JS.",
+        "optionTextTr": "React'teki bileşen stillerini yönetmek için CSS-in-JS kütüphanesi.",
+        "explanationTr": "Bu styled-components veya Emotion'ı tanımlar — Redux değil."
       },
       {
         "optionText": "A routing library that manages URL state in React applications",
         "isCorrect": false,
-        "explanation": "Routing is handled by React Router or Next.js. Redux manages application data state."
+        "explanation": "Routing is handled by React Router or Next.js. Redux manages application data state.",
+        "optionTextTr": "React uygulamalarında URL state'ini yöneten routing kütüphanesi.",
+        "explanationTr": "Bu React Router'ı tanımlar — Redux değil."
       },
       {
         "optionText": "A testing framework specifically designed for React components",
         "isCorrect": false,
-        "explanation": "Testing React components is done with Jest + React Testing Library. Redux is a state management library."
+        "explanation": "Testing React components is done with Jest + React Testing Library. Redux is a state management library.",
+        "optionTextTr": "React bileşenleri için özel olarak tasarlanmış test çerçevesi.",
+        "explanationTr": "Bu Jest veya RTL'yi tanımlar — Redux değil."
       }
     ]
   },
@@ -32,22 +40,30 @@
       {
         "optionText": "Single source of truth (one store), state is read-only (changed only via actions), and changes are made with pure reducer functions",
         "isCorrect": true,
-        "explanation": "These three principles ensure predictability: one store means one place to look for state; dispatching actions is the only way to trigger changes; reducers are pure functions so the same input always yields the same output."
+        "explanation": "These three principles ensure predictability: one store means one place to look for state; dispatching actions is the only way to trigger changes; reducers are pure functions so the same input always yields the same output.",
+        "optionTextTr": "Tek gerçek kaynağı (bir store), salt okunur state (yalnızca action'larla değiştirilir) ve değişimi açıklayan saf fonksiyonlar (reducer'lar).",
+        "explanationTr": "Doğru — bu üç prensip Redux'ı tahmin edilebilir ve debug edilebilir kılar."
       },
       {
         "optionText": "Multiple stores, mutable state, and async reducers",
         "isCorrect": false,
-        "explanation": "Redux recommends a single store, immutable state, and pure (synchronous) reducers. Async logic goes in middleware like Thunk or Saga."
+        "explanation": "Redux recommends a single store, immutable state, and pure (synchronous) reducers. Async logic goes in middleware like Thunk or Saga.",
+        "optionTextTr": "Çoklu store'lar, mutable state ve async reducer'lar.",
+        "explanationTr": "Redux tam tersi prensiplere sahiptir: tek store, immutable state ve saf senkron reducer'lar."
       },
       {
         "optionText": "Component-local state, direct state mutation, and two-way data binding",
         "isCorrect": false,
-        "explanation": "Redux is the opposite: global store, immutable updates, and unidirectional data flow."
+        "explanation": "Redux is the opposite: global store, immutable updates, and unidirectional data flow.",
+        "optionTextTr": "Component-local state, doğrudan state mutasyonu ve çift yönlü veri bağlama.",
+        "explanationTr": "Bunlar Redux prensiplerinin tam tersidir."
       },
       {
         "optionText": "Observable streams, reactive programming, and event sourcing",
         "isCorrect": false,
-        "explanation": "Those describe reactive libraries like RxJS. Redux uses a simpler action-reducer model, though redux-observable adds RxJS integration."
+        "explanation": "Those describe reactive libraries like RxJS. Redux uses a simpler action-reducer model, though redux-observable adds RxJS integration.",
+        "optionTextTr": "Observable stream'ler, reaktif programlama ve event sourcing.",
+        "explanationTr": "Bunlar RxJS ve event sourcing kalıplarını tanımlar — Redux'ın temel prensipleri değil."
       }
     ]
   },
@@ -58,22 +74,30 @@
       {
         "optionText": "Pure functions that take the current state and an action, then return a new state without mutating the original",
         "isCorrect": true,
-        "explanation": "A reducer has the signature (state, action) => newState. They must be pure — no side effects, no API calls, no mutation. Given the same state and action, they always return the same new state."
+        "explanation": "A reducer has the signature (state, action) => newState. They must be pure — no side effects, no API calls, no mutation. Given the same state and action, they always return the same new state.",
+        "optionTextTr": "Mevcut state ve action alarak yeni state döndüren saf fonksiyonlar — state'i doğrudan değiştirmez.",
+        "explanationTr": "Doğru — reducer'lar saf ve senkron olmalıdır; yan etkiler middleware'e bırakılır."
       },
       {
         "optionText": "Functions that send actions to the Redux store",
         "isCorrect": false,
-        "explanation": "Functions that send actions are called action creators or the dispatch function."
+        "explanation": "Functions that send actions are called action creators or the dispatch function.",
+        "optionTextTr": "Store'a action'lar gönderen fonksiyonlar.",
+        "explanationTr": "Bu action creator'ları tanımlar — reducer değil."
       },
       {
         "optionText": "Middleware functions that intercept actions before they reach the store",
         "isCorrect": false,
-        "explanation": "That describes Redux middleware (Thunk, Saga). Reducers process actions after middleware."
+        "explanation": "That describes Redux middleware (Thunk, Saga). Reducers process actions after middleware.",
+        "optionTextTr": "Action'ları reducer'a ulaşmadan yakalayan middleware fonksiyonları.",
+        "explanationTr": "Bu middleware'i tanımlar — reducer değil."
       },
       {
         "optionText": "Selectors that read and transform data from the Redux store",
         "isCorrect": false,
-        "explanation": "Selectors read from the store. Reducers write to it by returning new state."
+        "explanation": "Selectors read from the store. Reducers write to it by returning new state.",
+        "optionTextTr": "Store'dan veri okuyan ve dönüştüren selector'lar.",
+        "explanationTr": "Bu selector'ları tanımlar — reducer değil."
       }
     ]
   },
@@ -84,22 +108,30 @@
       {
         "optionText": "A middleware that allows action creators to return functions instead of plain objects, enabling async logic like API calls",
         "isCorrect": true,
-        "explanation": "By default Redux only accepts plain object actions. Redux Thunk lets you dispatch a function (thunk) that receives dispatch and getState, so you can make async API calls and dispatch actions based on results."
+        "explanation": "By default Redux only accepts plain object actions. Redux Thunk lets you dispatch a function (thunk) that receives dispatch and getState, so you can make async API calls and dispatch actions based on results.",
+        "optionTextTr": "Action creator'ların düz nesne yerine fonksiyon döndürmesine izin veren middleware; async mantığı destekler.",
+        "explanationTr": "Doğru — thunk, dispatch ve getState'e erişen bir fonksiyon döndürür."
       },
       {
         "optionText": "A Redux store enhancer that speeds up state updates",
         "isCorrect": false,
-        "explanation": "Redux Thunk is middleware, not a performance enhancer."
+        "explanation": "Redux Thunk is middleware, not a performance enhancer.",
+        "optionTextTr": "State güncellemelerini hızlandıran Redux store geliştirici.",
+        "explanationTr": "Bu Redux Thunk'ı tanımlamaz — Redux Thunk async action creator'lar içindir."
       },
       {
         "optionText": "A method for combining multiple reducers into a single reducer",
         "isCorrect": false,
-        "explanation": "That's combineReducers(). Thunk handles async action creators."
+        "explanation": "That's combineReducers(). Thunk handles async action creators.",
+        "optionTextTr": "Birden fazla reducer'ı tek bir reducer'da birleştiren yöntem.",
+        "explanationTr": "Bu combineReducers'ı tanımlar — Thunk değil."
       },
       {
         "optionText": "A Redux DevTools plugin for time-travel debugging",
         "isCorrect": false,
-        "explanation": "Time-travel debugging is a Redux DevTools feature. Thunk is async middleware."
+        "explanation": "Time-travel debugging is a Redux DevTools feature. Thunk is async middleware.",
+        "optionTextTr": "Zaman yolculuğu debugging için Redux DevTools eklentisi.",
+        "explanationTr": "Bu Redux DevTools'u tanımlar — Thunk değil."
       }
     ]
   },
@@ -110,22 +142,30 @@
       {
         "optionText": "Components are presentational (UI only, receive props); Containers are connected to the Redux store via connect() and pass state/dispatch as props",
         "isCorrect": true,
-        "explanation": "The container/presentational pattern separates concerns: presentational components are dumb, reusable UI; containers are smart, store-connected wrappers. With hooks (useSelector/useDispatch) this pattern is less mandatory but still useful conceptually."
+        "explanation": "The container/presentational pattern separates concerns: presentational components are dumb, reusable UI; containers are smart, store-connected wrappers. With hooks (useSelector/useDispatch) this pattern is less mandatory but still useful conceptually.",
+        "optionTextTr": "Component'ler sunum odaklıdır (yalnızca UI, props alır); Container'lar store'a bağlanır ve state/dispatch'i prop olarak aşağı geçirir.",
+        "explanationTr": "Doğru — bu sunum/container ayrımı artık hooks lehine daha az kullanılıyor ama yaygın bir pattern olarak kaldı."
       },
       {
         "optionText": "Containers are the same as React's built-in container HTML elements",
         "isCorrect": false,
-        "explanation": "Container in the Redux pattern is an architectural concept, not related to HTML container elements."
+        "explanation": "Container in the Redux pattern is an architectural concept, not related to HTML container elements.",
+        "optionTextTr": "Container'lar React'in yerleşik container HTML elementleriyle aynıdır.",
+        "explanationTr": "Bu HTML elementlerini tanımlar — Redux container pattern'i değil."
       },
       {
         "optionText": "Components are connected to the store; containers are purely presentational",
         "isCorrect": false,
-        "explanation": "It's the other way around. Containers connect to the store; components are presentational."
+        "explanation": "It's the other way around. Containers connect to the store; components are presentational.",
+        "optionTextTr": "Component'ler store'a bağlanır; container'lar tamamen sunum odaklıdır.",
+        "explanationTr": "Tam tersi doğrudur — container'lar store'a bağlanır; component'ler sunum odaklıdır."
       },
       {
         "optionText": "Both Component and Container are identical — the terms are interchangeable in Redux",
         "isCorrect": false,
-        "explanation": "They describe different roles in the container/presentational pattern, even if the distinction has softened with hooks."
+        "explanation": "They describe different roles in the container/presentational pattern, even if the distinction has softened with hooks.",
+        "optionTextTr": "Her ikisi de özdeştir — terimler birbirinin yerine kullanılır.",
+        "explanationTr": "Bunlar farklı rollere sahip farklı kavramlardır."
       }
     ]
   },
@@ -136,22 +176,30 @@
       {
         "optionText": "A middleware library that uses ES6 generator functions to handle complex async flows (API calls, race conditions, debouncing) as readable sequences",
         "isCorrect": true,
-        "explanation": "redux-saga manages side effects via sagas — generator functions that describe async flows step by step. They're easier to test than Thunk callbacks and handle complex scenarios like takeLatest, race(), all() naturally."
+        "explanation": "redux-saga manages side effects via sagas — generator functions that describe async flows step by step. They're easier to test than Thunk callbacks and handle complex scenarios like takeLatest, race(), all() naturally.",
+        "optionTextTr": "ES6 generator fonksiyonlarını kullanarak async yan etkileri (API çağrıları, WebSocket) yöneten middleware kütüphanesi.",
+        "explanationTr": "Doğru — saga'lar, etkileri plain nesne olarak tanımladığından thunk'lardan daha test edilebilir."
       },
       {
         "optionText": "A state management alternative that replaces Redux entirely",
         "isCorrect": false,
-        "explanation": "redux-saga is middleware that works alongside Redux, not a replacement."
+        "explanation": "redux-saga is middleware that works alongside Redux, not a replacement.",
+        "optionTextTr": "Redux'ı tamamen değiştiren state yönetim alternatifi.",
+        "explanationTr": "redux-saga, Redux'ın yerine geçmez — middleware olarak onun üzerine kurulur."
       },
       {
         "optionText": "A library for animating Redux state transitions in the UI",
         "isCorrect": false,
-        "explanation": "redux-saga handles async side effects, not animations."
+        "explanation": "redux-saga handles async side effects, not animations.",
+        "optionTextTr": "Redux state geçişlerini UI'da animasyonla gösteren kütüphane.",
+        "explanationTr": "Bu animasyon kütüphanelerini tanımlar — redux-saga değil."
       },
       {
         "optionText": "A logging tool that records all Redux actions to an external server",
         "isCorrect": false,
-        "explanation": "Logging is a separate concern (redux-logger). redux-saga manages async business logic."
+        "explanation": "Logging is a separate concern (redux-logger). redux-saga manages async business logic.",
+        "optionTextTr": "Tüm Redux action'larını harici servise kaydeden logging aracı.",
+        "explanationTr": "Bu logging middleware'ini tanımlar — redux-saga değil."
       }
     ]
   },
@@ -162,22 +210,30 @@
       {
         "optionText": "Functions that extract and derive data from the store — memoized with Reselect to avoid unnecessary recalculations",
         "isCorrect": true,
-        "explanation": "Selectors encapsulate store shape knowledge and let you compute derived data. Reselect's createSelector memoizes results, so components only re-render when relevant slice of state actually changes."
+        "explanation": "Selectors encapsulate store shape knowledge and let you compute derived data. Reselect's createSelector memoizes results, so components only re-render when relevant slice of state actually changes.",
+        "optionTextTr": "Store'dan veri çıkaran ve türeten fonksiyonlar — memoize edilmiş varyantlar (Reselect) gereksiz hesaplamayı önler.",
+        "explanationTr": "Doğru — selector'lar bileşenler ile state şeması arasındaki bağımlılığı azaltır."
       },
       {
         "optionText": "CSS selectors used to style Redux-connected components differently",
         "isCorrect": false,
-        "explanation": "Redux selectors are JavaScript functions that read from the store — nothing to do with CSS."
+        "explanation": "Redux selectors are JavaScript functions that read from the store — nothing to do with CSS.",
+        "optionTextTr": "Redux'a bağlı bileşenleri farklı stillemek için kullanılan CSS selector'ları.",
+        "explanationTr": "Bu CSS selector'larını tanımlar — Redux selector'ları değil."
       },
       {
         "optionText": "The action type strings used to identify Redux actions",
         "isCorrect": false,
-        "explanation": "Action type strings are constants or enum values. Selectors are functions that read state."
+        "explanation": "Action type strings are constants or enum values. Selectors are functions that read state.",
+        "optionTextTr": "Redux action'larını tanımlamak için kullanılan action type string'leri.",
+        "explanationTr": "Bu action type'ları tanımlar — selector'lar değil."
       },
       {
         "optionText": "Middleware functions that filter which actions reach the reducers",
         "isCorrect": false,
-        "explanation": "Middleware intercepts actions. Selectors read from the store after reducers have processed actions."
+        "explanation": "Middleware intercepts actions. Selectors read from the store after reducers have processed actions.",
+        "optionTextTr": "Hangi action'ların reducer'a ulaşacağını filtreleyen middleware fonksiyonları.",
+        "explanationTr": "Bu middleware'i tanımlar — selector değil."
       }
     ]
   },
@@ -188,22 +244,30 @@
       {
         "optionText": "Context is a built-in React API for passing data through the tree; Redux adds structured state management with actions, reducers, and middleware — with better performance through selective subscriptions",
         "isCorrect": true,
-        "explanation": "Context solves prop drilling but re-renders all consumers on any change. Redux with useSelector only re-renders components when their selected slice changes. Redux also adds DevTools, middleware, and a structured update pattern."
+        "explanation": "Context solves prop drilling but re-renders all consumers on any change. Redux with useSelector only re-renders components when their selected slice changes. Redux also adds DevTools, middleware, and a structured update pattern.",
+        "optionTextTr": "Context, prop drilling olmadan veri geçirmek için yerleşik React API'dir; Redux ise zaman yolculuğu ve güçlü DevTools sunan tam durum yönetimi çözümüdür.",
+        "explanationTr": "Doğru — context, sık değişmeyen veriler için uygundur; Redux ise karmaşık state güncellemeleri için daha iyi araçlar sunar."
       },
       {
         "optionText": "React context and React Redux are identical — Redux is just a wrapper around context",
         "isCorrect": false,
-        "explanation": "While react-redux v7+ uses context internally, Redux adds significant structure: the reducer pattern, action creators, middleware, and DevTools that raw context doesn't provide."
+        "explanation": "While react-redux v7+ uses context internally, Redux adds significant structure: the reducer pattern, action creators, middleware, and DevTools that raw context doesn't provide.",
+        "optionTextTr": "React context ve React Redux özdeştir — Redux yalnızca context'i sarmalar.",
+        "explanationTr": "Redux, context'ten çok daha fazla şey sağlar: eylem/reducer modeli, middleware, DevTools."
       },
       {
         "optionText": "Redux is faster than context for every use case",
         "isCorrect": false,
-        "explanation": "For simple state needs, context is perfectly adequate. Redux adds overhead that's only worthwhile for complex state with many subscribers."
+        "explanation": "For simple state needs, context is perfectly adequate. Redux adds overhead that's only worthwhile for complex state with many subscribers.",
+        "optionTextTr": "Redux her kullanım durumu için context'ten daha hızlıdır.",
+        "explanationTr": "Her ikisi de bağlama göre değişen performans özelliklerine sahiptir — Redux her zaman daha hızlı değildir."
       },
       {
         "optionText": "Context requires a Redux store; Redux can work without context",
         "isCorrect": false,
-        "explanation": "Context is a built-in React API that doesn't require Redux. Redux uses context as a delivery mechanism in react-redux, but it's optional in plain Redux."
+        "explanation": "Context is a built-in React API that doesn't require Redux. Redux uses context as a delivery mechanism in react-redux, but it's optional in plain Redux.",
+        "optionTextTr": "Context Redux store gerektirir; Redux context olmadan çalışabilir.",
+        "explanationTr": "Tam tersi: Redux, store sağlamak için Provider kullanır ama kendi içindeki context React context API'sinden bağımsızdır."
       }
     ]
   },
@@ -214,22 +278,30 @@
       {
         "optionText": "Thunk uses callbacks/promises for simple async; Saga uses generator functions for complex flows with better testability and built-in primitives like takeLatest and race()",
         "isCorrect": true,
-        "explanation": "Thunk is simpler to set up but complex async flows become nested callbacks. Saga separates async logic into readable generator sequences, each step easily unit-testable by iterating the generator."
+        "explanation": "Thunk is simpler to set up but complex async flows become nested callbacks. Saga separates async logic into readable generator sequences, each step easily unit-testable by iterating the generator.",
+        "optionTextTr": "Thunk basit async için callback/promise kullanır; Saga karmaşık iş akışları için generator ile daha test edilebilir etki yönetimi sağlar.",
+        "explanationTr": "Doğru — Saga'nın karmaşıklığı büyük iş akışları, yarış koşulları ve iptal mekanizmaları için avantaj sağlar."
       },
       {
         "optionText": "Thunk uses generators; Saga uses promises — they are mirror images of each other",
         "isCorrect": false,
-        "explanation": "It's the opposite: Thunk uses plain functions/promises; Saga uses ES6 generators."
+        "explanation": "It's the opposite: Thunk uses plain functions/promises; Saga uses ES6 generators.",
+        "optionTextTr": "Thunk generator kullanır; Saga promise — bunlar birbirinin aynasıdır.",
+        "explanationTr": "Tam tersi doğrudur — Thunk promise/callback, Saga generator kullanır."
       },
       {
         "optionText": "Both are identical — the choice is purely a matter of naming convention",
         "isCorrect": false,
-        "explanation": "They have fundamentally different programming models and trade-offs."
+        "explanation": "They have fundamentally different programming models and trade-offs.",
+        "optionTextTr": "Her ikisi özdeştir — seçim yalnızca adlandırma tercihidir.",
+        "explanationTr": "Bunlar önemli tasarım farklılıklarına sahiptir: Saga generator ve effect descriptor'lar kullanır."
       },
       {
         "optionText": "Saga is deprecated in favour of Thunk in modern Redux Toolkit projects",
         "isCorrect": false,
-        "explanation": "Redux Toolkit recommends RTK Query for data fetching, but both Thunk (built into RTK) and Saga are actively maintained. Neither is deprecated."
+        "explanation": "Redux Toolkit recommends RTK Query for data fetching, but both Thunk (built into RTK) and Saga are actively maintained. Neither is deprecated.",
+        "optionTextTr": "Saga, modern Redux Toolkit projelerinde Thunk lehine kullanımdan kaldırılmıştır.",
+        "explanationTr": "Saga kullanımdan kaldırılmamıştır — karmaşık async iş akışları için hâlâ aktif olarak kullanılmaktadır."
       }
     ]
   },
@@ -240,22 +312,30 @@
       {
         "optionText": "Export the store instance and call store.getState() or store.dispatch() directly in plain JS modules",
         "isCorrect": true,
-        "explanation": "Since the store is a plain JavaScript object created with configureStore(), you can import it anywhere and use store.getState(), store.dispatch(), or store.subscribe() without being inside a React component."
+        "explanation": "Since the store is a plain JavaScript object created with configureStore(), you can import it anywhere and use store.getState(), store.dispatch(), or store.subscribe() without being inside a React component.",
+        "optionTextTr": "Store instance'ını export edip herhangi bir JS dosyasında store.getState() veya store.dispatch() çağırın.",
+        "explanationTr": "Doğru — bu, React'in rendering döngüsü dışında store ile etkileşimi (yardımcı fonksiyonlar, servisler) için standart yaklaşımdır."
       },
       {
         "optionText": "Use React.useContext(ReduxContext) in any JavaScript file",
         "isCorrect": false,
-        "explanation": "React hooks including useContext can only be called inside React function components or custom hooks — not in plain JS modules."
+        "explanation": "React hooks including useContext can only be called inside React function components or custom hooks — not in plain JS modules.",
+        "optionTextTr": "Herhangi bir JavaScript dosyasında React.useContext(ReduxContext) kullanın.",
+        "explanationTr": "useContext yalnızca React component'lerinde çalışır — bileşen dışı kod için doğrudan store erişimi kullanılır."
       },
       {
         "optionText": "Redux store can only be accessed inside components wrapped with connect()",
         "isCorrect": false,
-        "explanation": "connect() is a convenience wrapper. The raw store is accessible anywhere by importing it."
+        "explanation": "connect() is a convenience wrapper. The raw store is accessible anywhere by importing it.",
+        "optionTextTr": "Redux store'a yalnızca connect() ile sarmalanmış bileşenler içinden erişilebilir.",
+        "explanationTr": "Bu doğru değildir — store, bileşenler dahil herhangi bir JavaScript ortamından erişilebilir."
       },
       {
         "optionText": "Use window.reduxStore — Redux automatically attaches the store to the global window",
         "isCorrect": false,
-        "explanation": "Redux does not attach anything to window. You must explicitly export and import the store instance."
+        "explanation": "Redux does not attach anything to window. You must explicitly export and import the store instance.",
+        "optionTextTr": "window.reduxStore kullanın — Redux store'u otomatik olarak pencereye bağlar.",
+        "explanationTr": "Redux store'u window'a otomatik bağlamaz — bu bir anti-pattern olur."
       }
     ]
   },
@@ -266,22 +346,30 @@
       {
         "optionText": "call() invokes a function/promise and waits for the result; put() dispatches an action to the Redux store",
         "isCorrect": true,
-        "explanation": "In Saga effects: call(fn, ...args) is like awaiting an async function and yields the result back to the saga. put(action) dispatches an action to the Redux store — equivalent to dispatch() in a component."
+        "explanation": "In Saga effects: call(fn, ...args) is like awaiting an async function and yields the result back to the saga. put(action) dispatches an action to the Redux store — equivalent to dispatch() in a component.",
+        "optionTextTr": "call() bir fonksiyon/promise çağırır ve sonucu bekler; put() store'a action dispatch eder.",
+        "explanationTr": "Doğru — her ikisi de test edilebilir plain object effect descriptor'larıdır."
       },
       {
         "optionText": "call() dispatches actions; put() makes API requests",
         "isCorrect": false,
-        "explanation": "It's the reverse: call() invokes functions (including API calls); put() dispatches Redux actions."
+        "explanation": "It's the reverse: call() invokes functions (including API calls); put() dispatches Redux actions.",
+        "optionTextTr": "call() action dispatch eder; put() API isteği yapar.",
+        "explanationTr": "Tam tersi doğrudur: put() dispatch eder, call() fonksiyon çağırır."
       },
       {
         "optionText": "Both call() and put() are identical and can be used interchangeably",
         "isCorrect": false,
-        "explanation": "They have completely different purposes. Mixing them up would cause runtime errors."
+        "explanation": "They have completely different purposes. Mixing them up would cause runtime errors.",
+        "optionTextTr": "call() ve put() birbirinin yerine kullanılabilir.",
+        "explanationTr": "Bunlar farklı amaçlara hizmet eder ve birbirinin yerine geçemez."
       },
       {
         "optionText": "call() is for synchronous operations; put() is for asynchronous operations",
         "isCorrect": false,
-        "explanation": "call() is used for both sync and async function calls. put() is specifically for dispatching Redux actions, regardless of timing."
+        "explanation": "call() is used for both sync and async function calls. put() is specifically for dispatching Redux actions, regardless of timing.",
+        "optionTextTr": "call() senkron; put() asenkron işlemler içindir.",
+        "explanationTr": "call() hem senkron hem async fonksiyonları çağırabilir; put() ise her zaman senkron dispatch işlemidir."
       }
     ]
   },
@@ -292,22 +380,30 @@
       {
         "optionText": "No — only state that is shared between multiple components or needs to persist across routes belongs in Redux; local UI state is better kept in component state",
         "isCorrect": true,
-        "explanation": "Redux is best for global, shared, or complex state. Form input, UI toggles, hover states, and other ephemeral local state don't need to be in Redux — useState is simpler and faster."
+        "explanation": "Redux is best for global, shared, or complex state. Form input, UI toggles, hover states, and other ephemeral local state don't need to be in Redux — useState is simpler and faster.",
+        "optionTextTr": "Hayır — yalnızca birden fazla bileşen arasında paylaşılan veya doğrudan sunucu tarafından güncellenmesi gereken state Redux'ta tutulmalıdır.",
+        "explanationTr": "Doğru — form input'ları, UI toggle'ları ve geçici state yerel bileşen state'inde kalabilir."
       },
       {
         "optionText": "Yes — all state must be in Redux to maintain the single source of truth principle",
         "isCorrect": false,
-        "explanation": "Single source of truth means each piece of state lives in one place — not that everything must be in Redux. Local component state is fine for local concerns."
+        "explanation": "Single source of truth means each piece of state lives in one place — not that everything must be in Redux. Local component state is fine for local concerns.",
+        "optionTextTr": "Evet — tek gerçek kaynağı ilkesini korumak için tüm state Redux'ta olmalıdır.",
+        "explanationTr": "Redux kılavuzunun kendisi tüm state'i Redux'ta tutmanın gerekmediğini açıklar."
       },
       {
         "optionText": "Yes — only Redux state triggers component re-renders in React",
         "isCorrect": false,
-        "explanation": "React's useState and useReducer also trigger re-renders when state changes. They don't need Redux."
+        "explanation": "React's useState and useReducer also trigger re-renders when state changes. They don't need Redux.",
+        "optionTextTr": "Evet — yalnızca Redux state, React'te bileşen yeniden render'larını tetikler.",
+        "explanationTr": "React local state de yeniden render tetikler — Redux, React state'in tek kaynağı değil."
       },
       {
         "optionText": "No — Redux should never be used because React context replaces it entirely",
         "isCorrect": false,
-        "explanation": "Context and Redux serve different needs. Redux is still valuable for complex, high-frequency state with many consumers."
+        "explanation": "Context and Redux serve different needs. Redux is still valuable for complex, high-frequency state with many consumers.",
+        "optionTextTr": "Hayır — React context Redux'ı tam olarak değiştirdiğinden Redux hiçbir zaman kullanılmamalı.",
+        "explanationTr": "Her iki araç da geçerlidir; Redux, bağlama göre context'ten daha uygun olabilir."
       }
     ]
   },
@@ -318,22 +414,30 @@
       {
         "optionText": "Pass a preloadedState argument to configureStore(), or define a default value in each reducer's state parameter",
         "isCorrect": true,
-        "explanation": "Two approaches: (1) reducer default: (state = initialState, action) => ... where initialState is defined in the reducer file. (2) configureStore({ preloadedState: { ... } }) for hydrating state from localStorage or server."
+        "explanation": "Two approaches: (1) reducer default: (state = initialState, action) => ... where initialState is defined in the reducer file. (2) configureStore({ preloadedState: { ... } }) for hydrating state from localStorage or server.",
+        "optionTextTr": "configureStore()'a preloadedState argümanı geçin veya reducer'larda default parametre değeri tanımlayın.",
+        "explanationTr": "Doğru — her iki yaklaşım da yaygındır: SSR için sunucu tarafından hydrate edilen state preloadedState ile yüklenir."
       },
       {
         "optionText": "Call store.setState() with the initial values after creating the store",
         "isCorrect": false,
-        "explanation": "Redux stores have no setState() method. State can only change through dispatched actions."
+        "explanation": "Redux stores have no setState() method. State can only change through dispatched actions.",
+        "optionTextTr": "Store oluşturulduktan sonra store.setState() çağırın.",
+        "explanationTr": "Redux store'unda setState() diye bir metod yoktur."
       },
       {
         "optionText": "Dispatch an INIT action with the initial state as payload",
         "isCorrect": false,
-        "explanation": "Redux dispatches @@INIT automatically on creation, but you don't dispatch initial state. Reducers define it via default parameter values."
+        "explanation": "Redux dispatches @@INIT automatically on creation, but you don't dispatch initial state. Reducers define it via default parameter values.",
+        "optionTextTr": "Payload olarak initial state içeren INIT action dispatch edin.",
+        "explanationTr": "Reducer'lar parametre default değerlerini kullanarak initial state'i tanımlar; INIT dispatch etmek gerekmez."
       },
       {
         "optionText": "Define initial state in a global Redux.config() call before creating the store",
         "isCorrect": false,
-        "explanation": "There is no Redux.config() API. Initial state is set in reducers or as preloadedState in configureStore()."
+        "explanation": "There is no Redux.config() API. Initial state is set in reducers or as preloadedState in configureStore().",
+        "optionTextTr": "Store oluşturmadan önce global Redux.config() çağrısında initial state tanımlayın.",
+        "explanationTr": "Redux.config() diye bir API yoktur."
       }
     ]
   },
@@ -344,22 +448,30 @@
       {
         "optionText": "Redux Thunk (simple async functions), Redux Saga (generator-based), and RTK Query (built-in data fetching in Redux Toolkit)",
         "isCorrect": true,
-        "explanation": "Redux Thunk is bundled with Redux Toolkit and covers most use cases. Redux Saga suits complex async flows. RTK Query is the modern recommended approach for server state, providing caching, invalidation, and auto-refetch."
+        "explanation": "Redux Thunk is bundled with Redux Toolkit and covers most use cases. Redux Saga suits complex async flows. RTK Query is the modern recommended approach for server state, providing caching, invalidation, and auto-refetch.",
+        "optionTextTr": "Redux Thunk (basit async fonksiyonlar), Redux Saga (generator tabanlı iş akışları), RTK Query (sunucu state).",
+        "explanationTr": "Doğru — seçim, karmaşıklık ve ihtiyaçlara bağlıdır; RTK Query, veri çekme için giderek popülerleşmektedir."
       },
       {
         "optionText": "Redux DevTools is the standard tool for handling async operations",
         "isCorrect": false,
-        "explanation": "Redux DevTools is a debugging tool, not middleware for handling async logic."
+        "explanation": "Redux DevTools is a debugging tool, not middleware for handling async logic.",
+        "optionTextTr": "Redux DevTools async işlemleri yönetmek için standart araçtır.",
+        "explanationTr": "DevTools debugging içindir — async işlemleri yönetmez."
       },
       {
         "optionText": "React Suspense replaces all async middleware in modern Redux",
         "isCorrect": false,
-        "explanation": "React Suspense handles data fetching at the render level (with libraries like RTK Query). It doesn't replace Redux middleware architecture."
+        "explanation": "React Suspense handles data fetching at the render level (with libraries like RTK Query). It doesn't replace Redux middleware architecture.",
+        "optionTextTr": "React Suspense, modern Redux'ta tüm async middleware'i değiştirir.",
+        "explanationTr": "React Suspense, veri çekme UI'ı için kullanışlıdır ama Redux middleware'in yerini almaz."
       },
       {
         "optionText": "Async calls must be made outside Redux and results passed via props",
         "isCorrect": false,
-        "explanation": "This was an older pattern. Redux middleware is specifically designed to handle async side effects within the Redux flow."
+        "explanation": "This was an older pattern. Redux middleware is specifically designed to handle async side effects within the Redux flow.",
+        "optionTextTr": "Async çağrılar Redux dışında yapılmalı ve sonuçlar prop olarak geçirilmelidir.",
+        "explanationTr": "Bu olası olsa da ölçeklenebilir değildir; Redux middleware async işlemleri için daha temiz bir yol sunar."
       }
     ]
   },
@@ -370,22 +482,30 @@
       {
         "optionText": "Both use observable-like patterns for handling state changes over time; Redux actions can be seen as a stream of events, similar to RxJS Observables",
         "isCorrect": true,
-        "explanation": "Both are inspired by functional reactive programming. redux-observable bridges them by treating the action stream as an RxJS Observable. Both promote unidirectional data flow and pure transformations, but Redux uses reducers while RxJS uses operators."
+        "explanation": "Both are inspired by functional reactive programming. redux-observable bridges them by treating the action stream as an RxJS Observable. Both promote unidirectional data flow and pure transformations, but Redux uses reducers while RxJS uses operators.",
+        "optionTextTr": "Her ikisi de zaman içindeki state değişikliklerini yönetmek için observable benzeri desenler kullanır; Redux store ve RxJS Subject/Observable benzer şekilde abone/bildirim modeli uygular.",
+        "explanationTr": "Doğru — Redux ekibi, Redux'ın RxJS'e benzer bir observable olarak modellenebileceğini kabul eder."
       },
       {
         "optionText": "Redux and RxJS are completely unrelated with no overlapping concepts",
         "isCorrect": false,
-        "explanation": "They share concepts like event streams and pure transformations. redux-observable intentionally merges both."
+        "explanation": "They share concepts like event streams and pure transformations. redux-observable intentionally merges both.",
+        "optionTextTr": "Redux ve RxJS tamamen ilgisizdir.",
+        "explanationTr": "Her ikisi de reaktif veri akışı desenleri uygular — bağlantısız oldukları doğru değildir."
       },
       {
         "optionText": "RxJS is built on top of Redux and requires it to function",
         "isCorrect": false,
-        "explanation": "RxJS is an independent library. It can be used with or without Redux."
+        "explanation": "RxJS is an independent library. It can be used with or without Redux.",
+        "optionTextTr": "RxJS, Redux'ün üzerine kurulur ve çalışması için onu gerektirir.",
+        "explanationTr": "RxJS ve Redux bağımsızdır — ikisi birlikte kullanılabilir ama biri diğerini gerektirmez."
       },
       {
         "optionText": "Redux replaces RxJS for all reactive programming needs in React apps",
         "isCorrect": false,
-        "explanation": "Redux and RxJS solve different problems and are complementary. Redux is opinionated about app state; RxJS is a general-purpose reactive programming library."
+        "explanation": "Redux and RxJS solve different problems and are complementary. Redux is opinionated about app state; RxJS is a general-purpose reactive programming library.",
+        "optionTextTr": "Redux, React uygulamalarında tüm reaktif programlama ihtiyaçları için RxJS'in yerini alır.",
+        "explanationTr": "Her ikisi de farklı güçlü yönlere sahiptir ve birbirinin yerini alamaz."
       }
     ]
   },
@@ -396,22 +516,30 @@
       {
         "optionText": "Redux requires more boilerplate for simple use cases, has a steeper learning curve (reducers, immutability, middleware), and adds indirection compared to simpler patterns",
         "isCorrect": true,
-        "explanation": "Redux's strict unidirectional flow, pure reducers, and immutability are powerful but add complexity. For small apps, the boilerplate of action types, action creators, and reducers can outweigh the benefits. Redux Toolkit significantly reduces this now."
+        "explanation": "Redux's strict unidirectional flow, pure reducers, and immutability are powerful but add complexity. For small apps, the boilerplate of action types, action creators, and reducers can outweigh the benefits. Redux Toolkit significantly reduces this now.",
+        "optionTextTr": "Redux, basit kullanım durumları için daha fazla boilerplate gerektirir, dik öğrenme eğrisine sahiptir ve büyük store'larda performans hususları gerektirir.",
+        "explanationTr": "Doğru — RTK bu sorunların çoğunu hafifletir ama Flux tabanlı olmayan yaklaşımlara (Zustand, Jotai) kıyasla hâlâ daha yapılandırılmıştır."
       },
       {
         "optionText": "Redux is slower than Flux because it uses a single store instead of multiple stores",
         "isCorrect": false,
-        "explanation": "Performance is not a notable downside of Redux vs Flux. The single store is actually beneficial for consistency."
+        "explanation": "Performance is not a notable downside of Redux vs Flux. The single store is actually beneficial for consistency.",
+        "optionTextTr": "Redux, birden fazla store yerine tek store kullandığından Flux'tan daha yavaştır.",
+        "explanationTr": "Redux'ın tek store'u genellikle birden fazla Flux store'undan daha iyi performans gösterir."
       },
       {
         "optionText": "Redux doesn't support React — it was designed for Angular applications",
         "isCorrect": false,
-        "explanation": "Redux works with any JavaScript framework. react-redux is the official binding for React."
+        "explanation": "Redux works with any JavaScript framework. react-redux is the official binding for React.",
+        "optionTextTr": "Redux React'i desteklemez — Angular için tasarlanmıştır.",
+        "explanationTr": "Redux, React dahil herhangi bir JavaScript çerçevesiyle çalışan çerçeveden bağımsız bir kütüphanedir."
       },
       {
         "optionText": "Redux cannot handle async operations; Flux supports them natively",
         "isCorrect": false,
-        "explanation": "Both need help for async (neither has built-in async support). Redux uses middleware; Flux stores handle async in their own methods."
+        "explanation": "Both need help for async (neither has built-in async support). Redux uses middleware; Flux stores handle async in their own methods.",
+        "optionTextTr": "Redux async işlemleri kaldıramaz; Flux bunu yerel olarak destekler.",
+        "explanationTr": "Redux, middleware (Thunk, Saga) aracılığıyla async'i destekler; Flux yerel async desteğe sahip değildir."
       }
     ]
   },
@@ -422,22 +550,30 @@
       {
         "optionText": "An application architecture pattern from Facebook enforcing unidirectional data flow: Action → Dispatcher → Store → View.",
         "isCorrect": true,
-        "explanation": "Correct — Flux was the precursor to Redux. Redux simplified Flux by replacing the Dispatcher with pure reducer functions and combining multiple stores into one."
+        "explanation": "Correct — Flux was the precursor to Redux. Redux simplified Flux by replacing the Dispatcher with pure reducer functions and combining multiple stores into one.",
+        "optionTextTr": "Tek yönlü veri akışını zorunlu kılan Facebook'tan bir uygulama mimarisi deseni: Action → Dispatcher → Store → View → Action.",
+        "explanationTr": "Doğru — Redux, birden fazla store ve dispatcher'ı tek bir reducer fonksiyonuyla basitleştirerek Flux'tan ilham aldı."
       },
       {
         "optionText": "A CSS framework developed by Facebook for building responsive UIs.",
         "isCorrect": false,
-        "explanation": "Flux is a state management architecture pattern, not a CSS framework. Facebook's UI library is React."
+        "explanation": "Flux is a state management architecture pattern, not a CSS framework. Facebook's UI library is React.",
+        "optionTextTr": "Facebook'un duyarlı UI'lar oluşturmak için geliştirdiği CSS çerçevesi.",
+        "explanationTr": "Bu CSS çerçevelerini tanımlar — Flux bir uygulama mimarisi desenidir."
       },
       {
         "optionText": "A Redux middleware for handling asynchronous actions with generators.",
         "isCorrect": false,
-        "explanation": "That describes redux-saga. Flux is the broader architecture pattern that inspired Redux, not a middleware."
+        "explanation": "That describes redux-saga. Flux is the broader architecture pattern that inspired Redux, not a middleware.",
+        "optionTextTr": "Generator ile async action'ları yöneten Redux middleware.",
+        "explanationTr": "Bu redux-saga'yı tanımlar — Flux değil."
       },
       {
         "optionText": "A build tool that bundles React and Redux applications for production.",
         "isCorrect": false,
-        "explanation": "Flux is an architectural pattern, not a build tool. Bundling is handled by Webpack, Vite, or Turbopack."
+        "explanation": "Flux is an architectural pattern, not a build tool. Bundling is handled by Webpack, Vite, or Turbopack.",
+        "optionTextTr": "React ve Redux uygulamalarını production için bundle eden build aracı.",
+        "explanationTr": "Bu Webpack veya Vite'yi tanımlar — Flux değil."
       }
     ]
   },
@@ -448,22 +584,30 @@
       {
         "optionText": "The single object holding the entire application state tree — created with configureStore() and accessed via useAppSelector.",
         "isCorrect": true,
-        "explanation": "Correct — Redux enforces a single store ('single source of truth'). All state lives there; components subscribe via selectors."
+        "explanation": "Correct — Redux enforces a single store ('single source of truth'). All state lives there; components subscribe via selectors.",
+        "optionTextTr": "Tüm uygulama state ağacını tutan tek nesne — configureStore() ile oluşturulur, getState/dispatch/subscribe üçlüsü sunulur.",
+        "explanationTr": "Doğru — Redux, tüm state için tek bir global nesne kullanır."
       },
       {
         "optionText": "A local storage wrapper that persists Redux state between browser sessions.",
         "isCorrect": false,
-        "explanation": "The Redux store lives in memory. Persistence is optional via redux-persist. The store itself is a plain object, not a storage API."
+        "explanation": "The Redux store lives in memory. Persistence is optional via redux-persist. The store itself is a plain object, not a storage API.",
+        "optionTextTr": "Redux state'ini tarayıcı oturumları arasında kalıcı kılan local storage wrapper'ı.",
+        "explanationTr": "Bu redux-persist'i tanımlar — store değil."
       },
       {
         "optionText": "A collection of reducers — each reducer is one store in Redux.",
         "isCorrect": false,
-        "explanation": "Redux has one store with multiple reducers combined via combineReducers. A reducer is not a store."
+        "explanation": "Redux has one store with multiple reducers combined via combineReducers. A reducer is not a store.",
+        "optionTextTr": "Reducer koleksiyonu — her reducer Redux'ta bir store'dur.",
+        "explanationTr": "Redux'ta yalnızca bir store bulunur; birden fazla reducer combineReducers ile birleştirilir."
       },
       {
         "optionText": "A component that wraps the app and provides context — equivalent to React Context.",
         "isCorrect": false,
-        "explanation": "The <Provider> component wraps the app to provide the store via context, but the store itself is the state container, not a component."
+        "explanation": "The <Provider> component wraps the app to provide the store via context, but the store itself is the state container, not a component.",
+        "optionTextTr": "Uygulamayı sarmalayıp context sağlayan bir bileşen.",
+        "explanationTr": "Bu Provider bileşenini tanımlar — store nesnesi değil."
       }
     ]
   },
@@ -474,22 +618,30 @@
       {
         "optionText": "A pure function (state, action) => newState that describes how state changes in response to an action.",
         "isCorrect": true,
-        "explanation": "Correct — reducers must be pure: same inputs always produce same output, no side effects. Redux Toolkit's createSlice generates reducers with Immer for safe mutations."
+        "explanation": "Correct — reducers must be pure: same inputs always produce same output, no side effects. Redux Toolkit's createSlice generates reducers with Immer for safe mutations.",
+        "optionTextTr": "State değişikliğini açıklayan (state, action) => newState biçiminde saf fonksiyon.",
+        "explanationTr": "Doğru — reducer'lar saf olmalıdır: aynı girdi her zaman aynı çıktı; yan etki yok."
       },
       {
         "optionText": "A function that dispatches actions to the Redux store.",
         "isCorrect": false,
-        "explanation": "Dispatching is done via store.dispatch() or the useAppDispatch hook. A reducer receives actions and returns new state."
+        "explanation": "Dispatching is done via store.dispatch() or the useAppDispatch hook. A reducer receives actions and returns new state.",
+        "optionTextTr": "Store'a action dispatch eden fonksiyon.",
+        "explanationTr": "Bu action creator'ı tanımlar — reducer değil."
       },
       {
         "optionText": "A component that subscribes to the store and re-renders when state changes.",
         "isCorrect": false,
-        "explanation": "Components subscribe via useSelector. A reducer is a pure function that computes new state — it has no awareness of components."
+        "explanation": "Components subscribe via useSelector. A reducer is a pure function that computes new state — it has no awareness of components.",
+        "optionTextTr": "Store'a subscribe olan ve state değiştiğinde yeniden render eden bileşen.",
+        "explanationTr": "Bu React-Redux bağlı bileşeni tanımlar — reducer değil."
       },
       {
         "optionText": "A middleware that intercepts actions before they reach the store.",
         "isCorrect": false,
-        "explanation": "Middleware (thunk, saga) intercepts actions. Reducers receive actions after middleware and compute the new state."
+        "explanation": "Middleware (thunk, saga) intercepts actions. Reducers receive actions after middleware and compute the new state.",
+        "optionTextTr": "Action'ları store'a ulaşmadan yakalayan middleware.",
+        "explanationTr": "Bu middleware'i tanımlar — reducer değil."
       }
     ]
   },
@@ -500,22 +652,30 @@
       {
         "optionText": "A browser extension that lets you inspect every dispatched action, time-travel through state history, and replay actions.",
         "isCorrect": true,
-        "explanation": "Correct — Redux DevTools is one of Redux's killer features. Time-travel debugging lets you step forward/backward through state changes to reproduce bugs."
+        "explanation": "Correct — Redux DevTools is one of Redux's killer features. Time-travel debugging lets you step forward/backward through state changes to reproduce bugs.",
+        "optionTextTr": "Her dispatch edilen action'ı incelemenizi, state ağacını gezmenizi ve zaman yolculuğu debugging (önceki state'e geri sarma) yapmanızı sağlayan tarayıcı uzantısı.",
+        "explanationTr": "Doğru — Redux DevTools, Redux state yönetiminin en değerli özelliklerinden birini sunar."
       },
       {
         "optionText": "A CLI tool that generates Redux boilerplate code for slices and thunks.",
         "isCorrect": false,
-        "explanation": "Redux Toolkit's CLI (npx create-redux-app) generates code. Redux DevTools is a browser debugging extension."
+        "explanation": "Redux Toolkit's CLI (npx create-redux-app) generates code. Redux DevTools is a browser debugging extension.",
+        "optionTextTr": "Slice ve thunk için Redux boilerplate kodu üreten CLI aracı.",
+        "explanationTr": "Böyle bir CLI aracı yoktur — Redux DevTools bir tarayıcı uzantısıdır."
       },
       {
         "optionText": "A testing library for writing unit tests on Redux reducers and selectors.",
         "isCorrect": false,
-        "explanation": "Reducer testing uses standard Jest. Redux DevTools is a browser DevTools extension for runtime inspection and time-travel debugging."
+        "explanation": "Reducer testing uses standard Jest. Redux DevTools is a browser DevTools extension for runtime inspection and time-travel debugging.",
+        "optionTextTr": "Redux reducer ve selector'ları için unit test yazan test kütüphanesi.",
+        "explanationTr": "Bu Redux test kütüphanelerini tanımlar — DevTools değil."
       },
       {
         "optionText": "A VS Code extension that adds Redux-aware IntelliSense and type checking.",
         "isCorrect": false,
-        "explanation": "Redux type support comes from TypeScript + Redux Toolkit types. Redux DevTools is a browser extension, not a VS Code plugin."
+        "explanation": "Redux type support comes from TypeScript + Redux Toolkit types. Redux DevTools is a browser extension, not a VS Code plugin.",
+        "optionTextTr": "Redux farkında IntelliSense ve tip tamamlama ekleyen VS Code uzantısı.",
+        "explanationTr": "Redux DevTools bir tarayıcı uzantısıdır — VS Code uzantısı değil."
       }
     ]
   },
@@ -526,22 +686,30 @@
       {
         "optionText": "Handling async logic (API calls, timeouts) inside Redux — a thunk is a function that dispatches actions after async work completes.",
         "isCorrect": true,
-        "explanation": "Correct — redux-thunk lets you dispatch a function instead of a plain action. That function receives dispatch and getState, enabling async workflows."
+        "explanation": "Correct — redux-thunk lets you dispatch a function instead of a plain action. That function receives dispatch and getState, enabling async workflows.",
+        "optionTextTr": "Redux'ta async mantığı (API çağrıları, zamanlayıcılar) yönetmek için — thunk, dispatch ve getState'e erişimi olan bir fonksiyon döndüren action creator'dır.",
+        "explanationTr": "Doğru — RTK'nın createAsyncThunk'u bu deseni pek çok boilerplate olmadan otomatikleştirir."
       },
       {
         "optionText": "Combining multiple reducers into one root reducer for the Redux store.",
         "isCorrect": false,
-        "explanation": "That's combineReducers. Redux Thunk is middleware for async action creators — functions that dispatch other actions after async work."
+        "explanation": "That's combineReducers. Redux Thunk is middleware for async action creators — functions that dispatch other actions after async work.",
+        "optionTextTr": "Birden fazla reducer'ı Redux store için tek bir root reducer'da birleştirmek.",
+        "explanationTr": "Bu combineReducers'ı tanımlar — Thunk değil."
       },
       {
         "optionText": "Providing type-safe selectors that memoize expensive state computations.",
         "isCorrect": false,
-        "explanation": "Memoised selectors are provided by Reselect (createSelector). Redux Thunk handles async side effects."
+        "explanation": "Memoised selectors are provided by Reselect (createSelector). Redux Thunk handles async side effects.",
+        "optionTextTr": "Pahalı state hesaplamalarını memoize eden tip güvenli selector'lar sağlamak.",
+        "explanationTr": "Bu Reselect'i tanımlar — Thunk değil."
       },
       {
         "optionText": "Replacing the Redux store with React Context for simpler state management.",
         "isCorrect": false,
-        "explanation": "Redux Thunk is middleware that enhances Redux — it doesn't replace it. Context is a separate, simpler alternative for small apps."
+        "explanation": "Redux Thunk is middleware that enhances Redux — it doesn't replace it. Context is a separate, simpler alternative for small apps.",
+        "optionTextTr": "Daha basit state yönetimi için Redux store'u React Context ile değiştirmek.",
+        "explanationTr": "Thunk, store'u değiştirmez — async action işleme için middleware olarak çalışır."
       }
     ]
   },
@@ -552,22 +720,30 @@
       {
         "optionText": "The name comes from the functional programming reduce operation: (accumulator, value) => accumulator, applied to a stream of actions.",
         "isCorrect": true,
-        "explanation": "Correct — if you reduce an array of actions over an initial state using the reducer function, you get the current state. Redux models state as accumulated history."
+        "explanation": "Correct — if you reduce an array of actions over an initial state using the reducer function, you get the current state. Redux models state as accumulated history.",
+        "optionTextTr": "Ad, functional programming'deki reduce operasyonundan gelir: (accumulator, item) => accumulator gibi, reducer'lar (state, action) => newState çalışır.",
+        "explanationTr": "Doğru — Redux, reducers adını Array.prototype.reduce() ile olan benzerlikten almıştır."
       },
       {
         "optionText": "Because they reduce the amount of code needed compared to class-based state management.",
         "isCorrect": false,
-        "explanation": "The name is a functional programming term — Array.reduce. It has nothing to do with code verbosity."
+        "explanation": "The name is a functional programming term — Array.reduce. It has nothing to do with code verbosity.",
+        "optionTextTr": "Sınıf tabanlı yaklaşımlara kıyasla gereken kod miktarını azalttıkları için.",
+        "explanationTr": "Adlandırma, kod azaltmayla değil; functional programming reduce konseptiyle ilgilidir."
       },
       {
         "optionText": "They reduce the state to a minimal representation before sending it to components.",
         "isCorrect": false,
-        "explanation": "Reducers don't minimise state — they compute new state from the previous state and an action, following the functional reduce pattern."
+        "explanation": "Reducers don't minimise state — they compute new state from the previous state and an action, following the functional reduce pattern.",
+        "optionTextTr": "State'i store'a göndermeden önce minimal temsiline indirgerler.",
+        "explanationTr": "Bu yanlış bir tanımdır — reducer'lar state'i göndermeden önce minimize etmez."
       },
       {
         "optionText": "They reduce side effects by preventing state mutations.",
         "isCorrect": false,
-        "explanation": "Reducers are pure functions (no side effects), but the name comes from the reduce() operation in functional programming, not from reducing side effects."
+        "explanation": "Reducers are pure functions (no side effects), but the name comes from the reduce() operation in functional programming, not from reducing side effects.",
+        "optionTextTr": "State mutasyonlarını önleyerek yan etkileri azaltırlar.",
+        "explanationTr": "Yan etkileri önlemek doğruyken, adlandırma bu nedenle değil; reduce operasyonundan gelir."
       }
     ]
   },
@@ -578,22 +754,30 @@
       {
         "optionText": "connect(mapStateToProps, mapDispatchToProps)(Component) — a HOC that injects selected state and dispatch as props. Largely replaced by hooks.",
         "isCorrect": true,
-        "explanation": "Correct — connect is the legacy API. Modern Redux uses useSelector and useDispatch hooks, which are simpler and work directly in functional components."
+        "explanation": "Correct — connect is the legacy API. Modern Redux uses useSelector and useDispatch hooks, which are simpler and work directly in functional components.",
+        "optionTextTr": "connect(mapStateToProps, mapDispatchToProps)(Component) — store'u bileşen prop'larıyla birleştiren HOC.",
+        "explanationTr": "Doğru — bağlı bileşende useSelector ve useDispatch hook'larının öncüsü olan, hâlâ class bileşenlerinde kullanılan yoldur."
       },
       {
         "optionText": "Import connect and call it as a hook inside a functional component: const state = connect(mapState).",
         "isCorrect": false,
-        "explanation": "connect is a higher-order component (HOC), not a hook. Hooks for Redux are useSelector and useDispatch."
+        "explanation": "connect is a higher-order component (HOC), not a hook. Hooks for Redux are useSelector and useDispatch.",
+        "optionTextTr": "connect'i import edip functional bileşen içinde hook olarak çağırın.",
+        "explanationTr": "connect bir hook değil HOC'dur — useSelector ve useDispatch modern hook alternatifleridir."
       },
       {
         "optionText": "connect replaces the Provider — you don't need <Provider> if you use connect.",
         "isCorrect": false,
-        "explanation": "<Provider> is always needed to make the store available. connect wraps individual components to subscribe them to the store."
+        "explanation": "<Provider> is always needed to make the store available. connect wraps individual components to subscribe them to the store.",
+        "optionTextTr": "connect, Provider'ın yerini alır — connect kullanırsanız <Provider> gerekmez.",
+        "explanationTr": "connect, Provider gerektirir — store bağlamını sağlamak için Provider hâlâ zorunludur."
       },
       {
         "optionText": "connect is required in Redux Toolkit — without it, dispatched actions don't reach reducers.",
         "isCorrect": false,
-        "explanation": "Redux Toolkit recommends useSelector and useDispatch hooks, not connect. Actions reach reducers via the store regardless of connect."
+        "explanation": "Redux Toolkit recommends useSelector and useDispatch hooks, not connect. Actions reach reducers via the store regardless of connect.",
+        "optionTextTr": "connect, Redux Toolkit'te zorunludur — onsuz dispatch edilen action'lar çalışmaz.",
+        "explanationTr": "Redux Toolkit, connect gerektirmez — useSelector ve useDispatch hook'ları önerilir."
       }
     ]
   },
@@ -604,22 +788,30 @@
       {
         "optionText": "Pass an array to the middleware option in configureStore — use getDefaultMiddleware().concat(logger, myMiddleware).",
         "isCorrect": true,
-        "explanation": "Correct — Redux Toolkit's configureStore includes thunk by default. Concatenate additional middlewares like redux-logger or custom ones."
+        "explanation": "Correct — Redux Toolkit's configureStore includes thunk by default. Concatenate additional middlewares like redux-logger or custom ones.",
+        "optionTextTr": "configureStore'daki middleware seçeneğine dizi geçin — getDefaultMiddleware ile varsayılan middleware'i dahil edin.",
+        "explanationTr": "Doğru — RTK'nın configureStore ile: middleware: (getDefault) => getDefault().concat(customMiddleware)"
       },
       {
         "optionText": "Call applyMiddleware() multiple times — once per middleware.",
         "isCorrect": false,
-        "explanation": "applyMiddleware() accepts all middlewares in one call: applyMiddleware(thunk, logger). Calling it multiple times would overwrite previous middleware."
+        "explanation": "applyMiddleware() accepts all middlewares in one call: applyMiddleware(thunk, logger). Calling it multiple times would overwrite previous middleware.",
+        "optionTextTr": "Her middleware için applyMiddleware()'i birden fazla kez çağırın.",
+        "explanationTr": "applyMiddleware tek seferde birden fazla middleware alabilir; birden fazla kez çağırmanız gerekmez."
       },
       {
         "optionText": "Add middlewares inside each reducer function — they run before the state update.",
         "isCorrect": false,
-        "explanation": "Reducers are pure state functions. Middleware is applied at the store level and runs before actions reach reducers."
+        "explanation": "Reducers are pure state functions. Middleware is applied at the store level and runs before actions reach reducers.",
+        "optionTextTr": "Middleware'leri her reducer fonksiyonu içine ekleyin.",
+        "explanationTr": "Middleware, reducer'lara değil; store'a eklenir."
       },
       {
         "optionText": "Middleware must be added one at a time by recreating the store — configureStore doesn't support arrays.",
         "isCorrect": false,
-        "explanation": "configureStore's middleware option accepts an array or a callback receiving getDefaultMiddleware. Multiple middlewares are supported."
+        "explanation": "configureStore's middleware option accepts an array or a callback receiving getDefaultMiddleware. Multiple middlewares are supported.",
+        "optionTextTr": "Middleware her seferinde store yeniden oluşturularak birer birer eklenmeli.",
+        "explanationTr": "RTK'nın configureStore tüm middleware'leri tek bir çağrıda alır."
       }
     ]
   },
@@ -630,22 +822,30 @@
       {
         "optionText": "Use createAsyncThunk from Redux Toolkit — it dispatches pending/fulfilled/rejected actions automatically around your async fetch.",
         "isCorrect": true,
-        "explanation": "Correct — createAsyncThunk is the idiomatic RTK pattern. It handles loading/error states via extraReducers in the slice."
+        "explanation": "Correct — createAsyncThunk is the idiomatic RTK pattern. It handles loading/error states via extraReducers in the slice.",
+        "optionTextTr": "RTK'nın createAsyncThunk kullanın — pending/fulfilled/rejected action'larını dispatch eder ve sonuçları işler.",
+        "explanationTr": "Doğru — createAsyncThunk, async data fetching için Redux'ın önerilen yoludur."
       },
       {
         "optionText": "Make the fetch call inside a reducer — reducers can handle async operations in Redux Toolkit.",
         "isCorrect": false,
-        "explanation": "Reducers must be pure and synchronous. Async operations belong in thunks, sagas, or middleware — never in reducers."
+        "explanation": "Reducers must be pure and synchronous. Async operations belong in thunks, sagas, or middleware — never in reducers.",
+        "optionTextTr": "fetch çağrısını reducer içinde yapın — reducer'lar async'i işleyebilir.",
+        "explanationTr": "Reducer'lar saf senkron fonksiyonlar olmalıdır — async işlemi içermemeliler."
       },
       {
         "optionText": "Use useEffect in a component to fetch, then dispatch the result — Redux has no built-in async support.",
         "isCorrect": false,
-        "explanation": "Redux has createAsyncThunk for async. While fetching in useEffect and dispatching is valid, it bypasses Redux's async patterns and loading state management."
+        "explanation": "Redux has createAsyncThunk for async. While fetching in useEffect and dispatching is valid, it bypasses Redux's async patterns and loading state management.",
+        "optionTextTr": "Bileşende useEffect kullanarak fetch yapın, ardından sonucu dispatch edin.",
+        "explanationTr": "Bu çalışır ama createAsyncThunk bunu RTK'da daha temiz hale getirir."
       },
       {
         "optionText": "Add an async middleware like redux-ajax — the standard Redux Toolkit doesn't support Ajax.",
         "isCorrect": false,
-        "explanation": "Redux Toolkit ships createAsyncThunk for async operations. No extra library is needed for Ajax requests."
+        "explanation": "Redux Toolkit ships createAsyncThunk for async operations. No extra library is needed for Ajax requests.",
+        "optionTextTr": "Redux Toolkit'in standart aracı olan redux-ajax middleware'i ekleyin.",
+        "explanationTr": "redux-ajax standart bir araç değildir — createAsyncThunk önerilen yaklaşımdır."
       }
     ]
   },
@@ -656,22 +856,30 @@
       {
         "optionText": "Add a reset action to each slice that returns initialState, or handle a global RESET action in the root reducer.",
         "isCorrect": true,
-        "explanation": "Correct — for per-slice reset, add a reset reducer. For global reset (e.g. logout), intercept the action in the root reducer and return undefined so all slices reinitialise."
+        "explanation": "Correct — for per-slice reset, add a reset reducer. For global reset (e.g. logout), intercept the action in the root reducer and return undefined so all slices reinitialise.",
+        "optionTextTr": "Başlangıç state'ini döndüren her slice'a reset action ekleyin veya root reducer'da RESET action'ını yakalayın.",
+        "explanationTr": "Doğru — tüm state'i sıfırlamak için: root reducer'da if (action.type === 'RESET') return initialState."
       },
       {
         "optionText": "Call store.reset() — Redux provides a built-in reset method on the store.",
         "isCorrect": false,
-        "explanation": "Redux stores have no reset() method. State reset is implemented via dispatched actions and reducer logic."
+        "explanation": "Redux stores have no reset() method. State reset is implemented via dispatched actions and reducer logic.",
+        "optionTextTr": "store.reset() çağırın — Redux, store'da yerleşik reset metodu sağlar.",
+        "explanationTr": "Redux store'unda reset() metodu yoktur."
       },
       {
         "optionText": "Delete and recreate the store — Redux stores cannot be reset, only replaced.",
         "isCorrect": false,
-        "explanation": "Recreating the store is a heavy-handed approach that loses subscriptions. Dispatching a reset action is the correct pattern."
+        "explanation": "Recreating the store is a heavy-handed approach that loses subscriptions. Dispatching a reset action is the correct pattern.",
+        "optionTextTr": "Store'u silin ve yeniden oluşturun.",
+        "explanationTr": "Store'u silip yeniden oluşturmak aşırı ve hata açık bir yaklaşımdır — reducer'da reset action işlemek daha temizdir."
       },
       {
         "optionText": "Use store.dispatch({ type: '@@INIT' }) — this is Redux's internal reset action.",
         "isCorrect": false,
-        "explanation": "@@INIT is Redux's internal initialisation action — dispatching it manually is not supported. Use a custom reset action handled by your reducers."
+        "explanation": "@@INIT is Redux's internal initialisation action — dispatching it manually is not supported. Use a custom reset action handled by your reducers.",
+        "optionTextTr": "store.dispatch({ type: '@@INIT' }) çağırın — Redux'ın dahili sıfırlama action'ıdır.",
+        "explanationTr": "@@INIT, Redux'ın dahili başlatma action'ıdır; state'i sıfırlamak için resmi olarak desteklenmez."
       }
     ]
   },
@@ -682,22 +890,30 @@
       {
         "optionText": "In legacy Redux, string constants (e.g. ADD_TODO = 'ADD_TODO') prevented typos in action types — Redux Toolkit's createSlice eliminates this need.",
         "isCorrect": true,
-        "explanation": "Correct — constants gave compile-time safety before TypeScript adoption. RTK generates action creators with correct types automatically, making manual constants unnecessary."
+        "explanation": "Correct — constants gave compile-time safety before TypeScript adoption. RTK generates action creators with correct types automatically, making manual constants unnecessary.",
+        "optionTextTr": "Eski Redux'ta string sabitler (ADD_TODO = 'ADD_TODO') action type string'lerini typo'dan korur ve IDE otomatik tamamlama sağlar; RTK bunu createSlice ile otomatikleştirir.",
+        "explanationTr": "Doğru — RTK ile createSlice, action type'larını otomatik olarak üretir; elle sabit tanımlamaya gerek kalmaz."
       },
       {
         "optionText": "Constants define the initial state values for each Redux slice.",
         "isCorrect": false,
-        "explanation": "Initial state is defined in the initialState field of createSlice. Constants were used for action type strings, not state values."
+        "explanation": "Initial state is defined in the initialState field of createSlice. Constants were used for action type strings, not state values.",
+        "optionTextTr": "Sabitler, her Redux slice için initial state değerlerini tanımlar.",
+        "explanationTr": "Initial state, reducer'ın varsayılan parametre değerinde tanımlanır — sabit dosyalarında değil."
       },
       {
         "optionText": "Constants in Redux are configuration values passed to configureStore.",
         "isCorrect": false,
-        "explanation": "configureStore accepts reducer, middleware, and devTools options. Action type constants are a separate pattern for naming dispatched actions."
+        "explanation": "configureStore accepts reducer, middleware, and devTools options. Action type constants are a separate pattern for naming dispatched actions.",
+        "optionTextTr": "Sabitler, configureStore'a geçirilen yapılandırma değerleridir.",
+        "explanationTr": "Sabitler, yapılandırma değerleri değil; action type string'leridir."
       },
       {
         "optionText": "Redux requires constants to be defined in a separate constants.ts file for tree-shaking.",
         "isCorrect": false,
-        "explanation": "There is no such Redux requirement. Constants were a community convention for action type strings, not a performance or bundling feature."
+        "explanation": "There is no such Redux requirement. Constants were a community convention for action type strings, not a performance or bundling feature.",
+        "optionTextTr": "Redux, sabitlerin ayrı constants.ts dosyasında tanımlanmasını zorunlu kılar.",
+        "explanationTr": "Bu bir zorunluluk değil, eski bir kuraldır; RTK ile büyük ölçüde gereksiz hale geldi."
       }
     ]
   },
@@ -708,22 +924,30 @@
       {
         "optionText": "Feature folder pattern: each feature has its own directory with its slice, selectors, and thunks co-located.",
         "isCorrect": true,
-        "explanation": "Correct — Redux Toolkit recommends feature-based organisation over type-based (actions/, reducers/, selectors/). Co-location makes it easier to maintain and delete features."
+        "explanation": "Correct — Redux Toolkit recommends feature-based organisation over type-based (actions/, reducers/, selectors/). Co-location makes it easier to maintain and delete features.",
+        "optionTextTr": "Feature folder deseni: her feature, slice/selector/action'larını içeren kendi dizinine sahiptir.",
+        "explanationTr": "Doğru — bu yaklaşım Redux Toolkit ve modern Redux dokümanları tarafından önerilen yapıdır."
       },
       {
         "optionText": "Always separate actions, reducers, and selectors into three root-level folders.",
         "isCorrect": false,
-        "explanation": "This is the old Rails-style organisation that Redux Toolkit moved away from. Feature folders are now recommended."
+        "explanation": "This is the old Rails-style organisation that Redux Toolkit moved away from. Feature folders are now recommended.",
+        "optionTextTr": "Action'ları, reducer'ları ve selector'ları her zaman ayrı root dizinlerine ayırın.",
+        "explanationTr": "Bu eski 'duck' karşıtı yaklaşımdır; modern Redux, feature-first organizasyonu tercih eder."
       },
       {
         "optionText": "Put all Redux code in a single store.ts file — splitting it causes circular imports.",
         "isCorrect": false,
-        "explanation": "A single file only works for tiny apps. Feature folders are idiomatic for larger codebases and don't inherently cause circular imports."
+        "explanation": "A single file only works for tiny apps. Feature folders are idiomatic for larger codebases and don't inherently cause circular imports.",
+        "optionTextTr": "Tüm Redux kodunu tek bir store.ts dosyasına koyun.",
+        "explanationTr": "Küçük projeler için çalışabilir ama büyük uygulamalar için bakımı güçleşir."
       },
       {
         "optionText": "Redux has no recommended structure — it's entirely up to the team.",
         "isCorrect": false,
-        "explanation": "Redux Toolkit's Style Guide explicitly recommends the feature folder pattern with co-located slices."
+        "explanation": "Redux Toolkit's Style Guide explicitly recommends the feature folder pattern with co-located slices.",
+        "optionTextTr": "Redux'ın önerilen yapısı yoktur — tamamen ekibe bağlıdır.",
+        "explanationTr": "Redux'ın resmi dokümanları feature folder yaklaşımını önerir; bu konuda belirsiz değildir."
       }
     ]
   },
@@ -734,22 +958,30 @@
       {
         "optionText": "Use typed useAppSelector to read state and useAppDispatch to dispatch — never import the store directly into components.",
         "isCorrect": true,
-        "explanation": "Correct — direct store imports in components couple them tightly and bypass React's render cycle. Hooks keep components testable and reactive."
+        "explanation": "Correct — direct store imports in components couple them tightly and bypass React's render cycle. Hooks keep components testable and reactive.",
+        "optionTextTr": "Typed useAppSelector ile state okuyun, useAppDispatch ile dispatch edin.",
+        "explanationTr": "Doğru — RTK ile bu hook'ların yazılı versiyonları tip güvenliğini en üst düzeye çıkarır."
       },
       {
         "optionText": "Import the store directly: import store from '../store' and call store.getState().",
         "isCorrect": false,
-        "explanation": "Direct store imports in components bypass React's subscription mechanism and break re-renders. Use useSelector to subscribe reactively."
+        "explanation": "Direct store imports in components bypass React's subscription mechanism and break re-renders. Use useSelector to subscribe reactively.",
+        "optionTextTr": "Doğrudan store'u import edin ve store.getState() çağırın.",
+        "explanationTr": "Bu React bileşen context'inde anti-pattern'dir — useSelector hook'ları önerilir."
       },
       {
         "optionText": "Use React Context to pass the store as a prop through the component tree.",
         "isCorrect": false,
-        "explanation": "<Provider> already passes the store via context. You access it through useSelector/useDispatch hooks, not manual prop drilling."
+        "explanation": "<Provider> already passes the store via context. You access it through useSelector/useDispatch hooks, not manual prop drilling.",
+        "optionTextTr": "Store'u bileşen ağacında prop olarak geçirmek için React Context kullanın.",
+        "explanationTr": "React-Redux Provider store'u context aracılığıyla yönetir; store'u elle prop olarak geçirmek gerekmez."
       },
       {
         "optionText": "Use withStore() HOC from Redux Toolkit to inject the store into any component.",
         "isCorrect": false,
-        "explanation": "There is no withStore() HOC in Redux Toolkit. Use the useAppSelector and useAppDispatch hooks from react-redux."
+        "explanation": "There is no withStore() HOC in Redux Toolkit. Use the useAppSelector and useAppDispatch hooks from react-redux.",
+        "optionTextTr": "Store'u bileşene enjekte etmek için Redux Toolkit'ten withStore() HOC kullanın.",
+        "explanationTr": "withStore() diye bir Redux Toolkit API'si yoktur — useSelector/useDispatch hook'ları kullanılır."
       }
     ]
   },
@@ -760,22 +992,30 @@
       {
         "optionText": "A background daemon process that watches the Redux action stream using generator functions and handles side effects declaratively.",
         "isCorrect": true,
-        "explanation": "Correct — sagas use ES6 generators (yield) and effects (call, put, take, select) to express async flows. They're more powerful than thunks for complex orchestration but have a steeper learning curve."
+        "explanation": "Correct — sagas use ES6 generators (yield) and effects (call, put, take, select) to express async flows. They're more powerful than thunks for complex orchestration but have a steeper learning curve.",
+        "optionTextTr": "Arka planda Redux action stream'ini izleyen, async yan etkileri başlatan ve genel iş akışlarını yöneten daemon süreci.",
+        "explanationTr": "Doğru — saga'lar, her yeni action stream'e tepki veren döngüler olarak modellenir."
       },
       {
         "optionText": "A replacement for the Redux store that handles state and side effects in one place.",
         "isCorrect": false,
-        "explanation": "redux-saga is middleware, not a store replacement. The Redux store still manages state; sagas handle async side effects alongside it."
+        "explanation": "redux-saga is middleware, not a store replacement. The Redux store still manages state; sagas handle async side effects alongside it.",
+        "optionTextTr": "State ve yan etkileri yöneten Redux store'un yerine geçen yapı.",
+        "explanationTr": "redux-saga, Redux store'un yerini almaz — middleware olarak çalışır."
       },
       {
         "optionText": "A component wrapper that intercepts Redux actions before they reach the store.",
         "isCorrect": false,
-        "explanation": "Sagas are middleware functions (not component wrappers) that listen to dispatched actions using yield take() and respond with side effects."
+        "explanation": "Sagas are middleware functions (not component wrappers) that listen to dispatched actions using yield take() and respond with side effects.",
+        "optionTextTr": "Redux action'larını reducer'a ulaşmadan önce yakalayan component wrapper'ı.",
+        "explanationTr": "Bu middleware'in genel tanımıdır — saga'ların özel mental modelini tanımlamaz."
       },
       {
         "optionText": "A way to write Redux reducers asynchronously using async/await syntax.",
         "isCorrect": false,
-        "explanation": "Reducers must remain synchronous and pure. redux-saga uses generator functions (function*) for async orchestration in middleware, not in reducers."
+        "explanation": "Reducers must remain synchronous and pure. redux-saga uses generator functions (function*) for async orchestration in middleware, not in reducers.",
+        "optionTextTr": "async/await sözdizimi kullanarak Redux reducer'larını asenkron yazmanın yolu.",
+        "explanationTr": "Saga, async/await değil generator fonksiyonları kullanır."
       }
     ]
   },
@@ -786,22 +1026,30 @@
       {
         "optionText": "Relay is a GraphQL client that co-locates data requirements with components; Redux is a general-purpose state container for any data.",
         "isCorrect": true,
-        "explanation": "Correct — Relay fetches, caches, and normalises GraphQL data automatically. Redux is agnostic to data fetching and suits non-GraphQL apps or complex client state."
+        "explanation": "Correct — Relay fetches, caches, and normalises GraphQL data automatically. Redux is agnostic to data fetching and suits non-GraphQL apps or complex client state.",
+        "optionTextTr": "Relay bir GraphQL istemcisidir; veri gereksinimlerini bileşenlerle bir arada tutar; Redux ise genel state yöneticisidir. Bunlar birbirinin yerine geçmez.",
+        "explanationTr": "Doğru — Relay GraphQL state'ini yönetirken, Redux uygulama genelinde durum yönetimini ele alır."
       },
       {
         "optionText": "Relay is a newer version of Redux with built-in async support.",
         "isCorrect": false,
-        "explanation": "Relay and Redux are completely independent libraries with different purposes. Relay is a GraphQL framework from Meta; Redux is a general state manager."
+        "explanation": "Relay and Redux are completely independent libraries with different purposes. Relay is a GraphQL framework from Meta; Redux is a general state manager.",
+        "optionTextTr": "Relay, yerleşik async desteğiyle Redux'ın daha yeni versiyonudur.",
+        "explanationTr": "Relay, Redux'ın yeni versiyonu değildir — Facebook tarafından geliştirilen tamamen farklı bir GraphQL istemcisidir."
       },
       {
         "optionText": "Redux works with REST APIs; Relay works with GraphQL — they are functionally equivalent otherwise.",
         "isCorrect": false,
-        "explanation": "They have fundamentally different models. Relay auto-generates queries from component fragments; Redux is a manual state container with no data fetching logic."
+        "explanation": "They have fundamentally different models. Relay auto-generates queries from component fragments; Redux is a manual state container with no data fetching logic.",
+        "optionTextTr": "Redux REST API'lerle; Relay GraphQL ile çalışır — tamamen değiştirilebilirler.",
+        "explanationTr": "Her ikisi de farklı amaçlara hizmet eder ve birbirinin yerine geçemez."
       },
       {
         "optionText": "Relay replaces both Redux and React Router in a modern React application.",
         "isCorrect": false,
-        "explanation": "Relay handles data fetching and caching for GraphQL. Routing is still handled by React Router or Next.js; global UI state still benefits from Redux or Zustand."
+        "explanation": "Relay handles data fetching and caching for GraphQL. Routing is still handled by React Router or Next.js; global UI state still benefits from Redux or Zustand.",
+        "optionTextTr": "Relay, React Router ve Redux'ın yerini modern React uygulamasında tamamen alır.",
+        "explanationTr": "Relay yalnızca GraphQL veri yönetimini kapsama alır — routing ve genel state yönetimini değil."
       }
     ]
   },
@@ -812,22 +1060,30 @@
       {
         "optionText": "It's decorator syntax (@connect) — a shorthand to apply connect as a class decorator instead of wrapping with connect()(Component).",
         "isCorrect": true,
-        "explanation": "Correct — @connect(mapState, mapDispatch) above a class component is equivalent to export default connect(mapState, mapDispatch)(MyComponent). This is legacy class component syntax."
+        "explanation": "Correct — @connect(mapState, mapDispatch) above a class component is equivalent to export default connect(mapState, mapDispatch)(MyComponent). This is legacy class component syntax.",
+        "optionTextTr": "Decorator sözdizimi (@connect) — connect'i sınıf bileşenlerine kısaltılmış biçimde uygulamak için.",
+        "explanationTr": "Doğru — @connect(mapState, mapDispatch) class MyComponent genişletilmiş HOC wrapper'ını sarmalar."
       },
       {
         "optionText": "@ imports the Redux store from a module alias — it's a Webpack path shortcut.",
         "isCorrect": false,
-        "explanation": "Module aliases like @/components use @ as a path prefix. In Redux, @connect uses @ as the decorator syntax from the TC39 decorators proposal."
+        "explanation": "Module aliases like @/components use @ as a path prefix. In Redux, @connect uses @ as the decorator syntax from the TC39 decorators proposal.",
+        "optionTextTr": "@ Redux store'u bir modül takma adından import eder — Webpack path alias.",
+        "explanationTr": "@ burada Redux store import sözdizimini değil; decorator sözdizimini ifade eder."
       },
       {
         "optionText": "@ marks the component as a Redux action creator that can be dispatched.",
         "isCorrect": false,
-        "explanation": "Action creators are plain functions — they have no special syntax. @connect is a class decorator that injects state and dispatch as props."
+        "explanation": "Action creators are plain functions — they have no special syntax. @connect is a class decorator that injects state and dispatch as props.",
+        "optionTextTr": "@ bileşeni dispatch edilebilecek Redux action creator olarak işaretler.",
+        "explanationTr": "Bu decorator'ın doğru açıklaması değildir — @connect HOC bileşeni store'a bağlar."
       },
       {
         "optionText": "@ is required when using TypeScript with Redux — it enables type inference for connected components.",
         "isCorrect": false,
-        "explanation": "TypeScript type inference for connect comes from type parameters, not the @ decorator. The decorator is optional syntactic sugar for class components."
+        "explanation": "TypeScript type inference for connect comes from type parameters, not the @ decorator. The decorator is optional syntactic sugar for class components.",
+        "optionTextTr": "@ TypeScript ile Redux kullanıldığında zorunludur.",
+        "explanationTr": "Redux ile TypeScript kullanmak için @ decorator sözdizimi zorunlu değildir."
       }
     ]
   },
@@ -838,22 +1094,30 @@
       {
         "optionText": "Action log, state tree inspector, time-travel debugging (step through past states), action replay, and import/export of state snapshots.",
         "isCorrect": true,
-        "explanation": "Correct — Redux DevTools' time-travel is its killer feature. You can jump to any past state, replay actions to reproduce bugs, and export state for sharing."
+        "explanation": "Correct — Redux DevTools' time-travel is its killer feature. You can jump to any past state, replay actions to reproduce bugs, and export state for sharing.",
+        "optionTextTr": "Action log, state ağacı inspector'ı, zaman yolculuğu debugging (önceki state'e geri sarma), diff görünümü ve action tekrar oynatma.",
+        "explanationTr": "Doğru — bunlar Redux DevTools'u Redux ekosistemindeki en güçlü debugging araçlarından biri yapar."
       },
       {
         "optionText": "Automatic performance profiling, bundle size analysis, and dead code detection.",
         "isCorrect": false,
-        "explanation": "Performance profiling uses React DevTools Profiler; bundle analysis uses tools like webpack-bundle-analyzer. Redux DevTools focuses on action and state inspection."
+        "explanation": "Performance profiling uses React DevTools Profiler; bundle analysis uses tools like webpack-bundle-analyzer. Redux DevTools focuses on action and state inspection.",
+        "optionTextTr": "Otomatik performans profilleme, bundle boyutu analizi ve dead code tespiti.",
+        "explanationTr": "DevTools state ve action yönetimi odaklıdır — bundle analizi için webpack-bundle-analyzer gibi ayrı araçlar gerekir."
       },
       {
         "optionText": "It generates TypeScript types automatically from your Redux slice definitions.",
         "isCorrect": false,
-        "explanation": "Type generation is done by Redux Toolkit's TypeScript support. Redux DevTools is a runtime debugging tool, not a code generation tool."
+        "explanation": "Type generation is done by Redux Toolkit's TypeScript support. Redux DevTools is a runtime debugging tool, not a code generation tool.",
+        "optionTextTr": "Redux slice'larınızdan otomatik TypeScript tipleri üretir.",
+        "explanationTr": "DevTools tip üretimi yapmaz — Redux Toolkit bu konuda tip çıkarımı sağlar."
       },
       {
         "optionText": "It replaces console.log debugging and adds breakpoints directly in Redux reducers.",
         "isCorrect": false,
-        "explanation": "Debugger breakpoints are set in browser DevTools. Redux DevTools provides action and state inspection — complementary to, not a replacement for, the debugger."
+        "explanation": "Debugger breakpoints are set in browser DevTools. Redux DevTools provides action and state inspection — complementary to, not a replacement for, the debugger.",
+        "optionTextTr": "console.log debugging'in yerini alır ve doğrudan breakpoint ekler.",
+        "explanationTr": "DevTools mükemmel state inspection sunar ama IDE breakpoint'lerinin yerini almaz."
       }
     ]
   },
@@ -864,22 +1128,30 @@
       {
         "optionText": "A library that stores form state (field values, validation, touched flags) in the Redux store — largely superseded by React Hook Form.",
         "isCorrect": true,
-        "explanation": "Correct — Redux Form was popular for keeping form state in Redux for debugging and cross-component access. Today React Hook Form (uncontrolled) or Formik are preferred for performance."
+        "explanation": "Correct — Redux Form was popular for keeping form state in Redux for debugging and cross-component access. Today React Hook Form (uncontrolled) or Formik are preferred for performance.",
+        "optionTextTr": "Form state'ini (alan değerleri, doğrulama, touched flag'ları) Redux store'da saklayan kütüphane — artık React Hook Form lehine önerilmemektedir.",
+        "explanationTr": "Doğru — Redux Form, form state'ini global store'a koyduğundan performans sorunlarına neden olabilir; React Hook Form daha hafiftir."
       },
       {
         "optionText": "Redux Toolkit's built-in form handling solution with automatic validation.",
         "isCorrect": false,
-        "explanation": "Redux Toolkit has no built-in form library. Redux Form was a separate third-party library. Modern projects use React Hook Form or Formik."
+        "explanation": "Redux Toolkit has no built-in form library. Redux Form was a separate third-party library. Modern projects use React Hook Form or Formik.",
+        "optionTextTr": "Otomatik doğrulama içeren Redux Toolkit'in yerleşik form işleme çözümü.",
+        "explanationTr": "Redux Toolkit'in yerleşik form işleme çözümü yoktur — Redux Form ayrı bir kütüphanedir."
       },
       {
         "optionText": "A Redux middleware that validates action payloads before they reach reducers.",
         "isCorrect": false,
-        "explanation": "Redux Form manages HTML form state in Redux. Payload validation is a separate concern handled by middleware like redux-immutable-state-invariant or Zod schemas."
+        "explanation": "Redux Form manages HTML form state in Redux. Payload validation is a separate concern handled by middleware like redux-immutable-state-invariant or Zod schemas.",
+        "optionTextTr": "Action payload'larını reducer'a ulaşmadan doğrulayan Redux middleware.",
+        "explanationTr": "Bu Redux Form'u tanımlamaz — Redux Form form state yönetimiyle ilgilidir."
       },
       {
         "optionText": "A component library providing pre-styled form inputs connected to Redux.",
         "isCorrect": false,
-        "explanation": "Redux Form managed form state, not UI components. It worked with any input components. UI component libraries like shadcn/ui are separate."
+        "explanation": "Redux Form managed form state, not UI components. It worked with any input components. UI component libraries like shadcn/ui are separate.",
+        "optionTextTr": "Redux'a bağlı önceden stillendirilmiş form input'ları sağlayan bileşen kütüphanesi.",
+        "explanationTr": "Redux Form bir UI kütüphanesi değil; form state yönetim aracıdır."
       }
     ]
   },
@@ -890,22 +1162,30 @@
       {
         "optionText": "Field-level and form-level validation, field arrays for dynamic lists, form state in Redux store, and submission handling.",
         "isCorrect": true,
-        "explanation": "Correct — Redux Form stored all form state in Redux, enabling DevTools inspection. Its main drawback was performance: every keystroke triggered Redux state updates."
+        "explanation": "Correct — Redux Form stored all form state in Redux, enabling DevTools inspection. Its main drawback was performance: every keystroke triggered Redux state updates.",
+        "optionTextTr": "Alan düzeyinde ve form düzeyinde doğrulama, dinamik listeler için alan dizileri, normalize etme ve form state subscription'ları.",
+        "explanationTr": "Doğru — Redux Form, karmaşık form gereksinimleri için zengin özellikler sunar ancak React Hook Form günümüzde daha çok tercih edilmektedir."
       },
       {
         "optionText": "Uncontrolled inputs with ref-based access, minimal re-renders, and built-in Zod validation.",
         "isCorrect": false,
-        "explanation": "Those are features of React Hook Form. Redux Form used controlled inputs with state stored in Redux — the opposite of uncontrolled."
+        "explanation": "Those are features of React Hook Form. Redux Form used controlled inputs with state stored in Redux — the opposite of uncontrolled.",
+        "optionTextTr": "Minimal yeniden render ile ref tabanlı erişimli kontrolsüz input'lar.",
+        "explanationTr": "Bu React Hook Form'un tasarım felsefesini tanımlar — Redux Form değil."
       },
       {
         "optionText": "Built-in API integration that submits forms directly to REST endpoints.",
         "isCorrect": false,
-        "explanation": "Redux Form handled state management, not HTTP submissions. Form submission logic was still written by the developer using fetch or axios."
+        "explanation": "Redux Form handled state management, not HTTP submissions. Form submission logic was still written by the developer using fetch or axios.",
+        "optionTextTr": "Formları doğrudan REST endpoint'lerine gönderen yerleşik API entegrasyonu.",
+        "explanationTr": "Redux Form, form state yönetimi yapar — API entegrasyonu ayrıca gerçekleştirilir."
       },
       {
         "optionText": "Automatic form persistence to localStorage on every field change.",
         "isCorrect": false,
-        "explanation": "Redux Form stored state in Redux (in memory), not localStorage. Persistence would require redux-persist as an additional layer."
+        "explanation": "Redux Form stored state in Redux (in memory), not localStorage. Persistence would require redux-persist as an additional layer.",
+        "optionTextTr": "Her alan değişikliğinde localStorage'a otomatik form kalıcılığı.",
+        "explanationTr": "Bu özellik Redux Form'da yerleşik değildir."
       }
     ]
   }

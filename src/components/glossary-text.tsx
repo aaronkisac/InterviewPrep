@@ -15,12 +15,14 @@ export function GlossaryText({
   terms,
   excludeSlugs,
   isLoggedIn = true,
+  lang = "en",
 }: {
   text: string;
   terms: GlossaryTerm[];
   /** Skip these slugs — used on a term's own page so it doesn't link to itself. */
   excludeSlugs?: string[];
   isLoggedIn?: boolean;
+  lang?: "en" | "tr";
 }) {
   const matcher = buildMatcher(terms, excludeSlugs);
   if (!matcher) return <>{text}</>;
@@ -37,6 +39,8 @@ export function GlossaryText({
             key={index}
             slug={segment.slug}
             tooltip={segment.tooltip}
+            tooltipTr={segment.tooltip_tr}
+            lang={lang}
             isLoggedIn={isLoggedIn}
           >
             {segment.value}

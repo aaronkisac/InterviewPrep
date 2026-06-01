@@ -6,22 +6,30 @@
       {
         "optionText": "Replacing a real dependency with a controlled fake that returns predetermined values and records how it was called.",
         "isCorrect": true,
-        "explanation": "Correct — jest.fn() and jest.mock() create mocks so tests run without real databases or APIs."
+        "explanation": "Correct — jest.fn() and jest.mock() create mocks so tests run without real databases or APIs.",
+        "optionTextTr": "Önceden belirlenmiş değerler döndüren ve çağrıları kaydeden gerçek bağımlılığın yerini alan kontrollü sahte.",
+        "explanationTr": "Doğru — mock'lar bağımlılıkları izole eder; test edilen birimi, bağımlılıkların davranışından bağımsız olarak doğrularsın."
       },
       {
         "optionText": "Writing test code that resembles the production code as closely as possible.",
         "isCorrect": false,
-        "explanation": "Mocking is about substituting dependencies, not mirroring production code."
+        "explanation": "Mocking is about substituting dependencies, not mirroring production code.",
+        "optionTextTr": "Test kodunu üretim koduna mümkün olduğunca benzetecek şekilde yazmak.",
+        "explanationTr": "Bu, test kodlama stilidir — mocking ise gerçek bağımlılıkları sözleşmeli sahte versiyonlarla değiştirme tekniğidir."
       },
       {
         "optionText": "Running the same test multiple times to ensure it produces consistent results.",
         "isCorrect": false,
-        "explanation": "Repeatability is a property of good tests generally — mocking is specifically about replacing dependencies."
+        "explanation": "Repeatability is a property of good tests generally — mocking is specifically about replacing dependencies.",
+        "optionTextTr": "Tutarlı sonuç ürettiğinden emin olmak için aynı testi birden fazla kez çalıştırmak.",
+        "explanationTr": "Bu, test tekrarlanabilirliğidir — mocking bağımlılık yerine geçme tekniğidir."
       },
       {
         "optionText": "Generating fake user data using tools like Faker.js for integration tests.",
         "isCorrect": false,
-        "explanation": "Fake data generation is a different technique — mocking is specifically about replacing real implementations with controlled substitutes."
+        "explanation": "Fake data generation is a different technique — mocking is specifically about replacing real implementations with controlled substitutes.",
+        "optionTextTr": "Entegrasyon testleri için Faker.js gibi araçlarla sahte kullanıcı verisi oluşturmak.",
+        "explanationTr": "Bu veri fabrikasyonudur — mocking ise bir birimin bağımlılıklarını izole etmek için kullanılır."
       }
     ]
   },
@@ -32,22 +40,30 @@
       {
         "optionText": "Unit = single isolated unit; Integration = multiple units together; Smoke = basic sanity check; Regression = ensures old bugs don't return.",
         "isCorrect": true,
-        "explanation": "Correct — each test type serves a different purpose in a layered testing strategy."
+        "explanation": "Correct — each test type serves a different purpose in a layered testing strategy.",
+        "optionTextTr": "Unit = tek izole birim; Entegrasyon = birden fazla birim birlikte; Duman = temel iş akışlarının çalıştığını doğrular; Regresyon = eski hataların geri dönmediğini doğrular.",
+        "explanationTr": "Doğru — her biri farklı bir doğrulama katmanı sunar."
       },
       {
         "optionText": "They are different names for the same type of test, distinguished only by the team's preference.",
         "isCorrect": false,
-        "explanation": "Each type has a distinct scope and purpose — they are not interchangeable."
+        "explanation": "Each type has a distinct scope and purpose — they are not interchangeable.",
+        "optionTextTr": "Bunlar aynı test türünün farklı adlarıdır.",
+        "explanationTr": "Bunlar gerçekten farklı test türleridir — her biri farklı kapsamı ve amacı vardır."
       },
       {
         "optionText": "Unit tests run in CI; integration tests run locally; smoke tests run in production; regression tests run weekly.",
         "isCorrect": false,
-        "explanation": "The distinction is about scope and what is tested, not when or where they run."
+        "explanation": "The distinction is about scope and what is tested, not when or where they run.",
+        "optionTextTr": "Unit testleri CI'da; entegrasyon testleri yerel; duman testleri staging'de çalışır.",
+        "explanationTr": "Çalışma ortamı test türünü tanımlamaz — kapsam ve izolasyon tanımlar."
       },
       {
         "optionText": "Unit and integration tests are automated; smoke and regression tests are always manual.",
         "isCorrect": false,
-        "explanation": "All four types can be automated — the distinction is about scope, not execution method."
+        "explanation": "All four types can be automated — the distinction is about scope, not execution method.",
+        "optionTextTr": "Unit ve entegrasyon testleri otomatiktir; duman ve regresyon testleri manueldir.",
+        "explanationTr": "Dört tür de otomatize edilebilir; duman ve regresyon genellikle CI pipeline'ında otomatik çalışır."
       }
     ]
   },
@@ -58,22 +74,30 @@
       {
         "optionText": "A test structure where Arrange sets up state, Act triggers the behaviour under test, and Assert verifies the outcome.",
         "isCorrect": true,
-        "explanation": "Correct — AAA keeps tests readable and ensures each test has exactly one Act."
+        "explanation": "Correct — AAA keeps tests readable and ensures each test has exactly one Act.",
+        "optionTextTr": "Arrange state'i kurar, Act davranışı tetikler, Assert sonucu doğrular.",
+        "explanationTr": "Doğru — AAA yapısı test okunabilirliğini artırır ve birden fazla bölümün net ayrılmasını sağlar."
       },
       {
         "optionText": "A pattern where you first assert the expected output, then act, then arrange — in reverse order.",
         "isCorrect": false,
-        "explanation": "The correct order is Arrange → Act → Assert — reversing it would make tests harder to read and write."
+        "explanation": "The correct order is Arrange → Act → Assert — reversing it would make tests harder to read and write.",
+        "optionTextTr": "Önce beklenen çıktıyı assert et, sonra act, sonra arrange.",
+        "explanationTr": "Doğru sıra Arrange → Act → Assert'tır; tersine çevirmek testlerin anlamını bozar."
       },
       {
         "optionText": "A CI/CD deployment pipeline pattern: Arrange staging, Act on canary, Assert in production.",
         "isCorrect": false,
-        "explanation": "AAA is a test structure pattern, not a deployment pipeline pattern."
+        "explanation": "AAA is a test structure pattern, not a deployment pipeline pattern.",
+        "optionTextTr": "CI/CD dağıtım pipeline deseni.",
+        "explanationTr": "AAA, test yapılandırma desenidir — CI/CD kavramı değil."
       },
       {
         "optionText": "A pattern specific to Jasmine and Mocha — Jest uses the Given-When-Then pattern instead.",
         "isCorrect": false,
-        "explanation": "AAA is framework-agnostic and maps directly to Given-When-Then (BDD). Jest, Jasmine, and Mocha all support it."
+        "explanation": "AAA is framework-agnostic and maps directly to Given-When-Then (BDD). Jest, Jasmine, and Mocha all support it.",
+        "optionTextTr": "Yalnızca Jasmine ve Mocha'ya özgü bir desen — Jest Given-When-Then kullanır.",
+        "explanationTr": "AAA her test çerçevesinde kullanılabilir; Given-When-Then ise BDD stili için tercih edilir."
       }
     ]
   },
@@ -84,22 +108,30 @@
       {
         "optionText": "Unit tests verify a single unit in isolation with mocked dependencies; integration tests verify multiple units working together, often with real dependencies.",
         "isCorrect": true,
-        "explanation": "Correct — unit tests are fast and isolated; integration tests are slower but catch seam-level bugs."
+        "explanation": "Correct — unit tests are fast and isolated; integration tests are slower but catch seam-level bugs.",
+        "optionTextTr": "Unit testler tek birimi izole ederek mock bağımlılıklarla doğrular; entegrasyon testleri gerçek bağımlılıklarla birden fazla birimin birlikte çalıştığını doğrular.",
+        "explanationTr": "Doğru — bu izolasyon seviyesi ayrımın temelidir; kimin yazdığını veya hangi aracı kullandığını değil."
       },
       {
         "optionText": "Unit tests are written by developers; integration tests are written by QA engineers.",
         "isCorrect": false,
-        "explanation": "Who writes them is a team practice, not an inherent distinction — developers write both."
+        "explanation": "Who writes them is a team practice, not an inherent distinction — developers write both.",
+        "optionTextTr": "Unit testler geliştiriciler, entegrasyon testleri QA tarafından yazılır.",
+        "explanationTr": "Her iki test türü de geliştiriciler tarafından yazılabilir — ayrım yazarlıkla değil kapsamla ilgilidir."
       },
       {
         "optionText": "Unit tests run in the browser; integration tests run in Node.js via Jest.",
         "isCorrect": false,
-        "explanation": "Both can run in either environment — the distinction is about scope and dependency isolation."
+        "explanation": "Both can run in either environment — the distinction is about scope and dependency isolation.",
+        "optionTextTr": "Unit testler tarayıcıda çalışır; entegrasyon testleri Jest aracılığıyla Node.js'de.",
+        "explanationTr": "Çalışma ortamı test türünü belirlemez — izolasyon düzeyi belirler."
       },
       {
         "optionText": "Unit tests use describe() blocks; integration tests use it() blocks.",
         "isCorrect": false,
-        "explanation": "Both use the same Jest API — the difference is what is tested, not which functions are called."
+        "explanation": "Both use the same Jest API — the difference is what is tested, not which functions are called.",
+        "optionTextTr": "Unit testler describe() blokları kullanır; entegrasyon testleri it() blokları.",
+        "explanationTr": "Her iki test türü de describe() ve it() kullanabilir — sözdizimi ayrım değildir."
       }
     ]
   },
@@ -110,22 +142,30 @@
       {
         "optionText": "Fast feedback, early bug detection, safe refactoring, living documentation, and better-designed APIs through testability pressure.",
         "isCorrect": true,
-        "explanation": "Correct — tests that are hard to write often signal design problems; testability drives good architecture."
+        "explanation": "Correct — tests that are hard to write often signal design problems; testability drives good architecture.",
+        "optionTextTr": "Hızlı geri bildirim, erken hata tespiti, güvenli refactoring, yaşayan dokümantasyon ve tasarım için baskı.",
+        "explanationTr": "Doğru — iyi unit testler, tasarımı bağımlılıkları açık kılmaya zorlar."
       },
       {
         "optionText": "Unit tests guarantee the application has zero bugs in production.",
         "isCorrect": false,
-        "explanation": "Unit tests reduce bugs but cannot guarantee zero bugs — they only cover the cases explicitly tested."
+        "explanation": "Unit tests reduce bugs but cannot guarantee zero bugs — they only cover the cases explicitly tested.",
+        "optionTextTr": "Unit testler uygulamanın production'da sıfır hata içerdiğini garanti eder.",
+        "explanationTr": "Unit testler hata olasılığını azaltır ama ortadan kaldırmaz; entegrasyon, E2E ve manuel testler gereklidir."
       },
       {
         "optionText": "Unit tests eliminate the need for code reviews since tests verify correctness.",
         "isCorrect": false,
-        "explanation": "Tests and code reviews are complementary — tests check behaviour; reviews check design, style, and maintainability."
+        "explanation": "Tests and code reviews are complementary — tests check behaviour; reviews check design, style, and maintainability.",
+        "optionTextTr": "Unit testler, testlerin doğruluğu doğruladığından kod incelemelerine ihtiyacı ortadan kaldırır.",
+        "explanationTr": "Testler, tasarım rehberliği veya ekip standardlarının uygulanması gibi değerli perspektifleri olan kod incelemelerinin yerini alamaz."
       },
       {
         "optionText": "Unit tests are primarily beneficial for frontend code — backend code rarely benefits.",
         "isCorrect": false,
-        "explanation": "Unit testing applies equally to backend logic, utilities, and data transformation functions."
+        "explanation": "Unit testing applies equally to backend logic, utilities, and data transformation functions.",
+        "optionTextTr": "Unit testler öncelikli olarak frontend kodu için faydalıdır — backend kodu daha az avantaj sağlar.",
+        "explanationTr": "Hem frontend hem de backend, unit testlerden eşit derecede yararlanır."
       }
     ]
   },
@@ -136,22 +176,30 @@
       {
         "optionText": "Generally no — trivial getters/setters add coverage noise without testing meaningful behaviour; test the behaviour that uses them instead.",
         "isCorrect": true,
-        "explanation": "Correct — coverage for its own sake is a smell; if a getter contains logic, it's worth testing."
+        "explanation": "Correct — coverage for its own sake is a smell; if a getter contains logic, it's worth testing.",
+        "optionTextTr": "Genel olarak hayır — önemsiz getter/setter'lar gerçek davranış test etmeksizin coverage gürültüsü ekler.",
+        "explanationTr": "Doğru — test etmeye değer davranışı test et; mekansal kapsama değil anlamlı koşullara odaklan."
       },
       {
         "optionText": "Yes, always — every line of code should be covered by a unit test regardless of complexity.",
         "isCorrect": false,
-        "explanation": "100% coverage is not a goal in itself — testing trivial code wastes time and clutters the test suite."
+        "explanation": "100% coverage is not a goal in itself — testing trivial code wastes time and clutters the test suite.",
+        "optionTextTr": "Evet, her zaman — kod satırı ne olursa olsun her satır bir unit test tarafından kapsanmalıdır.",
+        "explanationTr": "Coverage, gerekli test sayısını belirlememeli — anlamlı davranışlar belirlemeli."
       },
       {
         "optionText": "Only getters need tests; setters are side-effect-free so they never need testing.",
         "isCorrect": false,
-        "explanation": "Even setters with validation logic might warrant testing — the principle is to test meaningful behaviour, not based on getter vs setter."
+        "explanation": "Even setters with validation logic might warrant testing — the principle is to test meaningful behaviour, not based on getter vs setter.",
+        "optionTextTr": "Yalnızca getter'ların test edilmesi gerekir; setter'lar yan etkisizdir.",
+        "explanationTr": "Setter'lar da test edilebilir mantığa sahip olabilir; genel kural test edilecek karmaşıklığa bağlıdır."
       },
       {
         "optionText": "Yes, because getters and setters are the entry points to state and most bugs occur there.",
         "isCorrect": false,
-        "explanation": "Most bugs occur in business logic, not trivial accessors — test the logic, not the plumbing."
+        "explanation": "Most bugs occur in business logic, not trivial accessors — test the logic, not the plumbing.",
+        "optionTextTr": "Evet, çünkü getter/setter'lar state'e giriş noktalarıdır.",
+        "explanationTr": "Getter/setter'lar önemsiz olduğunda gerçek davranışı test etmeden yalnızca coverage arttırırlar."
       }
     ]
   },
@@ -162,22 +210,30 @@
       {
         "optionText": "A mock replaces the real implementation entirely; a spy wraps the real implementation, letting it run while recording calls.",
         "isCorrect": true,
-        "explanation": "Correct — jest.spyOn() wraps the real function; jest.fn() or jest.mock() replaces it."
+        "explanation": "Correct — jest.spyOn() wraps the real function; jest.fn() or jest.mock() replaces it.",
+        "optionTextTr": "Mock, gerçek uygulamanın tamamını değiştirir; spy, gerçek uygulamayı sararken çağrıları kaydeder.",
+        "explanationTr": "Doğru — spy, gerçek kodu çalıştırmanıza izin verirken gözetim ekler; mock ise tamamen kontrol eder."
       },
       {
         "optionText": "Mocking is for functions; spying is for objects — they cannot be used interchangeably.",
         "isCorrect": false,
-        "explanation": "Both can target functions and objects — the difference is whether the real implementation runs."
+        "explanation": "Both can target functions and objects — the difference is whether the real implementation runs.",
+        "optionTextTr": "Mock fonksiyonlar için; spy nesneler için kullanılır.",
+        "explanationTr": "Her ikisi de fonksiyon ve nesnelere uygulanabilir — ayrım kullanım alanında değil davranışta."
       },
       {
         "optionText": "Spying is more accurate than mocking because it uses the real implementation.",
         "isCorrect": false,
-        "explanation": "Neither is inherently more accurate — choose based on whether you need the real implementation to run in the test."
+        "explanation": "Neither is inherently more accurate — choose based on whether you need the real implementation to run in the test.",
+        "optionTextTr": "Spy, gerçek uygulamayı kullandığından mock'tan daha doğrudur.",
+        "explanationTr": "Spy her zaman daha doğru değildir — gerçek bağımlılıkları izole etmek gerektiğinde mock tercih edilir."
       },
       {
         "optionText": "They are two names for the same Jest feature (jest.fn() and jest.spyOn() are equivalent).",
         "isCorrect": false,
-        "explanation": "They differ: jest.spyOn preserves the real implementation by default; jest.fn() creates a blank mock."
+        "explanation": "They differ: jest.spyOn preserves the real implementation by default; jest.fn() creates a blank mock.",
+        "optionTextTr": "Bunlar jest.fn() ve jest.spyOn()'un iki adıdır — aynı özellik.",
+        "explanationTr": "jest.fn() yeni mock fonksiyon oluşturur; jest.spyOn() mevcut yöntemi sararken izlemeye alır."
       }
     ]
   },
@@ -188,22 +244,30 @@
       {
         "optionText": "Mock external dependencies (APIs, databases, email services) in unit tests; avoid mocking in integration tests where real behaviour matters.",
         "isCorrect": true,
-        "explanation": "Correct — over-mocking leads to tests that pass while production code is broken."
+        "explanation": "Correct — over-mocking leads to tests that pass while production code is broken.",
+        "optionTextTr": "Unit testlerde dış bağımlılıkları (API, veritabanı, e-posta servisleri) mock'la; entegrasyon testlerinde gerçek uygulamayı kullan.",
+        "explanationTr": "Doğru — mock'lama unit testlerde izolasyonu sağlar; entegrasyon testleri gerçek entegrasyonları doğrular."
       },
       {
         "optionText": "Always mock everything in every test to ensure tests run as fast as possible.",
         "isCorrect": false,
-        "explanation": "Over-mocking produces false confidence — if you mock everything, you're testing the mocks, not the code."
+        "explanation": "Over-mocking produces false confidence — if you mock everything, you're testing the mocks, not the code.",
+        "optionTextTr": "Testlerin mümkün olduğunca hızlı çalışması için her testte her şeyi mock'la.",
+        "explanationTr": "Her şeyi mock'lamak, gerçek entegrasyonlardaki hataları kaçırabilir ve aşırı spesifik kırılgan testler üretir."
       },
       {
         "optionText": "Never mock — always use real implementations to ensure tests reflect production.",
         "isCorrect": false,
-        "explanation": "Real databases and APIs make tests slow, non-deterministic, and hard to run in CI without extensive setup."
+        "explanation": "Real databases and APIs make tests slow, non-deterministic, and hard to run in CI without extensive setup.",
+        "optionTextTr": "Asla mock'lama — testlerin production'u yansıtması için her zaman gerçek uygulamaları kullan.",
+        "explanationTr": "Unit testlerde gerçek bağımlılıkları kullanmak, testleri yavaşlatır ve dış faktörlere bağımlı kılar."
       },
       {
         "optionText": "Mock only in E2E tests; unit and integration tests should always use real dependencies.",
         "isCorrect": false,
-        "explanation": "This reverses best practice — unit tests mock dependencies; E2E tests use real implementations."
+        "explanation": "This reverses best practice — unit tests mock dependencies; E2E tests use real implementations.",
+        "optionTextTr": "Yalnızca E2E testlerde mock'la; unit ve entegrasyon testleri her zaman gerçek uygulamaları kullanmalı.",
+        "explanationTr": "Unit testlerde mock'lama, izolasyonun temel pratiğidir."
       }
     ]
   },
@@ -214,22 +278,30 @@
       {
         "optionText": "80–85% is a practical sweet spot — chasing 100% produces diminishing returns and leads to testing trivial code.",
         "isCorrect": true,
-        "explanation": "Correct — branch coverage at 80% is more valuable than 100% line coverage of trivial getters."
+        "explanation": "Correct — branch coverage at 80% is more valuable than 100% line coverage of trivial getters.",
+        "optionTextTr": "Pratik tatlı nokta %80-85 — %100 peşinde koşmak azalan getiri sağlar ve kırılgan testler üretir.",
+        "explanationTr": "Doğru — coverage, yeterli test koruması için bir rehberdir; erişilecek kutsal bir sayı değil."
       },
       {
         "optionText": "100% — any uncovered line is a potential bug and should be tested.",
         "isCorrect": false,
-        "explanation": "100% coverage is a vanity metric — you can hit 100% with meaningless tests that don't assert anything useful."
+        "explanation": "100% coverage is a vanity metric — you can hit 100% with meaningless tests that don't assert anything useful.",
+        "optionTextTr": "%100 — her kapsanmayan satır potansiyel bir hatadır.",
+        "explanationTr": "%100 coverage hedeflemek, boş değer testi gibi gerçek mantığı değil mekanik kapsamı test eden testlere yol açabilir."
       },
       {
         "optionText": "50% — testing more than half the codebase is sufficient for most projects.",
         "isCorrect": false,
-        "explanation": "50% is generally considered too low — critical business logic paths may not be covered."
+        "explanation": "50% is generally considered too low — critical business logic paths may not be covered.",
+        "optionTextTr": "%50 — kod tabanının yarısından fazlasını test etmek çoğu proje için yeterli.",
+        "explanationTr": "%50 gerçek bir tatlı nokta değil; sektör normları genellikle kritik iş mantığı için %70-90 arasında."
       },
       {
         "optionText": "Coverage percentage is irrelevant — only test the most complex functions.",
         "isCorrect": false,
-        "explanation": "Coverage is a useful signal even if imperfect — it surfaces areas with no tests at all."
+        "explanation": "Coverage is a useful signal even if imperfect — it surfaces areas with no tests at all.",
+        "optionTextTr": "Coverage yüzdesi alakasız — yalnızca en karmaşık fonksiyonları test et.",
+        "explanationTr": "Coverage bir sinyal olarak kullanışlıdır ancak tek başına yetersizdir — en kritik yolları test etmeyi öncelik ver."
       }
     ]
   },
@@ -240,22 +312,30 @@
       {
         "optionText": "Assert on observable side effects: state changes, mock calls, emitted events, or DOM updates — not return values.",
         "isCorrect": true,
-        "explanation": "Correct — if a void method calls sendEmail(), assert that sendEmail was called with the right arguments."
+        "explanation": "Correct — if a void method calls sendEmail(), assert that sendEmail was called with the right arguments.",
+        "optionTextTr": "Gözlemlenebilir yan etkileri assert et: state değişiklikleri, mock çağrıları, yayılan olaylar.",
+        "explanationTr": "Doğru — void yöntemler yan etkileri üzerinden dolaylı olarak test edilir."
       },
       {
         "optionText": "Void methods cannot be unit tested — skip them and rely on integration tests.",
         "isCorrect": false,
-        "explanation": "Void methods have testable side effects; you simply assert on those instead of a return value."
+        "explanation": "Void methods have testable side effects; you simply assert on those instead of a return value.",
+        "optionTextTr": "Void yöntemler unit test edilemez — entegrasyon testlerine bırak.",
+        "explanationTr": "Void yöntemler, mock çağrıları veya state değişiklikleri gibi yan etkileri üzerinden test edilebilir."
       },
       {
         "optionText": "Convert the method to return a boolean success flag, then assert the flag is true.",
         "isCorrect": false,
-        "explanation": "Changing production code to suit tests is an anti-pattern — test the existing side effects instead."
+        "explanation": "Changing production code to suit tests is an anti-pattern — test the existing side effects instead.",
+        "optionTextTr": "Yöntemi boolean başarı bayrağı döndürecek şekilde dönüştür.",
+        "explanationTr": "Yöntemi yalnızca test edilebilir kılmak için değiştirmek tasarım baskısı gerektirir; mevcut yan etkileri test et."
       },
       {
         "optionText": "Assert that the method does not throw an exception.",
         "isCorrect": false,
-        "explanation": "Not throwing is a baseline — a useful void method test verifies that the right side effects occurred."
+        "explanation": "Not throwing is a baseline — a useful void method test verifies that the right side effects occurred.",
+        "optionTextTr": "Yöntemin istisna fırlatmadığını assert et.",
+        "explanationTr": "Bu minimum bir kontrol sağlar ama yan etki değişikliklerini veya mock çağrılarını doğrulamaz."
       }
     ]
   },
@@ -266,22 +346,30 @@
       {
         "optionText": "Test private methods through the public API that calls them — if that's impossible, the private logic may need to move to a separate testable class.",
         "isCorrect": true,
-        "explanation": "Correct — private methods are implementation details; testing them directly couples tests to internals."
+        "explanation": "Correct — private methods are implementation details; testing them directly couples tests to internals.",
+        "optionTextTr": "Özel yöntemi çağıran public API üzerinden test et — bu mümkün değilse, özel yöntemi ayrı sınıfa çıkar.",
+        "explanationTr": "Doğru — özel yöntemleri doğrudan test etmek, uygulama detaylarını açığa çıkararak kırılgan testler üretir."
       },
       {
         "optionText": "Use TypeScript's 'as any' cast in every test to bypass the private modifier.",
         "isCorrect": false,
-        "explanation": "as any is a last resort hack — it couples tests to implementation details and breaks at runtime if logic changes."
+        "explanation": "as any is a last resort hack — it couples tests to implementation details and breaks at runtime if logic changes.",
+        "optionTextTr": "Her testte özel erişimi atlatmak için TypeScript'in 'as any' dönüşümünü kullan.",
+        "explanationTr": "Bu çalışır ama kırılgan ve yüksek bakım maliyetli testler üretir."
       },
       {
         "optionText": "Rename private methods to public for testing, then rename back for production.",
         "isCorrect": false,
-        "explanation": "Changing access modifiers just for tests defeats the purpose of encapsulation."
+        "explanation": "Changing access modifiers just for tests defeats the purpose of encapsulation.",
+        "optionTextTr": "Özel yöntemleri test için public yapıp sonra production için geri değiştir.",
+        "explanationTr": "Yalnızca test için API'yi değiştirmek kötü bir uygulamadır; davranış public arayüz üzerinden test edilmeli."
       },
       {
         "optionText": "Private methods should never be tested — they are internal implementation details.",
         "isCorrect": false,
-        "explanation": "Private logic should be tested, but through the public interface — not by bypassing access controls."
+        "explanation": "Private logic should be tested, but through the public interface — not by bypassing access controls.",
+        "optionTextTr": "Özel yöntemler asla test edilmemeli.",
+        "explanationTr": "Özel yöntemler gerçekten test edilebilir davranış içeriyorsa public API üzerinden dolaylı olarak test edilmeli."
       }
     ]
   },
@@ -292,22 +380,30 @@
       {
         "optionText": "Abstract the database behind a Repository interface; mock the repository in unit tests; use a real test database in integration tests.",
         "isCorrect": true,
-        "explanation": "Correct — the Repository pattern makes the data layer swappable, enabling fast unit tests and realistic integration tests."
+        "explanation": "Correct — the Repository pattern makes the data layer swappable, enabling fast unit tests and realistic integration tests.",
+        "optionTextTr": "Veritabanını Repository arayüzünün arkasına soyutla; unit testlerde repository'yi mock'la.",
+        "explanationTr": "Doğru — soyutlama, unit testlerin yavaş veritabanı çağrıları olmadan bağımlılıksız çalışmasını sağlar."
       },
       {
         "optionText": "Always use a real database in unit tests to ensure SQL queries are correct.",
         "isCorrect": false,
-        "explanation": "Real databases make unit tests slow and non-deterministic — that's what integration tests are for."
+        "explanation": "Real databases make unit tests slow and non-deterministic — that's what integration tests are for.",
+        "optionTextTr": "SQL sorgularının doğru olduğundan emin olmak için unit testlerde her zaman gerçek veritabanı kullan.",
+        "explanationTr": "Gerçek veritabanı kullanımı, testleri yavaşlatır ve dış kuruluma bağımlı kılar — entegrasyon testlerine bırak."
       },
       {
         "optionText": "Use SQLite in-memory for all tests regardless of whether you use PostgreSQL in production.",
         "isCorrect": false,
-        "explanation": "SQLite has different SQL behaviour than PostgreSQL/MySQL — dialect differences can mask real bugs."
+        "explanation": "SQLite has different SQL behaviour than PostgreSQL/MySQL — dialect differences can mask real bugs.",
+        "optionTextTr": "Kullandığın DBMS'den bağımsız olarak tüm testler için SQLite in-memory kullan.",
+        "explanationTr": "Bu yardımcı olabilir ama SQL dialektleri arasındaki farklılıkları gizleyebilir."
       },
       {
         "optionText": "Database-driven apps cannot be unit tested — only end-to-end tests are appropriate.",
         "isCorrect": false,
-        "explanation": "Abstracting the database behind an interface makes unit testing straightforward without touching a real DB."
+        "explanation": "Abstracting the database behind an interface makes unit testing straightforward without touching a real DB.",
+        "optionTextTr": "Veritabanı uygulamaları unit test edilemez — yalnızca E2E testler.",
+        "explanationTr": "Uygun soyutlamayla veritabanı mantığı gerçek DB'den bağımsız olarak unit test edilebilir."
       }
     ]
   },
@@ -318,22 +414,30 @@
       {
         "optionText": "Use React Testing Library to test user-facing behaviour via semantic queries (role, label) and userEvent — avoiding implementation details like CSS classes.",
         "isCorrect": true,
-        "explanation": "Correct — RTL's philosophy: test what users see and do, not how components are structured internally."
+        "explanation": "Correct — RTL's philosophy: test what users see and do, not how components are structured internally.",
+        "optionTextTr": "Kullanıcıya yönelik davranışı semantik sorgular aracılığıyla test etmek için React Testing Library kullan.",
+        "explanationTr": "Doğru — RTL, uygulama detayları yerine kullanıcı davranışını test eder."
       },
       {
         "optionText": "Take screenshots and compare pixel-by-pixel — any visual change fails the test.",
         "isCorrect": false,
-        "explanation": "That describes visual regression testing (e.g. Chromatic/Percy) — not unit testing of GUI behaviour."
+        "explanation": "That describes visual regression testing (e.g. Chromatic/Percy) — not unit testing of GUI behaviour.",
+        "optionTextTr": "Ekran görüntüleri al ve piksel piksel karşılaştır.",
+        "explanationTr": "Görsel regresyon testleme bir yaklaşım olmakla birlikte, CSS değişikliklerine karşı kırılgan olabilir."
       },
       {
         "optionText": "GUI cannot be unit tested — use only Cypress end-to-end tests for frontend.",
         "isCorrect": false,
-        "explanation": "React Testing Library enables fast, isolated component-level tests without a real browser."
+        "explanation": "React Testing Library enables fast, isolated component-level tests without a real browser.",
+        "optionTextTr": "GUI unit test edilemez — yalnızca Cypress E2E testleri kullan.",
+        "explanationTr": "RTL gibi araçlarla GUI bileşenleri unit test edilebilir."
       },
       {
         "optionText": "Query DOM elements by className and id, then assert on their innerHTML.",
         "isCorrect": false,
-        "explanation": "RTL's getByRole and getByLabelText are preferred — querying by className couples tests to implementation details."
+        "explanation": "RTL's getByRole and getByLabelText are preferred — querying by className couples tests to implementation details.",
+        "optionTextTr": "DOM öğelerini className ve id ile sorgula, sonra innerHTML'i assert et.",
+        "explanationTr": "className ve id üzerinden sorgu kırılgan testler üretir — semantik sorgular (rol, etiket) önerilir."
       }
     ]
   },
@@ -344,22 +448,30 @@
       {
         "optionText": "Yes — apply the 'new code' rule (all new code must have tests) and 'bug-fix' rule (write a failing test before fixing any bug), then gradually increase coverage.",
         "isCorrect": true,
-        "explanation": "Correct — the incremental approach avoids the trap of trying to test everything before shipping any new features."
+        "explanation": "Correct — the incremental approach avoids the trap of trying to test everything before shipping any new features.",
+        "optionTextTr": "Evet — 'yeni kod' kuralını (test yaz) ve 'dokunulan kod' kuralını uygula, test kapsamını giderek artır.",
+        "explanationTr": "Doğru — bu yaygın ve başarılı strateji, mevcut geliştirmeyi engellemeden kapsamı artırır."
       },
       {
         "optionText": "No — unit tests must be written before any production code; retrofitting is not practical.",
         "isCorrect": false,
-        "explanation": "Retrofitting tests is harder than greenfield TDD but absolutely viable with an incremental strategy."
+        "explanation": "Retrofitting tests is harder than greenfield TDD but absolutely viable with an incremental strategy.",
+        "optionTextTr": "Hayır — unit testler üretim kodundan önce yazılmalıdır.",
+        "explanationTr": "Yeni projelerde TDD idealdir, ancak retroaktif test ekleme son derece değerlidir ve pratikte yaygındır."
       },
       {
         "optionText": "Yes — but you must pause all feature development until 100% coverage is achieved.",
         "isCorrect": false,
-        "explanation": "A big-bang approach to coverage is impractical and demoralising — incremental coverage improvement is far more effective."
+        "explanation": "A big-bang approach to coverage is impractical and demoralising — incremental coverage improvement is far more effective.",
+        "optionTextTr": "Evet — ancak %100 coverage elde edilene kadar tüm özellik geliştirmeyi durdur.",
+        "explanationTr": "Bu pratik değil — artımlı yaklaşım, geliştirmeyi sürdürürken coverage'ı kademeli olarak artırır."
       },
       {
         "optionText": "Only if the existing codebase is rewritten to use dependency injection first.",
         "isCorrect": false,
-        "explanation": "DI helps but isn't required — you can add tests to tightly coupled code using techniques like extract-and-override."
+        "explanation": "DI helps but isn't required — you can add tests to tightly coupled code using techniques like extract-and-override.",
+        "optionTextTr": "Yalnızca mevcut kod tabanı bağımlılık enjeksiyonu kullanacak şekilde yeniden yazılırsa.",
+        "explanationTr": "DI yardımcı olur ama bir önkoşul değildir — retroaktif test çeşitli stratejilerle yapılabilir."
       }
     ]
   },
@@ -370,22 +482,30 @@
       {
         "optionText": "Slower initial velocity, requires design clarity upfront, test maintenance overhead, over-mocking temptation, and poor fit for exploratory/UI work.",
         "isCorrect": true,
-        "explanation": "Correct — TDD has real costs; it pays off most in business logic with clear requirements, less so for exploratory UI work."
+        "explanation": "Correct — TDD has real costs; it pays off most in business logic with clear requirements, less so for exploratory UI work.",
+        "optionTextTr": "Başlangıçta daha yavaş velocity, tasarım netliği gerektirir, test bakımı maliyeti ve yetersiz test kalitesi riski.",
+        "explanationTr": "Doğru — TDD gerçek bir öğrenme eğrisine sahip olup, bazı takımlarda daha yüksek disiplin gerektirir."
       },
       {
         "optionText": "TDD has no disadvantages — it always produces better code faster.",
         "isCorrect": false,
-        "explanation": "TDD has genuine trade-offs; acknowledging them is part of using the practice wisely."
+        "explanation": "TDD has genuine trade-offs; acknowledging them is part of using the practice wisely.",
+        "optionTextTr": "TDD'nin dezavantajı yoktur.",
+        "explanationTr": "TDD gerçek avantajlar sunar ancak belirli dezavantajları da mevcuttur — uygulamasının bilinçli yapılması gerekir."
       },
       {
         "optionText": "TDD prevents refactoring because existing tests break whenever code is changed.",
         "isCorrect": false,
-        "explanation": "Good TDD tests are written against behaviour, not implementation — they survive refactoring. Brittle tests are a TDD smell, not an inherent property."
+        "explanation": "Good TDD tests are written against behaviour, not implementation — they survive refactoring. Brittle tests are a TDD smell, not an inherent property.",
+        "optionTextTr": "TDD, mevcut testler kırıldığında refactoring'i engeller.",
+        "explanationTr": "İyi yazılmış testler refactoring'i kolaylaştırır; kötü testler onu zorlaştırabilir ama bu TDD'nin başarısızlığı değil."
       },
       {
         "optionText": "TDD only works in statically typed languages like TypeScript — not JavaScript.",
         "isCorrect": false,
-        "explanation": "TDD is language-agnostic and was popularised in dynamically typed languages like Smalltalk and Ruby."
+        "explanation": "TDD is language-agnostic and was popularised in dynamically typed languages like Smalltalk and Ruby.",
+        "optionTextTr": "TDD yalnızca TypeScript gibi statik tipli dillerde çalışır.",
+        "explanationTr": "TDD; Python, Ruby, JavaScript gibi dinamik diller dahil her dilde uygulanabilir."
       }
     ]
   },
@@ -396,22 +516,30 @@
       {
         "optionText": "Control cache state explicitly: test cache-miss (clear cache first), test cache-hit (pre-populate), test TTL (jest.useFakeTimers()), and test invalidation separately.",
         "isCorrect": true,
-        "explanation": "Correct — abstracting the cache behind an interface makes these states easy to set up in each test."
+        "explanation": "Correct — abstracting the cache behind an interface makes these states easy to set up in each test.",
+        "optionTextTr": "Cache state'ini açıkça kontrol et: cache-miss (önce temizle), cache-hit (önceden doldur), geçersiz kılma senaryosu.",
+        "explanationTr": "Doğru — deterministik cache kontrolü, tutarsız test sonuçlarından kaynaklanan flaky testleri önler."
       },
       {
         "optionText": "Skip testing cache-related code because timing makes it non-deterministic.",
         "isCorrect": false,
-        "explanation": "jest.useFakeTimers() eliminates timing non-determinism — caching logic is testable."
+        "explanation": "jest.useFakeTimers() eliminates timing non-determinism — caching logic is testable.",
+        "optionTextTr": "Cache, zamanlamayı deterministik olmayan hale getirdiğinden cache ile ilgili kodu test etmeyi atla.",
+        "explanationTr": "Cache kodunu atlamak, bozuk cache davranışının production'a geçmesine izin verir — kontrol edilebilir."
       },
       {
         "optionText": "Always disable caching in tests so cache state doesn't affect results.",
         "isCorrect": false,
-        "explanation": "Disabling caching skips testing the cache logic itself — you need tests that specifically exercise each cache state."
+        "explanation": "Disabling caching skips testing the cache logic itself — you need tests that specifically exercise each cache state.",
+        "optionTextTr": "Testlerde cache'i her zaman devre dışı bırak, böylece cache state sonuçları etkilemez.",
+        "explanationTr": "Cache'i devre dışı bırakmak, cache davranışını doğrulamaz; her iki durumu da test etmek gerekir."
       },
       {
         "optionText": "Only test cache behaviour in integration tests — unit tests cannot simulate cache state.",
         "isCorrect": false,
-        "explanation": "Abstracting the cache behind an interface allows full unit testing of cache-miss, cache-hit, TTL, and invalidation scenarios."
+        "explanation": "Abstracting the cache behind an interface allows full unit testing of cache-miss, cache-hit, TTL, and invalidation scenarios.",
+        "optionTextTr": "Sadece entegrasyon testlerinde cache davranışını test et.",
+        "explanationTr": "Unit testler, uygun bağımlılık enjeksiyonuyla cache davranışını simüle edebilir."
       }
     ]
   }
