@@ -13,6 +13,7 @@ export type QuestionListItem = Pick<
   | "level"
   | "level_label"
   | "question"
+  | "question_tr"
   | "answer_general"
   | "answer_personal"
   | "answer_general_tr"
@@ -68,7 +69,7 @@ export async function listQuestions(
   let query = supabase
     .from("questions")
     .select(
-      "id, topic, level, level_label, question, answer_general, answer_personal, answer_general_tr, answer_personal_tr, detail_md, detail_md_tr",
+      "id, topic, level, level_label, question, question_tr, answer_general, answer_personal, answer_general_tr, answer_personal_tr, detail_md, detail_md_tr",
     )
     .eq("status", "active")
     .eq("is_shared", true)

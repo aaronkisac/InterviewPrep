@@ -79,7 +79,7 @@ export default async function QuestionDetailPage({
           </Link>
         </div>
         <h1 className="mt-3 text-2xl font-semibold leading-tight tracking-tight">
-          {question.question}
+          {lang === "tr" && question.question_tr ? question.question_tr : question.question}
         </h1>
       </header>
 

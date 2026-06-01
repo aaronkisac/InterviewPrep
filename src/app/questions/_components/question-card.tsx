@@ -84,7 +84,7 @@ export function QuestionCard({
             ▶
           </span>
           <span className="truncate text-sm font-medium leading-snug">
-            {question.question}
+            {lang === "tr" && question.question_tr ? question.question_tr : question.question}
           </span>
         </button>
 
