@@ -100,11 +100,14 @@ export default async function MockSessionPage({
         level,
         levelLabel,
         question: q.question,
+        questionTr: "",
         options: opts.map((o, i) => ({
           id: `${q.id}-opt-${i}`,
           text: o.optionText,
+          textTr: "",
           isCorrect: o.isCorrect,
           explanation: o.explanation ?? "",
+          explanationTr: "",
         })),
       };
     });
