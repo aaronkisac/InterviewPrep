@@ -159,6 +159,7 @@ async function upsertBatch(
         .update({
           level: row.level,
           level_label: row.level_label,
+          question_tr: row.question_tr,
           answer_general: row.answer_general,
           answer_personal: row.answer_personal,
           answer_general_tr: row.answer_general_tr,
