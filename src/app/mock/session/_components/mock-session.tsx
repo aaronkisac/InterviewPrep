@@ -187,7 +187,7 @@ export function MockSession({
                     </span>
                     <span className="text-muted-foreground">{q.levelLabel}</span>
                   </div>
-                  <p className="mt-2 text-sm font-medium leading-snug">{q.question}</p>
+                  <p className="mt-2 text-sm font-medium leading-snug">{lang === "tr" && q.questionTr ? q.questionTr : q.question}</p>
                   <p className="mt-3 text-sm text-rose-600 dark:text-rose-400">
                     <span className="font-medium">
                       {i18n.yourAnswer}
@@ -269,7 +269,7 @@ export function MockSession({
           <span className="text-muted-foreground">{current.levelLabel}</span>
         </div>
         <h1 className="mt-3 text-lg font-semibold leading-snug">
-          {current.question}
+          {lang === "tr" && current.questionTr ? current.questionTr : current.question}
         </h1>
 
         <ul className="mt-5 space-y-2">

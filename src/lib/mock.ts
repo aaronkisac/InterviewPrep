@@ -18,6 +18,7 @@ type QuestionWithOptionsRow = {
   level: Level;
   level_label: LevelLabel;
   question: string;
+  question_tr: string;
   mock_options: {
     id: string;
     option_text: string;
@@ -53,7 +54,7 @@ async function loadMockReady(): Promise<MockQuestion[]> {
   const { data, error } = await supabase
     .from("questions")
     .select(
-      "id, topic, level, level_label, question, mock_options(id, option_text, option_text_tr, is_correct, explanation, explanation_tr)",
+      "id, topic, level, level_label, question, question_tr, mock_options(id, option_text, option_text_tr, is_correct, explanation, explanation_tr)",
     )
     .eq("status", "active")
     .eq("is_shared", true);
@@ -76,6 +77,7 @@ async function loadMockReady(): Promise<MockQuestion[]> {
       level: row.level,
       levelLabel: row.level_label,
       question: row.question,
+      questionTr: row.question_tr,
       options: opts.map((o) => ({
         id: o.id,
         text: o.option_text,

@@ -17,6 +17,7 @@ export type QuestionRow = {
   level: 1 | 2 | 3 | 4 | 5;
   level_label: LevelLabel;
   question: string;
+  question_tr: string;
   answer_general: string;
   answer_personal: string | null;
   answer_general_tr: string;

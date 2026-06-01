@@ -25,6 +25,7 @@ export type MockQuestion = {
   /** Localized display label (from DB or i18nLevels). */
   levelLabel: string;
   question: string;
+  questionTr: string;
   options: MockOption[];
 };
 

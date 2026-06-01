@@ -12,6 +12,7 @@
     "detailMdTr": "## Kanban\n\n## Temel Kavram\n\nKanban (Japonca 'tabela'), işin bir sistemden akışını görselleştirir:\n\n```\n| Backlog | Yapılacak | Devam Eden (WIP≤3) | İnceleme | Tamamlandı |\n|---------|-----------|-------------------|----------|------------|\n| kart    | kart      | kart kart kart    | kart     | kart       |\n```\n\n## Temel İlkeler\n\n1. **İş akışını görselleştir** — her iş kalemi panoda görünür\n2. **WIP'i sınırla** — aktif kalemleri kısıtlamak darboğazları ortaya çıkarır\n3. **Akışı yönet** — düzgün, hızlı teslimat için optimize et\n4. **Politikaları açık hale getir** — sütun başına 'tamamlandı' tanımı\n5. **İşbirlikçi olarak iyileştir** — iyileştirmek için metrikleri kullan (döngü süresi, çıktı)\n\n## Kanban Metrikleri\n\n- **Döngü süresi (Cycle time)**: 'başlandı'dan 'tamamlandı'ya süre\n- **Öncülük süresi (Lead time)**: 'istendi'den 'tamamlandı'ya süre\n- **Çıktı (Throughput)**: haftada tamamlanan kalemler\n- **Kümülatif Akış Diyagramı (CFD)**: darboğazları zaman içinde görselleştirir\n\n## Kanban vs Scrum\n\n| | Kanban | Scrum |\n|---|--------|-------|\n| Kadans | Sürekli akış | Sabit sprint'ler (1-4 hafta) |\n| Roller | Reçete edilmemiş | PO, SM, Geliştirici Ekibi |\n| Törenler | Reçete edilmemiş | Sprint Planlaması, Retrospektif vb. |\n| Değişiklik | İstediğiniz zaman | Sonraki sprint |\n| En iyi için | Destek, operasyon, bakım | Özellik geliştirme |\n\n## Scrumban\n\nBirçok ekip hibrit kullanır: Scrum'ın yapısı (sprint'ler, retrospektifler) + Kanban'ın WIP limitleri ve akış metrikleri.",
     "is_seed": true,
     "is_shared": true,
-    "status": "approved"
+    "status": "approved",
+    "questionTr": "Kanban nedir?"
   }
 ]

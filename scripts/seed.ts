@@ -29,6 +29,7 @@ type SeedQuestion = {
   id: number;
   topic: Topic;
   question: string;
+  questionTr?: string | null;
   level: 1 | 2 | 3 | 4 | 5;
   levelLabel: LevelLabel;
   answerGeneral?: string | null;
@@ -45,6 +46,7 @@ type SeedInsert = Pick<
   | "level"
   | "level_label"
   | "question"
+  | "question_tr"
   | "answer_general"
   | "answer_personal"
   | "answer_general_tr"
@@ -116,6 +118,7 @@ function toInsert(q: SeedQuestion): SeedInsert {
     level: q.level,
     level_label: q.levelLabel,
     question: q.question.trim(),
+    question_tr: q.questionTr?.trim() ?? "",
     answer_general: q.answerGeneral?.trim() ?? "",
     answer_personal: q.answerPersonal?.trim() ?? null,
     answer_general_tr: q.answerGeneralTr?.trim() ?? "",

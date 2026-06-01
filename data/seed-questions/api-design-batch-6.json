@@ -12,6 +12,7 @@
     "detailMdTr": "## Yapı\n\n```\neyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkFhcm9uIn0.imza\n└──────── Header ─────────┘ └──────────── Payload ────────────┘ └─ Signature ─┘\n```\n\n**Bölüm 1: Header**\n```json\n{ \"alg\": \"HS256\", \"typ\": \"JWT\" }\n```\n\n**Bölüm 2: Payload**\n```json\n{\n  \"sub\": \"user-42\",\n  \"name\": \"Aaron Kisac\",\n  \"role\": \"admin\",\n  \"iat\": 1717200000,\n  \"exp\": 1717203600\n}\n```\n\n**Bölüm 3: İmza**\n```\nHMACSHA256(\n  base64url(header) + '.' + base64url(payload),\n  secret\n)\n```\n\n## JWT Nasıl Çalışır\n\n```\n1. Kullanıcı giriş yapar → sunucu JWT imzalar → istemciye gönderir\n2. İstemci saklar (bellek veya HttpOnly cookie)\n3. Sonraki istekler: Authorization: Bearer <token>\n4. Sunucu imzayı doğrular → DB araması yok\n5. İçerik şifrelenmez — yalnızca imzalanmış\n```\n\n## Güvenli Kullanım\n\n```typescript\n// İmzala\nconst token = jwt.sign(\n  { sub: user.id, role: user.role },\n  process.env.JWT_SECRET!,\n  { expiresIn: '15m' }\n);\n\n// Doğrula\nconst payload = jwt.verify(token, process.env.JWT_SECRET!);\n\n// Önemli:\n// ❌ localStorage (XSS'e açık)\n// ✅ HttpOnly cookie\n// ❌ Hassas veriyi payload'a koyma (şifreler!)\n// ✅ Kısa TTL (15-60 dakika)\n```",
     "is_seed": true,
     "is_shared": true,
-    "status": "approved"
+    "status": "approved",
+    "questionTr": "JWT (JSON Web Token) nedir ve üç parçası nelerdir?"
   }
 ]

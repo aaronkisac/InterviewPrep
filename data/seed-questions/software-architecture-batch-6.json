@@ -12,7 +12,8 @@
     "detailMdTr": "## Nasıl Çalışır\n\n```\nKullanıcı (Londra) → CDN Edge (Londra) → Önbellek isabet? → sun\n                                          → Önbellek ıskalama? → Origin sunucu → önbellek → sun\n```\n\n## Ne Önbelleğe Alır\n\n```\n✅ Statik varlıklar: JS, CSS, resimler, fontlar\n✅ Statik HTML sayfaları\n✅ API yanıtları (TTL ile)\n✅ Video/ses içeriği\n```\n\n## Performans Kazanımları\n\n```\n1. Azaltılmış gecikme\n   Origin sunucuya RTT yerine edge'e RTT.\n   Londra'dan Singapur origin: ~200ms RTT\n   Londra'dan Londra CDN edge: ~5ms RTT\n\n2. Origin yük boşaltma\n   Edge'de önbellek isabetler = origin'i vurmaz.\n   Viral içerik → CDN ölçekler, origin korunur.\n\n3. Güvenilirlik\n   Origin çöktüğünde CDN önbelleğe alınmış içeriği sunmaya devam eder.\n```\n\n## Next.js + CDN\n\n```typescript\n// Yanıt başlıkları Cache-Control belirler\nexport async function GET() {\n  return Response.json(data, {\n    headers: {\n      'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=86400',\n    },\n  });\n}\n// CDN yanıtı 1 saat önbelleğe alır; bayat veri 24 saate kadar sunulur\n```",
     "is_seed": true,
     "is_shared": true,
-    "status": "approved"
+    "status": "approved",
+    "questionTr": "CDN (Content Delivery Network) nedir ve performansı nasıl iyileştirir?"
   },
   {
     "id": 1491,
@@ -27,7 +28,8 @@
     "detailMdTr": "## Durumsuz Servis\n\n```\nİstek → Herhangi bir instance → İşle → Yanıt\n(önceki isteklerin belleği yok)\n```\n\n**Özellikler:**\n- Her istek tüm gerekli bilgileri içerir\n- Herhangi bir instance herhangi bir isteği yönetebilir\n- Kolayca yatay ölçek — instance ekle/kaldır\n\n```typescript\n// ✅ Durumsuz — tüm durum token'da veya DB'de\nasync function getProfile(req: Request) {\n  const userId = jwt.verify(req.headers.authorization).sub;\n  return db.findUser(userId); // bağlam = token'dan\n}\n```\n\n## Durumlu Servis\n\n```\nİstek → Belirli instance (state'e sahip) → İşle → Yanıt\n```\n\n**Özellikler:**\n- Instance oturum/bağlam hatırlıyor\n- İstemci aynı instance'a yönlendirmek zorunda (sticky session)\n- Ölçekleme karmaşık\n\n```typescript\n// ❌ Durumlu — bellek içi oturum harita\nconst sessions = new Map<string, UserSession>();\nasync function getProfile(req: Request) {\n  const session = sessions.get(req.sessionId); // yalnızca bu instance'ta var\n}\n```\n\n## Mimari İçin Kural\n\n```\nUygulama katmanı → durumsuz (JWT, dış oturum)\nVeritabanı katmanı → durumlu (tasarım gereği)\nCache (Redis) → durum için paylaşılan depolama\n```",
     "is_seed": true,
     "is_shared": true,
-    "status": "approved"
+    "status": "approved",
+    "questionTr": "Stateful ile Stateless servisler arasındaki fark nedir?"
   },
   {
     "id": 1492,
@@ -42,7 +44,8 @@
     "detailMdTr": "## Durumlar\n\n```\nKAPALI → (başarısızlık oranı > eşik) → AÇIK\nACIK   → (zaman aşımı geçti) → YARI AÇIK\nYARI AÇIK → (yoklama başarılı) → KAPALI\nYARI AÇIK → (yoklama başarısız) → AÇIK\n```\n\n## Neden Gerekli\n\n```\nDevre Kesici olmadan:\n  Servis A → Servis B (çökmüş) çağırıyor\n  Her istek zaman aşımı bekliyor (30s)\n  → İplik havuzu tükendi → Servis A da yavaşlıyor → Cascade başarısızlık\n```\n\n## TypeScript Uygulaması\n\n```typescript\nconst breaker = new CircuitBreaker(inventoryService.check, {\n  timeout: 3000,\n  errorThresholdPercentage: 50,\n  resetTimeout: 30000,\n});\n\nasync function checkInventory(productId: string): Promise<number> {\n  try {\n    return await breaker.fire(productId);\n  } catch (e) {\n    if (e.code === 'CIRCUIT_OPEN') {\n      return cachedInventory.get(productId) ?? 0; // geri düşüş\n    }\n    throw e;\n  }\n}\n```\n\n## Faydaları\n\n```\n✅ Başarısız servise hızlı başarısızlık — bekleme yok\n✅ Cascade başarısızlığını önler\n✅ Otomatik kurtarma (yarı açık durum)\n✅ Gözlemlenebilirlik — devre durumunu metrik olarak aç\n```",
     "is_seed": true,
     "is_shared": true,
-    "status": "approved"
+    "status": "approved",
+    "questionTr": "Circuit Breaker Deseni nedir?"
   },
   {
     "id": 1493,
@@ -57,7 +60,8 @@
     "detailMdTr": "## Senkron\n\n```\nSipariş Servisi ──HTTP──► Stok Servisi\n              ◄── yanıt (bloklar) ──\n```\n\n**Protokoller:** REST, gRPC, GraphQL\n\n**Artıları:**\n- Basit istek/yanıt\n- Anında geri bildirim (başarı/başarısızlık)\n- Uygulamak kolay\n\n**Eksileri:**\n- Bağlantı (Stok çöktüğünde Sipariş çöker)\n- Gecikme birikimi (A→B→C→D = toplam gecikme)\n- Yeniden deneme karmaşıklığı\n\n## Asenkron\n\n```\nSipariş Servisi ──► [Mesaj Kuyruğu] ──► Stok Servisi\n              (yanıtı beklemez)\n```\n\n**Protokoller:** RabbitMQ, Kafka, AWS SQS\n\n**Artıları:**\n- Gevşek bağlantı — Stok çöktüğünde mesajlar sıraya girer\n- Daha iyi hata toleransı\n- Farklı hızlarda ölçek (tüketici Kafka'dan kendi hızında tüketir)\n\n**Eksileri:**\n- Nihai tutarlılık\n- Debugging zor\n- Mesaj sıralaması karmaşık\n\n## Ne Zaman Hangisi\n\n```\nSenkron:    Anında sonuç gerekiyor (ödeme onayı, stok sorgusu)\nAsenkron:   Gecikmeli işlem kabul edilebilir (bildirimler, raporlama, e-posta)\n```",
     "is_seed": true,
     "is_shared": true,
-    "status": "approved"
+    "status": "approved",
+    "questionTr": "Microservice'lerde Senkron ve Asenkron İletişim arasındaki fark nedir?"
   },
   {
     "id": 1494,
@@ -72,6 +76,7 @@
     "detailMdTr": "## Temel Kavram\n\n```\nÜretici ──► [Kuyruk] ──► Tüketici\n            arabellek\n```\n\n## Çözdüğü Problemler\n\n**1. Trafik Zirveler**\n```\n10.000 istek/sn gelir → Kuyruk arabellekler → Tüketici 1.000 istek/sn işler\n→ Zirveler kullanıcıyı etkilemez\n```\n\n**2. Üretici-Tüketici Hız Uyumsuzluğu**\n```\nÜretici hızlı, tüketici yavaş → kuyruk arabellek olarak davranır\n```\n\n**3. Servis Ayrıştırma**\n```\nSipariş Servisi → [Sipariş kuyruğu] ← Stok, E-posta, Analitik\nSipariş servisi Stok'un var olduğunu bile bilmez\n```\n\n## Yaygın Mesaj Kuyrukları\n\n```\nRabbitMQ:  Basit kuyruklar, yönlendirme kuralları\nKafka:     Yüksek verim, log tabanlı, replay özelliği\nAWS SQS:   Yönetilen, ölçeklenebilir, No-Ops\nBull/BullMQ: Node.js için Redis tabanlı\n```\n\n## Next.js API + Kuyruk\n\n```typescript\n// API'yi hızlı tut — kuyruğa ekle, hemen yanıt ver\nexport async function POST(req: Request) {\n  const { email } = await req.json();\n  await queue.add('send-welcome', { email });\n  return Response.json({ status: 'sıraya alındı' });\n}\n\n// Worker ayrı ayrı işler\nqueue.process('send-welcome', async (job) => {\n  await emailService.sendWelcome(job.data.email);\n});\n```",
     "is_seed": true,
     "is_shared": true,
-    "status": "approved"
+    "status": "approved",
+    "questionTr": "Message Queue nedir ve hangi sorunu çözer?"
   }
 ]
