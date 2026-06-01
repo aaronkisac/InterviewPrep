@@ -5,6 +5,8 @@ import { useTransition } from "react";
 import { Lock } from "lucide-react";
 
 import { cn } from "@/lib/utils";
+import { i18nQuestions } from "@/lib/i18n";
+import type { Language } from "@/lib/supabase/types";
 
 function Tab({
   label,
@@ -62,11 +64,14 @@ export function TopicTabs({
   isLoggedIn = true,
   topics = [],
   customTopics = [],
+  lang = "en",
 }: {
   isLoggedIn?: boolean;
   topics?: Array<{ slug: string; name: string }>;
   customTopics?: Array<{ slug: string; name: string }>;
+  lang?: Language;
 }) {
+  const i18n = i18nQuestions[lang];
   const router = useRouter();
   const searchParams = useSearchParams();
   const [isPending, startTransition] = useTransition();
@@ -96,8 +101,8 @@ export function TopicTabs({
     });
   }
 
-  const allTab = { value: "", label: "All" };
-  const bookmarkTab = { value: "bookmarked", label: "★ Bookmarked" };
+  const allTab = { value: "", label: i18n.tabAll };
+  const bookmarkTab = { value: "bookmarked", label: i18n.tabBookmarked };
   const topicTabs = topics.map((t) => ({ value: t.slug, label: t.name }));
   const myTopicTabs = customTopics.map((t) => ({ value: t.slug, label: t.name }));
 

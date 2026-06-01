@@ -7,80 +7,17 @@ import { getUserSubmissions } from "@/lib/actions/questions";
 import { listTopicsWithQuestions } from "@/lib/actions/custom-topics";
 import { listSystemTopics } from "@/lib/actions/admin-topics";
 import { getLang } from "@/lib/lang";
-import { i18nCommon, i18nDashboard } from "@/lib/i18n";
-import type { Language } from "@/lib/supabase/types";
+import { i18nDashboard } from "@/lib/i18n";
 
-// suppress unused-import lint for type-only usage above
 import { DeleteSubmissionButton } from "@/app/dashboard/_components/delete-submission-button";
-import { MyTopicsSection } from "@/app/dashboard/_components/my-topics-section";
+import { GradeChip } from "@/app/dashboard/_components/grade-chip";
+import { MyTopicsSection } from "@/app/dashboard/_components/my-topics/my-topics-section";
+import { StatusChip } from "@/app/dashboard/_components/status-chip";
+import { getGrade } from "@/lib/grade";
+import { formatDate } from "@/lib/format-date";
 import { cn } from "@/lib/utils";
 
 export const dynamic = "force-dynamic";
-
-function formatDate(iso: string, lang: Language): string {
-  return new Date(iso).toLocaleDateString(lang === "tr" ? "tr-TR" : "en-GB", {
-    day: "numeric",
-    month: "short",
-    year: "numeric",
-  });
-}
-
-type DashboardI18n = (typeof i18nDashboard)[Language];
-
-function StatusChip({
-  status,
-  isShared,
-  i18n,
-}: {
-  status: string;
-  isShared: boolean;
-  i18n: DashboardI18n;
-}) {
-  if (!isShared) {
-    return (
-      <span className="shrink-0 rounded-md border border-border px-2 py-0.5 text-xs text-muted-foreground">
-        {i18n.private}
-      </span>
-    );
-  }
-  if (status === "pending") {
-    return (
-      <span className="shrink-0 rounded-md border border-amber-500/40 bg-amber-50 px-2 py-0.5 text-xs font-medium text-amber-700 dark:bg-amber-950/40 dark:text-amber-300">
-        {i18n.pendingReview}
-      </span>
-    );
-  }
-  if (status === "active") {
-    return (
-      <span className="shrink-0 rounded-md border border-emerald-500/40 bg-emerald-50 px-2 py-0.5 text-xs font-medium text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300">
-        {i18n.published}
-      </span>
-    );
-  }
-  return (
-    <span className="shrink-0 rounded-md border border-rose-500/40 bg-rose-50 px-2 py-0.5 text-xs font-medium text-rose-700 dark:bg-rose-950/40 dark:text-rose-300">
-      {i18n.rejected}
-    </span>
-  );
-}
-
-function GradeChip({ pct, lang }: { pct: number; lang: Language }) {
-  const common = i18nCommon[lang];
-  const { label, cls } =
-    pct === 100
-      ? { label: common.perfect, cls: "border-emerald-500/40 bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300" }
-      : pct >= 80
-        ? { label: common.strong, cls: "border-emerald-500/40 bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300" }
-        : pct >= 60
-          ? { label: common.decent, cls: "border-amber-500/40 bg-amber-50 text-amber-700 dark:bg-amber-950/40 dark:text-amber-300" }
-          : { label: common.needsWork, cls: "border-rose-500/40 bg-rose-50 text-rose-700 dark:bg-rose-950/40 dark:text-rose-300" };
-
-  return (
-    <span className={cn("rounded-md border px-2 py-0.5 text-xs font-medium", cls)}>
-      {pct}% {label}
-    </span>
-  );
-}
 
 export default async function DashboardPage() {
   const session = await auth().catch(() => null);
@@ -139,6 +76,7 @@ export default async function DashboardPage() {
               .sort((a, b) => b.seen - a.seen)
               .map(({ topic, seen, correct }) => {
                 const pct = seen > 0 ? Math.round((correct / seen) * 100) : 0;
+                const { barClass } = getGrade(pct, lang);
                 return (
                   <div key={topic} className="flex items-center gap-4 px-4 py-3">
                     <span className="w-36 shrink-0 text-sm font-medium">
@@ -147,14 +85,7 @@ export default async function DashboardPage() {
                     <div className="flex-1">
                       <div className="h-1.5 overflow-hidden rounded-full bg-secondary">
                         <div
-                          className={cn(
-                            "h-full rounded-full transition-all",
-                            pct >= 80
-                              ? "bg-emerald-500"
-                              : pct >= 60
-                                ? "bg-amber-500"
-                                : "bg-rose-500",
-                          )}
+                          className={cn("h-full rounded-full transition-all", barClass)}
                           style={{ width: `${pct}%` }}
                         />
                       </div>

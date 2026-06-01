@@ -2,10 +2,15 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 import { saveMockSession, saveTopicMastery } from "@/lib/actions/user-tracking";
+import { getGrade } from "@/lib/grade";
 import type { MockOption, MockQuestion } from "@/lib/mock-shared";
+import {
+  buildQuestionResults,
+  computeMockScore,
+} from "@/lib/mock-scoring";
 import type { Language } from "@/lib/supabase/types";
 import { i18nCommon, i18nMockSession } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
@@ -37,35 +42,40 @@ export function MockSession({
   const total = questions.length;
   const current = questions[index];
   const saveCalledRef = useRef(false);
+  const [saveError, setSaveError] = useState(false);
+
+  const score = useMemo(
+    () => (finished ? computeMockScore(questions, selected) : 0),
+    [finished, questions, selected],
+  );
 
   useEffect(() => {
     if (!finished || saveCalledRef.current) return;
     saveCalledRef.current = true;
 
-    const score = questions.reduce((sum, q, i) => {
-      const picked = q.options.find((o) => o.id === selected[i]);
-      return sum + (picked?.isCorrect ? 1 : 0);
-    }, 0);
-
-    const questionResults = questions.map((q, i) => ({
-      questionId: q.id,
-      topic: q.topic,
-      correct: q.options.find((o) => o.id === selected[i])?.isCorrect ?? false,
-    }));
-
+    const questionResults = buildQuestionResults(questions, selected);
     const topics = [...new Set(questions.map((q) => q.topic))];
 
-    saveMockSession({ score, total, topics, questionResults }).catch(() => {});
-
-    saveTopicMastery(
-      "mock",
-      questionResults.map((r) => ({
-        questionId: r.questionId,
-        topic: r.topic,
-        mastered: r.correct,
-      })),
-    ).catch(() => {});
-  }, [finished, questions, selected, total]);
+    void Promise.all([
+      saveMockSession({
+        score,
+        total,
+        topics,
+        questionResults: questionResults.map(({ questionId, correct }) => ({
+          questionId,
+          correct,
+        })),
+      }),
+      saveTopicMastery(
+        "mock",
+        questionResults.map((r) => ({
+          questionId: r.questionId,
+          topic: r.topic,
+          mastered: r.correct,
+        })),
+      ),
+    ]).catch(() => setSaveError(true));
+  }, [finished, questions, score, selected, total]);
 
   if (!current) return null;
 
@@ -88,23 +98,12 @@ export function MockSession({
   }
 
   if (finished) {
-    const score = questions.reduce((sum, q, i) => {
-      const picked = q.options.find((o) => o.id === selected[i]);
-      return sum + (picked?.isCorrect ? 1 : 0);
-    }, 0);
     const missed = questions
       .map((q, i) => ({ q, picked: q.options.find((o) => o.id === selected[i]) }))
       .filter((entry) => !entry.picked?.isCorrect);
 
     const pct = Math.round((score / total) * 100);
-    const grade =
-      pct === 100
-        ? { label: common.perfect, color: "text-emerald-600 dark:text-emerald-400" }
-        : pct >= 80
-          ? { label: common.strong, color: "text-emerald-600 dark:text-emerald-400" }
-          : pct >= 60
-            ? { label: common.decent, color: "text-amber-600 dark:text-amber-400" }
-            : { label: common.needsWork, color: "text-rose-600 dark:text-rose-400" };
+    const grade = getGrade(pct, lang);
 
     const topicMap = new Map<string, { correct: number; total: number }>();
     questions.forEach((q, i) => {
@@ -126,9 +125,14 @@ export function MockSession({
           <p className="mt-2 text-4xl font-semibold tracking-tight">
             {score} / {total}
           </p>
-          <p className={cn("mt-1 text-sm font-medium", grade.color)}>
+          <p className={cn("mt-1 text-sm font-medium", grade.textClass)}>
             {pct}% — {grade.label}
           </p>
+          {saveError && (
+            <p className="mt-2 text-xs text-amber-600 dark:text-amber-400">
+              Session could not be saved. Your score is shown but progress was not recorded.
+            </p>
+          )}
           {score === total && (
             <p className="mt-1 text-sm text-muted-foreground">
               {i18n.cleanSweep}

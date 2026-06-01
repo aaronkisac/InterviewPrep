@@ -4,70 +4,17 @@ import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { CheckCircle2, XCircle, Upload } from "lucide-react";
 
-import { bulkImportSystemQuestions, type BulkImportQuestion, type MockOption } from "@/lib/actions/admin-topics";
+import {
+  bulkImportSystemQuestions,
+  type BulkImportQuestion,
+} from "@/lib/actions/admin-topics";
 import { i18nAdmin } from "@/lib/i18n";
+import {
+  validateAdminImportJson,
+  type AdminImportValidation,
+} from "@/lib/validation/question-import";
 import type { Language } from "@/lib/supabase/types";
 import { cn } from "@/lib/utils";
-
-type ValidationResult = {
-  valid: BulkImportQuestion[];
-  invalid: Array<{ index: number; reasons: string[] }>;
-};
-
-function validateMockOptions(opts: unknown): string | null {
-  if (!Array.isArray(opts)) return '"mock_options" must be an array';
-  if (opts.length !== 4) return '"mock_options" must have exactly 4 items';
-  const correctCount = opts.filter((o) => (o as Record<string, unknown>).isCorrect === true).length;
-  if (correctCount !== 1) return '"mock_options" must have exactly 1 correct answer';
-  for (const o of opts) {
-    const opt = o as Record<string, unknown>;
-    if (!opt.optionText || typeof opt.optionText !== "string" || !(opt.optionText as string).trim())
-      return 'Each option needs a non-empty "optionText"';
-  }
-  return null;
-}
-
-function validateAdminJson(raw: string): { parsed: ValidationResult; error?: never } | { error: string; parsed?: never } {
-  let data: unknown;
-  try {
-    data = JSON.parse(raw);
-  } catch {
-    return { error: "Invalid JSON — check syntax" };
-  }
-  if (!Array.isArray(data)) return { error: "Expected a JSON array [ ... ]" };
-
-  const valid: BulkImportQuestion[] = [];
-  const invalid: Array<{ index: number; reasons: string[] }> = [];
-
-  for (let i = 0; i < data.length; i++) {
-    const item = data[i] as Record<string, unknown>;
-    const reasons: string[] = [];
-
-    if (!item.question || typeof item.question !== "string" || !item.question.trim())
-      reasons.push('"question" is required (non-empty string)');
-
-    const level = Number(item.level);
-    if (!item.level || !Number.isInteger(level) || level < 1 || level > 5)
-      reasons.push('"level" is required (integer 1–5)');
-
-    if (!item.answerGeneral || typeof item.answerGeneral !== "string" || !item.answerGeneral.trim())
-      reasons.push('"answerGeneral" is required (non-empty string)');
-
-    // Validate mock_options only if provided
-    if (item.mock_options !== undefined && item.mock_options !== null) {
-      const optErr = validateMockOptions(item.mock_options);
-      if (optErr) reasons.push(optErr);
-    }
-
-    if (reasons.length > 0) {
-      invalid.push({ index: i + 1, reasons });
-    } else {
-      valid.push(item as unknown as BulkImportQuestion);
-    }
-  }
-
-  return { parsed: { valid, invalid } };
-}
 
 const EXAMPLE = JSON.stringify(
   [
@@ -97,29 +44,41 @@ export function JsonImportAdmin({
   topicSlug: string;
   topicName: string;
   lang?: Language;
-}) {
+}): React.ReactElement {
   const i18n = i18nAdmin[lang];
   const [open, setOpen] = useState(false);
   const [text, setText] = useState("");
-  const [result, setResult] = useState<ValidationResult | null>(null);
+  const [result, setResult] = useState<AdminImportValidation | null>(null);
   const [parseError, setParseError] = useState("");
   const [isPending, startTransition] = useTransition();
   const [success, setSuccess] = useState<number | null>(null);
   const router = useRouter();
 
-  function handleChange(value: string) {
+  function handleChange(value: string): void {
     setText(value);
     setSuccess(null);
-    if (!value.trim()) { setResult(null); setParseError(""); return; }
-    const out = validateAdminJson(value);
-    if (out.error) { setParseError(out.error); setResult(null); }
-    else { setParseError(""); setResult(out.parsed!); }
+    if (!value.trim()) {
+      setResult(null);
+      setParseError("");
+      return;
+    }
+    const out = validateAdminImportJson(value);
+    if (out.error) {
+      setParseError(out.error);
+      setResult(null);
+    } else {
+      setParseError("");
+      setResult(out.parsed ?? null);
+    }
   }
 
-  function submit() {
+  function submit(): void {
     if (!result || result.valid.length === 0) return;
     startTransition(async () => {
-      const res = await bulkImportSystemQuestions(topicSlug, result.valid);
+      const res = await bulkImportSystemQuestions(
+        topicSlug,
+        result.valid as BulkImportQuestion[],
+      );
       if (res.ok) {
         setSuccess(res.inserted);
         setText("");
@@ -151,27 +110,24 @@ export function JsonImportAdmin({
         </p>
         <button
           type="button"
-          onClick={() => { setOpen(false); setText(""); setResult(null); setParseError(""); }}
+          onClick={() => {
+            setOpen(false);
+            setText("");
+            setResult(null);
+            setParseError("");
+          }}
           className="text-xs text-muted-foreground hover:text-foreground"
         >
           Cancel
         </button>
       </div>
 
-      {/* Format hint */}
       <details className="text-xs text-muted-foreground">
         <summary className="cursor-pointer hover:text-foreground">Required fields + example</summary>
         <div className="mt-2 space-y-1">
           <p><span className="font-mono text-foreground">question</span> — string, required</p>
           <p><span className="font-mono text-foreground">level</span> — integer 1–5, required</p>
           <p><span className="font-mono text-foreground">answerGeneral</span> — string, required</p>
-          <p className="text-muted-foreground/60">Optional: answerGeneralTr, answerPersonal, answerPersonalTr, detailMd, detailMdTr, topic</p>
-          <p className="text-muted-foreground/60">
-            <span className="font-mono text-foreground">mock_options</span> — optional array of exactly 4 objects{" "}
-            <span className="italic">(makes question available in mock exam)</span>
-            <br />
-            Each option: <span className="font-mono">optionText</span> (required), <span className="font-mono">isCorrect</span> (exactly 1 true), <span className="font-mono">explanation</span> (optional)
-          </p>
           <pre className="mt-2 overflow-x-auto rounded bg-muted p-2 text-[10px] leading-relaxed">{EXAMPLE}</pre>
         </div>
       </details>
@@ -184,7 +140,6 @@ export function JsonImportAdmin({
         className="w-full resize-y rounded-md border border-input bg-background px-3 py-2 font-mono text-xs outline-none focus:border-ring focus:ring-1 focus:ring-ring"
       />
 
-      {/* Live status */}
       {(result || parseError) && (
         <div className="space-y-1">
           {parseError && (
@@ -194,9 +149,14 @@ export function JsonImportAdmin({
           )}
           {result && (
             <>
-              <p className={cn("flex items-center gap-1 text-xs font-medium",
-                result.valid.length > 0 ? "text-emerald-600 dark:text-emerald-400" : "text-muted-foreground"
-              )}>
+              <p
+                className={cn(
+                  "flex items-center gap-1 text-xs font-medium",
+                  result.valid.length > 0
+                    ? "text-emerald-600 dark:text-emerald-400"
+                    : "text-muted-foreground",
+                )}
+              >
                 <CheckCircle2 className="size-3" />
                 {result.valid.length} valid question{result.valid.length !== 1 ? "s" : ""}
                 {(() => {

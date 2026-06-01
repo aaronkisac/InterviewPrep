@@ -164,6 +164,7 @@ export default async function QuestionsPage({
           isLoggedIn={isLoggedIn}
           topics={systemTopics}
           customTopics={customTopicsForTabs}
+          lang={lang}
         />
 
         <div className="rounded-b-lg border-x border-b border-border bg-card px-4 pb-4 pt-3">

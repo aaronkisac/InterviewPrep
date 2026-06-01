@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 
 import { auth } from "@/lib/auth";
+import { getLevelLabelEn } from "@/lib/levels";
 import { createAdminClient } from "@/lib/supabase/admin";
 import type { Topic } from "@/lib/supabase/types";
 
@@ -43,14 +44,6 @@ export async function submitQuestion(
 
   const userId = session.user.id;
 
-  const LEVEL_LABELS: Record<number, string> = {
-    1: "Entry",
-    2: "Junior",
-    3: "Mid",
-    4: "Senior",
-    5: "Expert",
-  };
-
   // Server action has already verified the session via NextAuth.
   // Use the admin (service-role) client — Supabase auth.uid() is not set in
   // JWT-strategy NextAuth sessions, so the anon client would fail RLS.
@@ -61,7 +54,7 @@ export async function submitQuestion(
     .insert({
       topic: input.topic,
       level: input.level,
-      level_label: LEVEL_LABELS[input.level],
+      level_label: getLevelLabelEn(input.level),
       question: input.question.trim(),
       answer_general: input.answer_general.trim(),
       answer_general_tr: "",

@@ -666,6 +666,8 @@ export const i18nQuestions = {
     privateTopic: "Private topic",
     signIn: "Sign in",
     submitQuestion: "+ Submit question",
+    tabAll: "All",
+    tabBookmarked: "★ Bookmarked",
     title: "All questions",
   },
   tr: {
@@ -684,6 +686,8 @@ export const i18nQuestions = {
     privateTopic: "Özel topic",
     signIn: "Giriş yap",
     submitQuestion: "+ Soru gönder",
+    tabAll: "Hepsi",
+    tabBookmarked: "★ Yer imleri",
     title: "Tüm sorular",
   },
 } as const;

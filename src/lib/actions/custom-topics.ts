@@ -2,6 +2,7 @@
 
 import { auth } from "@/lib/auth";
 import { createAdminClient } from "@/lib/supabase/admin";
+import type { MockOptionInput } from "@/types/mock";
 
 // ── Types ────────────────────────────────────────────────────────────────────
 
@@ -14,11 +15,8 @@ export type CustomTopic = {
   mock_question_count: number;
 };
 
-export type MockOption = {
-  optionText: string;
-  isCorrect: boolean;
-  explanation?: string;
-};
+/** @deprecated Use MockOptionInput from @/types/mock */
+export type MockOption = MockOptionInput;
 
 export type CustomQuestion = {
   id: string;

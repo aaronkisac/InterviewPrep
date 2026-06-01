@@ -1,7 +1,9 @@
 "use server";
 
 import { auth } from "@/lib/auth";
+import { getLevelLabelEn } from "@/lib/levels";
 import { createAdminClient } from "@/lib/supabase/admin";
+import type { MockOptionInput } from "@/types/mock";
 
 export type SystemTopic = {
   slug: string;
@@ -92,11 +94,8 @@ export async function deleteSystemTopic(
 
 // ── JSON bulk import ──────────────────────────────────────────────────────────
 
-export type MockOption = {
-  optionText: string;
-  isCorrect: boolean;
-  explanation?: string;
-};
+/** @deprecated Use MockOptionInput from @/types/mock */
+export type MockOption = MockOptionInput;
 
 export type BulkImportQuestion = {
   question: string;
@@ -108,7 +107,7 @@ export type BulkImportQuestion = {
   answerPersonalTr?: string;
   detailMd?: string;
   detailMdTr?: string;
-  mock_options?: MockOption[];
+  mock_options?: MockOptionInput[];
 };
 
 export async function bulkImportSystemQuestions(
@@ -120,14 +119,10 @@ export async function bulkImportSystemQuestions(
 
   if (questions.length === 0) return { ok: false, inserted: 0, error: "No questions provided" };
 
-  const levelLabels: Record<number, string> = {
-    1: "Entry", 2: "Junior", 3: "Mid", 4: "Senior", 5: "Expert",
-  };
-
   const rows = questions.map((q) => ({
     topic: q.topic?.trim() || topicSlug,
     level: q.level,
-    level_label: levelLabels[q.level] ?? "Entry",
+    level_label: getLevelLabelEn(q.level),
     question: q.question.trim(),
     answer_general: q.answerGeneral.trim(),
     answer_general_tr: q.answerGeneralTr?.trim() ?? "",
