@@ -1,7 +1,6 @@
 import { unstable_cache } from "next/cache";
 
 import { createAdminClient } from "@/lib/supabase/admin";
-import { createServerSupabaseClient } from "@/lib/supabase/server";
 import type { QuestionRow, Topic } from "@/lib/supabase/types";
 
 // Re-export for convenience — Server Components can import everything from
@@ -59,30 +58,43 @@ export function parseQuery(value: string | undefined): string | undefined {
   return trimmed && trimmed.length > 0 ? trimmed : undefined;
 }
 
+/**
+ * Cached for 1 hour — question list is public and rarely changes.
+ * Uses admin client; unstable_cache cannot access cookies/session.
+ * Each unique filter combination gets its own cache entry.
+ */
+const _listQuestionsCached = unstable_cache(
+  async (filters: QuestionFilters): Promise<QuestionListItem[]> => {
+    const supabase = createAdminClient();
+
+    let query = supabase
+      .from("questions")
+      .select(
+        "id, topic, level, level_label, question, question_tr, answer_general, answer_personal, answer_general_tr, answer_personal_tr",
+      )
+      .eq("status", "active")
+      .eq("is_shared", true)
+      .order("topic", { ascending: true })
+      .order("level", { ascending: true });
+
+    if (filters.topic) query = query.eq("topic", filters.topic);
+    if (filters.levels && filters.levels.length > 0)
+      query = query.in("level", filters.levels);
+    if (filters.q) query = query.ilike("question", `%${filters.q}%`);
+
+    const { data, error } = await query;
+    if (error) throw new Error(`Failed to load questions: ${error.message}`);
+
+    return (data ?? []) as QuestionListItem[];
+  },
+  ["questions-list"],
+  { revalidate: 3600 },
+);
+
 export async function listQuestions(
   filters: QuestionFilters,
 ): Promise<QuestionListItem[]> {
-  const supabase = await createServerSupabaseClient();
-
-  let query = supabase
-    .from("questions")
-    .select(
-      "id, topic, level, level_label, question, question_tr, answer_general, answer_personal, answer_general_tr, answer_personal_tr",
-    )
-    .eq("status", "active")
-    .eq("is_shared", true)
-    .order("topic", { ascending: true })
-    .order("level", { ascending: true });
-
-  if (filters.topic) query = query.eq("topic", filters.topic);
-  if (filters.levels && filters.levels.length > 0)
-    query = query.in("level", filters.levels);
-  if (filters.q) query = query.ilike("question", `%${filters.q}%`);
-
-  const { data, error } = await query;
-  if (error) throw new Error(`Failed to load questions: ${error.message}`);
-
-  return (data ?? []) as QuestionListItem[];
+  return _listQuestionsCached(filters);
 }
 
 /**
@@ -114,17 +126,22 @@ export const getTopicStats = unstable_cache(
   { revalidate: 300 },
 );
 
-export async function getQuestionById(
-  id: string,
-): Promise<QuestionRow | null> {
-  const supabase = await createServerSupabaseClient();
-  const { data, error } = await supabase
-    .from("questions")
-    .select("*")
-    .eq("id", id)
-    .eq("status", "active")
-    .maybeSingle();
+/**
+ * Cached for 1 hour — question detail is public and rarely changes.
+ */
+export const getQuestionById = unstable_cache(
+  async (id: string): Promise<QuestionRow | null> => {
+    const supabase = createAdminClient();
+    const { data, error } = await supabase
+      .from("questions")
+      .select("*")
+      .eq("id", id)
+      .eq("status", "active")
+      .maybeSingle();
 
-  if (error) throw new Error(`Failed to load question: ${error.message}`);
-  return data;
-}
+    if (error) throw new Error(`Failed to load question: ${error.message}`);
+    return data;
+  },
+  ["question-by-id"],
+  { revalidate: 3600 },
+);

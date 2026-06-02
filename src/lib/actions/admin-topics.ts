@@ -1,5 +1,6 @@
 "use server";
 
+import { unstable_cache } from "next/cache";
 import { auth } from "@/lib/auth";
 import { getLevelLabelEn } from "@/lib/levels";
 import { createAdminClient } from "@/lib/supabase/admin";
@@ -20,7 +21,12 @@ async function requireAdmin() {
   return session.user.id;
 }
 
-export async function listSystemTopics(): Promise<SystemTopic[]> {
+/**
+ * Cached for 1 hour — system topics change only when an admin adds/removes one.
+ * Admin pages that need fresh data should call revalidateTag("system-topics").
+ */
+export const listSystemTopics = unstable_cache(
+  async (): Promise<SystemTopic[]> => {
   const sb = createAdminClient();
   const { data: topics } = await sb
     .from("system_topics")
@@ -42,7 +48,10 @@ export async function listSystemTopics(): Promise<SystemTopic[]> {
   }
 
   return topics.map((t) => ({ ...t, question_count: countMap[t.slug] ?? 0 }));
-}
+  },
+  ["system-topics"],
+  { revalidate: 3600 },
+);
 
 export async function createSystemTopic(
   name: string,

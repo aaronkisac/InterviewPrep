@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useTransition } from "react";
+import { flushSync } from "react-dom";
 
 import { setLang } from "@/lib/actions/lang";
 import { LANG_COOKIE } from "@/lib/lang-constants";
@@ -14,8 +15,8 @@ export function LangToggle() {
 
   function toggle() {
     const next = lang === "en" ? "tr" : "en";
-    // Update context immediately — zero-latency UI feedback
-    setLangCtx(next);
+    // Force synchronous render before batching with the transition
+    flushSync(() => setLangCtx(next));
     // Write cookie client-side so the refresh picks it up without waiting for the server action
     document.cookie = `${LANG_COOKIE}=${next};path=/;max-age=${60 * 60 * 24 * 365};samesite=lax`;
     // Refresh server components in the background + sync server-side cookie
