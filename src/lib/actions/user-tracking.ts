@@ -98,15 +98,15 @@ export async function toggleBookmark(
   }
 }
 
-export async function getBookmarkedIds(): Promise<string[]> {
-  const session = await auth();
-  if (!session?.user?.id) return [];
+export async function getBookmarkedIds(overrideUserId?: string): Promise<string[]> {
+  const userId = overrideUserId ?? (await auth())?.user?.id;
+  if (!userId) return [];
 
   const sb = createAdminClient();
   const { data } = await sb
     .from("bookmarks")
     .select("question_id")
-    .eq("user_id", session.user.id);
+    .eq("user_id", userId);
 
   return (data ?? []).map((r) => r.question_id as string);
 }
@@ -254,10 +254,9 @@ export async function getDashboardData(): Promise<DashboardData | null> {
       .eq("user_id", userId)
       .order("created_at", { ascending: false })
       .limit(10),
-    sb
-      .from("user_question_progress")
-      .select("question_id, correct, questions!inner(topic)")
-      .eq("user_id", userId),
+    // RPC does GROUP BY in SQL — avoids fetching every individual progress row
+    // and joining questions one-by-one in JS.
+    sb.rpc("get_user_topic_progress", { p_user_id: userId }),
     sb
       .from("bookmarks")
       .select("question_id", { count: "exact", head: true })
@@ -273,20 +272,13 @@ export async function getDashboardData(): Promise<DashboardData | null> {
     createdAt: s.created_at as string,
   }));
 
-  // Aggregate progress by topic
-  const topicMap = new Map<Topic, { seen: number; correct: number }>();
-  for (const row of progressResult.data ?? []) {
-    const topic = row.questions?.[0]?.topic as Topic | undefined;
-    if (!topic) continue;
-    const entry = topicMap.get(topic) ?? { seen: 0, correct: 0 };
-    entry.seen += 1;
-    if (row.correct === true) entry.correct += 1;
-    topicMap.set(topic, entry);
-  }
-
-  const topicProgress = Array.from(topicMap.entries()).map(
-    ([topic, stats]) => ({ topic, ...stats }),
-  );
+  const topicProgress = (
+    (progressResult.data ?? []) as Array<{ topic: string; seen: number; correct: number }>
+  ).map(({ topic, seen, correct }) => ({
+    topic: topic as Topic,
+    seen: Number(seen),
+    correct: Number(correct),
+  }));
 
   return {
     mockSessions,

@@ -27,6 +27,7 @@ import type {
 
 type SeedQuestion = {
   id: number;
+  uuid?: string; // optional: if set, update by UUID instead of (topic, question)
   topic: Topic;
   question: string;
   questionTr?: string | null;
@@ -56,7 +57,7 @@ type SeedInsert = Pick<
   | "is_seed"
   | "is_shared"
   | "status"
->;
+> & { uuid?: string };
 
 const SEED_FILES: ReadonlyArray<{ topic: Topic; file: string }> = [
   { topic: "react", file: "seed-react.json" },
@@ -114,6 +115,7 @@ async function loadExtraQuestions(): Promise<SeedQuestion[]> {
 
 function toInsert(q: SeedQuestion): SeedInsert {
   return {
+    uuid: q.uuid,
     topic: q.topic,
     level: q.level,
     level_label: q.levelLabel,
@@ -140,6 +142,26 @@ async function upsertBatch(
   let updated = 0;
 
   for (const row of rows) {
+    // If uuid is provided, update directly by UUID — bypasses question-text matching
+    if (row.uuid) {
+      const { error: updateError } = await supabase
+        .from("questions")
+        .update({
+          level: row.level,
+          level_label: row.level_label,
+          question_tr: row.question_tr,
+          answer_general: row.answer_general,
+          answer_general_tr: row.answer_general_tr,
+          answer_personal_tr: row.answer_personal_tr,
+          detail_md: row.detail_md,
+          detail_md_tr: row.detail_md_tr,
+        })
+        .eq("id", row.uuid);
+      if (updateError) throw new Error(`UUID update failed for ${row.uuid}: ${updateError.message}`);
+      updated += 1;
+      continue;
+    }
+
     const { data: existing, error: selectError } = await supabase
       .from("questions")
       .select("id, level, level_label")

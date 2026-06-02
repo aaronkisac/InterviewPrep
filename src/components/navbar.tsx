@@ -66,7 +66,7 @@ export async function Navbar() {
         <div className="flex-1" />
 
         {/* Language toggle */}
-        <LangToggle current={lang} />
+        <LangToggle />
 
         {/* Theme controls */}
         <ThemeSelector />

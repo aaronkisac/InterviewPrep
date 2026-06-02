@@ -1,7 +1,8 @@
 import { cookies } from "next/headers";
 import type { Language } from "@/lib/supabase/types";
 
-export const LANG_COOKIE = "preferred_lang";
+export { LANG_COOKIE } from "@/lib/lang-constants";
+import { LANG_COOKIE } from "@/lib/lang-constants";
 
 /**
  * Reads the user's preferred language from the cookie.

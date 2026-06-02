@@ -454,15 +454,15 @@ export async function toggleCustomBookmark(
   }
 }
 
-export async function getCustomBookmarkIds(): Promise<string[]> {
-  const session = await auth();
-  if (!session?.user?.id) return [];
+export async function getCustomBookmarkIds(overrideUserId?: string): Promise<string[]> {
+  const userId = overrideUserId ?? (await auth())?.user?.id;
+  if (!userId) return [];
 
   const sb = createAdminClient();
   const { data } = await sb
     .from("custom_question_bookmarks")
     .select("custom_question_id")
-    .eq("user_id", session.user.id);
+    .eq("user_id", userId);
 
   return (data ?? []).map((r) => r.custom_question_id as string);
 }

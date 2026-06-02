@@ -1,3 +1,6 @@
+import { unstable_cache } from "next/cache";
+
+import { createAdminClient } from "@/lib/supabase/admin";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 import type { TermRow, Topic } from "@/lib/supabase/types";
 
@@ -6,16 +9,26 @@ export type TermListItem = Pick<
   "id" | "slug" | "label" | "topic" | "tooltip" | "tooltip_tr"
 >;
 
-export async function listTerms(): Promise<TermListItem[]> {
-  const supabase = await createServerSupabaseClient();
-  const { data, error } = await supabase
-    .from("terms")
-    .select("id, slug, label, topic, tooltip, tooltip_tr")
-    .order("label", { ascending: true });
+/**
+ * Cached for 5 minutes — glossary terms change only when an admin seeds new
+ * content, so frequent re-fetching is wasteful.
+ */
+export const listTerms = unstable_cache(
+  async (): Promise<TermListItem[]> => {
+    // Use admin client (no cookies) — terms are public data and unstable_cache
+    // does not allow cookies() inside its scope.
+    const supabase = createAdminClient();
+    const { data, error } = await supabase
+      .from("terms")
+      .select("id, slug, label, topic, tooltip, tooltip_tr")
+      .order("label", { ascending: true });
 
-  if (error) throw new Error(`Failed to load terms: ${error.message}`);
-  return data ?? [];
-}
+    if (error) throw new Error(`Failed to load terms: ${error.message}`);
+    return data ?? [];
+  },
+  ["glossary-terms"],
+  { revalidate: 300 },
+);
 
 export async function getTermBySlug(slug: string): Promise<TermRow | null> {
   const supabase = await createServerSupabaseClient();

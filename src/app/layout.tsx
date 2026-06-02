@@ -5,6 +5,8 @@ import "./globals.css";
 import { Navbar } from "@/components/navbar";
 import { ThemeProvider } from "@/components/theme-provider";
 import { COLOR_THEME_STORAGE_KEY, DEFAULT_COLOR_THEME } from "@/lib/themes";
+import { LangProvider } from "@/contexts/lang-context";
+import { getLang } from "@/lib/lang";
 
 const libreBaskerville = Libre_Baskerville({
   subsets: ["latin"],
@@ -26,9 +28,10 @@ export const metadata: Metadata = {
     "Personal interview prep across React, TypeScript, and Next.js — Q&A, glossary, mock sessions.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  const lang = await getLang();
   return (
     <html
       lang="en"
@@ -45,10 +48,12 @@ export default function RootLayout({
       </head>
       <body className="min-h-full flex flex-col bg-background text-foreground">
         <ThemeProvider>
-          <Navbar />
-          <div className="pt-[37px] flex flex-col flex-1">
-            {children}
-          </div>
+          <LangProvider initial={lang}>
+            <Navbar />
+            <div className="pt-[37px] flex flex-col flex-1">
+              {children}
+            </div>
+          </LangProvider>
         </ThemeProvider>
       </body>
     </html>

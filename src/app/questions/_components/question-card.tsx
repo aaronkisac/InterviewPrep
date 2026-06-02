@@ -1,13 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 import { GlossaryText } from "@/components/glossary-text";
 import { CardMarkdown } from "@/components/card-markdown";
 import { BookmarkButton } from "@/app/questions/_components/bookmark-button";
 import { LevelDots } from "@/components/level-dots";
-import type { GlossaryTerm } from "@/lib/glossary-match";
+import { useTerms } from "@/app/questions/_components/terms-context";
+import { buildMatcher } from "@/lib/glossary-match";
 import type { Language } from "@/lib/supabase/types";
 import { TR_FALLBACK } from "@/lib/topics";
 import { i18nQuestionCard } from "@/lib/i18n";
@@ -37,7 +38,6 @@ export function QuestionCard({
   question,
   index,
   lang,
-  terms,
   isBookmarked = false,
   showTopic = false,
   isLoggedIn = true,
@@ -46,12 +46,17 @@ export function QuestionCard({
   question: QuestionListItem;
   index: number;
   lang: Language;
-  terms: GlossaryTerm[];
   isBookmarked?: boolean;
   showTopic?: boolean;
   isLoggedIn?: boolean;
   topicLabels?: Record<string, string>;
 }) {
+  const terms = useTerms();
+  // Build the glossary matcher once per card instance (terms list is stable
+  // across renders since it comes from context). Avoids rebuilding the regex
+  // on every re-render when the personal answer section is toggled open.
+  const matcher = useMemo(() => buildMatcher(terms), [terms]);
+
   const [open, setOpen] = useState(false);
   const [personalOpen, setPersonalOpen] = useState(false);
   const { general, personal, isFallback } = pickAnswer(question, lang);
@@ -149,7 +154,7 @@ export function QuestionCard({
               </button>
               {personalOpen && (
                 <p className="mt-2 rounded border border-dashed border-border bg-background p-3 text-sm leading-relaxed text-foreground/85">
-                  <GlossaryText text={personal} terms={terms} isLoggedIn={isLoggedIn} />
+                  <GlossaryText text={personal} matcher={matcher} isLoggedIn={isLoggedIn} />
                 </p>
               )}
             </div>

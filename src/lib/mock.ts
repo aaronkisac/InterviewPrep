@@ -1,9 +1,12 @@
+import { unstable_cache } from "next/cache";
+
 import type {
   Level,
   MockQuestion,
   MockReadyMeta,
   MockSessionConfig,
 } from "@/lib/mock-shared";
+import { createAdminClient } from "@/lib/supabase/admin";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 import type { LevelLabel, Topic } from "@/lib/supabase/types";
 
@@ -48,49 +51,59 @@ function shuffle<T>(input: readonly T[]): T[] {
  * Loads every question that is ready for a mock session. A question only
  * qualifies when it has exactly four options with exactly one correct — the
  * V1 constraint from the spec.
+ *
+ * Cached for 60 seconds — mock question data changes only when an admin
+ * seeds new content, so a short TTL is safe and avoids hammering Supabase
+ * on every config/session page load.
  */
-async function loadMockReady(): Promise<MockQuestion[]> {
-  const supabase = await createServerSupabaseClient();
-  const { data, error } = await supabase
-    .from("questions")
-    .select(
-      "id, topic, level, level_label, question, question_tr, mock_options(id, option_text, option_text_tr, is_correct, explanation, explanation_tr)",
-    )
-    .eq("status", "active")
-    .eq("is_shared", true);
+const loadMockReady = unstable_cache(
+  async (): Promise<MockQuestion[]> => {
+    // Use admin client (no cookies) — mock questions are public data and
+    // unstable_cache does not allow cookies() inside its scope.
+    const supabase = createAdminClient();
+    const { data, error } = await supabase
+      .from("questions")
+      .select(
+        "id, topic, level, level_label, question, question_tr, mock_options(id, option_text, option_text_tr, is_correct, explanation, explanation_tr)",
+      )
+      .eq("status", "active")
+      .eq("is_shared", true);
 
-  if (error) {
-    throw new Error(`Failed to load mock questions: ${error.message}`);
-  }
+    if (error) {
+      throw new Error(`Failed to load mock questions: ${error.message}`);
+    }
 
-  const rows = (data ?? []) as unknown as QuestionWithOptionsRow[];
-  const ready: MockQuestion[] = [];
+    const rows = (data ?? []) as unknown as QuestionWithOptionsRow[];
+    const ready: MockQuestion[] = [];
 
-  for (const row of rows) {
-    const opts = row.mock_options ?? [];
-    const correctCount = opts.filter((o) => o.is_correct).length;
-    if (opts.length !== 4 || correctCount !== 1) continue;
+    for (const row of rows) {
+      const opts = row.mock_options ?? [];
+      const correctCount = opts.filter((o) => o.is_correct).length;
+      if (opts.length !== 4 || correctCount !== 1) continue;
 
-    ready.push({
-      id: row.id,
-      topic: row.topic,
-      level: row.level,
-      levelLabel: row.level_label,
-      question: row.question,
-      questionTr: row.question_tr,
-      options: opts.map((o) => ({
-        id: o.id,
-        text: o.option_text,
-        textTr: o.option_text_tr,
-        isCorrect: o.is_correct,
-        explanation: o.explanation,
-        explanationTr: o.explanation_tr,
-      })),
-    });
-  }
+      ready.push({
+        id: row.id,
+        topic: row.topic,
+        level: row.level,
+        levelLabel: row.level_label,
+        question: row.question,
+        questionTr: row.question_tr,
+        options: opts.map((o) => ({
+          id: o.id,
+          text: o.option_text,
+          textTr: o.option_text_tr,
+          isCorrect: o.is_correct,
+          explanation: o.explanation,
+          explanationTr: o.explanation_tr,
+        })),
+      });
+    }
 
-  return ready;
-}
+    return ready;
+  },
+  ["mock-ready-questions"],
+  { revalidate: 60 },
+);
 
 /** Topic + level of every mock-ready question — drives the config page. */
 export async function getMockReadyMeta(): Promise<MockReadyMeta[]> {

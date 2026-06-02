@@ -18,6 +18,7 @@ import { TopicTabs } from "./_components/topic-tabs";
 import { QuestionFilters } from "./_components/filters";
 import { QuestionCard } from "./_components/question-card";
 import { CustomQuestionCard } from "./_components/custom-question-card";
+import { TermsProvider } from "./_components/terms-context";
 
 export const dynamic = "force-dynamic";
 
@@ -50,21 +51,17 @@ export default async function QuestionsPage({
 
   const session = await auth().catch(() => null);
   const isLoggedIn = Boolean(session?.user);
-
-  // Fetch base data always
-  const [allQuestions, terms, bookmarkedIds, systemTopics] = await Promise.all([
-    // Skip system question fetch if viewing a custom topic
-    myTopicSlug ? Promise.resolve([]) : listQuestions(filters),
-    listTerms(),
-    getBookmarkedIds(),
-    listSystemTopics(),
-  ]);
-
-  // Custom topics for tabs — pass userId directly to avoid a second auth() call
   const userId = session?.user?.id;
-  const customTopicsForTabs = userId
-    ? await listCustomTopics(userId).catch(() => [])
-    : [];
+
+  // Fetch all base data in parallel — userId passed directly to avoid repeated auth() calls
+  const [allQuestions, terms, bookmarkedIds, systemTopics, customTopicsForTabs] =
+    await Promise.all([
+      myTopicSlug ? Promise.resolve([]) : listQuestions(filters),
+      listTerms(),
+      getBookmarkedIds(userId),
+      listSystemTopics(),
+      userId ? listCustomTopics(userId).catch(() => []) : Promise.resolve([]),
+    ]);
 
   // If a custom topic tab is active, fetch its questions + bookmarks
   const [customTopicData, customBookmarkIds] = await Promise.all([
@@ -72,7 +69,7 @@ export default async function QuestionsPage({
       ? getCustomTopic(myTopicSlug, userId).catch(() => null)
       : Promise.resolve(null),
     userId && myTopicSlug
-      ? getCustomBookmarkIds().catch(() => [] as string[])
+      ? getCustomBookmarkIds(userId).catch(() => [] as string[])
       : Promise.resolve([] as string[]),
   ]);
 
@@ -217,21 +214,22 @@ export default async function QuestionsPage({
               {i18n.empty}
             </p>
           ) : (
-            <ul className="space-y-1.5">
-              {questions.map((question, i) => (
-                <QuestionCard
-                  key={question.id}
-                  question={question}
-                  index={i + 1}
-                  lang={lang}
-                  terms={terms}
-                  isBookmarked={bookmarkedSet.has(question.id)}
-                  showTopic={isBookmarkedTab}
-                  isLoggedIn={isLoggedIn}
-                  topicLabels={topicLabels}
-                />
-              ))}
-            </ul>
+            <TermsProvider terms={terms}>
+              <ul className="space-y-1.5">
+                {questions.map((question, i) => (
+                  <QuestionCard
+                    key={question.id}
+                    question={question}
+                    index={i + 1}
+                    lang={lang}
+                    isBookmarked={bookmarkedSet.has(question.id)}
+                    showTopic={isBookmarkedTab}
+                    isLoggedIn={isLoggedIn}
+                    topicLabels={topicLabels}
+                  />
+                ))}
+              </ul>
+            </TermsProvider>
           )}
         </div>
       </div>

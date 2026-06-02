@@ -1,3 +1,6 @@
+import { unstable_cache } from "next/cache";
+
+import { createAdminClient } from "@/lib/supabase/admin";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 import type { QuestionRow, Topic } from "@/lib/supabase/types";
 
@@ -18,10 +21,7 @@ export type QuestionListItem = Pick<
   | "answer_personal"
   | "answer_general_tr"
   | "answer_personal_tr"
-> & {
-  has_detail: boolean;
-  has_detail_tr: boolean;
-};
+>;
 
 export type QuestionFilters = {
   topic?: Topic;
@@ -64,12 +64,10 @@ export async function listQuestions(
 ): Promise<QuestionListItem[]> {
   const supabase = await createServerSupabaseClient();
 
-  // Pulls detail_md / detail_md_tr so the card can flag "deep-dive available",
-  // but we drop them from the public shape — only render on the detail page.
   let query = supabase
     .from("questions")
     .select(
-      "id, topic, level, level_label, question, question_tr, answer_general, answer_personal, answer_general_tr, answer_personal_tr, detail_md, detail_md_tr",
+      "id, topic, level, level_label, question, question_tr, answer_general, answer_personal, answer_general_tr, answer_personal_tr",
     )
     .eq("status", "active")
     .eq("is_shared", true)
@@ -84,35 +82,37 @@ export async function listQuestions(
   const { data, error } = await query;
   if (error) throw new Error(`Failed to load questions: ${error.message}`);
 
-  return (data ?? []).map((row) => {
-    const { detail_md, detail_md_tr, ...rest } = row as QuestionRow & {
-      detail_md: string | null;
-      detail_md_tr: string | null;
-    };
-    return {
-      ...rest,
-      has_detail: Boolean(detail_md && detail_md.trim().length > 0),
-      has_detail_tr: Boolean(detail_md_tr && detail_md_tr.trim().length > 0),
-    };
-  });
+  return (data ?? []) as QuestionListItem[];
 }
 
-export async function getTopicStats(): Promise<Record<string, number>> {
-  const supabase = await createServerSupabaseClient();
-  const { data, error } = await supabase
-    .from("questions")
-    .select("topic")
-    .eq("status", "active")
-    .eq("is_shared", true);
+/**
+ * Cached for 5 minutes — topic counts only change when new questions are seeded.
+ * Supabase JS client doesn't support GROUP BY natively, so we fetch topic
+ * column only (minimal payload) and aggregate in JS, but avoid hitting the DB
+ * on every homepage render.
+ */
+export const getTopicStats = unstable_cache(
+  async (): Promise<Record<string, number>> => {
+    // Use admin client (no cookies) — topic stats are public and unstable_cache
+    // does not allow cookies() inside its scope.
+    const supabase = createAdminClient();
+    const { data, error } = await supabase
+      .from("questions")
+      .select("topic")
+      .eq("status", "active")
+      .eq("is_shared", true);
 
-  if (error) return {};
+    if (error) return {};
 
-  const counts: Record<string, number> = {};
-  for (const row of data ?? []) {
-    counts[row.topic as string] = (counts[row.topic as string] ?? 0) + 1;
-  }
-  return counts;
-}
+    const counts: Record<string, number> = {};
+    for (const row of data ?? []) {
+      counts[row.topic as string] = (counts[row.topic as string] ?? 0) + 1;
+    }
+    return counts;
+  },
+  ["topic-stats"],
+  { revalidate: 300 },
+);
 
 export async function getQuestionById(
   id: string,
