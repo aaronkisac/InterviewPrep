@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import { Lock, Bookmark } from "lucide-react";
+import { Bookmark } from "lucide-react";
 import { Tooltip } from "radix-ui";
 
 import type { CustomQuestion } from "@/lib/actions/custom-topics";
@@ -16,11 +16,13 @@ export function CustomQuestionCard({
   index,
   lang,
   initialBookmarked = false,
+  topicName,
 }: {
   question: CustomQuestion;
   index: number;
   lang: Language;
   initialBookmarked?: boolean;
+  topicName?: string;
 }) {
   const [open, setOpen] = useState(false);
   const [bookmarked, setBookmarked] = useState(initialBookmarked);
@@ -63,6 +65,12 @@ export function CustomQuestionCard({
           </span>
         </button>
 
+        {topicName && (
+          <span className="hidden md:inline flex-shrink-0 rounded border border-border bg-secondary px-1.5 py-0.5 text-[10px] font-medium text-secondary-foreground">
+            {topicName}
+          </span>
+        )}
+
         <LevelDots level={question.level ?? 1} />
 
         <Tooltip.Provider delayDuration={300}>
@@ -93,23 +101,6 @@ export function CustomQuestionCard({
             </Tooltip.Portal>
           </Tooltip.Root>
 
-          <Tooltip.Root>
-            <Tooltip.Trigger asChild>
-              <span className="flex items-center">
-                <Lock className="size-3 flex-shrink-0 text-muted-foreground/40" />
-              </span>
-            </Tooltip.Trigger>
-            <Tooltip.Portal>
-              <Tooltip.Content
-                side="top"
-                className="z-50 rounded-md bg-foreground px-2.5 py-1.5 text-xs text-background shadow-md animate-in fade-in-0 zoom-in-95"
-                sideOffset={5}
-              >
-                Private — only visible to you
-                <Tooltip.Arrow className="fill-foreground" />
-              </Tooltip.Content>
-            </Tooltip.Portal>
-          </Tooltip.Root>
         </Tooltip.Provider>
       </div>
 

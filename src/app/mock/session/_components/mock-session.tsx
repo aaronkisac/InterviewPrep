@@ -99,7 +99,7 @@ export function MockSession({
 
   return (
     <div className="space-y-5">
-      <ProgressBar current={index + 1} total={total} quitLabel={common.quit} />
+      <ProgressBar current={index + 1} total={total} quitLabel={common.quit} questionLabel={i18n.questionOf(index + 1, total)} />
       <QuestionView
         question={current}
         selectedId={selected[index] ?? null}

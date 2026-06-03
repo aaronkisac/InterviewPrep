@@ -466,3 +466,50 @@ export async function getCustomBookmarkIds(overrideUserId?: string): Promise<str
 
   return (data ?? []).map((r) => r.custom_question_id as string);
 }
+
+/**
+ * Returns the full CustomQuestion objects that the user has bookmarked,
+ * across all of their custom topics. Used by the "Bookmarked" tab to
+ * surface custom questions alongside system questions.
+ */
+export type BookmarkedCustomQuestion = CustomQuestion & { topicName: string };
+
+export async function getBookmarkedCustomQuestions(
+  overrideUserId?: string,
+): Promise<BookmarkedCustomQuestion[]> {
+  const userId = overrideUserId ?? (await auth())?.user?.id;
+  if (!userId) return [];
+
+  const sb = createAdminClient();
+
+  // Step 1: get bookmarked IDs
+  const { data: bookmarks } = await sb
+    .from("custom_question_bookmarks")
+    .select("custom_question_id")
+    .eq("user_id", userId);
+
+  if (!bookmarks || bookmarks.length === 0) return [];
+
+  const ids = bookmarks.map((b) => b.custom_question_id as string);
+
+  // Step 2: fetch questions + their topic name in one query
+  const { data: questions } = await sb
+    .from("custom_questions")
+    .select("id, topic_id, question, answer, level, answer_personal, position, created_at, custom_topics(name)")
+    .in("id", ids);
+
+  if (!questions) return [];
+
+  return questions.map((q) => ({
+    id: q.id as string,
+    topic_id: q.topic_id as string,
+    question: q.question as string,
+    answer: (q.answer as string) ?? "",
+    level: (q.level as number) ?? 1,
+    answer_personal: (q.answer_personal as string | null) ?? null,
+    mock_options: null,
+    position: (q.position as number) ?? 0,
+    created_at: q.created_at as string,
+    topicName: (q.custom_topics as { name: string } | null)?.name ?? "",
+  }));
+}

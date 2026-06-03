@@ -12,7 +12,7 @@ import { listTerms } from "@/lib/terms";
 import { getLang } from "@/lib/lang";
 import { i18nQuestions } from "@/lib/i18n";
 import { listSystemTopics } from "@/lib/actions/admin-topics";
-import { listCustomTopics, getCustomTopic, getCustomBookmarkIds } from "@/lib/actions/custom-topics";
+import { listCustomTopics, getCustomTopic, getCustomBookmarkIds, getBookmarkedCustomQuestions, type BookmarkedCustomQuestion } from "@/lib/actions/custom-topics";
 
 import { TopicTabs } from "./_components/topic-tabs";
 import { QuestionFilters } from "./_components/filters";
@@ -64,13 +64,17 @@ export default async function QuestionsPage({
     ]);
 
   // If a custom topic tab is active, fetch its questions + bookmarks
-  const [customTopicData, customBookmarkIds] = await Promise.all([
+  // If on bookmarked tab, also fetch all bookmarked custom questions
+  const [customTopicData, customBookmarkIds, bookmarkedCustomQuestions] = await Promise.all([
     userId && myTopicSlug
       ? getCustomTopic(myTopicSlug, userId).catch(() => null)
       : Promise.resolve(null),
     userId && myTopicSlug
       ? getCustomBookmarkIds(userId).catch(() => [] as string[])
       : Promise.resolve([] as string[]),
+    userId && isBookmarkedTab
+      ? getBookmarkedCustomQuestions(userId).catch(() => [])
+      : Promise.resolve([]),
   ]);
 
   const topicLabels = Object.fromEntries(systemTopics.map((t) => [t.slug, t.name]));
@@ -172,7 +176,7 @@ export default async function QuestionsPage({
                 ? `${customQuestions.length} ${customQuestions.length === 1 ? "question" : "questions"} · ${i18n.privateTopic}`
                 : isBookmarkedTab && !isLoggedIn
                   ? i18n.loginForBookmarks
-                  : i18n.countSuffix(questions.length, hasActiveFilters)}
+                  : i18n.countSuffix(questions.length + bookmarkedCustomQuestions.length, hasActiveFilters)}
             </span>
             {(hasActiveFilters || isCustomTab) && (
               <Link
@@ -209,7 +213,7 @@ export default async function QuestionsPage({
                 ))}
               </ul>
             )
-          ) : questions.length === 0 ? (
+          ) : questions.length === 0 && bookmarkedCustomQuestions.length === 0 ? (
             <p className="rounded-lg border border-dashed border-border p-8 text-center text-sm text-muted-foreground">
               {i18n.empty}
             </p>
@@ -226,6 +230,16 @@ export default async function QuestionsPage({
                     showTopic={isBookmarkedTab}
                     isLoggedIn={isLoggedIn}
                     topicLabels={topicLabels}
+                  />
+                ))}
+                {(bookmarkedCustomQuestions as BookmarkedCustomQuestion[]).map((q, i) => (
+                  <CustomQuestionCard
+                    key={q.id}
+                    question={q}
+                    index={questions.length + i + 1}
+                    lang={lang}
+                    initialBookmarked={true}
+                    topicName={q.topicName}
                   />
                 ))}
               </ul>

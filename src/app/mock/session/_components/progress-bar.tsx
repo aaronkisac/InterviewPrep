@@ -7,16 +7,18 @@ export function ProgressBar({
   current,
   total,
   quitLabel,
+  questionLabel,
 }: {
   current: number;
   total: number;
   quitLabel: string;
+  questionLabel?: string;
 }) {
   const pct = Math.round((current / total) * 100);
   return (
     <div>
       <div className="flex items-center justify-between text-xs text-muted-foreground">
-        <span>{current} / {total}</span>
+        <span>{questionLabel ?? `${current} / ${total}`}</span>
         <Link href="/mock" className="hover:text-foreground hover:underline">
           {quitLabel}
         </Link>
