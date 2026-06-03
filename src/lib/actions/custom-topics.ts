@@ -495,7 +495,7 @@ export async function getBookmarkedCustomQuestions(
   // Step 2: fetch questions + their topic name in one query
   const { data: questions } = await sb
     .from("custom_questions")
-    .select("id, topic_id, question, answer, level, answer_personal, position, created_at, custom_topics(name)")
+    .select("id, topic_id, question, answer, level, answer_personal, position, created_at, updated_at, custom_topics(name)")
     .in("id", ids);
 
   if (!questions) return [];
@@ -510,6 +510,7 @@ export async function getBookmarkedCustomQuestions(
     mock_options: null,
     position: (q.position as number) ?? 0,
     created_at: q.created_at as string,
-    topicName: (q.custom_topics as { name: string } | null)?.name ?? "",
+    updated_at: q.updated_at as string,
+    topicName: (Array.isArray(q.custom_topics) ? q.custom_topics[0]?.name : (q.custom_topics as { name: string } | null)?.name) ?? "",
   }));
 }
