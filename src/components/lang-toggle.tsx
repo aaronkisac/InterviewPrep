@@ -1,8 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useTransition } from "react";
-import { flushSync } from "react-dom";
+import { useState } from "react";
 
 import { setLang } from "@/lib/actions/lang";
 import { LANG_COOKIE } from "@/lib/lang-constants";
@@ -11,19 +10,21 @@ import { useLang } from "@/contexts/lang-context";
 export function LangToggle() {
   const { lang, setLang: setLangCtx } = useLang();
   const router = useRouter();
-  const [isPending, startTransition] = useTransition();
+  const [isPending, setIsPending] = useState(false);
 
-  function toggle() {
+  async function toggle() {
+    if (isPending) return;
     const next = lang === "en" ? "tr" : "en";
-    // Force synchronous render before batching with the transition
-    flushSync(() => setLangCtx(next));
-    // Write cookie client-side so the refresh picks it up without waiting for the server action
+    setIsPending(true);
+    // Update context immediately for instant client-side feedback
+    setLangCtx(next);
+    // Set cookie client-side as well (belt-and-suspenders)
     document.cookie = `${LANG_COOKIE}=${next};path=/;max-age=${60 * 60 * 24 * 365};samesite=lax`;
-    // Refresh server components in the background + sync server-side cookie
-    startTransition(() => {
-      router.refresh();
-      void setLang(next);
-    });
+    // Await server action so the Set-Cookie header lands before we refresh
+    await setLang(next);
+    // Now refresh server components — cookie is guaranteed to be set
+    router.refresh();
+    setIsPending(false);
   }
 
   return (
