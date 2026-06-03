@@ -7,6 +7,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { COLOR_THEME_STORAGE_KEY, DEFAULT_COLOR_THEME } from "@/lib/themes";
 import { LangProvider } from "@/contexts/lang-context";
 import { getLang } from "@/lib/lang";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const libreBaskerville = Libre_Baskerville({
   subsets: ["latin"],
@@ -55,6 +56,7 @@ export default async function RootLayout({
             </div>
           </LangProvider>
         </ThemeProvider>
+        <SpeedInsights />
       </body>
     </html>
   );
