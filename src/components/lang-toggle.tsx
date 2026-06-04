@@ -20,11 +20,10 @@ export function LangToggle() {
     setLangCtx(next);
     // Set cookie client-side as well (belt-and-suspenders)
     document.cookie = `${LANG_COOKIE}=${next};path=/;max-age=${60 * 60 * 24 * 365};samesite=lax`;
-    // Await server action so the Set-Cookie header lands before we refresh
+    // Await server action so the Set-Cookie header lands before reloading
     await setLang(next);
-    // Now refresh server components — cookie is guaranteed to be set
-    router.refresh();
-    setIsPending(false);
+    // Hard reload — router.refresh() doesn't reliably re-render RSC in production
+    window.location.reload();
   }
 
   return (
