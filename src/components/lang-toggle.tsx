@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter, usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 import { setLang } from "@/lib/actions/lang";
@@ -9,7 +9,6 @@ import { useLang } from "@/contexts/lang-context";
 
 export function LangToggle() {
   const { lang, setLang: setLangCtx } = useLang();
-  const router = useRouter();
   const pathname = usePathname();
   const [isPending, setIsPending] = useState(false);
 
@@ -17,16 +16,15 @@ export function LangToggle() {
     if (isPending) return;
     const next = lang === "en" ? "tr" : "en";
     setIsPending(true);
-    // Update context immediately for instant client-side feedback
+    // Update context for instant button feedback
     setLangCtx(next);
     // Set cookie client-side
     document.cookie = `${LANG_COOKIE}=${next};path=/;max-age=${60 * 60 * 24 * 365};samesite=lax`;
-    // Await server action so cookie is set server-side
+    // Set cookie server-side via server action
     await setLang(next);
-    // Soft navigation to current path — forces server components to re-render
-    // router.refresh() does not reliably re-render RSC in production
-    router.push(pathname);
-    setIsPending(false);
+    // Hard reload required: server components read lang from cookie at render time.
+    // router.push/refresh reuses the cached RSC payload in production and skips re-render.
+    window.location.href = pathname;
   }
 
   return (
