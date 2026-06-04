@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { useState } from "react";
 
 import { setLang } from "@/lib/actions/lang";
@@ -10,6 +10,7 @@ import { useLang } from "@/contexts/lang-context";
 export function LangToggle() {
   const { lang, setLang: setLangCtx } = useLang();
   const router = useRouter();
+  const pathname = usePathname();
   const [isPending, setIsPending] = useState(false);
 
   async function toggle() {
@@ -18,12 +19,13 @@ export function LangToggle() {
     setIsPending(true);
     // Update context immediately for instant client-side feedback
     setLangCtx(next);
-    // Set cookie client-side as well (belt-and-suspenders)
+    // Set cookie client-side
     document.cookie = `${LANG_COOKIE}=${next};path=/;max-age=${60 * 60 * 24 * 365};samesite=lax`;
-    // Await server action — cookie must be set before refresh fires
+    // Await server action so cookie is set server-side
     await setLang(next);
-    // Re-render server components with the new cookie
-    router.refresh();
+    // Soft navigation to current path — forces server components to re-render
+    // router.refresh() does not reliably re-render RSC in production
+    router.push(pathname);
     setIsPending(false);
   }
 
