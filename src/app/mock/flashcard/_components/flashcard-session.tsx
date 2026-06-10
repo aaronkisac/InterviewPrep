@@ -23,7 +23,6 @@ type Result = "known" | "unknown";
 
 export function FlashcardSession({
   questions,
-  topicName,
   lang = "en",
 }: {
   questions: FlashcardQuestion[];

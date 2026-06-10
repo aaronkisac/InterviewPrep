@@ -1,21 +1,5 @@
 import { expect, test } from "@playwright/test";
 
-const TOPIC_LABELS = [
-  "React",
-  "TypeScript",
-  "Next.js",
-  "JavaScript",
-  "Redux",
-  "HTML5",
-  "CSS",
-  "React Hooks",
-  "Git",
-  "Agile & Scrum",
-  "WebSockets",
-  "Unit Testing",
-  "Design Patterns",
-];
-
 test.describe("/questions page", () => {
   test("loads and shows a non-zero question count", async ({ page }) => {
     await page.goto("/questions");

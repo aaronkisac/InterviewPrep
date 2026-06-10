@@ -115,6 +115,7 @@ export default async function MockSessionPage({
   function shuffle<T>(arr: T[]): T[] {
     const out = [...arr];
     for (let i = out.length - 1; i > 0; i--) {
+      // eslint-disable-next-line react-hooks/purity -- Server Component: a fresh shuffle per request is the desired behaviour
       const j = Math.floor(Math.random() * (i + 1));
       [out[i], out[j]] = [out[j]!, out[i]!];
     }
@@ -166,6 +167,7 @@ export default async function MockSessionPage({
     );
   }
 
+  // eslint-disable-next-line react-hooks/purity -- Server Component: unique key per request forces a fresh client session
   const sessionKey = `${allTopics.join("-")}-${lo}-${hi}-${length}-${Math.random()
     .toString(36)
     .slice(2)}`;

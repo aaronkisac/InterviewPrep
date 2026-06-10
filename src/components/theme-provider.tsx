@@ -37,11 +37,15 @@ function ColorThemeManager({ children }: { children: ReactNode }) {
   const [colorTheme, setColorThemeState] =
     useState<ColorThemeId>(DEFAULT_COLOR_THEME);
 
-  // On mount: read localStorage and apply data-theme
+  // One-time sync from localStorage after hydration. SSR must render the
+  // default (no localStorage on the server), so this cannot be a lazy
+  // initializer; the inline <head> script already applied data-theme
+  // pre-paint, this only aligns React state with it.
   useEffect(() => {
     const saved = localStorage.getItem(COLOR_THEME_STORAGE_KEY) as ColorThemeId | null;
     const ids = COLOR_THEMES.map((t) => t.id);
     const resolved = saved && ids.includes(saved) ? saved : DEFAULT_COLOR_THEME;
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- intentional one-shot post-hydration sync
     setColorThemeState(resolved);
     document.documentElement.setAttribute("data-theme", resolved);
   }, []);

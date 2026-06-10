@@ -74,7 +74,11 @@ export function MockConfigTabs({
   function toggleMock(key: string) {
     setMockSelected((prev) => {
       const next = new Set(prev);
-      next.has(key) ? next.delete(key) : next.add(key);
+      if (next.has(key)) {
+        next.delete(key);
+      } else {
+        next.add(key);
+      }
       return next;
     });
   }
@@ -96,7 +100,11 @@ export function MockConfigTabs({
   function toggleFlash(key: string) {
     setFlashSelected((prev) => {
       const next = new Set(prev);
-      next.has(key) ? next.delete(key) : next.add(key);
+      if (next.has(key)) {
+        next.delete(key);
+      } else {
+        next.add(key);
+      }
       return next;
     });
   }
@@ -152,7 +160,13 @@ export function MockConfigTabs({
   const currentTopics = isMock ? mockTopics : flashcardTopics;
   const currentSelected = isMock ? mockSelected : flashSelected;
   const currentAllSelected = isMock ? mockAllSelected : flashAllSelected;
-  function toggleCurrent(key: string) { isMock ? toggleMock(key) : toggleFlash(key); }
+  function toggleCurrent(key: string) {
+    if (isMock) {
+      toggleMock(key);
+    } else {
+      toggleFlash(key);
+    }
+  }
   function toggleAll() {
     if (isMock) {
       setMockSelected(mockAllSelected ? new Set() : new Set(mockTopicKeys));

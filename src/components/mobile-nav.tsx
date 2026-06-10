@@ -15,7 +15,13 @@ export function MobileNav({ user, isAdmin, signOutAction }: MobileNavProps) {
   const menuRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
 
-  useEffect(() => setOpen(false), [pathname]);
+  // Close the menu when the route changes — state adjustment during render
+  // (https://react.dev/learn/you-might-not-need-an-effect) instead of an effect.
+  const [prevPathname, setPrevPathname] = useState(pathname);
+  if (prevPathname !== pathname) {
+    setPrevPathname(pathname);
+    setOpen(false);
+  }
 
   useEffect(() => {
     if (!open) return;

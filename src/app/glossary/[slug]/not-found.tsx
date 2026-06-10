@@ -8,7 +8,7 @@ export default function TermNotFound() {
         Term not found
       </h1>
       <p className="mt-2 text-sm text-muted-foreground">
-        That slug doesn't match any glossary entry.
+        That slug doesn&apos;t match any glossary entry.
       </p>
       <Link
         href="/glossary"

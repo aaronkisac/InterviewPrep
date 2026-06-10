@@ -7,7 +7,6 @@ import type {
   MockSessionConfig,
 } from "@/lib/mock-shared";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { createServerSupabaseClient } from "@/lib/supabase/server";
 import type { LevelLabel, Topic } from "@/lib/supabase/types";
 
 // Server Components can import everything mock-related from "@/lib/mock".

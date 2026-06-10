@@ -4,15 +4,14 @@ import { useEffect, useRef, useState } from "react";
 import { useTheme } from "next-themes";
 import { useColorTheme } from "@/components/theme-provider";
 import { COLOR_THEMES, type ColorThemeId } from "@/lib/themes";
+import { useMounted } from "@/lib/use-mounted";
 
 export function ThemeSelector() {
   const { colorTheme, setColorTheme } = useColorTheme();
   const { resolvedTheme } = useTheme();
   const [open, setOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
+  const mounted = useMounted();
   const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => setMounted(true), []);
 
   useEffect(() => {
     if (!open) return;
