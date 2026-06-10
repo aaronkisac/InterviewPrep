@@ -67,3 +67,41 @@ test.describe("/questions page", () => {
     await expect(page).toHaveURL(/\/questions(\?lang=en)?$/);
   });
 });
+
+test.describe("/questions pagination", () => {
+  test("paginates the unfiltered list and preserves filters in links", async ({
+    page,
+  }) => {
+    await page.goto("/questions");
+    const nav = page.getByRole("navigation", { name: "Pagination" });
+    await expect(nav).toBeVisible();
+    await expect(nav.getByText(/Page 1 of \d+/)).toBeVisible();
+
+    // First page: previous is disabled (rendered as a span, not a link)
+    await expect(nav.getByRole("link", { name: "← Previous" })).toHaveCount(0);
+
+    const firstQuestion = page.locator("ul > li").first();
+    const firstText = await firstQuestion.innerText();
+
+    await nav.getByRole("link", { name: "Next →" }).click();
+    await expect(page).toHaveURL(/page=2/);
+    await expect(nav.getByText(/Page 2 of \d+/)).toBeVisible();
+
+    // Different window of questions
+    const newFirstText = await page.locator("ul > li").first().innerText();
+    expect(newFirstText).not.toBe(firstText);
+
+    // Going back keeps a clean URL (no page param on page 1)
+    await nav.getByRole("link", { name: "← Previous" }).click();
+    await expect(page).not.toHaveURL(/page=/);
+  });
+
+  test("filtered topic with few questions shows no pagination", async ({
+    page,
+  }) => {
+    await page.goto("/questions?topic=websockets");
+    await expect(
+      page.getByRole("navigation", { name: "Pagination" }),
+    ).toHaveCount(0);
+  });
+});

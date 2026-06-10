@@ -58,6 +58,11 @@ export function parseQuery(value: string | undefined): string | undefined {
   return trimmed && trimmed.length > 0 ? trimmed : undefined;
 }
 
+export function parsePage(value: string | undefined): number {
+  const n = Number(value);
+  return Number.isInteger(n) && n >= 1 ? n : 1;
+}
+
 /**
  * Cached for 1 hour — question list is public and rarely changes.
  * Uses admin client; unstable_cache cannot access cookies/session.
@@ -88,13 +93,66 @@ const _listQuestionsCached = unstable_cache(
     return (data ?? []) as QuestionListItem[];
   },
   ["questions-list"],
-  { revalidate: 3600 },
+  { revalidate: 3600, tags: ["questions"] },
 );
 
 export async function listQuestions(
   filters: QuestionFilters,
 ): Promise<QuestionListItem[]> {
   return _listQuestionsCached(filters);
+}
+
+export const PAGE_SIZE = 50;
+
+export type QuestionPage = { items: QuestionListItem[]; total: number };
+
+/**
+ * Paginated variant for the /questions browse view. Stable ordering
+ * (topic → level → id) so range windows never overlap between pages.
+ * Cached per unique (filters, page) combination; same tag as the full list.
+ */
+const _listQuestionsPageCached = unstable_cache(
+  async (filters: QuestionFilters, page: number): Promise<QuestionPage> => {
+    const supabase = createAdminClient();
+    const from = (page - 1) * PAGE_SIZE;
+
+    let query = supabase
+      .from("questions")
+      .select(
+        "id, topic, level, level_label, question, question_tr, answer_general, answer_personal, answer_general_tr, answer_personal_tr",
+        { count: "exact" },
+      )
+      .eq("status", "active")
+      .eq("is_shared", true)
+      .order("topic", { ascending: true })
+      .order("level", { ascending: true })
+      .order("id", { ascending: true })
+      .range(from, from + PAGE_SIZE - 1);
+
+    if (filters.topic) query = query.eq("topic", filters.topic);
+    if (filters.levels && filters.levels.length > 0)
+      query = query.in("level", filters.levels);
+    if (filters.q) query = query.ilike("question", `%${filters.q}%`);
+
+    const { data, count, error } = await query;
+    // Supabase returns an error when the range starts past the last row —
+    // treat it like an empty page instead of crashing the view.
+    if (error) {
+      if (from > 0) return { items: [], total: count ?? 0 };
+      throw new Error(`Failed to load questions: ${error.message}`);
+    }
+
+    return { items: (data ?? []) as QuestionListItem[], total: count ?? 0 };
+  },
+  ["questions-page"],
+  { revalidate: 3600, tags: ["questions"] },
+);
+
+export async function listQuestionsPage(
+  filters: QuestionFilters,
+  page: number,
+): Promise<QuestionPage> {
+  return _listQuestionsPageCached(filters, page);
 }
 
 /**
@@ -123,7 +181,7 @@ export const getTopicStats = unstable_cache(
     return counts;
   },
   ["topic-stats"],
-  { revalidate: 300 },
+  { revalidate: 300, tags: ["questions"] },
 );
 
 /**
@@ -143,5 +201,5 @@ export const getQuestionById = unstable_cache(
     return data;
   },
   ["question-by-id"],
-  { revalidate: 3600 },
+  { revalidate: 3600, tags: ["questions"] },
 );

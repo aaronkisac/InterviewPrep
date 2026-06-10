@@ -1,6 +1,6 @@
 "use server";
 
-import { unstable_cache } from "next/cache";
+import { revalidateTag, unstable_cache } from "next/cache";
 import { auth } from "@/lib/auth";
 import { getLevelLabelEn } from "@/lib/levels";
 import { createAdminClient } from "@/lib/supabase/admin";
@@ -190,5 +190,6 @@ export async function bulkImportSystemQuestions(
     }
   }
 
+  revalidateTag("questions");
   return { ok: true, inserted: inserted?.length ?? rows.length };
 }

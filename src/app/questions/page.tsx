@@ -3,8 +3,11 @@ import Link from "next/link";
 import { auth } from "@/lib/auth";
 import { getBookmarkedIds } from "@/lib/actions/user-tracking";
 import {
+  PAGE_SIZE,
   listQuestions,
+  listQuestionsPage,
   parseLevels,
+  parsePage,
   parseQuery,
   parseTopic,
 } from "@/lib/questions";
@@ -14,6 +17,7 @@ import { i18nQuestions } from "@/lib/i18n";
 import { listSystemTopics } from "@/lib/actions/admin-topics";
 import { listCustomTopics, getCustomTopic, getCustomBookmarkIds, getBookmarkedCustomQuestions, type BookmarkedCustomQuestion } from "@/lib/actions/custom-topics";
 
+import { Pagination } from "./_components/pagination";
 import { TopicTabs } from "./_components/topic-tabs";
 import { QuestionFilters } from "./_components/filters";
 import { QuestionCard } from "./_components/question-card";
@@ -27,6 +31,7 @@ type SearchParams = Promise<{
   mytopic?: string;
   levels?: string;
   q?: string;
+  page?: string;
 }>;
 
 const GUEST_MAX_LEVEL = 2;
@@ -48,15 +53,32 @@ export default async function QuestionsPage({
     levels: parseLevels(params.levels),
     q: parseQuery(params.q),
   };
+  const page = parsePage(params.page);
 
   const session = await auth().catch(() => null);
   const isLoggedIn = Boolean(session?.user);
   const userId = session?.user?.id;
 
+  // Guests only ever see level 1–2 — push that into the DB query so
+  // pagination counts are correct.
+  const guestLevels = (filters.levels ?? ([1, 2] as (1 | 2)[])).filter(
+    (l) => l <= GUEST_MAX_LEVEL,
+  );
+  const browseFilters = isLoggedIn
+    ? filters
+    : { ...filters, levels: guestLevels };
+  // A guest who filtered to levels 3+ matches nothing — skip the query
+  // (an empty levels array would be ignored by the query builder).
+  const guestNoLevels = !isLoggedIn && guestLevels.length === 0;
+  const skipBrowse = Boolean(myTopicSlug) || isBookmarkedTab || guestNoLevels;
+
   // Fetch all base data in parallel — userId passed directly to avoid repeated auth() calls
-  const [allQuestions, terms, bookmarkedIds, systemTopics, customTopicsForTabs] =
+  const [browsePage, allForBookmarks, terms, bookmarkedIds, systemTopics, customTopicsForTabs] =
     await Promise.all([
-      myTopicSlug ? Promise.resolve([]) : listQuestions(filters),
+      skipBrowse
+        ? Promise.resolve({ items: [], total: 0 })
+        : listQuestionsPage(browseFilters, page),
+      isBookmarkedTab ? listQuestions(filters) : Promise.resolve([]),
       listTerms(),
       getBookmarkedIds(userId),
       listSystemTopics(),
@@ -81,14 +103,18 @@ export default async function QuestionsPage({
   const bookmarkedSet = new Set(bookmarkedIds);
   const customBookmarkedSet = new Set(customBookmarkIds);
 
-  // System questions (with guest level filter)
-  const visibleQuestions = isLoggedIn
-    ? allQuestions
-    : allQuestions.filter((q) => q.level <= GUEST_MAX_LEVEL);
+  // System questions — bookmarked tab filters the full list in memory
+  // (a user's bookmarks are small); the browse tab is DB-paginated.
+  const visibleForBookmarks = isLoggedIn
+    ? allForBookmarks
+    : allForBookmarks.filter((q) => q.level <= GUEST_MAX_LEVEL);
 
   const questions = isBookmarkedTab
-    ? visibleQuestions.filter((q) => bookmarkedSet.has(q.id))
-    : visibleQuestions;
+    ? visibleForBookmarks.filter((q) => bookmarkedSet.has(q.id))
+    : browsePage.items;
+  const total = isBookmarkedTab ? questions.length : browsePage.total;
+  const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
+  const indexOffset = isBookmarkedTab ? 0 : (page - 1) * PAGE_SIZE;
 
   const hasActiveFilters =
     Boolean(filters.topic) ||
@@ -144,7 +170,7 @@ export default async function QuestionsPage({
       {/* ── Guest upsell banner ── */}
       {!isLoggedIn && (
         <div className="mb-5 flex items-center justify-between gap-4 rounded-lg border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-sm text-amber-700 dark:text-amber-400">
-          <p>{i18n.guestBanner(questions.length)}</p>
+          <p>{i18n.guestBanner(total)}</p>
           <Link
             href="/signin"
             className="flex-shrink-0 rounded-md bg-amber-500 px-3 py-1.5 text-xs font-semibold text-white hover:bg-amber-600"
@@ -176,7 +202,7 @@ export default async function QuestionsPage({
                 ? `${customQuestions.length} ${customQuestions.length === 1 ? "question" : "questions"} · ${i18n.privateTopic}`
                 : isBookmarkedTab && !isLoggedIn
                   ? i18n.loginForBookmarks
-                  : i18n.countSuffix(questions.length + bookmarkedCustomQuestions.length, hasActiveFilters)}
+                  : i18n.countSuffix(total + bookmarkedCustomQuestions.length, hasActiveFilters)}
             </span>
             {(hasActiveFilters || isCustomTab) && (
               <Link
@@ -224,7 +250,7 @@ export default async function QuestionsPage({
                   <QuestionCard
                     key={question.id}
                     question={question}
-                    index={i + 1}
+                    index={indexOffset + i + 1}
                     lang={lang}
                     isBookmarked={bookmarkedSet.has(question.id)}
                     showTopic={isBookmarkedTab}
@@ -244,6 +270,23 @@ export default async function QuestionsPage({
                 ))}
               </ul>
             </TermsProvider>
+          )}
+
+          {!isCustomTab && !isBookmarkedTab && (
+            <Pagination
+              page={page}
+              totalPages={totalPages}
+              searchParams={{
+                topic: params.topic,
+                levels: params.levels,
+                q: params.q,
+              }}
+              labels={{
+                prev: i18n.paginationPrev,
+                next: i18n.paginationNext,
+                pageOf: i18n.pageOf(page, totalPages),
+              }}
+            />
           )}
         </div>
       </div>

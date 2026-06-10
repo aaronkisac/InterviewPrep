@@ -101,7 +101,7 @@ const loadMockReady = unstable_cache(
     return ready;
   },
   ["mock-ready-questions"],
-  { revalidate: 60 },
+  { revalidate: 60, tags: ["questions"] },
 );
 
 /** Topic + level of every mock-ready question — drives the config page. */

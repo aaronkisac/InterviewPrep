@@ -1,6 +1,6 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 
 import { auth } from "@/lib/auth";
 import { getLevelLabelEn } from "@/lib/levels";
@@ -70,6 +70,7 @@ export async function submitQuestion(
   if (error) return { ok: false, error: error.message };
 
   revalidatePath("/questions");
+  revalidateTag("questions");
   revalidatePath("/dashboard");
 
   return { ok: true, id: data.id };
@@ -189,6 +190,7 @@ export async function approveQuestion(
   if (error) return { ok: false, error: error.message };
 
   revalidatePath("/questions");
+  revalidateTag("questions");
   revalidatePath("/admin/questions");
 
   return { ok: true };
@@ -222,6 +224,7 @@ export async function rejectQuestion(
   if (error) return { ok: false, error: error.message };
 
   revalidatePath("/admin/questions");
+  revalidateTag("questions");
 
   return { ok: true };
 }
@@ -253,6 +256,7 @@ export async function deleteOwnQuestion(
 
   revalidatePath("/dashboard");
   revalidatePath("/questions");
+  revalidateTag("questions");
 
   return { ok: true };
 }
@@ -280,6 +284,7 @@ export async function adminDeleteQuestion(
   if (error) return { ok: false, error: error.message };
 
   revalidatePath("/questions");
+  revalidateTag("questions");
   revalidatePath("/admin/questions");
 
   return { ok: true };
