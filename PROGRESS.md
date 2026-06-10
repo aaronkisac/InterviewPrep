@@ -1,6 +1,6 @@
 # Progress
 
-Last updated: 2026-05-29 (mock options audit + glossary expansion)
+Last updated: 2026-06-11 (P0 hygiene + deploy checklist)
 
 ---
 
@@ -79,6 +79,7 @@ Last updated: 2026-05-29 (mock options audit + glossary expansion)
 | detailMdTr complete | Turkish deep-dive translations added to all remaining topics. React (50 q, batches 1–9), HTML5 (51 q, batches 1–7), Software Architecture (94 q, batches 1–6), API Design (47 q, batches 1–6). All topics now have full `detailMdTr` coverage. Previously complete: TypeScript, Next.js, Redux, CSS, React Hooks, Git, Agile & Scrum, WebSockets, Unit Testing, Design Patterns. JavaScript had `detailMdTr` from the start. |
 | Global TR support | Cookie-based language preference (`preferred_lang`). `src/lib/lang.ts` + `src/lib/actions/lang.ts`. Central `src/lib/i18n.ts` dictionary (all UI strings). `LangToggle` in Navbar persists lang across all pages. All server pages (homepage, dashboard, glossary, signin, questions, mock, flashcard) + all client components (MockConfigTabs, MockSession, FlashcardSession, QuestionCard) fully translated. |
 | Full mock TR support | `question_tr` column added (migration `20260601000002`). Mock session shows question, options and explanations in Turkish when lang=tr. `mock_options` table gains `option_text_tr` + `explanation_tr` columns (migration `20260601000001`). `terms` table gains `tooltip_tr` + `definition_tr`. All 588 seed questions have `questionTr`. All 129 glossary terms have `tooltipTr` + `definitionTr`. All seed-mock files have `optionTextTr` + `explanationTr` for every option. |
+| P0 hygiene + security headers | Removed stray `_tmp_` files, fixed `.gitignore`, security headers + `poweredByHeader:false` in `next.config.ts`. Added `DEVELOPMENT_PLAN.md` (prioritized plan) + `DEPLOY.md` (prod deploy checklist). |
 
 ---
 
