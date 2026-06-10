@@ -1,6 +1,6 @@
 # Progress
 
-Last updated: 2026-06-11 (P0 hygiene + deploy checklist)
+Last updated: 2026-06-11 (P1 resilience + unit tests)
 
 ---
 
@@ -80,6 +80,7 @@ Last updated: 2026-06-11 (P0 hygiene + deploy checklist)
 | Global TR support | Cookie-based language preference (`preferred_lang`). `src/lib/lang.ts` + `src/lib/actions/lang.ts`. Central `src/lib/i18n.ts` dictionary (all UI strings). `LangToggle` in Navbar persists lang across all pages. All server pages (homepage, dashboard, glossary, signin, questions, mock, flashcard) + all client components (MockConfigTabs, MockSession, FlashcardSession, QuestionCard) fully translated. |
 | Full mock TR support | `question_tr` column added (migration `20260601000002`). Mock session shows question, options and explanations in Turkish when lang=tr. `mock_options` table gains `option_text_tr` + `explanation_tr` columns (migration `20260601000001`). `terms` table gains `tooltip_tr` + `definition_tr`. All 588 seed questions have `questionTr`. All 129 glossary terms have `tooltipTr` + `definitionTr`. All seed-mock files have `optionTextTr` + `explanationTr` for every option. |
 | P0 hygiene + security headers | Removed stray `_tmp_` files, fixed `.gitignore`, security headers + `poweredByHeader:false` in `next.config.ts`. Added `DEVELOPMENT_PLAN.md` (prioritized plan) + `DEPLOY.md` (prod deploy checklist). |
+| P1 resilience + unit tests | Root `error.tsx`/`global-error.tsx`/`not-found.tsx` (EN/TR). Vitest + 5 unit suites (`src/lib/__tests__`). CI `checks` job (lint+typegen+typecheck+unit) gates e2e. `lang-toggle.spec.ts` e2e. Lint script → `eslint .`. Typecheck fixes in `db-seed.spec.ts`. |
 
 ---
 
