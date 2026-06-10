@@ -190,6 +190,6 @@ export async function bulkImportSystemQuestions(
     }
   }
 
-  revalidateTag("questions");
+  revalidateTag("questions", "max");
   return { ok: true, inserted: inserted?.length ?? rows.length };
 }

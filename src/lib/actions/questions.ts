@@ -70,7 +70,7 @@ export async function submitQuestion(
   if (error) return { ok: false, error: error.message };
 
   revalidatePath("/questions");
-  revalidateTag("questions");
+  revalidateTag("questions", "max");
   revalidatePath("/dashboard");
 
   return { ok: true, id: data.id };
@@ -190,7 +190,7 @@ export async function approveQuestion(
   if (error) return { ok: false, error: error.message };
 
   revalidatePath("/questions");
-  revalidateTag("questions");
+  revalidateTag("questions", "max");
   revalidatePath("/admin/questions");
 
   return { ok: true };
@@ -224,7 +224,7 @@ export async function rejectQuestion(
   if (error) return { ok: false, error: error.message };
 
   revalidatePath("/admin/questions");
-  revalidateTag("questions");
+  revalidateTag("questions", "max");
 
   return { ok: true };
 }
@@ -256,7 +256,7 @@ export async function deleteOwnQuestion(
 
   revalidatePath("/dashboard");
   revalidatePath("/questions");
-  revalidateTag("questions");
+  revalidateTag("questions", "max");
 
   return { ok: true };
 }
@@ -284,7 +284,7 @@ export async function adminDeleteQuestion(
   if (error) return { ok: false, error: error.message };
 
   revalidatePath("/questions");
-  revalidateTag("questions");
+  revalidateTag("questions", "max");
   revalidatePath("/admin/questions");
 
   return { ok: true };
