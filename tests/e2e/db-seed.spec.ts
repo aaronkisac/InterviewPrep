@@ -4,7 +4,6 @@
  */
 import { createClient } from "@supabase/supabase-js";
 import { expect, test } from "@playwright/test";
-import ws from "ws";
 
 const TOPIC_MINIMUMS: Record<string, number> = {
   react: 50,
@@ -30,7 +29,7 @@ function getAdminClient() {
       "NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY must be set",
     );
   }
-  return createClient(url, key, { realtime: { transport: ws } });
+  return createClient(url, key);
 }
 
 test.describe("DB — question counts", () => {
@@ -63,7 +62,7 @@ test.describe("DB — question counts", () => {
 
     const counts = new Map<string, number>();
     for (const row of data ?? []) {
-      const topic = (row.question as { topic: string } | null)?.topic;
+      const topic = (row.question as unknown as { topic: string } | null)?.topic;
       if (topic) counts.set(topic, (counts.get(topic) ?? 0) + 1);
     }
 
