@@ -1,6 +1,6 @@
 # Progress
 
-Last updated: 2026-06-11 (P2 full-text search)
+Last updated: 2026-06-11 (P2 complete: pagination, cache tags, FTS, a11y)
 
 ---
 
@@ -83,6 +83,7 @@ Last updated: 2026-06-11 (P2 full-text search)
 | P1 resilience + unit tests | Root `error.tsx`/`global-error.tsx`/`not-found.tsx` (EN/TR). Vitest + 5 unit suites (`src/lib/__tests__`). CI `checks` job (lint+typegen+typecheck+unit) gates e2e. `lang-toggle.spec.ts` e2e. Lint script → `eslint .`. Typecheck fixes in `db-seed.spec.ts`. |
 | P2 pagination + cache tags | `/questions` DB-level pagination (50/sayfa, `listQuestionsPage`, stable ordering). Guest level filter pushed into query. `Pagination` component (EN/TR). All question caches tagged `questions`; approve/reject/delete/import actions call `revalidateTag`. Pagination e2e specs. |
 | P2 full-text search | Migration `20260611000001_full_text_search.sql` (generated tsvector EN+TR, GIN). Hybrid search in `listQuestions`/`listQuestionsPage`: title ILIKE OR `wfts` on vector. `buildSearchOrFilter` + unit tests. **Needs `supabase db push`.** |
+| P2 a11y pass | WCAG 2.1 AA static audit (`.docs/a11y-audit-2026-06-11.md`). 9 fixes: skip link, aria-disabled mock options + sr-only result text, LevelDots aria-label, labeled filters, aria-pressed tabs/pills, named progressbar, Escape on mobile nav. Manual follow-ups listed in report. |
 
 ---
 
