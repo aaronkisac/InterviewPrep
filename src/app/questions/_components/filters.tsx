@@ -98,6 +98,7 @@ export function QuestionFilters({ topics = [], lang = "en" }: QuestionFiltersPro
       {topics.length > 0 && (
         <select
           id="topic-filter"
+          aria-label={i18nQuestions[lang].filterByTopic}
           value={currentTopic}
           onChange={(e) => updateTopic(e.currentTarget.value)}
           className="h-9 rounded-md border border-input bg-background px-3 text-sm shadow-sm outline-none transition focus:border-ring focus:ring-1 focus:ring-ring"
@@ -115,6 +116,7 @@ export function QuestionFilters({ topics = [], lang = "en" }: QuestionFiltersPro
       <div className="flex items-center gap-3">
         <input
           type="search"
+          aria-label={searchPlaceholder}
           placeholder={searchPlaceholder}
           defaultValue={currentQuery}
           onChange={(e) => updateQuery(e.currentTarget.value)}
@@ -131,6 +133,7 @@ export function QuestionFilters({ topics = [], lang = "en" }: QuestionFiltersPro
             <button
               key={lvl.value}
               type="button"
+              aria-pressed={active}
               data-active={active}
               onClick={() => toggleLevel(lvl.value)}
               className={cn(

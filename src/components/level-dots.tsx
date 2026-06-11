@@ -15,10 +15,15 @@ export function LevelDots({ level }: { level: number }) {
   const label = LEVELS.find((l) => l.value === level)?.label ?? `Level ${level}`;
 
   return (
-    <div className="relative hidden sm:flex items-center gap-[3px] flex-shrink-0 group/dots">
+    <div
+      role="img"
+      aria-label={label}
+      className="relative hidden sm:flex items-center gap-[3px] flex-shrink-0 group/dots"
+    >
       {Array.from({ length: 5 }).map((_, i) => (
         <span
           key={i}
+          aria-hidden="true"
           className={cn(
             "inline-block h-[5px] w-[5px] rounded-full",
             i < level ? active : "bg-border",

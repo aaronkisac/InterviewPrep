@@ -63,8 +63,12 @@ export function QuestionView({
               <li key={option.id}>
                 <button
                   type="button"
-                  onClick={() => onSelect(option.id)}
-                  disabled={isAnswered}
+                  // aria-disabled instead of disabled: a hard disable would
+                  // drop keyboard focus to <body> the moment an answer locks in
+                  onClick={() => {
+                    if (!isAnswered) onSelect(option.id);
+                  }}
+                  aria-disabled={isAnswered}
                   aria-pressed={isPicked}
                   className={cn(
                     "flex w-full items-start gap-3 rounded-md border p-3 text-left text-sm transition",
@@ -90,6 +94,12 @@ export function QuestionView({
                   </span>
                   <span className="flex-1 pt-0.5 leading-snug">
                     {lang === "tr" && option.textTr ? option.textTr : option.text}
+                    {showCorrect && (
+                      <span className="sr-only"> — {i18n.correct}</span>
+                    )}
+                    {showWrong && (
+                      <span className="sr-only"> — {i18n.notQuite}</span>
+                    )}
                   </span>
                 </button>
               </li>

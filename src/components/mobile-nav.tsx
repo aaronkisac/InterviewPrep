@@ -13,6 +13,7 @@ interface MobileNavProps {
 export function MobileNav({ user, isAdmin, signOutAction }: MobileNavProps) {
   const [open, setOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
   const pathname = usePathname();
 
   // Close the menu when the route changes — state adjustment during render
@@ -28,8 +29,18 @@ export function MobileNav({ user, isAdmin, signOutAction }: MobileNavProps) {
     function handleClick(e: MouseEvent) {
       if (!menuRef.current?.contains(e.target as Node)) setOpen(false);
     }
+    function handleKey(e: KeyboardEvent) {
+      if (e.key === "Escape") {
+        setOpen(false);
+        triggerRef.current?.focus();
+      }
+    }
     document.addEventListener("mousedown", handleClick);
-    return () => document.removeEventListener("mousedown", handleClick);
+    document.addEventListener("keydown", handleKey);
+    return () => {
+      document.removeEventListener("mousedown", handleClick);
+      document.removeEventListener("keydown", handleKey);
+    };
   }, [open]);
 
   const linkClass =
@@ -38,6 +49,8 @@ export function MobileNav({ user, isAdmin, signOutAction }: MobileNavProps) {
   return (
     <div className="relative min-[800px]:hidden" ref={menuRef}>
       <button
+        ref={triggerRef}
+        type="button"
         aria-label="Open menu"
         aria-expanded={open}
         onClick={() => setOpen((v) => !v)}

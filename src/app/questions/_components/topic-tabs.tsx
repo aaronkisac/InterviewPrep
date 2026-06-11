@@ -27,6 +27,7 @@ function Tab({
     <button
       type="button"
       onClick={onClick}
+      aria-pressed={isActive}
       className={cn(
         // Base — all tabs
         "-mb-px px-3 py-[5px] pb-[7px] text-[11px] sm:text-sm font-medium whitespace-nowrap",

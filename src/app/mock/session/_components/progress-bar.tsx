@@ -26,6 +26,7 @@ export function ProgressBar({
       <div
         className="mt-2 h-1.5 overflow-hidden rounded-full bg-secondary"
         role="progressbar"
+        aria-label={questionLabel ?? `${current} / ${total}`}
         aria-valuenow={current}
         aria-valuemin={0}
         aria-valuemax={total}

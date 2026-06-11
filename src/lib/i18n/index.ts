@@ -659,6 +659,7 @@ export const i18nQuestions = {
     dashboardBtn: "Go to Dashboard →",
     empty: "No questions match these filters yet.",
     emptyCustom: "No questions in this topic yet. Add some from your dashboard.",
+    filterByTopic: "Filter by topic",
     guestBanner: (total: number) =>
       `You're viewing ${total} junior & entry-level questions. Sign in to unlock all levels, mock interviews, and the glossary.`,
     keywordPlaceholder: "Keyword in question…",
@@ -682,6 +683,7 @@ export const i18nQuestions = {
     dashboardBtn: "Dashboard'a git →",
     empty: "Bu filtrelere uyan soru yok.",
     emptyCustom: "Bu topic'te henüz soru yok. Dashboard'dan ekleyebilirsin.",
+    filterByTopic: "Konuya göre filtrele",
     guestBanner: (total: number) =>
       `${total} junior ve başlangıç seviyesi soru görüntülüyorsunuz. Tüm seviyeleri, mock mülakatları ve sözlüğü açmak için giriş yapın.`,
     keywordPlaceholder: "Soruda anahtar kelime…",
