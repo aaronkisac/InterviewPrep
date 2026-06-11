@@ -1,6 +1,6 @@
 # Progress
 
-Last updated: 2026-06-11 (P3 spaced repetition)
+Last updated: 2026-06-11 (P3 retry-missed mode)
 
 ---
 
@@ -85,6 +85,7 @@ Last updated: 2026-06-11 (P3 spaced repetition)
 | P2 full-text search | Migration `20260611000001_full_text_search.sql` (generated tsvector EN+TR, GIN). Hybrid search in `listQuestions`/`listQuestionsPage`: title ILIKE OR `wfts` on vector. `buildSearchOrFilter` + unit tests. **Needs `supabase db push`.** |
 | P2 a11y pass | WCAG 2.1 AA static audit (`.docs/a11y-audit-2026-06-11.md`). 9 fixes: skip link, aria-disabled mock options + sr-only result text, LevelDots aria-label, labeled filters, aria-pressed tabs/pills, named progressbar, Escape on mobile nav. Manual follow-ups listed in report. |
 | P3 spaced repetition | Leitner boxes on `user_topic_mastery` (migration `20260611000002`, **needs `supabase db push`**). `src/lib/leitner.ts` + tests. Correct answer promotes box (0/1/3/7/21d intervals), wrong demotes. `/mock/review` flashcard session over due questions. Dashboard review card. |
+| P3 retry-missed mode | End screen "Retry missed (N)" button — wrong answers re-run as a fresh client-side round, recorded as its own session (feeds Leitner). Topic breakdown already existed. |
 
 ---
 
