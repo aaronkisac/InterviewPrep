@@ -94,6 +94,7 @@ Last updated: 2026-06-11 (answerPersonal pass 2)
 | SEO setup | `src/lib/site.ts` (SITE_NAME/DESCRIPTION + `getSiteUrl()` from `NEXT_PUBLIC_SITE_URL`→`NEXTAUTH_URL`). Root metadata: metadataBase, title template, keywords, OG (en_GB + tr_TR), twitter card, robots. `robots.ts` (gated routes disallowed; `/questions/` blocked but `/questions` crawlable), `sitemap.ts` (public routes only), `opengraph-image.tsx` (1200×630, logo + tagline via next/og). JSON-LD WebSite schema + dynamic `<html lang>` (en/tr) in layout. Canonical on `/` + `/questions`; noindex metadata on dashboard/glossary/mock/admin. `.env.example` gains `NEXT_PUBLIC_SITE_URL`. |
 | Topic + nav icons | `src/lib/topic-icons.ts` — slug→Lucide map (15 topics, BookOpen fallback for custom/unknown). Homepage topic grid + `/questions` TopicTabs (system tabs + Bookmark tab; custom tabs keep Lock) show icons. Navbar `NavLink` now inline-flex; Questions/Mock/Glossary/Dashboard/Admin links + MobileNav get matching icons. |
 | Logo | `src/components/logo.tsx` — iconic mark: question mark whose dot is a checkmark ("questions, answered") on a solid primary disc, mark strokes in `var(--primary-foreground)`. Server-safe; navbar uses `<Logo size={20} />`. `src/app/icon.svg` favicon = same disc version (hardcoded vintage colors + `prefers-color-scheme: dark` variant). Legacy favicon.ico fallback. |
+| Course Milestone A — engine foundations | Migration `20260612000001_course_tables.sql` (`units`/`lessons`/`user_lesson_progress`, RLS deny-direct). `src/lib/course/`: `step-schema.ts` (8 step types, dependency-free validator — **no zod**, project stays zero-dep; no shiki either: code renders via existing react-markdown + rehype-highlight), `path-state.ts` (derived lock states), `lesson-queue.ts` (finish-to-pass re-queue, first-try accuracy). Seeder: `data/seed-courses/<topic>/<unit>.json` import (challenge text→UUID resolve, lesson prune). `pnpm course:coverage` script. 3 test suites. First content: `react/unit-01-components-jsx.json` (2 lessons, all 8 step types, 4 challenges). Row types added to `supabase/types.ts`. **Needs `supabase db push` + `pnpm seed`.** |
 
 ---
 
@@ -121,6 +122,7 @@ GitHub Secrets needed: `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KE
 
 ### Still missing (optional / future):
 - `answerPersonal` / `answerPersonalTr` for most questions (add from Aaron's real interview experience)
+- Learning Map / Course experience — spec v3 at `.docs/learning-map-spec.md`, **approved 2026-06-12, in progress**. React-first pilot, Milestones A–E. Milestone A done (see Completed Phases). Next: Milestone B (lesson player — needs `motion` + `canvas-confetti` deps via `pnpm add`). Spec deviation: validator is hand-rolled (no zod), code highlighting via existing rehype-highlight (no shiki).
 
 ---
 

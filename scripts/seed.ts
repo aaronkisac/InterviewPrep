@@ -15,6 +15,7 @@ import path from "node:path";
 
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 
+import { validateSeedUnit, type SeedUnit } from "../src/lib/course/step-schema";
 import type {
   LevelLabel,
   QuestionRow,
@@ -437,6 +438,194 @@ async function seedMockOptions(
   );
 }
 
+// ---------------------------------------------------------------------------
+// Courses — units + lessons from data/seed-courses/<topic>/<unit-slug>.json.
+// Each file is one unit (meta + lessons + steps), validated by step-schema.
+// `challenge` steps reference bank questions by exact text; we resolve them
+// to UUIDs here and store `questionId` inside the steps JSONB.
+// Idempotent: units upsert by (topic_slug, slug), lessons by (unit_id, slug);
+// lessons removed from a file are deleted so the file stays source of truth.
+// ---------------------------------------------------------------------------
+
+async function loadCourseUnits(): Promise<SeedUnit[]> {
+  const dir = path.join(process.cwd(), "data", "seed-courses");
+  let topics: string[];
+  try {
+    topics = (await readdir(dir, { withFileTypes: true }))
+      .filter((e) => e.isDirectory())
+      .map((e) => e.name)
+      .sort();
+  } catch {
+    return [];
+  }
+
+  const units: SeedUnit[] = [];
+  for (const topic of topics) {
+    const topicDir = path.join(dir, topic);
+    const files = (await readdir(topicDir))
+      .filter((f) => f.endsWith(".json"))
+      .sort();
+    for (const file of files) {
+      const raw = await readFile(path.join(topicDir, file), "utf8");
+      const result = validateSeedUnit(JSON.parse(raw) as unknown);
+      if (!result.ok) {
+        throw new Error(
+          `Invalid course unit ${topic}/${file}:\n  ${result.errors.join("\n  ")}`,
+        );
+      }
+      if (result.value.topic !== topic) {
+        throw new Error(
+          `${topic}/${file}: unit "topic" is "${result.value.topic}" but the file lives in seed-courses/${topic}/`,
+        );
+      }
+      units.push(result.value);
+    }
+  }
+  return units;
+}
+
+async function resolveChallenges(
+  supabase: SupabaseClient,
+  unit: SeedUnit,
+): Promise<void> {
+  for (const lesson of unit.lessons) {
+    for (const step of lesson.steps) {
+      if (step.type !== "challenge") continue;
+      const { data: question, error } = await withRetry(
+        () =>
+          supabase
+            .from("questions")
+            .select("id")
+            .eq("topic", unit.topic)
+            .eq("question", step.question.trim())
+            .maybeSingle(),
+        "challenge lookup",
+      );
+      if (error) {
+        throw new Error(
+          `Challenge lookup failed for "${step.question.slice(0, 40)}…": ${error.message}`,
+        );
+      }
+      if (!question) {
+        throw new Error(
+          `${unit.topic}/${unit.slug} → ${lesson.slug}: no ${unit.topic} question matches "${step.question.slice(0, 60)}…"`,
+        );
+      }
+      step.questionId = question.id as string;
+    }
+  }
+}
+
+async function seedCourses(
+  supabase: SupabaseClient,
+  units: SeedUnit[],
+): Promise<void> {
+  let unitsUpserted = 0;
+  let lessonsUpserted = 0;
+
+  for (const unit of units) {
+    await resolveChallenges(supabase, unit);
+
+    const unitRow = {
+      topic_slug: unit.topic,
+      slug: unit.slug,
+      title: unit.title,
+      title_tr: unit.titleTr,
+      section: unit.section,
+      position: unit.position,
+    };
+
+    const { data: existingUnit, error: unitSelectError } = await withRetry(
+      () =>
+        supabase
+          .from("units")
+          .select("id")
+          .eq("topic_slug", unit.topic)
+          .eq("slug", unit.slug)
+          .maybeSingle(),
+      "unit lookup",
+    );
+    if (unitSelectError) throw new Error(unitSelectError.message);
+
+    let unitId: string;
+    if (existingUnit) {
+      unitId = existingUnit.id as string;
+      const { error } = await withRetry(
+        () => supabase.from("units").update(unitRow).eq("id", unitId),
+        "unit update",
+      );
+      if (error) throw new Error(error.message);
+    } else {
+      const { data, error } = await withRetry(
+        () => supabase.from("units").insert(unitRow).select("id").single(),
+        "unit insert",
+      );
+      if (error) throw new Error(error.message);
+      unitId = (data as { id: string }).id;
+    }
+    unitsUpserted += 1;
+
+    for (const lesson of unit.lessons) {
+      const lessonRow = {
+        unit_id: unitId,
+        slug: lesson.slug,
+        title: lesson.title,
+        title_tr: lesson.titleTr,
+        position: lesson.position,
+        steps: lesson.steps,
+      };
+      const { data: existingLesson, error: lessonSelectError } =
+        await withRetry(
+          () =>
+            supabase
+              .from("lessons")
+              .select("id")
+              .eq("unit_id", unitId)
+              .eq("slug", lesson.slug)
+              .maybeSingle(),
+          "lesson lookup",
+        );
+      if (lessonSelectError) throw new Error(lessonSelectError.message);
+
+      if (existingLesson) {
+        const { error } = await withRetry(
+          () =>
+            supabase
+              .from("lessons")
+              .update(lessonRow)
+              .eq("id", existingLesson.id as string),
+          "lesson update",
+        );
+        if (error) throw new Error(error.message);
+      } else {
+        const { error } = await withRetry(
+          () => supabase.from("lessons").insert(lessonRow),
+          "lesson insert",
+        );
+        if (error) throw new Error(error.message);
+      }
+      lessonsUpserted += 1;
+    }
+
+    // Remove lessons that are no longer in the file (file = source of truth).
+    const keepSlugs = unit.lessons.map((l) => l.slug);
+    const { error: pruneError } = await withRetry(
+      () =>
+        supabase
+          .from("lessons")
+          .delete()
+          .eq("unit_id", unitId)
+          .not("slug", "in", `(${keepSlugs.map((s) => `"${s}"`).join(",")})`),
+      "lesson prune",
+    );
+    if (pruneError) throw new Error(pruneError.message);
+  }
+
+  console.log(
+    `  courses    → ${unitsUpserted} units, ${lessonsUpserted} lessons`,
+  );
+}
+
 async function main() {
   const supabase = createClient(
     getEnv("NEXT_PUBLIC_SUPABASE_URL"),
@@ -477,6 +666,14 @@ async function main() {
   console.log("Seeding mock options…");
   const mockEntries = await loadMockOptions();
   await seedMockOptions(supabase, mockEntries);
+
+  console.log("Seeding courses…");
+  const courseUnits = await loadCourseUnits();
+  if (courseUnits.length > 0) {
+    await seedCourses(supabase, courseUnits);
+  } else {
+    console.log("  courses    → no seed-courses directory, skipped");
+  }
 
   console.log("Seeding terms…");
   const terms = await loadTerms();

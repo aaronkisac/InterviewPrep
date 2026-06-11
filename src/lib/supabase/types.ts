@@ -85,3 +85,39 @@ export type BookmarkRow = {
   question_id: string;
   created_at: string;
 };
+
+// --- Course experience (learning map) ---
+
+export type UnitSection = "foundations" | "core" | "advanced" | "interview";
+
+export type UnitRow = {
+  id: string;
+  topic_slug: Topic;
+  slug: string;
+  title: string;
+  title_tr: string;
+  section: UnitSection;
+  position: number;
+  created_at: string;
+};
+
+export type LessonRow = {
+  id: string;
+  unit_id: string;
+  slug: string;
+  title: string;
+  title_tr: string;
+  position: number;
+  /** Validated Step[] — see src/lib/course/step-schema.ts */
+  steps: unknown;
+  created_at: string;
+};
+
+export type UserLessonProgressRow = {
+  user_id: string;
+  lesson_id: string;
+  best_pct: number;
+  attempts: number;
+  completed_at: string | null;
+  updated_at: string;
+};

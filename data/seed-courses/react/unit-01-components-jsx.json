@@ -1,0 +1,173 @@
+{
+  "topic": "react",
+  "slug": "components-jsx",
+  "title": "Components & JSX",
+  "titleTr": "Bileşenler ve JSX",
+  "section": "foundations",
+  "position": 1,
+  "lessons": [
+    {
+      "slug": "what-is-jsx",
+      "title": "What is JSX?",
+      "titleTr": "JSX nedir?",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Markup that lives in JavaScript",
+          "titleTr": "JavaScript içinde yaşayan markup",
+          "body": "React UIs are described with **JSX** — a syntax extension that lets you write markup directly in JavaScript:\n\n```jsx\nconst greeting = <h1>Hello, React!</h1>;\n```\n\nJSX is not HTML and not a string. Build tools compile it to plain function calls (`React.createElement` or the automatic JSX runtime), which produce lightweight objects describing what should appear on screen.",
+          "bodyTr": "React arayüzleri **JSX** ile tanımlanır — markup'ı doğrudan JavaScript içinde yazmanı sağlayan bir sözdizimi uzantısı:\n\n```jsx\nconst greeting = <h1>Merhaba, React!</h1>;\n```\n\nJSX, HTML değildir ve bir string de değildir. Build araçları onu düz fonksiyon çağrılarına (`React.createElement` veya otomatik JSX runtime) derler; bu çağrılar ekranda ne görüneceğini tarif eden hafif nesneler üretir."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What does JSX compile to?",
+          "promptTr": "JSX neye derlenir?",
+          "options": [
+            {
+              "text": "HTML strings injected with innerHTML",
+              "textTr": "innerHTML ile eklenen HTML string'leri"
+            },
+            {
+              "text": "Plain function calls that return element objects",
+              "textTr": "Element nesneleri döndüren düz fonksiyon çağrıları",
+              "correct": true
+            },
+            {
+              "text": "Template literals",
+              "textTr": "Template literal'ler"
+            },
+            {
+              "text": "Direct DOM node mutations",
+              "textTr": "Doğrudan DOM düğümü değişiklikleri"
+            }
+          ],
+          "explanation": "JSX compiles to function calls (the JSX runtime) that return element objects — descriptions of the UI, not the UI itself.",
+          "explanationTr": "JSX, element nesneleri döndüren fonksiyon çağrılarına (JSX runtime) derlenir — arayüzün kendisi değil, tarifi."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Embed the variable in JSX",
+          "promptTr": "Değişkeni JSX içine göm",
+          "code": "const name = \"Aaron\";\nconst el = <h1>Hello, ___</h1>;",
+          "answers": ["{name}"],
+          "distractors": ["${name}", "(name)", "name"],
+          "explanation": "Curly braces embed any JavaScript expression inside JSX.",
+          "explanationTr": "Süslü parantezler, herhangi bir JavaScript ifadesini JSX içine gömer."
+        },
+        {
+          "type": "true_false",
+          "statement": "JSX attributes use camelCase DOM property names, like className and htmlFor.",
+          "statementTr": "JSX öznitelikleri className ve htmlFor gibi camelCase DOM property adlarını kullanır.",
+          "answer": true,
+          "explanation": "JSX maps to DOM properties, not HTML attributes — class becomes className, for becomes htmlFor.",
+          "explanationTr": "JSX, HTML özniteliklerine değil DOM property'lerine karşılık gelir — class yerine className, for yerine htmlFor."
+        },
+        {
+          "type": "output_predict",
+          "prompt": "What does this render inside the paragraph?",
+          "promptTr": "Bu kod paragrafın içine ne render eder?",
+          "code": "const count = 0;\nreturn <p>{count && \"items\"}</p>;",
+          "options": [
+            { "text": "0", "textTr": "0", "correct": true },
+            { "text": "items", "textTr": "items" },
+            { "text": "Nothing — empty paragraph", "textTr": "Hiçbir şey — boş paragraf" },
+            { "text": "false", "textTr": "false" }
+          ],
+          "explanation": "Unlike null or false, the number 0 IS rendered by JSX — a classic gotcha with &&. Use count > 0 && … instead.",
+          "explanationTr": "null veya false'tan farklı olarak 0 sayısı JSX tarafından render EDİLİR — && ile klasik bir tuzak. Bunun yerine count > 0 && … kullan."
+        },
+        {
+          "type": "challenge",
+          "question": "What is JSX?"
+        },
+        {
+          "type": "challenge",
+          "question": "How do you write comments in JSX?"
+        }
+      ]
+    },
+    {
+      "slug": "your-first-component",
+      "title": "Your first component",
+      "titleTr": "İlk bileşenin",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Components are functions",
+          "titleTr": "Bileşenler birer fonksiyondur",
+          "body": "A React **component** is a function that returns JSX:\n\n```jsx\nfunction Welcome() {\n  return <h1>Welcome aboard!</h1>;\n}\n```\n\nTwo rules:\n\n1. The name **must start with a capital letter** — `<welcome />` is treated as a DOM tag, `<Welcome />` as your component.\n2. It must return a **single root** — wrap siblings in a parent or a fragment (`<>…</>`).",
+          "bodyTr": "Bir React **bileşeni**, JSX döndüren bir fonksiyondur:\n\n```jsx\nfunction Welcome() {\n  return <h1>Hoş geldin!</h1>;\n}\n```\n\nİki kural:\n\n1. İsim **büyük harfle başlamalı** — `<welcome />` bir DOM etiketi, `<Welcome />` ise senin bileşenin sayılır.\n2. **Tek bir kök** döndürmeli — kardeş elemanları bir ebeveyne ya da fragment'e (`<>…</>`) sar.",
+          "visual": "component-tree"
+        },
+        {
+          "type": "mcq",
+          "prompt": "Why must component names be capitalized?",
+          "promptTr": "Bileşen adları neden büyük harfle başlamalı?",
+          "options": [
+            {
+              "text": "It's only a naming convention with no real effect",
+              "textTr": "Sadece bir adlandırma geleneği, gerçek bir etkisi yok"
+            },
+            {
+              "text": "Lowercase tags are compiled as DOM elements, capitalized ones as components",
+              "textTr": "Küçük harfli etiketler DOM elemanı, büyük harfliler bileşen olarak derlenir",
+              "correct": true
+            },
+            {
+              "text": "JavaScript classes require capital letters",
+              "textTr": "JavaScript sınıfları büyük harf gerektirir"
+            },
+            {
+              "text": "Linters fail otherwise",
+              "textTr": "Aksi halde linter hata verir"
+            }
+          ],
+          "explanation": "The JSX compiler uses the first letter to decide: lowercase → string tag for the DOM, capitalized → reference to your function.",
+          "explanationTr": "JSX derleyicisi ilk harfe bakarak karar verir: küçük harf → DOM için string etiket, büyük harf → senin fonksiyonuna referans."
+        },
+        {
+          "type": "order",
+          "prompt": "Order what happens when React shows your component on screen",
+          "promptTr": "React bileşenini ekranda gösterirken olanları sırala",
+          "items": [
+            { "text": "JSX compiles to element-creating function calls", "textTr": "JSX, element üreten fonksiyon çağrılarına derlenir" },
+            { "text": "React calls your component function", "textTr": "React bileşen fonksiyonunu çağırır" },
+            { "text": "The returned element tree is compared and committed", "textTr": "Dönen element ağacı karşılaştırılır ve commit edilir" },
+            { "text": "The browser DOM is updated", "textTr": "Tarayıcı DOM'u güncellenir" }
+          ],
+          "explanation": "Compile time happens first (build), then at runtime React calls the function, diffs the result and updates the DOM.",
+          "explanationTr": "Önce derleme (build) gerçekleşir; çalışma zamanında React fonksiyonu çağırır, sonucu karşılaştırır ve DOM'u günceller."
+        },
+        {
+          "type": "match",
+          "prompt": "Match each JSX form to what it produces",
+          "promptTr": "Her JSX biçimini ürettiği şeyle eşleştir",
+          "pairs": [
+            { "left": "<div />", "leftTr": "<div />", "right": "DOM element", "rightTr": "DOM elemanı" },
+            { "left": "<Widget />", "leftTr": "<Widget />", "right": "Your component", "rightTr": "Senin bileşenin" },
+            { "left": "<>…</>", "leftTr": "<>…</>", "right": "Fragment — no extra DOM node", "rightTr": "Fragment — fazladan DOM düğümü yok" },
+            { "left": "{expr}", "leftTr": "{expr}", "right": "Embedded JavaScript expression", "rightTr": "Gömülü JavaScript ifadesi" }
+          ]
+        },
+        {
+          "type": "true_false",
+          "statement": "A component can return several sibling elements without wrapping them.",
+          "statementTr": "Bir bileşen, kardeş elemanları sarmalamadan birden fazla kök eleman döndürebilir.",
+          "answer": false,
+          "explanation": "A function returns one value — wrap siblings in a parent element or a fragment.",
+          "explanationTr": "Bir fonksiyon tek değer döndürür — kardeşleri bir ebeveyn elemana ya da fragment'e sar."
+        },
+        {
+          "type": "challenge",
+          "question": "Why is it necessary to capitalize component names?"
+        },
+        {
+          "type": "challenge",
+          "question": "What are the major features of React?"
+        }
+      ]
+    }
+  ]
+}
