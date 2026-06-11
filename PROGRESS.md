@@ -1,6 +1,6 @@
 # Progress
 
-Last updated: 2026-06-11 (P3 mock timer)
+Last updated: 2026-06-11 (topic badges + glossary pagination)
 
 ---
 
@@ -87,6 +87,7 @@ Last updated: 2026-06-11 (P3 mock timer)
 | P3 spaced repetition | Leitner boxes on `user_topic_mastery` (migration `20260611000002`, **needs `supabase db push`**). `src/lib/leitner.ts` + tests. Correct answer promotes box (0/1/3/7/21d intervals), wrong demotes. `/mock/review` flashcard session over due questions. Dashboard review card. |
 | P3 retry-missed mode | End screen "Retry missed (N)" button — wrong answers re-run as a fresh client-side round, recorded as its own session (feeds Leitner). Topic breakdown already existed. |
 | P3 mock timer | Optional per-question countdown (Off/30/60/90s) in mock config (`?t=`). `Countdown` in QuestionView (keyed per question, red <10s, `role=timer`). Timeout = unanswered via `""` sentinel + "Time's up!" feedback. |
+| Topic badges + glossary pagination | `/questions` All tab shows topic badge per card. `/glossary` All view flattened (stable section order) with topic badges + pagination (`?page=/?per=`). `Pagination`/`PageSizeSelect` generalized to `src/components/` with `basePath`. |
 
 ---
 
