@@ -13,11 +13,13 @@ type PaginationLabels = {
 export function Pagination({
   page,
   totalPages,
+  basePath,
   searchParams,
   labels,
 }: {
   page: number;
   totalPages: number;
+  basePath: string;
   searchParams: Record<string, string | undefined>;
   labels: PaginationLabels;
 }) {
@@ -30,7 +32,7 @@ export function Pagination({
     }
     if (p > 1) sp.set("page", String(p));
     const qs = sp.toString();
-    return `/questions${qs ? `?${qs}` : ""}`;
+    return `${basePath}${qs ? `?${qs}` : ""}`;
   };
 
   const linkClass =

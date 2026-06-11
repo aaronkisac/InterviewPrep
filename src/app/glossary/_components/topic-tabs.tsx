@@ -54,6 +54,7 @@ export function GlossaryTopicTabs({
 
   function selectTopic(value: string) {
     const params = new URLSearchParams(searchParams.toString());
+    params.delete("page");
     if (value) {
       params.set("topic", value);
     } else {

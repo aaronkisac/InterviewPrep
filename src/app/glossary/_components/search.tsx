@@ -12,6 +12,7 @@ export function GlossarySearch({ placeholder = "Search terms…" }: { placeholde
 
   function updateQuery(value: string) {
     const params = new URLSearchParams(searchParams.toString());
+    params.delete("page");
     if (value.trim()) {
       params.set("q", value.trim());
     } else {

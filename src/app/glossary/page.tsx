@@ -4,7 +4,10 @@ import { groupByTopic, listTerms } from "@/lib/terms";
 import type { Topic } from "@/lib/supabase/types";
 import { listSystemTopics } from "@/lib/actions/admin-topics";
 import { getLang } from "@/lib/lang";
-import { i18nGlossary } from "@/lib/i18n";
+import { parsePage, parsePageSize } from "@/lib/questions";
+import { i18nGlossary, i18nQuestions } from "@/lib/i18n";
+import { PageSizeSelect } from "@/components/page-size-select";
+import { Pagination } from "@/components/pagination";
 
 import { GlossaryTopicTabs } from "./_components/topic-tabs";
 import { GlossarySearch } from "./_components/search";
@@ -12,7 +15,7 @@ import { TooltipDemo } from "./_components/tooltip-demo";
 
 export const dynamic = "force-dynamic";
 
-type SearchParams = Promise<{ topic?: string; q?: string }>;
+type SearchParams = Promise<{ topic?: string; q?: string; page?: string; per?: string }>;
 
 export default async function GlossaryPage({
   searchParams,
@@ -25,6 +28,9 @@ export default async function GlossaryPage({
 
   const lang = await getLang();
   const i18n = i18nGlossary[lang];
+  const i18nQ = i18nQuestions[lang];
+  const page = parsePage(params.page);
+  const pageSize = parsePageSize(params.per);
 
   const [allTerms, systemTopics] = await Promise.all([listTerms(), listSystemTopics()]);
   const groups = groupByTopic(allTerms);
@@ -38,10 +44,17 @@ export default async function GlossaryPage({
     .filter((s) => (groups[s.key]?.length ?? 0) > 0)
     .map((s) => ({ value: s.key, label: s.label }));
 
+  const topicLabelMap = Object.fromEntries(
+    SECTION_ORDER.map((s) => [s.key, s.label]),
+  );
+
+  // Flat list in stable section order (so "All" pages don't jump around)
+  const orderedAll = SECTION_ORDER.flatMap((s) => groups[s.key] ?? []);
+
   const topicFiltered =
     selectedTopic && selectedTopic !== "all"
       ? (groups[selectedTopic as Topic | "general"] ?? [])
-      : allTerms;
+      : orderedAll;
 
   const filtered = searchQuery
     ? topicFiltered.filter(
@@ -52,7 +65,11 @@ export default async function GlossaryPage({
     : topicFiltered;
 
   const hasFilter = Boolean(selectedTopic) || Boolean(searchQuery);
-  const showSections = !selectedTopic && !searchQuery;
+  const showTopicBadge = !selectedTopic || selectedTopic === "all";
+
+  const total = filtered.length;
+  const totalPages = Math.max(1, Math.ceil(total / pageSize));
+  const pageItems = filtered.slice((page - 1) * pageSize, page * pageSize);
 
   return (
     <main className="mx-auto w-full max-w-[1200px] px-4 py-8 sm:px-6 lg:px-8">
@@ -75,67 +92,64 @@ export default async function GlossaryPage({
 
         <div className="rounded-b-lg border-x border-b border-border bg-card px-4 pb-4 pt-3">
           <div className="mb-3 flex items-center justify-between text-sm text-muted-foreground">
-            <span>{i18n.termCount(filtered.length)}</span>
-            {hasFilter && (
-              <Link
-                href="/glossary"
-                className="text-xs text-foreground hover:underline"
-              >
-                {i18n.clearFilters}
-              </Link>
-            )}
+            <span>{i18n.termCount(total)}</span>
+            <span className="flex items-center gap-3">
+              <PageSizeSelect
+                value={pageSize}
+                label={i18nQ.perPage}
+                basePath="/glossary"
+              />
+              {hasFilter && (
+                <Link
+                  href="/glossary"
+                  className="text-xs text-foreground hover:underline"
+                >
+                  {i18n.clearFilters}
+                </Link>
+              )}
+            </span>
           </div>
 
-          {filtered.length === 0 ? (
+          {total === 0 ? (
             <p className="rounded-lg border border-dashed border-border p-8 text-center text-sm text-muted-foreground">
               {i18n.noResults}
             </p>
-          ) : showSections ? (
-            <div className="space-y-8">
-              {SECTION_ORDER.map((section) => {
-                const items = groups[section.key];
-                if (!items || items.length === 0) return null;
-                return (
-                  <section key={section.key}>
-                    <h2 className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground/60">
-                      {section.label}
-                    </h2>
-                    <ul className="space-y-1.5">
-                      {items.map((term) => (
-                        <li key={term.id}>
-                          <Link
-                            href={`/glossary/${term.slug}`}
-                            className="block rounded-lg border border-border bg-background px-4 py-3 transition hover:border-foreground/30"
-                          >
-                            <p className="text-sm font-medium">{term.label}</p>
-                            <p className="mt-0.5 text-xs leading-snug text-muted-foreground">
-                              {lang === "tr" && term.tooltip_tr ? term.tooltip_tr : term.tooltip}
-                            </p>
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </section>
-                );
-              })}
-            </div>
           ) : (
             <ul className="space-y-1.5">
-              {filtered.map((term) => (
+              {pageItems.map((term) => (
                 <li key={term.id}>
                   <Link
                     href={`/glossary/${term.slug}`}
                     className="block rounded-lg border border-border bg-background px-4 py-3 transition hover:border-foreground/30"
                   >
-                    <p className="text-sm font-medium">{term.label}</p>
+                    <span className="flex items-center justify-between gap-3">
+                      <span className="text-sm font-medium">{term.label}</span>
+                      {showTopicBadge && (
+                        <span className="flex-shrink-0 rounded border border-border bg-secondary px-1.5 py-0.5 text-[10px] font-medium text-secondary-foreground">
+                          {topicLabelMap[term.topic] ?? term.topic}
+                        </span>
+                      )}
+                    </span>
                     <p className="mt-0.5 text-xs leading-snug text-muted-foreground">
-                      {term.tooltip}
+                      {lang === "tr" && term.tooltip_tr ? term.tooltip_tr : term.tooltip}
                     </p>
                   </Link>
                 </li>
               ))}
             </ul>
           )}
+
+          <Pagination
+            page={page}
+            totalPages={totalPages}
+            basePath="/glossary"
+            searchParams={{ topic: params.topic, q: params.q, per: params.per }}
+            labels={{
+              prev: i18nQ.paginationPrev,
+              next: i18nQ.paginationNext,
+              pageOf: i18nQ.pageOf(page, totalPages),
+            }}
+          />
         </div>
       </div>
     </main>

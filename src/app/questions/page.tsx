@@ -17,8 +17,8 @@ import { i18nQuestions } from "@/lib/i18n";
 import { listSystemTopics } from "@/lib/actions/admin-topics";
 import { listCustomTopics, getCustomTopic, getCustomBookmarkIds, getBookmarkedCustomQuestions, type BookmarkedCustomQuestion } from "@/lib/actions/custom-topics";
 
-import { PageSizeSelect } from "./_components/page-size-select";
-import { Pagination } from "./_components/pagination";
+import { PageSizeSelect } from "@/components/page-size-select";
+import { Pagination } from "@/components/pagination";
 import { TopicTabs } from "./_components/topic-tabs";
 import { QuestionFilters } from "./_components/filters";
 import { QuestionCard } from "./_components/question-card";
@@ -210,7 +210,7 @@ export default async function QuestionsPage({
             </span>
             <span className="flex items-center gap-3">
               {!isCustomTab && !isBookmarkedTab && (
-                <PageSizeSelect value={pageSize} label={i18n.perPage} />
+                <PageSizeSelect value={pageSize} label={i18n.perPage} basePath="/questions" />
               )}
               {(hasActiveFilters || isCustomTab) && (
                 <Link
@@ -262,7 +262,7 @@ export default async function QuestionsPage({
                     index={indexOffset + i + 1}
                     lang={lang}
                     isBookmarked={bookmarkedSet.has(question.id)}
-                    showTopic={isBookmarkedTab}
+                    showTopic={isBookmarkedTab || !filters.topic}
                     isLoggedIn={isLoggedIn}
                     topicLabels={topicLabels}
                   />
@@ -285,6 +285,7 @@ export default async function QuestionsPage({
             <Pagination
               page={page}
               totalPages={totalPages}
+              basePath="/questions"
               searchParams={{
                 topic: params.topic,
                 levels: params.levels,

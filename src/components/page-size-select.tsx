@@ -12,9 +12,11 @@ const DEFAULT_SIZE = 25;
 export function PageSizeSelect({
   value,
   label,
+  basePath,
 }: {
   value: number;
   label: string;
+  basePath: string;
 }) {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -29,7 +31,7 @@ export function PageSizeSelect({
       params.set("per", raw);
     }
     startTransition(() => {
-      router.replace(`/questions?${params.toString()}`, { scroll: false });
+      router.replace(`${basePath}?${params.toString()}`, { scroll: false });
     });
   }
 
