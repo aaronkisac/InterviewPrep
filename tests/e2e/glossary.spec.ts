@@ -35,25 +35,54 @@ test.describe("/glossary page", () => {
     await expect(page.getByText(/^\d+ terms?$/)).toBeVisible();
   });
 
-  test("all 14 topic sections are present", async ({ page }) => {
+  test("all topics are present as tabs", async ({ page }) => {
     await page.goto("/glossary");
-    // h2 elements have CSS text-transform:uppercase visually, but DOM text is original case.
-    // Use locator('h2').filter instead of getByRole to avoid ARIA name normalisation issues.
     for (const section of EXPECTED_SECTIONS) {
-      // Use exact regex to avoid "React" matching "React Hooks"
+      // Exact name to avoid "React" matching "React Hooks"
       await expect(
-        page.locator("h2").filter({ hasText: new RegExp(`^${section}$`) }),
-        `section "${section}" not found`,
+        page.getByRole("button", { name: section, exact: true }).first(),
+        `tab "${section}" not found`,
       ).toBeVisible();
     }
   });
 
-  test("at least 105 term links are rendered", async ({ page }) => {
+  test("at least 105 terms exist and the All view is paginated with topic badges", async ({
+    page,
+  }) => {
     await page.goto("/glossary");
-    // Terms are <li> elements inside each <section> — each wraps a link to /glossary/[slug]
-    const termLinks = page.locator('section li a[href^="/glossary/"]');
+
+    // Total count from the "N terms" label (the list itself is paginated)
+    const countText = await page.getByText(/^\d+ terms?$/).innerText();
+    const total = Number(countText.match(/\d+/)?.[0] ?? 0);
+    expect(total, `expected ≥ 105 terms, got ${total}`).toBeGreaterThanOrEqual(105);
+
+    // Page shows at most one page of term links
+    const termLinks = page.locator('li a[href^="/glossary/"]');
     await termLinks.first().waitFor();
-    const count = await termLinks.count();
-    expect(count, `expected ≥ 105 term links, got ${count}`).toBeGreaterThanOrEqual(105);
+    expect(await termLinks.count()).toBeLessThanOrEqual(50);
+
+    // Pagination nav is present on the All view
+    await expect(
+      page.getByRole("navigation", { name: "Pagination" }),
+    ).toBeVisible();
+
+    // Next page shows a different first term
+    const firstTerm = await termLinks.first().innerText();
+    await page.getByRole("link", { name: "Next →" }).click();
+    await expect(page).toHaveURL(/page=2/);
+    await termLinks.first().waitFor();
+    expect(await termLinks.first().innerText()).not.toBe(firstTerm);
+  });
+
+  test("selecting a topic tab resets pagination and filters terms", async ({
+    page,
+  }) => {
+    await page.goto("/glossary?page=2");
+    await page.getByRole("button", { name: "WebSockets", exact: true }).click();
+    await expect(page).toHaveURL(/topic=websockets/i);
+    await expect(page).not.toHaveURL(/page=/);
+    await expect(
+      page.locator('li a[href^="/glossary/"]').first(),
+    ).toBeVisible();
   });
 });
