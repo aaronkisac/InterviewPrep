@@ -3,11 +3,11 @@ import Link from "next/link";
 import { auth } from "@/lib/auth";
 import { getBookmarkedIds } from "@/lib/actions/user-tracking";
 import {
-  PAGE_SIZE,
   listQuestions,
   listQuestionsPage,
   parseLevels,
   parsePage,
+  parsePageSize,
   parseQuery,
   parseTopic,
 } from "@/lib/questions";
@@ -17,6 +17,7 @@ import { i18nQuestions } from "@/lib/i18n";
 import { listSystemTopics } from "@/lib/actions/admin-topics";
 import { listCustomTopics, getCustomTopic, getCustomBookmarkIds, getBookmarkedCustomQuestions, type BookmarkedCustomQuestion } from "@/lib/actions/custom-topics";
 
+import { PageSizeSelect } from "./_components/page-size-select";
 import { Pagination } from "./_components/pagination";
 import { TopicTabs } from "./_components/topic-tabs";
 import { QuestionFilters } from "./_components/filters";
@@ -32,6 +33,7 @@ type SearchParams = Promise<{
   levels?: string;
   q?: string;
   page?: string;
+  per?: string;
 }>;
 
 const GUEST_MAX_LEVEL = 2;
@@ -55,6 +57,7 @@ export default async function QuestionsPage({
     lang,
   };
   const page = parsePage(params.page);
+  const pageSize = parsePageSize(params.per);
 
   const session = await auth().catch(() => null);
   const isLoggedIn = Boolean(session?.user);
@@ -78,7 +81,7 @@ export default async function QuestionsPage({
     await Promise.all([
       skipBrowse
         ? Promise.resolve({ items: [], total: 0 })
-        : listQuestionsPage(browseFilters, page),
+        : listQuestionsPage(browseFilters, page, pageSize),
       isBookmarkedTab ? listQuestions(filters) : Promise.resolve([]),
       listTerms(),
       getBookmarkedIds(userId),
@@ -114,8 +117,8 @@ export default async function QuestionsPage({
     ? visibleForBookmarks.filter((q) => bookmarkedSet.has(q.id))
     : browsePage.items;
   const total = isBookmarkedTab ? questions.length : browsePage.total;
-  const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
-  const indexOffset = isBookmarkedTab ? 0 : (page - 1) * PAGE_SIZE;
+  const totalPages = Math.max(1, Math.ceil(total / pageSize));
+  const indexOffset = isBookmarkedTab ? 0 : (page - 1) * pageSize;
 
   const hasActiveFilters =
     Boolean(filters.topic) ||
@@ -205,14 +208,19 @@ export default async function QuestionsPage({
                   ? i18n.loginForBookmarks
                   : i18n.countSuffix(total + bookmarkedCustomQuestions.length, hasActiveFilters)}
             </span>
-            {(hasActiveFilters || isCustomTab) && (
-              <Link
-                href={`/questions${lang === "tr" ? "?lang=tr" : ""}`}
-                className="text-foreground hover:underline text-xs"
-              >
-                {i18n.clear}
-              </Link>
-            )}
+            <span className="flex items-center gap-3">
+              {!isCustomTab && !isBookmarkedTab && (
+                <PageSizeSelect value={pageSize} label={i18n.perPage} />
+              )}
+              {(hasActiveFilters || isCustomTab) && (
+                <Link
+                  href={`/questions${lang === "tr" ? "?lang=tr" : ""}`}
+                  className="text-foreground hover:underline text-xs"
+                >
+                  {i18n.clear}
+                </Link>
+              )}
+            </span>
           </div>
 
           {/* Custom topic questions */}
@@ -281,6 +289,7 @@ export default async function QuestionsPage({
                 topic: params.topic,
                 levels: params.levels,
                 q: params.q,
+                per: params.per,
               }}
               labels={{
                 prev: i18n.paginationPrev,

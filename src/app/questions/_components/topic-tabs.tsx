@@ -82,6 +82,7 @@ export function TopicTabs({
 
   function selectTopic(value: string) {
     const params = new URLSearchParams(searchParams.toString());
+    params.delete("page");
     params.delete("mytopic");
     if (value) {
       params.set("topic", value);
@@ -95,6 +96,7 @@ export function TopicTabs({
 
   function selectMyTopic(slug: string) {
     const params = new URLSearchParams(searchParams.toString());
+    params.delete("page");
     params.delete("topic");
     params.set("mytopic", slug);
     startTransition(() => {

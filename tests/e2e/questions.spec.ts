@@ -105,3 +105,26 @@ test.describe("/questions pagination", () => {
     ).toHaveCount(0);
   });
 });
+
+test.describe("/questions pagination resets", () => {
+  test("changing topic resets to page 1", async ({ page }) => {
+    await page.goto("/questions?page=2");
+    await expect(page.getByText(/Page 2 of \d+/)).toBeVisible();
+
+    await page.locator("#topic-filter").selectOption("websockets");
+    await expect(page).toHaveURL(/topic=websockets/);
+    await expect(page).not.toHaveURL(/page=/);
+    // 18 websockets questions < 25/page — list is non-empty, no pagination
+    await expect(page.locator("ul > li").first()).toBeVisible();
+  });
+
+  test("changing page size re-windows the list and resets the page", async ({
+    page,
+  }) => {
+    await page.goto("/questions?page=2");
+    await page.getByLabel(/Per page/).selectOption("50");
+    await expect(page).toHaveURL(/per=50/);
+    await expect(page).not.toHaveURL(/page=/);
+    await expect(page.getByText(/Page 1 of \d+/)).toBeVisible();
+  });
+});

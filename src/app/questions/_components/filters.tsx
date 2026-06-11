@@ -26,6 +26,7 @@ export function QuestionFilters({ topics = [], lang = "en" }: QuestionFiltersPro
 
   function updateTopic(value: string) {
     const params = new URLSearchParams(searchParams.toString());
+    params.delete("page");
     if (value) {
       params.set("topic", value);
     } else {
@@ -45,6 +46,7 @@ export function QuestionFilters({ topics = [], lang = "en" }: QuestionFiltersPro
 
   function updateQuery(value: string) {
     const params = new URLSearchParams(searchParams.toString());
+    params.delete("page");
     if (value) {
       params.set("q", value);
     } else {
@@ -57,6 +59,7 @@ export function QuestionFilters({ topics = [], lang = "en" }: QuestionFiltersPro
 
   function toggleLevel(level: 1 | 2 | 3 | 4 | 5) {
     const params = new URLSearchParams(searchParams.toString());
+    params.delete("page");
     const next = currentLevels.includes(level)
       ? currentLevels.filter((l) => l !== level)
       : [...currentLevels, level].sort();

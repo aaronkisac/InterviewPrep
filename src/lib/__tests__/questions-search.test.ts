@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { buildSearchOrFilter, parsePage } from "@/lib/questions";
+import { buildSearchOrFilter, parsePage, parsePageSize } from "@/lib/questions";
 
 describe("buildSearchOrFilter", () => {
   it("combines ilike + english FTS for the default language", () => {
@@ -42,5 +42,20 @@ describe("parsePage", () => {
     expect(parsePage("2.5")).toBe(1);
     expect(parsePage("abc")).toBe(1);
     expect(parsePage(undefined)).toBe(1);
+  });
+});
+
+describe("parsePageSize", () => {
+  it("accepts only the allowed sizes", () => {
+    expect(parsePageSize("10")).toBe(10);
+    expect(parsePageSize("25")).toBe(25);
+    expect(parsePageSize("50")).toBe(50);
+  });
+
+  it("falls back to the default (25) for anything else", () => {
+    expect(parsePageSize("100")).toBe(25);
+    expect(parsePageSize("0")).toBe(25);
+    expect(parsePageSize("abc")).toBe(25);
+    expect(parsePageSize(undefined)).toBe(25);
   });
 });

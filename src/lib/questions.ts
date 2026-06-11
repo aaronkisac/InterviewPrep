@@ -135,7 +135,16 @@ export async function listQuestions(
   return _listQuestionsCached(filters);
 }
 
-export const PAGE_SIZE = 50;
+export const PAGE_SIZES = [10, 25, 50] as const;
+export type PageSize = (typeof PAGE_SIZES)[number];
+export const DEFAULT_PAGE_SIZE: PageSize = 25;
+
+export function parsePageSize(value: string | undefined): PageSize {
+  const n = Number(value);
+  return (PAGE_SIZES as readonly number[]).includes(n)
+    ? (n as PageSize)
+    : DEFAULT_PAGE_SIZE;
+}
 
 export type QuestionPage = { items: QuestionListItem[]; total: number };
 
@@ -145,9 +154,13 @@ export type QuestionPage = { items: QuestionListItem[]; total: number };
  * Cached per unique (filters, page) combination; same tag as the full list.
  */
 const _listQuestionsPageCached = unstable_cache(
-  async (filters: QuestionFilters, page: number): Promise<QuestionPage> => {
+  async (
+    filters: QuestionFilters,
+    page: number,
+    pageSize: PageSize,
+  ): Promise<QuestionPage> => {
     const supabase = createAdminClient();
-    const from = (page - 1) * PAGE_SIZE;
+    const from = (page - 1) * pageSize;
 
     let query = supabase
       .from("questions")
@@ -160,7 +173,7 @@ const _listQuestionsPageCached = unstable_cache(
       .order("topic", { ascending: true })
       .order("level", { ascending: true })
       .order("id", { ascending: true })
-      .range(from, from + PAGE_SIZE - 1);
+      .range(from, from + pageSize - 1);
 
     if (filters.topic) query = query.eq("topic", filters.topic);
     if (filters.levels && filters.levels.length > 0)
@@ -187,8 +200,9 @@ const _listQuestionsPageCached = unstable_cache(
 export async function listQuestionsPage(
   filters: QuestionFilters,
   page: number,
+  pageSize: PageSize = DEFAULT_PAGE_SIZE,
 ): Promise<QuestionPage> {
-  return _listQuestionsPageCached(filters, page);
+  return _listQuestionsPageCached(filters, page, pageSize);
 }
 
 /**
