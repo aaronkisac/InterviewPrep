@@ -52,6 +52,7 @@ export default async function QuestionsPage({
     topic: isBookmarkedTab ? undefined : parseTopic(params.topic),
     levels: parseLevels(params.levels),
     q: parseQuery(params.q),
+    lang,
   };
   const page = parsePage(params.page);
 

@@ -26,7 +26,37 @@ export type QuestionFilters = {
   topic?: Topic;
   levels?: (1 | 2 | 3 | 4 | 5)[];
   q?: string;
+  /** UI language — picks which FTS vector / question column to search. */
+  lang?: "en" | "tr";
 };
+
+/**
+ * Hybrid search filter: ILIKE substring match on the question title
+ * (catches partial words like "useEff") OR websearch full-text match on the
+ * generated tsvector (catches terms buried in answers and deep-dives).
+ * Returns a PostgREST `.or()` expression, or null for empty input.
+ * Commas/parens are stripped — they are reserved in PostgREST or-syntax.
+ */
+export function buildSearchOrFilter(
+  q: string,
+  lang: "en" | "tr" | undefined,
+): string | null {
+  const safe = q.replace(/[,()]/g, " ").replace(/\s+/g, " ").trim();
+  if (!safe) return null;
+  const pattern = `%${safe}%`;
+  if (lang === "tr") {
+    return [
+      `question_tr.ilike.${pattern}`,
+      `question.ilike.${pattern}`,
+      `search_vector_tr.wfts(simple).${safe}`,
+      `search_vector.wfts(english).${safe}`,
+    ].join(",");
+  }
+  return [
+    `question.ilike.${pattern}`,
+    `search_vector.wfts(english).${safe}`,
+  ].join(",");
+}
 
 // Topic is now dynamic — any non-empty slug is valid
 export function parseTopic(value: string | undefined): Topic | undefined {
@@ -85,7 +115,10 @@ const _listQuestionsCached = unstable_cache(
     if (filters.topic) query = query.eq("topic", filters.topic);
     if (filters.levels && filters.levels.length > 0)
       query = query.in("level", filters.levels);
-    if (filters.q) query = query.ilike("question", `%${filters.q}%`);
+    if (filters.q) {
+      const orFilter = buildSearchOrFilter(filters.q, filters.lang);
+      if (orFilter) query = query.or(orFilter);
+    }
 
     const { data, error } = await query;
     if (error) throw new Error(`Failed to load questions: ${error.message}`);
@@ -132,7 +165,10 @@ const _listQuestionsPageCached = unstable_cache(
     if (filters.topic) query = query.eq("topic", filters.topic);
     if (filters.levels && filters.levels.length > 0)
       query = query.in("level", filters.levels);
-    if (filters.q) query = query.ilike("question", `%${filters.q}%`);
+    if (filters.q) {
+      const orFilter = buildSearchOrFilter(filters.q, filters.lang);
+      if (orFilter) query = query.or(orFilter);
+    }
 
     const { data, count, error } = await query;
     // Supabase returns an error when the range starts past the last row —
