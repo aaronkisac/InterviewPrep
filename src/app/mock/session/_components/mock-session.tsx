@@ -24,6 +24,8 @@ export function MockSession({
   const i18n = i18nMockSession[lang];
   const common = i18nCommon[lang];
 
+  // Local copy so "retry missed" can re-run a subset without a server round-trip
+  const [sessionQuestions, setSessionQuestions] = useState(questions);
   const [index, setIndex] = useState(0);
   const [selected, setSelected] = useState<(string | null)[]>(() =>
     questions.map(() => null),
@@ -32,20 +34,20 @@ export function MockSession({
   const [saveError, setSaveError] = useState(false);
   const saveCalledRef = useRef(false);
 
-  const total = questions.length;
-  const current = questions[index];
+  const total = sessionQuestions.length;
+  const current = sessionQuestions[index];
 
   const score = useMemo(
-    () => (finished ? computeMockScore(questions, selected) : 0),
-    [finished, questions, selected],
+    () => (finished ? computeMockScore(sessionQuestions, selected) : 0),
+    [finished, sessionQuestions, selected],
   );
 
   useEffect(() => {
     if (!finished || saveCalledRef.current) return;
     saveCalledRef.current = true;
 
-    const questionResults = buildQuestionResults(questions, selected);
-    const topics = [...new Set(questions.map((q) => q.topic))];
+    const questionResults = buildQuestionResults(sessionQuestions, selected);
+    const topics = [...new Set(sessionQuestions.map((q) => q.topic))];
 
     void Promise.all([
       saveMockSession({
@@ -66,20 +68,35 @@ export function MockSession({
         })),
       ),
     ]).catch(() => setSaveError(true));
-  }, [finished, questions, score, selected, total]);
+  }, [finished, sessionQuestions, score, selected, total]);
 
   if (!current) return null;
+
+  function handleRetryMissed() {
+    const missed = sessionQuestions.filter((q, i) => {
+      const picked = q.options.find((o) => o.id === selected[i]);
+      return !picked?.isCorrect;
+    });
+    if (missed.length === 0) return;
+    setSessionQuestions(missed);
+    setSelected(missed.map(() => null));
+    setIndex(0);
+    setFinished(false);
+    setSaveError(false);
+    saveCalledRef.current = false; // the retry round records its own session
+  }
 
   if (finished) {
     return (
       <EndScreen
-        questions={questions}
+        questions={sessionQuestions}
         selected={selected}
         score={score}
         total={total}
         lang={lang}
         topicLabels={topicLabels}
         saveError={saveError}
+        onRetryMissed={score < total ? handleRetryMissed : undefined}
       />
     );
   }

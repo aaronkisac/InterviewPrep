@@ -21,6 +21,7 @@ export function EndScreen({
   lang,
   topicLabels,
   saveError,
+  onRetryMissed,
 }: {
   questions: MockQuestion[];
   selected: (string | null)[];
@@ -29,6 +30,7 @@ export function EndScreen({
   lang: Language;
   topicLabels: Record<string, string>;
   saveError: boolean;
+  onRetryMissed?: () => void;
 }) {
   const router = useRouter();
   const i18n = i18nMockSession[lang];
@@ -138,6 +140,15 @@ export function EndScreen({
 
       {/* Actions */}
       <div className="flex flex-wrap gap-3">
+        {onRetryMissed && missed.length > 0 && (
+          <button
+            type="button"
+            onClick={onRetryMissed}
+            className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition hover:opacity-90"
+          >
+            {i18n.retryMissed(missed.length)}
+          </button>
+        )}
         <button
           type="button"
           onClick={() => router.refresh()}
