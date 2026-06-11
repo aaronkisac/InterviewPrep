@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect, useState } from "react";
+
 import type { MockOption, MockQuestion } from "@/lib/mock-shared";
 import type { Language } from "@/lib/supabase/types";
 import { cn } from "@/lib/utils";
@@ -9,10 +11,59 @@ const OPTION_LABELS = ["A", "B", "C", "D"] as const;
 type I18n = {
   correct: string;
   notQuite: string;
+  timeUp: string;
+  timeLeft: string;
   correctAnswer: string;
   next: string;
   finish: string;
 };
+
+/**
+ * Per-question countdown. Mounted with a key per question so state resets
+ * naturally; stops ticking once the question is answered.
+ */
+function Countdown({
+  seconds,
+  active,
+  label,
+  onTimeout,
+}: {
+  seconds: number;
+  active: boolean;
+  label: string;
+  onTimeout: () => void;
+}) {
+  const [left, setLeft] = useState(seconds);
+
+  useEffect(() => {
+    if (!active || left <= 0) return;
+    const id = setTimeout(() => setLeft((l) => l - 1), 1000);
+    return () => clearTimeout(id);
+  }, [active, left]);
+
+  useEffect(() => {
+    if (left === 0 && active) onTimeout();
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- fire once when the clock hits zero
+  }, [left]);
+
+  const mm = Math.floor(left / 60);
+  const ss = String(left % 60).padStart(2, "0");
+
+  return (
+    <span
+      role="timer"
+      aria-label={`${label}: ${mm}:${ss}`}
+      className={
+        "ml-auto rounded-md border px-2 py-0.5 font-mono text-xs font-semibold tabular-nums " +
+        (left <= 10 && active
+          ? "border-rose-500/60 bg-rose-50 text-rose-700 dark:bg-rose-950/40 dark:text-rose-300"
+          : "border-border bg-secondary text-secondary-foreground")
+      }
+    >
+      {mm}:{ss}
+    </span>
+  );
+}
 
 function correctOption(question: MockQuestion): MockOption | undefined {
   return question.options.find((o) => o.isCorrect);
@@ -25,8 +76,10 @@ export function QuestionView({
   lang,
   topicLabels,
   i18n,
+  timerSeconds = 0,
   onSelect,
   onNext,
+  onTimeout,
 }: {
   question: MockQuestion;
   selectedId: string | null;
@@ -34,10 +87,13 @@ export function QuestionView({
   lang: Language;
   topicLabels: Record<string, string>;
   i18n: I18n;
+  timerSeconds?: number;
   onSelect: (optionId: string) => void;
   onNext: () => void;
+  onTimeout: () => void;
 }) {
   const isAnswered = selectedId !== null;
+  const timedOut = selectedId === "";
   const pickedOption = question.options.find((o) => o.id === selectedId);
   const answer = correctOption(question);
 
@@ -49,6 +105,15 @@ export function QuestionView({
             {topicLabels[question.topic] ?? question.topic}
           </span>
           <span className="text-muted-foreground">{question.levelLabel}</span>
+          {timerSeconds > 0 && (
+            <Countdown
+              key={question.id}
+              seconds={timerSeconds}
+              active={!isAnswered}
+              label={i18n.timeLeft}
+              onTimeout={onTimeout}
+            />
+          )}
         </div>
         <h1 className="mt-3 text-lg font-semibold leading-snug">
           {lang === "tr" && question.questionTr ? question.questionTr : question.question}
@@ -118,7 +183,11 @@ export function QuestionView({
             aria-live="polite"
           >
             <p className="font-medium">
-              {pickedOption?.isCorrect ? i18n.correct : i18n.notQuite}
+              {pickedOption?.isCorrect
+                ? i18n.correct
+                : timedOut
+                  ? i18n.timeUp
+                  : i18n.notQuite}
             </p>
             {pickedOption?.explanation && (
               <p className="mt-1">

@@ -5,6 +5,7 @@ import {
   getMockSessionQuestions,
   parseLevelOr,
   parseSessionLength,
+  parseTimerSeconds,
   parseTopicList,
 } from "@/lib/mock";
 import { listSystemTopics } from "@/lib/actions/admin-topics";
@@ -24,6 +25,7 @@ type SearchParams = Promise<{
   min?: string;
   max?: string;
   len?: string;
+  t?: string;
 }>;
 
 export default async function MockSessionPage({
@@ -37,6 +39,7 @@ export default async function MockSessionPage({
   const minLevel = parseLevelOr(params.min, 1);
   const maxLevel = parseLevelOr(params.max, 5);
   const length = parseSessionLength(params.len);
+  const timerSeconds = parseTimerSeconds(params.t);
 
   const lo = minLevel <= maxLevel ? minLevel : maxLevel;
   const hi = minLevel <= maxLevel ? maxLevel : minLevel;
@@ -176,6 +179,7 @@ export default async function MockSessionPage({
     <main className="mx-auto w-full max-w-[1200px] px-4 sm:px-6 lg:px-8 py-10">
       <MockSession
         key={sessionKey}
+        timerSeconds={timerSeconds}
         questions={combined}
         topicLabels={topicLabels}
         lang={lang}

@@ -3,6 +3,7 @@ import { describe, expect, it } from "vitest";
 import {
   parseLevelOr,
   parseSessionLength,
+  parseTimerSeconds,
   parseTopicList,
 } from "@/lib/mock-shared";
 
@@ -51,5 +52,20 @@ describe("parseSessionLength", () => {
     expect(parseSessionLength("15")).toBe(10);
     expect(parseSessionLength("abc")).toBe(10);
     expect(parseSessionLength(undefined)).toBe(10);
+  });
+});
+
+describe("parseTimerSeconds", () => {
+  it("accepts the allowed timer values", () => {
+    expect(parseTimerSeconds("30")).toBe(30);
+    expect(parseTimerSeconds("60")).toBe(60);
+    expect(parseTimerSeconds("90")).toBe(90);
+  });
+
+  it("defaults to 0 (off) for anything else", () => {
+    expect(parseTimerSeconds("45")).toBe(0);
+    expect(parseTimerSeconds("-30")).toBe(0);
+    expect(parseTimerSeconds("abc")).toBe(0);
+    expect(parseTimerSeconds(undefined)).toBe(0);
   });
 });

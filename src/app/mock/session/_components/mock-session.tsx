@@ -16,10 +16,13 @@ export function MockSession({
   questions,
   topicLabels = {},
   lang = "en",
+  timerSeconds = 0,
 }: {
   questions: MockQuestion[];
   topicLabels?: Record<string, string>;
   lang?: Language;
+  /** Per-question countdown; 0 disables the timer. */
+  timerSeconds?: number;
 }) {
   const i18n = i18nMockSession[lang];
   const common = i18nCommon[lang];
@@ -114,6 +117,17 @@ export function MockSession({
     else setIndex((i) => i + 1);
   }
 
+  // Timeout locks the question as unanswered ("" matches no option id, so
+  // scoring and the end screen treat it as incorrect / not answered).
+  function handleTimeout() {
+    setSelected((prev) => {
+      if (prev[index] !== null) return prev;
+      const next = [...prev];
+      next[index] = "";
+      return next;
+    });
+  }
+
   return (
     <div className="space-y-5">
       <ProgressBar current={index + 1} total={total} quitLabel={common.quit} questionLabel={i18n.questionOf(index + 1, total)} />
@@ -126,12 +140,16 @@ export function MockSession({
         i18n={{
           correct: i18n.correct,
           notQuite: i18n.notQuite,
+          timeUp: i18n.timeUp,
+          timeLeft: i18n.timeLeft,
           correctAnswer: i18n.correctAnswer,
           next: i18n.next,
           finish: i18n.finish,
         }}
+        timerSeconds={timerSeconds}
         onSelect={handleSelect}
         onNext={handleNext}
+        onTimeout={handleTimeout}
       />
     </div>
   );

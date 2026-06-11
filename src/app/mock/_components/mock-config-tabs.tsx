@@ -6,9 +6,11 @@ import { Lock } from "lucide-react";
 
 import {
   SESSION_LENGTHS,
+  TIMER_OPTIONS,
   type Level,
   type MockReadyMeta,
   type SessionLength,
+  type TimerSeconds,
 } from "@/lib/mock-shared";
 import { LEVELS } from "@/lib/topics";
 import { i18nMock, i18nLevels } from "@/lib/i18n";
@@ -52,6 +54,7 @@ export function MockConfigTabs({
   const [minLevel, setMinLevel] = useState<Level>(1);
   const [maxLevel, setMaxLevel] = useState<Level>(5);
   const [length, setLength] = useState<SessionLength>(10);
+  const [timer, setTimer] = useState<TimerSeconds>(0);
   const [isStarting, setIsStarting] = useState(false);
 
   // ── Mock tab state ───────────────────────────────────────────────────────────
@@ -131,6 +134,7 @@ export function MockConfigTabs({
         max: String(maxLevel),
         len: String(length),
       });
+      if (timer > 0) params.set("t", String(timer));
       router.push(`/mock/session?${params.toString()}`);
     } else {
       if (flashSelected.size === 0) { setIsStarting(false); return; }
@@ -365,6 +369,39 @@ export function MockConfigTabs({
             })}
           </div>
         </fieldset>
+
+        {/* ── Timer (mock only) ── */}
+        {isMock && (
+          <fieldset className="space-y-3">
+            <legend className="text-sm font-medium">{i18n.timerPerQuestion}</legend>
+            <div className="inline-flex overflow-hidden rounded-md border border-input">
+              {TIMER_OPTIONS.map((t) => {
+                const checked = timer === t;
+                return (
+                  <label
+                    key={t}
+                    className={cn(
+                      "cursor-pointer px-4 py-1.5 text-sm font-medium transition",
+                      checked
+                        ? "bg-foreground text-background"
+                        : "bg-background text-foreground hover:bg-accent",
+                    )}
+                  >
+                    <input
+                      type="radio"
+                      name="timer"
+                      value={t}
+                      checked={checked}
+                      onChange={() => setTimer(t)}
+                      className="sr-only"
+                    />
+                    {t === 0 ? i18n.timerOff : `${t}s`}
+                  </label>
+                );
+              })}
+            </div>
+          </fieldset>
+        )}
 
         {/* ── Start ── */}
         <div className="border-t border-border pt-4">

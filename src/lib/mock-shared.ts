@@ -7,6 +7,17 @@ import type { Topic } from "@/lib/supabase/types";
 export const SESSION_LENGTHS = [5, 10, 20] as const;
 export type SessionLength = (typeof SESSION_LENGTHS)[number];
 
+/** Per-question countdown options in seconds. 0 = no timer. */
+export const TIMER_OPTIONS = [0, 30, 60, 90] as const;
+export type TimerSeconds = (typeof TIMER_OPTIONS)[number];
+
+export function parseTimerSeconds(value: string | undefined): TimerSeconds {
+  const n = Number(value);
+  return (TIMER_OPTIONS as readonly number[]).includes(n)
+    ? (n as TimerSeconds)
+    : 0;
+}
+
 export type Level = 1 | 2 | 3 | 4 | 5;
 
 export type MockOption = {
