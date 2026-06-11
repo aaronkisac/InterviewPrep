@@ -1,6 +1,6 @@
 # Progress
 
-Last updated: 2026-06-11 (P2 pagination + cache tags)
+Last updated: 2026-06-11 (P2 full-text search)
 
 ---
 
@@ -82,6 +82,7 @@ Last updated: 2026-06-11 (P2 pagination + cache tags)
 | P0 hygiene + security headers | Removed stray `_tmp_` files, fixed `.gitignore`, security headers + `poweredByHeader:false` in `next.config.ts`. Added `DEVELOPMENT_PLAN.md` (prioritized plan) + `DEPLOY.md` (prod deploy checklist). |
 | P1 resilience + unit tests | Root `error.tsx`/`global-error.tsx`/`not-found.tsx` (EN/TR). Vitest + 5 unit suites (`src/lib/__tests__`). CI `checks` job (lint+typegen+typecheck+unit) gates e2e. `lang-toggle.spec.ts` e2e. Lint script → `eslint .`. Typecheck fixes in `db-seed.spec.ts`. |
 | P2 pagination + cache tags | `/questions` DB-level pagination (50/sayfa, `listQuestionsPage`, stable ordering). Guest level filter pushed into query. `Pagination` component (EN/TR). All question caches tagged `questions`; approve/reject/delete/import actions call `revalidateTag`. Pagination e2e specs. |
+| P2 full-text search | Migration `20260611000001_full_text_search.sql` (generated tsvector EN+TR, GIN). Hybrid search in `listQuestions`/`listQuestionsPage`: title ILIKE OR `wfts` on vector. `buildSearchOrFilter` + unit tests. **Needs `supabase db push`.** |
 
 ---
 
