@@ -358,3 +358,42 @@ export async function getDueReviews(
   }
   return [...byQuestion.values()];
 }
+
+// ============================================================================
+// Dashboard: score trend
+// ============================================================================
+
+export type SessionTrendPoint = {
+  pct: number;
+  score: number;
+  total: number;
+  createdAt: string;
+};
+
+/** Last `limit` mock sessions as chart points, oldest first. */
+export async function getSessionTrend(
+  userId: string,
+  limit = 30,
+): Promise<SessionTrendPoint[]> {
+  const sb = createAdminClient();
+  const { data, error } = await sb
+    .from("mock_sessions")
+    .select("score, total, created_at")
+    .eq("user_id", userId)
+    .order("created_at", { ascending: false })
+    .limit(limit);
+
+  if (error) {
+    console.error("[getSessionTrend]", error.message);
+    return [];
+  }
+
+  return (data ?? [])
+    .reverse()
+    .map((s) => ({
+      score: s.score as number,
+      total: s.total as number,
+      pct: Math.round(((s.score as number) / Math.max(s.total as number, 1)) * 100),
+      createdAt: s.created_at as string,
+    }));
+}

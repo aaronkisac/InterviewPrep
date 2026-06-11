@@ -164,6 +164,7 @@ export const i18nDashboard = {
     questionsAnswered: "Questions answered",
     questionsCount: (n: number) => `${n} question${n === 1 ? "" : "s"}`,
     reviewAllCaughtUp: "All caught up — nothing due for review.",
+    scoreTrend: (n: number) => `Score trend — last ${n} sessions`,
     reviewDueCount: (n: number) =>
       `${n} question${n === 1 ? "" : "s"} due for review`,
     reviewStart: "Start review →",
@@ -204,6 +205,7 @@ export const i18nDashboard = {
     questionsCount: (n: number) => `${n} soru`,
     rejected: "Reddedildi",
     reviewAllCaughtUp: "Hepsi tamam — tekrarı gelen soru yok.",
+    scoreTrend: (n: number) => `Skor eğilimi — son ${n} oturum`,
     reviewDueCount: (n: number) => `${n} soru tekrar için hazır`,
     reviewStart: "Tekrara başla →",
     reviewTitle: "Aralıklı tekrar",

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 
 import { auth } from "@/lib/auth";
-import { getDashboardData, getDueReviews } from "@/lib/actions/user-tracking";
+import { getDashboardData, getDueReviews, getSessionTrend } from "@/lib/actions/user-tracking";
 import { getUserSubmissions } from "@/lib/actions/questions";
 import { listTopicsWithQuestions } from "@/lib/actions/custom-topics";
 import { listSystemTopics } from "@/lib/actions/admin-topics";
@@ -12,6 +12,7 @@ import { i18nDashboard } from "@/lib/i18n";
 import { DeleteSubmissionButton } from "@/app/dashboard/_components/delete-submission-button";
 import { GradeChip } from "@/app/dashboard/_components/grade-chip";
 import { MyTopicsSection } from "@/app/dashboard/_components/my-topics/my-topics-section";
+import { ProgressChart } from "@/app/dashboard/_components/progress-chart";
 import { StatusChip } from "@/app/dashboard/_components/status-chip";
 import { getGrade } from "@/lib/grade";
 import { formatDate } from "@/lib/format-date";
@@ -26,12 +27,13 @@ export default async function DashboardPage() {
   const lang = await getLang();
   const i18n = i18nDashboard[lang];
 
-  const [data, submissions, { topics: customTopics, questionsMap }, systemTopics, dueReviews] = await Promise.all([
+  const [data, submissions, { topics: customTopics, questionsMap }, systemTopics, dueReviews, sessionTrend] = await Promise.all([
     getDashboardData(),
     getUserSubmissions(),
     listTopicsWithQuestions(),
     listSystemTopics(),
     getDueReviews(session.user.id),
+    getSessionTrend(session.user.id),
   ]);
   const dueCount = dueReviews.length;
   const topicLabels = Object.fromEntries(systemTopics.map((t) => [t.slug, t.name]));
@@ -93,6 +95,20 @@ export default async function DashboardPage() {
           </Link>
         )}
       </section>
+
+      {/* Score trend */}
+      {sessionTrend.length >= 2 && (
+        <section>
+          <h2 className="mb-3 text-sm font-medium text-muted-foreground">
+            {i18n.scoreTrend(sessionTrend.length)}
+          </h2>
+          <ProgressChart
+            trend={sessionTrend}
+            lang={lang}
+            ariaLabel={i18n.scoreTrend(sessionTrend.length)}
+          />
+        </section>
+      )}
 
       {/* Topic progress */}
       {data && data.topicProgress.length > 0 && (
