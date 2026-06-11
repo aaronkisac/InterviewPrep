@@ -126,7 +126,7 @@ export default async function GlossaryPage({
                       <span className="text-sm font-medium">{term.label}</span>
                       {showTopicBadge && (
                         <span className="flex-shrink-0 rounded border border-border bg-secondary px-1.5 py-0.5 text-[10px] font-medium text-secondary-foreground">
-                          {topicLabelMap[term.topic] ?? term.topic}
+                          {topicLabelMap[term.topic ?? "general"] ?? term.topic ?? i18n.general}
                         </span>
                       )}
                     </span>
