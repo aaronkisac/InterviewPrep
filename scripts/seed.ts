@@ -78,7 +78,8 @@ function getEnv(name: string): string {
  * retried; only thrown fetch-level errors are.
  */
 async function withRetry<T>(
-  fn: () => Promise<T>,
+  // PromiseLike, not Promise: supabase query builders are thenables
+  fn: () => PromiseLike<T>,
   label: string,
   attempts = 4,
 ): Promise<T> {
