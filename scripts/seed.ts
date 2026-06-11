@@ -71,6 +71,34 @@ function getEnv(name: string): string {
   return v;
 }
 
+/**
+ * Retry transient network failures (undici "fetch failed", ECONNRESET).
+ * The seed run makes ~1800 sequential requests — a single blip should not
+ * kill the whole run. Supabase API errors (returned, not thrown) are not
+ * retried; only thrown fetch-level errors are.
+ */
+async function withRetry<T>(
+  fn: () => Promise<T>,
+  label: string,
+  attempts = 4,
+): Promise<T> {
+  let lastErr: unknown;
+  for (let i = 1; i <= attempts; i++) {
+    try {
+      return await fn();
+    } catch (err) {
+      lastErr = err;
+      if (i === attempts) break;
+      const wait = i * 1500;
+      console.warn(
+        `  retry ${label} (attempt ${i}/${attempts}) in ${wait}ms — ${String(err)}`,
+      );
+      await new Promise((r) => setTimeout(r, wait));
+    }
+  }
+  throw lastErr;
+}
+
 async function loadSeedFile(file: string): Promise<SeedQuestion[]> {
   const filePath = path.join(process.cwd(), "data", file);
   let raw: string;
@@ -353,12 +381,16 @@ async function seedMockOptions(
       );
     }
 
-    const { data: question, error: lookupError } = await supabase
-      .from("questions")
-      .select("id")
-      .eq("topic", entry.topic)
-      .eq("question", entry.question.trim())
-      .maybeSingle();
+    const { data: question, error: lookupError } = await withRetry(
+      () =>
+        supabase
+          .from("questions")
+          .select("id")
+          .eq("topic", entry.topic)
+          .eq("question", entry.question.trim())
+          .maybeSingle(),
+      "question lookup",
+    );
 
     if (lookupError) {
       throw new Error(
@@ -374,10 +406,10 @@ async function seedMockOptions(
     }
 
     // Replace existing options so repeated seed runs stay idempotent.
-    const { error: deleteError } = await supabase
-      .from("mock_options")
-      .delete()
-      .eq("question_id", question.id);
+    const { error: deleteError } = await withRetry(
+      () => supabase.from("mock_options").delete().eq("question_id", question.id),
+      "options delete",
+    );
     if (deleteError) throw new Error(deleteError.message);
 
     const rows = entry.options.map((o) => ({
@@ -388,9 +420,10 @@ async function seedMockOptions(
       explanation: o.explanation.trim(),
       explanation_tr: o.explanationTr?.trim() ?? "",
     }));
-    const { error: insertError } = await supabase
-      .from("mock_options")
-      .insert(rows);
+    const { error: insertError } = await withRetry(
+      () => supabase.from("mock_options").insert(rows),
+      "options insert",
+    );
     if (insertError) throw new Error(insertError.message);
 
     questionsCovered += 1;
