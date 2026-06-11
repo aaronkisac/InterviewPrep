@@ -9,6 +9,10 @@ import { listSystemTopics } from "@/lib/actions/admin-topics";
 
 export const dynamic = "force-dynamic";
 
+export const metadata = {
+  alternates: { canonical: "/" },
+};
+
 export default async function HomePage() {
   const session = await auth().catch(() => null);
   const user = session?.user;

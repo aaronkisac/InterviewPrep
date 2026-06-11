@@ -15,6 +15,11 @@ import { TooltipDemo } from "./_components/tooltip-demo";
 
 export const dynamic = "force-dynamic";
 
+export const metadata = {
+  title: "Glossary",
+  robots: { index: false, follow: false },
+};
+
 type SearchParams = Promise<{ topic?: string; q?: string; page?: string; per?: string }>;
 
 export default async function GlossaryPage({

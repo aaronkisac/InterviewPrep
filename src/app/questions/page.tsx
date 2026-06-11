@@ -27,6 +27,13 @@ import { TermsProvider } from "./_components/terms-context";
 
 export const dynamic = "force-dynamic";
 
+export const metadata = {
+  title: "Questions",
+  description:
+    "Browse 600+ frontend interview questions across React, TypeScript, Next.js and more — filterable by topic, level and full-text search.",
+  alternates: { canonical: "/questions" },
+};
+
 type SearchParams = Promise<{
   topic?: string;
   mytopic?: string;

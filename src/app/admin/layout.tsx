@@ -6,6 +6,11 @@ import { NavLink } from "@/components/nav-link";
 import { getLang } from "@/lib/lang";
 import { i18nAdmin } from "@/lib/i18n";
 
+export const metadata = {
+  title: "Admin",
+  robots: { index: false, follow: false },
+};
+
 async function getRole(userId: string): Promise<string | null> {
   const sb = createAdminClient();
   const { data } = await sb

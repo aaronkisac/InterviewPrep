@@ -20,6 +20,11 @@ import { cn } from "@/lib/utils";
 
 export const dynamic = "force-dynamic";
 
+export const metadata = {
+  title: "Dashboard",
+  robots: { index: false, follow: false },
+};
+
 export default async function DashboardPage() {
   const session = await auth().catch(() => null);
   if (!session?.user?.id) redirect("/signin");

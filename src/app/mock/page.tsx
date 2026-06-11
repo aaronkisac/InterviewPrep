@@ -11,6 +11,11 @@ import { MockConfigTabs, type TopicEntry, type TopicStats } from "./_components/
 
 export const dynamic = "force-dynamic";
 
+export const metadata = {
+  title: "Mock interview",
+  robots: { index: false, follow: false },
+};
+
 export default async function MockPage() {
   const session = await auth().catch(() => null);
   const userId = session?.user?.id;

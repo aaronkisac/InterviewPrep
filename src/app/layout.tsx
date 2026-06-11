@@ -7,6 +7,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { COLOR_THEME_STORAGE_KEY, DEFAULT_COLOR_THEME } from "@/lib/themes";
 import { LangProvider } from "@/contexts/lang-context";
 import { getLang } from "@/lib/lang";
+import { getSiteUrl, SITE_DESCRIPTION, SITE_NAME } from "@/lib/site";
 
 const libreBaskerville = Libre_Baskerville({
   subsets: ["latin"],
@@ -23,9 +24,40 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Interview Prep",
-  description:
-    "Personal interview prep across React, TypeScript, and Next.js — Q&A, glossary, mock sessions.",
+  metadataBase: new URL(getSiteUrl()),
+  title: {
+    default: SITE_NAME,
+    template: `%s · ${SITE_NAME}`,
+  },
+  description: SITE_DESCRIPTION,
+  applicationName: SITE_NAME,
+  keywords: [
+    "frontend interview questions",
+    "react interview questions",
+    "typescript interview questions",
+    "next.js interview questions",
+    "javascript interview prep",
+    "mock interview",
+    "mülakat soruları",
+  ],
+  openGraph: {
+    type: "website",
+    siteName: SITE_NAME,
+    title: SITE_NAME,
+    description: SITE_DESCRIPTION,
+    url: "/",
+    locale: "en_GB",
+    alternateLocale: "tr_TR",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_NAME,
+    description: SITE_DESCRIPTION,
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default async function RootLayout({
@@ -34,7 +66,7 @@ export default async function RootLayout({
   const lang = await getLang();
   return (
     <html
-      lang="en"
+      lang={lang === "tr" ? "tr" : "en"}
       className={`h-full antialiased ${libreBaskerville.variable} ${inter.variable}`}
       suppressHydrationWarning
     >
@@ -47,6 +79,19 @@ export default async function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col bg-background text-foreground">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              name: SITE_NAME,
+              description: SITE_DESCRIPTION,
+              url: getSiteUrl(),
+              inLanguage: ["en", "tr"],
+            }),
+          }}
+        />
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-primary-foreground"
