@@ -22,7 +22,9 @@ function pickAnswer(
   if (lang === "tr") {
     return {
       general: question.answer_general_tr || TR_FALLBACK,
-      personal: question.answer_personal_tr,
+      // Personal answers are authored in EN first — fall back so they
+      // don't disappear in Turkish mode.
+      personal: question.answer_personal_tr || question.answer_personal,
       isFallback: !question.answer_general_tr,
     };
   }

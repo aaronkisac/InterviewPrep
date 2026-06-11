@@ -48,7 +48,9 @@ export default async function QuestionDetailPage({
     lang === "tr" ? question.detail_md_tr : question.detail_md;
 
   const personal =
-    lang === "tr" ? question.answer_personal_tr : question.answer_personal;
+    lang === "tr"
+      ? question.answer_personal_tr || question.answer_personal
+      : question.answer_personal;
 
   const i18n = i18nQuestionDetail[lang];
 
