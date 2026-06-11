@@ -1,6 +1,6 @@
 # Progress
 
-Last updated: 2026-06-11 (P3 dashboard score trend)
+Last updated: 2026-06-11 (answerPersonal React pass 1)
 
 ---
 
@@ -89,6 +89,7 @@ Last updated: 2026-06-11 (P3 dashboard score trend)
 | P3 mock timer | Optional per-question countdown (Off/30/60/90s) in mock config (`?t=`). `Countdown` in QuestionView (keyed per question, red <10s, `role=timer`). Timeout = unanswered via `""` sentinel + "Time's up!" feedback. |
 | Topic badges + glossary pagination | `/questions` All tab shows topic badge per card. `/glossary` All view flattened (stable section order) with topic badges + pagination (`?page=/?per=`). `Pagination`/`PageSizeSelect` generalized to `src/components/` with `basePath`. |
 | P3 dashboard score trend | `getSessionTrend` (son 30 oturum) + `ProgressChart` — bağımlılıksız, grade renkli bar chart, native tooltip, `role=img`. 2+ oturumda görünür. |
+| P3 answerPersonal (React pass 1) | 10 React questions (206, 214, 217, 227, 228, 234, 242, 244, 245, 248) — first-person EN answers from real proof points. TR + remaining topics (hooks, TS, Next.js, testing, HTML5/a11y) pending. **Needs `pnpm seed`.** |
 
 ---
 
