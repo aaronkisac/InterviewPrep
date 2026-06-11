@@ -1,6 +1,7 @@
 "use server";
 
 import { auth } from "@/lib/auth";
+import { nextBox, nextDueAt } from "@/lib/leitner";
 import { createAdminClient } from "@/lib/supabase/admin";
 import type { Topic } from "@/lib/supabase/types";
 
@@ -122,7 +123,9 @@ export type MasteryRow = {
 };
 
 /**
- * Upsert mastery rows after a session finishes.
+ * Upsert mastery rows after a session finishes, with Leitner scheduling:
+ * correct answer promotes the question one box (max 5, longer interval),
+ * wrong answer demotes it to box 1 (due immediately).
  * mode: 'mock' | 'flashcard'
  * rows: one entry per question answered
  */
@@ -136,16 +139,34 @@ export async function saveTopicMastery(
 
   const userId = session.user.id;
   const sb = createAdminClient();
-  const now = new Date().toISOString();
+  const nowDate = new Date();
+  const now = nowDate.toISOString();
 
-  const upsertRows = rows.map((r) => ({
-    user_id: userId,
-    question_id: r.questionId,
-    topic: r.topic,
-    mode,
-    mastered: r.mastered,
-    updated_at: now,
-  }));
+  // Current boxes for the answered questions (missing row = new = box 0)
+  const { data: existing } = await sb
+    .from("user_topic_mastery")
+    .select("question_id, box")
+    .eq("user_id", userId)
+    .eq("mode", mode)
+    .in("question_id", rows.map((r) => r.questionId));
+
+  const currentBox = new Map<string, number>(
+    (existing ?? []).map((r) => [r.question_id as string, (r.box as number) ?? 1]),
+  );
+
+  const upsertRows = rows.map((r) => {
+    const box = nextBox(currentBox.get(r.questionId), r.mastered);
+    return {
+      user_id: userId,
+      question_id: r.questionId,
+      topic: r.topic,
+      mode,
+      mastered: r.mastered,
+      box,
+      due_at: nextDueAt(box, nowDate),
+      updated_at: now,
+    };
+  });
 
   // Only upgrade mastered: true → keep existing true if already set.
   // We use a raw upsert; "mastered" is set to the new value so a correct
@@ -285,4 +306,55 @@ export async function getDashboardData(): Promise<DashboardData | null> {
     topicProgress,
     bookmarkCount: bookmarkResult.count ?? 0,
   };
+}
+
+// ============================================================================
+// Spaced repetition: review queue
+// ============================================================================
+
+export type DueReview = {
+  questionId: string;
+  topic: string;
+  box: number;
+  dueAt: string;
+};
+
+/**
+ * Questions due for review (due_at <= now), earliest first.
+ * Custom-topic questions are excluded for now — the review session renders
+ * system question content only. Rows existing in both modes are deduped to
+ * the earliest due date.
+ */
+export async function getDueReviews(
+  userId: string,
+  limit = 200,
+): Promise<DueReview[]> {
+  const sb = createAdminClient();
+  const { data, error } = await sb
+    .from("user_topic_mastery")
+    .select("question_id, topic, box, due_at")
+    .eq("user_id", userId)
+    .lte("due_at", new Date().toISOString())
+    .not("topic", "like", "custom:%")
+    .order("due_at", { ascending: true })
+    .limit(limit);
+
+  if (error) {
+    console.error("[getDueReviews]", error.message);
+    return [];
+  }
+
+  const byQuestion = new Map<string, DueReview>();
+  for (const row of data ?? []) {
+    const id = row.question_id as string;
+    if (!byQuestion.has(id)) {
+      byQuestion.set(id, {
+        questionId: id,
+        topic: row.topic as string,
+        box: (row.box as number) ?? 1,
+        dueAt: row.due_at as string,
+      });
+    }
+  }
+  return [...byQuestion.values()];
 }

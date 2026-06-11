@@ -2,7 +2,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 
 import { auth } from "@/lib/auth";
-import { getDashboardData } from "@/lib/actions/user-tracking";
+import { getDashboardData, getDueReviews } from "@/lib/actions/user-tracking";
 import { getUserSubmissions } from "@/lib/actions/questions";
 import { listTopicsWithQuestions } from "@/lib/actions/custom-topics";
 import { listSystemTopics } from "@/lib/actions/admin-topics";
@@ -21,17 +21,19 @@ export const dynamic = "force-dynamic";
 
 export default async function DashboardPage() {
   const session = await auth().catch(() => null);
-  if (!session?.user) redirect("/signin");
+  if (!session?.user?.id) redirect("/signin");
 
   const lang = await getLang();
   const i18n = i18nDashboard[lang];
 
-  const [data, submissions, { topics: customTopics, questionsMap }, systemTopics] = await Promise.all([
+  const [data, submissions, { topics: customTopics, questionsMap }, systemTopics, dueReviews] = await Promise.all([
     getDashboardData(),
     getUserSubmissions(),
     listTopicsWithQuestions(),
     listSystemTopics(),
+    getDueReviews(session.user.id),
   ]);
+  const dueCount = dueReviews.length;
   const topicLabels = Object.fromEntries(systemTopics.map((t) => [t.slug, t.name]));
 
   return (
@@ -64,6 +66,33 @@ export default async function DashboardPage() {
           <p className="mt-1 text-xs text-muted-foreground">{i18n.bookmarks}</p>
         </div>
       </div>
+
+      {/* Spaced repetition */}
+      <section
+        className={cn(
+          "flex items-center justify-between gap-4 rounded-lg border px-4 py-3",
+          dueCount > 0
+            ? "border-sky-500/30 bg-sky-500/10"
+            : "border-border bg-card",
+        )}
+      >
+        <div>
+          <p className="text-sm font-medium">{i18n.reviewTitle}</p>
+          <p className="mt-0.5 text-xs text-muted-foreground">
+            {dueCount > 0
+              ? i18n.reviewDueCount(dueCount)
+              : i18n.reviewAllCaughtUp}
+          </p>
+        </div>
+        {dueCount > 0 && (
+          <Link
+            href="/mock/review"
+            className="flex-shrink-0 rounded-md bg-primary px-3 py-1.5 text-xs font-semibold text-primary-foreground hover:opacity-90"
+          >
+            {i18n.reviewStart}
+          </Link>
+        )}
+      </section>
 
       {/* Topic progress */}
       {data && data.topicProgress.length > 0 && (

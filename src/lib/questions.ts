@@ -235,6 +235,27 @@ export const getTopicStats = unstable_cache(
 );
 
 /**
+ * Uncached bulk fetch by ids — used by the per-user review session, where
+ * the id set differs per user and caching would only pollute the store.
+ */
+export async function getQuestionsByIds(
+  ids: string[],
+): Promise<QuestionListItem[]> {
+  if (ids.length === 0) return [];
+  const supabase = createAdminClient();
+  const { data, error } = await supabase
+    .from("questions")
+    .select(
+      "id, topic, level, level_label, question, question_tr, answer_general, answer_personal, answer_general_tr, answer_personal_tr",
+    )
+    .eq("status", "active")
+    .in("id", ids);
+
+  if (error) throw new Error(`Failed to load questions: ${error.message}`);
+  return (data ?? []) as QuestionListItem[];
+}
+
+/**
  * Cached for 1 hour — question detail is public and rarely changes.
  */
 export const getQuestionById = unstable_cache(
