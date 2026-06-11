@@ -3,6 +3,13 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import {
+  BookOpen,
+  LayoutDashboard,
+  ListChecks,
+  MessageSquare,
+  Shield,
+} from "lucide-react";
 
 interface MobileNavProps {
   user: { name?: string | null; email?: string | null } | undefined;
@@ -44,7 +51,7 @@ export function MobileNav({ user, isAdmin, signOutAction }: MobileNavProps) {
   }, [open]);
 
   const linkClass =
-    "block rounded-md px-3 py-2 text-sm text-foreground transition-colors hover:bg-accent/60";
+    "flex items-center gap-2 rounded-md px-3 py-2 text-sm text-foreground transition-colors hover:bg-accent/60";
 
   return (
     <div className="relative min-[800px]:hidden" ref={menuRef}>
@@ -71,14 +78,28 @@ export function MobileNav({ user, isAdmin, signOutAction }: MobileNavProps) {
 
       {open && (
         <div className="absolute right-0 top-full mt-2 w-48 rounded-md border border-border bg-card p-1 shadow-md">
-          <Link href="/questions" className={linkClass}>Questions</Link>
-          {user && <Link href="/mock" className={linkClass}>Mock</Link>}
-          {user && <Link href="/glossary" className={linkClass}>Glossary</Link>}
+          <Link href="/questions" className={linkClass}>
+            <ListChecks className="size-4" aria-hidden="true" />
+            Questions
+          </Link>
+          {user && (
+            <Link href="/mock" className={linkClass}>
+              <MessageSquare className="size-4" aria-hidden="true" />
+              Mock
+            </Link>
+          )}
+          {user && (
+            <Link href="/glossary" className={linkClass}>
+              <BookOpen className="size-4" aria-hidden="true" />
+              Glossary
+            </Link>
+          )}
           {isAdmin && (
             <Link
               href="/admin/questions"
               className={`${linkClass} text-violet-600 dark:text-violet-400`}
             >
+              <Shield className="size-4" aria-hidden="true" />
               Admin
             </Link>
           )}
@@ -87,7 +108,10 @@ export function MobileNav({ user, isAdmin, signOutAction }: MobileNavProps) {
 
           {user ? (
             <>
-              <Link href="/dashboard" className={linkClass}>Dashboard</Link>
+              <Link href="/dashboard" className={linkClass}>
+                <LayoutDashboard className="size-4" aria-hidden="true" />
+                Dashboard
+              </Link>
               {signOutAction && (
                 <form action={signOutAction}>
                   <button

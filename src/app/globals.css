@@ -322,6 +322,44 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+::selection {
+  background: color-mix(in srgb, var(--primary) 28%, transparent);
+}
+
+:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+/* ================================================================== */
+/* Polish utilities                                                     */
+/* ================================================================== */
+
+/* Subtle lift on hover for interactive cards. Theme-aware shadow via   */
+/* color-mix so it works on both light and dark palettes.               */
+.card-lift {
+  transition:
+    border-color 150ms ease,
+    box-shadow 150ms ease,
+    transform 150ms ease;
+}
+
+.card-lift:hover {
+  border-color: color-mix(in srgb, var(--foreground) 25%, var(--border));
+  box-shadow:
+    0 1px 2px color-mix(in srgb, var(--foreground) 6%, transparent),
+    0 6px 18px -6px color-mix(in srgb, var(--foreground) 14%, transparent);
+  transform: translateY(-2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-lift,
+  .card-lift:hover {
+    transition: none;
+    transform: none;
+  }
+}
+
 /* ================================================================== */
 /* Highlight.js                                                         */
 /* ================================================================== */

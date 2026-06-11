@@ -65,7 +65,7 @@ export function QuestionCard({
   const card = i18nQuestionCard[lang];
 
   return (
-    <li className="rounded-lg border border-border bg-background transition hover:border-foreground/30">
+    <li className="rounded-lg border border-border bg-background transition hover:border-foreground/30 hover:shadow-[0_2px_10px_-4px_color-mix(in_srgb,var(--foreground)_15%,transparent)]">
       {/* ── Collapsed row ── */}
       <div className="flex w-full items-center gap-2 px-3 py-2.5 sm:gap-3 sm:px-4">
         {/* sequential number */}

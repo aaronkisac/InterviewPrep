@@ -8,6 +8,14 @@ import { NavLink } from "@/components/nav-link";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { ThemeSelector } from "@/components/theme-selector";
 import { MobileNav } from "@/components/mobile-nav";
+import { Logo } from "@/components/logo";
+import {
+  BookOpen,
+  LayoutDashboard,
+  ListChecks,
+  MessageSquare,
+  Shield,
+} from "lucide-react";
 import { LangToggle } from "@/components/lang-toggle";
 
 export async function Navbar() {
@@ -42,21 +50,36 @@ export async function Navbar() {
         {/* Brand */}
         <Link
           href="/"
-          className="mr-4 shrink-0 text-sm font-semibold tracking-tight"
+          className="mr-4 flex shrink-0 items-center gap-2 text-sm font-semibold tracking-tight"
         >
+          <Logo size={20} />
           Interview Prep
         </Link>
 
         {/* Desktop nav — hidden below 800px */}
         <div className="hidden min-[800px]:flex items-center gap-1">
-          <NavLink href="/questions">{nav.questions}</NavLink>
-          {user && <NavLink href="/mock">{nav.mock}</NavLink>}
-          {user && <NavLink href="/glossary">{nav.glossary}</NavLink>}
+          <NavLink href="/questions">
+            <ListChecks className="size-4" aria-hidden="true" />
+            {nav.questions}
+          </NavLink>
+          {user && (
+            <NavLink href="/mock">
+              <MessageSquare className="size-4" aria-hidden="true" />
+              {nav.mock}
+            </NavLink>
+          )}
+          {user && (
+            <NavLink href="/glossary">
+              <BookOpen className="size-4" aria-hidden="true" />
+              {nav.glossary}
+            </NavLink>
+          )}
           {isAdmin && (
             <NavLink
               href="/admin/questions"
               className="text-violet-600 hover:text-violet-700 dark:text-violet-400"
             >
+              <Shield className="size-4" aria-hidden="true" />
               {nav.admin}
             </NavLink>
           )}
@@ -76,6 +99,7 @@ export async function Navbar() {
         {user ? (
           <div className="hidden min-[800px]:flex items-center gap-1">
             <NavLink href="/dashboard" exact>
+              <LayoutDashboard className="size-4" aria-hidden="true" />
               {nav.dashboard}
             </NavLink>
             <form action={handleSignOut}>

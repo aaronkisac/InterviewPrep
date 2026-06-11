@@ -2,10 +2,11 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { useTransition } from "react";
-import { Lock } from "lucide-react";
+import { Bookmark, Lock, type LucideIcon } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { i18nQuestions } from "@/lib/i18n";
+import { getTopicIcon } from "@/lib/topic-icons";
 import type { Language } from "@/lib/supabase/types";
 
 function Tab({
@@ -15,6 +16,7 @@ function Tab({
   isPrivate,
   onClick,
   extraClass,
+  icon: Icon,
 }: {
   label: string;
   isActive: boolean;
@@ -22,6 +24,7 @@ function Tab({
   isPrivate?: boolean;
   onClick: () => void;
   extraClass?: string;
+  icon?: LucideIcon;
 }) {
   return (
     <button
@@ -52,6 +55,11 @@ function Tab({
       {isPrivate ? (
         <span className="flex items-center gap-1">
           <Lock className="size-2.5" />
+          {label}
+        </span>
+      ) : Icon ? (
+        <span className="flex items-center gap-1.5">
+          <Icon className="size-3 sm:size-3.5 shrink-0" aria-hidden="true" />
           {label}
         </span>
       ) : (
@@ -104,9 +112,21 @@ export function TopicTabs({
     });
   }
 
-  const allTab = { value: "", label: i18n.tabAll };
-  const bookmarkTab = { value: "bookmarked", label: i18n.tabBookmarked };
-  const topicTabs = topics.map((t) => ({ value: t.slug, label: t.name }));
+  const allTab = {
+    value: "",
+    label: i18n.tabAll,
+    icon: undefined as LucideIcon | undefined,
+  };
+  const bookmarkTab = {
+    value: "bookmarked",
+    label: i18n.tabBookmarked,
+    icon: Bookmark as LucideIcon | undefined,
+  };
+  const topicTabs = topics.map((t) => ({
+    value: t.slug,
+    label: t.name,
+    icon: getTopicIcon(t.slug) as LucideIcon | undefined,
+  }));
   const myTopicTabs = customTopics.map((t) => ({ value: t.slug, label: t.name }));
 
   const activeTopicTab = topicTabs.find((t) => t.value === currentTopic);
@@ -131,6 +151,7 @@ export function TopicTabs({
           <Tab
             key={`mob-${tab.value}`}
             label={tab.label}
+            icon={tab.icon}
             isActive={currentTopic === tab.value && currentMyTopic === ""}
             isBookmark={tab.value === "bookmarked"}
             onClick={() => selectTopic(tab.value)}
@@ -156,6 +177,7 @@ export function TopicTabs({
           <Tab
             key={tab.value}
             label={tab.label}
+            icon={tab.icon}
             isActive={currentTopic === tab.value && currentMyTopic === ""}
             isBookmark={tab.value === "bookmarked"}
             onClick={() => selectTopic(tab.value)}

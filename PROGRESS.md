@@ -90,6 +90,9 @@ Last updated: 2026-06-11 (answerPersonal pass 2)
 | Topic badges + glossary pagination | `/questions` All tab shows topic badge per card. `/glossary` All view flattened (stable section order) with topic badges + pagination (`?page=/?per=`). `Pagination`/`PageSizeSelect` generalized to `src/components/` with `basePath`. |
 | P3 dashboard score trend | `getSessionTrend` (son 30 oturum) + `ProgressChart` — bağımlılıksız, grade renkli bar chart, native tooltip, `role=img`. 2+ oturumda görünür. |
 | P3 answerPersonal (pass 1+2) | 26 questions: React (206, 214, 217, 227, 228, 234, 242, 244, 245, 248), Next.js (309, 310, 312, 315, 319), Hooks (808, 814, 816, 817), Testing (1205, 1208, 1209, 1214), HTML5 (601, 622, 642). EN, IC voice, real proof points. TR + TS/JS topics pending. **Needs `pnpm seed`.** |
+| UI polish pass | globals.css: `card-lift` hover-elevation utility (theme-aware via color-mix, reduced-motion safe), global `:focus-visible` ring, `::selection` tint. Homepage: gradient headline, CTA active-scale, card-lift on feature/topic cards. QuestionCard subtle hover shadow. Navbar "ip" brand mark. |
+| Topic + nav icons | `src/lib/topic-icons.ts` — slug→Lucide map (15 topics, BookOpen fallback for custom/unknown). Homepage topic grid + `/questions` TopicTabs (system tabs + Bookmark tab; custom tabs keep Lock) show icons. Navbar `NavLink` now inline-flex; Questions/Mock/Glossary/Dashboard/Admin links + MobileNav get matching icons. |
+| Logo | `src/components/logo.tsx` — iconic mark: question mark whose dot is a checkmark ("questions, answered") on a solid primary disc, mark strokes in `var(--primary-foreground)`. Server-safe; navbar uses `<Logo size={20} />`. `src/app/icon.svg` favicon = same disc version (hardcoded vintage colors + `prefers-color-scheme: dark` variant). Legacy favicon.ico fallback. |
 
 ---
 
