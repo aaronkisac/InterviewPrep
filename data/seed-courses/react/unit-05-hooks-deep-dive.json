@@ -1,0 +1,187 @@
+{
+  "topic": "react",
+  "slug": "hooks-deep-dive",
+  "title": "Hooks Deep Dive",
+  "titleTr": "Hook'lara Derin Dalış",
+  "section": "core",
+  "position": 5,
+  "lessons": [
+    {
+      "slug": "rules-of-hooks",
+      "title": "Rules of hooks",
+      "titleTr": "Hook kuralları",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Why order is everything",
+          "titleTr": "Sıra neden her şeydir",
+          "body": "React doesn't know your hooks by name — it knows them by **call order**. On every render it walks the same list: 1st hook, 2nd hook, 3rd hook…\n\nThat's why the two rules of hooks exist:\n\n1. **Only call hooks at the top level** — never inside conditions, loops, or nested functions.\n2. **Only call hooks from React functions** — components or custom hooks.\n\nBreak rule 1 and a skipped hook shifts every slot after it: state lands on the wrong hook.",
+          "bodyTr": "React hook'larını isimle tanımaz — **çağrı sırasıyla** tanır. Her render'da aynı listeyi yürür: 1. hook, 2. hook, 3. hook…\n\nİki hook kuralının varlık sebebi bu:\n\n1. **Hook'ları yalnızca en üst seviyede çağır** — asla koşul, döngü veya iç içe fonksiyon içinde değil.\n2. **Hook'ları yalnızca React fonksiyonlarından çağır** — bileşenler veya custom hook'lar.\n\n1. kuralı çiğnersen atlanan bir hook sonraki tüm slotları kaydırır: state yanlış hook'a gider.",
+          "visual": "hook-rules"
+        },
+        {
+          "type": "mcq",
+          "prompt": "Why does this break?",
+          "promptTr": "Bu neden bozulur?",
+          "code": "if (isLoggedIn) {\n  const [name, setName] = useState(\"\");\n}\nconst [age, setAge] = useState(0);",
+          "options": [
+            {
+              "text": "When isLoggedIn flips, the call order changes and age reads name's old slot",
+              "textTr": "isLoggedIn değişince çağrı sırası kayar ve age, name'in eski slotunu okur",
+              "correct": true
+            },
+            {
+              "text": "useState can't be used twice in one component",
+              "textTr": "useState bir bileşende iki kez kullanılamaz"
+            },
+            {
+              "text": "Variables declared in an if block aren't reactive",
+              "textTr": "if bloğunda tanımlanan değişkenler reaktif olmaz"
+            },
+            {
+              "text": "It doesn't — React handles it",
+              "textTr": "Bozulmaz — React halleder"
+            }
+          ],
+          "explanation": "Hooks are matched by position. Make the condition live inside the hook (or split the component) instead.",
+          "explanationTr": "Hook'lar konuma göre eşlenir. Koşulu hook'un içine taşı (ya da bileşeni böl)."
+        },
+        {
+          "type": "true_false",
+          "statement": "A custom hook is just a function whose name starts with \"use\" and that calls other hooks — no special API needed.",
+          "statementTr": "Custom hook, adı \"use\" ile başlayan ve başka hook'lar çağıran sıradan bir fonksiyondur — özel bir API gerekmez.",
+          "answer": true,
+          "explanation": "The use- prefix lets the linter enforce the rules. Custom hooks share logic, not state — each call gets its own state.",
+          "explanationTr": "use- öneki linter'ın kuralları denetlemesini sağlar. Custom hook'lar state değil mantık paylaşır — her çağrı kendi state'ini alır."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Extract the logic into a custom hook",
+          "promptTr": "Mantığı bir custom hook'a çıkar",
+          "code": "function ___(key) {\n  const [value, setValue] = ___(null);\n  // ...shared logic\n  return [value, setValue];\n}",
+          "answers": ["useStorage", "useState"],
+          "distractors": ["getStorage", "createState"],
+          "explanation": "Name must start with \"use\"; inside, it composes the built-in hooks like any component would.",
+          "explanationTr": "İsim \"use\" ile başlamalı; içeride, tıpkı bir bileşen gibi yerleşik hook'ları kompoze eder."
+        },
+        {
+          "type": "challenge",
+          "question": "What are React Hooks (and their advantages)?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is the difference between class and function components?"
+        }
+      ]
+    },
+    {
+      "slug": "refs",
+      "title": "Refs: reaching outside",
+      "titleTr": "Ref'ler: dışarıya uzanmak",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "A box React doesn't watch",
+          "titleTr": "React'in izlemediği bir kutu",
+          "body": "`useRef` gives you a mutable box that **survives renders but never triggers them**:\n\n```jsx\nconst inputRef = useRef(null);\n\n<input ref={inputRef} />\n<button onClick={() => inputRef.current.focus()}>\n  Focus\n</button>\n```\n\nTwo jobs:\n\n1. **DOM access** — focus, scroll, measure (things React doesn't model)\n2. **Instance values** — timer ids, previous values; anything you need to *remember* without re-rendering\n\nIf the value affects what's on screen, it belongs in state, not a ref.",
+          "bodyTr": "`useRef`, **render'lara dayanan ama onları asla tetiklemeyen** değişebilir bir kutu verir:\n\n```jsx\nconst inputRef = useRef(null);\n\n<input ref={inputRef} />\n<button onClick={() => inputRef.current.focus()}>\n  Odaklan\n</button>\n```\n\nİki görevi var:\n\n1. **DOM erişimi** — odaklama, kaydırma, ölçme (React'in modellemediği şeyler)\n2. **Örnek değerleri** — timer id'leri, önceki değerler; re-render olmadan *hatırlaman* gereken her şey\n\nDeğer ekranda görüneni etkiliyorsa yeri state'tir, ref değil."
+        },
+        {
+          "type": "output_predict",
+          "prompt": "The button is clicked 3 times. What does the page show?",
+          "promptTr": "Butona 3 kez tıklanıyor. Sayfa ne gösterir?",
+          "code": "const count = useRef(0);\n\nreturn (\n  <button onClick={() => count.current++}>\n    {count.current}\n  </button>\n);",
+          "options": [
+            { "text": "0 — ref changes don't re-render; the screen is stale", "textTr": "0 — ref değişimi re-render tetiklemez; ekran bayat kalır", "correct": true },
+            { "text": "3 — the ref tracks clicks", "textTr": "3 — ref tıklamaları sayar" },
+            { "text": "2 — one render lags behind", "textTr": "2 — bir render geriden gelir" },
+            { "text": "Error — refs are read-only", "textTr": "Hata — ref'ler salt okunurdur" }
+          ],
+          "explanation": "count.current really is 3 in memory — but nothing told React to render. Values shown in JSX belong in state.",
+          "explanationTr": "count.current bellekte gerçekten 3 — ama React'e render et diyen olmadı. JSX'te gösterilen değerlerin yeri state'tir."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Focus the input when the form mounts",
+          "promptTr": "Form mount olduğunda input'a odaklan",
+          "code": "const inputRef = ___(null);\n\nuseEffect(() => {\n  inputRef.___.focus();\n}, []);\n\n<input ref={inputRef} />",
+          "answers": ["useRef", "current"],
+          "distractors": ["createRef", "value"],
+          "explanation": "The DOM node lands on .current after commit — which is exactly when effects run.",
+          "explanationTr": "DOM düğümü commit'ten sonra .current'a düşer — effect'lerin çalıştığı an tam olarak budur."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Why is useRef preferred over createRef in function components?",
+          "promptTr": "Fonksiyon bileşenlerinde neden createRef değil useRef tercih edilir?",
+          "options": [
+            {
+              "text": "createRef makes a NEW ref object every render; useRef returns the same box each time",
+              "textTr": "createRef her render'da YENİ bir ref nesnesi üretir; useRef her seferinde aynı kutuyu döndürür",
+              "correct": true
+            },
+            {
+              "text": "createRef can't hold DOM nodes",
+              "textTr": "createRef DOM düğümü tutamaz"
+            },
+            {
+              "text": "useRef is faster to allocate",
+              "textTr": "useRef daha hızlı ayrılır"
+            },
+            {
+              "text": "There is no difference",
+              "textTr": "Fark yoktur"
+            }
+          ],
+          "explanation": "createRef was designed for class components (created once in the constructor). In a function body it would reset on every render.",
+          "explanationTr": "createRef sınıf bileşenleri için tasarlandı (constructor'da bir kez oluşturulur). Fonksiyon gövdesinde her render'da sıfırlanırdı."
+        },
+        {
+          "type": "match",
+          "prompt": "State or ref? Match the use case",
+          "promptTr": "State mi ref mi? Kullanım senaryosunu eşleştir",
+          "pairs": [
+            {
+              "left": "Value rendered in JSX",
+              "leftTr": "JSX'te render edilen değer",
+              "right": "state",
+              "rightTr": "state"
+            },
+            {
+              "left": "setInterval id for cleanup",
+              "leftTr": "Cleanup için setInterval id'si",
+              "right": "ref",
+              "rightTr": "ref"
+            },
+            {
+              "left": "Scrolling a div into view",
+              "leftTr": "Bir div'i görünüme kaydırmak",
+              "right": "ref",
+              "rightTr": "ref"
+            },
+            {
+              "left": "Disabling a button while saving",
+              "leftTr": "Kaydederken butonu devre dışı bırakmak",
+              "right": "state",
+              "rightTr": "state"
+            }
+          ]
+        },
+        {
+          "type": "challenge",
+          "question": "What are refs and what are they used for?"
+        },
+        {
+          "type": "challenge",
+          "question": "How do you create refs in React?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is the difference between useRef and createRef?"
+        }
+      ]
+    }
+  ]
+}

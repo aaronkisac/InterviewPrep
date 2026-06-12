@@ -12,7 +12,9 @@ import { usePrefersReducedMotion } from "@/lib/course/use-reduced-motion";
 import type { Language } from "@/lib/supabase/types";
 
 import { ComponentTree } from "./component-tree";
+import { ContextTunnel } from "./context-tunnel";
 import { EffectTimeline } from "./effect-timeline";
+import { HookRules } from "./hook-rules";
 import { PropsFlow } from "./props-flow";
 import { VdomDiff } from "./vdom-diff";
 
@@ -21,7 +23,9 @@ const VISUALS: Record<
   React.ComponentType<{ lang: Language; reduced: boolean }>
 > = {
   "component-tree": ComponentTree,
+  "context-tunnel": ContextTunnel,
   "effect-timeline": EffectTimeline,
+  "hook-rules": HookRules,
   "props-flow": PropsFlow,
   "vdom-diff": VdomDiff,
 };
