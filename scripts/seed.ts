@@ -257,7 +257,8 @@ async function upsertBatch(
       continue;
     }
 
-    const { uuid: _uuid, ...clean } = row;
+    const clean = { ...row };
+    delete clean.uuid;
     const id = qmap.get(keyOf(clean.topic, clean.question));
     if (id) {
       upserts.push({ ...clean, id });

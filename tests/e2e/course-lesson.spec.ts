@@ -5,7 +5,12 @@ import { expect, test, type Page } from "@playwright/test";
 // concept → mcq → fill_blank → true_false → output_predict → challenge ×2.
 // Requires `pnpm seed` (courses section) to have run against the database.
 
-const optionButtons = (page: Page) => page.locator("button[aria-pressed]");
+// Enabled options only: with AnimatePresence mode="wait" the outgoing step
+// card lingers in the DOM during its exit animation with frozen feedback
+// props (aria-disabled="true"), so a bare [aria-pressed] locator can resolve
+// to a dying, unclickable button.
+const optionButtons = (page: Page) =>
+  page.locator('button[aria-pressed]:not([aria-disabled="true"])');
 const checkBtn = (page: Page) =>
   page.getByRole("button", { name: "Check", exact: true });
 const feedbackBanner = (page: Page) => page.locator('[aria-live="polite"]');
@@ -34,6 +39,18 @@ async function playLesson(page: Page) {
     const banner = feedbackBanner(page);
     if (await banner.isVisible().catch(() => false)) {
       await banner.getByRole("button", { name: "Continue", exact: true }).click();
+      // The banner exits with an animation and lingers in the DOM — wait for
+      // it to detach so the next iteration doesn't click the dying instance.
+      await banner.waitFor({ state: "detached", timeout: 5_000 }).catch(() => {});
+      // The step card exits separately (and later) than the banner. Its frozen
+      // feedback state is the only source of aria-disabled="true" elements, so
+      // wait for those to detach before reading the next step's heading/options
+      // — otherwise we count/click buttons on the dying card.
+      await page
+        .locator('[aria-disabled="true"]')
+        .first()
+        .waitFor({ state: "detached", timeout: 5_000 })
+        .catch(() => {});
       continue;
     }
 
@@ -47,6 +64,9 @@ async function playLesson(page: Page) {
       tried.set(heading, (idx + 1) % count);
       await optionButtons(page).nth(idx % count).click();
       await checkBtn(page).click();
+      // The banner mounts with an animation — wait for it, otherwise the next
+      // loop iteration races it and tries to click now-disabled options.
+      await feedbackBanner(page).waitFor({ state: "visible" });
       continue;
     }
 
@@ -55,6 +75,7 @@ async function playLesson(page: Page) {
     if (await token.isVisible().catch(() => false)) {
       await token.click();
       await checkBtn(page).click();
+      await feedbackBanner(page).waitFor({ state: "visible" });
       continue;
     }
 
