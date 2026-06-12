@@ -11,6 +11,7 @@ import { MobileNav } from "@/components/mobile-nav";
 import { Logo } from "@/components/logo";
 import {
   BookOpen,
+  GraduationCap,
   LayoutDashboard,
   ListChecks,
   MessageSquare,
@@ -58,6 +59,10 @@ export async function Navbar() {
 
         {/* Desktop nav — hidden below 800px */}
         <div className="hidden min-[800px]:flex items-center gap-1">
+          <NavLink href="/learn">
+            <GraduationCap className="size-4" aria-hidden="true" />
+            {nav.learn}
+          </NavLink>
           <NavLink href="/questions">
             <ListChecks className="size-4" aria-hidden="true" />
             {nav.questions}

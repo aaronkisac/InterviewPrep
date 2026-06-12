@@ -4,6 +4,7 @@
 // Non-interactive — the bottom bar shows "Continue".
 
 import { MarkdownContent } from "@/components/markdown-content";
+import { CourseVisual } from "@/components/course/visuals";
 import type { ConceptStep } from "@/lib/course/step-schema";
 import type { Language } from "@/lib/supabase/types";
 
@@ -24,6 +25,7 @@ export function StepConcept({
         lang={lang}
         className="text-[15px]"
       />
+      {step.visual && <CourseVisual name={step.visual} lang={lang} />}
     </div>
   );
 }

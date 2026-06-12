@@ -6,8 +6,9 @@ import { getDashboardData, getDueReviews, getSessionTrend } from "@/lib/actions/
 import { getUserSubmissions } from "@/lib/actions/questions";
 import { listTopicsWithQuestions } from "@/lib/actions/custom-topics";
 import { listSystemTopics } from "@/lib/actions/admin-topics";
+import { getContinueLearning } from "@/lib/course-data";
 import { getLang } from "@/lib/lang";
-import { i18nDashboard } from "@/lib/i18n";
+import { i18nCourse, i18nDashboard } from "@/lib/i18n";
 
 import { DeleteSubmissionButton } from "@/app/dashboard/_components/delete-submission-button";
 import { GradeChip } from "@/app/dashboard/_components/grade-chip";
@@ -32,14 +33,16 @@ export default async function DashboardPage() {
   const lang = await getLang();
   const i18n = i18nDashboard[lang];
 
-  const [data, submissions, { topics: customTopics, questionsMap }, systemTopics, dueReviews, sessionTrend] = await Promise.all([
+  const [data, submissions, { topics: customTopics, questionsMap }, systemTopics, dueReviews, sessionTrend, continueLearning] = await Promise.all([
     getDashboardData(),
     getUserSubmissions(),
     listTopicsWithQuestions(),
     listSystemTopics(),
     getDueReviews(session.user.id),
     getSessionTrend(session.user.id),
+    getContinueLearning(session.user.id),
   ]);
+  const i18nC = i18nCourse[lang];
   const dueCount = dueReviews.length;
   const topicLabels = Object.fromEntries(systemTopics.map((t) => [t.slug, t.name]));
 
@@ -100,6 +103,32 @@ export default async function DashboardPage() {
           </Link>
         )}
       </section>
+
+      {/* Continue learning (course) */}
+      {continueLearning && (
+        <section className="flex items-center justify-between gap-4 rounded-lg border border-primary/30 bg-primary/5 px-4 py-3">
+          <div className="min-w-0">
+            <p className="text-sm font-medium">{i18nC.continueLearning}</p>
+            <p className="mt-0.5 truncate text-xs text-muted-foreground">
+              {topicLabels[continueLearning.topicSlug] ?? continueLearning.topicSlug}
+              {continueLearning.lessonId
+                ? ` · ${lang === "tr" ? continueLearning.unitTitleTr : continueLearning.unitTitle} → ${lang === "tr" ? continueLearning.lessonTitleTr : continueLearning.lessonTitle}`
+                : ` · ${i18nC.courseComplete}`}{" "}
+              · {i18nC.lessonsDone(continueLearning.completedCount, continueLearning.lessonCount)}
+            </p>
+          </div>
+          <Link
+            href={
+              continueLearning.lessonId
+                ? `/learn/${continueLearning.topicSlug}/lesson/${continueLearning.lessonId}`
+                : `/learn/${continueLearning.topicSlug}`
+            }
+            className="flex-shrink-0 rounded-md bg-primary px-3 py-1.5 text-xs font-semibold text-primary-foreground hover:opacity-90"
+          >
+            {i18nC.continueBtn}
+          </Link>
+        </section>
+      )}
 
       {/* Score trend */}
       {sessionTrend.length >= 2 && (

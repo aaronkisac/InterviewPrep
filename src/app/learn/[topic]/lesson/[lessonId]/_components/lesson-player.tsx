@@ -298,9 +298,9 @@ export function LessonPlayer({
   const exit = useCallback(() => {
     const dirty = !done && (queue.cleared > 0 || Object.keys(queue.firstTry).length > 0);
     if (!dirty || window.confirm(i18n.exitConfirm)) {
-      router.push("/dashboard");
+      router.push(`/learn/${lesson.topicSlug}`);
     }
-  }, [done, queue, router, i18n.exitConfirm]);
+  }, [done, queue, router, i18n.exitConfirm, lesson.topicSlug]);
 
   const pct = Math.round(progress(queue) * 100);
 
@@ -348,10 +348,10 @@ export function LessonPlayer({
             </Link>
           )}
           <Link
-            href="/dashboard"
+            href={`/learn/${lesson.topicSlug}`}
             className="rounded-md border border-border px-5 py-2 text-sm font-medium transition hover:bg-accent"
           >
-            {i18n.backToDashboard}
+            {i18n.backToMap}
           </Link>
         </div>
       </div>

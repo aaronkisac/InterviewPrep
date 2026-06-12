@@ -2,6 +2,7 @@
 // Client Components must never import this — pure data shaping for pages.
 
 import { createAdminClient } from "@/lib/supabase/admin";
+import { deriveCoursePath } from "@/lib/course/path-state";
 import { validateSteps, type ChallengeStep, type Step } from "@/lib/course/step-schema";
 import type { MockOption } from "@/lib/mock-shared";
 import type { UnitSection } from "@/lib/supabase/types";
@@ -83,6 +84,123 @@ export async function getCompletedLessonIds(
     return new Set();
   }
   return new Set((data ?? []).map((r) => r.lesson_id as string));
+}
+
+// ---------------------------------------------------------------------------
+// Course summaries — the /learn grid + dashboard card.
+// ---------------------------------------------------------------------------
+
+export type CourseSummary = {
+  topicSlug: string;
+  unitCount: number;
+  lessonCount: number;
+  /** Lessons the user completed in this course (0 for guests). */
+  completedCount: number;
+};
+
+/** Every topic that has a course, with the user's completion counts. */
+export async function listCourseSummaries(
+  userId?: string,
+): Promise<CourseSummary[]> {
+  const sb = createAdminClient();
+  const { data, error } = await sb
+    .from("units")
+    .select("topic_slug, lessons(id)")
+    .order("topic_slug", { ascending: true });
+
+  if (error) {
+    console.error("[listCourseSummaries]", error.message);
+    return [];
+  }
+
+  const completed = userId
+    ? await getCompletedLessonIds(userId)
+    : new Set<string>();
+
+  const byTopic = new Map<string, CourseSummary>();
+  for (const u of data ?? []) {
+    const slug = u.topic_slug as string;
+    const lessons = (u.lessons ?? []) as Array<{ id: string }>;
+    const entry =
+      byTopic.get(slug) ??
+      ({ topicSlug: slug, unitCount: 0, lessonCount: 0, completedCount: 0 } satisfies CourseSummary);
+    entry.unitCount += 1;
+    entry.lessonCount += lessons.length;
+    entry.completedCount += lessons.filter((l) => completed.has(l.id)).length;
+    byTopic.set(slug, entry);
+  }
+  return [...byTopic.values()];
+}
+
+export type ContinueLearning = {
+  topicSlug: string;
+  /** Active lesson to jump into; null when the course is finished. */
+  lessonId: string | null;
+  lessonTitle: string;
+  lessonTitleTr: string;
+  unitTitle: string;
+  unitTitleTr: string;
+  completedCount: number;
+  lessonCount: number;
+};
+
+/** The user's most recent course + its next (active) lesson. */
+export async function getContinueLearning(
+  userId: string,
+): Promise<ContinueLearning | null> {
+  const sb = createAdminClient();
+
+  const { data: latest } = await sb
+    .from("user_lesson_progress")
+    .select("lesson_id, updated_at, lessons(unit_id, units(topic_slug))")
+    .eq("user_id", userId)
+    .order("updated_at", { ascending: false })
+    .limit(1)
+    .maybeSingle();
+
+  const topicSlug = (
+    latest?.lessons as unknown as { units?: { topic_slug?: string } } | null
+  )?.units?.topic_slug;
+  if (!topicSlug) return null;
+
+  const [units, completed] = await Promise.all([
+    getCourseUnits(topicSlug),
+    getCompletedLessonIds(userId),
+  ]);
+  if (units.length === 0) return null;
+
+  // Single source of truth for unlock rules — path-state is pure/server-safe.
+  const state = deriveCoursePath(
+    units.map((u) => ({
+      id: u.id,
+      position: u.position,
+      lessons: u.lessons.map((l) => ({ id: l.id, position: l.position })),
+    })),
+    completed,
+  );
+  const activeUnit =
+    units.find((u) =>
+      u.lessons.some((l) => l.id === state.activeLessonId),
+    ) ?? null;
+  const activeLesson =
+    activeUnit?.lessons.find((l) => l.id === state.activeLessonId) ?? null;
+
+  const lessonCount = units.reduce((s, u) => s + u.lessons.length, 0);
+  const completedCount = units.reduce(
+    (s, u) => s + u.lessons.filter((l) => completed.has(l.id)).length,
+    0,
+  );
+
+  return {
+    topicSlug,
+    lessonId: activeLesson?.id ?? null,
+    lessonTitle: activeLesson?.title ?? "",
+    lessonTitleTr: activeLesson?.titleTr ?? "",
+    unitTitle: activeUnit?.title ?? "",
+    unitTitleTr: activeUnit?.titleTr ?? "",
+    completedCount,
+    lessonCount,
+  };
 }
 
 // ---------------------------------------------------------------------------

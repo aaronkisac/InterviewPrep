@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   BookOpen,
+  GraduationCap,
   LayoutDashboard,
   ListChecks,
   MessageSquare,
@@ -78,6 +79,10 @@ export function MobileNav({ user, isAdmin, signOutAction }: MobileNavProps) {
 
       {open && (
         <div className="absolute right-0 top-full mt-2 w-48 rounded-md border border-border bg-card p-1 shadow-md">
+          <Link href="/learn" className={linkClass}>
+            <GraduationCap className="size-4" aria-hidden="true" />
+            Learn
+          </Link>
           <Link href="/questions" className={linkClass}>
             <ListChecks className="size-4" aria-hidden="true" />
             Questions
