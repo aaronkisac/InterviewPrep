@@ -124,7 +124,7 @@ GitHub Secrets needed: `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KE
 
 ### Still missing (optional / future):
 - `answerPersonal` / `answerPersonalTr` for most questions (add from Aaron's real interview experience)
-- Learning Map / Course experience — spec v3 at `.docs/learning-map-spec.md`, **approved 2026-06-12, in progress**. React-first pilot, Milestones A–E. A (engine) + B (lesson player) + C (map UI) done — see Completed Phases. Next: **Milestone D** — React content batches (units 2–10, ~1 unit per batch: author JSON → seed → play-test; diagrams alongside the units that need them), then E (a11y/e2e hardening + pilot retro). Spec deviations so far: no zod, no shiki.
+- Learning Map / Course experience — spec v3 at `.docs/learning-map-spec.md`, **approved 2026-06-12, in progress**. React-first pilot, Milestones A–E. A (engine) + B (lesson player) + C (map UI) done — see Completed Phases. Now in **Milestone D** — React content batches. Done: unit-01 Components & JSX (2 lessons), unit-02 Props & State (3 lessons, 23 steps, 7 challenges, uses `props-flow` visual; schema + challenge-text cross-check verified). Next batches: unit-03 Rendering & Reconciliation → unit-10 Interview Gauntlet (1 unit per batch: author → `pnpm seed` → play-test). Then E (a11y/e2e hardening + pilot retro). Spec deviations so far: no zod, no shiki.
 
 ---
 

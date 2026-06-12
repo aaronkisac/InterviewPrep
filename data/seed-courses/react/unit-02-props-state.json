@@ -1,0 +1,307 @@
+{
+  "topic": "react",
+  "slug": "props-state",
+  "title": "Props & State",
+  "titleTr": "Props ve State",
+  "section": "foundations",
+  "position": 2,
+  "lessons": [
+    {
+      "slug": "passing-props",
+      "title": "Passing props",
+      "titleTr": "Props aktarmak",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Data flows down",
+          "titleTr": "Veri aşağı akar",
+          "body": "**Props** are how a parent passes data to a child — like function arguments:\n\n```jsx\nfunction Greeting({ name }) {\n  return <p>Hello, {name}!</p>;\n}\n\n<Greeting name=\"Aaron\" />\n```\n\nTwo rules:\n\n1. Props are **read-only** — a component never modifies what it receives.\n2. Data flows **one way**: parent → child. The child talks back by calling callback props the parent provided.",
+          "bodyTr": "**Props**, bir ebeveynin çocuğa veri aktarma yoludur — fonksiyon argümanları gibi:\n\n```jsx\nfunction Greeting({ name }) {\n  return <p>Merhaba, {name}!</p>;\n}\n\n<Greeting name=\"Aaron\" />\n```\n\nİki kural:\n\n1. Props **salt okunur** — bileşen aldığı veriyi asla değiştirmez.\n2. Veri **tek yönlü** akar: ebeveyn → çocuk. Çocuk, ebeveynin verdiği callback prop'larını çağırarak yukarı haber verir.",
+          "visual": "props-flow"
+        },
+        {
+          "type": "mcq",
+          "prompt": "What happens if a child component tries to modify a prop it received?",
+          "promptTr": "Bir çocuk bileşen aldığı bir prop'u değiştirmeye çalışırsa ne olur?",
+          "options": [
+            {
+              "text": "The parent re-renders with the new value",
+              "textTr": "Ebeveyn yeni değerle yeniden render olur"
+            },
+            {
+              "text": "It must not — props are read-only; mutating them breaks React's data model",
+              "textTr": "Yapmamalı — props salt okunurdur; değiştirmek React'in veri modelini bozar",
+              "correct": true
+            },
+            {
+              "text": "React automatically clones the prop",
+              "textTr": "React prop'u otomatik klonlar"
+            },
+            {
+              "text": "Nothing — props are just suggestions",
+              "textTr": "Hiçbir şey — props sadece öneridir"
+            }
+          ],
+          "explanation": "Components must act like pure functions with respect to their props. To change data, the owner of that data (the parent) must change it.",
+          "explanationTr": "Bileşenler props'larına göre saf fonksiyon gibi davranmalıdır. Veriyi değiştirmek için o verinin sahibi (ebeveyn) değiştirmelidir.",
+          "code": "function Child({ count }) {\n  count = count + 1; // ?\n  return <p>{count}</p>;\n}"
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Destructure the props and render the title",
+          "promptTr": "Props'u destructure edip başlığı render et",
+          "code": "function Card(___) {\n  return <h2>{___}</h2>;\n}",
+          "answers": ["{ title }", "title"],
+          "distractors": ["props.title()", "this.title"],
+          "explanation": "Function components receive a single props object — destructuring in the parameter list keeps the body clean.",
+          "explanationTr": "Fonksiyon bileşenleri tek bir props nesnesi alır — parametre listesinde destructure etmek gövdeyi temiz tutar."
+        },
+        {
+          "type": "true_false",
+          "statement": "Whatever you put between a component's opening and closing tags arrives as the special `children` prop.",
+          "statementTr": "Bir bileşenin açılış ve kapanış etiketleri arasına koyduğun her şey özel `children` prop'u olarak gelir.",
+          "answer": true,
+          "explanation": "<Panel><p>Hi</p></Panel> → Panel receives { children: <p>Hi</p> }. This is how layout/wrapper components compose.",
+          "explanationTr": "<Panel><p>Selam</p></Panel> → Panel { children: <p>Selam</p> } alır. Layout/sarmalayıcı bileşenler böyle kompoze edilir."
+        },
+        {
+          "type": "output_predict",
+          "prompt": "What does Badge render?",
+          "promptTr": "Badge ne render eder?",
+          "code": "function Badge({ label = \"New\" }) {\n  return <span>{label}</span>;\n}\n\n<Badge label={undefined} />",
+          "options": [
+            { "text": "<span>New</span>", "textTr": "<span>New</span>", "correct": true },
+            { "text": "<span></span>", "textTr": "<span></span>" },
+            { "text": "<span>undefined</span>", "textTr": "<span>undefined</span>" },
+            { "text": "Render error", "textTr": "Render hatası" }
+          ],
+          "explanation": "Default parameter values kick in when the prop is undefined — but not when it is null.",
+          "explanationTr": "Varsayılan parametre değerleri prop undefined olduğunda devreye girer — null olduğunda girmez."
+        },
+        {
+          "type": "challenge",
+          "question": "What are props in React?"
+        }
+      ]
+    },
+    {
+      "slug": "state-with-usestate",
+      "title": "State with useState",
+      "titleTr": "useState ile state",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Memory that survives re-renders",
+          "titleTr": "Re-render'lara dayanan hafıza",
+          "body": "**State** is a component's own memory. Regular variables reset on every render — state persists and *triggers* renders when it changes:\n\n```jsx\nfunction Counter() {\n  const [count, setCount] = useState(0);\n  return (\n    <button onClick={() => setCount(count + 1)}>\n      {count}\n    </button>\n  );\n}\n```\n\n`useState` returns a pair: the current value and a setter. Calling the setter schedules a re-render with the new value — **never mutate state directly**.",
+          "bodyTr": "**State**, bileşenin kendi hafızasıdır. Normal değişkenler her render'da sıfırlanır — state kalıcıdır ve değiştiğinde render *tetikler*:\n\n```jsx\nfunction Counter() {\n  const [count, setCount] = useState(0);\n  return (\n    <button onClick={() => setCount(count + 1)}>\n      {count}\n    </button>\n  );\n}\n```\n\n`useState` bir çift döndürür: mevcut değer ve bir setter. Setter'ı çağırmak yeni değerle bir re-render planlar — **state'i asla doğrudan mutasyona uğratma**."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Complete the useState declaration",
+          "promptTr": "useState tanımını tamamla",
+          "code": "const [text, ___] = useState(___);",
+          "answers": ["setText", "\"\""],
+          "distractors": ["text()", "useState"],
+          "explanation": "Convention: [value, setValue]. The argument is the initial state, used only on the first render.",
+          "explanationTr": "Gelenek: [value, setValue]. Argüman başlangıç state'idir, yalnızca ilk render'da kullanılır."
+        },
+        {
+          "type": "output_predict",
+          "prompt": "The button is clicked once. What does the alert show?",
+          "promptTr": "Butona bir kez tıklanıyor. Alert ne gösterir?",
+          "code": "const [count, setCount] = useState(0);\n\nfunction handleClick() {\n  setCount(count + 1);\n  setCount(count + 1);\n  alert(count);\n}",
+          "options": [
+            { "text": "0 — and count becomes 1", "textTr": "0 — ve count 1 olur", "correct": true },
+            { "text": "2 — and count becomes 2", "textTr": "2 — ve count 2 olur" },
+            { "text": "0 — and count becomes 2", "textTr": "0 — ve count 2 olur" },
+            { "text": "1 — and count becomes 2", "textTr": "1 — ve count 2 olur" }
+          ],
+          "explanation": "State is a snapshot: count stays 0 inside this event handler. Both setters compute 0 + 1, so the state lands on 1. Use the updater form setCount(c => c + 1) to chain updates.",
+          "explanationTr": "State bir anlık görüntüdür: bu event handler içinde count 0 kalır. İki setter da 0 + 1 hesaplar, dolayısıyla state 1 olur. Güncellemeleri zincirlemek için setCount(c => c + 1) updater biçimini kullan."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Why must you create a new array instead of pushing into state directly?",
+          "promptTr": "Neden state dizisine doğrudan push etmek yerine yeni bir dizi oluşturmalısın?",
+          "code": "// ❌ items.push(newItem)\n// ✅ setItems([...items, newItem])",
+          "options": [
+            {
+              "text": "push() is slower than the spread operator",
+              "textTr": "push() spread operatöründen yavaştır"
+            },
+            {
+              "text": "React compares references — a mutated array looks unchanged, so no re-render",
+              "textTr": "React referansları karşılaştırır — mutasyona uğramış dizi değişmemiş görünür, re-render olmaz",
+              "correct": true
+            },
+            {
+              "text": "Arrays in state are frozen with Object.freeze",
+              "textTr": "State'teki diziler Object.freeze ile dondurulur"
+            },
+            {
+              "text": "push() is not available inside components",
+              "textTr": "push() bileşen içinde kullanılamaz"
+            }
+          ],
+          "explanation": "Immutability is how React detects change: new value, new reference. Mutation hides the change from the reference comparison.",
+          "explanationTr": "Değişmezlik, React'in değişikliği fark etme yoludur: yeni değer, yeni referans. Mutasyon, değişikliği referans karşılaştırmasından gizler."
+        },
+        {
+          "type": "order",
+          "prompt": "Order what happens after setCount(1) is called",
+          "promptTr": "setCount(1) çağrıldıktan sonra olanları sırala",
+          "items": [
+            { "text": "React schedules a re-render", "textTr": "React bir re-render planlar" },
+            { "text": "The component function runs again", "textTr": "Bileşen fonksiyonu yeniden çalışır" },
+            { "text": "useState returns the new value", "textTr": "useState yeni değeri döndürür" },
+            { "text": "React commits the changed DOM nodes", "textTr": "React değişen DOM düğümlerini commit eder" }
+          ],
+          "explanation": "Setter → scheduled render → function re-runs with fresh state → minimal DOM commit.",
+          "explanationTr": "Setter → planlanan render → fonksiyon taze state ile yeniden çalışır → minimal DOM commit'i."
+        },
+        {
+          "type": "match",
+          "prompt": "Match each concept to its description",
+          "promptTr": "Her kavramı açıklamasıyla eşleştir",
+          "pairs": [
+            {
+              "left": "props",
+              "leftTr": "props",
+              "right": "Passed in from the parent, read-only",
+              "rightTr": "Ebeveynden gelir, salt okunur"
+            },
+            {
+              "left": "state",
+              "leftTr": "state",
+              "right": "Owned by the component, triggers renders",
+              "rightTr": "Bileşene aittir, render tetikler"
+            },
+            {
+              "left": "setState updater",
+              "leftTr": "setState updater",
+              "right": "c => c + 1 — safe chained updates",
+              "rightTr": "c => c + 1 — güvenli zincirleme güncelleme"
+            },
+            {
+              "left": "initial state",
+              "leftTr": "başlangıç state'i",
+              "right": "Used only on the first render",
+              "rightTr": "Yalnızca ilk render'da kullanılır"
+            }
+          ]
+        },
+        {
+          "type": "challenge",
+          "question": "What is state in React?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is useState() in React?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is the difference between state and props?"
+        }
+      ]
+    },
+    {
+      "slug": "controlled-inputs",
+      "title": "Controlled inputs",
+      "titleTr": "Kontrollü input'lar",
+      "position": 3,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Who owns the input's value?",
+          "titleTr": "Input'un değeri kime ait?",
+          "body": "A **controlled** input gets its value from React state — every keystroke flows through `onChange`, so React is the single source of truth:\n\n```jsx\nconst [email, setEmail] = useState(\"\");\n\n<input\n  value={email}\n  onChange={(e) => setEmail(e.target.value)}\n/>\n```\n\nAn **uncontrolled** input keeps its value in the DOM; you read it when needed via a ref. Controlled inputs make validation, formatting and conditional UI trivial — that's why they're the default choice in forms.",
+          "bodyTr": "**Kontrollü** bir input, değerini React state'inden alır — her tuş vuruşu `onChange`'den geçer, böylece React tek gerçek kaynak olur:\n\n```jsx\nconst [email, setEmail] = useState(\"\");\n\n<input\n  value={email}\n  onChange={(e) => setEmail(e.target.value)}\n/>\n```\n\n**Kontrolsüz** bir input, değerini DOM'da tutar; gerektiğinde ref ile okursun. Kontrollü input'lar doğrulama, biçimlendirme ve koşullu arayüzü kolaylaştırır — formlarda varsayılan tercih olmalarının sebebi bu."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Make this input controlled",
+          "promptTr": "Bu input'u kontrollü hale getir",
+          "code": "<input\n  value={___}\n  onChange={(e) => setName(___)}\n/>",
+          "answers": ["name", "e.target.value"],
+          "distractors": ["setName", "e.value"],
+          "explanation": "value binds the input to state; onChange writes every change back to state.",
+          "explanationTr": "value input'u state'e bağlar; onChange her değişikliği state'e geri yazar."
+        },
+        {
+          "type": "mcq",
+          "prompt": "An input has `value={text}` but no onChange handler. What happens when the user types?",
+          "promptTr": "Bir input'ta `value={text}` var ama onChange yok. Kullanıcı yazınca ne olur?",
+          "options": [
+            {
+              "text": "Nothing appears — the value is locked to state, and React warns about a read-only field",
+              "textTr": "Hiçbir şey yazılmaz — değer state'e kilitlidir ve React salt okunur alan uyarısı verir",
+              "correct": true
+            },
+            {
+              "text": "Typing works; state just lags behind",
+              "textTr": "Yazma çalışır; state sadece geriden gelir"
+            },
+            {
+              "text": "React switches it to uncontrolled automatically",
+              "textTr": "React otomatik olarak kontrolsüze çevirir"
+            },
+            {
+              "text": "It throws a runtime error",
+              "textTr": "Çalışma zamanı hatası fırlatır"
+            }
+          ],
+          "explanation": "A controlled input always displays exactly what state holds. No onChange → state never changes → the input appears frozen.",
+          "explanationTr": "Kontrollü input her zaman state'te ne varsa onu gösterir. onChange yok → state hiç değişmez → input donmuş görünür."
+        },
+        {
+          "type": "true_false",
+          "statement": "Reading an uncontrolled input's value requires a ref (or form data) because the DOM owns the value.",
+          "statementTr": "Kontrolsüz bir input'un değerini okumak ref (veya form verisi) gerektirir çünkü değerin sahibi DOM'dur.",
+          "answer": true,
+          "explanation": "Uncontrolled = DOM keeps the value; React reads it on demand, typically with useRef or FormData on submit.",
+          "explanationTr": "Kontrolsüz = değeri DOM tutar; React gerektiğinde okur — genellikle useRef ile ya da submit'te FormData ile."
+        },
+        {
+          "type": "match",
+          "prompt": "Controlled or uncontrolled? Match each trait",
+          "promptTr": "Kontrollü mü kontrolsüz mü? Her özelliği eşleştir",
+          "pairs": [
+            {
+              "left": "value={state}",
+              "leftTr": "value={state}",
+              "right": "Controlled",
+              "rightTr": "Kontrollü"
+            },
+            {
+              "left": "defaultValue + ref",
+              "leftTr": "defaultValue + ref",
+              "right": "Uncontrolled",
+              "rightTr": "Kontrolsüz"
+            },
+            {
+              "left": "Instant validation per keystroke",
+              "leftTr": "Tuş başına anında doğrulama",
+              "right": "Easy when controlled",
+              "rightTr": "Kontrollüde kolay"
+            }
+          ]
+        },
+        {
+          "type": "challenge",
+          "question": "What are controlled components?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is the difference between controlled and uncontrolled components?"
+        },
+        {
+          "type": "challenge",
+          "question": "What happens when you call setState?"
+        }
+      ]
+    }
+  ]
+}
