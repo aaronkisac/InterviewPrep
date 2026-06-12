@@ -1,0 +1,168 @@
+{
+  "topic": "react",
+  "slug": "performance",
+  "title": "Performance",
+  "titleTr": "Performans",
+  "section": "advanced",
+  "position": 7,
+  "lessons": [
+    {
+      "slug": "skipping-renders",
+      "title": "Skipping renders with memo",
+      "titleTr": "memo ile render atlamak",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Renders are cheap — until they aren't",
+          "titleTr": "Render'lar ucuzdur — olmadığı ana kadar",
+          "body": "By default, a parent render takes all children with it. Usually fine. When a child is *measurably* expensive, opt it out:\n\n```jsx\nconst Chart = memo(function Chart({ data }) {\n  // heavy rendering\n});\n```\n\n`memo` skips the render **if every prop is shallow-equal** to last time. That comparison is by reference — which is why these silently defeat it:\n\n```jsx\n<Chart data={{ points }} />        // new object every render\n<Chart onSelect={() => pick(id)} /> // new function every render\n```\n\nStable references come from `useMemo` (values) and `useCallback` (functions). The class-era equivalents: `PureComponent` / `shouldComponentUpdate`.",
+          "bodyTr": "Varsayılan olarak ebeveyn render'ı tüm çocukları da götürür. Çoğunlukla sorun değil. Bir çocuk *ölçülebilir biçimde* pahalıysa onu kapsamdan çıkar:\n\n```jsx\nconst Chart = memo(function Chart({ data }) {\n  // ağır render\n});\n```\n\n`memo`, **her prop bir öncekiyle sığ-eşitse** render'ı atlar. Bu karşılaştırma referans iledir — bu yüzden şunlar onu sessizce boşa çıkarır:\n\n```jsx\n<Chart data={{ points }} />        // her render'da yeni nesne\n<Chart onSelect={() => pick(id)} /> // her render'da yeni fonksiyon\n```\n\nKararlı referanslar `useMemo` (değerler) ve `useCallback` (fonksiyonlar) ile gelir. Sınıf dönemindeki karşılıkları: `PureComponent` / `shouldComponentUpdate`.",
+          "visual": "memo-rerender"
+        },
+        {
+          "type": "output_predict",
+          "prompt": "Row is wrapped in memo. Parent re-renders because of unrelated state. Does Row re-render?",
+          "promptTr": "Row, memo ile sarılı. Ebeveyn alakasız bir state yüzünden yeniden render oluyor. Row render olur mu?",
+          "code": "const Row = memo(RowImpl);\n\nfunction Table() {\n  const [query, setQuery] = useState(\"\");\n  return <Row style={{ color: \"red\" }} />;\n}",
+          "options": [
+            {
+              "text": "Yes — the inline style object is a NEW reference every render",
+              "textTr": "Evet — inline style nesnesi her render'da YENİ bir referans",
+              "correct": true
+            },
+            { "text": "No — memo blocks it", "textTr": "Hayır — memo engeller" },
+            { "text": "Only the first time", "textTr": "Yalnızca ilk seferde" },
+            { "text": "It throws — memo forbids object props", "textTr": "Hata fırlatır — memo nesne prop'u yasaklar" }
+          ],
+          "explanation": "{ color: \"red\" } !== { color: \"red\" } by reference. Hoist the object out of the component or memoize it.",
+          "explanationTr": "Referans olarak { color: \"red\" } !== { color: \"red\" }. Nesneyi bileşenin dışına taşı ya da memoize et."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Keep the handler's reference stable so memo holds",
+          "promptTr": "memo'nun işlemesi için handler referansını kararlı tut",
+          "code": "const handleSelect = ___(\n  (id) => setSelected(id),\n  ___\n);\n\n<Row onSelect={handleSelect} />",
+          "answers": ["useCallback", "[]"],
+          "distractors": ["useMemo", "[id]"],
+          "explanation": "useCallback returns the same function reference between renders while its deps are unchanged — an empty array here, since setSelected is stable.",
+          "explanationTr": "useCallback, bağımlılıkları değişmediği sürece render'lar arasında aynı fonksiyon referansını döndürür — setSelected kararlı olduğundan burada boş dizi."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What is the function-component equivalent of shouldComponentUpdate / PureComponent?",
+          "promptTr": "shouldComponentUpdate / PureComponent'in fonksiyon bileşenindeki karşılığı nedir?",
+          "options": [
+            {
+              "text": "React.memo (optionally with a custom compare function)",
+              "textTr": "React.memo (istenirse özel karşılaştırma fonksiyonuyla)",
+              "correct": true
+            },
+            { "text": "useEffect with an empty array", "textTr": "Boş dizili useEffect" },
+            { "text": "useRef", "textTr": "useRef" },
+            { "text": "StrictMode", "textTr": "StrictMode" }
+          ],
+          "explanation": "PureComponent = class with built-in shallow prop/state compare; memo brings the same shallow-compare skip to function components.",
+          "explanationTr": "PureComponent = yerleşik sığ prop/state karşılaştırmalı sınıf; memo aynı sığ karşılaştırma atlamasını fonksiyon bileşenlerine getirir."
+        },
+        {
+          "type": "challenge",
+          "question": "What are Pure Components?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is the point of shouldComponentUpdate()?"
+        }
+      ]
+    },
+    {
+      "slug": "keeping-renders-cheap",
+      "title": "Keeping renders cheap",
+      "titleTr": "Render'ları ucuz tutmak",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Measure, then memoize",
+          "titleTr": "Önce ölç, sonra memoize et",
+          "body": "`useMemo` caches an **expensive calculation** between renders:\n\n```jsx\nconst sorted = useMemo(\n  () => [...rows].sort(byDate),\n  [rows]\n);\n```\n\nRules of thumb:\n\n- **Profile first** (React DevTools Profiler) — most renders are already fast; memoization adds its own cost and complexity.\n- Keep the render itself light: no heavy loops, no new Date()/random (impure!), no huge inline structures.\n- **Ship the production build** — it strips dev warnings and StrictMode double-renders, and is dramatically faster (`next build`, or `NODE_ENV=production`).",
+          "bodyTr": "`useMemo`, **pahalı bir hesaplamayı** render'lar arasında önbelleğe alır:\n\n```jsx\nconst sorted = useMemo(\n  () => [...rows].sort(byDate),\n  [rows]\n);\n```\n\nPratik kurallar:\n\n- **Önce profille** (React DevTools Profiler) — çoğu render zaten hızlıdır; memoization kendi maliyetini ve karmaşıklığını getirir.\n- Render'ın kendisini hafif tut: ağır döngü yok, new Date()/random yok (saf değil!), dev inline yapılar yok.\n- **Production build'i yayınla** — dev uyarılarını ve StrictMode çift render'larını söker, dramatik biçimde hızlıdır (`next build` ya da `NODE_ENV=production`).",
+          "visual": "effect-timeline"
+        },
+        {
+          "type": "mcq",
+          "prompt": "Why is the production build so much faster than development?",
+          "promptTr": "Production build neden development'tan bu kadar hızlı?",
+          "options": [
+            {
+              "text": "Dev-only checks, warnings and StrictMode double-invokes are stripped; code is minified",
+              "textTr": "Yalnızca dev'e özgü kontroller, uyarılar ve StrictMode çift çalıştırmaları söküldü; kod minify edildi",
+              "correct": true
+            },
+            {
+              "text": "Production uses a different virtual DOM algorithm",
+              "textTr": "Production farklı bir sanal DOM algoritması kullanır"
+            },
+            {
+              "text": "The browser allocates more memory to production sites",
+              "textTr": "Tarayıcı production sitelere daha çok bellek ayırır"
+            },
+            {
+              "text": "It isn't — only the bundle is smaller",
+              "textTr": "Değildir — sadece bundle küçülür"
+            }
+          ],
+          "explanation": "Development React trades speed for diagnostics. Never measure performance against a dev build.",
+          "explanationTr": "Development React, hızı tanılama yeteneğiyle takas eder. Performansı asla dev build üzerinden ölçme."
+        },
+        {
+          "type": "true_false",
+          "statement": "Wrapping every component in memo and every value in useMemo is a good default strategy.",
+          "statementTr": "Her bileşeni memo'ya, her değeri useMemo'ya sarmak iyi bir varsayılan stratejidir.",
+          "answer": false,
+          "explanation": "Each memoization costs memory and comparison work, and hides bugs behind stale caches. Optimize what the Profiler proves slow.",
+          "explanationTr": "Her memoization bellek ve karşılaştırma maliyeti getirir, bayat önbelleklerle bug gizler. Profiler'ın yavaş olduğunu kanıtladığını optimize et."
+        },
+        {
+          "type": "match",
+          "prompt": "Match the tool to the problem it solves",
+          "promptTr": "Aracı çözdüğü sorunla eşleştir",
+          "pairs": [
+            {
+              "left": "React.memo",
+              "leftTr": "React.memo",
+              "right": "Child re-renders with unchanged props",
+              "rightTr": "Props'u değişmeyen çocuğun render'ı"
+            },
+            {
+              "left": "useMemo",
+              "leftTr": "useMemo",
+              "right": "Expensive calculation repeats each render",
+              "rightTr": "Pahalı hesap her render'da tekrarlanıyor"
+            },
+            {
+              "left": "useCallback",
+              "leftTr": "useCallback",
+              "right": "Function prop breaks memo'd children",
+              "rightTr": "Fonksiyon prop'u memo'lu çocukları bozuyor"
+            },
+            {
+              "left": "DevTools Profiler",
+              "leftTr": "DevTools Profiler",
+              "right": "Finding what is actually slow",
+              "rightTr": "Gerçekte neyin yavaş olduğunu bulmak"
+            }
+          ]
+        },
+        {
+          "type": "challenge",
+          "question": "How do you build React in production mode, and what does that do?"
+        },
+        {
+          "type": "challenge",
+          "question": "What are some limitations of things you shouldn't do in the component's render method?"
+        }
+      ]
+    }
+  ]
+}

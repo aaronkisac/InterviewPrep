@@ -15,6 +15,7 @@ import { ComponentTree } from "./component-tree";
 import { ContextTunnel } from "./context-tunnel";
 import { EffectTimeline } from "./effect-timeline";
 import { HookRules } from "./hook-rules";
+import { MemoRerender } from "./memo-rerender";
 import { PropsFlow } from "./props-flow";
 import { VdomDiff } from "./vdom-diff";
 
@@ -26,6 +27,7 @@ const VISUALS: Record<
   "context-tunnel": ContextTunnel,
   "effect-timeline": EffectTimeline,
   "hook-rules": HookRules,
+  "memo-rerender": MemoRerender,
   "props-flow": PropsFlow,
   "vdom-diff": VdomDiff,
 };

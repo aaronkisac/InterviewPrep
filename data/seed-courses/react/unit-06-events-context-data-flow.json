@@ -1,0 +1,262 @@
+{
+  "topic": "react",
+  "slug": "events-context-data-flow",
+  "title": "Events, Context & Data Flow",
+  "titleTr": "Event'ler, Context ve Veri Akışı",
+  "section": "core",
+  "position": 6,
+  "lessons": [
+    {
+      "slug": "handling-events",
+      "title": "Handling events",
+      "titleTr": "Event'leri yönetmek",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Events, the React way",
+          "titleTr": "React usulü event'ler",
+          "body": "React wraps native events in **SyntheticEvent** — one consistent API across browsers, attached via camelCase props:\n\n```jsx\n<button onClick={handleClick}>Save</button>\n```\n\nThree habits to build:\n\n1. Pass the **function itself** (`onClick={handleClick}`), don't call it (`handleClick()` runs on render!)\n2. Need an argument? Wrap it: `onClick={() => remove(item.id)}`\n3. Stop a form's native submit with `e.preventDefault()`",
+          "bodyTr": "React, yerel event'leri **SyntheticEvent** ile sarar — tarayıcılar arası tutarlı tek API, camelCase prop'larla bağlanır:\n\n```jsx\n<button onClick={handleClick}>Kaydet</button>\n```\n\nEdinilecek üç alışkanlık:\n\n1. **Fonksiyonun kendisini** geçir (`onClick={handleClick}`), çağırma (`handleClick()` render'da çalışır!)\n2. Argüman mı lazım? Sarmala: `onClick={() => remove(item.id)}`\n3. Formun yerel submit'ini `e.preventDefault()` ile durdur"
+        },
+        {
+          "type": "output_predict",
+          "prompt": "What happens when this component renders?",
+          "promptTr": "Bu bileşen render olduğunda ne olur?",
+          "code": "<button onClick={deleteAll()}>\n  Delete all\n</button>",
+          "options": [
+            {
+              "text": "deleteAll runs immediately during render — not on click",
+              "textTr": "deleteAll, tıklamada değil render sırasında hemen çalışır",
+              "correct": true
+            },
+            {
+              "text": "It waits for the click as usual",
+              "textTr": "Her zamanki gibi tıklamayı bekler"
+            },
+            {
+              "text": "React warns and ignores the handler",
+              "textTr": "React uyarır ve handler'ı yok sayar"
+            },
+            {
+              "text": "Syntax error",
+              "textTr": "Sözdizimi hatası"
+            }
+          ],
+          "explanation": "deleteAll() is evaluated while building the JSX. Pass the reference (onClick={deleteAll}) or wrap it in an arrow.",
+          "explanationTr": "deleteAll() JSX kurulurken değerlendirilir. Referansı geçir (onClick={deleteAll}) ya da arrow ile sarmala."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Delete one item, and keep the form from reloading the page",
+          "promptTr": "Tek bir öğeyi sil ve formun sayfayı yenilemesini engelle",
+          "code": "<form onSubmit={(e) => e.___()}>\n  <button onClick={() => remove(___)}>x</button>\n</form>",
+          "answers": ["preventDefault", "item.id"],
+          "distractors": ["stopPropagation", "e.target.id"],
+          "explanation": "preventDefault stops the browser's default action (form navigation); the arrow lets you pass the id at click time.",
+          "explanationTr": "preventDefault tarayıcının varsayılan eylemini (form navigasyonu) durdurur; arrow, id'yi tıklama anında geçirmeni sağlar."
+        },
+        {
+          "type": "true_false",
+          "statement": "stopPropagation() and preventDefault() do the same thing.",
+          "statementTr": "stopPropagation() ile preventDefault() aynı şeyi yapar.",
+          "answer": false,
+          "explanation": "preventDefault cancels the browser's default action; stopPropagation stops the event from bubbling up to parent handlers.",
+          "explanationTr": "preventDefault tarayıcının varsayılan eylemini iptal eder; stopPropagation event'in ebeveyn handler'lara kabarcıklanmasını durdurur."
+        },
+        {
+          "type": "challenge",
+          "question": "How are events handled in React?"
+        },
+        {
+          "type": "challenge",
+          "question": "How do you pass a parameter to an event handler?"
+        },
+        {
+          "type": "challenge",
+          "question": "How do you prevent the default behavior of an event?"
+        }
+      ]
+    },
+    {
+      "slug": "context",
+      "title": "Context: skipping the middlemen",
+      "titleTr": "Context: aracıları atlamak",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "When props have to travel too far",
+          "titleTr": "Props çok uzağa taşınmak zorunda kalınca",
+          "body": "Passing `theme` through five components that never use it is **prop drilling**. **Context** tunnels a value straight to whoever needs it:\n\n```jsx\nconst ThemeContext = createContext(\"light\");\n\n<ThemeContext.Provider value={theme}>\n  <App />\n</ThemeContext.Provider>\n\n// anywhere below:\nconst theme = useContext(ThemeContext);\n```\n\nUse it for truly tree-wide data: theme, locale, auth user. Every consumer re-renders when the value changes — so it's not a dumping ground for fast-changing state.",
+          "bodyTr": "`theme`'i onu hiç kullanmayan beş bileşenden geçirmek **prop drilling**'dir. **Context**, değeri ihtiyacı olana doğrudan tüneller:\n\n```jsx\nconst ThemeContext = createContext(\"light\");\n\n<ThemeContext.Provider value={theme}>\n  <App />\n</ThemeContext.Provider>\n\n// aşağıda herhangi bir yerde:\nconst theme = useContext(ThemeContext);\n```\n\nGerçekten ağaç çapındaki veriler için kullan: tema, dil, oturum kullanıcısı. Değer değiştiğinde her tüketici yeniden render olur — yani hızlı değişen state için çöplük değildir.",
+          "visual": "context-tunnel"
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Read the current user anywhere in the tree",
+          "promptTr": "Mevcut kullanıcıyı ağacın herhangi bir yerinde oku",
+          "code": "const UserContext = ___(null);\n\nfunction Avatar() {\n  const user = ___(UserContext);\n  return <img src={user.photo} />;\n}",
+          "answers": ["createContext", "useContext"],
+          "distractors": ["useContext", "createContext"],
+          "explanation": "createContext defines the channel (module scope); useContext reads the nearest Provider's value.",
+          "explanationTr": "createContext kanalı tanımlar (modül kapsamında); useContext en yakın Provider'ın değerini okur."
+        },
+        {
+          "type": "mcq",
+          "prompt": "A component calls useContext(ThemeContext) but there is NO Provider above it. What does it get?",
+          "promptTr": "Bir bileşen useContext(ThemeContext) çağırıyor ama üstünde Provider YOK. Ne alır?",
+          "options": [
+            {
+              "text": "The default value given to createContext",
+              "textTr": "createContext'e verilen varsayılan değeri",
+              "correct": true
+            },
+            { "text": "undefined, always", "textTr": "Her zaman undefined" },
+            { "text": "A runtime error", "textTr": "Çalışma zamanı hatası" },
+            { "text": "null until a Provider mounts", "textTr": "Bir Provider mount olana dek null" }
+          ],
+          "explanation": "createContext(defaultValue) — the fallback when no Provider is found above. Many codebases pass null and throw a helpful error in a custom hook instead.",
+          "explanationTr": "createContext(defaultValue) — üstte Provider bulunamadığında devreye giren yedek. Birçok codebase null verip custom hook içinde açıklayıcı hata fırlatmayı tercih eder."
+        },
+        {
+          "type": "true_false",
+          "statement": "When a Provider's value changes, only the components that read that context re-render — not everything under the Provider.",
+          "statementTr": "Provider'ın value'su değiştiğinde yalnızca o context'i okuyan bileşenler yeniden render olur — Provider altındaki her şey değil.",
+          "answer": true,
+          "explanation": "Consumers re-render on value change even if memoized in between. Non-readers only re-render for the usual reasons (parent render etc.).",
+          "explanationTr": "Tüketiciler, aradakiler memoize olsa bile value değişince render olur. Okumayanlar yalnızca olağan sebeplerle render olur (ebeveyn render'ı vb.)."
+        },
+        {
+          "type": "challenge",
+          "question": "What is context in React?"
+        }
+      ]
+    },
+    {
+      "slug": "redux-and-global-state",
+      "title": "Redux & global state",
+      "titleTr": "Redux ve global state",
+      "position": 3,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "One store, one direction",
+          "titleTr": "Tek store, tek yön",
+          "body": "When many distant components read **and write** the same data, lifting state and context get clumsy. **Redux** (an implementation of the **Flux** idea) centralizes it:\n\n- **Store** — the single source of truth for app state\n- **Action** — a plain object describing *what happened*\n- **Reducer** — a pure function: `(state, action) → newState`\n\nThe cycle is strictly one-way: UI **dispatches** an action → reducer computes new state → subscribed components re-render. Predictable, loggable, time-travel debuggable.",
+          "bodyTr": "Birbirinden uzak birçok bileşen aynı veriyi okuyup **yazıyorsa**, state'i yukarı taşımak ve context hantallaşır. **Redux** (**Flux** fikrinin bir uygulaması) bunu merkezileştirir:\n\n- **Store** — uygulama state'inin tek gerçek kaynağı\n- **Action** — *ne olduğunu* tarif eden düz bir nesne\n- **Reducer** — saf bir fonksiyon: `(state, action) → yeniState`\n\nDöngü kesinlikle tek yönlüdür: UI bir action **dispatch** eder → reducer yeni state'i hesaplar → abone bileşenler yeniden render olur. Öngörülebilir, loglanabilir, time-travel ile debug edilebilir."
+        },
+        {
+          "type": "order",
+          "prompt": "A user clicks \"Add to cart\". Order the Redux cycle",
+          "promptTr": "Kullanıcı \"Sepete ekle\"ye tıklıyor. Redux döngüsünü sırala",
+          "items": [
+            { "text": "Component dispatches { type: 'cart/add', payload }", "textTr": "Bileşen { type: 'cart/add', payload } dispatch eder" },
+            { "text": "The reducer computes the new state", "textTr": "Reducer yeni state'i hesaplar" },
+            { "text": "The store replaces its state", "textTr": "Store state'ini değiştirir" },
+            { "text": "Subscribed components re-render with the new cart", "textTr": "Abone bileşenler yeni sepetle render olur" }
+          ],
+          "explanation": "dispatch → reduce → store update → notify subscribers. Data never flows backwards.",
+          "explanationTr": "dispatch → reduce → store güncellenir → aboneler bilgilendirilir. Veri asla geriye akmaz."
+        },
+        {
+          "type": "match",
+          "prompt": "Match each Redux piece to its job",
+          "promptTr": "Her Redux parçasını göreviyle eşleştir",
+          "pairs": [
+            { "left": "Store", "leftTr": "Store", "right": "Holds the single state tree", "rightTr": "Tek state ağacını tutar" },
+            { "left": "Action", "leftTr": "Action", "right": "Describes what happened", "rightTr": "Ne olduğunu tarif eder" },
+            { "left": "Reducer", "leftTr": "Reducer", "right": "Pure: (state, action) → newState", "rightTr": "Saf: (state, action) → yeniState" },
+            { "left": "Middleware (thunk/saga)", "leftTr": "Middleware (thunk/saga)", "right": "Handles async work around dispatch", "rightTr": "Dispatch etrafındaki asenkron işi yönetir" }
+          ]
+        },
+        {
+          "type": "mcq",
+          "prompt": "Reducers must be pure. Which of these is allowed inside one?",
+          "promptTr": "Reducer'lar saf olmalı. Hangisi içinde yapılabilir?",
+          "options": [
+            {
+              "text": "Returning a new state object built from the old one",
+              "textTr": "Eskisinden üretilen yeni bir state nesnesi döndürmek",
+              "correct": true
+            },
+            { "text": "Fetching data from an API", "textTr": "API'den veri çekmek" },
+            { "text": "Mutating the incoming state for speed", "textTr": "Hız için gelen state'i mutasyona uğratmak" },
+            { "text": "Dispatching another action", "textTr": "Başka bir action dispatch etmek" }
+          ],
+          "explanation": "Side effects and mutation break time travel and predictability. Async work lives in middleware, not reducers.",
+          "explanationTr": "Yan etkiler ve mutasyon time travel'ı ve öngörülebilirliği bozar. Asenkron iş reducer'da değil middleware'de yaşar."
+        },
+        {
+          "type": "challenge",
+          "question": "What is the point of Redux?"
+        },
+        {
+          "type": "challenge",
+          "question": "Where is state kept in a React + Redux application?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is the typical data flow in a React + Redux app?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is Flux?"
+        },
+        {
+          "type": "challenge",
+          "question": "What are typical middleware choices for handling async calls in Redux?"
+        }
+      ]
+    },
+    {
+      "slug": "portals-and-reactdom",
+      "title": "Portals & ReactDOM",
+      "titleTr": "Portal'lar ve ReactDOM",
+      "position": 4,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Rendering outside the box",
+          "titleTr": "Kutunun dışına render etmek",
+          "body": "**ReactDOM** is the renderer that connects React to the browser — `createRoot(el).render(<App />)` mounts your tree.\n\nSometimes a child must visually escape its parent: modals, tooltips, toasts trapped by `overflow: hidden` or z-index. A **portal** renders the element into a different DOM node while keeping it in the same React tree:\n\n```jsx\ncreatePortal(<Modal />, document.body)\n```\n\nEvents still bubble through the *React* tree, context still works — only the DOM location changes.",
+          "bodyTr": "**ReactDOM**, React'i tarayıcıya bağlayan renderer'dır — `createRoot(el).render(<App />)` ağacını mount eder.\n\nBazen bir çocuk, ebeveyninden görsel olarak kaçmalıdır: `overflow: hidden` veya z-index'e takılan modal'lar, tooltip'ler, toast'lar. **Portal**, elemanı React ağacında tutarken farklı bir DOM düğümüne render eder:\n\n```jsx\ncreatePortal(<Modal />, document.body)\n```\n\nEvent'ler yine *React* ağacında kabarcıklanır, context yine çalışır — yalnızca DOM konumu değişir.",
+          "visual": "component-tree"
+        },
+        {
+          "type": "true_false",
+          "statement": "A click inside a portal still bubbles up to the portal's React parent, even though the DOM parent is different.",
+          "statementTr": "Portal içindeki bir tıklama, DOM ebeveyni farklı olsa bile portalın React ebeveynine kabarcıklanır.",
+          "answer": true,
+          "explanation": "Portals change WHERE the DOM lives, not the React tree — events and context follow the React tree.",
+          "explanationTr": "Portal'lar DOM'un NEREDE yaşadığını değiştirir, React ağacını değil — event'ler ve context React ağacını izler."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Which is the classic portal use case?",
+          "promptTr": "Klasik portal kullanım senaryosu hangisi?",
+          "options": [
+            {
+              "text": "A modal that must not be clipped by an ancestor's overflow: hidden",
+              "textTr": "Bir atanın overflow: hidden'ına takılmaması gereken bir modal",
+              "correct": true
+            },
+            { "text": "Lazy-loading a route", "textTr": "Bir route'u lazy yüklemek" },
+            { "text": "Sharing state between siblings", "textTr": "Kardeşler arasında state paylaşmak" },
+            { "text": "Memoizing an expensive list", "textTr": "Pahalı bir listeyi memoize etmek" }
+          ],
+          "explanation": "Overlays (modal, tooltip, dropdown, toast) escape clipping/z-index contexts by rendering at document.body.",
+          "explanationTr": "Overlay'ler (modal, tooltip, dropdown, toast) document.body'ye render olarak kırpılma/z-index bağlamlarından kaçar."
+        },
+        {
+          "type": "challenge",
+          "question": "What are portals in React?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is ReactDOM?"
+        }
+      ]
+    }
+  ]
+}
