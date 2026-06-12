@@ -1,0 +1,282 @@
+{
+  "topic": "react",
+  "slug": "patterns-architecture",
+  "title": "Patterns & Architecture",
+  "titleTr": "Pattern'ler ve Mimari",
+  "section": "advanced",
+  "position": 8,
+  "lessons": [
+    {
+      "slug": "jsx-techniques",
+      "title": "JSX techniques",
+      "titleTr": "JSX teknikleri",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "The everyday toolbox",
+          "titleTr": "Günlük alet çantası",
+          "body": "Three patterns you'll write daily:\n\n**Inline conditionals**\n```jsx\n{isAdmin && <AdminPanel />}\n{error ? <Error /> : <Content />}\n```\n\n**Spread props** — forward everything at once:\n```jsx\nfunction Input(props) {\n  return <input className=\"field\" {...props} />;\n}\n```\n\n**Inline styles** take an *object* with camelCase keys:\n```jsx\n<div style={{ backgroundColor: \"teal\", fontSize: 14 }} />\n```\n\nUnder the hood, JSX is `createElement(type, props, children)`; its sibling `cloneElement(element, extraProps)` copies an existing element with merged props.",
+          "bodyTr": "Her gün yazacağın üç pattern:\n\n**Satır içi koşullar**\n```jsx\n{isAdmin && <AdminPanel />}\n{error ? <Error /> : <Content />}\n```\n\n**Spread props** — hepsini tek seferde ilet:\n```jsx\nfunction Input(props) {\n  return <input className=\"field\" {...props} />;\n}\n```\n\n**Satır içi stiller** camelCase anahtarlı bir *nesne* alır:\n```jsx\n<div style={{ backgroundColor: \"teal\", fontSize: 14 }} />\n```\n\nKaputun altında JSX, `createElement(type, props, children)`'dır; kardeşi `cloneElement(element, ekProps)` mevcut bir elemanı prop'ları birleştirerek kopyalar."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Show the badge only when there are unread messages",
+          "promptTr": "Rozeti yalnızca okunmamış mesaj varken göster",
+          "code": "<header>\n  {unread > 0 ___ <Badge count={unread} />}\n  {loading ___ <Spinner /> : <Inbox />}\n</header>",
+          "answers": ["&&", "?"],
+          "distractors": ["||", "??"],
+          "explanation": "&& renders the right side when the left is truthy; the ternary picks between two branches.",
+          "explanationTr": "&& sol taraf truthy iken sağ tarafı render eder; ternary iki dal arasında seçim yapar."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What does {...props} on a JSX element do?",
+          "promptTr": "Bir JSX elemanındaki {...props} ne yapar?",
+          "options": [
+            {
+              "text": "Passes every key of the object as an individual prop",
+              "textTr": "Nesnenin her anahtarını ayrı bir prop olarak geçirir",
+              "correct": true
+            },
+            { "text": "Deep-clones the props object", "textTr": "Props nesnesini derin kopyalar" },
+            { "text": "Converts props to children", "textTr": "Props'u children'a çevirir" },
+            { "text": "Memoizes the props", "textTr": "Props'u memoize eder" }
+          ],
+          "explanation": "JSX spread = object spread for attributes. Later props win, so <input {...props} className=\"x\" /> lets callers be overridden.",
+          "explanationTr": "JSX spread = öznitelikler için nesne spread'i. Sonraki prop kazanır; <input {...props} className=\"x\" /> ile çağıranın değeri ezilebilir."
+        },
+        {
+          "type": "true_false",
+          "statement": "style=\"color: red\" is valid JSX.",
+          "statementTr": "style=\"color: red\" geçerli bir JSX'tir.",
+          "answer": false,
+          "explanation": "JSX style takes an object: style={{ color: \"red\" }}. String CSS belongs in classes/stylesheets.",
+          "explanationTr": "JSX'te style bir nesne alır: style={{ color: \"red\" }}. String CSS sınıfların/stil dosyalarının işidir."
+        },
+        {
+          "type": "challenge",
+          "question": "What are inline conditional expressions in JSX?"
+        },
+        {
+          "type": "challenge",
+          "question": "What do the three dots (...) do in React?"
+        },
+        {
+          "type": "challenge",
+          "question": "How would you write an inline style in React?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is the difference between createElement and cloneElement?"
+        }
+      ]
+    },
+    {
+      "slug": "elements-and-components",
+      "title": "Elements vs components",
+      "titleTr": "Element'ler ve component'ler",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "The recipe and the dish",
+          "titleTr": "Tarif ve yemek",
+          "body": "Interviewers love this distinction:\n\n- A **component** is the *definition* — a function (or class) that returns elements. The recipe.\n- An **element** is what a render *produces* — an immutable plain object like `{ type: Button, props: {…} }` describing one node. The dish.\n\n```jsx\nfunction Button() { … }   // component\nconst el = <Button />;     // element\n```\n\nComponents that manage their own state are **stateful**; ones that purely map props → UI are **stateless**. Since hooks, any function component *can* hold state — the distinction is about what it does, not what it is.",
+          "bodyTr": "Mülakatçılar bu ayrımı çok sever:\n\n- **Component**, *tanımdır* — element döndüren bir fonksiyon (veya sınıf). Tarif.\n- **Element**, render'ın *ürettiğidir* — tek bir düğümü tarif eden `{ type: Button, props: {…} }` gibi değişmez düz bir nesne. Yemek.\n\n```jsx\nfunction Button() { … }   // component\nconst el = <Button />;     // element\n```\n\nKendi state'ini yöneten bileşenler **stateful**, sadece props → UI eşlemesi yapanlar **stateless**'tır. Hook'lardan beri her fonksiyon bileşeni state tutabilir — ayrım ne olduğuyla değil ne yaptığıyla ilgilidir.",
+          "visual": "component-tree"
+        },
+        {
+          "type": "match",
+          "prompt": "Component or element?",
+          "promptTr": "Component mı element mi?",
+          "pairs": [
+            { "left": "function Card() {…}", "leftTr": "function Card() {…}", "right": "Component", "rightTr": "Component" },
+            { "left": "<Card title=\"Hi\" />", "leftTr": "<Card title=\"Hi\" />", "right": "Element", "rightTr": "Element" },
+            { "left": "{ type: 'div', props: {} }", "leftTr": "{ type: 'div', props: {} }", "right": "Element", "rightTr": "Element" },
+            { "left": "class Modal extends React.Component", "leftTr": "class Modal extends React.Component", "right": "Component", "rightTr": "Component" }
+          ]
+        },
+        {
+          "type": "mcq",
+          "prompt": "What does a class component's render() method do?",
+          "promptTr": "Sınıf bileşeninin render() metodu ne yapar?",
+          "options": [
+            {
+              "text": "Returns the element tree describing the UI — pure, no side effects",
+              "textTr": "Arayüzü tarif eden element ağacını döndürür — saftır, yan etkisi olmaz",
+              "correct": true
+            },
+            { "text": "Writes directly to the DOM", "textTr": "Doğrudan DOM'a yazar" },
+            { "text": "Runs once, on mount only", "textTr": "Yalnızca mount'ta bir kez çalışır" },
+            { "text": "Schedules effects", "textTr": "Effect planlar" }
+          ],
+          "explanation": "render() is the class equivalent of a function component's body: produce elements, touch nothing.",
+          "explanationTr": "render(), fonksiyon bileşeninin gövdesinin sınıf karşılığıdır: element üret, hiçbir şeye dokunma."
+        },
+        {
+          "type": "challenge",
+          "question": "How do you create components in React?"
+        },
+        {
+          "type": "challenge",
+          "question": "What's the difference between an Element and a Component in React?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is the render method for?"
+        },
+        {
+          "type": "challenge",
+          "question": "What are stateful components?"
+        },
+        {
+          "type": "challenge",
+          "question": "What are stateless components?"
+        }
+      ]
+    },
+    {
+      "slug": "class-components-and-this",
+      "title": "Class components & this",
+      "titleTr": "Sınıf bileşenleri ve this",
+      "position": 3,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Legacy you'll still meet in codebases",
+          "titleTr": "Codebase'lerde hâlâ karşılaşacağın miras",
+          "body": "Class components still power plenty of production code:\n\n```jsx\nclass Counter extends React.Component {\n  constructor(props) {\n    super(props);           // without this, this.props is undefined in the constructor\n    this.state = { n: 0 };\n    this.inc = this.inc.bind(this); // bind, or `this` is lost when passed as a handler\n  }\n  inc() { this.setState({ n: this.state.n + 1 }); }\n}\n```\n\nThe modern escape from `.bind`: **class fields with arrow functions** (`inc = () => {…}`) — arrows capture `this` lexically. And because `setState` is async-batched, code that must run *after* the update goes in its callback: `this.setState(next, () => …)`.",
+          "bodyTr": "Sınıf bileşenleri hâlâ epey production kodu çalıştırıyor:\n\n```jsx\nclass Counter extends React.Component {\n  constructor(props) {\n    super(props);           // bu olmadan constructor'da this.props undefined olur\n    this.state = { n: 0 };\n    this.inc = this.inc.bind(this); // bind et, yoksa handler olarak geçirilince `this` kaybolur\n  }\n  inc() { this.setState({ n: this.state.n + 1 }); }\n}\n```\n\n`.bind`'dan modern kaçış: **arrow fonksiyonlu class field'ları** (`inc = () => {…}`) — arrow'lar `this`'i leksik olarak yakalar. Ve `setState` asenkron-toplu çalıştığından, güncellemeden *sonra* koşması gereken kod callback'ine gider: `this.setState(next, () => …)`."
+        },
+        {
+          "type": "output_predict",
+          "prompt": "inc is passed as onClick WITHOUT binding. What happens on click?",
+          "promptTr": "inc, bind edilmeden onClick olarak geçiriliyor. Tıklamada ne olur?",
+          "code": "class Counter extends React.Component {\n  inc() { this.setState({ n: this.state.n + 1 }); }\n  render() {\n    return <button onClick={this.inc}>+</button>;\n  }\n}",
+          "options": [
+            {
+              "text": "TypeError — `this` is undefined inside inc",
+              "textTr": "TypeError — inc içinde `this` undefined",
+              "correct": true
+            },
+            { "text": "It works — React binds automatically", "textTr": "Çalışır — React otomatik bind eder" },
+            { "text": "The state updates but doesn't render", "textTr": "State güncellenir ama render olmaz" },
+            { "text": "The whole class re-instantiates", "textTr": "Tüm sınıf yeniden örneklenir" }
+          ],
+          "explanation": "Detached method = lost `this` (class bodies are strict mode). Fix: bind in the constructor, or define inc as an arrow class field.",
+          "explanationTr": "Kopartılan metot = kaybolan `this` (sınıf gövdeleri strict mode'dur). Çözüm: constructor'da bind ya da inc'i arrow class field yap."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Fix the handler without using bind",
+          "promptTr": "Handler'ı bind kullanmadan düzelt",
+          "code": "class Counter extends React.Component {\n  inc = ___ => {\n    this.setState({ n: this.state.n + 1 }, ___ => console.log(\"updated!\"));\n  };\n}",
+          "answers": ["()", "()"],
+          "distractors": ["this", "n"],
+          "explanation": "Arrow class fields capture this lexically; the second argument of setState runs after the update is applied.",
+          "explanationTr": "Arrow class field'ları this'i leksik yakalar; setState'in ikinci argümanı güncelleme uygulandıktan sonra çalışır."
+        },
+        {
+          "type": "true_false",
+          "statement": "In a constructor, you must call super(props) before touching `this`.",
+          "statementTr": "Constructor'da `this`'e dokunmadan önce super(props) çağırmak zorundasın.",
+          "answer": true,
+          "explanation": "JavaScript requires super() before this in derived classes; passing props makes this.props available inside the constructor.",
+          "explanationTr": "JavaScript türetilmiş sınıflarda this'ten önce super() ister; props'u geçirmek constructor içinde this.props'u kullanılabilir yapar."
+        },
+        {
+          "type": "challenge",
+          "question": "What is the purpose of calling super(props) in a constructor?"
+        },
+        {
+          "type": "challenge",
+          "question": "Why do class methods need to be bound to a class instance?"
+        },
+        {
+          "type": "challenge",
+          "question": "What's an alternative way to avoid having to bind to this in event callback methods?"
+        },
+        {
+          "type": "challenge",
+          "question": "What are the advantages of using arrow functions in React?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is the purpose of the callback argument of setState?"
+        }
+      ]
+    },
+    {
+      "slug": "architecture-patterns",
+      "title": "Architecture patterns",
+      "titleTr": "Mimari pattern'ler",
+      "position": 4,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Organizing components at scale",
+          "titleTr": "Bileşenleri ölçekte organize etmek",
+          "body": "**Higher-order component (HOC)** — a function that takes a component and returns an enhanced one:\n\n```jsx\nconst withAuth = (Component) => (props) =>\n  isLoggedIn() ? <Component {...props} /> : <Login />;\n```\n\n**Presentational vs container** — split \"how it looks\" (dumb, props-only) from \"how it works\" (data fetching, state). Hooks largely replaced both patterns, but they live on in older codebases and interviews.\n\n**Where do AJAX calls go?** Class era: `componentDidMount`. Hooks era: `useEffect` (or a data library like React Query / SWR). Never during render.\n\n**Type safety**: `PropTypes` validates props at *runtime* (dev warnings); **Flow**/TypeScript catch the same bugs at *compile time*.",
+          "bodyTr": "**Higher-order component (HOC)** — bir bileşeni alıp geliştirilmiş halini döndüren fonksiyon:\n\n```jsx\nconst withAuth = (Component) => (props) =>\n  isLoggedIn() ? <Component {...props} /> : <Login />;\n```\n\n**Presentational vs container** — \"nasıl göründüğü\"nü (saf, yalnızca props) \"nasıl çalıştığı\"ndan (veri çekme, state) ayır. Hook'lar bu pattern'lerin yerini büyük ölçüde aldı ama eski codebase'lerde ve mülakatlarda yaşamaya devam ediyorlar.\n\n**AJAX çağrıları nereye?** Sınıf dönemi: `componentDidMount`. Hook dönemi: `useEffect` (ya da React Query / SWR gibi bir veri kütüphanesi). Asla render sırasında değil.\n\n**Tip güvenliği**: `PropTypes` props'u *çalışma zamanında* doğrular (dev uyarıları); **Flow**/TypeScript aynı hataları *derleme zamanında* yakalar."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Which one is a higher-order component?",
+          "promptTr": "Hangisi bir higher-order component'tir?",
+          "options": [
+            {
+              "text": "connect(mapState)(TodoList) — takes a component, returns a wrapped one",
+              "textTr": "connect(mapState)(TodoList) — bir bileşen alır, sarılmışını döndürür",
+              "correct": true
+            },
+            { "text": "useTodos() — returns data", "textTr": "useTodos() — veri döndürür" },
+            { "text": "<TodoList render={...} /> — render prop", "textTr": "<TodoList render={...} /> — render prop" },
+            { "text": "memo? No wait — actually <Provider>", "textTr": "memo? Yok dur — aslında <Provider>" }
+          ],
+          "explanation": "HOC = Component in, Component out. Redux's connect is the classic example. (memo technically is one too!)",
+          "explanationTr": "HOC = Component girer, Component çıkar. Redux'ın connect'i klasik örnektir. (Teknik olarak memo da öyledir!)"
+        },
+        {
+          "type": "match",
+          "prompt": "Match the tool to when it catches a bad prop",
+          "promptTr": "Aracı, hatalı prop'u yakaladığı anla eşleştir",
+          "pairs": [
+            { "left": "PropTypes", "leftTr": "PropTypes", "right": "Runtime, dev-only console warning", "rightTr": "Çalışma zamanı, yalnızca dev console uyarısı" },
+            { "left": "Flow / TypeScript", "leftTr": "Flow / TypeScript", "right": "Compile time, before the code runs", "rightTr": "Derleme zamanı, kod çalışmadan önce" },
+            { "left": "Presentational component", "leftTr": "Presentational bileşen", "right": "Renders from props, no data logic", "rightTr": "Props'tan render eder, veri mantığı yok" },
+            { "left": "Container component", "leftTr": "Container bileşen", "right": "Fetches data, holds state", "rightTr": "Veri çeker, state tutar" }
+          ]
+        },
+        {
+          "type": "true_false",
+          "statement": "Fetching data during render (in the component body, outside any effect) is fine as long as you cache it.",
+          "statementTr": "Render sırasında (bileşen gövdesinde, effect dışında) veri çekmek, önbelleğe aldığın sürece sorun değildir.",
+          "answer": false,
+          "explanation": "Render must stay pure — a fetch in the body fires on every render and breaks StrictMode/concurrent rendering. Effects or data libraries own that job.",
+          "explanationTr": "Render saf kalmalı — gövdedeki fetch her render'da ateşlenir, StrictMode/eşzamanlı render'ı bozar. O iş effect'lerin veya veri kütüphanelerinin işidir."
+        },
+        {
+          "type": "challenge",
+          "question": "What are higher-order components?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is the difference between presentational and container components?"
+        },
+        {
+          "type": "challenge",
+          "question": "What are PropTypes in React?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is Flow?"
+        },
+        {
+          "type": "challenge",
+          "question": "Where should you make an AJAX request in a component?"
+        }
+      ]
+    }
+  ]
+}
