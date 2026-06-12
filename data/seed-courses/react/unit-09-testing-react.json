@@ -1,0 +1,124 @@
+{
+  "topic": "react",
+  "slug": "testing-react",
+  "title": "Testing React",
+  "titleTr": "React'i Test Etmek",
+  "section": "advanced",
+  "position": 9,
+  "lessons": [
+    {
+      "slug": "testing-mindset",
+      "title": "The testing mindset",
+      "titleTr": "Test zihniyeti",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Test what the user sees",
+          "titleTr": "Kullanıcının gördüğünü test et",
+          "body": "The guiding principle (from Testing Library): *\"The more your tests resemble the way your software is used, the more confidence they can give you.\"*\n\nIn practice:\n\n- Query the screen the way a user would — by **role**, **label**, **text** — not by class names or component internals.\n- Test **behavior** (\"clicking Add puts the item in the list\"), not **implementation** (\"setState was called with…\"). Implementation tests shatter on every refactor.\n- The stack: **Jest** (or Vitest) runs tests and provides assertions/mocks; **React Testing Library** renders components into a DOM and queries it; **Playwright/Cypress** drive a real browser for end-to-end flows.",
+          "bodyTr": "Yol gösteren ilke (Testing Library'den): *\"Testlerin, yazılımının kullanılma biçimine ne kadar benzerse, sana o kadar güven verir.\"*\n\nPratikte:\n\n- Ekranı bir kullanıcının yapacağı gibi sorgula — **role**, **label**, **text** ile — class adları veya bileşen içyapısıyla değil.\n- **Davranışı** test et (\"Ekle'ye tıklayınca öğe listeye girer\"), **implementasyonu** değil (\"setState şununla çağrıldı…\"). İmplementasyon testleri her refactor'da kırılır.\n- Stack: **Jest** (veya Vitest) testleri çalıştırır, assertion/mock sağlar; **React Testing Library** bileşenleri DOM'a render edip sorgular; **Playwright/Cypress** uçtan uca akışlar için gerçek tarayıcı sürer."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Which query best follows Testing Library's philosophy?",
+          "promptTr": "Hangi sorgu Testing Library felsefesine en uygun?",
+          "options": [
+            {
+              "text": "screen.getByRole(\"button\", { name: \"Save\" })",
+              "textTr": "screen.getByRole(\"button\", { name: \"Save\" })",
+              "correct": true
+            },
+            { "text": "container.querySelector(\".btn-primary\")", "textTr": "container.querySelector(\".btn-primary\")" },
+            { "text": "wrapper.find(SaveButton).props()", "textTr": "wrapper.find(SaveButton).props()" },
+            { "text": "screen.getByTestId(\"save\")  — always first choice", "textTr": "screen.getByTestId(\"save\") — her zaman ilk tercih" }
+          ],
+          "explanation": "Roles + accessible names are what assistive tech (and users) perceive — they survive refactors and double as an a11y check. test-id is the escape hatch, not the default.",
+          "explanationTr": "Role + erişilebilir ad, yardımcı teknolojinin (ve kullanıcının) algıladığı şeydir — refactor'lara dayanır, üstüne a11y kontrolü sayılır. test-id varsayılan değil kaçış kapısıdır."
+        },
+        {
+          "type": "true_false",
+          "statement": "A test that asserts \"component state equals X after click\" is more robust than one asserting \"the new todo appears on screen\".",
+          "statementTr": "\"Tıklamadan sonra bileşen state'i X olur\" diyen bir test, \"yeni todo ekranda görünür\" diyen testten daha sağlamdır.",
+          "answer": false,
+          "explanation": "State shape is an implementation detail — rename a field and the test dies while the app still works. Screen output is the contract.",
+          "explanationTr": "State'in şekli bir implementasyon detayıdır — bir alanı yeniden adlandır, uygulama çalışmaya devam ederken test ölür. Ekran çıktısı asıl sözleşmedir."
+        },
+        {
+          "type": "match",
+          "prompt": "Match the tool to its job in a React test stack",
+          "promptTr": "Aracı React test stack'indeki göreviyle eşleştir",
+          "pairs": [
+            { "left": "Jest / Vitest", "leftTr": "Jest / Vitest", "right": "Runner, assertions, mocks, coverage", "rightTr": "Runner, assertion, mock, coverage" },
+            { "left": "React Testing Library", "leftTr": "React Testing Library", "right": "Render + query components like a user", "rightTr": "Bileşeni kullanıcı gibi render et + sorgula" },
+            { "left": "user-event", "leftTr": "user-event", "right": "Realistic typing, clicking, tabbing", "rightTr": "Gerçekçi yazma, tıklama, tab'lama" },
+            { "left": "Playwright / Cypress", "leftTr": "Playwright / Cypress", "right": "End-to-end flows in a real browser", "rightTr": "Gerçek tarayıcıda uçtan uca akışlar" }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "jest-and-rtl",
+      "title": "Jest & Testing Library in practice",
+      "titleTr": "Pratikte Jest ve Testing Library",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Anatomy of a component test",
+          "titleTr": "Bir bileşen testinin anatomisi",
+          "body": "```jsx\nimport { render, screen } from \"@testing-library/react\";\nimport userEvent from \"@testing-library/user-event\";\n\ntest(\"adds a todo\", async () => {\n  render(<TodoApp />);\n\n  await userEvent.type(\n    screen.getByRole(\"textbox\"), \"Buy milk\");\n  await userEvent.click(\n    screen.getByRole(\"button\", { name: \"Add\" }));\n\n  expect(screen.getByText(\"Buy milk\")).toBeInTheDocument();\n});\n```\n\nArrange (render) → act (user-event) → assert (screen). **Jest** supplies `test`, `expect`, module mocks (`jest.mock`), timers and coverage reports; RTL supplies the DOM-level rendering and queries. Async UI? `await screen.findByText(…)` polls until it appears.",
+          "bodyTr": "```jsx\nimport { render, screen } from \"@testing-library/react\";\nimport userEvent from \"@testing-library/user-event\";\n\ntest(\"todo ekler\", async () => {\n  render(<TodoApp />);\n\n  await userEvent.type(\n    screen.getByRole(\"textbox\"), \"Süt al\");\n  await userEvent.click(\n    screen.getByRole(\"button\", { name: \"Ekle\" }));\n\n  expect(screen.getByText(\"Süt al\")).toBeInTheDocument();\n});\n```\n\nArrange (render) → act (user-event) → assert (screen). **Jest**; `test`, `expect`, modül mock'ları (`jest.mock`), timer'lar ve coverage raporları sağlar; RTL ise DOM seviyesinde render ve sorguları. Asenkron UI mı? `await screen.findByText(…)` görünene dek bekler."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Complete the test",
+          "promptTr": "Testi tamamla",
+          "code": "render(<Counter />);\n\nawait userEvent.___(screen.getByRole(\"button\", { name: \"+\" }));\n\nexpect(screen.getByText(\"1\")).___();",
+          "answers": ["click", "toBeInTheDocument"],
+          "distractors": ["press", "toExist"],
+          "explanation": "user-event simulates the full event chain of a real click; jest-dom matchers like toBeInTheDocument read like English.",
+          "explanationTr": "user-event gerçek bir tıklamanın tüm event zincirini simüle eder; toBeInTheDocument gibi jest-dom matcher'ları İngilizce gibi okunur."
+        },
+        {
+          "type": "mcq",
+          "prompt": "The list loads from an API after mount. Which assertion works?",
+          "promptTr": "Liste, mount'tan sonra API'den yükleniyor. Hangi assertion çalışır?",
+          "options": [
+            {
+              "text": "expect(await screen.findByText(\"Buy milk\")).toBeInTheDocument()",
+              "textTr": "expect(await screen.findByText(\"Süt al\")).toBeInTheDocument()",
+              "correct": true
+            },
+            {
+              "text": "expect(screen.getByText(\"Buy milk\")).toBeInTheDocument() — right after render",
+              "textTr": "expect(screen.getByText(\"Süt al\")).toBeInTheDocument() — render'dan hemen sonra"
+            },
+            {
+              "text": "setTimeout(() => expect(...), 2000)",
+              "textTr": "setTimeout(() => expect(...), 2000)"
+            },
+            {
+              "text": "expect(fetch).toHaveBeenCalled() is enough",
+              "textTr": "expect(fetch).toHaveBeenCalled() yeterli"
+            }
+          ],
+          "explanation": "findBy* = getBy* + waiting. getBy throws immediately; raw setTimeout is flaky; asserting fetch was called tests plumbing, not outcome.",
+          "explanationTr": "findBy* = getBy* + bekleme. getBy anında fırlatır; çıplak setTimeout güvenilmezdir; fetch çağrıldı demek sonucu değil tesisatı test eder."
+        },
+        {
+          "type": "true_false",
+          "statement": "jest.mock(\"./api\") replaces the real module so tests run without hitting the network.",
+          "statementTr": "jest.mock(\"./api\") gerçek modülün yerine geçer, böylece testler ağa çıkmadan çalışır.",
+          "answer": true,
+          "explanation": "Module mocking isolates the unit under test — deterministic, fast, offline. (MSW is the heavier alternative that mocks at the network layer.)",
+          "explanationTr": "Modül mock'lama test edilen birimi izole eder — deterministik, hızlı, çevrimdışı. (MSW, ağ katmanında mock'layan daha kapsamlı alternatiftir.)"
+        },
+        {
+          "type": "challenge",
+          "question": "What is JEST?"
+        }
+      ]
+    }
+  ]
+}

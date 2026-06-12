@@ -7,7 +7,14 @@
  *   2. Apply migrations: `supabase db push`
  *   3. Run: `pnpm seed`
  *
+ * Sections can be run selectively (much faster while iterating):
+ *   pnpm seed courses          # only data/seed-courses/
+ *   pnpm seed mock             # only mock options
+ *   pnpm seed questions terms  # questions + glossary terms
+ *
  * Idempotent: rows are matched on (topic, question) and upserted.
+ * Performance: one prefetch builds a (topic, question) → id map, then all
+ * writes go out as chunked batch requests instead of per-row round trips.
  */
 
 import { readFile, readdir } from "node:fs/promises";
@@ -66,6 +73,8 @@ const SEED_FILES: ReadonlyArray<{ topic: Topic; file: string }> = [
   { topic: "nextjs", file: "seed-nextjs.json" },
 ];
 
+const BATCH_SIZE = 500;
+
 function getEnv(name: string): string {
   const v = process.env[name];
   if (!v) throw new Error(`Missing env var: ${name}`);
@@ -74,9 +83,8 @@ function getEnv(name: string): string {
 
 /**
  * Retry transient network failures (undici "fetch failed", ECONNRESET).
- * The seed run makes ~1800 sequential requests — a single blip should not
- * kill the whole run. Supabase API errors (returned, not thrown) are not
- * retried; only thrown fetch-level errors are.
+ * Supabase API errors (returned, not thrown) are not retried; only thrown
+ * fetch-level errors are.
  */
 async function withRetry<T>(
   // PromiseLike, not Promise: supabase query builders are thenables
@@ -99,6 +107,45 @@ async function withRetry<T>(
     }
   }
   throw lastErr;
+}
+
+/** Map key for question identity: topic + tab + trimmed question text. */
+function keyOf(topic: string, question: string): string {
+  return `${topic}\t${question.trim()}`;
+}
+
+function chunk<T>(items: T[], size: number): T[][] {
+  const out: T[][] = [];
+  for (let i = 0; i < items.length; i += size) out.push(items.slice(i, i + size));
+  return out;
+}
+
+/**
+ * One paged prefetch of every question's (topic, question) → id.
+ * Replaces thousands of per-row lookups across questions, mock options and
+ * course challenge resolution.
+ */
+async function fetchQuestionMap(
+  supabase: SupabaseClient,
+): Promise<Map<string, string>> {
+  const map = new Map<string, string>();
+  const page = 1000;
+  for (let from = 0; ; from += page) {
+    const { data, error } = await withRetry(
+      () =>
+        supabase
+          .from("questions")
+          .select("id, topic, question")
+          .range(from, from + page - 1),
+      "question map page",
+    );
+    if (error) throw new Error(error.message);
+    for (const r of data ?? []) {
+      map.set(keyOf(r.topic as string, r.question as string), r.id as string);
+    }
+    if (!data || data.length < page) break;
+  }
+  return map;
 }
 
 async function loadSeedFile(file: string): Promise<SeedQuestion[]> {
@@ -163,72 +210,82 @@ function toInsert(q: SeedQuestion): SeedInsert {
   };
 }
 
+/**
+ * Batched question upsert.
+ * Existing rows (found in the prefetched map) go out as chunked
+ * upsert-by-id requests; new rows as chunked inserts whose returned ids are
+ * fed back into the map (mock options / challenges resolve against it later).
+ * Rows carrying an explicit `uuid` keep the old per-row update path — that
+ * branch intentionally writes a narrower column set.
+ */
 async function upsertBatch(
   supabase: SupabaseClient,
   topic: Topic,
   rows: SeedInsert[],
+  qmap: Map<string, string>,
 ): Promise<{ inserted: number; updated: number }> {
   let inserted = 0;
   let updated = 0;
 
+  const inserts: Array<Omit<SeedInsert, "uuid">> = [];
+  const upserts: Array<Omit<SeedInsert, "uuid"> & { id: string }> = [];
+
   for (const row of rows) {
     // If uuid is provided, update directly by UUID — bypasses question-text matching
     if (row.uuid) {
-      const { error: updateError } = await supabase
-        .from("questions")
-        .update({
-          level: row.level,
-          level_label: row.level_label,
-          question_tr: row.question_tr,
-          answer_general: row.answer_general,
-          answer_general_tr: row.answer_general_tr,
-          answer_personal_tr: row.answer_personal_tr,
-          detail_md: row.detail_md,
-          detail_md_tr: row.detail_md_tr,
-        })
-        .eq("id", row.uuid);
-      if (updateError) throw new Error(`UUID update failed for ${row.uuid}: ${updateError.message}`);
+      const { error: updateError } = await withRetry(
+        () =>
+          supabase
+            .from("questions")
+            .update({
+              level: row.level,
+              level_label: row.level_label,
+              question_tr: row.question_tr,
+              answer_general: row.answer_general,
+              answer_general_tr: row.answer_general_tr,
+              answer_personal_tr: row.answer_personal_tr,
+              detail_md: row.detail_md,
+              detail_md_tr: row.detail_md_tr,
+            })
+            .eq("id", row.uuid!),
+        "uuid update",
+      );
+      if (updateError) {
+        throw new Error(`UUID update failed for ${row.uuid}: ${updateError.message}`);
+      }
       updated += 1;
       continue;
     }
 
-    const { data: existing, error: selectError } = await supabase
-      .from("questions")
-      .select("id, level, level_label")
-      .eq("topic", row.topic)
-      .eq("question", row.question)
-      .maybeSingle();
-
-    if (selectError) {
-      throw new Error(
-        `Lookup failed for "${row.question.slice(0, 40)}…": ${selectError.message}`,
-      );
-    }
-
-    if (existing) {
-      const { error: updateError } = await supabase
-        .from("questions")
-        .update({
-          level: row.level,
-          level_label: row.level_label,
-          question_tr: row.question_tr,
-          answer_general: row.answer_general,
-          answer_personal: row.answer_personal,
-          answer_general_tr: row.answer_general_tr,
-          answer_personal_tr: row.answer_personal_tr,
-          detail_md: row.detail_md,
-          detail_md_tr: row.detail_md_tr,
-        })
-        .eq("id", existing.id);
-      if (updateError) throw new Error(updateError.message);
-      updated += 1;
+    const { uuid: _uuid, ...clean } = row;
+    const id = qmap.get(keyOf(clean.topic, clean.question));
+    if (id) {
+      upserts.push({ ...clean, id });
     } else {
-      const { error: insertError } = await supabase
-        .from("questions")
-        .insert(row);
-      if (insertError) throw new Error(insertError.message);
-      inserted += 1;
+      inserts.push(clean);
     }
+  }
+
+  for (const part of chunk(upserts, BATCH_SIZE)) {
+    const { error } = await withRetry(
+      () => supabase.from("questions").upsert(part, { onConflict: "id" }),
+      "questions batch upsert",
+    );
+    if (error) throw new Error(error.message);
+    updated += part.length;
+  }
+
+  for (const part of chunk(inserts, BATCH_SIZE)) {
+    const { data, error } = await withRetry(
+      () =>
+        supabase.from("questions").insert(part).select("id, topic, question"),
+      "questions batch insert",
+    );
+    if (error) throw new Error(error.message);
+    for (const r of data ?? []) {
+      qmap.set(keyOf(r.topic as string, r.question as string), r.id as string);
+    }
+    inserted += part.length;
   }
 
   console.log(
@@ -238,7 +295,7 @@ async function upsertBatch(
 }
 
 // ---------------------------------------------------------------------------
-// Terms — separate table, simpler upsert by slug.
+// Terms — separate table, batched upsert keyed on slug.
 // ---------------------------------------------------------------------------
 
 type SeedTerm = {
@@ -292,36 +349,42 @@ async function upsertTerms(
   supabase: SupabaseClient,
   rows: TermInsert[],
 ): Promise<{ inserted: number; updated: number }> {
-  let inserted = 0;
-  let updated = 0;
+  const { data: existing, error: mapError } = await withRetry(
+    () => supabase.from("terms").select("id, slug"),
+    "terms map",
+  );
+  if (mapError) throw new Error(mapError.message);
+  const idBySlug = new Map(
+    (existing ?? []).map((r) => [r.slug as string, r.id as string]),
+  );
 
+  const inserts: TermInsert[] = [];
+  const upserts: Array<TermInsert & { id: string }> = [];
   for (const row of rows) {
-    const { data: existing, error: selectError } = await supabase
-      .from("terms")
-      .select("id")
-      .eq("slug", row.slug)
-      .maybeSingle();
-
-    if (selectError) {
-      throw new Error(`Lookup failed for term "${row.slug}": ${selectError.message}`);
-    }
-
-    if (existing) {
-      const { error: updateError } = await supabase
-        .from("terms")
-        .update(row)
-        .eq("id", existing.id);
-      if (updateError) throw new Error(updateError.message);
-      updated += 1;
-    } else {
-      const { error: insertError } = await supabase.from("terms").insert(row);
-      if (insertError) throw new Error(insertError.message);
-      inserted += 1;
-    }
+    const id = idBySlug.get(row.slug);
+    if (id) upserts.push({ ...row, id });
+    else inserts.push(row);
   }
 
-  console.log(`  terms      → inserted ${inserted}, updated ${updated}`);
-  return { inserted, updated };
+  for (const part of chunk(upserts, BATCH_SIZE)) {
+    const { error } = await withRetry(
+      () => supabase.from("terms").upsert(part, { onConflict: "id" }),
+      "terms batch upsert",
+    );
+    if (error) throw new Error(error.message);
+  }
+  for (const part of chunk(inserts, BATCH_SIZE)) {
+    const { error } = await withRetry(
+      () => supabase.from("terms").insert(part),
+      "terms batch insert",
+    );
+    if (error) throw new Error(error.message);
+  }
+
+  console.log(
+    `  terms      → inserted ${inserts.length}, updated ${upserts.length}`,
+  );
+  return { inserted: inserts.length, updated: upserts.length };
 }
 
 // ---------------------------------------------------------------------------
@@ -370,10 +433,21 @@ async function loadMockOptions(): Promise<SeedMockEntry[]> {
 async function seedMockOptions(
   supabase: SupabaseClient,
   entries: SeedMockEntry[],
+  qmap: Map<string, string>,
 ): Promise<void> {
-  let questionsCovered = 0;
-  let optionsInserted = 0;
   let skipped = 0;
+
+  type OptionRow = {
+    question_id: string;
+    option_text: string;
+    option_text_tr: string;
+    is_correct: boolean;
+    explanation: string;
+    explanation_tr: string;
+  };
+
+  const questionIds: string[] = [];
+  const optionRows: OptionRow[] = [];
 
   for (const entry of entries) {
     const correct = entry.options.filter((o) => o.isCorrect).length;
@@ -383,23 +457,8 @@ async function seedMockOptions(
       );
     }
 
-    const { data: question, error: lookupError } = await withRetry(
-      () =>
-        supabase
-          .from("questions")
-          .select("id")
-          .eq("topic", entry.topic)
-          .eq("question", entry.question.trim())
-          .maybeSingle(),
-      "question lookup",
-    );
-
-    if (lookupError) {
-      throw new Error(
-        `Lookup failed for "${entry.question.slice(0, 40)}…": ${lookupError.message}`,
-      );
-    }
-    if (!question) {
+    const questionId = qmap.get(keyOf(entry.topic, entry.question));
+    if (!questionId) {
       console.warn(
         `  ⚠ no question matched "${entry.question.slice(0, 50)}…" — skipped`,
       );
@@ -407,33 +466,38 @@ async function seedMockOptions(
       continue;
     }
 
-    // Replace existing options so repeated seed runs stay idempotent.
-    const { error: deleteError } = await withRetry(
-      () => supabase.from("mock_options").delete().eq("question_id", question.id),
-      "options delete",
-    );
-    if (deleteError) throw new Error(deleteError.message);
+    questionIds.push(questionId);
+    for (const o of entry.options) {
+      optionRows.push({
+        question_id: questionId,
+        option_text: o.optionText.trim(),
+        option_text_tr: o.optionTextTr?.trim() ?? "",
+        is_correct: o.isCorrect,
+        explanation: o.explanation.trim(),
+        explanation_tr: o.explanationTr?.trim() ?? "",
+      });
+    }
+  }
 
-    const rows = entry.options.map((o) => ({
-      question_id: question.id,
-      option_text: o.optionText.trim(),
-      option_text_tr: o.optionTextTr?.trim() ?? "",
-      is_correct: o.isCorrect,
-      explanation: o.explanation.trim(),
-      explanation_tr: o.explanationTr?.trim() ?? "",
-    }));
-    const { error: insertError } = await withRetry(
-      () => supabase.from("mock_options").insert(rows),
-      "options insert",
+  // Replace existing options so repeated seed runs stay idempotent.
+  for (const part of chunk(questionIds, 200)) {
+    const { error } = await withRetry(
+      () => supabase.from("mock_options").delete().in("question_id", part),
+      "options batch delete",
     );
-    if (insertError) throw new Error(insertError.message);
+    if (error) throw new Error(error.message);
+  }
 
-    questionsCovered += 1;
-    optionsInserted += rows.length;
+  for (const part of chunk(optionRows, BATCH_SIZE)) {
+    const { error } = await withRetry(
+      () => supabase.from("mock_options").insert(part),
+      "options batch insert",
+    );
+    if (error) throw new Error(error.message);
   }
 
   console.log(
-    `  mock_options → ${questionsCovered} questions, ${optionsInserted} options` +
+    `  mock_options → ${questionIds.length} questions, ${optionRows.length} options` +
       (skipped > 0 ? `, ${skipped} skipped` : ""),
   );
 }
@@ -442,7 +506,8 @@ async function seedMockOptions(
 // Courses — units + lessons from data/seed-courses/<topic>/<unit-slug>.json.
 // Each file is one unit (meta + lessons + steps), validated by step-schema.
 // `challenge` steps reference bank questions by exact text; we resolve them
-// to UUIDs here and store `questionId` inside the steps JSONB.
+// against the prefetched question map and store `questionId` inside the
+// steps JSONB.
 // Idempotent: units upsert by (topic_slug, slug), lessons by (unit_id, slug);
 // lessons removed from a file are deleted so the file stays source of truth.
 // ---------------------------------------------------------------------------
@@ -484,34 +549,17 @@ async function loadCourseUnits(): Promise<SeedUnit[]> {
   return units;
 }
 
-async function resolveChallenges(
-  supabase: SupabaseClient,
-  unit: SeedUnit,
-): Promise<void> {
+function resolveChallenges(unit: SeedUnit, qmap: Map<string, string>): void {
   for (const lesson of unit.lessons) {
     for (const step of lesson.steps) {
       if (step.type !== "challenge") continue;
-      const { data: question, error } = await withRetry(
-        () =>
-          supabase
-            .from("questions")
-            .select("id")
-            .eq("topic", unit.topic)
-            .eq("question", step.question.trim())
-            .maybeSingle(),
-        "challenge lookup",
-      );
-      if (error) {
-        throw new Error(
-          `Challenge lookup failed for "${step.question.slice(0, 40)}…": ${error.message}`,
-        );
-      }
-      if (!question) {
+      const questionId = qmap.get(keyOf(unit.topic, step.question));
+      if (!questionId) {
         throw new Error(
           `${unit.topic}/${unit.slug} → ${lesson.slug}: no ${unit.topic} question matches "${step.question.slice(0, 60)}…"`,
         );
       }
-      step.questionId = question.id as string;
+      step.questionId = questionId;
     }
   }
 }
@@ -519,12 +567,13 @@ async function resolveChallenges(
 async function seedCourses(
   supabase: SupabaseClient,
   units: SeedUnit[],
+  qmap: Map<string, string>,
 ): Promise<void> {
   let unitsUpserted = 0;
   let lessonsUpserted = 0;
 
   for (const unit of units) {
-    await resolveChallenges(supabase, unit);
+    resolveChallenges(unit, qmap);
 
     const unitRow = {
       topic_slug: unit.topic,
@@ -565,8 +614,18 @@ async function seedCourses(
     }
     unitsUpserted += 1;
 
-    for (const lesson of unit.lessons) {
-      const lessonRow = {
+    // Lessons of one unit: prefetch slug → id, then batch the writes.
+    const { data: existingLessons, error: lessonMapError } = await withRetry(
+      () => supabase.from("lessons").select("id, slug").eq("unit_id", unitId),
+      "lesson map",
+    );
+    if (lessonMapError) throw new Error(lessonMapError.message);
+    const lessonIdBySlug = new Map(
+      (existingLessons ?? []).map((r) => [r.slug as string, r.id as string]),
+    );
+
+    const lessonRows = unit.lessons.map((lesson) => {
+      const base = {
         unit_id: unitId,
         slug: lesson.slug,
         title: lesson.title,
@@ -574,51 +633,29 @@ async function seedCourses(
         position: lesson.position,
         steps: lesson.steps,
       };
-      const { data: existingLesson, error: lessonSelectError } =
-        await withRetry(
-          () =>
-            supabase
-              .from("lessons")
-              .select("id")
-              .eq("unit_id", unitId)
-              .eq("slug", lesson.slug)
-              .maybeSingle(),
-          "lesson lookup",
-        );
-      if (lessonSelectError) throw new Error(lessonSelectError.message);
+      const id = lessonIdBySlug.get(lesson.slug);
+      return id ? { ...base, id } : base;
+    });
 
-      if (existingLesson) {
-        const { error } = await withRetry(
-          () =>
-            supabase
-              .from("lessons")
-              .update(lessonRow)
-              .eq("id", existingLesson.id as string),
-          "lesson update",
-        );
-        if (error) throw new Error(error.message);
-      } else {
-        const { error } = await withRetry(
-          () => supabase.from("lessons").insert(lessonRow),
-          "lesson insert",
-        );
-        if (error) throw new Error(error.message);
-      }
-      lessonsUpserted += 1;
-    }
+    const { error: lessonUpsertError } = await withRetry(
+      () => supabase.from("lessons").upsert(lessonRows, { onConflict: "id" }),
+      "lessons batch upsert",
+    );
+    if (lessonUpsertError) throw new Error(lessonUpsertError.message);
+    lessonsUpserted += lessonRows.length;
 
     // Remove lessons that are no longer in the file (file = source of truth).
     const keepSlugs = unit.lessons.map((l) => l.slug);
-    const { error: pruneError } = await withRetry(
-      () =>
-        supabase
-          .from("lessons")
-          .delete()
-          .eq("unit_id", unitId)
-          .not("slug", "in", `(${keepSlugs.map((s) => `"${s}"`).join(",")})`),
-      "lesson prune",
-    );
-    if (pruneError) throw new Error(pruneError.message);
+    const staleIds = (existingLessons ?? [])
+      .filter((r) => !keepSlugs.includes(r.slug as string))
+      .map((r) => r.id as string);
+    if (staleIds.length > 0) {
+      const { error: pruneError } = await withRetry(
+        () => supabase.from("lessons").delete().in("id", staleIds),
+        "lesson prune",
+      );
+      if (pruneError) throw new Error(pruneError.message);
+    }
   }
 
   console.log(
@@ -633,55 +670,83 @@ async function main() {
     { auth: { persistSession: false, autoRefreshToken: false } },
   );
 
-  console.log("Seeding questions…");
+  // Section filter: `pnpm seed courses mock` runs only those sections.
+  const VALID_SECTIONS = ["questions", "mock", "courses", "terms"] as const;
+  const args = process.argv.slice(2).flatMap((a) => a.split(",")).filter(Boolean);
+  const unknown = args.filter(
+    (a) => !(VALID_SECTIONS as readonly string[]).includes(a),
+  );
+  if (unknown.length > 0) {
+    throw new Error(
+      `Unknown section(s): ${unknown.join(", ")}. Valid: ${VALID_SECTIONS.join(", ")}`,
+    );
+  }
+  const only = new Set(args);
+  const want = (s: (typeof VALID_SECTIONS)[number]) =>
+    only.size === 0 || only.has(s);
+
+  // One prefetch serves questions, mock options and course challenges.
+  const needsMap = want("questions") || want("mock") || want("courses");
+  const qmap = needsMap ? await fetchQuestionMap(supabase) : new Map<string, string>();
+  if (needsMap) console.log(`Question map: ${qmap.size} rows`);
+
   let total = { inserted: 0, updated: 0 };
 
-  for (const { topic, file } of SEED_FILES) {
-    const questions = await loadSeedFile(file);
-    const rows = questions.map(toInsert);
-    const result = await upsertBatch(supabase, topic, rows);
-    total = {
-      inserted: total.inserted + result.inserted,
-      updated: total.updated + result.updated,
-    };
-  }
-
-  const extra = await loadExtraQuestions();
-  if (extra.length > 0) {
-    const byTopic = new Map<Topic, SeedQuestion[]>();
-    for (const q of extra) {
-      const list = byTopic.get(q.topic) ?? [];
-      list.push(q);
-      byTopic.set(q.topic, list);
-    }
-    for (const [topic, qs] of byTopic) {
-      const result = await upsertBatch(supabase, topic, qs.map(toInsert));
+  if (want("questions")) {
+    console.log("Seeding questions…");
+    for (const { topic, file } of SEED_FILES) {
+      const questions = await loadSeedFile(file);
+      if (questions.length === 0) continue;
+      const result = await upsertBatch(supabase, topic, questions.map(toInsert), qmap);
       total = {
         inserted: total.inserted + result.inserted,
         updated: total.updated + result.updated,
       };
     }
+
+    const extra = await loadExtraQuestions();
+    if (extra.length > 0) {
+      const byTopic = new Map<Topic, SeedQuestion[]>();
+      for (const q of extra) {
+        const list = byTopic.get(q.topic) ?? [];
+        list.push(q);
+        byTopic.set(q.topic, list);
+      }
+      for (const [topic, qs] of byTopic) {
+        const result = await upsertBatch(supabase, topic, qs.map(toInsert), qmap);
+        total = {
+          inserted: total.inserted + result.inserted,
+          updated: total.updated + result.updated,
+        };
+      }
+    }
   }
 
-  console.log("Seeding mock options…");
-  const mockEntries = await loadMockOptions();
-  await seedMockOptions(supabase, mockEntries);
-
-  console.log("Seeding courses…");
-  const courseUnits = await loadCourseUnits();
-  if (courseUnits.length > 0) {
-    await seedCourses(supabase, courseUnits);
-  } else {
-    console.log("  courses    → no seed-courses directory, skipped");
+  if (want("mock")) {
+    console.log("Seeding mock options…");
+    const mockEntries = await loadMockOptions();
+    await seedMockOptions(supabase, mockEntries, qmap);
   }
 
-  console.log("Seeding terms…");
-  const terms = await loadTerms();
-  const termResult = await upsertTerms(supabase, terms.map(termToInsert));
-  total = {
-    inserted: total.inserted + termResult.inserted,
-    updated: total.updated + termResult.updated,
-  };
+  if (want("courses")) {
+    console.log("Seeding courses…");
+    const courseUnits = await loadCourseUnits();
+    if (courseUnits.length > 0) {
+      await seedCourses(supabase, courseUnits, qmap);
+    } else {
+      console.log("  courses    → no seed-courses directory, skipped");
+    }
+  }
+
+  if (want("terms")) {
+    console.log("Seeding terms…");
+    const terms = await loadTerms();
+    const termResult = await upsertTerms(supabase, terms.map(termToInsert));
+    total = {
+      inserted: total.inserted + termResult.inserted,
+      updated: total.updated + termResult.updated,
+    };
+  }
 
   console.log(
     `Done. Inserted ${total.inserted}, updated ${total.updated} total.`,

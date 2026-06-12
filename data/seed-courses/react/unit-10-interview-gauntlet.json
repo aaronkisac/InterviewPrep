@@ -1,0 +1,81 @@
+{
+  "topic": "react",
+  "slug": "interview-gauntlet",
+  "title": "Interview Gauntlet",
+  "titleTr": "Mülakat Parkuru",
+  "section": "interview",
+  "position": 10,
+  "lessons": [
+    {
+      "slug": "the-big-picture",
+      "title": "The big picture",
+      "titleTr": "Büyük resim",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Answering \"What is React?\" like a senior",
+          "titleTr": "\"React nedir?\" sorusuna senior gibi cevap vermek",
+          "body": "Open-ended openers (\"What is React?\", \"Why React?\", \"Limitations?\") test *structure*, not trivia. A reliable shape:\n\n1. **One-liner**: a declarative, component-based JavaScript library for building UIs.\n2. **Three strengths**: component reuse + one-way data flow; the virtual-DOM/reconciliation model; ecosystem and tooling maturity.\n3. **Honest limits**: it's just the view layer (routing/data need libraries), JSX learning curve, fast-moving ecosystem, SEO needs SSR (Next.js).\n4. **Anchor it in experience** — one sentence about a real project beats a memorized list.\n\nKnowing the limitations is what separates a senior answer from a fan answer.",
+          "bodyTr": "Açık uçlu açılışlar (\"React nedir?\", \"Neden React?\", \"Sınırları?\") ezber değil *yapı* test eder. Güvenilir bir şablon:\n\n1. **Tek cümle**: arayüz inşa etmek için bildirimsel, bileşen tabanlı bir JavaScript kütüphanesi.\n2. **Üç güçlü yan**: bileşen yeniden kullanımı + tek yönlü veri akışı; sanal DOM/reconciliation modeli; ekosistem ve araç olgunluğu.\n3. **Dürüst sınırlar**: yalnızca view katmanı (routing/veri için kütüphane gerekir), JSX öğrenme eğrisi, hızlı değişen ekosistem, SEO için SSR (Next.js) gerekir.\n4. **Deneyime bağla** — gerçek bir projeden tek cümle, ezberlenmiş listeden iyidir.\n\nSınırları bilmek, senior cevabı hayran cevabından ayıran şeydir."
+        },
+        {
+          "type": "challenge",
+          "question": "What is React?"
+        },
+        {
+          "type": "challenge",
+          "question": "What are the advantages of ReactJS?"
+        },
+        {
+          "type": "challenge",
+          "question": "What are the limitations of ReactJS?"
+        },
+        {
+          "type": "challenge",
+          "question": "What do you like about React?"
+        }
+      ]
+    },
+    {
+      "slug": "react-vs-the-world",
+      "title": "React vs the world",
+      "titleTr": "React'e karşı dünya",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Comparison questions: criteria first",
+          "titleTr": "Karşılaştırma soruları: önce kriterler",
+          "body": "\"React vs X?\" questions reward a **criteria-driven** answer over a verdict:\n\n- **vs Angular(JS)**: library vs full framework; one-way data flow vs two-way binding; you assemble React's stack, Angular ships its own.\n- **vs Vue**: similar reactive component model; Vue bundles more conventions (SFC, directives), React leans on JavaScript itself and a larger ecosystem/job market.\n- **vs React Native**: same React model and language — different *renderer*. react-dom targets the browser DOM; React Native renders real native widgets. \"Learn once, write anywhere\", not \"write once, run anywhere\".\n\nClose with fit, not faith: team experience, hiring pool, existing codebase decide more than benchmarks.",
+          "bodyTr": "\"React vs X?\" soruları hüküm yerine **kriter odaklı** cevabı ödüllendirir:\n\n- **Angular(JS)'a karşı**: kütüphane vs tam framework; tek yönlü veri akışı vs çift yönlü bağlama; React'te stack'i sen kurarsın, Angular kendisininkiyle gelir.\n- **Vue'ya karşı**: benzer reaktif bileşen modeli; Vue daha çok konvansiyon paketler (SFC, direktifler), React JavaScript'in kendisine ve daha büyük ekosistem/iş pazarına yaslanır.\n- **React Native'e karşı**: aynı React modeli ve dil — farklı *renderer*. react-dom tarayıcı DOM'unu hedefler; React Native gerçek native bileşenler çizer. \"Bir kez öğren, her yerde yaz\" — \"bir kez yaz, her yerde çalışsın\" değil.\n\nKapanışı inançla değil uyumla yap: ekip deneyimi, işe alım havuzu ve mevcut codebase, benchmark'lardan daha belirleyicidir.",
+          "visual": "vdom-diff"
+        },
+        {
+          "type": "challenge",
+          "question": "How is React different from AngularJS?"
+        },
+        {
+          "type": "challenge",
+          "question": "What are the advantages of React over Vue?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is the difference between React and React Native?"
+        },
+        {
+          "type": "challenge",
+          "question": "What’s the difference between an “Element” and a “Component” in React?"
+        },
+        {
+          "type": "challenge",
+          "question": "What’s the difference between an \"Element\" and a \"Component\" in React?"
+        },
+        {
+          "type": "challenge",
+          "question": "What's the difference between an \"Element\" and a \"Component\" in React?"
+        }
+      ]
+    }
+  ]
+}
