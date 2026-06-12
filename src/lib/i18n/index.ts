@@ -139,6 +139,55 @@ export const i18nCommon = {
   },
 } as const;
 
+// ─── Course (learning map / lesson player) ────────────────────────────────────
+
+export const i18nCourse = {
+  en: {
+    backToDashboard: "Back to dashboard",
+    blankN: (n: number) => `Blank ${n}`,
+    challengeBadge: "Interview question",
+    challengesDone: "Interview questions",
+    check: "Check",
+    continueBtn: "Continue",
+    correct: "Correct!",
+    correctAnswer: "Correct answer:",
+    exitConfirm: "Leave the lesson? Progress in this lesson will be lost.",
+    exitLesson: "Exit lesson",
+    falseLabel: "False",
+    firstTryAccuracy: "First-try accuracy",
+    lessonComplete: "Lesson complete!",
+    lessonProgress: "Lesson progress",
+    nextLesson: "Next lesson",
+    notQuite: "Not quite",
+    pool: "Tap to add in order",
+    trueLabel: "True",
+    wordBank: "Word bank",
+    yourOrder: "Your order",
+  },
+  tr: {
+    backToDashboard: "Panele dön",
+    blankN: (n: number) => `Boşluk ${n}`,
+    challengeBadge: "Mülakat sorusu",
+    challengesDone: "Mülakat sorusu",
+    check: "Kontrol et",
+    continueBtn: "Devam",
+    correct: "Doğru!",
+    correctAnswer: "Doğru cevap:",
+    exitConfirm: "Dersten çıkılsın mı? Bu dersteki ilerlemen kaybolur.",
+    exitLesson: "Dersten çık",
+    falseLabel: "Yanlış",
+    firstTryAccuracy: "İlk denemede doğruluk",
+    lessonComplete: "Ders tamamlandı!",
+    lessonProgress: "Ders ilerlemesi",
+    nextLesson: "Sonraki ders",
+    notQuite: "Tam değil",
+    pool: "Sırayla eklemek için dokun",
+    trueLabel: "Doğru",
+    wordBank: "Kelime bankası",
+    yourOrder: "Senin sıralaman",
+  },
+} as const;
+
 // ─── Dashboard ────────────────────────────────────────────────────────────────
 
 export const i18nDashboard = {

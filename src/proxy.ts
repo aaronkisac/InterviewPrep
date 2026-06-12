@@ -19,8 +19,14 @@ export default async function proxy(req: NextRequest) {
     /^\/questions\/[^/]+/.test(pathname) &&
     !pathname.startsWith("/questions/new");
 
+  // /learn/[topic]/lesson/[id] — the lesson player needs auth; the course
+  // map itself stays guest-visible (read-only teaser).
+  const isLessonPlayer = /^\/learn\/[^/]+\/lesson\//.test(pathname);
+
   const needsAuth =
-    AUTH_PREFIXES.some((p) => pathname.startsWith(p)) || isQuestionDetail;
+    AUTH_PREFIXES.some((p) => pathname.startsWith(p)) ||
+    isQuestionDetail ||
+    isLessonPlayer;
 
   if (!needsAuth) return NextResponse.next();
 
@@ -52,5 +58,7 @@ export const config = {
 
     "/questions/new",
     "/questions/:id",
+
+    "/learn/:path*",
   ],
 };
