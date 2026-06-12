@@ -82,7 +82,7 @@ export function LessonPlayer({
 
   // Per-step selection state (reset on advance)
   const [optionIndex, setOptionIndex] = useState<number | null>(null);
-  const [blanks, setBlanks] = useState<Array<number | null>>([]);
+  const [blanksRaw, setBlanksRaw] = useState<Array<number | null>>([]);
   const [sequence, setSequence] = useState<number[]>([]);
 
   const stepIndex = currentStep(queue);
@@ -132,13 +132,14 @@ export function LessonPlayer({
     }
   }, [step, lesson.challenges]);
 
-  // Initialize fill-blank slots when the step changes
-  useEffect(() => {
-    if (step?.type === "fill_blank") {
-      setBlanks(Array.from({ length: step.answers.length }, () => null));
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- keyed by step instance
-  }, [stepKey]);
+  // Fill-blank slots, derived — raw state starts empty and is sized lazily,
+  // so no setState-in-effect is needed when the step changes.
+  const blanks: Array<number | null> = useMemo(() => {
+    if (step?.type !== "fill_blank") return [];
+    return blanksRaw.length === step.answers.length
+      ? blanksRaw
+      : Array.from({ length: step.answers.length }, () => null);
+  }, [step, blanksRaw]);
 
   const canCheck =
     step !== undefined &&
@@ -244,7 +245,7 @@ export function LessonPlayer({
     setPhase("answering");
     setFeedback(null);
     setOptionIndex(null);
-    setBlanks([]);
+    setBlanksRaw([]);
     setSequence([]);
   }, [step, feedback]);
 
@@ -459,7 +460,7 @@ export function LessonPlayer({
                   reduced={reduced}
                   lang={lang}
                   i18n={{ wordBank: i18n.wordBank, blank: i18n.blankN }}
-                  onChange={setBlanks}
+                  onChange={setBlanksRaw}
                 />
               </div>
             )}
