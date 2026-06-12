@@ -1,0 +1,272 @@
+{
+  "topic": "react",
+  "slug": "rendering-reconciliation",
+  "title": "Rendering & Reconciliation",
+  "titleTr": "Render ve Reconciliation",
+  "section": "core",
+  "position": 3,
+  "lessons": [
+    {
+      "slug": "virtual-dom",
+      "title": "The virtual DOM",
+      "titleTr": "Sanal DOM",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Describe, diff, patch",
+          "titleTr": "Tarif et, karşılaştır, uygula",
+          "body": "Touching the real DOM is expensive. React's trick: your components produce a **virtual DOM** — a lightweight object tree describing the UI.\n\nOn every render React builds a *new* tree, **diffs** it against the previous one (this comparison is called **reconciliation**), and patches only what actually changed into the real DOM.\n\nYou write \"here's what the UI should look like\"; React figures out the minimal set of DOM operations to get there.",
+          "bodyTr": "Gerçek DOM'a dokunmak pahalıdır. React'in numarası: bileşenlerin bir **sanal DOM** üretir — arayüzü tarif eden hafif bir nesne ağacı.\n\nHer render'da React *yeni* bir ağaç kurar, öncekiyle **diff'ler** (bu karşılaştırmaya **reconciliation** denir) ve gerçek DOM'a yalnızca gerçekten değişeni uygular.\n\nSen \"arayüz şöyle görünmeli\" diye yazarsın; React oraya varmak için gereken minimum DOM işlemini bulur.",
+          "visual": "vdom-diff"
+        },
+        {
+          "type": "mcq",
+          "prompt": "Why is diffing two JavaScript object trees faster than re-rendering the page?",
+          "promptTr": "İki JavaScript nesne ağacını diff'lemek neden sayfayı yeniden render etmekten hızlıdır?",
+          "options": [
+            {
+              "text": "Object comparison stays in memory; DOM operations trigger layout, paint and style work",
+              "textTr": "Nesne karşılaştırması bellekte kalır; DOM işlemleri layout, paint ve stil hesaplaması tetikler",
+              "correct": true
+            },
+            {
+              "text": "JavaScript objects are compiled to machine code",
+              "textTr": "JavaScript nesneleri makine koduna derlenir"
+            },
+            {
+              "text": "The virtual DOM runs in a web worker",
+              "textTr": "Sanal DOM bir web worker'da çalışır"
+            },
+            {
+              "text": "It isn't — React skips diffing in production",
+              "textTr": "Değildir — React production'da diff'i atlar"
+            }
+          ],
+          "explanation": "The win is avoiding unnecessary real-DOM work. Diffing plain objects is cheap; reflow/repaint is not.",
+          "explanationTr": "Kazanç, gereksiz gerçek DOM işinden kaçınmaktır. Düz nesneleri diff'lemek ucuzdur; reflow/repaint değildir."
+        },
+        {
+          "type": "true_false",
+          "statement": "When reconciliation finds two elements of different types at the same position (e.g. <div> → <span>), React tears down that subtree and rebuilds it.",
+          "statementTr": "Reconciliation aynı konumda farklı tipte iki eleman bulduğunda (örn. <div> → <span>) React o alt ağacı söküp yeniden kurar.",
+          "answer": true,
+          "explanation": "Different type = different subtree, including its state. Same type = React keeps the node and updates only changed attributes.",
+          "explanationTr": "Farklı tip = farklı alt ağaç, state'i dahil. Aynı tip = React düğümü korur, yalnızca değişen öznitelikleri günceller."
+        },
+        {
+          "type": "match",
+          "prompt": "Match each term to what it means",
+          "promptTr": "Her terimi anlamıyla eşleştir",
+          "pairs": [
+            {
+              "left": "Virtual DOM",
+              "leftTr": "Sanal DOM",
+              "right": "In-memory description of the UI",
+              "rightTr": "Arayüzün bellekteki tarifi"
+            },
+            {
+              "left": "Reconciliation",
+              "leftTr": "Reconciliation",
+              "right": "Diffing the new tree against the old",
+              "rightTr": "Yeni ağacı eskisiyle karşılaştırma"
+            },
+            {
+              "left": "Commit",
+              "leftTr": "Commit",
+              "right": "Applying minimal patches to the real DOM",
+              "rightTr": "Gerçek DOM'a minimum yamaları uygulama"
+            }
+          ]
+        },
+        {
+          "type": "challenge",
+          "question": "What is the virtual DOM?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is reconciliation in React?"
+        }
+      ]
+    },
+    {
+      "slug": "lists-and-keys",
+      "title": "Lists & keys",
+      "titleTr": "Listeler ve key'ler",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Keys give items an identity",
+          "titleTr": "Key'ler öğelere kimlik verir",
+          "body": "Rendering a list is just `map`:\n\n```jsx\n{todos.map((todo) => (\n  <li key={todo.id}>{todo.text}</li>\n))}\n```\n\nThe **key** tells reconciliation *which item is which* between renders. With stable keys, reordering moves DOM nodes instead of rewriting them — and item state (like an input's text) stays with the right item.\n\nThat's why array **index as key** is a trap: insert one item at the top and every index shifts, so React thinks *every* item changed.",
+          "bodyTr": "Liste render etmek sadece `map`'tir:\n\n```jsx\n{todos.map((todo) => (\n  <li key={todo.id}>{todo.text}</li>\n))}\n```\n\n**Key**, reconciliation'a render'lar arasında *hangi öğenin hangisi olduğunu* söyler. Kararlı key'lerle yeniden sıralama, DOM düğümlerini yeniden yazmak yerine taşır — ve öğe state'i (örn. bir input'un metni) doğru öğeyle kalır.\n\nBu yüzden dizi **index'ini key yapmak** bir tuzaktır: en üste bir öğe ekle, tüm index'ler kayar ve React *her* öğenin değiştiğini sanır."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Render the list with a stable key",
+          "promptTr": "Listeyi kararlı bir key ile render et",
+          "code": "{users.___((user) => (\n  <li ___={user.id}>{user.name}</li>\n))}",
+          "answers": ["map", "key"],
+          "distractors": ["forEach", "id"],
+          "explanation": "map returns the element array; key must be stable and unique among siblings.",
+          "explanationTr": "map eleman dizisini döndürür; key kardeşler arasında kararlı ve benzersiz olmalıdır."
+        },
+        {
+          "type": "output_predict",
+          "prompt": "Each row has an uncontrolled input. A new todo is prepended and keys are array indexes. What happens to the text typed in the first row?",
+          "promptTr": "Her satırda kontrolsüz bir input var. Listenin başına yeni bir todo ekleniyor ve key'ler dizi index'i. İlk satıra yazılmış metne ne olur?",
+          "code": "{todos.map((todo, i) => (\n  <li key={i}>\n    {todo.text} <input />\n  </li>\n))}",
+          "options": [
+            {
+              "text": "It stays in row 1 — now next to the NEW todo",
+              "textTr": "1. satırda kalır — artık YENİ todo'nun yanında",
+              "correct": true
+            },
+            {
+              "text": "It moves down with its original todo",
+              "textTr": "Asıl todo'suyla birlikte aşağı iner"
+            },
+            {
+              "text": "It is cleared everywhere",
+              "textTr": "Tamamen silinir"
+            },
+            {
+              "text": "React throws a duplicate key error",
+              "textTr": "React duplicate key hatası fırlatır"
+            }
+          ],
+          "explanation": "key={0} still says \"same item\" even though the data shifted — so DOM state sticks to the position, not the data. Stable ids fix this.",
+          "explanationTr": "Veri kaysa da key={0} hâlâ \"aynı öğe\" der — DOM state'i veriye değil konuma yapışır. Kararlı id'ler bunu çözer."
+        },
+        {
+          "type": "mcq",
+          "prompt": "When is using the array index as key acceptable?",
+          "promptTr": "Dizi index'ini key olarak kullanmak ne zaman kabul edilebilir?",
+          "options": [
+            {
+              "text": "When the list never reorders, filters, or inserts — static content only",
+              "textTr": "Liste asla yeniden sıralanmıyor, filtrelenmiyor ve araya ekleme yoksa — yalnızca statik içerik",
+              "correct": true
+            },
+            {
+              "text": "Never — it always causes bugs",
+              "textTr": "Asla — her zaman bug çıkarır"
+            },
+            {
+              "text": "Whenever items have no visible state",
+              "textTr": "Öğelerin görünür state'i olmadığında her zaman"
+            },
+            {
+              "text": "Only in development builds",
+              "textTr": "Yalnızca development build'lerinde"
+            }
+          ],
+          "explanation": "A static, append-only list renders fine with index keys. The moment order can change, switch to stable ids.",
+          "explanationTr": "Statik, yalnızca sona eklenen bir liste index key'lerle sorunsuz çalışır. Sıra değişebilir hale geldiği an kararlı id'lere geç."
+        },
+        {
+          "type": "true_false",
+          "statement": "Fragments (<>…</>) let a list item return multiple elements without adding an extra DOM node — and <Fragment key={…}> works in lists.",
+          "statementTr": "Fragment'ler (<>…</>) bir liste öğesinin fazladan DOM düğümü eklemeden birden çok eleman döndürmesini sağlar — ve listelerde <Fragment key={…}> kullanılabilir.",
+          "answer": true,
+          "explanation": "The shorthand <>…</> can't take a key; the explicit <Fragment key={id}> form can.",
+          "explanationTr": "Kısa <>…</> yazımı key alamaz; açık <Fragment key={id}> biçimi alabilir."
+        },
+        {
+          "type": "challenge",
+          "question": "What is the point of using keys in React?"
+        },
+        {
+          "type": "challenge",
+          "question": "What's the typical pattern for rendering a list of components from an array of data?"
+        },
+        {
+          "type": "challenge",
+          "question": "What are fragments?"
+        }
+      ]
+    },
+    {
+      "slug": "what-triggers-a-render",
+      "title": "What triggers a render",
+      "titleTr": "Render'ı ne tetikler",
+      "position": 3,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Renders cascade downward",
+          "titleTr": "Render'lar aşağı doğru yayılır",
+          "body": "A component re-renders when:\n\n1. Its **state** changes (a setter was called)\n2. Its **parent** re-renders — children render with it *by default*, props changed or not\n3. A **context** it reads changes\n\nNote what's *not* on the list: \"props changed\". Props only change because a parent re-rendered. Re-rendering is cheap virtual DOM work — the real cost is in the commit, which React already minimizes. Optimize renders only when they're measurably slow (that's the Performance unit).",
+          "bodyTr": "Bir bileşen şu durumlarda yeniden render olur:\n\n1. **State**'i değiştiğinde (bir setter çağrıldı)\n2. **Ebeveyni** yeniden render olduğunda — çocuklar *varsayılan olarak* onunla render olur, props değişsin değişmesin\n3. Okuduğu bir **context** değiştiğinde\n\nListede olmayana dikkat: \"props değişti\". Props yalnızca ebeveyn render olduğu için değişir. Re-render ucuz sanal DOM işidir — asıl maliyet commit'tedir ve React onu zaten minimize eder. Render'ları yalnızca ölçülebilir biçimde yavaşken optimize et (o da Performance ünitesinin konusu)."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Parent re-renders. Child receives the exact same props. What does Child do by default?",
+          "promptTr": "Ebeveyn yeniden render oluyor. Child birebir aynı props'u alıyor. Child varsayılan olarak ne yapar?",
+          "options": [
+            {
+              "text": "It re-renders anyway — same props don't skip a render without memo",
+              "textTr": "Yine de render olur — memo olmadan aynı props render'ı atlatmaz",
+              "correct": true
+            },
+            {
+              "text": "It skips rendering automatically",
+              "textTr": "Otomatik olarak render'ı atlar"
+            },
+            {
+              "text": "It only re-renders if it has state",
+              "textTr": "Yalnızca state'i varsa render olur"
+            },
+            {
+              "text": "It throws unless props are memoized",
+              "textTr": "Props memoize edilmedikçe hata fırlatır"
+            }
+          ],
+          "explanation": "Default behavior: parent renders → children render. React.memo opts a component into a props comparison to skip this.",
+          "explanationTr": "Varsayılan davranış: ebeveyn render olur → çocuklar render olur. React.memo bileşeni props karşılaştırmasına dahil ederek bunu atlatır."
+        },
+        {
+          "type": "order",
+          "prompt": "Order the full journey from click to updated pixels",
+          "promptTr": "Tıklamadan güncellenen piksellere tam yolculuğu sırala",
+          "items": [
+            { "text": "Event handler calls a state setter", "textTr": "Event handler bir state setter'ı çağırır" },
+            { "text": "React re-runs the component (render phase)", "textTr": "React bileşeni yeniden çalıştırır (render aşaması)" },
+            { "text": "New virtual tree is diffed against the old", "textTr": "Yeni sanal ağaç eskisiyle diff'lenir" },
+            { "text": "Changed nodes are committed to the DOM", "textTr": "Değişen düğümler DOM'a commit edilir" },
+            { "text": "Browser paints the update", "textTr": "Tarayıcı güncellemeyi boyar" }
+          ],
+          "explanation": "Setter → render → reconcile → commit → paint. Render is pure calculation; commit touches the DOM.",
+          "explanationTr": "Setter → render → reconcile → commit → paint. Render saf hesaplamadır; commit DOM'a dokunur."
+        },
+        {
+          "type": "true_false",
+          "statement": "Returning null from a component is a valid way to render nothing.",
+          "statementTr": "Bir bileşenden null döndürmek hiçbir şey render etmemenin geçerli bir yoludur.",
+          "answer": true,
+          "explanation": "null, false and undefined render nothing — the standard way to conditionally hide a component from inside itself.",
+          "explanationTr": "null, false ve undefined hiçbir şey render etmez — bir bileşeni kendi içinden koşullu gizlemenin standart yolu."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Hide the banner unless there is an error",
+          "promptTr": "Hata yoksa banner'ı gizle",
+          "code": "function Banner({ error }) {\n  if (!error) return ___;\n  return <div role=\"alert\">{___}</div>;\n}",
+          "answers": ["null", "error"],
+          "distractors": ["\"\"", "<div />"],
+          "explanation": "Early-return null is the cleanest \"render nothing\" — no wrapper element, no display:none.",
+          "explanationTr": "Erken null dönüşü en temiz \"hiçbir şey render etme\" yoludur — sarmalayıcı eleman yok, display:none yok."
+        },
+        {
+          "type": "challenge",
+          "question": "How does React work?"
+        },
+        {
+          "type": "challenge",
+          "question": "How would you prevent a component from rendering?"
+        }
+      ]
+    }
+  ]
+}

@@ -13,6 +13,7 @@ import type { Language } from "@/lib/supabase/types";
 
 import { ComponentTree } from "./component-tree";
 import { PropsFlow } from "./props-flow";
+import { VdomDiff } from "./vdom-diff";
 
 const VISUALS: Record<
   string,
@@ -20,6 +21,7 @@ const VISUALS: Record<
 > = {
   "component-tree": ComponentTree,
   "props-flow": PropsFlow,
+  "vdom-diff": VdomDiff,
 };
 
 export function CourseVisual({
