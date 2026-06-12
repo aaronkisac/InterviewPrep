@@ -1,0 +1,237 @@
+{
+  "topic": "react",
+  "slug": "effects-lifecycle",
+  "title": "Effects & Lifecycle",
+  "titleTr": "Effect'ler ve Yaşam Döngüsü",
+  "section": "core",
+  "position": 4,
+  "lessons": [
+    {
+      "slug": "synchronizing-with-effects",
+      "title": "Synchronizing with effects",
+      "titleTr": "Effect'lerle senkronizasyon",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Escape hatch to the outside world",
+          "titleTr": "Dış dünyaya açılan kapı",
+          "body": "Rendering must stay pure — no network calls, subscriptions or DOM fiddling while React calculates the UI. That work belongs in an **effect**:\n\n```jsx\nuseEffect(() => {\n  document.title = `${unread} unread`;\n}, [unread]);\n```\n\nEffects run **after** React commits and the browser paints. They synchronize your component with an *external system*: the document, a WebSocket, a timer, analytics.\n\nIf you're only computing data from props/state, you don't need an effect — just compute it during render.",
+          "bodyTr": "Render saf kalmalı — React arayüzü hesaplarken ağ çağrısı, abonelik veya DOM kurcalaması olmaz. O işler bir **effect**'e aittir:\n\n```jsx\nuseEffect(() => {\n  document.title = `${unread} okunmamış`;\n}, [unread]);\n```\n\nEffect'ler React commit ettikten ve tarayıcı boyadıktan **sonra** çalışır. Bileşenini bir *dış sistemle* senkronize ederler: document, WebSocket, zamanlayıcı, analytics.\n\nSadece props/state'ten veri hesaplıyorsan effect'e ihtiyacın yok — onu render sırasında hesapla.",
+          "visual": "effect-timeline"
+        },
+        {
+          "type": "mcq",
+          "prompt": "Which of these actually needs an effect?",
+          "promptTr": "Bunlardan hangisi gerçekten effect gerektirir?",
+          "options": [
+            {
+              "text": "Computing fullName from firstName + lastName",
+              "textTr": "firstName + lastName'den fullName hesaplamak"
+            },
+            {
+              "text": "Filtering a list based on a search prop",
+              "textTr": "Bir listeyi search prop'una göre filtrelemek"
+            },
+            {
+              "text": "Subscribing to a WebSocket when the room id changes",
+              "textTr": "Oda id'si değiştiğinde bir WebSocket'e abone olmak",
+              "correct": true
+            },
+            {
+              "text": "Resetting a form when the user prop changes (use key instead)",
+              "textTr": "User prop'u değişince formu sıfırlamak (onun yerine key kullan)"
+            }
+          ],
+          "explanation": "Effects are for external systems. Derived data is computed in render; resetting state per item is the key prop's job.",
+          "explanationTr": "Effect'ler dış sistemler içindir. Türetilmiş veri render'da hesaplanır; öğe başına state sıfırlamak key prop'unun işidir."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Sync the document title whenever count changes",
+          "promptTr": "count her değiştiğinde document başlığını senkronize et",
+          "code": "___(() => {\n  document.title = `Count: ${count}`;\n}, [___]);",
+          "answers": ["useEffect", "count"],
+          "distractors": ["useState", "setCount"],
+          "explanation": "The dependency array lists every reactive value the effect reads — here, count.",
+          "explanationTr": "Bağımlılık dizisi, effect'in okuduğu her reaktif değeri listeler — burada count."
+        },
+        {
+          "type": "true_false",
+          "statement": "Effects block the browser from painting until they finish.",
+          "statementTr": "Effect'ler bitene kadar tarayıcının boyamasını engeller.",
+          "answer": false,
+          "explanation": "useEffect runs after paint, asynchronously. (The rare exception that runs before paint is useLayoutEffect.)",
+          "explanationTr": "useEffect boyamadan sonra, asenkron çalışır. (Boyamadan önce çalışan nadir istisna useLayoutEffect'tir.)"
+        },
+        {
+          "type": "challenge",
+          "question": "What does it mean for a component to be mounted?"
+        }
+      ]
+    },
+    {
+      "slug": "dependencies-and-cleanup",
+      "title": "Dependencies & cleanup",
+      "titleTr": "Bağımlılıklar ve cleanup",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "The dependency array is a contract",
+          "titleTr": "Bağımlılık dizisi bir sözleşmedir",
+          "body": "The second argument controls *when* the effect re-runs:\n\n```jsx\nuseEffect(fn)          // after every render\nuseEffect(fn, [])      // after the first render only\nuseEffect(fn, [a, b])  // when a or b changed\n```\n\nIf the effect sets something up, **return a cleanup function** — React calls it before the effect runs again and when the component unmounts:\n\n```jsx\nuseEffect(() => {\n  const id = setInterval(tick, 1000);\n  return () => clearInterval(id);\n}, []);\n```\n\nLying in the dependency array (omitting values you read) is the #1 source of stale-value bugs.",
+          "bodyTr": "İkinci argüman effect'in *ne zaman* yeniden çalışacağını belirler:\n\n```jsx\nuseEffect(fn)          // her render'dan sonra\nuseEffect(fn, [])      // yalnızca ilk render'dan sonra\nuseEffect(fn, [a, b])  // a veya b değiştiğinde\n```\n\nEffect bir şey kuruyorsa **bir cleanup fonksiyonu döndür** — React onu effect yeniden çalışmadan önce ve bileşen unmount olurken çağırır:\n\n```jsx\nuseEffect(() => {\n  const id = setInterval(tick, 1000);\n  return () => clearInterval(id);\n}, []);\n```\n\nBağımlılık dizisinde yalan söylemek (okuduğun değerleri yazmamak) bayat değer buglarının 1 numaralı kaynağıdır."
+        },
+        {
+          "type": "output_predict",
+          "prompt": "count starts at 0. What does this interval log every second?",
+          "promptTr": "count 0'dan başlıyor. Bu interval her saniye ne loglar?",
+          "code": "useEffect(() => {\n  const id = setInterval(() => {\n    console.log(count);\n    setCount(count + 1);\n  }, 1000);\n  return () => clearInterval(id);\n}, []);",
+          "options": [
+            { "text": "0, 0, 0, … — count is stale inside the closure", "textTr": "0, 0, 0, … — closure içindeki count bayat", "correct": true },
+            { "text": "0, 1, 2, … — it counts up", "textTr": "0, 1, 2, … — sayar" },
+            { "text": "1, 2, 3, … — starts after the first tick", "textTr": "1, 2, 3, … — ilk tik'ten sonra başlar" },
+            { "text": "Nothing — the interval never starts", "textTr": "Hiçbir şey — interval hiç başlamaz" }
+          ],
+          "explanation": "With [] the effect captured count = 0 forever; setCount(0 + 1) keeps setting 1. Fix: setCount(c => c + 1), or declare the dependency.",
+          "explanationTr": "[] ile effect count = 0'ı sonsuza dek yakaladı; setCount(0 + 1) hep 1'e kurar. Çözüm: setCount(c => c + 1) ya da bağımlılığı bildirmek."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Subscribe on mount, unsubscribe on unmount",
+          "promptTr": "Mount'ta abone ol, unmount'ta abonelikten çık",
+          "code": "useEffect(() => {\n  socket.connect(roomId);\n  return () => socket.___(roomId);\n}, [___]);",
+          "answers": ["disconnect", "roomId"],
+          "distractors": ["connect", "socket"],
+          "explanation": "Cleanup mirrors setup. roomId is read inside, so it belongs in the array — switching rooms disconnects the old one first.",
+          "explanationTr": "Cleanup kurulumun aynasıdır. roomId içeride okunuyor, o yüzden dizide olmalı — oda değişince önce eskisi kapanır."
+        },
+        {
+          "type": "order",
+          "prompt": "roomId changes from \"a\" to \"b\". Order what runs",
+          "promptTr": "roomId \"a\"dan \"b\"ye değişiyor. Çalışanları sırala",
+          "items": [
+            { "text": "Component re-renders with roomId = \"b\"", "textTr": "Bileşen roomId = \"b\" ile yeniden render olur" },
+            { "text": "React commits the DOM changes", "textTr": "React DOM değişikliklerini commit eder" },
+            { "text": "Cleanup runs — disconnects room \"a\"", "textTr": "Cleanup çalışır — \"a\" odası kapanır" },
+            { "text": "Effect runs — connects room \"b\"", "textTr": "Effect çalışır — \"b\" odasına bağlanır" }
+          ],
+          "explanation": "Render → commit → old cleanup → new effect. Cleanup always sees the previous render's values.",
+          "explanationTr": "Render → commit → eski cleanup → yeni effect. Cleanup her zaman önceki render'ın değerlerini görür."
+        },
+        {
+          "type": "true_false",
+          "statement": "In development, StrictMode mounts components twice, so effects run setup → cleanup → setup — a missing cleanup becomes obvious immediately.",
+          "statementTr": "Development'ta StrictMode bileşenleri iki kez mount eder; effect'ler kurulum → cleanup → kurulum sırasıyla çalışır — eksik cleanup hemen belli olur.",
+          "answer": true,
+          "explanation": "The double-invoke is intentional stress-testing in dev only. If it breaks your app, the effect was missing a cleanup.",
+          "explanationTr": "Çift çalıştırma yalnızca dev'de, kasıtlı bir stres testidir. Uygulamanı bozuyorsa effect'in cleanup'ı eksik demektir."
+        },
+        {
+          "type": "challenge",
+          "question": "What is the React component lifecycle?"
+        }
+      ]
+    },
+    {
+      "slug": "strictmode-and-error-boundaries",
+      "title": "StrictMode & error boundaries",
+      "titleTr": "StrictMode ve error boundary'ler",
+      "position": 3,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Safety nets",
+          "titleTr": "Güvenlik ağları",
+          "body": "Two guard rails every production app should know:\n\n**StrictMode** (dev only) double-invokes renders and effects, and warns about legacy APIs — it surfaces impure renders and missing cleanups *before* your users do.\n\n**Error boundaries** catch errors thrown *during rendering* of their children and show a fallback instead of unmounting the whole app:\n\n```jsx\n<ErrorBoundary fallback={<Oops />}>\n  <Profile />\n</ErrorBoundary>\n```\n\nThey do **not** catch errors in event handlers, async code, or the server — those need try/catch.",
+          "bodyTr": "Her production uygulamasının bilmesi gereken iki korkuluk:\n\n**StrictMode** (yalnızca dev) render ve effect'leri iki kez çalıştırır, eski API'ler için uyarır — saf olmayan render'ları ve eksik cleanup'ları kullanıcıdan *önce* ortaya çıkarır.\n\n**Error boundary'ler**, çocuklarının *render'ı sırasında* fırlayan hataları yakalar ve tüm uygulamayı söküp atmak yerine bir fallback gösterir:\n\n```jsx\n<ErrorBoundary fallback={<Oops />}>\n  <Profile />\n</ErrorBoundary>\n```\n\nEvent handler'lardaki, asenkron koddaki veya sunucudaki hataları **yakalamazlar** — onlara try/catch gerekir.",
+          "visual": "component-tree"
+        },
+        {
+          "type": "mcq",
+          "prompt": "Your app works fine, but in development every effect seems to run twice. Why?",
+          "promptTr": "Uygulaman düzgün çalışıyor ama development'ta her effect iki kez çalışıyor gibi. Neden?",
+          "options": [
+            {
+              "text": "StrictMode intentionally re-mounts components in dev to expose unsafe effects",
+              "textTr": "StrictMode, güvensiz effect'leri ortaya çıkarmak için dev'de bileşenleri kasıtlı olarak yeniden mount eder",
+              "correct": true
+            },
+            {
+              "text": "A bug — the dependency array is wrong",
+              "textTr": "Bug — bağımlılık dizisi yanlış"
+            },
+            {
+              "text": "Hot reload duplicates the component tree",
+              "textTr": "Hot reload bileşen ağacını çoğaltır"
+            },
+            {
+              "text": "React 18+ always runs effects twice, in prod too",
+              "textTr": "React 18+ effect'leri prod'da da hep iki kez çalıştırır"
+            }
+          ],
+          "explanation": "Dev-only behavior, removed in production builds. Write idempotent effects with proper cleanups and the double-run is harmless.",
+          "explanationTr": "Yalnızca dev davranışıdır, production build'lerinde yoktur. Düzgün cleanup'lı, idempotent effect'ler yazarsan çift çalışma zararsızdır."
+        },
+        {
+          "type": "true_false",
+          "statement": "An error thrown inside a button's onClick handler is caught by the nearest error boundary.",
+          "statementTr": "Bir butonun onClick handler'ında fırlayan hata en yakın error boundary tarafından yakalanır.",
+          "answer": false,
+          "explanation": "Error boundaries only catch errors during render, lifecycle methods, and constructors of the tree below them. Event handlers need try/catch.",
+          "explanationTr": "Error boundary'ler yalnızca altlarındaki ağacın render'ı, yaşam döngüsü metotları ve constructor'larındaki hataları yakalar. Event handler'lara try/catch gerekir."
+        },
+        {
+          "type": "match",
+          "prompt": "Which tool catches which problem?",
+          "promptTr": "Hangi araç hangi sorunu yakalar?",
+          "pairs": [
+            {
+              "left": "StrictMode",
+              "leftTr": "StrictMode",
+              "right": "Impure renders & missing cleanups (dev)",
+              "rightTr": "Saf olmayan render ve eksik cleanup (dev)"
+            },
+            {
+              "left": "Error boundary",
+              "leftTr": "Error boundary",
+              "right": "Errors thrown while rendering children",
+              "rightTr": "Çocuklar render olurken fırlayan hatalar"
+            },
+            {
+              "left": "try/catch",
+              "leftTr": "try/catch",
+              "right": "Errors in event handlers & async code",
+              "rightTr": "Event handler ve asenkron koddaki hatalar"
+            },
+            {
+              "left": "Cleanup function",
+              "leftTr": "Cleanup fonksiyonu",
+              "right": "Leaked timers & subscriptions",
+              "rightTr": "Sızdırılan timer ve abonelikler"
+            }
+          ]
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Enable StrictMode for the whole app",
+          "promptTr": "Tüm uygulama için StrictMode'u etkinleştir",
+          "code": "createRoot(rootEl).render(\n  <React.___>\n    <App />\n  </React.___>\n);",
+          "answers": ["StrictMode", "StrictMode"],
+          "distractors": ["Fragment", "Suspense"],
+          "explanation": "Wrap the root (or any subtree) — checks apply to everything inside, with zero production cost.",
+          "explanationTr": "Kökü (veya herhangi bir alt ağacı) sarmala — kontroller içindeki her şeye uygulanır, production maliyeti sıfırdır."
+        },
+        {
+          "type": "challenge",
+          "question": "What is StrictMode in React?"
+        },
+        {
+          "type": "challenge",
+          "question": "How error boundaries handled in React (15)?"
+        }
+      ]
+    }
+  ]
+}

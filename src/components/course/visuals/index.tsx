@@ -12,6 +12,7 @@ import { usePrefersReducedMotion } from "@/lib/course/use-reduced-motion";
 import type { Language } from "@/lib/supabase/types";
 
 import { ComponentTree } from "./component-tree";
+import { EffectTimeline } from "./effect-timeline";
 import { PropsFlow } from "./props-flow";
 import { VdomDiff } from "./vdom-diff";
 
@@ -20,6 +21,7 @@ const VISUALS: Record<
   React.ComponentType<{ lang: Language; reduced: boolean }>
 > = {
   "component-tree": ComponentTree,
+  "effect-timeline": EffectTimeline,
   "props-flow": PropsFlow,
   "vdom-diff": VdomDiff,
 };
