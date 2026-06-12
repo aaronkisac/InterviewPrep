@@ -43,8 +43,10 @@ export function OptionList({
   i18n: { correct: string; notQuite: string };
   onSelect: (index: number) => void;
 }) {
+  // Plain list of toggle buttons — no listbox role (that ARIA pattern expects
+  // option children + composite focus management we don't implement).
   return (
-    <ul className="space-y-2" role="listbox" aria-label="Options">
+    <ul className="space-y-2">
       {options.map((option, i) => {
         const isPicked = i === selected;
         const showCorrect = answered && option.correct;

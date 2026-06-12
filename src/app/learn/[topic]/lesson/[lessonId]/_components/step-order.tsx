@@ -109,6 +109,8 @@ export function StepOrder({
                 type="button"
                 onClick={() => pick(itemIndex)}
                 aria-disabled={answered || used}
+                // Used items hide their text visually — keep an accessible name
+                aria-label={label(itemIndex)}
                 className={cn(
                   "rounded-xl border p-3 text-left text-sm transition",
                   used

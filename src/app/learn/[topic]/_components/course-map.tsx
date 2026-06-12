@@ -148,9 +148,13 @@ export function CourseMap({
                 <p className="text-sm font-semibold leading-snug">{unitTitle}</p>
                 <span className="shrink-0 text-xs font-medium text-muted-foreground">
                   {unit.status === "done" ? (
-                    <Check className="size-4 text-emerald-600" aria-label={`${unitTitle}: 100%`} />
+                    <Check
+                      role="img"
+                      className="size-4 text-emerald-600"
+                      aria-label={`${unitTitle}: 100%`}
+                    />
                   ) : unit.status === "locked" ? (
-                    <Lock className="size-4" aria-label={i18n.locked} />
+                    <Lock role="img" className="size-4" aria-label={i18n.locked} />
                   ) : (
                     `${unit.completedPct}%`
                   )}

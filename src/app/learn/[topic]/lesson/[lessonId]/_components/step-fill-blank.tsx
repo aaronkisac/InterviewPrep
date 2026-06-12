@@ -107,6 +107,8 @@ export function StepFillBlank({
                 type="button"
                 onClick={() => placeToken(i)}
                 aria-disabled={answered || used}
+                // Used tokens hide their text visually — keep an accessible name
+                aria-label={token}
                 className={cn(
                   "rounded-md border px-3 py-1.5 font-mono text-sm transition",
                   used
