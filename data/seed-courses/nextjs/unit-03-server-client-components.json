@@ -1,0 +1,100 @@
+{
+  "topic": "nextjs",
+  "slug": "server-client-components",
+  "title": "Server & Client Components",
+  "titleTr": "Server ve Client Component'ler",
+  "section": "core",
+  "position": 3,
+  "lessons": [
+    {
+      "slug": "server-vs-client",
+      "title": "Server vs Client Components",
+      "titleTr": "Server vs Client Component'ler",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Where a component runs",
+          "titleTr": "Bir bileşenin nerede çalıştığı",
+          "body": "In the App Router, components are **Server Components by default**. They render **on the server**, never ship their JS to the browser, and can directly `await` data, read files, or hit a database. The result is less client JS and faster loads. They **can't** use state, effects, or browser APIs (`useState`, `useEffect`, `onClick`, `window`).\n\nWhen you need interactivity, opt a component into the client with the **`\"use client\"`** directive at the top of the file. **Client Components** run in the browser (after rendering once on the server), so they can use hooks, event handlers and browser APIs — at the cost of shipping their JS.\n\n```tsx\n\"use client\";\nimport { useState } from \"react\";\nexport function Counter() {\n  const [n, setN] = useState(0);\n  return <button onClick={() => setN(n + 1)}>{n}</button>;\n}\n```\n\nThe boundary cascades: once a file is `\"use client\"`, everything it imports is part of the client bundle. Best practice: **keep components on the server by default, and push `\"use client\"` to the leaves** that truly need interactivity (a button, a form), so most of the tree stays server-rendered. Server Components can render Client Components, but not vice-versa (a client component can only receive server components as children/props).",
+          "bodyTr": "App Router'da bileşenler **varsayılan Server Component'tir**. **Sunucuda** render olur, JS'lerini asla tarayıcıya göndermez ve doğrudan veriyi `await` edebilir, dosya okuyabilir ya da veritabanına gidebilir. Sonuç: daha az istemci JS'i ve daha hızlı yükleme. State, effect ya da tarayıcı API'leri (`useState`, `useEffect`, `onClick`, `window`) **kullanamazlar**.\n\nEtkileşim gerektiğinde, dosyanın başındaki **`\"use client\"`** direktifiyle bir bileşeni istemciye al. **Client Component'ler** tarayıcıda çalışır (sunucuda bir kez render olduktan sonra), bu yüzden hook'ları, event handler'ları ve tarayıcı API'lerini kullanabilir — JS'lerini gönderme pahasına.\n\n```tsx\n\"use client\";\nimport { useState } from \"react\";\nexport function Counter() {\n  const [n, setN] = useState(0);\n  return <button onClick={() => setN(n + 1)}>{n}</button>;\n}\n```\n\nSınır aşağı yayılır: bir dosya `\"use client\"` olunca, import ettiği her şey istemci bundle'ının parçası olur. En iyi pratik: **bileşenleri varsayılan sunucuda tut ve `\"use client\"`'ı gerçekten etkileşim gereken yapraklara it** (bir buton, bir form), böylece ağacın çoğu sunucuda render olur. Server Component'ler Client Component render edebilir ama tersi olmaz (bir client component, server component'leri yalnızca children/prop olarak alabilir)."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Which can a Server Component NOT do?",
+          "promptTr": "Bir Server Component neyi YAPAMAZ?",
+          "options": [
+            { "text": "Use useState, useEffect or onClick handlers", "textTr": "useState, useEffect ya da onClick handler'ları kullanmak", "correct": true },
+            { "text": "Await a database query directly", "textTr": "Bir veritabanı sorgusunu doğrudan await etmek" },
+            { "text": "Render without shipping JS to the client", "textTr": "İstemciye JS göndermeden render olmak" },
+            { "text": "Read a file from the filesystem", "textTr": "Dosya sisteminden bir dosya okumak" }
+          ],
+          "explanation": "Server Components have no interactivity — no state, effects, or event handlers. Those require a Client Component (\"use client\"). Server Components can fetch data and read files directly.",
+          "explanationTr": "Server Component'lerin etkileşimi yoktur — state, effect ya da event handler yok. Bunlar bir Client Component (\"use client\") gerektirir. Server Component'ler doğrudan veri çekip dosya okuyabilir."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Mark this file as a Client Component so it can use useState",
+          "promptTr": "Bu dosyayı, useState kullanabilmesi için Client Component olarak işaretle",
+          "code": "___;\nimport { useState } from \"react\";\nexport function Toggle() { /* … */ }",
+          "answers": ["\"use client\""],
+          "distractors": ["\"use server\"", "\"client\"", "use client"],
+          "explanation": "The exact string directive \"use client\" at the very top opts the module (and its imports) into the client bundle, enabling hooks and event handlers.",
+          "explanationTr": "En üstteki tam string direktifi \"use client\", modülü (ve import'larını) istemci bundle'ına alır, hook ve event handler'ları etkinleştirir."
+        },
+        {
+          "type": "challenge",
+          "question": "What are Server Components and Client Components?"
+        },
+        {
+          "type": "challenge",
+          "question": "When do you use 'use client' directive in Next.js?"
+        }
+      ]
+    },
+    {
+      "slug": "route-handlers-and-data-fetching",
+      "title": "Route Handlers & data fetching",
+      "titleTr": "Route Handler'lar ve veri çekme",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "APIs and where data is loaded",
+          "titleTr": "API'ler ve verinin nerede yüklendiği",
+          "body": "**Route Handlers** are the App Router's way to build API endpoints. A `route.ts` file in a folder exports functions named after HTTP methods, using the Web `Request`/`Response` APIs:\n\n```ts\n// app/api/users/route.ts\nexport async function GET() {\n  return Response.json(await getUsers());\n}\nexport async function POST(req: Request) { /* … */ }\n```\n\nThey replace the Pages Router's `pages/api/*` and run on the server (Node or Edge runtime).\n\n**Data fetching differs between routers:**\n\n- **App Router** — fetch **directly inside Server Components** with `async`/`await`. `fetch` is extended with caching/revalidation options (`{ next: { revalidate: 60 } }`). No special exported functions; data is colocated with the component that uses it, and you can stream with `Suspense`.\n- **Pages Router** — fetch via special exported functions: `getStaticProps` (SSG, build time), `getServerSideProps` (SSR, per request), `getStaticPaths` (dynamic SSG). Data is passed down as props.\n\nThe App Router model is simpler — `await` your data where you need it — while the Pages Router separates data loading from rendering through those page-level functions.",
+          "bodyTr": "**Route Handler'lar**, App Router'ın API endpoint'leri kurma yoludur. Bir klasördeki `route.ts` dosyası, Web `Request`/`Response` API'lerini kullanarak HTTP metodlarına göre adlandırılmış fonksiyonlar export eder:\n\n```ts\n// app/api/users/route.ts\nexport async function GET() {\n  return Response.json(await getUsers());\n}\nexport async function POST(req: Request) { /* … */ }\n```\n\nPages Router'ın `pages/api/*`'ının yerini alırlar ve sunucuda çalışır (Node ya da Edge runtime).\n\n**Veri çekme router'lar arasında farklıdır:**\n\n- **App Router** — `async`/`await` ile **doğrudan Server Component'lerin içinde** çek. `fetch`, önbellekleme/revalidation seçenekleriyle genişletilir (`{ next: { revalidate: 60 } }`). Özel export edilmiş fonksiyon yok; veri, onu kullanan bileşenle bir arada tutulur ve `Suspense` ile stream edebilirsin.\n- **Pages Router** — özel export edilmiş fonksiyonlarla çek: `getStaticProps` (SSG, build zamanı), `getServerSideProps` (SSR, istek başına), `getStaticPaths` (dinamik SSG). Veri prop olarak aşağı geçirilir.\n\nApp Router modeli daha basittir — veriyi ihtiyaç duyduğun yerde `await` et — Pages Router ise veri yüklemeyi bu sayfa-seviyesi fonksiyonlarla render'dan ayırır."
+        },
+        {
+          "type": "mcq",
+          "prompt": "How do you typically fetch data in an App Router page?",
+          "promptTr": "App Router'da bir sayfada veriyi tipik olarak nasıl çekersin?",
+          "options": [
+            { "text": "await it directly inside an async Server Component", "textTr": "async bir Server Component içinde doğrudan await ederek", "correct": true },
+            { "text": "Export getServerSideProps from the page", "textTr": "Sayfadan getServerSideProps export ederek" },
+            { "text": "Only via useEffect on the client", "textTr": "Yalnızca istemcide useEffect ile" },
+            { "text": "Through a global Redux store", "textTr": "Global bir Redux store aracılığıyla" }
+          ],
+          "explanation": "App Router Server Components are async — you await fetch/db calls right in the component. getServerSideProps/getStaticProps belong to the Pages Router.",
+          "explanationTr": "App Router Server Component'leri async'tir — fetch/db çağrılarını doğrudan bileşende await edersin. getServerSideProps/getStaticProps Pages Router'a aittir."
+        },
+        {
+          "type": "true_false",
+          "statement": "A route.ts file in the App Router exports functions named after HTTP methods like GET and POST.",
+          "statementTr": "App Router'da bir route.ts dosyası GET ve POST gibi HTTP metodlarına göre adlandırılmış fonksiyonlar export eder.",
+          "answer": true,
+          "explanation": "Route Handlers export GET, POST, PUT, DELETE, etc., using the Web Request/Response APIs — the App Router replacement for pages/api endpoints.",
+          "explanationTr": "Route Handler'lar Web Request/Response API'lerini kullanarak GET, POST, PUT, DELETE vb. export eder — pages/api endpoint'lerinin App Router karşılığı."
+        },
+        {
+          "type": "challenge",
+          "question": "What are Route Handlers in Next.js App Router?"
+        },
+        {
+          "type": "challenge",
+          "question": "How does data fetching work in App Router vs Pages Router?"
+        }
+      ]
+    }
+  ]
+}

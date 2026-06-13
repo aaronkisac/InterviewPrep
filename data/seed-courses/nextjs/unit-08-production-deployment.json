@@ -1,0 +1,104 @@
+{
+  "topic": "nextjs",
+  "slug": "production-deployment",
+  "title": "Production & Deployment",
+  "titleTr": "Production ve Deployment",
+  "section": "interview",
+  "position": 8,
+  "lessons": [
+    {
+      "slug": "auth-and-security",
+      "title": "Authentication & security",
+      "titleTr": "Kimlik doğrulama ve güvenlik",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Who the user is, and keeping the app safe",
+          "titleTr": "Kullanıcının kim olduğu ve uygulamayı güvende tutmak",
+          "body": "**Authentication** in Next.js usually combines a library and the framework's server features. A common stack is **NextAuth/Auth.js** (or Clerk, Lucia, a custom JWT/session): the user logs in, you store a **session in an httpOnly cookie**, and you check it on the server. In the App Router you read the session in **Server Components, Route Handlers and middleware** — `middleware.ts` is ideal for **gating protected routes** (redirect to `/login` if no session). Do authorization checks on the **server**, never trust the client.\n\n**Key security considerations:**\n\n- **Keep secrets server-side** — never expose API keys via `NEXT_PUBLIC_`.\n- **httpOnly, Secure, SameSite cookies** for sessions (mitigate XSS/CSRF).\n- **Validate and sanitise all input** on the server (Server Actions/Route Handlers); never trust client data.\n- **Authorize on the server** for every protected action, not just hide UI.\n- **Avoid leaking server data to Client Components** — only pass what the client needs.\n- **Set security headers** (CSP, etc.) via `next.config.js` or middleware, and guard against SSRF in server fetches.\n- **Keep dependencies patched.**\n\nThe Server Component model helps: sensitive logic and data stay on the server by default.",
+          "bodyTr": "Next.js'te **kimlik doğrulama** genelde bir kütüphane ile framework'ün sunucu özelliklerini birleştirir. Yaygın bir stack **NextAuth/Auth.js**'tir (ya da Clerk, Lucia, özel JWT/session): kullanıcı giriş yapar, bir **session'ı httpOnly cookie'de** saklarsın ve onu sunucuda kontrol edersin. App Router'da session'ı **Server Component'lerde, Route Handler'larda ve middleware'de** okursun — `middleware.ts`, **korumalı route'ları kapılamak** için idealdir (session yoksa `/login`'e yönlendir). Yetkilendirme kontrollerini **sunucuda** yap, istemciye asla güvenme.\n\n**Temel güvenlik konuları:**\n\n- **Sırları sunucu tarafında tut** — API anahtarlarını asla `NEXT_PUBLIC_` ile açma.\n- Session'lar için **httpOnly, Secure, SameSite cookie'ler** (XSS/CSRF'i azalt).\n- **Tüm girdiyi sunucuda doğrula ve temizle** (Server Action/Route Handler); istemci verisine asla güvenme.\n- Her korumalı eylem için **sunucuda yetkilendir**, yalnızca UI gizleme değil.\n- **Sunucu verisini Client Component'lere sızdırmaktan kaçın** — yalnızca istemcinin ihtiyacını geçir.\n- `next.config.js` ya da middleware ile **güvenlik header'ları ayarla** (CSP vb.) ve sunucu fetch'lerinde SSRF'e karşı korun.\n- **Bağımlılıkları yamalı tut.**\n\nServer Component modeli yardımcı olur: hassas mantık ve veri varsayılan olarak sunucuda kalır."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Where should you enforce authorization for a protected action?",
+          "promptTr": "Korumalı bir eylem için yetkilendirmeyi nerede zorunlu kılmalısın?",
+          "options": [
+            { "text": "On the server (Server Component / Route Handler / middleware), never trusting the client", "textTr": "Sunucuda (Server Component / Route Handler / middleware), istemciye asla güvenmeden", "correct": true },
+            { "text": "Only by hiding the button in the UI", "textTr": "Yalnızca UI'da butonu gizleyerek" },
+            { "text": "In a NEXT_PUBLIC_ environment variable", "textTr": "Bir NEXT_PUBLIC_ ortam değişkeninde" },
+            { "text": "In the browser's localStorage", "textTr": "Tarayıcının localStorage'ında" }
+          ],
+          "explanation": "Client-side checks are cosmetic — a user can call the API directly. Always verify the session/permissions on the server for every protected request or action.",
+          "explanationTr": "İstemci tarafı kontroller kozmetiktir — kullanıcı API'yi doğrudan çağırabilir. Her korumalı istek ya da eylem için session/izinleri her zaman sunucuda doğrula."
+        },
+        {
+          "type": "true_false",
+          "statement": "Storing a session token in an httpOnly cookie helps protect it from being read by client-side JavaScript (XSS).",
+          "statementTr": "Bir session token'ını httpOnly cookie'de saklamak, onu istemci tarafı JavaScript (XSS) tarafından okunmaktan korumaya yardım eder.",
+          "answer": true,
+          "explanation": "httpOnly cookies aren't accessible to document.cookie/JS, reducing XSS token theft. Pair with Secure and SameSite to harden against interception and CSRF.",
+          "explanationTr": "httpOnly cookie'lere document.cookie/JS erişemez, XSS token hırsızlığını azaltır. Araya girme ve CSRF'e karşı sertleştirmek için Secure ve SameSite ile eşle."
+        },
+        {
+          "type": "challenge",
+          "question": "How would you handle authentication in a Next.js application?"
+        },
+        {
+          "type": "challenge",
+          "question": "What are the key security considerations in a Next.js application?"
+        }
+      ]
+    },
+    {
+      "slug": "i18n-deploy-analytics",
+      "title": "i18n, deployment & analytics",
+      "titleTr": "i18n, deployment ve analytics",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Many languages, shipping, and measuring",
+          "titleTr": "Çok dil, yayınlama ve ölçme",
+          "body": "**Internationalisation (i18n)** in the App Router is typically done with a **`[lang]` (or `[locale]`) dynamic segment** plus a library like **next-intl** or **next-i18next**: routes become `/en/...`, `/tr/...`, and **middleware** detects the user's locale (from the URL, `Accept-Language`, or a cookie) and rewrites/redirects accordingly. Translations live in message files loaded per locale; `generateStaticParams` can pre-build each language.\n\n**Deployment** depends on your build output:\n\n- **Vercel** — the zero-config home for Next.js (handles SSR, ISR, Edge, image optimisation automatically).\n- **Self-hosted Node** — `next build` + `next start`, or `output: \"standalone\"` for a minimal server bundle (great for Docker).\n- **Static export** (`output: \"export\"`) — if no route needs a server, deploy the static files to any CDN/static host.\n- Other platforms (Netlify, AWS, Cloudflare) support Next via adapters.\n\n**Analytics**: use `@vercel/analytics` / Speed Insights, or wire any provider (GA4, Plausible, PostHog) via `next/script` and the App Router's **`useReportWebVitals`** hook to capture Core Web Vitals. Load third-party scripts with `next/script`'s strategies (`afterInteractive`, `lazyOnload`) so analytics never blocks rendering.",
+          "bodyTr": "App Router'da **uluslararasılaştırma (i18n)** tipik olarak bir **`[lang]` (ya da `[locale]`) dinamik segmenti** artı **next-intl** ya da **next-i18next** gibi bir kütüphaneyle yapılır: route'lar `/en/...`, `/tr/...` olur ve **middleware** kullanıcının locale'ini (URL'den, `Accept-Language`'tan ya da bir cookie'den) algılayıp buna göre rewrite/redirect yapar. Çeviriler locale başına yüklenen mesaj dosyalarında durur; `generateStaticParams` her dili önceden üretebilir.\n\n**Deployment**, build çıktına bağlıdır:\n\n- **Vercel** — Next.js'in sıfır-config evi (SSR, ISR, Edge, görsel optimizasyonunu otomatik halleder).\n- **Self-hosted Node** — `next build` + `next start` ya da minimal sunucu bundle'ı için `output: \"standalone\"` (Docker için harika).\n- **Static export** (`output: \"export\"`) — hiçbir route sunucu gerektirmiyorsa, statik dosyaları herhangi bir CDN/statik host'a deploy et.\n- Diğer platformlar (Netlify, AWS, Cloudflare) Next'i adaptörlerle destekler.\n\n**Analytics**: `@vercel/analytics` / Speed Insights kullan ya da herhangi bir sağlayıcıyı (GA4, Plausible, PostHog) `next/script` ve App Router'ın **`useReportWebVitals`** hook'uyla bağla; Core Web Vitals'ı yakalamak için. Üçüncü taraf script'leri `next/script`'in stratejileriyle (`afterInteractive`, `lazyOnload`) yükle ki analytics render'ı asla bloklamasın."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Why is Vercel the zero-config default for deploying Next.js?",
+          "promptTr": "Next.js deploy etmek için Vercel neden sıfır-config varsayılandır?",
+          "options": [
+            { "text": "It natively handles SSR, ISR, Edge functions and image optimisation without setup", "textTr": "SSR, ISR, Edge fonksiyonları ve görsel optimizasyonunu kurulum olmadan native halleder", "correct": true },
+            { "text": "It is the only host that can run static files", "textTr": "Statik dosya çalıştırabilen tek host'tur" },
+            { "text": "It compiles Next.js to a desktop app", "textTr": "Next.js'i bir masaüstü uygulamasına derler" },
+            { "text": "It removes the need for a build step", "textTr": "Build adımı ihtiyacını ortadan kaldırır" }
+          ],
+          "explanation": "Vercel (Next.js's maker) maps the framework's features to its platform automatically. You can also self-host on Node/standalone, do a static export, or use adapters on other clouds.",
+          "explanationTr": "Vercel (Next.js'in yapımcısı), framework'ün özelliklerini platformuna otomatik eşler. Ayrıca Node/standalone'da self-host edebilir, statik export yapabilir ya da diğer bulutlarda adaptör kullanabilirsin."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Name the dynamic segment commonly used to route by language",
+          "promptTr": "Dile göre yönlendirmek için yaygın kullanılan dinamik segmenti adlandır",
+          "code": "app/___/about/page.tsx   // /en/about, /tr/about",
+          "answers": ["[lang]"],
+          "distractors": ["[id]", "(lang)", "@lang"],
+          "explanation": "A [lang] (or [locale]) dynamic segment makes the language part of the URL; middleware detects and routes to the right locale, and message files supply translations.",
+          "explanationTr": "Bir [lang] (ya da [locale]) dinamik segmenti dili URL'nin parçası yapar; middleware doğru locale'i algılayıp yönlendirir ve mesaj dosyaları çevirileri sağlar."
+        },
+        {
+          "type": "challenge",
+          "question": "How would you implement internationalisation (i18n) in a Next.js application?"
+        },
+        {
+          "type": "challenge",
+          "question": "How do you deploy a Next.js application?"
+        },
+        {
+          "type": "challenge",
+          "question": "How do you implement analytics in a Next.js application?"
+        }
+      ]
+    }
+  ]
+}

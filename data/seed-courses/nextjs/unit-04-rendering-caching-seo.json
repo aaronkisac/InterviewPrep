@@ -1,0 +1,107 @@
+{
+  "topic": "nextjs",
+  "slug": "rendering-caching-seo",
+  "title": "Rendering, Caching & SEO",
+  "titleTr": "Render, Önbellekleme ve SEO",
+  "section": "core",
+  "position": 4,
+  "lessons": [
+    {
+      "slug": "isr-static-params-caching",
+      "title": "ISR, static params & caching",
+      "titleTr": "ISR, statik parametreler ve önbellekleme",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Static speed that stays fresh",
+          "titleTr": "Taze kalan statik hız",
+          "body": "**ISR (Incremental Static Regeneration)** gives you static-page speed *and* fresh content. A page is served from the static cache, and after a `revalidate` interval the next request triggers a background rebuild — so visitors get instant HTML that updates periodically without a full redeploy.\n\n```ts\nexport const revalidate = 60; // re-generate at most once per minute\n// or per-fetch: fetch(url, { next: { revalidate: 60 } })\n```\n\nFor **dynamic routes**, you pre-build the known paths. The App Router uses **`generateStaticParams`**; the Pages Router used **`getStaticPaths`** — same idea, different API:\n\n```ts\nexport async function generateStaticParams() {\n  return (await getSlugs()).map((slug) => ({ slug }));\n}\n```\n\n**Caching**: Next.js caches aggressively at several layers — the **Data Cache** (`fetch` results), the **Full Route Cache** (rendered HTML/RSC payload), the **Router Cache** (client-side), and the **Request Memoization** within one render. You control it with `revalidate`, `cache: \"no-store\"` (opt out / dynamic), and `revalidatePath`/`revalidateTag` to invalidate on demand. The mental model: static by default, opt into dynamic or set a revalidation window when data changes.",
+          "bodyTr": "**ISR (Incremental Static Regeneration)**, sana statik-sayfa hızını *ve* taze içeriği verir. Bir sayfa statik önbellekten sunulur ve bir `revalidate` aralığından sonra bir sonraki istek arka planda yeniden üretimi tetikler — böylece ziyaretçiler tam redeploy olmadan periyodik güncellenen anında HTML alır.\n\n```ts\nexport const revalidate = 60; // dakikada en fazla bir kez yeniden üret\n// ya da fetch başına: fetch(url, { next: { revalidate: 60 } })\n```\n\n**Dinamik route'lar** için bilinen yolları önceden üretirsin. App Router **`generateStaticParams`** kullanır; Pages Router **`getStaticPaths`** kullanırdı — aynı fikir, farklı API:\n\n```ts\nexport async function generateStaticParams() {\n  return (await getSlugs()).map((slug) => ({ slug }));\n}\n```\n\n**Önbellekleme**: Next.js birkaç katmanda agresif önbekler — **Data Cache** (`fetch` sonuçları), **Full Route Cache** (render edilmiş HTML/RSC yükü), **Router Cache** (istemci tarafı) ve tek bir render içindeki **Request Memoization**. Bunu `revalidate`, `cache: \"no-store\"` (vazgeç / dinamik) ve talep üzerine geçersiz kılmak için `revalidatePath`/`revalidateTag` ile kontrol edersin. Zihinsel model: varsayılan statik, dinamiğe geç ya da veri değişince bir revalidation penceresi ayarla."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What does ISR give you over plain static generation?",
+          "promptTr": "ISR, düz statik üretime göre sana ne kazandırır?",
+          "options": [
+            { "text": "Static speed plus periodic background refresh without a full redeploy", "textTr": "Statik hız artı tam redeploy olmadan periyodik arka plan tazeleme", "correct": true },
+            { "text": "Per-request server rendering for every visitor", "textTr": "Her ziyaretçi için istek başına sunucu render'ı" },
+            { "text": "Rendering entirely in the browser", "textTr": "Tamamen tarayıcıda render" },
+            { "text": "Disabling caching completely", "textTr": "Önbelleklemeyi tamamen kapatma" }
+          ],
+          "explanation": "ISR serves cached static HTML and regenerates it in the background after the revalidate window — fresh content without rebuilding/redeploying the whole site.",
+          "explanationTr": "ISR önbellekli statik HTML sunar ve revalidate penceresinden sonra arka planda yeniden üretir — tüm siteyi yeniden build/deploy etmeden taze içerik."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What is the App Router equivalent of the Pages Router's getStaticPaths?",
+          "promptTr": "Pages Router'ın getStaticPaths'ının App Router karşılığı nedir?",
+          "options": [
+            { "text": "generateStaticParams", "textTr": "generateStaticParams", "correct": true },
+            { "text": "getServerSideProps", "textTr": "getServerSideProps" },
+            { "text": "useStaticParams", "textTr": "useStaticParams" },
+            { "text": "revalidatePath", "textTr": "revalidatePath" }
+          ],
+          "explanation": "Both pre-render the set of dynamic paths at build time. generateStaticParams is the App Router API; getStaticPaths was the Pages Router one. revalidatePath is for on-demand cache invalidation.",
+          "explanationTr": "İkisi de dinamik yol kümesini build zamanında önceden render eder. generateStaticParams App Router API'sidir; getStaticPaths Pages Router'ınkiydi. revalidatePath ise talep üzerine önbellek geçersiz kılma içindir."
+        },
+        {
+          "type": "challenge",
+          "question": "What is ISR (Incremental Static Regeneration) in Next.js?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is the difference between generateStaticParams and getStaticPaths?"
+        },
+        {
+          "type": "challenge",
+          "question": "How does Next.js handle caching and what are the cache options?"
+        }
+      ]
+    },
+    {
+      "slug": "seo-and-build-output",
+      "title": "SEO & build output",
+      "titleTr": "SEO ve build çıktısı",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Crawlable HTML and how it ships",
+          "titleTr": "Taranabilir HTML ve nasıl gönderildiği",
+          "body": "A plain React **SPA** sends a near-empty HTML shell and renders in JS, so crawlers (and slow devices) may see little content on first load, hurting **SEO** and first paint. Next.js fixes this by **pre-rendering HTML on the server** (SSR/SSG): crawlers receive complete, content-rich markup immediately. On top of that, the **Metadata API** generates `<title>`, descriptions, Open Graph and canonical tags per route, and Next.js produces `sitemap.xml`/`robots.txt`. Result: better indexing, social previews, and Core Web Vitals than a client-only SPA.\n\nThe **build output** depends on how each route renders. `next build` classifies every route:\n\n- **Static** (○) — prerendered to HTML at build time (SSG).\n- **SSG with dynamic params** — prerendered via `generateStaticParams`.\n- **Dynamic / SSR** (ƒ) — rendered per request on a server.\n- **ISR** — static with a revalidation window.\n\nThis classification drives **deployment strategy**: a fully static site can deploy to any CDN/static host, while SSR/ISR routes need a Node or Edge server runtime (Vercel, a Node server, or a container). You can also force a fully static export (`output: \"export\"`) if no route needs a server.",
+          "bodyTr": "Düz bir React **SPA**, neredeyse boş bir HTML kabuğu gönderir ve JS'te render eder; bu yüzden tarayıcılar (ve yavaş cihazlar) ilk yüklemede az içerik görebilir, **SEO**'yu ve ilk boyamayı zedeler. Next.js bunu **HTML'i sunucuda ön-render ederek** (SSR/SSG) çözer: tarayıcılar hemen eksiksiz, içerik dolu markup alır. Üstüne, **Metadata API** route başına `<title>`, açıklama, Open Graph ve canonical tag'leri üretir ve Next.js `sitemap.xml`/`robots.txt` üretir. Sonuç: yalnızca-istemci bir SPA'ya göre daha iyi indeksleme, sosyal önizlemeler ve Core Web Vitals.\n\n**Build çıktısı**, her route'un nasıl render olduğuna bağlıdır. `next build` her route'u sınıflandırır:\n\n- **Static** (○) — build zamanında HTML'e ön-render (SSG).\n- **Dinamik parametreli SSG** — `generateStaticParams` ile ön-render.\n- **Dinamik / SSR** (ƒ) — bir sunucuda istek başına render.\n- **ISR** — revalidation penceresiyle statik.\n\nBu sınıflandırma **deployment stratejisini** belirler: tamamen statik bir site herhangi bir CDN/statik host'a deploy edilebilir, SSR/ISR route'ları ise bir Node ya da Edge sunucu runtime'ı gerektirir (Vercel, bir Node sunucu ya da bir container). Hiçbir route sunucu gerektirmiyorsa tamamen statik export'a da (`output: \"export\"`) zorlayabilirsin."
+        },
+        {
+          "type": "true_false",
+          "statement": "Server-rendering HTML helps SEO because crawlers receive full content on the first response instead of an empty shell.",
+          "statementTr": "HTML'i sunucuda render etmek SEO'ya yardım eder çünkü tarayıcılar ilk yanıtta boş kabuk yerine tam içerik alır.",
+          "answer": true,
+          "explanation": "Pre-rendered markup is immediately crawlable and paints fast, unlike a CSR SPA that ships an empty shell and fills it in with JS the crawler may not run.",
+          "explanationTr": "Ön-render edilmiş markup anında taranabilir ve hızlı boyanır; boş kabuk gönderip onu tarayıcının çalıştırmayabileceği JS ile dolduran bir CSR SPA'nın aksine."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Why does the build output classification matter for deployment?",
+          "promptTr": "Build çıktısı sınıflandırması deployment için neden önemlidir?",
+          "options": [
+            { "text": "Static routes can go on any CDN, but SSR/ISR routes need a server runtime", "textTr": "Statik route'lar herhangi bir CDN'e gidebilir, ama SSR/ISR route'ları bir sunucu runtime'ı gerektirir", "correct": true },
+            { "text": "It changes the JavaScript language version used", "textTr": "Kullanılan JavaScript dil sürümünü değiştirir" },
+            { "text": "It only affects the dev server, not production", "textTr": "Yalnızca dev sunucusunu etkiler, production'ı değil" },
+            { "text": "Static and dynamic routes deploy identically", "textTr": "Statik ve dinamik route'lar aynı şekilde deploy edilir" }
+          ],
+          "explanation": "If every route is static you can host on a pure CDN/static host; any SSR/ISR route requires a Node/Edge server to render or revalidate on demand.",
+          "explanationTr": "Her route statikse saf bir CDN/statik host'ta barındırabilirsin; herhangi bir SSR/ISR route'u, talep üzerine render ya da revalidate için bir Node/Edge sunucu gerektirir."
+        },
+        {
+          "type": "challenge",
+          "question": "How does Next.js improve SEO compared to a plain React SPA?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is the Next.js build output and how does it affect deployment strategy?"
+        }
+      ]
+    }
+  ]
+}

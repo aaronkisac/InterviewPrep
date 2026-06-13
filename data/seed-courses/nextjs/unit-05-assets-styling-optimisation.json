@@ -1,0 +1,136 @@
+{
+  "topic": "nextjs",
+  "slug": "assets-styling-optimisation",
+  "title": "Assets, Styling & Optimisation",
+  "titleTr": "Varlıklar, Stil ve Optimizasyon",
+  "section": "core",
+  "position": 5,
+  "lessons": [
+    {
+      "slug": "images-and-static-files",
+      "title": "Images & static files",
+      "titleTr": "Görseller ve statik dosyalar",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "next/image and the public folder",
+          "titleTr": "next/image ve public klasörü",
+          "body": "**`next/image`** is an `<img>` replacement that optimises images automatically:\n\n- **Resizing & responsive** `srcset` so each device downloads the right size.\n- **Modern formats** (WebP/AVIF) when supported.\n- **Lazy loading** by default — off-screen images load when needed.\n- **No layout shift** — you provide `width`/`height` (or `fill`), reserving space and protecting CLS.\n\n```tsx\nimport Image from \"next/image\";\n<Image src=\"/hero.png\" width={800} height={400} alt=\"Hero\" priority />\n```\n\nUse `priority` for above-the-fold images (e.g. the LCP image) to preload them.\n\n**Static files** go in the **`public/`** folder and are served from the root URL: `public/logo.svg` → `/logo.svg`. It's for favicons, robots.txt, fonts and images referenced by path. Files in `public/` are served as-is with no processing — don't put secrets there, since everything is publicly accessible.",
+          "bodyTr": "**`next/image`**, görselleri otomatik optimize eden bir `<img>` yerine geçenidir:\n\n- **Yeniden boyutlandırma & responsive** `srcset` ile her cihaz doğru boyutu indirir.\n- Desteklenince **modern formatlar** (WebP/AVIF).\n- Varsayılan **lazy loading** — ekran dışı görseller gerektiğinde yüklenir.\n- **Layout kayması yok** — `width`/`height` (ya da `fill`) verirsin, yer ayrılır ve CLS korunur.\n\n```tsx\nimport Image from \"next/image\";\n<Image src=\"/hero.png\" width={800} height={400} alt=\"Hero\" priority />\n```\n\nKatlama-üstü görseller için (örn. LCP görseli) `priority` kullan, böylece önceden yüklenirler.\n\n**Statik dosyalar** **`public/`** klasörüne girer ve kök URL'den sunulur: `public/logo.svg` → `/logo.svg`. Favicon'lar, robots.txt, fontlar ve yolla referans alınan görseller içindir. `public/` içindeki dosyalar işlem görmeden olduğu gibi sunulur — oraya sır koyma, çünkü her şey herkese açıktır."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Why prefer next/image over a plain <img> tag?",
+          "promptTr": "Düz <img> yerine neden next/image tercih edilir?",
+          "options": [
+            { "text": "It auto-resizes, serves modern formats, lazy-loads, and reserves space to avoid layout shift", "textTr": "Otomatik boyutlandırır, modern format sunar, lazy-load yapar ve layout kaymasını önlemek için yer ayırır", "correct": true },
+            { "text": "It encrypts the image so it can't be downloaded", "textTr": "Görseli indirilemesin diye şifreler" },
+            { "text": "It only works with SVG files", "textTr": "Yalnızca SVG dosyalarıyla çalışır" },
+            { "text": "It disables caching for images", "textTr": "Görseller için önbeklemeyi kapatır" }
+          ],
+          "explanation": "next/image handles responsive sizing, modern formats, lazy loading and explicit dimensions (preventing CLS) — all the optimisations you'd otherwise wire up by hand.",
+          "explanationTr": "next/image responsive boyutlandırmayı, modern formatları, lazy loading'i ve açık boyutları (CLS'i önler) halleder — elle kuracağın tüm optimizasyonları."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Reference a logo placed in the public/ folder",
+          "promptTr": "public/ klasörüne konan bir logoyu referans al",
+          "code": "<img src=\"___logo.svg\" alt=\"Logo\" />",
+          "answers": ["/"],
+          "distractors": ["/public/", "./public/", "public/"],
+          "explanation": "Files in public/ are served from the site root, so public/logo.svg is referenced as /logo.svg — you never include 'public' in the path.",
+          "explanationTr": "public/ içindeki dosyalar site kökünden sunulur, bu yüzden public/logo.svg, /logo.svg olarak referans alınır — yola asla 'public' eklenmez."
+        },
+        {
+          "type": "challenge",
+          "question": "What is next/image and why should you use it?"
+        },
+        {
+          "type": "challenge",
+          "question": "How do you serve static files in Next.js?"
+        }
+      ]
+    },
+    {
+      "slug": "styling",
+      "title": "CSS & styling",
+      "titleTr": "CSS ve stil",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Many ways to style, all supported",
+          "titleTr": "Stil için birçok yol, hepsi destekli",
+          "body": "Next.js supports several styling approaches out of the box:\n\n- **Global CSS** — import a `.css` file in the root layout for app-wide styles.\n- **CSS Modules** — `Button.module.css` scopes class names locally, so they never clash: `import styles from \"./Button.module.css\"`.\n- **Tailwind CSS** — utility-first, first-class supported and the common default in new apps.\n- **CSS-in-JS** — styled-components/Emotion work, though they need a bit of setup for Server Components (they're client-side).\n- **Sass** — `.scss`/`.sass` supported by installing `sass`.\n- **`next/font`** — self-hosts and optimises fonts with zero layout shift.\n\nIn the App Router, global CSS is typically imported once in `app/layout.tsx`. CSS Modules and Tailwind work in both Server and Client Components since they compile to plain CSS; runtime CSS-in-JS libraries generally need the `\"use client\"` boundary. Choose based on team preference — there's no single mandated approach.",
+          "bodyTr": "Next.js birkaç stil yaklaşımını hazır destekler:\n\n- **Global CSS** — uygulama geneli stiller için kök layout'ta bir `.css` dosyası import et.\n- **CSS Modules** — `Button.module.css` class adlarını yerel kapsar, böylece asla çakışmazlar: `import styles from \"./Button.module.css\"`.\n- **Tailwind CSS** — utility-first, birinci sınıf destekli ve yeni uygulamalarda yaygın varsayılan.\n- **CSS-in-JS** — styled-components/Emotion çalışır, ama Server Component'ler için biraz kurulum gerekir (istemci taraflıdırlar).\n- **Sass** — `sass` kurarak `.scss`/`.sass` desteklenir.\n- **`next/font`** — fontları sıfır layout kaymasıyla kendi sunar ve optimize eder.\n\nApp Router'da global CSS tipik olarak `app/layout.tsx`'te bir kez import edilir. CSS Modules ve Tailwind, düz CSS'e derlendiği için hem Server hem Client Component'lerde çalışır; çalışma zamanı CSS-in-JS kütüphaneleri genellikle `\"use client\"` sınırına ihtiyaç duyar. Ekip tercihine göre seç — tek bir zorunlu yaklaşım yok."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What problem do CSS Modules solve?",
+          "promptTr": "CSS Modules hangi sorunu çözer?",
+          "options": [
+            { "text": "They scope class names locally so styles in different files don't clash", "textTr": "Class adlarını yerel kapsar, böylece farklı dosyalardaki stiller çakışmaz", "correct": true },
+            { "text": "They make CSS run on the server only", "textTr": "CSS'i yalnızca sunucuda çalıştırır" },
+            { "text": "They replace the need for any CSS", "textTr": "Herhangi bir CSS ihtiyacını ortadan kaldırır" },
+            { "text": "They compile CSS to WebAssembly", "textTr": "CSS'i WebAssembly'ye derler" }
+          ],
+          "explanation": "A .module.css file generates unique, hashed class names per import, so a .button in one module can't collide with a .button in another — local scoping by default.",
+          "explanationTr": "Bir .module.css dosyası import başına benzersiz, hash'lenmiş class adları üretir, böylece bir modüldeki .button başka birindeki .button ile çakışamaz — varsayılan yerel kapsam."
+        },
+        {
+          "type": "challenge",
+          "question": "How does Next.js handle CSS and styling?"
+        }
+      ]
+    },
+    {
+      "slug": "code-splitting-and-vitals",
+      "title": "Code splitting & Core Web Vitals",
+      "titleTr": "Kod bölme ve Core Web Vitals",
+      "position": 3,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Ship less JS, measure the right things",
+          "titleTr": "Daha az JS gönder, doğru şeyleri ölç",
+          "body": "Next.js does **automatic code splitting** per route — visiting `/about` only loads that page's JS, not the whole app. You can split *further* with **dynamic imports**: `next/dynamic` (or `import()`) loads a component **lazily**, only when needed, optionally with a loading state and `ssr: false` to skip server rendering for client-only widgets (charts, editors, modals).\n\n```tsx\nconst Chart = dynamic(() => import(\"./Chart\"), { loading: () => <Spinner />, ssr: false });\n```\n\nUse dynamic imports for heavy, below-the-fold, or rarely used components to shrink the initial bundle.\n\n**Core Web Vitals** are Google's UX metrics: **LCP** (largest contentful paint — loading), **INP** (interaction to next paint — responsiveness, replaced FID), and **CLS** (cumulative layout shift — visual stability). To optimise them in Next.js: use `next/image` (sized images → better LCP/CLS), `next/font` (no font layout shift), `priority` on the LCP image, Server Components and code splitting (less JS → better INP), prefetching via `<Link>`, and streaming with `Suspense`. Measure with Lighthouse, the Web Vitals library, or `useReportWebVitals`.",
+          "bodyTr": "Next.js route başına **otomatik kod bölme** yapar — `/about`'a gitmek tüm uygulamayı değil yalnızca o sayfanın JS'ini yükler. **Dinamik import'larla** *daha da* bölebilirsin: `next/dynamic` (ya da `import()`) bir bileşeni **tembel** yükler, yalnızca gerektiğinde, isteğe bağlı bir loading state ve yalnızca-istemci widget'lar (grafikler, editörler, modal'lar) için sunucu render'ını atlamak üzere `ssr: false` ile.\n\n```tsx\nconst Chart = dynamic(() => import(\"./Chart\"), { loading: () => <Spinner />, ssr: false });\n```\n\nBaşlangıç bundle'ını küçültmek için ağır, katlama-altı ya da nadiren kullanılan bileşenler için dinamik import kullan.\n\n**Core Web Vitals**, Google'ın UX metrikleridir: **LCP** (largest contentful paint — yükleme), **INP** (interaction to next paint — yanıt verme, FID'in yerini aldı) ve **CLS** (cumulative layout shift — görsel kararlılık). Next.js'te optimize etmek için: `next/image` (boyutlu görseller → daha iyi LCP/CLS), `next/font` (font layout kayması yok), LCP görselinde `priority`, Server Component'ler ve kod bölme (daha az JS → daha iyi INP), `<Link>` ile prefetch ve `Suspense` ile streaming. Lighthouse, Web Vitals kütüphanesi ya da `useReportWebVitals` ile ölç."
+        },
+        {
+          "type": "mcq",
+          "prompt": "When is a dynamic import (next/dynamic) most useful?",
+          "promptTr": "Dinamik import (next/dynamic) en çok ne zaman faydalıdır?",
+          "options": [
+            { "text": "To lazy-load a heavy, below-the-fold or rarely used component and shrink the initial bundle", "textTr": "Ağır, katlama-altı ya da nadir kullanılan bir bileşeni lazy-load edip başlangıç bundle'ını küçültmek için", "correct": true },
+            { "text": "To make every component server-rendered", "textTr": "Her bileşeni sunucuda render etmek için" },
+            { "text": "To disable routing", "textTr": "Routing'i devre dışı bırakmak için" },
+            { "text": "To inline all CSS into JS", "textTr": "Tüm CSS'i JS'e gömmek için" }
+          ],
+          "explanation": "Dynamic imports defer loading non-critical components until needed, reducing the initial JS payload and improving load/interaction metrics. ssr:false also helps for client-only libraries.",
+          "explanationTr": "Dinamik import'lar kritik olmayan bileşenlerin yüklenmesini gerekene dek erteler, başlangıç JS yükünü azaltır ve yükleme/etkileşim metriklerini iyileştirir. ssr:false ayrıca yalnızca-istemci kütüphaneler için yardımcı olur."
+        },
+        {
+          "type": "true_false",
+          "statement": "Using next/image with explicit width and height helps reduce Cumulative Layout Shift (CLS).",
+          "statementTr": "next/image'i açık width ve height ile kullanmak Cumulative Layout Shift'i (CLS) azaltmaya yardım eder.",
+          "answer": true,
+          "explanation": "Reserved dimensions stop content from jumping when the image loads, which is exactly what CLS measures. next/font similarly prevents font-driven shift.",
+          "explanationTr": "Ayrılmış boyutlar, görsel yüklenince içeriğin zıplamasını durdurur; CLS'in ölçtüğü tam olarak budur. next/font da benzer şekilde font kaynaklı kaymayı önler."
+        },
+        {
+          "type": "challenge",
+          "question": "What are dynamic imports in Next.js and when do you use them?"
+        },
+        {
+          "type": "challenge",
+          "question": "How does code splitting work in Next.js?"
+        },
+        {
+          "type": "challenge",
+          "question": "How do you optimise Core Web Vitals in a Next.js application?"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,136 @@
+{
+  "topic": "nextjs",
+  "slug": "configuration-project-setup",
+  "title": "Configuration & Project Setup",
+  "titleTr": "Konfigürasyon ve Proje Kurulumu",
+  "section": "core",
+  "position": 6,
+  "lessons": [
+    {
+      "slug": "config-and-environment",
+      "title": "next.config.js & environment variables",
+      "titleTr": "next.config.js ve ortam değişkenleri",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Configuring the framework and its secrets",
+          "titleTr": "Framework'ü ve sırlarını yapılandırmak",
+          "body": "**`next.config.js`** (or `.ts`/`.mjs`) is the project's config file, exporting an options object. Common things you configure: `images` (allowed remote domains), `redirects`/`rewrites`, `headers`, `env`, `experimental` flags, `output` (`\"standalone\"`/`\"export\"`), webpack/turbopack tweaks, and i18n. It runs at build/server time, not in the browser.\n\n```js\n/** @type {import('next').NextConfig} */\nmodule.exports = {\n  images: { remotePatterns: [{ hostname: \"cdn.example.com\" }] },\n  async redirects() { return [{ source: \"/old\", destination: \"/new\", permanent: true }]; },\n};\n```\n\n**Environment variables** load from `.env.local` (and `.env`, `.env.production`). The key rule is exposure:\n\n- Variables are **server-only by default** — available in Server Components, Route Handlers, and `next.config.js`. Safe for secrets (API keys, DB URLs).\n- Prefix with **`NEXT_PUBLIC_`** to expose a value to the **browser** — it's inlined into the client bundle at build time, so never put secrets there.\n\n```bash\nDATABASE_URL=...            # server only\nNEXT_PUBLIC_API_URL=...     # shipped to the browser\n```",
+          "bodyTr": "**`next.config.js`** (ya da `.ts`/`.mjs`), bir seçenek nesnesi export eden projenin config dosyasıdır. Yapılandırdığın yaygın şeyler: `images` (izin verilen remote domain'ler), `redirects`/`rewrites`, `headers`, `env`, `experimental` bayraklar, `output` (`\"standalone\"`/`\"export\"`), webpack/turbopack ince ayarları ve i18n. Tarayıcıda değil, build/sunucu zamanında çalışır.\n\n```js\n/** @type {import('next').NextConfig} */\nmodule.exports = {\n  images: { remotePatterns: [{ hostname: \"cdn.example.com\" }] },\n  async redirects() { return [{ source: \"/old\", destination: \"/new\", permanent: true }]; },\n};\n```\n\n**Ortam değişkenleri** `.env.local`'den (ve `.env`, `.env.production`) yüklenir. Temel kural maruziyettir:\n\n- Değişkenler **varsayılan yalnızca-sunucudur** — Server Component'lerde, Route Handler'larda ve `next.config.js`'te kullanılabilir. Sırlar için güvenli (API anahtarları, DB URL'leri).\n- Bir değeri **tarayıcıya** açmak için **`NEXT_PUBLIC_`** ön ekini ver — build zamanında istemci bundle'ına gömülür, bu yüzden oraya asla sır koyma.\n\n```bash\nDATABASE_URL=...            # yalnızca sunucu\nNEXT_PUBLIC_API_URL=...     # tarayıcıya gönderilir\n```"
+        },
+        {
+          "type": "mcq",
+          "prompt": "How do you make an environment variable available in the browser?",
+          "promptTr": "Bir ortam değişkenini tarayıcıda nasıl kullanılabilir yaparsın?",
+          "options": [
+            { "text": "Prefix it with NEXT_PUBLIC_", "textTr": "Başına NEXT_PUBLIC_ ön eki ekle", "correct": true },
+            { "text": "Put it in next.config.js only", "textTr": "Yalnızca next.config.js'e koy" },
+            { "text": "Name it in ALL_CAPS", "textTr": "Adını BÜYÜK_HARF yap" },
+            { "text": "All env variables are always sent to the browser", "textTr": "Tüm ortam değişkenleri her zaman tarayıcıya gönderilir" }
+          ],
+          "explanation": "Only NEXT_PUBLIC_-prefixed variables are inlined into the client bundle. Everything else stays server-side — so secrets must NOT use that prefix.",
+          "explanationTr": "Yalnızca NEXT_PUBLIC_ ön ekli değişkenler istemci bundle'ına gömülür. Diğer her şey sunucu tarafında kalır — yani sırlar bu ön eki KULLANMAMALI."
+        },
+        {
+          "type": "true_false",
+          "statement": "Putting a secret API key in a NEXT_PUBLIC_ variable keeps it hidden from users.",
+          "statementTr": "Bir gizli API anahtarını NEXT_PUBLIC_ değişkenine koymak onu kullanıcılardan gizler.",
+          "answer": false,
+          "explanation": "NEXT_PUBLIC_ values are inlined into the JS sent to the browser — anyone can read them in DevTools. Keep secrets in unprefixed, server-only variables.",
+          "explanationTr": "NEXT_PUBLIC_ değerleri tarayıcıya gönderilen JS'e gömülür — herkes onları DevTools'ta okuyabilir. Sırları ön eksiz, yalnızca-sunucu değişkenlerinde tut."
+        },
+        {
+          "type": "challenge",
+          "question": "What is next.config.js and what can you configure in it?"
+        },
+        {
+          "type": "challenge",
+          "question": "How do you manage environment variables in a Next.js application?"
+        }
+      ]
+    },
+    {
+      "slug": "typescript-and-metadata",
+      "title": "TypeScript & the Metadata API",
+      "titleTr": "TypeScript ve Metadata API",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Typed projects and head tags",
+          "titleTr": "Tiplenmiş projeler ve head tag'leri",
+          "body": "**TypeScript** is first-class in Next.js: scaffold with `create-next-app --typescript` (or add a `tsconfig.json` and Next fills it in). You get typed `params`/`searchParams`, typed Route Handlers, a generated `next-env.d.ts`, and optional **typed routes**. Zero-config — Next compiles TS via SWC, and `next build` type-checks the project.\n\nThe **Metadata API** (App Router) sets `<head>` tags — title, description, Open Graph, icons, canonical — without manually editing the document head. Two forms:\n\n```tsx\n// static\nexport const metadata = {\n  title: \"My Page\",\n  description: \"...\",\n  openGraph: { images: [\"/og.png\"] },\n};\n\n// dynamic, per-route\nexport async function generateMetadata({ params }) {\n  const post = await getPost(params.slug);\n  return { title: post.title };\n}\n```\n\nExporting `metadata` or `generateMetadata` from a `layout.tsx`/`page.tsx` lets Next render the correct, crawlable head tags on the server — central to SEO and social sharing. It replaces the Pages Router's `next/head`.",
+          "bodyTr": "**TypeScript** Next.js'te birinci sınıftır: `create-next-app --typescript` ile iskele kur (ya da bir `tsconfig.json` ekle, Next doldurur). Tiplenmiş `params`/`searchParams`, tiplenmiş Route Handler'lar, üretilen bir `next-env.d.ts` ve isteğe bağlı **typed routes** elde edersin. Sıfır-config — Next, TS'i SWC ile derler ve `next build` projeyi tip denetler.\n\n**Metadata API** (App Router), `<head>` tag'lerini ayarlar — title, description, Open Graph, icon, canonical — belge head'ini elle düzenlemeden. İki biçim:\n\n```tsx\n// statik\nexport const metadata = {\n  title: \"Sayfam\",\n  description: \"...\",\n  openGraph: { images: [\"/og.png\"] },\n};\n\n// dinamik, route başına\nexport async function generateMetadata({ params }) {\n  const post = await getPost(params.slug);\n  return { title: post.title };\n}\n```\n\nBir `layout.tsx`/`page.tsx`'ten `metadata` ya da `generateMetadata` export etmek, Next'in doğru, taranabilir head tag'lerini sunucuda render etmesini sağlar — SEO ve sosyal paylaşımın merkezindedir. Pages Router'ın `next/head`'inin yerini alır."
+        },
+        {
+          "type": "mcq",
+          "prompt": "How do you set a page's title and Open Graph tags in the App Router?",
+          "promptTr": "App Router'da bir sayfanın title ve Open Graph tag'lerini nasıl ayarlarsın?",
+          "options": [
+            { "text": "Export a metadata object or generateMetadata function from the page/layout", "textTr": "Sayfadan/layout'tan bir metadata nesnesi ya da generateMetadata fonksiyonu export ederek", "correct": true },
+            { "text": "Edit index.html directly", "textTr": "index.html'i doğrudan düzenleyerek" },
+            { "text": "Use document.title in a useEffect", "textTr": "Bir useEffect içinde document.title kullanarak" },
+            { "text": "Pass them as URL query params", "textTr": "Onları URL query parametreleri olarak geçerek" }
+          ],
+          "explanation": "The Metadata API reads an exported metadata (static) or generateMetadata (dynamic) and renders the head tags server-side — better for SEO than client-side document.title hacks.",
+          "explanationTr": "Metadata API, export edilen metadata (statik) ya da generateMetadata (dinamik)'i okur ve head tag'lerini sunucuda render eder — istemci tarafı document.title hilelerinden SEO için daha iyidir."
+        },
+        {
+          "type": "challenge",
+          "question": "How do you use TypeScript with Next.js?"
+        },
+        {
+          "type": "challenge",
+          "question": "How does the Metadata API work in Next.js App Router?"
+        }
+      ]
+    },
+    {
+      "slug": "errors-and-state",
+      "title": "Errors & state management",
+      "titleTr": "Hatalar ve state yönetimi",
+      "position": 3,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Catching failures and holding state",
+          "titleTr": "Hataları yakalamak ve state tutmak",
+          "body": "The App Router handles **errors** with special files:\n\n- **`error.tsx`** — a Client Component error boundary for a route segment. It catches runtime errors in that segment and its children and shows a fallback with a `reset()` function to retry.\n- **`not-found.tsx`** — rendered for `notFound()` calls or unmatched routes (404).\n- **`global-error.tsx`** — catches errors in the root layout itself.\n\n```tsx\n\"use client\";\nexport default function Error({ error, reset }) {\n  return <button onClick={reset}>Try again</button>;\n}\n```\n\nFor **state management**, match the tool to the need:\n\n- **Server state / data** — fetch in Server Components; cache with Next's data cache. Often you don't need a client store at all.\n- **URL state** — searchParams/route params keep state shareable and server-readable.\n- **Local UI state** — `useState`/`useReducer` in Client Components.\n- **Shared client state** — Context for light needs; **Zustand**, **Jotai**, or **Redux Toolkit** for larger apps; **TanStack Query** for client-side server-cache.\n\nThe App Router shifts much \"state\" to the server, so reach for a global client store only when genuinely sharing interactive state across the tree.",
+          "bodyTr": "App Router **hataları** özel dosyalarla yönetir:\n\n- **`error.tsx`** — bir route segmenti için Client Component error boundary. O segment ve çocuklarındaki çalışma zamanı hatalarını yakalar ve yeniden denemek için bir `reset()` fonksiyonuyla fallback gösterir.\n- **`not-found.tsx`** — `notFound()` çağrıları ya da eşleşmeyen route'lar (404) için render edilir.\n- **`global-error.tsx`** — kök layout'un kendisindeki hataları yakalar.\n\n```tsx\n\"use client\";\nexport default function Error({ error, reset }) {\n  return <button onClick={reset}>Tekrar dene</button>;\n}\n```\n\n**State yönetimi** için aracı ihtiyaca göre seç:\n\n- **Sunucu state'i / veri** — Server Component'lerde çek; Next'in data cache'iyle önbekle. Çoğu zaman bir istemci store'una hiç ihtiyacın olmaz.\n- **URL state'i** — searchParams/route parametreleri state'i paylaşılabilir ve sunucudan okunabilir tutar.\n- **Yerel UI state'i** — Client Component'lerde `useState`/`useReducer`.\n- **Paylaşılan istemci state'i** — hafif ihtiyaçlar için Context; daha büyük uygulamalar için **Zustand**, **Jotai** ya da **Redux Toolkit**; istemci tarafı sunucu-cache için **TanStack Query**.\n\nApp Router \"state\"in çoğunu sunucuya kaydırır, bu yüzden global bir istemci store'una yalnızca ağaç boyunca etkileşimli state'i gerçekten paylaşırken başvur."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Name the App Router file that acts as an error boundary for a route segment",
+          "promptTr": "Bir route segmenti için error boundary işlevi gören App Router dosyasını adlandır",
+          "code": "app/dashboard/___.tsx",
+          "answers": ["error"],
+          "distractors": ["catch", "boundary", "fallback"],
+          "explanation": "error.tsx is a Client Component error boundary auto-wired by Next for its segment, receiving error and reset props. not-found.tsx handles 404s; global-error.tsx covers the root layout.",
+          "explanationTr": "error.tsx, Next'in segmenti için otomatik bağladığı, error ve reset prop'larını alan bir Client Component error boundary'dir. not-found.tsx 404'leri; global-error.tsx kök layout'u kapsar."
+        },
+        {
+          "type": "mcq",
+          "prompt": "In the App Router, why might you need less client-side global state than in a plain React SPA?",
+          "promptTr": "App Router'da, düz bir React SPA'ya göre neden daha az istemci tarafı global state'e ihtiyacın olabilir?",
+          "options": [
+            { "text": "Much data lives on the server (Server Components + data cache) and in the URL, so a global store is often unnecessary", "textTr": "Verinin çoğu sunucuda (Server Component'ler + data cache) ve URL'de durur, bu yüzden global store çoğu zaman gereksizdir", "correct": true },
+            { "text": "Next.js forbids using any state libraries", "textTr": "Next.js herhangi bir state kütüphanesi kullanmayı yasaklar" },
+            { "text": "useState doesn't work in Next.js", "textTr": "useState Next.js'te çalışmaz" },
+            { "text": "All state must be stored in cookies", "textTr": "Tüm state çerezlerde saklanmalıdır" }
+          ],
+          "explanation": "Server Components fetch and hold data server-side, and URL/searchParams carry shareable state — so you reach for Zustand/Redux only for genuinely shared interactive client state.",
+          "explanationTr": "Server Component'ler veriyi sunucu tarafında çekip tutar ve URL/searchParams paylaşılabilir state taşır — bu yüzden Zustand/Redux'a yalnızca gerçekten paylaşılan etkileşimli istemci state'i için başvurursun."
+        },
+        {
+          "type": "challenge",
+          "question": "How do you handle errors and error pages in Next.js App Router?"
+        },
+        {
+          "type": "challenge",
+          "question": "How do you manage state in a Next.js application?"
+        }
+      ]
+    }
+  ]
+}

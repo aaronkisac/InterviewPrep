@@ -1,0 +1,197 @@
+{
+  "topic": "nextjs",
+  "title": "Next.js",
+  "$comment": "Canonical concept list (syllabus) for Next.js. Complete: 8 units cover all bank questions. Verified by: pnpm concept:coverage",
+  "concepts": [
+    {
+      "id": "what-is-nextjs",
+      "title": "What is Next.js?",
+      "titleTr": "Next.js nedir?",
+      "section": "foundations",
+      "unit": "foundations",
+      "lessons": [
+        "what-is-nextjs"
+      ]
+    },
+    {
+      "id": "rendering-strategies",
+      "title": "SSR, SSG & CSR",
+      "titleTr": "SSR, SSG ve CSR",
+      "section": "foundations",
+      "unit": "foundations",
+      "lessons": [
+        "rendering-strategies"
+      ]
+    },
+    {
+      "id": "performance-and-fast-refresh",
+      "title": "Built-in performance & Fast Refresh",
+      "titleTr": "Yerleşik performans ve Fast Refresh",
+      "section": "foundations",
+      "unit": "foundations",
+      "lessons": [
+        "performance-and-fast-refresh"
+      ]
+    },
+    {
+      "id": "file-based-routing-and-app-router",
+      "title": "File-based routing & the App Router",
+      "titleTr": "Dosya tabanlı routing ve App Router",
+      "section": "foundations",
+      "unit": "routing-navigation",
+      "lessons": [
+        "file-based-routing-and-app-router"
+      ]
+    },
+    {
+      "id": "layouts-link-dynamic-routes",
+      "title": "Layouts, Link & dynamic routes",
+      "titleTr": "Layout'lar, Link ve dinamik route'lar",
+      "section": "foundations",
+      "unit": "routing-navigation",
+      "lessons": [
+        "layouts-link-dynamic-routes"
+      ]
+    },
+    {
+      "id": "server-vs-client",
+      "title": "Server vs Client Components",
+      "titleTr": "Server vs Client Component'ler",
+      "section": "core",
+      "unit": "server-client-components",
+      "lessons": [
+        "server-vs-client"
+      ]
+    },
+    {
+      "id": "route-handlers-and-data-fetching",
+      "title": "Route Handlers & data fetching",
+      "titleTr": "Route Handler'lar ve veri çekme",
+      "section": "core",
+      "unit": "server-client-components",
+      "lessons": [
+        "route-handlers-and-data-fetching"
+      ]
+    },
+    {
+      "id": "isr-static-params-caching",
+      "title": "ISR, static params & caching",
+      "titleTr": "ISR, statik parametreler ve önbellekleme",
+      "section": "core",
+      "unit": "rendering-caching-seo",
+      "lessons": [
+        "isr-static-params-caching"
+      ]
+    },
+    {
+      "id": "seo-and-build-output",
+      "title": "SEO & build output",
+      "titleTr": "SEO ve build çıktısı",
+      "section": "core",
+      "unit": "rendering-caching-seo",
+      "lessons": [
+        "seo-and-build-output"
+      ]
+    },
+    {
+      "id": "images-and-static-files",
+      "title": "Images & static files",
+      "titleTr": "Görseller ve statik dosyalar",
+      "section": "core",
+      "unit": "assets-styling-optimisation",
+      "lessons": [
+        "images-and-static-files"
+      ]
+    },
+    {
+      "id": "styling",
+      "title": "CSS & styling",
+      "titleTr": "CSS ve stil",
+      "section": "core",
+      "unit": "assets-styling-optimisation",
+      "lessons": [
+        "styling"
+      ]
+    },
+    {
+      "id": "code-splitting-and-vitals",
+      "title": "Code splitting & Core Web Vitals",
+      "titleTr": "Kod bölme ve Core Web Vitals",
+      "section": "core",
+      "unit": "assets-styling-optimisation",
+      "lessons": [
+        "code-splitting-and-vitals"
+      ]
+    },
+    {
+      "id": "config-and-environment",
+      "title": "next.config.js & environment variables",
+      "titleTr": "next.config.js ve ortam değişkenleri",
+      "section": "core",
+      "unit": "configuration-project-setup",
+      "lessons": [
+        "config-and-environment"
+      ]
+    },
+    {
+      "id": "typescript-and-metadata",
+      "title": "TypeScript & the Metadata API",
+      "titleTr": "TypeScript ve Metadata API",
+      "section": "core",
+      "unit": "configuration-project-setup",
+      "lessons": [
+        "typescript-and-metadata"
+      ]
+    },
+    {
+      "id": "errors-and-state",
+      "title": "Errors & state management",
+      "titleTr": "Hatalar ve state yönetimi",
+      "section": "core",
+      "unit": "configuration-project-setup",
+      "lessons": [
+        "errors-and-state"
+      ]
+    },
+    {
+      "id": "parallel-and-intercepting-routes",
+      "title": "Parallel & Intercepting Routes",
+      "titleTr": "Parallel ve Intercepting Route'lar",
+      "section": "advanced",
+      "unit": "advanced-app-router",
+      "lessons": [
+        "parallel-and-intercepting-routes"
+      ]
+    },
+    {
+      "id": "middleware-legacy-files-draft-mode",
+      "title": "Middleware, _app/_document & Draft Mode",
+      "titleTr": "Middleware, _app/_document ve Draft Mode",
+      "section": "advanced",
+      "unit": "advanced-app-router",
+      "lessons": [
+        "middleware-legacy-files-draft-mode"
+      ]
+    },
+    {
+      "id": "auth-and-security",
+      "title": "Authentication & security",
+      "titleTr": "Kimlik doğrulama ve güvenlik",
+      "section": "interview",
+      "unit": "production-deployment",
+      "lessons": [
+        "auth-and-security"
+      ]
+    },
+    {
+      "id": "i18n-deploy-analytics",
+      "title": "i18n, deployment & analytics",
+      "titleTr": "i18n, deployment ve analytics",
+      "section": "interview",
+      "unit": "production-deployment",
+      "lessons": [
+        "i18n-deploy-analytics"
+      ]
+    }
+  ]
+}

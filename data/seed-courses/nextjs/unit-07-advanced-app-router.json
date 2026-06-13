@@ -1,0 +1,104 @@
+{
+  "topic": "nextjs",
+  "slug": "advanced-app-router",
+  "title": "Advanced App Router",
+  "titleTr": "İleri App Router",
+  "section": "advanced",
+  "position": 7,
+  "lessons": [
+    {
+      "slug": "parallel-and-intercepting-routes",
+      "title": "Parallel & Intercepting Routes",
+      "titleTr": "Parallel ve Intercepting Route'lar",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Rendering multiple slots, and overlay routes",
+          "titleTr": "Birden çok slot render etmek ve overlay route'lar",
+          "body": "**Parallel Routes** let one layout render **multiple independent page slots at once**, each with its own loading/error state. You define them with **`@folder`** named slots, which arrive as props on the layout:\n\n```\napp/\n  layout.tsx        // receives { children, team, analytics }\n  @team/page.tsx\n  @analytics/page.tsx\n```\n\nUse them for dashboards (render `@team` and `@analytics` side by side), or conditionally showing different slots (e.g. logged-in vs guest). Each slot navigates independently.\n\n**Intercepting Routes** let you **load a route's content inside the current layout** instead of a full-page navigation — classic use: open a photo or product in a **modal** over the current page, while a direct URL/refresh still shows the full page. You mark them with the `(.)`, `(..)`, `(...)` conventions (relative to the segment):\n\n```\napp/feed/page.tsx\napp/feed/@modal/(.)photo/[id]/page.tsx   // intercept /photo/[id] as a modal\napp/photo/[id]/page.tsx                    // full page on direct visit\n```\n\nTogether they enable Instagram-style modals: click → overlay; share/refresh the URL → full page. Both are App-Router-only features built on the folder conventions.",
+          "bodyTr": "**Parallel Route'lar**, bir layout'un **aynı anda birden çok bağımsız sayfa slotu** render etmesini sağlar; her birinin kendi loading/error state'i olur. Onları **`@folder`** adlı slot'larla tanımlarsın; bunlar layout'ta prop olarak gelir:\n\n```\napp/\n  layout.tsx        // { children, team, analytics } alır\n  @team/page.tsx\n  @analytics/page.tsx\n```\n\nOnları dashboard'lar için kullan (`@team` ve `@analytics`'i yan yana render et) ya da farklı slot'ları koşullu göstermek için (örn. giriş yapmış vs misafir). Her slot bağımsız gezinir.\n\n**Intercepting Route'lar**, bir route'un içeriğini tam-sayfa gezinme yerine **mevcut layout içinde yüklemeni** sağlar — klasik kullanım: mevcut sayfanın üstünde bir **modal**'da bir foto ya da ürün açmak, doğrudan URL/yenileme ise yine tam sayfayı gösterir. Onları `(.)`, `(..)`, `(...)` konvansiyonlarıyla işaretlersin (segmente göreli):\n\n```\napp/feed/page.tsx\napp/feed/@modal/(.)photo/[id]/page.tsx   // /photo/[id]'yi modal olarak yakala\napp/photo/[id]/page.tsx                    // doğrudan ziyarette tam sayfa\n```\n\nBirlikte Instagram tarzı modal'ları mümkün kılar: tıkla → overlay; URL'yi paylaş/yenile → tam sayfa. İkisi de klasör konvansiyonları üzerine kurulu, yalnızca-App-Router özellikleridir."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What is the classic use case for Intercepting Routes?",
+          "promptTr": "Intercepting Route'lar için klasik kullanım durumu nedir?",
+          "options": [
+            { "text": "Showing a route in a modal over the current page, while a direct visit shows the full page", "textTr": "Bir route'u mevcut sayfanın üstünde modal'da göstermek, doğrudan ziyaret ise tam sayfayı gösterir", "correct": true },
+            { "text": "Running middleware on every request", "textTr": "Her istekte middleware çalıştırmak" },
+            { "text": "Caching API responses on the CDN", "textTr": "API yanıtlarını CDN'de önbeklemek" },
+            { "text": "Splitting a bundle into smaller chunks", "textTr": "Bir bundle'ı daha küçük parçalara bölmek" }
+          ],
+          "explanation": "Intercepting Routes load another route's UI inside the current layout (e.g. a modal) for soft navigation, while the same URL on direct load/refresh renders the standalone full page.",
+          "explanationTr": "Intercepting Route'lar başka bir route'un UI'ını mevcut layout içinde (örn. modal) yumuşak gezinme için yükler; aynı URL doğrudan yüklemede/yenilemede bağımsız tam sayfayı render eder."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Name a parallel route slot called 'analytics'",
+          "promptTr": "'analytics' adlı bir parallel route slotu adlandır",
+          "code": "app/\n  ___analytics/page.tsx",
+          "answers": ["@"],
+          "distractors": ["(", "[", "_"],
+          "explanation": "Parallel route slots use the @folder convention (e.g. @analytics), and the slot is passed to the layout as a prop. Brackets denote dynamic segments; parentheses are route groups.",
+          "explanationTr": "Parallel route slot'ları @folder konvansiyonunu kullanır (örn. @analytics) ve slot layout'a prop olarak geçirilir. Köşeli parantez dinamik segmenti; normal parantez route group'u belirtir."
+        },
+        {
+          "type": "challenge",
+          "question": "How does Parallel Routes work in Next.js App Router?"
+        },
+        {
+          "type": "challenge",
+          "question": "What are Intercepting Routes and when would you use them?"
+        }
+      ]
+    },
+    {
+      "slug": "middleware-legacy-files-draft-mode",
+      "title": "Middleware, _app/_document & Draft Mode",
+      "titleTr": "Middleware, _app/_document ve Draft Mode",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Request interception, Pages shells, and previews",
+          "titleTr": "İstek yakalama, Pages kabukları ve önizlemeler",
+          "body": "**Middleware** (`middleware.ts` at the project root) runs **before a request is completed**, on the Edge runtime, for matching routes. It can rewrite, redirect, set headers/cookies, or return a response — ideal for **auth gating, A/B tests, i18n locale routing, and bot protection**. It can't run heavy Node APIs or touch the DOM; keep it fast.\n\n```ts\nexport function middleware(req: NextRequest) {\n  if (!req.cookies.get(\"token\")) return NextResponse.redirect(new URL(\"/login\", req.url));\n}\nexport const config = { matcher: [\"/dashboard/:path*\"] };\n```\n\nIn the **Pages Router**, two special files customise the shared shell:\n\n- **`_app.tsx`** wraps every page — the place for global providers, layout and global CSS. It persists across navigation.\n- **`_document.tsx`** customises the server-rendered HTML document (`<html>`, `<body>`, `<head>` structure). It renders once on the server only.\n\nThe App Router replaces both with `layout.tsx` (and built-in metadata).\n\n**Draft Mode** lets you bypass static caching to preview **unpublished/draft CMS content**. You enable it server-side (`draftMode().enable()` via a route handler), which sets a cookie so subsequent requests render dynamically with the latest draft — perfect for a \"Preview\" button in a headless CMS. Disable it to return to the cached static version.",
+          "bodyTr": "**Middleware** (proje kökünde `middleware.ts`), eşleşen route'lar için **bir istek tamamlanmadan önce**, Edge runtime'da çalışır. Rewrite, redirect yapabilir, header/cookie ayarlayabilir ya da bir yanıt döndürebilir — **auth kapısı, A/B testleri, i18n locale yönlendirme ve bot koruması** için ideal. Ağır Node API'lerini çalıştıramaz ya da DOM'a dokunamaz; hızlı tut.\n\n```ts\nexport function middleware(req: NextRequest) {\n  if (!req.cookies.get(\"token\")) return NextResponse.redirect(new URL(\"/login\", req.url));\n}\nexport const config = { matcher: [\"/dashboard/:path*\"] };\n```\n\n**Pages Router**'da iki özel dosya paylaşılan kabuğu özelleştirir:\n\n- **`_app.tsx`** her sayfayı sarar — global provider'lar, layout ve global CSS için yer. Gezinme boyunca kalıcıdır.\n- **`_document.tsx`** sunucuda render edilen HTML belgesini özelleştirir (`<html>`, `<body>`, `<head>` yapısı). Yalnızca sunucuda bir kez render olur.\n\nApp Router ikisini de `layout.tsx` (ve yerleşik metadata) ile değiştirir.\n\n**Draft Mode**, **yayınlanmamış/taslak CMS içeriğini** önizlemek için statik önbeklemeyi atlamanı sağlar. Onu sunucu tarafında etkinleştirirsin (bir route handler ile `draftMode().enable()`), bu bir cookie ayarlar; sonraki istekler en son taslakla dinamik render olur — headless bir CMS'teki \"Önizleme\" butonu için mükemmel. Önbellekli statik sürüme dönmek için onu kapat."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What is middleware in Next.js best suited for?",
+          "promptTr": "Next.js'te middleware en çok neye uygundur?",
+          "options": [
+            { "text": "Running before a request completes to redirect, rewrite, or gate routes (e.g. auth, i18n)", "textTr": "Bir istek tamamlanmadan önce çalışıp route'ları redirect/rewrite/gate etmek (örn. auth, i18n)", "correct": true },
+            { "text": "Rendering heavy components on the client", "textTr": "Ağır bileşenleri istemcide render etmek" },
+            { "text": "Storing the application's database", "textTr": "Uygulamanın veritabanını saklamak" },
+            { "text": "Styling components with CSS Modules", "textTr": "Bileşenleri CSS Modules ile stillemek" }
+          ],
+          "explanation": "Middleware runs on the Edge before the request resolves — great for auth gating, redirects, locale routing and headers. It's lightweight and can't use full Node APIs or the DOM.",
+          "explanationTr": "Middleware, istek çözülmeden önce Edge'de çalışır — auth kapısı, redirect, locale yönlendirme ve header'lar için harika. Hafiftir; tam Node API'lerini ya da DOM'u kullanamaz."
+        },
+        {
+          "type": "true_false",
+          "statement": "In the App Router, layout.tsx replaces the Pages Router's _app.tsx and _document.tsx.",
+          "statementTr": "App Router'da layout.tsx, Pages Router'ın _app.tsx ve _document.tsx'inin yerini alır.",
+          "answer": true,
+          "explanation": "The root layout.tsx provides the shared shell (including <html>/<body>) and global providers/CSS, taking over the roles that _app and _document played in the Pages Router.",
+          "explanationTr": "Kök layout.tsx, paylaşılan kabuğu (<html>/<body> dahil) ve global provider/CSS'i sağlar; Pages Router'da _app ve _document'in oynadığı rolleri devralır."
+        },
+        {
+          "type": "challenge",
+          "question": "How do you implement middleware in Next.js?"
+        },
+        {
+          "type": "challenge",
+          "question": "What are _app.tsx and _document.tsx in the Next.js Pages Router?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is Draft Mode in Next.js and when would you use it?"
+        }
+      ]
+    }
+  ]
+}

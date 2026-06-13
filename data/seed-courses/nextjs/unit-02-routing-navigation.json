@@ -1,0 +1,118 @@
+{
+  "topic": "nextjs",
+  "slug": "routing-navigation",
+  "title": "Routing & Navigation",
+  "titleTr": "Routing ve Navigasyon",
+  "section": "foundations",
+  "position": 2,
+  "lessons": [
+    {
+      "slug": "file-based-routing-and-app-router",
+      "title": "File-based routing & the App Router",
+      "titleTr": "Dosya tabanlı routing ve App Router",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "The filesystem is the router",
+          "titleTr": "Dosya sistemi router'dır",
+          "body": "In Next.js, **the folder structure defines the routes** — no manual route config. There are two routers:\n\n- **Pages Router** (`pages/`, the original): each file is a route. `pages/about.tsx` → `/about`, `pages/index.tsx` → `/`.\n- **App Router** (`app/`, Next.js 13+, now the default): routes are **folders**, and a special `page.tsx` file makes a folder publicly routable. `app/about/page.tsx` → `/about`.\n\nThe `app/` directory adds powerful conventions via special files: `page.tsx` (the route UI), `layout.tsx` (shared shell), `loading.tsx` (instant loading UI / Suspense), `error.tsx` (error boundary), `not-found.tsx`, `route.ts` (API). Folders not containing a `page` aren't routable.\n\nKey differences: the **App Router** is built on **React Server Components**, supports nested layouts, streaming and `Suspense` natively, and colocates data fetching in components. The **Pages Router** uses `getServerSideProps`/`getStaticProps` for data and `_app`/`_document` for shells. New apps should use the App Router; the Pages Router remains supported for existing projects.",
+          "bodyTr": "Next.js'te **klasör yapısı route'ları tanımlar** — manuel route config yok. İki router vardır:\n\n- **Pages Router** (`pages/`, orijinal): her dosya bir route'tur. `pages/about.tsx` → `/about`, `pages/index.tsx` → `/`.\n- **App Router** (`app/`, Next.js 13+, artık varsayılan): route'lar **klasörlerdir** ve özel bir `page.tsx` dosyası bir klasörü herkese açık routable yapar. `app/about/page.tsx` → `/about`.\n\n`app/` dizini özel dosyalarla güçlü konvansiyonlar ekler: `page.tsx` (route UI), `layout.tsx` (paylaşılan kabuk), `loading.tsx` (anında yükleme UI / Suspense), `error.tsx` (error boundary), `not-found.tsx`, `route.ts` (API). `page` içermeyen klasörler routable değildir.\n\nTemel farklar: **App Router**, **React Server Component'ler** üzerine kuruludur, iç içe layout'ları, streaming'i ve `Suspense`'i native destekler ve veri çekmeyi bileşenlerde bir arada tutar. **Pages Router** veri için `getServerSideProps`/`getStaticProps` ve kabuk için `_app`/`_document` kullanır. Yeni uygulamalar App Router kullanmalı; Pages Router mevcut projeler için desteklenmeye devam eder."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Name the special file that makes app/about/ a public route",
+          "promptTr": "app/about/ klasörünü herkese açık route yapan özel dosyayı adlandır",
+          "code": "app/\n  about/\n    ___.tsx",
+          "answers": ["page"],
+          "distractors": ["index", "route", "layout"],
+          "explanation": "In the App Router, page.tsx makes a folder routable. index.tsx is the Pages Router convention; route.ts is for API handlers; layout.tsx is a shared shell, not a route on its own.",
+          "explanationTr": "App Router'da page.tsx bir klasörü routable yapar. index.tsx Pages Router konvansiyonudur; route.ts API handler'ları içindir; layout.tsx kendi başına bir route değil, paylaşılan kabuktur."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What is a defining feature of the App Router vs the Pages Router?",
+          "promptTr": "App Router'ı Pages Router'dan ayıran temel özellik nedir?",
+          "options": [
+            { "text": "It's built on React Server Components with nested layouts and streaming", "textTr": "İç içe layout'lar ve streaming ile React Server Component'ler üzerine kuruludur", "correct": true },
+            { "text": "It doesn't support dynamic routes", "textTr": "Dinamik route'ları desteklemez" },
+            { "text": "It requires a separate routing library", "textTr": "Ayrı bir routing kütüphanesi gerektirir" },
+            { "text": "It only works without TypeScript", "textTr": "Yalnızca TypeScript olmadan çalışır" }
+          ],
+          "explanation": "The App Router (app/) uses Server Components by default, supports nested layouts, Suspense and streaming, and colocates data fetching — a big shift from the Pages Router's getServerSideProps model.",
+          "explanationTr": "App Router (app/) varsayılan Server Component kullanır, iç içe layout'ları, Suspense ve streaming'i destekler ve veri çekmeyi bir arada tutar — Pages Router'ın getServerSideProps modelinden büyük bir değişim."
+        },
+        {
+          "type": "challenge",
+          "question": "How does file-based routing work in Next.js?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is the App Router in Next.js 13+?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is the difference between the pages/ and app/ directory?"
+        }
+      ]
+    },
+    {
+      "slug": "layouts-link-dynamic-routes",
+      "title": "Layouts, Link & dynamic routes",
+      "titleTr": "Layout'lar, Link ve dinamik route'lar",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Shared shells, fast navigation, parameterised paths",
+          "titleTr": "Paylaşılan kabuklar, hızlı gezinme, parametreli yollar",
+          "body": "A **`layout.tsx`** wraps the pages beneath it with shared UI (nav bars, footers, providers). Crucially, layouts **persist across navigation** — they don't re-render or lose state when you move between child routes, and they **nest**: a root layout wraps everything, and nested layouts add per-section shells. The root layout must include `<html>` and `<body>`.\n\nThe **`<Link>`** component (`next/link`) is how you navigate. Prefer it over a plain `<a>` because Link does **client-side navigation** (no full page reload), **prefetches** the target route when it's in view, and preserves scroll/state — far faster than a hard navigation. A raw `<a>` reloads the whole app.\n\n**Dynamic routes** capture path segments with brackets:\n\n```\napp/blog/[slug]/page.tsx   → /blog/hello   (params.slug = \"hello\")\napp/shop/[...all]/page.tsx → catch-all\n```\n\nThe segment value arrives as `params` (a prop in the App Router). Use `generateStaticParams` to pre-build known dynamic pages at build time.",
+          "bodyTr": "Bir **`layout.tsx`**, altındaki sayfaları paylaşılan UI ile sarar (nav bar'lar, footer'lar, provider'lar). En önemlisi, layout'lar **gezinme boyunca kalıcıdır** — çocuk route'lar arasında geçerken yeniden render olmaz ya da state kaybetmez ve **iç içedir**: bir kök layout her şeyi sarar, iç içe layout'lar bölüm başına kabuklar ekler. Kök layout `<html>` ve `<body>` içermelidir.\n\n**`<Link>`** bileşeni (`next/link`), gezinme şeklindir. Onu düz bir `<a>`'ya tercih et çünkü Link **istemci tarafı gezinme** yapar (tam sayfa yeniden yükleme yok), hedef route görünürken onu **prefetch** eder ve scroll/state'i korur — sert gezinmeden çok daha hızlı. Çıplak bir `<a>` tüm uygulamayı yeniden yükler.\n\n**Dinamik route'lar** yol segmentlerini köşeli parantezle yakalar:\n\n```\napp/blog/[slug]/page.tsx   → /blog/hello   (params.slug = \"hello\")\napp/shop/[...all]/page.tsx → catch-all\n```\n\nSegment değeri `params` olarak gelir (App Router'da bir prop). Bilinen dinamik sayfaları build zamanında önceden üretmek için `generateStaticParams` kullan."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Why use next/link's <Link> instead of a plain <a> tag for internal navigation?",
+          "promptTr": "İç gezinme için düz <a> yerine neden next/link'in <Link>'i kullanılır?",
+          "options": [
+            { "text": "It does client-side navigation and prefetches the route, avoiding a full page reload", "textTr": "İstemci tarafı gezinme yapar ve route'u prefetch eder, tam sayfa yeniden yüklemeden kaçınır", "correct": true },
+            { "text": "It is required for external links", "textTr": "Dış bağlantılar için gereklidir" },
+            { "text": "It disables JavaScript on the page", "textTr": "Sayfada JavaScript'i devre dışı bırakır" },
+            { "text": "It makes the URL invisible", "textTr": "URL'yi görünmez yapar" }
+          ],
+          "explanation": "Link navigates without reloading the whole app and prefetches in-view routes, so transitions feel instant. A bare <a> triggers a full document reload, discarding app state.",
+          "explanationTr": "Link tüm uygulamayı yeniden yüklemeden gezinir ve görünürdeki route'ları prefetch eder, böylece geçişler anında hissettirir. Çıplak bir <a>, uygulama state'ini atarak tam belge yeniden yüklemesi tetikler."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Create a dynamic route segment for a blog post slug",
+          "promptTr": "Bir blog yazısı slug'ı için dinamik route segmenti oluştur",
+          "code": "app/blog/___/page.tsx",
+          "answers": ["[slug]"],
+          "distractors": ["{slug}", ":slug", "(slug)"],
+          "explanation": "Square brackets mark a dynamic segment: [slug] matches /blog/anything and exposes params.slug. Parentheses (slug) would be a route group; colons are Express syntax, not Next.js.",
+          "explanationTr": "Köşeli parantezler dinamik segmenti işaretler: [slug], /blog/herhangi-bir-şey'i eşler ve params.slug'ı sunar. Parantez (slug) bir route group olurdu; iki nokta Express söz dizimidir, Next.js değil."
+        },
+        {
+          "type": "true_false",
+          "statement": "A layout.tsx re-renders and loses its state every time you navigate to a different child page.",
+          "statementTr": "layout.tsx, farklı bir çocuk sayfaya her gezindiğinde yeniden render olur ve state'ini kaybeder.",
+          "answer": false,
+          "explanation": "Layouts persist across navigation between their child routes — they keep their state and don't re-render, which is what makes shared shells (nav, sidebars) efficient.",
+          "explanationTr": "Layout'lar, çocuk route'ları arasındaki gezinme boyunca kalıcıdır — state'lerini korur ve yeniden render olmazlar; paylaşılan kabukları (nav, sidebar) verimli kılan budur."
+        },
+        {
+          "type": "challenge",
+          "question": "What is a layout.tsx file in Next.js App Router?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is the Link component in Next.js and why use it instead of an anchor tag?"
+        },
+        {
+          "type": "challenge",
+          "question": "How do you handle dynamic routes in Next.js?"
+        }
+      ]
+    }
+  ]
+}

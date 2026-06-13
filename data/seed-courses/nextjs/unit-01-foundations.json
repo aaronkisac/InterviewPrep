@@ -1,0 +1,138 @@
+{
+  "topic": "nextjs",
+  "slug": "foundations",
+  "title": "Next.js Foundations",
+  "titleTr": "Next.js Temelleri",
+  "section": "foundations",
+  "position": 1,
+  "lessons": [
+    {
+      "slug": "what-is-nextjs",
+      "title": "What is Next.js?",
+      "titleTr": "Next.js nedir?",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "A framework on top of React",
+          "titleTr": "React üstünde bir framework",
+          "body": "React is a **library** for building UIs — it gives you components and nothing else. **Next.js** is a **framework** built on React that supplies the missing production pieces: routing, server-side rendering, data fetching, bundling, image optimisation and a build/deploy story.\n\nProblems it solves out of the box:\n\n- **Routing** — file-based, no router library to wire up.\n- **Rendering on the server** — SSR/SSG for fast first paint and SEO.\n- **Performance** — automatic code-splitting, image/font optimisation, prefetching.\n- **Full-stack** — API/Route Handlers and Server Components let you write backend logic alongside UI.\n- **DX** — zero-config TypeScript, Fast Refresh, sensible defaults.\n\nThe trade-off vs a plain React SPA: you adopt the framework's conventions and a build/server model. The win: less glue code, better defaults, and a smoother path to production. Think of it as \"React, batteries included\".",
+          "bodyTr": "React, arayüz inşa etmek için bir **kütüphanedir** — sana bileşenleri verir, başka bir şey değil. **Next.js**, React üstüne kurulu, eksik production parçalarını sağlayan bir **framework**'tür: routing, sunucu tarafı render, veri çekme, bundling, görsel optimizasyonu ve bir build/deploy düzeni.\n\nHazır olarak çözdüğü sorunlar:\n\n- **Routing** — dosya tabanlı, kurulacak bir router kütüphanesi yok.\n- **Sunucuda render** — hızlı ilk boyama ve SEO için SSR/SSG.\n- **Performans** — otomatik kod bölme, görsel/font optimizasyonu, prefetch.\n- **Full-stack** — API/Route Handler'lar ve Server Component'ler backend mantığını UI'ın yanında yazmanı sağlar.\n- **DX** — sıfır-config TypeScript, Fast Refresh, makul varsayılanlar.\n\nDüz bir React SPA'ya karşı ödünleşim: framework'ün konvansiyonlarını ve bir build/sunucu modelini benimsersin. Kazanç: daha az yapıştırma kodu, daha iyi varsayılanlar ve production'a daha pürüzsüz bir yol. \"React, bataryalar dahil\" diye düşün."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What best describes the relationship between React and Next.js?",
+          "promptTr": "React ile Next.js arasındaki ilişkiyi en iyi hangisi açıklar?",
+          "options": [
+            { "text": "Next.js is a framework built on React that adds routing, rendering and tooling", "textTr": "Next.js, React üstüne kurulu, routing/render/araç ekleyen bir framework'tür", "correct": true },
+            { "text": "Next.js is a competing library that replaces React", "textTr": "Next.js, React'in yerini alan rakip bir kütüphanedir" },
+            { "text": "React is built on top of Next.js", "textTr": "React, Next.js üstüne kuruludur" },
+            { "text": "They are unrelated technologies", "textTr": "İlgisiz teknolojilerdir" }
+          ],
+          "explanation": "Next.js uses React for the UI layer and adds the framework concerns React leaves out: routing, SSR/SSG, bundling, image optimisation and a production build.",
+          "explanationTr": "Next.js UI katmanı için React'i kullanır ve React'in dışarıda bıraktığı framework işlerini ekler: routing, SSR/SSG, bundling, görsel optimizasyonu ve production build."
+        },
+        {
+          "type": "true_false",
+          "statement": "A plain React app comes with built-in routing and server-side rendering.",
+          "statementTr": "Düz bir React uygulaması yerleşik routing ve sunucu tarafı render ile gelir.",
+          "answer": false,
+          "explanation": "React is just the view library — routing and SSR need extra libraries or a framework. Next.js provides both (and more) by default.",
+          "explanationTr": "React yalnızca view kütüphanesidir — routing ve SSR ekstra kütüphane ya da framework gerektirir. Next.js ikisini de (ve fazlasını) varsayılan sağlar."
+        },
+        {
+          "type": "challenge",
+          "question": "What is Next.js and what problems does it solve?"
+        },
+        {
+          "type": "challenge",
+          "question": "What are the benefits of using Next.js over a plain React app?"
+        }
+      ]
+    },
+    {
+      "slug": "rendering-strategies",
+      "title": "SSR, SSG & CSR",
+      "titleTr": "SSR, SSG ve CSR",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Where and when HTML is produced",
+          "titleTr": "HTML'in nerede ve ne zaman üretildiği",
+          "body": "Next.js can render a page three ways — the difference is **where** and **when** the HTML is generated:\n\n- **CSR (Client-Side Rendering)** — the browser downloads JS and renders in the client. Fast navigation after load, but a blank/slow first paint and weak SEO. Classic SPA behaviour.\n- **SSG (Static Site Generation)** — HTML is built **at build time** and served from a CDN. Fastest and cheapest; ideal for content that rarely changes (docs, blogs, marketing). **ISR** lets static pages refresh on a schedule.\n- **SSR (Server-Side Rendering)** — HTML is generated **per request** on the server. Always fresh and SEO-friendly, but adds server work and latency. Ideal for personalised or fast-changing data.\n\nRule of thumb: **SSG for static content, SSR for per-request/personalised, CSR for highly interactive private dashboards.** The App Router blends these — Server Components render on the server by default, and you opt parts into client interactivity. Pre-rendering (SSR/SSG) is the main SEO and performance win over a pure CSR SPA.",
+          "bodyTr": "Next.js bir sayfayı üç şekilde render edebilir — fark, HTML'in **nerede** ve **ne zaman** üretildiğidir:\n\n- **CSR (Client-Side Rendering)** — tarayıcı JS indirir ve istemcide render eder. Yüklemeden sonra hızlı gezinme ama boş/yavaş ilk boyama ve zayıf SEO. Klasik SPA davranışı.\n- **SSG (Static Site Generation)** — HTML **build zamanında** üretilir ve CDN'den sunulur. En hızlı ve ucuz; nadiren değişen içerik için ideal (dokümanlar, bloglar, pazarlama). **ISR**, statik sayfaların bir programa göre tazelenmesini sağlar.\n- **SSR (Server-Side Rendering)** — HTML sunucuda **istek başına** üretilir. Her zaman taze ve SEO-dostu, ama sunucu işi ve gecikme ekler. Kişiselleştirilmiş ya da hızlı değişen veri için ideal.\n\nKural: **statik içerik için SSG, istek-başına/kişiselleştirilmiş için SSR, yüksek etkileşimli özel dashboard'lar için CSR.** App Router bunları harmanlar — Server Component'ler varsayılan sunucuda render olur, parçaları istemci etkileşimine alırsın. Ön-render (SSR/SSG), saf CSR SPA'ya karşı temel SEO ve performans kazancıdır."
+        },
+        {
+          "type": "mcq",
+          "prompt": "A marketing page rarely changes and must load instantly worldwide. Best strategy?",
+          "promptTr": "Bir pazarlama sayfası nadiren değişiyor ve dünya genelinde anında yüklenmeli. En iyi strateji?",
+          "options": [
+            { "text": "SSG — pre-build the HTML and serve from a CDN", "textTr": "SSG — HTML'i önceden üret ve CDN'den sun", "correct": true },
+            { "text": "CSR — render everything in the browser", "textTr": "CSR — her şeyi tarayıcıda render et" },
+            { "text": "SSR — regenerate on every request", "textTr": "SSR — her istekte yeniden üret" },
+            { "text": "None — static pages can't be cached", "textTr": "Hiçbiri — statik sayfalar önbelleklenemez" }
+          ],
+          "explanation": "Static, rarely-changing content is perfect for SSG: built once, cached on a CDN, served instantly with no per-request server cost. ISR can refresh it periodically if needed.",
+          "explanationTr": "Statik, nadiren değişen içerik SSG için mükemmeldir: bir kez üretilir, CDN'de önbeklenir, istek başına sunucu maliyeti olmadan anında sunulur. Gerekirse ISR onu periyodik tazeleyebilir."
+        },
+        {
+          "type": "true_false",
+          "statement": "SSR generates a page's HTML on the server for each incoming request.",
+          "statementTr": "SSR, bir sayfanın HTML'ini her gelen istek için sunucuda üretir.",
+          "answer": true,
+          "explanation": "SSR renders per request, so the content is always fresh and crawlable — at the cost of server work and some latency versus pre-built static pages.",
+          "explanationTr": "SSR istek başına render eder, bu yüzden içerik her zaman taze ve taranabilir — önceden üretilmiş statik sayfalara kıyasla sunucu işi ve biraz gecikme pahasına."
+        },
+        {
+          "type": "challenge",
+          "question": "What is the difference between SSR, SSG, and CSR in Next.js?"
+        }
+      ]
+    },
+    {
+      "slug": "performance-and-fast-refresh",
+      "title": "Built-in performance & Fast Refresh",
+      "titleTr": "Yerleşik performans ve Fast Refresh",
+      "position": 3,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "What you get for free",
+          "titleTr": "Bedavaya gelenler",
+          "body": "Next.js ships many **performance optimisations by default**, so you don't wire them up yourself:\n\n- **Automatic code splitting** — each route only loads the JS it needs.\n- **Prefetching** — `<Link>` prefetches linked routes in the viewport, so navigation feels instant.\n- **Image optimisation** — `next/image` resizes, lazy-loads and serves modern formats.\n- **Font optimisation** — `next/font` self-hosts fonts with no layout shift.\n- **Server Components & streaming** — less JS shipped to the client.\n- **Static generation & caching** — pages and data cached aggressively.\n- **Script optimisation** — `next/script` controls third-party loading.\n\nFor developer experience, **Fast Refresh** gives near-instant feedback while editing: when you save a component, Next.js hot-reloads **only that component and re-renders it, preserving local React state** where possible. If an edit can't be applied safely (e.g. a syntax error or a change outside a component), it falls back to a full reload. It's far better than a manual refresh because you keep your place in the UI.",
+          "bodyTr": "Next.js birçok **performans optimizasyonunu varsayılan** gönderir, böylece onları kendin kurmazsın:\n\n- **Otomatik kod bölme** — her route yalnızca ihtiyaç duyduğu JS'i yükler.\n- **Prefetch** — `<Link>` viewport'taki bağlı route'ları önceden çeker, gezinme anında hissettirir.\n- **Görsel optimizasyonu** — `next/image` yeniden boyutlar, tembel yükler ve modern formatlar sunar.\n- **Font optimizasyonu** — `next/font` fontları layout kayması olmadan kendi sunar.\n- **Server Component'ler & streaming** — istemciye daha az JS gönderilir.\n- **Statik üretim & önbellekleme** — sayfalar ve veri agresif önbeklenir.\n- **Script optimizasyonu** — `next/script` üçüncü taraf yüklemeyi kontrol eder.\n\nGeliştirici deneyimi için **Fast Refresh**, düzenlerken neredeyse anında geri bildirim verir: bir bileşeni kaydettiğinde Next.js **yalnızca o bileşeni hot-reload eder ve yeniden render eder, mümkünse yerel React state'ini koruyarak**. Bir düzenleme güvenle uygulanamazsa (örn. söz dizimi hatası ya da bileşen dışı bir değişiklik), tam yeniden yüklemeye düşer. Manuel yenilemeden çok daha iyidir çünkü UI'daki yerini korursun."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What does Fast Refresh preserve when you edit a component?",
+          "promptTr": "Bir bileşeni düzenlediğinde Fast Refresh neyi korur?",
+          "options": [
+            { "text": "Local React state, re-rendering just the edited component where possible", "textTr": "Yerel React state'ini, mümkünse yalnızca düzenlenen bileşeni yeniden render ederek", "correct": true },
+            { "text": "Nothing — it always does a full page reload", "textTr": "Hiçbir şey — her zaman tam sayfa yeniden yükler" },
+            { "text": "Only the URL", "textTr": "Yalnızca URL'yi" },
+            { "text": "The server-side cache only", "textTr": "Yalnızca sunucu tarafı önbelleği" }
+          ],
+          "explanation": "Fast Refresh hot-reloads the edited component and keeps its local state, so you don't lose your place. It only falls back to a full reload when an edit can't be applied safely.",
+          "explanationTr": "Fast Refresh düzenlenen bileşeni hot-reload eder ve yerel state'ini korur, böylece yerini kaybetmezsin. Yalnızca bir düzenleme güvenle uygulanamadığında tam yeniden yüklemeye düşer."
+        },
+        {
+          "type": "true_false",
+          "statement": "In Next.js, each route automatically loads only the JavaScript it needs (code splitting).",
+          "statementTr": "Next.js'te her route otomatik olarak yalnızca ihtiyaç duyduğu JavaScript'i yükler (kod bölme).",
+          "answer": true,
+          "explanation": "Automatic per-route code splitting is a built-in default — users download a small bundle for the current page instead of the whole app's JS up front.",
+          "explanationTr": "Route başına otomatik kod bölme yerleşik bir varsayılandır — kullanıcılar tüm uygulamanın JS'i yerine mevcut sayfa için küçük bir bundle indirir."
+        },
+        {
+          "type": "challenge",
+          "question": "What built-in performance optimisations does Next.js provide?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is Fast Refresh in Next.js and how does it work?"
+        }
+      ]
+    }
+  ]
+}
