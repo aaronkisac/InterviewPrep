@@ -1,0 +1,267 @@
+{
+  "topic": "typescript",
+  "title": "TypeScript",
+  "$comment": "Canonical concept list (syllabus) for this topic. Each concept must be (a) taught by >=1 listed lesson in data/seed-courses/typescript/ and (b) tested by >=1 bank question (via a lesson challenge). Verified by: pnpm concept:coverage",
+  "concepts": [
+    {
+      "id": "what-is-typescript",
+      "title": "What is TypeScript?",
+      "titleTr": "TypeScript nedir?",
+      "section": "foundations",
+      "unit": "fundamentals",
+      "lessons": [
+        "what-is-typescript"
+      ]
+    },
+    {
+      "id": "compiler-and-files",
+      "title": "The compiler & file types",
+      "titleTr": "Derleyici ve dosya türleri",
+      "section": "foundations",
+      "unit": "fundamentals",
+      "lessons": [
+        "compiler-and-files"
+      ]
+    },
+    {
+      "id": "everyday-types",
+      "title": "Everyday types",
+      "titleTr": "Günlük tipler",
+      "section": "foundations",
+      "unit": "fundamentals",
+      "lessons": [
+        "everyday-types"
+      ]
+    },
+    {
+      "id": "interfaces",
+      "title": "Interfaces",
+      "titleTr": "Interface'ler",
+      "section": "foundations",
+      "unit": "types-interfaces",
+      "lessons": [
+        "interfaces"
+      ]
+    },
+    {
+      "id": "type-vs-interface-vs-class",
+      "title": "type vs interface vs class",
+      "titleTr": "type vs interface vs class",
+      "section": "foundations",
+      "unit": "types-interfaces",
+      "lessons": [
+        "type-vs-interface-vs-class"
+      ]
+    },
+    {
+      "id": "structural-typing",
+      "title": "Structural typing",
+      "titleTr": "Yapısal tipleme",
+      "section": "foundations",
+      "unit": "types-interfaces",
+      "lessons": [
+        "structural-typing"
+      ]
+    },
+    {
+      "id": "union-types",
+      "title": "Union types",
+      "titleTr": "Union tipleri",
+      "section": "core",
+      "unit": "unions-narrowing",
+      "lessons": [
+        "union-types"
+      ]
+    },
+    {
+      "id": "optional-chaining-nullish",
+      "title": "?., ?? and short-circuiting",
+      "titleTr": "?., ?? ve kısa devre",
+      "section": "core",
+      "unit": "unions-narrowing",
+      "lessons": [
+        "optional-chaining-nullish"
+      ]
+    },
+    {
+      "id": "null-checks-assertions",
+      "title": "Null checks & the ! assertion",
+      "titleTr": "Null kontrolleri ve ! assertion'ı",
+      "section": "core",
+      "unit": "unions-narrowing",
+      "lessons": [
+        "null-checks-assertions"
+      ]
+    },
+    {
+      "id": "any-unknown-never",
+      "title": "any, unknown & never",
+      "titleTr": "any, unknown ve never",
+      "section": "core",
+      "unit": "unions-narrowing",
+      "lessons": [
+        "any-unknown-never"
+      ]
+    },
+    {
+      "id": "constructors-inheritance",
+      "title": "Constructors & inheritance",
+      "titleTr": "Constructor'lar ve kalıtım",
+      "section": "core",
+      "unit": "classes-oop",
+      "lessons": [
+        "constructors-inheritance"
+      ]
+    },
+    {
+      "id": "access-modifiers",
+      "title": "Access modifiers & # privacy",
+      "titleTr": "Erişim belirleyiciler ve # gizliliği",
+      "section": "core",
+      "unit": "classes-oop",
+      "lessons": [
+        "access-modifiers"
+      ]
+    },
+    {
+      "id": "abstract-accessors-constants",
+      "title": "abstract, accessors & constants",
+      "titleTr": "abstract, accessor'lar ve sabitler",
+      "section": "core",
+      "unit": "classes-oop",
+      "lessons": [
+        "abstract-accessors-constants"
+      ]
+    },
+    {
+      "id": "oop-principles-mixins",
+      "title": "OOP principles & mixins",
+      "titleTr": "OOP ilkeleri ve mixin'ler",
+      "section": "core",
+      "unit": "classes-oop",
+      "lessons": [
+        "oop-principles-mixins"
+      ]
+    },
+    {
+      "id": "generics-and-index-signatures",
+      "title": "Generics & index signatures",
+      "titleTr": "Generic'ler ve index signature'lar",
+      "section": "advanced",
+      "unit": "generics-type-level",
+      "lessons": [
+        "generics-and-index-signatures"
+      ]
+    },
+    {
+      "id": "conditional-types-and-infer",
+      "title": "Conditional types & infer",
+      "titleTr": "Conditional type'lar ve infer",
+      "section": "advanced",
+      "unit": "generics-type-level",
+      "lessons": [
+        "conditional-types-and-infer"
+      ]
+    },
+    {
+      "id": "deriving-types",
+      "title": "Deriving types from other types",
+      "titleTr": "Tipleri başka tiplerden türetmek",
+      "section": "advanced",
+      "unit": "generics-type-level",
+      "lessons": [
+        "deriving-types"
+      ]
+    },
+    {
+      "id": "enums",
+      "title": "Enums & const enums",
+      "titleTr": "Enum'lar ve const enum'lar",
+      "section": "advanced",
+      "unit": "enums-assertions-immutability",
+      "lessons": [
+        "enums"
+      ]
+    },
+    {
+      "id": "const-assertions-readonly",
+      "title": "const assertions & readonly",
+      "titleTr": "const assertion'lar ve readonly",
+      "section": "advanced",
+      "unit": "enums-assertions-immutability",
+      "lessons": [
+        "const-assertions-readonly"
+      ]
+    },
+    {
+      "id": "assertion-functions-overloads",
+      "title": "Assertion functions & overloads",
+      "titleTr": "Assertion fonksiyonları ve overload'lar",
+      "section": "advanced",
+      "unit": "enums-assertions-immutability",
+      "lessons": [
+        "assertion-functions-overloads"
+      ]
+    },
+    {
+      "id": "modules-and-dynamic-import",
+      "title": "Modules & dynamic import",
+      "titleTr": "Modüller ve dinamik import",
+      "section": "advanced",
+      "unit": "modules-declarations-interop",
+      "lessons": [
+        "modules-and-dynamic-import"
+      ]
+    },
+    {
+      "id": "js-libraries-and-declare",
+      "title": "Using JS libraries & declare",
+      "titleTr": "JS kütüphaneleri kullanmak ve declare",
+      "section": "advanced",
+      "unit": "modules-declarations-interop",
+      "lessons": [
+        "js-libraries-and-declare"
+      ]
+    },
+    {
+      "id": "decorators-and-currying",
+      "title": "Decorators & currying",
+      "titleTr": "Decorator'lar ve currying",
+      "section": "advanced",
+      "unit": "modules-declarations-interop",
+      "lessons": [
+        "decorators-and-currying"
+      ]
+    },
+    {
+      "id": "compilation-and-erasure",
+      "title": "Compilation & type erasure",
+      "titleTr": "Derleme ve tip silme",
+      "section": "interview",
+      "unit": "compiler-tooling-ecosystem",
+      "lessons": [
+        "compilation-and-erasure"
+      ]
+    },
+    {
+      "id": "tsconfig-and-build-performance",
+      "title": "tsconfig & build performance",
+      "titleTr": "tsconfig ve build performansı",
+      "section": "interview",
+      "unit": "compiler-tooling-ecosystem",
+      "lessons": [
+        "tsconfig-and-build-performance"
+      ]
+    },
+    {
+      "id": "typescript-in-practice",
+      "title": "TypeScript in practice",
+      "titleTr": "Pratikte TypeScript",
+      "section": "interview",
+      "unit": "compiler-tooling-ecosystem",
+      "lessons": [
+        "typescript-in-practice"
+      ]
+    }
+  ]
+}

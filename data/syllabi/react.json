@@ -1,0 +1,277 @@
+{
+  "topic": "react",
+  "title": "React",
+  "$comment": "Canonical concept list (syllabus) for this topic. Each concept must be (a) taught by >=1 listed lesson in data/seed-courses/react/ and (b) tested by >=1 bank question (via a lesson challenge). Verified by: pnpm concept:coverage",
+  "concepts": [
+    {
+      "id": "what-is-jsx",
+      "title": "What is JSX?",
+      "titleTr": "JSX nedir?",
+      "section": "foundations",
+      "unit": "components-jsx",
+      "lessons": [
+        "what-is-jsx"
+      ]
+    },
+    {
+      "id": "your-first-component",
+      "title": "Your first component",
+      "titleTr": "İlk bileşenin",
+      "section": "foundations",
+      "unit": "components-jsx",
+      "lessons": [
+        "your-first-component"
+      ]
+    },
+    {
+      "id": "passing-props",
+      "title": "Passing props",
+      "titleTr": "Props aktarmak",
+      "section": "foundations",
+      "unit": "props-state",
+      "lessons": [
+        "passing-props"
+      ]
+    },
+    {
+      "id": "state-with-usestate",
+      "title": "State with useState",
+      "titleTr": "useState ile state",
+      "section": "foundations",
+      "unit": "props-state",
+      "lessons": [
+        "state-with-usestate"
+      ]
+    },
+    {
+      "id": "controlled-inputs",
+      "title": "Controlled inputs",
+      "titleTr": "Kontrollü input'lar",
+      "section": "foundations",
+      "unit": "props-state",
+      "lessons": [
+        "controlled-inputs"
+      ]
+    },
+    {
+      "id": "virtual-dom",
+      "title": "The virtual DOM",
+      "titleTr": "Sanal DOM",
+      "section": "core",
+      "unit": "rendering-reconciliation",
+      "lessons": [
+        "virtual-dom"
+      ]
+    },
+    {
+      "id": "lists-and-keys",
+      "title": "Lists & keys",
+      "titleTr": "Listeler ve key'ler",
+      "section": "core",
+      "unit": "rendering-reconciliation",
+      "lessons": [
+        "lists-and-keys"
+      ]
+    },
+    {
+      "id": "what-triggers-a-render",
+      "title": "What triggers a render",
+      "titleTr": "Render'ı ne tetikler",
+      "section": "core",
+      "unit": "rendering-reconciliation",
+      "lessons": [
+        "what-triggers-a-render"
+      ]
+    },
+    {
+      "id": "synchronizing-with-effects",
+      "title": "Synchronizing with effects",
+      "titleTr": "Effect'lerle senkronizasyon",
+      "section": "core",
+      "unit": "effects-lifecycle",
+      "lessons": [
+        "synchronizing-with-effects"
+      ]
+    },
+    {
+      "id": "dependencies-and-cleanup",
+      "title": "Dependencies & cleanup",
+      "titleTr": "Bağımlılıklar ve cleanup",
+      "section": "core",
+      "unit": "effects-lifecycle",
+      "lessons": [
+        "dependencies-and-cleanup"
+      ]
+    },
+    {
+      "id": "strictmode-and-error-boundaries",
+      "title": "StrictMode & error boundaries",
+      "titleTr": "StrictMode ve error boundary'ler",
+      "section": "core",
+      "unit": "effects-lifecycle",
+      "lessons": [
+        "strictmode-and-error-boundaries"
+      ]
+    },
+    {
+      "id": "rules-of-hooks",
+      "title": "Rules of hooks",
+      "titleTr": "Hook kuralları",
+      "section": "core",
+      "unit": "hooks-deep-dive",
+      "lessons": [
+        "rules-of-hooks"
+      ]
+    },
+    {
+      "id": "refs",
+      "title": "Refs: reaching outside",
+      "titleTr": "Ref'ler: dışarıya uzanmak",
+      "section": "core",
+      "unit": "hooks-deep-dive",
+      "lessons": [
+        "refs"
+      ]
+    },
+    {
+      "id": "handling-events",
+      "title": "Handling events",
+      "titleTr": "Event'leri yönetmek",
+      "section": "core",
+      "unit": "events-context-data-flow",
+      "lessons": [
+        "handling-events"
+      ]
+    },
+    {
+      "id": "context",
+      "title": "Context: skipping the middlemen",
+      "titleTr": "Context: aracıları atlamak",
+      "section": "core",
+      "unit": "events-context-data-flow",
+      "lessons": [
+        "context"
+      ]
+    },
+    {
+      "id": "redux-and-global-state",
+      "title": "Redux & global state",
+      "titleTr": "Redux ve global state",
+      "section": "core",
+      "unit": "events-context-data-flow",
+      "lessons": [
+        "redux-and-global-state"
+      ]
+    },
+    {
+      "id": "portals-and-reactdom",
+      "title": "Portals & ReactDOM",
+      "titleTr": "Portal'lar ve ReactDOM",
+      "section": "core",
+      "unit": "events-context-data-flow",
+      "lessons": [
+        "portals-and-reactdom"
+      ]
+    },
+    {
+      "id": "skipping-renders",
+      "title": "Skipping renders with memo",
+      "titleTr": "memo ile render atlamak",
+      "section": "advanced",
+      "unit": "performance",
+      "lessons": [
+        "skipping-renders"
+      ]
+    },
+    {
+      "id": "keeping-renders-cheap",
+      "title": "Keeping renders cheap",
+      "titleTr": "Render'ları ucuz tutmak",
+      "section": "advanced",
+      "unit": "performance",
+      "lessons": [
+        "keeping-renders-cheap"
+      ]
+    },
+    {
+      "id": "jsx-techniques",
+      "title": "JSX techniques",
+      "titleTr": "JSX teknikleri",
+      "section": "advanced",
+      "unit": "patterns-architecture",
+      "lessons": [
+        "jsx-techniques"
+      ]
+    },
+    {
+      "id": "elements-and-components",
+      "title": "Elements vs components",
+      "titleTr": "Element'ler ve component'ler",
+      "section": "advanced",
+      "unit": "patterns-architecture",
+      "lessons": [
+        "elements-and-components"
+      ]
+    },
+    {
+      "id": "class-components-and-this",
+      "title": "Class components & this",
+      "titleTr": "Sınıf bileşenleri ve this",
+      "section": "advanced",
+      "unit": "patterns-architecture",
+      "lessons": [
+        "class-components-and-this"
+      ]
+    },
+    {
+      "id": "architecture-patterns",
+      "title": "Architecture patterns",
+      "titleTr": "Mimari pattern'ler",
+      "section": "advanced",
+      "unit": "patterns-architecture",
+      "lessons": [
+        "architecture-patterns"
+      ]
+    },
+    {
+      "id": "testing-mindset",
+      "title": "The testing mindset",
+      "titleTr": "Test zihniyeti",
+      "section": "advanced",
+      "unit": "testing-react",
+      "lessons": [
+        "testing-mindset"
+      ]
+    },
+    {
+      "id": "jest-and-rtl",
+      "title": "Jest & Testing Library in practice",
+      "titleTr": "Pratikte Jest ve Testing Library",
+      "section": "advanced",
+      "unit": "testing-react",
+      "lessons": [
+        "jest-and-rtl"
+      ]
+    },
+    {
+      "id": "the-big-picture",
+      "title": "The big picture",
+      "titleTr": "Büyük resim",
+      "section": "interview",
+      "unit": "interview-gauntlet",
+      "lessons": [
+        "the-big-picture"
+      ]
+    },
+    {
+      "id": "react-vs-the-world",
+      "title": "React vs the world",
+      "titleTr": "React'e karşı dünya",
+      "section": "interview",
+      "unit": "interview-gauntlet",
+      "lessons": [
+        "react-vs-the-world"
+      ]
+    }
+  ]
+}
