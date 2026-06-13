@@ -1,0 +1,255 @@
+{
+  "topic": "typescript",
+  "slug": "types-interfaces",
+  "title": "Types & Interfaces",
+  "titleTr": "Tipler ve Interface'ler",
+  "section": "foundations",
+  "position": 2,
+  "lessons": [
+    {
+      "slug": "interfaces",
+      "title": "Interfaces",
+      "titleTr": "Interface'ler",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Contracts for object shapes",
+          "titleTr": "Nesne şekilleri için sözleşmeler",
+          "body": "An **interface** declares the shape of an object — its properties, their types, and the methods it supports:\n\n```ts\ninterface User {\n  id: number;\n  name: string;\n  greet(): string;\n}\n```\n\nThe compiler uses it for structural checking; **nothing about it exists at runtime**. Interfaces grow through `extends` (one or several parents) and through **declaration merging** — declaring the same interface twice merges the members, which is how you augment third-party types.",
+          "bodyTr": "Bir **interface**, bir nesnenin şeklini bildirir — property'lerini, tiplerini ve desteklediği metotları:\n\n```ts\ninterface User {\n  id: number;\n  name: string;\n  greet(): string;\n}\n```\n\nDerleyici onu yapısal denetim için kullanır; **çalışma zamanında ondan hiçbir şey var olmaz**. Interface'ler `extends` ile (bir veya birden çok ebeveyn) ve **declaration merging** ile büyür — aynı interface'i iki kez bildirmek üyeleri birleştirir; üçüncü parti tipleri genişletmenin yolu budur."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Make Admin inherit every member of User",
+          "promptTr": "Admin'in, User'ın tüm üyelerini devralmasını sağla",
+          "code": "interface Admin ___ User {\n  role: string;\n}",
+          "answers": [
+            "extends"
+          ],
+          "distractors": [
+            "implements",
+            "&",
+            "inherits"
+          ],
+          "explanation": "Interfaces inherit with extends — Admin gets every User member plus its own. implements is for classes fulfilling a contract.",
+          "explanationTr": "Interface'ler extends ile kalıtım alır — Admin, kendi üyelerine ek olarak tüm User üyelerini edinir. implements ise bir sözleşmeyi yerine getiren sınıflar içindir."
+        },
+        {
+          "type": "mcq",
+          "prompt": "An interface can extend more than one interface at once.",
+          "promptTr": "Bir interface aynı anda birden fazla interface'i genişletebilir.",
+          "options": [
+            {
+              "text": "True — extends User, Timestamped merges them all",
+              "textTr": "Doğru — extends User, Timestamped hepsini birleştirir",
+              "correct": true
+            },
+            {
+              "text": "False — only single inheritance is allowed",
+              "textTr": "Yanlış — yalnızca tekli kalıtıma izin verilir"
+            },
+            {
+              "text": "Only with the & operator",
+              "textTr": "Yalnızca & operatörüyle"
+            },
+            {
+              "text": "Only if the parents share no property names",
+              "textTr": "Yalnızca ebeveynler ortak property adı taşımıyorsa"
+            }
+          ],
+          "explanation": "extends takes a comma-separated list and merges every parent. The type-alias equivalent is intersection (&), but extends gives clearer errors.",
+          "explanationTr": "extends virgülle ayrılmış bir liste alır ve tüm ebeveynleri birleştirir. Type alias karşılığı kesişimdir (&), ama extends daha net hatalar verir."
+        },
+        {
+          "type": "true_false",
+          "statement": "Interfaces are erased at compile time — you cannot check one with instanceof at runtime.",
+          "statementTr": "Interface'ler derleme zamanında silinir — çalışma zamanında bir interface'i instanceof ile kontrol edemezsin.",
+          "answer": true,
+          "explanation": "An interface is a compile-time contract only. Runtime checks need real values: typeof, instanceof on classes, or hand-written type guards.",
+          "explanationTr": "Interface yalnızca derleme zamanı sözleşmesidir. Çalışma zamanı kontrolleri gerçek değerler ister: typeof, sınıflarda instanceof ya da elle yazılmış type guard'lar."
+        },
+        {
+          "type": "challenge",
+          "question": "What is Interface in TypeScript?"
+        },
+        {
+          "type": "challenge",
+          "question": "How do you extend one interface from another in TypeScript?"
+        }
+      ]
+    },
+    {
+      "slug": "type-vs-interface-vs-class",
+      "title": "type vs interface vs class",
+      "titleTr": "type vs interface vs class",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Three tools, three jobs",
+          "titleTr": "Üç araç, üç iş",
+          "body": "All three describe objects, but they're not interchangeable:\n\n- **interface** — object shapes; merges across declarations; extends cleanly.\n- **type alias** — names *anything*: unions, tuples, mapped types, primitives. No merging.\n- **class** — a **runtime** construct: produces instances, carries state and methods, and acts as both a type and a value.\n\n```ts\ntype Status = \"idle\" | \"loading\" | \"error\"; // only type can do this\ninterface Props { status: Status }\nclass ApiClient { constructor(private baseUrl: string) {} }\n```\n\nA pragmatic split: interface for object shapes you might extend, type for unions and intersections — and stay consistent within a codebase.",
+          "bodyTr": "Üçü de nesneleri tanımlar ama birbirinin yerine geçmez:\n\n- **interface** — nesne şekilleri; bildirimler arasında merge olur; temiz extends.\n- **type alias** — *her şeyi* adlandırır: union'lar, tuple'lar, mapped type'lar, primitifler. Merge olmaz.\n- **class** — bir **çalışma zamanı** yapısı: örnek üretir, durum ve metot taşır, hem tip hem değer olarak davranır.\n\n```ts\ntype Status = \"idle\" | \"loading\" | \"error\"; // bunu yalnızca type yapabilir\ninterface Props { status: Status }\nclass ApiClient { constructor(private baseUrl: string) {} }\n```\n\nPratik bir ayrım: genişletebileceğin nesne şekilleri için interface, union ve kesişimler için type — ve aynı codebase içinde tutarlı kal."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Which can declare a union like \"idle\" | \"loading\" | \"error\"?",
+          "promptTr": "\"idle\" | \"loading\" | \"error\" gibi bir union'ı hangisi bildirebilir?",
+          "options": [
+            {
+              "text": "Only a type alias",
+              "textTr": "Yalnızca type alias",
+              "correct": true
+            },
+            {
+              "text": "Only an interface",
+              "textTr": "Yalnızca interface"
+            },
+            {
+              "text": "Both type and interface",
+              "textTr": "Hem type hem interface"
+            },
+            {
+              "text": "Only an enum",
+              "textTr": "Yalnızca enum"
+            }
+          ],
+          "explanation": "Interfaces describe object shapes. A type alias can name any type — unions, tuples, primitives, mapped types.",
+          "explanationTr": "Interface'ler nesne şekillerini tanımlar. Type alias ise her tipi adlandırabilir — union'lar, tuple'lar, primitifler, mapped type'lar."
+        },
+        {
+          "type": "match",
+          "prompt": "Match each tool to its distinctive strength",
+          "promptTr": "Her aracı ayırt edici gücüyle eşleştir",
+          "pairs": [
+            {
+              "left": "interface",
+              "leftTr": "interface",
+              "right": "Object shapes + declaration merging",
+              "rightTr": "Nesne şekilleri + declaration merging"
+            },
+            {
+              "left": "type",
+              "leftTr": "type",
+              "right": "Unions, tuples — names anything",
+              "rightTr": "Union'lar, tuple'lar — her şeyi adlandırır"
+            },
+            {
+              "left": "class",
+              "leftTr": "class",
+              "right": "Runtime instances with state and methods",
+              "rightTr": "Durum ve metotları olan çalışma zamanı örnekleri"
+            },
+            {
+              "left": "&",
+              "leftTr": "&",
+              "right": "Intersection — the type-alias way to combine",
+              "rightTr": "Kesişim — type alias ile birleştirme yolu"
+            }
+          ]
+        },
+        {
+          "type": "true_false",
+          "statement": "A class can be used both as a type (for annotations) and as a value (to instantiate).",
+          "statementTr": "Bir sınıf hem tip olarak (anotasyonlarda) hem değer olarak (örnek üretmek için) kullanılabilir.",
+          "answer": true,
+          "explanation": "class ApiClient creates a runtime constructor AND a type for its instances — the only one of the three that lives in both worlds.",
+          "explanationTr": "class ApiClient hem bir çalışma zamanı constructor'ı hem de örnekleri için bir tip üretir — üçü içinde iki dünyada birden yaşayan tek odur."
+        },
+        {
+          "type": "challenge",
+          "question": "What is the difference between type and interface in TypeScript?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is the difference between Classes and Interfaces in TypeScript?"
+        },
+        {
+          "type": "challenge",
+          "question": "When to use interfaces and when to use classes in TypeScript?"
+        }
+      ]
+    },
+    {
+      "slug": "structural-typing",
+      "title": "Structural typing",
+      "titleTr": "Yapısal tipleme",
+      "position": 3,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Shape over name",
+          "titleTr": "İsim değil şekil",
+          "body": "TypeScript types match by **shape, not by name**. If a value has all the required properties with the right types, it's compatible — no explicit declaration needed:\n\n```ts\ninterface Point { x: number; y: number }\nconst spot = { x: 1, y: 2, z: 3 };\nconst p: Point = spot; // ✓ shape fits\n```\n\nThis is the opposite of **nominal** typing (Java, C#), where names must match. Structural typing makes mocks and library interop painless. The trade-off: two IDs that are both `string` cross-assign silently — **branded types** restore distinctness when you need it.",
+          "bodyTr": "TypeScript tipleri **isme göre değil, şekle göre** eşleşir. Bir değer, gerekli tüm property'lere doğru tiplerle sahipse uyumludur — açık bir bildirim gerekmez:\n\n```ts\ninterface Point { x: number; y: number }\nconst spot = { x: 1, y: 2, z: 3 };\nconst p: Point = spot; // ✓ şekil uyuyor\n```\n\nBu, isimlerin eşleşmesi gereken **nominal** tiplemenin (Java, C#) tam tersidir. Yapısal tipleme mock'ları ve kütüphane uyumunu zahmetsiz kılar. Bedeli: ikisi de `string` olan iki farklı ID birbirine sessizce atanabilir — gerektiğinde **branded type'lar** ayrımı geri getirir."
+        },
+        {
+          "type": "output_predict",
+          "prompt": "What does the compiler say about the last line?",
+          "promptTr": "Derleyici son satır hakkında ne der?",
+          "code": "interface Named { name: string }\nclass Person {\n  constructor(public name: string) {}\n}\nconst n: Named = new Person(\"Aaron\"); // ?",
+          "options": [
+            {
+              "text": "It compiles — Person has the right shape",
+              "textTr": "Derlenir — Person doğru şekle sahip",
+              "correct": true
+            },
+            {
+              "text": "Error: Person does not implement Named",
+              "textTr": "Hata: Person, Named'i implement etmiyor"
+            },
+            {
+              "text": "Error: classes cannot be assigned to interfaces",
+              "textTr": "Hata: sınıflar interface'lere atanamaz"
+            },
+            {
+              "text": "It compiles only if Person declares implements Named",
+              "textTr": "Yalnızca Person, implements Named bildirirse derlenir"
+            }
+          ],
+          "explanation": "No implements needed — Person instances have a string name, so they structurally satisfy Named.",
+          "explanationTr": "implements gerekmez — Person örneklerinin string bir name'i var, dolayısıyla Named'i yapısal olarak karşılarlar."
+        },
+        {
+          "type": "true_false",
+          "statement": "Two separately declared interfaces with identical members are interchangeable in TypeScript.",
+          "statementTr": "Ayrı ayrı bildirilmiş ama üyeleri birebir aynı olan iki interface, TypeScript'te birbirinin yerine kullanılabilir.",
+          "answer": true,
+          "explanation": "Same shape = same type compatibility. The declaration name plays no role in matching — that's structural typing.",
+          "explanationTr": "Aynı şekil = aynı tip uyumluluğu. Bildirim adının eşleşmede hiçbir rolü yoktur — yapısal tipleme budur."
+        },
+        {
+          "type": "mcq",
+          "prompt": "UserId and OrderId are both type aliases for string. How do you stop one being passed where the other is expected?",
+          "promptTr": "UserId ve OrderId, ikisi de string için type alias. Birinin diğerinin beklendiği yere geçmesini nasıl engellersin?",
+          "options": [
+            {
+              "text": "Brand them — intersect each with a unique marker property",
+              "textTr": "Brand'le — her birini benzersiz bir işaret property'siyle kesiştir",
+              "correct": true
+            },
+            {
+              "text": "Use interface instead of type",
+              "textTr": "type yerine interface kullan"
+            },
+            {
+              "text": "Enable strict mode",
+              "textTr": "strict modu aç"
+            },
+            {
+              "text": "You can't — aliases of the same primitive are always interchangeable",
+              "textTr": "Engelleyemezsin — aynı primitifin alias'ları her zaman birbirinin yerine geçer"
+            }
+          ],
+          "explanation": "Branded types (e.g. string & { __brand: \"UserId\" }) simulate nominal typing where structural matching is too permissive.",
+          "explanationTr": "Branded type'lar (örn. string & { __brand: \"UserId\" }) yapısal eşleşmenin fazla esnek kaldığı yerde nominal tiplemeyi taklit eder."
+        },
+        {
+          "type": "challenge",
+          "question": "What is Structural Typing?"
+        }
+      ]
+    }
+  ]
+}

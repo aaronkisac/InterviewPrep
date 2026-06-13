@@ -1,0 +1,206 @@
+{
+  "topic": "typescript",
+  "slug": "generics-type-level",
+  "title": "Generics & Type-Level Programming",
+  "titleTr": "Generic'ler ve Tip Düzeyinde Programlama",
+  "section": "advanced",
+  "position": 5,
+  "lessons": [
+    {
+      "slug": "generics-and-index-signatures",
+      "title": "Generics & index signatures",
+      "titleTr": "Generic'ler ve index signature'lar",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Parameterising types",
+          "titleTr": "Tipleri parametreleştirmek",
+          "body": "A **generic** is a type parameter — a placeholder a caller fills in, so one definition works across many concrete types without losing type information:\n\n```ts\nfunction identity<T>(value: T): T {\n  return value;\n}\nconst n = identity(3);      // T = number\nconst s = identity(\"hi\");  // T = string\n```\n\nThe alternative — `any` — would discard the type. Generics keep the link between input and output. You can constrain a parameter with `extends` (`<T extends { id: string }>`), give it a default (`<T = string>`), and use it on functions, classes, interfaces and type aliases.\n\nWhen you don't know the *keys* ahead of time, an **index signature** describes them by pattern instead:\n\n```ts\ninterface Dictionary<V> {\n  [key: string]: V;\n}\n```\n\nThat says \"any string key maps to a `V`\". Use it for open-ended maps; reach for a generic when you want the caller to pin down the type.",
+          "bodyTr": "Bir **generic**, bir tip parametresidir — çağıranın doldurduğu bir yer tutucu; böylece tek bir tanım, tip bilgisini kaybetmeden birçok somut tiple çalışır:\n\n```ts\nfunction identity<T>(value: T): T {\n  return value;\n}\nconst n = identity(3);      // T = number\nconst s = identity(\"hi\");  // T = string\n```\n\nAlternatif — `any` — tipi atardı. Generic'ler girdiyle çıktı arasındaki bağı korur. Bir parametreyi `extends` ile kısıtlayabilir (`<T extends { id: string }>`), varsayılan verebilir (`<T = string>`) ve onu fonksiyonlarda, sınıflarda, interface'lerde ve type alias'larda kullanabilirsin.\n\n*Anahtarları* önceden bilmediğinde, bir **index signature** onları bunun yerine bir desenle tanımlar:\n\n```ts\ninterface Dictionary<V> {\n  [key: string]: V;\n}\n```\n\nBu, \"herhangi bir string anahtar bir `V`'ye eşlenir\" der. Açık uçlu map'ler için kullan; çağıranın tipi sabitlemesini istediğinde generic'e başvur."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Declare a generic type parameter so input and output stay linked",
+          "promptTr": "Girdi ve çıktının bağlı kalması için bir generic tip parametresi tanımla",
+          "code": "function first___(arr: T[]): T {\n  return arr[0];\n}",
+          "answers": [
+            "<T>"
+          ],
+          "distractors": [
+            "<any>",
+            "(T)",
+            "[T]"
+          ],
+          "explanation": "<T> introduces a type parameter that binds the array's element type to the return type — first(['a']) returns a string, first([1]) a number.",
+          "explanationTr": "<T> bir tip parametresi tanıtır; dizinin eleman tipini dönüş tipine bağlar — first(['a']) string, first([1]) number döndürür."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What does an index signature like { [key: string]: number } express?",
+          "promptTr": "{ [key: string]: number } gibi bir index signature neyi ifade eder?",
+          "options": [
+            {
+              "text": "Any string key is allowed and maps to a number",
+              "textTr": "Herhangi bir string anahtara izin verilir ve bir number'a eşlenir",
+              "correct": true
+            },
+            {
+              "text": "Exactly one property named 'key' of type number",
+              "textTr": "number tipinde 'key' adlı tam olarak bir property"
+            },
+            {
+              "text": "An array of numbers",
+              "textTr": "Bir number dizisi"
+            },
+            {
+              "text": "A number that can be indexed",
+              "textTr": "İndekslenebilen bir number"
+            }
+          ],
+          "explanation": "The signature describes a whole family of keys by pattern, not a single named property — ideal when keys are dynamic. The value type constrains every entry.",
+          "explanationTr": "Signature, tek bir adlandırılmış property'yi değil, desenle bir anahtar ailesini tanımlar — anahtarlar dinamikken idealdir. Değer tipi her girdiyi kısıtlar."
+        },
+        {
+          "type": "challenge",
+          "question": "Explain generics in TypeScript"
+        },
+        {
+          "type": "challenge",
+          "question": "What is an index signature, and why would you use one?"
+        }
+      ]
+    },
+    {
+      "slug": "conditional-types-and-infer",
+      "title": "Conditional types & infer",
+      "titleTr": "Conditional type'lar ve infer",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Types that branch — and capture",
+          "titleTr": "Dallanan — ve yakalayan — tipler",
+          "body": "A **conditional type** is a ternary at the type level:\n\n```ts\ntype IsString<T> = T extends string ? true : false;\ntype A = IsString<\"hi\">; // true\ntype B = IsString<10>;    // false\n```\n\nIts power comes from **`infer`**, which declares a fresh type variable *inside* the `extends` clause to capture part of a type by pattern-matching:\n\n```ts\ntype ElementOf<T> = T extends (infer U)[] ? U : never;\ntype X = ElementOf<string[]>; // string\n```\n\nWithout `infer` you would have no way to *name* the element type you're matching against — that's exactly the gap it fills. The built-in `ReturnType<F>` is just `F extends (...a: any[]) => infer R ? R : never`.\n\n**Template literal types** apply the same string-interpolation syntax to types, building new string-literal unions:\n\n```ts\ntype Event = \"click\" | \"hover\";\ntype Handler = `on${Capitalize<Event>}`; // \"onClick\" | \"onHover\"\n```\n\nThey power typed event names, route params, and CSS-in-JS keys.",
+          "bodyTr": "Bir **conditional type**, tip düzeyinde bir ternary'dir:\n\n```ts\ntype IsString<T> = T extends string ? true : false;\ntype A = IsString<\"hi\">; // true\ntype B = IsString<10>;    // false\n```\n\nGücü **`infer`**'den gelir; `extends` cümlesinin *içinde* taze bir tip değişkeni tanımlayarak desen eşleştirmeyle bir tipin parçasını yakalar:\n\n```ts\ntype ElementOf<T> = T extends (infer U)[] ? U : never;\ntype X = ElementOf<string[]>; // string\n```\n\n`infer` olmadan, eşleştirdiğin eleman tipini *adlandırmanın* bir yolu olmazdı — doldurduğu boşluk tam olarak budur. Yerleşik `ReturnType<F>` sadece `F extends (...a: any[]) => infer R ? R : never`'dir.\n\n**Template literal type'lar** aynı string interpolasyon sözdizimini tiplere uygular ve yeni string-literal union'lar kurar:\n\n```ts\ntype Event = \"click\" | \"hover\";\ntype Handler = `on${Capitalize<Event>}`; // \"onClick\" | \"onHover\"\n```\n\nTiplenmiş event adlarını, route parametrelerini ve CSS-in-JS anahtarlarını güçlendirir."
+        },
+        {
+          "type": "output_predict",
+          "prompt": "What is the resolved type?",
+          "promptTr": "Çözülen tip nedir?",
+          "code": "type Unwrap<T> = T extends Promise<infer V> ? V : T;\ntype R = Unwrap<Promise<number>>;",
+          "options": [
+            {
+              "text": "number",
+              "textTr": "number",
+              "correct": true
+            },
+            {
+              "text": "Promise<number>",
+              "textTr": "Promise<number>"
+            },
+            {
+              "text": "never",
+              "textTr": "never"
+            },
+            {
+              "text": "unknown",
+              "textTr": "unknown"
+            }
+          ],
+          "explanation": "T matches Promise<infer V>, binding V to number, so the true branch returns number. A non-promise T would fall through to the else branch unchanged.",
+          "explanationTr": "T, Promise<infer V> ile eşleşir, V'yi number'a bağlar, bu yüzden true dalı number döndürür. Promise olmayan bir T, else dalına değişmeden düşerdi."
+        },
+        {
+          "type": "true_false",
+          "statement": "The infer keyword can only appear inside the extends clause of a conditional type.",
+          "statementTr": "infer anahtar kelimesi yalnızca bir conditional type'ın extends cümlesinde görünebilir.",
+          "answer": true,
+          "explanation": "infer is meaningful only while pattern-matching in a conditional's extends position — that's where TypeScript can bind it to the matched fragment.",
+          "explanationTr": "infer yalnızca bir conditional'ın extends konumunda desen eşleştirirken anlamlıdır — TypeScript onu eşleşen parçaya orada bağlayabilir."
+        },
+        {
+          "type": "challenge",
+          "question": "What are conditional types in TypeScript?"
+        },
+        {
+          "type": "challenge",
+          "question": "Why is the infer keyword needed in TypeScript?"
+        },
+        {
+          "type": "challenge",
+          "question": "What are template literal types and what are they used for?"
+        }
+      ]
+    },
+    {
+      "slug": "deriving-types",
+      "title": "Deriving types from other types",
+      "titleTr": "Tipleri başka tiplerden türetmek",
+      "position": 3,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "keyof, Omit and unique symbol",
+          "titleTr": "keyof, Omit ve unique symbol",
+          "body": "Good TypeScript derives types instead of repeating them. Two everyday tools:\n\n- **Build a union from a type's keys** with `keyof`:\n\n```ts\ninterface User { id: string; name: string; age: number; }\ntype UserKey = keyof User; // \"id\" | \"name\" | \"age\"\n```\n  To get a union of the *value* types instead: `User[keyof User]`.\n\n- **Exclude a property** with the built-in `Omit` (and its inverse `Pick`):\n\n```ts\ntype PublicUser = Omit<User, \"age\">; // { id, name }\n```\n  `Omit<T, K>` is itself built from `Pick` and `Exclude` over `keyof`.\n\nSeparately, a **`unique symbol`** is a symbol whose identity the type system tracks. Declared with `const`/`readonly`, it's a *nominal*, one-of-a-kind type — perfect for branded keys or well-known symbols that must never be confused with another:\n\n```ts\ndeclare const brand: unique symbol;\ntype USD = number & { [brand]: \"USD\" };\n```",
+          "bodyTr": "İyi TypeScript, tipleri tekrarlamak yerine türetir. İki günlük araç:\n\n- **Bir tipin anahtarlarından union kur** — `keyof` ile:\n\n```ts\ninterface User { id: string; name: string; age: number; }\ntype UserKey = keyof User; // \"id\" | \"name\" | \"age\"\n```\n  Bunun yerine *değer* tiplerinden union almak için: `User[keyof User]`.\n\n- **Bir property'yi dışla** — yerleşik `Omit` (ve tersi `Pick`) ile:\n\n```ts\ntype PublicUser = Omit<User, \"age\">; // { id, name }\n```\n  `Omit<T, K>` kendisi `keyof` üzerinde `Pick` ve `Exclude`'dan kurulmuştur.\n\nAyrıca, bir **`unique symbol`**, kimliğini tip sisteminin izlediği bir symbol'dür. `const`/`readonly` ile tanımlanır, *nominal* ve tek-türünden bir tiptir — markalı anahtarlar veya başkasıyla asla karıştırılmaması gereken well-known symbol'ler için mükemmeldir:\n\n```ts\ndeclare const brand: unique symbol;\ntype USD = number & { [brand]: \"USD\" };\n```"
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Produce the union \"id\" | \"name\" | \"age\" from User",
+          "promptTr": "User'dan \"id\" | \"name\" | \"age\" union'ını üret",
+          "code": "type UserKey = ___ User;",
+          "answers": [
+            "keyof"
+          ],
+          "distractors": [
+            "typeof",
+            "in",
+            "Pick"
+          ],
+          "explanation": "keyof T collapses an object type's property names into a string-literal union — the backbone of mapped and lookup types.",
+          "explanationTr": "keyof T, bir nesne tipinin property adlarını string-literal union'a indirger — mapped ve lookup tiplerinin omurgasıdır."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Which utility removes the 'age' property from User?",
+          "promptTr": "Hangi utility, User'dan 'age' property'sini kaldırır?",
+          "options": [
+            {
+              "text": "Omit<User, \"age\">",
+              "textTr": "Omit<User, \"age\">",
+              "correct": true
+            },
+            {
+              "text": "Pick<User, \"age\">",
+              "textTr": "Pick<User, \"age\">"
+            },
+            {
+              "text": "Partial<User>",
+              "textTr": "Partial<User>"
+            },
+            {
+              "text": "Exclude<User, \"age\">",
+              "textTr": "Exclude<User, \"age\">"
+            }
+          ],
+          "explanation": "Omit<T, K> keeps every property except K. Pick is its inverse; Exclude works on union members, not object properties.",
+          "explanationTr": "Omit<T, K>, K dışındaki her property'yi tutar. Pick onun tersidir; Exclude ise nesne property'lerinde değil, union üyelerinde çalışır."
+        },
+        {
+          "type": "challenge",
+          "question": "How do you build a union type from the properties of a type or interface?"
+        },
+        {
+          "type": "challenge",
+          "question": "How do you exclude a property from a type in TypeScript?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is the unique symbol type used for?"
+        }
+      ]
+    }
+  ]
+}

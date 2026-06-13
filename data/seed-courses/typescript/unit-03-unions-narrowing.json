@@ -1,0 +1,290 @@
+{
+  "topic": "typescript",
+  "slug": "unions-narrowing",
+  "title": "Unions & Narrowing",
+  "titleTr": "Union'lar ve Daraltma",
+  "section": "core",
+  "position": 3,
+  "lessons": [
+    {
+      "slug": "union-types",
+      "title": "Union types",
+      "titleTr": "Union tipleri",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "One value, several possible types",
+          "titleTr": "Tek değer, birden çok olası tip",
+          "body": "The pipe (`|`) builds a **union type** — a value that may be any one of several types:\n\n```ts\ntype Size = \"sm\" | \"md\" | \"lg\";\nfunction format(id: string | number) { /* … */ }\n```\n\nUntil you **narrow** the union, you can only use members that *all* branches share. Narrowing happens through real runtime checks the compiler understands: `typeof` for primitives, `instanceof` for classes, `Array.isArray`, the `in` operator, or a discriminant property. Optional values are unions too — `T | undefined`.",
+          "bodyTr": "Pipe (`|`) bir **union tipi** kurar — birkaç tipten herhangi biri olabilen bir değer:\n\n```ts\ntype Size = \"sm\" | \"md\" | \"lg\";\nfunction format(id: string | number) { /* … */ }\n```\n\nUnion'ı **daraltana** kadar yalnızca *tüm* dalların paylaştığı üyeleri kullanabilirsin. Daraltma, derleyicinin anladığı gerçek çalışma zamanı kontrolleriyle olur: primitifler için `typeof`, sınıflar için `instanceof`, `Array.isArray`, `in` operatörü ya da bir ayırt edici (discriminant) property. Opsiyonel değerler de union'dır — `T | undefined`."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Let the id be either a string or a number",
+          "promptTr": "id'nin string ya da number olabilmesini sağla",
+          "code": "function format(id: string ___ number) {\n  return String(id);\n}",
+          "answers": [
+            "|"
+          ],
+          "distractors": [
+            "&",
+            "||",
+            "or"
+          ],
+          "explanation": "A single pipe builds a union type. & is intersection, || is the runtime logical operator.",
+          "explanationTr": "Tek pipe bir union tipi kurar. & kesişimdir, || ise çalışma zamanındaki mantıksal operatördür."
+        },
+        {
+          "type": "output_predict",
+          "prompt": "What does the compiler say?",
+          "promptTr": "Derleyici ne der?",
+          "code": "function shout(v: string | number) {\n  return v.toUpperCase(); // ?\n}",
+          "options": [
+            {
+              "text": "Error — toUpperCase doesn't exist on string | number",
+              "textTr": "Hata — toUpperCase, string | number üzerinde yok",
+              "correct": true
+            },
+            {
+              "text": "It compiles — v is sometimes a string",
+              "textTr": "Derlenir — v bazen string'dir"
+            },
+            {
+              "text": "It compiles but throws for numbers at runtime",
+              "textTr": "Derlenir ama sayılar için çalışma zamanında hata fırlatır"
+            },
+            {
+              "text": "Error — unions cannot have methods called on them",
+              "textTr": "Hata — union'lar üzerinde metot çağrılamaz"
+            }
+          ],
+          "explanation": "Only members shared by every branch are usable. Narrow first: if (typeof v === \"string\") return v.toUpperCase();",
+          "explanationTr": "Yalnızca her dalın paylaştığı üyeler kullanılabilir. Önce daralt: if (typeof v === \"string\") return v.toUpperCase();"
+        },
+        {
+          "type": "mcq",
+          "prompt": "Which check narrows a value to a class instance at runtime?",
+          "promptTr": "Hangi kontrol bir değeri çalışma zamanında sınıf örneğine daraltır?",
+          "options": [
+            {
+              "text": "instanceof",
+              "textTr": "instanceof",
+              "correct": true
+            },
+            {
+              "text": "typeof",
+              "textTr": "typeof"
+            },
+            {
+              "text": "as",
+              "textTr": "as"
+            },
+            {
+              "text": "satisfies",
+              "textTr": "satisfies"
+            }
+          ],
+          "explanation": "typeof handles primitives, instanceof handles classes, Array.isArray handles arrays — and for interfaces you write a user-defined type guard (x is Foo), since types are erased.",
+          "explanationTr": "typeof primitifleri, instanceof sınıfları, Array.isArray dizileri halleder — interface'ler içinse kullanıcı tanımlı bir type guard (x is Foo) yazarsın, çünkü tipler silinir."
+        },
+        {
+          "type": "challenge",
+          "question": "What does the pipe (|) mean in TypeScript?"
+        },
+        {
+          "type": "challenge",
+          "question": "How do you check the type of a variable at runtime in TypeScript?"
+        }
+      ]
+    },
+    {
+      "slug": "optional-chaining-nullish",
+      "title": "?., ?? and short-circuiting",
+      "titleTr": "?., ?? ve kısa devre",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Operators that stop early",
+          "titleTr": "Erken duran operatörler",
+          "body": "**Short-circuiting** means a logical operator stops as soon as the result is settled — and returns an *operand*, not a boolean:\n\n- `a && b` — returns the first falsy operand, else `b`.\n- `a || b` — returns the first truthy operand.\n- `a ?? b` — returns `b` **only** when `a` is `null`/`undefined` — `0`, `\"\"` and `false` pass through.\n- `a?.b` — **optional chaining**: if `a` is `null`/`undefined`, the whole access short-circuits to `undefined` instead of throwing.\n\n```ts\nconst port = config.port ?? 3000; // 0 stays 0\nconst name = user?.profile?.name; // never throws\n```\n\nTypeScript narrows along each branch: after `user && user.name`, `user` is known to be defined.",
+          "bodyTr": "**Kısa devre**, mantıksal operatörün sonuç belli olur olmaz durması demektir — ve boolean değil, bir *operand* döndürür:\n\n- `a && b` — ilk falsy operandı döndürür, yoksa `b`.\n- `a || b` — ilk truthy operandı döndürür.\n- `a ?? b` — `b`'yi **yalnızca** `a` `null`/`undefined` iken döndürür — `0`, `\"\"` ve `false` aynen geçer.\n- `a?.b` — **optional chaining**: `a` `null`/`undefined` ise erişimin tamamı hata fırlatmak yerine `undefined`'a kısa devre yapar.\n\n```ts\nconst port = config.port ?? 3000; // 0, 0 olarak kalır\nconst name = user?.profile?.name; // asla fırlatmaz\n```\n\nTypeScript her dal boyunca daraltır: `user && user.name`'den sonra `user`'ın tanımlı olduğu bilinir."
+        },
+        {
+          "type": "output_predict",
+          "prompt": "What does this print?",
+          "promptTr": "Bu ne yazdırır?",
+          "code": "const config = { port: 0 };\nconsole.log(config.port ?? 3000);\nconsole.log(config.port || 3000);",
+          "options": [
+            {
+              "text": "0 then 3000",
+              "textTr": "0, sonra 3000",
+              "correct": true
+            },
+            {
+              "text": "3000 then 3000",
+              "textTr": "3000, sonra 3000"
+            },
+            {
+              "text": "0 then 0",
+              "textTr": "0, sonra 0"
+            },
+            {
+              "text": "3000 then 0",
+              "textTr": "3000, sonra 0"
+            }
+          ],
+          "explanation": "?? only falls back for null/undefined, so 0 survives. || treats 0 as falsy and replaces it — the classic config-default bug.",
+          "explanationTr": "?? yalnızca null/undefined için yedeğe düşer, bu yüzden 0 hayatta kalır. || ise 0'ı falsy sayıp değiştirir — klasik config varsayılanı hatası."
+        },
+        {
+          "type": "true_false",
+          "statement": "user?.profile.name throws a TypeError when user is undefined.",
+          "statementTr": "user undefined iken user?.profile.name bir TypeError fırlatır.",
+          "answer": false,
+          "explanation": "?. short-circuits the whole chain to undefined the moment its receiver is null/undefined — nothing after it runs.",
+          "explanationTr": "?. alıcısı null/undefined olduğu anda zincirin tamamını undefined'a kısa devre yapar — sonrasındaki hiçbir şey çalışmaz."
+        },
+        {
+          "type": "challenge",
+          "question": "What is Optional Chaining in TypeScript?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is the purpose of Nullish Coalescing operator?"
+        },
+        {
+          "type": "challenge",
+          "question": "What does short-circuiting mean in TypeScript?"
+        }
+      ]
+    },
+    {
+      "slug": "null-checks-assertions",
+      "title": "Null checks & the ! assertion",
+      "titleTr": "Null kontrolleri ve ! assertion'ı",
+      "position": 3,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Handling null and undefined",
+          "titleTr": "null ve undefined ile başa çıkmak",
+          "body": "With `strictNullChecks` on, the compiler forces you to handle `null` and `undefined`:\n\n```ts\nif (value != null) {\n  // value is narrowed: neither null nor undefined\n}\n```\n\nThe loose `!= null` catches **both** in one comparison; `=== null` / `=== undefined` test exactly one.\n\nThe **non-null assertion** `!` is different in kind: `a!.b` tells the checker *\"trust me, it's not null\"*. It emits **no JavaScript** and changes nothing at runtime — if you were wrong, it still throws. `?.` protects you; `!` only silences the compiler. Default to `?.`.",
+          "bodyTr": "`strictNullChecks` açıkken derleyici seni `null` ve `undefined`'ı ele almaya zorlar:\n\n```ts\nif (value != null) {\n  // value daraltıldı: ne null ne undefined\n}\n```\n\nGevşek `!= null` tek karşılaştırmada **ikisini birden** yakalar; `=== null` / `=== undefined` tam olarak birini test eder.\n\n**Non-null assertion** `!` ise başka türdür: `a!.b`, denetleyiciye *\"güven bana, null değil\"* der. **Hiç JavaScript üretmez** ve çalışma zamanında hiçbir şeyi değiştirmez — yanıldıysan yine fırlatır. `?.` seni korur; `!` yalnızca derleyiciyi susturur. Varsayılanın `?.` olsun."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Catch both null and undefined with one comparison",
+          "promptTr": "Tek karşılaştırmayla hem null'ı hem undefined'ı yakala",
+          "code": "if (value ___ null) {\n  use(value);\n}",
+          "answers": [
+            "!="
+          ],
+          "distractors": [
+            "!==",
+            "===",
+            "=="
+          ],
+          "explanation": "Loose != null is the one idiomatic use of loose equality: it excludes both null and undefined. Strict !== null would let undefined through.",
+          "explanationTr": "Gevşek != null, gevşek eşitliğin deyimsel tek kullanımıdır: hem null'ı hem undefined'ı dışlar. Katı !== null ise undefined'ı içeri alırdı."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What is the key difference between a?.b and a!.b?",
+          "promptTr": "a?.b ile a!.b arasındaki temel fark nedir?",
+          "options": [
+            {
+              "text": "?. is a runtime guard that emits JS; ! is a compile-time claim that emits nothing",
+              "textTr": "?. JS üreten bir çalışma zamanı korumasıdır; ! ise hiçbir şey üretmeyen bir derleme zamanı iddiasıdır",
+              "correct": true
+            },
+            {
+              "text": "They behave identically; ! is just older syntax",
+              "textTr": "Aynı davranırlar; ! sadece daha eski bir sözdizimidir"
+            },
+            {
+              "text": "! adds a runtime null check that throws a custom error",
+              "textTr": "! çalışma zamanına özel hata fırlatan bir null kontrolü ekler"
+            },
+            {
+              "text": "?. only works inside if statements",
+              "textTr": "?. yalnızca if ifadeleri içinde çalışır"
+            }
+          ],
+          "explanation": "?. actually protects you at runtime. ! only tells the checker to trust you — if you're wrong, the code still throws.",
+          "explanationTr": "?. seni çalışma zamanında gerçekten korur. ! ise denetleyiciye yalnızca sana güvenmesini söyler — yanıldıysan kod yine fırlatır."
+        },
+        {
+          "type": "challenge",
+          "question": "How can you check for null and undefined in TypeScript?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is the difference between optional chaining (?.) and the non-null assertion operator (!)?"
+        }
+      ]
+    },
+    {
+      "slug": "any-unknown-never",
+      "title": "any, unknown & never",
+      "titleTr": "any, unknown ve never",
+      "position": 4,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Top and bottom of the type system",
+          "titleTr": "Tip sisteminin tepesi ve dibi",
+          "body": "Three special types mark the edges of the system:\n\n- **`any`** — checking switched off. Errors spread silently through everything it touches. Last resort.\n- **`unknown`** — the *safe* top type. Anything assigns to it, but you must **narrow** before use — it contains errors at the narrowing point.\n- **`never`** — the bottom type: a value that can't exist. Functions that always throw return it, and the compiler narrows to it on provably unreachable paths.\n\n`never`'s killer feature is the **exhaustive check**:\n\n```ts\nswitch (shape.kind) {\n  case \"circle\": return area(shape);\n  case \"square\": return shape.size ** 2;\n  default: {\n    const _exhaustive: never = shape; // new kind → compile error\n  }\n}\n```\n\nPragmatic rule: prefer `unknown` over `any` for external data; use `never` to catch missed cases.",
+          "bodyTr": "Üç özel tip, sistemin uçlarını işaretler:\n\n- **`any`** — denetim kapalı. Hatalar dokunduğu her şeye sessizce yayılır. Son çare.\n- **`unknown`** — *güvenli* üst tip. Her şey ona atanır ama kullanmadan önce **daraltman** gerekir — hataları daraltma noktasında tutar.\n- **`never`** — alt tip: var olamayacak bir değer. Her zaman fırlatan fonksiyonlar onu döndürür ve derleyici kanıtlanabilir şekilde erişilemeyen yollarda ona daraltır.\n\n`never`'ın yıldız özelliği **exhaustive check**'tir:\n\n```ts\nswitch (shape.kind) {\n  case \"circle\": return area(shape);\n  case \"square\": return shape.size ** 2;\n  default: {\n    const _exhaustive: never = shape; // yeni kind → derleme hatası\n  }\n}\n```\n\nPratik kural: dış veri için `any` yerine `unknown` tercih et; kaçan durumları yakalamak için `never` kullan."
+        },
+        {
+          "type": "true_false",
+          "statement": "Like any, a value typed unknown can be used directly — properties, calls, arithmetic.",
+          "statementTr": "Tıpkı any gibi, unknown tipli bir değer doğrudan kullanılabilir — property erişimi, çağrı, aritmetik.",
+          "answer": false,
+          "explanation": "That's exactly the difference: unknown accepts any value but blocks all use until you narrow it. any allows everything, silently.",
+          "explanationTr": "Fark tam olarak bu: unknown her değeri kabul eder ama sen daraltana kadar tüm kullanımı engeller. any ise her şeye sessizce izin verir."
+        },
+        {
+          "type": "mcq",
+          "prompt": "A switch over a discriminated union should put what in its default branch to stay exhaustive?",
+          "promptTr": "Discriminated union üzerindeki bir switch, eksiksiz kalmak için default dalına ne koymalı?",
+          "options": [
+            {
+              "text": "Assign the value to a variable typed never",
+              "textTr": "Değeri never tipli bir değişkene ata",
+              "correct": true
+            },
+            {
+              "text": "Throw new Error(\"unreachable\") — the type system reads the throw",
+              "textTr": "throw new Error(\"unreachable\") — tip sistemi throw'u okur"
+            },
+            {
+              "text": "Return undefined",
+              "textTr": "undefined döndür"
+            },
+            {
+              "text": "Cast the value to any",
+              "textTr": "Değeri any'ye cast et"
+            }
+          ],
+          "explanation": "If every case is handled, the default value narrows to never and the assignment type-checks. Add a union member without a case and it becomes a compile error.",
+          "explanationTr": "Her durum ele alındıysa default'taki değer never'a daralır ve atama tip denetiminden geçer. Case'i olmayan yeni bir union üyesi eklersen derleme hatasına dönüşür."
+        },
+        {
+          "type": "challenge",
+          "question": "How to choose between never, unknown, and any in TypeScript?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is the difference between unknown and any type?"
+        },
+        {
+          "type": "challenge",
+          "question": "Explain what is never datatype in TypeScript?"
+        }
+      ]
+    }
+  ]
+}

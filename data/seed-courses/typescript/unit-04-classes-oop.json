@@ -1,0 +1,313 @@
+{
+  "topic": "typescript",
+  "slug": "classes-oop",
+  "title": "Classes & OOP",
+  "titleTr": "Sınıflar ve OOP",
+  "section": "core",
+  "position": 4,
+  "lessons": [
+    {
+      "slug": "constructors-inheritance",
+      "title": "Constructors & inheritance",
+      "titleTr": "Constructor'lar ve kalıtım",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "extends, super and override",
+          "titleTr": "extends, super ve override",
+          "body": "A subclass reaches its parent through `super`:\n\n```ts\nclass Animal {\n  constructor(public name: string) {}\n}\nclass Dog extends Animal {\n  constructor(name: string) {\n    super(name); // must run before any `this`\n    this.bark();\n  }\n  override speak() { /* … */ }\n}\n```\n\nRules worth knowing: `super()` must be called **before touching `this`** — the base constructor initialises the inherited part. If the subclass needs no extra setup, omit the constructor and arguments forward automatically. And `override` marks a deliberate replacement: with `noImplicitOverride` on, renaming the base method turns a silently-orphaned override into a compile error.",
+          "bodyTr": "Bir alt sınıf, ebeveynine `super` üzerinden ulaşır:\n\n```ts\nclass Animal {\n  constructor(public name: string) {}\n}\nclass Dog extends Animal {\n  constructor(name: string) {\n    super(name); // her `this`'ten önce çalışmalı\n    this.bark();\n  }\n  override speak() { /* … */ }\n}\n```\n\nBilinmesi gereken kurallar: `super()`, **`this`'e dokunmadan önce** çağrılmalı — taban constructor, kalıtılan kısmı başlatır. Alt sınıfın ek kuruluma ihtiyacı yoksa constructor'ı tamamen atla, argümanlar otomatik iletilir. `override` ise bilinçli bir değiştirmeyi işaretler: `noImplicitOverride` açıkken taban metodun adı değişirse, sessizce sahipsiz kalan override bir derleme hatasına dönüşür."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Call the base class constructor",
+          "promptTr": "Taban sınıfın constructor'ını çağır",
+          "code": "class Dog extends Animal {\n  constructor(name: string) {\n    ___(name);\n  }\n}",
+          "answers": ["super"],
+          "distractors": ["this", "base", "Animal"],
+          "explanation": "super(...) invokes the parent constructor — and it must be the first thing, before any use of this.",
+          "explanationTr": "super(...) ebeveyn constructor'ı çağırır — ve this'in herhangi bir kullanımından önce, ilk iş olmalıdır."
+        },
+        {
+          "type": "true_false",
+          "statement": "In a subclass constructor you may read this before calling super(), as long as you don't write to it.",
+          "statementTr": "Alt sınıf constructor'ında, yazmadığın sürece super() çağrısından önce this'i okuyabilirsin.",
+          "answer": false,
+          "explanation": "Neither read nor write — this simply doesn't exist until super() has initialised the inherited part of the object.",
+          "explanationTr": "Ne okuma ne yazma — super(), nesnenin kalıtılan kısmını başlatana kadar this henüz var olmaz."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What is the real value of the override keyword (with noImplicitOverride)?",
+          "promptTr": "override anahtar sözcüğünün (noImplicitOverride ile) asıl değeri nedir?",
+          "options": [
+            {
+              "text": "If the base method is renamed or removed, the orphaned override becomes a compile error",
+              "textTr": "Taban metot yeniden adlandırılır ya da silinirse, sahipsiz kalan override derleme hatası olur",
+              "correct": true
+            },
+            {
+              "text": "It makes the method run faster by skipping the prototype chain",
+              "textTr": "Prototype zincirini atlayarak metodu hızlandırır"
+            },
+            {
+              "text": "It prevents subclasses from overriding the method again",
+              "textTr": "Alt sınıfların metodu tekrar override etmesini engeller"
+            },
+            {
+              "text": "It calls the base implementation automatically",
+              "textTr": "Taban implementasyonu otomatik çağırır"
+            }
+          ],
+          "explanation": "override is purely a compile-time contract: it guarantees a parent counterpart exists, so refactors can't silently orphan your method.",
+          "explanationTr": "override tamamen derleme zamanı bir sözleşmedir: ebeveynde karşılığın var olduğunu garanti eder, böylece refactor'lar metodunu sessizce sahipsiz bırakamaz."
+        },
+        {
+          "type": "challenge",
+          "question": "How to call a base class constructor from a child class in TypeScript?"
+        },
+        {
+          "type": "challenge",
+          "question": "How does the override keyword work in TypeScript?"
+        }
+      ]
+    },
+    {
+      "slug": "access-modifiers",
+      "title": "Access modifiers & # privacy",
+      "titleTr": "Erişim belirleyiciler ve # gizliliği",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Who can see what",
+          "titleTr": "Kim neyi görür",
+          "body": "Class members have four visibility levels:\n\n- **`public`** — the default when nothing is written; visible everywhere.\n- **`protected`** — the class **and its subclasses**, never outside.\n- **`private`** — only the declaring class; even subclasses can't see it.\n- **`#field`** — *JavaScript* private: enforced by the **runtime**, not just the compiler.\n\nThe crucial split: `public`/`protected`/`private` are **compile-time only** — erased at build, fully reachable from plain JS. A `#` field is truly sealed even via bracket access, and enables the `#x in obj` brand check. Prefer `#` for hard encapsulation.",
+          "bodyTr": "Sınıf üyelerinin dört görünürlük düzeyi vardır:\n\n- **`public`** — hiçbir şey yazılmadığındaki varsayılan; her yerden görünür.\n- **`protected`** — sınıf **ve alt sınıfları**, asla dışarısı değil.\n- **`private`** — yalnızca bildiren sınıf; alt sınıflar bile göremez.\n- **`#field`** — *JavaScript* private'ı: yalnızca derleyici değil, **runtime** tarafından uygulanır.\n\nKritik ayrım: `public`/`protected`/`private` **yalnızca derleme zamanıdır** — build'de silinir, düz JS'ten tamamen erişilebilir. `#` alanı ise bracket erişimiyle bile gerçekten mühürlüdür ve `#x in obj` brand check'ini mümkün kılar. Sert kapsülleme için `#` tercih et."
+        },
+        {
+          "type": "mcq",
+          "prompt": "A class member declared with no modifier is…",
+          "promptTr": "Hiçbir belirleyici olmadan bildirilen bir sınıf üyesi…",
+          "options": [
+            { "text": "public", "textTr": "public", "correct": true },
+            { "text": "private", "textTr": "private" },
+            { "text": "protected", "textTr": "protected" },
+            { "text": "readonly", "textTr": "readonly" }
+          ],
+          "explanation": "public is the implied default — only private and protected actually change anything.",
+          "explanationTr": "public, örtük varsayılandır — yalnızca private ve protected gerçekten bir şey değiştirir."
+        },
+        {
+          "type": "match",
+          "prompt": "Match each modifier to its reach",
+          "promptTr": "Her belirleyiciyi erişim alanıyla eşleştir",
+          "pairs": [
+            {
+              "left": "public",
+              "leftTr": "public",
+              "right": "Everywhere — the default",
+              "rightTr": "Her yer — varsayılan"
+            },
+            {
+              "left": "protected",
+              "leftTr": "protected",
+              "right": "Declaring class + subclasses",
+              "rightTr": "Bildiren sınıf + alt sınıflar"
+            },
+            {
+              "left": "private",
+              "leftTr": "private",
+              "right": "Declaring class only, erased at runtime",
+              "rightTr": "Yalnızca bildiren sınıf, çalışma zamanında silinir"
+            },
+            {
+              "left": "#field",
+              "leftTr": "#field",
+              "right": "Truly private — enforced by the runtime",
+              "rightTr": "Gerçekten private — runtime tarafından uygulanır"
+            }
+          ]
+        },
+        {
+          "type": "output_predict",
+          "prompt": "What does the last line print?",
+          "promptTr": "Son satır ne yazdırır?",
+          "code": "class Counter {\n  private count = 7;\n}\nconst c = new Counter();\nconsole.log((c as any).count);",
+          "options": [
+            { "text": "7", "textTr": "7", "correct": true },
+            { "text": "undefined", "textTr": "undefined" },
+            { "text": "Runtime error: count is private", "textTr": "Çalışma zamanı hatası: count private" },
+            { "text": "null", "textTr": "null" }
+          ],
+          "explanation": "private is erased at compile time — at runtime the property is an ordinary field. Only a #count field would actually be unreachable.",
+          "explanationTr": "private derleme zamanında silinir — çalışma zamanında property sıradan bir alandır. Yalnızca bir #count alanı gerçekten erişilmez olurdu."
+        },
+        {
+          "type": "challenge",
+          "question": "Which access modifier is implied when none is specified?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is the difference between private and protected members in TypeScript?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is the difference between private fields (#) and the private keyword?"
+        }
+      ]
+    },
+    {
+      "slug": "abstract-accessors-constants",
+      "title": "abstract, accessors & constants",
+      "titleTr": "abstract, accessor'lar ve sabitler",
+      "position": 3,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Shaping a class hierarchy",
+          "titleTr": "Bir sınıf hiyerarşisini şekillendirmek",
+          "body": "Three tools refine how a class behaves:\n\n**`abstract`** — the class can't be instantiated, only extended. Abstract methods declare a signature with no body; every concrete subclass *must* implement them, so the compiler enforces the contract while the base shares the common code.\n\n**Getters & setters** — accessors that look like a property but run code:\n\n```ts\nclass Temp {\n  #celsius = 0;\n  get fahrenheit() { return this.#celsius * 1.8 + 32; }\n  set fahrenheit(f: number) { this.#celsius = (f - 32) / 1.8; }\n}\n```\n\nA getter with no setter is effectively **readonly**.\n\n**Class constants** — `static readonly MAX_RETRIES = 3`: `readonly` blocks reassignment, `static` puts it on the class instead of each instance.",
+          "bodyTr": "Üç araç, bir sınıfın davranışını inceltir:\n\n**`abstract`** — sınıf örneklenemez, yalnızca genişletilir. Abstract metotlar gövdesiz bir imza bildirir; her somut alt sınıf onları *uygulamak zorundadır* — taban ortak kodu paylaşırken derleyici sözleşmeyi uygular.\n\n**Getter ve setter'lar** — property gibi görünen ama kod çalıştıran accessor'lar:\n\n```ts\nclass Temp {\n  #celsius = 0;\n  get fahrenheit() { return this.#celsius * 1.8 + 32; }\n  set fahrenheit(f: number) { this.#celsius = (f - 32) / 1.8; }\n}\n```\n\nSetter'ı olmayan bir getter fiilen **readonly**'dir.\n\n**Sınıf sabitleri** — `static readonly MAX_RETRIES = 3`: `readonly` yeniden atamayı engeller, `static` değeri her örnek yerine sınıfın üzerine koyar."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Make MAX_RETRIES a single constant shared by all instances",
+          "promptTr": "MAX_RETRIES'ı tüm örneklerin paylaştığı tek bir sabit yap",
+          "code": "class ApiClient {\n  ___ readonly MAX_RETRIES = 3;\n}",
+          "answers": ["static"],
+          "distractors": ["const", "final", "abstract"],
+          "explanation": "static readonly = one value on the class itself, locked after initialisation. const doesn't exist inside class bodies.",
+          "explanationTr": "static readonly = sınıfın kendisinde tek değer, başlatma sonrası kilitli. const, sınıf gövdesi içinde yoktur."
+        },
+        {
+          "type": "true_false",
+          "statement": "You can create an instance of an abstract class as long as it has no abstract methods.",
+          "statementTr": "Abstract metodu olmadığı sürece bir abstract sınıfın örneğini oluşturabilirsin.",
+          "answer": false,
+          "explanation": "abstract on the class itself forbids instantiation regardless of its members — it exists only to be extended.",
+          "explanationTr": "Sınıfın kendisindeki abstract, üyelerinden bağımsız olarak örneklemeyi yasaklar — yalnızca genişletilmek için vardır."
+        },
+        {
+          "type": "mcq",
+          "prompt": "A class defines get value() but no setter. What happens on assignment?",
+          "promptTr": "Bir sınıf get value() tanımlıyor ama setter yok. Atama yapılınca ne olur?",
+          "options": [
+            {
+              "text": "Compile error — the property is effectively readonly",
+              "textTr": "Derleme hatası — property fiilen readonly'dir",
+              "correct": true
+            },
+            {
+              "text": "The value is silently updated",
+              "textTr": "Değer sessizce güncellenir"
+            },
+            {
+              "text": "A default setter is generated automatically",
+              "textTr": "Otomatik olarak varsayılan bir setter üretilir"
+            },
+            {
+              "text": "It only fails at runtime",
+              "textTr": "Yalnızca çalışma zamanında başarısız olur"
+            }
+          ],
+          "explanation": "Getter-only accessors are readonly to the type checker. TypeScript also infers the property type from the getter's return type.",
+          "explanationTr": "Yalnızca getter'ı olan accessor'lar tip denetleyicisi için readonly'dir. TypeScript ayrıca property tipini getter'ın dönüş tipinden çıkarır."
+        },
+        {
+          "type": "challenge",
+          "question": "Why do we need the abstract keyword for classes and methods?"
+        },
+        {
+          "type": "challenge",
+          "question": "What are getters and setters in TypeScript?"
+        },
+        {
+          "type": "challenge",
+          "question": "How do you implement class constants in TypeScript?"
+        }
+      ]
+    },
+    {
+      "slug": "oop-principles-mixins",
+      "title": "OOP principles & mixins",
+      "titleTr": "OOP ilkeleri ve mixin'ler",
+      "position": 4,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Four pillars, one twist",
+          "titleTr": "Dört sütun, bir sürpriz",
+          "body": "TypeScript supports all four OOP pillars — with a structural twist:\n\n- **Encapsulation** — access modifiers and `#` private fields.\n- **Inheritance** — `extends`.\n- **Polymorphism** — method overriding and interface implementation.\n- **Abstraction** — `abstract` classes and interfaces.\n\nThe twist: thanks to structural typing, a class satisfies an interface **by shape** — no explicit `implements` needed. And idiomatic TS often leans more functional than classic OOP: plain objects, unions, pure functions.\n\nWhen single inheritance is too narrow, a **mixin** composes behaviour instead: a function that takes a base class (typed `new (...args: any[]) => {}`) and returns a subclass with extra members. Stack several to layer features like `Timestamped` or `Serializable` onto unrelated classes.",
+          "bodyTr": "TypeScript, dört OOP sütununun hepsini destekler — yapısal bir sürprizle:\n\n- **Kapsülleme** — erişim belirleyiciler ve `#` private alanlar.\n- **Kalıtım** — `extends`.\n- **Çok biçimlilik** — metot override'ı ve interface implementasyonu.\n- **Soyutlama** — `abstract` sınıflar ve interface'ler.\n\nSürpriz: yapısal tipleme sayesinde bir sınıf, bir interface'i **şekliyle** karşılar — açık bir `implements` gerekmez. Ve deyimsel TS, klasik OOP'den çok fonksiyonel tarafa yaslanır: düz nesneler, union'lar, saf fonksiyonlar.\n\nTekli kalıtım dar geldiğinde **mixin** davranışı kompozisyonla ekler: taban sınıfı alan (`new (...args: any[]) => {}` olarak tiplenmiş) ve ek üyeli bir alt sınıf döndüren bir fonksiyon. Birkaçını üst üste koyarak `Timestamped` ya da `Serializable` gibi özellikleri alakasız sınıflara katmanla."
+        },
+        {
+          "type": "match",
+          "prompt": "Match each OOP pillar to its TypeScript mechanism",
+          "promptTr": "Her OOP sütununu TypeScript mekanizmasıyla eşleştir",
+          "pairs": [
+            {
+              "left": "Encapsulation",
+              "leftTr": "Kapsülleme",
+              "right": "Access modifiers + # fields",
+              "rightTr": "Erişim belirleyiciler + # alanlar"
+            },
+            {
+              "left": "Inheritance",
+              "leftTr": "Kalıtım",
+              "right": "extends",
+              "rightTr": "extends"
+            },
+            {
+              "left": "Polymorphism",
+              "leftTr": "Çok biçimlilik",
+              "right": "Overriding + interface implementation",
+              "rightTr": "Override + interface implementasyonu"
+            },
+            {
+              "left": "Abstraction",
+              "leftTr": "Soyutlama",
+              "right": "abstract classes + interfaces",
+              "rightTr": "abstract sınıflar + interface'ler"
+            }
+          ]
+        },
+        {
+          "type": "mcq",
+          "prompt": "What is a mixin in TypeScript?",
+          "promptTr": "TypeScript'te mixin nedir?",
+          "options": [
+            {
+              "text": "A function that takes a base class and returns a subclass with added members",
+              "textTr": "Taban sınıfı alıp ek üyelerle bir alt sınıf döndüren fonksiyon",
+              "correct": true
+            },
+            {
+              "text": "A decorator that injects properties at runtime",
+              "textTr": "Çalışma zamanında property enjekte eden bir decorator"
+            },
+            {
+              "text": "An interface that merges with a class of the same name",
+              "textTr": "Aynı adlı sınıfla birleşen bir interface"
+            },
+            {
+              "text": "A tsconfig option enabling multiple inheritance",
+              "textTr": "Çoklu kalıtımı açan bir tsconfig seçeneği"
+            }
+          ],
+          "explanation": "The constructor-type constraint (new (...args: any[]) => {}) is what lets TypeScript type this pattern — apply several mixins to layer behaviour without multiple inheritance.",
+          "explanationTr": "Constructor tipi kısıtı (new (...args: any[]) => {}), TypeScript'in bu kalıbı tiplemesini sağlar — çoklu kalıtım olmadan davranış katmanlamak için birkaç mixin uygula."
+        },
+        {
+          "type": "challenge",
+          "question": "Which object-oriented principles does TypeScript support?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is a mixin class in TypeScript?"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,261 @@
+{
+  "topic": "typescript",
+  "slug": "fundamentals",
+  "title": "TypeScript Fundamentals",
+  "titleTr": "TypeScript Temelleri",
+  "section": "foundations",
+  "position": 1,
+  "lessons": [
+    {
+      "slug": "what-is-typescript",
+      "title": "What is TypeScript?",
+      "titleTr": "TypeScript nedir?",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "JavaScript with a type system",
+          "titleTr": "Tip sistemi olan JavaScript",
+          "body": "**TypeScript** is a superset of JavaScript: every valid JS file is already valid TS. It layers a **static type system** on top:\n\n```ts\nfunction total(prices: number[]): number {\n  return prices.reduce((sum, p) => sum + p, 0);\n}\n```\n\nThe compiler checks your code **before it runs** — typos, missing properties, wrong argument types all surface in the editor. At runtime nothing changes: the types are erased and plain JavaScript ships.",
+          "bodyTr": "**TypeScript**, JavaScript'in bir üst kümesidir: geçerli her JS dosyası zaten geçerli TS'dir. Üzerine bir **statik tip sistemi** ekler:\n\n```ts\nfunction total(prices: number[]): number {\n  return prices.reduce((sum, p) => sum + p, 0);\n}\n```\n\nDerleyici kodunu **çalışmadan önce** denetler — yazım hataları, eksik property'ler, yanlış argüman tipleri daha editördeyken ortaya çıkar. Çalışma zamanında hiçbir şey değişmez: tipler silinir ve geriye düz JavaScript kalır."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What is the relationship between TypeScript and JavaScript?",
+          "promptTr": "TypeScript ile JavaScript arasındaki ilişki nedir?",
+          "options": [
+            {
+              "text": "TypeScript is a superset of JavaScript — valid JS is valid TS",
+              "textTr": "TypeScript, JavaScript'in üst kümesidir — geçerli JS geçerli TS'dir",
+              "correct": true
+            },
+            {
+              "text": "TypeScript is a different language with its own runtime",
+              "textTr": "TypeScript, kendi runtime'ı olan ayrı bir dildir"
+            },
+            {
+              "text": "TypeScript is a JavaScript framework like React",
+              "textTr": "TypeScript, React gibi bir JavaScript framework'üdür"
+            },
+            {
+              "text": "TypeScript is a subset of JavaScript with fewer features",
+              "textTr": "TypeScript, daha az özelliği olan bir JavaScript alt kümesidir"
+            }
+          ],
+          "explanation": "TS extends JS with types and a few syntax additions (enums, access modifiers). Same runtime, same ecosystem — the compiler just checks the code first.",
+          "explanationTr": "TS, JS'i tipler ve birkaç sözdizimi eklemesiyle (enum'lar, erişim belirleyiciler) genişletir. Aynı runtime, aynı ekosistem — derleyici sadece kodu önceden denetler."
+        },
+        {
+          "type": "true_false",
+          "statement": "TypeScript types still exist at runtime, so you can check them in production code.",
+          "statementTr": "TypeScript tipleri çalışma zamanında da var olur, bu yüzden onları production kodunda kontrol edebilirsin.",
+          "answer": false,
+          "explanation": "Types are erased at compile time — nothing about them ships to the runtime. Runtime checks use JavaScript tools like typeof and instanceof.",
+          "explanationTr": "Tipler derleme zamanında silinir — çalışma zamanına onlardan hiçbir şey gitmez. Çalışma zamanı kontrolleri typeof ve instanceof gibi JavaScript araçlarını kullanır."
+        },
+        {
+          "type": "output_predict",
+          "prompt": "What happens when you compile this?",
+          "promptTr": "Bunu derlediğinde ne olur?",
+          "code": "const label: string = \"Total\";\nconst count: number = label; // ?",
+          "options": [
+            {
+              "text": "Compile error: string is not assignable to number",
+              "textTr": "Derleme hatası: string, number'a atanamaz",
+              "correct": true
+            },
+            {
+              "text": "It compiles; label is converted to a number",
+              "textTr": "Derlenir; label bir sayıya dönüştürülür"
+            },
+            {
+              "text": "It compiles but throws at runtime",
+              "textTr": "Derlenir ama çalışma zamanında hata fırlatır"
+            },
+            {
+              "text": "count becomes NaN",
+              "textTr": "count, NaN olur"
+            }
+          ],
+          "explanation": "This is the whole point of TS: the mismatch is caught at compile time, in the editor, before the code ever runs.",
+          "explanationTr": "TS'in bütün olayı bu: uyumsuzluk derleme zamanında, daha editördeyken, kod hiç çalışmadan yakalanır."
+        },
+        {
+          "type": "challenge",
+          "question": "What is TypeScript and why would I use it in place of JavaScript?"
+        },
+        {
+          "type": "challenge",
+          "question": "What are the differences between TypeScript and JavaScript?"
+        },
+        {
+          "type": "challenge",
+          "question": "What are the benefits of TypeScript?"
+        }
+      ]
+    },
+    {
+      "slug": "compiler-and-files",
+      "title": "The compiler & file types",
+      "titleTr": "Derleyici ve dosya türleri",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "From .ts to .js",
+          "titleTr": ".ts'den .js'e",
+          "body": "Browsers and Node run **JavaScript**, not TypeScript — so TS must be compiled. Three pieces do the work:\n\n1. **The language** — syntax + type system layered on JS.\n2. **The compiler (`tsc`)** — type-checks and emits JS per your `tsconfig`.\n3. **The language service** — powers the editor: autocomplete, hover types, rename, inline errors.\n\nMost real builds emit with a faster tool (esbuild, swc — Next.js does this) and keep `tsc --noEmit` purely for type-checking.\n\nFile extensions matter too: `.ts` for plain TypeScript, `.tsx` when the file contains **JSX** — it tells the parser that `<` starts an element, not a comparison.",
+          "bodyTr": "Tarayıcılar ve Node, TypeScript değil **JavaScript** çalıştırır — bu yüzden TS derlenmek zorundadır. İşi üç parça yapar:\n\n1. **Dil** — JS üzerine eklenen sözdizimi + tip sistemi.\n2. **Derleyici (`tsc`)** — tip denetimi yapar ve `tsconfig`'e göre JS üretir.\n3. **Language service** — editörü güçlendirir: otomatik tamamlama, hover tipleri, yeniden adlandırma, satır içi hatalar.\n\nGerçek build'lerin çoğu çıktıyı daha hızlı bir araçla üretir (esbuild, swc — Next.js böyle yapar) ve `tsc --noEmit`'i yalnızca tip denetimi için tutar.\n\nDosya uzantıları da önemlidir: düz TypeScript için `.ts`, dosya **JSX** içeriyorsa `.tsx` — bu, parser'a `<` karakterinin karşılaştırma değil element başlattığını söyler."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Why does TypeScript need a compile step?",
+          "promptTr": "TypeScript'in neden bir derleme adımına ihtiyacı var?",
+          "options": [
+            {
+              "text": "Browsers and Node only run JavaScript — types must be stripped and JS emitted",
+              "textTr": "Tarayıcılar ve Node yalnızca JavaScript çalıştırır — tipler ayıklanıp JS üretilmelidir",
+              "correct": true
+            },
+            {
+              "text": "Compiling makes the code run faster at runtime",
+              "textTr": "Derleme, kodun çalışma zamanında daha hızlı çalışmasını sağlar"
+            },
+            {
+              "text": "The compiler encrypts the source for security",
+              "textTr": "Derleyici, güvenlik için kaynak kodu şifreler"
+            },
+            {
+              "text": "It is optional — modern browsers run TS natively",
+              "textTr": "İsteğe bağlıdır — modern tarayıcılar TS'i doğrudan çalıştırır"
+            }
+          ],
+          "explanation": "No runtime understands TS. tsc, esbuild, swc or ts-node strip the types and emit JS at your target version.",
+          "explanationTr": "Hiçbir runtime TS anlamaz. tsc, esbuild, swc veya ts-node tipleri ayıklar ve hedef sürümünde JS üretir."
+        },
+        {
+          "type": "true_false",
+          "statement": "A React component file that returns JSX should use the .tsx extension.",
+          "statementTr": "JSX döndüren bir React bileşen dosyası .tsx uzantısını kullanmalıdır.",
+          "answer": true,
+          "explanation": ".tsx tells the parser the file may contain JSX. Use .ts for everything else — utilities, hooks without JSX, types.",
+          "explanationTr": ".tsx, parser'a dosyanın JSX içerebileceğini söyler. Geri kalan her şey için .ts kullan — yardımcı fonksiyonlar, JSX içermeyen hook'lar, tipler."
+        },
+        {
+          "type": "order",
+          "prompt": "Order the journey of TypeScript code from editor to browser",
+          "promptTr": "TypeScript kodunun editörden tarayıcıya yolculuğunu sırala",
+          "items": [
+            {
+              "text": "You write TS; the language service flags errors in the editor",
+              "textTr": "TS yazarsın; language service hataları editörde işaretler"
+            },
+            {
+              "text": "The compiler type-checks the whole project",
+              "textTr": "Derleyici tüm projeyi tip denetiminden geçirir"
+            },
+            {
+              "text": "Types are erased and JavaScript is emitted",
+              "textTr": "Tipler silinir ve JavaScript üretilir"
+            },
+            {
+              "text": "The browser or Node runs the plain JS",
+              "textTr": "Tarayıcı veya Node düz JS'i çalıştırır"
+            }
+          ],
+          "explanation": "Editor feedback → project-wide check → emit → run. Types never survive past the emit step.",
+          "explanationTr": "Editör geri bildirimi → proje genelinde denetim → çıktı üretimi → çalıştırma. Tipler çıktı üretimi adımından öteye asla geçmez."
+        },
+        {
+          "type": "challenge",
+          "question": "Do we need to compile TypeScript files and why?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is the difference between .ts and .tsx extensions in TypeScript?"
+        },
+        {
+          "type": "challenge",
+          "question": "What are the main components of TypeScript?"
+        }
+      ]
+    },
+    {
+      "slug": "everyday-types",
+      "title": "Everyday types",
+      "titleTr": "Günlük tipler",
+      "position": 3,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "The built-in toolbox",
+          "titleTr": "Yerleşik araç kutusu",
+          "body": "TypeScript's built-in types come in three groups:\n\n- **Primitives** — `string`, `number`, `boolean`, `bigint`, `symbol`, plus `null` and `undefined`.\n- **Structural** — `object`, arrays (`T[]` or `Array<T>`), tuples, and function types.\n- **Special** — `any` (checking off), `unknown` (safe top type — narrow before use), `never` (bottom type — no value), `void` (function returns nothing useful).\n\n```ts\nconst ids: number[] = [1, 2, 3];\nconst pair: [string, number] = [\"score\", 42];\nlet input: unknown = JSON.parse(raw);\n```",
+          "bodyTr": "TypeScript'in yerleşik tipleri üç gruba ayrılır:\n\n- **Primitifler** — `string`, `number`, `boolean`, `bigint`, `symbol`, ayrıca `null` ve `undefined`.\n- **Yapısal olanlar** — `object`, diziler (`T[]` veya `Array<T>`), tuple'lar ve fonksiyon tipleri.\n- **Özel olanlar** — `any` (denetim kapalı), `unknown` (güvenli üst tip — kullanmadan önce daralt), `never` (alt tip — hiçbir değer yok), `void` (fonksiyon işe yarar bir şey döndürmez).\n\n```ts\nconst ids: number[] = [1, 2, 3];\nconst pair: [string, number] = [\"score\", 42];\nlet input: unknown = JSON.parse(raw);\n```"
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Interpolate the variable into the template literal",
+          "promptTr": "Değişkeni template literal içine yerleştir",
+          "code": "const name = \"Aaron\";\nconst msg = `Hello, ___!`;",
+          "answers": ["${name}"],
+          "distractors": ["{name}", "(name)", "name"],
+          "explanation": "Template literals are backtick strings with ${...} placeholders — standard JavaScript that TypeScript type-checks.",
+          "explanationTr": "Template literal'ler, ${...} yer tutucuları olan backtick string'lerdir — TypeScript'in tip denetiminden geçirdiği standart JavaScript."
+        },
+        {
+          "type": "mcq",
+          "prompt": "You receive a value of unknown shape from JSON.parse. Which type forces you to narrow it before use?",
+          "promptTr": "JSON.parse'tan şekli belirsiz bir değer alıyorsun. Hangi tip, kullanmadan önce onu daraltmaya zorlar?",
+          "options": [
+            { "text": "any", "textTr": "any" },
+            { "text": "unknown", "textTr": "unknown", "correct": true },
+            { "text": "never", "textTr": "never" },
+            { "text": "object", "textTr": "object" }
+          ],
+          "explanation": "unknown is the safe top type: anything can be assigned to it, but you must narrow (typeof, instanceof, guards) before using it. any turns checking off entirely.",
+          "explanationTr": "unknown güvenli üst tiptir: her şey ona atanabilir ama kullanmadan önce daraltman (typeof, instanceof, guard'lar) gerekir. any ise denetimi tamamen kapatır."
+        },
+        {
+          "type": "match",
+          "prompt": "Match each special type to its meaning",
+          "promptTr": "Her özel tipi anlamıyla eşleştir",
+          "pairs": [
+            {
+              "left": "any",
+              "leftTr": "any",
+              "right": "Type checking switched off",
+              "rightTr": "Tip denetimi kapalı"
+            },
+            {
+              "left": "unknown",
+              "leftTr": "unknown",
+              "right": "Safe top type — narrow before use",
+              "rightTr": "Güvenli üst tip — kullanmadan önce daralt"
+            },
+            {
+              "left": "never",
+              "leftTr": "never",
+              "right": "Bottom type — no possible value",
+              "rightTr": "Alt tip — olası hiçbir değer yok"
+            },
+            {
+              "left": "void",
+              "leftTr": "void",
+              "right": "Function returns nothing useful",
+              "rightTr": "Fonksiyon işe yarar bir şey döndürmez"
+            }
+          ]
+        },
+        {
+          "type": "challenge",
+          "question": "List the built-in types in TypeScript"
+        },
+        {
+          "type": "challenge",
+          "question": "How do you perform string interpolation in TypeScript?"
+        }
+      ]
+    }
+  ]
+}

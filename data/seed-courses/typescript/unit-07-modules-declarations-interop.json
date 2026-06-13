@@ -1,0 +1,194 @@
+{
+  "topic": "typescript",
+  "slug": "modules-declarations-interop",
+  "title": "Modules, Declarations & Interop",
+  "titleTr": "Modüller, Bildirimler ve Birlikte Çalışma",
+  "section": "advanced",
+  "position": 7,
+  "lessons": [
+    {
+      "slug": "modules-and-dynamic-import",
+      "title": "Modules & dynamic import",
+      "titleTr": "Modüller ve dinamik import",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Files as modules, loaded eagerly or on demand",
+          "titleTr": "Dosyalar modül olarak, hevesle ya da gerektiğinde yüklenir",
+          "body": "In TypeScript, **any file with a top-level `import` or `export` is a module** — its declarations are scoped to the file, not global. A file with neither is a *script* and shares the global scope. You expose things with `export` and consume them with `import`.\n\nStatic imports are resolved up front. A **dynamic import expression** — `import(...)` used as a function — loads a module *lazily at runtime* and returns a promise of its namespace:\n\n```ts\nconst { heavy } = await import(\"./heavy.js\");\n```\n\nThis enables code-splitting and conditional loading; TypeScript still types the result from the target module's declarations.\n\n**Import attributes** (formerly *import assertions*) annotate *how* a module should be interpreted, most commonly for JSON:\n\n```ts\nimport data from \"./config.json\" with { type: \"json\" };\n```\n\nThe benefit: the runtime/bundler validates the module's type, preventing a JSON URL from being silently executed as JavaScript — a security and correctness guarantee at the import boundary.",
+          "bodyTr": "TypeScript'te, **üst düzey `import` ya da `export` içeren her dosya bir modüldür** — bildirimleri global değil, dosyaya kapsanır. İkisi de olmayan bir dosya *script*'tir ve global kapsamı paylaşır. Bir şeyleri `export` ile açar, `import` ile tüketirsin.\n\nStatik import'lar önceden çözülür. Bir **dinamik import ifadesi** — fonksiyon olarak kullanılan `import(...)` — bir modülü *çalışma zamanında tembelce* yükler ve namespace'inin bir promise'ini döndürür:\n\n```ts\nconst { heavy } = await import(\"./heavy.js\");\n```\n\nBu, kod bölmeyi ve koşullu yüklemeyi mümkün kılar; TypeScript yine de sonucu hedef modülün bildirimlerinden tipler.\n\n**Import attribute'ları** (eskiden *import assertion*) bir modülün *nasıl* yorumlanması gerektiğini annotate eder, en çok da JSON için:\n\n```ts\nimport data from \"./config.json\" with { type: \"json\" };\n```\n\nFaydası: çalışma zamanı/bundler modülün tipini doğrular, bir JSON URL'sinin sessizce JavaScript olarak çalıştırılmasını engeller — import sınırında bir güvenlik ve doğruluk garantisi."
+        },
+        {
+          "type": "true_false",
+          "statement": "A TypeScript file with no top-level import or export statements is treated as a module with its own scope.",
+          "statementTr": "Üst düzey import veya export ifadesi olmayan bir TypeScript dosyası, kendi kapsamı olan bir modül olarak ele alınır.",
+          "answer": false,
+          "explanation": "Without any import/export it's a script sharing the global scope. Add even one export {} to opt the file into module scoping.",
+          "explanationTr": "Hiç import/export yoksa global kapsamı paylaşan bir script'tir. Dosyayı modül kapsamına almak için tek bir export {} bile ekle."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What does a dynamic import() expression return?",
+          "promptTr": "Dinamik bir import() ifadesi ne döndürür?",
+          "options": [
+            {
+              "text": "A promise that resolves to the module's namespace",
+              "textTr": "Modülün namespace'ine çözülen bir promise",
+              "correct": true
+            },
+            {
+              "text": "The module's default export synchronously",
+              "textTr": "Modülün default export'unu senkron olarak"
+            },
+            {
+              "text": "A string path to the module file",
+              "textTr": "Modül dosyasına bir string yol"
+            },
+            {
+              "text": "undefined until the next tick",
+              "textTr": "Sonraki tick'e kadar undefined"
+            }
+          ],
+          "explanation": "import(...) is asynchronous: it returns a Promise of the module namespace object, enabling lazy loading and code-splitting.",
+          "explanationTr": "import(...) asenkrondur: modül namespace nesnesinin bir Promise'ini döndürür, tembel yükleme ve kod bölmeyi mümkün kılar."
+        },
+        {
+          "type": "challenge",
+          "question": "What are modules in TypeScript?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is a dynamic import expression?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is the benefit of import attributes (import assertions)?"
+        }
+      ]
+    },
+    {
+      "slug": "js-libraries-and-declare",
+      "title": "Using JS libraries & declare",
+      "titleTr": "JS kütüphaneleri kullanmak ve declare",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Bridging untyped JavaScript",
+          "titleTr": "Tipsiz JavaScript'e köprü kurmak",
+          "body": "To use a **plain JavaScript library** in TypeScript you need *type declarations* (`.d.ts`). Three paths:\n\n1. The package **ships its own** types (look for a `types` field in its `package.json`) — nothing to do.\n2. Install community types from **DefinitelyTyped**: `npm i -D @types/lodash`.\n3. If neither exists, write a minimal local declaration yourself.\n\nThat's where the **`declare`** keyword comes in: it describes a shape that *exists at runtime but has no TypeScript source* — it emits no JavaScript, it only informs the type checker:\n\n```ts\n// globals.d.ts\ndeclare const APP_VERSION: string;\ndeclare function gtag(...args: any[]): void;\ndeclare module \"untyped-lib\"; // quick any-typed shim\n```\n\nUse `declare` for: ambient globals injected by a script tag or build, typing a JS module that lacks types, and `declare global` to augment existing types. Rule of thumb: `declare` makes a promise to the compiler — you're responsible for it being true at runtime.",
+          "bodyTr": "TypeScript'te bir **düz JavaScript kütüphanesi** kullanmak için *tip bildirimleri* (`.d.ts`) gerekir. Üç yol:\n\n1. Paket **kendi** tiplerini gönderir (`package.json`'ında bir `types` alanı ara) — yapılacak bir şey yok.\n2. **DefinitelyTyped**'tan topluluk tiplerini kur: `npm i -D @types/lodash`.\n3. İkisi de yoksa, kendin minimal bir yerel bildirim yaz.\n\n**`declare`** anahtar kelimesi tam burada devreye girer: *çalışma zamanında var olan ama TypeScript kaynağı olmayan* bir şekli tanımlar — hiç JavaScript üretmez, yalnızca tip denetleyiciyi bilgilendirir:\n\n```ts\n// globals.d.ts\ndeclare const APP_VERSION: string;\ndeclare function gtag(...args: any[]): void;\ndeclare module \"untyped-lib\"; // hızlı any-tipli shim\n```\n\n`declare`'i şunlar için kullan: bir script tag'i ya da build tarafından enjekte edilen ortam global'leri, tipleri olmayan bir JS modülünü tiplemek ve mevcut tipleri genişletmek için `declare global`. Kural: `declare` derleyiciye bir söz verir — bunun çalışma zamanında doğru olmasından sen sorumlusun."
+        },
+        {
+          "type": "mcq",
+          "prompt": "A library has no types and no @types package. What's the idiomatic fix?",
+          "promptTr": "Bir kütüphanenin tipleri ve @types paketi yok. Deyimsel çözüm nedir?",
+          "options": [
+            {
+              "text": "Write a local .d.ts with declare module to describe it",
+              "textTr": "Onu tanımlamak için declare module içeren yerel bir .d.ts yaz",
+              "correct": true
+            },
+            {
+              "text": "Rewrite the library in TypeScript",
+              "textTr": "Kütüphaneyi TypeScript'te yeniden yaz"
+            },
+            {
+              "text": "Set noImplicitAny to true and import it",
+              "textTr": "noImplicitAny'yi true yap ve import et"
+            },
+            {
+              "text": "Move the library into node_modules/@types manually",
+              "textTr": "Kütüphaneyi elle node_modules/@types içine taşı"
+            }
+          ],
+          "explanation": "A small ambient declaration (declare module \"name\") gives the import a type — even an any-typed stub unblocks you without touching the library.",
+          "explanationTr": "Küçük bir ortam bildirimi (declare module \"name\") import'a bir tip verir — any-tipli bir stub bile kütüphaneye dokunmadan önünü açar."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Tell the compiler about a global injected at runtime by a script tag",
+          "promptTr": "Çalışma zamanında bir script tag'i tarafından enjekte edilen bir global'i derleyiciye bildir",
+          "code": "___ const APP_VERSION: string;",
+          "answers": [
+            "declare"
+          ],
+          "distractors": [
+            "export",
+            "const",
+            "extern"
+          ],
+          "explanation": "declare introduces an ambient binding: it type-checks usages of APP_VERSION but emits no JavaScript, since the value comes from elsewhere at runtime.",
+          "explanationTr": "declare bir ortam bağlaması tanıtır: APP_VERSION kullanımlarını tip denetler ama hiç JavaScript üretmez, çünkü değer çalışma zamanında başka yerden gelir."
+        },
+        {
+          "type": "challenge",
+          "question": "How do you use plain JavaScript libraries in TypeScript?"
+        },
+        {
+          "type": "challenge",
+          "question": "When should you use the declare keyword in TypeScript?"
+        }
+      ]
+    },
+    {
+      "slug": "decorators-and-currying",
+      "title": "Decorators & currying",
+      "titleTr": "Decorator'lar ve currying",
+      "position": 3,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Annotating classes, and one-arg-at-a-time functions",
+          "titleTr": "Sınıfları işaretlemek ve birer argümanlık fonksiyonlar",
+          "body": "A **decorator** is a function that hooks into the *declaration* of a class, method, accessor, property or parameter to observe or modify it:\n\n```ts\nfunction log(target: any, key: string) { /* … */ }\nclass Service {\n  @log save() {}\n}\n```\n\nThey enable cross-cutting concerns (logging, validation, DI) without cluttering the body. TypeScript shipped an experimental decorators flag for years; the Stage-3 standard decorators now align with the JS proposal. They're heavily used by Angular, NestJS and TypeORM.\n\n**Currying** is unrelated to TS specifically — it's a functional pattern: transform a multi-argument function into a chain of single-argument functions, each returning the next:\n\n```ts\nconst add = (a: number) => (b: number) => a + b;\nadd(2)(3); // 5\n```\n\nIn TypeScript the types flow through each arrow, so `add(2)` is typed `(b: number) => number`. Currying enables partial application — fix the first argument now, supply the rest later.",
+          "bodyTr": "Bir **decorator**, bir sınıfın, metodun, accessor'ın, property'nin ya da parametrenin *bildirimine* bağlanarak onu gözlemleyen ya da değiştiren bir fonksiyondur:\n\n```ts\nfunction log(target: any, key: string) { /* … */ }\nclass Service {\n  @log save() {}\n}\n```\n\nGövdeyi karmaşıklaştırmadan kesişen ilgileri (loglama, doğrulama, DI) mümkün kılarlar. TypeScript yıllarca deneysel bir decorator flag'i sundu; Stage-3 standart decorator'lar artık JS önerisiyle uyumlu. Angular, NestJS ve TypeORM tarafından yoğun kullanılır.\n\n**Currying** özellikle TS'e özgü değildir — fonksiyonel bir desendir: çok argümanlı bir fonksiyonu, her biri bir sonrakini döndüren tek argümanlı fonksiyonlar zincirine dönüştürür:\n\n```ts\nconst add = (a: number) => (b: number) => a + b;\nadd(2)(3); // 5\n```\n\nTypeScript'te tipler her arrow boyunca akar, bu yüzden `add(2)` tipi `(b: number) => number`'dır. Currying kısmi uygulamayı mümkün kılar — ilk argümanı şimdi sabitle, gerisini sonra ver."
+        },
+        {
+          "type": "output_predict",
+          "prompt": "What does this print?",
+          "promptTr": "Bu ne yazdırır?",
+          "code": "const multiply = (a: number) => (b: number) => a * b;\nconst triple = multiply(3);\nconsole.log(triple(4));",
+          "options": [
+            {
+              "text": "12",
+              "textTr": "12",
+              "correct": true
+            },
+            {
+              "text": "7",
+              "textTr": "7"
+            },
+            {
+              "text": "[Function]",
+              "textTr": "[Function]"
+            },
+            {
+              "text": "NaN",
+              "textTr": "NaN"
+            }
+          ],
+          "explanation": "multiply(3) returns a function that multiplies by 3; calling it with 4 yields 12. That's currying enabling partial application.",
+          "explanationTr": "multiply(3), 3 ile çarpan bir fonksiyon döndürür; onu 4 ile çağırmak 12 verir. Bu, kısmi uygulamayı mümkün kılan currying'dir."
+        },
+        {
+          "type": "true_false",
+          "statement": "A decorator can observe or modify the declaration it is attached to, such as a class or method.",
+          "statementTr": "Bir decorator, bağlandığı bildirimi (sınıf veya metot gibi) gözlemleyebilir ya da değiştirebilir.",
+          "answer": true,
+          "explanation": "That's their purpose: decorators run against the declaration to add behaviour — logging, metadata, dependency injection — without editing the body.",
+          "explanationTr": "Amaçları budur: decorator'lar bildirime karşı çalışıp gövdeyi düzenlemeden davranış ekler — loglama, metadata, bağımlılık enjeksiyonu."
+        },
+        {
+          "type": "challenge",
+          "question": "What are decorators in TypeScript?"
+        },
+        {
+          "type": "challenge",
+          "question": "Explain what is Currying in TypeScript?"
+        }
+      ]
+    }
+  ]
+}

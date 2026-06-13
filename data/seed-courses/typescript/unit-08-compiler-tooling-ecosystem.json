@@ -1,0 +1,197 @@
+{
+  "topic": "typescript",
+  "slug": "compiler-tooling-ecosystem",
+  "title": "Compiler, Tooling & Ecosystem",
+  "titleTr": "Derleyici, Araçlar ve Ekosistem",
+  "section": "interview",
+  "position": 8,
+  "lessons": [
+    {
+      "slug": "compilation-and-erasure",
+      "title": "Compilation & type erasure",
+      "titleTr": "Derleme ve tip silme",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Types vanish; maps connect output back",
+          "titleTr": "Tipler kaybolur; map'ler çıktıyı geri bağlar",
+          "body": "**Type erasure** is the core mental model: TypeScript's types exist *only at compile time*. `tsc` strips every annotation, interface and type alias, emitting plain JavaScript with **zero runtime type information**:\n\n```ts\nfunction greet(name: string) {}\n// emitted: function greet(name) {}\n```\n\nConsequences: you can't do `if (x instanceof MyInterface)` (interfaces don't exist at runtime), and runtime validation needs real checks or a library like Zod. (Enums and decorators are the rare constructs that *do* emit code.)\n\nBecause the running code differs from your source, the compiler can emit **map files**:\n\n- A **source map** (`.js.map`) maps generated JS back to the original `.ts`, so debuggers and stack traces point at your source lines.\n- A **declaration map** (`.d.ts.map`) links emitted `.d.ts` types back to the `.ts` they came from, so \"Go to definition\" jumps into source, not the generated declaration.\n\nBoth are build-time conveniences shipped alongside the output, not part of the runtime.",
+          "bodyTr": "**Tip silme (type erasure)** temel zihinsel modeldir: TypeScript'in tipleri *yalnızca derleme zamanında* vardır. `tsc` her annotation'ı, interface'i ve type alias'ı soyar ve **sıfır çalışma zamanı tip bilgisi** olan düz JavaScript üretir:\n\n```ts\nfunction greet(name: string) {}\n// üretilen: function greet(name) {}\n```\n\nSonuçları: `if (x instanceof MyInterface)` yapamazsın (interface'ler çalışma zamanında yoktur) ve çalışma zamanı doğrulaması gerçek kontroller ya da Zod gibi bir kütüphane gerektirir. (Enum'lar ve decorator'lar, kod *üreten* nadir yapılardır.)\n\nÇalışan kod kaynağından farklı olduğu için derleyici **map dosyaları** üretebilir:\n\n- Bir **source map** (`.js.map`), üretilen JS'i orijinal `.ts`'e geri eşler; böylece debugger'lar ve stack trace'ler kaynak satırlarını gösterir.\n- Bir **declaration map** (`.d.ts.map`), üretilen `.d.ts` tiplerini geldikleri `.ts`'e bağlar; böylece \"Go to definition\", üretilen bildirime değil kaynağa atlar.\n\nİkisi de çıktının yanında gönderilen derleme zamanı kolaylıklarıdır, çalışma zamanının parçası değil."
+        },
+        {
+          "type": "true_false",
+          "statement": "You can use `value instanceof SomeInterface` at runtime to check a type.",
+          "statementTr": "Çalışma zamanında bir tipi kontrol etmek için `value instanceof SomeInterface` kullanabilirsin.",
+          "answer": false,
+          "explanation": "Interfaces are erased — they don't exist at runtime, so instanceof can't see them. Use a class, a discriminant property, or a runtime validator instead.",
+          "explanationTr": "Interface'ler silinir — çalışma zamanında yokturlar, bu yüzden instanceof onları göremez. Bunun yerine bir sınıf, ayırt edici property ya da çalışma zamanı doğrulayıcı kullan."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What does a source map (.js.map) do?",
+          "promptTr": "Bir source map (.js.map) ne yapar?",
+          "options": [
+            {
+              "text": "Maps generated JavaScript back to the original TypeScript source for debugging",
+              "textTr": "Hata ayıklama için üretilen JavaScript'i orijinal TypeScript kaynağına geri eşler",
+              "correct": true
+            },
+            {
+              "text": "Stores runtime type information for instanceof checks",
+              "textTr": "instanceof kontrolleri için çalışma zamanı tip bilgisini saklar"
+            },
+            {
+              "text": "Caches compilation output to speed up builds",
+              "textTr": "Build'leri hızlandırmak için derleme çıktısını önbelleğe alır"
+            },
+            {
+              "text": "Lists every module's dependencies",
+              "textTr": "Her modülün bağımlılıklarını listeler"
+            }
+          ],
+          "explanation": "Source maps let debuggers and stack traces reference your .ts lines even though the browser runs compiled .js. Declaration maps do the same for .d.ts → .ts.",
+          "explanationTr": "Source map'ler, tarayıcı derlenmiş .js çalıştırsa da debugger'ların ve stack trace'lerin .ts satırlarına atıfta bulunmasını sağlar. Declaration map'ler aynısını .d.ts → .ts için yapar."
+        },
+        {
+          "type": "challenge",
+          "question": "What is type erasure in TypeScript?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is a TypeScript map file (source map / declaration map)?"
+        }
+      ]
+    },
+    {
+      "slug": "tsconfig-and-build-performance",
+      "title": "tsconfig & build performance",
+      "titleTr": "tsconfig ve build performansı",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "lib, incremental builds & project references",
+          "titleTr": "lib, artımlı build'ler ve project reference'lar",
+          "body": "Three knobs that shape how `tsc` checks and builds:\n\n- **`lib`** lists the built-in API declarations available to your code — `[\"ES2020\", \"DOM\"]`, etc. It says *what runtime features the compiler should assume exist*. Targeting Node with no DOM? Drop `\"DOM\"` so `document` becomes an error. `lib` controls type availability, not transpilation (that's `target`).\n\n- **`--incremental`** tells `tsc` to save a `.tsbuildinfo` file recording the last build's graph, so the next compile only re-checks what changed. The first build is normal; subsequent builds are much faster. It trades a little disk for big rebuild savings.\n\n- **Project references** let a large codebase be split into smaller sub-projects that depend on each other (`references` in tsconfig + `composite: true`). Benefits: `tsc --build` compiles each project once, in dependency order, caching outputs; editors get faster, enforce real boundaries between packages, and only rebuild affected projects. It's the standard way to scale a monorepo's type-checking.",
+          "bodyTr": "`tsc`'nin nasıl denetlediğini ve build aldığını şekillendiren üç ayar:\n\n- **`lib`**, kodun kullanabileceği yerleşik API bildirimlerini listeler — `[\"ES2020\", \"DOM\"]` vb. *Derleyicinin hangi çalışma zamanı özelliklerinin var olduğunu varsayması gerektiğini* söyler. DOM olmadan Node hedefliyor musun? `\"DOM\"`'u çıkar, böylece `document` bir hata olur. `lib`, transpilasyonu değil tip kullanılabilirliğini kontrol eder (o `target`'tır).\n\n- **`--incremental`**, `tsc`'ye son build'in grafiğini kaydeden bir `.tsbuildinfo` dosyası saklamasını söyler; böylece sonraki derleme yalnızca değişeni yeniden denetler. İlk build normaldir; sonrakiler çok daha hızlıdır. Biraz disk karşılığında büyük yeniden build tasarrufu sağlar.\n\n- **Project reference'lar**, büyük bir codebase'in birbirine bağımlı küçük alt projelere bölünmesini sağlar (tsconfig'te `references` + `composite: true`). Faydaları: `tsc --build` her projeyi bağımlılık sırasıyla bir kez derler, çıktıları önbelleğe alır; editörler hızlanır, paketler arası gerçek sınırları zorunlu kılar ve yalnızca etkilenen projeleri yeniden build eder. Bir monorepo'nun tip denetimini ölçeklemenin standart yoludur."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Enable cached, faster rebuilds via a .tsbuildinfo file",
+          "promptTr": "Bir .tsbuildinfo dosyasıyla önbellekli, daha hızlı yeniden build'leri etkinleştir",
+          "code": "{\n  \"compilerOptions\": {\n    \"___\": true\n  }\n}",
+          "answers": [
+            "incremental"
+          ],
+          "distractors": [
+            "watch",
+            "fast",
+            "cache"
+          ],
+          "explanation": "incremental: true makes tsc persist build state to .tsbuildinfo and only re-check changed files on the next run.",
+          "explanationTr": "incremental: true, tsc'nin build durumunu .tsbuildinfo'ya kalıcı kılmasını ve sonraki çalıştırmada yalnızca değişen dosyaları yeniden denetlemesini sağlar."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Your code targets Node and shouldn't reference the DOM. What enforces that?",
+          "promptTr": "Kodun Node'u hedefliyor ve DOM'a atıfta bulunmamalı. Bunu ne zorunlu kılar?",
+          "options": [
+            {
+              "text": "Omit \"DOM\" from the lib array so document/window become type errors",
+              "textTr": "lib dizisinden \"DOM\"u çıkar, böylece document/window tip hatası olur",
+              "correct": true
+            },
+            {
+              "text": "Set target to ES5",
+              "textTr": "target'ı ES5 yap"
+            },
+            {
+              "text": "Enable strict mode",
+              "textTr": "strict modu etkinleştir"
+            },
+            {
+              "text": "Add \"DOM\" to the exclude array",
+              "textTr": "\"DOM\"u exclude dizisine ekle"
+            },
+            {
+              "text": "Use a const enum",
+              "textTr": "Bir const enum kullan"
+            }
+          ],
+          "explanation": "lib decides which ambient API declarations exist. Without \"DOM\", referencing document is an error — exactly the guard you want for server code.",
+          "explanationTr": "lib, hangi ortam API bildirimlerinin var olduğuna karar verir. \"DOM\" olmadan document'e atıf bir hatadır — sunucu kodu için tam da istediğin koruma."
+        },
+        {
+          "type": "challenge",
+          "question": "What does the tsconfig lib option do?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is the purpose of the --incremental flag in TypeScript?"
+        },
+        {
+          "type": "challenge",
+          "question": "What are project references and their benefits?"
+        }
+      ]
+    },
+    {
+      "slug": "typescript-in-practice",
+      "title": "TypeScript in practice",
+      "titleTr": "Pratikte TypeScript",
+      "position": 3,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Backend use, and an opinionated closer",
+          "titleTr": "Backend kullanımı ve görüş bildiren bir kapanış",
+          "body": "**Yes, TypeScript runs the backend.** It's not browser-only — `tsc` emits Node-compatible JavaScript, and you run it three common ways: compile with `tsc` then `node dist/`, run directly in dev with `tsx`/`ts-node`, or use a runtime with native TS support (Deno, Bun, or recent Node's type-stripping). Frameworks like NestJS, Express + `@types/express`, and Fastify are fully typed. The same types can be **shared** between client and server in a monorepo — one source of truth for API shapes.\n\nInterviews often close with **\"what would you change about TypeScript?\"** — a *judgement* question, not a trivia one. Strong answers name a real tension and stay balanced:\n\n- **Erased types** mean no runtime validation — great for zero-cost abstraction, painful when you need to trust external data.\n- **`any`** can silently defeat the whole system; some wish it were harder to reach for.\n- **Config surface** (`tsconfig`) and declaration-file friction can be steep for newcomers.\n- **Structural typing** is flexible but occasionally lets unintended shapes through.\n\nThe point isn't the complaint — it's showing you understand the trade-offs you live with daily.",
+          "bodyTr": "**Evet, TypeScript backend'de çalışır.** Yalnızca tarayıcıya özgü değildir — `tsc`, Node uyumlu JavaScript üretir ve onu üç yaygın yolla çalıştırırsın: `tsc` ile derleyip `node dist/`, geliştirmede doğrudan `tsx`/`ts-node` ile çalıştır ya da native TS destekli bir runtime kullan (Deno, Bun veya güncel Node'un type-stripping'i). NestJS, Express + `@types/express` ve Fastify gibi framework'ler tamamen tiplenmiştir. Aynı tipler bir monorepo'da client ile server arasında **paylaşılabilir** — API şekilleri için tek doğruluk kaynağı.\n\nMülakatlar çoğu zaman **\"TypeScript'te neyi değiştirirdin?\"** ile kapanır — ezber değil, *yargı* sorusudur. Güçlü cevaplar gerçek bir gerilimi adlandırır ve dengeli kalır:\n\n- **Silinen tipler**, çalışma zamanı doğrulaması olmaması demektir — sıfır maliyetli soyutlama için harika, dış veriye güvenmen gerektiğinde acı verici.\n- **`any`**, tüm sistemi sessizce bozabilir; bazıları ona ulaşmanın daha zor olmasını ister.\n- **Config yüzeyi** (`tsconfig`) ve bildirim dosyası sürtünmesi yeni başlayanlar için dik olabilir.\n- **Yapısal tipleme** esnektir ama bazen istenmeyen şekillerin geçmesine izin verir.\n\nMesele şikâyet değil — her gün birlikte yaşadığın ödünleşimleri anladığını göstermektir."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Which statement about running TypeScript on the backend is accurate?",
+          "promptTr": "TypeScript'i backend'de çalıştırmakla ilgili hangi ifade doğrudur?",
+          "options": [
+            {
+              "text": "tsc emits Node-compatible JS; tools like tsx, ts-node, Deno and Bun also run TS directly",
+              "textTr": "tsc Node uyumlu JS üretir; tsx, ts-node, Deno ve Bun gibi araçlar da TS'i doğrudan çalıştırır",
+              "correct": true
+            },
+            {
+              "text": "TypeScript only compiles for browsers, never Node",
+              "textTr": "TypeScript yalnızca tarayıcılar için derler, asla Node için değil"
+            },
+            {
+              "text": "Node executes .ts files natively with no tooling in every version",
+              "textTr": "Node, .ts dosyalarını her sürümde araçsız native çalıştırır"
+            },
+            {
+              "text": "Backend TypeScript requires rewriting types as runtime classes",
+              "textTr": "Backend TypeScript, tipleri çalışma zamanı sınıfları olarak yeniden yazmayı gerektirir"
+            }
+          ],
+          "explanation": "TS is runtime-agnostic. You compile to JS for Node or use a TS-aware runner; frameworks like NestJS and Fastify are built around it, and types can be shared across the stack.",
+          "explanationTr": "TS runtime'dan bağımsızdır. Node için JS'e derlersin ya da TS-bilen bir çalıştırıcı kullanırsın; NestJS ve Fastify gibi framework'ler bunun etrafında kurulur ve tipler stack boyunca paylaşılabilir."
+        },
+        {
+          "type": "true_false",
+          "statement": "Because types are erased, TypeScript cannot validate external data (like an API response) at runtime on its own.",
+          "statementTr": "Tipler silindiği için TypeScript, dış veriyi (bir API yanıtı gibi) çalışma zamanında tek başına doğrulayamaz.",
+          "answer": true,
+          "explanation": "Type annotations disappear after compilation, so trusting unvalidated external data is a common pitfall — pair TS with a runtime validator like Zod for boundaries.",
+          "explanationTr": "Tip annotation'ları derlemeden sonra kaybolur, bu yüzden doğrulanmamış dış veriye güvenmek yaygın bir tuzaktır — sınırlar için TS'i Zod gibi bir çalışma zamanı doğrulayıcıyla eşle."
+        },
+        {
+          "type": "challenge",
+          "question": "Can you use TypeScript on the backend, and how?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is one thing you would change about TypeScript?"
+        }
+      ]
+    }
+  ]
+}

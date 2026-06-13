@@ -1,0 +1,202 @@
+{
+  "topic": "typescript",
+  "slug": "enums-assertions-immutability",
+  "title": "Enums, Assertions & Immutability",
+  "titleTr": "Enum'lar, Assertion'lar ve Değişmezlik",
+  "section": "advanced",
+  "position": 6,
+  "lessons": [
+    {
+      "slug": "enums",
+      "title": "Enums & const enums",
+      "titleTr": "Enum'lar ve const enum'lar",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Named constants, two flavours",
+          "titleTr": "Adlandırılmış sabitler, iki çeşit",
+          "body": "An **enum** names a set of related constants. By default members are numeric and auto-increment; give them **string values** explicitly for stable, debuggable output:\n\n```ts\nenum Direction {\n  Up = \"UP\",\n  Down = \"DOWN\",\n}\n```\n\nString enums never reverse-map and survive serialisation legibly — `\"UP\"` beats `0` in a log or API payload.\n\nA regular enum compiles to a **runtime object** you can iterate. A **`const enum`** is erased at compile time: each use is inlined as its literal value, leaving no object behind.\n\n```ts\nconst enum Size { S, M, L }\nconst x = Size.M; // emitted as: const x = 1;\n```\n\nThat's smaller and faster, but the enum no longer exists at runtime (no iteration, and it needs care across module boundaries / with `isolatedModules`). Reach for `const enum` when you only need the inlined values; a plain enum — or a `const` object with `as const` — when you need the object too.",
+          "bodyTr": "Bir **enum**, ilişkili sabitler kümesini adlandırır. Varsayılan olarak üyeler sayısaldır ve otomatik artar; kararlı, hata ayıklanabilir çıktı için onlara açıkça **string değerler** ver:\n\n```ts\nenum Direction {\n  Up = \"UP\",\n  Down = \"DOWN\",\n}\n```\n\nString enum'lar asla ters eşleme yapmaz ve serileştirmeden okunaklı çıkar — bir log'da ya da API yükünde `\"UP\"`, `0`'dan iyidir.\n\nNormal bir enum, üzerinde döngü kurabileceğin bir **çalışma zamanı nesnesine** derlenir. Bir **`const enum`** ise derleme zamanında silinir: her kullanım literal değeri olarak satır içine alınır, geriye nesne bırakmaz.\n\n```ts\nconst enum Size { S, M, L }\nconst x = Size.M; // şu şekilde üretilir: const x = 1;\n```\n\nBu daha küçük ve hızlıdır ama enum artık çalışma zamanında yoktur (döngü yok ve modül sınırları arasında / `isolatedModules` ile dikkat gerektirir). Yalnızca satır içi değerlere ihtiyacın varsa `const enum`'a; nesneye de ihtiyacın varsa düz enum'a — ya da `as const`'lu bir `const` nesnesine — başvur."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Give the enum members explicit string values",
+          "promptTr": "Enum üyelerine açık string değerler ver",
+          "code": "enum Status {\n  Active = ___,\n  Done = \"DONE\",\n}",
+          "answers": [
+            "\"ACTIVE\""
+          ],
+          "distractors": [
+            "ACTIVE",
+            "0",
+            "'Active'.length"
+          ],
+          "explanation": "Each member is assigned a string literal. String enums serialise legibly and don't generate a reverse numeric mapping.",
+          "explanationTr": "Her üyeye bir string literal atanır. String enum'lar okunaklı serileşir ve ters sayısal eşleme üretmez."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What is the main consequence of using const enum over a regular enum?",
+          "promptTr": "Düz enum yerine const enum kullanmanın temel sonucu nedir?",
+          "options": [
+            {
+              "text": "Members are inlined and no runtime object is emitted",
+              "textTr": "Üyeler satır içine alınır ve çalışma zamanı nesnesi üretilmez",
+              "correct": true
+            },
+            {
+              "text": "Members become mutable at runtime",
+              "textTr": "Üyeler çalışma zamanında değiştirilebilir olur"
+            },
+            {
+              "text": "It forces all members to be strings",
+              "textTr": "Tüm üyeleri string olmaya zorlar"
+            },
+            {
+              "text": "It allows reverse mapping from value to name",
+              "textTr": "Değerden ada ters eşlemeye izin verir"
+            }
+          ],
+          "explanation": "const enum trades the runtime object for inlined literals — smaller output, but you lose iteration and must watch out under isolatedModules.",
+          "explanationTr": "const enum, çalışma zamanı nesnesini satır içi literallerle takas eder — daha küçük çıktı ama döngüyü kaybedersin ve isolatedModules altında dikkat etmelisin."
+        },
+        {
+          "type": "challenge",
+          "question": "How do you create an enum with string values?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is the difference between enum and const enums?"
+        }
+      ]
+    },
+    {
+      "slug": "const-assertions-readonly",
+      "title": "const assertions & readonly",
+      "titleTr": "const assertion'lar ve readonly",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Locking values down",
+          "titleTr": "Değerleri kilitlemek",
+          "body": "By default TypeScript **widens** literals: `const obj = { mode: \"dark\" }` infers `mode: string`. A **`const assertion`** (`as const`) stops that — it makes the value deeply `readonly` and keeps the narrowest literal types:\n\n```ts\nconst config = { mode: \"dark\", retries: 3 } as const;\n// mode: \"dark\" (not string); whole object readonly\nconst routes = [\"/home\", \"/about\"] as const;\n// readonly [\"/home\", \"/about\"]\n```\n\nUse cases: deriving precise union types (`typeof routes[number]`), freezing config objects, and turning arrays into tuples.\n\nFor **immutable collections** without `as const`, annotate them:\n\n```ts\nconst nums: readonly number[] = [1, 2, 3];   // readonly array\nconst point: readonly [number, number] = [0, 0]; // readonly tuple\n```\n\n`readonly` arrays drop mutating methods (`push`, `splice`) from the type — the guarantee is compile-time only; nothing freezes at runtime.",
+          "bodyTr": "TypeScript varsayılan olarak literalleri **genişletir**: `const obj = { mode: \"dark\" }`, `mode: string` çıkarır. Bir **`const assertion`** (`as const`) bunu durdurur — değeri derinlemesine `readonly` yapar ve en dar literal tipleri korur:\n\n```ts\nconst config = { mode: \"dark\", retries: 3 } as const;\n// mode: \"dark\" (string değil); tüm nesne readonly\nconst routes = [\"/home\", \"/about\"] as const;\n// readonly [\"/home\", \"/about\"]\n```\n\nKullanım alanları: kesin union tipleri türetmek (`typeof routes[number]`), config nesnelerini dondurmak ve dizileri tuple'a çevirmek.\n\n`as const` olmadan **değişmez koleksiyonlar** için onları annotate et:\n\n```ts\nconst nums: readonly number[] = [1, 2, 3];   // readonly dizi\nconst point: readonly [number, number] = [0, 0]; // readonly tuple\n```\n\n`readonly` diziler, değiştiren metotları (`push`, `splice`) tipten çıkarır — garanti yalnızca derleme zamanıdır; çalışma zamanında hiçbir şey donmaz."
+        },
+        {
+          "type": "output_predict",
+          "prompt": "What type is inferred for mode?",
+          "promptTr": "mode için hangi tip çıkarılır?",
+          "code": "const config = { mode: \"dark\" } as const;\ntype M = typeof config.mode;",
+          "options": [
+            {
+              "text": "\"dark\"",
+              "textTr": "\"dark\"",
+              "correct": true
+            },
+            {
+              "text": "string",
+              "textTr": "string"
+            },
+            {
+              "text": "readonly string",
+              "textTr": "readonly string"
+            },
+            {
+              "text": "any",
+              "textTr": "any"
+            }
+          ],
+          "explanation": "as const prevents literal widening, so mode keeps the exact literal type \"dark\" rather than the broader string.",
+          "explanationTr": "as const literal genişlemeyi engeller, bu yüzden mode daha geniş string yerine tam literal tip \"dark\"'ı korur."
+        },
+        {
+          "type": "true_false",
+          "statement": "A readonly number[] type prevents push() from being called on the array at compile time.",
+          "statementTr": "readonly number[] tipi, derleme zamanında dizide push() çağrılmasını engeller.",
+          "answer": true,
+          "explanation": "readonly arrays expose only non-mutating members, so push/splice are type errors. It's a compile-time guarantee — the runtime array is still mutable if you cast it away.",
+          "explanationTr": "readonly diziler yalnızca değiştirmeyen üyeleri sunar, bu yüzden push/splice tip hatasıdır. Bu derleme zamanı garantisidir — cast'leyip kaçarsan çalışma zamanındaki dizi hâlâ değiştirilebilir."
+        },
+        {
+          "type": "challenge",
+          "question": "What are the use cases for a const assertion?"
+        },
+        {
+          "type": "challenge",
+          "question": "How do you create read-only arrays and tuples in TypeScript?"
+        }
+      ]
+    },
+    {
+      "slug": "assertion-functions-overloads",
+      "title": "Assertion functions & overloads",
+      "titleTr": "Assertion fonksiyonları ve overload'lar",
+      "position": 3,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Narrowing by assertion, and many signatures",
+          "titleTr": "Assertion ile daraltma ve çok sayıda imza",
+          "body": "An **assertion function** narrows its argument *for the rest of the scope* by throwing if a condition fails. The magic is the `asserts` return annotation:\n\n```ts\nfunction assert(cond: unknown, msg?: string): asserts cond {\n  if (!cond) throw new Error(msg);\n}\nfunction assertIsString(v: unknown): asserts v is string {\n  if (typeof v !== \"string\") throw new Error(\"not a string\");\n}\n```\n\nAfter `assertIsString(x)`, the compiler treats `x` as `string` below the call — like a type guard, but it throws instead of returning a boolean.\n\nSeparately, beware **`String` vs `string`**: lowercase `string` is the primitive you almost always want; capital `String` is the boxed wrapper *object* — `new String(\"x\")` is an object, not a primitive, and is rarely correct. The same trap exists for `Number`/`number` and `Boolean`/`boolean`.\n\nTypeScript also supports **function overloading**: write multiple signatures above one implementation so callers see precise return types per argument shape:\n\n```ts\nfunction len(x: string): number;\nfunction len(x: any[]): number;\nfunction len(x: string | any[]): number { return x.length; }\n```\n\nNote it's *signature-level* overloading — there's a single JS function underneath.",
+          "bodyTr": "Bir **assertion fonksiyonu**, bir koşul başarısız olursa fırlatarak argümanını *kapsamın geri kalanı için* daraltır. Sihir, `asserts` dönüş annotation'ıdır:\n\n```ts\nfunction assert(cond: unknown, msg?: string): asserts cond {\n  if (!cond) throw new Error(msg);\n}\nfunction assertIsString(v: unknown): asserts v is string {\n  if (typeof v !== \"string\") throw new Error(\"not a string\");\n}\n```\n\n`assertIsString(x)`'ten sonra derleyici, çağrının altında `x`'i `string` olarak ele alır — type guard gibi ama boolean döndürmek yerine fırlatır.\n\nAyrıca, **`String` vs `string`**'e dikkat: küçük harf `string` neredeyse her zaman istediğin primitiftir; büyük harf `String` ise kutulanmış wrapper *nesnesidir* — `new String(\"x\")` bir nesnedir, primitif değil ve nadiren doğrudur. Aynı tuzak `Number`/`number` ve `Boolean`/`boolean` için de vardır.\n\nTypeScript ayrıca **function overloading** destekler: tek bir implementasyonun üstüne birden çok imza yaz; böylece çağıranlar her argüman şekline göre kesin dönüş tipleri görür:\n\n```ts\nfunction len(x: string): number;\nfunction len(x: any[]): number;\nfunction len(x: string | any[]): number { return x.length; }\n```\n\nUnutma, bu *imza düzeyinde* overloading'dir — altında tek bir JS fonksiyonu vardır."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Annotate the function so it narrows v to string for callers",
+          "promptTr": "Fonksiyonu, çağıranlar için v'yi string'e daraltacak şekilde annotate et",
+          "code": "function assertIsString(v: unknown): ___ v is string {\n  if (typeof v !== \"string\") throw new Error();\n}",
+          "answers": [
+            "asserts"
+          ],
+          "distractors": [
+            "returns",
+            "is",
+            "ensures"
+          ],
+          "explanation": "The asserts predicate tells the compiler that if the function returns normally, the condition (v is string) holds for the rest of the scope.",
+          "explanationTr": "asserts predicate'i derleyiciye, fonksiyon normal dönerse koşulun (v is string) kapsamın geri kalanında geçerli olduğunu söyler."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Why is the lowercase 'string' type preferred over capital 'String'?",
+          "promptTr": "Neden küçük harf 'string' tipi büyük harf 'String'e tercih edilir?",
+          "options": [
+            {
+              "text": "string is the primitive; String is the boxed wrapper object, rarely what you want",
+              "textTr": "string primitiftir; String ise kutulanmış wrapper nesnesidir, nadiren istediğin şeydir",
+              "correct": true
+            },
+            {
+              "text": "They are identical; casing is only a style preference",
+              "textTr": "Aynıdırlar; büyük/küçük harf yalnızca stil tercihidir"
+            },
+            {
+              "text": "String is faster at runtime",
+              "textTr": "String çalışma zamanında daha hızlıdır"
+            },
+            {
+              "text": "string cannot hold Unicode characters",
+              "textTr": "string Unicode karakter tutamaz"
+            }
+          ],
+          "explanation": "A primitive string isn't assignable to the object type String in the useful direction, and new String() boxes create real objects — almost always a bug.",
+          "explanationTr": "Primitif bir string, faydalı yönde String nesne tipine atanamaz ve new String() kutuları gerçek nesneler oluşturur — neredeyse her zaman bir hatadır."
+        },
+        {
+          "type": "challenge",
+          "question": "What are assertion functions in TypeScript?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is the difference between the String and string types in TypeScript?"
+        },
+        {
+          "type": "challenge",
+          "question": "Does TypeScript support function overloading?"
+        }
+      ]
+    }
+  ]
+}
