@@ -32,35 +32,16 @@
           "prompt": "What does a source map (.js.map) do?",
           "promptTr": "Bir source map (.js.map) ne yapar?",
           "options": [
-            {
-              "text": "Maps generated JavaScript back to the original TypeScript source for debugging",
-              "textTr": "Hata ayıklama için üretilen JavaScript'i orijinal TypeScript kaynağına geri eşler",
-              "correct": true
-            },
-            {
-              "text": "Stores runtime type information for instanceof checks",
-              "textTr": "instanceof kontrolleri için çalışma zamanı tip bilgisini saklar"
-            },
-            {
-              "text": "Caches compilation output to speed up builds",
-              "textTr": "Build'leri hızlandırmak için derleme çıktısını önbelleğe alır"
-            },
-            {
-              "text": "Lists every module's dependencies",
-              "textTr": "Her modülün bağımlılıklarını listeler"
-            }
+            { "text": "Maps generated JavaScript back to the original TypeScript source for debugging", "textTr": "Hata ayıklama için üretilen JavaScript'i orijinal TypeScript kaynağına geri eşler", "correct": true },
+            { "text": "Stores runtime type information for instanceof checks", "textTr": "instanceof kontrolleri için çalışma zamanı tip bilgisini saklar" },
+            { "text": "Caches compilation output to speed up builds", "textTr": "Build'leri hızlandırmak için derleme çıktısını önbelleğe alır" },
+            { "text": "Lists every module's dependencies", "textTr": "Her modülün bağımlılıklarını listeler" }
           ],
           "explanation": "Source maps let debuggers and stack traces reference your .ts lines even though the browser runs compiled .js. Declaration maps do the same for .d.ts → .ts.",
           "explanationTr": "Source map'ler, tarayıcı derlenmiş .js çalıştırsa da debugger'ların ve stack trace'lerin .ts satırlarına atıfta bulunmasını sağlar. Declaration map'ler aynısını .d.ts → .ts için yapar."
         },
-        {
-          "type": "challenge",
-          "question": "What is type erasure in TypeScript?"
-        },
-        {
-          "type": "challenge",
-          "question": "What is a TypeScript map file (source map / declaration map)?"
-        }
+        { "type": "challenge", "question": "What is type erasure in TypeScript?" },
+        { "type": "challenge", "question": "What is a TypeScript map file (source map / declaration map)?" }
       ]
     },
     {
@@ -81,14 +62,8 @@
           "prompt": "Enable cached, faster rebuilds via a .tsbuildinfo file",
           "promptTr": "Bir .tsbuildinfo dosyasıyla önbellekli, daha hızlı yeniden build'leri etkinleştir",
           "code": "{\n  \"compilerOptions\": {\n    \"___\": true\n  }\n}",
-          "answers": [
-            "incremental"
-          ],
-          "distractors": [
-            "watch",
-            "fast",
-            "cache"
-          ],
+          "answers": ["incremental"],
+          "distractors": ["watch", "fast", "cache"],
           "explanation": "incremental: true makes tsc persist build state to .tsbuildinfo and only re-check changed files on the next run.",
           "explanationTr": "incremental: true, tsc'nin build durumunu .tsbuildinfo'ya kalıcı kılmasını ve sonraki çalıştırmada yalnızca değişen dosyaları yeniden denetlemesini sağlar."
         },
@@ -97,43 +72,18 @@
           "prompt": "Your code targets Node and shouldn't reference the DOM. What enforces that?",
           "promptTr": "Kodun Node'u hedefliyor ve DOM'a atıfta bulunmamalı. Bunu ne zorunlu kılar?",
           "options": [
-            {
-              "text": "Omit \"DOM\" from the lib array so document/window become type errors",
-              "textTr": "lib dizisinden \"DOM\"u çıkar, böylece document/window tip hatası olur",
-              "correct": true
-            },
-            {
-              "text": "Set target to ES5",
-              "textTr": "target'ı ES5 yap"
-            },
-            {
-              "text": "Enable strict mode",
-              "textTr": "strict modu etkinleştir"
-            },
-            {
-              "text": "Add \"DOM\" to the exclude array",
-              "textTr": "\"DOM\"u exclude dizisine ekle"
-            },
-            {
-              "text": "Use a const enum",
-              "textTr": "Bir const enum kullan"
-            }
+            { "text": "Omit \"DOM\" from the lib array so document/window become type errors", "textTr": "lib dizisinden \"DOM\"u çıkar, böylece document/window tip hatası olur", "correct": true },
+            { "text": "Set target to ES5", "textTr": "target'ı ES5 yap" },
+            { "text": "Enable strict mode", "textTr": "strict modu etkinleştir" },
+            { "text": "Add \"DOM\" to the exclude array", "textTr": "\"DOM\"u exclude dizisine ekle" },
+            { "text": "Use a const enum", "textTr": "Bir const enum kullan" }
           ],
           "explanation": "lib decides which ambient API declarations exist. Without \"DOM\", referencing document is an error — exactly the guard you want for server code.",
           "explanationTr": "lib, hangi ortam API bildirimlerinin var olduğuna karar verir. \"DOM\" olmadan document'e atıf bir hatadır — sunucu kodu için tam da istediğin koruma."
         },
-        {
-          "type": "challenge",
-          "question": "What does the tsconfig lib option do?"
-        },
-        {
-          "type": "challenge",
-          "question": "What is the purpose of the --incremental flag in TypeScript?"
-        },
-        {
-          "type": "challenge",
-          "question": "What are project references and their benefits?"
-        }
+        { "type": "challenge", "question": "What does the tsconfig lib option do?" },
+        { "type": "challenge", "question": "What is the purpose of the --incremental flag in TypeScript?" },
+        { "type": "challenge", "question": "What are project references and their benefits?" }
       ]
     },
     {
@@ -154,23 +104,10 @@
           "prompt": "Which statement about running TypeScript on the backend is accurate?",
           "promptTr": "TypeScript'i backend'de çalıştırmakla ilgili hangi ifade doğrudur?",
           "options": [
-            {
-              "text": "tsc emits Node-compatible JS; tools like tsx, ts-node, Deno and Bun also run TS directly",
-              "textTr": "tsc Node uyumlu JS üretir; tsx, ts-node, Deno ve Bun gibi araçlar da TS'i doğrudan çalıştırır",
-              "correct": true
-            },
-            {
-              "text": "TypeScript only compiles for browsers, never Node",
-              "textTr": "TypeScript yalnızca tarayıcılar için derler, asla Node için değil"
-            },
-            {
-              "text": "Node executes .ts files natively with no tooling in every version",
-              "textTr": "Node, .ts dosyalarını her sürümde araçsız native çalıştırır"
-            },
-            {
-              "text": "Backend TypeScript requires rewriting types as runtime classes",
-              "textTr": "Backend TypeScript, tipleri çalışma zamanı sınıfları olarak yeniden yazmayı gerektirir"
-            }
+            { "text": "tsc emits Node-compatible JS; tools like tsx, ts-node, Deno and Bun also run TS directly", "textTr": "tsc Node uyumlu JS üretir; tsx, ts-node, Deno ve Bun gibi araçlar da TS'i doğrudan çalıştırır", "correct": true },
+            { "text": "TypeScript only compiles for browsers, never Node", "textTr": "TypeScript yalnızca tarayıcılar için derler, asla Node için değil" },
+            { "text": "Node executes .ts files natively with no tooling in every version", "textTr": "Node, .ts dosyalarını her sürümde araçsız native çalıştırır" },
+            { "text": "Backend TypeScript requires rewriting types as runtime classes", "textTr": "Backend TypeScript, tipleri çalışma zamanı sınıfları olarak yeniden yazmayı gerektirir" }
           ],
           "explanation": "TS is runtime-agnostic. You compile to JS for Node or use a TS-aware runner; frameworks like NestJS and Fastify are built around it, and types can be shared across the stack.",
           "explanationTr": "TS runtime'dan bağımsızdır. Node için JS'e derlersin ya da TS-bilen bir çalıştırıcı kullanırsın; NestJS ve Fastify gibi framework'ler bunun etrafında kurulur ve tipler stack boyunca paylaşılabilir."
@@ -183,14 +120,8 @@
           "explanation": "Type annotations disappear after compilation, so trusting unvalidated external data is a common pitfall — pair TS with a runtime validator like Zod for boundaries.",
           "explanationTr": "Tip annotation'ları derlemeden sonra kaybolur, bu yüzden doğrulanmamış dış veriye güvenmek yaygın bir tuzaktır — sınırlar için TS'i Zod gibi bir çalışma zamanı doğrulayıcıyla eşle."
         },
-        {
-          "type": "challenge",
-          "question": "Can you use TypeScript on the backend, and how?"
-        },
-        {
-          "type": "challenge",
-          "question": "What is one thing you would change about TypeScript?"
-        }
+        { "type": "challenge", "question": "Can you use TypeScript on the backend, and how?" },
+        { "type": "challenge", "question": "What is one thing you would change about TypeScript?" }
       ]
     }
   ]

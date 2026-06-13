@@ -24,14 +24,8 @@
           "prompt": "Give the enum members explicit string values",
           "promptTr": "Enum üyelerine açık string değerler ver",
           "code": "enum Status {\n  Active = ___,\n  Done = \"DONE\",\n}",
-          "answers": [
-            "\"ACTIVE\""
-          ],
-          "distractors": [
-            "ACTIVE",
-            "0",
-            "'Active'.length"
-          ],
+          "answers": ["\"ACTIVE\""],
+          "distractors": ["ACTIVE", "0", "'Active'.length"],
           "explanation": "Each member is assigned a string literal. String enums serialise legibly and don't generate a reverse numeric mapping.",
           "explanationTr": "Her üyeye bir string literal atanır. String enum'lar okunaklı serileşir ve ters sayısal eşleme üretmez."
         },
@@ -40,35 +34,16 @@
           "prompt": "What is the main consequence of using const enum over a regular enum?",
           "promptTr": "Düz enum yerine const enum kullanmanın temel sonucu nedir?",
           "options": [
-            {
-              "text": "Members are inlined and no runtime object is emitted",
-              "textTr": "Üyeler satır içine alınır ve çalışma zamanı nesnesi üretilmez",
-              "correct": true
-            },
-            {
-              "text": "Members become mutable at runtime",
-              "textTr": "Üyeler çalışma zamanında değiştirilebilir olur"
-            },
-            {
-              "text": "It forces all members to be strings",
-              "textTr": "Tüm üyeleri string olmaya zorlar"
-            },
-            {
-              "text": "It allows reverse mapping from value to name",
-              "textTr": "Değerden ada ters eşlemeye izin verir"
-            }
+            { "text": "Members are inlined and no runtime object is emitted", "textTr": "Üyeler satır içine alınır ve çalışma zamanı nesnesi üretilmez", "correct": true },
+            { "text": "Members become mutable at runtime", "textTr": "Üyeler çalışma zamanında değiştirilebilir olur" },
+            { "text": "It forces all members to be strings", "textTr": "Tüm üyeleri string olmaya zorlar" },
+            { "text": "It allows reverse mapping from value to name", "textTr": "Değerden ada ters eşlemeye izin verir" }
           ],
           "explanation": "const enum trades the runtime object for inlined literals — smaller output, but you lose iteration and must watch out under isolatedModules.",
           "explanationTr": "const enum, çalışma zamanı nesnesini satır içi literallerle takas eder — daha küçük çıktı ama döngüyü kaybedersin ve isolatedModules altında dikkat etmelisin."
         },
-        {
-          "type": "challenge",
-          "question": "How do you create an enum with string values?"
-        },
-        {
-          "type": "challenge",
-          "question": "What is the difference between enum and const enums?"
-        }
+        { "type": "challenge", "question": "How do you create an enum with string values?" },
+        { "type": "challenge", "question": "What is the difference between enum and const enums?" }
       ]
     },
     {
@@ -90,23 +65,10 @@
           "promptTr": "mode için hangi tip çıkarılır?",
           "code": "const config = { mode: \"dark\" } as const;\ntype M = typeof config.mode;",
           "options": [
-            {
-              "text": "\"dark\"",
-              "textTr": "\"dark\"",
-              "correct": true
-            },
-            {
-              "text": "string",
-              "textTr": "string"
-            },
-            {
-              "text": "readonly string",
-              "textTr": "readonly string"
-            },
-            {
-              "text": "any",
-              "textTr": "any"
-            }
+            { "text": "\"dark\"", "textTr": "\"dark\"", "correct": true },
+            { "text": "string", "textTr": "string" },
+            { "text": "readonly string", "textTr": "readonly string" },
+            { "text": "any", "textTr": "any" }
           ],
           "explanation": "as const prevents literal widening, so mode keeps the exact literal type \"dark\" rather than the broader string.",
           "explanationTr": "as const literal genişlemeyi engeller, bu yüzden mode daha geniş string yerine tam literal tip \"dark\"'ı korur."
@@ -119,14 +81,8 @@
           "explanation": "readonly arrays expose only non-mutating members, so push/splice are type errors. It's a compile-time guarantee — the runtime array is still mutable if you cast it away.",
           "explanationTr": "readonly diziler yalnızca değiştirmeyen üyeleri sunar, bu yüzden push/splice tip hatasıdır. Bu derleme zamanı garantisidir — cast'leyip kaçarsan çalışma zamanındaki dizi hâlâ değiştirilebilir."
         },
-        {
-          "type": "challenge",
-          "question": "What are the use cases for a const assertion?"
-        },
-        {
-          "type": "challenge",
-          "question": "How do you create read-only arrays and tuples in TypeScript?"
-        }
+        { "type": "challenge", "question": "What are the use cases for a const assertion?" },
+        { "type": "challenge", "question": "How do you create read-only arrays and tuples in TypeScript?" }
       ]
     },
     {
@@ -147,14 +103,8 @@
           "prompt": "Annotate the function so it narrows v to string for callers",
           "promptTr": "Fonksiyonu, çağıranlar için v'yi string'e daraltacak şekilde annotate et",
           "code": "function assertIsString(v: unknown): ___ v is string {\n  if (typeof v !== \"string\") throw new Error();\n}",
-          "answers": [
-            "asserts"
-          ],
-          "distractors": [
-            "returns",
-            "is",
-            "ensures"
-          ],
+          "answers": ["asserts"],
+          "distractors": ["returns", "is", "ensures"],
           "explanation": "The asserts predicate tells the compiler that if the function returns normally, the condition (v is string) holds for the rest of the scope.",
           "explanationTr": "asserts predicate'i derleyiciye, fonksiyon normal dönerse koşulun (v is string) kapsamın geri kalanında geçerli olduğunu söyler."
         },
@@ -163,39 +113,17 @@
           "prompt": "Why is the lowercase 'string' type preferred over capital 'String'?",
           "promptTr": "Neden küçük harf 'string' tipi büyük harf 'String'e tercih edilir?",
           "options": [
-            {
-              "text": "string is the primitive; String is the boxed wrapper object, rarely what you want",
-              "textTr": "string primitiftir; String ise kutulanmış wrapper nesnesidir, nadiren istediğin şeydir",
-              "correct": true
-            },
-            {
-              "text": "They are identical; casing is only a style preference",
-              "textTr": "Aynıdırlar; büyük/küçük harf yalnızca stil tercihidir"
-            },
-            {
-              "text": "String is faster at runtime",
-              "textTr": "String çalışma zamanında daha hızlıdır"
-            },
-            {
-              "text": "string cannot hold Unicode characters",
-              "textTr": "string Unicode karakter tutamaz"
-            }
+            { "text": "string is the primitive; String is the boxed wrapper object, rarely what you want", "textTr": "string primitiftir; String ise kutulanmış wrapper nesnesidir, nadiren istediğin şeydir", "correct": true },
+            { "text": "They are identical; casing is only a style preference", "textTr": "Aynıdırlar; büyük/küçük harf yalnızca stil tercihidir" },
+            { "text": "String is faster at runtime", "textTr": "String çalışma zamanında daha hızlıdır" },
+            { "text": "string cannot hold Unicode characters", "textTr": "string Unicode karakter tutamaz" }
           ],
           "explanation": "A primitive string isn't assignable to the object type String in the useful direction, and new String() boxes create real objects — almost always a bug.",
           "explanationTr": "Primitif bir string, faydalı yönde String nesne tipine atanamaz ve new String() kutuları gerçek nesneler oluşturur — neredeyse her zaman bir hatadır."
         },
-        {
-          "type": "challenge",
-          "question": "What are assertion functions in TypeScript?"
-        },
-        {
-          "type": "challenge",
-          "question": "What is the difference between the String and string types in TypeScript?"
-        },
-        {
-          "type": "challenge",
-          "question": "Does TypeScript support function overloading?"
-        }
+        { "type": "challenge", "question": "What are assertion functions in TypeScript?" },
+        { "type": "challenge", "question": "What is the difference between the String and string types in TypeScript?" },
+        { "type": "challenge", "question": "Does TypeScript support function overloading?" }
       ]
     }
   ]

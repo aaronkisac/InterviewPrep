@@ -32,39 +32,17 @@
           "prompt": "What does a dynamic import() expression return?",
           "promptTr": "Dinamik bir import() ifadesi ne döndürür?",
           "options": [
-            {
-              "text": "A promise that resolves to the module's namespace",
-              "textTr": "Modülün namespace'ine çözülen bir promise",
-              "correct": true
-            },
-            {
-              "text": "The module's default export synchronously",
-              "textTr": "Modülün default export'unu senkron olarak"
-            },
-            {
-              "text": "A string path to the module file",
-              "textTr": "Modül dosyasına bir string yol"
-            },
-            {
-              "text": "undefined until the next tick",
-              "textTr": "Sonraki tick'e kadar undefined"
-            }
+            { "text": "A promise that resolves to the module's namespace", "textTr": "Modülün namespace'ine çözülen bir promise", "correct": true },
+            { "text": "The module's default export synchronously", "textTr": "Modülün default export'unu senkron olarak" },
+            { "text": "A string path to the module file", "textTr": "Modül dosyasına bir string yol" },
+            { "text": "undefined until the next tick", "textTr": "Sonraki tick'e kadar undefined" }
           ],
           "explanation": "import(...) is asynchronous: it returns a Promise of the module namespace object, enabling lazy loading and code-splitting.",
           "explanationTr": "import(...) asenkrondur: modül namespace nesnesinin bir Promise'ini döndürür, tembel yükleme ve kod bölmeyi mümkün kılar."
         },
-        {
-          "type": "challenge",
-          "question": "What are modules in TypeScript?"
-        },
-        {
-          "type": "challenge",
-          "question": "What is a dynamic import expression?"
-        },
-        {
-          "type": "challenge",
-          "question": "What is the benefit of import attributes (import assertions)?"
-        }
+        { "type": "challenge", "question": "What are modules in TypeScript?" },
+        { "type": "challenge", "question": "What is a dynamic import expression?" },
+        { "type": "challenge", "question": "What is the benefit of import attributes (import assertions)?" }
       ]
     },
     {
@@ -85,23 +63,10 @@
           "prompt": "A library has no types and no @types package. What's the idiomatic fix?",
           "promptTr": "Bir kütüphanenin tipleri ve @types paketi yok. Deyimsel çözüm nedir?",
           "options": [
-            {
-              "text": "Write a local .d.ts with declare module to describe it",
-              "textTr": "Onu tanımlamak için declare module içeren yerel bir .d.ts yaz",
-              "correct": true
-            },
-            {
-              "text": "Rewrite the library in TypeScript",
-              "textTr": "Kütüphaneyi TypeScript'te yeniden yaz"
-            },
-            {
-              "text": "Set noImplicitAny to true and import it",
-              "textTr": "noImplicitAny'yi true yap ve import et"
-            },
-            {
-              "text": "Move the library into node_modules/@types manually",
-              "textTr": "Kütüphaneyi elle node_modules/@types içine taşı"
-            }
+            { "text": "Write a local .d.ts with declare module to describe it", "textTr": "Onu tanımlamak için declare module içeren yerel bir .d.ts yaz", "correct": true },
+            { "text": "Rewrite the library in TypeScript", "textTr": "Kütüphaneyi TypeScript'te yeniden yaz" },
+            { "text": "Set noImplicitAny to true and import it", "textTr": "noImplicitAny'yi true yap ve import et" },
+            { "text": "Move the library into node_modules/@types manually", "textTr": "Kütüphaneyi elle node_modules/@types içine taşı" }
           ],
           "explanation": "A small ambient declaration (declare module \"name\") gives the import a type — even an any-typed stub unblocks you without touching the library.",
           "explanationTr": "Küçük bir ortam bildirimi (declare module \"name\") import'a bir tip verir — any-tipli bir stub bile kütüphaneye dokunmadan önünü açar."
@@ -111,25 +76,13 @@
           "prompt": "Tell the compiler about a global injected at runtime by a script tag",
           "promptTr": "Çalışma zamanında bir script tag'i tarafından enjekte edilen bir global'i derleyiciye bildir",
           "code": "___ const APP_VERSION: string;",
-          "answers": [
-            "declare"
-          ],
-          "distractors": [
-            "export",
-            "const",
-            "extern"
-          ],
+          "answers": ["declare"],
+          "distractors": ["export", "const", "extern"],
           "explanation": "declare introduces an ambient binding: it type-checks usages of APP_VERSION but emits no JavaScript, since the value comes from elsewhere at runtime.",
           "explanationTr": "declare bir ortam bağlaması tanıtır: APP_VERSION kullanımlarını tip denetler ama hiç JavaScript üretmez, çünkü değer çalışma zamanında başka yerden gelir."
         },
-        {
-          "type": "challenge",
-          "question": "How do you use plain JavaScript libraries in TypeScript?"
-        },
-        {
-          "type": "challenge",
-          "question": "When should you use the declare keyword in TypeScript?"
-        }
+        { "type": "challenge", "question": "How do you use plain JavaScript libraries in TypeScript?" },
+        { "type": "challenge", "question": "When should you use the declare keyword in TypeScript?" }
       ]
     },
     {
@@ -151,23 +104,10 @@
           "promptTr": "Bu ne yazdırır?",
           "code": "const multiply = (a: number) => (b: number) => a * b;\nconst triple = multiply(3);\nconsole.log(triple(4));",
           "options": [
-            {
-              "text": "12",
-              "textTr": "12",
-              "correct": true
-            },
-            {
-              "text": "7",
-              "textTr": "7"
-            },
-            {
-              "text": "[Function]",
-              "textTr": "[Function]"
-            },
-            {
-              "text": "NaN",
-              "textTr": "NaN"
-            }
+            { "text": "12", "textTr": "12", "correct": true },
+            { "text": "7", "textTr": "7" },
+            { "text": "[Function]", "textTr": "[Function]" },
+            { "text": "NaN", "textTr": "NaN" }
           ],
           "explanation": "multiply(3) returns a function that multiplies by 3; calling it with 4 yields 12. That's currying enabling partial application.",
           "explanationTr": "multiply(3), 3 ile çarpan bir fonksiyon döndürür; onu 4 ile çağırmak 12 verir. Bu, kısmi uygulamayı mümkün kılan currying'dir."
@@ -180,14 +120,8 @@
           "explanation": "That's their purpose: decorators run against the declaration to add behaviour — logging, metadata, dependency injection — without editing the body.",
           "explanationTr": "Amaçları budur: decorator'lar bildirime karşı çalışıp gövdeyi düzenlemeden davranış ekler — loglama, metadata, bağımlılık enjeksiyonu."
         },
-        {
-          "type": "challenge",
-          "question": "What are decorators in TypeScript?"
-        },
-        {
-          "type": "challenge",
-          "question": "Explain what is Currying in TypeScript?"
-        }
+        { "type": "challenge", "question": "What are decorators in TypeScript?" },
+        { "type": "challenge", "question": "Explain what is Currying in TypeScript?" }
       ]
     }
   ]

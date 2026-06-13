@@ -139,11 +139,12 @@ GitHub Secrets needed: `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KE
 - unit-01 Fundamentals (foundations) — **done 2026-06-13**: 3 lessons, 20 steps, 8 challenges (2004/2008/2003 · 2002/2001/129 · 105/102). `data/seed-courses/typescript/unit-01-fundamentals.json`. **Needs `pnpm seed courses` + `pnpm course:coverage`.**
 - unit-02 Types & Interfaces (foundations) — **done 2026-06-13**: 3 lessons (interfaces · type vs interface vs class · structural typing), 18 steps, 6 challenges (2009/131 · 2013/2007/2010 · 2015). `unit-02-types-interfaces.json`. **Needs `pnpm seed courses` + coverage.**
 - unit-03 Unions & Narrowing (core) — **done 2026-06-13**: 4 lessons (union types · ?./??/short-circuit · null checks & ! · any/unknown/never), 23 steps, 10 challenges (107/128 · 2005/2006/124 · 115/126 · 2012/2018/2020). `unit-03-unions-narrowing.json`. **Needs `pnpm seed courses` + coverage.**
-- unit-04 Classes & OOP (core): 101, 112, 132, 123, 133, 119, 118, 117, 122, 137
-- unit-05 Generics & Conditional Types (core): 104, 120, 2019, 121, 140, 134, 135, 2014, 2017
-- unit-06 Enums, Assertions & Readonly (advanced): 108, 2016, 2011, 111, 106, 125, 109, 114
-- unit-07 Modules, Tooling & Config (advanced): 103, 136, 141, 138, 130, 113, 110, 139, 143, 127, 116
-- unit-08 Interview Gauntlet (interview): 142 + weakest-area recap challenges
+- unit-04 Classes & OOP (core) — **done 2026-06-13**: 4 lessons (constructors-inheritance · access-modifiers · abstract-accessors-constants · oop-principles-mixins), 25 steps, 10 challenges (101/112 · 132/123/133 · 119/118/117 · 122/137). `unit-04-classes-oop.json`.
+- unit-05 Generics & Type-Level (advanced) — **done 2026-06-13**: 3 lessons (generics-and-index-signatures · conditional-types-and-infer · deriving-types), 8 challenges (104/120 · 2019/121/140 · 134/135/2014). `unit-05-generics-type-level.json`.
+- unit-06 Enums, Assertions & Immutability (advanced) — **done 2026-06-13**: 3 lessons (enums · const-assertions-readonly · assertion-functions-overloads), 7 challenges (108/2016 · 2011/111 · 106/125/109). `unit-06-enums-assertions-immutability.json`.
+- unit-07 Modules, Declarations & Interop (advanced) — **done 2026-06-13**: 3 lessons (modules-and-dynamic-import · js-libraries-and-declare · decorators-and-currying), 7 challenges (103/136/141 · 138/130 · 113/110). `unit-07-modules-declarations-interop.json`.
+- unit-08 Compiler, Tooling & Ecosystem (interview) — **done 2026-06-13**: 3 lessons (compilation-and-erasure · tsconfig-and-build-performance · typescript-in-practice), 7 challenges (139/143 · 127/116/2017 · 2014/142). `unit-08-compiler-tooling-ecosystem.json`.
+- **All 8 units authored. Run `pnpm seed courses && pnpm course:coverage` — expect 63/63 TypeScript coverage.**
 Same retro rules apply: challenge texts byte-for-byte from seed JSON, 5–9 steps/lesson, lessons end on 1–3 challenges, no new visuals required (concept `visual` optional).
 
 ---
