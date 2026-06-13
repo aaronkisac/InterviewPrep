@@ -24,14 +24,8 @@
           "prompt": "Declare a generic type parameter so input and output stay linked",
           "promptTr": "Girdi ve çıktının bağlı kalması için bir generic tip parametresi tanımla",
           "code": "function first___(arr: T[]): T {\n  return arr[0];\n}",
-          "answers": [
-            "<T>"
-          ],
-          "distractors": [
-            "<any>",
-            "(T)",
-            "[T]"
-          ],
+          "answers": ["<T>"],
+          "distractors": ["<any>", "(T)", "[T]"],
           "explanation": "<T> introduces a type parameter that binds the array's element type to the return type — first(['a']) returns a string, first([1]) a number.",
           "explanationTr": "<T> bir tip parametresi tanıtır; dizinin eleman tipini dönüş tipine bağlar — first(['a']) string, first([1]) number döndürür."
         },
@@ -45,30 +39,15 @@
               "textTr": "Herhangi bir string anahtara izin verilir ve bir number'a eşlenir",
               "correct": true
             },
-            {
-              "text": "Exactly one property named 'key' of type number",
-              "textTr": "number tipinde 'key' adlı tam olarak bir property"
-            },
-            {
-              "text": "An array of numbers",
-              "textTr": "Bir number dizisi"
-            },
-            {
-              "text": "A number that can be indexed",
-              "textTr": "İndekslenebilen bir number"
-            }
+            { "text": "Exactly one property named 'key' of type number", "textTr": "number tipinde 'key' adlı tam olarak bir property" },
+            { "text": "An array of numbers", "textTr": "Bir number dizisi" },
+            { "text": "A number that can be indexed", "textTr": "İndekslenebilen bir number" }
           ],
           "explanation": "The signature describes a whole family of keys by pattern, not a single named property — ideal when keys are dynamic. The value type constrains every entry.",
           "explanationTr": "Signature, tek bir adlandırılmış property'yi değil, desenle bir anahtar ailesini tanımlar — anahtarlar dinamikken idealdir. Değer tipi her girdiyi kısıtlar."
         },
-        {
-          "type": "challenge",
-          "question": "Explain generics in TypeScript"
-        },
-        {
-          "type": "challenge",
-          "question": "What is an index signature, and why would you use one?"
-        }
+        { "type": "challenge", "question": "Explain generics in TypeScript" },
+        { "type": "challenge", "question": "What is an index signature, and why would you use one?" }
       ]
     },
     {
@@ -90,23 +69,10 @@
           "promptTr": "Çözülen tip nedir?",
           "code": "type Unwrap<T> = T extends Promise<infer V> ? V : T;\ntype R = Unwrap<Promise<number>>;",
           "options": [
-            {
-              "text": "number",
-              "textTr": "number",
-              "correct": true
-            },
-            {
-              "text": "Promise<number>",
-              "textTr": "Promise<number>"
-            },
-            {
-              "text": "never",
-              "textTr": "never"
-            },
-            {
-              "text": "unknown",
-              "textTr": "unknown"
-            }
+            { "text": "number", "textTr": "number", "correct": true },
+            { "text": "Promise<number>", "textTr": "Promise<number>" },
+            { "text": "never", "textTr": "never" },
+            { "text": "unknown", "textTr": "unknown" }
           ],
           "explanation": "T matches Promise<infer V>, binding V to number, so the true branch returns number. A non-promise T would fall through to the else branch unchanged.",
           "explanationTr": "T, Promise<infer V> ile eşleşir, V'yi number'a bağlar, bu yüzden true dalı number döndürür. Promise olmayan bir T, else dalına değişmeden düşerdi."
@@ -119,18 +85,9 @@
           "explanation": "infer is meaningful only while pattern-matching in a conditional's extends position — that's where TypeScript can bind it to the matched fragment.",
           "explanationTr": "infer yalnızca bir conditional'ın extends konumunda desen eşleştirirken anlamlıdır — TypeScript onu eşleşen parçaya orada bağlayabilir."
         },
-        {
-          "type": "challenge",
-          "question": "What are conditional types in TypeScript?"
-        },
-        {
-          "type": "challenge",
-          "question": "Why is the infer keyword needed in TypeScript?"
-        },
-        {
-          "type": "challenge",
-          "question": "What are template literal types and what are they used for?"
-        }
+        { "type": "challenge", "question": "What are conditional types in TypeScript?" },
+        { "type": "challenge", "question": "Why is the infer keyword needed in TypeScript?" },
+        { "type": "challenge", "question": "What are template literal types and what are they used for?" }
       ]
     },
     {
@@ -151,14 +108,8 @@
           "prompt": "Produce the union \"id\" | \"name\" | \"age\" from User",
           "promptTr": "User'dan \"id\" | \"name\" | \"age\" union'ını üret",
           "code": "type UserKey = ___ User;",
-          "answers": [
-            "keyof"
-          ],
-          "distractors": [
-            "typeof",
-            "in",
-            "Pick"
-          ],
+          "answers": ["keyof"],
+          "distractors": ["typeof", "in", "Pick"],
           "explanation": "keyof T collapses an object type's property names into a string-literal union — the backbone of mapped and lookup types.",
           "explanationTr": "keyof T, bir nesne tipinin property adlarını string-literal union'a indirger — mapped ve lookup tiplerinin omurgasıdır."
         },
@@ -167,39 +118,17 @@
           "prompt": "Which utility removes the 'age' property from User?",
           "promptTr": "Hangi utility, User'dan 'age' property'sini kaldırır?",
           "options": [
-            {
-              "text": "Omit<User, \"age\">",
-              "textTr": "Omit<User, \"age\">",
-              "correct": true
-            },
-            {
-              "text": "Pick<User, \"age\">",
-              "textTr": "Pick<User, \"age\">"
-            },
-            {
-              "text": "Partial<User>",
-              "textTr": "Partial<User>"
-            },
-            {
-              "text": "Exclude<User, \"age\">",
-              "textTr": "Exclude<User, \"age\">"
-            }
+            { "text": "Omit<User, \"age\">", "textTr": "Omit<User, \"age\">", "correct": true },
+            { "text": "Pick<User, \"age\">", "textTr": "Pick<User, \"age\">" },
+            { "text": "Partial<User>", "textTr": "Partial<User>" },
+            { "text": "Exclude<User, \"age\">", "textTr": "Exclude<User, \"age\">" }
           ],
           "explanation": "Omit<T, K> keeps every property except K. Pick is its inverse; Exclude works on union members, not object properties.",
           "explanationTr": "Omit<T, K>, K dışındaki her property'yi tutar. Pick onun tersidir; Exclude ise nesne property'lerinde değil, union üyelerinde çalışır."
         },
-        {
-          "type": "challenge",
-          "question": "How do you build a union type from the properties of a type or interface?"
-        },
-        {
-          "type": "challenge",
-          "question": "How do you exclude a property from a type in TypeScript?"
-        },
-        {
-          "type": "challenge",
-          "question": "What is the unique symbol type used for?"
-        }
+        { "type": "challenge", "question": "How do you build a union type from the properties of a type or interface?" },
+        { "type": "challenge", "question": "How do you exclude a property from a type in TypeScript?" },
+        { "type": "challenge", "question": "What is the unique symbol type used for?" }
       ]
     }
   ]
