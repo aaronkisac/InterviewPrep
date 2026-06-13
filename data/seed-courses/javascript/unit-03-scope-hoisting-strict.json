@@ -1,0 +1,153 @@
+{
+  "topic": "javascript",
+  "slug": "scope-hoisting-strict",
+  "title": "Scope, Hoisting & Strict Mode",
+  "titleTr": "Scope, Hoisting ve Strict Mode",
+  "section": "core",
+  "position": 3,
+  "lessons": [
+    {
+      "slug": "scope-and-declarations",
+      "title": "Scope & declarations",
+      "titleTr": "Scope ve bildirimler",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Where a name is visible",
+          "titleTr": "Bir adın nerede görünür olduğu",
+          "body": "**Scope** is the region of code where a name is visible. JavaScript has:\n\n- **Global scope** — declared outside any function/block; visible everywhere.\n- **Function scope** — `var` and parameters live for the whole function.\n- **Block scope** — `let` and `const` live only inside the nearest `{ }`.\n\n```js\nfunction f() {\n  if (true) {\n    var a = 1;   // function-scoped\n    let b = 2;   // block-scoped\n  }\n  console.log(a); // 1\n  console.log(b); // ReferenceError\n}\n```\n\n**`let`** declares a *block-scoped*, reassignable binding (ES6). It fixed two `var` problems: `var` ignores blocks (leaks out of `if`/`for`), and `var` is function-scoped so loop closures all capture the same variable. The everyday rule: **`const` by default, `let` when you must reassign, and avoid `var`.**",
+          "bodyTr": "**Scope**, bir adın görünür olduğu kod bölgesidir. JavaScript'te:\n\n- **Global scope** — herhangi bir fonksiyon/blok dışında tanımlanır; her yerde görünür.\n- **Fonksiyon scope'u** — `var` ve parametreler tüm fonksiyon boyunca yaşar.\n- **Blok scope'u** — `let` ve `const` yalnızca en yakın `{ }` içinde yaşar.\n\n```js\nfunction f() {\n  if (true) {\n    var a = 1;   // fonksiyon scope'lu\n    let b = 2;   // blok scope'lu\n  }\n  console.log(a); // 1\n  console.log(b); // ReferenceError\n}\n```\n\n**`let`**, *blok scope'lu*, yeniden atanabilir bir bağlama tanımlar (ES6). İki `var` sorununu çözdü: `var` blokları yok sayar (`if`/`for`'dan dışarı sızar) ve `var` fonksiyon scope'lu olduğu için döngü closure'ları aynı değişkeni yakalar. Günlük kural: **varsayılan `const`, yeniden atamak gerekiyorsa `let`, `var`'dan kaçın.**"
+        },
+        {
+          "type": "output_predict",
+          "prompt": "What does this log?",
+          "promptTr": "Bu ne yazdırır?",
+          "code": "const fns = [];\nfor (let i = 0; i < 3; i++) fns.push(() => i);\nconsole.log(fns[0](), fns[1](), fns[2]());",
+          "options": [
+            { "text": "0 1 2", "textTr": "0 1 2", "correct": true },
+            { "text": "3 3 3", "textTr": "3 3 3" },
+            { "text": "0 0 0", "textTr": "0 0 0" },
+            { "text": "undefined undefined undefined", "textTr": "undefined undefined undefined" }
+          ],
+          "explanation": "let gives each loop iteration its own binding of i, so each closure captures a distinct value. With var (function-scoped) all three would log 3.",
+          "explanationTr": "let, her döngü iterasyonuna kendi i bağlamasını verir, bu yüzden her closure farklı bir değer yakalar. var ile (fonksiyon scope'lu) üçü de 3 yazardı."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Which best describes how let differs from var?",
+          "promptTr": "let'in var'dan farkını en iyi hangisi açıklar?",
+          "options": [
+            { "text": "let is block-scoped and not hoisted for use before declaration; var is function-scoped", "textTr": "let blok scope'ludur ve bildiriminden önce kullanılamaz; var fonksiyon scope'ludur", "correct": true },
+            { "text": "let cannot be reassigned, var can", "textTr": "let yeniden atanamaz, var atanabilir" },
+            { "text": "They are identical apart from the keyword", "textTr": "Anahtar kelime dışında aynıdırlar" },
+            { "text": "let creates a global property on window, var does not", "textTr": "let window'da global property oluşturur, var oluşturmaz" }
+          ],
+          "explanation": "let is block-scoped with a temporal dead zone before its declaration; var is function-scoped and initialised to undefined when hoisted. (const is like let but also non-reassignable.)",
+          "explanationTr": "let blok scope'ludur ve bildiriminden önce temporal dead zone'a sahiptir; var fonksiyon scope'ludur ve hoist edilince undefined'a ilklenir. (const, let gibidir ama ayrıca yeniden atanamaz.)"
+        },
+        {
+          "type": "challenge",
+          "question": "What is Scope in JavaScript?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is let keyword in JavaScript?"
+        },
+        {
+          "type": "challenge",
+          "question": "What's the difference between using let and var to declare a variable in ES6?"
+        }
+      ]
+    },
+    {
+      "slug": "hoisting",
+      "title": "Hoisting",
+      "titleTr": "Hoisting",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Declarations move up; assignments don't",
+          "titleTr": "Bildirimler yukarı taşınır; atamalar taşınmaz",
+          "body": "**Hoisting** is how the engine processes declarations before running code. During compilation, declarations are registered at the top of their scope; only the *declaration* moves, not the *assignment*.\n\n- **`var`** is hoisted and initialised to `undefined` — usable (as `undefined`) before its line.\n- **Function declarations** are hoisted *whole* — callable before they appear.\n- **`let` / `const`** are hoisted too but sit in the **temporal dead zone (TDZ)** — referencing them before the declaration throws a `ReferenceError`.\n\n```js\nconsole.log(a); // undefined  (var hoisted)\nvar a = 1;\n\nfoo();          // works — function declaration hoisted\nfunction foo() {}\n\nconsole.log(b); // ReferenceError — TDZ\nlet b = 2;\n```\n\nMental model: `var x = 1` is really `var x;` (hoisted) then `x = 1` (stays in place).",
+          "bodyTr": "**Hoisting**, motorun kodu çalıştırmadan önce bildirimleri işleme biçimidir. Derleme sırasında bildirimler scope'larının tepesine kaydedilir; yalnızca *bildirim* taşınır, *atama* değil.\n\n- **`var`** hoist edilir ve `undefined`'a ilklenir — satırından önce (`undefined` olarak) kullanılabilir.\n- **Fonksiyon bildirimleri** *bütün olarak* hoist edilir — göründükleri yerden önce çağrılabilir.\n- **`let` / `const`** de hoist edilir ama **temporal dead zone (TDZ)** içinde durur — bildiriminden önce referans almak `ReferenceError` fırlatır.\n\n```js\nconsole.log(a); // undefined  (var hoist edildi)\nvar a = 1;\n\nfoo();          // çalışır — fonksiyon bildirimi hoist edildi\nfunction foo() {}\n\nconsole.log(b); // ReferenceError — TDZ\nlet b = 2;\n```\n\nZihinsel model: `var x = 1` aslında `var x;` (hoist edilir) sonra `x = 1` (yerinde kalır)."
+        },
+        {
+          "type": "output_predict",
+          "prompt": "What does this log?",
+          "promptTr": "Bu ne yazdırır?",
+          "code": "console.log(x);\nvar x = 5;",
+          "options": [
+            { "text": "undefined", "textTr": "undefined", "correct": true },
+            { "text": "5", "textTr": "5" },
+            { "text": "ReferenceError", "textTr": "ReferenceError" },
+            { "text": "null", "textTr": "null" }
+          ],
+          "explanation": "var x is hoisted and initialised to undefined; the assignment x = 5 stays on its line. So the log runs before x = 5 and prints undefined. With let it would throw (TDZ).",
+          "explanationTr": "var x hoist edilip undefined'a ilklenir; x = 5 ataması satırında kalır. Yani log, x = 5'ten önce çalışır ve undefined yazar. let ile fırlatırdı (TDZ)."
+        },
+        {
+          "type": "true_false",
+          "statement": "A function declaration can be called on a line above where it is written.",
+          "statementTr": "Bir fonksiyon bildirimi, yazıldığı yerin üstündeki bir satırda çağrılabilir.",
+          "answer": true,
+          "explanation": "Function declarations are hoisted in full, so they're callable before their definition. Function expressions assigned to var/let are not — only the variable is hoisted.",
+          "explanationTr": "Fonksiyon bildirimleri bütün olarak hoist edilir, bu yüzden tanımlarından önce çağrılabilir. var/let'e atanan fonksiyon ifadeleri öyle değildir — yalnızca değişken hoist edilir."
+        },
+        {
+          "type": "challenge",
+          "question": "What is hoisting in JavaScript?"
+        }
+      ]
+    },
+    {
+      "slug": "strict-mode-and-globals",
+      "title": "Strict mode & the global scope",
+      "titleTr": "Strict mode ve global scope",
+      "position": 3,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Opting into safer semantics",
+          "titleTr": "Daha güvenli semantiğe geçmek",
+          "body": "**Strict mode** (`\"use strict\";` at the top of a file or function) opts into a stricter JavaScript dialect. ES modules and class bodies are strict automatically.\n\nWhat it changes:\n\n- Assigning to an undeclared variable **throws** instead of silently creating a global.\n- `this` in a plain function call is `undefined`, not the global object.\n- Duplicate parameter names, writing to read-only props, and some other foot-guns become errors.\n- Reserves future keywords; forbids `with`.\n\n**Advantages**: catches silent bugs early, prevents accidental globals, makes code easier to optimise. **Disadvantages**: can break old code that relied on sloppy behavior; a few legacy patterns (like `arguments`/parameter aliasing) change.\n\nRelated hazard — the **global scope**. Leaving variables on the global object risks **name collisions** between scripts/libraries, accidental overwrites, and harder-to-reason-about, leak-prone code. The fix: keep names local — use modules, IIFEs, or block scope, and expose at most a single namespace object.",
+          "bodyTr": "**Strict mode** (bir dosyanın ya da fonksiyonun başında `\"use strict\";`) daha katı bir JavaScript lehçesine geçer. ES modülleri ve sınıf gövdeleri otomatik olarak strict'tir.\n\nNeyi değiştirir:\n\n- Tanımlanmamış bir değişkene atama, sessizce global oluşturmak yerine **fırlatır**.\n- Düz fonksiyon çağrısında `this`, global nesne değil `undefined`'dır.\n- Tekrarlı parametre adları, salt-okunur property'lere yazma ve bazı diğer tuzaklar hataya dönüşür.\n- Gelecekteki anahtar kelimeleri rezerve eder; `with`'i yasaklar.\n\n**Avantajlar**: sessiz hataları erken yakalar, kazara global'leri önler, kodu optimize etmeyi kolaylaştırır. **Dezavantajlar**: özensiz davranışa dayanan eski kodu bozabilir; bazı eski kalıplar (`arguments`/parametre takma adı gibi) değişir.\n\nİlgili tehlike — **global scope**. Değişkenleri global nesnede bırakmak; script'ler/kütüphaneler arası **ad çakışmaları**, kazara üzerine yazma ve sızıntıya açık, akıl yürütmesi zor kod riski taşır. Çözüm: adları yerel tut — modüller, IIFE'ler veya blok scope kullan ve en fazla tek bir namespace nesnesi sun."
+        },
+        {
+          "type": "true_false",
+          "statement": "In strict mode, assigning to a variable you never declared throws an error.",
+          "statementTr": "Strict mode'da, hiç tanımlamadığın bir değişkene atama yapmak hata fırlatır.",
+          "answer": true,
+          "explanation": "Outside strict mode, x = 1 on an undeclared name silently creates a global. Strict mode turns that into a ReferenceError — one of its biggest safety wins.",
+          "explanationTr": "Strict mode dışında, tanımlanmamış bir adda x = 1 sessizce bir global oluşturur. Strict mode bunu ReferenceError'a çevirir — en büyük güvenlik kazanımlarından biri."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Why is polluting the global scope considered harmful?",
+          "promptTr": "Global scope'u kirletmek neden zararlı sayılır?",
+          "options": [
+            { "text": "Name collisions between scripts can overwrite each other and cause leaks", "textTr": "Script'ler arası ad çakışmaları birbirini ezip sızıntıya yol açabilir", "correct": true },
+            { "text": "Global variables are always slower to read", "textTr": "Global değişkenleri okumak her zaman daha yavaştır" },
+            { "text": "The browser deletes globals after each event", "textTr": "Tarayıcı her event'ten sonra global'leri siler" },
+            { "text": "You cannot use const at the top level", "textTr": "Üst seviyede const kullanamazsın" }
+          ],
+          "explanation": "Two libraries each defining a global `$` or `config` clobber one another. Keeping names in modules/IIFEs/blocks avoids collisions and keeps lifetimes short.",
+          "explanationTr": "Her biri global `$` ya da `config` tanımlayan iki kütüphane birbirini ezer. Adları modül/IIFE/blok içinde tutmak çakışmayı önler ve ömrü kısa tutar."
+        },
+        {
+          "type": "challenge",
+          "question": "What is strict mode?"
+        },
+        {
+          "type": "challenge",
+          "question": "What are the advantages and disadvantages of using use strict?"
+        },
+        {
+          "type": "challenge",
+          "question": "Why is it generally a bad idea to leave the global scope of a website as-is?"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,202 @@
+{
+  "topic": "javascript",
+  "slug": "objects-prototypes-this",
+  "title": "Objects, Prototypes & this",
+  "titleTr": "Nesneler, Prototype'lar ve this",
+  "section": "core",
+  "position": 5,
+  "lessons": [
+    {
+      "slug": "prototypes-and-this",
+      "title": "Prototypal inheritance & this",
+      "titleTr": "Prototip kalıtımı ve this",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "The prototype chain and the four this rules",
+          "titleTr": "Prototype zinciri ve dört this kuralı",
+          "body": "JavaScript inherits through **prototypes**, not classes. Every object has a hidden link (`[[Prototype]]`, seen via `Object.getPrototypeOf`) to another object. When you read a property that's missing, the engine walks **up the prototype chain** until it finds it or hits `null`.\n\n```js\nconst animal = { eats: true };\nconst dog = Object.create(animal); // dog.__proto__ === animal\ndog.barks = true;\ndog.eats; // true — found on animal via the chain\n```\n\nClasses are syntax sugar over this mechanism.\n\n**`this`** is decided by **how a function is called**, not where it's defined. Four rules, in priority order:\n\n1. **`new Foo()`** → `this` is the brand-new object.\n2. **`fn.call/apply/bind(obj)`** → `this` is `obj` (explicit).\n3. **`obj.method()`** → `this` is `obj` (the receiver).\n4. **Plain `fn()`** → `this` is `undefined` (strict) or the global object (sloppy).\n\nArrow functions ignore all four — they take `this` lexically from their surroundings.",
+          "bodyTr": "JavaScript, sınıflarla değil **prototype'larla** kalıtım yapar. Her nesnenin başka bir nesneye gizli bir bağı (`[[Prototype]]`, `Object.getPrototypeOf` ile görülür) vardır. Eksik bir property'yi okuduğunda motor onu bulana ya da `null`'a ulaşana dek **prototype zincirinde yukarı** yürür.\n\n```js\nconst animal = { eats: true };\nconst dog = Object.create(animal); // dog.__proto__ === animal\ndog.barks = true;\ndog.eats; // true — zincir üzerinden animal'da bulundu\n```\n\nSınıflar bu mekanizmanın söz dizimi şekeridir.\n\n**`this`**, fonksiyonun *nerede tanımlandığıyla* değil **nasıl çağrıldığıyla** belirlenir. Öncelik sırasıyla dört kural:\n\n1. **`new Foo()`** → `this`, yepyeni nesnedir.\n2. **`fn.call/apply/bind(obj)`** → `this`, `obj`'tir (açık).\n3. **`obj.method()`** → `this`, `obj`'tir (alıcı).\n4. **Düz `fn()`** → `this`, `undefined` (strict) ya da global nesnedir (sloppy).\n\nArrow fonksiyonlar dördünü de yok sayar — `this`'i çevrelerinden lexical alır."
+        },
+        {
+          "type": "output_predict",
+          "prompt": "What does this log?",
+          "promptTr": "Bu ne yazdırır?",
+          "code": "const user = {\n  name: \"Ada\",\n  greet() { return this.name; },\n};\nconst g = user.greet;\nconsole.log(g());",
+          "options": [
+            { "text": "undefined (or TypeError in strict mode)", "textTr": "undefined (ya da strict mode'da TypeError)", "correct": true },
+            { "text": "\"Ada\"", "textTr": "\"Ada\"" },
+            { "text": "\"\"", "textTr": "\"\"" },
+            { "text": "ReferenceError", "textTr": "ReferenceError" }
+          ],
+          "explanation": "Detaching the method loses the receiver: g() is a plain call, so this is undefined (strict) or global. this.name is then undefined. Fix with user.greet.bind(user).",
+          "explanationTr": "Metodu ayırmak alıcıyı kaybeder: g() düz bir çağrıdır, bu yüzden this undefined (strict) ya da global'dir. this.name böylece undefined olur. user.greet.bind(user) ile düzelt."
+        },
+        {
+          "type": "mcq",
+          "prompt": "How does the engine resolve a property not found on an object itself?",
+          "promptTr": "Motor, nesnenin kendisinde bulunmayan bir property'yi nasıl çözer?",
+          "options": [
+            { "text": "It walks up the prototype chain until found or null", "textTr": "Bulunana ya da null'a ulaşana dek prototype zincirinde yukarı yürür", "correct": true },
+            { "text": "It throws immediately", "textTr": "Hemen fırlatır" },
+            { "text": "It searches every object in memory", "textTr": "Bellekteki her nesneyi tarar" },
+            { "text": "It returns the property from the global object", "textTr": "Property'yi global nesneden döndürür" }
+          ],
+          "explanation": "Property lookup follows [[Prototype]] links upward. Missing the whole chain yields undefined; the chain ends at Object.prototype then null.",
+          "explanationTr": "Property araması [[Prototype]] bağlarını yukarı izler. Tüm zincirde bulunmazsa undefined döner; zincir Object.prototype'ta sonra null'da biter."
+        },
+        {
+          "type": "challenge",
+          "question": "How does prototypal inheritance work in JavaScript?"
+        },
+        {
+          "type": "challenge",
+          "question": "Explain the `this` keyword in JavaScript."
+        }
+      ]
+    },
+    {
+      "slug": "es6-vs-es5-classes",
+      "title": "Classes: ES6 vs ES5",
+      "titleTr": "Sınıflar: ES6 vs ES5",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Constructor functions vs the class keyword",
+          "titleTr": "Constructor fonksiyonları vs class anahtar kelimesi",
+          "body": "Before ES6, \"classes\" were **constructor functions** with methods hung on the prototype:\n\n```js\nfunction Animal(name) { this.name = name; }\nAnimal.prototype.speak = function () { return this.name; };\n```\n\nES6 **`class`** is cleaner syntax over the *same* prototype mechanism:\n\n```js\nclass Animal {\n  constructor(name) { this.name = name; }\n  speak() { return this.name; }\n}\n```\n\nBenefits of the class form: clearer syntax, `extends` / `super` for inheritance, methods are non-enumerable by default, class bodies run in **strict mode**, and — crucially — calling a class without `new` **throws** (a constructor function silently runs with the wrong `this`). The trade-off: it's syntax sugar, so understanding prototypes still matters when debugging. Under the hood both produce the same prototype chain.",
+          "bodyTr": "ES6'dan önce \"sınıflar\", metotları prototype'a asılmış **constructor fonksiyonlarıydı**:\n\n```js\nfunction Animal(name) { this.name = name; }\nAnimal.prototype.speak = function () { return this.name; };\n```\n\nES6 **`class`**, *aynı* prototype mekanizması üzerine daha temiz bir söz dizimidir:\n\n```js\nclass Animal {\n  constructor(name) { this.name = name; }\n  speak() { return this.name; }\n}\n```\n\nClass biçiminin faydaları: daha net söz dizimi, kalıtım için `extends` / `super`, metotlar varsayılan olarak non-enumerable, sınıf gövdeleri **strict mode**'da çalışır ve — en önemlisi — bir sınıfı `new` olmadan çağırmak **fırlatır** (constructor fonksiyonu yanlış `this` ile sessizce çalışır). Ödünleşim: söz dizimi şekeridir, bu yüzden hata ayıklarken prototype'ları anlamak hâlâ önemlidir. Altta ikisi de aynı prototype zincirini üretir."
+        },
+        {
+          "type": "true_false",
+          "statement": "Calling an ES6 class without the new keyword throws a TypeError.",
+          "statementTr": "Bir ES6 sınıfını new anahtar kelimesi olmadan çağırmak TypeError fırlatır.",
+          "answer": true,
+          "explanation": "Classes require new. An old constructor function called without new doesn't throw — it runs with this as undefined/global, a silent source of bugs the class form removes.",
+          "explanationTr": "Sınıflar new gerektirir. new olmadan çağrılan eski bir constructor fonksiyonu fırlatmaz — this undefined/global iken çalışır; class biçiminin kaldırdığı sessiz bir hata kaynağı."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What is true about ES6 classes vs ES5 constructor functions?",
+          "promptTr": "ES6 sınıfları vs ES5 constructor fonksiyonları hakkında doğru olan nedir?",
+          "options": [
+            { "text": "Classes are syntax sugar over the same prototype-based mechanism", "textTr": "Sınıflar, aynı prototype tabanlı mekanizma üzerine söz dizimi şekeridir", "correct": true },
+            { "text": "Classes use a completely different inheritance model than prototypes", "textTr": "Sınıflar prototype'lardan tamamen farklı bir kalıtım modeli kullanır" },
+            { "text": "Classes are interpreted, constructor functions are compiled", "textTr": "Sınıflar yorumlanır, constructor fonksiyonları derlenir" },
+            { "text": "Constructor functions support extends, classes do not", "textTr": "Constructor fonksiyonları extends destekler, sınıflar desteklemez" }
+          ],
+          "explanation": "Both end up on the prototype chain. class just adds cleaner syntax, strict mode, non-enumerable methods, super, and the new-required safety check.",
+          "explanationTr": "İkisi de prototype zincirinde son bulur. class yalnızca daha temiz söz dizimi, strict mode, non-enumerable metotlar, super ve new-zorunlu güvenlik kontrolü ekler."
+        },
+        {
+          "type": "challenge",
+          "question": "What are the benefits of using ES6 classes over ES5 constructor functions?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is the difference between ES6 classes and ES5 function constructors?"
+        }
+      ]
+    },
+    {
+      "slug": "freezing-extending-host-native",
+      "title": "Freezing, extending & object kinds",
+      "titleTr": "Dondurma, genişletme ve nesne türleri",
+      "position": 3,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Object.freeze vs const, monkey-patching, host vs native",
+          "titleTr": "Object.freeze vs const, monkey-patch, host vs native",
+          "body": "**`const` vs `Object.freeze()`** protect different things. `const` freezes the **binding** — you can't reassign the variable — but the object it points to is still mutable. `Object.freeze()` freezes the **object's contents** — no adding, removing, or changing properties (shallow).\n\n```js\nconst o = { x: 1 };\no.x = 2;        // allowed — const only locks the binding\nObject.freeze(o);\no.x = 3;        // ignored (throws in strict mode)\n```\n\n**Extending built-ins** (`Array.prototype.myMethod = …`) is discouraged: a future language feature with the same name collides, all code in the page is affected, and `for…in` may suddenly enumerate your addition. Prefer standalone utilities or subclasses.\n\nFinally, two object categories: **native objects** are defined by the ECMAScript spec and exist everywhere (`Object`, `Array`, `Date`, `Math`, `Promise`). **Host objects** are supplied by the runtime environment — the browser (`window`, `document`, `fetch`, DOM nodes) or Node (`process`, `Buffer`). Native = language; host = environment.",
+          "bodyTr": "**`const` vs `Object.freeze()`** farklı şeyleri korur. `const`, **bağlamayı** dondurur — değişkeni yeniden atayamazsın — ama gösterdiği nesne hâlâ değiştirilebilir. `Object.freeze()`, **nesnenin içeriğini** dondurur — property ekleme, silme, değiştirme yok (sığ).\n\n```js\nconst o = { x: 1 };\no.x = 2;        // izinli — const yalnızca bağlamayı kilitler\nObject.freeze(o);\no.x = 3;        // yok sayılır (strict mode'da fırlatır)\n```\n\n**Built-in'leri genişletmek** (`Array.prototype.myMethod = …`) önerilmez: aynı adlı gelecekteki bir dil özelliği çakışır, sayfadaki tüm kod etkilenir ve `for…in` aniden eklediğini sayabilir. Bağımsız yardımcılar ya da alt sınıflar tercih et.\n\nSon olarak iki nesne kategorisi: **native nesneler** ECMAScript spec'iyle tanımlanır ve her yerde bulunur (`Object`, `Array`, `Date`, `Math`, `Promise`). **Host nesneleri** çalışma ortamı tarafından sağlanır — tarayıcı (`window`, `document`, `fetch`, DOM düğümleri) ya da Node (`process`, `Buffer`). Native = dil; host = ortam."
+        },
+        {
+          "type": "output_predict",
+          "prompt": "What does this log?",
+          "promptTr": "Bu ne yazdırır?",
+          "code": "const cfg = Object.freeze({ port: 80 });\ncfg.port = 9090;\nconsole.log(cfg.port);",
+          "options": [
+            { "text": "80", "textTr": "80", "correct": true },
+            { "text": "9090", "textTr": "9090" },
+            { "text": "undefined", "textTr": "undefined" },
+            { "text": "TypeError", "textTr": "TypeError" }
+          ],
+          "explanation": "Object.freeze makes properties unwritable; the assignment is silently ignored in sloppy mode (and throws in strict mode), so port stays 80. const alone would have allowed the change.",
+          "explanationTr": "Object.freeze property'leri yazılamaz yapar; atama sloppy mode'da sessizce yok sayılır (strict mode'da fırlatır), bu yüzden port 80 kalır. Tek başına const bu değişikliğe izin verirdi."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Which is a host object rather than a native object?",
+          "promptTr": "Hangisi native değil host nesnesidir?",
+          "options": [
+            { "text": "document", "textTr": "document", "correct": true },
+            { "text": "Array", "textTr": "Array" },
+            { "text": "Math", "textTr": "Math" },
+            { "text": "Promise", "textTr": "Promise" }
+          ],
+          "explanation": "document is provided by the browser environment (a host object). Array, Math and Promise are native — defined by the ECMAScript language spec and present in any runtime.",
+          "explanationTr": "document tarayıcı ortamı tarafından sağlanır (host nesnesi). Array, Math ve Promise native'dir — ECMAScript dil spec'iyle tanımlı ve her runtime'da vardır."
+        },
+        {
+          "type": "challenge",
+          "question": "Explain the difference between Object.freeze() vs const"
+        },
+        {
+          "type": "challenge",
+          "question": "Why is extending built-in JavaScript objects not a good idea?"
+        },
+        {
+          "type": "challenge",
+          "question": "What's the difference between Host objects and Native objects?"
+        }
+      ]
+    },
+    {
+      "slug": "references-and-iteration",
+      "title": "References & iteration",
+      "titleTr": "Referanslar ve iterasyon",
+      "position": 4,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Copies vs references, and how to loop",
+          "titleTr": "Kopyalar vs referanslar ve nasıl döngü kurulur",
+          "body": "JavaScript is **pass by value** — but for objects, the *value* passed is a **reference** (the address), so it behaves like \"pass by reference\" for mutation:\n\n```js\nfunction bump(o) { o.n++; }      // mutates the shared object\nlet obj = { n: 1 };\nbump(obj); obj.n; // 2\n\nfunction reset(o) { o = { n: 0 }; } // reassigns the local copy only\nreset(obj); obj.n; // still 2\n```\n\nPrimitives are copied by value; objects share a reference until you copy them (spread `{...o}`, `structuredClone`).\n\n**Iterating** — pick the right construct:\n\n- Array items, in order: `for…of`, `forEach`, or `for (let i…)`.\n- Object's own keys: `for…in` (⚠ also walks inherited enumerable keys — guard with `hasOwnProperty`), or better `Object.keys/values/entries(obj)`.\n- `for…of` works on any **iterable** (arrays, strings, Maps, Sets) but *not* plain objects directly.",
+          "bodyTr": "JavaScript **pass by value**'dur — ama nesneler için geçilen *değer* bir **referanstır** (adres), bu yüzden mutasyonda \"pass by reference\" gibi davranır:\n\n```js\nfunction bump(o) { o.n++; }      // paylaşılan nesneyi değiştirir\nlet obj = { n: 1 };\nbump(obj); obj.n; // 2\n\nfunction reset(o) { o = { n: 0 }; } // yalnızca yerel kopyayı yeniden atar\nreset(obj); obj.n; // hâlâ 2\n```\n\nPrimitifler değere göre kopyalanır; nesneler sen kopyalayana dek (spread `{...o}`, `structuredClone`) bir referansı paylaşır.\n\n**İterasyon** — doğru yapıyı seç:\n\n- Dizi öğeleri, sırayla: `for…of`, `forEach` ya da `for (let i…)`.\n- Nesnenin kendi anahtarları: `for…in` (⚠ miras alınan enumerable anahtarları da gezer — `hasOwnProperty` ile koru) ya da daha iyisi `Object.keys/values/entries(obj)`.\n- `for…of` herhangi bir **iterable**'da çalışır (diziler, string'ler, Map'ler, Set'ler) ama düz nesnelerde doğrudan *çalışmaz*."
+        },
+        {
+          "type": "true_false",
+          "statement": "Reassigning a parameter inside a function (o = {...}) changes the caller's variable.",
+          "statementTr": "Bir fonksiyon içinde parametreyi yeniden atamak (o = {...}) çağıranın değişkenini değiştirir.",
+          "answer": false,
+          "explanation": "Reassignment only rebinds the local parameter. The caller still points at the original object. Mutating the object's properties, however, is visible to the caller.",
+          "explanationTr": "Yeniden atama yalnızca yerel parametreyi yeniden bağlar. Çağıran hâlâ orijinal nesneyi gösterir. Ancak nesnenin property'lerini değiştirmek çağıran tarafından görülür."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What's the safest way to loop over a plain object's own keys?",
+          "promptTr": "Düz bir nesnenin kendi anahtarlarında döngü kurmanın en güvenli yolu nedir?",
+          "options": [
+            { "text": "Object.keys(obj).forEach(...)", "textTr": "Object.keys(obj).forEach(...)", "correct": true },
+            { "text": "for (const k of obj)", "textTr": "for (const k of obj)" },
+            { "text": "obj.forEach(...)", "textTr": "obj.forEach(...)" },
+            { "text": "for…in without any guard", "textTr": "Hiç koruma olmadan for…in" }
+          ],
+          "explanation": "Object.keys returns only own enumerable keys, avoiding inherited ones. for…of and forEach don't work on plain objects; bare for…in can leak inherited keys.",
+          "explanationTr": "Object.keys yalnızca kendi enumerable anahtarlarını döndürür, miras alınanlardan kaçınır. for…of ve forEach düz nesnelerde çalışmaz; çıplak for…in miras anahtarları sızdırabilir."
+        },
+        {
+          "type": "challenge",
+          "question": "What is the difference between pass by value and pass by reference in JavaScript?"
+        },
+        {
+          "type": "challenge",
+          "question": "What language constructions do you use for iterating over object properties and array items?"
+        }
+      ]
+    }
+  ]
+}

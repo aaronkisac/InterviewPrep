@@ -1,0 +1,152 @@
+{
+  "topic": "javascript",
+  "slug": "performance-memory-engine",
+  "title": "Performance, Memory & Engine",
+  "titleTr": "Performans, Bellek ve Motor",
+  "section": "advanced",
+  "position": 11,
+  "lessons": [
+    {
+      "slug": "memoization-and-weak-collections",
+      "title": "Memoization & weak collections",
+      "titleTr": "Memoization ve weak koleksiyonlar",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Caching results and GC-friendly maps",
+          "titleTr": "Sonuçları önbellekleme ve GC-dostu map'ler",
+          "body": "**Memoization** caches a function's results by its arguments, so repeated calls with the same input return instantly instead of recomputing:\n\n```js\nfunction memoize(fn) {\n  const cache = new Map();\n  return (x) => {\n    if (cache.has(x)) return cache.get(x);\n    const r = fn(x);\n    cache.set(x, r);\n    return r;\n  };\n}\n```\n\nIt's a classic closure + cache pattern, ideal for pure, expensive functions.\n\n**`Map` vs `WeakMap`**: a `Map` holds any key and keeps strong references — entries live until you delete them or the Map dies. A **`WeakMap`** takes only **objects** as keys and holds them **weakly**: if nothing else references a key object, it can be garbage-collected and its entry vanishes automatically. `WeakMap` isn't iterable and has no `size` — by design. Use it for metadata keyed by an object (private data, caches tied to a DOM node) where you don't want to cause a leak by pinning the object alive.",
+          "bodyTr": "**Memoization**, bir fonksiyonun sonuçlarını argümanlarına göre önbelleğe alır; böylece aynı girdiyle tekrarlanan çağrılar yeniden hesaplamak yerine anında döner:\n\n```js\nfunction memoize(fn) {\n  const cache = new Map();\n  return (x) => {\n    if (cache.has(x)) return cache.get(x);\n    const r = fn(x);\n    cache.set(x, r);\n    return r;\n  };\n}\n```\n\nKlasik bir closure + cache desenidir; saf, pahalı fonksiyonlar için idealdir.\n\n**`Map` vs `WeakMap`**: bir `Map` herhangi bir anahtarı tutar ve güçlü referanslar saklar — girdiler sen silene ya da Map ölene dek yaşar. Bir **`WeakMap`** yalnızca **nesneleri** anahtar olarak alır ve onları **zayıf** tutar: bir anahtar nesneye başka hiçbir şey referans vermiyorsa, çöp toplanabilir ve girdisi otomatik kaybolur. `WeakMap` iterable değildir ve `size`'ı yoktur — tasarım gereği. Onu, nesneyi canlı tutarak sızıntıya yol açmak istemediğin, bir nesneye anahtarlanmış metadata için kullan (özel veri, bir DOM düğümüne bağlı cache'ler)."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Why choose a WeakMap over a Map for caching data tied to DOM nodes?",
+          "promptTr": "DOM düğümlerine bağlı veriyi önbelleklemek için neden Map yerine WeakMap seçilir?",
+          "options": [
+            { "text": "When a node is removed and no longer referenced, its WeakMap entry is garbage-collected automatically — no leak", "textTr": "Bir düğüm kaldırılıp artık referans almadığında, WeakMap girdisi otomatik çöp toplanır — sızıntı yok", "correct": true },
+            { "text": "WeakMap lookups are always O(1) while Map is O(n)", "textTr": "WeakMap aramaları her zaman O(1), Map ise O(n)" },
+            { "text": "WeakMap can be iterated more easily", "textTr": "WeakMap daha kolay iterate edilir" },
+            { "text": "WeakMap accepts primitive keys too", "textTr": "WeakMap primitif anahtarları da kabul eder" }
+          ],
+          "explanation": "WeakMap holds keys weakly, so removed nodes (with no other references) get collected along with their entries — a Map would keep them alive forever, leaking memory.",
+          "explanationTr": "WeakMap anahtarları zayıf tutar, bu yüzden kaldırılan düğümler (başka referansı olmayan) girdileriyle birlikte toplanır — bir Map onları sonsuza dek canlı tutup bellek sızdırırdı."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Return the cached result if we've computed this input before",
+          "promptTr": "Bu girdiyi daha önce hesapladıysak önbellekteki sonucu döndür",
+          "code": "if (cache.___(x)) return cache.get(x);",
+          "answers": ["has"],
+          "distractors": ["get", "includes", "contains"],
+          "explanation": "Map.has(key) checks existence without conflating a cached undefined/0/false result with a miss — safer than relying on get() returning a truthy value.",
+          "explanationTr": "Map.has(key), varlığı kontrol eder; önbellekteki undefined/0/false bir sonucu bir 'miss' ile karıştırmaz — get()'in truthy dönmesine güvenmekten daha güvenli."
+        },
+        {
+          "type": "challenge",
+          "question": "What is memoization and how do you implement it?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is the difference between Map and WeakMap?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is a WeakRef and FinalizationRegistry in JavaScript?"
+        }
+      ]
+    },
+    {
+      "slug": "leaks-and-gc",
+      "title": "Memory leaks & garbage collection",
+      "titleTr": "Bellek sızıntıları ve çöp toplama",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "How memory is freed, and how it leaks",
+          "titleTr": "Bellek nasıl serbest bırakılır ve nasıl sızar",
+          "body": "JavaScript memory is managed automatically by a **garbage collector (GC)**. The modern algorithm is **mark-and-sweep**: starting from *roots* (global object, current call stack), the GC marks everything **reachable**; whatever it can't reach is unreachable and gets swept (freed). \"Reachable\" — not \"referenced\" — is the key: an object referenced only by other garbage is still collected.\n\nSo a **memory leak** in JS isn't unreferenced memory — it's memory that **stays reachable but is no longer needed**. Common causes:\n\n- **Lingering globals** — accidental globals that never go out of scope.\n- **Forgotten timers/intervals** — `setInterval` callbacks keep their closures (and everything they capture) alive.\n- **Detached DOM nodes** — JS still holding a reference to a removed element.\n- **Unremoved event listeners** — keep their handler closures alive.\n- **Closures and caches that grow unbounded** (e.g. a Map that's never pruned).\n\nFix by clearing timers/listeners, nulling references when done, and using `WeakMap`/`WeakSet` for object-keyed caches.",
+          "bodyTr": "JavaScript belleği bir **çöp toplayıcı (GC)** tarafından otomatik yönetilir. Modern algoritma **mark-and-sweep**'tir: *kök*lerden (global nesne, mevcut çağrı yığını) başlayarak GC, **erişilebilir** her şeyi işaretler; erişemediği her şey erişilemezdir ve süpürülür (serbest bırakılır). \"Erişilebilir\" — \"referanslı\" değil — anahtardır: yalnızca başka çöpler tarafından referans alınan bir nesne yine toplanır.\n\nYani JS'te bir **bellek sızıntısı**, referanssız bellek değildir — **erişilebilir kalan ama artık gerekmeyen** bellektir. Yaygın sebepler:\n\n- **Kalıcı global'ler** — scope'tan asla çıkmayan kazara global'ler.\n- **Unutulan timer/interval'ler** — `setInterval` callback'leri closure'larını (ve yakaladıkları her şeyi) canlı tutar.\n- **Ayrılmış (detached) DOM düğümleri** — JS'in kaldırılmış bir öğeye referansı sürmesi.\n- **Kaldırılmayan event listener'lar** — handler closure'larını canlı tutar.\n- **Sınırsız büyüyen closure ve cache'ler** (örn. asla budanmayan bir Map).\n\nTimer/listener'ları temizleyerek, iş bitince referansları null'layarak ve nesne-anahtarlı cache'ler için `WeakMap`/`WeakSet` kullanarak düzelt."
+        },
+        {
+          "type": "true_false",
+          "statement": "JavaScript's garbage collector frees an object as soon as no code references it directly by name.",
+          "statementTr": "JavaScript'in çöp toplayıcısı, bir nesneye hiçbir kod doğrudan adıyla referans vermediği anda onu serbest bırakır.",
+          "answer": false,
+          "explanation": "It frees objects that are unreachable from roots, not merely unnamed. An object still reachable through a timer, listener, or cache stays in memory — that's how leaks happen.",
+          "explanationTr": "Köklerden erişilemeyen nesneleri serbest bırakır, sadece adsız olanları değil. Bir timer, listener ya da cache üzerinden hâlâ erişilebilir bir nesne bellekte kalır — sızıntılar böyle olur."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Which is a common cause of memory leaks in JS apps?",
+          "promptTr": "JS uygulamalarında yaygın bir bellek sızıntısı sebebi hangisidir?",
+          "options": [
+            { "text": "A setInterval that's never cleared, keeping its closure alive", "textTr": "Asla temizlenmeyen, closure'ını canlı tutan bir setInterval", "correct": true },
+            { "text": "Using const instead of let", "textTr": "let yerine const kullanmak" },
+            { "text": "Returning early from a function", "textTr": "Bir fonksiyondan erken dönmek" },
+            { "text": "Calling Array.map", "textTr": "Array.map çağırmak" }
+          ],
+          "explanation": "Uncleared timers, forgotten listeners, detached DOM references, and unbounded caches keep memory reachable. clearInterval / removeEventListener and weak collections prevent it.",
+          "explanationTr": "Temizlenmeyen timer'lar, unutulan listener'lar, ayrılmış DOM referansları ve sınırsız cache'ler belleği erişilebilir tutar. clearInterval / removeEventListener ve weak koleksiyonlar bunu önler."
+        },
+        {
+          "type": "challenge",
+          "question": "What are common causes of memory leaks in JavaScript applications?"
+        },
+        {
+          "type": "challenge",
+          "question": "How does garbage collection work in JavaScript?"
+        }
+      ]
+    },
+    {
+      "slug": "engine-optimisation",
+      "title": "Engine optimisation: perf, TCO, V8",
+      "titleTr": "Motor optimizasyonu: perf, TCO, V8",
+      "position": 3,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Writing code the engine can optimise",
+          "titleTr": "Motorun optimize edebileceği kod yazmak",
+          "body": "Engines like **V8** compile hot JavaScript to machine code and optimise aggressively. Two internal tricks:\n\n- **Hidden classes (shapes)** — objects with the *same properties added in the same order* share an internal class, letting V8 access properties by fixed offset instead of a hash lookup. Adding properties in different orders, or deleting them, creates new shapes and **deoptimises**. Lesson: initialise all properties in the constructor, in a consistent order.\n- **Inline caching** — V8 remembers the shape seen at a property-access site and fast-paths future accesses of the same shape. Polymorphic sites (many shapes) lose this speedup.\n\n**Tail call optimisation (TCO)** lets a function call in *tail position* (the very last action) reuse the current stack frame instead of adding a new one — making deep recursion run in constant stack space. It's in the ES2015 spec but, in practice, only Safari/JavaScriptCore implements it; V8 does not, so deep recursion still risks stack overflow.\n\nGeneral **performance techniques**: avoid layout thrash (batch DOM reads/writes), debounce/throttle hot events, prefer `requestAnimationFrame` for animation, minimise allocations in hot loops, use Web Workers for heavy CPU work, keep object shapes stable, and measure before optimising.",
+          "bodyTr": "**V8** gibi motorlar sıcak JavaScript'i makine koduna derler ve agresif optimize eder. İki içsel hile:\n\n- **Hidden class'lar (shape'ler)** — *aynı property'leri aynı sırada eklenen* nesneler bir iç sınıf paylaşır; bu, V8'in property'lere hash araması yerine sabit offset'le erişmesini sağlar. Property'leri farklı sırayla eklemek ya da silmek yeni shape'ler oluşturur ve **deoptimize eder**. Ders: tüm property'leri constructor'da, tutarlı bir sırada ilkle.\n- **Inline caching** — V8 bir property-erişim noktasında görülen shape'i hatırlar ve aynı shape'in gelecekteki erişimlerini hızlandırır. Polimorfik noktalar (çok shape) bu hızlanmayı kaybeder.\n\n**Tail call optimisation (TCO)**, *tail pozisyonundaki* (en son eylem) bir fonksiyon çağrısının yeni bir yığın çerçevesi eklemek yerine mevcut çerçeveyi yeniden kullanmasını sağlar — derin özyinelemenin sabit yığın alanında çalışmasını mümkün kılar. ES2015 spec'inde vardır ama pratikte yalnızca Safari/JavaScriptCore uygular; V8 uygulamaz, bu yüzden derin özyineleme hâlâ stack overflow riski taşır.\n\nGenel **performans teknikleri**: layout thrash'ten kaçın (DOM okuma/yazmalarını topla), sıcak event'leri debounce/throttle et, animasyon için `requestAnimationFrame` tercih et, sıcak döngülerde tahsisatları azalt, ağır CPU işi için Web Worker kullan, nesne shape'lerini sabit tut ve optimize etmeden önce ölç."
+        },
+        {
+          "type": "true_false",
+          "statement": "Adding the same properties in a consistent order helps V8 reuse hidden classes for faster property access.",
+          "statementTr": "Aynı property'leri tutarlı bir sırada eklemek, V8'in daha hızlı property erişimi için hidden class'ları yeniden kullanmasına yardımcı olur.",
+          "answer": true,
+          "explanation": "Consistent shapes let V8 access properties by fixed offset and keep inline caches monomorphic. Varying property order/structure spawns new hidden classes and deoptimises.",
+          "explanationTr": "Tutarlı shape'ler V8'in property'lere sabit offset'le erişmesini ve inline cache'leri monomorfik tutmasını sağlar. Değişen property sırası/yapısı yeni hidden class'lar üretip deoptimize eder."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What is the real-world status of tail call optimisation in JavaScript?",
+          "promptTr": "JavaScript'te tail call optimisation'ın gerçek dünyadaki durumu nedir?",
+          "options": [
+            { "text": "Specified in ES2015 but only implemented by Safari/JavaScriptCore, not V8", "textTr": "ES2015'te tanımlı ama yalnızca Safari/JavaScriptCore uygular, V8 uygulamaz", "correct": true },
+            { "text": "Implemented everywhere, so deep recursion never overflows", "textTr": "Her yerde uygulanır, bu yüzden derin özyineleme asla taşmaz" },
+            { "text": "Removed from the language entirely", "textTr": "Dilden tamamen kaldırıldı" },
+            { "text": "Only available in Node, never in browsers", "textTr": "Yalnızca Node'da, asla tarayıcılarda değil" }
+          ],
+          "explanation": "TCO is in the spec but adoption stalled — JavaScriptCore (Safari) supports it; V8 (Chrome/Node) does not. So deep recursion can still blow the stack in most environments.",
+          "explanationTr": "TCO spec'te var ama benimsenme durdu — JavaScriptCore (Safari) destekler; V8 (Chrome/Node) desteklemez. Yani çoğu ortamda derin özyineleme hâlâ yığını patlatabilir."
+        },
+        {
+          "type": "challenge",
+          "question": "What are common JavaScript performance optimisation techniques?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is tail call optimisation (TCO) in JavaScript?"
+        },
+        {
+          "type": "challenge",
+          "question": "Explain the V8 engine's hidden classes and inline caching optimisations."
+        }
+      ]
+    }
+  ]
+}

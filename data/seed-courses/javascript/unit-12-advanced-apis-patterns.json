@@ -1,0 +1,246 @@
+{
+  "topic": "javascript",
+  "slug": "advanced-apis-patterns",
+  "title": "Advanced APIs, Patterns & Algorithms",
+  "titleTr": "İleri API'ler, Desenler ve Algoritmalar",
+  "section": "interview",
+  "position": 12,
+  "lessons": [
+    {
+      "slug": "proxy-and-reflect",
+      "title": "Proxy & Reflect",
+      "titleTr": "Proxy ve Reflect",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Intercepting operations on objects",
+          "titleTr": "Nesnelerdeki işlemleri yakalamak",
+          "body": "A **`Proxy`** wraps an object and lets you intercept fundamental operations via **traps** — `get`, `set`, `has`, `deleteProperty`, `apply`, and more:\n\n```js\nconst safe = new Proxy(target, {\n  get(obj, key) {\n    if (!(key in obj)) throw new Error(`No ${String(key)}`);\n    return obj[key];\n  },\n});\n```\n\nUse cases: validation, reactive state (Vue 3's reactivity is built on Proxy), logging/auditing, default values, negative array indices, and access control.\n\nThe **`Reflect`** API provides the *default* implementations of those same operations as plain functions: `Reflect.get(obj, key)`, `Reflect.set`, `Reflect.has`, `Reflect.ownKeys`. It complements Proxy: inside a trap you call the matching `Reflect` method to perform the original behavior correctly (including the right `receiver` for getters/setters), then add your logic around it.\n\n```js\nget(obj, key, receiver) {\n  console.log(\"read\", key);\n  return Reflect.get(obj, key, receiver); // default behavior\n}\n```\n\nProxy = intercept; Reflect = the canonical default action to forward to.",
+          "bodyTr": "Bir **`Proxy`**, bir nesneyi sarar ve temel işlemleri **trap**'ler aracılığıyla yakalamana izin verir — `get`, `set`, `has`, `deleteProperty`, `apply` ve fazlası:\n\n```js\nconst safe = new Proxy(target, {\n  get(obj, key) {\n    if (!(key in obj)) throw new Error(`No ${String(key)}`);\n    return obj[key];\n  },\n});\n```\n\nKullanım alanları: doğrulama, reaktif state (Vue 3'ün reaktivitesi Proxy üzerine kurulu), loglama/denetim, varsayılan değerler, negatif dizi indeksleri ve erişim kontrolü.\n\n**`Reflect`** API'si, aynı işlemlerin *varsayılan* uygulamalarını düz fonksiyonlar olarak sunar: `Reflect.get(obj, key)`, `Reflect.set`, `Reflect.has`, `Reflect.ownKeys`. Proxy'yi tamamlar: bir trap içinde, orijinal davranışı doğru gerçekleştirmek için (getter/setter'lar için doğru `receiver` dahil) eşleşen `Reflect` metodunu çağırır, sonra etrafına mantığını eklersin.\n\n```js\nget(obj, key, receiver) {\n  console.log(\"read\", key);\n  return Reflect.get(obj, key, receiver); // varsayılan davranış\n}\n```\n\nProxy = yakala; Reflect = iletilecek kanonik varsayılan eylem."
+        },
+        {
+          "type": "mcq",
+          "prompt": "How does Reflect complement Proxy?",
+          "promptTr": "Reflect, Proxy'yi nasıl tamamlar?",
+          "options": [
+            {
+              "text": "It provides the default operation a trap can forward to, with correct semantics like receiver",
+              "textTr": "Bir trap'in iletebileceği, receiver gibi doğru semantikli varsayılan işlemi sağlar",
+              "correct": true
+            },
+            {
+              "text": "It makes proxies run on a separate thread",
+              "textTr": "Proxy'lerin ayrı bir thread'de çalışmasını sağlar"
+            },
+            {
+              "text": "It replaces the need for proxies entirely",
+              "textTr": "Proxy ihtiyacını tamamen ortadan kaldırır"
+            },
+            {
+              "text": "It freezes the target object",
+              "textTr": "Hedef nesneyi dondurur"
+            }
+          ],
+          "explanation": "Reflect methods mirror the proxy traps one-to-one, giving a clean way to invoke the original behavior inside a trap (e.g. Reflect.get(obj, key, receiver)).",
+          "explanationTr": "Reflect metodları proxy trap'lerini birebir yansıtır; bir trap içinde orijinal davranışı çağırmanın temiz bir yolunu verir (örn. Reflect.get(obj, key, receiver))."
+        },
+        {
+          "type": "true_false",
+          "statement": "A Proxy can intercept property reads through a get trap.",
+          "statementTr": "Bir Proxy, property okumalarını bir get trap'i aracılığıyla yakalayabilir.",
+          "answer": true,
+          "explanation": "The get trap runs on every property read of the proxy, letting you validate, log, supply defaults, or transform the returned value before it reaches the caller.",
+          "explanationTr": "get trap'i, proxy'nin her property okumasında çalışır; döndürülen değer çağırana ulaşmadan önce doğrulama, loglama, varsayılan verme ya da dönüştürme yapmana izin verir."
+        },
+        {
+          "type": "challenge",
+          "question": "What is the Proxy object in JavaScript and what can it be used for?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is the Reflect API and how does it complement Proxy?"
+        }
+      ]
+    },
+    {
+      "slug": "patterns-and-workers",
+      "title": "Observer pattern & workers",
+      "titleTr": "Observer pattern ve worker'lar",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Decoupled events, and off-main-thread work",
+          "titleTr": "Ayrıştırılmış event'ler ve ana-thread-dışı iş",
+          "body": "The **Observer pattern** lets a *subject* notify many *observers* when something changes, without them being tightly coupled. Observers subscribe; the subject broadcasts:\n\n```js\nclass Subject {\n  #observers = new Set();\n  subscribe(fn) { this.#observers.add(fn); return () => this.#observers.delete(fn); }\n  notify(data) { this.#observers.forEach((fn) => fn(data)); }\n}\n```\n\nIt underpins event emitters, RxJS, and reactive UIs. (Pub/Sub is a close cousin with a broker in the middle.)\n\n**Web Workers** run JavaScript on a **separate thread**, so heavy CPU work (parsing, image processing, crypto) doesn't freeze the UI. They communicate with the main thread via `postMessage` and have **no DOM access**. Use them for long, pure computation.\n\n**Service Workers** are a special worker that sits between the page and the network as a **programmable proxy**. They intercept `fetch` requests and serve from a **Cache**, enabling **offline-first** apps, background sync, and push notifications. They're the backbone of PWAs. Both are off-main-thread, but Web Workers do *computation* while Service Workers do *network/caching*.",
+          "bodyTr": "**Observer pattern**, bir *subject*'in, sıkı bağlı olmadan, bir şey değiştiğinde birçok *observer*'a haber vermesini sağlar. Observer'lar abone olur; subject yayınlar:\n\n```js\nclass Subject {\n  #observers = new Set();\n  subscribe(fn) { this.#observers.add(fn); return () => this.#observers.delete(fn); }\n  notify(data) { this.#observers.forEach((fn) => fn(data)); }\n}\n```\n\nEvent emitter'ların, RxJS'in ve reaktif UI'ların temelini oluşturur. (Pub/Sub, ortada bir broker olan yakın bir akrabasıdır.)\n\n**Web Worker'lar**, JavaScript'i **ayrı bir thread**'de çalıştırır; böylece ağır CPU işi (ayrıştırma, görüntü işleme, kriptografi) UI'ı dondurmaz. Ana thread ile `postMessage` aracılığıyla iletişir ve **DOM erişimleri yoktur**. Onları uzun, saf hesaplama için kullan.\n\n**Service Worker'lar**, sayfa ile ağ arasında **programlanabilir bir proxy** olarak oturan özel bir worker'dır. `fetch` isteklerini yakalar ve bir **Cache**'ten sunar; **offline-first** uygulamaları, arka plan senkronizasyonu ve push bildirimleri mümkün kılar. PWA'ların belkemiğidir. İkisi de ana-thread-dışıdır ama Web Worker'lar *hesaplama* yaparken Service Worker'lar *ağ/önbellek* yapar."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What is the key capability of a Service Worker that a Web Worker lacks?",
+          "promptTr": "Bir Service Worker'ın, Web Worker'da olmayan temel yeteneği nedir?",
+          "options": [
+            {
+              "text": "Intercepting network requests and serving cached responses for offline use",
+              "textTr": "Ağ isteklerini yakalayıp offline kullanım için önbellekli yanıtlar sunmak",
+              "correct": true
+            },
+            {
+              "text": "Direct access to the DOM",
+              "textTr": "DOM'a doğrudan erişim"
+            },
+            {
+              "text": "Running synchronous code faster",
+              "textTr": "Senkron kodu daha hızlı çalıştırmak"
+            },
+            {
+              "text": "Blocking the main thread on purpose",
+              "textTr": "Ana thread'i kasten bloklamak"
+            }
+          ],
+          "explanation": "Service Workers act as a network proxy with a Cache API, enabling offline-first, background sync and push. Web Workers are for CPU work and can't intercept requests. Neither touches the DOM.",
+          "explanationTr": "Service Worker'lar, Cache API'li bir ağ proxy'si gibi davranır; offline-first, arka plan senkronu ve push sağlar. Web Worker'lar CPU işi içindir ve istekleri yakalayamaz. İkisi de DOM'a dokunmaz."
+        },
+        {
+          "type": "true_false",
+          "statement": "In the Observer pattern, observers subscribe to a subject that notifies them of changes.",
+          "statementTr": "Observer pattern'de observer'lar, kendilerine değişiklikleri bildiren bir subject'e abone olur.",
+          "answer": true,
+          "explanation": "The subject keeps a list of observers and calls them on change. This decouples the source of an event from the many parts that react to it.",
+          "explanationTr": "Subject, observer'ların bir listesini tutar ve değişimde onları çağırır. Bu, bir event'in kaynağını ona tepki veren birçok parçadan ayrıştırır."
+        },
+        {
+          "type": "challenge",
+          "question": "What is the Observer pattern and how do you implement it in JavaScript?"
+        },
+        {
+          "type": "challenge",
+          "question": "What are Web Workers and when should you use them?"
+        },
+        {
+          "type": "challenge",
+          "question": "What are Service Workers and how do they enable offline-first applications?"
+        }
+      ]
+    },
+    {
+      "slug": "platform-wasm-temporal",
+      "title": "Platform: WebAssembly & Temporal",
+      "titleTr": "Platform: WebAssembly ve Temporal",
+      "position": 3,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Near-native speed and a sane date API",
+          "titleTr": "Native'e yakın hız ve aklı başında bir tarih API'si",
+          "body": "**WebAssembly (Wasm)** is a low-level, binary instruction format that runs in the browser at **near-native speed**. It's a *compilation target*: languages like C, C++, Rust and Go compile to `.wasm` and run alongside JavaScript, which calls into them. It doesn't replace JS — it complements it for CPU-heavy tasks (games, video/image processing, crypto, emulators). JS handles the DOM and glue; Wasm does the number-crunching, sharing memory via typed arrays.\n\nThe **Temporal API** is a modern replacement for the famously broken `Date`. `Date`'s problems: it's mutable, months are 0-indexed, parsing is inconsistent, and time-zone handling is painful. Temporal fixes this with **immutable**, purpose-built types: `Temporal.PlainDate`, `PlainTime`, `PlainDateTime`, `ZonedDateTime`, `Duration`, `Instant`. They make time-zone-aware, unambiguous date math reliable.\n\n```js\nTemporal.PlainDate.from(\"2026-06-13\").add({ days: 30 });\n```\n\nIt was introduced to end the era of reaching for Moment.js/date-fns just to do correct date arithmetic.",
+          "bodyTr": "**WebAssembly (Wasm)**, tarayıcıda **native'e yakın hızda** çalışan, düşük seviyeli, ikili bir komut formatıdır. Bir *derleme hedefidir*: C, C++, Rust ve Go gibi diller `.wasm`'a derlenir ve JavaScript'in yanında çalışır; JS onları çağırır. JS'in yerini almaz — CPU-ağırlıklı görevler (oyunlar, video/görüntü işleme, kriptografi, emülatörler) için onu tamamlar. JS DOM'u ve yapıştırmayı halleder; Wasm sayı hesaplamayı yapar, belleği typed array'ler aracılığıyla paylaşır.\n\n**Temporal API**, ünlü bozuk `Date`'in modern yerine geçenidir. `Date`'in sorunları: değiştirilebilir, aylar 0-indeksli, ayrıştırma tutarsız ve zaman dilimi yönetimi acı verici. Temporal bunu **değişmez**, amaca özel tiplerle düzeltir: `Temporal.PlainDate`, `PlainTime`, `PlainDateTime`, `ZonedDateTime`, `Duration`, `Instant`. Zaman-dilimi-duyarlı, belirsizlik içermeyen tarih matematiğini güvenilir kılar.\n\n```js\nTemporal.PlainDate.from(\"2026-06-13\").add({ days: 30 });\n```\n\nDoğru tarih aritmetiği yapmak için Moment.js/date-fns'e başvurma çağını bitirmek için getirildi."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What best describes WebAssembly's relationship to JavaScript?",
+          "promptTr": "WebAssembly'nin JavaScript'le ilişkisini en iyi hangisi açıklar?",
+          "options": [
+            {
+              "text": "A near-native compilation target that complements JS for CPU-heavy work",
+              "textTr": "CPU-ağırlıklı iş için JS'i tamamlayan, native'e yakın bir derleme hedefi",
+              "correct": true
+            },
+            {
+              "text": "A replacement that makes JavaScript obsolete",
+              "textTr": "JavaScript'i geçersiz kılan bir yerine geçen"
+            },
+            {
+              "text": "A new syntax for writing JavaScript",
+              "textTr": "JavaScript yazmak için yeni bir söz dizimi"
+            },
+            {
+              "text": "A CSS feature for animations",
+              "textTr": "Animasyonlar için bir CSS özelliği"
+            }
+          ],
+          "explanation": "Wasm runs compiled C/C++/Rust at near-native speed and interoperates with JS, which still drives the DOM. They work together; Wasm doesn't replace JS.",
+          "explanationTr": "Wasm, derlenmiş C/C++/Rust'ı native'e yakın hızda çalıştırır ve hâlâ DOM'u süren JS'le birlikte çalışır. Birlikte çalışırlar; Wasm JS'in yerini almaz."
+        },
+        {
+          "type": "true_false",
+          "statement": "The Temporal API was introduced because the legacy Date object is mutable and error-prone, especially for time zones.",
+          "statementTr": "Temporal API, eski Date nesnesi değiştirilebilir ve özellikle zaman dilimlerinde hataya açık olduğu için getirildi.",
+          "answer": true,
+          "explanation": "Temporal provides immutable, well-defined types for dates, times, durations and zoned datetimes — fixing Date's mutability, 0-indexed months and brittle time-zone handling.",
+          "explanationTr": "Temporal; tarihler, zamanlar, süreler ve zoned datetime'lar için değişmez, iyi tanımlı tipler sunar — Date'in değiştirilebilirliğini, 0-indeksli aylarını ve kırılgan zaman dilimi yönetimini düzeltir."
+        },
+        {
+          "type": "challenge",
+          "question": "What is WebAssembly and how does it relate to JavaScript?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is the JavaScript Temporal API and why was it introduced?"
+        }
+      ]
+    },
+    {
+      "slug": "algorithms-and-errors",
+      "title": "Algorithms & error handling",
+      "titleTr": "Algoritmalar ve hata yönetimi",
+      "position": 4,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Searching arrays, and throwing errors right",
+          "titleTr": "Dizilerde arama ve hataları doğru fırlatmak",
+          "body": "**Linear search** scans an array element by element until it finds the target — `O(n)`. It works on any array, sorted or not:\n\n```js\nfunction linear(arr, x) {\n  for (let i = 0; i < arr.length; i++) if (arr[i] === x) return i;\n  return -1;\n}\n```\n\n**Binary search** is much faster — `O(log n)` — but requires a **sorted** array. It repeatedly halves the search range by comparing the middle element:\n\n```js\nfunction binary(arr, x) {\n  let lo = 0, hi = arr.length - 1;\n  while (lo <= hi) {\n    const mid = (lo + hi) >> 1;\n    if (arr[mid] === x) return mid;\n    if (arr[mid] < x) lo = mid + 1; else hi = mid - 1;\n  }\n  return -1;\n}\n```\n\nFinally, **`throw Error('msg')` vs `throw new Error('msg')`**: they behave **identically**. The `Error` constructor returns a fresh error object whether or not you use `new`, so both throw a proper `Error` with a stack trace. Convention (and clarity, and linters) favour `new Error(...)`. The thing to actually avoid is throwing a plain string (`throw 'oops'`) — that loses the stack trace and `.message`.",
+          "bodyTr": "**Linear search**, hedefi bulana dek diziyi eleman eleman tarar — `O(n)`. Sıralı olsun olmasın her dizide çalışır:\n\n```js\nfunction linear(arr, x) {\n  for (let i = 0; i < arr.length; i++) if (arr[i] === x) return i;\n  return -1;\n}\n```\n\n**Binary search** çok daha hızlıdır — `O(log n)` — ama **sıralı** bir dizi gerektirir. Orta elemanı karşılaştırarak arama aralığını tekrar tekrar yarıya böler:\n\n```js\nfunction binary(arr, x) {\n  let lo = 0, hi = arr.length - 1;\n  while (lo <= hi) {\n    const mid = (lo + hi) >> 1;\n    if (arr[mid] === x) return mid;\n    if (arr[mid] < x) lo = mid + 1; else hi = mid - 1;\n  }\n  return -1;\n}\n```\n\nSon olarak, **`throw Error('msg')` vs `throw new Error('msg')`**: **aynı** davranırlar. `Error` constructor'ı, `new` kullansan da kullanmasan da taze bir hata nesnesi döndürür, bu yüzden ikisi de stack trace'li düzgün bir `Error` fırlatır. Konvansiyon (ve netlik ve linter'lar) `new Error(...)`'ı tercih eder. Asıl kaçınılması gereken, düz bir string fırlatmaktır (`throw 'oops'`) — bu stack trace'i ve `.message`'ı kaybeder."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Why can binary search be O(log n) while linear search is O(n)?",
+          "promptTr": "Binary search neden O(log n) iken linear search O(n)'dir?",
+          "options": [
+            {
+              "text": "Binary search halves the remaining range each step, but needs a sorted array",
+              "textTr": "Binary search her adımda kalan aralığı yarılar, ama sıralı bir dizi gerektirir",
+              "correct": true
+            },
+            {
+              "text": "Binary search uses less memory",
+              "textTr": "Binary search daha az bellek kullanır"
+            },
+            {
+              "text": "Linear search re-sorts the array each time",
+              "textTr": "Linear search her seferinde diziyi yeniden sıralar"
+            },
+            {
+              "text": "Binary search works on any array regardless of order",
+              "textTr": "Binary search sıradan bağımsız her dizide çalışır"
+            }
+          ],
+          "explanation": "By comparing the midpoint of a sorted range, binary search discards half the candidates each iteration → log n steps. Linear search must check elements one by one → n steps.",
+          "explanationTr": "Sıralı bir aralığın orta noktasını karşılaştırarak binary search her iterasyonda adayların yarısını eler → log n adım. Linear search elemanları tek tek kontrol etmeli → n adım."
+        },
+        {
+          "type": "true_false",
+          "statement": "throw Error('x') and throw new Error('x') behave the same, and both are better than throwing a plain string.",
+          "statementTr": "throw Error('x') ve throw new Error('x') aynı davranır ve ikisi de düz string fırlatmaktan iyidir.",
+          "answer": true,
+          "explanation": "Error() works with or without new (it returns an error object either way). Both give a stack trace and .message; throwing a string loses both, so always throw an Error.",
+          "explanationTr": "Error(), new'li ya da new'siz çalışır (her iki durumda bir hata nesnesi döndürür). İkisi de stack trace ve .message verir; string fırlatmak ikisini de kaybeder, bu yüzden her zaman bir Error fırlat."
+        },
+        {
+          "type": "challenge",
+          "question": "What is a linear search algorithm and how do you implement it?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is a binary search algorithm and how does it work?"
+        },
+        {
+          "type": "challenge",
+          "question": "What's the difference between throw Error('msg') vs throw new Error('msg')?"
+        }
+      ]
+    }
+  ]
+}

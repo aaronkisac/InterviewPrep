@@ -1,0 +1,145 @@
+{
+  "topic": "javascript",
+  "slug": "values-types",
+  "title": "Values, Types & Special Values",
+  "titleTr": "Değerler, Tipler ve Özel Değerler",
+  "section": "foundations",
+  "position": 1,
+  "lessons": [
+    {
+      "slug": "values-and-objects",
+      "title": "Values, types & objects",
+      "titleTr": "Değerler, tipler ve nesneler",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Primitives vs objects",
+          "titleTr": "Primitifler ve nesneler",
+          "body": "JavaScript values come in two families. **Primitives** are immutable, compared by value: `string`, `number`, `boolean`, `null`, `undefined`, `symbol`, `bigint`. **Objects** are everything else — plain objects, arrays, functions, dates — and are compared by *reference*.\n\n```js\nlet a = 10;        // number (primitive)\nlet b = \"hi\";      // string (primitive)\nlet c = { x: 1 };  // object (reference)\nlet d = [1, 2, 3]; // object (an array is an object)\n```\n\nThe **object type** is the mutable, keyed collection at the heart of the language. Functions and arrays are specialised objects. JavaScript is *dynamically typed*: a variable doesn't have a type, the **value** it currently holds does — so the same variable can hold a number now and a string later.",
+          "bodyTr": "JavaScript değerleri iki aileye ayrılır. **Primitifler** değişmezdir ve değere göre karşılaştırılır: `string`, `number`, `boolean`, `null`, `undefined`, `symbol`, `bigint`. **Nesneler** ise geri kalan her şeydir — düz nesneler, diziler, fonksiyonlar, tarihler — ve *referansa* göre karşılaştırılır.\n\n```js\nlet a = 10;        // number (primitif)\nlet b = \"hi\";      // string (primitif)\nlet c = { x: 1 };  // nesne (referans)\nlet d = [1, 2, 3]; // nesne (dizi bir nesnedir)\n```\n\n**Nesne (object) tipi**, dilin merkezindeki değiştirilebilir, anahtarlı koleksiyondur. Fonksiyonlar ve diziler özelleşmiş nesnelerdir. JavaScript *dinamik tipli*dir: tip değişkene değil, o anda tuttuğu **değere** aittir — yani aynı değişken şimdi number, sonra string tutabilir."
+        },
+        {
+          "type": "mcq",
+          "prompt": "How are objects compared to each other?",
+          "promptTr": "Nesneler birbiriyle nasıl karşılaştırılır?",
+          "options": [
+            { "text": "By reference — two objects are equal only if they are the same instance", "textTr": "Referansa göre — iki nesne yalnızca aynı örnekse eşittir", "correct": true },
+            { "text": "By value — field by field, deeply", "textTr": "Değere göre — alan alan, derinlemesine" },
+            { "text": "By their JSON string", "textTr": "JSON string'lerine göre" },
+            { "text": "By the order they were created", "textTr": "Oluşturulma sıralarına göre" }
+          ],
+          "explanation": "{a:1} === {a:1} is false — different references. Primitives compare by value, so 1 === 1 is true. Deep equality needs a manual check or a library.",
+          "explanationTr": "{a:1} === {a:1} false'tur — farklı referanslar. Primitifler değere göre karşılaştırılır, bu yüzden 1 === 1 true'dur. Derin eşitlik elle kontrol ya da kütüphane gerektirir."
+        },
+        {
+          "type": "true_false",
+          "statement": "In JavaScript a variable has a fixed type that its value must match.",
+          "statementTr": "JavaScript'te bir değişkenin, değerinin uyması gereken sabit bir tipi vardır.",
+          "answer": false,
+          "explanation": "JavaScript is dynamically typed — types belong to values, not variables. The same binding can hold a number, then a string, then an object.",
+          "explanationTr": "JavaScript dinamik tiplidir — tipler değişkenlere değil değerlere aittir. Aynı bağlama önce number, sonra string, sonra nesne tutabilir."
+        },
+        {
+          "type": "challenge",
+          "question": "Explain Values and Types in JavaScript"
+        },
+        {
+          "type": "challenge",
+          "question": "What is the object type?"
+        }
+      ]
+    },
+    {
+      "slug": "typeof-and-arrays",
+      "title": "typeof & arrays",
+      "titleTr": "typeof ve diziler",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Inspecting types, and arrays as objects",
+          "titleTr": "Tipleri incelemek ve nesne olarak diziler",
+          "body": "The **`typeof`** operator returns a string naming a value's type:\n\n```js\ntypeof 10        // \"number\"\ntypeof \"hi\"      // \"string\"\ntypeof true      // \"boolean\"\ntypeof undefined // \"undefined\"\ntypeof function(){} // \"function\"\ntypeof {}        // \"object\"\ntypeof null      // \"object\"  ← famous historical bug\ntypeof []        // \"object\"  ← arrays report as object\n```\n\nTwo gotchas to memorise: `typeof null` is `\"object\"` (a bug kept for backwards-compatibility), and arrays report `\"object\"` too. To detect an array use **`Array.isArray(x)`**, not `typeof`.\n\nAn **array** is an ordered, integer-indexed object with a `length` and many built-in methods (`map`, `filter`, `reduce`, `push`…). It can hold mixed types and grow or shrink at runtime.",
+          "bodyTr": "**`typeof`** operatörü, bir değerin tipini adlandıran bir string döndürür:\n\n```js\ntypeof 10        // \"number\"\ntypeof \"hi\"      // \"string\"\ntypeof true      // \"boolean\"\ntypeof undefined // \"undefined\"\ntypeof function(){} // \"function\"\ntypeof {}        // \"object\"\ntypeof null      // \"object\"  ← meşhur tarihsel hata\ntypeof []        // \"object\"  ← diziler object olarak görünür\n```\n\nEzberlenecek iki tuzak: `typeof null` `\"object\"`tir (geriye dönük uyumluluk için korunan bir hata) ve diziler de `\"object\"` der. Bir diziyi tespit etmek için `typeof` değil **`Array.isArray(x)`** kullan.\n\nBir **dizi**, `length`'i ve birçok yerleşik metodu (`map`, `filter`, `reduce`, `push`…) olan, sıralı, tamsayı-indeksli bir nesnedir. Karışık tipler tutabilir, çalışma zamanında büyüyüp küçülebilir."
+        },
+        {
+          "type": "output_predict",
+          "prompt": "What does this log?",
+          "promptTr": "Bu ne yazdırır?",
+          "code": "console.log(typeof null, Array.isArray([1, 2]), typeof []);",
+          "options": [
+            { "text": "object true object", "textTr": "object true object", "correct": true },
+            { "text": "null false array", "textTr": "null false array" },
+            { "text": "object true array", "textTr": "object true array" },
+            { "text": "null true object", "textTr": "null true object" }
+          ],
+          "explanation": "typeof null is \"object\" (historic bug), arrays are objects so typeof [] is \"object\", and Array.isArray is the correct way to detect an array.",
+          "explanationTr": "typeof null \"object\"tir (tarihsel hata), diziler nesnedir bu yüzden typeof [] \"object\"tir ve Array.isArray bir diziyi tespit etmenin doğru yoludur."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Reliably check whether value is an array",
+          "promptTr": "value'nun dizi olup olmadığını güvenilir şekilde kontrol et",
+          "code": "if (___(value)) {\n  value.forEach(doThing);\n}",
+          "answers": ["Array.isArray"],
+          "distractors": ["typeof", "isArray", "value.isArray"],
+          "explanation": "Array.isArray is the only reliable check — typeof returns \"object\" for arrays, and instanceof Array breaks across iframes/realms.",
+          "explanationTr": "Array.isArray tek güvenilir kontroldür — typeof diziler için \"object\" döner, instanceof Array ise iframe/realm sınırlarında bozulur."
+        },
+        {
+          "type": "challenge",
+          "question": "What is typeof operator?"
+        },
+        {
+          "type": "challenge",
+          "question": "Explain arrays in JavaScript"
+        }
+      ]
+    },
+    {
+      "slug": "null-undefined-not-defined",
+      "title": "null, undefined & not defined",
+      "titleTr": "null, undefined ve not defined",
+      "position": 3,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Three kinds of \"nothing\"",
+          "titleTr": "Üç çeşit \"hiçlik\"",
+          "body": "JavaScript has two empty values plus an error state people confuse with them:\n\n- **`undefined`** — the default: a declared variable with no value yet, a missing object property, a function with no `return`, or a missing argument. *The engine sets it.*\n- **`null`** — an intentional \"no value\", set by **you** to say \"empty on purpose\".\n- **not defined** — not a value at all. Referencing a name that was never declared throws a **`ReferenceError`**.\n\n```js\nlet a;            // a is undefined\nlet b = null;     // b is null (deliberate)\nconsole.log(c);   // ReferenceError: c is not defined\n```\n\nConvention: let the engine produce `undefined`; use `null` yourself to signal emptiness. And `typeof undefinedVar` is `\"undefined\"`, but `typeof neverDeclared` is *also* `\"undefined\"` — the one place `typeof` doesn't throw on an undeclared name.",
+          "bodyTr": "JavaScript'te iki boş değer, bir de bunlarla karıştırılan bir hata durumu vardır:\n\n- **`undefined`** — varsayılan: henüz değeri olmayan bir değişken, eksik bir nesne property'si, `return`'ü olmayan bir fonksiyon ya da eksik bir argüman. *Motor atar.*\n- **`null`** — bilinçli bir \"değer yok\"; \"kasten boş\" demek için **sen** atarsın.\n- **not defined** — bir değer bile değildir. Hiç tanımlanmamış bir adı referans almak **`ReferenceError`** fırlatır.\n\n```js\nlet a;            // a, undefined\nlet b = null;     // b, null (kasıtlı)\nconsole.log(c);   // ReferenceError: c is not defined\n```\n\nKonvansiyon: `undefined`'ı motor üretsin; boşluğu belirtmek için `null`'u sen kullan. Ayrıca `typeof undefinedVar` `\"undefined\"`tir, ama `typeof neverDeclared` *da* `\"undefined\"`tir — `typeof`'un tanımlanmamış bir adda fırlatmadığı tek yer."
+        },
+        {
+          "type": "true_false",
+          "statement": "Referencing a variable that was never declared returns undefined.",
+          "statementTr": "Hiç tanımlanmamış bir değişkeni referans almak undefined döndürür.",
+          "answer": false,
+          "explanation": "It throws a ReferenceError (\"x is not defined\"). A declared-but-unassigned variable is undefined; an undeclared name is a different thing entirely.",
+          "explanationTr": "ReferenceError fırlatır (\"x is not defined\"). Tanımlanmış ama atanmamış bir değişken undefined'dır; tanımlanmamış bir ad ise tamamen başka bir şeydir."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Which value should you assign yourself to mean \"intentionally empty\"?",
+          "promptTr": "\"Kasten boş\" demek için hangi değeri kendin atamalısın?",
+          "options": [
+            { "text": "null", "textTr": "null", "correct": true },
+            { "text": "undefined", "textTr": "undefined" },
+            { "text": "0", "textTr": "0" },
+            { "text": "NaN", "textTr": "NaN" }
+          ],
+          "explanation": "null is the conventional \"deliberate absence\". undefined is what the engine produces when something simply hasn't been set.",
+          "explanationTr": "null, geleneksel \"bilinçli yokluk\"tur. undefined ise bir şey henüz atanmadığında motorun ürettiğidir."
+        },
+        {
+          "type": "challenge",
+          "question": "Explain Null and Undefined in JavaScript"
+        },
+        {
+          "type": "challenge",
+          "question": "Explain the difference between undefined and not defined in JavaScript"
+        }
+      ]
+    }
+  ]
+}

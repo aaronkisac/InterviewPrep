@@ -1,0 +1,149 @@
+{
+  "topic": "javascript",
+  "slug": "async-javascript",
+  "title": "Asynchronous JavaScript",
+  "titleTr": "Asenkron JavaScript",
+  "section": "advanced",
+  "position": 7,
+  "lessons": [
+    {
+      "slug": "callbacks-promises-async",
+      "title": "Callbacks, promises & async/await",
+      "titleTr": "Callback'ler, promise'ler ve async/await",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Three generations of async code",
+          "titleTr": "Asenkron kodun üç kuşağı",
+          "body": "Async work (network, timers, files) finishes later, so JavaScript needs a way to run code *when it's done*. Three approaches evolved:\n\n- **Callbacks** — pass a function to run on completion. Nesting them deeply creates **callback hell**: a rightward-drifting pyramid that's hard to read and whose error handling must be repeated at every level. The cause is sequencing dependent async steps by nesting.\n- **Promises** — an object representing a future value in one of three states: *pending → fulfilled* or *rejected*. `.then()` chains steps flatly; `.catch()` handles errors once for the whole chain. `Promise.all` / `race` / `allSettled` coordinate many.\n- **async/await** — syntax over promises. `await` pauses an `async` function until a promise settles, so async code *reads* synchronously, with normal `try/catch`.\n\n```js\nasync function load() {\n  try {\n    const res = await fetch(url);\n    return await res.json();\n  } catch (e) { /* handle */ }\n}\n```\n\nAn `async` function always returns a promise; `await` only unwraps one.",
+          "bodyTr": "Asenkron iş (ağ, timer, dosya) sonra biter, bu yüzden JavaScript'in *iş bitince* kod çalıştıracak bir yola ihtiyacı var. Üç yaklaşım evrildi:\n\n- **Callback'ler** — tamamlanınca çalışacak bir fonksiyon geç. Derinlemesine iç içe koymak **callback hell** oluşturur: okunması zor, sağa kayan bir piramit; hata yönetimi her seviyede tekrarlanmalı. Sebep, bağımlı asenkron adımları iç içe koyarak sıralamaktır.\n- **Promise'ler** — gelecekteki bir değeri üç durumdan birinde temsil eden nesne: *pending → fulfilled* ya da *rejected*. `.then()` adımları düz zincirler; `.catch()` tüm zincir için hataları bir kez yönetir. `Promise.all` / `race` / `allSettled` birçoğunu koordine eder.\n- **async/await** — promise'ler üzerine söz dizimi. `await`, bir promise yerleşene dek bir `async` fonksiyonu duraklatır, böylece asenkron kod normal `try/catch` ile senkron *gibi okunur*.\n\n```js\nasync function load() {\n  try {\n    const res = await fetch(url);\n    return await res.json();\n  } catch (e) { /* handle */ }\n}\n```\n\nBir `async` fonksiyon her zaman bir promise döndürür; `await` yalnızca birini açar."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What is the root cause of \"callback hell\"?",
+          "promptTr": "\"Callback hell\"in temel sebebi nedir?",
+          "options": [
+            { "text": "Nesting dependent asynchronous steps inside one another", "textTr": "Bağımlı asenkron adımları iç içe koymak", "correct": true },
+            { "text": "Using too many promises", "textTr": "Çok fazla promise kullanmak" },
+            { "text": "The event loop running out of memory", "textTr": "Event loop'un belleğinin tükenmesi" },
+            { "text": "Calling functions before they are declared", "textTr": "Fonksiyonları tanımlanmadan önce çağırmak" }
+          ],
+          "explanation": "Each dependent step nests inside the previous callback, creating a deep pyramid with repeated, scattered error handling. Promises/async-await flatten it.",
+          "explanationTr": "Her bağımlı adım bir önceki callback'in içine yerleşir, tekrar eden ve dağınık hata yönetimiyle derin bir piramit oluşturur. Promise/async-await onu düzleştirir."
+        },
+        {
+          "type": "true_false",
+          "statement": "An async function returns a promise even if its body returns a plain value like 42.",
+          "statementTr": "Bir async fonksiyon, gövdesi 42 gibi düz bir değer döndürse bile bir promise döndürür.",
+          "answer": true,
+          "explanation": "async always wraps the return value in a promise — return 42 yields a promise that fulfills with 42. That's why callers can await it.",
+          "explanationTr": "async, dönüş değerini her zaman bir promise'e sarar — return 42, 42 ile yerleşen bir promise verir. Çağıranların onu await edebilmesinin sebebi budur."
+        },
+        {
+          "type": "challenge",
+          "question": "What is Callback Hell and what is the main cause of it?"
+        },
+        {
+          "type": "challenge",
+          "question": "How do Promises work in JavaScript?"
+        },
+        {
+          "type": "challenge",
+          "question": "How does async/await work under the hood?"
+        }
+      ]
+    },
+    {
+      "slug": "the-event-loop",
+      "title": "The event loop",
+      "titleTr": "Event loop",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "One thread, two queues",
+          "titleTr": "Tek thread, iki kuyruk",
+          "body": "JavaScript runs on a **single thread** with an **event loop**. Synchronous code runs on the **call stack**. When async work completes, its callback is queued — and there are *two* queues with different priority:\n\n- **Macrotasks** (task queue): `setTimeout`, `setInterval`, I/O, UI events. One per loop iteration.\n- **Microtasks**: promise `.then`/`catch`/`finally`, `queueMicrotask`, `await` continuations.\n\nThe rule: after each macrotask (and after the current synchronous run finishes), the engine **drains the entire microtask queue** before rendering or taking the next macrotask. So microtasks always run before the next `setTimeout`.\n\n```js\nconsole.log(\"A\");\nsetTimeout(() => console.log(\"B\"), 0);   // macrotask\nPromise.resolve().then(() => console.log(\"C\")); // microtask\nconsole.log(\"D\");\n// A D C B\n```\n\nKey takeaway: the loop never blocks on async work, and **microtasks jump ahead of macrotasks** — overloading microtasks can even starve rendering.",
+          "bodyTr": "JavaScript, bir **event loop** ile **tek thread**'de çalışır. Senkron kod **call stack**'te çalışır. Asenkron iş bitince callback'i kuyruğa alınır — ve farklı önceliğe sahip *iki* kuyruk vardır:\n\n- **Macrotask'lar** (task queue): `setTimeout`, `setInterval`, I/O, UI event'leri. Döngü iterasyonu başına bir tane.\n- **Microtask'lar**: promise `.then`/`catch`/`finally`, `queueMicrotask`, `await` devamları.\n\nKural: her macrotask'tan sonra (ve mevcut senkron çalışma bitince), motor render etmeden ya da sonraki macrotask'ı almadan önce **tüm microtask kuyruğunu boşaltır**. Yani microtask'lar her zaman sonraki `setTimeout`'tan önce çalışır.\n\n```js\nconsole.log(\"A\");\nsetTimeout(() => console.log(\"B\"), 0);   // macrotask\nPromise.resolve().then(() => console.log(\"C\")); // microtask\nconsole.log(\"D\");\n// A D C B\n```\n\nÖzet: döngü asenkron işte asla bloklamaz ve **microtask'lar macrotask'ların önüne geçer** — microtask'ları aşırı yüklemek render'ı bile aç bırakabilir."
+        },
+        {
+          "type": "output_predict",
+          "prompt": "In what order are the letters logged?",
+          "promptTr": "Harfler hangi sırayla yazdırılır?",
+          "code": "console.log(\"A\");\nsetTimeout(() => console.log(\"B\"), 0);\nPromise.resolve().then(() => console.log(\"C\"));\nconsole.log(\"D\");",
+          "options": [
+            { "text": "A D C B", "textTr": "A D C B", "correct": true },
+            { "text": "A B C D", "textTr": "A B C D" },
+            { "text": "A D B C", "textTr": "A D B C" },
+            { "text": "A C D B", "textTr": "A C D B" }
+          ],
+          "explanation": "Sync first: A, D. Then the microtask queue drains before macrotasks: C (promise). Finally the setTimeout macrotask: B.",
+          "explanationTr": "Önce senkron: A, D. Sonra microtask kuyruğu macrotask'lardan önce boşalır: C (promise). En son setTimeout macrotask'ı: B."
+        },
+        {
+          "type": "true_false",
+          "statement": "A promise .then callback runs before a setTimeout(…, 0) callback queued at the same time.",
+          "statementTr": "Aynı anda kuyruğa alınan bir setTimeout(…, 0) callback'inden önce bir promise .then callback'i çalışır.",
+          "answer": true,
+          "explanation": "Microtasks (promise reactions) drain completely before the next macrotask (setTimeout). So .then wins the race against a 0ms timeout.",
+          "explanationTr": "Microtask'lar (promise tepkileri) sonraki macrotask'tan (setTimeout) önce tamamen boşalır. Yani .then, 0ms'lik bir timeout'a karşı yarışı kazanır."
+        },
+        {
+          "type": "challenge",
+          "question": "Explain the JavaScript event loop."
+        },
+        {
+          "type": "challenge",
+          "question": "What are microtasks vs macrotasks and how does the task queue prioritisation work?"
+        }
+      ]
+    },
+    {
+      "slug": "debounce-throttle",
+      "title": "Debounce & throttle",
+      "titleTr": "Debounce ve throttle",
+      "position": 3,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Rate-limiting frequent events",
+          "titleTr": "Sık event'leri hız sınırlamak",
+          "body": "High-frequency events (scroll, resize, keystrokes) can fire hundreds of times a second. Two patterns tame them — both built on closures and timers:\n\n- **Debounce** — wait until activity *stops*. Run the function only after N ms of silence; every new call resets the timer. Ideal for search-as-you-type and validation.\n- **Throttle** — run at most once per N ms during continuous activity. Ideal for scroll/resize handlers and analytics.\n\n```js\nfunction debounce(fn, ms) {\n  let t;\n  return (...args) => {\n    clearTimeout(t);\n    t = setTimeout(() => fn(...args), ms);\n  };\n}\n\nfunction throttle(fn, ms) {\n  let last = 0;\n  return (...args) => {\n    const now = Date.now();\n    if (now - last >= ms) { last = now; fn(...args); }\n  };\n}\n```\n\nMnemonic: **debounce = wait for the pause**; **throttle = steady drip**.",
+          "bodyTr": "Yüksek frekanslı event'ler (scroll, resize, tuş vuruşları) saniyede yüzlerce kez tetiklenebilir. İki desen onları evcilleştirir — ikisi de closure ve timer üzerine kuruludur:\n\n- **Debounce** — etkinlik *durana* dek bekle. Fonksiyonu yalnızca N ms sessizlikten sonra çalıştır; her yeni çağrı timer'ı sıfırlar. Yazarken arama ve doğrulama için ideal.\n- **Throttle** — sürekli etkinlik sırasında N ms'de en fazla bir kez çalıştır. Scroll/resize handler'ları ve analytics için ideal.\n\n```js\nfunction debounce(fn, ms) {\n  let t;\n  return (...args) => {\n    clearTimeout(t);\n    t = setTimeout(() => fn(...args), ms);\n  };\n}\n\nfunction throttle(fn, ms) {\n  let last = 0;\n  return (...args) => {\n    const now = Date.now();\n    if (now - last >= ms) { last = now; fn(...args); }\n  };\n}\n```\n\nKısaltma: **debounce = duraklamayı bekle**; **throttle = düzenli damla**."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Search-as-you-type should fire only after the user stops typing. Which fits?",
+          "promptTr": "Yazarken arama, yalnızca kullanıcı yazmayı bıraktıktan sonra tetiklenmeli. Hangisi uyar?",
+          "options": [
+            { "text": "Debounce — wait for a pause in typing", "textTr": "Debounce — yazmada bir duraklama bekle", "correct": true },
+            { "text": "Throttle — run at a steady interval while typing", "textTr": "Throttle — yazarken sabit aralıkla çalıştır" },
+            { "text": "Neither — call the API on every keystroke", "textTr": "Hiçbiri — her tuş vuruşunda API'yi çağır" },
+            { "text": "Both behave identically here", "textTr": "İkisi de burada aynı davranır" }
+          ],
+          "explanation": "Debounce delays until typing stops, so one request fires after the user pauses. Throttle would fire repeatedly mid-typing, which isn't what search-as-you-type wants.",
+          "explanationTr": "Debounce, yazma durana dek erteler, böylece kullanıcı durunca tek istek atılır. Throttle yazma ortasında tekrar tekrar tetiklerdi; bu yazarken aramanın istediği şey değil."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Reset the pending debounce timer on every call",
+          "promptTr": "Her çağrıda bekleyen debounce timer'ını sıfırla",
+          "code": "return (...args) => {\n  ___(t);\n  t = setTimeout(() => fn(...args), ms);\n};",
+          "answers": ["clearTimeout"],
+          "distractors": ["setTimeout", "clearInterval", "cancelTimeout"],
+          "explanation": "clearTimeout cancels the previously scheduled call so only the last one (after the pause) actually runs — the essence of debounce.",
+          "explanationTr": "clearTimeout, önceden zamanlanmış çağrıyı iptal eder, böylece yalnızca sonuncusu (duraklamadan sonra) çalışır — debounce'un özü."
+        },
+        {
+          "type": "challenge",
+          "question": "What is debouncing and how do you implement it?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is throttling and how do you implement it?"
+        }
+      ]
+    }
+  ]
+}

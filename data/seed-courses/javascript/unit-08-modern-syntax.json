@@ -1,0 +1,155 @@
+{
+  "topic": "javascript",
+  "slug": "modern-syntax",
+  "title": "Modern Syntax & Operators",
+  "titleTr": "Modern Söz Dizimi ve Operatörler",
+  "section": "advanced",
+  "position": 8,
+  "lessons": [
+    {
+      "slug": "spread-rest-destructuring",
+      "title": "Spread, rest & destructuring",
+      "titleTr": "Spread, rest ve destructuring",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "The ... operator, both directions",
+          "titleTr": "... operatörü, iki yönde",
+          "body": "The `...` token does two opposite jobs depending on position.\n\n**Spread** *expands* an iterable/object into individual elements:\n\n```js\nconst a = [1, 2];\nconst b = [...a, 3];        // [1, 2, 3] — copy + extend\nconst o = { ...base, x: 1 }; // shallow-merge objects\nfn(...args);                 // spread into arguments\n```\n\n**Rest** *collects* the remainder into one array/object — it appears in function parameters or destructuring:\n\n```js\nfunction sum(...nums) { return nums.reduce((a, b) => a + b); }\nconst [first, ...others] = [1, 2, 3]; // others = [2, 3]\n```\n\nSame syntax, mirror roles: spread spreads out, rest gathers in.\n\n**Destructuring** unpacks values from arrays/objects into variables:\n\n```js\nconst { name, age = 0 } = user;     // with default\nconst [x, y] = point;\nconst { a: renamed } = obj;          // rename\n```\n\nIt's concise, supports defaults, renaming, and nesting — everywhere in modern JS (imports, function params, React props).",
+          "bodyTr": "`...` token'ı konuma göre iki zıt iş yapar.\n\n**Spread**, bir iterable/nesneyi tek tek elemanlara *açar*:\n\n```js\nconst a = [1, 2];\nconst b = [...a, 3];        // [1, 2, 3] — kopya + genişlet\nconst o = { ...base, x: 1 }; // nesneleri sığ birleştir\nfn(...args);                 // argümanlara spread\n```\n\n**Rest**, geri kalanı tek bir dizi/nesnede *toplar* — fonksiyon parametrelerinde ya da destructuring'de görünür:\n\n```js\nfunction sum(...nums) { return nums.reduce((a, b) => a + b); }\nconst [first, ...others] = [1, 2, 3]; // others = [2, 3]\n```\n\nAynı söz dizimi, ayna roller: spread dışarı açar, rest içeri toplar.\n\n**Destructuring**, dizilerden/nesnelerden değerleri değişkenlere açar:\n\n```js\nconst { name, age = 0 } = user;     // varsayılanla\nconst [x, y] = point;\nconst { a: renamed } = obj;          // yeniden adlandırma\n```\n\nKısadır; varsayılan, yeniden adlandırma ve iç içe yapıyı destekler — modern JS'te her yerde (import'lar, fonksiyon parametreleri, React props)."
+        },
+        {
+          "type": "output_predict",
+          "prompt": "What does this log?",
+          "promptTr": "Bu ne yazdırır?",
+          "code": "const [a, ...rest] = [1, 2, 3, 4];\nconsole.log(a, rest);",
+          "options": [
+            { "text": "1 [2, 3, 4]", "textTr": "1 [2, 3, 4]", "correct": true },
+            { "text": "1 2", "textTr": "1 2" },
+            { "text": "[1] [2, 3, 4]", "textTr": "[1] [2, 3, 4]" },
+            { "text": "1 [3, 4]", "textTr": "1 [3, 4]" }
+          ],
+          "explanation": "a takes the first element; rest collects the remaining elements into a new array [2, 3, 4]. That's rest in array destructuring.",
+          "explanationTr": "a ilk elemanı alır; rest kalan elemanları yeni bir dizide [2, 3, 4] toplar. Bu, dizi destructuring'inde rest'tir."
+        },
+        {
+          "type": "mcq",
+          "prompt": "In `function f(...args) {}`, what is the ... called and what does it do?",
+          "promptTr": "`function f(...args) {}` içinde ... ne diye adlandırılır ve ne yapar?",
+          "options": [
+            { "text": "Rest — it collects all arguments into a single array", "textTr": "Rest — tüm argümanları tek bir dizide toplar", "correct": true },
+            { "text": "Spread — it expands an array into arguments", "textTr": "Spread — bir diziyi argümanlara açar" },
+            { "text": "An optional-parameter marker", "textTr": "Opsiyonel parametre işareti" },
+            { "text": "A type annotation for variadic functions", "textTr": "Değişken argümanlı fonksiyonlar için tip annotation'ı" }
+          ],
+          "explanation": "In a parameter list, ... is rest: it gathers the arguments into an array. The same ... at a call site (f(...arr)) would be spread, doing the opposite.",
+          "explanationTr": "Parametre listesinde ... rest'tir: argümanları bir dizide toplar. Çağrı yerindeki aynı ... (f(...arr)) spread olur, tersini yapar."
+        },
+        {
+          "type": "challenge",
+          "question": "What are the benefits of using spread syntax in ES6 and how is it different from rest syntax?"
+        },
+        {
+          "type": "challenge",
+          "question": "Can you give an example for destructuring an object or an array in ES6?"
+        }
+      ]
+    },
+    {
+      "slug": "chaining-nullish-and-es6",
+      "title": "Optional chaining, nullish & ES5→ES6",
+      "titleTr": "Optional chaining, nullish ve ES5→ES6",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Safe access, smart defaults, a modernised language",
+          "titleTr": "Güvenli erişim, akıllı varsayılanlar, modernleşen bir dil",
+          "body": "**Optional chaining `?.`** short-circuits to `undefined` instead of throwing when a reference in a chain is `null`/`undefined`:\n\n```js\nuser?.profile?.name      // undefined if user or profile is missing\napi?.fetch?.()           // call only if it exists\narr?.[0]                 // safe index access\n```\n\n**Nullish coalescing `??`** supplies a fallback **only** for `null`/`undefined` — unlike `||`, it lets `0`, `\"\"` and `false` through:\n\n```js\nconst port = config.port ?? 3000; // 0 stays 0\n```\n\nThey pair perfectly: `user?.age ?? 18`.\n\n**ES6 (ES2015)** modernised the language over **ES5**: `let`/`const`, arrow functions, classes, template literals, destructuring, spread/rest, default parameters, modules (`import`/`export`), promises, `Map`/`Set`, and `Symbol`. ES5 had only `var`, function-based scope, and no modules or promises. \"ES6\" loosely means \"modern JS\" — though the language now ships yearly (ES2016+).\n\n**`export default`** marks the single main export of a module, imported without braces: `import Thing from \"./mod\"` (vs named `import { x }`).",
+          "bodyTr": "**Optional chaining `?.`**, zincirdeki bir referans `null`/`undefined` olduğunda fırlatmak yerine `undefined`'a kısa devre yapar:\n\n```js\nuser?.profile?.name      // user ya da profile yoksa undefined\napi?.fetch?.()           // yalnızca varsa çağır\narr?.[0]                 // güvenli indeks erişimi\n```\n\n**Nullish coalescing `??`**, **yalnızca** `null`/`undefined` için yedek verir — `||`'ın aksine `0`, `\"\"` ve `false`'u geçirir:\n\n```js\nconst port = config.port ?? 3000; // 0, 0 kalır\n```\n\nMükemmel eşleşirler: `user?.age ?? 18`.\n\n**ES6 (ES2015)**, dili **ES5**'in üzerine modernleştirdi: `let`/`const`, arrow fonksiyonlar, sınıflar, template literal'ler, destructuring, spread/rest, varsayılan parametreler, modüller (`import`/`export`), promise'ler, `Map`/`Set` ve `Symbol`. ES5'te yalnızca `var`, fonksiyon tabanlı scope vardı; modül ya da promise yoktu. \"ES6\" gevşek anlamda \"modern JS\" demektir — ama dil artık yıllık çıkıyor (ES2016+).\n\n**`export default`**, bir modülün tek ana export'unu işaretler, süslü parantez olmadan import edilir: `import Thing from \"./mod\"` (adlı `import { x }`'in aksine)."
+        },
+        {
+          "type": "output_predict",
+          "prompt": "What does this log?",
+          "promptTr": "Bu ne yazdırır?",
+          "code": "const cfg = { count: 0 };\nconsole.log(cfg.count ?? 10, cfg.count || 10);",
+          "options": [
+            { "text": "0 10", "textTr": "0 10", "correct": true },
+            { "text": "10 10", "textTr": "10 10" },
+            { "text": "0 0", "textTr": "0 0" },
+            { "text": "10 0", "textTr": "10 0" }
+          ],
+          "explanation": "?? only falls back for null/undefined, so 0 survives → 0. || treats 0 as falsy and replaces it → 10. The classic reason to prefer ?? for numeric defaults.",
+          "explanationTr": "?? yalnızca null/undefined için yedeğe düşer, bu yüzden 0 hayatta kalır → 0. || ise 0'ı falsy sayıp değiştirir → 10. Sayısal varsayılanlarda ?? tercih etmenin klasik sebebi."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Which is a feature ES6 added that ES5 lacked?",
+          "promptTr": "ES6'nın eklediği, ES5'te olmayan bir özellik hangisidir?",
+          "options": [
+            { "text": "Native modules with import/export", "textTr": "import/export ile yerel modüller", "correct": true },
+            { "text": "The var keyword", "textTr": "var anahtar kelimesi" },
+            { "text": "Function declarations", "textTr": "Fonksiyon bildirimleri" },
+            { "text": "The typeof operator", "textTr": "typeof operatörü" }
+          ],
+          "explanation": "ES6 introduced modules, let/const, classes, arrow functions, template literals, destructuring, promises and more. var/functions/typeof already existed in ES5.",
+          "explanationTr": "ES6; modülleri, let/const, sınıfları, arrow fonksiyonları, template literal'leri, destructuring'i, promise'leri ve fazlasını getirdi. var/fonksiyonlar/typeof ES5'te zaten vardı."
+        },
+        {
+          "type": "challenge",
+          "question": "What is optional chaining and the nullish coalescing operator?"
+        },
+        {
+          "type": "challenge",
+          "question": "What are the differences between ES5 and ES6?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is export default in JavaScript?"
+        }
+      ]
+    },
+    {
+      "slug": "tagged-templates-and-dedupe",
+      "title": "Tagged templates & array dedupe",
+      "titleTr": "Tagged template'ler ve dizi tekilleştirme",
+      "position": 3,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Custom string processing, and Set tricks",
+          "titleTr": "Özel string işleme ve Set hileleri",
+          "body": "A **tagged template literal** runs a function against a template string, giving you the static parts and the interpolated values separately:\n\n```js\nfunction tag(strings, ...values) {\n  // strings: the literal chunks; values: the ${...} results\n  return strings.reduce((out, s, i) =>\n    out + s + (values[i] ?? \"\"), \"\");\n}\ntag`Hello ${name}, you have ${count} messages`;\n```\n\nUses: safe HTML escaping, i18n, styled-components CSS, SQL builders — anywhere you want to *process* interpolations rather than just concatenate.\n\nSeparately, a clean ES6 idiom: **remove duplicates from an array** with a `Set` (which holds only unique values) plus spread:\n\n```js\nconst unique = [...new Set([1, 2, 2, 3])]; // [1, 2, 3]\n```\n\n`new Set(arr)` drops duplicates by SameValueZero equality; spreading it back gives an array. One line, no manual loop.",
+          "bodyTr": "Bir **tagged template literal**, bir template string'e karşı bir fonksiyon çalıştırır; statik parçaları ve interpolasyon değerlerini ayrı ayrı verir:\n\n```js\nfunction tag(strings, ...values) {\n  // strings: literal parçalar; values: ${...} sonuçları\n  return strings.reduce((out, s, i) =>\n    out + s + (values[i] ?? \"\"), \"\");\n}\ntag`Merhaba ${name}, ${count} mesajın var`;\n```\n\nKullanımlar: güvenli HTML escape'leme, i18n, styled-components CSS, SQL builder'lar — interpolasyonları sadece birleştirmek değil *işlemek* istediğin her yer.\n\nAyrıca temiz bir ES6 deyimi: **bir diziden tekrarları kaldırmak** — bir `Set` (yalnızca benzersiz değerler tutar) artı spread ile:\n\n```js\nconst unique = [...new Set([1, 2, 2, 3])]; // [1, 2, 3]\n```\n\n`new Set(arr)`, SameValueZero eşitliğiyle tekrarları atar; geri spread etmek bir dizi verir. Tek satır, elle döngü yok."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Remove duplicates from nums in one ES6 expression",
+          "promptTr": "Tek bir ES6 ifadesiyle nums'tan tekrarları kaldır",
+          "code": "const unique = [...new ___(nums)];",
+          "answers": ["Set"],
+          "distractors": ["Array", "Map", "WeakSet"],
+          "explanation": "A Set stores only unique values; spreading it into an array gives a de-duplicated list. WeakSet only holds objects and isn't iterable, so it can't be spread.",
+          "explanationTr": "Bir Set yalnızca benzersiz değerler saklar; onu bir diziye spread etmek tekilleştirilmiş bir liste verir. WeakSet yalnızca nesne tutar ve iterable değildir, bu yüzden spread edilemez."
+        },
+        {
+          "type": "true_false",
+          "statement": "In a tagged template, the first argument is an array of the literal string parts.",
+          "statementTr": "Bir tagged template'te ilk argüman, literal string parçalarının bir dizisidir.",
+          "answer": true,
+          "explanation": "The tag function receives the static string segments as its first argument (an array), followed by each interpolated value as the rest arguments.",
+          "explanationTr": "Tag fonksiyonu, statik string parçalarını ilk argüman olarak (bir dizi) alır, ardından her interpolasyon değeri rest argümanları olarak gelir."
+        },
+        {
+          "type": "challenge",
+          "question": "What are tagged template literals?"
+        },
+        {
+          "type": "challenge",
+          "question": "Suggest one simple way of removing duplicates from an array using ES6"
+        }
+      ]
+    }
+  ]
+}

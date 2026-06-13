@@ -1,0 +1,102 @@
+{
+  "topic": "javascript",
+  "slug": "modules-compilation",
+  "title": "Modules & Compilation",
+  "titleTr": "Modüller ve Derleme",
+  "section": "advanced",
+  "position": 10,
+  "lessons": [
+    {
+      "slug": "module-systems-and-pattern",
+      "title": "Module systems & the module pattern",
+      "titleTr": "Modül sistemleri ve module pattern",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "How JavaScript organised code over time",
+          "titleTr": "JavaScript kodu zaman içinde nasıl düzenledi",
+          "body": "Before native modules, the **module pattern** used a closure (often an IIFE) to create privacy and expose a public API:\n\n```js\nconst counter = (function () {\n  let count = 0;            // private\n  return { inc: () => ++count, get: () => count }; // public\n})();\n```\n\nState is hidden in the closure; only the returned object is reachable. It's the classic way to avoid globals.\n\nThen competing **module systems** appeared:\n\n- **CommonJS (CJS)** — Node's system: `require()` and `module.exports`. **Synchronous** loading, ideal on the server where files are local.\n- **AMD** — browser-era async loading (RequireJS): `define([deps], factory)`. **Asynchronous**, so it doesn't block page load over the network.\n\nThe core difference: CommonJS loads synchronously (server, local disk), AMD loads asynchronously (browser, network). Both are now largely superseded by **ES Modules** (`import`/`export`) — the standard that works in both browsers and Node, with static analysis and tree-shaking.",
+          "bodyTr": "Yerel modüllerden önce, **module pattern** gizlilik oluşturup public bir API sunmak için bir closure (genelde IIFE) kullanırdı:\n\n```js\nconst counter = (function () {\n  let count = 0;            // özel\n  return { inc: () => ++count, get: () => count }; // public\n})();\n```\n\nState closure'da gizlenir; yalnızca döndürülen nesneye erişilir. Global'lerden kaçınmanın klasik yolu.\n\nSonra rakip **modül sistemleri** ortaya çıktı:\n\n- **CommonJS (CJS)** — Node'un sistemi: `require()` ve `module.exports`. **Senkron** yükleme, dosyaların yerel olduğu sunucuda ideal.\n- **AMD** — tarayıcı dönemi asenkron yükleme (RequireJS): `define([deps], factory)`. **Asenkron**, bu yüzden ağ üzerinden sayfa yüklemesini bloklamaz.\n\nTemel fark: CommonJS senkron yükler (sunucu, yerel disk), AMD asenkron yükler (tarayıcı, ağ). İkisinin de yerini büyük ölçüde **ES Modules** (`import`/`export`) aldı — hem tarayıcıda hem Node'da çalışan, statik analiz ve tree-shaking'li standart."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What's the core difference between CommonJS and AMD?",
+          "promptTr": "CommonJS ile AMD arasındaki temel fark nedir?",
+          "options": [
+            { "text": "CommonJS loads modules synchronously; AMD loads them asynchronously", "textTr": "CommonJS modülleri senkron yükler; AMD asenkron yükler", "correct": true },
+            { "text": "AMD is for servers; CommonJS is for browsers", "textTr": "AMD sunucular için; CommonJS tarayıcılar için" },
+            { "text": "CommonJS can't export functions", "textTr": "CommonJS fonksiyon export edemez" },
+            { "text": "They are identical syntaxes", "textTr": "Aynı söz dizimleridir" }
+          ],
+          "explanation": "CommonJS (Node) is synchronous, fine on local disk. AMD (RequireJS) is asynchronous, designed so browser network loads don't block. ES Modules now unify both.",
+          "explanationTr": "CommonJS (Node) senkrondur, yerel diskte sorunsuz. AMD (RequireJS) asenkrondur, tarayıcı ağ yüklemeleri bloklamasın diye tasarlandı. ES Modules artık ikisini birleştirir."
+        },
+        {
+          "type": "true_false",
+          "statement": "The module pattern uses a closure to keep some state private while exposing a public API.",
+          "statementTr": "Module pattern, bir public API sunarken bir miktar state'i özel tutmak için closure kullanır.",
+          "answer": true,
+          "explanation": "Variables declared inside the IIFE stay private; only the returned object is accessible. It was the pre-ES-modules way to encapsulate and avoid globals.",
+          "explanationTr": "IIFE içinde tanımlanan değişkenler özel kalır; yalnızca döndürülen nesneye erişilir. ES-modüllerinden önce kapsülleme ve global'lerden kaçınma yoluydu."
+        },
+        {
+          "type": "challenge",
+          "question": "What are the differences between AMD and CommonJS module systems?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is the module pattern in JavaScript?"
+        }
+      ]
+    },
+    {
+      "slug": "polyfills-shims-compile",
+      "title": "Polyfills, shims & compile-to-JS",
+      "titleTr": "Polyfill'ler, shim'ler ve compile-to-JS",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Filling gaps and languages on top of JS",
+          "titleTr": "Boşlukları doldurmak ve JS üstüne diller",
+          "body": "A **polyfill** is code that *implements a modern feature on older engines that lack it*, using the standard API name so your code is none the wiser:\n\n```js\nif (!Array.prototype.includes) {\n  Array.prototype.includes = function (x) { /* … */ };\n}\n```\n\nA **shim** is the broader term: any layer that intercepts an API and provides consistent behavior — it may patch bugs or *change* behavior, not just backfill a missing feature. So: **every polyfill is a shim, but not every shim is a polyfill** — a polyfill specifically backfills a missing standard API to spec.\n\nSeparately, **compile-to-JS languages** (TypeScript, CoffeeScript, Elm, ReScript, or Babel transpiling newer JS) author in one language and emit JavaScript.\n\n- **Advantages**: extra features (static types, nicer syntax), catch errors earlier, target old browsers from modern source.\n- **Disadvantages**: a build step, source maps needed for debugging, an extra abstraction to learn, and you still must understand the JS it generates.",
+          "bodyTr": "Bir **polyfill**, *modern bir özelliği, ondan yoksun eski motorlarda uygulayan* koddur; standart API adını kullanır, böylece kodun farkına bile varmaz:\n\n```js\nif (!Array.prototype.includes) {\n  Array.prototype.includes = function (x) { /* … */ };\n}\n```\n\nBir **shim** daha geniş bir terimdir: bir API'yi yakalayıp tutarlı davranış sağlayan herhangi bir katman — yalnızca eksik bir özelliği doldurmakla kalmaz, hataları yamayabilir ya da davranışı *değiştirebilir*. Yani: **her polyfill bir shim'dir, ama her shim bir polyfill değildir** — polyfill, özellikle eksik bir standart API'yi spec'e göre doldurur.\n\nAyrıca, **compile-to-JS dilleri** (TypeScript, CoffeeScript, Elm, ReScript ya da daha yeni JS'i transpile eden Babel) bir dilde yazıp JavaScript üretir.\n\n- **Avantajlar**: ekstra özellikler (statik tipler, daha güzel söz dizimi), hataları daha erken yakalama, modern kaynaktan eski tarayıcıları hedefleme.\n- **Dezavantajlar**: bir build adımı, hata ayıklama için source map gereksinimi, öğrenilecek ekstra bir soyutlama ve ürettiği JS'i yine de anlaman gerekir."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Which statement about shims and polyfills is correct?",
+          "promptTr": "Shim ve polyfill hakkında hangi ifade doğrudur?",
+          "options": [
+            { "text": "Every polyfill is a shim, but a shim can do more than backfill a missing API", "textTr": "Her polyfill bir shim'dir, ama bir shim eksik API doldurmaktan fazlasını yapabilir", "correct": true },
+            { "text": "Every shim is a polyfill", "textTr": "Her shim bir polyfill'dir" },
+            { "text": "Polyfills only work in Node, shims only in browsers", "textTr": "Polyfill'ler yalnızca Node'da, shim'ler yalnızca tarayıcılarda çalışır" },
+            { "text": "Shims compile a new language to JavaScript", "textTr": "Shim'ler yeni bir dili JavaScript'e derler" }
+          ],
+          "explanation": "A polyfill is a specific kind of shim that implements a missing standard API to spec. A shim is the general concept — it may also normalise or patch existing behavior.",
+          "explanationTr": "Polyfill, eksik bir standart API'yi spec'e göre uygulayan özel bir shim türüdür. Shim genel kavramdır — mevcut davranışı normalize edebilir ya da yamayabilir."
+        },
+        {
+          "type": "true_false",
+          "statement": "A downside of compile-to-JS languages is that they add a build step and require source maps for debugging.",
+          "statementTr": "Compile-to-JS dillerinin bir dezavantajı, bir build adımı eklemeleri ve hata ayıklama için source map gerektirmeleridir.",
+          "answer": true,
+          "explanation": "You trade extra power (types, syntax) for tooling overhead: a compile step, source maps to map runtime errors back to your source, and another layer to learn.",
+          "explanationTr": "Ekstra gücü (tipler, söz dizimi) araç yüküyle takas edersin: bir derleme adımı, çalışma zamanı hatalarını kaynağa eşlemek için source map'ler ve öğrenilecek başka bir katman."
+        },
+        {
+          "type": "challenge",
+          "question": "What is a Polyfill?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is the difference between a shim and a polyfill?"
+        },
+        {
+          "type": "challenge",
+          "question": "What are some of the advantages/disadvantages of writing JavaScript code in a language that compiles to JavaScript?"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,104 @@
+{
+  "topic": "javascript",
+  "slug": "dom-events",
+  "title": "DOM & Events",
+  "titleTr": "DOM ve Event'ler",
+  "section": "core",
+  "position": 6,
+  "lessons": [
+    {
+      "slug": "bubbling-and-delegation",
+      "title": "Bubbling & delegation",
+      "titleTr": "Bubbling ve delegation",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "How events travel, and how to listen smartly",
+          "titleTr": "Event'ler nasıl yolculuk eder ve akıllıca nasıl dinlenir",
+          "body": "When you interact with an element, the event travels in three phases: **capture** (document → target, going down), **target**, then **bubble** (target → document, going up). Most handlers run in the bubbling phase, so a click on a button also fires handlers on its parents.\n\nYou can stop bubbling with **`event.stopPropagation()`** (and `event.preventDefault()` cancels the default action, like a link navigating — they're different things).\n\n**Event delegation** uses bubbling deliberately: instead of one listener per child, attach a **single** listener on a common ancestor and read `event.target` to find what was clicked.\n\n```js\nlist.addEventListener(\"click\", (e) => {\n  const li = e.target.closest(\"li\");\n  if (li) select(li);\n});\n```\n\nWhy it's useful: fewer listeners (less memory), and it **works for elements added later** — perfect for dynamic lists. One handler covers all current and future children.",
+          "bodyTr": "Bir öğeyle etkileşince event üç fazda yolculuk eder: **capture** (document → hedef, aşağı inerek), **target**, sonra **bubble** (hedef → document, yukarı çıkarak). Çoğu handler bubbling fazında çalışır, bu yüzden bir butona tıklama, üst öğelerindeki handler'ları da tetikler.\n\nBubbling'i **`event.stopPropagation()`** ile durdurabilirsin (ve `event.preventDefault()` bir linkin gezinmesi gibi varsayılan eylemi iptal eder — bunlar farklı şeylerdir).\n\n**Event delegation**, bubbling'i bilinçli kullanır: her çocuğa bir listener yerine, ortak bir ataya **tek** listener takar ve neye tıklandığını bulmak için `event.target`'ı okur.\n\n```js\nlist.addEventListener(\"click\", (e) => {\n  const li = e.target.closest(\"li\");\n  if (li) select(li);\n});\n```\n\nNeden faydalı: daha az listener (daha az bellek) ve **sonradan eklenen öğelerde de çalışır** — dinamik listeler için mükemmel. Tek handler, tüm mevcut ve gelecekteki çocukları kapsar."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Why does event delegation work for elements added after the listener was attached?",
+          "promptTr": "Event delegation, listener takıldıktan sonra eklenen öğeler için neden çalışır?",
+          "options": [
+            { "text": "The event bubbles up from the new child to the ancestor that holds the single listener", "textTr": "Event, yeni çocuktan tek listener'ı tutan ataya kadar bubble eder", "correct": true },
+            { "text": "The browser re-scans the DOM on every click", "textTr": "Tarayıcı her tıklamada DOM'u yeniden tarar" },
+            { "text": "New elements automatically copy the listener", "textTr": "Yeni öğeler listener'ı otomatik kopyalar" },
+            { "text": "Delegation disables capturing", "textTr": "Delegation, capturing'i devre dışı bırakır" }
+          ],
+          "explanation": "The ancestor's listener fires whenever any descendant's event bubbles up to it — including descendants that didn't exist when the listener was added.",
+          "explanationTr": "Atanın listener'ı, herhangi bir alt öğenin event'i ona bubble ettiğinde çalışır — listener eklendiğinde var olmayan alt öğeler dahil."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Stop the event from bubbling further up the tree",
+          "promptTr": "Event'in ağaçta yukarı bubble etmesini durdur",
+          "code": "button.addEventListener(\"click\", (e) => {\n  e.___();\n});",
+          "answers": ["stopPropagation"],
+          "distractors": ["preventDefault", "stopBubbling", "cancel"],
+          "explanation": "stopPropagation halts the bubbling/capturing chain. preventDefault is different — it cancels the browser's default action (e.g. following a link) but does not stop bubbling.",
+          "explanationTr": "stopPropagation, bubbling/capturing zincirini durdurur. preventDefault farklıdır — tarayıcının varsayılan eylemini (örn. linke gitme) iptal eder ama bubbling'i durdurmaz."
+        },
+        {
+          "type": "challenge",
+          "question": "Explain event bubbling and how one may prevent it"
+        },
+        {
+          "type": "challenge",
+          "question": "What is event delegation and why is it useful?"
+        }
+      ]
+    },
+    {
+      "slug": "page-load-and-same-origin",
+      "title": "Page load & same-origin",
+      "titleTr": "Sayfa yükleme ve same-origin",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "When the page is ready, and what code may touch",
+          "titleTr": "Sayfa ne zaman hazır olur ve kod neye dokunabilir",
+          "body": "Two events signal a page is usable:\n\n- **`DOMContentLoaded`** fires when the HTML is parsed and the DOM is ready — *before* images, stylesheets and subframes finish. Best for running script that needs the DOM.\n- **`load`** (`window.onload`, historically `document` load) fires *later*, once **everything** — images, CSS, iframes — has loaded.\n\n```js\ndocument.addEventListener(\"DOMContentLoaded\", init); // DOM ready, fast\nwindow.addEventListener(\"load\", measure);            // all assets ready\n```\n\nThe `load` event's disadvantage: it waits for every asset, so init runs late on image-heavy pages. Use it only when you genuinely need final sizes/assets (e.g. measuring an image). Otherwise prefer `DOMContentLoaded`, `defer` scripts, or putting scripts at the end of `<body>`.\n\nThe **same-origin policy** is a browser security rule: script from origin A (scheme + host + port) can't read responses or the DOM of origin B. It stops a malicious page from reading your bank's data. Controlled, opt-in sharing happens via **CORS** headers, and `postMessage` for cross-window messaging.",
+          "bodyTr": "İki event sayfanın kullanılabilir olduğunu bildirir:\n\n- **`DOMContentLoaded`**, HTML ayrıştırılıp DOM hazır olduğunda tetiklenir — resimler, stylesheet'ler ve alt çerçeveler bitmeden *önce*. DOM'a ihtiyaç duyan script'i çalıştırmak için en iyisi.\n- **`load`** (`window.onload`, tarihsel olarak `document` load) *daha sonra*, **her şey** — resimler, CSS, iframe'ler — yüklenince tetiklenir.\n\n```js\ndocument.addEventListener(\"DOMContentLoaded\", init); // DOM hazır, hızlı\nwindow.addEventListener(\"load\", measure);            // tüm asset'ler hazır\n```\n\n`load` event'inin dezavantajı: her asset'i bekler, bu yüzden resim ağırlıklı sayfalarda init geç çalışır. Onu yalnızca gerçekten son boyutlara/asset'lere ihtiyacın olduğunda kullan (örn. bir resmi ölçmek). Aksi halde `DOMContentLoaded`, `defer` script'leri ya da script'leri `<body>` sonuna koymayı tercih et.\n\n**Same-origin policy**, bir tarayıcı güvenlik kuralıdır: A kaynağından (şema + host + port) gelen script, B kaynağının yanıtlarını ya da DOM'unu okuyamaz. Kötü niyetli bir sayfanın bankanın verisini okumasını engeller. Kontrollü, opt-in paylaşım **CORS** başlıkları ve pencereler arası mesajlaşma için `postMessage` ile olur."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Which fires first, and is usually the better choice for DOM setup?",
+          "promptTr": "Hangisi önce tetiklenir ve DOM kurulumu için genelde daha iyi seçimdir?",
+          "options": [
+            { "text": "DOMContentLoaded — the DOM is ready before images/CSS finish", "textTr": "DOMContentLoaded — DOM, resim/CSS bitmeden hazırdır", "correct": true },
+            { "text": "load — it waits for the DOM only", "textTr": "load — yalnızca DOM'u bekler" },
+            { "text": "They fire at the same time", "textTr": "Aynı anda tetiklenirler" },
+            { "text": "load fires first, then DOMContentLoaded", "textTr": "Önce load, sonra DOMContentLoaded tetiklenir" }
+          ],
+          "explanation": "DOMContentLoaded fires as soon as HTML is parsed; load waits for all sub-resources. For attaching handlers and reading the DOM, DOMContentLoaded runs sooner.",
+          "explanationTr": "DOMContentLoaded, HTML ayrıştırılır ayrıştırılmaz tetiklenir; load tüm alt kaynakları bekler. Handler takmak ve DOM okumak için DOMContentLoaded daha erken çalışır."
+        },
+        {
+          "type": "true_false",
+          "statement": "By default, JavaScript on page A can read the response body of a fetch to a different origin B.",
+          "statementTr": "Varsayılan olarak, A sayfasındaki JavaScript, farklı bir B kaynağına yapılan fetch'in yanıt gövdesini okuyabilir.",
+          "answer": false,
+          "explanation": "The same-origin policy blocks reading cross-origin responses unless B opts in with CORS headers. The request may still be sent, but the script can't read the result.",
+          "explanationTr": "Same-origin policy, B CORS başlıklarıyla izin vermedikçe çapraz kaynak yanıtları okumayı engeller. İstek gönderilebilir ama script sonucu okuyamaz."
+        },
+        {
+          "type": "challenge",
+          "question": "What is the difference between document.load and DOMContentLoaded events?"
+        },
+        {
+          "type": "challenge",
+          "question": "Why would you use something like the load event? Does this event have disadvantages? Do you know any alternatives, and why would you use those?"
+        },
+        {
+          "type": "challenge",
+          "question": "Explain the same-origin policy with regards to JavaScript."
+        }
+      ]
+    }
+  ]
+}

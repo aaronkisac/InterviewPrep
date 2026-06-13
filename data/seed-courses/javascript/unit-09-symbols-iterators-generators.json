@@ -1,0 +1,162 @@
+{
+  "topic": "javascript",
+  "slug": "symbols-iterators-generators",
+  "title": "Symbols, Iterators & Generators",
+  "titleTr": "Symbol'ler, Iterator'lar ve Generator'lar",
+  "section": "advanced",
+  "position": 9,
+  "lessons": [
+    {
+      "slug": "symbols",
+      "title": "Symbols",
+      "titleTr": "Symbol'ler",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Unique, collision-proof keys",
+          "titleTr": "Benzersiz, çakışmaya dayanıklı anahtarlar",
+          "body": "A **`Symbol`** is a primitive whose every value is **guaranteed unique**, even with the same description:\n\n```js\nSymbol(\"id\") === Symbol(\"id\"); // false — always unique\n```\n\nThe motivation for adding Symbol in ES6: a way to add properties to objects that **can't collide** with existing or future keys, and that stay hidden from normal enumeration (`for…in`, `Object.keys`, `JSON.stringify` all skip symbol keys).\n\nUnique use cases:\n\n- **Non-colliding object keys** — libraries tag objects with a Symbol without risking name clashes.\n- **Well-known symbols** customise language behaviour: `Symbol.iterator` makes an object iterable, `Symbol.asyncIterator`, `Symbol.toPrimitive`, `Symbol.hasInstance`.\n- **Pseudo-private metadata** — symbol keys aren't enumerated, so they hide implementation details.\n- **Global registry** via `Symbol.for(\"key\")` shares a symbol across realms.\n\nThink of Symbol as a built-in \"guaranteed-unique label\".",
+          "bodyTr": "Bir **`Symbol`**, her değeri — aynı açıklamayla bile — **benzersiz olması garanti** edilen bir primitiftir:\n\n```js\nSymbol(\"id\") === Symbol(\"id\"); // false — her zaman benzersiz\n```\n\nES6'da Symbol eklemenin motivasyonu: nesnelere, mevcut ya da gelecekteki anahtarlarla **çakışamayacak** ve normal sayımdan gizli kalan (`for…in`, `Object.keys`, `JSON.stringify` symbol anahtarlarını atlar) property'ler ekleme yolu.\n\nBenzersiz kullanım alanları:\n\n- **Çakışmayan nesne anahtarları** — kütüphaneler nesneleri ad çakışması riski olmadan bir Symbol ile işaretler.\n- **Well-known symbol'ler** dil davranışını özelleştirir: `Symbol.iterator` bir nesneyi iterable yapar, `Symbol.asyncIterator`, `Symbol.toPrimitive`, `Symbol.hasInstance`.\n- **Sözde-özel metadata** — symbol anahtarları sayılmaz, böylece implementasyon detaylarını gizler.\n- **Global registry** — `Symbol.for(\"key\")` ile bir symbol'ü realm'ler arasında paylaşır.\n\nSymbol'ü yerleşik bir \"benzersizliği garanti edilmiş etiket\" olarak düşün."
+        },
+        {
+          "type": "true_false",
+          "statement": "Two symbols created with the same description are equal.",
+          "statementTr": "Aynı açıklamayla oluşturulan iki symbol eşittir.",
+          "answer": false,
+          "explanation": "Every Symbol() call yields a unique value — the description is only a label for debugging. Use Symbol.for(key) if you deliberately want a shared, registry symbol.",
+          "explanationTr": "Her Symbol() çağrısı benzersiz bir değer verir — açıklama yalnızca hata ayıklama için bir etikettir. Bilinçli olarak paylaşılan bir registry symbol'ü istersen Symbol.for(key) kullan."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What problem does Symbol primarily solve?",
+          "promptTr": "Symbol esas olarak hangi sorunu çözer?",
+          "options": [
+            { "text": "Adding object keys that can't collide with other keys and stay hidden from enumeration", "textTr": "Başka anahtarlarla çakışamayan ve sayımdan gizli kalan nesne anahtarları eklemek", "correct": true },
+            { "text": "Making numbers arbitrarily large", "textTr": "Sayıları keyfi olarak büyütmek" },
+            { "text": "Running code on another thread", "textTr": "Kodu başka bir thread'de çalıştırmak" },
+            { "text": "Formatting dates by locale", "textTr": "Tarihleri yerele göre biçimlendirmek" }
+          ],
+          "explanation": "Symbols give guaranteed-unique, non-enumerable keys — perfect for library metadata and well-known hooks like Symbol.iterator without clashing with user properties.",
+          "explanationTr": "Symbol'ler garanti benzersiz, sayılamayan anahtarlar verir — kütüphane metadata'sı ve Symbol.iterator gibi well-known hook'lar için, kullanıcı property'leriyle çakışmadan mükemmel."
+        },
+        {
+          "type": "challenge",
+          "question": "What is the motivation for bringing Symbol to ES6?"
+        },
+        {
+          "type": "challenge",
+          "question": "What are JavaScript Symbols and what unique use cases do they enable?"
+        }
+      ]
+    },
+    {
+      "slug": "iterators-and-generators",
+      "title": "Iterators & generators",
+      "titleTr": "Iterator'lar ve generator'lar",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "The iteration protocol and pausable functions",
+          "titleTr": "İterasyon protokolü ve duraklatılabilir fonksiyonlar",
+          "body": "An **iterable** is any object with a `[Symbol.iterator]()` method returning an **iterator** — an object with a `next()` that yields `{ value, done }`. Arrays, strings, `Map`, `Set` are built-in iterables, which is why `for…of` and spread work on them.\n\n```js\nfor (const ch of \"hi\") { ... }   // strings are iterable\n```\n\nA **generator** (`function*`) is the easiest way to *build* an iterator. `yield` pauses the function and emits a value; calling `.next()` resumes it. State is preserved between calls.\n\n```js\nfunction* ids() {\n  let i = 1;\n  while (true) yield i++;   // infinite, lazy\n}\nconst g = ids();\ng.next().value; // 1\ng.next().value; // 2\n```\n\n**When to use generators**: lazy/infinite sequences, custom iteration for your own data structures, pausable state machines, and taming async flows. Advanced patterns they enable: lazy pipelines that compute on demand, two-way communication (passing a value into `yield`), `yield*` delegation, and the basis of early coroutine/async libraries. Generators trade a little overhead for memory-efficient, on-demand iteration.",
+          "bodyTr": "Bir **iterable**, `[Symbol.iterator]()` metoduyla bir **iterator** döndüren herhangi bir nesnedir — `next()`'i `{ value, done }` veren bir nesne. Diziler, string'ler, `Map`, `Set` yerleşik iterable'lardır; `for…of` ve spread'in onlarda çalışmasının sebebi budur.\n\n```js\nfor (const ch of \"hi\") { ... }   // string'ler iterable'dır\n```\n\nBir **generator** (`function*`), bir iterator *oluşturmanın* en kolay yoludur. `yield` fonksiyonu duraklatıp bir değer yayar; `.next()` çağırmak onu sürdürür. State çağrılar arasında korunur.\n\n```js\nfunction* ids() {\n  let i = 1;\n  while (true) yield i++;   // sonsuz, tembel\n}\nconst g = ids();\ng.next().value; // 1\ng.next().value; // 2\n```\n\n**Generator'ları ne zaman kullanmalı**: tembel/sonsuz diziler, kendi veri yapıların için özel iterasyon, duraklatılabilir state machine'ler ve asenkron akışları evcilleştirmek. Mümkün kıldığı ileri desenler: talep üzerine hesaplayan tembel pipeline'lar, çift yönlü iletişim (`yield`'e bir değer geçmek), `yield*` delegasyonu ve erken coroutine/async kütüphanelerinin temeli. Generator'lar biraz ek yük karşılığında bellek-verimli, talep üzerine iterasyon sağlar."
+        },
+        {
+          "type": "output_predict",
+          "prompt": "What does this log?",
+          "promptTr": "Bu ne yazdırır?",
+          "code": "function* g() {\n  yield 1;\n  yield 2;\n}\nconst it = g();\nconsole.log(it.next().value, it.next().value, it.next().done);",
+          "options": [
+            { "text": "1 2 true", "textTr": "1 2 true", "correct": true },
+            { "text": "1 2 false", "textTr": "1 2 false" },
+            { "text": "1 1 true", "textTr": "1 1 true" },
+            { "text": "undefined undefined true", "textTr": "undefined undefined true" }
+          ],
+          "explanation": "Each next() resumes to the next yield: 1, then 2. The third next() has nothing left to yield, so value is undefined and done is true.",
+          "explanationTr": "Her next() bir sonraki yield'e kadar sürdürür: 1, sonra 2. Üçüncü next()'in yield edecek bir şeyi kalmaz, bu yüzden value undefined ve done true olur."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What makes an object usable in a for…of loop?",
+          "promptTr": "Bir nesneyi for…of döngüsünde kullanılabilir yapan nedir?",
+          "options": [
+            { "text": "It implements [Symbol.iterator] returning an iterator", "textTr": "Bir iterator döndüren [Symbol.iterator]'ı uygular", "correct": true },
+            { "text": "It has a length property", "textTr": "Bir length property'si vardır" },
+            { "text": "It is declared with const", "textTr": "const ile tanımlanmıştır" },
+            { "text": "It has a forEach method", "textTr": "Bir forEach metodu vardır" }
+          ],
+          "explanation": "for…of consumes the iteration protocol: it calls [Symbol.iterator]() and then next() repeatedly. Plain objects lack it (use Object.entries); a generator provides it automatically.",
+          "explanationTr": "for…of iterasyon protokolünü tüketir: [Symbol.iterator]()'ı, sonra tekrar tekrar next()'i çağırır. Düz nesnelerde yoktur (Object.entries kullan); generator onu otomatik sağlar."
+        },
+        {
+          "type": "challenge",
+          "question": "What are JavaScript iterators and iterables?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is generator in JS?"
+        },
+        {
+          "type": "challenge",
+          "question": "When should we use generators in ES6?"
+        },
+        {
+          "type": "challenge",
+          "question": "What are JavaScript generators and what advanced patterns do they enable?"
+        }
+      ]
+    },
+    {
+      "slug": "bigint-and-intl",
+      "title": "BigInt & Intl",
+      "titleTr": "BigInt ve Intl",
+      "position": 3,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Huge integers and locale-aware formatting",
+          "titleTr": "Devasa tamsayılar ve yerel-duyarlı biçimlendirme",
+          "body": "**`BigInt`** is a numeric primitive for integers beyond the safe range of `number` (which loses precision past 2^53−1). Append `n` or call `BigInt()`:\n\n```js\n9007199254740991n + 2n; // 9007199254740993n — exact\ntypeof 10n;             // \"bigint\"\n```\n\nUse it for: large IDs (database/snowflake IDs), cryptography, high-precision counters, and timestamps in nanoseconds. Caveats: you can't mix `BigInt` and `number` in arithmetic without converting, and `BigInt` isn't for fractions (no decimals).\n\nThe **`Intl`** API provides **locale-aware** internationalisation built into the platform — no library needed:\n\n```js\nnew Intl.NumberFormat(\"de-DE\", { style: \"currency\", currency: \"EUR\" }).format(1234.5);\n// \"1.234,50 €\"\nnew Intl.DateTimeFormat(\"en-GB\").format(new Date());\nnew Intl.RelativeTimeFormat(\"en\").format(-1, \"day\"); // \"1 day ago\"\n```\n\nIt solves locale formatting of numbers, currencies, dates, lists, plurals and collation (sorting) correctly across languages — replacing brittle manual formatting.",
+          "bodyTr": "**`BigInt`**, `number`'ın güvenli aralığının ötesindeki tamsayılar için sayısal bir primitiftir (`number`, 2^53−1'i geçince hassasiyet kaybeder). `n` ekle ya da `BigInt()` çağır:\n\n```js\n9007199254740991n + 2n; // 9007199254740993n — tam\ntypeof 10n;             // \"bigint\"\n```\n\nKullan: büyük ID'ler (veritabanı/snowflake ID'leri), kriptografi, yüksek hassasiyetli sayaçlar ve nanosaniye zaman damgaları. Uyarılar: dönüştürmeden aritmetikte `BigInt` ve `number`'ı karıştıramazsın ve `BigInt` kesirler için değildir (ondalık yok).\n\n**`Intl`** API'si, platforma yerleşik **yerel-duyarlı** uluslararasılaştırma sağlar — kütüphane gerekmez:\n\n```js\nnew Intl.NumberFormat(\"de-DE\", { style: \"currency\", currency: \"EUR\" }).format(1234.5);\n// \"1.234,50 €\"\nnew Intl.DateTimeFormat(\"en-GB\").format(new Date());\nnew Intl.RelativeTimeFormat(\"en\").format(-1, \"day\"); // \"1 day ago\"\n```\n\nSayıların, para birimlerinin, tarihlerin, listelerin, çoğulların ve sıralamanın (collation) yerel biçimlendirmesini diller arası doğru çözer — kırılgan elle biçimlendirmenin yerini alır."
+        },
+        {
+          "type": "output_predict",
+          "prompt": "What does this log?",
+          "promptTr": "Bu ne yazdırır?",
+          "code": "console.log(typeof 10n, 9007199254740991n + 2n);",
+          "options": [
+            { "text": "bigint 9007199254740993n", "textTr": "bigint 9007199254740993n", "correct": true },
+            { "text": "number 9007199254740992", "textTr": "number 9007199254740992" },
+            { "text": "bigint 9007199254740992n", "textTr": "bigint 9007199254740992n" },
+            { "text": "number NaN", "textTr": "number NaN" }
+          ],
+          "explanation": "10n is a bigint. BigInt arithmetic stays exact past Number.MAX_SAFE_INTEGER, so the sum is precisely 9007199254740993n — a plain number would round.",
+          "explanationTr": "10n bir bigint'tir. BigInt aritmetiği Number.MAX_SAFE_INTEGER'ın ötesinde tam kalır, bu yüzden toplam tam olarak 9007199254740993n'dir — düz bir number yuvarlardı."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Which task is the Intl API designed for?",
+          "promptTr": "Intl API'si hangi görev için tasarlanmıştır?",
+          "options": [
+            { "text": "Formatting numbers, currencies and dates per locale", "textTr": "Sayıları, para birimlerini ve tarihleri yerele göre biçimlendirmek", "correct": true },
+            { "text": "Running tasks on background threads", "textTr": "Görevleri arka plan thread'lerinde çalıştırmak" },
+            { "text": "Storing large integers", "textTr": "Büyük tamsayıları saklamak" },
+            { "text": "Making cross-origin network requests", "textTr": "Çapraz kaynak ağ istekleri yapmak" }
+          ],
+          "explanation": "Intl handles locale-correct formatting and collation for numbers, currencies, dates, lists and plurals — the job people used to do with heavy date/number libraries.",
+          "explanationTr": "Intl; sayılar, para birimleri, tarihler, listeler ve çoğullar için yerel-doğru biçimlendirme ve sıralama yapar — eskiden ağır tarih/sayı kütüphaneleriyle yapılan iş."
+        },
+        {
+          "type": "challenge",
+          "question": "What is BigInt in JavaScript and when would you use it?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is the Intl API and what problems does it solve?"
+        }
+      ]
+    }
+  ]
+}

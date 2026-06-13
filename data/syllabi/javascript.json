@@ -1,0 +1,367 @@
+{
+  "topic": "javascript",
+  "title": "JavaScript",
+  "$comment": "Canonical concept list (syllabus) for JavaScript. Complete: 12 units cover all bank questions. Verified by: pnpm concept:coverage",
+  "concepts": [
+    {
+      "id": "values-and-objects",
+      "title": "Values, types & objects",
+      "titleTr": "Değerler, tipler ve nesneler",
+      "section": "foundations",
+      "unit": "values-types",
+      "lessons": [
+        "values-and-objects"
+      ]
+    },
+    {
+      "id": "typeof-and-arrays",
+      "title": "typeof & arrays",
+      "titleTr": "typeof ve diziler",
+      "section": "foundations",
+      "unit": "values-types",
+      "lessons": [
+        "typeof-and-arrays"
+      ]
+    },
+    {
+      "id": "null-undefined-not-defined",
+      "title": "null, undefined & not defined",
+      "titleTr": "null, undefined ve not defined",
+      "section": "foundations",
+      "unit": "values-types",
+      "lessons": [
+        "null-undefined-not-defined"
+      ]
+    },
+    {
+      "id": "equality-operators",
+      "title": "Equality: == vs ===",
+      "titleTr": "Eşitlik: == vs ===",
+      "section": "foundations",
+      "unit": "equality-coercion",
+      "lessons": [
+        "equality-operators"
+      ]
+    },
+    {
+      "id": "type-coercion",
+      "title": "Type coercion",
+      "titleTr": "Tip coercion'ı",
+      "section": "foundations",
+      "unit": "equality-coercion",
+      "lessons": [
+        "type-coercion"
+      ]
+    },
+    {
+      "id": "scope-and-declarations",
+      "title": "Scope & declarations",
+      "titleTr": "Scope ve bildirimler",
+      "section": "core",
+      "unit": "scope-hoisting-strict",
+      "lessons": [
+        "scope-and-declarations"
+      ]
+    },
+    {
+      "id": "hoisting",
+      "title": "Hoisting",
+      "titleTr": "Hoisting",
+      "section": "core",
+      "unit": "scope-hoisting-strict",
+      "lessons": [
+        "hoisting"
+      ]
+    },
+    {
+      "id": "strict-mode-and-globals",
+      "title": "Strict mode & the global scope",
+      "titleTr": "Strict mode ve global scope",
+      "section": "core",
+      "unit": "scope-hoisting-strict",
+      "lessons": [
+        "strict-mode-and-globals"
+      ]
+    },
+    {
+      "id": "closures-and-hof",
+      "title": "Closures & higher-order functions",
+      "titleTr": "Closure'lar ve higher-order fonksiyonlar",
+      "section": "core",
+      "unit": "functions-closures",
+      "lessons": [
+        "closures-and-hof"
+      ]
+    },
+    {
+      "id": "arrow-functions",
+      "title": "Arrow functions",
+      "titleTr": "Arrow fonksiyonlar",
+      "section": "core",
+      "unit": "functions-closures",
+      "lessons": [
+        "arrow-functions"
+      ]
+    },
+    {
+      "id": "anonymous-and-iife",
+      "title": "Anonymous functions & IIFEs",
+      "titleTr": "Anonim fonksiyonlar ve IIFE'ler",
+      "section": "core",
+      "unit": "functions-closures",
+      "lessons": [
+        "anonymous-and-iife"
+      ]
+    },
+    {
+      "id": "bind-currying-purity",
+      "title": "bind, currying & purity",
+      "titleTr": "bind, currying ve saflık",
+      "section": "core",
+      "unit": "functions-closures",
+      "lessons": [
+        "bind-currying-purity"
+      ]
+    },
+    {
+      "id": "prototypes-and-this",
+      "title": "Prototypal inheritance & this",
+      "titleTr": "Prototip kalıtımı ve this",
+      "section": "core",
+      "unit": "objects-prototypes-this",
+      "lessons": [
+        "prototypes-and-this"
+      ]
+    },
+    {
+      "id": "es6-vs-es5-classes",
+      "title": "Classes: ES6 vs ES5",
+      "titleTr": "Sınıflar: ES6 vs ES5",
+      "section": "core",
+      "unit": "objects-prototypes-this",
+      "lessons": [
+        "es6-vs-es5-classes"
+      ]
+    },
+    {
+      "id": "freezing-extending-host-native",
+      "title": "Freezing, extending & object kinds",
+      "titleTr": "Dondurma, genişletme ve nesne türleri",
+      "section": "core",
+      "unit": "objects-prototypes-this",
+      "lessons": [
+        "freezing-extending-host-native"
+      ]
+    },
+    {
+      "id": "references-and-iteration",
+      "title": "References & iteration",
+      "titleTr": "Referanslar ve iterasyon",
+      "section": "core",
+      "unit": "objects-prototypes-this",
+      "lessons": [
+        "references-and-iteration"
+      ]
+    },
+    {
+      "id": "bubbling-and-delegation",
+      "title": "Bubbling & delegation",
+      "titleTr": "Bubbling ve delegation",
+      "section": "core",
+      "unit": "dom-events",
+      "lessons": [
+        "bubbling-and-delegation"
+      ]
+    },
+    {
+      "id": "page-load-and-same-origin",
+      "title": "Page load & same-origin",
+      "titleTr": "Sayfa yükleme ve same-origin",
+      "section": "core",
+      "unit": "dom-events",
+      "lessons": [
+        "page-load-and-same-origin"
+      ]
+    },
+    {
+      "id": "callbacks-promises-async",
+      "title": "Callbacks, promises & async/await",
+      "titleTr": "Callback'ler, promise'ler ve async/await",
+      "section": "advanced",
+      "unit": "async-javascript",
+      "lessons": [
+        "callbacks-promises-async"
+      ]
+    },
+    {
+      "id": "the-event-loop",
+      "title": "The event loop",
+      "titleTr": "Event loop",
+      "section": "advanced",
+      "unit": "async-javascript",
+      "lessons": [
+        "the-event-loop"
+      ]
+    },
+    {
+      "id": "debounce-throttle",
+      "title": "Debounce & throttle",
+      "titleTr": "Debounce ve throttle",
+      "section": "advanced",
+      "unit": "async-javascript",
+      "lessons": [
+        "debounce-throttle"
+      ]
+    },
+    {
+      "id": "spread-rest-destructuring",
+      "title": "Spread, rest & destructuring",
+      "titleTr": "Spread, rest ve destructuring",
+      "section": "advanced",
+      "unit": "modern-syntax",
+      "lessons": [
+        "spread-rest-destructuring"
+      ]
+    },
+    {
+      "id": "chaining-nullish-and-es6",
+      "title": "Optional chaining, nullish & ES5→ES6",
+      "titleTr": "Optional chaining, nullish ve ES5→ES6",
+      "section": "advanced",
+      "unit": "modern-syntax",
+      "lessons": [
+        "chaining-nullish-and-es6"
+      ]
+    },
+    {
+      "id": "tagged-templates-and-dedupe",
+      "title": "Tagged templates & array dedupe",
+      "titleTr": "Tagged template'ler ve dizi tekilleştirme",
+      "section": "advanced",
+      "unit": "modern-syntax",
+      "lessons": [
+        "tagged-templates-and-dedupe"
+      ]
+    },
+    {
+      "id": "symbols",
+      "title": "Symbols",
+      "titleTr": "Symbol'ler",
+      "section": "advanced",
+      "unit": "symbols-iterators-generators",
+      "lessons": [
+        "symbols"
+      ]
+    },
+    {
+      "id": "iterators-and-generators",
+      "title": "Iterators & generators",
+      "titleTr": "Iterator'lar ve generator'lar",
+      "section": "advanced",
+      "unit": "symbols-iterators-generators",
+      "lessons": [
+        "iterators-and-generators"
+      ]
+    },
+    {
+      "id": "bigint-and-intl",
+      "title": "BigInt & Intl",
+      "titleTr": "BigInt ve Intl",
+      "section": "advanced",
+      "unit": "symbols-iterators-generators",
+      "lessons": [
+        "bigint-and-intl"
+      ]
+    },
+    {
+      "id": "module-systems-and-pattern",
+      "title": "Module systems & the module pattern",
+      "titleTr": "Modül sistemleri ve module pattern",
+      "section": "advanced",
+      "unit": "modules-compilation",
+      "lessons": [
+        "module-systems-and-pattern"
+      ]
+    },
+    {
+      "id": "polyfills-shims-compile",
+      "title": "Polyfills, shims & compile-to-JS",
+      "titleTr": "Polyfill'ler, shim'ler ve compile-to-JS",
+      "section": "advanced",
+      "unit": "modules-compilation",
+      "lessons": [
+        "polyfills-shims-compile"
+      ]
+    },
+    {
+      "id": "memoization-and-weak-collections",
+      "title": "Memoization & weak collections",
+      "titleTr": "Memoization ve weak koleksiyonlar",
+      "section": "advanced",
+      "unit": "performance-memory-engine",
+      "lessons": [
+        "memoization-and-weak-collections"
+      ]
+    },
+    {
+      "id": "leaks-and-gc",
+      "title": "Memory leaks & garbage collection",
+      "titleTr": "Bellek sızıntıları ve çöp toplama",
+      "section": "advanced",
+      "unit": "performance-memory-engine",
+      "lessons": [
+        "leaks-and-gc"
+      ]
+    },
+    {
+      "id": "engine-optimisation",
+      "title": "Engine optimisation: perf, TCO, V8",
+      "titleTr": "Motor optimizasyonu: perf, TCO, V8",
+      "section": "advanced",
+      "unit": "performance-memory-engine",
+      "lessons": [
+        "engine-optimisation"
+      ]
+    },
+    {
+      "id": "proxy-and-reflect",
+      "title": "Proxy & Reflect",
+      "titleTr": "Proxy ve Reflect",
+      "section": "interview",
+      "unit": "advanced-apis-patterns",
+      "lessons": [
+        "proxy-and-reflect"
+      ]
+    },
+    {
+      "id": "patterns-and-workers",
+      "title": "Observer pattern & workers",
+      "titleTr": "Observer pattern ve worker'lar",
+      "section": "interview",
+      "unit": "advanced-apis-patterns",
+      "lessons": [
+        "patterns-and-workers"
+      ]
+    },
+    {
+      "id": "platform-wasm-temporal",
+      "title": "Platform: WebAssembly & Temporal",
+      "titleTr": "Platform: WebAssembly ve Temporal",
+      "section": "interview",
+      "unit": "advanced-apis-patterns",
+      "lessons": [
+        "platform-wasm-temporal"
+      ]
+    },
+    {
+      "id": "algorithms-and-errors",
+      "title": "Algorithms & error handling",
+      "titleTr": "Algoritmalar ve hata yönetimi",
+      "section": "interview",
+      "unit": "advanced-apis-patterns",
+      "lessons": [
+        "algorithms-and-errors"
+      ]
+    }
+  ]
+}

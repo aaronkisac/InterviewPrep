@@ -1,0 +1,203 @@
+{
+  "topic": "javascript",
+  "slug": "functions-closures",
+  "title": "Functions & Closures",
+  "titleTr": "Fonksiyonlar ve Closure'lar",
+  "section": "core",
+  "position": 4,
+  "lessons": [
+    {
+      "slug": "closures-and-hof",
+      "title": "Closures & higher-order functions",
+      "titleTr": "Closure'lar ve higher-order fonksiyonlar",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Functions that remember and functions that take functions",
+          "titleTr": "Hatırlayan fonksiyonlar ve fonksiyon alan fonksiyonlar",
+          "body": "A **closure** is a function bundled with the variables from the scope where it was *defined*. Even after the outer function returns, the inner function keeps access to those variables.\n\n```js\nfunction counter() {\n  let count = 0;\n  return () => ++count; // closes over `count`\n}\nconst next = counter();\nnext(); // 1\nnext(); // 2  — count persists privately\n```\n\nClosures power **private state**, factory functions, memoization, and event handlers that remember context.\n\nA **higher-order function (HOF)** is a function that takes a function as an argument and/or returns one. They're everywhere in JS:\n\n```js\n[1, 2, 3].map(n => n * 2);     // map takes a function\nconst add = a => b => a + b;    // returns a function\n```\n\n`map`, `filter`, `reduce`, `setTimeout` and event listeners are all HOFs. Closures and HOFs together are the backbone of functional JavaScript.",
+          "bodyTr": "Bir **closure**, *tanımlandığı* scope'taki değişkenlerle paketlenmiş bir fonksiyondur. Dış fonksiyon döndükten sonra bile iç fonksiyon o değişkenlere erişimini korur.\n\n```js\nfunction counter() {\n  let count = 0;\n  return () => ++count; // `count` üzerine kapanır\n}\nconst next = counter();\nnext(); // 1\nnext(); // 2  — count özel olarak kalıcıdır\n```\n\nClosure'lar **özel state**, factory fonksiyonları, memoization ve bağlamı hatırlayan event handler'ları güçlendirir.\n\nBir **higher-order function (HOF)**, argüman olarak fonksiyon alan ve/veya fonksiyon döndüren fonksiyondur. JS'te her yerdedir:\n\n```js\n[1, 2, 3].map(n => n * 2);     // map bir fonksiyon alır\nconst add = a => b => a + b;    // bir fonksiyon döndürür\n```\n\n`map`, `filter`, `reduce`, `setTimeout` ve event listener'lar HOF'tur. Closure'lar ve HOF'lar birlikte fonksiyonel JavaScript'in omurgasıdır."
+        },
+        {
+          "type": "output_predict",
+          "prompt": "What does this log?",
+          "promptTr": "Bu ne yazdırır?",
+          "code": "function make() {\n  let n = 0;\n  return () => ++n;\n}\nconst a = make();\nconst b = make();\nconsole.log(a(), a(), b());",
+          "options": [
+            { "text": "1 2 1", "textTr": "1 2 1", "correct": true },
+            { "text": "1 2 3", "textTr": "1 2 3" },
+            { "text": "1 1 1", "textTr": "1 1 1" },
+            { "text": "1 2 2", "textTr": "1 2 2" }
+          ],
+          "explanation": "Each call to make() creates a fresh closure with its own n. a and b don't share state, so a() goes 1→2 while b() starts again at 1.",
+          "explanationTr": "make()'in her çağrısı kendi n'i olan taze bir closure oluşturur. a ve b state paylaşmaz, bu yüzden a() 1→2 giderken b() yeniden 1'den başlar."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Which best defines a higher-order function?",
+          "promptTr": "Higher-order fonksiyonu en iyi hangisi tanımlar?",
+          "options": [
+            { "text": "A function that takes a function as an argument or returns a function", "textTr": "Argüman olarak fonksiyon alan ya da fonksiyon döndüren bir fonksiyon", "correct": true },
+            { "text": "A function defined at the top of a file", "textTr": "Bir dosyanın en üstünde tanımlanan fonksiyon" },
+            { "text": "A function that runs faster than others", "textTr": "Diğerlerinden daha hızlı çalışan bir fonksiyon" },
+            { "text": "Any function declared with the function keyword", "textTr": "function anahtar kelimesiyle tanımlanan herhangi bir fonksiyon" }
+          ],
+          "explanation": "HOFs treat functions as values — passing or returning them. map/filter/reduce take a callback; a curried adder returns functions.",
+          "explanationTr": "HOF'lar fonksiyonları değer olarak ele alır — onları geçer ya da döndürür. map/filter/reduce callback alır; curry'lenmiş bir toplayıcı fonksiyon döndürür."
+        },
+        {
+          "type": "challenge",
+          "question": "What is a closure, and how/why would you use one?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is a higher-order function?"
+        }
+      ]
+    },
+    {
+      "slug": "arrow-functions",
+      "title": "Arrow functions",
+      "titleTr": "Arrow fonksiyonlar",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Concise syntax, lexical this",
+          "titleTr": "Kısa söz dizimi, lexical this",
+          "body": "**Arrow functions** (`=>`) are more than shorter syntax. Their defining trait: they **don't bind their own `this`** — they capture `this` *lexically* from the surrounding scope. That kills the classic `const self = this` workaround.\n\n```js\nclass Timer {\n  seconds = 0;\n  start() {\n    setInterval(() => this.seconds++, 1000); // `this` is the Timer\n  }\n}\n```\n\nUse arrows for: callbacks that need the outer `this` (handlers, `map`/`filter`), short one-liners, and currying.\n\n**Avoid** arrows for: object methods that need their own `this` (`obj.method = () => this` is wrong), constructors (arrows can't be `new`-ed), and anything using `arguments` (arrows don't have it — use rest `...args`). Also, returning an object literal needs parentheses: `() => ({ a: 1 })`.",
+          "bodyTr": "**Arrow fonksiyonlar** (`=>`) sadece kısa söz dizimi değildir. Tanımlayıcı özellikleri: **kendi `this`'lerini bağlamazlar** — `this`'i çevreleyen scope'tan *lexical* olarak yakalarlar. Bu, klasik `const self = this` hilesini ortadan kaldırır.\n\n```js\nclass Timer {\n  seconds = 0;\n  start() {\n    setInterval(() => this.seconds++, 1000); // `this`, Timer'dır\n  }\n}\n```\n\nArrow kullan: dış `this`'e ihtiyaç duyan callback'ler (handler'lar, `map`/`filter`), kısa tek satırlıklar ve currying için.\n\nArrow **kullanma**: kendi `this`'ine ihtiyaç duyan nesne metotları (`obj.method = () => this` yanlıştır), constructor'lar (arrow `new`'lenemez) ve `arguments` kullanan her şey (arrow'da yok — rest `...args` kullan). Ayrıca nesne literali döndürmek parantez gerektirir: `() => ({ a: 1 })`."
+        },
+        {
+          "type": "true_false",
+          "statement": "An arrow function has its own this that depends on how it is called.",
+          "statementTr": "Bir arrow fonksiyonun, nasıl çağrıldığına bağlı kendi this'i vardır.",
+          "answer": false,
+          "explanation": "Arrows have no own this — they inherit it lexically from the enclosing scope, regardless of how they're called. That's exactly why they're great for callbacks.",
+          "explanationTr": "Arrow'ların kendi this'i yoktur — nasıl çağrıldıklarına bakılmaksızın onu çevreleyen scope'tan lexical olarak miras alırlar. Callback'ler için harika olmalarının sebebi tam da budur."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Where is an arrow function the WRONG choice?",
+          "promptTr": "Arrow fonksiyon nerede YANLIŞ tercihtir?",
+          "options": [
+            { "text": "As an object method that needs its own this binding", "textTr": "Kendi this bağlamasına ihtiyaç duyan bir nesne metodu olarak", "correct": true },
+            { "text": "As a callback passed to array.map", "textTr": "array.map'e geçilen bir callback olarak" },
+            { "text": "As a short one-line expression", "textTr": "Kısa tek satırlık bir ifade olarak" },
+            { "text": "Inside setInterval to keep the outer this", "textTr": "Dış this'i korumak için setInterval içinde" }
+          ],
+          "explanation": "An object method written as an arrow captures this from the surrounding (often module/global) scope, not the object — so this.x is wrong. Use a normal method there.",
+          "explanationTr": "Arrow olarak yazılan bir nesne metodu this'i nesneden değil çevreleyen (çoğu zaman modül/global) scope'tan yakalar — bu yüzden this.x yanlıştır. Orada normal metot kullan."
+        },
+        {
+          "type": "challenge",
+          "question": "What advantages are using arrow functions?"
+        },
+        {
+          "type": "challenge",
+          "question": "When should I use Arrow Functions in ES6?"
+        }
+      ]
+    },
+    {
+      "slug": "anonymous-and-iife",
+      "title": "Anonymous functions & IIFEs",
+      "titleTr": "Anonim fonksiyonlar ve IIFE'ler",
+      "position": 3,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Functions without names, and functions that run immediately",
+          "titleTr": "Adsız fonksiyonlar ve hemen çalışan fonksiyonlar",
+          "body": "An **anonymous function** has no name of its own:\n\n```js\nsetTimeout(function () { ... }, 100); // anonymous\narr.map(x => x + 1);                   // anonymous arrow\n```\n\nTypical uses: callbacks, arguments to HOFs, and IIFEs. A **named function** (`function add() {}`) reads better in **stack traces** and can recurse by name — so for anything non-trivial, prefer a name even when assigning to a variable.\n\nAn **IIFE** (Immediately Invoked Function Expression) is a function defined and called at once:\n\n```js\n(function () {\n  const secret = 42;   // private — not global\n})();\n```\n\nThe wrapping `( … )` makes it an *expression*; the trailing `()` runs it. Before ES modules and block scope, IIFEs were *the* way to create a private scope and avoid polluting the global namespace — the foundation of the module pattern.",
+          "bodyTr": "Bir **anonim fonksiyonun** kendine ait adı yoktur:\n\n```js\nsetTimeout(function () { ... }, 100); // anonim\narr.map(x => x + 1);                   // anonim arrow\n```\n\nTipik kullanımlar: callback'ler, HOF'lara argümanlar ve IIFE'ler. Bir **adlı fonksiyon** (`function add() {}`) **stack trace**'lerde daha iyi okunur ve adıyla özyineleme yapabilir — bu yüzden önemsiz olmayan her şeyde, bir değişkene atarken bile ad tercih et.\n\nBir **IIFE** (Immediately Invoked Function Expression), tanımlanıp anında çağrılan bir fonksiyondur:\n\n```js\n(function () {\n  const secret = 42;   // özel — global değil\n})();\n```\n\nSaran `( … )` onu bir *ifadeye* çevirir; sondaki `()` çalıştırır. ES modülleri ve blok scope'tan önce, IIFE'ler özel bir scope oluşturup global isim alanını kirletmemenin *tek* yoluydu — module pattern'in temeli."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Turn this function into an IIFE that runs immediately",
+          "promptTr": "Bu fonksiyonu hemen çalışan bir IIFE'ye çevir",
+          "code": "(function () {\n  init();\n})___;",
+          "answers": ["()"],
+          "distractors": [";", "=>", "[]"],
+          "explanation": "The trailing () invokes the expression right away. The wrapping parentheses make the function a value that can be called inline.",
+          "explanationTr": "Sondaki (), ifadeyi hemen çağırır. Saran parantezler fonksiyonu, satır içinde çağrılabilen bir değer yapar."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What is one advantage of a named function over an anonymous one?",
+          "promptTr": "Adlı fonksiyonun anonim olana göre bir avantajı nedir?",
+          "options": [
+            { "text": "It shows a meaningful name in stack traces and can call itself recursively", "textTr": "Stack trace'lerde anlamlı bir ad gösterir ve kendini özyinelemeli çağırabilir", "correct": true },
+            { "text": "It always runs faster", "textTr": "Her zaman daha hızlı çalışır" },
+            { "text": "It is automatically hoisted when assigned to const", "textTr": "const'a atandığında otomatik hoist edilir" },
+            { "text": "It cannot be passed as an argument", "textTr": "Argüman olarak geçilemez" }
+          ],
+          "explanation": "Names make debugging easier (clear stack frames) and allow self-reference. Anonymous functions show up as \"<anonymous>\" and can't recurse by name.",
+          "explanationTr": "Adlar hata ayıklamayı kolaylaştırır (net stack frame'ler) ve öz-referansa izin verir. Anonim fonksiyonlar \"<anonymous>\" olarak görünür ve adıyla özyineleme yapamaz."
+        },
+        {
+          "type": "challenge",
+          "question": "What's a typical use case for anonymous functions?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is the difference between Anonymous and Named functions?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is IIFEs (Immediately Invoked Function Expressions)?"
+        }
+      ]
+    },
+    {
+      "slug": "bind-currying-purity",
+      "title": "bind, currying & purity",
+      "titleTr": "bind, currying ve saflık",
+      "position": 4,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Fixing this, fixing arguments, avoiding side effects",
+          "titleTr": "this'i sabitlemek, argümanları sabitlemek, yan etkilerden kaçınmak",
+          "body": "**`Function.prototype.bind(thisArg, ...args)`** returns a *new* function with `this` permanently set (and optionally some leading arguments pre-filled). It does **not** call the function — unlike `call`/`apply`, which invoke immediately.\n\n```js\nconst greet = function () { return this.name; };\nconst bound = greet.bind({ name: \"Ada\" });\nbound(); // \"Ada\"\n```\n\n**Currying** transforms `f(a, b, c)` into `f(a)(b)(c)` — a chain of one-argument functions, enabling partial application:\n\n```js\nconst add = a => b => a + b;\nconst add5 = add(5);\nadd5(3); // 8\n```\n\nA **pure function** returns the same output for the same input and has **no side effects** (no mutation, I/O, or external state). Pure functions plus **immutability** (never mutating data, returning new copies) make code predictable, testable, cache-friendly, and safe for concurrency — the reason `map`/`filter`/`reduce` and the spread operator are preferred over in-place mutation.",
+          "bodyTr": "**`Function.prototype.bind(thisArg, ...args)`**, `this`'i kalıcı olarak ayarlanmış (ve isteğe bağlı bazı baştaki argümanlar önceden doldurulmuş) *yeni* bir fonksiyon döndürür. Fonksiyonu **çağırmaz** — hemen çağıran `call`/`apply`'ın aksine.\n\n```js\nconst greet = function () { return this.name; };\nconst bound = greet.bind({ name: \"Ada\" });\nbound(); // \"Ada\"\n```\n\n**Currying**, `f(a, b, c)`'yi `f(a)(b)(c)`'ye dönüştürür — tek argümanlı fonksiyonlar zinciri, kısmi uygulamayı mümkün kılar:\n\n```js\nconst add = a => b => a + b;\nconst add5 = add(5);\nadd5(3); // 8\n```\n\nBir **saf (pure) fonksiyon**, aynı girdi için aynı çıktıyı döndürür ve **yan etkisi yoktur** (mutasyon, I/O ya da dış state yok). Saf fonksiyonlar artı **değişmezlik** (veriyi asla değiştirmeden yeni kopyalar döndürmek) kodu öngörülebilir, test edilebilir, önbellek-dostu ve eşzamanlılık için güvenli kılar — `map`/`filter`/`reduce` ve spread operatörünün yerinde mutasyona tercih edilme sebebi budur."
+        },
+        {
+          "type": "output_predict",
+          "prompt": "What does this log?",
+          "promptTr": "Bu ne yazdırır?",
+          "code": "function mul(a, b) { return a * b; }\nconst double = mul.bind(null, 2);\nconsole.log(double(5));",
+          "options": [
+            { "text": "10", "textTr": "10", "correct": true },
+            { "text": "2", "textTr": "2" },
+            { "text": "NaN", "textTr": "NaN" },
+            { "text": "[Function]", "textTr": "[Function]" }
+          ],
+          "explanation": "bind(null, 2) pre-fills the first argument a=2 and returns a new function; calling it with 5 sets b=5, so 2 * 5 = 10. This is partial application via bind.",
+          "explanationTr": "bind(null, 2) ilk argüman a=2'yi önceden doldurur ve yeni bir fonksiyon döndürür; onu 5 ile çağırmak b=5 yapar, yani 2 * 5 = 10. Bu, bind ile kısmi uygulamadır."
+        },
+        {
+          "type": "true_false",
+          "statement": "A pure function may read and modify a variable outside its own scope.",
+          "statementTr": "Saf bir fonksiyon kendi scope'u dışındaki bir değişkeni okuyup değiştirebilir.",
+          "answer": false,
+          "explanation": "Modifying external state is a side effect, which breaks purity. A pure function depends only on its arguments and changes nothing outside itself.",
+          "explanationTr": "Dış state'i değiştirmek bir yan etkidir ve saflığı bozar. Saf bir fonksiyon yalnızca argümanlarına bağlıdır ve kendi dışında hiçbir şeyi değiştirmez."
+        },
+        {
+          "type": "challenge",
+          "question": "Explain Function.prototype.bind."
+        },
+        {
+          "type": "challenge",
+          "question": "What is currying in JavaScript?"
+        },
+        {
+          "type": "challenge",
+          "question": "What are pure functions and why does immutability matter in JavaScript?"
+        }
+      ]
+    }
+  ]
+}

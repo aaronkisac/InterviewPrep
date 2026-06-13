@@ -1,0 +1,102 @@
+{
+  "topic": "javascript",
+  "slug": "equality-coercion",
+  "title": "Equality & Coercion",
+  "titleTr": "Eşitlik ve Coercion",
+  "section": "foundations",
+  "position": 2,
+  "lessons": [
+    {
+      "slug": "equality-operators",
+      "title": "Equality: == vs ===",
+      "titleTr": "Eşitlik: == vs ===",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Strict vs loose equality",
+          "titleTr": "Katı ve gevşek eşitlik",
+          "body": "JavaScript has two equality operators:\n\n- **`===`** (strict) — equal only if **same type AND same value**. No conversion.\n- **`==`** (loose) — converts operands to a common type first, *then* compares. This conversion is where the surprises live.\n\n```js\n1 === \"1\"   // false — different types\n1 == \"1\"    // true  — \"1\" coerced to 1\nnull == undefined   // true  (special-cased)\nnull === undefined  // false\nNaN === NaN  // false — NaN is never equal to anything\n```\n\nThe practical rule: **default to `===`**. Reach for `==` only in the one idiomatic case `x == null`, which is `true` for both `null` and `undefined` and nothing else. For real value-equality of objects you need a deep comparison — both operators only check reference for objects.",
+          "bodyTr": "JavaScript'te iki eşitlik operatörü vardır:\n\n- **`===`** (katı) — yalnızca **aynı tip VE aynı değer** ise eşit. Dönüşüm yok.\n- **`==`** (gevşek) — önce operandları ortak bir tipe dönüştürür, *sonra* karşılaştırır. Sürprizler bu dönüşümde gizlidir.\n\n```js\n1 === \"1\"   // false — farklı tipler\n1 == \"1\"    // true  — \"1\", 1'e dönüştürülür\nnull == undefined   // true  (özel durum)\nnull === undefined  // false\nNaN === NaN  // false — NaN hiçbir şeye eşit değildir\n```\n\nPratik kural: **varsayılanın `===` olsun**. `==`'e yalnızca deyimsel `x == null` durumunda başvur; bu hem `null` hem `undefined` için `true`, başka hiçbir şey için değil. Nesnelerin gerçek değer eşitliği için derin karşılaştırma gerekir — her iki operatör de nesnelerde yalnızca referansı kontrol eder."
+        },
+        {
+          "type": "output_predict",
+          "prompt": "What does this log?",
+          "promptTr": "Bu ne yazdırır?",
+          "code": "console.log(0 == \"\", 0 == \"0\", \"\" == \"0\");",
+          "options": [
+            { "text": "true true false", "textTr": "true true false", "correct": true },
+            { "text": "true true true", "textTr": "true true true" },
+            { "text": "false false false", "textTr": "false false false" },
+            { "text": "true false false", "textTr": "true false false" }
+          ],
+          "explanation": "== coerces to numbers: 0 == \"\" → 0 == 0 true; 0 == \"0\" → 0 == 0 true; but \"\" == \"0\" compares two strings (no coercion) → false. This non-transitivity is exactly why === is preferred.",
+          "explanationTr": "== sayıya dönüştürür: 0 == \"\" → 0 == 0 true; 0 == \"0\" → 0 == 0 true; ama \"\" == \"0\" iki string'i karşılaştırır (dönüşüm yok) → false. Bu geçişsizlik tam da === tercih edilmesinin nedenidir."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Catch both null and undefined, nothing else, in one check",
+          "promptTr": "Tek kontrolde hem null hem undefined'ı, başka hiçbir şeyi değil, yakala",
+          "code": "if (value ___ null) {\n  // value is null or undefined\n}",
+          "answers": ["=="],
+          "distractors": ["===", "!=", "!=="],
+          "explanation": "value == null is the one blessed use of loose equality: true for null and undefined only. Strict === null would miss undefined.",
+          "explanationTr": "value == null, gevşek eşitliğin onaylanmış tek kullanımıdır: yalnızca null ve undefined için true. Katı === null, undefined'ı kaçırırdı."
+        },
+        {
+          "type": "challenge",
+          "question": "Explain equality in JavaScript"
+        },
+        {
+          "type": "challenge",
+          "question": "What is the difference between == and ===?"
+        }
+      ]
+    },
+    {
+      "slug": "type-coercion",
+      "title": "Type coercion",
+      "titleTr": "Tip coercion'ı",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "When JavaScript converts types for you",
+          "titleTr": "JavaScript senin yerine tip dönüştürdüğünde",
+          "body": "**Coercion** is JavaScript automatically converting a value from one type to another. It comes in two forms:\n\n- **Implicit** — triggered by an operator or context: `1 + \"2\"` → `\"12\"`, `if (\"\")` → falsy, `\"5\" * 2` → `10`.\n- **Explicit** — you ask for it: `Number(\"5\")`, `String(5)`, `Boolean(x)`.\n\nThe rules that catch people out:\n\n- **`+`** with any string concatenates (string wins): `1 + \"2\"` → `\"12\"`. Every other arithmetic operator converts to number: `\"6\" / \"2\"` → `3`.\n- **Falsy values** — `false`, `0`, `\"\"`, `null`, `undefined`, `NaN`. Everything else is truthy, including `\"0\"`, `\"false\"`, `[]` and `{}`.\n- Classic surprises: `[] + []` → `\"\"`, `[] + {}` → `\"[object Object]\"`, `\"5\" - 1` → `4` but `\"5\" + 1` → `\"51\"`.\n\nDefend yourself: convert explicitly at boundaries and prefer `===`.",
+          "bodyTr": "**Coercion**, JavaScript'in bir değeri otomatik olarak bir tipten başkasına dönüştürmesidir. İki biçimi vardır:\n\n- **Örtük (implicit)** — bir operatör ya da bağlamla tetiklenir: `1 + \"2\"` → `\"12\"`, `if (\"\")` → falsy, `\"5\" * 2` → `10`.\n- **Açık (explicit)** — sen istersin: `Number(\"5\")`, `String(5)`, `Boolean(x)`.\n\nİnsanları yakalayan kurallar:\n\n- Herhangi bir string ile **`+`** birleştirir (string kazanır): `1 + \"2\"` → `\"12\"`. Diğer tüm aritmetik operatörler sayıya dönüştürür: `\"6\" / \"2\"` → `3`.\n- **Falsy değerler** — `false`, `0`, `\"\"`, `null`, `undefined`, `NaN`. Geri kalan her şey truthy'dir; `\"0\"`, `\"false\"`, `[]` ve `{}` dahil.\n- Klasik sürprizler: `[] + []` → `\"\"`, `[] + {}` → `\"[object Object]\"`, `\"5\" - 1` → `4` ama `\"5\" + 1` → `\"51\"`.\n\nKendini koru: sınırlarda açıkça dönüştür ve `===` tercih et."
+        },
+        {
+          "type": "output_predict",
+          "prompt": "What does this log?",
+          "promptTr": "Bu ne yazdırır?",
+          "code": "console.log(\"5\" + 1, \"5\" - 1, [] + {});",
+          "options": [
+            { "text": "51 4 [object Object]", "textTr": "51 4 [object Object]", "correct": true },
+            { "text": "6 4 {}", "textTr": "6 4 {}" },
+            { "text": "51 4 0", "textTr": "51 4 0" },
+            { "text": "6 6 [object Object]", "textTr": "6 6 [object Object]" }
+          ],
+          "explanation": "+ with a string concatenates → \"51\"; - has no string meaning so both go to number → 4; [] becomes \"\" and {} becomes \"[object Object]\".",
+          "explanationTr": "string ile + birleştirir → \"51\"; -'nin string anlamı yok, ikisi de sayıya gider → 4; [] \"\" olur, {} \"[object Object]\" olur."
+        },
+        {
+          "type": "true_false",
+          "statement": "The string \"0\" is a falsy value in JavaScript.",
+          "statementTr": "\"0\" string'i JavaScript'te falsy bir değerdir.",
+          "answer": false,
+          "explanation": "Only the number 0 is falsy. The non-empty string \"0\" is truthy — a frequent bug when checking user input. The falsy set is: false, 0, \"\", null, undefined, NaN.",
+          "explanationTr": "Yalnızca number 0 falsy'dir. Boş olmayan \"0\" string'i truthy'dir — kullanıcı girdisini kontrol ederken sık görülen bir hata. Falsy kümesi: false, 0, \"\", null, undefined, NaN."
+        },
+        {
+          "type": "challenge",
+          "question": "What is Coercion in JavaScript?"
+        },
+        {
+          "type": "challenge",
+          "question": "How does JavaScript handle type coercion and what are the most surprising cases?"
+        }
+      ]
+    }
+  ]
+}
