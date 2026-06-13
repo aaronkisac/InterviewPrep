@@ -29,9 +29,18 @@
               "textTr": "screen.getByRole(\"button\", { name: \"Save\" })",
               "correct": true
             },
-            { "text": "container.querySelector(\".btn-primary\")", "textTr": "container.querySelector(\".btn-primary\")" },
-            { "text": "wrapper.find(SaveButton).props()", "textTr": "wrapper.find(SaveButton).props()" },
-            { "text": "screen.getByTestId(\"save\")  — always first choice", "textTr": "screen.getByTestId(\"save\") — her zaman ilk tercih" }
+            {
+              "text": "container.querySelector(\".btn-primary\")",
+              "textTr": "container.querySelector(\".btn-primary\")"
+            },
+            {
+              "text": "wrapper.find(SaveButton).props()",
+              "textTr": "wrapper.find(SaveButton).props()"
+            },
+            {
+              "text": "screen.getByTestId(\"save\")  — always first choice",
+              "textTr": "screen.getByTestId(\"save\") — her zaman ilk tercih"
+            }
           ],
           "explanation": "Roles + accessible names are what assistive tech (and users) perceive — they survive refactors and double as an a11y check. test-id is the escape hatch, not the default.",
           "explanationTr": "Role + erişilebilir ad, yardımcı teknolojinin (ve kullanıcının) algıladığı şeydir — refactor'lara dayanır, üstüne a11y kontrolü sayılır. test-id varsayılan değil kaçış kapısıdır."
@@ -49,11 +58,35 @@
           "prompt": "Match the tool to its job in a React test stack",
           "promptTr": "Aracı React test stack'indeki göreviyle eşleştir",
           "pairs": [
-            { "left": "Jest / Vitest", "leftTr": "Jest / Vitest", "right": "Runner, assertions, mocks, coverage", "rightTr": "Runner, assertion, mock, coverage" },
-            { "left": "React Testing Library", "leftTr": "React Testing Library", "right": "Render + query components like a user", "rightTr": "Bileşeni kullanıcı gibi render et + sorgula" },
-            { "left": "user-event", "leftTr": "user-event", "right": "Realistic typing, clicking, tabbing", "rightTr": "Gerçekçi yazma, tıklama, tab'lama" },
-            { "left": "Playwright / Cypress", "leftTr": "Playwright / Cypress", "right": "End-to-end flows in a real browser", "rightTr": "Gerçek tarayıcıda uçtan uca akışlar" }
+            {
+              "left": "Jest / Vitest",
+              "leftTr": "Jest / Vitest",
+              "right": "Runner, assertions, mocks, coverage",
+              "rightTr": "Runner, assertion, mock, coverage"
+            },
+            {
+              "left": "React Testing Library",
+              "leftTr": "React Testing Library",
+              "right": "Render + query components like a user",
+              "rightTr": "Bileşeni kullanıcı gibi render et + sorgula"
+            },
+            {
+              "left": "user-event",
+              "leftTr": "user-event",
+              "right": "Realistic typing, clicking, tabbing",
+              "rightTr": "Gerçekçi yazma, tıklama, tab'lama"
+            },
+            {
+              "left": "Playwright / Cypress",
+              "leftTr": "Playwright / Cypress",
+              "right": "End-to-end flows in a real browser",
+              "rightTr": "Gerçek tarayıcıda uçtan uca akışlar"
+            }
           ]
+        },
+        {
+          "type": "challenge",
+          "question": "What is the difference between testing implementation details and testing behavior in React?"
         }
       ]
     },
@@ -75,8 +108,14 @@
           "prompt": "Complete the test",
           "promptTr": "Testi tamamla",
           "code": "render(<Counter />);\n\nawait userEvent.___(screen.getByRole(\"button\", { name: \"+\" }));\n\nexpect(screen.getByText(\"1\")).___();",
-          "answers": ["click", "toBeInTheDocument"],
-          "distractors": ["press", "toExist"],
+          "answers": [
+            "click",
+            "toBeInTheDocument"
+          ],
+          "distractors": [
+            "press",
+            "toExist"
+          ],
           "explanation": "user-event simulates the full event chain of a real click; jest-dom matchers like toBeInTheDocument read like English.",
           "explanationTr": "user-event gerçek bir tıklamanın tüm event zincirini simüle eder; toBeInTheDocument gibi jest-dom matcher'ları İngilizce gibi okunur."
         },
