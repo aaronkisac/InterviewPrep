@@ -6,10 +6,12 @@
 // A11y: every node is a link/button with full text state; color never alone.
 
 import Link from "next/link";
+import { useEffect, useMemo, useState } from "react";
 import { motion } from "motion/react";
 import { Check, Lock, Play, Star } from "lucide-react";
 
 import { SPRING_POP } from "@/lib/course/motion";
+import { getGuestCompletedLessonIds } from "@/lib/course/guest-progress";
 import type { LessonNodeStatus, UnitNodeStatus } from "@/lib/course/path-state";
 import type { UnitSection } from "@/lib/supabase/types";
 import { usePrefersReducedMotion } from "@/lib/course/use-reduced-motion";
@@ -99,6 +101,37 @@ export function CourseMap({
   const i18n = i18nCourse[lang];
   const reduced = usePrefersReducedMotion();
 
+  // Guest progress lives in localStorage; load it after mount so the first
+  // client render still matches the server (empty → only lesson 1 active).
+  const [guestCompleted, setGuestCompleted] = useState<Set<string>>(
+    () => new Set(),
+  );
+  useEffect(() => {
+    if (isGuest) setGuestCompleted(getGuestCompletedLessonIds());
+  }, [isGuest]);
+
+  // Sequential lock states for the first unit when browsing as a guest:
+  // a lesson is done when stored locally, the first not-done one is active,
+  // the rest stay locked until it is finished.
+  const guestFirstUnitStatus = useMemo(() => {
+    if (!isGuest) return null;
+    const first = units[0];
+    if (!first) return null;
+    const map = new Map<string, LessonNodeStatus>();
+    let activeAssigned = false;
+    for (const l of first.lessons) {
+      if (guestCompleted.has(l.id)) {
+        map.set(l.id, "done");
+      } else if (!activeAssigned) {
+        map.set(l.id, "active");
+        activeAssigned = true;
+      } else {
+        map.set(l.id, "locked");
+      }
+    }
+    return map;
+  }, [isGuest, units, guestCompleted]);
+
   // Global index of each unit's first lesson bubble (drives the sine offsets).
   // Computed before JSX — the react compiler forbids mutating closure
   // variables inside render callbacks.
@@ -168,32 +201,51 @@ export function CourseMap({
                   const offset = offsetFor(i);
                   const prevOffset = offsetFor(i - 1);
                   const title = lang === "tr" ? lesson.titleTr : lesson.title;
-                  const href = isGuest
-                    ? "/signin"
-                    : `/learn/${topicSlug}/lesson/${lesson.id}`;
-                  const clickable = lesson.status !== "locked";
+                  const isFirstUnit = uIdx === 0;
+                  // First unit = no-login trial (sequential, localStorage-driven).
+                  // Later units link to sign-in for guests.
+                  let displayStatus: LessonNodeStatus;
+                  let href: string;
+                  let clickable: boolean;
+                  if (isGuest && isFirstUnit) {
+                    displayStatus =
+                      guestFirstUnitStatus?.get(lesson.id) ?? lesson.status;
+                    clickable = displayStatus !== "locked";
+                    href = `/learn/${topicSlug}/lesson/${lesson.id}`;
+                  } else if (isGuest) {
+                    displayStatus = lesson.status;
+                    clickable = true;
+                    href = "/signin";
+                  } else {
+                    displayStatus = lesson.status;
+                    clickable = lesson.status !== "locked";
+                    href = `/learn/${topicSlug}/lesson/${lesson.id}`;
+                  }
+                  // "Sign in" hint on the first lesson of the first gated unit.
+                  const showSignInBadge =
+                    isGuest && uIdx === 1 && li === 0;
 
                   const disc = (
                     <motion.span
                       className={cn(
                         "relative flex size-14 items-center justify-center rounded-full border-4",
-                        lesson.status === "done" &&
+                        displayStatus === "done" &&
                           "border-emerald-600 bg-emerald-500 text-white",
-                        lesson.status === "active" &&
+                        displayStatus === "active" &&
                           "border-primary bg-primary text-primary-foreground shadow-lg",
-                        lesson.status === "locked" &&
+                        displayStatus === "locked" &&
                           "border-border bg-secondary text-muted-foreground",
                       )}
                       animate={
-                        !reduced && lesson.status === "active"
+                        !reduced && displayStatus === "active"
                           ? { scale: [1, 1.06, 1] }
                           : undefined
                       }
                       transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
                     >
-                      {lesson.status === "done" ? (
+                      {displayStatus === "done" ? (
                         <Star className="size-5 fill-current" aria-hidden="true" />
-                      ) : lesson.status === "active" ? (
+                      ) : displayStatus === "active" ? (
                         <Play className="size-5 fill-current" aria-hidden="true" />
                       ) : (
                         <Lock className="size-5" aria-hidden="true" />
@@ -207,7 +259,7 @@ export function CourseMap({
                         <Connector
                           from={prevOffset}
                           to={offset}
-                          unlocked={lesson.status !== "locked"}
+                          unlocked={displayStatus !== "locked"}
                           reduced={reduced}
                         />
                       )}
@@ -221,7 +273,7 @@ export function CourseMap({
                         {clickable ? (
                           <Link
                             href={href}
-                            aria-label={`${title}${lesson.status === "done" ? ` — ${i18n.replay}` : ""}`}
+                            aria-label={`${title}${displayStatus === "done" ? ` — ${i18n.replay}` : ""}`}
                             className="rounded-full transition hover:brightness-105 active:scale-95"
                           >
                             {disc}
@@ -232,18 +284,22 @@ export function CourseMap({
                         <span
                           className={cn(
                             "max-w-40 text-xs leading-snug",
-                            lesson.status === "locked"
+                            displayStatus === "locked"
                               ? "text-muted-foreground/60"
                               : "text-muted-foreground",
                           )}
                           aria-hidden="true"
                         >
                           {title}
-                          {lesson.status === "active" && (
+                          {displayStatus === "active" ? (
                             <span className="ml-1 inline-block rounded-full bg-primary px-1.5 py-0.5 text-[10px] font-bold uppercase text-primary-foreground">
-                              {isGuest ? i18n.signInToStart : i18n.start}
+                              {i18n.start}
                             </span>
-                          )}
+                          ) : showSignInBadge ? (
+                            <span className="ml-1 inline-block rounded-full bg-muted-foreground/20 px-1.5 py-0.5 text-[10px] font-bold uppercase text-muted-foreground">
+                              {i18n.signInToStart}
+                            </span>
+                          ) : null}
                         </span>
                       </motion.div>
                     </div>

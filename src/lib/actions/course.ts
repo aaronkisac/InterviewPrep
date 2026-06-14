@@ -97,3 +97,32 @@ export async function recordLessonResult(
 
   return { ok: true };
 }
+
+/**
+ * Import a logged-out visitor's localStorage course progress into their
+ * account on first sign-in. Existing accounts keep their own data — if any
+ * lesson progress already exists, the guest entries are ignored (the client
+ * still clears localStorage afterwards).
+ */
+export async function migrateGuestProgress(
+  entries: RecordLessonResultInput[],
+): Promise<{ imported: number }> {
+  const session = await auth();
+  if (!session?.user?.id || entries.length === 0) return { imported: 0 };
+
+  const sb = createAdminClient();
+  const { count } = await sb
+    .from("user_lesson_progress")
+    .select("lesson_id", { count: "exact", head: true })
+    .eq("user_id", session.user.id);
+
+  // Account already has progress → trust the server data, skip the import.
+  if ((count ?? 0) > 0) return { imported: 0 };
+
+  let imported = 0;
+  for (const entry of entries) {
+    const result = await recordLessonResult(entry);
+    if (result.ok) imported += 1;
+  }
+  return { imported };
+}

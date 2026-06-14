@@ -30,6 +30,7 @@ import { seededShuffle } from "@/lib/course/shuffle";
 import { isInteractive, type Step } from "@/lib/course/step-schema";
 import { usePrefersReducedMotion } from "@/lib/course/use-reduced-motion";
 import { recordLessonResult } from "@/lib/actions/course";
+import { saveGuestLessonResult } from "@/lib/course/guest-progress";
 import type { ChallengeData } from "@/lib/course-data";
 import { i18nCourse } from "@/lib/i18n";
 import { MarkdownContent } from "@/components/markdown-content";
@@ -66,9 +67,12 @@ type Feedback = {
 export function LessonPlayer({
   lesson,
   lang,
+  isGuest = false,
 }: {
   lesson: PlayerLesson;
   lang: Language;
+  /** Logged-out trial: persist completion to localStorage, not the account. */
+  isGuest?: boolean;
 }) {
   const i18n = i18nCourse[lang];
   const reduced = usePrefersReducedMotion();
@@ -281,11 +285,20 @@ export function LessonPlayer({
         ? [{ questionId: s.questionId, correct: queue.firstTry[i] === true }]
         : [],
     );
-    void recordLessonResult({
-      lessonId: lesson.id,
-      accuracyPct: finalAccuracy,
-      challenges,
-    });
+    if (isGuest) {
+      // Logged-out trial — keep progress locally; migrated on first sign-in.
+      saveGuestLessonResult({
+        lessonId: lesson.id,
+        accuracyPct: finalAccuracy,
+        challenges,
+      });
+    } else {
+      void recordLessonResult({
+        lessonId: lesson.id,
+        accuracyPct: finalAccuracy,
+        challenges,
+      });
+    }
 
     if (!reduced) {
       void import("canvas-confetti").then(({ default: confetti }) => {
@@ -293,7 +306,7 @@ export function LessonPlayer({
         void confetti({ particleCount: 80, spread: 70, origin: { x: 0.7, y: 0.7 } });
       });
     }
-  }, [done, lesson, queue, finalAccuracy, reduced]);
+  }, [done, lesson, queue, finalAccuracy, reduced, isGuest]);
 
   const exit = useCallback(() => {
     const dirty = !done && (queue.cleared > 0 || Object.keys(queue.firstTry).length > 0);

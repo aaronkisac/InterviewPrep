@@ -1,0 +1,112 @@
+{
+  "topic": "redux",
+  "slug": "fundamentals",
+  "title": "Redux Fundamentals",
+  "titleTr": "Redux Temelleri",
+  "section": "foundations",
+  "position": 1,
+  "lessons": [
+    {
+      "slug": "redux-flux-principles",
+      "title": "Redux, Flux & core principles",
+      "titleTr": "Redux, Flux ve temel ilkeler",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Predictable state from one source",
+          "titleTr": "Tek kaynaktan öngörülebilir state",
+          "body": "**Redux** is a predictable **state container** for JavaScript apps. It centralises application state in one place and makes every change explicit and traceable — popular with React but framework-agnostic.\n\nIt grew out of **Flux**, Facebook's architecture for **one-way (unidirectional) data flow**: actions → dispatcher → stores → views. Flux fixed the tangled two-way binding of MVC. Redux keeps Flux's one-way flow but simplifies it — **a single store** instead of many, and **pure reducer functions** instead of a dispatcher.\n\nThe **three core principles** of Redux:\n\n1. **Single source of truth** — the whole app state lives in one **store** (one object tree).\n2. **State is read-only** — you never mutate it directly; the only way to change it is to **dispatch an action** (a plain object describing what happened).\n3. **Changes are made with pure functions** — **reducers** take the previous state and an action and return the *next* state, without side effects.\n\nTogether these make state changes predictable, debuggable, and time-travelable.",
+          "bodyTr": "**Redux**, JavaScript uygulamaları için öngörülebilir bir **state konteyneridir**. Uygulama state'ini tek bir yerde merkezileştirir ve her değişikliği açık ve izlenebilir kılar — React'le popüler ama framework'ten bağımsızdır.\n\n**Flux**'tan doğdu; Facebook'un **tek yönlü (unidirectional) veri akışı** mimarisi: action'lar → dispatcher → store'lar → view'lar. Flux, MVC'nin karışık çift yönlü bağlamasını düzeltti. Redux, Flux'ın tek yönlü akışını korur ama basitleştirir — birçok yerine **tek bir store** ve dispatcher yerine **saf reducer fonksiyonları**.\n\nRedux'ın **üç temel ilkesi**:\n\n1. **Tek doğruluk kaynağı** — tüm uygulama state'i tek bir **store**'da yaşar (tek nesne ağacı).\n2. **State salt-okunurdur** — onu asla doğrudan değiştirmezsin; değiştirmenin tek yolu bir **action dispatch etmektir** (ne olduğunu tanımlayan düz bir nesne).\n3. **Değişiklikler saf fonksiyonlarla yapılır** — **reducer'lar** önceki state ile action'ı alır ve yan etki olmadan *sonraki* state'i döndürür.\n\nBunlar birlikte state değişikliklerini öngörülebilir, hata ayıklanabilir ve zaman-yolculuğu yapılabilir kılar."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Which is NOT one of Redux's three core principles?",
+          "promptTr": "Hangisi Redux'ın üç temel ilkesinden biri DEĞİLDİR?",
+          "options": [
+            { "text": "Components may mutate the store directly for performance", "textTr": "Bileşenler performans için store'u doğrudan değiştirebilir", "correct": true },
+            { "text": "Single source of truth (one store)", "textTr": "Tek doğruluk kaynağı (tek store)" },
+            { "text": "State is read-only; change it by dispatching actions", "textTr": "State salt-okunurdur; action dispatch ederek değiştir" },
+            { "text": "Changes are made by pure reducer functions", "textTr": "Değişiklikler saf reducer fonksiyonlarıyla yapılır" }
+          ],
+          "explanation": "You never mutate the store directly — that breaks predictability. State changes only via dispatched actions handled by pure reducers.",
+          "explanationTr": "Store'u asla doğrudan değiştirmezsin — bu öngörülebilirliği bozar. State yalnızca, saf reducer'larca işlenen dispatch edilmiş action'larla değişir."
+        },
+        {
+          "type": "true_false",
+          "statement": "Redux is built on the idea of unidirectional (one-way) data flow, inherited from Flux.",
+          "statementTr": "Redux, Flux'tan miras alınan tek yönlü veri akışı fikri üzerine kuruludur.",
+          "answer": true,
+          "explanation": "Like Flux, data flows one way: dispatch an action → reducer computes new state → UI re-renders. There's no two-way binding back into the store.",
+          "explanationTr": "Flux gibi, veri tek yönde akar: action dispatch et → reducer yeni state hesaplar → UI yeniden render olur. Store'a geri çift yönlü bağlama yoktur."
+        },
+        {
+          "type": "challenge",
+          "question": "What is Redux?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is Flux?"
+        },
+        {
+          "type": "challenge",
+          "question": "What are the core principles of Redux?"
+        }
+      ]
+    },
+    {
+      "slug": "store-and-reducers",
+      "title": "Store & reducers",
+      "titleTr": "Store ve reducer'lar",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "The single state tree and the functions that update it",
+          "titleTr": "Tek state ağacı ve onu güncelleyen fonksiyonlar",
+          "body": "The **store** is the object that holds the whole application **state tree**. There is exactly **one** store. Its API is small:\n\n- **`getState()`** — read the current state.\n- **`dispatch(action)`** — the only way to trigger a state change.\n- **`subscribe(listener)`** — run a callback whenever state changes (react-redux uses this under the hood).\n\nYou create it with `configureStore` (Redux Toolkit) or the classic `createStore(rootReducer)`.\n\nA **reducer** is a **pure function** `(state, action) => newState`. It looks at the action's `type` and returns the next state, **without mutating** the old one:\n\n```js\nfunction counter(state = 0, action) {\n  switch (action.type) {\n    case \"increment\": return state + 1;\n    case \"decrement\": return state - 1;\n    default:          return state; // unknown action → unchanged\n  }\n}\n```\n\nKey rules: reducers must be **pure** (no API calls, no mutation, no `Date.now()`/random), must return the **unchanged** state for unknown actions, and must produce a **new** object/array instead of editing the existing one. Multiple reducers are combined into the root reducer with `combineReducers`.",
+          "bodyTr": "**Store**, tüm uygulama **state ağacını** tutan nesnedir. Tam olarak **bir** store vardır. API'si küçüktür:\n\n- **`getState()`** — mevcut state'i oku.\n- **`dispatch(action)`** — bir state değişikliğini tetiklemenin tek yolu.\n- **`subscribe(listener)`** — state her değiştiğinde bir callback çalıştır (react-redux bunu arkada kullanır).\n\nOnu `configureStore` (Redux Toolkit) ya da klasik `createStore(rootReducer)` ile oluşturursun.\n\nBir **reducer**, `(state, action) => newState` saf fonksiyonudur. Action'ın `type`'ına bakar ve eskisini **değiştirmeden** sonraki state'i döndürür:\n\n```js\nfunction counter(state = 0, action) {\n  switch (action.type) {\n    case \"increment\": return state + 1;\n    case \"decrement\": return state - 1;\n    default:          return state; // bilinmeyen action → değişmez\n  }\n}\n```\n\nTemel kurallar: reducer'lar **saf** olmalı (API çağrısı yok, mutasyon yok, `Date.now()`/random yok), bilinmeyen action'lar için **değişmemiş** state'i döndürmeli ve mevcut nesneyi düzenlemek yerine **yeni** bir nesne/dizi üretmeli. Birden çok reducer, `combineReducers` ile kök reducer'da birleştirilir."
+        },
+        {
+          "type": "output_predict",
+          "prompt": "What does the counter reducer return for an unknown action?",
+          "promptTr": "counter reducer'ı bilinmeyen bir action için ne döndürür?",
+          "code": "counter(5, { type: \"reset\" });\n// the reducer only handles increment/decrement",
+          "options": [
+            { "text": "5 — the current state, unchanged", "textTr": "5 — mevcut state, değişmeden", "correct": true },
+            { "text": "0 — it resets to the initial state", "textTr": "0 — başlangıç state'ine sıfırlanır" },
+            { "text": "undefined", "textTr": "undefined" },
+            { "text": "It throws an error", "textTr": "Hata fırlatır" }
+          ],
+          "explanation": "A reducer must return the existing state unchanged in its default case for actions it doesn't handle — that's why the switch ends with `default: return state`.",
+          "explanationTr": "Bir reducer, ele almadığı action'lar için default durumunda mevcut state'i değişmeden döndürmeli — switch'in `default: return state` ile bitmesinin sebebi budur."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Which is the only correct way to change state in Redux?",
+          "promptTr": "Redux'ta state'i değiştirmenin tek doğru yolu hangisidir?",
+          "options": [
+            { "text": "Dispatch an action, which a reducer turns into new state", "textTr": "Bir action dispatch et; reducer onu yeni state'e çevirir", "correct": true },
+            { "text": "Call store.state = newValue directly", "textTr": "Doğrudan store.state = newValue çağır" },
+            { "text": "Mutate the object returned by getState()", "textTr": "getState()'in döndürdüğü nesneyi değiştir" },
+            { "text": "Edit the reducer's previous state argument in place", "textTr": "Reducer'ın önceki state argümanını yerinde düzenle" }
+          ],
+          "explanation": "All state changes flow through dispatch → reducer → new state. Direct assignment or mutating getState()/the state argument breaks Redux's guarantees.",
+          "explanationTr": "Tüm state değişiklikleri dispatch → reducer → yeni state akışından geçer. Doğrudan atama ya da getState()/state argümanını değiştirmek Redux'ın garantilerini bozar."
+        },
+        {
+          "type": "challenge",
+          "question": "What is a store in Redux?"
+        },
+        {
+          "type": "challenge",
+          "question": "What are reducers in Redux?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is a Reducer?"
+        }
+      ]
+    }
+  ]
+}

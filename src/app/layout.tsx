@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import { Libre_Baskerville, Inter } from "next/font/google";
 import "./globals.css";
 
+import { auth } from "@/lib/auth";
 import { Navbar } from "@/components/navbar";
+import { GuestProgressMigrator } from "@/components/guest-progress-migrator";
 import { ThemeProvider } from "@/components/theme-provider";
 import { COLOR_THEME_STORAGE_KEY, DEFAULT_COLOR_THEME } from "@/lib/themes";
 import { LangProvider } from "@/contexts/lang-context";
@@ -64,6 +66,7 @@ export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   const lang = await getLang();
+  const session = await auth().catch(() => null);
   return (
     <html
       lang={lang === "tr" ? "tr" : "en"}
@@ -101,6 +104,7 @@ export default async function RootLayout({
         <ThemeProvider>
           <LangProvider initial={lang}>
             <Navbar />
+            {session?.user ? <GuestProgressMigrator /> : null}
             <div id="main-content" className="pt-[37px] flex flex-col flex-1">
               {children}
             </div>

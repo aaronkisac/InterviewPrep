@@ -1,0 +1,104 @@
+{
+  "topic": "redux",
+  "slug": "reducers-state-conventions",
+  "title": "Reducers, State & Conventions",
+  "titleTr": "Reducer'lar, State ve Konvansiyonlar",
+  "section": "core",
+  "position": 2,
+  "lessons": [
+    {
+      "slug": "reducers-and-constants",
+      "title": "Why \"reducers\" & action constants",
+      "titleTr": "Neden \"reducer\" ve action sabitleri",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "The name, and naming action types",
+          "titleTr": "İsim ve action type'larını adlandırmak",
+          "body": "Why are they called **reducers**? Because they have the exact shape of the callback you pass to **`Array.prototype.reduce`**: `(accumulator, item) => newAccumulator`. A Redux reducer is `(stateSoFar, action) => nextState` — you can literally compute final state by *reducing* a list of actions over an initial state:\n\n```js\nactions.reduce(rootReducer, initialState); // replay history → current state\n```\n\nThat \"fold a stream of actions into state\" idea is why the name fits, and why time-travel debugging works.\n\n**Action type constants** are a convention: instead of writing the string `\"ADD_TODO\"` in both the action creator and the reducer, you define it once:\n\n```js\nexport const ADD_TODO = \"ADD_TODO\";\n```\n\nWhy bother? It prevents **typos** (a mistyped string fails silently — the reducer just ignores it), gives **autocomplete** and a single place to rename, makes it easy to **see all action types** at a glance, and avoids duplication between the creator and the reducer. (Redux Toolkit's `createSlice` generates these for you.)",
+          "bodyTr": "Neden **reducer** denir? Çünkü **`Array.prototype.reduce`**'a geçtiğin callback'in tam şekline sahipler: `(accumulator, item) => newAccumulator`. Bir Redux reducer'ı `(stateSoFar, action) => nextState`'tir — son state'i, bir action listesini başlangıç state'i üzerinde *reduce ederek* hesaplayabilirsin:\n\n```js\nactions.reduce(rootReducer, initialState); // geçmişi tekrar oynat → mevcut state\n```\n\nO \"bir action akışını state'e katlama\" fikri, ismin uyma ve zaman-yolculuğu hata ayıklamasının çalışma sebebidir.\n\n**Action type sabitleri** bir konvansiyondur: `\"ADD_TODO\"` string'ini hem action creator'da hem reducer'da yazmak yerine, bir kez tanımlarsın:\n\n```js\nexport const ADD_TODO = \"ADD_TODO\";\n```\n\nNeden? **Yazım hatalarını** önler (yanlış yazılmış string sessizce başarısız olur — reducer onu yok sayar), **otomatik tamamlama** ve yeniden adlandırmak için tek yer verir, **tüm action type'ları** bir bakışta görmeyi kolaylaştırır ve creator ile reducer arasında tekrarı önler. (Redux Toolkit'in `createSlice`'ı bunları senin için üretir.)"
+        },
+        {
+          "type": "mcq",
+          "prompt": "Why are Redux state functions called \"reducers\"?",
+          "promptTr": "Redux state fonksiyonlarına neden \"reducer\" denir?",
+          "options": [
+            { "text": "They match the (accumulator, item) => newAccumulator shape of Array.reduce, folding actions into state", "textTr": "Array.reduce'un (accumulator, item) => newAccumulator şekline uyarlar, action'ları state'e katlarlar", "correct": true },
+            { "text": "They reduce the size of the bundle", "textTr": "Bundle boyutunu azaltırlar" },
+            { "text": "They reduce the number of components", "textTr": "Bileşen sayısını azaltırlar" },
+            { "text": "They run only when state shrinks", "textTr": "Yalnızca state küçüldüğünde çalışırlar" }
+          ],
+          "explanation": "A reducer is exactly the function you'd pass to Array.reduce: (acc, item) => acc. Reducing the action history over an initial state yields the current state.",
+          "explanationTr": "Bir reducer, Array.reduce'a geçeceğin fonksiyonun ta kendisidir: (acc, item) => acc. Action geçmişini başlangıç state'i üzerinde reduce etmek mevcut state'i verir."
+        },
+        {
+          "type": "true_false",
+          "statement": "Using action type constants instead of inline strings helps catch typos and avoids duplication.",
+          "statementTr": "Inline string yerine action type sabitleri kullanmak yazım hatalarını yakalamaya yardım eder ve tekrarı önler.",
+          "answer": true,
+          "explanation": "A constant is defined once and imported in both the action creator and reducer, so a typo becomes a clear reference error instead of a silently-ignored action.",
+          "explanationTr": "Bir sabit bir kez tanımlanıp hem action creator'da hem reducer'da import edilir, böylece bir yazım hatası sessizce yok sayılan bir action yerine net bir referans hatası olur."
+        },
+        {
+          "type": "challenge",
+          "question": "Why are Redux state functions called reducers?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is the purpose of the constants in Redux?"
+        }
+      ]
+    },
+    {
+      "slug": "initial-reset-and-what-to-store",
+      "title": "Initial state, reset & what to store",
+      "titleTr": "Başlangıç state'i, reset ve neyi saklamalı",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Seeding, clearing, and right-sizing the store",
+          "titleTr": "Tohumlama, temizleme ve store'u doğru boyutlandırma",
+          "body": "**Setting initial state**: each reducer declares its own default via the parameter default — `function todos(state = [], action)`. On startup Redux dispatches a dummy `@@INIT` action, so every reducer returns its initial value and the store tree is seeded. (`createStore`/`configureStore` also accept a `preloadedState` argument, e.g. to hydrate from the server or localStorage.)\n\n**Resetting state**: the clean trick is to wrap your root reducer — on a `LOGOUT`/`RESET` action, pass `undefined` as the state so every child reducer falls back to its initial value:\n\n```js\nconst appReducer = combineReducers({ /* … */ });\nconst rootReducer = (state, action) =>\n  appReducer(action.type === \"RESET\" ? undefined : state, action);\n```\n\n**Do you need to keep all component state in the store?** **No.** Redux is for *shared, app-wide* state — auth/user, cart, cached server data, cross-page data. **Local UI state** (form input being typed, a dropdown's open/closed flag, hover state) belongs in component `useState`. Putting everything in Redux adds boilerplate and re-renders for no benefit. Rule of thumb: lift state to Redux only when **multiple distant components** need it or it must **survive navigation**.",
+          "bodyTr": "**Başlangıç state'i ayarlama**: her reducer kendi varsayılanını parametre default'uyla bildirir — `function todos(state = [], action)`. Başlangıçta Redux bir sahte `@@INIT` action'ı dispatch eder, böylece her reducer başlangıç değerini döndürür ve store ağacı tohumlanır. (`createStore`/`configureStore` ayrıca bir `preloadedState` argümanı kabul eder, örn. sunucudan ya da localStorage'dan hidrasyon için.)\n\n**State'i sıfırlama**: temiz hile, kök reducer'ı sarmaktır — bir `LOGOUT`/`RESET` action'ında state olarak `undefined` geç, böylece her çocuk reducer başlangıç değerine düşer:\n\n```js\nconst appReducer = combineReducers({ /* … */ });\nconst rootReducer = (state, action) =>\n  appReducer(action.type === \"RESET\" ? undefined : state, action);\n```\n\n**Tüm bileşen state'ini store'da tutman gerekir mi?** **Hayır.** Redux *paylaşılan, uygulama-geneli* state içindir — auth/kullanıcı, sepet, önbellekli sunucu verisi, sayfalar arası veri. **Yerel UI state'i** (yazılmakta olan form girdisi, bir dropdown'ın açık/kapalı bayrağı, hover state'i) bileşen `useState`'ine aittir. Her şeyi Redux'a koymak faydasız boilerplate ve yeniden render ekler. Kural: state'i Redux'a yalnızca **birden çok uzak bileşen** ona ihtiyaç duyduğunda ya da **gezinmeden sağ çıkması** gerektiğinde taşı."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Give the reducer its initial state via a default parameter",
+          "promptTr": "Reducer'a başlangıç state'ini bir default parametreyle ver",
+          "code": "function todos(state ___ [], action) {\n  // …\n}",
+          "answers": ["="],
+          "distractors": ["=>", "==", ":"],
+          "explanation": "The ES6 default parameter (state = []) supplies the initial state the first time the reducer runs (on @@INIT), since state is undefined then.",
+          "explanationTr": "ES6 default parametresi (state = []), reducer ilk çalıştığında (@@INIT'te) başlangıç state'ini sağlar, çünkü o an state undefined'dır."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Which state belongs in component useState rather than the Redux store?",
+          "promptTr": "Hangi state Redux store yerine bileşen useState'ine aittir?",
+          "options": [
+            { "text": "A dropdown's open/closed flag used by only that component", "textTr": "Yalnızca o bileşenin kullandığı bir dropdown'ın açık/kapalı bayrağı", "correct": true },
+            { "text": "The authenticated user shared across the whole app", "textTr": "Tüm uygulamada paylaşılan kimliği doğrulanmış kullanıcı" },
+            { "text": "The shopping cart shown on many pages", "textTr": "Birçok sayfada gösterilen alışveriş sepeti" },
+            { "text": "Cached API data reused by several screens", "textTr": "Birkaç ekranda tekrar kullanılan önbellekli API verisi" }
+          ],
+          "explanation": "Purely local UI state (a dropdown toggle) should stay in useState. Redux is for state that's shared across distant components or must persist across navigation.",
+          "explanationTr": "Tamamen yerel UI state'i (bir dropdown toggle'ı) useState'te kalmalı. Redux, uzak bileşenler arasında paylaşılan ya da gezinmede kalıcı olması gereken state içindir."
+        },
+        {
+          "type": "challenge",
+          "question": "How to set initial state in Redux?"
+        },
+        {
+          "type": "challenge",
+          "question": "How to reset state in Redux?"
+        },
+        {
+          "type": "challenge",
+          "question": "Do you need to keep all component states in Redux store?"
+        }
+      ]
+    }
+  ]
+}

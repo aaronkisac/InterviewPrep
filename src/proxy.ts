@@ -19,14 +19,11 @@ export default async function proxy(req: NextRequest) {
     /^\/questions\/[^/]+/.test(pathname) &&
     !pathname.startsWith("/questions/new");
 
-  // /learn/[topic]/lesson/[id] — the lesson player needs auth; the course
-  // map itself stays guest-visible (read-only teaser).
-  const isLessonPlayer = /^\/learn\/[^/]+\/lesson\//.test(pathname);
-
+  // /learn/* stays guest-visible. The lesson player allows a no-login trial
+  // of the course's FIRST unit; access to later units is enforced in the page
+  // component (it needs DB lookup of the unit, which the proxy can't do).
   const needsAuth =
-    AUTH_PREFIXES.some((p) => pathname.startsWith(p)) ||
-    isQuestionDetail ||
-    isLessonPlayer;
+    AUTH_PREFIXES.some((p) => pathname.startsWith(p)) || isQuestionDetail;
 
   if (!needsAuth) return NextResponse.next();
 
@@ -58,7 +55,5 @@ export const config = {
 
     "/questions/new",
     "/questions/:id",
-
-    "/learn/:path*",
   ],
 };

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
 
 import { auth } from "@/lib/auth";
-import { getLessonBundle } from "@/lib/course-data";
+import { getCourseUnits, getLessonBundle } from "@/lib/course-data";
 import { getLang } from "@/lib/lang";
 
 import { LessonPlayer } from "./_components/lesson-player";
@@ -21,7 +21,16 @@ export default async function LessonPage({
   const { topic, lessonId } = await params;
 
   const session = await auth().catch(() => null);
-  if (!session?.user?.id) redirect("/signin");
+
+  // Guests get a no-login trial limited to the first unit of the course.
+  // Any later lesson still redirects to sign-in.
+  if (!session?.user?.id) {
+    const units = await getCourseUnits(topic);
+    const firstUnit = units[0];
+    const inFirstUnit =
+      !!firstUnit && firstUnit.lessons.some((l) => l.id === lessonId);
+    if (!inFirstUnit) redirect("/signin");
+  }
 
   const lang = await getLang();
   const bundle = await getLessonBundle(lessonId);
@@ -40,6 +49,7 @@ export default async function LessonPage({
           nextLessonId: bundle.nextLessonId,
         }}
         lang={lang}
+        isGuest={!session?.user?.id}
       />
     </main>
   );

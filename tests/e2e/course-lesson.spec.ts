@@ -165,12 +165,17 @@ test.describe("lesson player", () => {
 test.describe("guest access", () => {
   test.use({ storageState: { cookies: [], origins: [] } });
 
-  test("map is guest-visible but the player redirects to /signin", async ({ page }) => {
+  test("guests can play the first unit but later units redirect to /signin", async ({ page }) => {
     await page.goto("/learn/react");
     await expect(page.getByText("Components & JSX")).toBeVisible();
 
-    const firstLesson = page.locator('a[href*="/lesson/"], a[href="/signin"]').first();
-    await firstLesson.click();
+    // First-unit lessons are a no-login trial: they open the player.
+    await page.locator('a[href*="/lesson/"]').first().click();
+    await expect(page).toHaveURL(/\/learn\/react\/lesson\//);
+
+    // Later units still gate behind sign-in.
+    await page.goto("/learn/react");
+    await page.locator('a[href="/signin"]').first().click();
     await expect(page).toHaveURL(/\/signin/);
   });
 });

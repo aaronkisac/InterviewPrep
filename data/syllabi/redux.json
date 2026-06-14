@@ -1,0 +1,47 @@
+{
+  "topic": "redux",
+  "title": "Redux",
+  "$comment": "Canonical concept list (syllabus) for Redux. WORK IN PROGRESS: foundations units 1-2 only; remaining units land incrementally. Verified by: pnpm concept:coverage",
+  "concepts": [
+    {
+      "id": "redux-flux-principles",
+      "title": "Redux, Flux & core principles",
+      "titleTr": "Redux, Flux ve temel ilkeler",
+      "section": "foundations",
+      "unit": "fundamentals",
+      "lessons": [
+        "redux-flux-principles"
+      ]
+    },
+    {
+      "id": "store-and-reducers",
+      "title": "Store & reducers",
+      "titleTr": "Store ve reducer'lar",
+      "section": "foundations",
+      "unit": "fundamentals",
+      "lessons": [
+        "store-and-reducers"
+      ]
+    },
+    {
+      "id": "reducers-and-constants",
+      "title": "Why \"reducers\" & action constants",
+      "titleTr": "Neden \"reducer\" ve action sabitleri",
+      "section": "core",
+      "unit": "reducers-state-conventions",
+      "lessons": [
+        "reducers-and-constants"
+      ]
+    },
+    {
+      "id": "initial-reset-and-what-to-store",
+      "title": "Initial state, reset & what to store",
+      "titleTr": "Başlangıç state'i, reset ve neyi saklamalı",
+      "section": "core",
+      "unit": "reducers-state-conventions",
+      "lessons": [
+        "initial-reset-and-what-to-store"
+      ]
+    }
+  ]
+}
