@@ -1,0 +1,193 @@
+{
+  "topic": "redux",
+  "slug": "async-middleware",
+  "title": "Async & Middleware",
+  "titleTr": "Async ve Middleware",
+  "section": "advanced",
+  "position": 4,
+  "lessons": [
+    {
+      "slug": "side-effects-and-thunk",
+      "title": "Side effects & redux-thunk",
+      "titleTr": "Yan etkiler ve redux-thunk",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Where async lives, and what a thunk is",
+          "titleTr": "Async'in yaşadığı yer ve thunk nedir",
+          "body": "Reducers must be **pure**, so they can't do API calls, timers, or anything async. That work belongs in **middleware** — code that sits between `dispatch(action)` and the reducer, and can intercept, delay, transform, or dispatch more actions.\n\n**`redux-thunk`** is the smallest async middleware. Normally you may only dispatch **plain objects**; thunk lets you also dispatch a **function** — the *thunk*. When the middleware sees a function, instead of forwarding it to reducers it **calls it**, handing over `(dispatch, getState)`:\n\n```js\nconst fetchUser = (id) => async (dispatch, getState) => {\n  dispatch({ type: \"user/loading\" });\n  const res = await fetch(`/api/users/${id}`);\n  dispatch({ type: \"user/loaded\", payload: await res.json() });\n};\n\nstore.dispatch(fetchUser(42)); // dispatching a function, not an object\n```\n\nThat's all a thunk is: a function that **defers** work and dispatches real actions when it's ready. **What is it used for?** Anything that can't go in a reducer — async API calls, **conditional dispatch** (read `getState()` first and bail if data is already cached), dispatching **multiple** actions in sequence (loading → success/error), and other side effects — all kept out of components and reducers.",
+          "bodyTr": "Reducer'lar **saf** olmalı, bu yüzden API çağrısı, zamanlayıcı ya da async bir şey yapamazlar. O iş **middleware**'e aittir — `dispatch(action)` ile reducer arasında oturan, action'ları araya girip geciktirebilen, dönüştürebilen ya da daha fazla action dispatch edebilen kod.\n\n**`redux-thunk`** en küçük async middleware'dir. Normalde yalnızca **düz nesneler** dispatch edebilirsin; thunk, bir **fonksiyon** da dispatch etmene izin verir — *thunk*. Middleware bir fonksiyon gördüğünde, onu reducer'lara iletmek yerine **çağırır** ve `(dispatch, getState)`'i verir:\n\n```js\nconst fetchUser = (id) => async (dispatch, getState) => {\n  dispatch({ type: \"user/loading\" });\n  const res = await fetch(`/api/users/${id}`);\n  dispatch({ type: \"user/loaded\", payload: await res.json() });\n};\n\nstore.dispatch(fetchUser(42)); // nesne değil, fonksiyon dispatch ediliyor\n```\n\nBir thunk işte bu kadar: işi **erteleyen** ve hazır olduğunda gerçek action'lar dispatch eden bir fonksiyon. **Ne için kullanılır?** Bir reducer'a giremeyecek her şey — async API çağrıları, **koşullu dispatch** (önce `getState()` oku ve veri zaten önbellekteyse vazgeç), sırayla **birden çok** action dispatch etme (loading → success/error) ve diğer yan etkiler — hepsi bileşenlerden ve reducer'lardan uzak tutulur."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What does redux-thunk add to a plain Redux store?",
+          "promptTr": "redux-thunk düz bir Redux store'una ne ekler?",
+          "options": [
+            { "text": "The ability to dispatch a function (dispatch, getState) => {...}, not just plain action objects", "textTr": "Yalnızca düz action nesneleri değil, bir fonksiyon (dispatch, getState) => {...} dispatch edebilme", "correct": true },
+            { "text": "Automatic caching of every API response", "textTr": "Her API yanıtının otomatik önbelleğe alınması" },
+            { "text": "A replacement for reducers", "textTr": "Reducer'ların yerine geçen bir şey" },
+            { "text": "Built-in WebSocket support", "textTr": "Yerleşik WebSocket desteği" }
+          ],
+          "explanation": "Thunk middleware intercepts dispatched functions and calls them with (dispatch, getState), giving async/conditional logic a home outside reducers. Everything else stays the same.",
+          "explanationTr": "Thunk middleware'i, dispatch edilen fonksiyonları araya girip onları (dispatch, getState) ile çağırır ve async/koşullu mantığa reducer'lar dışında bir yer verir. Geri kalan her şey aynı kalır."
+        },
+        {
+          "type": "true_false",
+          "statement": "A thunk can read current state with getState() and decide not to dispatch anything (e.g. skip a fetch when data is already cached).",
+          "statementTr": "Bir thunk getState() ile mevcut state'i okuyabilir ve hiçbir şey dispatch etmemeye karar verebilir (örn. veri zaten önbellekteyse fetch'i atlamak).",
+          "answer": true,
+          "explanation": "Because thunk receives getState, it can branch on the current state — conditional dispatch is a core use case, e.g. returning early to avoid a redundant network request.",
+          "explanationTr": "Thunk getState'i aldığı için mevcut state'e göre dallanabilir — koşullu dispatch temel bir kullanım örneğidir, örn. gereksiz bir ağ isteğinden kaçınmak için erken dönmek."
+        },
+        {
+          "type": "challenge",
+          "question": "What is Redux Thunk?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is Redux Thunk used for?"
+        }
+      ]
+    },
+    {
+      "slug": "ajax-requests-and-middleware-choices",
+      "title": "Making requests & middleware choices",
+      "titleTr": "İstek yapmak ve middleware seçimleri",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Fetching data and picking the right async tool",
+          "titleTr": "Veri çekmek ve doğru async aracını seçmek",
+          "body": "**Making an Ajax request in Redux** follows one pattern regardless of library: dispatch a **request** action, do the async call inside middleware, then dispatch **success** or **failure** with the result. With thunk:\n\n```js\nconst loadTodos = () => async (dispatch) => {\n  dispatch({ type: \"todos/request\" });\n  try {\n    const data = await fetch(\"/api/todos\").then(r => r.json());\n    dispatch({ type: \"todos/success\", payload: data });\n  } catch (err) {\n    dispatch({ type: \"todos/failure\", error: String(err) });\n  }\n};\n```\n\nThe component just dispatches `loadTodos()`; reducers handle each action to flip loading flags and store data. (Redux Toolkit's `createAsyncThunk` and RTK Query generate this request/success/failure flow for you.)\n\n**Typical middleware choices for async calls**: **redux-thunk** (simplest, functions + promises — the default, bundled with Redux Toolkit); **redux-saga** (generator-based, models complex flows, cancellation, and concurrency as declarative effects); **redux-observable** (RxJS \"epics\" — powerful for streams/debouncing). Thunk covers most apps; reach for saga/observable when async orchestration gets genuinely complex.",
+          "bodyTr": "**Redux'ta bir Ajax isteği yapmak** kütüphaneden bağımsız olarak tek bir deseni izler: bir **request** action'ı dispatch et, async çağrıyı middleware içinde yap, sonra sonuçla birlikte **success** ya da **failure** dispatch et. Thunk ile:\n\n```js\nconst loadTodos = () => async (dispatch) => {\n  dispatch({ type: \"todos/request\" });\n  try {\n    const data = await fetch(\"/api/todos\").then(r => r.json());\n    dispatch({ type: \"todos/success\", payload: data });\n  } catch (err) {\n    dispatch({ type: \"todos/failure\", error: String(err) });\n  }\n};\n```\n\nBileşen yalnızca `loadTodos()` dispatch eder; reducer'lar her action'ı işleyerek loading bayraklarını değiştirir ve veriyi saklar. (Redux Toolkit'in `createAsyncThunk`'ı ve RTK Query bu request/success/failure akışını senin için üretir.)\n\n**Async çağrılar için tipik middleware seçimleri**: **redux-thunk** (en basit, fonksiyonlar + promise'ler — varsayılan, Redux Toolkit ile gelir); **redux-saga** (generator tabanlı, karmaşık akışları, iptali ve eşzamanlılığı bildirimsel efektler olarak modeller); **redux-observable** (RxJS \"epic'leri\" — akışlar/debounce için güçlü). Thunk çoğu uygulamayı kapsar; async orkestrasyonu gerçekten karmaşıklaştığında saga/observable'a uzan."
+        },
+        {
+          "type": "order",
+          "prompt": "Order the actions a typical async fetch dispatches in Redux",
+          "promptTr": "Redux'ta tipik bir async fetch'in dispatch ettiği action'ları sırala",
+          "items": [
+            { "text": "Dispatch a 'request' action to set loading = true", "textTr": "loading = true yapmak için bir 'request' action'ı dispatch et" },
+            { "text": "Perform the async call inside middleware (thunk/saga)", "textTr": "Async çağrıyı middleware içinde yap (thunk/saga)" },
+            { "text": "Dispatch 'success' with the data (or 'failure' with the error)", "textTr": "Veriyle 'success' (ya da hatayla 'failure') dispatch et" }
+          ],
+          "explanation": "Request → async work → success/failure is the canonical three-step shape. Reducers react to each action to manage loading state and store results.",
+          "explanationTr": "Request → async iş → success/failure kanonik üç adımlı şekildir. Reducer'lar loading state'ini yönetmek ve sonuçları saklamak için her action'a tepki verir."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Which is the simplest, most common middleware for async calls and ships with Redux Toolkit?",
+          "promptTr": "Async çağrılar için en basit, en yaygın middleware hangisidir ve Redux Toolkit ile gelir?",
+          "options": [
+            { "text": "redux-thunk", "textTr": "redux-thunk", "correct": true },
+            { "text": "redux-saga", "textTr": "redux-saga" },
+            { "text": "redux-observable", "textTr": "redux-observable" },
+            { "text": "redux-logger", "textTr": "redux-logger" }
+          ],
+          "explanation": "Thunk is the default async middleware — minimal API, just functions and promises — and Redux Toolkit includes it out of the box. Saga and observable are for more complex orchestration.",
+          "explanationTr": "Thunk varsayılan async middleware'dir — minimal API, sadece fonksiyonlar ve promise'ler — ve Redux Toolkit onu hazır içerir. Saga ve observable daha karmaşık orkestrasyon içindir."
+        },
+        {
+          "type": "challenge",
+          "question": "How to make Ajax request in Redux?"
+        },
+        {
+          "type": "challenge",
+          "question": "What are typical middleware choices for handling asynchronous calls in Redux?"
+        }
+      ]
+    },
+    {
+      "slug": "composing-the-middleware-pipeline",
+      "title": "Composing the middleware pipeline",
+      "titleTr": "Middleware hattını oluşturmak",
+      "position": 3,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Adding several middleware — and meeting saga",
+          "titleTr": "Birkaç middleware eklemek — ve saga ile tanışmak",
+          "body": "Redux applies middleware as a **chain**, and you add several at once. Classic Redux uses `applyMiddleware`, passing each as an argument **in order** — they run left-to-right on the way in:\n\n```js\nimport { createStore, applyMiddleware } from \"redux\";\nimport thunk from \"redux-thunk\";\nimport logger from \"redux-logger\";\n\nconst store = createStore(\n  rootReducer,\n  applyMiddleware(thunk, logger), // order matters: thunk first, then logger\n);\n```\n\nWith **Redux Toolkit** you instead return an array from `middleware`:\n\n```js\nconfigureStore({\n  reducer: rootReducer,\n  middleware: (getDefault) => getDefault().concat(logger, myMiddleware),\n});\n```\n\n**Order matters** because each middleware can act before/after the next — e.g. put a logger after thunk so it logs the resolved actions, not the thunk function.\n\nOne popular member of that chain is **`redux-saga`**: middleware that handles side effects using ES6 **generator functions**. Instead of thunks returning promises, sagas `yield` plain *effect objects* (\"call this API\", \"put this action\", \"take that action type\") that the saga middleware executes — making complex async flows easy to read, test, and cancel.",
+          "bodyTr": "Redux, middleware'i bir **zincir** olarak uygular ve birkaçını aynı anda eklersin. Klasik Redux `applyMiddleware` kullanır, her birini **sırayla** argüman olarak geçirir — girişte soldan sağa çalışırlar:\n\n```js\nimport { createStore, applyMiddleware } from \"redux\";\nimport thunk from \"redux-thunk\";\nimport logger from \"redux-logger\";\n\nconst store = createStore(\n  rootReducer,\n  applyMiddleware(thunk, logger), // sıra önemli: önce thunk, sonra logger\n);\n```\n\n**Redux Toolkit** ile bunun yerine `middleware`'den bir dizi döndürürsün:\n\n```js\nconfigureStore({\n  reducer: rootReducer,\n  middleware: (getDefault) => getDefault().concat(logger, myMiddleware),\n});\n```\n\n**Sıra önemlidir** çünkü her middleware bir sonrakinden önce/sonra iş yapabilir — örn. logger'ı thunk'tan sonra koy ki thunk fonksiyonunu değil çözülmüş action'ları loglasın.\n\nO zincirin popüler bir üyesi **`redux-saga`**'dır: yan etkileri ES6 **generator fonksiyonlarıyla** ele alan middleware. Promise döndüren thunk'lar yerine sagalar, saga middleware'inin çalıştırdığı düz *efekt nesneleri* (\"bu API'yi çağır\", \"bu action'ı put et\", \"o action type'ını take et\") `yield` eder — bu da karmaşık async akışları okunabilir, test edilebilir ve iptal edilebilir kılar."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Add multiple middleware to a classic Redux store",
+          "promptTr": "Klasik bir Redux store'una birden çok middleware ekle",
+          "code": "createStore(rootReducer, ___(thunk, logger));",
+          "answers": ["applyMiddleware"],
+          "distractors": ["combineReducers", "compose", "configureStore"],
+          "explanation": "applyMiddleware(...mw) wraps the store's dispatch with each middleware in the order given. (combineReducers merges reducers; compose just composes functions.)",
+          "explanationTr": "applyMiddleware(...mw), store'un dispatch'ini verilen sırayla her middleware ile sarar. (combineReducers reducer'ları birleştirir; compose yalnızca fonksiyonları kompoze eder.)"
+        },
+        {
+          "type": "true_false",
+          "statement": "The order in which middleware is passed to applyMiddleware affects how actions flow through the chain.",
+          "statementTr": "Middleware'in applyMiddleware'e geçirilme sırası, action'ların zincirden nasıl aktığını etkiler.",
+          "answer": true,
+          "explanation": "Middleware runs in the order listed; each wraps the next. That's why a logger placed after thunk sees the dispatched plain actions rather than the thunk function.",
+          "explanationTr": "Middleware listelendiği sırada çalışır; her biri bir sonrakini sarar. Bu yüzden thunk'tan sonra yerleştirilen bir logger, thunk fonksiyonunu değil dispatch edilen düz action'ları görür."
+        },
+        {
+          "type": "challenge",
+          "question": "How to add multiple middlewares to Redux?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is redux-saga?"
+        }
+      ]
+    },
+    {
+      "slug": "redux-saga-in-depth",
+      "title": "redux-saga in depth",
+      "titleTr": "redux-saga derinlemesine",
+      "position": 4,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "The mental model: watchers, workers & effects",
+          "titleTr": "Zihinsel model: watcher'lar, worker'lar ve efektler",
+          "body": "The **mental model of redux-saga**: think of a saga as a **background thread** dedicated to side effects, written as a **generator** that runs for the life of the app. It `yield`s **effect objects** — *declarations* of work — and the saga middleware carries them out, then resumes the generator with the result. Because you yield plain descriptions (not the work itself), sagas are **easy to test** (assert on the yielded effects) and **cancellable**.\n\nThe common shape is **watcher → worker**: a watcher saga waits for an action, then forks a worker saga to handle it:\n\n```js\nfunction* watchFetch() {\n  yield takeEvery(\"todos/request\", fetchTodos); // watcher\n}\nfunction* fetchTodos(action) {                   // worker\n  const data = yield call(api.getTodos, action.id); // call: invoke fn, await result\n  yield put({ type: \"todos/success\", payload: data }); // put: dispatch an action\n}\n```\n\n**`call` vs `put`** are the two effects you'll use most:\n\n- **`call(fn, ...args)`** — *invoke a function* (usually async, like an API request) and wait for it to resolve; it's the saga equivalent of `await fn(...args)`.\n- **`put(action)`** — *dispatch an action* back to the store; the saga equivalent of `dispatch(action)`.\n\nSo `call` reaches **out** (do the side effect), `put` sends **back in** (update state). **Saga vs thunk**: thunks are imperative functions returning promises — minimal, perfect for simple async. Sagas are declarative generators — more boilerplate and a learning curve, but far better for **complex** flows: cancellation, debouncing, racing/concurrency (`takeLatest`, `race`), and orchestrating many interdependent effects, all highly testable.",
+          "bodyTr": "**redux-saga'nın zihinsel modeli**: bir saga'yı yan etkilere adanmış bir **arka plan thread'i** olarak düşün; uygulamanın ömrü boyunca çalışan bir **generator** olarak yazılır. **Efekt nesneleri** — işin *bildirimleri* — `yield` eder ve saga middleware'i onları yürütür, sonra generator'ı sonuçla devam ettirir. Düz açıklamalar (işin kendisi değil) yield ettiğin için sagalar **test etmesi kolaydır** (yield edilen efektleri doğrula) ve **iptal edilebilir**.\n\nYaygın şekil **watcher → worker**'dır: bir watcher saga bir action bekler, sonra onu ele almak için bir worker saga fork eder:\n\n```js\nfunction* watchFetch() {\n  yield takeEvery(\"todos/request\", fetchTodos); // watcher\n}\nfunction* fetchTodos(action) {                   // worker\n  const data = yield call(api.getTodos, action.id); // call: fn'i çağır, sonucu bekle\n  yield put({ type: \"todos/success\", payload: data }); // put: bir action dispatch et\n}\n```\n\n**`call` vs `put`** en çok kullanacağın iki efekttir:\n\n- **`call(fn, ...args)`** — bir *fonksiyonu çağır* (genelde async, bir API isteği gibi) ve çözülmesini bekle; `await fn(...args)`'ın saga karşılığıdır.\n- **`put(action)`** — store'a geri bir *action dispatch et*; `dispatch(action)`'ın saga karşılığıdır.\n\nYani `call` **dışarı** uzanır (yan etkiyi yap), `put` **içeri geri** gönderir (state'i güncelle). **Saga vs thunk**: thunk'lar promise döndüren buyurgan fonksiyonlardır — minimal, basit async için mükemmel. Sagalar bildirimsel generator'lardır — daha fazla boilerplate ve öğrenme eğrisi ama **karmaşık** akışlar için çok daha iyi: iptal, debounce, yarış/eşzamanlılık (`takeLatest`, `race`) ve birbirine bağlı birçok efekti orkestre etmek, hepsi yüksek test edilebilirlikle."
+        },
+        {
+          "type": "match",
+          "prompt": "Match each redux-saga effect to what it does",
+          "promptTr": "Her redux-saga efektini ne yaptığıyla eşleştir",
+          "pairs": [
+            { "left": "call(fn, ...args)", "leftTr": "call(fn, ...args)", "right": "Invoke a (usually async) function and wait for the result", "rightTr": "Bir (genelde async) fonksiyonu çağır ve sonucu bekle" },
+            { "left": "put(action)", "leftTr": "put(action)", "right": "Dispatch an action back to the store", "rightTr": "Store'a geri bir action dispatch et" },
+            { "left": "takeEvery(type, saga)", "leftTr": "takeEvery(type, saga)", "right": "Run a worker saga on every matching action", "rightTr": "Eşleşen her action'da bir worker saga çalıştır" }
+          ]
+        },
+        {
+          "type": "mcq",
+          "prompt": "When is redux-saga a better choice than redux-thunk?",
+          "promptTr": "redux-saga ne zaman redux-thunk'tan daha iyi bir seçimdir?",
+          "options": [
+            { "text": "For complex async orchestration — cancellation, debouncing, concurrency — where declarative, testable effects pay off", "textTr": "Karmaşık async orkestrasyonu için — iptal, debounce, eşzamanlılık — bildirimsel, test edilebilir efektlerin işe yaradığı yerde", "correct": true },
+            { "text": "For a single, simple fetch on a button click", "textTr": "Bir butona tıklamada tek, basit bir fetch için" },
+            { "text": "When you want the smallest possible bundle and least boilerplate", "textTr": "Mümkün olan en küçük bundle ve en az boilerplate istediğinde" },
+            { "text": "Whenever you use Redux Toolkit, since saga is its default", "textTr": "Redux Toolkit kullandığın her zaman, çünkü saga onun varsayılanıdır" }
+          ],
+          "explanation": "Thunk wins for simple cases (less code, default in RTK). Saga's generator effects shine for complex, long-lived, cancellable flows — at the cost of more boilerplate and a steeper learning curve.",
+          "explanationTr": "Thunk basit durumlarda kazanır (daha az kod, RTK'da varsayılan). Saga'nın generator efektleri karmaşık, uzun ömürlü, iptal edilebilir akışlarda parlar — daha fazla boilerplate ve daha dik bir öğrenme eğrisi pahasına."
+        },
+        {
+          "type": "challenge",
+          "question": "What is the mental model of redux-saga?"
+        },
+        {
+          "type": "challenge",
+          "question": "What are the differences between call and put in redux-saga?"
+        },
+        {
+          "type": "challenge",
+          "question": "What are the differences between redux-saga and redux-thunk?"
+        }
+      ]
+    }
+  ]
+}

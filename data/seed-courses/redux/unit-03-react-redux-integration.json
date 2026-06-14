@@ -1,0 +1,161 @@
+{
+  "topic": "redux",
+  "slug": "react-redux-integration",
+  "title": "Connecting React & Redux",
+  "titleTr": "React ve Redux'ı Bağlamak",
+  "section": "core",
+  "position": 3,
+  "lessons": [
+    {
+      "slug": "provider-connect-and-hooks",
+      "title": "Provider, connect & the hooks API",
+      "titleTr": "Provider, connect ve hooks API'si",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Wiring the store into the component tree",
+          "titleTr": "Store'u bileşen ağacına bağlamak",
+          "body": "`react-redux` is the binding that lets React components read from and dispatch to the store. Two things make it work:\n\n1. **`<Provider store={store}>`** wraps the app once at the root and passes the store down through React context, so any component below can reach it.\n2. **`connect()`** (the classic API) is a **higher-order component** that subscribes a component to the store and injects slices of state and dispatchers as props.\n\n`connect` takes two arguments:\n\n```js\nexport default connect(mapStateToProps, mapDispatchToProps)(TodoList);\n```\n\n- **`mapStateToProps(state)`** selects the data this component needs and returns it as props. It re-runs on every store change; if the returned props are shallow-equal, the component skips re-rendering.\n- **`mapDispatchToProps(dispatch)`** returns prop functions that dispatch actions (the object-shorthand form wraps each action creator in `dispatch` for you).\n\nThis split is the **container vs presentational** pattern: a *container* (created by `connect`) knows about Redux and feeds data down; a *presentational* component just takes props and renders. Modern apps usually replace `connect` with the **hooks API** — `useSelector(selectorFn)` to read state and `useDispatch()` to get `dispatch` — which removes the HOC boilerplate.",
+          "bodyTr": "`react-redux`, React bileşenlerinin store'dan okumasını ve store'a dispatch etmesini sağlayan bağlayıcıdır. İki şey onu çalıştırır:\n\n1. **`<Provider store={store}>`** uygulamayı kökte bir kez sarar ve store'u React context üzerinden aşağı geçirir, böylece alttaki herhangi bir bileşen ona erişebilir.\n2. **`connect()`** (klasik API) bir bileşeni store'a abone eden ve state dilimlerini ile dispatcher'ları prop olarak enjekte eden bir **higher-order component**'tir.\n\n`connect` iki argüman alır:\n\n```js\nexport default connect(mapStateToProps, mapDispatchToProps)(TodoList);\n```\n\n- **`mapStateToProps(state)`** bu bileşenin ihtiyaç duyduğu veriyi seçer ve prop olarak döndürür. Her store değişiminde yeniden çalışır; döndürülen prop'lar shallow-equal ise bileşen yeniden render'ı atlar.\n- **`mapDispatchToProps(dispatch)`** action'lar dispatch eden prop fonksiyonları döndürür (nesne-kısayol formu her action creator'ı senin için `dispatch` ile sarar).\n\nBu ayrım **container vs presentational** desenidir: bir *container* (`connect` tarafından oluşturulan) Redux'ı bilir ve veriyi aşağı besler; bir *presentational* bileşen yalnızca prop alıp render eder. Modern uygulamalar genelde `connect`'i **hooks API'siyle** değiştirir — state okumak için `useSelector(selectorFn)` ve `dispatch` almak için `useDispatch()` — bu da HOC boilerplate'ini kaldırır."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What do the two arguments to connect(mapStateToProps, mapDispatchToProps) do?",
+          "promptTr": "connect(mapStateToProps, mapDispatchToProps)'a verilen iki argüman ne yapar?",
+          "options": [
+            { "text": "The first selects state into props; the second injects functions that dispatch actions", "textTr": "İlki state'i prop'lara seçer; ikincisi action dispatch eden fonksiyonları enjekte eder", "correct": true },
+            { "text": "Both select state; dispatch is always automatic", "textTr": "İkisi de state seçer; dispatch her zaman otomatiktir" },
+            { "text": "The first creates the store; the second creates the Provider", "textTr": "İlki store'u oluşturur; ikincisi Provider'ı oluşturur" },
+            { "text": "The first runs reducers; the second runs middleware", "textTr": "İlki reducer'ları çalıştırır; ikincisi middleware'i çalıştırır" }
+          ],
+          "explanation": "mapStateToProps(state) picks the data a component needs; mapDispatchToProps(dispatch) supplies prop functions that dispatch actions. connect wires both as props on the wrapped component.",
+          "explanationTr": "mapStateToProps(state) bir bileşenin ihtiyaç duyduğu veriyi seçer; mapDispatchToProps(dispatch) action dispatch eden prop fonksiyonları sağlar. connect ikisini de sarmalanan bileşene prop olarak bağlar."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Read a slice of state with the react-redux hook",
+          "promptTr": "react-redux hook'uyla bir state dilimini oku",
+          "code": "const count = ___(state => state.counter.value);",
+          "answers": ["useSelector"],
+          "distractors": ["useDispatch", "useStore", "connect"],
+          "explanation": "useSelector takes a selector function and returns the picked slice, re-rendering the component when that slice changes. useDispatch returns the dispatch function instead.",
+          "explanationTr": "useSelector bir selector fonksiyonu alır ve seçilen dilimi döndürür, o dilim değiştiğinde bileşeni yeniden render eder. useDispatch ise dispatch fonksiyonunu döndürür."
+        },
+        {
+          "type": "mcq",
+          "prompt": "In the container vs presentational split, what is a 'container' component?",
+          "promptTr": "Container vs presentational ayrımında bir 'container' bileşeni nedir?",
+          "options": [
+            { "text": "A component connected to Redux that selects state and dispatch, then feeds them as props to a presentational component", "textTr": "Redux'a bağlı, state ve dispatch seçip bunları bir presentational bileşene prop olarak besleyen bir bileşen", "correct": true },
+            { "text": "Any component that renders HTML and CSS", "textTr": "HTML ve CSS render eden herhangi bir bileşen" },
+            { "text": "A component that only holds local useState", "textTr": "Yalnızca yerel useState tutan bir bileşen" },
+            { "text": "The root <Provider> element", "textTr": "Kök <Provider> elemanı" }
+          ],
+          "explanation": "A container is Redux-aware (built by connect or hooks) and concerned with how things work — selecting data and dispatching. A presentational component is Redux-unaware and concerned with how things look, taking everything via props.",
+          "explanationTr": "Container, Redux'tan haberdardır (connect ya da hook'larla yapılır) ve işlerin nasıl çalıştığıyla ilgilenir — veri seçer ve dispatch eder. Presentational bileşen Redux'tan habersizdir, işlerin nasıl göründüğüyle ilgilenir ve her şeyi prop üzerinden alır."
+        },
+        {
+          "type": "challenge",
+          "question": "How to use connect from react-redux?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is the difference between Component and Container in Redux?"
+        }
+      ]
+    },
+    {
+      "slug": "selectors-and-store-access",
+      "title": "Selectors & accessing the store",
+      "titleTr": "Selector'lar ve store'a erişim",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Reading state cleanly — and from outside React",
+          "titleTr": "State'i temiz okumak — ve React dışından",
+          "body": "A **selector** is just a function that takes the store state and returns a derived piece of it: `const selectTotal = state => state.cart.items.reduce(...)`. Selectors are worth the habit because they **centralise the shape of state** (components don't reach deep into `state.a.b.c`, so a refactor touches one place), they're **reusable and testable**, and they can be **memoised** with `reselect`'s `createSelector` so expensive derivations only recompute when their inputs change — avoiding needless re-renders.\n\nThe **proper way to access the store inside React** is *not* to import the store object directly — it's to go through `useSelector`/`useDispatch` (or `connect`), so components stay subscribed and testable and don't depend on a singleton.\n\nBut sometimes you need the store **outside a React component** — in a utility, an API layer, or a thunk. Two clean options:\n\n1. **Export the store** from the module that creates it and import `store.getState()` / `store.dispatch()` where needed (simple, but couples code to a singleton — fine for app code, awkward for libraries/SSR).\n2. **Pass it in** — middleware like thunk already hands you `(dispatch, getState)`, so async logic can read and update state without importing anything.",
+          "bodyTr": "Bir **selector**, store state'ini alıp ondan türetilmiş bir parça döndüren bir fonksiyondur: `const selectTotal = state => state.cart.items.reduce(...)`. Selector'lar alışkanlık edinmeye değer çünkü **state'in şeklini merkezileştirirler** (bileşenler `state.a.b.c` derinliğine uzanmaz, bir refactor tek yere dokunur), **tekrar kullanılabilir ve test edilebilirler** ve `reselect`'in `createSelector`'ıyla **memoize edilebilirler**, böylece pahalı türetmeler yalnızca girdileri değiştiğinde yeniden hesaplanır — gereksiz yeniden render'ları önler.\n\n**React içinde store'a erişmenin doğru yolu** store nesnesini doğrudan import etmek *değildir* — `useSelector`/`useDispatch` (ya da `connect`) üzerinden gitmektir, böylece bileşenler abone ve test edilebilir kalır ve bir singleton'a bağımlı olmaz.\n\nAma bazen store'a bir React bileşeni **dışında** ihtiyaç duyarsın — bir yardımcıda, API katmanında ya da bir thunk'ta. İki temiz seçenek:\n\n1. Store'u oluşturan modülden **store'u export et** ve gerektiğinde `store.getState()` / `store.dispatch()` import et (basit ama kodu bir singleton'a bağlar — uygulama kodu için iyi, kütüphaneler/SSR için tuhaf).\n2. **İçeri geçir** — thunk gibi middleware zaten sana `(dispatch, getState)` verir, böylece async mantık hiçbir şey import etmeden state'i okuyup güncelleyebilir."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Why use selectors (especially memoised ones via reselect)?",
+          "promptTr": "Neden selector kullanılır (özellikle reselect ile memoize edilenler)?",
+          "options": [
+            { "text": "They centralise state shape, are reusable/testable, and memoisation skips recomputing derived data unless inputs change", "textTr": "State şeklini merkezileştirir, tekrar kullanılabilir/test edilebilirdir ve memoizasyon, girdiler değişmedikçe türetilmiş veriyi yeniden hesaplamayı atlar", "correct": true },
+            { "text": "They make reducers run faster", "textTr": "Reducer'ların daha hızlı çalışmasını sağlarlar" },
+            { "text": "They replace the need for a store", "textTr": "Store ihtiyacını ortadan kaldırırlar" },
+            { "text": "They let components mutate state directly", "textTr": "Bileşenlerin state'i doğrudan değiştirmesine izin verirler" }
+          ],
+          "explanation": "Selectors decouple components from the exact state tree and are easy to test in isolation. createSelector memoises the result, so derived values recompute only when their inputs actually change.",
+          "explanationTr": "Selector'lar bileşenleri tam state ağacından ayırır ve izole test etmesi kolaydır. createSelector sonucu memoize eder, böylece türetilmiş değerler yalnızca girdileri gerçekten değiştiğinde yeniden hesaplanır."
+        },
+        {
+          "type": "true_false",
+          "statement": "Inside a React component, the recommended way to read state is to import the store object and call store.getState() directly.",
+          "statementTr": "Bir React bileşeni içinde state okumanın önerilen yolu, store nesnesini import edip doğrudan store.getState() çağırmaktır.",
+          "answer": false,
+          "explanation": "Inside components you use useSelector/useDispatch (or connect) so the component stays subscribed to updates. Importing store.getState() directly reads a stale snapshot and won't re-render. Direct store access is reserved for code outside React.",
+          "explanationTr": "Bileşenlerin içinde useSelector/useDispatch (ya da connect) kullanırsın, böylece bileşen güncellemelere abone kalır. store.getState()'i doğrudan import etmek eski bir anlık görüntü okur ve yeniden render etmez. Doğrudan store erişimi React dışındaki kod için ayrılmıştır."
+        },
+        {
+          "type": "challenge",
+          "question": "What are Redux selectors and why to use them?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is the proper way to access Redux store?"
+        },
+        {
+          "type": "challenge",
+          "question": "How to access Redux store outside a React component?"
+        }
+      ]
+    },
+    {
+      "slug": "context-vs-redux-and-connect-decorator",
+      "title": "Context vs Redux & the connect decorator",
+      "titleTr": "Context vs Redux ve connect decorator'ı",
+      "position": 3,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "When plain context is enough — and the @connect shorthand",
+          "titleTr": "Düz context ne zaman yeter — ve @connect kısayolu",
+          "body": "**React Context vs React-Redux**: they overlap but solve different scales of problem. **Context** is a *dependency-injection* mechanism — it passes a value down the tree without prop-drilling. It has no opinion about *how* state updates, no devtools, no middleware, and every consumer re-renders when the context value changes. **Redux** (via react-redux) adds a predictable update model (actions + reducers), middleware for async/side-effects, time-travel devtools, and `useSelector` subscriptions that re-render *only* the components whose selected slice changed.\n\nRule of thumb: reach for **context** for low-frequency, mostly-static values (theme, current user, locale). Reach for **Redux** for complex, frequently-updated, app-wide state where you want traceability and tooling. (Note react-redux itself uses context internally to pass the store down.)\n\nThe **`@` symbol** you sometimes see — `@connect(mapState, mapDispatch)` above a class — is **decorator syntax**. It's purely shorthand: applying `connect(...)` to the class as a decorator instead of writing `export default connect(...)(MyComponent)` at the bottom. It needs a Babel/TypeScript decorator plugin and is far less common now that hooks are the norm.",
+          "bodyTr": "**React Context vs React-Redux**: örtüşürler ama farklı ölçekte problemleri çözerler. **Context** bir *bağımlılık enjeksiyonu* mekanizmasıdır — prop-drilling olmadan bir değeri ağaçtan aşağı geçirir. State'in *nasıl* güncellendiği hakkında görüşü, devtools'u, middleware'i yoktur ve context değeri değiştiğinde her tüketici yeniden render olur. **Redux** (react-redux ile) öngörülebilir bir güncelleme modeli (action'lar + reducer'lar), async/yan-etkiler için middleware, zaman-yolculuğu devtools'u ve *yalnızca* seçilen dilimi değişen bileşenleri yeniden render eden `useSelector` abonelikleri ekler.\n\nKural: düşük frekanslı, çoğunlukla statik değerler (tema, mevcut kullanıcı, dil) için **context**'e uzan. İzlenebilirlik ve araç istediğin karmaşık, sık güncellenen, uygulama-geneli state için **Redux**'a uzan. (Not: react-redux'ın kendisi store'u aşağı geçirmek için içeride context kullanır.)\n\nBazen gördüğün **`@` sembolü** — bir class'ın üstündeki `@connect(mapState, mapDispatch)` — **decorator söz dizimidir**. Tamamen kısayoldur: `connect(...)`'i, altta `export default connect(...)(MyComponent)` yazmak yerine class'a bir decorator olarak uygulamak. Bir Babel/TypeScript decorator eklentisi gerektirir ve hook'lar norm olduğundan artık çok daha az yaygındır."
+        },
+        {
+          "type": "mcq",
+          "prompt": "When is plain React Context usually a better fit than Redux?",
+          "promptTr": "Düz React Context ne zaman genelde Redux'tan daha uygun olur?",
+          "options": [
+            { "text": "For low-frequency, mostly-static values like theme, locale, or current user", "textTr": "Tema, dil ya da mevcut kullanıcı gibi düşük frekanslı, çoğunlukla statik değerler için", "correct": true },
+            { "text": "For complex async flows with side effects", "textTr": "Yan etkili karmaşık async akışlar için" },
+            { "text": "When you need time-travel debugging", "textTr": "Zaman-yolculuğu hata ayıklamasına ihtiyacın olduğunda" },
+            { "text": "When many components update frequently and need fine-grained re-renders", "textTr": "Birçok bileşen sık güncellendiğinde ve ince-taneli yeniden render gerektiğinde" }
+          ],
+          "explanation": "Context is great for injecting a stable value without prop-drilling. For frequently-changing, app-wide state with middleware and devtools — and selective re-renders via useSelector — Redux fits better.",
+          "explanationTr": "Context, prop-drilling olmadan kararlı bir değeri enjekte etmek için harikadır. Middleware ve devtools'lu, sık değişen uygulama-geneli state ve useSelector ile seçici yeniden render için Redux daha uygundur."
+        },
+        {
+          "type": "true_false",
+          "statement": "Writing @connect(mapStateToProps) above a class is decorator syntax — a shorthand equivalent to calling connect(...)(MyComponent).",
+          "statementTr": "Bir class'ın üstüne @connect(mapStateToProps) yazmak decorator söz dizimidir — connect(...)(MyComponent) çağırmaya eşdeğer bir kısayol.",
+          "answer": true,
+          "explanation": "The @ is the decorator operator. @connect(...) class C {} is sugar for class C {} ; C = connect(...)(C). It requires a decorator plugin and is uncommon now that the hooks API is preferred.",
+          "explanationTr": "@ decorator operatörüdür. @connect(...) class C {}, class C {} ; C = connect(...)(C) için şekerlemedir. Bir decorator eklentisi gerektirir ve hooks API'si tercih edildiğinden artık nadirdir."
+        },
+        {
+          "type": "challenge",
+          "question": "What is the difference between React context and React Redux?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is the purpose of @ symbol in redux connect decorator?"
+        }
+      ]
+    }
+  ]
+}

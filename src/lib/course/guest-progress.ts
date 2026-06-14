@@ -7,6 +7,13 @@
 // from components that also render on the server.
 
 const STORAGE_KEY = "ip:guest-course-progress";
+// Same-tab writes don't fire the `storage` event, so we dispatch our own.
+const CHANGE_EVENT = "ip:guest-course-progress-change";
+
+function notifyChange(): void {
+  if (typeof window === "undefined") return;
+  window.dispatchEvent(new Event(CHANGE_EVENT));
+}
 
 /** One finished lesson, shaped to match the server's RecordLessonResultInput. */
 export type GuestLessonResult = {
@@ -37,6 +44,7 @@ function write(store: Store): void {
   if (typeof window === "undefined") return;
   try {
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(store));
+    notifyChange();
   } catch {
     // Quota / private-mode — non-critical.
   }
@@ -78,7 +86,55 @@ export function clearGuestProgress(): void {
   if (typeof window === "undefined") return;
   try {
     window.localStorage.removeItem(STORAGE_KEY);
+    notifyChange();
   } catch {
     // ignore
   }
+}
+
+// --- useSyncExternalStore support -------------------------------------------
+// course-map reads completed lesson ids via useSyncExternalStore so the value
+// stays SSR-safe (server snapshot is empty) without a setState-in-effect.
+
+const EMPTY_COMPLETED: ReadonlySet<string> = new Set();
+
+let cachedRaw: string | null = null;
+let cachedCompleted: ReadonlySet<string> = EMPTY_COMPLETED;
+
+/** Subscribe to guest-progress changes (cross-tab `storage` + same-tab writes). */
+export function subscribeGuestProgress(onChange: () => void): () => void {
+  if (typeof window === "undefined") return () => {};
+  const onStorage = (e: StorageEvent) => {
+    if (e.key === null || e.key === STORAGE_KEY) onChange();
+  };
+  window.addEventListener("storage", onStorage);
+  window.addEventListener(CHANGE_EVENT, onChange);
+  return () => {
+    window.removeEventListener("storage", onStorage);
+    window.removeEventListener(CHANGE_EVENT, onChange);
+  };
+}
+
+/**
+ * Stable snapshot of completed lesson ids. Returns the same Set reference until
+ * the underlying localStorage value actually changes, so useSyncExternalStore
+ * doesn't loop on reference inequality.
+ */
+export function getGuestCompletedSnapshot(): ReadonlySet<string> {
+  if (typeof window === "undefined") return EMPTY_COMPLETED;
+  let raw: string | null = null;
+  try {
+    raw = window.localStorage.getItem(STORAGE_KEY);
+  } catch {
+    raw = null;
+  }
+  if (raw === cachedRaw) return cachedCompleted;
+  cachedRaw = raw;
+  cachedCompleted = getGuestCompletedLessonIds();
+  return cachedCompleted;
+}
+
+/** SSR snapshot — always empty so the first client render matches the server. */
+export function getGuestCompletedServerSnapshot(): ReadonlySet<string> {
+  return EMPTY_COMPLETED;
 }

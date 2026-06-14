@@ -1,6 +1,6 @@
 # Progress
 
-Last updated: 2026-06-13 (course e2e finish-to-pass flake fix)
+Last updated: 2026-06-14 (Redux course COMPLETE — 5 units, 35/35)
 
 ---
 
@@ -147,6 +147,16 @@ GitHub Secrets needed: `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KE
 - unit-08 Compiler, Tooling & Ecosystem (interview) — **done 2026-06-13**: 3 lessons (compilation-and-erasure · tsconfig-and-build-performance · typescript-in-practice), 7 challenges (139/143 · 127/116/2017 · 2014/142). `unit-08-compiler-tooling-ecosystem.json`.
 - **All 8 units authored. Run `pnpm seed courses && pnpm course:coverage` — expect 63/63 TypeScript coverage.**
 Same retro rules apply: challenge texts byte-for-byte from seed JSON, 5–9 steps/lesson, lessons end on 1–3 challenges, no new visuals required (concept `visual` optional).
+
+**Course scale-out beyond pilot (state as of 2026-06-14):** Next.js course (8 units, 19 lessons, 42 challenges) and JavaScript course (12 units, 36 lessons, 86 challenges) authored — `concept:coverage` reports 0 untaught concepts for both. Redux course **in progress**.
+
+**Redux course plan** (bank: 35 questions, ids 401–435):
+- unit-01 Fundamentals (foundations) — done: 2 lessons, 6 challenges (401/402/403 · 404/405/406).
+- unit-02 Reducers, State & Conventions (core) — done: 2 lessons, 5 challenges (413/414 · 411/429/416).
+- unit-03 Connecting React & Redux (core) — **done 2026-06-14**: 3 lessons (provider-connect-and-hooks · selectors-and-store-access · context-vs-redux-and-connect-decorator), 7 challenges (415/412 · 418/430/428 · 420/431). `unit-03-react-redux-integration.json` + 3 syllabus concepts.
+- unit-04 Async & Middleware (advanced) — **done 2026-06-14**: 4 lessons (side-effects-and-thunk · ajax-requests-and-middleware-choices · composing-the-middleware-pipeline · redux-saga-in-depth), 9 challenges (409/410 · 424/423 · 419/417 · 434/433/426). Uses `order` + `match` step types. `unit-04-async-middleware.json` + 4 syllabus concepts. **Coverage 27/35. Needs `pnpm seed courses` + `pnpm course:coverage` + play-test.**
+- unit-05 Tooling, Ecosystem & Comparisons (interview) — **done 2026-06-14**: 3 lessons (redux-devtools · project-structure-and-redux-form · redux-in-the-ecosystem), 8 challenges (407/408 · 425/421/422 · 427/432/435). `unit-05-tooling-ecosystem.json` + 3 syllabus concepts.
+- **Redux course COMPLETE: 5 units, 14 lessons, 35 challenges — coverage 35/35. Needs `pnpm seed courses` + `pnpm course:coverage` + play-test.** Syllabus `$comment` updated (no longer WIP). Course scale-out status: React ✓, TypeScript ✓, Next.js ✓, JavaScript ✓, Redux ✓.
 
 ---
 

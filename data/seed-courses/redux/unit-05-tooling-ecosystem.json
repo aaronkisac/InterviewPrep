@@ -1,0 +1,152 @@
+{
+  "topic": "redux",
+  "slug": "tooling-ecosystem",
+  "title": "Tooling, Ecosystem & Comparisons",
+  "titleTr": "Araçlar, Ekosistem ve Karşılaştırmalar",
+  "section": "interview",
+  "position": 5,
+  "lessons": [
+    {
+      "slug": "redux-devtools",
+      "title": "Redux DevTools",
+      "titleTr": "Redux DevTools",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Inspecting and time-travelling your state",
+          "titleTr": "State'ini incelemek ve zaman-yolculuğu yapmak",
+          "body": "**Redux DevTools** is a development tool — a browser extension (plus a store enhancer) — that gives you a live window into the store. Because every state change is an explicit, serialisable action handled by a pure reducer, the tooling can record the whole history and let you replay it.\n\nIts main **features**:\n\n- **Action log** — a list of every dispatched action with its `type` and payload.\n- **State inspection** — view the full state tree (and the diff) after each action.\n- **Time-travel debugging** — jump back to any previous action and see the UI at that point; *skip* an action to recompute state without it.\n- **Action replay / import-export** — save a session and replay it, or share a bug as a sequence of actions.\n- **Dispatching actions manually** and **hot-reloading reducers** without losing state.\n\nYou enable it by composing the enhancer (or, with **Redux Toolkit**, `configureStore` wires it up automatically in development). It's a big reason Redux's strict action/reducer model is worth the boilerplate — the predictability *is* the debuggability.",
+          "bodyTr": "**Redux DevTools** bir geliştirme aracıdır — bir tarayıcı eklentisi (artı bir store enhancer'ı) — ve sana store'a canlı bir pencere verir. Her state değişikliği açık, serileştirilebilir ve saf bir reducer'ca işlenen bir action olduğundan, araç tüm geçmişi kaydedip onu tekrar oynatmanı sağlayabilir.\n\nBaşlıca **özellikleri**:\n\n- **Action günlüğü** — dispatch edilen her action'ın `type`'ı ve payload'uyla listesi.\n- **State inceleme** — her action'dan sonra tam state ağacını (ve farkı) görüntüle.\n- **Zaman-yolculuğu hata ayıklama** — herhangi bir önceki action'a geri atla ve UI'ı o andaki haliyle gör; bir action'ı *atlayarak* state'i onsuz yeniden hesapla.\n- **Action tekrar oynatma / içe-dışa aktarma** — bir oturumu kaydedip tekrar oynat ya da bir hatayı action dizisi olarak paylaş.\n- **Action'ları elle dispatch etme** ve state'i kaybetmeden **reducer'ları hot-reload etme**.\n\nOnu enhancer'ı kompoze ederek etkinleştirirsin (ya da **Redux Toolkit** ile `configureStore` geliştirmede otomatik bağlar). Redux'ın katı action/reducer modelinin boilerplate'e değmesinin büyük bir sebebi budur — öngörülebilirlik *zaten* hata ayıklanabilirliktir."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Which capability is unique to Redux DevTools thanks to actions + pure reducers?",
+          "promptTr": "Action'lar + saf reducer'lar sayesinde Redux DevTools'a özgü olan yetenek hangisidir?",
+          "options": [
+            { "text": "Time-travel debugging — jump to or skip past actions and recompute the resulting state", "textTr": "Zaman-yolculuğu hata ayıklama — action'lara atla ya da onları atla ve sonuç state'ini yeniden hesapla", "correct": true },
+            { "text": "Compiling TypeScript faster", "textTr": "TypeScript'i daha hızlı derlemek" },
+            { "text": "Minifying the production bundle", "textTr": "Production bundle'ını küçültmek" },
+            { "text": "Running unit tests in the browser", "textTr": "Tarayıcıda unit testleri çalıştırmak" }
+          ],
+          "explanation": "Since state is derived purely from an ordered list of actions, the devtools can replay or skip them and recompute state — that's time-travel debugging.",
+          "explanationTr": "State, sıralı bir action listesinden saf biçimde türetildiği için devtools onları tekrar oynatabilir ya da atlayabilir ve state'i yeniden hesaplayabilir — bu zaman-yolculuğu hata ayıklamadır."
+        },
+        {
+          "type": "true_false",
+          "statement": "Redux DevTools lets you inspect each dispatched action and the state diff it produced.",
+          "statementTr": "Redux DevTools, dispatch edilen her action'ı ve onun ürettiği state farkını incelemene izin verir.",
+          "answer": true,
+          "explanation": "The action log plus per-action state inspection (including diffs) is the core feature set, alongside time travel, manual dispatch, and import/export of sessions.",
+          "explanationTr": "Action günlüğü artı action başına state inceleme (farklar dahil), zaman yolculuğu, elle dispatch ve oturum içe/dışa aktarmanın yanında temel özellik setidir."
+        },
+        {
+          "type": "challenge",
+          "question": "What is Redux DevTools?"
+        },
+        {
+          "type": "challenge",
+          "question": "What are the features of Redux DevTools?"
+        }
+      ]
+    },
+    {
+      "slug": "project-structure-and-redux-form",
+      "title": "Project structure & Redux Form",
+      "titleTr": "Proje yapısı ve Redux Form",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Organising the code, and a forms-in-the-store library",
+          "titleTr": "Kodu düzenlemek ve formları-store'da-tutan bir kütüphane",
+          "body": "**Structuring Redux top-level directories** — two common conventions:\n\n- **By type (\"rails-style\")**: top-level folders for `actions/`, `reducers/`, `constants/`, `components/`, `containers/`. Simple, but a single feature is scattered across many folders.\n- **By feature (\"ducks\" / Redux Toolkit slices)**: one folder per feature, each bundling its slice/reducer, actions, and selectors together (`features/todos/todosSlice.js`). This scales far better and is what **Redux Toolkit** recommends.\n\nThere's no mandated layout — the goal is that related code lives together and the store wiring (`store.js`) is easy to find.\n\n**Redux Form** is a library that keeps **form state in the Redux store** instead of local component state — field values, focus, touched/dirty flags, validation errors, and submission status all become Redux state, updated via dispatched actions. **Main features**: it manages the full form lifecycle (initialise, track per-field state, sync + async validation, submit handling), a `reduxForm()` HOC + `Field` components wire inputs to the store, and everything is visible in DevTools. The trade-off: dispatching on every keystroke is a lot of overhead, which is why the community has largely moved to local-state libraries like **React Hook Form** or **Formik** for most forms — Redux Form makes sense mainly when form state genuinely needs to be shared app-wide.",
+          "bodyTr": "**Redux üst düzey dizinlerini yapılandırmak** — iki yaygın konvansiyon:\n\n- **Tipe göre (\"rails-style\")**: `actions/`, `reducers/`, `constants/`, `components/`, `containers/` için üst düzey klasörler. Basit ama tek bir özellik birçok klasöre dağılır.\n- **Özelliğe göre (\"ducks\" / Redux Toolkit slice'ları)**: özellik başına bir klasör, her biri slice/reducer'ını, action'larını ve selector'larını birlikte paketler (`features/todos/todosSlice.js`). Bu çok daha iyi ölçeklenir ve **Redux Toolkit**'in önerdiğidir.\n\nDayatılan bir düzen yoktur — amaç, ilgili kodun birlikte yaşaması ve store bağlantısının (`store.js`) kolayca bulunmasıdır.\n\n**Redux Form**, **form state'ini** yerel bileşen state'i yerine **Redux store'unda** tutan bir kütüphanedir — alan değerleri, odak, touched/dirty bayrakları, doğrulama hataları ve gönderim durumunun hepsi, dispatch edilen action'larla güncellenen Redux state'i olur. **Başlıca özellikler**: tüm form yaşam döngüsünü yönetir (başlatma, alan başına state takibi, senkron + async doğrulama, gönderim işleme), bir `reduxForm()` HOC'u + `Field` bileşenleri girdileri store'a bağlar ve her şey DevTools'ta görünür. Ödün: her tuş vuruşunda dispatch etmek çok yük getirir, bu yüzden topluluk çoğu form için büyük ölçüde **React Hook Form** ya da **Formik** gibi yerel-state kütüphanelerine geçti — Redux Form esas olarak form state'inin gerçekten uygulama-geneli paylaşılması gerektiğinde anlamlıdır."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Why has the community largely moved away from Redux Form for most forms?",
+          "promptTr": "Topluluk çoğu form için neden büyük ölçüde Redux Form'dan uzaklaştı?",
+          "options": [
+            { "text": "Storing every keystroke in the Redux store adds significant overhead; local-state libs (React Hook Form, Formik) are lighter", "textTr": "Her tuş vuruşunu Redux store'unda saklamak ciddi yük ekler; yerel-state kütüphaneleri (React Hook Form, Formik) daha hafiftir", "correct": true },
+            { "text": "Redux Form cannot validate fields", "textTr": "Redux Form alanları doğrulayamaz" },
+            { "text": "Redux Form only works with class components", "textTr": "Redux Form yalnızca class bileşenlerle çalışır" },
+            { "text": "It is incompatible with Redux DevTools", "textTr": "Redux DevTools ile uyumsuzdur" }
+          ],
+          "explanation": "Redux Form does manage validation and the full lifecycle, but putting transient per-keystroke form state in the global store is costly. Most forms are local concerns, so lighter local-state libraries usually win.",
+          "explanationTr": "Redux Form doğrulamayı ve tüm yaşam döngüsünü yönetir ama geçici, tuş-başına form state'ini global store'a koymak maliyetlidir. Çoğu form yereldir, bu yüzden daha hafif yerel-state kütüphaneleri genelde kazanır."
+        },
+        {
+          "type": "match",
+          "prompt": "Match each Redux directory convention to its description",
+          "promptTr": "Her Redux dizin konvansiyonunu açıklamasıyla eşleştir",
+          "pairs": [
+            { "left": "By type (rails-style)", "leftTr": "Tipe göre (rails-style)", "right": "Top-level actions/ reducers/ constants/ folders; a feature spreads across them", "rightTr": "Üst düzey actions/ reducers/ constants/ klasörleri; bir özellik bunlara yayılır" },
+            { "left": "By feature (ducks / slices)", "leftTr": "Özelliğe göre (ducks / slice'lar)", "right": "One folder per feature bundling its reducer, actions & selectors — RTK's recommendation", "rightTr": "Özellik başına bir klasör; reducer, action ve selector'larını paketler — RTK'nın önerisi" },
+            { "left": "store.js (store entry)", "leftTr": "store.js (store girişi)", "right": "Central file that combines reducers and applies middleware to create the store", "rightTr": "Reducer'ları birleştirip middleware uygulayarak store'u oluşturan merkezi dosya" }
+          ]
+        },
+        {
+          "type": "challenge",
+          "question": "How to structure Redux top level directories?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is Redux Form?"
+        },
+        {
+          "type": "challenge",
+          "question": "What are the main features of Redux Form?"
+        }
+      ]
+    },
+    {
+      "slug": "redux-in-the-ecosystem",
+      "title": "Redux among Flux, RxJS & Relay",
+      "titleTr": "Flux, RxJS ve Relay arasında Redux",
+      "position": 3,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "How Redux compares to its neighbours",
+          "titleTr": "Redux komşularıyla nasıl kıyaslanır",
+          "body": "**Downsides of Redux over Flux**: Redux trades some flexibility for predictability. Compared with Flux it has a **single store** (Flux allows many), so all state shares one tree; reducers must be **pure** and produce **immutable** updates, which adds **boilerplate** (action types, creators, reducers, connecting components) for small apps; and the *one big object* model can make some patterns (per-instance state, very localised state) feel heavy. Critics also note the learning curve. (Redux Toolkit exists largely to cut that boilerplate.)\n\n**Redux vs RxJS — similarities**: both embrace a **reactive, stream-of-events** mindset and **immutable, declarative** transformations. A Redux store is conceptually a `scan`/`reduce` over a *stream of actions* producing a stream of states — exactly what RxJS expresses with observables and operators. They're complementary, not rivals: `redux-observable` literally uses RxJS to handle Redux actions as streams. The difference: Redux is a small, opinionated **state container**; RxJS is a general **reactive programming** library for any async stream.\n\n**How Relay differs from Redux**: Relay is **not** a general state container — it's a **GraphQL data-fetching framework** for React. Redux holds *any* client state and is transport-agnostic (you wire up fetching yourself). Relay is **specialised**: components declare their data needs with GraphQL fragments, and Relay handles fetching, normalising, caching, and updating server data automatically. Rule of thumb: Relay (or Apollo) manages **server state over GraphQL**; Redux manages **client/UI state** you control directly.",
+          "bodyTr": "**Redux'ın Flux'a göre dezavantajları**: Redux, öngörülebilirlik için bir miktar esneklikten ödün verir. Flux'la kıyaslandığında **tek bir store**'u vardır (Flux birçoğuna izin verir), bu yüzden tüm state tek bir ağacı paylaşır; reducer'lar **saf** olmalı ve **değişmez** güncellemeler üretmeli, bu da küçük uygulamalar için **boilerplate** ekler (action type'ları, creator'lar, reducer'lar, bileşenleri bağlamak); ve *tek büyük nesne* modeli bazı desenleri (örnek-başına state, çok yerel state) ağır hissettirebilir. Eleştirmenler öğrenme eğrisine de dikkat çeker. (Redux Toolkit büyük ölçüde o boilerplate'i kesmek için vardır.)\n\n**Redux vs RxJS — benzerlikler**: ikisi de **reaktif, olay-akışı** zihniyetini ve **değişmez, bildirimsel** dönüşümleri benimser. Bir Redux store'u kavramsal olarak bir *action akışı* üzerinde state akışı üreten bir `scan`/`reduce`'tur — tam olarak RxJS'in observable'lar ve operatörlerle ifade ettiği şey. Rakip değil tamamlayıcıdırlar: `redux-observable` Redux action'larını akış olarak işlemek için tam anlamıyla RxJS kullanır. Fark: Redux küçük, görüş sahibi bir **state konteyneridir**; RxJS herhangi bir async akış için genel bir **reaktif programlama** kütüphanesidir.\n\n**Relay'in Redux'tan farkı**: Relay genel bir state konteyneri **değildir** — React için bir **GraphQL veri-çekme framework'üdür**. Redux *herhangi bir* istemci state'ini tutar ve taşımadan bağımsızdır (çekmeyi kendin bağlarsın). Relay **uzmanlaşmıştır**: bileşenler veri ihtiyaçlarını GraphQL fragment'larıyla bildirir ve Relay çekme, normalleştirme, önbellekleme ve sunucu verisini güncellemeyi otomatik halleder. Kural: Relay (ya da Apollo) **GraphQL üzerinden sunucu state'ini** yönetir; Redux doğrudan kontrol ettiğin **istemci/UI state'ini** yönetir."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What is the key difference between Relay and Redux?",
+          "promptTr": "Relay ile Redux arasındaki temel fark nedir?",
+          "options": [
+            { "text": "Relay is a specialised GraphQL data-fetching framework; Redux is a general client-state container", "textTr": "Relay özelleşmiş bir GraphQL veri-çekme framework'üdür; Redux genel bir istemci-state konteyneridir", "correct": true },
+            { "text": "Relay and Redux are two names for the same library", "textTr": "Relay ve Redux aynı kütüphanenin iki adıdır" },
+            { "text": "Relay only stores local UI state; Redux only fetches data", "textTr": "Relay yalnızca yerel UI state'i saklar; Redux yalnızca veri çeker" },
+            { "text": "Relay replaces React; Redux replaces JavaScript", "textTr": "Relay React'in yerine geçer; Redux JavaScript'in yerine geçer" }
+          ],
+          "explanation": "Relay automates fetching/caching/normalising server data declared via GraphQL fragments. Redux is transport-agnostic and holds whatever client state you put in it. They solve different problems.",
+          "explanationTr": "Relay, GraphQL fragment'larıyla bildirilen sunucu verisini çekmeyi/önbelleklemeyi/normalleştirmeyi otomatikleştirir. Redux taşımadan bağımsızdır ve içine koyduğun herhangi bir istemci state'ini tutar. Farklı problemleri çözerler."
+        },
+        {
+          "type": "true_false",
+          "statement": "A Redux store is conceptually a reduce/scan over a stream of actions, which is why it shares a reactive, immutable mindset with RxJS.",
+          "statementTr": "Bir Redux store'u kavramsal olarak bir action akışı üzerinde bir reduce/scan'dir; RxJS ile reaktif, değişmez bir zihniyeti paylaşmasının sebebi budur.",
+          "answer": true,
+          "explanation": "Both model state as immutable, declarative transformations of an event stream. redux-observable even uses RxJS to process Redux actions as observables.",
+          "explanationTr": "İkisi de state'i bir olay akışının değişmez, bildirimsel dönüşümleri olarak modeller. redux-observable, Redux action'larını observable olarak işlemek için RxJS bile kullanır."
+        },
+        {
+          "type": "challenge",
+          "question": "What are the downsides of Redux over Flux?"
+        },
+        {
+          "type": "challenge",
+          "question": "Are there any similarities between Redux and RxJS?"
+        },
+        {
+          "type": "challenge",
+          "question": "How Relay is different from Redux?"
+        }
+      ]
+    }
+  ]
+}

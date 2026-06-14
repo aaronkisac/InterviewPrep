@@ -1,7 +1,7 @@
 {
   "topic": "redux",
   "title": "Redux",
-  "$comment": "Canonical concept list (syllabus) for Redux. WORK IN PROGRESS: foundations units 1-2 only; remaining units land incrementally. Verified by: pnpm concept:coverage",
+  "$comment": "Canonical concept list (syllabus) for Redux. COMPLETE: 5 units, 14 concepts covering bank ids 401-435 (35/35). Verified by: pnpm concept:coverage",
   "concepts": [
     {
       "id": "redux-flux-principles",
@@ -41,6 +41,106 @@
       "unit": "reducers-state-conventions",
       "lessons": [
         "initial-reset-and-what-to-store"
+      ]
+    },
+    {
+      "id": "provider-connect-and-hooks",
+      "title": "Provider, connect & the hooks API",
+      "titleTr": "Provider, connect ve hooks API'si",
+      "section": "core",
+      "unit": "react-redux-integration",
+      "lessons": [
+        "provider-connect-and-hooks"
+      ]
+    },
+    {
+      "id": "selectors-and-store-access",
+      "title": "Selectors & accessing the store",
+      "titleTr": "Selector'lar ve store'a erişim",
+      "section": "core",
+      "unit": "react-redux-integration",
+      "lessons": [
+        "selectors-and-store-access"
+      ]
+    },
+    {
+      "id": "context-vs-redux-and-connect-decorator",
+      "title": "Context vs Redux & the connect decorator",
+      "titleTr": "Context vs Redux ve connect decorator'ı",
+      "section": "core",
+      "unit": "react-redux-integration",
+      "lessons": [
+        "context-vs-redux-and-connect-decorator"
+      ]
+    },
+    {
+      "id": "side-effects-and-thunk",
+      "title": "Side effects & redux-thunk",
+      "titleTr": "Yan etkiler ve redux-thunk",
+      "section": "advanced",
+      "unit": "async-middleware",
+      "lessons": [
+        "side-effects-and-thunk"
+      ]
+    },
+    {
+      "id": "ajax-requests-and-middleware-choices",
+      "title": "Making requests & middleware choices",
+      "titleTr": "İstek yapmak ve middleware seçimleri",
+      "section": "advanced",
+      "unit": "async-middleware",
+      "lessons": [
+        "ajax-requests-and-middleware-choices"
+      ]
+    },
+    {
+      "id": "composing-the-middleware-pipeline",
+      "title": "Composing the middleware pipeline",
+      "titleTr": "Middleware hattını oluşturmak",
+      "section": "advanced",
+      "unit": "async-middleware",
+      "lessons": [
+        "composing-the-middleware-pipeline"
+      ]
+    },
+    {
+      "id": "redux-saga-in-depth",
+      "title": "redux-saga in depth",
+      "titleTr": "redux-saga derinlemesine",
+      "section": "advanced",
+      "unit": "async-middleware",
+      "lessons": [
+        "redux-saga-in-depth"
+      ]
+    },
+    {
+      "id": "redux-devtools",
+      "title": "Redux DevTools",
+      "titleTr": "Redux DevTools",
+      "section": "interview",
+      "unit": "tooling-ecosystem",
+      "lessons": [
+        "redux-devtools"
+      ]
+    },
+    {
+      "id": "project-structure-and-redux-form",
+      "title": "Project structure & Redux Form",
+      "titleTr": "Proje yapısı ve Redux Form",
+      "section": "interview",
+      "unit": "tooling-ecosystem",
+      "lessons": [
+        "project-structure-and-redux-form"
+      ]
+    },
+    {
+      "id": "redux-in-the-ecosystem",
+      "title": "Redux among Flux, RxJS & Relay",
+      "titleTr": "Flux, RxJS ve Relay arasında Redux",
+      "section": "interview",
+      "unit": "tooling-ecosystem",
+      "lessons": [
+        "redux-in-the-ecosystem"
       ]
     }
   ]

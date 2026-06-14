@@ -6,12 +6,16 @@
 // A11y: every node is a link/button with full text state; color never alone.
 
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useSyncExternalStore } from "react";
 import { motion } from "motion/react";
 import { Check, Lock, Play, Star } from "lucide-react";
 
 import { SPRING_POP } from "@/lib/course/motion";
-import { getGuestCompletedLessonIds } from "@/lib/course/guest-progress";
+import {
+  getGuestCompletedServerSnapshot,
+  getGuestCompletedSnapshot,
+  subscribeGuestProgress,
+} from "@/lib/course/guest-progress";
 import type { LessonNodeStatus, UnitNodeStatus } from "@/lib/course/path-state";
 import type { UnitSection } from "@/lib/supabase/types";
 import { usePrefersReducedMotion } from "@/lib/course/use-reduced-motion";
@@ -101,14 +105,14 @@ export function CourseMap({
   const i18n = i18nCourse[lang];
   const reduced = usePrefersReducedMotion();
 
-  // Guest progress lives in localStorage; load it after mount so the first
-  // client render still matches the server (empty → only lesson 1 active).
-  const [guestCompleted, setGuestCompleted] = useState<Set<string>>(
-    () => new Set(),
+  // Guest progress lives in localStorage; read it through an external store so
+  // the first client render still matches the server (empty → only lesson 1
+  // active) and there's no setState-in-effect.
+  const guestCompleted = useSyncExternalStore(
+    subscribeGuestProgress,
+    getGuestCompletedSnapshot,
+    getGuestCompletedServerSnapshot,
   );
-  useEffect(() => {
-    if (isGuest) setGuestCompleted(getGuestCompletedLessonIds());
-  }, [isGuest]);
 
   // Sequential lock states for the first unit when browsing as a guest:
   // a lesson is done when stored locally, the first not-done one is active,
