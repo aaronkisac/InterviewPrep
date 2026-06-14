@@ -1,6 +1,6 @@
 # Progress
 
-Last updated: 2026-06-14 (Redux course COMPLETE — 5 units, 35/35)
+Last updated: 2026-06-14 (React Hooks course — unit-03 Refs & the DOM)
 
 ---
 
@@ -157,6 +157,15 @@ Same retro rules apply: challenge texts byte-for-byte from seed JSON, 5–9 step
 - unit-04 Async & Middleware (advanced) — **done 2026-06-14**: 4 lessons (side-effects-and-thunk · ajax-requests-and-middleware-choices · composing-the-middleware-pipeline · redux-saga-in-depth), 9 challenges (409/410 · 424/423 · 419/417 · 434/433/426). Uses `order` + `match` step types. `unit-04-async-middleware.json` + 4 syllabus concepts. **Coverage 27/35. Needs `pnpm seed courses` + `pnpm course:coverage` + play-test.**
 - unit-05 Tooling, Ecosystem & Comparisons (interview) — **done 2026-06-14**: 3 lessons (redux-devtools · project-structure-and-redux-form · redux-in-the-ecosystem), 8 challenges (407/408 · 425/421/422 · 427/432/435). `unit-05-tooling-ecosystem.json` + 3 syllabus concepts.
 - **Redux course COMPLETE: 5 units, 14 lessons, 35 challenges — coverage 35/35. Needs `pnpm seed courses` + `pnpm course:coverage` + play-test.** Syllabus `$comment` updated (no longer WIP). Course scale-out status: React ✓, TypeScript ✓, Next.js ✓, JavaScript ✓, Redux ✓.
+
+**React Hooks course plan** (bank: 29 questions, ids 801–829) — new course, started 2026-06-14. This is the home for the deep hook/useEffect interview questions the React pilot deliberately left out of scope. New dir `data/seed-courses/react-hooks/` + new syllabus `data/syllabi/react-hooks.json` (WIP).
+- unit-01 Foundations (foundations) — **done 2026-06-14**: 2 lessons (what-are-hooks · usestate-basics), 5 challenges (801/805 · 802/810/811).
+- unit-02 Effects & Lifecycle (core) — **done 2026-06-14**: 2 lessons (useeffect-and-lifecycle · batching-and-rerenders), 4 challenges (806/803 · 807/824).
+- unit-03 Refs & the DOM (core) — **done 2026-06-14**: 2 lessons (refs-and-the-dom · useref-vs-usestate), 3 challenges (804/814 · 815).
+- unit-04 Context & Reducer (core) — **done 2026-06-14**: 2 lessons (usecontext · usestate-vs-usereducer), 3 challenges (812/827 · 813).
+- unit-05 Memoization & Performance (advanced) — **done 2026-06-14**: 2 lessons (usememo-and-usecallback · memo-pitfalls-and-when), 6 challenges (816/817/825 · 818/821/826).
+- unit-06 Advanced Patterns & Custom Hooks (interview) — **done 2026-06-14**: 3 lessons (custom-hooks · hooks-vs-hoc-and-class-coverage · effect-escape-hatches), 8 challenges (808/809/829 · 819/820 · 822/823/828).
+- **React Hooks course COMPLETE: 6 units, 13 lessons, 29 challenges — coverage 29/29.** Uses match step type (unit-03). Syllabus no longer WIP. **Needs `pnpm seed courses` + `pnpm course:coverage` + play-test.**
 
 ---
 

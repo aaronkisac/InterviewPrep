@@ -1,0 +1,108 @@
+{
+  "topic": "react-hooks",
+  "slug": "memoization-performance",
+  "title": "Memoization & Performance",
+  "titleTr": "Memoizasyon ve Performans",
+  "section": "advanced",
+  "position": 5,
+  "lessons": [
+    {
+      "slug": "usememo-and-usecallback",
+      "title": "useMemo & useCallback",
+      "titleTr": "useMemo ve useCallback",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Caching values and functions between renders",
+          "titleTr": "Render'lar arası değerleri ve fonksiyonları önbelleğe almak",
+          "body": "Both hooks **memoise** across renders, keyed by a dependency array — they recompute only when a dependency changes.\n\n**`useMemo(fn, deps)`** caches a **computed value**. Use it to skip an expensive recalculation, or to keep a **stable object/array reference** so memoised children / context / effect deps don't see a \"new\" value every render:\n\n```js\nconst sorted = useMemo(() => bigList.sort(cmp), [bigList]);\n```\n\n**`useCallback(fn, deps)`** caches a **function**. Common use cases: passing a callback to a `React.memo`-wrapped child (so the child doesn't re-render from a new function each time), and stabilising a function used in another hook's dependency array (e.g. a `useEffect` that calls it).\n\n```js\nconst handleAdd = useCallback((item) => setItems(xs => [...xs, item]), []);\n```\n\n**The difference in practice:** they're the same tool for different things — `useMemo` returns the **result of calling** `fn`; `useCallback` returns **the function itself**. In fact `useCallback(fn, deps)` is exactly `useMemo(() => fn, deps)`. Rule of thumb: memoise a **value** → `useMemo`; memoise a **function** → `useCallback`.",
+          "bodyTr": "İki hook da render'lar arası **memoize** eder, bir bağımlılık dizisiyle anahtarlanır — yalnızca bir bağımlılık değiştiğinde yeniden hesaplarlar.\n\n**`useMemo(fn, deps)`** bir **hesaplanmış değeri** önbelleğe alır. Pahalı bir yeniden hesaplamayı atlamak ya da **kararlı bir nesne/dizi referansı** tutmak için kullan; böylece memoize edilmiş çocuklar / context / effect deps her render'da \"yeni\" bir değer görmez:\n\n```js\nconst sorted = useMemo(() => bigList.sort(cmp), [bigList]);\n```\n\n**`useCallback(fn, deps)`** bir **fonksiyonu** önbelleğe alır. Yaygın kullanımlar: bir callback'i `React.memo` ile sarılmış bir çocuğa geçirmek (böylece çocuk her seferinde yeni bir fonksiyondan yeniden render olmaz) ve başka bir hook'un bağımlılık dizisinde kullanılan bir fonksiyonu kararlı kılmak (örn. onu çağıran bir `useEffect`).\n\n```js\nconst handleAdd = useCallback((item) => setItems(xs => [...xs, item]), []);\n```\n\n**Pratikteki fark:** farklı şeyler için aynı araçtırlar — `useMemo`, `fn`'i **çağırmanın sonucunu** döndürür; `useCallback` **fonksiyonun kendisini** döndürür. Aslında `useCallback(fn, deps)` tam olarak `useMemo(() => fn, deps)`'tir. Kural: bir **değeri** memoize et → `useMemo`; bir **fonksiyonu** memoize et → `useCallback`."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What does useMemo return versus useCallback?",
+          "promptTr": "useMemo, useCallback'e karşı ne döndürür?",
+          "options": [
+            { "text": "useMemo returns the result of calling the function; useCallback returns the function itself", "textTr": "useMemo fonksiyonu çağırmanın sonucunu döndürür; useCallback fonksiyonun kendisini döndürür", "correct": true },
+            { "text": "Both return the function itself", "textTr": "İkisi de fonksiyonun kendisini döndürür" },
+            { "text": "useMemo returns a function; useCallback returns a value", "textTr": "useMemo bir fonksiyon döndürür; useCallback bir değer döndürür" },
+            { "text": "They are identical with no difference", "textTr": "Hiçbir farkları olmadan aynıdırlar" }
+          ],
+          "explanation": "useMemo(() => compute(), deps) caches the computed value; useCallback(fn, deps) caches the function. useCallback(fn, deps) === useMemo(() => fn, deps).",
+          "explanationTr": "useMemo(() => compute(), deps) hesaplanan değeri önbelleğe alır; useCallback(fn, deps) fonksiyonu önbelleğe alır. useCallback(fn, deps) === useMemo(() => fn, deps)."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Memoise a callback passed to a memoised child",
+          "promptTr": "Memoize edilmiş bir çocuğa geçirilen callback'i memoize et",
+          "code": "const handleClick = ___(() => doThing(id), [id]);",
+          "answers": ["useCallback"],
+          "distractors": ["useMemo", "useRef", "useEffect"],
+          "explanation": "useCallback memoises the function so its reference stays stable while id is unchanged, preventing needless re-renders of a React.memo child.",
+          "explanationTr": "useCallback fonksiyonu memoize eder, böylece id değişmedikçe referansı kararlı kalır ve bir React.memo çocuğunun gereksiz yeniden render'ını önler."
+        },
+        {
+          "type": "challenge",
+          "question": "When and why would you use useMemo()?"
+        },
+        {
+          "type": "challenge",
+          "question": "What are common use cases for useCallback?"
+        },
+        {
+          "type": "challenge",
+          "question": "What's the difference between useCallback and useMemo in practice?"
+        }
+      ]
+    },
+    {
+      "slug": "memo-pitfalls-and-when",
+      "title": "React.memo, pitfalls & choosing the hook",
+      "titleTr": "React.memo, tuzaklar ve hook seçimi",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Different tools, and the cost of over-memoising",
+          "titleTr": "Farklı araçlar ve aşırı memoize etmenin maliyeti",
+          "body": "**`React.memo()` vs `useMemo()`** — different things despite the name:\n\n- **`React.memo(Component)`** is a **higher-order component**. It memoises a whole **component**, skipping its re-render when its **props** are shallow-equal to last time.\n- **`useMemo(fn, deps)`** is a **hook** that memoises a **value** inside a component.\n\nThey often work together: wrap a child in `React.memo`, then `useMemo`/`useCallback` the object and function props you pass it, so the props stay reference-equal and `memo` can actually skip the render.\n\n**Problems with useCallback (and memoisation in general):** it isn't free. Every `useCallback`/`useMemo` adds the dependency array, the closure, and a cache lookup — overhead that often **costs more than it saves** for cheap computations or callbacks passed to non-memoised children. Other pitfalls: a **wrong/missing dependency** captures a stale value (bug), and the cache is a hint React may **discard** — never rely on it for correctness, only performance.\n\n**When to use which:**\n\n- **`useMemo`** — cache an expensive value or keep a stable reference.\n- **`useCallback`** — keep a function's identity stable (for `memo` children or hook deps).\n- **`useEffect`** — run a **side effect** after render (fetching, subscriptions, DOM) — it doesn't return a cached value at all; it's a different category.\n\nDefault to *not* memoising; add it when a profiler shows a real problem.",
+          "bodyTr": "**`React.memo()` vs `useMemo()`** — isme rağmen farklı şeyler:\n\n- **`React.memo(Component)`** bir **higher-order component**'tir. Bütün bir **bileşeni** memoize eder, **prop'ları** bir önceki sefere shallow-equal olduğunda yeniden render'ını atlar.\n- **`useMemo(fn, deps)`** bir bileşen içindeki bir **değeri** memoize eden bir **hook**'tur.\n\nGenelde birlikte çalışırlar: bir çocuğu `React.memo` ile sar, sonra ona geçirdiğin nesne ve fonksiyon prop'larını `useMemo`/`useCallback` et; böylece prop'lar referans-eşit kalır ve `memo` render'ı gerçekten atlayabilir.\n\n**useCallback (ve genel olarak memoizasyon) sorunları:** bedava değildir. Her `useCallback`/`useMemo`, bağımlılık dizisini, closure'ı ve bir önbellek aramasını ekler — ucuz hesaplamalar ya da memoize edilmemiş çocuklara geçirilen callback'ler için genelde **kazandırdığından fazlasına mal olur**. Diğer tuzaklar: **yanlış/eksik bir bağımlılık** eski bir değeri yakalar (bug) ve önbellek, React'in **atabileceği** bir ipucudur — doğruluk için ona asla güvenme, yalnızca performans için.\n\n**Hangisi ne zaman:**\n\n- **`useMemo`** — pahalı bir değeri önbelleğe al ya da kararlı bir referans tut.\n- **`useCallback`** — bir fonksiyonun kimliğini kararlı tut (`memo` çocukları ya da hook deps için).\n- **`useEffect`** — render'dan sonra bir **yan etki** çalıştır (fetch, abonelik, DOM) — hiç önbelleklenmiş değer döndürmez; farklı bir kategoridir.\n\nVarsayılan olarak memoize *etme*; bir profiler gerçek bir sorun gösterdiğinde ekle."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What is the key difference between React.memo() and useMemo()?",
+          "promptTr": "React.memo() ile useMemo() arasındaki temel fark nedir?",
+          "options": [
+            { "text": "React.memo memoises a whole component by its props; useMemo memoises a value inside a component", "textTr": "React.memo bütün bir bileşeni prop'larına göre memoize eder; useMemo bir bileşen içindeki bir değeri memoize eder", "correct": true },
+            { "text": "They are the same API with different names", "textTr": "Farklı isimlerle aynı API'dirler" },
+            { "text": "React.memo is a hook; useMemo is an HOC", "textTr": "React.memo bir hook'tur; useMemo bir HOC'tur" },
+            { "text": "useMemo only works in class components", "textTr": "useMemo yalnızca class bileşenlerde çalışır" }
+          ],
+          "explanation": "React.memo is an HOC that skips a component's re-render on shallow-equal props; useMemo is a hook that caches a computed value within a component. Different scopes entirely.",
+          "explanationTr": "React.memo, shallow-equal prop'larda bir bileşenin yeniden render'ını atlayan bir HOC'tur; useMemo bir bileşen içinde hesaplanan bir değeri önbelleğe alan bir hook'tur. Tamamen farklı kapsamlar."
+        },
+        {
+          "type": "true_false",
+          "statement": "Wrapping every function in useCallback always improves performance.",
+          "statementTr": "Her fonksiyonu useCallback'e sarmak her zaman performansı artırır.",
+          "answer": false,
+          "explanation": "Memoisation has its own cost (deps array, closure, cache). For cheap functions or props passed to non-memoised children it often costs more than it saves. Measure first; don't memoise by reflex.",
+          "explanationTr": "Memoizasyonun kendi maliyeti vardır (deps dizisi, closure, önbellek). Ucuz fonksiyonlar ya da memoize edilmemiş çocuklara geçirilen prop'lar için genelde kazandırdığından fazlasına mal olur. Önce ölç; refleksle memoize etme."
+        },
+        {
+          "type": "challenge",
+          "question": "What are the differences between React.memo() and useMemo()?"
+        },
+        {
+          "type": "challenge",
+          "question": "Are there any problems when using useCallback?"
+        },
+        {
+          "type": "challenge",
+          "question": "When to use useCallback, useMemo, and useEffect?"
+        }
+      ]
+    }
+  ]
+}

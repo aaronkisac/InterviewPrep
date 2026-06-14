@@ -1,0 +1,104 @@
+{
+  "topic": "react-hooks",
+  "slug": "context-reducer",
+  "title": "Context & Reducer",
+  "titleTr": "Context ve Reducer",
+  "section": "core",
+  "position": 4,
+  "lessons": [
+    {
+      "slug": "usecontext",
+      "title": "useContext: sharing without prop-drilling",
+      "titleTr": "useContext: prop-drilling olmadan paylaşım",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Reading context, and where it bites",
+          "titleTr": "Context okumak ve nerede ısırdığı",
+          "body": "**`useContext`** lets a component read a shared value without passing it through every level as props (**prop-drilling**). Three steps:\n\n```js\nconst ThemeContext = createContext(\"light\");        // 1. create\n\n<ThemeContext.Provider value={theme}>...</ThemeContext.Provider> // 2. provide\n\nconst theme = useContext(ThemeContext);             // 3. consume\n```\n\n**When to use it:** for low-frequency, broadly-needed values — theme, current user, locale, a design-system config. It's dependency injection, not a state manager.\n\n**Problems with useContext** to know for interviews:\n\n- **Every consumer re-renders when the Provider's `value` changes** — and it changes if you pass a **new object/array literal each render** (`value={{ user, setUser }}`), because the reference differs every time. Fix: memoise the value with `useMemo`.\n- **No selective subscription** — you can't subscribe to *part* of a context; any change re-renders all consumers. For large, frequently-updated state, that's why people reach for Redux/Zustand or split into multiple contexts.\n- **Default value trap** — the `createContext(default)` value is used only when there's **no** Provider above; forgetting the Provider silently gives you the default instead of an error.",
+          "bodyTr": "**`useContext`** bir bileşenin paylaşılan bir değeri, onu her seviyeden prop olarak geçirmeden (**prop-drilling**) okumasını sağlar. Üç adım:\n\n```js\nconst ThemeContext = createContext(\"light\");        // 1. oluştur\n\n<ThemeContext.Provider value={theme}>...</ThemeContext.Provider> // 2. sağla\n\nconst theme = useContext(ThemeContext);             // 3. tüket\n```\n\n**Ne zaman kullanılır:** düşük frekanslı, geniş ihtiyaç duyulan değerler için — tema, mevcut kullanıcı, dil, bir tasarım sistemi yapılandırması. Bu bir bağımlılık enjeksiyonudur, state yöneticisi değil.\n\n**Mülakat için bilinmesi gereken useContext sorunları:**\n\n- **Provider'ın `value`'su değiştiğinde her tüketici yeniden render olur** — ve her render'da **yeni bir nesne/dizi literali** geçirirsen değişir (`value={{ user, setUser }}`), çünkü referans her seferinde farklıdır. Çözüm: değeri `useMemo` ile memoize et.\n- **Seçici abonelik yok** — bir context'in *bir kısmına* abone olamazsın; herhangi bir değişiklik tüm tüketicileri yeniden render eder. Büyük, sık güncellenen state için insanların Redux/Zustand'a uzanması ya da birden çok context'e bölmesinin sebebi budur.\n- **Varsayılan değer tuzağı** — `createContext(default)` değeri yalnızca üstte **hiç** Provider yokken kullanılır; Provider'ı unutmak sana hata yerine sessizce varsayılanı verir."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Why might passing value={{ user, setUser }} to a Provider hurt performance?",
+          "promptTr": "Bir Provider'a value={{ user, setUser }} geçirmek performansa neden zarar verebilir?",
+          "options": [
+            { "text": "A new object is created every render, so all consumers re-render even if the data is unchanged", "textTr": "Her render'da yeni bir nesne oluşur, bu yüzden veri değişmese bile tüm tüketiciler yeniden render olur", "correct": true },
+            { "text": "Objects can't be passed through context", "textTr": "Nesneler context üzerinden geçirilemez" },
+            { "text": "useContext only accepts strings", "textTr": "useContext yalnızca string kabul eder" },
+            { "text": "It disables the Provider's default value", "textTr": "Provider'ın varsayılan değerini devre dışı bırakır" }
+          ],
+          "explanation": "The inline object literal has a new reference each render, so context sees a changed value and re-renders every consumer. Wrap it in useMemo([user]) to keep a stable reference.",
+          "explanationTr": "Inline nesne literali her render'da yeni bir referansa sahiptir, bu yüzden context değişmiş bir değer görür ve her tüketiciyi yeniden render eder. Kararlı bir referans için useMemo([user]) ile sar."
+        },
+        {
+          "type": "true_false",
+          "statement": "If you call useContext but forgot to wrap the tree in a Provider, you get the default value passed to createContext rather than an error.",
+          "statementTr": "useContext çağırıp ağacı bir Provider'a sarmayı unuttuysan, bir hata yerine createContext'e geçirilen varsayılan değeri alırsın.",
+          "answer": true,
+          "explanation": "The default is the fallback when no Provider is found above. This can silently mask a missing Provider, so some teams default to undefined and throw in a custom hook to catch the mistake.",
+          "explanationTr": "Varsayılan, üstte Provider bulunamadığında devreye giren yedektir. Bu eksik bir Provider'ı sessizce gizleyebilir, bu yüzden bazı ekipler varsayılanı undefined yapıp hatayı yakalamak için bir custom hook'ta throw eder."
+        },
+        {
+          "type": "challenge",
+          "question": "When and how would you use useContext?"
+        },
+        {
+          "type": "challenge",
+          "question": "Is there any problem when using useContext Hook?"
+        }
+      ]
+    },
+    {
+      "slug": "usestate-vs-usereducer",
+      "title": "useState vs useReducer",
+      "titleTr": "useState vs useReducer",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "When state logic outgrows useState",
+          "titleTr": "State mantığı useState'i aştığında",
+          "body": "Both manage state; **`useReducer`** is the better fit when state is **complex or its updates are interrelated**. It centralises update logic in a pure reducer `(state, action) => newState`, and components `dispatch` actions instead of calling setters:\n\n```js\nconst [state, dispatch] = useReducer(reducer, initialState);\ndispatch({ type: \"increment\" });\n```\n\n**Reach for `useState`** when state is **simple and independent** — a boolean toggle, an input value, a single counter.\n\n**Reach for `useReducer`** when:\n\n- the **next state depends on the previous** in non-trivial ways,\n- multiple values **change together** or follow rules (a form with many fields, a wizard),\n- update logic is complex enough that you want it **testable in isolation** (the reducer is a pure function), or\n- you want to **pass `dispatch` down** instead of many callbacks — `dispatch` has a stable identity, so it won't cause child re-renders the way fresh callbacks can.\n\nThey're interchangeable in principle (useState is essentially a simple reducer under the hood); the choice is about which keeps the code clearer.",
+          "bodyTr": "İkisi de state yönetir; **`useReducer`**, state **karmaşık olduğunda ya da güncellemeleri birbirine bağlı olduğunda** daha uygundur. Güncelleme mantığını saf bir reducer'da `(state, action) => newState` merkezileştirir ve bileşenler setter çağırmak yerine action `dispatch` eder:\n\n```js\nconst [state, dispatch] = useReducer(reducer, initialState);\ndispatch({ type: \"increment\" });\n```\n\nState **basit ve bağımsız** olduğunda **`useState`'e uzan** — bir boolean toggle, bir girdi değeri, tek bir sayaç.\n\nŞunlarda **`useReducer`'a uzan**:\n\n- **sonraki state öncekine** önemsiz olmayan biçimde bağlıysa,\n- birden çok değer **birlikte değişiyorsa** ya da kurallara uyuyorsa (çok alanlı bir form, bir sihirbaz),\n- güncelleme mantığı **izole test etmek** isteyeceğin kadar karmaşıksa (reducer saf bir fonksiyondur), ya da\n- birçok callback yerine **`dispatch`'i aşağı geçirmek** istiyorsan — `dispatch`'in kararlı bir kimliği vardır, bu yüzden taze callback'ler gibi çocuk yeniden render'larına yol açmaz.\n\nPrensipte birbirinin yerine kullanılabilirler (useState esasen arkada basit bir reducer'dır); seçim, kodu hangisinin daha net tuttuğuyla ilgilidir."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Which scenario is the strongest case for useReducer over useState?",
+          "promptTr": "Hangi senaryo useState yerine useReducer için en güçlü gerekçedir?",
+          "options": [
+            { "text": "Complex state with many interrelated fields and update rules you want testable in one place", "textTr": "Tek yerde test edilebilir, çok sayıda birbirine bağlı alan ve güncelleme kuralı olan karmaşık state", "correct": true },
+            { "text": "A single boolean that toggles on click", "textTr": "Tıklamada değişen tek bir boolean" },
+            { "text": "A controlled text input's value", "textTr": "Kontrollü bir metin girdisinin değeri" },
+            { "text": "A value that never changes", "textTr": "Hiç değişmeyen bir değer" }
+          ],
+          "explanation": "useReducer shines when transitions are complex/interdependent and benefit from a pure, testable reducer. Simple independent state (a toggle, an input) is cleaner with useState.",
+          "explanationTr": "useReducer, geçişler karmaşık/birbirine bağlı olduğunda ve saf, test edilebilir bir reducer'dan fayda sağladığında parlar. Basit bağımsız state (toggle, girdi) useState ile daha temizdir."
+        },
+        {
+          "type": "true_false",
+          "statement": "The dispatch function from useReducer has a stable identity across renders, so passing it down won't trigger re-renders the way a freshly-created callback can.",
+          "statementTr": "useReducer'dan gelen dispatch fonksiyonu render'lar arası kararlı bir kimliğe sahiptir, bu yüzden onu aşağı geçirmek, yeni oluşturulan bir callback'in yapabileceği gibi yeniden render tetiklemez.",
+          "answer": true,
+          "explanation": "React guarantees a stable dispatch reference, so memoised children won't re-render because of it — one reason to prefer useReducer + context for deep trees over passing many callbacks.",
+          "explanationTr": "React kararlı bir dispatch referansı garanti eder, bu yüzden memoize edilmiş çocuklar onun yüzünden yeniden render olmaz — derin ağaçlarda birçok callback geçirmek yerine useReducer + context'i tercih etmenin bir sebebi."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Get state and a dispatch from a reducer",
+          "promptTr": "Bir reducer'dan state ve dispatch al",
+          "code": "const [state, dispatch] = ___(reducer, initialState);",
+          "answers": ["useReducer"],
+          "distractors": ["useState", "useMemo", "createStore"],
+          "explanation": "useReducer(reducer, initialState) returns [state, dispatch]. You then dispatch actions that the reducer turns into the next state.",
+          "explanationTr": "useReducer(reducer, initialState), [state, dispatch] döndürür. Sonra reducer'ın sonraki state'e çevirdiği action'lar dispatch edersin."
+        },
+        {
+          "type": "challenge",
+          "question": "When to use useState vs useReducer?"
+        }
+      ]
+    }
+  ]
+}

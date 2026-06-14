@@ -1,0 +1,118 @@
+{
+  "topic": "react-hooks",
+  "slug": "hooks-foundations",
+  "title": "Hooks Foundations",
+  "titleTr": "Hook Temelleri",
+  "section": "foundations",
+  "position": 1,
+  "lessons": [
+    {
+      "slug": "what-are-hooks",
+      "title": "What hooks are & why they exist",
+      "titleTr": "Hook'lar nedir ve neden var",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "State and lifecycle, without classes",
+          "titleTr": "Class olmadan state ve yaşam döngüsü",
+          "body": "**React Hooks** are functions that let you \"hook into\" React state and lifecycle features **from function components** — added in React 16.8. Before hooks, only class components could hold state or run lifecycle code; function components were limited to props. Hooks (`useState`, `useEffect`, `useContext`, `useRef`, …) removed that limit.\n\n**Why they exist / their advantages:**\n\n- **Reuse stateful logic** without changing your component tree. Before, sharing logic meant render props or HOCs (wrapper hell); a **custom hook** extracts it into a plain function.\n- **Simpler components** — related logic lives together (a subscription's setup and cleanup in one `useEffect`) instead of being split across `componentDidMount`/`componentWillUnmount`.\n- **No `this`, no binding, no class boilerplate** — just functions and values, which are easier to read, test, and minify.\n\nHooks come with **two rules** the React team enforces (via the `eslint-plugin-react-hooks` linter):\n\n1. **Only call hooks at the top level** — never inside loops, conditions, or nested functions. React tracks hooks **by call order**, so the order must be identical on every render.\n2. **Only call hooks from React functions** — function components or other custom hooks, not regular JS functions.",
+          "bodyTr": "**React Hook'ları**, fonksiyon bileşenlerinden React state ve yaşam döngüsü özelliklerine \"bağlanmanı\" sağlayan fonksiyonlardır — React 16.8'de eklendi. Hook'lardan önce yalnızca class bileşenleri state tutabilir veya yaşam döngüsü kodu çalıştırabilirdi; fonksiyon bileşenleri prop'larla sınırlıydı. Hook'lar (`useState`, `useEffect`, `useContext`, `useRef`, …) bu sınırı kaldırdı.\n\n**Neden varlar / avantajları:**\n\n- Bileşen ağacını değiştirmeden **state'li mantığı tekrar kullan**. Önceden mantık paylaşmak render props ya da HOC demekti (wrapper cehennemi); bir **custom hook** onu düz bir fonksiyona çıkarır.\n- **Daha basit bileşenler** — ilgili mantık birlikte yaşar (bir aboneliğin kurulumu ve temizliği tek bir `useEffect`'te) yerine `componentDidMount`/`componentWillUnmount` arasına bölünmek.\n- **`this` yok, binding yok, class boilerplate'i yok** — sadece fonksiyonlar ve değerler; okuması, test etmesi ve minify etmesi daha kolay.\n\nHook'lar, React ekibinin (`eslint-plugin-react-hooks` linter'ıyla) zorladığı **iki kuralla** gelir:\n\n1. **Hook'ları yalnızca en üst seviyede çağır** — asla döngü, koşul ya da iç içe fonksiyon içinde değil. React hook'ları **çağrı sırasına göre** takip eder, bu yüzden sıra her render'da aynı olmalı.\n2. **Hook'ları yalnızca React fonksiyonlarından çağır** — fonksiyon bileşenleri ya da diğer custom hook'lar, düz JS fonksiyonları değil."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What did hooks fundamentally enable when introduced in React 16.8?",
+          "promptTr": "Hook'lar React 16.8'de tanıtıldığında temelde neyi mümkün kıldı?",
+          "options": [
+            { "text": "Using state and lifecycle features inside function components", "textTr": "Fonksiyon bileşenleri içinde state ve yaşam döngüsü özelliklerini kullanmak", "correct": true },
+            { "text": "Rendering components on the server only", "textTr": "Bileşenleri yalnızca sunucuda render etmek" },
+            { "text": "Replacing JSX with plain HTML", "textTr": "JSX'i düz HTML ile değiştirmek" },
+            { "text": "Making class components faster", "textTr": "Class bileşenlerini hızlandırmak" }
+          ],
+          "explanation": "Before 16.8, state and lifecycle were class-only. Hooks let function components hold state (useState) and run side effects (useEffect), plus reuse logic via custom hooks.",
+          "explanationTr": "16.8'den önce state ve yaşam döngüsü yalnızca class'lardaydı. Hook'lar fonksiyon bileşenlerinin state tutmasını (useState), yan etki çalıştırmasını (useEffect) ve custom hook'larla mantığı tekrar kullanmasını sağladı."
+        },
+        {
+          "type": "true_false",
+          "statement": "It's fine to call a hook like useState inside an if statement, as long as the condition is usually true.",
+          "statementTr": "useState gibi bir hook'u bir if içinde çağırmak, koşul genelde true olduğu sürece sorun değildir.",
+          "answer": false,
+          "explanation": "Rule of Hooks #1: only call hooks at the top level. React identifies hooks by call order, so a conditional hook can shift that order between renders and corrupt state. The eslint plugin flags this.",
+          "explanationTr": "Hook Kuralı #1: hook'ları yalnızca en üst seviyede çağır. React hook'ları çağrı sırasına göre tanır, bu yüzden koşullu bir hook render'lar arası sırayı kaydırıp state'i bozabilir. eslint eklentisi bunu işaretler."
+        },
+        {
+          "type": "challenge",
+          "question": "What are React Hooks?"
+        },
+        {
+          "type": "challenge",
+          "question": "What are the advantages of using React Hooks?"
+        }
+      ]
+    },
+    {
+      "slug": "usestate-basics",
+      "title": "useState: declaring and updating state",
+      "titleTr": "useState: state tanımlama ve güncelleme",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "The state hook and how updates actually apply",
+          "titleTr": "State hook'u ve güncellemelerin gerçekte nasıl uygulandığı",
+          "body": "**`useState`** declares a piece of state in a function component. It returns a pair — the current value and a setter — via array destructuring:\n\n```js\nconst [count, setCount] = useState(0); // 0 is the initial value\n```\n\nThe initial value is used only on the **first render**. Calling `setCount(next)` schedules a re-render with the new value.\n\n**Does it update immediately? No.** State updates are **asynchronous and batched** — `setCount` doesn't mutate `count` on the spot; it requests a re-render, and the variable holds the *new* value only on the next render. So this logs the **old** value:\n\n```js\nsetCount(count + 1);\nconsole.log(count); // still the old value this render\n```\n\nWhen the next value depends on the previous one, use the **functional updater** so you're not reading a stale variable (important inside loops or batched updates):\n\n```js\nsetCount(prev => prev + 1);\n```\n\n**Updating objects/arrays:** state must be treated as **immutable** — never mutate it, always create a new object/array. For a **nested object**, spread each level you change:\n\n```js\nsetUser(prev => ({ ...prev, address: { ...prev.address, city: \"London\" } }));\n```\n\nMutating `prev.address.city = …` directly would skip the re-render and break React's change detection.",
+          "bodyTr": "**`useState`** bir fonksiyon bileşeninde bir state parçası tanımlar. Dizi destructuring ile bir çift döndürür — mevcut değer ve bir setter:\n\n```js\nconst [count, setCount] = useState(0); // 0 başlangıç değeri\n```\n\nBaşlangıç değeri yalnızca **ilk render'da** kullanılır. `setCount(next)` çağırmak yeni değerle bir yeniden render planlar.\n\n**Hemen güncellenir mi? Hayır.** State güncellemeleri **asenkron ve toplu (batched)** — `setCount` `count`'u o an değiştirmez; bir yeniden render ister ve değişken *yeni* değeri yalnızca sonraki render'da tutar. Yani bu **eski** değeri loglar:\n\n```js\nsetCount(count + 1);\nconsole.log(count); // bu render'da hâlâ eski değer\n```\n\nSonraki değer öncekine bağlı olduğunda, eski bir değişken okumamak için **fonksiyonel updater** kullan (döngülerde ya da batched güncellemelerde önemli):\n\n```js\nsetCount(prev => prev + 1);\n```\n\n**Nesne/dizi güncelleme:** state **değişmez** muamelesi görmeli — onu asla mutate etme, her zaman yeni bir nesne/dizi oluştur. Bir **iç içe nesne** için, değiştirdiğin her seviyeyi spread et:\n\n```js\nsetUser(prev => ({ ...prev, address: { ...prev.address, city: \"London\" } }));\n```\n\n`prev.address.city = …` şeklinde doğrudan mutate etmek yeniden render'ı atlar ve React'in değişiklik algılamasını bozar."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Declare a count state initialised to 0",
+          "promptTr": "0 ile başlatılan bir count state'i tanımla",
+          "code": "const [count, setCount] = ___(0);",
+          "answers": ["useState"],
+          "distractors": ["useRef", "useEffect", "useReducer"],
+          "explanation": "useState(initial) returns [value, setter]. useRef holds a mutable box without re-rendering; useReducer is for more complex state transitions.",
+          "explanationTr": "useState(initial), [değer, setter] döndürür. useRef yeniden render etmeden mutable bir kutu tutar; useReducer daha karmaşık state geçişleri içindir."
+        },
+        {
+          "type": "output_predict",
+          "prompt": "What does the log show right after calling setCount?",
+          "promptTr": "setCount çağrıldıktan hemen sonra log ne gösterir?",
+          "code": "const [count, setCount] = useState(5);\nsetCount(count + 1);\nconsole.log(count);",
+          "options": [
+            { "text": "5 — state hasn't updated yet this render", "textTr": "5 — state bu render'da henüz güncellenmedi", "correct": true },
+            { "text": "6 — setCount updates count immediately", "textTr": "6 — setCount count'u hemen günceller" },
+            { "text": "undefined", "textTr": "undefined" },
+            { "text": "It throws because count is const", "textTr": "count const olduğu için hata fırlatır" }
+          ],
+          "explanation": "setCount schedules a re-render; the count variable in this render still holds 5. The new value (6) is only visible on the next render.",
+          "explanationTr": "setCount bir yeniden render planlar; bu render'daki count değişkeni hâlâ 5 tutar. Yeni değer (6) yalnızca sonraki render'da görünür."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Which correctly updates the city on a nested user object in state?",
+          "promptTr": "State'teki iç içe bir user nesnesinin city'sini hangisi doğru günceller?",
+          "options": [
+            { "text": "setUser(prev => ({ ...prev, address: { ...prev.address, city: \"London\" } }))", "textTr": "setUser(prev => ({ ...prev, address: { ...prev.address, city: \"London\" } }))", "correct": true },
+            { "text": "user.address.city = \"London\"", "textTr": "user.address.city = \"London\"" },
+            { "text": "setUser({ city: \"London\" })", "textTr": "setUser({ city: \"London\" })" },
+            { "text": "user.address = { city: \"London\" }; setUser(user)", "textTr": "user.address = { city: \"London\" }; setUser(user)" }
+          ],
+          "explanation": "You must produce a new object at every level you change, keeping the rest via spread. Mutating in place breaks immutability and may skip the re-render; setUser({city}) would drop the other fields.",
+          "explanationTr": "Değiştirdiğin her seviyede yeni bir nesne üretmeli, gerisini spread ile korumalısın. Yerinde mutate etmek değişmezliği bozar ve yeniden render'ı atlayabilir; setUser({city}) diğer alanları düşürür."
+        },
+        {
+          "type": "challenge",
+          "question": "What is useState() in React?"
+        },
+        {
+          "type": "challenge",
+          "question": "Does React useState Hook update immediately?"
+        },
+        {
+          "type": "challenge",
+          "question": "How do I update state on a nested object with useState()?"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,151 @@
+{
+  "topic": "react-hooks",
+  "slug": "advanced-patterns-custom-hooks",
+  "title": "Advanced Patterns & Custom Hooks",
+  "titleTr": "İleri Desenler ve Custom Hook'lar",
+  "section": "interview",
+  "position": 6,
+  "lessons": [
+    {
+      "slug": "custom-hooks",
+      "title": "Writing custom hooks",
+      "titleTr": "Custom hook yazmak",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Just a function — that calls hooks",
+          "titleTr": "Sadece bir fonksiyon — ama hook çağıran",
+          "body": "A **custom hook** is a JavaScript function whose name starts with **`use`** and that **calls other hooks** (`useState`, `useEffect`, …). That's the whole difference from a normal function:\n\n- A **normal function** can't call hooks. A **custom hook** can, so it must obey the Rules of Hooks (top-level only, called from components/hooks). The `use` prefix is the signal that lets the linter enforce those rules.\n- Its purpose is to **extract and reuse stateful logic** — `useFetch`, `useLocalStorage`, `useDebounce` — without render props or HOCs.\n\n**Do two components using the same hook share state? No.** Each call to a custom hook (and to the `useState`/`useEffect` inside it) gets its **own isolated state**. The hook shares *logic*, not *data*. Two components calling `useCounter()` each have an independent counter. (To share data, you need lifted state, context, or an external store.)\n\n**Can a custom hook return JSX?** Technically **yes** — a hook can return anything, including a React element. But it's **unusual and discouraged**: returning JSX blurs the line between a hook (logic) and a component (UI). If you're returning markup, it should usually be a component. Hooks should return *data and handlers*; components return *UI*.",
+          "bodyTr": "Bir **custom hook**, adı **`use`** ile başlayan ve **başka hook'lar çağıran** (`useState`, `useEffect`, …) bir JavaScript fonksiyonudur. Normal bir fonksiyondan tüm farkı budur:\n\n- Bir **normal fonksiyon** hook çağıramaz. Bir **custom hook** çağırabilir, bu yüzden Hook Kurallarına uymalıdır (yalnızca en üst seviye, bileşenlerden/hook'lardan çağrılır). `use` öneki, linter'ın bu kuralları zorlamasını sağlayan sinyaldir.\n- Amacı, render props ya da HOC olmadan **state'li mantığı çıkarıp tekrar kullanmaktır** — `useFetch`, `useLocalStorage`, `useDebounce`.\n\n**Aynı hook'u kullanan iki bileşen state paylaşır mı? Hayır.** Bir custom hook'a (ve içindeki `useState`/`useEffect`'e) yapılan her çağrı **kendi izole state'ini** alır. Hook *mantığı* paylaşır, *veriyi* değil. `useCounter()` çağıran iki bileşenin her birinin bağımsız bir sayacı vardır. (Veri paylaşmak için lift edilmiş state, context ya da harici bir store gerekir.)\n\n**Bir custom hook JSX döndürebilir mi?** Teknik olarak **evet** — bir hook bir React elemanı dahil her şeyi döndürebilir. Ama bu **alışılmadık ve önerilmez**: JSX döndürmek bir hook (mantık) ile bir bileşen (UI) arasındaki çizgiyi bulanıklaştırır. Markup döndürüyorsan, genelde bir bileşen olmalı. Hook'lar *veri ve handler* döndürmeli; bileşenler *UI* döndürür."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What distinguishes a custom hook from a regular helper function?",
+          "promptTr": "Bir custom hook'u normal bir yardımcı fonksiyondan ne ayırır?",
+          "options": [
+            { "text": "It calls other hooks and follows the Rules of Hooks (and is named with a use prefix)", "textTr": "Başka hook'lar çağırır ve Hook Kurallarına uyar (ve use önekiyle adlandırılır)", "correct": true },
+            { "text": "It must return JSX", "textTr": "JSX döndürmek zorundadır" },
+            { "text": "It runs on the server only", "textTr": "Yalnızca sunucuda çalışır" },
+            { "text": "It is automatically memoised", "textTr": "Otomatik olarak memoize edilir" }
+          ],
+          "explanation": "The defining trait is calling hooks (so the Rules of Hooks apply); the use prefix lets tooling enforce them. A plain function can't call hooks.",
+          "explanationTr": "Tanımlayıcı özellik hook çağırmaktır (böylece Hook Kuralları geçerli olur); use öneki araçların bunları zorlamasını sağlar. Düz bir fonksiyon hook çağıramaz."
+        },
+        {
+          "type": "true_false",
+          "statement": "Two components that both call the same custom hook automatically share the same state.",
+          "statementTr": "Aynı custom hook'u çağıran iki bileşen otomatik olarak aynı state'i paylaşır.",
+          "answer": false,
+          "explanation": "Each call gets its own isolated state — a custom hook reuses logic, not data. Sharing data requires lifted state, context, or an external store.",
+          "explanationTr": "Her çağrı kendi izole state'ini alır — bir custom hook veriyi değil mantığı tekrar kullanır. Veri paylaşmak lift edilmiş state, context ya da harici bir store gerektirir."
+        },
+        {
+          "type": "challenge",
+          "question": "When writing a Custom Hook, what is the difference between it and a normal function?"
+        },
+        {
+          "type": "challenge",
+          "question": "Do two components using the same Hook share state?"
+        },
+        {
+          "type": "challenge",
+          "question": "Can a custom React hook return JSX?"
+        }
+      ]
+    },
+    {
+      "slug": "hooks-vs-hoc-and-class-coverage",
+      "title": "Hooks vs HOC / render props, and class coverage",
+      "titleTr": "Hook'lar vs HOC / render props ve class kapsamı",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "What hooks replace — and the one gap",
+          "titleTr": "Hook'ların neyin yerine geçtiği — ve tek boşluk",
+          "body": "**Do hooks replace render props and HOCs?** For the main use case — **sharing stateful logic** — yes, and more cleanly. Render props and HOCs both wrap components, which leads to **\"wrapper hell\"** (deeply nested trees) and name collisions. A **custom hook** shares the same logic as a plain function call, with no extra nesting. So hooks are the preferred tool for logic reuse. (Render props/HOCs aren't *gone* — they're still useful when you need to control **what** renders, not just share logic.)\n\n**Do hooks cover all class use cases?** **Almost.** `useState`/`useReducer` replace `this.state`; `useEffect`/`useLayoutEffect` cover the lifecycle methods; `useContext` replaces the context consumer. The **one gap**: there is **no hook equivalent of `componentDidCatch` / `getDerivedStateFromError`** — **error boundaries must still be class components**. The other rarely-cited gap is `getSnapshotBeforeUpdate`. For everything else, function components + hooks are a complete replacement.",
+          "bodyTr": "**Hook'lar render props ve HOC'ların yerine geçer mi?** Ana kullanım için — **state'li mantığı paylaşmak** — evet, ve daha temiz biçimde. Render props ve HOC'ların ikisi de bileşenleri sarar, bu da **\"wrapper cehennemi\"**'ne (derin iç içe ağaçlar) ve isim çakışmalarına yol açar. Bir **custom hook** aynı mantığı düz bir fonksiyon çağrısı gibi paylaşır, ekstra iç içe geçme olmadan. Yani mantık tekrarı için tercih edilen araç hook'lardır. (Render props/HOC'lar *yok olmadı* — yalnızca mantık paylaşmakla kalmayıp **ne**'nin render olacağını kontrol etmen gerektiğinde hâlâ yararlılar.)\n\n**Hook'lar tüm class kullanımlarını kapsar mı?** **Neredeyse.** `useState`/`useReducer`, `this.state`'in yerine geçer; `useEffect`/`useLayoutEffect` yaşam döngüsü metotlarını kapsar; `useContext` context tüketicisinin yerine geçer. **Tek boşluk**: **`componentDidCatch` / `getDerivedStateFromError`'ın hook karşılığı yoktur** — **error boundary'ler hâlâ class bileşeni olmalı**. Nadiren anılan diğer boşluk `getSnapshotBeforeUpdate`'tir. Geri kalan her şey için fonksiyon bileşenleri + hook'lar tam bir alternatiftir."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Which class capability still has no direct hook equivalent?",
+          "promptTr": "Hangi class yeteneğinin hâlâ doğrudan bir hook karşılığı yoktur?",
+          "options": [
+            { "text": "Error boundaries (componentDidCatch / getDerivedStateFromError)", "textTr": "Error boundary'ler (componentDidCatch / getDerivedStateFromError)", "correct": true },
+            { "text": "Local state (this.state)", "textTr": "Yerel state (this.state)" },
+            { "text": "Running code after mount", "textTr": "Mount'tan sonra kod çalıştırmak" },
+            { "text": "Reading context", "textTr": "Context okumak" },
+            { "text": "Cleanup on unmount", "textTr": "Unmount'ta temizlik" }
+          ],
+          "explanation": "Hooks cover state, lifecycle, and context. Error boundaries are the notable exception — they still require a class (or a wrapper library). State, effects, and context all have hook equivalents.",
+          "explanationTr": "Hook'lar state'i, yaşam döngüsünü ve context'i kapsar. Error boundary'ler dikkat çeken istisnadır — hâlâ bir class (ya da bir wrapper kütüphanesi) gerektirir. State, effect ve context'in hepsinin hook karşılığı vardır."
+        },
+        {
+          "type": "true_false",
+          "statement": "Hooks let you reuse stateful logic without the nested-wrapper problem that render props and HOCs create.",
+          "statementTr": "Hook'lar, render props ve HOC'ların yarattığı iç içe wrapper sorunu olmadan state'li mantığı tekrar kullanmanı sağlar.",
+          "answer": true,
+          "explanation": "Custom hooks share logic via a plain function call — no extra components in the tree, so no wrapper hell or prop-name collisions.",
+          "explanationTr": "Custom hook'lar mantığı düz bir fonksiyon çağrısıyla paylaşır — ağaçta ekstra bileşen yok, dolayısıyla wrapper cehennemi ya da prop-ismi çakışması yok."
+        },
+        {
+          "type": "challenge",
+          "question": "Do Hooks replace render props and higher-order components (HOC)?"
+        },
+        {
+          "type": "challenge",
+          "question": "Do React Hooks cover all use cases for class components?"
+        }
+      ]
+    },
+    {
+      "slug": "effect-escape-hatches",
+      "title": "useLayoutEffect, flushSync & error boundaries",
+      "titleTr": "useLayoutEffect, flushSync ve error boundary'ler",
+      "position": 3,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Synchronous escape hatches and catching errors",
+          "titleTr": "Senkron kaçış kapıları ve hataları yakalamak",
+          "body": "Three escape hatches for cases the everyday hooks don't cover:\n\n**`useLayoutEffect` vs `useEffect`** — same API, different timing. `useEffect` runs **after** the browser paints (asynchronous); `useLayoutEffect` runs **synchronously after DOM mutations but before paint**. Prefer `useEffect`. Reach for `useLayoutEffect` only when you must **read layout and re-render before the user sees anything** — e.g. measuring a DOM node's size/position to place a tooltip — so you avoid a visible flicker. The cost: it blocks painting, so keep it light.\n\n**`flushSync`** forces React to flush a state update **synchronously** and update the DOM immediately, opting out of batching. Use it sparingly when you need the DOM updated *before* the next line runs — e.g. update state, then immediately read the new DOM layout or scroll to a just-added element. Overuse hurts performance (it defeats batching).\n\n**Error boundaries in function components** — there's no error-boundary hook, so you **can't build one with hooks alone**. The practical answer: use a small **class** component with `componentDidCatch`/`getDerivedStateFromError`, or a library like **`react-error-boundary`** which gives you a function-friendly `<ErrorBoundary>` component and a `useErrorBoundary` hook. You still *use* it from your function components; you just can't author the boundary itself as a hook.",
+          "bodyTr": "Günlük hook'ların kapsamadığı durumlar için üç kaçış kapısı:\n\n**`useLayoutEffect` vs `useEffect`** — aynı API, farklı zamanlama. `useEffect` tarayıcı boyadıktan **sonra** çalışır (asenkron); `useLayoutEffect` **DOM mutasyonlarından sonra ama boyamadan önce senkron** çalışır. `useEffect`'i tercih et. `useLayoutEffect`'e yalnızca **layout okuyup kullanıcı bir şey görmeden önce yeniden render etmen** gerektiğinde uzan — örn. bir tooltip'i yerleştirmek için bir DOM düğümünün boyutunu/konumunu ölçmek — böylece görünür bir titremeyi önlersin. Maliyeti: boyamayı engeller, bu yüzden hafif tut.\n\n**`flushSync`** React'i bir state güncellemesini **senkron** flush etmeye ve DOM'u hemen güncellemeye zorlar, batching'den çıkar. Bir sonraki satır çalışmadan *önce* DOM'un güncellenmesi gerektiğinde az kullan — örn. state'i güncelle, sonra hemen yeni DOM layout'unu oku ya da yeni eklenen bir elemana scroll yap. Aşırı kullanım performansa zarar verir (batching'i bozar).\n\n**Fonksiyon bileşenlerinde error boundary'ler** — bir error-boundary hook'u yok, bu yüzden **yalnızca hook'larla bir tane yapamazsın**. Pratik cevap: `componentDidCatch`/`getDerivedStateFromError` olan küçük bir **class** bileşeni kullan ya da sana fonksiyon-dostu bir `<ErrorBoundary>` bileşeni ve bir `useErrorBoundary` hook'u veren **`react-error-boundary`** gibi bir kütüphane kullan. Onu yine fonksiyon bileşenlerinden *kullanırsın*; sadece boundary'nin kendisini bir hook olarak yazamazsın."
+        },
+        {
+          "type": "mcq",
+          "prompt": "When should you use useLayoutEffect instead of useEffect?",
+          "promptTr": "useEffect yerine useLayoutEffect'i ne zaman kullanmalısın?",
+          "options": [
+            { "text": "When you must read layout and re-render before the browser paints, to avoid a visible flicker", "textTr": "Görünür bir titremeyi önlemek için layout okuyup tarayıcı boyamadan önce yeniden render etmen gerektiğinde", "correct": true },
+            { "text": "Always — it is faster than useEffect", "textTr": "Her zaman — useEffect'ten hızlıdır" },
+            { "text": "For fetching data on mount", "textTr": "Mount'ta veri çekmek için" },
+            { "text": "To avoid writing a dependency array", "textTr": "Bağımlılık dizisi yazmaktan kaçınmak için" }
+          ],
+          "explanation": "useLayoutEffect runs synchronously before paint — right for measuring/mutating layout to prevent flicker. It blocks painting, so default to useEffect for everything else (including data fetching).",
+          "explanationTr": "useLayoutEffect boyamadan önce senkron çalışır — titremeyi önlemek için layout ölçmeye/değiştirmeye uygun. Boyamayı engeller, bu yüzden diğer her şey için (veri çekme dahil) varsayılan useEffect'tir."
+        },
+        {
+          "type": "true_false",
+          "statement": "You can build a full error boundary using only hooks, with no class component.",
+          "statementTr": "Hiç class bileşeni olmadan, yalnızca hook'larla tam bir error boundary yapabilirsin.",
+          "answer": false,
+          "explanation": "There's no hook for componentDidCatch/getDerivedStateFromError, so the boundary itself must be a class (or come from a library like react-error-boundary). You use it from function components, but can't author it as a hook.",
+          "explanationTr": "componentDidCatch/getDerivedStateFromError için bir hook yoktur, bu yüzden boundary'nin kendisi bir class olmalı (ya da react-error-boundary gibi bir kütüphaneden gelmeli). Onu fonksiyon bileşenlerinden kullanırsın ama bir hook olarak yazamazsın."
+        },
+        {
+          "type": "challenge",
+          "question": "When would you want to avoid useEffect and use useLayoutEffect instead?"
+        },
+        {
+          "type": "challenge",
+          "question": "When would you use flushSync in React?"
+        },
+        {
+          "type": "challenge",
+          "question": "How can I make use of Error Boundaries in functional React components?"
+        }
+      ]
+    }
+  ]
+}

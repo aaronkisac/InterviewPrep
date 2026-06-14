@@ -1,0 +1,105 @@
+{
+  "topic": "react-hooks",
+  "slug": "effects-lifecycle",
+  "title": "Effects & Lifecycle",
+  "titleTr": "Effect'ler ve Yaşam Döngüsü",
+  "section": "core",
+  "position": 2,
+  "lessons": [
+    {
+      "slug": "useeffect-and-lifecycle",
+      "title": "useEffect & the class lifecycle",
+      "titleTr": "useEffect ve class yaşam döngüsü",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Synchronising with the outside world",
+          "titleTr": "Dış dünyayla senkronize olmak",
+          "body": "**`useEffect(setup, deps)`** runs side effects *after* render — data fetching, subscriptions, manual DOM tweaks, timers. The **dependency array** controls *when* the setup re-runs:\n\n- **`useEffect(fn)`** — no array → runs after **every** render.\n- **`useEffect(fn, [])`** — empty array → runs **once**, after the first mount. This is the answer to *\"call a loading function only once\"*: put the fetch in the effect and pass `[]` so it doesn't re-run.\n- **`useEffect(fn, [a, b])`** — runs after mount and whenever `a` or `b` changes (compared by `Object.is`).\n\n```js\nuseEffect(() => {\n  loadData(); // runs once after mount\n}, []);\n```\n\nThe optional **return value is a cleanup function** — React runs it before the next effect run and on unmount (cancel subscriptions, clear timers).\n\n**Which class lifecycle methods does useEffect replace?** One hook covers three:\n\n- **`componentDidMount`** → `useEffect(fn, [])` (runs after first render).\n- **`componentDidUpdate`** → `useEffect(fn, [deps])` (runs when deps change).\n- **`componentWillUnmount`** → the **cleanup** function returned from the effect.\n\nSo a subscription's setup and teardown live together in one effect, instead of being split across two lifecycle methods.",
+          "bodyTr": "**`useEffect(setup, deps)`** yan etkileri render'dan *sonra* çalıştırır — veri çekme, abonelikler, manuel DOM düzenlemeleri, zamanlayıcılar. **Bağımlılık dizisi** setup'ın *ne zaman* yeniden çalışacağını kontrol eder:\n\n- **`useEffect(fn)`** — dizi yok → **her** render'dan sonra çalışır.\n- **`useEffect(fn, [])`** — boş dizi → ilk mount'tan sonra **bir kez** çalışır. *\"Bir yükleme fonksiyonunu yalnızca bir kez çağır\"* sorusunun cevabı budur: fetch'i effect'e koy ve `[]` geç ki tekrar çalışmasın.\n- **`useEffect(fn, [a, b])`** — mount'tan sonra ve `a` ya da `b` her değiştiğinde çalışır (`Object.is` ile karşılaştırılır).\n\n```js\nuseEffect(() => {\n  loadData(); // mount'tan sonra bir kez çalışır\n}, []);\n```\n\nİsteğe bağlı **dönüş değeri bir temizleme (cleanup) fonksiyonudur** — React onu bir sonraki effect çalışmasından önce ve unmount'ta çalıştırır (abonelikleri iptal et, zamanlayıcıları temizle).\n\n**useEffect hangi class yaşam döngüsü metotlarının yerine geçer?** Tek hook üçünü kapsar:\n\n- **`componentDidMount`** → `useEffect(fn, [])` (ilk render'dan sonra çalışır).\n- **`componentDidUpdate`** → `useEffect(fn, [deps])` (deps değiştiğinde çalışır).\n- **`componentWillUnmount`** → effect'ten döndürülen **cleanup** fonksiyonu.\n\nYani bir aboneliğin kurulumu ve sökümü iki yaşam döngüsü metoduna bölünmek yerine tek bir effect'te birlikte yaşar."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Run an effect only once, after the first render",
+          "promptTr": "Bir effect'i yalnızca bir kez, ilk render'dan sonra çalıştır",
+          "code": "useEffect(() => {\n  loadData();\n}, ___);",
+          "answers": ["[]"],
+          "distractors": ["[loadData]", "null", "{}"],
+          "explanation": "An empty dependency array means the effect has no dependencies, so React runs it once after mount and never re-runs it — the standard 'load once' pattern.",
+          "explanationTr": "Boş bağımlılık dizisi, effect'in hiç bağımlılığı olmadığı anlamına gelir, bu yüzden React onu mount'tan sonra bir kez çalıştırır ve bir daha çalıştırmaz — standart 'bir kez yükle' deseni."
+        },
+        {
+          "type": "mcq",
+          "prompt": "The cleanup function returned by useEffect corresponds to which class lifecycle?",
+          "promptTr": "useEffect'in döndürdüğü cleanup fonksiyonu hangi class yaşam döngüsüne karşılık gelir?",
+          "options": [
+            { "text": "componentWillUnmount (and runs before each re-run of the effect)", "textTr": "componentWillUnmount (ve effect'in her yeniden çalışmasından önce de çalışır)", "correct": true },
+            { "text": "componentDidMount", "textTr": "componentDidMount" },
+            { "text": "render", "textTr": "render" },
+            { "text": "constructor", "textTr": "constructor" }
+          ],
+          "explanation": "The returned function cleans up: React calls it on unmount and also before re-running the effect, so subscriptions/timers don't leak. componentDidMount maps to useEffect(fn, []).",
+          "explanationTr": "Döndürülen fonksiyon temizlik yapar: React onu unmount'ta ve effect'i yeniden çalıştırmadan önce çağırır, böylece abonelikler/zamanlayıcılar sızmaz. componentDidMount ise useEffect(fn, [])'e karşılık gelir."
+        },
+        {
+          "type": "challenge",
+          "question": "Which lifecycle methods of class components are replaced by useEffect in functional components?"
+        },
+        {
+          "type": "challenge",
+          "question": "How to call a loading function with React useEffect only once?"
+        }
+      ]
+    },
+    {
+      "slug": "batching-and-rerenders",
+      "title": "Batching & forcing re-renders",
+      "titleTr": "Batching ve yeniden render'ı zorlamak",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Grouping updates, and the rare need to force one",
+          "titleTr": "Güncellemeleri gruplamak ve nadir zorlama ihtiyacı",
+          "body": "**Batching** is React grouping multiple state updates into a **single re-render**. If you call several setters in one event handler, React doesn't render after each — it waits and renders **once** with all the changes applied:\n\n```js\nfunction handleClick() {\n  setCount(c => c + 1);\n  setFlag(f => !f);\n  // → one re-render, not two\n}\n```\n\n**Advantages**: fewer renders (better performance), and a **consistent** UI — you never paint a half-updated state where `count` changed but `flag` didn't. In **React 18+**, batching is **automatic everywhere** (via `createRoot`) — including in promises, `setTimeout`, and native event handlers, which weren't batched before 18. (`flushSync` opts out when you truly need a synchronous DOM update between two updates.)\n\n**Forcing a re-render with hooks**: there's no `forceUpdate` in function components, and you rarely need one — if the UI depends on data, that data should be state. When you genuinely must (e.g. an external mutable source changed), trigger a state change:\n\n```js\nconst [, forceRender] = useReducer(x => x + 1, 0); // call forceRender()\n// or: const [, setTick] = useState(0); setTick(t => t + 1);\n```\n\nBoth schedule a render by changing state. Needing this is usually a smell that some value should have been state (or read via `useSyncExternalStore`).",
+          "bodyTr": "**Batching**, React'in birden çok state güncellemesini **tek bir yeniden render'da** gruplamasıdır. Bir olay işleyicide birkaç setter çağırırsan, React her birinden sonra render etmez — bekler ve tüm değişiklikler uygulanmış halde **bir kez** render eder:\n\n```js\nfunction handleClick() {\n  setCount(c => c + 1);\n  setFlag(f => !f);\n  // → iki değil, bir yeniden render\n}\n```\n\n**Avantajları**: daha az render (daha iyi performans) ve **tutarlı** bir UI — `count` değişmiş ama `flag` değişmemiş yarı-güncel bir state'i asla boyamazsın. **React 18+**'da batching **her yerde otomatiktir** (`createRoot` ile) — promise'ler, `setTimeout` ve native event handler'lar dahil; bunlar 18'den önce batch'lenmiyordu. (`flushSync`, iki güncelleme arasında gerçekten senkron bir DOM güncellemesi gerektiğinde devre dışı bırakır.)\n\n**Hook'larla yeniden render'ı zorlamak**: fonksiyon bileşenlerinde `forceUpdate` yoktur ve nadiren gerekir — UI bir veriye bağlıysa o veri state olmalı. Gerçekten gerektiğinde (örn. harici mutable bir kaynak değişti), bir state değişikliği tetikle:\n\n```js\nconst [, forceRender] = useReducer(x => x + 1, 0); // forceRender() çağır\n// ya da: const [, setTick] = useState(0); setTick(t => t + 1);\n```\n\nİkisi de state'i değiştirerek bir render planlar. Buna ihtiyaç duymak genelde bir değerin state olması gerektiğinin (ya da `useSyncExternalStore` ile okunması gerektiğinin) işaretidir."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What is the main advantage of React batching multiple state updates?",
+          "promptTr": "React'in birden çok state güncellemesini batch'lemesinin temel avantajı nedir?",
+          "options": [
+            { "text": "Fewer re-renders and a consistent UI — all updates apply together in one render", "textTr": "Daha az yeniden render ve tutarlı bir UI — tüm güncellemeler tek render'da birlikte uygulanır", "correct": true },
+            { "text": "It makes state updates synchronous", "textTr": "State güncellemelerini senkron yapar" },
+            { "text": "It removes the need for a dependency array", "textTr": "Bağımlılık dizisi ihtiyacını ortadan kaldırır" },
+            { "text": "It lets you mutate state directly", "textTr": "State'i doğrudan mutate etmene izin verir" }
+          ],
+          "explanation": "Batching collapses several setStates into one render, improving performance and preventing inconsistent intermediate UI. React 18 made it automatic everywhere.",
+          "explanationTr": "Batching birkaç setState'i tek render'a indirir, performansı artırır ve tutarsız ara UI'ı önler. React 18 bunu her yerde otomatik yaptı."
+        },
+        {
+          "type": "mcq",
+          "prompt": "How do you force a re-render in a function component when you truly must?",
+          "promptTr": "Bir fonksiyon bileşeninde gerçekten gerektiğinde yeniden render'ı nasıl zorlarsın?",
+          "options": [
+            { "text": "Trigger a state change, e.g. useReducer(x => x + 1, 0) or a setState tick", "textTr": "Bir state değişikliği tetikle, örn. useReducer(x => x + 1, 0) ya da bir setState tick'i", "correct": true },
+            { "text": "Call this.forceUpdate()", "textTr": "this.forceUpdate() çağır" },
+            { "text": "Re-import the component", "textTr": "Bileşeni yeniden import et" },
+            { "text": "Mutate a useRef value", "textTr": "Bir useRef değerini mutate et" }
+          ],
+          "explanation": "Function components have no forceUpdate; changing state is the only way to schedule a render. A useReducer incrementer or a setState tick works. Mutating a ref does NOT re-render. Needing this is usually a sign the value should be state.",
+          "explanationTr": "Fonksiyon bileşenlerinde forceUpdate yoktur; render planlamanın tek yolu state'i değiştirmektir. Bir useReducer artırıcı ya da setState tick'i işe yarar. Bir ref'i mutate etmek yeniden render ETMEZ. Buna ihtiyaç genelde değerin state olması gerektiğinin işaretidir."
+        },
+        {
+          "type": "challenge",
+          "question": "What is batching in React and what are its advantages?"
+        },
+        {
+          "type": "challenge",
+          "question": "How can I force a component to re-render with Hooks in React?"
+        }
+      ]
+    }
+  ]
+}

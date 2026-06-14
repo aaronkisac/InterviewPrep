@@ -1,0 +1,135 @@
+{
+  "topic": "react-hooks",
+  "slug": "refs-and-dom",
+  "title": "Refs & the DOM",
+  "titleTr": "Ref'ler ve DOM",
+  "section": "core",
+  "position": 3,
+  "lessons": [
+    {
+      "slug": "refs-and-the-dom",
+      "title": "useRef & accessing the DOM",
+      "titleTr": "useRef ve DOM'a erişim",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "A mutable box that survives renders",
+          "titleTr": "Render'lardan sağ çıkan mutable bir kutu",
+          "body": "**`useRef(initial)`** returns a plain object `{ current: initial }` that **persists across renders** and whose `.current` you can read and write freely. Two distinct uses:\n\n**1. Accessing DOM elements.** This is the React way to reach a real DOM node (instead of `document.querySelector`). Create a ref, attach it to JSX with the `ref` attribute, and after render React sets `.current` to the node:\n\n```js\nconst inputRef = useRef(null);\n// ...\n<input ref={inputRef} />;\n// later, e.g. in an effect or handler:\ninputRef.current.focus();\n```\n\nUse it for imperative DOM work: focus/blur, measuring size or scroll position, playing media, integrating non-React libraries.\n\n**2. Holding a mutable value without re-rendering.** Because changing `.current` does **not** trigger a render, a ref is the right place for data that isn't shown in the UI but must survive renders — a `setInterval`/timeout id, the previous value of a prop, a flag like \"has mounted\", or any \"instance variable\" you'd have put on `this` in a class.\n\nGuideline: **don't read or write `ref.current` during rendering** — do it in event handlers or effects. Rendering should stay pure.",
+          "bodyTr": "**`useRef(initial)`**, **render'lar arası kalıcı** olan ve `.current`'ını serbestçe okuyup yazabildiğin düz bir nesne döndürür: `{ current: initial }`. İki ayrı kullanımı var:\n\n**1. DOM elemanlarına erişim.** Bu, gerçek bir DOM düğümüne ulaşmanın React yoludur (`document.querySelector` yerine). Bir ref oluştur, JSX'e `ref` attribute'uyla bağla; render'dan sonra React `.current`'ı düğüme ayarlar:\n\n```js\nconst inputRef = useRef(null);\n// ...\n<input ref={inputRef} />;\n// sonra, örn. bir effect ya da handler içinde:\ninputRef.current.focus();\n```\n\nOnu imperatif DOM işleri için kullan: focus/blur, boyut ya da scroll konumu ölçme, medya oynatma, React olmayan kütüphaneleri entegre etme.\n\n**2. Yeniden render olmadan mutable bir değer tutmak.** `.current`'ı değiştirmek bir render tetikleMEDİĞİ için, ref; UI'da gösterilmeyen ama render'lardan sağ çıkması gereken veriler için doğru yerdir — bir `setInterval`/timeout id'si, bir prop'un önceki değeri, \"mount oldu mu\" gibi bir bayrak ya da bir class'ta `this` üzerine koyacağın herhangi bir \"instance değişkeni\".\n\nKural: **render sırasında `ref.current`'ı okuma ya da yazma** — bunu event handler'larda ya da effect'lerde yap. Render saf kalmalı."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Focus an input via a ref",
+          "promptTr": "Bir input'a ref ile focus ver",
+          "code": "const inputRef = useRef(null);\n// <input ref={inputRef} />\ninputRef.____.focus();",
+          "answers": [
+            "current"
+          ],
+          "distractors": [
+            "value",
+            "node",
+            "dom"
+          ],
+          "explanation": "React assigns the DOM node to ref.current after render. So inputRef.current is the <input> element, and .focus() is a normal DOM method.",
+          "explanationTr": "React, render'dan sonra DOM düğümünü ref.current'a atar. Yani inputRef.current <input> elemanıdır ve .focus() normal bir DOM metodudur."
+        },
+        {
+          "type": "true_false",
+          "statement": "Assigning a new value to ref.current causes the component to re-render.",
+          "statementTr": "ref.current'a yeni bir değer atamak bileşeni yeniden render eder.",
+          "answer": false,
+          "explanation": "Mutating a ref is deliberately invisible to rendering — that's its whole point versus state. Use state when a change should update the UI; use a ref when it shouldn't.",
+          "explanationTr": "Bir ref'i mutate etmek render açısından bilerek görünmezdir — state'e karşı tüm amacı budur. Bir değişiklik UI'ı güncellemeliyse state, güncellememeli ise ref kullan."
+        },
+        {
+          "type": "challenge",
+          "question": "How to access DOM elements in React?"
+        },
+        {
+          "type": "challenge",
+          "question": "What are the use cases for useRef?"
+        }
+      ]
+    },
+    {
+      "slug": "useref-vs-usestate",
+      "title": "useRef vs useState",
+      "titleTr": "useRef vs useState",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Same persistence, opposite rendering behaviour",
+          "titleTr": "Aynı kalıcılık, zıt render davranışı",
+          "body": "Both hooks **remember a value across renders**, but they differ in two key ways:\n\n| | **useState** | **useRef** |\n|---|---|---|\n| Re-render on change | **Yes** — `setX` schedules a render | **No** — mutating `.current` is silent |\n| How you update | via the **setter**, immutably | assign **`.current`** directly (mutable) |\n| Value timing | new value on **next** render | new value **immediately**, synchronously |\n| Use for | data the **UI displays** | data the UI **doesn't** display |\n\nSo: use **`useState`** when a change must be reflected on screen (a counter, form input, toggle). Use **`useRef`** when you need to keep something between renders but changing it shouldn't repaint — a timer id, the previous value, a DOM node, a \"first render\" flag.\n\n```js\nconst [count, setCount] = useState(0); // changing → re-render\nconst renders = useRef(0);             // changing → no re-render\nrenders.current++;                     // tally without causing a loop\n```\n\nA classic trap: storing a value in a ref and expecting the UI to update when it changes — it won't. If the screen must reflect it, it has to be state.",
+          "bodyTr": "İki hook da **bir değeri render'lar arası hatırlar**, ama iki temel açıdan farklılar:\n\n| | **useState** | **useRef** |\n|---|---|---|\n| Değişimde re-render | **Evet** — `setX` render planlar | **Hayır** — `.current`'ı mutate etmek sessizdir |\n| Nasıl güncellersin | **setter** ile, değişmez biçimde | **`.current`**'ı doğrudan ata (mutable) |\n| Değer zamanlaması | yeni değer **sonraki** render'da | yeni değer **anında**, senkron |\n| Ne için | UI'ın **gösterdiği** veri | UI'ın **göstermediği** veri |\n\nYani: bir değişiklik ekrana yansımalıysa **`useState`** kullan (sayaç, form girdisi, toggle). Render'lar arası bir şeyi tutman gerekiyor ama değiştirmesi ekranı yeniden boyamamalıysa **`useRef`** kullan — bir timer id'si, önceki değer, bir DOM düğümü, bir \"ilk render\" bayrağı.\n\n```js\nconst [count, setCount] = useState(0); // değişim → re-render\nconst renders = useRef(0);             // değişim → re-render yok\nrenders.current++;                     // döngüye yol açmadan say\n```\n\nKlasik tuzak: bir değeri ref'te saklayıp değiştiğinde UI'ın güncellenmesini beklemek — güncellenmez. Ekran onu yansıtmalıysa, state olması gerekir."
+        },
+        {
+          "type": "mcq",
+          "prompt": "You need to remember a setInterval id between renders, but it isn't shown in the UI. Which hook?",
+          "promptTr": "Render'lar arası bir setInterval id'sini hatırlaman gerekiyor ama UI'da gösterilmiyor. Hangi hook?",
+          "options": [
+            {
+              "text": "useRef — it persists the value without triggering re-renders",
+              "textTr": "useRef — değeri yeniden render tetiklemeden saklar",
+              "correct": true
+            },
+            {
+              "text": "useState — so the component re-renders each tick",
+              "textTr": "useState — böylece bileşen her tick'te yeniden render olur"
+            },
+            {
+              "text": "useMemo — to memoise the id",
+              "textTr": "useMemo — id'yi memoize etmek için"
+            },
+            {
+              "text": "A module-level variable shared by all instances",
+              "textTr": "Tüm örneklerce paylaşılan modül seviyesi bir değişken"
+            }
+          ],
+          "explanation": "The id is internal bookkeeping, not UI — a ref persists it per-instance without re-rendering. State would cause needless renders; a module variable would leak across component instances.",
+          "explanationTr": "id, UI değil iç defter tutmadır — bir ref onu örnek başına yeniden render etmeden saklar. State gereksiz render'lara yol açar; modül değişkeni bileşen örnekleri arasında sızar."
+        },
+        {
+          "type": "true_false",
+          "statement": "If a value is kept in a ref, changing it will automatically update what the user sees on screen.",
+          "statementTr": "Bir değer ref'te tutulursa, onu değiştirmek kullanıcının ekranda gördüğünü otomatik günceller.",
+          "answer": false,
+          "explanation": "Ref mutations don't re-render, so the UI won't reflect the change. Anything the screen must show has to live in state (or be derived from state).",
+          "explanationTr": "Ref mutasyonları yeniden render etmez, bu yüzden UI değişikliği yansıtmaz. Ekranın göstermesi gereken her şey state'te yaşamalı (ya da state'ten türetilmeli)."
+        },
+        {
+          "type": "match",
+          "prompt": "Match each behaviour to the right hook",
+          "promptTr": "Her davranışı doğru hook'la eşleştir",
+          "pairs": [
+            {
+              "left": "useState",
+              "leftTr": "useState",
+              "right": "Updating it (via the setter) schedules a re-render",
+              "rightTr": "Onu (setter ile) güncellemek bir yeniden render planlar"
+            },
+            {
+              "left": "useRef",
+              "leftTr": "useRef",
+              "right": "Mutating .current changes the value with no re-render",
+              "rightTr": ".current'ı mutate etmek değeri yeniden render olmadan değiştirir"
+            },
+            {
+              "left": "Both",
+              "leftTr": "İkisi de",
+              "right": "Preserve their value across renders of the component",
+              "rightTr": "Değerlerini bileşenin render'ları arasında korur"
+            }
+          ]
+        },
+        {
+          "type": "challenge",
+          "question": "Explain the difference between useState and useRef hooks."
+        }
+      ]
+    }
+  ]
+}

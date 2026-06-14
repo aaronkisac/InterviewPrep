@@ -1,0 +1,137 @@
+{
+  "topic": "react-hooks",
+  "title": "React Hooks",
+  "$comment": "Canonical concept list (syllabus) for React Hooks. COMPLETE: 6 units, 13 concepts covering bank ids 801-829 (29/29). Verified by: pnpm concept:coverage",
+  "concepts": [
+    {
+      "id": "what-are-hooks",
+      "title": "What hooks are & why they exist",
+      "titleTr": "Hook'lar nedir ve neden var",
+      "section": "foundations",
+      "unit": "hooks-foundations",
+      "lessons": [
+        "what-are-hooks"
+      ]
+    },
+    {
+      "id": "usestate-basics",
+      "title": "useState: declaring and updating state",
+      "titleTr": "useState: state tanımlama ve güncelleme",
+      "section": "foundations",
+      "unit": "hooks-foundations",
+      "lessons": [
+        "usestate-basics"
+      ]
+    },
+    {
+      "id": "useeffect-and-lifecycle",
+      "title": "useEffect & the class lifecycle",
+      "titleTr": "useEffect ve class yaşam döngüsü",
+      "section": "core",
+      "unit": "effects-lifecycle",
+      "lessons": [
+        "useeffect-and-lifecycle"
+      ]
+    },
+    {
+      "id": "batching-and-rerenders",
+      "title": "Batching & forcing re-renders",
+      "titleTr": "Batching ve yeniden render'ı zorlamak",
+      "section": "core",
+      "unit": "effects-lifecycle",
+      "lessons": [
+        "batching-and-rerenders"
+      ]
+    },
+    {
+      "id": "refs-and-the-dom",
+      "title": "useRef & accessing the DOM",
+      "titleTr": "useRef ve DOM'a erişim",
+      "section": "core",
+      "unit": "refs-and-dom",
+      "lessons": [
+        "refs-and-the-dom"
+      ]
+    },
+    {
+      "id": "useref-vs-usestate",
+      "title": "useRef vs useState",
+      "titleTr": "useRef vs useState",
+      "section": "core",
+      "unit": "refs-and-dom",
+      "lessons": [
+        "useref-vs-usestate"
+      ]
+    },
+    {
+      "id": "usecontext",
+      "title": "useContext: sharing without prop-drilling",
+      "titleTr": "useContext: prop-drilling olmadan paylaşım",
+      "section": "core",
+      "unit": "context-reducer",
+      "lessons": [
+        "usecontext"
+      ]
+    },
+    {
+      "id": "usestate-vs-usereducer",
+      "title": "useState vs useReducer",
+      "titleTr": "useState vs useReducer",
+      "section": "core",
+      "unit": "context-reducer",
+      "lessons": [
+        "usestate-vs-usereducer"
+      ]
+    },
+    {
+      "id": "usememo-and-usecallback",
+      "title": "useMemo & useCallback",
+      "titleTr": "useMemo ve useCallback",
+      "section": "advanced",
+      "unit": "memoization-performance",
+      "lessons": [
+        "usememo-and-usecallback"
+      ]
+    },
+    {
+      "id": "memo-pitfalls-and-when",
+      "title": "React.memo, pitfalls & choosing the hook",
+      "titleTr": "React.memo, tuzaklar ve hook seçimi",
+      "section": "advanced",
+      "unit": "memoization-performance",
+      "lessons": [
+        "memo-pitfalls-and-when"
+      ]
+    },
+    {
+      "id": "custom-hooks",
+      "title": "Writing custom hooks",
+      "titleTr": "Custom hook yazmak",
+      "section": "interview",
+      "unit": "advanced-patterns-custom-hooks",
+      "lessons": [
+        "custom-hooks"
+      ]
+    },
+    {
+      "id": "hooks-vs-hoc-and-class-coverage",
+      "title": "Hooks vs HOC / render props, and class coverage",
+      "titleTr": "Hook'lar vs HOC / render props ve class kapsamı",
+      "section": "interview",
+      "unit": "advanced-patterns-custom-hooks",
+      "lessons": [
+        "hooks-vs-hoc-and-class-coverage"
+      ]
+    },
+    {
+      "id": "effect-escape-hatches",
+      "title": "useLayoutEffect, flushSync & error boundaries",
+      "titleTr": "useLayoutEffect, flushSync ve error boundary'ler",
+      "section": "interview",
+      "unit": "advanced-patterns-custom-hooks",
+      "lessons": [
+        "effect-escape-hatches"
+      ]
+    }
+  ]
+}
