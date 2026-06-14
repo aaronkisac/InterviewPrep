@@ -1,0 +1,144 @@
+{
+  "topic": "css",
+  "slug": "preprocessors-architecture",
+  "title": "Preprocessors & Architecture",
+  "titleTr": "Preprocessor'lar ve Mimari",
+  "section": "advanced",
+  "position": 5,
+  "lessons": [
+    {
+      "slug": "preprocessors-what-and-why",
+      "title": "CSS preprocessors: what & why",
+      "titleTr": "CSS preprocessor'ları: ne ve neden",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Programming features on top of CSS",
+          "titleTr": "CSS üstüne programlama özellikleri",
+          "body": "**A CSS preprocessor** is a tool that lets you write CSS in an **extended syntax** with programming features, then **compiles it to plain CSS** the browser understands. The big ones are **Sass/SCSS**, **Less**, and **Stylus**. They add what vanilla CSS historically lacked:\n\n- **Variables** (`$brand`), **nesting** (mirror your HTML structure), **mixins** (reusable declaration blocks, with arguments), **functions/operators** (math, colour manipulation), **partials & `@import`/`@use`** (split styles into modules), and **loops/conditionals** for generating rules.\n\n**Why use one?** Less repetition (DRY), better organisation of large codebases, and powerful reuse — which is why they dominated before modern CSS caught up.\n\n**Advantages:** maintainability, DRY via variables/mixins, modular files, and helpers (colour functions, math) that cut boilerplate.\n\n**Disadvantages:** they add a **build step** and tooling; a new **syntax to learn**; **debugging** maps to compiled CSS (mitigated by sourcemaps); **over-nesting** can silently produce bloated, over-specific selectors; and the compiled output can balloon if you're careless. Also, **native CSS now has variables, nesting, and `@layer`**, so some teams skip preprocessors entirely. Trade-off: power and organisation vs build complexity and a discipline cost.",
+          "bodyTr": "**Bir CSS preprocessor**, CSS'i programlama özellikleriyle **genişletilmiş bir söz diziminde** yazmanı, sonra onu tarayıcının anladığı **düz CSS'e derlemeni** sağlayan bir araçtır. Büyük olanlar **Sass/SCSS**, **Less** ve **Stylus**'tur. Vanilla CSS'in tarihsel olarak eksik olduğu şeyleri eklerler:\n\n- **Değişkenler** (`$brand`), **nesting** (HTML yapını yansıt), **mixin'ler** (argümanlı, tekrar kullanılabilir declaration blokları), **fonksiyonlar/operatörler** (matematik, renk işleme), **partial'lar & `@import`/`@use`** (stilleri modüllere böl) ve kural üretmek için **döngüler/koşullar**.\n\n**Neden kullanılır?** Daha az tekrar (DRY), büyük kod tabanlarının daha iyi organizasyonu ve güçlü tekrar kullanım — modern CSS yetişene kadar baskın olmalarının sebebi bu.\n\n**Avantajları:** bakım kolaylığı, değişken/mixin ile DRY, modüler dosyalar ve boilerplate kesen yardımcılar (renk fonksiyonları, matematik).\n\n**Dezavantajları:** bir **build adımı** ve araç ekler; öğrenilecek **yeni bir söz dizimi**; **debugging** derlenmiş CSS'e eşlenir (sourcemap'lerle hafifletilir); **aşırı-nesting** sessizce şişkin, aşırı-specific selector'lar üretebilir; ve dikkatsizsen derlenmiş çıktı şişebilir. Ayrıca **native CSS artık değişkenler, nesting ve `@layer`'a sahip**, bu yüzden bazı ekipler preprocessor'ları tamamen atlar. Ödün: güç ve organizasyon vs build karmaşıklığı ve bir disiplin maliyeti."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What does a CSS preprocessor fundamentally do?",
+          "promptTr": "Bir CSS preprocessor temelde ne yapar?",
+          "options": [
+            { "text": "Lets you write CSS with variables/nesting/mixins, then compiles it to plain CSS", "textTr": "CSS'i değişken/nesting/mixin ile yazmanı sağlar, sonra düz CSS'e derler", "correct": true },
+            { "text": "Runs CSS faster in the browser at runtime", "textTr": "CSS'i tarayıcıda çalışma zamanında daha hızlı çalıştırır" },
+            { "text": "Replaces the need for HTML", "textTr": "HTML ihtiyacını ortadan kaldırır" },
+            { "text": "Minifies images", "textTr": "Görselleri küçültür" }
+          ],
+          "explanation": "A preprocessor compiles an extended syntax (Sass/Less/Stylus) into standard CSS, adding variables, nesting, mixins, and functions for DRY, maintainable styles.",
+          "explanationTr": "Bir preprocessor, genişletilmiş bir söz dizimini (Sass/Less/Stylus) standart CSS'e derler, DRY ve bakımı kolay stiller için değişken, nesting, mixin ve fonksiyon ekler."
+        },
+        {
+          "type": "true_false",
+          "statement": "A downside of preprocessors is that over-nesting can produce bloated, overly-specific selectors.",
+          "statementTr": "Preprocessor'ların bir dezavantajı, aşırı-nesting'in şişkin, aşırı-specific selector'lar üretebilmesidir.",
+          "answer": true,
+          "explanation": "Mirroring deep HTML with nesting compiles to long descendant selectors with high specificity that are hard to override — a common preprocessor pitfall, alongside the build step and learning curve.",
+          "explanationTr": "Derin HTML'i nesting'le yansıtmak, override etmesi zor, yüksek specificity'li uzun descendant selector'lara derlenir — build adımı ve öğrenme eğrisinin yanında yaygın bir preprocessor tuzağı."
+        },
+        {
+          "type": "challenge",
+          "question": "What is a CSS preprocessor and why use one?"
+        },
+        {
+          "type": "challenge",
+          "question": "What are the advantages/disadvantages of using CSS preprocessors?"
+        }
+      ]
+    },
+    {
+      "slug": "sass-and-scss",
+      "title": "Sass & SCSS",
+      "titleTr": "Sass ve SCSS",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "One preprocessor, two syntaxes",
+          "titleTr": "Tek preprocessor, iki söz dizimi",
+          "body": "**Sass (Syntactically Awesome Style Sheets)** is the most popular CSS preprocessor. It provides variables, nesting, mixins (`@mixin`/`@include`), functions, inheritance (`@extend`), partials, and modules (`@use`) — compiled to CSS by the Sass compiler (Dart Sass today).\n\n**Sass comes in two syntaxes**, and \"SCSS vs Sass\" asks about exactly this:\n\n- **SCSS (`.scss`)** — \"Sassy CSS.\" It's a **superset of CSS**: uses **braces `{}` and semicolons `;}`** just like CSS, so any valid CSS file is valid SCSS. Easy to adopt incrementally. This is by far the **more common** syntax today.\n- **The indented syntax (`.sass`)** — the **original**. It drops braces and semicolons, using **indentation and newlines** instead (like Pug for CSS). More concise but not CSS-compatible, so pasting plain CSS in won't work.\n\nKey point: **they're the same language/feature set — only the surface syntax differs.** \"Sass\" the *project* compiles both `.scss` and `.sass`. Most teams pick **SCSS** because it looks like CSS and lowers the learning curve.",
+          "bodyTr": "**Sass (Syntactically Awesome Style Sheets)** en popüler CSS preprocessor'üdür. Değişkenler, nesting, mixin'ler (`@mixin`/`@include`), fonksiyonlar, kalıtım (`@extend`), partial'lar ve modüller (`@use`) sağlar — Sass derleyicisi (bugün Dart Sass) tarafından CSS'e derlenir.\n\n**Sass iki söz diziminde gelir** ve \"SCSS vs Sass\" tam olarak bunu sorar:\n\n- **SCSS (`.scss`)** — \"Sassy CSS.\" Bir **CSS üst kümesidir**: tıpkı CSS gibi **süslü parantez `{}` ve noktalı virgül `;`** kullanır, bu yüzden geçerli herhangi bir CSS dosyası geçerli SCSS'tir. Aşamalı benimsemesi kolaydır. Bugün açık ara **daha yaygın** söz dizimidir.\n- **Girintili söz dizimi (`.sass`)** — **orijinal**. Süslü parantez ve noktalı virgülü bırakır, yerine **girinti ve yeni satırlar** kullanır (CSS için Pug gibi). Daha kısa ama CSS-uyumlu değil, bu yüzden düz CSS yapıştırmak çalışmaz.\n\nTemel nokta: **aynı dil/özellik kümesidirler — yalnızca yüzey söz dizimi farklıdır.** *Proje* olan \"Sass\" hem `.scss` hem `.sass`'ı derler. Çoğu ekip CSS'e benzediği ve öğrenme eğrisini düşürdüğü için **SCSS**'i seçer."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What's the difference between SCSS and the indented Sass syntax?",
+          "promptTr": "SCSS ile girintili Sass söz dizimi arasındaki fark nedir?",
+          "options": [
+            { "text": "SCSS uses CSS-like braces and semicolons (a CSS superset); .sass uses indentation and no braces/semicolons", "textTr": "SCSS, CSS benzeri süslü parantez ve noktalı virgül kullanır (CSS üst kümesi); .sass girinti kullanır, parantez/noktalı virgül yok", "correct": true },
+            { "text": "They are different languages with different features", "textTr": "Farklı özelliklere sahip farklı dillerdir" },
+            { "text": "SCSS can't use variables; Sass can", "textTr": "SCSS değişken kullanamaz; Sass kullanabilir" },
+            { "text": "Sass runs in the browser; SCSS doesn't", "textTr": "Sass tarayıcıda çalışır; SCSS çalışmaz" }
+          ],
+          "explanation": "Both are syntaxes for the same Sass language. SCSS is a CSS superset (braces/semicolons); the indented .sass syntax uses whitespace. Feature set is identical.",
+          "explanationTr": "İkisi de aynı Sass dilinin söz dizimleridir. SCSS bir CSS üst kümesidir (parantez/noktalı virgül); girintili .sass söz dizimi boşluk kullanır. Özellik kümesi aynıdır."
+        },
+        {
+          "type": "true_false",
+          "statement": "Any valid CSS file is also valid SCSS, because SCSS is a superset of CSS.",
+          "statementTr": "Geçerli herhangi bir CSS dosyası aynı zamanda geçerli SCSS'tir, çünkü SCSS CSS'in bir üst kümesidir.",
+          "answer": true,
+          "explanation": "SCSS keeps CSS's braces and semicolons, so you can rename .css to .scss and start adding Sass features incrementally. The indented .sass syntax is not CSS-compatible.",
+          "explanationTr": "SCSS, CSS'in parantez ve noktalı virgülünü korur, bu yüzden .css'i .scss yapıp aşamalı olarak Sass özellikleri eklemeye başlayabilirsin. Girintili .sass söz dizimi CSS-uyumlu değildir."
+        },
+        {
+          "type": "challenge",
+          "question": "What is Sass?"
+        },
+        {
+          "type": "challenge",
+          "question": "What's the difference between SCSS and Sass?"
+        }
+      ]
+    },
+    {
+      "slug": "custom-properties-and-architecture",
+      "title": "Custom properties & CSS architecture",
+      "titleTr": "Custom property'ler ve CSS mimarisi",
+      "position": 3,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Native variables and naming systems",
+          "titleTr": "Native değişkenler ve adlandırma sistemleri",
+          "body": "**CSS Custom Properties** (CSS variables) are native variables declared with `--name` and read with `var()`:\n\n```css\n:root { --brand: #06f; }\n.btn { background: var(--brand); }\n```\n\n**Advantages over preprocessor variables:** they're **live at runtime**, not compiled away. So they **cascade and inherit** (set `--brand` on any element and descendants pick it up), can be **changed with JavaScript** (`el.style.setProperty('--brand', …)`), respond to **media queries / `:hover` / state** (great for theming and dark mode), and update **without a rebuild**. A Sass `$var` is resolved at compile time and is gone in the output; a CSS custom property is a real, dynamic value in the DOM. (They complement each other — many codebases use both.)\n\n**CSS architecture methodologies** are conventions for **naming and organising** CSS so it scales without specificity wars and unintended overrides:\n\n- **BEM (Block–Element–Modifier)** — `.card`, `.card__title`, `.card--featured`. Flat, low-specificity class names that make structure and intent obvious.\n- **OOCSS (Object-Oriented CSS)** — separate **structure from skin** and **container from content**, reusing small composable objects.\n- **SMACSS** — categorise rules into Base, Layout, Module, State, Theme.\n\n**Why they matter:** large CSS becomes unmaintainable without discipline — specificity conflicts, dead code, fragile overrides. These systems give predictable, reusable, low-specificity class names so teams can scale and change styles safely.",
+          "bodyTr": "**CSS Custom Properties** (CSS değişkenleri), `--name` ile tanımlanan ve `var()` ile okunan native değişkenlerdir:\n\n```css\n:root { --brand: #06f; }\n.btn { background: var(--brand); }\n```\n\n**Preprocessor değişkenlerine göre avantajları:** **çalışma zamanında canlıdırlar**, derlenip yok olmazlar. Bu yüzden **cascade ve inherit** olurlar (herhangi bir elemanda `--brand` ayarla, descendant'lar alır), **JavaScript ile değiştirilebilirler** (`el.style.setProperty('--brand', …)`), **media query / `:hover` / state**'e yanıt verirler (theming ve dark mode için harika) ve **rebuild olmadan** güncellenirler. Bir Sass `$var` derleme zamanında çözülür ve çıktıda yoktur; bir CSS custom property DOM'da gerçek, dinamik bir değerdir. (Birbirlerini tamamlarlar — çoğu kod tabanı ikisini de kullanır.)\n\n**CSS mimari metodolojileri**, CSS'in specificity savaşları ve istenmeyen override'lar olmadan ölçeklenmesi için onu **adlandırma ve organize etme** konvansiyonlarıdır:\n\n- **BEM (Block–Element–Modifier)** — `.card`, `.card__title`, `.card--featured`. Yapıyı ve niyeti açık kılan düz, düşük-specificity class adları.\n- **OOCSS (Object-Oriented CSS)** — **yapıyı skin'den** ve **konteyneri içerikten** ayır, küçük birleştirilebilir nesneleri tekrar kullan.\n- **SMACSS** — kuralları Base, Layout, Module, State, Theme olarak kategorize et.\n\n**Neden önemliler:** büyük CSS disiplin olmadan bakımsız hale gelir — specificity çatışmaları, ölü kod, kırılgan override'lar. Bu sistemler öngörülebilir, tekrar kullanılabilir, düşük-specificity class adları verir ki ekipler stilleri güvenle ölçekleyebilsin ve değiştirebilsin."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What's a key advantage of CSS custom properties over Sass variables?",
+          "promptTr": "CSS custom property'lerin Sass değişkenlerine göre temel bir avantajı nedir?",
+          "options": [
+            { "text": "They're live at runtime — they cascade, inherit, respond to state, and can be changed via JS without a rebuild", "textTr": "Çalışma zamanında canlıdırlar — cascade/inherit olur, state'e yanıt verir ve rebuild olmadan JS ile değiştirilebilir", "correct": true },
+            { "text": "They compile to smaller files", "textTr": "Daha küçük dosyalara derlenirler" },
+            { "text": "They only work in preprocessors", "textTr": "Yalnızca preprocessor'larda çalışırlar" },
+            { "text": "They cannot be themed", "textTr": "Theme edilemezler" }
+          ],
+          "explanation": "Sass variables are compiled away; CSS custom properties are real, dynamic DOM values that cascade, inherit, react to media queries/state, and are JS-settable — ideal for theming.",
+          "explanationTr": "Sass değişkenleri derlenip yok olur; CSS custom property'leri gerçek, dinamik DOM değerleridir — cascade/inherit olur, media query/state'e tepki verir ve JS ile ayarlanabilir — theming için ideal."
+        },
+        {
+          "type": "match",
+          "prompt": "Match each methodology to its idea",
+          "promptTr": "Her metodolojiyi fikriyle eşleştir",
+          "pairs": [
+            { "left": "BEM", "leftTr": "BEM", "right": "Block__Element--Modifier class naming for flat, low-specificity styles", "rightTr": "Düz, düşük-specificity stiller için Block__Element--Modifier class adlandırma" },
+            { "left": "OOCSS", "leftTr": "OOCSS", "right": "Separate structure from skin and container from content; reuse objects", "rightTr": "Yapıyı skin'den, konteyneri içerikten ayır; nesneleri tekrar kullan" },
+            { "left": "SMACSS", "leftTr": "SMACSS", "right": "Categorise rules into Base, Layout, Module, State, Theme", "rightTr": "Kuralları Base, Layout, Module, State, Theme olarak kategorize et" }
+          ]
+        },
+        {
+          "type": "challenge",
+          "question": "Explain CSS Custom Properties (variables) and their advantages over preprocessor variables."
+        },
+        {
+          "type": "challenge",
+          "question": "What are CSS architecture methodologies (BEM, OOCSS, SMACSS) and why do they matter?"
+        }
+      ]
+    }
+  ]
+}

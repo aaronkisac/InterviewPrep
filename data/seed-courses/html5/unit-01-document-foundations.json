@@ -1,0 +1,197 @@
+{
+  "topic": "html5",
+  "slug": "document-foundations",
+  "title": "Document Foundations",
+  "titleTr": "Belge Temelleri",
+  "section": "foundations",
+  "position": 1,
+  "lessons": [
+    {
+      "slug": "doctype-and-rendering-modes",
+      "title": "Doctype & rendering modes",
+      "titleTr": "Doctype ve render modları",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Telling the browser how to render",
+          "titleTr": "Tarayıcıya nasıl render edeceğini söylemek",
+          "body": "Every HTML document starts with **`<!DOCTYPE html>`**. It is **not an HTML tag** — it's an instruction to the browser about which **rendering mode** to use.\n\n**Why you need it:** without a doctype (or with an old/malformed one), browsers fall back to **quirks mode**, emulating the buggy behaviour of 1990s browsers (e.g. the old box model where `width` included padding). The modern `<!DOCTYPE html>` triggers **standards mode**, where the browser follows current specs. So the doctype's whole job is to keep the page out of quirks mode.\n\n**The three modes:**\n\n- **Full standards mode** — layout follows the W3C/WHATWG specs. Triggered by `<!DOCTYPE html>`.\n- **Almost standards mode** — nearly identical, with one legacy quirk left in (the way images in table cells are sized vertically). Triggered by certain older doctypes.\n- **Quirks mode** — emulates non-standard legacy behaviour for very old pages. Triggered by a **missing** or unrecognised doctype.\n\nThe short modern doctype (`<!DOCTYPE html>`) is deliberately minimal — older HTML4/XHTML doctypes were long DTD URLs; HTML5 simplified it to the one form that just means \"use standards mode.\"",
+          "bodyTr": "Her HTML belgesi **`<!DOCTYPE html>`** ile başlar. Bu **bir HTML etiketi değildir** — tarayıcıya hangi **render modunu** kullanacağına dair bir talimattır.\n\n**Neden gerekli:** doctype olmadan (ya da eski/bozuk biriyle), tarayıcılar **quirks mode**'a düşer ve 1990'ların tarayıcılarının hatalı davranışını taklit eder (örn. `width`'in padding'i içerdiği eski box model). Modern `<!DOCTYPE html>`, tarayıcının güncel spec'leri izlediği **standards mode**'u tetikler. Yani doctype'ın tüm görevi sayfayı quirks mode'dan uzak tutmaktır.\n\n**Üç mod:**\n\n- **Full standards mode** — layout W3C/WHATWG spec'lerini izler. `<!DOCTYPE html>` ile tetiklenir.\n- **Almost standards mode** — neredeyse aynı, içeride bir eski quirk bırakılmış (tablo hücrelerindeki görsellerin dikey boyutlandırılma şekli). Bazı eski doctype'larla tetiklenir.\n- **Quirks mode** — çok eski sayfalar için standart-dışı eski davranışı taklit eder. **Eksik** ya da tanınmayan bir doctype ile tetiklenir.\n\nKısa modern doctype (`<!DOCTYPE html>`) bilerek minimaldir — eski HTML4/XHTML doctype'ları uzun DTD URL'leriydi; HTML5 onu, yalnızca \"standards mode kullan\" anlamına gelen tek forma indirgedi."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What happens if a page has no doctype?",
+          "promptTr": "Bir sayfada doctype yoksa ne olur?",
+          "options": [
+            {
+              "text": "The browser uses quirks mode, emulating legacy non-standard behaviour",
+              "textTr": "Tarayıcı quirks mode kullanır, eski standart-dışı davranışı taklit eder",
+              "correct": true
+            },
+            {
+              "text": "The page refuses to load",
+              "textTr": "Sayfa yüklenmeyi reddeder"
+            },
+            {
+              "text": "JavaScript is disabled",
+              "textTr": "JavaScript devre dışı kalır"
+            },
+            {
+              "text": "Nothing changes; doctype is purely decorative",
+              "textTr": "Hiçbir şey değişmez; doctype tamamen dekoratiftir"
+            }
+          ],
+          "explanation": "A missing or unrecognised doctype drops the browser into quirks mode (e.g. the old box model). <!DOCTYPE html> forces standards mode.",
+          "explanationTr": "Eksik ya da tanınmayan bir doctype tarayıcıyı quirks mode'a düşürür (örn. eski box model). <!DOCTYPE html> standards mode'u zorlar."
+        },
+        {
+          "type": "true_false",
+          "statement": "<!DOCTYPE html> is a regular HTML element like <div> or <p>.",
+          "statementTr": "<!DOCTYPE html>, <div> ya da <p> gibi normal bir HTML elemanıdır.",
+          "answer": false,
+          "explanation": "It's a document type declaration, not an element — it has no content, attributes, or closing tag, and exists only to set the rendering mode.",
+          "explanationTr": "Bu bir belge türü bildirimidir, eleman değil — içeriği, attribute'u ya da kapanış etiketi yoktur ve yalnızca render modunu ayarlamak için vardır."
+        },
+        {
+          "type": "challenge",
+          "question": "What does a DOCTYPE do?"
+        },
+        {
+          "type": "challenge",
+          "question": "Why do I need a doctype and what does it do?"
+        },
+        {
+          "type": "challenge",
+          "question": "Explain almost standard, full standard and quirks mode"
+        }
+      ]
+    },
+    {
+      "slug": "dom-encoding-and-the-spec",
+      "title": "The DOM, encoding & the spec",
+      "titleTr": "DOM, kodlama ve spec",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "From bytes to a live tree",
+          "titleTr": "Byte'lardan canlı bir ağaca",
+          "body": "**The DOM (Document Object Model)** is the browser's **in-memory tree representation** of a parsed HTML document. Each element, attribute, and piece of text becomes a **node**; JavaScript reads and changes the page by manipulating these nodes (`document.querySelector`, `element.textContent`, etc.). The DOM is a *live* structure — it's the HTML *after* parsing, not the raw source text, and it updates as scripts change it.\n\n**Character encoding** maps the document's **bytes to characters**. Declare it first thing in `<head>` with `<meta charset=\"utf-8\">`. **UTF-8** is the standard — it can represent every Unicode character (every language, emoji, symbol). Without the right encoding, bytes get decoded with the wrong table and you see **mojibake** (garbled text like `Ã©` instead of `é`).\n\n**Spec vs implementation:** an **HTML specification** (by the WHATWG/W3C) defines how HTML *should* behave; a **browser's implementation** is one vendor's actual code. They differ in practice — browsers ship features at different times, contain bugs, or interpret ambiguous parts of the spec differently. That gap is why we test across browsers, use feature detection, and sometimes need polyfills: the spec is the contract, but each browser's behaviour is what actually runs.",
+          "bodyTr": "**DOM (Document Object Model)**, tarayıcının ayrıştırılmış bir HTML belgesinin **bellekteki ağaç temsilidir**. Her eleman, attribute ve metin parçası bir **node** olur; JavaScript bu node'ları işleyerek sayfayı okur ve değiştirir (`document.querySelector`, `element.textContent`, vb.). DOM *canlı* bir yapıdır — ayrıştırmadan *sonraki* HTML'dir, ham kaynak metin değil, ve script'ler değiştirdikçe güncellenir.\n\n**Karakter kodlaması** belgenin **byte'larını karakterlere** eşler. `<head>`'in en başında `<meta charset=\"utf-8\">` ile bildir. **UTF-8** standarttır — her Unicode karakterini (her dil, emoji, sembol) temsil edebilir. Doğru kodlama olmadan, byte'lar yanlış tabloyla çözülür ve **mojibake** görürsün (`é` yerine `Ã©` gibi bozuk metin).\n\n**Spec vs implementasyon:** bir **HTML spec'i** (WHATWG/W3C tarafından) HTML'in nasıl davranması *gerektiğini* tanımlar; bir **tarayıcının implementasyonu** bir üreticinin gerçek kodudur. Pratikte farklılaşırlar — tarayıcılar özellikleri farklı zamanlarda sunar, hata içerir ya da spec'in belirsiz kısımlarını farklı yorumlar. Bu boşluk, neden tarayıcılar arası test ettiğimizin, feature detection kullandığımızın ve bazen polyfill gerektiğinin sebebidir: spec sözleşmedir ama gerçekte çalışan her tarayıcının davranışıdır."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What best describes the DOM?",
+          "promptTr": "DOM'u en iyi ne tanımlar?",
+          "options": [
+            {
+              "text": "The browser's in-memory tree of nodes built from parsed HTML, which JS can read and modify",
+              "textTr": "Tarayıcının ayrıştırılmış HTML'den oluşturduğu, JS'in okuyup değiştirebildiği bellekteki node ağacı",
+              "correct": true
+            },
+            {
+              "text": "The raw HTML text file on the server",
+              "textTr": "Sunucudaki ham HTML metin dosyası"
+            },
+            {
+              "text": "A CSS styling language",
+              "textTr": "Bir CSS stil dili"
+            },
+            {
+              "text": "A database for storing user data",
+              "textTr": "Kullanıcı verisi saklayan bir veritabanı"
+            }
+          ],
+          "explanation": "The DOM is the parsed, live tree representation of the document. It's distinct from the raw source — scripts mutate the DOM, not the original text.",
+          "explanationTr": "DOM, belgenin ayrıştırılmış, canlı ağaç temsilidir. Ham kaynaktan farklıdır — script'ler orijinal metni değil DOM'u değiştirir."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Declare UTF-8 encoding in the head",
+          "promptTr": "Head'de UTF-8 kodlamasını bildir",
+          "code": "<meta charset=\"___\">",
+          "answers": [
+            "utf-8"
+          ],
+          "distractors": [
+            "ascii",
+            "latin-1",
+            "utf-16"
+          ],
+          "explanation": "<meta charset=\"utf-8\"> tells the browser to decode the bytes as UTF-8, which covers all Unicode characters and prevents mojibake.",
+          "explanationTr": "<meta charset=\"utf-8\">, tarayıcıya byte'ları UTF-8 olarak çözmesini söyler; bu tüm Unicode karakterlerini kapsar ve mojibake'yi önler."
+        },
+        {
+          "type": "challenge",
+          "question": "What is the DOM?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is Character Encoding?"
+        },
+        {
+          "type": "challenge",
+          "question": "Discuss the differences between an HTML specification and a browser's implementation thereof."
+        }
+      ]
+    },
+    {
+      "slug": "self-closing-and-optional-tags",
+      "title": "Self-closing & optional tags",
+      "titleTr": "Self-closing ve isteğe bağlı etiketler",
+      "position": 3,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Void elements and tags you can omit",
+          "titleTr": "Void elemanlar ve atlayabileceğin etiketler",
+          "body": "**A self-closing (void) tag** is an element that has **no content and no closing tag** because it can't contain children — `<img>`, `<br>`, `<hr>`, `<input>`, `<meta>`, `<link>`. In HTML you write them as just `<img>`; the trailing slash (`<img />`) is **optional** and comes from XHTML/JSX — in plain HTML it's ignored. These are called **void elements** in the spec.\n\n**Optional tags** are a separate idea: some **start or end tags can be legally omitted** because the parser can infer them. For example, `</li>`, `</p>`, `</td>`, and even `<html>`, `<head>`, `<body>` tags can be left out in valid HTML — the browser reconstructs the correct tree. For instance, a `<p>` is implicitly closed when a new block element starts.\n\nIn practice most teams **write the tags anyway** (and linters/formatters enforce them) for readability and to avoid subtle bugs, even though the spec permits omission. The distinction matters in interviews: *void* elements **can't** have a closing tag; *optional* tags **could** have one but the spec lets you skip it.",
+          "bodyTr": "**Self-closing (void) etiket**, çocuk içeremediği için **içeriği ve kapanış etiketi olmayan** bir elemandır — `<img>`, `<br>`, `<hr>`, `<input>`, `<meta>`, `<link>`. HTML'de onları sadece `<img>` olarak yazarsın; sondaki slash (`<img />`) **isteğe bağlıdır** ve XHTML/JSX'ten gelir — düz HTML'de yok sayılır. Bunlara spec'te **void elemanlar** denir.\n\n**İsteğe bağlı etiketler** ayrı bir fikirdir: bazı **başlangıç ya da bitiş etiketleri yasal olarak atlanabilir** çünkü parser onları çıkarsayabilir. Örneğin `</li>`, `</p>`, `</td>` ve hatta `<html>`, `<head>`, `<body>` etiketleri geçerli HTML'de atlanabilir — tarayıcı doğru ağacı yeniden kurar. Örneğin yeni bir blok eleman başladığında bir `<p>` örtük olarak kapanır.\n\nPratikte çoğu ekip, spec atlamaya izin verse de okunabilirlik ve ince hatalardan kaçınmak için **etiketleri yine de yazar** (ve linter/formatter'lar bunu zorlar). Ayrım mülakatlarda önemlidir: *void* elemanların kapanış etiketi **olamaz**; *isteğe bağlı* etiketlerin biri **olabilir** ama spec atlamana izin verir."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Which is a void (self-closing) element that cannot have a closing tag?",
+          "promptTr": "Hangisi kapanış etiketi olamayan bir void (self-closing) elemandır?",
+          "options": [
+            {
+              "text": "<img>",
+              "textTr": "<img>",
+              "correct": true
+            },
+            {
+              "text": "<div>",
+              "textTr": "<div>"
+            },
+            {
+              "text": "<p>",
+              "textTr": "<p>"
+            },
+            {
+              "text": "<span>",
+              "textTr": "<span>"
+            }
+          ],
+          "explanation": "<img> is a void element — no children, no closing tag. <div>, <p>, and <span> all wrap content and take closing tags.",
+          "explanationTr": "<img> bir void elemandır — çocuğu yok, kapanış etiketi yok. <div>, <p> ve <span> içerik sarar ve kapanış etiketi alır."
+        },
+        {
+          "type": "true_false",
+          "statement": "An optional tag like </p> can sometimes be omitted because the parser infers where the element ends.",
+          "statementTr": "</p> gibi isteğe bağlı bir etiket bazen atlanabilir çünkü parser elemanın nerede bittiğini çıkarsar.",
+          "answer": true,
+          "explanation": "The HTML spec allows omitting certain start/end tags (e.g. </p>, </li>); the parser reconstructs them. Most teams still write them for clarity.",
+          "explanationTr": "HTML spec'i bazı başlangıç/bitiş etiketlerini atlamaya izin verir (örn. </p>, </li>); parser onları yeniden kurar. Çoğu ekip netlik için yine de yazar."
+        },
+        {
+          "type": "challenge",
+          "question": "What is a self-closing tag?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is an optional tag?"
+        }
+      ]
+    }
+  ]
+}

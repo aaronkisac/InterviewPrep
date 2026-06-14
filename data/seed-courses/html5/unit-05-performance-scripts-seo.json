@@ -1,0 +1,146 @@
+{
+  "topic": "html5",
+  "slug": "performance-scripts-seo",
+  "title": "Performance, Scripts & SEO",
+  "titleTr": "Performans, Script'ler ve SEO",
+  "section": "advanced",
+  "position": 5,
+  "lessons": [
+    {
+      "slug": "loading-scripts-async-defer",
+      "title": "Loading scripts: async & defer",
+      "titleTr": "Script yükleme: async ve defer",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "How the parser handles <script>",
+          "titleTr": "Parser'ın <script>'i nasıl ele aldığı",
+          "body": "By default a **`<script src>`** is **render-blocking**: when the HTML parser hits it, it **stops parsing**, downloads the script, executes it, then resumes. A big script in `<head>` therefore delays the whole page.\n\nTwo attributes fix this for **external** scripts:\n\n- **`async`** — download the script **in parallel** with parsing, then **execute as soon as it arrives**, pausing the parser at that moment. Order is **not** guaranteed (whichever loads first runs first). Good for **independent** scripts like analytics.\n- **`defer`** — download **in parallel**, but **execute only after** the HTML is fully parsed, **in document order**, just before `DOMContentLoaded`. Good for scripts that need the DOM or depend on each other.\n\nSo the three cases: **`<script>`** blocks parsing now; **`<script async>`** loads in parallel and runs ASAP (unordered); **`<script defer>`** loads in parallel and runs after parsing (ordered). Both `async` and `defer` only apply to scripts with `src`.",
+          "bodyTr": "Varsayılan olarak bir **`<script src>`** **render-blocking**'tir: HTML parser ona ulaştığında **ayrıştırmayı durdurur**, script'i indirir, çalıştırır, sonra devam eder. Bu yüzden `<head>`'deki büyük bir script tüm sayfayı geciktirir.\n\nİki attribute bunu **harici** script'ler için düzeltir:\n\n- **`async`** — script'i ayrıştırmayla **paralel** indir, sonra **geldiği anda çalıştır** ve o anda parser'ı duraklat. Sıra **garanti edilmez** (önce yüklenen önce çalışır). Analytics gibi **bağımsız** script'ler için iyidir.\n- **`defer`** — **paralel** indir ama **yalnızca HTML tamamen ayrıştırıldıktan sonra**, **belge sırasına göre**, `DOMContentLoaded`'dan hemen önce çalıştır. DOM'a ihtiyaç duyan ya da birbirine bağımlı script'ler için iyidir.\n\nYani üç durum: **`<script>`** şimdi ayrıştırmayı engeller; **`<script async>`** paralel yükler ve mümkün olan en kısa sürede çalışır (sırasız); **`<script defer>`** paralel yükler ve ayrıştırmadan sonra çalışır (sıralı). Hem `async` hem `defer` yalnızca `src`'li script'lere uygulanır."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What's the difference between async and defer?",
+          "promptTr": "async ile defer arasındaki fark nedir?",
+          "options": [
+            { "text": "Both download in parallel, but async runs as soon as it loads (unordered); defer runs after parsing, in order", "textTr": "İkisi de paralel indirir ama async yüklenir yüklenmez çalışır (sırasız); defer ayrıştırmadan sonra, sırayla çalışır", "correct": true },
+            { "text": "async runs after parsing; defer runs immediately", "textTr": "async ayrıştırmadan sonra çalışır; defer hemen çalışır" },
+            { "text": "They are identical", "textTr": "Aynılar" },
+            { "text": "Both block parsing like a plain script", "textTr": "İkisi de düz bir script gibi ayrıştırmayı engeller" }
+          ],
+          "explanation": "async: parallel download, execute on arrival, no order guarantee. defer: parallel download, execute after the document is parsed, preserving order.",
+          "explanationTr": "async: paralel indirme, gelince çalıştırma, sıra garantisi yok. defer: paralel indirme, belge ayrıştırıldıktan sonra çalıştırma, sıra korunur."
+        },
+        {
+          "type": "order",
+          "prompt": "Order these by how early their JS typically runs during page load (earliest first)",
+          "promptTr": "Bunları JS'lerinin sayfa yüklenmesinde tipik olarak ne kadar erken çalıştığına göre sırala (en erken önce)",
+          "items": [
+            { "text": "<script> in <head> — blocks parsing and runs immediately", "textTr": "<head>'deki <script> — ayrıştırmayı engeller ve hemen çalışır" },
+            { "text": "<script async> — runs as soon as it finishes downloading", "textTr": "<script async> — indirmesi biter bitmez çalışır" },
+            { "text": "<script defer> — runs after the HTML is fully parsed", "textTr": "<script defer> — HTML tamamen ayrıştırıldıktan sonra çalışır" }
+          ],
+          "explanation": "A plain head script runs first (blocking), async runs whenever its download finishes (usually next), and defer waits until parsing completes.",
+          "explanationTr": "Düz bir head script'i önce çalışır (engelleyerek), async indirmesi bittiğinde çalışır (genelde sonra) ve defer ayrıştırma bitene kadar bekler."
+        },
+        {
+          "type": "challenge",
+          "question": "What are defer and async attributes on a <script> tag?"
+        },
+        {
+          "type": "challenge",
+          "question": "Describe the difference between <script>, <script async> and <script defer>"
+        }
+      ]
+    },
+    {
+      "slug": "resource-placement-and-rendering",
+      "title": "Resource placement & progressive rendering",
+      "titleTr": "Kaynak yerleşimi ve aşamalı render",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Where to put CSS and JS, and why it paints sooner",
+          "titleTr": "CSS ve JS'i nereye koymalı ve neden daha erken boyar",
+          "body": "The classic guidance: **CSS `<link>`s go in `<head>`, JS `<script>`s go just before `</body>`.**\n\n- **CSS in `<head>`** so the browser knows the styles **before** it paints, avoiding a **flash of unstyled content (FOUC)** and avoiding re-layouts. CSS is render-blocking by nature, so you want it discovered early.\n- **Scripts before `</body>`** so the parser builds and shows the HTML **first**; the (render-blocking) scripts run after the content exists, so the user sees the page sooner and scripts can find the DOM they need.\n\n**Exceptions:** with **`defer`**/`async` (or `type=\"module\"`, which defers by default) you can safely put scripts in `<head>` since they no longer block parsing — modern practice. Small critical inline scripts or feature-detection snippets (e.g. setting a theme to avoid a flash) may also go in the head intentionally.\n\n**Progressive rendering** is the umbrella term for techniques that **display content as soon as possible** rather than waiting for everything: server-side streaming of HTML, lazy-loading images/below-the-fold content (`loading=\"lazy\"`), prioritising above-the-fold/critical CSS, and code-splitting. The goal is a faster **perceived** load — the user sees and can use the top of the page while the rest still arrives.",
+          "bodyTr": "Klasik tavsiye: **CSS `<link>`'leri `<head>`'e, JS `<script>`'leri `</body>`'den hemen önce.**\n\n- **CSS `<head>`'de** ki tarayıcı boyamadan **önce** stilleri bilsin, **flash of unstyled content (FOUC)**'tan ve yeniden-layout'lardan kaçınsın. CSS doğası gereği render-blocking'tir, bu yüzden erken keşfedilmesini istersin.\n- **Script'ler `</body>`'den önce** ki parser HTML'i **önce** kurup göstersin; (render-blocking) script'ler içerik var olduktan sonra çalışsın, böylece kullanıcı sayfayı daha erken görür ve script'ler ihtiyaç duydukları DOM'u bulabilir.\n\n**İstisnalar:** **`defer`**/`async` (ya da varsayılan defer'li `type=\"module\"`) ile script'leri `<head>`'e güvenle koyabilirsin çünkü artık ayrıştırmayı engellemezler — modern pratik. Küçük kritik inline script'ler ya da feature-detection parçaları (örn. flash'tan kaçınmak için tema ayarlama) da bilerek head'e konabilir.\n\n**Progressive rendering**, her şeyi beklemek yerine **içeriği mümkün olan en kısa sürede gösteren** tekniklerin şemsiye terimidir: HTML'in sunucu tarafı stream'i, görsel/ekran-altı içeriğin lazy-load'u (`loading=\"lazy\"`), ekran-üstü/kritik CSS'i önceliklendirme ve code-splitting. Amaç daha hızlı **algılanan** yüklemedir — kullanıcı, gerisi gelirken sayfanın üstünü görür ve kullanabilir."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Why put CSS in <head> but scripts just before </body> (in the classic approach)?",
+          "promptTr": "Klasik yaklaşımda CSS'i neden <head>'e ama script'leri </body>'den hemen önce koyarsın?",
+          "options": [
+            { "text": "So styles are known before paint (no FOUC) and the HTML renders before render-blocking scripts run", "textTr": "Stiller boyamadan önce bilinsin (FOUC yok) ve HTML, render-blocking script'ler çalışmadan önce render olsun diye", "correct": true },
+            { "text": "Because CSS cannot be placed in the body at all", "textTr": "Çünkü CSS gövdeye hiç konamaz" },
+            { "text": "Because scripts must always run before any HTML parses", "textTr": "Çünkü script'ler her zaman herhangi bir HTML ayrıştırılmadan önce çalışmalı" },
+            { "text": "It has no effect on performance", "textTr": "Performansa etkisi yoktur" }
+          ],
+          "explanation": "Early CSS prevents unstyled flashes and relayouts; deferring scripts to the end lets content appear first. With defer/async, scripts can safely live in the head too.",
+          "explanationTr": "Erken CSS stilsiz flash'ları ve yeniden-layout'ları önler; script'leri sona ertelemek içeriğin önce görünmesini sağlar. defer/async ile script'ler head'de de güvenle durabilir."
+        },
+        {
+          "type": "true_false",
+          "statement": "Progressive rendering aims to show usable content as early as possible instead of waiting for the entire page.",
+          "statementTr": "Progressive rendering, tüm sayfayı beklemek yerine kullanılabilir içeriği mümkün olduğunca erken göstermeyi amaçlar.",
+          "answer": true,
+          "explanation": "Streaming HTML, lazy-loading, critical CSS, and code-splitting all improve perceived performance by painting the important parts first.",
+          "explanationTr": "HTML stream'i, lazy-loading, kritik CSS ve code-splitting, önemli kısımları önce boyayarak algılanan performansı artırır."
+        },
+        {
+          "type": "challenge",
+          "question": "Why is it generally a good idea to position CSS <link>s between <head> and JS <script>s just before </body>? Do you know any exceptions?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is progressive rendering?"
+        }
+      ]
+    },
+    {
+      "slug": "seo-and-cache-busting",
+      "title": "SEO & cache busting",
+      "titleTr": "SEO ve cache busting",
+      "position": 3,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Being found, and serving fresh assets",
+          "titleTr": "Bulunmak ve taze asset sunmak",
+          "body": "**Getting indexed better by search engines** comes down to giving crawlers clean, meaningful, fast content:\n\n- **Semantic, well-structured HTML** with one descriptive `<title>`, a `<meta name=\"description\">`, and a sensible heading hierarchy (`<h1>`…`<h2>`).\n- **Accessible content**: real text over images of text, `alt` on images, descriptive link text.\n- **Crawlability**: a `sitemap.xml`, sane `robots.txt`, clean URLs, internal links, and **server-rendered** content (so crawlers see it without running JS).\n- **Performance & mobile**: fast Core Web Vitals and a responsive `viewport` — both ranking factors. Plus structured data (schema.org) for rich results.\n\n**Cache busting** solves a different problem: browsers cache static assets (CSS/JS/images) aggressively for speed, so after a deploy a user might keep the **stale** old file. Cache busting forces them to fetch the new one by **changing the asset's URL** whenever its content changes — typically a **content hash or version in the filename** (`app.9f2a1c.js`) or a query string (`app.js?v=123`). Because the URL is new, the browser can't reuse the cached copy and downloads the fresh file. Build tools (Vite, webpack) generate hashed filenames automatically.",
+          "bodyTr": "**Arama motorları tarafından daha iyi indekslenmek**, crawler'lara temiz, anlamlı, hızlı içerik vermeye dayanır:\n\n- **Semantik, iyi yapılandırılmış HTML**: açıklayıcı tek bir `<title>`, bir `<meta name=\"description\">` ve mantıklı bir başlık hiyerarşisi (`<h1>`…`<h2>`).\n- **Erişilebilir içerik**: metin görsellerine karşı gerçek metin, görsellerde `alt`, açıklayıcı link metni.\n- **Taranabilirlik**: bir `sitemap.xml`, makul `robots.txt`, temiz URL'ler, iç linkler ve **sunucuda render edilmiş** içerik (crawler'lar JS çalıştırmadan görsün).\n- **Performans & mobil**: hızlı Core Web Vitals ve responsive bir `viewport` — ikisi de sıralama faktörü. Ayrıca zengin sonuçlar için yapılandırılmış veri (schema.org).\n\n**Cache busting** farklı bir sorunu çözer: tarayıcılar hız için statik asset'leri (CSS/JS/görsel) agresif önbelleğe alır, bu yüzden bir deploy sonrası kullanıcı **bayat** eski dosyayı tutabilir. Cache busting, içeriği her değiştiğinde **asset'in URL'sini değiştirerek** yeni dosyayı getirmeye zorlar — tipik olarak **dosya adında bir içerik hash'i ya da sürüm** (`app.9f2a1c.js`) ya da bir query string (`app.js?v=123`). URL yeni olduğundan tarayıcı önbellekteki kopyayı kullanamaz ve taze dosyayı indirir. Build araçları (Vite, webpack) hash'li dosya adlarını otomatik üretir."
+        },
+        {
+          "type": "mcq",
+          "prompt": "How does cache busting force browsers to download an updated asset?",
+          "promptTr": "Cache busting tarayıcıları güncellenmiş bir asset'i indirmeye nasıl zorlar?",
+          "options": [
+            { "text": "By changing the asset's URL (content hash or version) so the cached copy no longer matches", "textTr": "Asset'in URL'sini değiştirerek (içerik hash'i ya da sürüm), böylece önbellekteki kopya artık eşleşmez", "correct": true },
+            { "text": "By disabling the browser cache entirely for all sites", "textTr": "Tüm siteler için tarayıcı önbelleğini tamamen devre dışı bırakarak" },
+            { "text": "By compressing the file", "textTr": "Dosyayı sıkıştırarak" },
+            { "text": "By renaming the domain", "textTr": "Alan adını yeniden adlandırarak" }
+          ],
+          "explanation": "A new URL (hashed filename or ?v= query) means the browser has no cached entry for it, so it must fetch the fresh file. Content hashes are the common build-tool approach.",
+          "explanationTr": "Yeni bir URL (hash'li dosya adı ya da ?v= query'si), tarayıcının ona ait önbellek girdisi olmadığı anlamına gelir, bu yüzden taze dosyayı getirmek zorundadır. İçerik hash'leri yaygın build-aracı yaklaşımıdır."
+        },
+        {
+          "type": "true_false",
+          "statement": "Server-rendered content and good Core Web Vitals can both help a page rank and get indexed.",
+          "statementTr": "Sunucuda render edilen içerik ve iyi Core Web Vitals, bir sayfanın sıralanmasına ve indekslenmesine yardımcı olabilir.",
+          "answer": true,
+          "explanation": "Crawlers index server-rendered HTML reliably (no JS needed), and speed/mobile-friendliness are ranking signals — both improve discoverability.",
+          "explanationTr": "Crawler'lar sunucuda render edilen HTML'i güvenilir şekilde indeksler (JS gerekmez) ve hız/mobil uyumluluk sıralama sinyalleridir — ikisi de keşfedilebilirliği artırır."
+        },
+        {
+          "type": "challenge",
+          "question": "How can I get indexed better by search engines?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is the purpose of cache busting and how can you achieve it?"
+        }
+      ]
+    }
+  ]
+}

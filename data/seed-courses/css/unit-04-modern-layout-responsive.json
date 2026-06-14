@@ -1,0 +1,142 @@
+{
+  "topic": "css",
+  "slug": "modern-layout-responsive",
+  "title": "Modern Layout & Responsive",
+  "titleTr": "Modern Layout ve Responsive",
+  "section": "advanced",
+  "position": 4,
+  "lessons": [
+    {
+      "slug": "flexbox-grid-and-grid-systems",
+      "title": "Flexbox, Grid & grid systems",
+      "titleTr": "Flexbox, Grid ve grid sistemleri",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Two layout engines, one job",
+          "titleTr": "İki layout motoru, tek iş",
+          "body": "**Flexbox** and **Grid** are the modern layout modules that replaced floats/positioning hacks:\n\n- **Flexbox** is **one-dimensional** — it lays out items in a single row *or* column and distributes space along that axis (`display: flex`, `justify-content`, `align-items`, `gap`, `flex: 1`). Ideal for components: navbars, toolbars, centering, card rows.\n- **Grid** is **two-dimensional** — it controls rows *and* columns at once (`display: grid`, `grid-template-columns`, `grid-template-areas`, `gap`). Ideal for page-level layout and any real grid.\n\nRule of thumb: **content distribution along one axis → Flexbox; an actual 2D layout → Grid.** They compose well (a grid cell can be a flex container).\n\n**A grid system** is a design/CSS convention that divides the page into a fixed number of **columns** (classically **12**) with consistent **gutters**, so elements align to a shared rhythm and span a whole number of columns (e.g. a sidebar = 3 of 12, content = 9). Frameworks like Bootstrap ship one as utility classes (`col-6`). Historically grid systems were built with floats or `inline-block`; today they're trivially expressed with **CSS Grid** or Flexbox. The point is **consistent alignment and responsive column spans** without ad-hoc widths.",
+          "bodyTr": "**Flexbox** ve **Grid**, float/positioning hack'lerinin yerini alan modern layout modülleridir:\n\n- **Flexbox** **tek boyutludur** — item'ları tek bir satır *ya da* sütunda dizer ve o eksen boyunca alan dağıtır (`display: flex`, `justify-content`, `align-items`, `gap`, `flex: 1`). Bileşenler için ideal: navbar'lar, toolbar'lar, ortalama, kart satırları.\n- **Grid** **iki boyutludur** — satırları *ve* sütunları aynı anda kontrol eder (`display: grid`, `grid-template-columns`, `grid-template-areas`, `gap`). Sayfa düzeyi layout ve her gerçek grid için ideal.\n\nKural: **tek eksen boyunca içerik dağıtımı → Flexbox; gerçek bir 2D layout → Grid.** İyi birleşirler (bir grid hücresi bir flex konteyneri olabilir).\n\n**Bir grid sistemi**, sayfayı sabit sayıda **sütuna** (klasik olarak **12**) tutarlı **gutter'larla** bölen bir tasarım/CSS konvansiyonudur; böylece elemanlar ortak bir ritme hizalanır ve tam sayıda sütun kaplar (örn. sidebar = 12'de 3, content = 9). Bootstrap gibi framework'ler bunu utility class'ları olarak sunar (`col-6`). Tarihsel olarak grid sistemleri float ya da `inline-block` ile yapılırdı; bugün **CSS Grid** ya da Flexbox ile kolayca ifade edilir. Amaç, gelişigüzel genişlikler olmadan **tutarlı hizalama ve responsive sütun kaplamalarıdır**."
+        },
+        {
+          "type": "mcq",
+          "prompt": "When should you choose Grid over Flexbox?",
+          "promptTr": "Flexbox yerine Grid'i ne zaman seçmelisin?",
+          "options": [
+            { "text": "When you need two-dimensional layout — rows and columns controlled together", "textTr": "İki boyutlu layout gerektiğinde — satır ve sütunların birlikte kontrolü", "correct": true },
+            { "text": "When laying out items along a single axis", "textTr": "Item'ları tek eksen boyunca dizerken" },
+            { "text": "Only for centering a single element", "textTr": "Yalnızca tek bir elemanı ortalamak için" },
+            { "text": "Grid can't do responsive layouts", "textTr": "Grid responsive layout yapamaz" }
+          ],
+          "explanation": "Grid is 2D (rows + columns) — best for page layouts and true grids. Flexbox is 1D — best for distributing items along one axis.",
+          "explanationTr": "Grid 2D'dir (satır + sütun) — sayfa layout'ları ve gerçek grid'ler için en iyisi. Flexbox 1D'dir — item'ları tek eksen boyunca dağıtmak için en iyisi."
+        },
+        {
+          "type": "true_false",
+          "statement": "A 12-column grid system exists to give elements consistent alignment and predictable, responsive column spans.",
+          "statementTr": "12 sütunlu bir grid sistemi, elemanlara tutarlı hizalama ve öngörülebilir, responsive sütun kaplamaları vermek için vardır.",
+          "answer": true,
+          "explanation": "Grid systems divide the page into equal columns with gutters so layout aligns to a shared rhythm; elements span a whole number of columns (e.g. 3/12, 9/12).",
+          "explanationTr": "Grid sistemleri sayfayı gutter'larla eşit sütunlara böler ki layout ortak bir ritme hizalansın; elemanlar tam sayıda sütun kaplar (örn. 3/12, 9/12)."
+        },
+        {
+          "type": "challenge",
+          "question": "Have you played around with the new CSS Flexbox or Grid specs?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is a Grid System in CSS?"
+        }
+      ]
+    },
+    {
+      "slug": "responsive-and-retina",
+      "title": "Responsive vs mobile-first & retina",
+      "titleTr": "Responsive vs mobile-first ve retina",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Adapting to screens and pixel densities",
+          "titleTr": "Ekranlara ve piksel yoğunluklarına uyum",
+          "body": "**Responsive vs mobile-first** are related but distinct:\n\n- **Responsive design** means the layout **adapts to any viewport** — fluid widths, flexible images, and **media queries** that adjust styles at breakpoints. It says nothing about *which* size you design for first.\n- **Mobile-first** is a **strategy** within responsive design: write the **base styles for small screens**, then use **`min-width`** media queries to *add* complexity as the screen grows. The opposite (desktop-first) starts at large and uses `max-width` to scale down.\n\nMobile-first is generally preferred: base CSS stays lean, you progressively enhance, and it matches mobile-majority traffic and performance budgets. So all mobile-first sites are responsive, but not all responsive sites are built mobile-first.\n\n**Retina / high-DPI graphics:** retina screens pack **2×+ device pixels** per CSS pixel, so a normal-resolution image looks **blurry**. Techniques to serve crisp assets: provide higher-resolution raster images via **`srcset`**/`<picture>` (or `image-set()` in CSS) so the browser picks by DPR; prefer **SVG** for icons/logos (vector = infinitely sharp); use **icon fonts or CSS** for simple shapes; and serve `@2x`/`@3x` assets where needed. The goal is sharpness on high-DPI without forcing huge downloads on low-DPI devices.",
+          "bodyTr": "**Responsive vs mobile-first** ilişkili ama ayrıdır:\n\n- **Responsive tasarım**, layout'un **herhangi bir viewport'a uyum** sağlaması demektir — akışkan genişlikler, esnek görseller ve breakpoint'lerde stilleri ayarlayan **media query'ler**. Önce *hangi* boyut için tasarladığın hakkında bir şey söylemez.\n- **Mobile-first**, responsive tasarım içinde bir **stratejidir**: **küçük ekranlar için temel stilleri** yaz, sonra ekran büyüdükçe karmaşıklık *eklemek* için **`min-width`** media query'leri kullan. Tersi (desktop-first) büyükten başlar ve küçültmek için `max-width` kullanır.\n\nMobile-first genelde tercih edilir: temel CSS yalın kalır, aşamalı geliştirirsin ve mobil-çoğunluklu trafiğe ve performans bütçelerine uyar. Yani tüm mobile-first siteler responsive'dir ama tüm responsive siteler mobile-first yapılmamıştır.\n\n**Retina / yüksek-DPI grafikler:** retina ekranlar CSS pikseli başına **2×+ cihaz pikseli** sıkıştırır, bu yüzden normal çözünürlüklü bir görsel **bulanık** görünür. Net asset sunma teknikleri: **`srcset`**/`<picture>` (ya da CSS'te `image-set()`) ile daha yüksek çözünürlüklü raster görseller sun ki tarayıcı DPR'a göre seçsin; ikon/logo için **SVG** tercih et (vektör = sonsuz keskin); basit şekiller için **ikon font ya da CSS** kullan; ve gerektiğinde `@2x`/`@3x` asset'ler sun. Amaç, düşük-DPI cihazlara devasa indirmeler zorlamadan yüksek-DPI'da keskinliktir."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What specifically defines a mobile-first approach?",
+          "promptTr": "Mobile-first yaklaşımını özellikle ne tanımlar?",
+          "options": [
+            { "text": "Base styles target small screens, then min-width media queries add complexity as the screen grows", "textTr": "Temel stiller küçük ekranları hedefler, sonra min-width media query'leri ekran büyüdükçe karmaşıklık ekler", "correct": true },
+            { "text": "It only works on phones, never desktop", "textTr": "Yalnızca telefonlarda çalışır, asla masaüstünde" },
+            { "text": "It uses max-width queries to scale down from desktop", "textTr": "Masaüstünden küçültmek için max-width query'leri kullanır" },
+            { "text": "It's the same thing as responsive design", "textTr": "Responsive tasarımla aynı şeydir" }
+          ],
+          "explanation": "Mobile-first writes the small-screen base first and enhances upward with min-width queries. Responsive is the broader goal of adapting to any viewport; mobile-first is one strategy to achieve it.",
+          "explanationTr": "Mobile-first önce küçük-ekran temelini yazar ve min-width query'leriyle yukarı doğru geliştirir. Responsive, herhangi bir viewport'a uyum sağlamanın daha geniş hedefidir; mobile-first onu başarmanın bir stratejisidir."
+        },
+        {
+          "type": "true_false",
+          "statement": "Using SVG for icons is a good way to keep them sharp on retina/high-DPI screens.",
+          "statementTr": "İkonlar için SVG kullanmak, onları retina/yüksek-DPI ekranlarda keskin tutmanın iyi bir yoludur.",
+          "answer": true,
+          "explanation": "SVG is vector, so it scales to any pixel density without blurring — ideal for icons/logos. For photos, use srcset/picture to serve higher-resolution rasters by DPR.",
+          "explanationTr": "SVG vektördür, bu yüzden bulanıklaşmadan herhangi bir piksel yoğunluğuna ölçeklenir — ikon/logo için ideal. Fotoğraflar için DPR'a göre daha yüksek çözünürlüklü raster sunmak üzere srcset/picture kullan."
+        },
+        {
+          "type": "challenge",
+          "question": "Can you explain the difference between coding a website to be responsive versus using a mobile-first strategy?"
+        },
+        {
+          "type": "challenge",
+          "question": "Have you ever worked with retina graphics? If so, when and what techniques did you use?"
+        }
+      ]
+    },
+    {
+      "slug": "translate-vs-absolute-and-print",
+      "title": "translate() vs positioning & print styles",
+      "titleTr": "translate() vs konumlandırma ve print stilleri",
+      "position": 3,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Cheap movement and printable pages",
+          "titleTr": "Ucuz hareket ve yazdırılabilir sayfalar",
+          "body": "**`transform: translate()` vs absolute positioning** — both move an element, but at different costs:\n\n- **`translate()`** moves an element **without affecting layout** and is **GPU-accelerated**. Crucially it only triggers **compositing**, not layout/paint — so it's the right tool for **animations and transitions** (sliding, parallax): smooth, 60fps, no reflow. It moves relative to the element's own position.\n- **Absolute positioning** (`top/left`) takes the element **out of flow** and positions it against an ancestor. Changing `top/left` triggers **layout (reflow)** each frame — janky to animate, but the correct tool when you need to **place** an element at coordinates within a container (a badge, a dropdown).\n\nRule: **animate with `translate`** (performance); **place/lay out with positioning** (semantics). They're often combined — position absolutely, then animate with transform.\n\n**Optimising pages for print:** use a print stylesheet — `<link media=\"print\">` or `@media print { … }`. Typical steps: **hide** non-content (nav, sidebars, ads, video) with `display: none`; switch to **black-on-white** and `pt`/`cm` units; remove backgrounds to save ink; **expand links** to show their URL (`a::after { content: \" (\" attr(href) \")\"; }`); control page breaks with `break-inside: avoid` / `break-before`; and ensure content reflows to the paper width. Test with the browser's print preview.",
+          "bodyTr": "**`transform: translate()` vs absolute positioning** — ikisi de bir elemanı hareket ettirir ama farklı maliyetlerle:\n\n- **`translate()`** bir elemanı **layout'u etkilemeden** hareket ettirir ve **GPU-hızlandırmalıdır**. Önemlisi yalnızca **compositing**'i tetikler, layout/paint'i değil — bu yüzden **animasyon ve geçişler** için doğru araçtır (kaydırma, parallax): pürüzsüz, 60fps, reflow yok. Elemanın kendi konumuna göre hareket eder.\n- **Absolute positioning** (`top/left`) elemanı **akıştan çıkarır** ve bir ataya göre konumlandırır. `top/left`'i değiştirmek her karede **layout (reflow)** tetikler — animasyon için takılır ama bir elemanı bir konteyner içinde koordinatlara **yerleştirmen** gerektiğinde doğru araçtır (bir rozet, bir dropdown).\n\nKural: **`translate` ile animasyon yap** (performans); **konumlandırma ile yerleştir/diz** (semantik). Sık birleştirilirler — absolute konumlandır, sonra transform ile animasyon yap.\n\n**Sayfaları yazdırma için optimize etmek:** bir print stylesheet kullan — `<link media=\"print\">` ya da `@media print { … }`. Tipik adımlar: içerik-olmayanı (nav, sidebar, reklam, video) `display: none` ile **gizle**; **siyah-beyaza** ve `pt`/`cm` birimlerine geç; mürekkep tasarrufu için arka planları kaldır; **linkleri genişlet** ki URL'lerini göstersin (`a::after { content: \" (\" attr(href) \")\"; }`); sayfa sonlarını `break-inside: avoid` / `break-before` ile kontrol et; ve içeriğin kağıt genişliğine yeniden akmasını sağla. Tarayıcının print preview'iyle test et."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Why prefer transform: translate() over changing top/left for animation?",
+          "promptTr": "Animasyon için top/left değiştirmek yerine neden transform: translate() tercih edilir?",
+          "options": [
+            { "text": "translate is GPU-composited and skips layout/paint, so it animates smoothly without reflow", "textTr": "translate GPU-composite'lidir ve layout/paint'i atlar, bu yüzden reflow olmadan pürüzsüz animasyon yapar", "correct": true },
+            { "text": "top/left cannot move elements at all", "textTr": "top/left elemanları hiç hareket ettiremez" },
+            { "text": "translate changes the document flow each frame", "textTr": "translate her karede belge akışını değiştirir" },
+            { "text": "There is no performance difference", "textTr": "Performans farkı yoktur" }
+          ],
+          "explanation": "translate only triggers compositing (GPU), avoiding per-frame layout/paint, so animations stay smooth. Animating top/left forces reflow each frame and janks.",
+          "explanationTr": "translate yalnızca compositing'i (GPU) tetikler, kare-başına layout/paint'ten kaçınır, bu yüzden animasyonlar pürüzsüz kalır. top/left'i animasyonlamak her karede reflow zorlar ve takılır."
+        },
+        {
+          "type": "true_false",
+          "statement": "A print stylesheet typically hides navigation/ads and can expand links to show their URLs.",
+          "statementTr": "Bir print stylesheet tipik olarak navigasyon/reklamları gizler ve linkleri URL'lerini gösterecek şekilde genişletebilir.",
+          "answer": true,
+          "explanation": "@media print rules hide non-content, switch to ink-friendly colours, and can append href via content: attr(href) so printed links remain useful.",
+          "explanationTr": "@media print kuralları içerik-olmayanı gizler, mürekkep-dostu renklere geçer ve content: attr(href) ile href ekleyebilir, böylece yazdırılan linkler yararlı kalır."
+        },
+        {
+          "type": "challenge",
+          "question": "Is there any reason you'd want to use translate() instead of absolute positioning, or vice-versa? And why?"
+        },
+        {
+          "type": "challenge",
+          "question": "How do you optimize your webpages for print?"
+        }
+      ]
+    }
+  ]
+}

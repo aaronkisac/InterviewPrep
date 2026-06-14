@@ -1,0 +1,107 @@
+{
+  "topic": "css",
+  "slug": "css-fundamentals",
+  "title": "CSS Fundamentals",
+  "titleTr": "CSS Temelleri",
+  "section": "foundations",
+  "position": 1,
+  "lessons": [
+    {
+      "slug": "what-css-is-and-how-it-works",
+      "title": "What CSS is & how the browser applies it",
+      "titleTr": "CSS nedir ve tarayıcı onu nasıl uygular",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Style language, rules, and the render pipeline",
+          "titleTr": "Stil dili, kurallar ve render hattı",
+          "body": "**CSS (Cascading Style Sheets)** is the language for describing the **presentation** of HTML — colours, fonts, spacing, layout. It separates *how things look* from the HTML's *structure and meaning*, so the same markup can be restyled without changing content.\n\n**A CSS rule** (ruleset) has two parts:\n\n```css\nselector {\n  property: value;   /* a declaration */\n}\n```\n\nThe **selector** targets which elements to style; the **declaration block** holds `property: value` pairs. `h1 { color: red; font-size: 2rem; }` selects all `<h1>`s and applies two declarations.\n\n**How CSS works under the hood:** the browser parses CSS into the **CSSOM** (CSS Object Model), a tree mirroring the DOM. It then combines DOM + CSSOM into the **render tree** (only visible nodes, with computed styles), runs **layout/reflow** (calculating each box's geometry), then **paint** (filling pixels) and **composite** (layering). The **cascade** decides which rule wins when several match — based on **origin, specificity, and source order** — and many properties **inherit** from parent to child. So CSS isn't applied blindly; it's resolved through cascade + inheritance into one computed value per property per element.",
+          "bodyTr": "**CSS (Cascading Style Sheets)**, HTML'in **sunumunu** tanımlayan dildir — renkler, fontlar, boşluk, layout. *Görünümü*, HTML'in *yapı ve anlamından* ayırır, böylece aynı markup içerik değişmeden yeniden stillenebilir.\n\n**Bir CSS kuralının** (ruleset) iki parçası vardır:\n\n```css\nselector {\n  property: value;   /* bir declaration */\n}\n```\n\n**Selector** hangi elemanların stilleneceğini hedefler; **declaration bloğu** `property: value` çiftlerini tutar. `h1 { color: red; font-size: 2rem; }` tüm `<h1>`'leri seçer ve iki declaration uygular.\n\n**CSS arka planda nasıl çalışır:** tarayıcı CSS'i **CSSOM**'a (CSS Object Model) ayrıştırır; bu, DOM'u yansıtan bir ağaçtır. Sonra DOM + CSSOM'u **render tree**'de birleştirir (yalnızca görünür node'lar, hesaplanmış stillerle), **layout/reflow** çalıştırır (her kutunun geometrisini hesaplar), sonra **paint** (pikselleri doldurma) ve **composite** (katmanlama). **Cascade**, birkaç kural eşleştiğinde hangisinin kazanacağına karar verir — **origin, specificity ve kaynak sırasına** göre — ve birçok property parent'tan child'a **inherit** olur. Yani CSS körü körüne uygulanmaz; cascade + inheritance ile eleman başına property başına tek bir hesaplanmış değere çözülür."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What are the two parts of a CSS rule?",
+          "promptTr": "Bir CSS kuralının iki parçası nedir?",
+          "options": [
+            { "text": "A selector (what to target) and a declaration block of property: value pairs", "textTr": "Bir selector (neyi hedefleyeceği) ve property: value çiftlerinden oluşan bir declaration bloğu", "correct": true },
+            { "text": "A class and an id", "textTr": "Bir class ve bir id" },
+            { "text": "An opening and closing tag", "textTr": "Bir açılış ve kapanış etiketi" },
+            { "text": "A function and its arguments", "textTr": "Bir fonksiyon ve argümanları" }
+          ],
+          "explanation": "A rule is selector { property: value; ... }. The selector chooses elements; the declaration block lists the styles to apply.",
+          "explanationTr": "Bir kural selector { property: value; ... } biçimindedir. Selector elemanları seçer; declaration bloğu uygulanacak stilleri listeler."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Into what does the browser parse CSS before combining it with the DOM?",
+          "promptTr": "Tarayıcı CSS'i DOM ile birleştirmeden önce neye ayrıştırır?",
+          "options": [
+            { "text": "The CSSOM, which combines with the DOM into a render tree, then layout and paint", "textTr": "CSSOM'a; bu DOM ile render tree'de birleşir, sonra layout ve paint", "correct": true },
+            { "text": "A JSON file stored on disk", "textTr": "Diskte saklanan bir JSON dosyası" },
+            { "text": "Directly into pixels with no intermediate model", "textTr": "Ara bir model olmadan doğrudan piksellere" },
+            { "text": "The JavaScript heap", "textTr": "JavaScript yığınına" }
+          ],
+          "explanation": "CSS → CSSOM; DOM + CSSOM → render tree → layout (geometry) → paint → composite. The cascade and inheritance resolve the final computed values.",
+          "explanationTr": "CSS → CSSOM; DOM + CSSOM → render tree → layout (geometri) → paint → composite. Cascade ve inheritance son hesaplanmış değerleri çözer."
+        },
+        {
+          "type": "challenge",
+          "question": "What is CSS?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is a CSS rule?"
+        },
+        {
+          "type": "challenge",
+          "question": "How does CSS actually work under the hood of a browser?"
+        }
+      ]
+    },
+    {
+      "slug": "applying-styles-and-the-dom",
+      "title": "Applying styles & the DOM",
+      "titleTr": "Stilleri uygulamak ve DOM",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Three ways in, and what CSS styles",
+          "titleTr": "Üç giriş yolu ve CSS'in neyi stillediği",
+          "body": "**Three ways to apply CSS** to a page:\n\n1. **External stylesheet** — a `.css` file linked with `<link rel=\"stylesheet\" href=\"styles.css\">`. **Preferred**: one file cached and reused across pages, clean separation of concerns.\n2. **Internal (embedded)** — a `<style>` block in the `<head>`. Useful for a single page or critical above-the-fold CSS.\n3. **Inline** — a `style=\"…\"` attribute on an element. Highest specificity, but **avoid** it: not reusable, hard to maintain, mixes content and presentation. (Frameworks/emails are exceptions.)\n\nWhen rules conflict, **inline > internal/external**, then specificity and source order decide.\n\n**The DOM and CSS:** the **DOM** is the browser's live tree of the parsed HTML. CSS is **linked to it** because **selectors match against DOM nodes** — when you write `.btn:hover`, the browser walks the DOM to find matching elements and applies styles to those nodes. The browser builds the **CSSOM** alongside the DOM and merges them into the render tree. Because the DOM is live, changing it with JavaScript (adding a class, inserting an element) makes the browser **re-match selectors and re-render** — which is how dynamic styling works.",
+          "bodyTr": "Bir sayfaya **CSS uygulamanın üç yolu:**\n\n1. **Harici stylesheet** — `<link rel=\"stylesheet\" href=\"styles.css\">` ile bağlanan bir `.css` dosyası. **Tercih edilen**: tek dosya önbelleğe alınır ve sayfalar arası tekrar kullanılır, temiz sorumluluk ayrımı.\n2. **İç (gömülü)** — `<head>`'de bir `<style>` bloğu. Tek sayfa ya da kritik ekran-üstü CSS için yararlı.\n3. **Inline** — bir elemanda `style=\"…\"` attribute'u. En yüksek specificity ama **kaçın**: tekrar kullanılamaz, bakımı zor, içerik ve sunumu karıştırır. (Framework'ler/e-postalar istisna.)\n\nKurallar çakıştığında **inline > iç/harici**, sonra specificity ve kaynak sırası karar verir.\n\n**DOM ve CSS:** **DOM**, tarayıcının ayrıştırılmış HTML'in canlı ağacıdır. CSS ona **bağlıdır** çünkü **selector'lar DOM node'larına karşı eşleşir** — `.btn:hover` yazdığında, tarayıcı eşleşen elemanları bulmak için DOM'da gezinir ve stilleri o node'lara uygular. Tarayıcı DOM'un yanında **CSSOM**'u kurar ve onları render tree'de birleştirir. DOM canlı olduğundan, onu JavaScript ile değiştirmek (class ekleme, eleman ekleme) tarayıcının **selector'ları yeniden eşleştirmesini ve yeniden render etmesini** sağlar — dinamik stillemenin çalışma şekli budur."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Which is the preferred way to apply CSS for a multi-page site?",
+          "promptTr": "Çok sayfalı bir site için CSS uygulamanın tercih edilen yolu hangisidir?",
+          "options": [
+            { "text": "External stylesheet linked with <link> — cached and reused across pages", "textTr": "<link> ile bağlanan harici stylesheet — önbelleğe alınır ve sayfalar arası tekrar kullanılır", "correct": true },
+            { "text": "Inline style attributes on every element", "textTr": "Her elemanda inline style attribute'ları" },
+            { "text": "A new <style> block in every component", "textTr": "Her bileşende yeni bir <style> bloğu" },
+            { "text": "JavaScript setting styles one by one", "textTr": "JavaScript'in stilleri tek tek ayarlaması" }
+          ],
+          "explanation": "External stylesheets are cacheable, reusable, and keep content separate from presentation. Inline styles are hard to maintain and not reusable.",
+          "explanationTr": "Harici stylesheet'ler önbelleklenebilir, tekrar kullanılabilir ve içeriği sunumdan ayrı tutar. Inline stiller bakımı zordur ve tekrar kullanılamaz."
+        },
+        {
+          "type": "true_false",
+          "statement": "CSS selectors are matched against DOM nodes, so changing the DOM with JS can cause styles to re-apply.",
+          "statementTr": "CSS selector'ları DOM node'larına karşı eşleşir, bu yüzden DOM'u JS ile değiştirmek stillerin yeniden uygulanmasına neden olabilir.",
+          "answer": true,
+          "explanation": "Selectors target DOM elements; the browser builds the CSSOM and matches it to the DOM. Mutating the DOM (e.g. toggling a class) triggers re-matching and re-rendering.",
+          "explanationTr": "Selector'lar DOM elemanlarını hedefler; tarayıcı CSSOM'u kurar ve DOM'la eşleştirir. DOM'u değiştirmek (örn. bir class toggle'lamak) yeniden eşleşmeyi ve yeniden render'ı tetikler."
+        },
+        {
+          "type": "challenge",
+          "question": "Explain the three main ways to apply CSS styles to a web page."
+        },
+        {
+          "type": "challenge",
+          "question": "What is DOM (Document Object Model) and how is it linked to CSS?"
+        }
+      ]
+    }
+  ]
+}

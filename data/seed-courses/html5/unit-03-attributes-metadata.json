@@ -1,0 +1,108 @@
+{
+  "topic": "html5",
+  "slug": "attributes-metadata",
+  "title": "Attributes & Metadata",
+  "titleTr": "Attribute'lar ve Metadata",
+  "section": "core",
+  "position": 3,
+  "lessons": [
+    {
+      "slug": "attributes-properties-data-links",
+      "title": "Attributes, properties, data-* & safe links",
+      "titleTr": "Attribute'lar, property'ler, data-* ve güvenli linkler",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "The HTML you write vs the DOM you script",
+          "titleTr": "Yazdığın HTML vs script'lediğin DOM",
+          "body": "**Attribute vs property** is a classic gotcha. An **attribute** is what you write in the **HTML source** (`<input value=\"hi\">`); it's always a **string**. A **property** is a field on the **DOM node object** that the browser creates from that HTML (`inputEl.value`); it can be any type and is **live**.\n\nThe key difference: the attribute usually reflects the **initial** value, while the property tracks the **current** state. Type into that input and `inputEl.value` (property) becomes the new text, but `inputEl.getAttribute('value')` (attribute) still returns the original `\"hi\"`. Some are kept in sync, some aren't.\n\n**`data-*` attributes** let you attach **custom data** to any element (`<li data-id=\"42\" data-role=\"admin\">`). They're valid HTML, ignored by the browser's rendering, and readable from JS via the **`dataset`** property (`el.dataset.id` → `\"42\"`). Good for passing small bits of state to scripts without misusing classes/ids.\n\n**`rel=\"noopener\"`** goes on links that open a new tab (`target=\"_blank\"`). Without it, the new page can access `window.opener` and hijack your tab (a **tabnabbing** security/phishing risk) and may also hurt performance. `rel=\"noopener\"` severs that reference; `noreferrer` additionally strips the Referer header. Modern browsers imply `noopener` for `target=\"_blank\"`, but setting it explicitly is the safe habit.",
+          "bodyTr": "**Attribute vs property** klasik bir tuzaktır. Bir **attribute**, **HTML kaynağında** yazdığındır (`<input value=\"hi\">`); her zaman bir **string**'tir. Bir **property**, tarayıcının o HTML'den oluşturduğu **DOM node nesnesindeki** bir alandır (`inputEl.value`); herhangi bir tipte olabilir ve **canlıdır**.\n\nTemel fark: attribute genelde **başlangıç** değerini yansıtır, property ise **mevcut** durumu izler. O input'a yaz, `inputEl.value` (property) yeni metin olur ama `inputEl.getAttribute('value')` (attribute) hâlâ orijinal `\"hi\"`'yi döndürür. Bazıları senkron tutulur, bazıları tutulmaz.\n\n**`data-*` attribute'ları** herhangi bir elemana **özel veri** eklemeni sağlar (`<li data-id=\"42\" data-role=\"admin\">`). Geçerli HTML'dir, tarayıcı render'ında yok sayılır ve JS'ten **`dataset`** property'siyle okunur (`el.dataset.id` → `\"42\"`). Class/id'leri kötüye kullanmadan script'lere küçük state parçaları geçirmek için iyidir.\n\n**`rel=\"noopener\"`** yeni sekme açan linklere (`target=\"_blank\"`) konur. O olmadan, yeni sayfa `window.opener`'a erişip sekmeni ele geçirebilir (bir **tabnabbing** güvenlik/phishing riski) ve performansa da zarar verebilir. `rel=\"noopener\"` o referansı keser; `noreferrer` ek olarak Referer başlığını da kaldırır. Modern tarayıcılar `target=\"_blank\"` için `noopener`'ı varsayar ama açıkça koymak güvenli alışkanlıktır."
+        },
+        {
+          "type": "mcq",
+          "prompt": "After a user types into <input value=\"hi\">, what do the property and attribute return?",
+          "promptTr": "Bir kullanıcı <input value=\"hi\">'a yazdıktan sonra property ve attribute ne döndürür?",
+          "options": [
+            { "text": "inputEl.value (property) = the new text; getAttribute('value') = the original \"hi\"", "textTr": "inputEl.value (property) = yeni metin; getAttribute('value') = orijinal \"hi\"", "correct": true },
+            { "text": "Both return the new text", "textTr": "İkisi de yeni metni döndürür" },
+            { "text": "Both return \"hi\"", "textTr": "İkisi de \"hi\" döndürür" },
+            { "text": "The property is always a string; the attribute is a number", "textTr": "Property her zaman string'dir; attribute bir sayıdır" }
+          ],
+          "explanation": "The property reflects the live current state (new text); the value attribute reflects the initial HTML (\"hi\"). They aren't always kept in sync.",
+          "explanationTr": "Property canlı mevcut durumu (yeni metin) yansıtır; value attribute'u başlangıç HTML'ini (\"hi\") yansıtır. Her zaman senkron tutulmazlar."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Read a data-id attribute from JavaScript",
+          "promptTr": "JavaScript'ten bir data-id attribute'unu oku",
+          "code": "// <li data-id=\"42\"></li>\nconst id = li.____.id; // \"42\"",
+          "answers": ["dataset"],
+          "distractors": ["data", "attributes", "props"],
+          "explanation": "Custom data-* attributes are exposed on element.dataset, camel-cased after the data- prefix (data-id → dataset.id).",
+          "explanationTr": "Özel data-* attribute'ları element.dataset üzerinde sunulur, data- önekinden sonra camelCase olur (data-id → dataset.id)."
+        },
+        {
+          "type": "challenge",
+          "question": "What's the difference between an \"attribute\" and a \"property\" in HTML?"
+        },
+        {
+          "type": "challenge",
+          "question": "What are data-* attributes good for?"
+        },
+        {
+          "type": "challenge",
+          "question": "Where and why is the rel=\"noopener\" attribute used?"
+        }
+      ]
+    },
+    {
+      "slug": "meta-direction-compatibility",
+      "title": "Meta tags, text direction & compatibility",
+      "titleTr": "Meta etiketleri, metin yönü ve uyumluluk",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Document metadata and locale concerns",
+          "titleTr": "Belge metadata'sı ve yerel ayar konuları",
+          "body": "**Meta tags** are `<meta>` elements in the `<head>` that carry **metadata** about the document — information for the browser, search engines, and social platforms, not shown on the page. Common ones: `<meta charset=\"utf-8\">` (encoding), `<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">` (responsive scaling — essential for mobile), `<meta name=\"description\" content=\"…\">` (search snippet), and Open Graph tags (`og:title`, `og:image`) for link previews.\n\n**Text direction:** set it with the **`dir`** attribute — `dir=\"rtl\"` for right-to-left scripts (Arabic, Hebrew), `dir=\"ltr\"` for left-to-right, or `dir=\"auto\"` to let the browser infer from the content. Apply it on `<html>` for the whole page or on a specific element for a mixed-direction snippet. Pair it with `lang` for correct language handling.\n\n**IE compatibility mode:** legacy Internet Explorer could render in older-version modes. You force the **latest engine** with `<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">` (or the equivalent HTTP header), telling IE \"use your most modern rendering, don't emulate an old version.\" It's obsolete now that IE is retired, but it's a known interview item.",
+          "bodyTr": "**Meta etiketleri**, `<head>`'deki, belge hakkında **metadata** taşıyan `<meta>` elemanlarıdır — sayfada gösterilmeyen, tarayıcı, arama motorları ve sosyal platformlar için bilgi. Yaygın olanlar: `<meta charset=\"utf-8\">` (kodlama), `<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">` (responsive ölçekleme — mobil için şart), `<meta name=\"description\" content=\"…\">` (arama snippet'i) ve link önizlemeleri için Open Graph etiketleri (`og:title`, `og:image`).\n\n**Metin yönü:** **`dir`** attribute'uyla ayarla — sağdan sola yazılar (Arapça, İbranice) için `dir=\"rtl\"`, soldan sağa için `dir=\"ltr\"` ya da tarayıcının içerikten çıkarsaması için `dir=\"auto\"`. Tüm sayfa için `<html>`'e ya da karışık-yönlü bir parça için belirli bir elemana uygula. Doğru dil işleme için `lang` ile eşle.\n\n**IE uyumluluk modu:** eski Internet Explorer daha eski sürüm modlarında render edebiliyordu. **En son motoru** `<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">` (ya da eşdeğer HTTP başlığı) ile zorlarsın; IE'ye \"en modern render'ını kullan, eski bir sürümü taklit etme\" der. IE emekli olduğundan artık geçersiz ama bilinen bir mülakat maddesi."
+        },
+        {
+          "type": "mcq",
+          "prompt": "How do you set the text direction to right-to-left for Arabic content?",
+          "promptTr": "Arapça içerik için metin yönünü sağdan sola nasıl ayarlarsın?",
+          "options": [
+            { "text": "Use the dir attribute: dir=\"rtl\" (on <html> or a specific element)", "textTr": "dir attribute'unu kullan: dir=\"rtl\" (<html>'de ya da belirli bir elemanda)", "correct": true },
+            { "text": "Set text-align: right in CSS only", "textTr": "Yalnızca CSS'te text-align: right ayarla" },
+            { "text": "Add a rtl=\"true\" attribute", "textTr": "Bir rtl=\"true\" attribute'u ekle" },
+            { "text": "Reverse the characters manually", "textTr": "Karakterleri elle ters çevir" }
+          ],
+          "explanation": "dir=\"rtl\" sets the directionality semantically (affecting layout, punctuation, bidi handling). text-align only nudges alignment and doesn't handle bidirectional text correctly.",
+          "explanationTr": "dir=\"rtl\" yönlülüğü semantik olarak ayarlar (layout, noktalama, bidi işleme etkilenir). text-align yalnızca hizalamayı iter ve çift-yönlü metni doğru işlemez."
+        },
+        {
+          "type": "true_false",
+          "statement": "Meta tags in the <head> provide metadata for browsers, search engines, and social platforms rather than visible page content.",
+          "statementTr": "<head>'deki meta etiketleri, görünür sayfa içeriği yerine tarayıcılar, arama motorları ve sosyal platformlar için metadata sağlar.",
+          "answer": true,
+          "explanation": "Meta tags describe the document (charset, viewport, description, Open Graph) and aren't rendered as page content.",
+          "explanationTr": "Meta etiketleri belgeyi tanımlar (charset, viewport, description, Open Graph) ve sayfa içeriği olarak render edilmez."
+        },
+        {
+          "type": "challenge",
+          "question": "Explain meta tags in HTML"
+        },
+        {
+          "type": "challenge",
+          "question": "How do you change the direction of HTML text?"
+        },
+        {
+          "type": "challenge",
+          "question": "How do you set IE compatibility mode?"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,147 @@
+{
+  "topic": "css",
+  "slug": "box-model-layout",
+  "title": "Box Model & Layout Basics",
+  "titleTr": "Box Model ve Layout Temelleri",
+  "section": "core",
+  "position": 3,
+  "lessons": [
+    {
+      "slug": "box-model-and-box-sizing",
+      "title": "The box model & box-sizing",
+      "titleTr": "Box model ve box-sizing",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Every element is a box",
+          "titleTr": "Her eleman bir kutudur",
+          "body": "The **CSS box model** describes every element as a rectangular box made of four concentric layers, from inside out:\n\n- **Content** — the text/image area (`width`/`height` apply here by default).\n- **Padding** — space *inside* the box, between content and border.\n- **Border** — the line around the padding.\n- **Margin** — transparent space *outside* the border, separating this box from others.\n\nBy default (`box-sizing: content-box`), `width` sets only the **content** width, so the element's **rendered** width = `width + padding-left/right + border-left/right`. That makes sizing unintuitive: set `width: 200px; padding: 20px; border: 1px` and the box is actually **242px** wide.\n\n**`* { box-sizing: border-box; }`** changes this globally: with `border-box`, `width`/`height` include **padding and border**, so `width: 200px` means the box is exactly **200px** rendered, with padding/border eating into it rather than adding on top. The `*` applies it to every element. **Advantages:** predictable sizing (declared width = actual width), easier responsive layouts and grids (percentages + padding no longer overflow), and less mental math. It's a near-universal CSS reset baseline.",
+          "bodyTr": "**CSS box model**, her elemanı içten dışa dört iç içe katmandan oluşan dikdörtgen bir kutu olarak tanımlar:\n\n- **Content** — metin/görsel alanı (`width`/`height` varsayılan olarak buraya uygulanır).\n- **Padding** — kutunun *içinde*, content ile border arasındaki boşluk.\n- **Border** — padding'in etrafındaki çizgi.\n- **Margin** — border'ın *dışındaki*, bu kutuyu diğerlerinden ayıran şeffaf boşluk.\n\nVarsayılan olarak (`box-sizing: content-box`), `width` yalnızca **content** genişliğini ayarlar, bu yüzden elemanın **render edilmiş** genişliği = `width + padding-left/right + border-left/right`. Bu boyutlandırmayı sezgisiz yapar: `width: 200px; padding: 20px; border: 1px` ayarla ve kutu aslında **242px** genişliğinde olur.\n\n**`* { box-sizing: border-box; }`** bunu global olarak değiştirir: `border-box` ile `width`/`height` **padding ve border'ı** içerir, bu yüzden `width: 200px`, kutunun render'da tam **200px** olduğu anlamına gelir; padding/border üstüne eklenmek yerine içine yer. `*` onu her elemana uygular. **Avantajları:** öngörülebilir boyutlandırma (bildirilen genişlik = gerçek genişlik), daha kolay responsive layout'lar ve grid'ler (yüzde + padding artık taşmaz) ve daha az zihinsel hesap. Neredeyse evrensel bir CSS reset temelidir."
+        },
+        {
+          "type": "mcq",
+          "prompt": "With box-sizing: border-box, what does width: 200px; padding: 20px mean for the rendered width?",
+          "promptTr": "box-sizing: border-box ile width: 200px; padding: 20px render edilmiş genişlik için ne demektir?",
+          "options": [
+            { "text": "The box is 200px wide total; padding eats into that width", "textTr": "Kutu toplam 200px genişliğinde; padding o genişliğin içine yer", "correct": true },
+            { "text": "The box is 240px wide; padding adds on top", "textTr": "Kutu 240px genişliğinde; padding üstüne ekler" },
+            { "text": "The box is 160px wide", "textTr": "Kutu 160px genişliğinde" },
+            { "text": "width is ignored entirely", "textTr": "width tamamen yok sayılır" }
+          ],
+          "explanation": "border-box includes padding and border in the declared width, so the rendered width stays 200px. With the default content-box it would be 240px.",
+          "explanationTr": "border-box, padding ve border'ı bildirilen genişliğe dahil eder, bu yüzden render genişliği 200px kalır. Varsayılan content-box ile 240px olurdu."
+        },
+        {
+          "type": "order",
+          "prompt": "Order the box model layers from innermost to outermost",
+          "promptTr": "Box model katmanlarını en içten en dışa sırala",
+          "items": [
+            { "text": "Content", "textTr": "Content" },
+            { "text": "Padding", "textTr": "Padding" },
+            { "text": "Border", "textTr": "Border" },
+            { "text": "Margin", "textTr": "Margin" }
+          ],
+          "explanation": "From the inside out: content → padding → border → margin. Padding is inside the border; margin is the outside gap between boxes.",
+          "explanationTr": "İçten dışa: content → padding → border → margin. Padding border'ın içinde; margin kutular arası dıştaki boşluktur."
+        },
+        {
+          "type": "challenge",
+          "question": "Explain the CSS box model and the layout components that it consists of."
+        },
+        {
+          "type": "challenge",
+          "question": "What does * { box-sizing: border-box; } do? What are its advantages?"
+        }
+      ]
+    },
+    {
+      "slug": "floats-and-clearing",
+      "title": "Floats & clearing",
+      "titleTr": "Float'lar ve clearing",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Taking elements out of normal flow",
+          "titleTr": "Elemanları normal akıştan çıkarmak",
+          "body": "**Floats** were designed to let content (originally text) **wrap around** an element — a `float: left` image sits to the left while paragraphs flow around its right. A floated element is **taken partly out of the normal flow**: it shifts to the left or right edge of its container, and following inline content wraps alongside it. For years floats were also (mis)used for **page layout** (columns) before Flexbox/Grid existed.\n\nThe problem floats create: a floated child **doesn't contribute its height** to the parent, so a container with only floated children **collapses to zero height** — backgrounds and borders vanish, and later content can slide up underneath.\n\n**Clearing floats** fixes this. `clear: left/right/both` on a following element pushes it **below** the floats instead of beside them. To contain floats within a parent, the modern **clearfix** uses a pseudo-element:\n\n```css\n.clearfix::after { content: \"\"; display: block; clear: both; }\n```\n\n…or simply `overflow: auto`/`display: flow-root` on the parent, which establishes a new block formatting context that wraps the floats. The *purpose* of clearing is to restore correct height/flow so the layout doesn't break. (For new layouts, prefer Flexbox/Grid — floats are mostly legacy now.)",
+          "bodyTr": "**Float'lar**, içeriğin (başlangıçta metnin) bir elemanın **etrafına sarmasına** izin vermek için tasarlandı — `float: left` bir görsel sola otururken paragraflar onun sağından akar. Float'lanmış bir eleman **kısmen normal akıştan çıkarılır**: konteynerinin sol ya da sağ kenarına kayar ve sonraki inline içerik yanında sarar. Yıllarca float'lar Flexbox/Grid var olmadan önce **sayfa layout'u** (sütunlar) için de (yanlış) kullanıldı.\n\nFloat'ların yarattığı sorun: float'lanmış bir child **yüksekliğini parent'a katmaz**, bu yüzden yalnızca float'lanmış child'ları olan bir konteyner **sıfır yüksekliğe çöker** — arka planlar ve border'lar kaybolur ve sonraki içerik altına kayabilir.\n\n**Float'ları clear etmek** bunu düzeltir. Sonraki bir elemanda `clear: left/right/both`, onu float'ların yanına değil **altına** iter. Float'ları bir parent içinde tutmak için modern **clearfix** bir pseudo-element kullanır:\n\n```css\n.clearfix::after { content: \"\"; display: block; clear: both; }\n```\n\n…ya da parent'ta basitçe `overflow: auto`/`display: flow-root`; bu, float'ları saran yeni bir block formatting context oluşturur. Clearing'in *amacı*, layout'un bozulmaması için doğru yüksekliği/akışı geri kazandırmaktır. (Yeni layout'lar için Flexbox/Grid tercih et — float'lar artık çoğunlukla legacy.)"
+        },
+        {
+          "type": "mcq",
+          "prompt": "Why do floats often need clearing?",
+          "promptTr": "Float'lar neden sık sık clear edilmeye ihtiyaç duyar?",
+          "options": [
+            { "text": "A parent with only floated children collapses to zero height; clearing restores correct height/flow", "textTr": "Yalnızca float'lanmış child'ları olan bir parent sıfır yüksekliğe çöker; clearing doğru yüksekliği/akışı geri kazandırır", "correct": true },
+            { "text": "Floats are invisible without clearing", "textTr": "Float'lar clear olmadan görünmezdir" },
+            { "text": "Clearing changes the float's colour", "textTr": "Clearing float'un rengini değiştirir" },
+            { "text": "Floats can't contain text without it", "textTr": "Float'lar onsuz metin içeremez" }
+          ],
+          "explanation": "Floated children don't add height to their parent, so it collapses. clear (or a clearfix / overflow / flow-root) forces the parent to contain them and following content to drop below.",
+          "explanationTr": "Float'lanmış child'lar parent'a yükseklik katmaz, bu yüzden çöker. clear (ya da clearfix / overflow / flow-root) parent'ı onları içermeye ve sonraki içeriği altına düşmeye zorlar."
+        },
+        {
+          "type": "true_false",
+          "statement": "A floated element is taken partly out of normal flow and following content can wrap alongside it.",
+          "statementTr": "Float'lanmış bir eleman kısmen normal akıştan çıkarılır ve sonraki içerik yanında sarabilir.",
+          "answer": true,
+          "explanation": "That's the original purpose — e.g. text wrapping around a floated image. The side effect (collapsed parent height) is why clearing exists.",
+          "explanationTr": "Bu orijinal amaçtır — örn. float'lanmış bir görselin etrafına metin sarması. Yan etki (çökmüş parent yüksekliği) clearing'in var olma sebebidir."
+        },
+        {
+          "type": "challenge",
+          "question": "Describe floats and how they work."
+        },
+        {
+          "type": "challenge",
+          "question": "Explain the purpose of clearing floats in CSS."
+        }
+      ]
+    },
+    {
+      "slug": "positioning-and-stacking",
+      "title": "Positioning & stacking",
+      "titleTr": "Konumlandırma ve stacking",
+      "position": 3,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "position values and z-index",
+          "titleTr": "position değerleri ve z-index",
+          "body": "The **`position`** property controls how an element is placed and what `top/right/bottom/left` are relative to:\n\n- **`static`** — the default. Normal flow; `top/left` etc. are ignored.\n- **`relative`** — stays in flow, but you can **offset** it from its normal spot with `top/left`; it also becomes a **positioning context** for absolute children.\n- **`absolute`** — **removed from flow**; positioned relative to the **nearest positioned ancestor** (one that isn't `static`), or the initial containing block if none.\n- **`fixed`** — removed from flow; positioned relative to the **viewport**, so it stays put when scrolling (sticky headers, back-to-top buttons).\n- (**`sticky`** — a hybrid: relative until a scroll threshold, then fixed.)\n\n**`z-index`** controls the **stacking order** (which overlapping element is on top). Higher `z-index` paints in front — but **only within the same stacking context**, and only on **positioned** elements (or flex/grid items). A **stacking context** is a self-contained layer; it's formed by things like the root element, a positioned element with a `z-index` other than `auto`, `opacity < 1`, `transform`, `filter`, `will-change`, etc. The gotcha: a child's `z-index` is **local** to its parent's stacking context — a `z-index: 9999` child inside a low-stacked parent can still sit *behind* an element in another context. So stacking bugs are usually about *which context* you're in, not just the numbers.",
+          "bodyTr": "**`position`** property'si bir elemanın nasıl yerleştirileceğini ve `top/right/bottom/left`'in neye göre olduğunu kontrol eder:\n\n- **`static`** — varsayılan. Normal akış; `top/left` vb. yok sayılır.\n- **`relative`** — akışta kalır ama onu normal yerinden `top/left` ile **kaydırabilirsin**; ayrıca absolute child'lar için bir **konumlandırma bağlamı** olur.\n- **`absolute`** — **akıştan çıkarılır**; **en yakın konumlandırılmış ata**ya göre (static olmayan) ya da yoksa initial containing block'a göre konumlandırılır.\n- **`fixed`** — akıştan çıkarılır; **viewport'a** göre konumlandırılır, bu yüzden scroll'da yerinde kalır (sticky header'lar, başa-dön butonları).\n- (**`sticky`** — bir hibrit: bir scroll eşiğine kadar relative, sonra fixed.)\n\n**`z-index`** **stacking sırasını** kontrol eder (hangi örtüşen elemanın üstte olduğu). Daha yüksek `z-index` öne boyanır — ama **yalnızca aynı stacking context içinde** ve yalnızca **konumlandırılmış** elemanlarda (ya da flex/grid item'larında). Bir **stacking context** kendi içinde tam bir katmandır; kök eleman, `auto` dışında `z-index`'li konumlandırılmış bir eleman, `opacity < 1`, `transform`, `filter`, `will-change` vb. ile oluşur. Tuzak: bir child'ın `z-index`'i parent'ının stacking context'ine **yereldir** — düşük-stack'li bir parent içindeki `z-index: 9999` bir child, başka bir context'teki bir elemanın hâlâ *arkasında* olabilir. Yani stacking hataları genelde sadece sayılarla değil, *hangi context'te* olduğunla ilgilidir."
+        },
+        {
+          "type": "mcq",
+          "prompt": "An absolutely positioned element is positioned relative to what?",
+          "promptTr": "Absolute konumlandırılmış bir eleman neye göre konumlandırılır?",
+          "options": [
+            { "text": "Its nearest positioned ancestor (non-static), or the initial containing block if none", "textTr": "En yakın konumlandırılmış (non-static) atasına, ya da yoksa initial containing block'a", "correct": true },
+            { "text": "Always the viewport", "textTr": "Her zaman viewport'a" },
+            { "text": "Its immediate parent regardless of the parent's position", "textTr": "Parent'ın konumundan bağımsız olarak doğrudan parent'ına" },
+            { "text": "The <body> only", "textTr": "Yalnızca <body>'ye" }
+          ],
+          "explanation": "absolute looks up the tree for the nearest ancestor with position other than static. fixed is the one that's relative to the viewport.",
+          "explanationTr": "absolute, ağaçta static dışında position'a sahip en yakın atayı arar. Viewport'a göre olan fixed'dir."
+        },
+        {
+          "type": "true_false",
+          "statement": "z-index only affects positioned elements and is compared within the same stacking context.",
+          "statementTr": "z-index yalnızca konumlandırılmış elemanları etkiler ve aynı stacking context içinde karşılaştırılır.",
+          "answer": true,
+          "explanation": "z-index needs a non-static position (or flex/grid item) and only orders siblings within one stacking context — a child's huge z-index can't escape a parent stacked lower in another context.",
+          "explanationTr": "z-index, static-olmayan bir position (ya da flex/grid item) gerektirir ve yalnızca bir stacking context içindeki kardeşleri sıralar — bir child'ın devasa z-index'i, başka bir context'te daha düşük stack'lenmiş bir parent'tan kaçamaz."
+        },
+        {
+          "type": "challenge",
+          "question": "What's the difference between a relative, fixed, absolute and statically positioned element?"
+        },
+        {
+          "type": "challenge",
+          "question": "Describe z-index and how a stacking context is formed."
+        }
+      ]
+    }
+  ]
+}

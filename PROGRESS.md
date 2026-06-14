@@ -1,6 +1,6 @@
 # Progress
 
-Last updated: 2026-06-14 (React Hooks course — unit-03 Refs & the DOM)
+Last updated: 2026-06-14 (React Hooks 29/29 + HTML5 51/51 + CSS 33/33 courses complete)
 
 ---
 
@@ -166,6 +166,12 @@ Same retro rules apply: challenge texts byte-for-byte from seed JSON, 5–9 step
 - unit-05 Memoization & Performance (advanced) — **done 2026-06-14**: 2 lessons (usememo-and-usecallback · memo-pitfalls-and-when), 6 challenges (816/817/825 · 818/821/826).
 - unit-06 Advanced Patterns & Custom Hooks (interview) — **done 2026-06-14**: 3 lessons (custom-hooks · hooks-vs-hoc-and-class-coverage · effect-escape-hatches), 8 challenges (808/809/829 · 819/820 · 822/823/828).
 - **React Hooks course COMPLETE: 6 units, 13 lessons, 29 challenges — coverage 29/29.** Uses match step type (unit-03). Syllabus no longer WIP. **Needs `pnpm seed courses` + `pnpm course:coverage` + play-test.**
+
+**HTML5 course COMPLETE** (bank 601–651, 51 q) — new course authored 2026-06-14. 8 units, 20 lessons, **51/51 coverage**. Dir `data/seed-courses/html5/` + syllabus `data/syllabi/html5.json`. Units: 01 Document Foundations (607/651/631 · 606/603/630 · 604/620), 02 Elements & Text Semantics (608/602 · 610/605/617), 03 Attributes & Metadata (613/616/615 · 611/619/621), 04 Semantic HTML5 (612/614/640 · 622/623/626), 05 Performance/Scripts/SEO (618/632 · 634/645 · 624/628), 06 Storage & Browser APIs (625/627 · 635/647 · 636/646), 07 Media & Graphics (601/642/638 · 644/609/649), 08 Tooling/A11y/Advanced (633/643/650 · 637/629/639 · 648/641). Uses order + match step types. **Needs `pnpm seed courses` + `pnpm course:coverage` + play-test.**
+
+**CSS course COMPLETE** (bank 701–733, 33 q) — new course authored 2026-06-14. 6 units, 16 lessons, **33/33 coverage**. Dir `data/seed-courses/css/` + syllabus `data/syllabi/css.json`. Units: 01 CSS Fundamentals (701/702/713 · 706/711), 02 Selectors & Specificity (704/703 · 721/712), 03 Box Model & Layout (705/727 · 709/722 · 710/720), 04 Modern Layout & Responsive (715/716 · 726/729 · 724/728), 05 Preprocessors & Architecture (707/719 · 708/730 · 732/733), 06 Accessibility/Cross-browser/Techniques (723/725 · 717/714 · 718/731). Uses order + match step types. **Needs `pnpm seed courses` + `pnpm course:coverage` + play-test.**
+
+**Course scale-out status (2026-06-14): React ✓, TypeScript ✓, Next.js ✓, JavaScript ✓, Redux ✓ (35/35), React Hooks ✓ (29/29), HTML5 ✓ (51/51), CSS ✓ (33/33).** Remaining topics with banks but no course yet: git, agile-scrum, websockets, unit-testing, design-patterns, software-architecture, api-design.
 
 ---
 

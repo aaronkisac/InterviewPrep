@@ -1,0 +1,106 @@
+{
+  "topic": "html5",
+  "slug": "semantic-html5",
+  "title": "Semantic HTML5 & the Modern Spec",
+  "titleTr": "Semantik HTML5 ve Modern Spec",
+  "section": "core",
+  "position": 4,
+  "lessons": [
+    {
+      "slug": "html5-goals-and-building-blocks",
+      "title": "HTML5: goals, what's new & building blocks",
+      "titleTr": "HTML5: hedefler, yenilikler ve yapı taşları",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "What HTML5 set out to do",
+          "titleTr": "HTML5'in amaçladığı şey",
+          "body": "**Key goals/motivations for HTML5:** reduce reliance on plugins like Flash by making **multimedia native** (`<audio>`, `<video>`, `<canvas>`); define **error handling and parsing** precisely so all browsers build the same DOM from messy markup; add **semantic structure** for accessibility and SEO; provide rich **APIs** for app-like web experiences (storage, workers, geolocation); and stay **backward-compatible** so existing pages keep working. It was developed by the **WHATWG** as a \"living standard\" rather than a frozen version.\n\n**What's new in HTML5** includes: **semantic elements** (`<header>`, `<nav>`, `<main>`, `<article>`, `<section>`, `<footer>`, `<aside>`, `<figure>`); **media** (`<audio>`, `<video>`); **graphics** (`<canvas>`, inline `<svg>`); **form** types and attributes (`email`, `date`, `required`, `placeholder`); and **JavaScript APIs** (Web Storage, Web Workers, WebSockets, Geolocation, History, Drag-and-Drop).\n\n**Building blocks of HTML5** are often summarised in three pillars: **content/structure** (semantic markup), **presentation** (CSS3, which co-evolved), and **behaviour/APIs** (the JavaScript APIs above). Together they let the browser act as a full application platform, not just a document viewer.",
+          "bodyTr": "**HTML5'in temel hedefleri/motivasyonları:** **multimedyayı native** kılarak (`<audio>`, `<video>`, `<canvas>`) Flash gibi eklentilere bağımlılığı azaltmak; **hata işleme ve ayrıştırmayı** kesin tanımlayarak tüm tarayıcıların dağınık markup'tan aynı DOM'u kurmasını sağlamak; erişilebilirlik ve SEO için **semantik yapı** eklemek; uygulama benzeri web deneyimleri için zengin **API'ler** sunmak (storage, worker, geolocation); ve mevcut sayfaların çalışmaya devam etmesi için **geriye dönük uyumlu** kalmak. **WHATWG** tarafından dondurulmuş bir sürüm yerine bir \"living standard\" olarak geliştirildi.\n\n**HTML5'te yeni olanlar:** **semantik elemanlar** (`<header>`, `<nav>`, `<main>`, `<article>`, `<section>`, `<footer>`, `<aside>`, `<figure>`); **medya** (`<audio>`, `<video>`); **grafik** (`<canvas>`, inline `<svg>`); **form** tipleri ve attribute'ları (`email`, `date`, `required`, `placeholder`); ve **JavaScript API'leri** (Web Storage, Web Workers, WebSockets, Geolocation, History, Drag-and-Drop).\n\n**HTML5'in yapı taşları** genelde üç sütunda özetlenir: **içerik/yapı** (semantik markup), **sunum** (birlikte evrilen CSS3) ve **davranış/API'ler** (yukarıdaki JavaScript API'leri). Birlikte, tarayıcının yalnızca bir belge görüntüleyici değil, tam bir uygulama platformu olarak çalışmasını sağlarlar."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Which was a key motivation for HTML5?",
+          "promptTr": "Hangisi HTML5 için temel bir motivasyondu?",
+          "options": [
+            { "text": "Native multimedia and rich APIs so plugins like Flash become unnecessary, with precise parsing rules", "textTr": "Eklentileri (Flash) gereksiz kılan native multimedya ve zengin API'ler, kesin ayrıştırma kurallarıyla", "correct": true },
+            { "text": "To remove JavaScript from the browser", "textTr": "JavaScript'i tarayıcıdan kaldırmak" },
+            { "text": "To make all pages render in quirks mode", "textTr": "Tüm sayfaları quirks mode'da render etmek" },
+            { "text": "To drop backward compatibility with older HTML", "textTr": "Eski HTML ile geriye dönük uyumluluğu bırakmak" }
+          ],
+          "explanation": "HTML5 aimed to make media/APIs native (reducing plugins), define parsing precisely, add semantics, and stay backward-compatible — the opposite of removing JS or forcing quirks mode.",
+          "explanationTr": "HTML5; medya/API'leri native kılmayı (eklentileri azaltma), ayrıştırmayı kesin tanımlamayı, semantik eklemeyi ve geriye dönük uyumlu kalmayı amaçladı — JS'i kaldırmanın ya da quirks mode'u zorlamanın tersi."
+        },
+        {
+          "type": "true_false",
+          "statement": "HTML5 added JavaScript APIs such as Web Storage, Web Workers, and Geolocation alongside new semantic and media elements.",
+          "statementTr": "HTML5, yeni semantik ve medya elemanlarının yanında Web Storage, Web Workers ve Geolocation gibi JavaScript API'leri ekledi.",
+          "answer": true,
+          "explanation": "HTML5 is more than markup: it bundles structural elements, media, graphics, richer forms, and a suite of JS APIs that turn the browser into an app platform.",
+          "explanationTr": "HTML5 markup'tan fazlasıdır: yapısal elemanları, medyayı, grafiği, daha zengin formları ve tarayıcıyı bir uygulama platformuna çeviren bir dizi JS API'sini paketler."
+        },
+        {
+          "type": "challenge",
+          "question": "What were some of the key goals and motivations for the HTML5 specification?"
+        },
+        {
+          "type": "challenge",
+          "question": "What's new in HTML5?"
+        },
+        {
+          "type": "challenge",
+          "question": "What are the building blocks of HTML5?"
+        }
+      ]
+    },
+    {
+      "slug": "semantic-elements",
+      "title": "Semantic structure elements",
+      "titleTr": "Semantik yapı elemanları",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Markup that describes its meaning",
+          "titleTr": "Anlamını tanımlayan markup",
+          "body": "**Why use semantic tags?** Instead of `<div class=\"header\">`, semantic elements like `<header>`, `<nav>`, `<main>`, `<article>`, `<section>`, `<footer>`, `<aside>` **describe the role** of their content. Benefits: **accessibility** (screen readers expose landmarks so users can jump to nav/main), **SEO** (search engines understand structure), and **maintainability** (the markup self-documents). The page looks the same, but it *means* something.\n\n**Correct usage of the core four:**\n\n- **`<header>`** — introductory content for its nearest section: a site banner, or a heading + meta for an article.\n- **`<article>`** — a **self-contained, independently distributable** piece: a blog post, news story, comment, product card. It should make sense on its own.\n- **`<section>`** — a **thematic grouping** of content, typically with a heading. Use it to break a document into parts; don't use it as a generic wrapper (that's `<div>`).\n- **`<footer>`** — closing content for its section: author, copyright, related links.\n\n**Can a page have multiple `<header>`/`<footer>`?** **Yes.** They're scoped to their nearest sectioning context, not the page. A page can have one site `<header>`, and each `<article>`/`<section>` can have **its own** `<header>` and `<footer>`. The same goes for `<footer>` — multiple are valid and common.",
+          "bodyTr": "**Neden semantik etiketler?** `<div class=\"header\">` yerine, `<header>`, `<nav>`, `<main>`, `<article>`, `<section>`, `<footer>`, `<aside>` gibi semantik elemanlar içeriklerinin **rolünü tanımlar**. Faydaları: **erişilebilirlik** (ekran okuyucular landmark'ları sunar, kullanıcılar nav/main'e atlayabilir), **SEO** (arama motorları yapıyı anlar) ve **bakım kolaylığı** (markup kendini belgeler). Sayfa aynı görünür ama bir *anlam* taşır.\n\n**Temel dördünün doğru kullanımı:**\n\n- **`<header>`** — en yakın bölümü için giriş içeriği: bir site banner'ı ya da bir makale için başlık + meta.\n- **`<article>`** — **kendi içinde tam, bağımsız dağıtılabilir** bir parça: bir blog yazısı, haber, yorum, ürün kartı. Tek başına anlamlı olmalı.\n- **`<section>`** — içeriğin **tematik bir gruplaması**, genelde bir başlıkla. Bir belgeyi parçalara bölmek için kullan; jenerik bir wrapper olarak kullanma (o `<div>`).\n- **`<footer>`** — bölümü için kapanış içeriği: yazar, telif, ilgili linkler.\n\n**Bir sayfada birden çok `<header>`/`<footer>` olabilir mi?** **Evet.** Sayfaya değil, en yakın bölümleme bağlamına göre kapsamlanırlar. Bir sayfada bir site `<header>`'ı olabilir ve her `<article>`/`<section>` **kendi** `<header>` ve `<footer>`'ına sahip olabilir. Aynısı `<footer>` için de geçerli — birden çoğu geçerli ve yaygındır."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Which element is meant for a self-contained, independently distributable piece of content?",
+          "promptTr": "Hangi eleman kendi içinde tam, bağımsız dağıtılabilir bir içerik parçası içindir?",
+          "options": [
+            { "text": "<article>", "textTr": "<article>", "correct": true },
+            { "text": "<section>", "textTr": "<section>" },
+            { "text": "<div>", "textTr": "<div>" },
+            { "text": "<header>", "textTr": "<header>" }
+          ],
+          "explanation": "<article> is for independent, reusable content (a post, comment, card) that makes sense on its own. <section> is a thematic grouping; <div> is non-semantic; <header> is introductory content.",
+          "explanationTr": "<article> bağımsız, tekrar kullanılabilir içerik içindir (yazı, yorum, kart) ve tek başına anlamlıdır. <section> tematik bir gruplamadır; <div> semantik değildir; <header> giriş içeriğidir."
+        },
+        {
+          "type": "true_false",
+          "statement": "A single page may contain multiple <header> and <footer> elements, one per sectioning context.",
+          "statementTr": "Tek bir sayfa, bölümleme bağlamı başına bir tane olmak üzere birden çok <header> ve <footer> elemanı içerebilir.",
+          "answer": true,
+          "explanation": "header/footer are scoped to their nearest section or article, not the document, so each article/section can have its own — multiple are valid.",
+          "explanationTr": "header/footer belgeye değil en yakın section ya da article'a kapsamlanır, bu yüzden her article/section kendininkine sahip olabilir — birden çoğu geçerlidir."
+        },
+        {
+          "type": "challenge",
+          "question": "Why use HTML5 semantic tags?"
+        },
+        {
+          "type": "challenge",
+          "question": "Briefly describe the correct usage of HTML5 semantic elements: <header>, <article>, <section>, <footer>"
+        },
+        {
+          "type": "challenge",
+          "question": "Can a web page contain multiple <header> elements? What about <footer> elements?"
+        }
+      ]
+    }
+  ]
+}

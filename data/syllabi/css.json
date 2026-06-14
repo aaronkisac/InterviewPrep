@@ -1,0 +1,167 @@
+{
+  "topic": "css",
+  "title": "CSS",
+  "$comment": "Canonical concept list (syllabus) for CSS. COMPLETE: 6 units, 16 concepts covering bank ids 701-733 (33/33). Verified by: pnpm concept:coverage",
+  "concepts": [
+    {
+      "id": "what-css-is-and-how-it-works",
+      "title": "What CSS is & how the browser applies it",
+      "titleTr": "CSS nedir ve tarayıcı onu nasıl uygular",
+      "section": "foundations",
+      "unit": "css-fundamentals",
+      "lessons": [
+        "what-css-is-and-how-it-works"
+      ]
+    },
+    {
+      "id": "applying-styles-and-the-dom",
+      "title": "Applying styles & the DOM",
+      "titleTr": "Stilleri uygulamak ve DOM",
+      "section": "foundations",
+      "unit": "css-fundamentals",
+      "lessons": [
+        "applying-styles-and-the-dom"
+      ]
+    },
+    {
+      "id": "selectors-classes-ids",
+      "title": "Selectors, classes & IDs",
+      "titleTr": "Selector'lar, class'lar ve ID'ler",
+      "section": "foundations",
+      "unit": "selectors-specificity",
+      "lessons": [
+        "selectors-classes-ids"
+      ]
+    },
+    {
+      "id": "specificity-and-pseudo-elements",
+      "title": "Specificity & pseudo-elements",
+      "titleTr": "Specificity ve pseudo-element'ler",
+      "section": "foundations",
+      "unit": "selectors-specificity",
+      "lessons": [
+        "specificity-and-pseudo-elements"
+      ]
+    },
+    {
+      "id": "box-model-and-box-sizing",
+      "title": "The box model & box-sizing",
+      "titleTr": "Box model ve box-sizing",
+      "section": "core",
+      "unit": "box-model-layout",
+      "lessons": [
+        "box-model-and-box-sizing"
+      ]
+    },
+    {
+      "id": "floats-and-clearing",
+      "title": "Floats & clearing",
+      "titleTr": "Float'lar ve clearing",
+      "section": "core",
+      "unit": "box-model-layout",
+      "lessons": [
+        "floats-and-clearing"
+      ]
+    },
+    {
+      "id": "positioning-and-stacking",
+      "title": "Positioning & stacking",
+      "titleTr": "Konumlandırma ve stacking",
+      "section": "core",
+      "unit": "box-model-layout",
+      "lessons": [
+        "positioning-and-stacking"
+      ]
+    },
+    {
+      "id": "flexbox-grid-and-grid-systems",
+      "title": "Flexbox, Grid & grid systems",
+      "titleTr": "Flexbox, Grid ve grid sistemleri",
+      "section": "advanced",
+      "unit": "modern-layout-responsive",
+      "lessons": [
+        "flexbox-grid-and-grid-systems"
+      ]
+    },
+    {
+      "id": "responsive-and-retina",
+      "title": "Responsive vs mobile-first & retina",
+      "titleTr": "Responsive vs mobile-first ve retina",
+      "section": "advanced",
+      "unit": "modern-layout-responsive",
+      "lessons": [
+        "responsive-and-retina"
+      ]
+    },
+    {
+      "id": "translate-vs-absolute-and-print",
+      "title": "translate() vs positioning & print styles",
+      "titleTr": "translate() vs konumlandırma ve print stilleri",
+      "section": "advanced",
+      "unit": "modern-layout-responsive",
+      "lessons": [
+        "translate-vs-absolute-and-print"
+      ]
+    },
+    {
+      "id": "preprocessors-what-and-why",
+      "title": "CSS preprocessors: what & why",
+      "titleTr": "CSS preprocessor'ları: ne ve neden",
+      "section": "advanced",
+      "unit": "preprocessors-architecture",
+      "lessons": [
+        "preprocessors-what-and-why"
+      ]
+    },
+    {
+      "id": "sass-and-scss",
+      "title": "Sass & SCSS",
+      "titleTr": "Sass ve SCSS",
+      "section": "advanced",
+      "unit": "preprocessors-architecture",
+      "lessons": [
+        "sass-and-scss"
+      ]
+    },
+    {
+      "id": "custom-properties-and-architecture",
+      "title": "Custom properties & CSS architecture",
+      "titleTr": "Custom property'ler ve CSS mimarisi",
+      "section": "advanced",
+      "unit": "preprocessors-architecture",
+      "lessons": [
+        "custom-properties-and-architecture"
+      ]
+    },
+    {
+      "id": "accessibility-and-hiding-content",
+      "title": "Accessibility & hiding content",
+      "titleTr": "Erişilebilirlik ve içerik gizleme",
+      "section": "interview",
+      "unit": "robustness-a11y-crossbrowser",
+      "lessons": [
+        "accessibility-and-hiding-content"
+      ]
+    },
+    {
+      "id": "cross-browser-and-resets",
+      "title": "Cross-browser issues, resets & normalize",
+      "titleTr": "Tarayıcılar arası sorunlar, reset ve normalize",
+      "section": "interview",
+      "unit": "robustness-a11y-crossbrowser",
+      "lessons": [
+        "cross-browser-and-resets"
+      ]
+    },
+    {
+      "id": "sprites-and-table-layout",
+      "title": "CSS sprites & table-layout",
+      "titleTr": "CSS sprite'ları ve table-layout",
+      "section": "interview",
+      "unit": "robustness-a11y-crossbrowser",
+      "lessons": [
+        "sprites-and-table-layout"
+      ]
+    }
+  ]
+}

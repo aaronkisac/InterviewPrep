@@ -1,0 +1,102 @@
+{
+  "topic": "html5",
+  "slug": "elements-text-semantics",
+  "title": "Elements, Blocks & Text Semantics",
+  "titleTr": "Elemanlar, Bloklar ve Metin Semantiği",
+  "section": "foundations",
+  "position": 2,
+  "lessons": [
+    {
+      "slug": "block-vs-inline-span-div",
+      "title": "Block vs inline; span vs div",
+      "titleTr": "Block vs inline; span vs div",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Two display behaviours, two generic boxes",
+          "titleTr": "İki görüntüleme davranışı, iki jenerik kutu",
+          "body": "Elements have a default **display behaviour**:\n\n- **Block-level** elements start on a **new line** and take the **full available width** by default; you can set `width`/`height` and vertical margins. Examples: `<div>`, `<p>`, `<h1>`–`<h6>`, `<section>`, `<ul>`, `<li>`.\n- **Inline** elements flow **within a line**, taking only as much width as their content, and **ignore** `width`/`height` and top/bottom margins. Examples: `<span>`, `<a>`, `<strong>`, `<em>`, `<img>` (inline-level).\n\n(You can change this with CSS `display`, but every element ships with a default.)\n\n**`<span>` vs `<div>`** are the two **generic, semantically-meaningless containers** — use them only when no semantic element fits, purely as styling/scripting hooks:\n\n- **`<div>`** is **block-level** — for grouping larger chunks/layout regions.\n- **`<span>`** is **inline** — for wrapping a piece of text or inline content (e.g. to colour one word).\n\nSo the difference between them is exactly the block-vs-inline difference. Prefer semantic elements (`<nav>`, `<article>`, `<button>`) where they apply; reach for `div`/`span` when you genuinely just need a box.",
+          "bodyTr": "Elemanların varsayılan bir **görüntüleme davranışı** vardır:\n\n- **Block-level** elemanlar **yeni bir satırda** başlar ve varsayılan olarak **tüm uygun genişliği** alır; `width`/`height` ve dikey margin ayarlayabilirsin. Örnekler: `<div>`, `<p>`, `<h1>`–`<h6>`, `<section>`, `<ul>`, `<li>`.\n- **Inline** elemanlar **bir satır içinde** akar, yalnızca içerikleri kadar genişlik alır ve `width`/`height` ile üst/alt margin'i **yok sayar**. Örnekler: `<span>`, `<a>`, `<strong>`, `<em>`, `<img>` (inline-level).\n\n(Bunu CSS `display` ile değiştirebilirsin ama her eleman bir varsayılanla gelir.)\n\n**`<span>` vs `<div>`** iki **jenerik, semantik olarak anlamsız konteynerdir** — yalnızca uygun bir semantik eleman yokken, salt stil/script kancası olarak kullan:\n\n- **`<div>`** **block-level**'dır — daha büyük parçaları/layout bölgelerini gruplamak için.\n- **`<span>`** **inline**'dır — bir metin parçasını ya da inline içeriği sarmak için (örn. bir kelimeyi renklendirmek).\n\nYani aralarındaki fark tam olarak block-vs-inline farkıdır. Uygun olduğunda semantik elemanları (`<nav>`, `<article>`, `<button>`) tercih et; gerçekten sadece bir kutuya ihtiyacın olduğunda `div`/`span`'a uzan."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Which statement about block vs inline elements is correct?",
+          "promptTr": "Block vs inline elemanlar hakkında hangi ifade doğrudur?",
+          "options": [
+            { "text": "Block elements start on a new line and take full width; inline elements flow within a line and ignore width/height", "textTr": "Block elemanlar yeni satırda başlar ve tam genişlik alır; inline elemanlar satır içinde akar ve width/height'ı yok sayar", "correct": true },
+            { "text": "Inline elements always start on a new line", "textTr": "Inline elemanlar her zaman yeni satırda başlar" },
+            { "text": "Block elements ignore width and height", "textTr": "Block elemanlar width ve height'ı yok sayar" },
+            { "text": "There is no rendering difference between them", "textTr": "Aralarında render farkı yoktur" }
+          ],
+          "explanation": "Block elements break onto a new line and accept dimensions and vertical margins; inline elements sit within the text flow and ignore width/height and top/bottom margins.",
+          "explanationTr": "Block elemanlar yeni satıra geçer, boyut ve dikey margin kabul eder; inline elemanlar metin akışı içinde durur ve width/height ile üst/alt margin'i yok sayar."
+        },
+        {
+          "type": "true_false",
+          "statement": "<div> and <span> carry no semantic meaning — they're generic containers used as styling/scripting hooks.",
+          "statementTr": "<div> ve <span> semantik anlam taşımaz — stil/script kancası olarak kullanılan jenerik konteynerlerdir.",
+          "answer": true,
+          "explanation": "They're deliberately meaningless; div is block-level, span is inline. Prefer a semantic element when one fits, and use div/span only when none does.",
+          "explanationTr": "Bilerek anlamsızdırlar; div block-level, span inline'dır. Uygun olduğunda semantik bir eleman tercih et, hiçbiri uymadığında div/span kullan."
+        },
+        {
+          "type": "challenge",
+          "question": "Explain the difference between block elements and inline elements"
+        },
+        {
+          "type": "challenge",
+          "question": "What is the difference between span and div?"
+        }
+      ]
+    },
+    {
+      "slug": "text-level-semantics",
+      "title": "Text-level semantics",
+      "titleTr": "Metin düzeyi semantik",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Meaning vs appearance in inline text",
+          "titleTr": "Inline metinde anlam vs görünüm",
+          "body": "Several inline elements look similar but differ in **meaning** — which matters for assistive tech and SEO.\n\n**`<b>` vs `<strong>`** — both render bold by default, but:\n\n- **`<strong>`** conveys **strong importance / seriousness** — semantic emphasis a screen reader may stress.\n- **`<b>`** is **stylistic only** — \"bring attention\" with no added importance (e.g. a keyword, a product name). Use `<strong>` when the text *matters*, `<b>` when you just want bold without meaning. (Likewise `<em>` = emphasis vs `<i>` = stylistic italic.)\n\n**Highlighting text:** the semantic way is **`<mark>`**, which means \"marked/highlighted for reference or relevance\" and renders with a yellow background by default — ideal for highlighting search matches. (For purely visual highlight you could style a `<span>`, but `<mark>` carries the meaning.)\n\n**`<small>`** represents **side comments / fine print** — disclaimers, copyright, legal text, attributions. It's semantic (\"this is small print\"), not just \"make the font smaller\"; for pure sizing you'd use CSS. So reach for `<small>` when the content genuinely *is* a side note.",
+          "bodyTr": "Birkaç inline eleman benzer görünür ama **anlamca** farklıdır — bu, yardımcı teknolojiler ve SEO için önemlidir.\n\n**`<b>` vs `<strong>`** — ikisi de varsayılan olarak kalın render olur ama:\n\n- **`<strong>`** **güçlü önem / ciddiyet** taşır — bir ekran okuyucunun vurgulayabileceği semantik vurgu.\n- **`<b>`** **yalnızca stilistiktir** — eklenen önem olmadan \"dikkat çek\" (örn. bir anahtar kelime, bir ürün adı). Metin *önemliyse* `<strong>`, sadece anlamsız kalın istiyorsan `<b>` kullan. (Benzer şekilde `<em>` = vurgu vs `<i>` = stilistik italik.)\n\n**Metni vurgulamak:** semantik yol **`<mark>`**'tır; \"referans ya da uygunluk için işaretli/vurgulanmış\" anlamına gelir ve varsayılan olarak sarı arka planla render olur — arama eşleşmelerini vurgulamak için idealdir. (Salt görsel vurgu için bir `<span>`'i stilleyebilirsin ama anlamı `<mark>` taşır.)\n\n**`<small>`** **yan yorumları / küçük yazıyı** temsil eder — feragatnameler, telif, yasal metin, atıflar. Semantiktir (\"bu küçük yazı\"), sadece \"yazı tipini küçült\" değil; salt boyutlandırma için CSS kullanırdın. Yani içerik gerçekten *bir yan not ise* `<small>`'a uzan."
+        },
+        {
+          "type": "mcq",
+          "prompt": "When should you prefer <strong> over <b>?",
+          "promptTr": "<b> yerine <strong>'u ne zaman tercih etmelisin?",
+          "options": [
+            { "text": "When the text carries real importance/seriousness, not just visual bold", "textTr": "Metin sadece görsel kalın değil, gerçek önem/ciddiyet taşıdığında", "correct": true },
+            { "text": "Never — they are identical", "textTr": "Asla — aynılar" },
+            { "text": "Only inside tables", "textTr": "Yalnızca tablolarda" },
+            { "text": "When you want italic text", "textTr": "İtalik metin istediğinde" }
+          ],
+          "explanation": "<strong> adds semantic importance (assistive tech may emphasise it); <b> is presentational bold with no added meaning. Choose based on meaning, not looks.",
+          "explanationTr": "<strong> semantik önem ekler (yardımcı teknoloji vurgulayabilir); <b> eklenen anlamı olmayan sunumsal kalındır. Görünüme değil anlama göre seç."
+        },
+        {
+          "type": "true_false",
+          "statement": "The <mark> element is the semantic way to highlight text for reference or relevance.",
+          "statementTr": "<mark> elemanı, metni referans ya da uygunluk için vurgulamanın semantik yoludur.",
+          "answer": true,
+          "explanation": "<mark> means 'highlighted/marked' and renders with a yellow background by default — perfect for search-result highlights, unlike a purely styled span.",
+          "explanationTr": "<mark> 'vurgulanmış/işaretli' anlamına gelir ve varsayılan olarak sarı arka planla render olur — salt stillenmiş bir span'ın aksine arama-sonucu vurguları için mükemmel."
+        },
+        {
+          "type": "challenge",
+          "question": "What is the difference between <b> and <strong>?"
+        },
+        {
+          "type": "challenge",
+          "question": "How can you highlight text in HTML?"
+        },
+        {
+          "type": "challenge",
+          "question": "When is it appropriate to use the <small> element?"
+        }
+      ]
+    }
+  ]
+}

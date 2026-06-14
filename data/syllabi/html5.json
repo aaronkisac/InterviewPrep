@@ -1,0 +1,207 @@
+{
+  "topic": "html5",
+  "title": "HTML5",
+  "$comment": "Canonical concept list (syllabus) for HTML5. COMPLETE: 8 units, 20 concepts covering bank ids 601-651 (51/51). Verified by: pnpm concept:coverage",
+  "concepts": [
+    {
+      "id": "doctype-and-rendering-modes",
+      "title": "Doctype & rendering modes",
+      "titleTr": "Doctype ve render modları",
+      "section": "foundations",
+      "unit": "document-foundations",
+      "lessons": [
+        "doctype-and-rendering-modes"
+      ]
+    },
+    {
+      "id": "dom-encoding-and-the-spec",
+      "title": "The DOM, encoding & the spec",
+      "titleTr": "DOM, kodlama ve spec",
+      "section": "foundations",
+      "unit": "document-foundations",
+      "lessons": [
+        "dom-encoding-and-the-spec"
+      ]
+    },
+    {
+      "id": "self-closing-and-optional-tags",
+      "title": "Self-closing & optional tags",
+      "titleTr": "Self-closing ve isteğe bağlı etiketler",
+      "section": "foundations",
+      "unit": "document-foundations",
+      "lessons": [
+        "self-closing-and-optional-tags"
+      ]
+    },
+    {
+      "id": "block-vs-inline-span-div",
+      "title": "Block vs inline; span vs div",
+      "titleTr": "Block vs inline; span vs div",
+      "section": "foundations",
+      "unit": "elements-text-semantics",
+      "lessons": [
+        "block-vs-inline-span-div"
+      ]
+    },
+    {
+      "id": "text-level-semantics",
+      "title": "Text-level semantics",
+      "titleTr": "Metin düzeyi semantik",
+      "section": "foundations",
+      "unit": "elements-text-semantics",
+      "lessons": [
+        "text-level-semantics"
+      ]
+    },
+    {
+      "id": "attributes-properties-data-links",
+      "title": "Attributes, properties, data-* & safe links",
+      "titleTr": "Attribute'lar, property'ler, data-* ve güvenli linkler",
+      "section": "core",
+      "unit": "attributes-metadata",
+      "lessons": [
+        "attributes-properties-data-links"
+      ]
+    },
+    {
+      "id": "meta-direction-compatibility",
+      "title": "Meta tags, text direction & compatibility",
+      "titleTr": "Meta etiketleri, metin yönü ve uyumluluk",
+      "section": "core",
+      "unit": "attributes-metadata",
+      "lessons": [
+        "meta-direction-compatibility"
+      ]
+    },
+    {
+      "id": "html5-goals-and-building-blocks",
+      "title": "HTML5: goals, what's new & building blocks",
+      "titleTr": "HTML5: hedefler, yenilikler ve yapı taşları",
+      "section": "core",
+      "unit": "semantic-html5",
+      "lessons": [
+        "html5-goals-and-building-blocks"
+      ]
+    },
+    {
+      "id": "semantic-elements",
+      "title": "Semantic structure elements",
+      "titleTr": "Semantik yapı elemanları",
+      "section": "core",
+      "unit": "semantic-html5",
+      "lessons": [
+        "semantic-elements"
+      ]
+    },
+    {
+      "id": "loading-scripts-async-defer",
+      "title": "Loading scripts: async & defer",
+      "titleTr": "Script yükleme: async ve defer",
+      "section": "advanced",
+      "unit": "performance-scripts-seo",
+      "lessons": [
+        "loading-scripts-async-defer"
+      ]
+    },
+    {
+      "id": "resource-placement-and-rendering",
+      "title": "Resource placement & progressive rendering",
+      "titleTr": "Kaynak yerleşimi ve aşamalı render",
+      "section": "advanced",
+      "unit": "performance-scripts-seo",
+      "lessons": [
+        "resource-placement-and-rendering"
+      ]
+    },
+    {
+      "id": "seo-and-cache-busting",
+      "title": "SEO & cache busting",
+      "titleTr": "SEO ve cache busting",
+      "section": "advanced",
+      "unit": "performance-scripts-seo",
+      "lessons": [
+        "seo-and-cache-busting"
+      ]
+    },
+    {
+      "id": "cookies-localstorage-sessionstorage",
+      "title": "Cookies, localStorage & sessionStorage",
+      "titleTr": "Cookie'ler, localStorage ve sessionStorage",
+      "section": "advanced",
+      "unit": "storage-browser-apis",
+      "lessons": [
+        "cookies-localstorage-sessionstorage"
+      ]
+    },
+    {
+      "id": "client-databases",
+      "title": "Client-side databases: WebSQL & IndexedDB",
+      "titleTr": "İstemci tarafı veritabanları: WebSQL ve IndexedDB",
+      "section": "advanced",
+      "unit": "storage-browser-apis",
+      "lessons": [
+        "client-databases"
+      ]
+    },
+    {
+      "id": "workers-and-web-components",
+      "title": "Web Workers & Web Components",
+      "titleTr": "Web Workers ve Web Components",
+      "section": "advanced",
+      "unit": "storage-browser-apis",
+      "lessons": [
+        "workers-and-web-components"
+      ]
+    },
+    {
+      "id": "responsive-images",
+      "title": "Responsive images: alt, srcset & WebP",
+      "titleTr": "Responsive görseller: alt, srcset ve WebP",
+      "section": "advanced",
+      "unit": "media-graphics",
+      "lessons": [
+        "responsive-images"
+      ]
+    },
+    {
+      "id": "graphics-iframes-keygen",
+      "title": "SVG vs Canvas, iframes & keygen",
+      "titleTr": "SVG vs Canvas, iframe'ler ve keygen",
+      "section": "advanced",
+      "unit": "media-graphics",
+      "lessons": [
+        "graphics-iframes-keygen"
+      ]
+    },
+    {
+      "id": "templating-and-preprocessors",
+      "title": "Templating languages & HTML preprocessors",
+      "titleTr": "Templating dilleri ve HTML preprocessor'ları",
+      "section": "interview",
+      "unit": "tooling-a11y-advanced",
+      "lessons": [
+        "templating-and-preprocessors"
+      ]
+    },
+    {
+      "id": "xhtml-and-i18n",
+      "title": "XHTML & internationalisation",
+      "titleTr": "XHTML ve uluslararasılaştırma",
+      "section": "interview",
+      "unit": "tooling-a11y-advanced",
+      "lessons": [
+        "xhtml-and-i18n"
+      ]
+    },
+    {
+      "id": "accessibility-and-landmarks",
+      "title": "Accessibility, ARIA & the main element",
+      "titleTr": "Erişilebilirlik, ARIA ve main elemanı",
+      "section": "interview",
+      "unit": "tooling-a11y-advanced",
+      "lessons": [
+        "accessibility-and-landmarks"
+      ]
+    }
+  ]
+}

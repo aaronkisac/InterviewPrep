@@ -1,0 +1,147 @@
+{
+  "topic": "css",
+  "slug": "robustness-a11y-crossbrowser",
+  "title": "Accessibility, Cross-browser & Techniques",
+  "titleTr": "Erişilebilirlik, Tarayıcılar Arası ve Teknikler",
+  "section": "interview",
+  "position": 6,
+  "lessons": [
+    {
+      "slug": "accessibility-and-hiding-content",
+      "title": "Accessibility & hiding content",
+      "titleTr": "Erişilebilirlik ve içerik gizleme",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "CSS choices that help or hurt access",
+          "titleTr": "Erişime yardım eden ya da zarar veren CSS seçimleri",
+          "body": "**Accessibility (a11y) in a CSS context** means using CSS so it doesn't break — and actively supports — usability for everyone, including screen-reader, keyboard, and low-vision users. Key concerns:\n\n- **Don't rely on colour alone**, and meet **contrast** ratios (WCAG AA ~4.5:1 for text).\n- **Visible focus styles** — never `outline: none` without a replacement; keyboard users need to see focus.\n- **Respect user preferences** — `prefers-reduced-motion` (tone down animation), `prefers-color-scheme`, and relative units (`rem`) that honour the user's font size.\n- **Be careful what you hide:** `display: none` and `visibility: hidden` remove content from **both** the screen **and** the accessibility tree. `order`/fl ex reordering can desync visual and DOM/tab order.\n\n**Visually hiding content for screen readers only** is a common need (skip links, labels for icon buttons). The correct technique is the **\"visually-hidden\" / sr-only\" clip pattern** — it removes the element visually but keeps it in the accessibility tree:\n\n```css\n.sr-only { position: absolute; width: 1px; height: 1px; padding: 0;\n  margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }\n```\n\nWhat **not** to use: `display: none` and `visibility: hidden` hide from screen readers too; `opacity: 0` and `text-indent: -9999px` have focus/quirk issues. The clip pattern is the reliable way to keep text available to assistive tech while hiding it visually.",
+          "bodyTr": "**CSS bağlamında erişilebilirlik (a11y)**, CSS'i; ekran okuyucu, klavye ve az gören kullanıcılar dahil herkes için kullanılabilirliği bozmayacak — ve aktif destekleyecek — şekilde kullanmak demektir. Temel konular:\n\n- **Yalnızca renge güvenme** ve **kontrast** oranlarını karşıla (WCAG AA metin için ~4.5:1).\n- **Görünür focus stilleri** — yedek olmadan asla `outline: none` yapma; klavye kullanıcıları focus'u görmeli.\n- **Kullanıcı tercihlerine saygı göster** — `prefers-reduced-motion` (animasyonu yumuşat), `prefers-color-scheme` ve kullanıcının font boyutuna uyan göreli birimler (`rem`).\n- **Neyi gizlediğine dikkat et:** `display: none` ve `visibility: hidden` içeriği **hem** ekrandan **hem** erişilebilirlik ağacından kaldırır. `order`/flex yeniden sıralama, görsel ve DOM/tab sırasını ayrıştırabilir.\n\n**İçeriği yalnızca ekran okuyucular için görsel olarak gizlemek** yaygın bir ihtiyaçtır (skip link'ler, ikon butonları için etiketler). Doğru teknik **\"visually-hidden\" / \"sr-only\" clip deseni**dir — elemanı görsel olarak kaldırır ama erişilebilirlik ağacında tutar:\n\n```css\n.sr-only { position: absolute; width: 1px; height: 1px; padding: 0;\n  margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }\n```\n\n**KullanılMAması gerekenler:** `display: none` ve `visibility: hidden` ekran okuyuculardan da gizler; `opacity: 0` ve `text-indent: -9999px`'in focus/quirk sorunları vardır. Clip deseni, metni görsel olarak gizlerken yardımcı teknolojiye açık tutmanın güvenilir yoludur."
+        },
+        {
+          "type": "mcq",
+          "prompt": "How do you hide content visually but keep it available to screen readers?",
+          "promptTr": "İçeriği görsel olarak gizleyip ekran okuyuculara açık tutmayı nasıl yaparsın?",
+          "options": [
+            { "text": "A visually-hidden/sr-only clip pattern (tiny size, clip, off-screen) — not display:none", "textTr": "Bir visually-hidden/sr-only clip deseni (küçük boyut, clip, ekran-dışı) — display:none değil", "correct": true },
+            { "text": "display: none", "textTr": "display: none" },
+            { "text": "visibility: hidden", "textTr": "visibility: hidden" },
+            { "text": "Deleting the element from the DOM", "textTr": "Elemanı DOM'dan silmek" }
+          ],
+          "explanation": "display:none and visibility:hidden remove content from the accessibility tree. The sr-only clip pattern keeps it readable by assistive tech while hidden visually.",
+          "explanationTr": "display:none ve visibility:hidden içeriği erişilebilirlik ağacından kaldırır. sr-only clip deseni onu görsel olarak gizlerken yardımcı teknolojiye okunabilir tutar."
+        },
+        {
+          "type": "true_false",
+          "statement": "Removing focus outlines with outline: none (without a replacement) is an accessibility problem for keyboard users.",
+          "statementTr": "Focus outline'larını outline: none ile (yedek olmadan) kaldırmak, klavye kullanıcıları için bir erişilebilirlik sorunudur.",
+          "answer": true,
+          "explanation": "Keyboard users rely on a visible focus indicator to know where they are. If you remove the default outline, you must provide an equally visible custom focus style.",
+          "explanationTr": "Klavye kullanıcıları nerede olduklarını bilmek için görünür bir focus göstergesine güvenir. Varsayılan outline'ı kaldırırsan, eşit derecede görünür özel bir focus stili sağlamalısın."
+        },
+        {
+          "type": "challenge",
+          "question": "What does Accessibility (a11y) mean in a CSS context?"
+        },
+        {
+          "type": "challenge",
+          "question": "What are the different ways to visually hide content (and make it available only for screen readers)?"
+        }
+      ]
+    },
+    {
+      "slug": "cross-browser-and-resets",
+      "title": "Cross-browser issues, resets & normalize",
+      "titleTr": "Tarayıcılar arası sorunlar, reset ve normalize",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Taming default-style differences",
+          "titleTr": "Varsayılan stil farklarını ehlileştirmek",
+          "body": "Browsers ship **different default styles** (user-agent stylesheets) and implement features at different times, so the same CSS can look different across them.\n\n**Approaching browser-specific issues:**\n\n1. **Reproduce and identify** — which browser/version, using its devtools; check **caniuse** for support.\n2. **Prefer standards & graceful degradation** — write standard CSS, then use **feature detection** with `@supports (…) { }` rather than brittle browser sniffing.\n3. **Vendor prefixes** where needed (`-webkit-`), ideally added automatically by **Autoprefixer** so you don't hand-maintain them.\n4. **Provide fallbacks** — a solid colour before a gradient, a flex fallback before grid.\n5. **Normalize defaults** up front (below) and **test** across target browsers; keep polyfills only when necessary.\n\n**Resetting vs normalizing CSS** — two ways to neutralise UA-style differences:\n\n- **A CSS reset** (e.g. Meyer reset) **strips defaults to zero** — removes all margins, padding, font sizes, list styles, so you start from a blank slate and style everything yourself. Total control, but you re-add a lot.\n- **Normalize.css** **preserves useful defaults** and only **smooths the inconsistencies** between browsers (and fixes bugs), so headings/lists still look sensible.\n\nWhich to choose? **Normalize** when you want sensible cross-browser defaults with less boilerplate (common for content sites/design systems); **reset** when you have a strict design system and want to define everything from scratch. Many modern setups use a small custom reset that blends both.",
+          "bodyTr": "Tarayıcılar **farklı varsayılan stiller** (user-agent stylesheet'leri) sunar ve özellikleri farklı zamanlarda uygular, bu yüzden aynı CSS aralarında farklı görünebilir.\n\n**Tarayıcıya özgü sorunlara yaklaşım:**\n\n1. **Yeniden üret ve tanımla** — hangi tarayıcı/sürüm, onun devtools'uyla; destek için **caniuse**'a bak.\n2. **Standartları & graceful degradation'ı tercih et** — standart CSS yaz, sonra kırılgan browser sniffing yerine `@supports (…) { }` ile **feature detection** kullan.\n3. Gerektiğinde **vendor prefix'leri** (`-webkit-`), ideal olarak **Autoprefixer** ile otomatik eklenir ki elle bakım yapmayasın.\n4. **Fallback'ler sağla** — gradient'ten önce düz renk, grid'den önce flex fallback'i.\n5. Varsayılanları baştan **normalize et** (aşağıda) ve hedef tarayıcılarda **test et**; polyfill'leri yalnızca gerektiğinde tut.\n\n**CSS reset vs normalize** — UA-stil farklarını etkisizleştirmenin iki yolu:\n\n- **Bir CSS reset** (örn. Meyer reset) **varsayılanları sıfıra indirir** — tüm margin, padding, font boyutu, liste stilini kaldırır, böylece boş bir sayfadan başlar ve her şeyi kendin stilersin. Tam kontrol ama çoğunu yeniden eklersin.\n- **Normalize.css** **yararlı varsayılanları korur** ve yalnızca tarayıcılar arası **tutarsızlıkları yumuşatır** (ve hataları düzeltir), böylece başlıklar/listeler hâlâ makul görünür.\n\nHangisi? Daha az boilerplate ile makul tarayıcılar-arası varsayılanlar istediğinde **normalize** (içerik siteleri/tasarım sistemleri için yaygın); katı bir tasarım sistemin varsa ve her şeyi sıfırdan tanımlamak istediğinde **reset**. Çoğu modern kurulum ikisini harmanlayan küçük bir özel reset kullanır."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What's the difference between a CSS reset and normalize.css?",
+          "promptTr": "Bir CSS reset ile normalize.css arasındaki fark nedir?",
+          "options": [
+            { "text": "A reset strips all defaults to zero; normalize keeps useful defaults and just smooths cross-browser inconsistencies", "textTr": "Bir reset tüm varsayılanları sıfıra indirir; normalize yararlı varsayılanları korur ve yalnızca tarayıcılar-arası tutarsızlıkları yumuşatır", "correct": true },
+            { "text": "They are the same thing", "textTr": "Aynı şeydirler" },
+            { "text": "normalize removes all styling; a reset adds styling", "textTr": "normalize tüm stillemeyi kaldırır; reset stilleme ekler" },
+            { "text": "A reset only works in Chrome", "textTr": "Bir reset yalnızca Chrome'da çalışır" }
+          ],
+          "explanation": "Reset = blank slate (zero out everything, restyle from scratch). Normalize = keep sensible defaults, fix only the inconsistencies/bugs between browsers.",
+          "explanationTr": "Reset = boş sayfa (her şeyi sıfırla, sıfırdan stille). Normalize = makul varsayılanları koru, yalnızca tarayıcılar arası tutarsızlıkları/hataları düzelt."
+        },
+        {
+          "type": "true_false",
+          "statement": "@supports lets you apply CSS only when the browser supports a given feature (feature detection).",
+          "statementTr": "@supports, CSS'i yalnızca tarayıcı belirli bir özelliği desteklediğinde uygulamana izin verir (feature detection).",
+          "answer": true,
+          "explanation": "@supports (display: grid) { … } is native CSS feature detection — far more robust than sniffing the browser's user-agent string for handling cross-browser differences.",
+          "explanationTr": "@supports (display: grid) { … } native CSS feature detection'dır — tarayıcılar arası farkları ele almak için user-agent string'ini sniff etmekten çok daha sağlamdır."
+        },
+        {
+          "type": "challenge",
+          "question": "How would you approach fixing browser-specific styling issues?"
+        },
+        {
+          "type": "challenge",
+          "question": "What's the difference between resetting and normalizing CSS? Which would you choose, and why?"
+        }
+      ]
+    },
+    {
+      "slug": "sprites-and-table-layout",
+      "title": "CSS sprites & table-layout",
+      "titleTr": "CSS sprite'ları ve table-layout",
+      "position": 3,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Two classic optimisation techniques",
+          "titleTr": "İki klasik optimizasyon tekniği",
+          "body": "**CSS sprites** combine many small images (icons) into **one larger image file**, then show the right piece of each element using **`background-image`** plus **`background-position`** (and a fixed width/height to crop the viewport). Why: historically every image was a separate HTTP request, so a toolbar of 20 icons meant 20 requests; one sprite means **one request**, reducing latency overhead. Implementation: put all icons in a sprite sheet, give each icon class the sprite as `background-image`, and offset `background-position` to the icon's coordinates. (Note: with **HTTP/2 multiplexing**, **SVG icons**, and **icon fonts**, sprites matter less today — but the technique and reasoning still come up in interviews.)\n\n**The `table-layout` property** controls how a `<table>` computes its **column widths**:\n\n- **`table-layout: auto`** (default) — the browser **inspects all cell content** to size columns, so the table can't render until everything is measured. Flexible but **slow** for large tables, and widths can shift as content loads.\n- **`table-layout: fixed`** — column widths are determined by the **first row (and any explicit widths)**, ignoring the rest of the content. The browser can render **immediately and faster**, with **predictable, stable** column widths (content clips or wraps instead of widening the column). Use `fixed` for big data tables or when you want consistent, controllable columns.",
+          "bodyTr": "**CSS sprite'ları** birçok küçük görseli (ikonları) **tek bir büyük görsel dosyasında** birleştirir, sonra her elemanın doğru parçasını **`background-image`** artı **`background-position`** kullanarak gösterir (ve viewport'u kırpmak için sabit bir genişlik/yükseklik). Neden: tarihsel olarak her görsel ayrı bir HTTP isteğiydi, bu yüzden 20 ikonlu bir toolbar 20 istek demekti; tek bir sprite **tek bir istek** demektir, gecikme yükünü azaltır. Uygulama: tüm ikonları bir sprite sayfasına koy, her ikon class'ına sprite'ı `background-image` olarak ver ve `background-position`'ı ikonun koordinatlarına kaydır. (Not: **HTTP/2 multiplexing**, **SVG ikonlar** ve **ikon font'larıyla** sprite'lar bugün daha az önemli — ama teknik ve mantık mülakatlarda hâlâ çıkıyor.)\n\n**`table-layout` property'si** bir `<table>`'ın **sütun genişliklerini** nasıl hesapladığını kontrol eder:\n\n- **`table-layout: auto`** (varsayılan) — tarayıcı sütunları boyutlamak için **tüm hücre içeriğini inceler**, bu yüzden her şey ölçülene kadar tablo render olamaz. Esnek ama büyük tablolar için **yavaş** ve içerik yüklendikçe genişlikler kayabilir.\n- **`table-layout: fixed`** — sütun genişlikleri **ilk satır (ve açık genişlikler)** tarafından belirlenir, içeriğin geri kalanı yok sayılır. Tarayıcı **anında ve daha hızlı**, **öngörülebilir, kararlı** sütun genişlikleriyle render edebilir (içerik sütunu genişletmek yerine kırpılır ya da sarar). Büyük veri tabloları için ya da tutarlı, kontrol edilebilir sütunlar istediğinde `fixed` kullan."
+        },
+        {
+          "type": "mcq",
+          "prompt": "How are CSS sprites displayed once combined into one image?",
+          "promptTr": "CSS sprite'ları tek bir görselde birleştirildikten sonra nasıl gösterilir?",
+          "options": [
+            { "text": "Via background-image + background-position to show the right slice for each element", "textTr": "Her eleman için doğru dilimi göstermek üzere background-image + background-position ile", "correct": true },
+            { "text": "By loading each icon as a separate <img> request", "textTr": "Her ikonu ayrı bir <img> isteği olarak yükleyerek" },
+            { "text": "With JavaScript canvas only", "textTr": "Yalnızca JavaScript canvas ile" },
+            { "text": "Through an iframe per icon", "textTr": "İkon başına bir iframe ile" }
+          ],
+          "explanation": "Set the sprite sheet as background-image and shift background-position (with a cropped width/height) to reveal each icon — turning many requests into one.",
+          "explanationTr": "Sprite sayfasını background-image olarak ayarla ve her ikonu açığa çıkarmak için background-position'ı kaydır (kırpılmış bir genişlik/yükseklikle) — birçok isteği bire çevirir."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What does table-layout: fixed do?",
+          "promptTr": "table-layout: fixed ne yapar?",
+          "options": [
+            { "text": "Sizes columns from the first row/explicit widths, so the table renders faster with stable widths", "textTr": "Sütunları ilk satırdan/açık genişliklerden boyutlar, böylece tablo kararlı genişliklerle daha hızlı render olur", "correct": true },
+            { "text": "Makes the table scroll horizontally", "textTr": "Tabloyu yatay kaydırılabilir yapar" },
+            { "text": "Inspects every cell to size columns (slower)", "textTr": "Sütunları boyutlamak için her hücreyi inceler (daha yavaş)" },
+            { "text": "Disables borders", "textTr": "Border'ları devre dışı bırakır" }
+          ],
+          "explanation": "fixed determines widths from the first row and explicit widths, ignoring the rest — faster rendering and predictable columns. auto (default) measures all content and is slower.",
+          "explanationTr": "fixed, genişlikleri ilk satırdan ve açık genişliklerden belirler, gerisini yok sayar — daha hızlı render ve öngörülebilir sütunlar. auto (varsayılan) tüm içeriği ölçer ve daha yavaştır."
+        },
+        {
+          "type": "challenge",
+          "question": "Explain CSS sprites, and how you would implement them on a page or site."
+        },
+        {
+          "type": "challenge",
+          "question": "Explain the usage of the table-layout property."
+        }
+      ]
+    }
+  ]
+}

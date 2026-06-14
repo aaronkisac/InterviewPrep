@@ -1,0 +1,144 @@
+{
+  "topic": "html5",
+  "slug": "storage-browser-apis",
+  "title": "Storage & Browser APIs",
+  "titleTr": "Depolama ve Tarayıcı API'leri",
+  "section": "advanced",
+  "position": 6,
+  "lessons": [
+    {
+      "slug": "cookies-localstorage-sessionstorage",
+      "title": "Cookies, localStorage & sessionStorage",
+      "titleTr": "Cookie'ler, localStorage ve sessionStorage",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Three ways to store data on the client",
+          "titleTr": "İstemcide veri saklamanın üç yolu",
+          "body": "**Web Storage** is the HTML5 key–value API with two stores, **`localStorage`** and **`sessionStorage`** — both store **strings** under a key (`localStorage.setItem('k', 'v')`), are **origin-scoped**, synchronous, and ~5–10 MB. The difference is **lifetime**:\n\n- **`localStorage`** persists **indefinitely** (until cleared) and is shared across all tabs of the origin.\n- **`sessionStorage`** lasts only for the **tab's session** — cleared when the tab closes, and **not** shared between tabs.\n\n**Cookies** predate Web Storage and differ in important ways:\n\n- **Sent to the server** on every matching HTTP request (Web Storage is **client-only**) — so cookies suit auth/session tokens but add weight to every request.\n- **Tiny** (~4 KB) and have attributes: `Expires`/`Max-Age`, `Secure`, `HttpOnly` (hidden from JS — good for security), `SameSite` (CSRF protection).\n\nRule of thumb: **cookies** for data the server needs each request (sessions); **localStorage** for client-only data that should persist (preferences); **sessionStorage** for per-tab, throwaway state (a multi-step form's progress). Don't store secrets in Web Storage — it's readable by any JS on the page (XSS risk).",
+          "bodyTr": "**Web Storage**, iki store'lu HTML5 anahtar–değer API'sidir: **`localStorage`** ve **`sessionStorage`** — ikisi de bir anahtar altında **string** saklar (`localStorage.setItem('k', 'v')`), **origin-kapsamlı**, senkron ve ~5–10 MB'dir. Fark **ömürdür**:\n\n- **`localStorage`** **süresiz** kalır (temizlenene kadar) ve origin'in tüm sekmeleri arasında paylaşılır.\n- **`sessionStorage`** yalnızca **sekmenin oturumu** boyunca sürer — sekme kapanınca temizlenir ve sekmeler arası **paylaşılmaz**.\n\n**Cookie'ler** Web Storage'dan eskidir ve önemli açılardan farklıdır:\n\n- Her eşleşen HTTP isteğinde **sunucuya gönderilir** (Web Storage **yalnızca istemcidir**) — bu yüzden cookie'ler auth/session token'ları için uygundur ama her isteğe ağırlık ekler.\n- **Küçüktür** (~4 KB) ve attribute'ları vardır: `Expires`/`Max-Age`, `Secure`, `HttpOnly` (JS'ten gizli — güvenlik için iyi), `SameSite` (CSRF koruması).\n\nKural: sunucunun her istekte ihtiyaç duyduğu veri için **cookie** (oturumlar); kalıcı olması gereken yalnızca-istemci verisi için **localStorage** (tercihler); sekme-başına, atılabilir state için **sessionStorage** (çok adımlı bir formun ilerlemesi). Web Storage'da sır saklama — sayfadaki herhangi bir JS tarafından okunabilir (XSS riski)."
+        },
+        {
+          "type": "match",
+          "prompt": "Match each storage mechanism to its defining trait",
+          "promptTr": "Her depolama mekanizmasını tanımlayıcı özelliğiyle eşleştir",
+          "pairs": [
+            { "left": "Cookie", "leftTr": "Cookie", "right": "Sent to the server on every request; ~4 KB; can be HttpOnly", "rightTr": "Her istekte sunucuya gönderilir; ~4 KB; HttpOnly olabilir" },
+            { "left": "localStorage", "leftTr": "localStorage", "right": "Client-only, persists indefinitely, shared across tabs", "rightTr": "Yalnızca istemci, süresiz kalır, sekmeler arası paylaşılır" },
+            { "left": "sessionStorage", "leftTr": "sessionStorage", "right": "Client-only, cleared when the tab closes, not shared between tabs", "rightTr": "Yalnızca istemci, sekme kapanınca temizlenir, sekmeler arası paylaşılmaz" }
+          ]
+        },
+        {
+          "type": "true_false",
+          "statement": "Unlike cookies, localStorage and sessionStorage are never automatically sent to the server with HTTP requests.",
+          "statementTr": "Cookie'lerin aksine, localStorage ve sessionStorage HTTP istekleriyle sunucuya asla otomatik gönderilmez.",
+          "answer": true,
+          "explanation": "Web Storage is purely client-side; you must read it in JS and send it explicitly. Cookies are attached to matching requests automatically.",
+          "explanationTr": "Web Storage tamamen istemci tarafıdır; onu JS'te okuyup açıkça göndermelisin. Cookie'ler eşleşen isteklere otomatik eklenir."
+        },
+        {
+          "type": "challenge",
+          "question": "Describe the difference between a cookie, sessionStorage and localStorage"
+        },
+        {
+          "type": "challenge",
+          "question": "What is HTML5 Web Storage? Explain localStorage and sessionStorage."
+        }
+      ]
+    },
+    {
+      "slug": "client-databases",
+      "title": "Client-side databases: WebSQL & IndexedDB",
+      "titleTr": "İstemci tarafı veritabanları: WebSQL ve IndexedDB",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "When key–value isn't enough",
+          "titleTr": "Anahtar–değer yetmediğinde",
+          "body": "For structured, larger, or queryable client data, the browser offers databases beyond Web Storage.\n\n**WebSQL** was an early attempt: a relational, **SQL-based** database in the browser. It's **deprecated and removed** — the spec was abandoned because every implementation wrapped the same SQLite, so there was no independent standard. Don't use it for new work; know it only as history.\n\n**IndexedDB** is the modern, supported answer: a **low-level, transactional, NoSQL object store** in the browser. Key features: stores **structured objects** (not just strings) keyed by a key, supports **indexes** for querying, **transactions** for integrity, large capacity (hundreds of MB+), and an **asynchronous** API (it doesn't block the main thread). It's ideal for offline-capable apps, caching large datasets, and PWAs. The raw API is verbose and event-based, so most teams use a wrapper like **idb**, **Dexie**, or **localForage**.\n\nQuick ladder: a few strings → **Web Storage**; structured/queryable/offline data → **IndexedDB**; **WebSQL** → never (dead).",
+          "bodyTr": "Yapılandırılmış, daha büyük ya da sorgulanabilir istemci verisi için tarayıcı, Web Storage'ın ötesinde veritabanları sunar.\n\n**WebSQL** erken bir denemeydi: tarayıcıda ilişkisel, **SQL tabanlı** bir veritabanı. **Kullanımdan kaldırıldı ve çıkarıldı** — her implementasyon aynı SQLite'ı sardığı için spec terk edildi, bağımsız bir standart yoktu. Yeni iş için kullanma; yalnızca tarih olarak bil.\n\n**IndexedDB** modern, desteklenen cevaptır: tarayıcıda **düşük seviyeli, transactional, NoSQL nesne deposu**. Temel özellikler: bir anahtarla anahtarlanmış **yapılandırılmış nesneler** saklar (sadece string değil), sorgulama için **index'leri**, bütünlük için **transaction'ları**, büyük kapasiteyi (yüzlerce MB+) ve **asenkron** bir API'yi (ana thread'i engellemez) destekler. Offline yetenekli uygulamalar, büyük veri kümelerini önbellekleme ve PWA'lar için idealdir. Ham API ayrıntılı ve event tabanlıdır, bu yüzden çoğu ekip **idb**, **Dexie** ya da **localForage** gibi bir wrapper kullanır.\n\nHızlı merdiven: birkaç string → **Web Storage**; yapılandırılmış/sorgulanabilir/offline veri → **IndexedDB**; **WebSQL** → asla (ölü)."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Which best describes IndexedDB?",
+          "promptTr": "IndexedDB'yi en iyi ne tanımlar?",
+          "options": [
+            { "text": "An asynchronous, transactional NoSQL object store for structured client-side data", "textTr": "Yapılandırılmış istemci tarafı veri için asenkron, transactional bir NoSQL nesne deposu", "correct": true },
+            { "text": "A synchronous key–value store limited to strings", "textTr": "String'lerle sınırlı senkron bir anahtar–değer deposu" },
+            { "text": "A server-side SQL database", "textTr": "Sunucu tarafı bir SQL veritabanı" },
+            { "text": "The current recommended replacement for cookies in auth", "textTr": "Auth'ta cookie'lerin güncel önerilen yerine geçeni" }
+          ],
+          "explanation": "IndexedDB stores structured objects with indexes and transactions, asynchronously. Web Storage is the synchronous string key–value option; WebSQL is deprecated.",
+          "explanationTr": "IndexedDB, index'ler ve transaction'larla yapılandırılmış nesneleri asenkron saklar. Web Storage senkron string anahtar–değer seçeneğidir; WebSQL kullanımdan kaldırılmıştır."
+        },
+        {
+          "type": "true_false",
+          "statement": "WebSQL is a deprecated, removed standard and shouldn't be used for new projects.",
+          "statementTr": "WebSQL, kullanımdan kaldırılmış, çıkarılmış bir standarttır ve yeni projeler için kullanılmamalıdır.",
+          "answer": true,
+          "explanation": "WebSQL was abandoned (every implementation just wrapped SQLite, so there was no independent spec). IndexedDB is the supported successor.",
+          "explanationTr": "WebSQL terk edildi (her implementasyon yalnızca SQLite'ı sardığından bağımsız bir spec yoktu). IndexedDB desteklenen halefdir."
+        },
+        {
+          "type": "challenge",
+          "question": "What is WebSQL?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is an IndexedDB?"
+        }
+      ]
+    },
+    {
+      "slug": "workers-and-web-components",
+      "title": "Web Workers & Web Components",
+      "titleTr": "Web Workers ve Web Components",
+      "position": 3,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Off-thread work and reusable custom elements",
+          "titleTr": "Thread-dışı iş ve tekrar kullanılabilir özel elemanlar",
+          "body": "**Web Workers** let you run JavaScript on a **background thread**, separate from the main UI thread. JS is single-threaded, so a heavy computation normally **freezes the page**; a worker runs it off-thread so the UI stays responsive. Workers have **no DOM access** and communicate with the main thread by **message passing** (`postMessage` / `onmessage`). Use them for CPU-heavy work: parsing big files, image processing, cryptography. (Variants: Shared Workers, and Service Workers — a special worker that powers offline/PWA caching.)\n\n**Web Components** are a set of standards for building **reusable, encapsulated custom elements** that work in any framework or plain HTML. Three pillars:\n\n- **Custom Elements** — define your own tags with behaviour (`customElements.define('my-card', MyCard)`, used as `<my-card>`).\n- **Shadow DOM** — an encapsulated DOM + style subtree so the component's internals and CSS **don't leak** in or out (scoped styling).\n- **HTML Templates** — `<template>` and `<slot>` for declaring inert, reusable markup that's instantiated by the component.\n\nTogether they give framework-agnostic, encapsulated UI building blocks — the browser-native counterpart to a React/Vue component.",
+          "bodyTr": "**Web Workers**, JavaScript'i ana UI thread'inden ayrı bir **arka plan thread'inde** çalıştırmanı sağlar. JS tek thread'lidir, bu yüzden ağır bir hesaplama normalde **sayfayı dondurur**; bir worker onu thread-dışı çalıştırır, böylece UI duyarlı kalır. Worker'ların **DOM erişimi yoktur** ve ana thread'le **mesaj geçişiyle** (`postMessage` / `onmessage`) iletişir. Onları CPU-yoğun iş için kullan: büyük dosya ayrıştırma, görüntü işleme, kriptografi. (Varyantlar: Shared Workers ve Service Workers — offline/PWA önbelleğini sağlayan özel bir worker.)\n\n**Web Components**, herhangi bir framework'te ya da düz HTML'de çalışan **tekrar kullanılabilir, kapsüllenmiş özel elemanlar** yapmak için bir standartlar kümesidir. Üç sütun:\n\n- **Custom Elements** — davranışlı kendi etiketlerini tanımla (`customElements.define('my-card', MyCard)`, `<my-card>` olarak kullanılır).\n- **Shadow DOM** — kapsüllenmiş bir DOM + stil alt ağacı; böylece bileşenin iç yapısı ve CSS'i içeri/dışarı **sızmaz** (kapsamlı stil).\n- **HTML Templates** — bileşenin örneklediği etkisiz, tekrar kullanılabilir markup'ı bildirmek için `<template>` ve `<slot>`.\n\nBirlikte framework'ten bağımsız, kapsüllenmiş UI yapı taşları verirler — bir React/Vue bileşeninin tarayıcı-native karşılığı."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What is the main purpose of a Web Worker?",
+          "promptTr": "Bir Web Worker'ın temel amacı nedir?",
+          "options": [
+            { "text": "Run JS on a background thread so heavy work doesn't block/freeze the UI", "textTr": "Ağır işin UI'ı engellememesi/dondurmaması için JS'i arka plan thread'inde çalıştırmak", "correct": true },
+            { "text": "Give scripts direct access to manipulate the DOM faster", "textTr": "Script'lere DOM'u daha hızlı işlemek için doğrudan erişim vermek" },
+            { "text": "Store key–value data persistently", "textTr": "Anahtar–değer verisini kalıcı saklamak" },
+            { "text": "Define custom HTML tags", "textTr": "Özel HTML etiketleri tanımlamak" }
+          ],
+          "explanation": "Workers move CPU-heavy work off the main thread (communicating via postMessage) to keep the UI responsive. They have no DOM access; defining custom tags is Web Components.",
+          "explanationTr": "Worker'lar CPU-yoğun işi ana thread'den taşır (postMessage ile iletişerek) ki UI duyarlı kalsın. DOM erişimleri yoktur; özel etiket tanımlamak Web Components'tir."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Which trio of standards make up Web Components?",
+          "promptTr": "Hangi üçlü standart Web Components'i oluşturur?",
+          "options": [
+            { "text": "Custom Elements, Shadow DOM, and HTML Templates", "textTr": "Custom Elements, Shadow DOM ve HTML Templates", "correct": true },
+            { "text": "Workers, WebSockets, and Storage", "textTr": "Workers, WebSockets ve Storage" },
+            { "text": "Canvas, SVG, and WebGL", "textTr": "Canvas, SVG ve WebGL" },
+            { "text": "Cookies, localStorage, and IndexedDB", "textTr": "Cookies, localStorage ve IndexedDB" }
+          ],
+          "explanation": "Web Components = Custom Elements (your own tags) + Shadow DOM (encapsulation) + Templates/slots (reusable inert markup).",
+          "explanationTr": "Web Components = Custom Elements (kendi etiketlerin) + Shadow DOM (kapsülleme) + Templates/slot'lar (tekrar kullanılabilir etkisiz markup)."
+        },
+        {
+          "type": "challenge",
+          "question": "What are Web Workers?"
+        },
+        {
+          "type": "challenge",
+          "question": "What are Web Components?"
+        }
+      ]
+    }
+  ]
+}

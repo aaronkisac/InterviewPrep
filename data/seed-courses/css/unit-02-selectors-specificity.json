@@ -1,0 +1,132 @@
+{
+  "topic": "css",
+  "slug": "selectors-specificity",
+  "title": "Selectors & Specificity",
+  "titleTr": "Selector'lar ve Specificity",
+  "section": "foundations",
+  "position": 2,
+  "lessons": [
+    {
+      "slug": "selectors-classes-ids",
+      "title": "Selectors, classes & IDs",
+      "titleTr": "Selector'lar, class'lar ve ID'ler",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Targeting the right elements",
+          "titleTr": "Doğru elemanları hedeflemek",
+          "body": "**CSS selectors** are the patterns that decide *which elements a rule applies to*. The common families:\n\n- **Type/element** — `p`, `h1` (by tag).\n- **Class** — `.btn` (matches `class=\"btn\"`).\n- **ID** — `#header` (matches `id=\"header\"`).\n- **Attribute** — `[type=\"email\"]`.\n- **Pseudo-class** — `:hover`, `:focus`, `:nth-child(2)` (state/position).\n- **Pseudo-element** — `::before`, `::first-line`.\n- **Combinators** — descendant (`a b`), child (`a > b`), adjacent sibling (`a + b`), general sibling (`a ~ b`), and grouping (`a, b`).\n\n**Classes vs IDs** — both label elements for styling/scripting, but:\n\n- A **class** (`.x`) is **reusable** — many elements can share it, and one element can have several classes. This is what you almost always use for styling.\n- An **ID** (`#x`) must be **unique** — only one element per page. IDs are better as fragment targets (`#section`) or JS hooks.\n- **Specificity** differs: an ID is far more specific than a class, so prefer classes for styling to keep specificity low and overridable.",
+          "bodyTr": "**CSS selector'ları**, *bir kuralın hangi elemanlara uygulanacağına* karar veren desenlerdir. Yaygın aileler:\n\n- **Type/eleman** — `p`, `h1` (etikete göre).\n- **Class** — `.btn` (`class=\"btn\"` ile eşleşir).\n- **ID** — `#header` (`id=\"header\"` ile eşleşir).\n- **Attribute** — `[type=\"email\"]`.\n- **Pseudo-class** — `:hover`, `:focus`, `:nth-child(2)` (durum/konum).\n- **Pseudo-element** — `::before`, `::first-line`.\n- **Combinator'lar** — descendant (`a b`), child (`a > b`), bitişik kardeş (`a + b`), genel kardeş (`a ~ b`) ve gruplama (`a, b`).\n\n**Class'lar vs ID'ler** — ikisi de elemanları stil/script için etiketler ama:\n\n- Bir **class** (`.x`) **tekrar kullanılabilir** — birçok eleman onu paylaşabilir ve bir eleman birden çok class'a sahip olabilir. Stilleme için neredeyse her zaman bunu kullanırsın.\n- Bir **ID** (`#x`) **benzersiz** olmalı — sayfa başına yalnızca bir eleman. ID'ler fragment hedefi (`#section`) ya da JS kancası olarak daha iyidir.\n- **Specificity** farklıdır: bir ID, bir class'tan çok daha specific'tir, bu yüzden specificity'yi düşük ve override edilebilir tutmak için stillemede class'ları tercih et."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What is the key practical difference between a class and an ID?",
+          "promptTr": "Bir class ile bir ID arasındaki temel pratik fark nedir?",
+          "options": [
+            {
+              "text": "A class is reusable across many elements; an ID must be unique to one element per page",
+              "textTr": "Bir class birçok elemanda tekrar kullanılabilir; bir ID sayfa başına tek bir elemana özgü olmalı",
+              "correct": true
+            },
+            {
+              "text": "Classes can't be styled; only IDs can",
+              "textTr": "Class'lar stillenemez; yalnızca ID'ler stillenebilir"
+            },
+            {
+              "text": "IDs can appear many times; classes only once",
+              "textTr": "ID'ler birçok kez görünebilir; class'lar yalnızca bir kez"
+            },
+            {
+              "text": "They are completely interchangeable",
+              "textTr": "Tamamen birbirinin yerine geçer"
+            }
+          ],
+          "explanation": "Classes are reusable (and stackable on one element); IDs must be unique per page and carry much higher specificity, so classes are preferred for styling.",
+          "explanationTr": "Class'lar tekrar kullanılabilir (ve bir elemanda üst üste binebilir); ID'ler sayfa başına benzersiz olmalı ve çok daha yüksek specificity taşır, bu yüzden stillemede class'lar tercih edilir."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Write a selector that matches elements with class \"card\"",
+          "promptTr": "\"card\" class'lı elemanları eşleştiren bir selector yaz",
+          "code": "___card { padding: 1rem; }",
+          "answers": [
+            "."
+          ],
+          "distractors": [
+            "#",
+            "@",
+            "&"
+          ],
+          "explanation": "A leading dot selects by class (.card). A # selects by id, and @ begins at-rules like @media.",
+          "explanationTr": "Baştaki nokta class'a göre seçer (.card). # id'ye göre seçer ve @, @media gibi at-rule'ları başlatır."
+        },
+        {
+          "type": "challenge",
+          "question": "What are CSS selectors? Name some."
+        },
+        {
+          "type": "challenge",
+          "question": "What is the difference between classes and IDs in CSS?"
+        }
+      ]
+    },
+    {
+      "slug": "specificity-and-pseudo-elements",
+      "title": "Specificity & pseudo-elements",
+      "titleTr": "Specificity ve pseudo-element'ler",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Which rule wins, and styling sub-parts",
+          "titleTr": "Hangi kural kazanır ve alt-parçaları stillemek",
+          "body": "**Specificity** is how the cascade breaks ties when multiple rules set the same property on an element. It's scored as a tuple **(inline, IDs, classes/attributes/pseudo-classes, elements/pseudo-elements)**, compared left to right:\n\n- Inline `style=\"\"` → highest.\n- Each **ID** (`#id`) → next.\n- Each **class, attribute, or pseudo-class** (`.c`, `[attr]`, `:hover`) → next.\n- Each **element or pseudo-element** (`div`, `::before`) → lowest.\n\nSo `#nav .link` (1 ID + 1 class) beats `.menu .link a` (2 classes + 1 element). **Ties** are broken by **source order** (last wins). `!important` overrides normal specificity (use sparingly). The takeaway: keep selectors **low and flat** (favour classes) so styles stay easy to override.\n\n**Pseudo-elements** (`::before`, `::after`, `::first-line`, `::first-letter`, `::placeholder`, `::selection`) let you style a **specific part of an element, or inject generated content**, without extra markup. `::before`/`::after` create a child box (need `content`) — used for icons, decorative shapes, clearfix, tooltips. They use **double colons** (`::`) to distinguish them from pseudo-classes (single `:`), which target a **state** rather than a sub-part.",
+          "bodyTr": "**Specificity**, birden çok kural bir elemanda aynı property'yi ayarladığında cascade'in beraberliği nasıl bozduğudur. Soldan sağa karşılaştırılan bir tuple olarak puanlanır: **(inline, ID'ler, class/attribute/pseudo-class, eleman/pseudo-element)**:\n\n- Inline `style=\"\"` → en yüksek.\n- Her **ID** (`#id`) → sonraki.\n- Her **class, attribute ya da pseudo-class** (`.c`, `[attr]`, `:hover`) → sonraki.\n- Her **eleman ya da pseudo-element** (`div`, `::before`) → en düşük.\n\nYani `#nav .link` (1 ID + 1 class), `.menu .link a`'yı (2 class + 1 eleman) yener. **Beraberlikler** **kaynak sırasıyla** bozulur (son kazanır). `!important` normal specificity'yi geçersiz kılar (az kullan). Sonuç: selector'ları **düşük ve düz** tut (class'ları tercih et) ki stiller override etmesi kolay kalsın.\n\n**Pseudo-element'ler** (`::before`, `::after`, `::first-line`, `::first-letter`, `::placeholder`, `::selection`), ekstra markup olmadan bir elemanın **belirli bir parçasını stillemeni ya da üretilmiş içerik enjekte etmeni** sağlar. `::before`/`::after` bir child kutu oluşturur (`content` gerekir) — ikonlar, dekoratif şekiller, clearfix, tooltip'ler için kullanılır. Bunları, bir **alt-parça** yerine bir **duruma** hedeflenen pseudo-class'lardan (tek `:`) ayırmak için **çift iki nokta** (`::`) kullanırlar."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Which selector has higher specificity: #nav .link or .menu .link a?",
+          "promptTr": "Hangi selector daha yüksek specificity'ye sahip: #nav .link mı .menu .link a mı?",
+          "options": [
+            {
+              "text": "#nav .link — an ID outweighs any number of classes/elements",
+              "textTr": "#nav .link — bir ID, herhangi sayıda class/eleman'dan ağır basar",
+              "correct": true
+            },
+            {
+              "text": ".menu .link a — it has more parts",
+              "textTr": ".menu .link a — daha fazla parçası var"
+            },
+            {
+              "text": "They are equal",
+              "textTr": "Eşitler"
+            },
+            {
+              "text": "Whichever is written first wins",
+              "textTr": "Önce yazılan kazanır"
+            }
+          ],
+          "explanation": "Specificity compares ID count first: #nav .link is (0,1,1,0) vs .menu .link a at (0,0,2,1). One ID beats two classes, so #nav .link wins.",
+          "explanationTr": "Specificity önce ID sayısını karşılaştırır: #nav .link (0,1,1,0) vs .menu .link a (0,0,2,1). Bir ID iki class'ı yener, bu yüzden #nav .link kazanır."
+        },
+        {
+          "type": "true_false",
+          "statement": "Pseudo-elements like ::before let you style a part of an element or inject content without adding markup.",
+          "statementTr": "::before gibi pseudo-element'ler, markup eklemeden bir elemanın bir parçasını stillemeni ya da içerik enjekte etmeni sağlar.",
+          "answer": true,
+          "explanation": "::before/::after (with a content value) and ::first-line/::first-letter style sub-parts or generated content — no extra HTML needed.",
+          "explanationTr": "::before/::after (bir content değeriyle) ve ::first-line/::first-letter alt-parçaları ya da üretilmiş içeriği stiller — ekstra HTML gerekmez."
+        },
+        {
+          "type": "challenge",
+          "question": "Explain the basic rules of CSS Specificity."
+        },
+        {
+          "type": "challenge",
+          "question": "Describe pseudo-elements and discuss what they are used for."
+        }
+      ]
+    }
+  ]
+}

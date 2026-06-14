@@ -1,0 +1,106 @@
+{
+  "topic": "html5",
+  "slug": "media-graphics",
+  "title": "Media, Graphics & Embedding",
+  "titleTr": "Medya, Grafik ve Gömme",
+  "section": "advanced",
+  "position": 7,
+  "lessons": [
+    {
+      "slug": "responsive-images",
+      "title": "Responsive images: alt, srcset & WebP",
+      "titleTr": "Responsive görseller: alt, srcset ve WebP",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Accessible, right-sized, well-compressed images",
+          "titleTr": "Erişilebilir, doğru boyutlu, iyi sıkıştırılmış görseller",
+          "body": "**The `alt` attribute** gives an image a **text alternative**. It's read by **screen readers** (so blind users know what the image conveys), shown when the image **fails to load**, and used by search engines. Write `alt` to describe the image's *purpose* in context. For purely **decorative** images, use an **empty** `alt=\"\"` so assistive tech skips it (omitting `alt` entirely is worse — the screen reader may read the filename).\n\n**`srcset`** lets you offer the browser **multiple resolutions** of an image so it can pick the best for the device. With width descriptors plus `sizes`:\n\n```html\n<img src=\"img-800.jpg\"\n     srcset=\"img-400.jpg 400w, img-800.jpg 800w, img-1600.jpg 1600w\"\n     sizes=\"(max-width: 600px) 100vw, 50vw\" alt=\"…\">\n```\n\n**How the browser evaluates it:** it reads `sizes` to work out the image's **rendered width** for the current viewport, multiplies by the **device pixel ratio** (retina = 2×) to get the needed pixel width, then picks the **smallest `srcset` candidate that meets or exceeds** it. So a phone downloads a small file and a 4K display a large one — saving bandwidth without sacrificing sharpness. (The browser may also factor in network conditions.)\n\n**WebP** is a modern **image format** by Google offering **better compression** than JPEG/PNG at similar quality, with support for transparency and animation. Smaller files = faster loads. Serve it with a fallback (via `<picture>` or content negotiation) for any old browser that lacks support, though support is now near-universal.",
+          "bodyTr": "**`alt` attribute'u** bir görsele **metin alternatifi** verir. **Ekran okuyucular** tarafından okunur (kör kullanıcılar görselin ne ilettiğini bilsin), görsel **yüklenemediğinde** gösterilir ve arama motorlarınca kullanılır. `alt`'ı, görselin bağlamdaki *amacını* tanımlayacak şekilde yaz. Salt **dekoratif** görseller için **boş** `alt=\"\"` kullan ki yardımcı teknoloji onu atlasın (`alt`'ı tamamen atlamak daha kötüdür — ekran okuyucu dosya adını okuyabilir).\n\n**`srcset`**, tarayıcıya bir görselin **birden çok çözünürlüğünü** sunmanı sağlar; böylece cihaz için en iyisini seçebilir. Genişlik tanımlayıcıları artı `sizes` ile:\n\n```html\n<img src=\"img-800.jpg\"\n     srcset=\"img-400.jpg 400w, img-800.jpg 800w, img-1600.jpg 1600w\"\n     sizes=\"(max-width: 600px) 100vw, 50vw\" alt=\"…\">\n```\n\n**Tarayıcı bunu nasıl değerlendirir:** `sizes`'ı okuyup mevcut viewport için görselin **render edilmiş genişliğini** hesaplar, gereken piksel genişliğini bulmak için **device pixel ratio** ile çarpar (retina = 2×), sonra onu **karşılayan ya da aşan en küçük `srcset` adayını** seçer. Yani bir telefon küçük bir dosya, bir 4K ekran büyük bir dosya indirir — keskinlikten ödün vermeden bant genişliği kazanır. (Tarayıcı ağ koşullarını da hesaba katabilir.)\n\n**WebP**, Google'ın benzer kalitede JPEG/PNG'den **daha iyi sıkıştırma** sunan, şeffaflık ve animasyon destekli modern bir **görsel formatıdır**. Daha küçük dosyalar = daha hızlı yükleme. Destek artık neredeyse evrensel olsa da, desteklemeyen eski tarayıcılar için bir fallback ile sun (`<picture>` ya da içerik müzakeresiyle)."
+        },
+        {
+          "type": "mcq",
+          "prompt": "When the browser evaluates srcset, what does it use to choose a candidate?",
+          "promptTr": "Tarayıcı srcset'i değerlendirirken bir adayı seçmek için neyi kullanır?",
+          "options": [
+            { "text": "The rendered width (from sizes) × device pixel ratio, then the smallest candidate that meets it", "textTr": "Render edilmiş genişlik (sizes'tan) × device pixel ratio, sonra onu karşılayan en küçük aday", "correct": true },
+            { "text": "Always the largest image in the list", "textTr": "Her zaman listedeki en büyük görsel" },
+            { "text": "The alphabetical order of filenames", "textTr": "Dosya adlarının alfabetik sırası" },
+            { "text": "Whichever appears first in src", "textTr": "src'de ilk görünen hangisiyse" }
+          ],
+          "explanation": "The browser computes the needed pixel width from sizes and DPR, then picks the smallest srcset candidate that satisfies it — saving bandwidth on small/low-DPR screens.",
+          "explanationTr": "Tarayıcı gereken piksel genişliğini sizes ve DPR'den hesaplar, sonra onu karşılayan en küçük srcset adayını seçer — küçük/düşük-DPR ekranlarda bant genişliği kazanır."
+        },
+        {
+          "type": "true_false",
+          "statement": "A purely decorative image should have alt=\"\" so screen readers skip it.",
+          "statementTr": "Salt dekoratif bir görselin alt=\"\" olmalı ki ekran okuyucular onu atlasın.",
+          "answer": true,
+          "explanation": "Empty alt marks the image as decorative so assistive tech ignores it. Omitting alt entirely is worse — some screen readers fall back to reading the filename.",
+          "explanationTr": "Boş alt görseli dekoratif olarak işaretler, böylece yardımcı teknoloji onu yok sayar. alt'ı tamamen atlamak daha kötüdür — bazı ekran okuyucular dosya adını okumaya geri döner."
+        },
+        {
+          "type": "challenge",
+          "question": "What is the purpose of the alt attribute on images?"
+        },
+        {
+          "type": "challenge",
+          "question": "Why would you use a srcset attribute in an image tag? Explain the process the browser uses when evaluating the content of this attribute."
+        },
+        {
+          "type": "challenge",
+          "question": "What is WebP?"
+        }
+      ]
+    },
+    {
+      "slug": "graphics-iframes-keygen",
+      "title": "SVG vs Canvas, iframes & keygen",
+      "titleTr": "SVG vs Canvas, iframe'ler ve keygen",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Vector vs raster, embedding, and a deprecated tag",
+          "titleTr": "Vektör vs raster, gömme ve kullanımdan kaldırılmış bir etiket",
+          "body": "**SVG vs Canvas** — two ways to draw graphics, chosen by the job:\n\n- **SVG** is **vector** and **retained-mode**: shapes are DOM elements, so they **scale crisply** at any size, are **stylable with CSS**, **scriptable/accessible** (each element can have events, ARIA), and stay sharp on retina. Best for **icons, logos, charts, diagrams** — relatively few, interactive, resolution-independent shapes.\n- **Canvas** is **raster** and **immediate-mode**: you draw pixels via a JS API onto a bitmap; there are no retained objects, so it's great for **many fast-changing pixels** — games, image manipulation, particle effects, real-time visualisations. But it doesn't scale without blurring and isn't inherently accessible.\n\nRule of thumb: **few, scalable, interactive shapes → SVG; many pixels / high-frequency drawing → Canvas.**\n\n**`<iframe>`** embeds **another HTML document** inside the current page (`<iframe src=\"…\">`) — used for maps, videos, ads, payment widgets, sandboxed third-party content. It has its own browsing context; secure it with the `sandbox` attribute and `allow`/CSP, since embedding foreign content carries clickjacking and security risks.\n\n**Generating a public key in HTML:** historically the `<keygen>` element could generate a key pair on form submit. It's **deprecated and removed** from the spec and browsers — so the practical answer is **no, not anymore**; use the **Web Crypto API** (`crypto.subtle.generateKey`) in JavaScript instead.",
+          "bodyTr": "**SVG vs Canvas** — işe göre seçilen iki grafik çizme yolu:\n\n- **SVG** **vektör** ve **retained-mode**'dur: şekiller DOM elemanlarıdır, bu yüzden her boyutta **net ölçeklenir**, **CSS ile stillenebilir**, **script'lenebilir/erişilebilir** (her eleman event, ARIA alabilir) ve retina'da keskin kalır. **İkon, logo, grafik, diyagram** için en iyisi — görece az, etkileşimli, çözünürlükten bağımsız şekiller.\n- **Canvas** **raster** ve **immediate-mode**'dur: bir JS API'siyle bir bitmap'e piksel çizersin; tutulan nesne yok, bu yüzden **çok sayıda hızlı değişen piksel** için harikadır — oyunlar, görüntü işleme, parçacık efektleri, gerçek zamanlı görselleştirmeler. Ama bulanıklaşmadan ölçeklenmez ve doğası gereği erişilebilir değildir.\n\nKural: **az, ölçeklenebilir, etkileşimli şekil → SVG; çok piksel / yüksek frekanslı çizim → Canvas.**\n\n**`<iframe>`** mevcut sayfanın içine **başka bir HTML belgesi** gömer (`<iframe src=\"…\">`) — harita, video, reklam, ödeme widget'ı, sandbox'lı üçüncü taraf içerik için kullanılır. Kendi tarama bağlamı vardır; yabancı içerik gömmek clickjacking ve güvenlik riski taşıdığından onu `sandbox` attribute'u ve `allow`/CSP ile güvene al.\n\n**HTML'de public key üretmek:** tarihsel olarak `<keygen>` elemanı form gönderiminde bir anahtar çifti üretebiliyordu. Spec'ten ve tarayıcılardan **kullanımdan kaldırıldı ve çıkarıldı** — bu yüzden pratik cevap **hayır, artık değil**; yerine JavaScript'te **Web Crypto API**'sini (`crypto.subtle.generateKey`) kullan."
+        },
+        {
+          "type": "mcq",
+          "prompt": "You're building an interactive line chart with a handful of stylable, scalable shapes. SVG or Canvas?",
+          "promptTr": "Birkaç stillenebilir, ölçeklenebilir şekille etkileşimli bir çizgi grafiği yapıyorsun. SVG mi Canvas mı?",
+          "options": [
+            { "text": "SVG — vector, scalable, CSS-stylable and accessible per element", "textTr": "SVG — vektör, ölçeklenebilir, CSS ile stillenebilir ve eleman başına erişilebilir", "correct": true },
+            { "text": "Canvas — best for a few interactive vector shapes", "textTr": "Canvas — birkaç etkileşimli vektör şekli için en iyisi" },
+            { "text": "Neither can draw charts", "textTr": "İkisi de grafik çizemez" },
+            { "text": "Always Canvas regardless of the use case", "textTr": "Kullanım durumundan bağımsız her zaman Canvas" }
+          ],
+          "explanation": "Few, scalable, interactive, accessible shapes favour SVG. Canvas wins when you're pushing thousands of fast-changing pixels (games, real-time viz).",
+          "explanationTr": "Az, ölçeklenebilir, etkileşimli, erişilebilir şekiller SVG'yi tercih eder. Binlerce hızlı değişen piksel ittiğinde (oyunlar, gerçek zamanlı görselleştirme) Canvas kazanır."
+        },
+        {
+          "type": "true_false",
+          "statement": "The <keygen> element is the recommended modern way to generate a public key in HTML.",
+          "statementTr": "<keygen> elemanı, HTML'de public key üretmenin önerilen modern yoludur.",
+          "answer": false,
+          "explanation": "<keygen> is deprecated and removed. Generate keys in JavaScript with the Web Crypto API (crypto.subtle.generateKey) instead.",
+          "explanationTr": "<keygen> kullanımdan kaldırıldı ve çıkarıldı. Bunun yerine anahtarları JavaScript'te Web Crypto API ile (crypto.subtle.generateKey) üret."
+        },
+        {
+          "type": "challenge",
+          "question": "How would you select SVG or Canvas for your site?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is an iframe and how does it work?"
+        },
+        {
+          "type": "challenge",
+          "question": "Could you generate a public key in HTML?"
+        }
+      ]
+    }
+  ]
+}

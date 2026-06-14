@@ -1,0 +1,150 @@
+{
+  "topic": "html5",
+  "slug": "tooling-a11y-advanced",
+  "title": "Tooling, Accessibility & Advanced",
+  "titleTr": "Araçlar, Erişilebilirlik ve İleri Konular",
+  "section": "interview",
+  "position": 8,
+  "lessons": [
+    {
+      "slug": "templating-and-preprocessors",
+      "title": "Templating languages & HTML preprocessors",
+      "titleTr": "Templating dilleri ve HTML preprocessor'ları",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Generating HTML instead of hand-writing it",
+          "titleTr": "HTML'i elle yazmak yerine üretmek",
+          "body": "Hand-writing every page of HTML doesn't scale, so we generate it.\n\n**HTML templating languages** let you mix markup with **data and logic** — variables, loops, conditionals, partials/includes — then render final HTML. Server-side examples: **Handlebars, EJS, Pug, Nunjucks, Liquid, Jinja, ERB**. Modern component frameworks (React **JSX**, Vue **SFC templates**, Svelte) play the same role on the client/build side. The win: **reuse** (a `card` partial used everywhere), **separation** of data from markup, and avoiding copy-paste drift.\n\n**An HTML preprocessor** is a tool that takes a more concise or powerful **source syntax** and **compiles it to plain HTML**. The classic example is **Pug** (formerly Jade): indentation-based, no closing tags, with variables, mixins, and loops:\n\n```pug\nul\n  each item in items\n    li= item.name\n```\n\n…compiles to a normal `<ul><li>…</li></ul>`. Preprocessors reduce boilerplate and add programmability, at the cost of a **build step** and a syntax the whole team must learn. (\"Have you used one?\" is really asking whether you've worked with Pug/Haml/Slim or a templating engine, and can speak to the trade-offs.)",
+          "bodyTr": "HTML'in her sayfasını elle yazmak ölçeklenmez, bu yüzden onu üretiriz.\n\n**HTML templating dilleri** markup'ı **veri ve mantıkla** karıştırmanı sağlar — değişkenler, döngüler, koşullar, partial/include'lar — sonra son HTML'i render eder. Sunucu tarafı örnekleri: **Handlebars, EJS, Pug, Nunjucks, Liquid, Jinja, ERB**. Modern bileşen framework'leri (React **JSX**, Vue **SFC template'leri**, Svelte) istemci/build tarafında aynı rolü oynar. Kazanç: **tekrar kullanım** (her yerde kullanılan bir `card` partial'ı), veriyi markup'tan **ayırma** ve kopyala-yapıştır kaymasından kaçınma.\n\n**Bir HTML preprocessor**, daha kısa ya da güçlü bir **kaynak söz dizimi** alıp onu **düz HTML'e derleyen** bir araçtır. Klasik örnek **Pug**'dır (eski adı Jade): girinti tabanlı, kapanış etiketi yok, değişkenler, mixin'ler ve döngülerle:\n\n```pug\nul\n  each item in items\n    li= item.name\n```\n\n…normal bir `<ul><li>…</li></ul>`'a derlenir. Preprocessor'lar boilerplate'i azaltır ve programlanabilirlik ekler; bir **build adımı** ve tüm ekibin öğrenmesi gereken bir söz dizimi pahasına. (\"Kullandın mı?\" aslında Pug/Haml/Slim ya da bir templating motoruyla çalışıp çalışmadığını ve ödünleri konuşabilip konuşamadığını sorar.)"
+        },
+        {
+          "type": "mcq",
+          "prompt": "What does an HTML preprocessor like Pug do?",
+          "promptTr": "Pug gibi bir HTML preprocessor ne yapar?",
+          "options": [
+            { "text": "Compiles a more concise source syntax (with variables, loops) into plain HTML at build time", "textTr": "Daha kısa bir kaynak söz dizimini (değişkenler, döngülerle) build zamanında düz HTML'e derler", "correct": true },
+            { "text": "Runs HTML faster in the browser at runtime", "textTr": "HTML'i tarayıcıda çalışma zamanında daha hızlı çalıştırır" },
+            { "text": "Encrypts the HTML for security", "textTr": "Güvenlik için HTML'i şifreler" },
+            { "text": "Replaces the need for a server", "textTr": "Sunucu ihtiyacını ortadan kaldırır" }
+          ],
+          "explanation": "A preprocessor compiles its own concise syntax into standard HTML during a build step, adding variables/loops/mixins and reducing boilerplate.",
+          "explanationTr": "Bir preprocessor kendi kısa söz dizimini bir build adımında standart HTML'e derler, değişken/döngü/mixin ekler ve boilerplate'i azaltır."
+        },
+        {
+          "type": "true_false",
+          "statement": "Templating languages help by enabling reuse (partials) and separating data from markup.",
+          "statementTr": "Templating dilleri tekrar kullanımı (partial'lar) mümkün kılarak ve veriyi markup'tan ayırarak yardımcı olur.",
+          "answer": true,
+          "explanation": "Variables, loops, conditionals, and includes let you compose pages from reusable pieces and inject data, avoiding copy-paste duplication.",
+          "explanationTr": "Değişkenler, döngüler, koşullar ve include'lar sayfaları tekrar kullanılabilir parçalardan oluşturmana ve veri enjekte etmene izin verir, kopyala-yapıştır tekrarından kaçınır."
+        },
+        {
+          "type": "challenge",
+          "question": "Have you used different HTML templating languages before?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is an HTML preprocessor and have you used one?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is an HTML preprocessor and are you using it?"
+        }
+      ]
+    },
+    {
+      "slug": "xhtml-and-i18n",
+      "title": "XHTML & internationalisation",
+      "titleTr": "XHTML ve uluslararasılaştırma",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Stricter syntax, and serving many languages",
+          "titleTr": "Daha katı söz dizimi ve çok dil sunmak",
+          "body": "**XHTML vs HTML:** XHTML is HTML reformulated as **strict XML**, so its rules are far less forgiving:\n\n- All tags must be **properly closed** (including void elements: `<br />`), **lowercase**, and **correctly nested**.\n- Every attribute needs a **quoted value** (no `<input disabled>`; use `disabled=\"disabled\"`).\n- Documents must be **well-formed** — a single syntax error makes the parser **fail hard** (a \"yellow screen of death\" in XML mode), whereas HTML's parser is lenient and recovers from mistakes.\n\nHTML5 brought back a forgiving HTML syntax as the default; XHTML survives mainly where XML tooling is involved.\n\n**Serving content in multiple languages (i18n):**\n\n- Declare each page's language with **`<html lang=\"…\">`** (and `dir` for RTL); mark in-page language switches with `lang` on the element.\n- Tell search engines about translations with **`hreflang`** link tags / sitemap entries, and give each locale a stable URL (subpath `/fr/`, subdomain, or domain).\n- Negotiate the user's language via the **`Accept-Language`** header and/or an explicit switcher, and store the choice.\n\n**Things to be wary of in multilingual development:** text **expansion/contraction** (German is long, CJK is compact — don't hard-code widths); **RTL** layout and mirroring; **date/number/currency** formatting per locale (use `Intl`); **pluralization** rules that differ by language; **encoding** (UTF-8 everywhere); never **concatenate translated fragments** (word order differs — translate whole sentences); and keeping copy out of images so it can be translated.",
+          "bodyTr": "**XHTML vs HTML:** XHTML, **katı XML** olarak yeniden formüle edilmiş HTML'dir, bu yüzden kuralları çok daha az affedicidir:\n\n- Tüm etiketler **düzgün kapatılmalı** (void elemanlar dahil: `<br />`), **küçük harf** ve **doğru iç içe** olmalı.\n- Her attribute **tırnaklı bir değer** ister (`<input disabled>` yok; `disabled=\"disabled\"` kullan).\n- Belgeler **well-formed** olmalı — tek bir söz dizimi hatası parser'ın **sert biçimde başarısız olmasına** neden olur (XML modunda \"sarı ölüm ekranı\"), oysa HTML'in parser'ı hoşgörülüdür ve hatalardan kurtulur.\n\nHTML5 varsayılan olarak hoşgörülü bir HTML söz dizimini geri getirdi; XHTML çoğunlukla XML araçlarının devrede olduğu yerlerde yaşar.\n\n**İçeriği çok dilde sunmak (i18n):**\n\n- Her sayfanın dilini **`<html lang=\"…\">`** ile bildir (ve RTL için `dir`); sayfa içi dil değişimlerini elemandaki `lang` ile işaretle.\n- Arama motorlarına çevirileri **`hreflang`** link etiketleri / sitemap girdileriyle bildir ve her dile kararlı bir URL ver (alt yol `/fr/`, alt alan adı ya da alan adı).\n- Kullanıcının dilini **`Accept-Language`** başlığı ve/veya açık bir seçiciyle müzakere et ve seçimi sakla.\n\n**Çok dilli geliştirmede dikkat edilecekler:** metin **genişlemesi/daralması** (Almanca uzun, CJK kompakt — genişlikleri hard-code etme); **RTL** layout ve aynalama; dile göre **tarih/sayı/para birimi** biçimlendirme (`Intl` kullan); dile göre değişen **çoğullaştırma** kuralları; **kodlama** (her yerde UTF-8); **çevrilmiş parçaları asla birleştirme** (kelime sırası farklı — tüm cümleleri çevir); ve metni görsellerin dışında tutmak ki çevrilebilsin."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Which is a difference XHTML has compared to HTML?",
+          "promptTr": "XHTML'in HTML'e kıyasla bir farkı hangisidir?",
+          "options": [
+            { "text": "It's XML-strict: all tags must be closed, lowercase, well-formed, with quoted attribute values", "textTr": "XML-katıdır: tüm etiketler kapatılmalı, küçük harf, well-formed, tırnaklı attribute değerleriyle", "correct": true },
+            { "text": "It allows any tag to be left unclosed", "textTr": "Herhangi bir etiketin kapatılmadan bırakılmasına izin verir" },
+            { "text": "It removes the need for a doctype", "textTr": "Doctype ihtiyacını ortadan kaldırır" },
+            { "text": "It cannot include JavaScript", "textTr": "JavaScript içeremez" }
+          ],
+          "explanation": "XHTML follows XML rules — proper closing, lowercase tags, quoted attributes, strict well-formedness — and fails hard on errors, unlike HTML's lenient parser.",
+          "explanationTr": "XHTML, XML kurallarını izler — düzgün kapatma, küçük harf etiketler, tırnaklı attribute'lar, katı well-formedness — ve HTML'in hoşgörülü parser'ının aksine hatalarda sert biçimde başarısız olur."
+        },
+        {
+          "type": "true_false",
+          "statement": "When localising, you should translate whole sentences rather than concatenating translated word fragments.",
+          "statementTr": "Yerelleştirirken, çevrilmiş kelime parçalarını birleştirmek yerine tüm cümleleri çevirmelisin.",
+          "answer": true,
+          "explanation": "Word order, grammar, and pluralization vary by language, so stitching fragments produces broken sentences. Translate complete strings (with placeholders for variables).",
+          "explanationTr": "Kelime sırası, dilbilgisi ve çoğullaştırma dile göre değişir, bu yüzden parçaları birleştirmek bozuk cümleler üretir. Tam string'leri çevir (değişkenler için placeholder'larla)."
+        },
+        {
+          "type": "challenge",
+          "question": "What are some differences that XHTML has compared to HTML?"
+        },
+        {
+          "type": "challenge",
+          "question": "How do you serve a page with content in multiple languages?"
+        },
+        {
+          "type": "challenge",
+          "question": "What kind of things must you be wary of when designing or developing for multilingual sites?"
+        }
+      ]
+    },
+    {
+      "slug": "accessibility-and-landmarks",
+      "title": "Accessibility, ARIA & the main element",
+      "titleTr": "Erişilebilirlik, ARIA ve main elemanı",
+      "position": 3,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Making the web usable for everyone",
+          "titleTr": "Web'i herkes için kullanılabilir kılmak",
+          "body": "**Accessibility (a11y)** means building so that people with disabilities — visual, motor, auditory, cognitive — can perceive, navigate, and use a site, typically guided by the **WCAG** standard. The biggest lever is **semantic HTML**: real `<button>`, `<a>`, headings, labels, and landmarks give assistive tech meaning for free.\n\n**ARIA (Accessible Rich Internet Applications)** is a set of attributes that fill the gaps where native HTML can't express something — mainly for custom widgets. The pieces:\n\n- **`role`** — tells assistive tech *what an element is* when the tag alone doesn't (`role=\"dialog\"`, `role=\"tablist\"`). A **role** conveys the widget's type so a screen reader announces it correctly.\n- **States/properties** — `aria-expanded`, `aria-checked`, `aria-label`, `aria-describedby`, `aria-live` (announce dynamic updates).\n\n**First rule of ARIA: don't use ARIA if a native element does the job** — `<button>` beats `<div role=\"button\">`. ARIA adds semantics but no behaviour; you still wire up keyboard and focus yourself.\n\n**The `<main>` element** marks the **primary, unique content** of the page — what's left after removing the header, nav, sidebar, and footer. There should be **one** `<main>` per page. It's a **landmark**: screen-reader users can jump straight to it, and a **\"skip to main content\"** link targets it — a key accessibility pattern that saves keyboard users from tabbing through the nav on every page.",
+          "bodyTr": "**Erişilebilirlik (a11y)**, engelli insanların — görsel, motor, işitsel, bilişsel — bir siteyi algılayabilmesi, gezinebilmesi ve kullanabilmesi için, genelde **WCAG** standardı rehberliğinde inşa etmek demektir. En büyük kaldıraç **semantik HTML**'dir: gerçek `<button>`, `<a>`, başlıklar, etiketler ve landmark'lar yardımcı teknolojiye bedavaya anlam verir.\n\n**ARIA (Accessible Rich Internet Applications)**, native HTML'in bir şeyi ifade edemediği boşlukları dolduran bir attribute kümesidir — çoğunlukla özel widget'lar için. Parçalar:\n\n- **`role`** — etiketin tek başına söylemediğinde yardımcı teknolojiye *bir elemanın ne olduğunu* söyler (`role=\"dialog\"`, `role=\"tablist\"`). Bir **role**, widget'ın türünü iletir ki ekran okuyucu onu doğru anonslasın.\n- **State'ler/property'ler** — `aria-expanded`, `aria-checked`, `aria-label`, `aria-describedby`, `aria-live` (dinamik güncellemeleri anonsla).\n\n**ARIA'nın ilk kuralı: native bir eleman işi yapıyorsa ARIA kullanma** — `<button>`, `<div role=\"button\">`'ı yener. ARIA semantik ekler ama davranış eklemez; klavye ve focus'u yine kendin bağlarsın.\n\n**`<main>` elemanı** sayfanın **birincil, benzersiz içeriğini** işaretler — header, nav, sidebar ve footer çıkarıldıktan sonra kalan. Sayfa başına **bir** `<main>` olmalı. Bir **landmark**'tır: ekran okuyucu kullanıcıları doğrudan ona atlayabilir ve bir **\"ana içeriğe atla\"** linki onu hedefler — klavye kullanıcılarını her sayfada nav'da tab'lamaktan kurtaran önemli bir erişilebilirlik desenidir."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What does an ARIA role do, and when should you use one?",
+          "promptTr": "Bir ARIA role ne yapar ve ne zaman kullanmalısın?",
+          "options": [
+            { "text": "It tells assistive tech what an element is — use it only when no native element conveys that meaning", "textTr": "Yardımcı teknolojiye bir elemanın ne olduğunu söyler — yalnızca hiçbir native eleman o anlamı taşımadığında kullan", "correct": true },
+            { "text": "It styles the element visually", "textTr": "Elemanı görsel olarak stiller" },
+            { "text": "It adds keyboard behaviour automatically", "textTr": "Otomatik olarak klavye davranışı ekler" },
+            { "text": "It should replace native elements like <button>", "textTr": "<button> gibi native elemanların yerine geçmeli" }
+          ],
+          "explanation": "role communicates an element's type to assistive tech. First rule of ARIA: prefer a native element; ARIA adds semantics but no behaviour, so you still handle keyboard/focus.",
+          "explanationTr": "role, bir elemanın türünü yardımcı teknolojiye iletir. ARIA'nın ilk kuralı: native elemanı tercih et; ARIA semantik ekler ama davranış eklemez, bu yüzden klavye/focus'u yine sen halledersin."
+        },
+        {
+          "type": "true_false",
+          "statement": "A page should have a single <main> element marking its primary content, and it serves as a skip-link target.",
+          "statementTr": "Bir sayfada birincil içeriğini işaretleyen tek bir <main> elemanı olmalı ve bu, skip-link hedefi olarak hizmet eder.",
+          "answer": true,
+          "explanation": "<main> is a unique landmark for the page's core content; assistive tech and 'skip to content' links jump to it, bypassing repeated nav.",
+          "explanationTr": "<main>, sayfanın ana içeriği için benzersiz bir landmark'tır; yardımcı teknoloji ve 'içeriğe atla' linkleri tekrarlanan nav'ı atlayarak ona gider."
+        },
+        {
+          "type": "challenge",
+          "question": "What is accessibility & ARIA role means in a web application?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is the purpose of the <main> element?"
+        }
+      ]
+    }
+  ]
+}
