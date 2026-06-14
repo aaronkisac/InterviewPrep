@@ -1,0 +1,154 @@
+{
+  "topic": "git",
+  "slug": "workflows-advanced",
+  "title": "Workflows & Advanced",
+  "titleTr": "İş Akışları ve İleri Konular",
+  "section": "advanced",
+  "position": 4,
+  "lessons": [
+    {
+      "slug": "git-workflows",
+      "title": "Git workflows: Centralized, Forking & Gitflow",
+      "titleTr": "Git iş akışları: Centralized, Forking ve Gitflow",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Conventions for collaborating",
+          "titleTr": "İşbirliği için konvansiyonlar",
+          "body": "Git doesn't mandate a process; teams pick a **workflow** convention.\n\n**Centralized Workflow** — everyone works off a **single shared branch** (usually `main`) on one central repo, like SVN but with Git. You commit locally, pull others' changes, and push back to the shared branch (rebasing to stay linear). Simple, good for small teams, but a single line of development can get crowded and conflict-prone.\n\n**Forking Workflow** — each contributor has their **own server-side fork**; they push to *their* fork and open PRs to the canonical repo. **Advantages:** no one needs write access to the main repo (ideal for **open source** and large/untrusted contributor pools); maintainers review every PR before merging; the official repo stays clean and protected. The cost is a bit more ceremony (fork + remotes).\n\n**Gitflow** — a **branching model** with defined long-lived and supporting branches: **`main`** (production-ready, tagged releases), **`develop`** (integration), **`feature/*`** (off develop), **`release/*`** (stabilise a release), and **`hotfix/*`** (urgent prod fixes off main). It's structured and great for **scheduled releases/versioned products**, but heavier than needed for continuous-deployment web apps, where trunk-based / short-lived feature branches are often preferred.",
+          "bodyTr": "Git bir süreç dayatmaz; ekipler bir **iş akışı** konvansiyonu seçer.\n\n**Centralized Workflow** — herkes tek bir merkezi depoda **tek bir paylaşılan branch** (genelde `main`) üzerinde çalışır, SVN gibi ama Git'le. Yerel commit yapar, başkalarının değişikliklerini pull'lar ve paylaşılan branch'e geri push edersin (doğrusal kalmak için rebase ederek). Basit, küçük ekipler için iyi ama tek bir geliştirme hattı kalabalıklaşıp çakışmaya yatkın olabilir.\n\n**Forking Workflow** — her katkıcının **kendi sunucu tarafı fork'u** vardır; *kendi* fork'una push eder ve kanonik depoya PR açar. **Avantajları:** kimsenin ana depoya yazma erişimine ihtiyacı yoktur (**açık kaynak** ve büyük/güvenilmeyen katkıcı havuzları için ideal); bakımcılar birleştirmeden önce her PR'ı inceler; resmi depo temiz ve korumalı kalır. Maliyeti biraz daha fazla tören (fork + remote'lar).\n\n**Gitflow** — tanımlı uzun ömürlü ve destekleyici branch'leri olan bir **dallanma modeli**: **`main`** (üretime hazır, etiketli sürümler), **`develop`** (entegrasyon), **`feature/*`** (develop'tan), **`release/*`** (bir sürümü stabilize et) ve **`hotfix/*`** (main'den acil prod düzeltmeleri). Yapısaldır ve **planlı sürümler/versiyonlu ürünler** için harikadır ama sürekli dağıtım web uygulamaları için gereğinden ağırdır; orada trunk-based / kısa ömürlü feature branch'leri genelde tercih edilir."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What is the main advantage of the Forking Workflow?",
+          "promptTr": "Forking Workflow'un temel avantajı nedir?",
+          "options": [
+            { "text": "Contributors don't need write access to the main repo; maintainers review PRs from forks — ideal for open source", "textTr": "Katkıcıların ana depoya yazma erişimine ihtiyacı yoktur; bakımcılar fork'lardan gelen PR'ları inceler — açık kaynak için ideal", "correct": true },
+            { "text": "It removes the need for code review", "textTr": "Kod incelemesi ihtiyacını ortadan kaldırır" },
+            { "text": "Everyone pushes directly to main", "textTr": "Herkes doğrudan main'e push eder" },
+            { "text": "It only works for private repos", "textTr": "Yalnızca özel depolarda çalışır" }
+          ],
+          "explanation": "Forking lets untrusted/large contributor pools propose changes via PRs to their own forks without write access to the canonical repo, which stays protected and reviewed.",
+          "explanationTr": "Forking, güvenilmeyen/büyük katkıcı havuzlarının kanonik depoya yazma erişimi olmadan kendi fork'larına PR ile değişiklik önermesini sağlar; depo korumalı ve incelenmiş kalır."
+        },
+        {
+          "type": "match",
+          "prompt": "Match each workflow to its defining idea",
+          "promptTr": "Her iş akışını tanımlayıcı fikriyle eşleştir",
+          "pairs": [
+            { "left": "Centralized", "leftTr": "Centralized", "right": "Everyone shares one branch on one repo", "rightTr": "Herkes tek depoda tek branch paylaşır" },
+            { "left": "Forking", "leftTr": "Forking", "right": "Each contributor pushes to their own fork, PRs to canonical", "rightTr": "Her katkıcı kendi fork'una push eder, kanoniğe PR açar" },
+            { "left": "Gitflow", "leftTr": "Gitflow", "right": "main/develop/feature/release/hotfix branch model for versioned releases", "rightTr": "Versiyonlu sürümler için main/develop/feature/release/hotfix branch modeli" }
+          ]
+        },
+        {
+          "type": "challenge",
+          "question": "How does the Centralized Workflow work in Git?"
+        },
+        {
+          "type": "challenge",
+          "question": "Explain the advantages of the Forking Workflow."
+        },
+        {
+          "type": "challenge",
+          "question": "Could you explain the Gitflow workflow?"
+        }
+      ]
+    },
+    {
+      "slug": "bare-repos-and-hooks",
+      "title": "Bare repos & git hooks",
+      "titleTr": "Bare depolar ve git hook'ları",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Server repos and automation triggers",
+          "titleTr": "Sunucu depoları ve otomasyon tetikleyicileri",
+          "body": "**A \"bare\" repository** is a Git repo with **no working tree** — just the `.git` contents (objects, refs). You can't edit files in it; it exists to be a **shared remote** that people push to and pull from (a server repo). A normal `git clone` gives you a working copy with a checked-out branch; the variants differ in what they copy:\n\n- **`git clone <url>`** — normal clone: working tree + `origin` remote, copies the default branch and sets up tracking.\n- **`git clone --bare`** — a bare repo (no working tree), with a minimal config — used to **host** a repo. It does **not** set up the usual remote-tracking refs for fetching like a normal clone.\n- **`git clone --mirror`** — like `--bare` but a **full mirror**: it copies **all** refs (branches, tags, remotes) and sets up refspecs so `git fetch` keeps an exact mirror in sync. Used for **backups/migrations** of an entire repo.\n\n**Git hooks** are **scripts Git runs automatically** at certain points in the workflow, living in `.git/hooks/`. They let you **automate or enforce** policy. Two families:\n\n- **Client-side hooks** — run on the developer's machine: `pre-commit` (lint/format/tests before a commit), `commit-msg` (validate message format), `pre-push` (run tests before pushing), `post-checkout`/`post-merge`.\n- **Server-side hooks** — run on the remote on receive: `pre-receive`, `update`, `post-receive` (e.g. reject bad pushes, trigger CI/deploys).\n\nHooks aren't cloned by default; tools like **Husky** manage shareable client hooks in a repo.",
+          "bodyTr": "**\"Bare\" depo**, **working tree'si olmayan** bir Git deposudur — yalnızca `.git` içeriği (object'ler, ref'ler). İçindeki dosyaları düzenleyemezsin; insanların push edip pull'ladığı bir **paylaşılan remote** (sunucu deposu) olmak için vardır. Normal bir `git clone` sana checkout'lanmış bir branch'li çalışma kopyası verir; varyantlar neyi kopyaladıklarında farklılaşır:\n\n- **`git clone <url>`** — normal clone: working tree + `origin` remote, varsayılan branch'i kopyalar ve tracking kurar.\n- **`git clone --bare`** — bare bir depo (working tree yok), minimal config'le — bir depoyu **host etmek** için kullanılır. Normal bir clone gibi fetch için olağan remote-tracking ref'lerini kurmaz.\n- **`git clone --mirror`** — `--bare` gibi ama **tam ayna**: **tüm** ref'leri (branch, tag, remote) kopyalar ve `git fetch`'in tam bir aynayı senkron tutması için refspec'ler kurar. Bir deponun **yedeği/taşınması** için kullanılır.\n\n**Git hook'ları**, Git'in iş akışında belirli noktalarda **otomatik çalıştırdığı script'lerdir**; `.git/hooks/`'ta yaşarlar. Politikayı **otomatikleştirmeni ya da zorlamanı** sağlarlar. İki aile:\n\n- **İstemci-tarafı hook'lar** — geliştiricinin makinesinde çalışır: `pre-commit` (commit'ten önce lint/format/test), `commit-msg` (mesaj formatını doğrula), `pre-push` (push'tan önce test çalıştır), `post-checkout`/`post-merge`.\n- **Sunucu-tarafı hook'lar** — remote'ta alımda çalışır: `pre-receive`, `update`, `post-receive` (örn. kötü push'ları reddet, CI/deploy tetikle).\n\nHook'lar varsayılan olarak clone'lanmaz; **Husky** gibi araçlar bir depoda paylaşılabilir istemci hook'larını yönetir."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What characterises a bare Git repository?",
+          "promptTr": "Bir bare Git deposunu ne karakterize eder?",
+          "options": [
+            { "text": "It has no working tree — just the repository data — so it's used as a shared remote to push/pull", "textTr": "Working tree'si yoktur — yalnızca depo verisi — bu yüzden push/pull için paylaşılan bir remote olarak kullanılır", "correct": true },
+            { "text": "It contains only the README file", "textTr": "Yalnızca README dosyasını içerir" },
+            { "text": "It cannot store commit history", "textTr": "Commit geçmişini saklayamaz" },
+            { "text": "It is a clone with extra branches checked out", "textTr": "Ekstra branch'leri checkout'lanmış bir clone'dur" }
+          ],
+          "explanation": "A bare repo holds the git data with no checked-out working files — perfect as a central/remote repo. --mirror additionally copies all refs for an exact mirror; a normal clone has a working tree.",
+          "explanationTr": "Bir bare depo, checkout'lanmış çalışma dosyaları olmadan git verisini tutar — merkezi/remote depo olarak mükemmel. --mirror ek olarak tam ayna için tüm ref'leri kopyalar; normal clone'un working tree'si vardır."
+        },
+        {
+          "type": "true_false",
+          "statement": "A pre-commit hook can run linters or tests and block a commit if they fail.",
+          "statementTr": "Bir pre-commit hook'u linter ya da test çalıştırabilir ve başarısız olurlarsa commit'i engelleyebilir.",
+          "answer": true,
+          "explanation": "Client-side hooks like pre-commit/commit-msg/pre-push automate checks before the action; a non-zero exit aborts it. Server-side hooks (pre-receive, etc.) gate pushes.",
+          "explanationTr": "pre-commit/commit-msg/pre-push gibi istemci-tarafı hook'lar eylemden önce kontrolleri otomatikleştirir; sıfır-olmayan çıkış onu iptal eder. Sunucu-tarafı hook'lar (pre-receive, vb.) push'ları denetler."
+        },
+        {
+          "type": "challenge",
+          "question": "What is a \"bare\" Git repository and what is the difference between git clone, git clone --bare, and git clone --mirror?"
+        },
+        {
+          "type": "challenge",
+          "question": "What are git hooks and what are their types?"
+        }
+      ]
+    },
+    {
+      "slug": "git-bisect",
+      "title": "Finding regressions with git bisect",
+      "titleTr": "git bisect ile regresyon bulma",
+      "position": 3,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Binary search through history",
+          "titleTr": "Geçmişte ikili arama",
+          "body": "**`git bisect`** finds the **commit that introduced a bug** by doing a **binary search** through history — far faster than checking commits one by one. You give it one **bad** commit (bug present) and one **good** commit (bug absent); Git repeatedly checks out the **midpoint**, you test, and tell it the result. Each answer halves the search space, so it finds the culprit in **O(log n)** steps (≈ 10 tests for 1000 commits).\n\n```bash\ngit bisect start\ngit bisect bad              # current commit is broken\ngit bisect good v1.2.0      # this old release was fine\n# Git checks out a midpoint commit → you test it, then:\ngit bisect good   # or: git bisect bad\n# …repeat until Git prints the first bad commit…\ngit bisect reset            # return to where you started\n```\n\nThe payoff: instead of reading diffs, you just answer good/bad a handful of times and Git pinpoints the exact commit that introduced the regression — then you inspect that small diff.\n\n**It can be automated:** `git bisect run <script>` uses a test script's **exit code** (0 = good, non-zero = bad) to run the entire bisect **hands-free**, ideal when you have a reproducer or failing test. Always finish with `git bisect reset` to restore your original HEAD.",
+          "bodyTr": "**`git bisect`**, geçmişte **ikili arama** yaparak **bir hatayı tanıtan commit'i** bulur — commit'leri tek tek kontrol etmekten çok daha hızlı. Ona bir **bad** commit (hata var) ve bir **good** commit (hata yok) verirsin; Git tekrar tekrar **orta noktayı** checkout eder, sen test edersin ve sonucu söylersin. Her cevap arama alanını yarıya indirir, böylece suçluyu **O(log n)** adımda bulur (1000 commit için ≈ 10 test).\n\n```bash\ngit bisect start\ngit bisect bad              # mevcut commit bozuk\ngit bisect good v1.2.0      # bu eski sürüm iyiydi\n# Git bir orta nokta commit'i checkout eder → test edersin, sonra:\ngit bisect good   # ya da: git bisect bad\n# …Git ilk bad commit'i yazana kadar tekrarla…\ngit bisect reset            # başladığın yere dön\n```\n\nKazanç: diff okumak yerine, birkaç kez good/bad cevaplarsın ve Git regresyonu tanıtan tam commit'i belirler — sonra o küçük diff'i incelersin.\n\n**Otomatikleştirilebilir:** `git bisect run <script>`, bir test script'inin **çıkış kodunu** (0 = good, sıfır-olmayan = bad) kullanarak tüm bisect'i **eller serbest** çalıştırır; bir reproducer ya da başarısız testin olduğunda ideal. Orijinal HEAD'ini geri yüklemek için her zaman `git bisect reset` ile bitir."
+        },
+        {
+          "type": "order",
+          "prompt": "Order a typical git bisect session",
+          "promptTr": "Tipik bir git bisect oturumunu sırala",
+          "items": [
+            { "text": "git bisect start", "textTr": "git bisect start" },
+            { "text": "Mark the current broken commit: git bisect bad", "textTr": "Mevcut bozuk commit'i işaretle: git bisect bad" },
+            { "text": "Mark a known-good older commit: git bisect good <ref>", "textTr": "Bilinen-iyi eski bir commit'i işaretle: git bisect good <ref>" },
+            { "text": "Test each midpoint and mark good/bad until the culprit is found", "textTr": "Her orta noktayı test et ve suçlu bulunana kadar good/bad işaretle" },
+            { "text": "git bisect reset to return to the start", "textTr": "Başa dönmek için git bisect reset" }
+          ],
+          "explanation": "Start → mark bad and good endpoints → binary-search the midpoints answering good/bad → Git reports the first bad commit → reset to restore HEAD.",
+          "explanationTr": "Başlat → bad ve good uçları işaretle → orta noktaları good/bad cevaplayarak ikili-ara → Git ilk bad commit'i bildirir → HEAD'i geri yüklemek için reset."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Why is git bisect efficient for finding a regression?",
+          "promptTr": "git bisect bir regresyon bulmak için neden verimlidir?",
+          "options": [
+            { "text": "It binary-searches history, so it needs only ~log2(n) tests instead of checking every commit", "textTr": "Geçmişte ikili arar, bu yüzden her commit'i kontrol etmek yerine yalnızca ~log2(n) teste ihtiyaç duyar", "correct": true },
+            { "text": "It checks every commit sequentially from the start", "textTr": "Baştan itibaren her commit'i sırayla kontrol eder" },
+            { "text": "It guesses the commit randomly", "textTr": "Commit'i rastgele tahmin eder" },
+            { "text": "It only works if there are fewer than 10 commits", "textTr": "Yalnızca 10'dan az commit varsa çalışır" }
+          ],
+          "explanation": "By halving the candidate range at each step (binary search), bisect localises the first bad commit in logarithmic time, and git bisect run can automate it via a test's exit code.",
+          "explanationTr": "Her adımda aday aralığını yarıya indirerek (ikili arama), bisect ilk bad commit'i logaritmik zamanda yerelleştirir ve git bisect run bunu bir testin çıkış koduyla otomatikleştirebilir."
+        },
+        {
+          "type": "challenge",
+          "question": "How can you use git bisect to find the commit that introduced a regression?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is git bisect? How can you use it to determine the source of a regression bug?"
+        }
+      ]
+    }
+  ]
+}

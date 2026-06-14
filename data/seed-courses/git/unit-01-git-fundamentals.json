@@ -1,0 +1,100 @@
+{
+  "topic": "git",
+  "slug": "git-fundamentals",
+  "title": "Git Fundamentals",
+  "titleTr": "Git Temelleri",
+  "section": "foundations",
+  "position": 1,
+  "lessons": [
+    {
+      "slug": "what-git-is-and-vs-svn",
+      "title": "What Git is & how it differs from SVN",
+      "titleTr": "Git nedir ve SVN'den farkı",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "A distributed version control system",
+          "titleTr": "Dağıtık bir sürüm kontrol sistemi",
+          "body": "**Git** is a **distributed version control system (DVCS)** for tracking changes to files over time. Created by Linus Torvalds (2005) for the Linux kernel, it lets many people collaborate, keep a full history, branch and merge cheaply, and roll back mistakes.\n\nThe defining trait is **distributed**: every clone is a **full repository** with the **complete history**, not just a working copy. So you can commit, branch, diff, and view history **offline**, and there's no single point of failure.\n\n**Git vs SVN (Subversion):**\n\n- **Architecture** — Git is **distributed** (every dev has the whole repo); SVN is **centralized** (one server holds the history; clients check out a working copy).\n- **Offline work** — Git commits locally and syncs later; SVN needs the server for most operations.\n- **Branching/merging** — cheap and fast in Git (a branch is just a pointer); historically heavy and avoided in SVN.\n- **Snapshots vs deltas** — Git stores **snapshots** of the whole tree per commit (deduplicated by hash); SVN stores file **deltas**.\n- **Integrity** — Git content is addressed by **SHA hashes**, so corruption/tampering is detectable.\n\nIn short: Git trades a slightly steeper model for speed, offline power, and painless branching.",
+          "bodyTr": "**Git**, dosyalardaki değişiklikleri zaman içinde izlemek için **dağıtık bir sürüm kontrol sistemidir (DVCS)**. Linus Torvalds tarafından (2005) Linux çekirdeği için oluşturuldu; birçok kişinin işbirliği yapmasını, tam bir geçmiş tutmasını, ucuzca dallanıp birleştirmesini ve hataları geri almasını sağlar.\n\nTanımlayıcı özellik **dağıtık** olmasıdır: her klon, yalnızca bir çalışma kopyası değil, **tam geçmişe** sahip **tam bir depodur**. Yani commit, branch, diff ve geçmiş görüntülemeyi **çevrimdışı** yapabilirsin ve tek bir arıza noktası yoktur.\n\n**Git vs SVN (Subversion):**\n\n- **Mimari** — Git **dağıtıktır** (her geliştiricide tüm depo); SVN **merkezidir** (geçmişi tek bir sunucu tutar; istemciler bir çalışma kopyası çeker).\n- **Çevrimdışı çalışma** — Git yerel commit yapar ve sonra senkronize eder; SVN çoğu işlem için sunucuya ihtiyaç duyar.\n- **Dallanma/birleştirme** — Git'te ucuz ve hızlı (bir branch yalnızca bir işaretçidir); SVN'de tarihsel olarak ağır ve kaçınılan.\n- **Snapshot vs delta** — Git commit başına tüm ağacın **snapshot'larını** saklar (hash ile tekilleştirilir); SVN dosya **delta'larını** saklar.\n- **Bütünlük** — Git içeriği **SHA hash'leriyle** adreslenir, bu yüzden bozulma/kurcalama tespit edilebilir.\n\nKısaca: Git, hız, çevrimdışı güç ve sorunsuz dallanma için biraz daha dik bir model sunar."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What is the core architectural difference between Git and SVN?",
+          "promptTr": "Git ile SVN arasındaki temel mimari fark nedir?",
+          "options": [
+            { "text": "Git is distributed — every clone has the full history; SVN is centralized around one server", "textTr": "Git dağıtıktır — her klonda tam geçmiş vardır; SVN tek bir sunucu etrafında merkezidir", "correct": true },
+            { "text": "Git only works online; SVN works offline", "textTr": "Git yalnızca çevrimiçi çalışır; SVN çevrimdışı çalışır" },
+            { "text": "SVN supports branching but Git does not", "textTr": "SVN dallanmayı destekler ama Git desteklemez" },
+            { "text": "They are identical tools with different names", "textTr": "Farklı isimlerle aynı araçlardır" }
+          ],
+          "explanation": "Git is a DVCS: each clone is a complete repo with full history, enabling offline commits and cheap branching. SVN keeps history on a central server.",
+          "explanationTr": "Git bir DVCS'tir: her klon tam geçmişe sahip eksiksiz bir depodur, çevrimdışı commit ve ucuz dallanma sağlar. SVN geçmişi merkezi bir sunucuda tutar."
+        },
+        {
+          "type": "true_false",
+          "statement": "With Git you can commit, branch, and view full history while offline, because each clone is a complete repository.",
+          "statementTr": "Git ile çevrimdışıyken commit, branch ve tam geçmiş görüntüleme yapabilirsin, çünkü her klon eksiksiz bir depodur.",
+          "answer": true,
+          "explanation": "Distributed means the whole history lives in every clone, so local operations don't need the server — a key advantage over centralized SVN.",
+          "explanationTr": "Dağıtık olması, tüm geçmişin her klonda yaşaması demektir, bu yüzden yerel işlemler sunucuya ihtiyaç duymaz — merkezi SVN'e göre temel bir avantaj."
+        },
+        {
+          "type": "challenge",
+          "question": "What is Git?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is the difference between Git and SVN?"
+        }
+      ]
+    },
+    {
+      "slug": "committing-and-three-trees",
+      "title": "Committing & the three trees",
+      "titleTr": "Commit'leme ve üç ağaç",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Working tree, index, HEAD",
+          "titleTr": "Working tree, index, HEAD",
+          "body": "Git tracks changes across **three areas** (\"trees\"):\n\n- **Working tree (working directory)** — the actual files on disk you edit.\n- **Index (staging area)** — a snapshot of what will go into the **next** commit. `git add` moves changes from the working tree into the index.\n- **HEAD** — a pointer to the **last commit** on your current branch (the tip of history). It's the \"committed\" snapshot.\n\nThe normal flow: edit (working tree) → `git add` (stage into index) → `git commit` (record the index as a new commit, advancing HEAD). `git status` shows what's modified vs staged; `git diff` shows working-tree-vs-index, `git diff --staged` shows index-vs-HEAD.\n\n**Writing a commit message:** `git commit -m \"your message\"` records the staged changes with an inline message. Running `git commit` with no `-m` opens your editor for a longer message. Convention: a short imperative summary line (≤ ~50 chars), a blank line, then details.\n\nUnderstanding the three trees explains most Git commands: `add` updates the index from the working tree; `commit` writes the index to history; `reset`/`checkout` move data the other way between HEAD, index, and working tree.",
+          "bodyTr": "Git değişiklikleri **üç alanda** (\"ağaç\") izler:\n\n- **Working tree (çalışma dizini)** — düzenlediğin, diskteki gerçek dosyalar.\n- **Index (staging area)** — bir **sonraki** commit'e neyin gireceğinin bir snapshot'ı. `git add` değişiklikleri working tree'den index'e taşır.\n- **HEAD** — mevcut branch'indeki **son commit'e** bir işaretçi (geçmişin ucu). \"Commit'lenmiş\" snapshot'tır.\n\nNormal akış: düzenle (working tree) → `git add` (index'e stage'le) → `git commit` (index'i yeni bir commit olarak kaydet, HEAD'i ilerlet). `git status` neyin değiştiğini vs stage'lendiğini gösterir; `git diff` working-tree-vs-index, `git diff --staged` index-vs-HEAD gösterir.\n\n**Commit mesajı yazmak:** `git commit -m \"mesajın\"` stage'lenmiş değişiklikleri inline bir mesajla kaydeder. `-m` olmadan `git commit` çalıştırmak daha uzun bir mesaj için editörünü açar. Konvansiyon: kısa, buyurgan bir özet satırı (≤ ~50 karakter), bir boş satır, sonra detaylar.\n\nÜç ağacı anlamak çoğu Git komutunu açıklar: `add` index'i working tree'den günceller; `commit` index'i geçmişe yazar; `reset`/`checkout` veriyi HEAD, index ve working tree arasında ters yönde taşır."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Commit staged changes with an inline message",
+          "promptTr": "Stage'lenmiş değişiklikleri inline bir mesajla commit'le",
+          "code": "git commit ___ \"fix: correct typo\"",
+          "answers": ["-m"],
+          "distractors": ["-a", "-am", "--amend"],
+          "explanation": "-m provides the commit message inline. (-a stages tracked changes; --amend rewrites the last commit.)",
+          "explanationTr": "-m commit mesajını inline verir. (-a izlenen değişiklikleri stage'ler; --amend son commit'i yeniden yazar.)"
+        },
+        {
+          "type": "mcq",
+          "prompt": "What does the index (staging area) represent?",
+          "promptTr": "Index (staging area) neyi temsil eder?",
+          "options": [
+            { "text": "The snapshot of changes that will go into the next commit", "textTr": "Bir sonraki commit'e girecek değişikliklerin snapshot'ı", "correct": true },
+            { "text": "The files currently on disk", "textTr": "Şu anda diskteki dosyalar" },
+            { "text": "The last commit on the branch", "textTr": "Branch'teki son commit" },
+            { "text": "The remote repository", "textTr": "Uzak depo" }
+          ],
+          "explanation": "The index holds what git add has staged — the proposed next commit. The working tree is the files on disk; HEAD is the last commit.",
+          "explanationTr": "Index, git add'in stage'lediğini tutar — önerilen bir sonraki commit. Working tree diskteki dosyalardır; HEAD son commit'tir."
+        },
+        {
+          "type": "challenge",
+          "question": "What is the command to write a commit message in Git?"
+        },
+        {
+          "type": "challenge",
+          "question": "Tell me the difference between HEAD, working tree, and index in Git."
+        }
+      ]
+    }
+  ]
+}

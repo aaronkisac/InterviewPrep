@@ -1,0 +1,147 @@
+{
+  "topic": "git",
+  "slug": "undoing-rewriting",
+  "title": "Undoing & Rewriting History",
+  "titleTr": "Geri Alma ve Geçmişi Yeniden Yazma",
+  "section": "core",
+  "position": 3,
+  "lessons": [
+    {
+      "slug": "revert-and-reset",
+      "title": "revert & reset",
+      "titleTr": "revert ve reset",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Two very different ways to undo",
+          "titleTr": "Geri almanın iki çok farklı yolu",
+          "body": "**`git revert <commit>`** undoes a commit by creating a **new commit** that applies the **inverse** of its changes. History is **preserved** — the original commit stays; you just add an \"undo\" on top. Because it doesn't rewrite history, it's the **safe** way to undo something **already pushed/shared**.\n\n**`git reset`** moves the current branch pointer (HEAD) to a **different commit**, effectively **rewriting history** by discarding commits after that point. In plain English: *\"move the branch back to an earlier commit, and decide what to do with the changes in between.\"* Three modes control the index and working tree:\n\n- **`--soft`** — move HEAD only; keep changes **staged** (in the index). Good for re-committing differently.\n- **`--mixed`** (default) — move HEAD and reset the index; keep changes in the **working tree** (unstaged).\n- **`--hard`** — move HEAD and **discard** index *and* working-tree changes. Destructive — lost work is hard to recover.\n\nRule of thumb: **`revert`** to undo a **public/shared** commit (safe, adds history); **`reset`** to fix **local, unpushed** history (rewrites it). Never `reset`/force-push a shared branch others have based work on.",
+          "bodyTr": "**`git revert <commit>`** bir commit'i, değişikliklerinin **tersini** uygulayan **yeni bir commit** oluşturarak geri alır. Geçmiş **korunur** — orijinal commit kalır; sadece üstüne bir \"geri al\" eklersin. Geçmişi yeniden yazmadığı için, **zaten push edilmiş/paylaşılmış** bir şeyi geri almanın **güvenli** yoludur.\n\n**`git reset`**, mevcut branch işaretçisini (HEAD) **farklı bir commit'e** taşır; o noktadan sonraki commit'leri atarak etkili biçimde **geçmişi yeniden yazar**. Sade dille: *\"branch'i daha eski bir commit'e geri taşı ve aradaki değişikliklerle ne yapacağına karar ver.\"* Üç mod index ve working tree'yi kontrol eder:\n\n- **`--soft`** — yalnızca HEAD'i taşı; değişiklikleri **stage'li** tut (index'te). Farklı yeniden commit'lemek için iyi.\n- **`--mixed`** (varsayılan) — HEAD'i taşı ve index'i sıfırla; değişiklikleri **working tree**'de tut (stage'siz).\n- **`--hard`** — HEAD'i taşı ve index *ve* working-tree değişikliklerini **at**. Yıkıcı — kaybolan iş zor kurtarılır.\n\nKural: **paylaşılan/public** bir commit'i geri almak için **`revert`** (güvenli, geçmiş ekler); **yerel, push edilmemiş** geçmişi düzeltmek için **`reset`** (yeniden yazar). Başkalarının üzerine iş kurduğu paylaşılan bir branch'i asla `reset`/force-push etme."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Why prefer git revert over git reset for a commit that's already been pushed?",
+          "promptTr": "Zaten push edilmiş bir commit için neden git reset yerine git revert tercih edilir?",
+          "options": [
+            { "text": "revert adds a new inverse commit without rewriting shared history; reset rewrites history and breaks others' clones", "textTr": "revert, paylaşılan geçmişi yeniden yazmadan yeni bir ters commit ekler; reset geçmişi yeniden yazar ve başkalarının klonlarını bozar", "correct": true },
+            { "text": "revert deletes the commit permanently from everyone's history", "textTr": "revert commit'i herkesin geçmişinden kalıcı siler" },
+            { "text": "reset is safer for shared branches", "textTr": "reset paylaşılan branch'ler için daha güvenlidir" },
+            { "text": "They do exactly the same thing", "textTr": "Tam olarak aynı şeyi yaparlar" }
+          ],
+          "explanation": "revert is non-destructive — it appends an inverse commit, so shared history stays intact. reset moves the branch pointer and rewrites history, which is unsafe once others have the commits.",
+          "explanationTr": "revert yıkıcı değildir — bir ters commit ekler, böylece paylaşılan geçmiş bozulmaz. reset branch işaretçisini taşır ve geçmişi yeniden yazar, başkaları commit'lere sahip olunca güvensizdir."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What does git reset --hard do to your changes?",
+          "promptTr": "git reset --hard değişikliklerine ne yapar?",
+          "options": [
+            { "text": "Moves HEAD and discards both staged and working-tree changes (destructive)", "textTr": "HEAD'i taşır ve hem stage'li hem working-tree değişikliklerini atar (yıkıcı)", "correct": true },
+            { "text": "Keeps all changes staged", "textTr": "Tüm değişiklikleri stage'li tutar" },
+            { "text": "Only creates a new inverse commit", "textTr": "Yalnızca yeni bir ters commit oluşturur" },
+            { "text": "Pushes to the remote", "textTr": "Remote'a push eder" }
+          ],
+          "explanation": "--hard resets HEAD, index, and working tree, throwing away uncommitted work. --soft keeps changes staged; --mixed keeps them unstaged.",
+          "explanationTr": "--hard HEAD, index ve working tree'yi sıfırlar, commit'lenmemiş işi atar. --soft değişiklikleri stage'li tutar; --mixed stage'siz tutar."
+        },
+        {
+          "type": "challenge",
+          "question": "How do you revert a previous commit in Git?"
+        },
+        {
+          "type": "challenge",
+          "question": "Can you explain what git reset does in plain English?"
+        }
+      ]
+    },
+    {
+      "slug": "stash",
+      "title": "git stash",
+      "titleTr": "git stash",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Shelving work in progress",
+          "titleTr": "Devam eden işi rafa kaldırmak",
+          "body": "**`git stash`** **shelves your uncommitted changes** (working tree + index) and reverts your working directory to a clean `HEAD`, saving the changes on a stack you can restore later. **When to use it:** you're mid-change and need a clean tree *right now* — to **switch branches**, **pull** updates, or test something — but you're **not ready to commit**. Stash, do the other thing, then pop your work back.\n\n```bash\ngit stash            # shelve changes\ngit switch main      # do something on a clean tree\ngit stash pop        # bring changes back\n```\n\n(You can stash multiple times — they stack — and label with `git stash push -m \"msg\"`.)\n\n**`git stash pop` vs `git stash apply`:**\n\n- **`apply`** re-applies the stashed changes to your working tree but **keeps the stash** in the stack (so you can apply it again elsewhere).\n- **`pop`** applies the changes **and removes** the stash from the stack (apply + drop).\n\nUse **`pop`** for the normal \"resume where I left off\" case; use **`apply`** when you want to apply the same stash to **multiple branches** or keep it as a backup until you're sure it applied cleanly. If `pop` hits a merge conflict, the stash is **kept** (not dropped) so you don't lose it.",
+          "bodyTr": "**`git stash`** **commit'lenmemiş değişikliklerini** (working tree + index) **rafa kaldırır** ve çalışma dizinini temiz bir `HEAD`'e döndürür; değişiklikleri sonra geri yükleyebileceğin bir yığında saklar. **Ne zaman kullanılır:** bir değişikliğin ortasındasın ve *hemen* temiz bir ağaca ihtiyacın var — **branch değiştirmek**, güncelleme **pull**'lamak ya da bir şey test etmek için — ama **commit'lemeye hazır değilsin**. Stash'le, diğer işi yap, sonra işini geri pop'la.\n\n```bash\ngit stash            # değişiklikleri rafa kaldır\ngit switch main      # temiz ağaçta bir şey yap\ngit stash pop        # değişiklikleri geri getir\n```\n\n(Birden çok kez stash'leyebilirsin — yığılırlar — ve `git stash push -m \"mesaj\"` ile etiketleyebilirsin.)\n\n**`git stash pop` vs `git stash apply`:**\n\n- **`apply`** stash'lenmiş değişiklikleri working tree'ne yeniden uygular ama stash'i yığında **tutar** (başka yerde tekrar uygulayabilesin).\n- **`pop`** değişiklikleri uygular **ve** stash'i yığından **kaldırır** (apply + drop).\n\nNormal \"kaldığım yerden devam\" durumu için **`pop`** kullan; aynı stash'i **birden çok branch'e** uygulamak ya da temiz uygulandığından emin olana kadar yedek tutmak istediğinde **`apply`** kullan. `pop` bir merge çakışmasına çarparsa, stash **tutulur** (drop edilmez), böylece kaybetmezsin."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What's the difference between git stash pop and git stash apply?",
+          "promptTr": "git stash pop ile git stash apply arasındaki fark nedir?",
+          "options": [
+            { "text": "Both re-apply the stash; pop also removes it from the stack, apply keeps it", "textTr": "İkisi de stash'i yeniden uygular; pop ayrıca onu yığından kaldırır, apply tutar", "correct": true },
+            { "text": "apply removes the stash; pop keeps it", "textTr": "apply stash'i kaldırır; pop tutar" },
+            { "text": "pop discards the changes; apply commits them", "textTr": "pop değişiklikleri atar; apply commit'ler" },
+            { "text": "They are identical", "textTr": "Aynılar" }
+          ],
+          "explanation": "apply = restore but keep the stash entry; pop = restore and drop it. Use apply when you want to reuse the stash on multiple branches.",
+          "explanationTr": "apply = geri yükle ama stash girdisini tut; pop = geri yükle ve düşür. Stash'i birden çok branch'te yeniden kullanmak istediğinde apply kullan."
+        },
+        {
+          "type": "true_false",
+          "statement": "git stash is useful when you need a clean working tree to switch branches but aren't ready to commit.",
+          "statementTr": "git stash, branch değiştirmek için temiz bir working tree'ye ihtiyacın olduğunda ama commit'lemeye hazır olmadığında yararlıdır.",
+          "answer": true,
+          "explanation": "That's the canonical use: shelve WIP, get a clean HEAD, do the other task, then restore. It saves both staged and unstaged changes on a stack.",
+          "explanationTr": "Bu kanonik kullanımdır: WIP'i rafa kaldır, temiz bir HEAD al, diğer görevi yap, sonra geri yükle. Hem stage'li hem stage'siz değişiklikleri bir yığında saklar."
+        },
+        {
+          "type": "challenge",
+          "question": "When should I use git stash?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is the difference between git stash pop and git stash apply?"
+        }
+      ]
+    },
+    {
+      "slug": "rebase-vs-merge-and-undo",
+      "title": "rebase vs merge & undoing a rebase",
+      "titleTr": "rebase vs merge ve rebase'i geri alma",
+      "position": 3,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Replaying commits, and recovering",
+          "titleTr": "Commit'leri yeniden oynatmak ve kurtarma",
+          "body": "**`git rebase` vs `git merge`** both integrate one branch into another, but shape history differently:\n\n- **`merge`** creates a **merge commit** that ties the two histories together. It's **non-destructive** and preserves the true, branching history (you can see when work happened in parallel).\n- **`rebase`** **replays your branch's commits on top of another branch's tip**, producing a **linear** history with no merge commit — as if you'd started your work from the latest `main`. Cleaner log, easier `git bisect`/`blame`.\n\n**When to use rebase instead of merge:** to keep a **tidy, linear history** — typically rebasing your **local feature branch** onto the latest `main` before opening a PR, or cleaning up local commits with interactive rebase (`-i`). **The golden rule:** **don't rebase commits that are already public/shared** — rebase rewrites commit hashes, so force-pushing a rebased shared branch breaks everyone else's history. Merge for shared/long-lived branches; rebase for local cleanup.\n\n**Undoing a rebase:** because rebase rewrites history, use the **reflog** — Git's log of where HEAD has been. Find the pre-rebase position (`git reflog`, e.g. `HEAD@{5}`) and reset to it:\n\n```bash\ngit reflog                 # find the commit before the rebase\ngit reset --hard HEAD@{5}  # or the original commit hash / ORIG_HEAD\n```\n\nGit also stores the pre-rebase tip in **`ORIG_HEAD`**, so `git reset --hard ORIG_HEAD` often restores it directly.",
+          "bodyTr": "**`git rebase` vs `git merge`** ikisi de bir branch'i başkasına entegre eder ama geçmişi farklı şekillendirir:\n\n- **`merge`**, iki geçmişi birbirine bağlayan bir **merge commit** oluşturur. **Yıkıcı değildir** ve gerçek, dallanan geçmişi korur (işin paralel olduğu zamanı görebilirsin).\n- **`rebase`**, branch'inin commit'lerini **başka bir branch'in ucunun üstünde yeniden oynatır**, merge commit'siz **doğrusal** bir geçmiş üretir — sanki işine en güncel `main`'den başlamışsın gibi. Daha temiz log, daha kolay `git bisect`/`blame`.\n\n**Merge yerine ne zaman rebase:** **düzenli, doğrusal bir geçmiş** tutmak için — tipik olarak bir PR açmadan önce **yerel feature branch'ini** en güncel `main` üzerine rebase etmek ya da yerel commit'leri interactive rebase (`-i`) ile temizlemek. **Altın kural:** **zaten public/paylaşılan commit'leri rebase etme** — rebase commit hash'lerini yeniden yazar, bu yüzden rebase'lenmiş paylaşılan bir branch'i force-push etmek herkesin geçmişini bozar. Paylaşılan/uzun ömürlü branch'ler için merge; yerel temizlik için rebase.\n\n**Rebase'i geri alma:** rebase geçmişi yeniden yazdığı için **reflog**'u kullan — Git'in HEAD'in nerede olduğunun günlüğü. Rebase-öncesi konumu bul (`git reflog`, örn. `HEAD@{5}`) ve ona reset et:\n\n```bash\ngit reflog                 # rebase'den önceki commit'i bul\ngit reset --hard HEAD@{5}  # ya da orijinal commit hash'i / ORIG_HEAD\n```\n\nGit ayrıca rebase-öncesi ucu **`ORIG_HEAD`**'de saklar, bu yüzden `git reset --hard ORIG_HEAD` çoğu zaman onu doğrudan geri yükler."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What does git rebase do compared to git merge?",
+          "promptTr": "git rebase, git merge'e kıyasla ne yapar?",
+          "options": [
+            { "text": "Replays commits onto another branch's tip for a linear history (no merge commit)", "textTr": "Commit'leri başka bir branch'in ucuna yeniden oynatır, doğrusal bir geçmiş için (merge commit yok)", "correct": true },
+            { "text": "Creates a merge commit joining both histories", "textTr": "İki geçmişi birleştiren bir merge commit oluşturur" },
+            { "text": "Deletes the other branch", "textTr": "Diğer branch'i siler" },
+            { "text": "Pushes changes to the remote automatically", "textTr": "Değişiklikleri otomatik remote'a push eder" }
+          ],
+          "explanation": "rebase rewrites your commits on top of the target tip → linear history. merge ties histories with a merge commit, preserving the branch structure.",
+          "explanationTr": "rebase commit'lerini hedef ucun üstüne yeniden yazar → doğrusal geçmiş. merge geçmişleri bir merge commit'le bağlar, branch yapısını korur."
+        },
+        {
+          "type": "true_false",
+          "statement": "You can undo a rebase by finding the pre-rebase commit in the reflog (or ORIG_HEAD) and resetting to it.",
+          "statementTr": "Bir rebase'i, reflog'da (ya da ORIG_HEAD'de) rebase-öncesi commit'i bulup ona reset ederek geri alabilirsin.",
+          "answer": true,
+          "explanation": "The reflog records previous HEAD positions, so git reset --hard HEAD@{n} (or ORIG_HEAD) restores the branch to before the rebase.",
+          "explanationTr": "reflog önceki HEAD konumlarını kaydeder, bu yüzden git reset --hard HEAD@{n} (ya da ORIG_HEAD) branch'i rebase öncesine geri yükler."
+        },
+        {
+          "type": "challenge",
+          "question": "When do you use git rebase instead of git merge?"
+        },
+        {
+          "type": "challenge",
+          "question": "How do you undo a git rebase?"
+        }
+      ]
+    }
+  ]
+}

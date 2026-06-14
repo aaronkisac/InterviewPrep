@@ -1,0 +1,107 @@
+{
+  "topic": "git",
+  "title": "Git",
+  "$comment": "Canonical concept list (syllabus) for Git. COMPLETE: 4 units, 10 concepts covering bank ids 901-921 (21/21). Verified by: pnpm concept:coverage",
+  "concepts": [
+    {
+      "id": "what-git-is-and-vs-svn",
+      "title": "What Git is & how it differs from SVN",
+      "titleTr": "Git nedir ve SVN'den farkı",
+      "section": "foundations",
+      "unit": "git-fundamentals",
+      "lessons": [
+        "what-git-is-and-vs-svn"
+      ]
+    },
+    {
+      "id": "committing-and-three-trees",
+      "title": "Committing & the three trees",
+      "titleTr": "Commit'leme ve üç ağaç",
+      "section": "foundations",
+      "unit": "git-fundamentals",
+      "lessons": [
+        "committing-and-three-trees"
+      ]
+    },
+    {
+      "id": "forks-branches-clones-prs",
+      "title": "Forks, branches, clones & pull requests",
+      "titleTr": "Fork'lar, branch'ler, clone'lar ve pull request'ler",
+      "section": "core",
+      "unit": "branching-collaboration",
+      "lessons": [
+        "forks-branches-clones-prs"
+      ]
+    },
+    {
+      "id": "pull-vs-fetch-and-cherry-pick",
+      "title": "pull vs fetch & cherry-pick",
+      "titleTr": "pull vs fetch ve cherry-pick",
+      "section": "core",
+      "unit": "branching-collaboration",
+      "lessons": [
+        "pull-vs-fetch-and-cherry-pick"
+      ]
+    },
+    {
+      "id": "revert-and-reset",
+      "title": "revert & reset",
+      "titleTr": "revert ve reset",
+      "section": "core",
+      "unit": "undoing-rewriting",
+      "lessons": [
+        "revert-and-reset"
+      ]
+    },
+    {
+      "id": "stash",
+      "title": "git stash",
+      "titleTr": "git stash",
+      "section": "core",
+      "unit": "undoing-rewriting",
+      "lessons": [
+        "stash"
+      ]
+    },
+    {
+      "id": "rebase-vs-merge-and-undo",
+      "title": "rebase vs merge & undoing a rebase",
+      "titleTr": "rebase vs merge ve rebase'i geri alma",
+      "section": "core",
+      "unit": "undoing-rewriting",
+      "lessons": [
+        "rebase-vs-merge-and-undo"
+      ]
+    },
+    {
+      "id": "git-workflows",
+      "title": "Git workflows: Centralized, Forking & Gitflow",
+      "titleTr": "Git iş akışları: Centralized, Forking ve Gitflow",
+      "section": "advanced",
+      "unit": "workflows-advanced",
+      "lessons": [
+        "git-workflows"
+      ]
+    },
+    {
+      "id": "bare-repos-and-hooks",
+      "title": "Bare repos & git hooks",
+      "titleTr": "Bare depolar ve git hook'ları",
+      "section": "advanced",
+      "unit": "workflows-advanced",
+      "lessons": [
+        "bare-repos-and-hooks"
+      ]
+    },
+    {
+      "id": "git-bisect",
+      "title": "Finding regressions with git bisect",
+      "titleTr": "git bisect ile regresyon bulma",
+      "section": "advanced",
+      "unit": "workflows-advanced",
+      "lessons": [
+        "git-bisect"
+      ]
+    }
+  ]
+}

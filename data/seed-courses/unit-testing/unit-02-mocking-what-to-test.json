@@ -1,0 +1,102 @@
+{
+  "topic": "unit-testing",
+  "slug": "mocking-what-to-test",
+  "title": "Mocking & What to Test",
+  "titleTr": "Mock'lama ve Neyi Test Etmeli",
+  "section": "core",
+  "position": 2,
+  "lessons": [
+    {
+      "slug": "mocking-spying-and-when",
+      "title": "Mocking, spying & when to mock",
+      "titleTr": "Mock'lama, spy'lama ve ne zaman mock",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Replacing real dependencies",
+          "titleTr": "Gerçek bağımlılıkları değiştirmek",
+          "body": "**Mocking** means replacing a real dependency with a **fake (\"test double\")** you control, so you can test a unit **in isolation**. A **mock** stands in for a collaborator (an API client, a DB, a timer), returns canned values, and lets you **assert how it was called** — without hitting the real thing. \"Mock\" is also used loosely for the whole family of doubles: **stubs** (return fixed data), **mocks** (also verify interactions), **fakes** (working lightweight impls), and **spies**.\n\n**Mocking vs spying:**\n\n- A **mock** fully **replaces** the dependency with a fake implementation — the real code never runs.\n- A **spy** **wraps the real object**, letting the **actual implementation run** while **recording** how it was called (arguments, call count) so you can assert on it. A spy can optionally override specific methods.\n\nSo: mock = substitute behaviour; spy = observe (and optionally tweak) real behaviour.\n\n**When and where to use mocking:** mock the **slow, non-deterministic, or external** collaborators — network/HTTP, databases, the file system, the clock/randomness, third-party services — and dependencies that are **hard to set up** or have side effects. Mock at the **boundaries** of the unit. **Don't over-mock:** mocking the very thing you're testing, or mirroring its internals so closely that tests just restate the implementation, makes brittle tests that break on every refactor. Prefer real objects for simple, fast, pure collaborators.",
+          "bodyTr": "**Mock'lama**, gerçek bir bağımlılığı kontrol ettiğin bir **sahte (\"test double\")** ile değiştirmek demektir; böylece bir birimi **izole** test edebilirsin. Bir **mock** bir işbirlikçinin (API istemcisi, DB, zamanlayıcı) yerine geçer, hazır değerler döndürür ve **nasıl çağrıldığını doğrulamana** izin verir — gerçeğine dokunmadan. \"Mock\" tüm double ailesi için de gevşekçe kullanılır: **stub'lar** (sabit veri döndürür), **mock'lar** (etkileşimleri de doğrular), **fake'ler** (çalışan hafif implementasyonlar) ve **spy'lar**.\n\n**Mock'lama vs spy'lama:**\n\n- Bir **mock**, bağımlılığı sahte bir implementasyonla tamamen **değiştirir** — gerçek kod hiç çalışmaz.\n- Bir **spy**, **gerçek nesneyi sarar**, **asıl implementasyonun çalışmasına** izin verirken nasıl çağrıldığını (argümanlar, çağrı sayısı) **kaydeder** ki doğrulayabilesin. Bir spy isteğe bağlı olarak belirli metotları override edebilir.\n\nYani: mock = davranışı ikame et; spy = gerçek davranışı gözlemle (ve isteğe bağlı ayarla).\n\n**Ne zaman ve nerede mock kullanılır:** **yavaş, deterministik olmayan ya da harici** işbirlikçileri mock'la — ağ/HTTP, veritabanları, dosya sistemi, saat/rastgelelik, üçüncü taraf servisler — ve **kurması zor** ya da yan etkili bağımlılıkları. Birimin **sınırlarında** mock'la. **Aşırı mock'lama:** test ettiğin şeyin ta kendisini mock'lamak ya da iç yapısını testler yalnızca implementasyonu tekrar edecek kadar yakından yansıtmak, her refactor'da kırılan kırılgan testler yaratır. Basit, hızlı, saf işbirlikçiler için gerçek nesneleri tercih et."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What's the difference between mocking and spying?",
+          "promptTr": "Mock'lama ile spy'lama arasındaki fark nedir?",
+          "options": [
+            { "text": "A mock replaces the dependency entirely; a spy wraps the real object and records how it was called", "textTr": "Bir mock bağımlılığı tamamen değiştirir; bir spy gerçek nesneyi sarar ve nasıl çağrıldığını kaydeder", "correct": true },
+            { "text": "A spy replaces the dependency; a mock runs the real code", "textTr": "Bir spy bağımlılığı değiştirir; bir mock gerçek kodu çalıştırır" },
+            { "text": "They are two words for the same thing", "textTr": "Aynı şeyin iki kelimesidirler" },
+            { "text": "Spies can only be used on private methods", "textTr": "Spy'lar yalnızca private metotlarda kullanılabilir" }
+          ],
+          "explanation": "Mock = fake substitute, real code never runs. Spy = wraps the real implementation, lets it run, and records calls so you can assert on them.",
+          "explanationTr": "Mock = sahte ikame, gerçek kod hiç çalışmaz. Spy = gerçek implementasyonu sarar, çalışmasına izin verir ve çağrıları kaydeder ki doğrulayabilesin."
+        },
+        {
+          "type": "true_false",
+          "statement": "You should mock slow or external dependencies (network, DB, clock) but avoid over-mocking pure, fast collaborators.",
+          "statementTr": "Yavaş ya da harici bağımlılıkları (ağ, DB, saat) mock'lamalısın ama saf, hızlı işbirlikçileri aşırı mock'lamaktan kaçınmalısın.",
+          "answer": true,
+          "explanation": "Mock at the boundaries (I/O, time, third parties). Over-mocking internal/pure logic couples tests to implementation and makes them brittle.",
+          "explanationTr": "Sınırlarda mock'la (I/O, zaman, üçüncü taraflar). İç/saf mantığı aşırı mock'lamak testleri implementasyona bağlar ve kırılgan yapar."
+        },
+        {
+          "type": "challenge",
+          "question": "What is Mocking in unit testing?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is the difference between Mocking and Spying on an object?"
+        },
+        {
+          "type": "challenge",
+          "question": "When and where should I use mocking?"
+        }
+      ]
+    },
+    {
+      "slug": "whats-worth-testing",
+      "title": "What's worth testing",
+      "titleTr": "Neyi test etmeye değer",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Getters/setters and void methods",
+          "titleTr": "Getter/setter'lar ve void metotlar",
+          "body": "Not all code deserves a dedicated test; aim tests at **behaviour and risk**, not trivial code.\n\n**Should you unit-test getters and setters?** Generally **no** — plain getters/setters that just read/write a field carry **no logic**, so a test for them only restates the language and adds noise. They already get exercised **indirectly** by tests of the methods that use them. **Exception:** if a getter/setter contains real logic (validation, computation, lazy init, side effects), then *that logic* is worth testing. Rule: test behaviour, not boilerplate.\n\n**How to unit-test a void method** (one that returns nothing): you can't assert on a return value, so verify its **observable effects** instead:\n\n- **State change** — assert the object's state afterwards (`obj.isActive` became `true`).\n- **Interactions** — use a **mock/spy** to assert it called a collaborator correctly (`emailService.send` was called once with the right args).\n- **Side effects/outputs** — a value written to a store, an event emitted, an exception thrown for bad input.\n\nIf a void method has **no observable effect at all**, there's nothing to test — and arguably nothing for it to do. So: a void method is tested through its **consequences** (state + interactions), which is also a nudge toward designing observable, testable behaviour.",
+          "bodyTr": "Her kod özel bir testi hak etmez; testleri önemsiz koda değil, **davranış ve riske** yönelt.\n\n**Getter ve setter'ları unit-test etmeli misin?** Genelde **hayır** — yalnızca bir alanı okuyup/yazan düz getter/setter'lar **mantık taşımaz**, bu yüzden onlar için bir test yalnızca dili tekrar eder ve gürültü ekler. Onları kullanan metotların testleriyle zaten **dolaylı** çalıştırılırlar. **İstisna:** bir getter/setter gerçek mantık içeriyorsa (doğrulama, hesaplama, lazy init, yan etki), o zaman *o mantık* test edilmeye değer. Kural: boilerplate'i değil davranışı test et.\n\n**Bir void metodu nasıl unit-test edilir** (hiçbir şey döndürmeyen): bir dönüş değerini doğrulayamazsın, bu yüzden onun **gözlemlenebilir etkilerini** doğrula:\n\n- **State değişimi** — sonrasında nesnenin state'ini doğrula (`obj.isActive` `true` oldu).\n- **Etkileşimler** — bir işbirlikçiyi doğru çağırdığını doğrulamak için bir **mock/spy** kullan (`emailService.send` doğru argümanlarla bir kez çağrıldı).\n- **Yan etkiler/çıktılar** — bir store'a yazılan değer, yayılan bir event, kötü girdi için fırlatılan bir exception.\n\nBir void metodun **hiç gözlemlenebilir etkisi yoksa**, test edilecek bir şey yoktur — ve tartışmalı olarak yapacağı bir şey de yoktur. Yani: bir void metot **sonuçlarıyla** (state + etkileşimler) test edilir, bu da gözlemlenebilir, test edilebilir davranış tasarlamaya bir teşviktir."
+        },
+        {
+          "type": "mcq",
+          "prompt": "How do you unit-test a void method?",
+          "promptTr": "Bir void metodu nasıl unit-test edersin?",
+          "options": [
+            { "text": "Verify its observable effects — state changes, interactions with mocks/spies, side effects, or thrown errors", "textTr": "Gözlemlenebilir etkilerini doğrula — state değişimleri, mock/spy etkileşimleri, yan etkiler ya da fırlatılan hatalar", "correct": true },
+            { "text": "Assert on its return value", "textTr": "Dönüş değerini doğrula" },
+            { "text": "Void methods cannot be tested", "textTr": "Void metotlar test edilemez" },
+            { "text": "Change it to return a value just for the test", "textTr": "Yalnızca test için onu bir değer döndürecek şekilde değiştir" }
+          ],
+          "explanation": "With no return value, you assert the consequences: resulting state, calls made to collaborators (via mock/spy), emitted events, or exceptions.",
+          "explanationTr": "Dönüş değeri olmadığında sonuçları doğrularsın: oluşan state, işbirlikçilere yapılan çağrılar (mock/spy ile), yayılan event'ler ya da exception'lar."
+        },
+        {
+          "type": "true_false",
+          "statement": "Plain getters and setters with no logic generally don't need their own unit tests.",
+          "statementTr": "Mantığı olmayan düz getter ve setter'lar genelde kendi unit testlerine ihtiyaç duymaz.",
+          "answer": true,
+          "explanation": "Trivial accessors carry no behaviour and are covered indirectly. Only test them if they contain real logic (validation, computation, side effects).",
+          "explanationTr": "Önemsiz erişimciler davranış taşımaz ve dolaylı kapsanır. Yalnızca gerçek mantık (doğrulama, hesaplama, yan etki) içeriyorlarsa test et."
+        },
+        {
+          "type": "challenge",
+          "question": "Should unit tests be written for getters and setters?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is the best way to unit test a void method?"
+        }
+      ]
+    }
+  ]
+}

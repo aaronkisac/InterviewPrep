@@ -1,0 +1,105 @@
+{
+  "topic": "unit-testing",
+  "slug": "testing-fundamentals",
+  "title": "Testing Fundamentals",
+  "titleTr": "Test Temelleri",
+  "section": "foundations",
+  "position": 1,
+  "lessons": [
+    {
+      "slug": "types-of-tests",
+      "title": "Types of tests",
+      "titleTr": "Test türleri",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Unit, integration, smoke & regression",
+          "titleTr": "Unit, integration, smoke ve regression",
+          "body": "Tests differ by **scope** and **purpose**:\n\n- **Unit tests** — verify a **single unit** (a function/class/module) **in isolation**, with dependencies replaced by test doubles. Fast, numerous, pinpoint failures. The base of the **testing pyramid**.\n- **Integration tests** — verify that **multiple units work together** (e.g. service + real database, or several modules). Slower, fewer, catch wiring/contract bugs that unit tests can't.\n- **Smoke tests** — a small set of **\"is it fundamentally working?\"** checks run after a build/deploy (does the app start, can users log in). A quick sanity gate before deeper testing.\n- **Regression tests** — re-run existing tests to confirm that **new changes didn't break previously-working** behaviour. Often automated and run in CI; a fixed bug usually gains a regression test so it can't return.\n\n**The fundamental difference between unit and integration tests** is **isolation vs collaboration**: a unit test exercises one piece with everything else **mocked/stubbed**, so a failure points to exactly that unit; an integration test uses **real collaborators** to check they interact correctly, trading speed and pinpoint accuracy for confidence that the pieces actually fit together. You need both: many fast unit tests, fewer integration tests.",
+          "bodyTr": "Testler **kapsam** ve **amaca** göre farklılaşır:\n\n- **Unit testler** — tek bir **birimi** (fonksiyon/sınıf/modül) **izole** doğrular, bağımlılıklar test double'larıyla değiştirilir. Hızlı, çok sayıda, hataları tam belirler. **Test piramidinin** temeli.\n- **Integration testler** — **birden çok birimin birlikte çalıştığını** doğrular (örn. servis + gerçek veritabanı ya da birkaç modül). Daha yavaş, daha az; unit testlerin yakalayamadığı bağlantı/sözleşme hatalarını yakalar.\n- **Smoke testler** — bir build/deploy sonrası çalıştırılan küçük bir **\"temelde çalışıyor mu?\"** kontrol kümesi (uygulama başlıyor mu, kullanıcılar giriş yapabiliyor mu). Daha derin testten önce hızlı bir akıl-sağlığı kapısı.\n- **Regression testler** — **yeni değişikliklerin daha önce çalışan** davranışı bozmadığını doğrulamak için mevcut testleri yeniden çalıştırır. Genelde otomatik ve CI'da çalışır; düzeltilen bir hata genelde bir regression testi kazanır ki geri gelemesin.\n\n**Unit ile integration testler arasındaki temel fark**, **izolasyon vs işbirliğidir**: bir unit test, her şey **mock/stub**'lanmış halde tek bir parçayı çalıştırır, böylece bir hata tam o birime işaret eder; bir integration test, **gerçek işbirlikçiler** kullanarak doğru etkileşimi kontrol eder, hız ve tam-belirleme doğruluğunu, parçaların gerçekten uyduğu güvenine değişir. İkisine de ihtiyacın var: çok sayıda hızlı unit test, daha az integration test."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What is the fundamental difference between a unit test and an integration test?",
+          "promptTr": "Bir unit test ile bir integration test arasındaki temel fark nedir?",
+          "options": [
+            { "text": "A unit test isolates one unit with doubles; an integration test uses real collaborators to verify they work together", "textTr": "Bir unit test bir birimi double'larla izole eder; bir integration test gerçek işbirlikçileri kullanarak birlikte çalıştıklarını doğrular", "correct": true },
+            { "text": "Unit tests are slower than integration tests", "textTr": "Unit testler integration testlerden yavaştır" },
+            { "text": "Integration tests run a single function in isolation", "textTr": "Integration testler tek bir fonksiyonu izole çalıştırır" },
+            { "text": "There is no difference", "textTr": "Fark yoktur" }
+          ],
+          "explanation": "Isolation vs collaboration: unit = one piece with dependencies mocked (fast, pinpoint); integration = real pieces interacting (slower, more confidence the system fits together).",
+          "explanationTr": "İzolasyon vs işbirliği: unit = bağımlılıkları mock'lanmış tek parça (hızlı, tam belirleme); integration = gerçek parçaların etkileşimi (daha yavaş, sistemin uyduğuna dair daha çok güven)."
+        },
+        {
+          "type": "match",
+          "prompt": "Match each test type to its purpose",
+          "promptTr": "Her test türünü amacıyla eşleştir",
+          "pairs": [
+            { "left": "Unit test", "leftTr": "Unit test", "right": "Verify one unit in isolation, dependencies mocked", "rightTr": "Bağımlılıkları mock'lu, tek birimi izole doğrula" },
+            { "left": "Integration test", "leftTr": "Integration test", "right": "Verify multiple units work together with real collaborators", "rightTr": "Birden çok birimin gerçek işbirlikçilerle birlikte çalıştığını doğrula" },
+            { "left": "Smoke test", "leftTr": "Smoke test", "right": "Quick 'is it fundamentally working?' check after a build", "rightTr": "Build sonrası hızlı 'temelde çalışıyor mu?' kontrolü" },
+            { "left": "Regression test", "leftTr": "Regression test", "right": "Confirm new changes didn't break previously-working behaviour", "rightTr": "Yeni değişikliklerin önceki çalışan davranışı bozmadığını doğrula" }
+          ]
+        },
+        {
+          "type": "challenge",
+          "question": "What is the difference between Unit Tests, Integration Tests, Smoke Tests, and Regression Tests?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is the fundamental difference between Unit Tests and Integration Tests?"
+        }
+      ]
+    },
+    {
+      "slug": "aaa-and-benefits",
+      "title": "Arrange-Act-Assert & the benefits",
+      "titleTr": "Arrange-Act-Assert ve faydaları",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Structuring a test, and why bother",
+          "titleTr": "Bir testi yapılandırmak ve neden uğraşmalı",
+          "body": "**The Arrange-Act-Assert (AAA) pattern** is a convention for structuring a test into three clear phases:\n\n- **Arrange** — set up the world: create the object under test, prepare inputs, configure mocks/stubs.\n- **Act** — perform the **single action** being tested (call the method once).\n- **Assert** — verify the outcome matches expectations.\n\n```js\nit(\"adds an item to the cart\", () => {\n  const cart = new Cart();            // Arrange\n  cart.add({ id: 1, price: 10 });     // Act\n  expect(cart.total).toBe(10);        // Assert\n});\n```\n\nIt keeps tests **readable and focused** — one action, clear setup, explicit checks. A test that needs many Act steps is often testing too much.\n\n**Benefits of unit testing:** they **catch bugs early** (cheapest to fix), act as **living documentation** of how code should behave, enable **safe refactoring** (a green suite means you didn't break behaviour), give **fast feedback** (run in seconds), **drive better design** (hard-to-test code is often badly-coupled code, which TDD surfaces), and reduce **regressions** in CI. The cost is writing/maintaining them — but on any non-trivial codebase that pays for itself in confidence and speed.",
+          "bodyTr": "**Arrange-Act-Assert (AAA) deseni**, bir testi üç net faza yapılandırma konvansiyonudur:\n\n- **Arrange** — dünyayı kur: test edilen nesneyi oluştur, girdileri hazırla, mock/stub'ları yapılandır.\n- **Act** — test edilen **tek eylemi** gerçekleştir (metodu bir kez çağır).\n- **Assert** — sonucun beklentilerle eşleştiğini doğrula.\n\n```js\nit(\"adds an item to the cart\", () => {\n  const cart = new Cart();            // Arrange\n  cart.add({ id: 1, price: 10 });     // Act\n  expect(cart.total).toBe(10);        // Assert\n});\n```\n\nTestleri **okunabilir ve odaklı** tutar — tek eylem, net kurulum, açık kontroller. Birçok Act adımı gereken bir test genelde fazla şey test ediyordur.\n\n**Unit testin faydaları:** **hataları erken yakalar** (düzeltmesi en ucuz), kodun nasıl davranması gerektiğine dair **canlı dokümantasyon** olur, **güvenli refactoring** sağlar (yeşil bir suite davranışı bozmadığın anlamına gelir), **hızlı geri bildirim** verir (saniyeler içinde çalışır), **daha iyi tasarımı yönlendirir** (test etmesi zor kod genelde kötü-bağlı koddur, TDD bunu açığa çıkarır) ve CI'da **regresyonları** azaltır. Maliyeti onları yazmak/sürdürmektir — ama önemsiz olmayan herhangi bir kod tabanında güven ve hız olarak kendini amorti eder."
+        },
+        {
+          "type": "order",
+          "prompt": "Order the phases of the AAA pattern",
+          "promptTr": "AAA deseninin fazlarını sırala",
+          "items": [
+            { "text": "Arrange — set up the object, inputs, and mocks", "textTr": "Arrange — nesneyi, girdileri ve mock'ları kur" },
+            { "text": "Act — perform the single action under test", "textTr": "Act — test edilen tek eylemi gerçekleştir" },
+            { "text": "Assert — verify the outcome", "textTr": "Assert — sonucu doğrula" }
+          ],
+          "explanation": "Arrange (setup) → Act (the one action) → Assert (check the result). This three-phase structure keeps each test focused and readable.",
+          "explanationTr": "Arrange (kurulum) → Act (tek eylem) → Assert (sonucu kontrol et). Bu üç fazlı yapı her testi odaklı ve okunabilir tutar."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Which is a genuine benefit of unit testing?",
+          "promptTr": "Hangisi unit testin gerçek bir faydasıdır?",
+          "options": [
+            { "text": "Enables safe refactoring and catches regressions, while documenting expected behaviour", "textTr": "Güvenli refactoring sağlar ve regresyonları yakalar, beklenen davranışı belgelerken", "correct": true },
+            { "text": "It guarantees the code has zero bugs", "textTr": "Kodun sıfır hatası olduğunu garanti eder" },
+            { "text": "It removes the need for any other testing", "textTr": "Başka herhangi bir teste olan ihtiyacı ortadan kaldırır" },
+            { "text": "It makes the production code run faster", "textTr": "Production kodunun daha hızlı çalışmasını sağlar" }
+          ],
+          "explanation": "Unit tests give fast feedback, document behaviour, enable confident refactoring, and guard against regressions. They reduce bugs but can't prove their total absence, and don't replace integration/e2e tests.",
+          "explanationTr": "Unit testler hızlı geri bildirim verir, davranışı belgeler, güvenli refactoring sağlar ve regresyonlara karşı korur. Hataları azaltır ama tümünün yokluğunu kanıtlayamaz ve integration/e2e testlerin yerine geçmez."
+        },
+        {
+          "type": "challenge",
+          "question": "What is the Arrange-Act-Assert pattern?"
+        },
+        {
+          "type": "challenge",
+          "question": "What are the benefits of unit testing?"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "topic": "git",
+  "slug": "branching-collaboration",
+  "title": "Branching, Remotes & Collaboration",
+  "titleTr": "Dallanma, Remote'lar ve İşbirliği",
+  "section": "core",
+  "position": 2,
+  "lessons": [
+    {
+      "slug": "forks-branches-clones-prs",
+      "title": "Forks, branches, clones & pull requests",
+      "titleTr": "Fork'lar, branch'ler, clone'lar ve pull request'ler",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Four terms people mix up",
+          "titleTr": "İnsanların karıştırdığı dört terim",
+          "body": "**Branch, clone, and fork** operate at different levels:\n\n- **Branch** — a movable **pointer to a commit** *within one repository*. Branches let you develop a feature in isolation, then merge. Cheap and local (`git branch`, `git switch -c`).\n- **Clone** — a **full local copy** of a repository, including all history and branches (`git clone <url>`). It sets up an `origin` remote pointing back to the source.\n- **Fork** — a **server-side copy of someone else's repository** into your own account (a GitHub/GitLab concept, not a core git command). You fork a project you can't push to, then clone *your fork*, push branches there, and open a PR back to the original.\n\nSo: a fork is *your own repo on the server*, a clone is *a local copy of a repo*, and a branch is *a line of development inside a repo*.\n\n**Pull request vs branch:** a **branch** is the actual git object — the line of commits. A **pull request (PR / merge request)** is a **platform feature** (GitHub/GitLab/Bitbucket), **not** a git concept: it's a *request to merge one branch into another*, wrapping the diff with code review, discussion, CI checks, and an approve/merge button. You push a branch, then **open a PR** from it. The branch holds the code; the PR is the review-and-merge workflow around it.",
+          "bodyTr": "**Branch, clone ve fork** farklı seviyelerde çalışır:\n\n- **Branch** — *tek bir depo içinde* bir **commit'e hareketli işaretçi**. Branch'ler bir özelliği izole geliştirip sonra birleştirmeni sağlar. Ucuz ve yerel (`git branch`, `git switch -c`).\n- **Clone** — tüm geçmiş ve branch'ler dahil bir deponun **tam yerel kopyası** (`git clone <url>`). Kaynağa geri işaret eden bir `origin` remote'u kurar.\n- **Fork** — başka birinin deposunun **sunucu tarafı bir kopyası**, kendi hesabına (bir GitHub/GitLab kavramı, çekirdek git komutu değil). Push edemediğin bir projeyi fork'larsın, sonra *kendi fork'unu* clone'lar, branch'leri oraya push eder ve orijinale geri bir PR açarsın.\n\nYani: fork *sunucudaki kendi depon*, clone *bir deponun yerel kopyası* ve branch *bir depo içindeki bir geliştirme hattıdır*.\n\n**Pull request vs branch:** bir **branch** gerçek git nesnesidir — commit'ler hattı. Bir **pull request (PR / merge request)** bir **platform özelliğidir** (GitHub/GitLab/Bitbucket), bir git kavramı **değildir**: bir branch'i başka birine *birleştirme isteğidir*; diff'i kod incelemesi, tartışma, CI kontrolleri ve bir approve/merge butonuyla sarar. Bir branch push eder, sonra ondan bir **PR açarsın**. Branch kodu tutar; PR onun etrafındaki inceleme-ve-birleştirme akışıdır."
+        },
+        {
+          "type": "match",
+          "prompt": "Match each term to what it is",
+          "promptTr": "Her terimi ne olduğuyla eşleştir",
+          "pairs": [
+            { "left": "Branch", "leftTr": "Branch", "right": "A movable pointer to a commit inside one repository", "rightTr": "Tek bir depo içinde bir commit'e hareketli işaretçi" },
+            { "left": "Clone", "leftTr": "Clone", "right": "A full local copy of a repository with its history", "rightTr": "Bir deponun geçmişiyle birlikte tam yerel kopyası" },
+            { "left": "Fork", "leftTr": "Fork", "right": "A server-side copy of someone's repo into your own account", "rightTr": "Birinin deposunun kendi hesabına sunucu tarafı kopyası" },
+            { "left": "Pull request", "leftTr": "Pull request", "right": "A platform request to review and merge one branch into another", "rightTr": "Bir branch'i başkasına inceleyip birleştirme platform isteği" }
+          ]
+        },
+        {
+          "type": "true_false",
+          "statement": "A pull request is a core Git command, just like git branch.",
+          "statementTr": "Pull request, tıpkı git branch gibi bir çekirdek Git komutudur.",
+          "answer": false,
+          "explanation": "PRs are a feature of hosting platforms (GitHub/GitLab), not git itself. Git has branches; the PR is the review/merge workflow layered on top.",
+          "explanationTr": "PR'lar barındırma platformlarının (GitHub/GitLab) bir özelliğidir, git'in kendisinin değil. Git'te branch'ler vardır; PR üstüne eklenen inceleme/birleştirme akışıdır."
+        },
+        {
+          "type": "challenge",
+          "question": "What is a Git fork? What is the difference between fork, branch, and clone?"
+        },
+        {
+          "type": "challenge",
+          "question": "What's the difference between a pull request and a branch?"
+        }
+      ]
+    },
+    {
+      "slug": "pull-vs-fetch-and-cherry-pick",
+      "title": "pull vs fetch & cherry-pick",
+      "titleTr": "pull vs fetch ve cherry-pick",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Syncing with remotes, and grabbing one commit",
+          "titleTr": "Remote'larla senkronize olmak ve tek bir commit almak",
+          "body": "**`git fetch` vs `git pull`** — both bring remote changes, but:\n\n- **`git fetch`** **downloads** new commits/branches from the remote into your local **remote-tracking** branches (e.g. `origin/main`) but **does not touch your working branch**. It's safe and non-destructive — you can inspect what changed (`git log origin/main`) before integrating.\n- **`git pull`** is **`fetch` + `merge`** (or `fetch` + `rebase` with `--rebase`): it downloads *and* immediately integrates the remote changes into your current branch, updating your working tree.\n\nSo `fetch` lets you look before you leap; `pull` does it in one step. Many people prefer `fetch` then a deliberate `merge`/`rebase` to avoid surprise merges.\n\n**`git cherry-pick <commit>`** applies the changes from **one specific commit** onto your current branch, creating a **new commit** with the same diff (but a new hash). Use it to grab a single fix from another branch without merging the whole thing — e.g. backporting a hotfix from `main` onto a release branch, or pulling one useful commit out of a feature branch. Beware of applying the same change twice (duplicate commits) if that branch later merges normally.",
+          "bodyTr": "**`git fetch` vs `git pull`** — ikisi de remote değişiklikleri getirir ama:\n\n- **`git fetch`** remote'tan yeni commit'leri/branch'leri yerel **remote-tracking** branch'lerine (örn. `origin/main`) **indirir** ama **çalışma branch'ine dokunmaz**. Güvenli ve yıkıcı değildir — entegre etmeden önce neyin değiştiğini inceleyebilirsin (`git log origin/main`).\n- **`git pull`** **`fetch` + `merge`**'tir (ya da `--rebase` ile `fetch` + `rebase`): remote değişiklikleri indirir *ve* hemen mevcut branch'ine entegre eder, working tree'ni günceller.\n\nYani `fetch` bakmadan atlamana izin verir; `pull` tek adımda yapar. Birçok kişi sürpriz birleştirmelerden kaçınmak için `fetch` sonra bilinçli bir `merge`/`rebase` tercih eder.\n\n**`git cherry-pick <commit>`**, **tek bir belirli commit'ten** gelen değişiklikleri mevcut branch'ine uygular, aynı diff'le (ama yeni hash'le) **yeni bir commit** oluşturur. Tüm şeyi birleştirmeden başka bir branch'ten tek bir düzeltmeyi almak için kullan — örn. `main`'den bir hotfix'i bir release branch'ine backport etmek ya da bir feature branch'inden tek bir yararlı commit çıkarmak. O branch daha sonra normal birleşirse aynı değişikliği iki kez uygulamaya (yinelenen commit'ler) dikkat et."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What's the difference between git fetch and git pull?",
+          "promptTr": "git fetch ile git pull arasındaki fark nedir?",
+          "options": [
+            { "text": "fetch only downloads remote changes; pull = fetch + merge/rebase into your current branch", "textTr": "fetch yalnızca remote değişiklikleri indirir; pull = fetch + mevcut branch'ine merge/rebase", "correct": true },
+            { "text": "fetch integrates changes; pull only downloads them", "textTr": "fetch değişiklikleri entegre eder; pull yalnızca indirir" },
+            { "text": "They are identical", "textTr": "Aynılar" },
+            { "text": "pull works offline; fetch needs the network", "textTr": "pull çevrimdışı çalışır; fetch ağ gerektirir" }
+          ],
+          "explanation": "fetch updates remote-tracking branches without changing your work; pull fetches and then merges (or rebases) into your current branch in one step.",
+          "explanationTr": "fetch, çalışmanı değiştirmeden remote-tracking branch'leri günceller; pull, fetch yapar sonra tek adımda mevcut branch'ine merge (ya da rebase) eder."
+        },
+        {
+          "type": "true_false",
+          "statement": "git cherry-pick applies one specific commit's changes onto the current branch as a new commit.",
+          "statementTr": "git cherry-pick, belirli bir commit'in değişikliklerini mevcut branch'e yeni bir commit olarak uygular.",
+          "answer": true,
+          "explanation": "cherry-pick replays a single commit's diff onto your branch (new hash), handy for backporting a fix without merging the whole source branch.",
+          "explanationTr": "cherry-pick tek bir commit'in diff'ini branch'ine yeniden oynatır (yeni hash), tüm kaynak branch'i birleştirmeden bir düzeltmeyi backport etmek için kullanışlı."
+        },
+        {
+          "type": "challenge",
+          "question": "What is the difference between git pull and git fetch?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is git cherry-pick?"
+        }
+      ]
+    }
+  ]
+}

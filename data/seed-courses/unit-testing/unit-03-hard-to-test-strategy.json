@@ -1,0 +1,146 @@
+{
+  "topic": "unit-testing",
+  "slug": "hard-to-test-strategy",
+  "title": "Hard-to-Test Code & Strategy",
+  "titleTr": "Test Edilmesi Zor Kod ve Strateji",
+  "section": "interview",
+  "position": 3,
+  "lessons": [
+    {
+      "slug": "private-methods-and-guis",
+      "title": "Testing private methods & GUIs",
+      "titleTr": "Private metotları ve GUI'leri test etmek",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Test through the public surface",
+          "titleTr": "Public yüzey üzerinden test et",
+          "body": "**Testing private methods:** the standard advice is **don't test them directly** — test them **indirectly through the public API** that uses them. Privates are implementation details; if they're covered by tests of public behaviour, that's enough, and your tests stay free to refactor internals. **If a private method is complex enough to feel like it needs its own test, that's a design smell** — it often wants to be **extracted into its own class/module** with a public interface (then test it directly there). Last resorts (reflection, making it package-private/`@VisibleForTesting`) exist but signal the unit is doing too much.\n\n**Unit-testing a GUI:** UIs are hard to unit-test directly (rendering, event loops, async). The key move is to **separate logic from presentation** so the logic is testable without the UI. Patterns like **MVC/MVP/MVVM** and React's container/presentational split push business logic into plain, framework-free functions/objects you can unit-test normally. The thin view layer is then covered by **component tests** (e.g. React Testing Library — render, simulate events, assert on output) and a few **end-to-end** tests for full user flows. So: unit-test the **extracted logic**; use component/e2e tests for the **rendered UI** — don't try to cram pixel/DOM assertions into pure unit tests.",
+          "bodyTr": "**Private metotları test etme:** standart tavsiye **onları doğrudan test etmemektir** — onları kullanan **public API üzerinden dolaylı** test et. Private'lar implementasyon detaylarıdır; public davranış testleriyle kapsanıyorlarsa bu yeterlidir ve testlerin iç yapıyı refactor etmekte özgür kalır. **Bir private metot kendi testine ihtiyaç duyacak kadar karmaşık hissettiriyorsa, bu bir tasarım kokusudur** — genelde public bir arayüzle **kendi sınıfına/modülüne çıkarılmak** ister (sonra orada doğrudan test et). Son çareler (reflection, package-private/`@VisibleForTesting` yapma) vardır ama birimin fazla şey yaptığını işaret eder.\n\n**Bir GUI'yi unit-test etme:** UI'lar doğrudan unit-test etmesi zordur (render, event loop, async). Temel hamle, **mantığı sunumdan ayırmaktır** ki mantık UI olmadan test edilebilsin. **MVC/MVP/MVVM** gibi desenler ve React'in container/presentational ayrımı, iş mantığını normalde unit-test edebileceğin düz, framework'süz fonksiyonlara/nesnelere iter. İnce view katmanı sonra **component testleriyle** (örn. React Testing Library — render et, event simüle et, çıktıyı doğrula) ve tam kullanıcı akışları için birkaç **end-to-end** testle kapsanır. Yani: **çıkarılan mantığı** unit-test et; **render edilen UI** için component/e2e testleri kullan — piksel/DOM doğrulamalarını saf unit testlere sıkıştırmaya çalışma."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What's the recommended way to test private methods?",
+          "promptTr": "Private metotları test etmenin önerilen yolu nedir?",
+          "options": [
+            { "text": "Test them indirectly through the public API; if one needs its own test, extract it into its own unit", "textTr": "Onları public API üzerinden dolaylı test et; biri kendi testine ihtiyaç duyuyorsa kendi birimine çıkar", "correct": true },
+            { "text": "Always use reflection to call them directly", "textTr": "Onları doğrudan çağırmak için her zaman reflection kullan" },
+            { "text": "Make every private method public", "textTr": "Her private metodu public yap" },
+            { "text": "Private methods should never be covered at all", "textTr": "Private metotlar hiç kapsanmamalı" }
+          ],
+          "explanation": "Privates are implementation detail — cover them via public behaviour. A private that demands its own test usually signals it should be its own class with a public interface.",
+          "explanationTr": "Private'lar implementasyon detayıdır — onları public davranış üzerinden kapsa. Kendi testini gerektiren bir private genelde public arayüzlü kendi sınıfı olması gerektiğini işaret eder."
+        },
+        {
+          "type": "true_false",
+          "statement": "Making GUI logic testable usually means separating business logic from the view (e.g. MVVM, container/presentational).",
+          "statementTr": "GUI mantığını test edilebilir kılmak genelde iş mantığını view'dan ayırmak demektir (örn. MVVM, container/presentational).",
+          "answer": true,
+          "explanation": "Extract logic into framework-free units you can unit-test; cover the thin view with component/e2e tests. Don't push DOM/pixel assertions into pure unit tests.",
+          "explanationTr": "Mantığı unit-test edebileceğin framework'süz birimlere çıkar; ince view'ı component/e2e testleriyle kapsa. DOM/piksel doğrulamalarını saf unit testlere itme."
+        },
+        {
+          "type": "challenge",
+          "question": "How do you test private methods?"
+        },
+        {
+          "type": "challenge",
+          "question": "How can you unit test a GUI?"
+        }
+      ]
+    },
+    {
+      "slug": "databases-and-caching",
+      "title": "Databases & caching",
+      "titleTr": "Veritabanları ve önbellekleme",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Testing around stateful infrastructure",
+          "titleTr": "Durumlu altyapı etrafında test etmek",
+          "body": "**Unit-testing database-driven apps:** the strategy is to **keep the database out of unit tests** by isolating data access behind an abstraction (a **repository/DAO** interface). Then unit-test your logic with that interface **mocked/stubbed**. The real DB interaction belongs in a smaller set of **integration tests** — run against an **in-memory DB** (e.g. SQLite/H2) or a **disposable real DB** (a Docker container / Testcontainers), seeded with known fixtures, and wrapped in a **transaction that rolls back** (or a reset) after each test so tests stay isolated and repeatable. Keep these few and fast; push most assertions into pure unit tests.\n\n**Designing a testing strategy for cache-reliant code:** caching adds **hidden state** (stale data, TTL/expiry, hits vs misses, invalidation), so test those behaviours explicitly:\n\n- **Abstract the cache** behind an interface and **inject** it, so tests can supply a fake/in-memory cache and control it.\n- Test the **cache-miss path** (computes and stores) **and** the **cache-hit path** (returns cached, doesn't recompute — assert the underlying source was called **once**).\n- Test **invalidation/expiry** — after a TTL or an explicit invalidate, the value is recomputed; control time via an injectable **clock** rather than real `sleep`.\n- Test **stampede/edge cases** if relevant (concurrent misses).\n\nThe theme for both: **depend on an abstraction, inject it, and make time/state controllable** — that's what turns hard-to-test infrastructure into deterministic tests.",
+          "bodyTr": "**Veritabanı-tabanlı uygulamaları unit-test etme:** strateji, veri erişimini bir soyutlamanın (bir **repository/DAO** arayüzü) arkasında izole ederek **veritabanını unit testlerin dışında tutmaktır**. Sonra mantığını o arayüz **mock/stub'lanmış** halde unit-test et. Gerçek DB etkileşimi daha küçük bir **integration test** kümesine aittir — bir **in-memory DB**'ye (örn. SQLite/H2) ya da **atılabilir gerçek bir DB**'ye (Docker container / Testcontainers) karşı çalıştırılır, bilinen fixture'larla beslenir ve her testten sonra **geri alınan (rollback) bir transaction** (ya da bir sıfırlama) ile sarılır ki testler izole ve tekrarlanabilir kalsın. Bunları az ve hızlı tut; çoğu doğrulamayı saf unit testlere it.\n\n**Önbelleğe bağımlı kod için test stratejisi tasarlama:** önbellekleme **gizli state** ekler (bayat veri, TTL/sona erme, hit vs miss, invalidation), bu yüzden o davranışları açıkça test et:\n\n- **Önbelleği bir arayüz arkasında soyutla** ve **enjekte et**, böylece testler bir fake/in-memory önbellek sağlayıp kontrol edebilsin.\n- **Cache-miss yolunu** (hesaplar ve saklar) **ve** **cache-hit yolunu** (önbelleği döndürür, yeniden hesaplamaz — alttaki kaynağın **bir kez** çağrıldığını doğrula) test et.\n- **Invalidation/sona ermeyi** test et — bir TTL ya da açık bir invalidate sonrası değer yeniden hesaplanır; zamanı gerçek `sleep` yerine enjekte edilebilir bir **clock** ile kontrol et.\n- İlgiliyse **stampede/uç durumları** test et (eşzamanlı miss'ler).\n\nİkisinin de teması: **bir soyutlamaya bağımlı ol, onu enjekte et ve zamanı/state'i kontrol edilebilir kıl** — test edilmesi zor altyapıyı deterministik testlere çeviren budur."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What's the core strategy for unit-testing database-driven code?",
+          "promptTr": "Veritabanı-tabanlı kodu unit-test etmenin temel stratejisi nedir?",
+          "options": [
+            { "text": "Abstract data access behind a repository, mock it in unit tests, and use a few integration tests with an in-memory/disposable DB", "textTr": "Veri erişimini bir repository arkasında soyutla, unit testlerde mock'la ve in-memory/atılabilir DB'li birkaç integration testi kullan", "correct": true },
+            { "text": "Run every unit test against the production database", "textTr": "Her unit testi production veritabanına karşı çalıştır" },
+            { "text": "Never test database code", "textTr": "Veritabanı kodunu asla test etme" },
+            { "text": "Hardcode query results into the production code", "textTr": "Sorgu sonuçlarını production koduna hardcode et" }
+          ],
+          "explanation": "Isolate the DB behind an interface and mock it for fast unit tests; verify real persistence with a few integration tests on an in-memory or disposable DB, rolled back per test.",
+          "explanationTr": "DB'yi bir arayüz arkasında izole et ve hızlı unit testler için mock'la; gerçek kalıcılığı in-memory ya da atılabilir bir DB'de, test başına geri alınan birkaç integration testiyle doğrula."
+        },
+        {
+          "type": "true_false",
+          "statement": "To test cache-reliant code deterministically, inject the cache and a controllable clock, and test both hit and miss paths plus expiry.",
+          "statementTr": "Önbelleğe bağımlı kodu deterministik test etmek için önbelleği ve kontrol edilebilir bir clock'u enjekte et, hem hit hem miss yolunu artı sona ermeyi test et.",
+          "answer": true,
+          "explanation": "Injecting the cache and clock removes hidden state and real waiting, so you can assert cache hits don't recompute, misses store, and entries expire/invalidate as designed.",
+          "explanationTr": "Önbelleği ve clock'u enjekte etmek gizli state'i ve gerçek beklemeyi kaldırır, böylece cache hit'lerin yeniden hesaplamadığını, miss'lerin sakladığını ve girdilerin tasarlandığı gibi sona erdiğini/invalidate olduğunu doğrulayabilirsin."
+        },
+        {
+          "type": "challenge",
+          "question": "What is the best strategy for unit testing database-driven applications?"
+        },
+        {
+          "type": "challenge",
+          "question": "How do you design a testing strategy for code that relies on caching?"
+        }
+      ]
+    },
+    {
+      "slug": "coverage-legacy-and-tdd",
+      "title": "Coverage, legacy code & TDD trade-offs",
+      "titleTr": "Kapsam, legacy kod ve TDD ödünleri",
+      "position": 3,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Pragmatics of a real test suite",
+          "titleTr": "Gerçek bir test suite'inin pragmatiği",
+          "body": "**Reasonable code coverage:** there's **no universal magic number**. Many teams aim for roughly **70–80%** as a healthy target; **~100% is usually not worth it** (diminishing returns, time better spent elsewhere). Crucially, **coverage measures lines executed, not assertions made** — you can have 100% coverage with weak tests. Treat coverage as a tool to **find untested code**, not a goal to game; prioritise covering **critical, complex, and risky** paths over trivial code.\n\n**Adding unit testing to an existing production project — yes, and incrementally:** don't try to retrofit tests everywhere at once. Strategy: add tests for **new code and bug fixes** going forward (every fixed bug gets a regression test); write **characterization tests** that capture current behaviour before refactoring legacy code; and apply **\"seams\"** (dependency injection, extracting interfaces) to break hard dependencies so code becomes testable. Cover the **highest-risk / most-changed** areas first. Over time coverage and confidence grow without a big-bang rewrite. (Michael Feathers' *Working Effectively with Legacy Code* is the canonical reference.)\n\n**Disadvantages of TDD:** it has a **learning curve** and feels **slower upfront** (writing tests first); it can be **awkward for exploratory/spike work** or unclear requirements; **over-focusing on units** can yield many tightly-coupled tests that **resist refactoring** and miss integration issues; tests of trivial code add **maintenance cost**; and done dogmatically it can encourage over-design. TDD's benefits (design pressure, regression safety, fast feedback) are real, but it's a tool with trade-offs, not a mandate for every situation.",
+          "bodyTr": "**Makul kod kapsamı:** **evrensel bir sihirli sayı yoktur**. Birçok ekip sağlıklı bir hedef olarak kabaca **%70–80**'i amaçlar; **~%100 genelde buna değmez** (azalan getiri, zaman başka yerde daha iyi harcanır). Önemlisi, **kapsam çalıştırılan satırları ölçer, yapılan doğrulamaları değil** — zayıf testlerle %100 kapsama sahip olabilirsin. Kapsamı, oyunla aşılacak bir hedef değil, **test edilmemiş kodu bulmak** için bir araç olarak gör; önemsiz kod yerine **kritik, karmaşık ve riskli** yolları kapsamayı önceliklendir.\n\n**Mevcut bir production projesine unit test ekleme — evet, ve aşamalı:** her yere testi bir anda geçirmeye çalışma. Strateji: ileriye dönük **yeni kod ve hata düzeltmeleri** için test ekle (her düzeltilen hata bir regression testi alır); legacy kodu refactor etmeden önce mevcut davranışı yakalayan **characterization testleri** yaz; ve sert bağımlılıkları kırmak için **\"seam\"ler** (dependency injection, arayüz çıkarma) uygula ki kod test edilebilir olsun. Önce **en yüksek riskli / en çok değişen** alanları kapsa. Zamanla kapsam ve güven, büyük bir baştan-yazma olmadan büyür. (Michael Feathers'ın *Working Effectively with Legacy Code* kanonik referanstır.)\n\n**TDD'nin dezavantajları:** bir **öğrenme eğrisi** vardır ve **başta daha yavaş** hissettirir (önce test yazmak); **keşifsel/spike işler** ya da net olmayan gereksinimler için garip olabilir; **birimlere aşırı odaklanmak**, refactoring'e **direnen** ve integration sorunlarını kaçıran çok sayıda sıkı-bağlı test üretebilir; önemsiz kod testleri **bakım maliyeti** ekler; ve dogmatik yapılırsa aşırı-tasarımı teşvik edebilir. TDD'nin faydaları (tasarım baskısı, regresyon güvenliği, hızlı geri bildirim) gerçektir ama ödünleri olan bir araçtır, her durum için bir zorunluluk değil."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Which statement about code coverage is most accurate?",
+          "promptTr": "Kod kapsamı hakkında hangi ifade en doğrudur?",
+          "options": [
+            { "text": "There's no magic number; ~70–80% is common, and coverage shows untested code but not test quality", "textTr": "Sihirli sayı yoktur; ~%70–80 yaygındır ve kapsam test edilmemiş kodu gösterir ama test kalitesini değil", "correct": true },
+            { "text": "100% coverage guarantees a bug-free system", "textTr": "%100 kapsam hatasız bir sistem garanti eder" },
+            { "text": "Coverage measures how many assertions a test makes", "textTr": "Kapsam bir testin kaç doğrulama yaptığını ölçer" },
+            { "text": "Below 100% coverage, tests are worthless", "textTr": "%100'ün altında kapsamda testler değersizdir" }
+          ],
+          "explanation": "Coverage = lines executed, not assertion strength. Aim for a sensible target (often 70–80%), focus on risky paths, and use coverage to find gaps rather than chase 100%.",
+          "explanationTr": "Kapsam = çalıştırılan satırlar, doğrulama gücü değil. Makul bir hedefi amaçla (genelde %70–80), riskli yollara odaklan ve %100 kovalamak yerine kapsamı boşlukları bulmak için kullan."
+        },
+        {
+          "type": "true_false",
+          "statement": "Unit testing can be added to a legacy production project incrementally — testing new code/bug fixes first and introducing seams to break dependencies.",
+          "statementTr": "Unit test bir legacy production projesine aşamalı eklenebilir — önce yeni kodu/hata düzeltmelerini test ederek ve bağımlılıkları kırmak için seam'ler ekleyerek.",
+          "answer": true,
+          "explanation": "Retrofit incrementally: cover new code and fixes, write characterization tests before refactoring, and use DI/interfaces (seams) to make legacy code testable, starting with high-risk areas.",
+          "explanationTr": "Aşamalı geçir: yeni kodu ve düzeltmeleri kapsa, refactor'dan önce characterization testleri yaz ve legacy kodu test edilebilir kılmak için DI/arayüzler (seam'ler) kullan, yüksek-riskli alanlardan başlayarak."
+        },
+        {
+          "type": "challenge",
+          "question": "What is a reasonable code coverage percentage for unit tests?"
+        },
+        {
+          "type": "challenge",
+          "question": "Can unit testing be successfully added to an existing production project and how?"
+        },
+        {
+          "type": "challenge",
+          "question": "What are the disadvantages of Test-Driven Development (TDD)?"
+        }
+      ]
+    }
+  ]
+}

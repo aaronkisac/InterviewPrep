@@ -171,7 +171,9 @@ Same retro rules apply: challenge texts byte-for-byte from seed JSON, 5–9 step
 
 **CSS course COMPLETE** (bank 701–733, 33 q) — new course authored 2026-06-14. 6 units, 16 lessons, **33/33 coverage**. Dir `data/seed-courses/css/` + syllabus `data/syllabi/css.json`. Units: 01 CSS Fundamentals (701/702/713 · 706/711), 02 Selectors & Specificity (704/703 · 721/712), 03 Box Model & Layout (705/727 · 709/722 · 710/720), 04 Modern Layout & Responsive (715/716 · 726/729 · 724/728), 05 Preprocessors & Architecture (707/719 · 708/730 · 732/733), 06 Accessibility/Cross-browser/Techniques (723/725 · 717/714 · 718/731). Uses order + match step types. **Needs `pnpm seed courses` + `pnpm course:coverage` + play-test.**
 
-**Course scale-out status (2026-06-14): React ✓, TypeScript ✓, Next.js ✓, JavaScript ✓, Redux ✓ (35/35), React Hooks ✓ (29/29), HTML5 ✓ (51/51), CSS ✓ (33/33).** Remaining topics with banks but no course yet: git, agile-scrum, websockets, unit-testing, design-patterns, software-architecture, api-design.
+**Git course COMPLETE** (bank 901–921, 21 q) — 4 units, 10 lessons, **21/21**. `data/seed-courses/git/` + `data/syllabi/git.json`. Units: 01 Fundamentals (901/902 · 903/909), 02 Branching & Collaboration (905/904 · 906/912), 03 Undoing & Rewriting (907/914 · 908/915 · 919/917), 04 Workflows & Advanced (910/911/913 · 916/918 · 920/921). Uses match + order steps. **Needs `pnpm seed courses` + coverage + play-test.**
+
+**Course scale-out status (2026-06-14): React ✓, TypeScript ✓, Next.js ✓, JavaScript ✓, Redux ✓ (35/35), React Hooks ✓ (29/29), HTML5 ✓ (51/51), CSS ✓ (33/33), Git ✓ (21/21).** Remaining "small" batch (Aaron-approved order): unit-testing, design-patterns, websockets, agile-scrum. Then big ones: software-architecture, api-design.
 
 ---
 

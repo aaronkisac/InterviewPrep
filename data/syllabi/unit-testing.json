@@ -1,0 +1,77 @@
+{
+  "topic": "unit-testing",
+  "title": "Unit Testing",
+  "$comment": "Canonical concept list (syllabus) for Unit Testing. COMPLETE: 3 units, 7 concepts covering bank ids 1201-1216 (16/16). Verified by: pnpm concept:coverage",
+  "concepts": [
+    {
+      "id": "types-of-tests",
+      "title": "Types of tests",
+      "titleTr": "Test türleri",
+      "section": "foundations",
+      "unit": "testing-fundamentals",
+      "lessons": [
+        "types-of-tests"
+      ]
+    },
+    {
+      "id": "aaa-and-benefits",
+      "title": "Arrange-Act-Assert & the benefits",
+      "titleTr": "Arrange-Act-Assert ve faydaları",
+      "section": "foundations",
+      "unit": "testing-fundamentals",
+      "lessons": [
+        "aaa-and-benefits"
+      ]
+    },
+    {
+      "id": "mocking-spying-and-when",
+      "title": "Mocking, spying & when to mock",
+      "titleTr": "Mock'lama, spy'lama ve ne zaman mock",
+      "section": "core",
+      "unit": "mocking-what-to-test",
+      "lessons": [
+        "mocking-spying-and-when"
+      ]
+    },
+    {
+      "id": "whats-worth-testing",
+      "title": "What's worth testing",
+      "titleTr": "Neyi test etmeye değer",
+      "section": "core",
+      "unit": "mocking-what-to-test",
+      "lessons": [
+        "whats-worth-testing"
+      ]
+    },
+    {
+      "id": "private-methods-and-guis",
+      "title": "Testing private methods & GUIs",
+      "titleTr": "Private metotları ve GUI'leri test etmek",
+      "section": "interview",
+      "unit": "hard-to-test-strategy",
+      "lessons": [
+        "private-methods-and-guis"
+      ]
+    },
+    {
+      "id": "databases-and-caching",
+      "title": "Databases & caching",
+      "titleTr": "Veritabanları ve önbellekleme",
+      "section": "interview",
+      "unit": "hard-to-test-strategy",
+      "lessons": [
+        "databases-and-caching"
+      ]
+    },
+    {
+      "id": "coverage-legacy-and-tdd",
+      "title": "Coverage, legacy code & TDD trade-offs",
+      "titleTr": "Kapsam, legacy kod ve TDD ödünleri",
+      "section": "interview",
+      "unit": "hard-to-test-strategy",
+      "lessons": [
+        "coverage-legacy-and-tdd"
+      ]
+    }
+  ]
+}
