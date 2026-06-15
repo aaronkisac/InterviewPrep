@@ -141,6 +141,24 @@ export default async function HomePage() {
         </section>
       )}
 
+      {/* ── Sign-in CTA (guests only) — placed high so the ask is above the fold ── */}
+      {!user && (
+        <section className="flex flex-col items-start gap-3 rounded-lg border border-dashed border-border px-6 py-6 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <p className="text-sm font-semibold">{i18n.trackProgress}</p>
+            <p className="mt-1 max-w-md text-sm text-muted-foreground">
+              {i18n.trackProgressSub}
+            </p>
+          </div>
+          <Link
+            href="/signin"
+            className="shrink-0 rounded-md bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition hover:opacity-90 active:scale-[0.98]"
+          >
+            {i18n.signInCta}
+          </Link>
+        </section>
+      )}
+
       {/* ── Features ── */}
       <section className="space-y-4">
         <h2 className="text-sm font-medium text-muted-foreground">
@@ -190,22 +208,6 @@ export default async function HomePage() {
           })}
         </div>
       </section>
-
-      {/* ── Sign-in CTA (guests only) ── */}
-      {!user && (
-        <section className="rounded-lg border border-dashed border-border px-6 py-10 text-center">
-          <p className="text-sm font-semibold">{i18n.trackProgress}</p>
-          <p className="mx-auto mt-2 max-w-sm text-sm text-muted-foreground">
-            {i18n.trackProgressSub}
-          </p>
-          <Link
-            href="/signin"
-            className="mt-6 inline-block rounded-md bg-primary px-5 py-2 text-sm font-medium text-primary-foreground hover:opacity-90"
-          >
-            {i18n.signInCta}
-          </Link>
-        </section>
-      )}
 
       <footer className="border-t border-border pt-6 text-xs text-muted-foreground">
         {i18n.footer}

@@ -3,6 +3,7 @@
 import { auth } from "@/lib/auth";
 import { saveTopicMastery } from "@/lib/actions/user-tracking";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { validateSteps, type ChallengeStep } from "@/lib/course/step-schema";
 
 export type RecordLessonResultInput = {
   lessonId: string;
@@ -29,10 +30,11 @@ export async function recordLessonResult(
   const now = new Date().toISOString();
   const accuracy = Math.max(0, Math.min(100, Math.round(input.accuracyPct)));
 
-  // Lesson + topic (needed for mastery rows)
+  // Lesson + topic + steps (steps let us validate the submitted challenges
+  // against the questions that actually belong to this lesson).
   const { data: lesson, error: lessonError } = await sb
     .from("lessons")
-    .select("id, units(topic_slug)")
+    .select("id, steps, units(topic_slug)")
     .eq("id", input.lessonId)
     .maybeSingle();
 
@@ -44,6 +46,20 @@ export async function recordLessonResult(
     lesson.units as unknown as { topic_slug: string } | null
   )?.topic_slug;
   if (!topicSlug) return { ok: false };
+
+  // Whitelist: only question IDs that are genuine challenge steps in THIS
+  // lesson may write per-question progress / mastery. A tampered client could
+  // otherwise POST arbitrary bank question UUIDs (or fabricated `correct`
+  // flags) and pollute its own Leitner queue and topic mastery.
+  const parsedSteps = validateSteps(lesson.steps);
+  const allowedQuestionIds = new Set<string>(
+    parsedSteps.ok
+      ? parsedSteps.value
+          .filter((s): s is ChallengeStep => s.type === "challenge")
+          .map((s) => s.questionId)
+          .filter((id): id is string => typeof id === "string")
+      : [],
+  );
 
   // Upsert progress: attempts +1, best_pct keeps the max, completed_at sticks
   const { data: existing } = await sb
@@ -70,12 +86,23 @@ export async function recordLessonResult(
     return { ok: false };
   }
 
-  // Challenge steps feed the same tracking as mock sessions
-  if (input.challenges.length > 0) {
-    const rows = input.challenges.map((c) => ({
+  // Challenge steps feed the same tracking as mock sessions. Drop any entry
+  // whose questionId is not an actual challenge in this lesson; dedupe so a
+  // repeated UUID can't be counted twice.
+  const seen = new Set<string>();
+  const validChallenges = input.challenges.filter((c) => {
+    if (!allowedQuestionIds.has(c.questionId) || seen.has(c.questionId)) {
+      return false;
+    }
+    seen.add(c.questionId);
+    return true;
+  });
+
+  if (validChallenges.length > 0) {
+    const rows = validChallenges.map((c) => ({
       user_id: userId,
       question_id: c.questionId,
-      correct: c.correct,
+      correct: c.correct === true,
       answered_at: now,
     }));
     const { error: progressError } = await sb
@@ -87,10 +114,10 @@ export async function recordLessonResult(
 
     await saveTopicMastery(
       "mock",
-      input.challenges.map((c) => ({
+      validChallenges.map((c) => ({
         questionId: c.questionId,
         topic: topicSlug,
-        mastered: c.correct,
+        mastered: c.correct === true,
       })),
     );
   }
