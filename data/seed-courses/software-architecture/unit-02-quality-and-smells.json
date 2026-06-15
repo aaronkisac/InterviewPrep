@@ -1,0 +1,146 @@
+{
+  "topic": "software-architecture",
+  "slug": "quality-and-smells",
+  "title": "Code Quality & Smells",
+  "titleTr": "Kod Kalitesi ve Kokuları",
+  "section": "core",
+  "position": 2,
+  "lessons": [
+    {
+      "slug": "cohesion-coupling-god-class",
+      "title": "Cohesion, coupling & the GOD class",
+      "titleTr": "Cohesion, coupling ve GOD class",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "The two dials of good structure",
+          "titleTr": "İyi yapının iki ayar düğmesi",
+          "body": "**Cohesion** and **coupling** are the two fundamental measures of how well a system is structured — you want **high cohesion** and **low coupling**.\n\n- **Cohesion** = how **focused** a module is — how strongly its responsibilities belong together. **High cohesion** means a class does one well-defined job (everything in it relates to that job). Low cohesion = a grab-bag of unrelated things.\n- **Coupling** = how **dependent** modules are on each other. **Low (loose) coupling** means a change in one module rarely forces changes in others. High (tight) coupling = modules are entangled, so changes ripple and reuse/testing is hard.\n\nThe goal — **high cohesion, low coupling** — gives modules that are independently understandable, testable, replaceable, and reusable. The SOLID principles largely exist to push you there.\n\n**A GOD class** is an anti-pattern: a single class that **knows or does too much** — it centralises huge amounts of logic and data that should be spread across many classes. It has **low cohesion** (many unrelated responsibilities) and creates **high coupling** (everything depends on it). Why avoid it: it's hard to understand, test, and change; a small edit risks breaking unrelated features; it blocks reuse and parallel work. The fix is to **decompose** it along responsibilities (SRP) into smaller, cohesive classes.",
+          "bodyTr": "**Cohesion** ve **coupling**, bir sistemin ne kadar iyi yapılandırıldığının iki temel ölçüsüdür — **yüksek cohesion** ve **düşük coupling** istersin.\n\n- **Cohesion** = bir modülün ne kadar **odaklı** olduğu — sorumluluklarının ne kadar güçlü biçimde birbirine ait olduğu. **Yüksek cohesion**, bir sınıfın tek, iyi-tanımlı bir iş yaptığı anlamına gelir (içindeki her şey o işle ilgilidir). Düşük cohesion = ilgisiz şeylerin karışımı.\n- **Coupling** = modüllerin birbirine ne kadar **bağımlı** olduğu. **Düşük (gevşek) coupling**, bir modüldeki bir değişikliğin nadiren diğerlerinde değişiklik zorladığı anlamına gelir. Yüksek (sıkı) coupling = modüller iç içe geçmiştir, değişiklikler dalga yapar ve tekrar kullanım/test zorlaşır.\n\nHedef — **yüksek cohesion, düşük coupling** — bağımsız anlaşılabilir, test edilebilir, değiştirilebilir ve tekrar kullanılabilir modüller verir. SOLID ilkeleri büyük ölçüde seni oraya itmek için vardır.\n\n**Bir GOD class** bir anti-pattern'dir: **çok fazla şey bilen ya da yapan** tek bir sınıf — birçok sınıfa yayılması gereken devasa miktarda mantığı ve veriyi merkezileştirir. **Düşük cohesion**'ı vardır (birçok ilgisiz sorumluluk) ve **yüksek coupling** yaratır (her şey ona bağımlı). Neden kaçınılmalı: anlaması, test etmesi ve değiştirmesi zordur; küçük bir düzenleme ilgisiz özellikleri bozma riski taşır; tekrar kullanımı ve paralel çalışmayı engeller. Çözüm, onu sorumluluklar boyunca (SRP) daha küçük, uyumlu sınıflara **ayrıştırmaktır**."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What's the ideal combination of cohesion and coupling?",
+          "promptTr": "Cohesion ve coupling'in ideal kombinasyonu nedir?",
+          "options": [
+            { "text": "High cohesion, low coupling", "textTr": "Yüksek cohesion, düşük coupling", "correct": true },
+            { "text": "Low cohesion, high coupling", "textTr": "Düşük cohesion, yüksek coupling" },
+            { "text": "High cohesion, high coupling", "textTr": "Yüksek cohesion, yüksek coupling" },
+            { "text": "It doesn't matter", "textTr": "Önemi yok" }
+          ],
+          "explanation": "High cohesion (focused modules) + low coupling (few interdependencies) = code that's understandable, testable, and changeable in isolation.",
+          "explanationTr": "Yüksek cohesion (odaklı modüller) + düşük coupling (az karşılıklı bağımlılık) = izole anlaşılabilir, test edilebilir ve değiştirilebilir kod."
+        },
+        {
+          "type": "true_false",
+          "statement": "A GOD class has low cohesion and high coupling, and should be decomposed along responsibilities.",
+          "statementTr": "Bir GOD class'ın düşük cohesion'ı ve yüksek coupling'i vardır ve sorumluluklar boyunca ayrıştırılmalıdır.",
+          "answer": true,
+          "explanation": "It hoards unrelated responsibilities (low cohesion) and everything depends on it (high coupling); split it via SRP into smaller cohesive classes.",
+          "explanationTr": "İlgisiz sorumlulukları biriktirir (düşük cohesion) ve her şey ona bağımlıdır (yüksek coupling); SRP ile daha küçük uyumlu sınıflara böl."
+        },
+        {
+          "type": "challenge",
+          "question": "What is the difference between Cohesion and Coupling?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is GOD class and why should we avoid it?"
+        }
+      ]
+    },
+    {
+      "slug": "bad-design-fail-fast",
+      "title": "Bad design, fail-fast & failing early",
+      "titleTr": "Kötü tasarım, fail-fast ve erken başarısızlık",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Recognising bad design and failing usefully",
+          "titleTr": "Kötü tasarımı tanımak ve yararlı başarısız olmak",
+          "body": "**Bad design** is design that makes a system **hard to change, understand, or extend**, even if it currently works. Robert Martin's symptoms: **rigidity** (a small change forces many other changes), **fragility** (changes break things in unexpected places), **immobility** (you can't reuse parts elsewhere), and **viscosity** (doing the right thing is harder than hacking). It typically comes from tight coupling, low cohesion, duplication, and missing abstractions. So \"bad design\" isn't about it not working — it's about the **cost of change** being too high.\n\n**\"Fail Early\" / \"Fail Fast\"** means **detect and surface errors as soon as possible** — validate inputs up front, assert preconditions, throw immediately on invalid state — rather than letting bad data flow deep into the system and corrupt things or fail confusingly later. Failing early makes bugs **cheaper to find and fix** (the failure points right at the cause) and prevents silent corruption. You'd want to fail early at boundaries: invalid arguments, missing config, broken invariants.\n\n**Fail Fast vs Robust:** these are two philosophies. **Fail Fast** stops immediately on an unexpected condition (loud, obvious, easy to debug) — best for catching bugs in development and for internal invariants. **Robust** tries to **keep going / degrade gracefully** despite problems (tolerate bad input, use fallbacks) — best at system edges facing users or unreliable external systems. The trade-off: fail-fast surfaces problems but can crash; robust keeps running but can hide bugs. Good systems **fail fast internally** (catch programmer errors early) and are **robust at the boundaries** (handle external/user errors gracefully).",
+          "bodyTr": "**Kötü tasarım**, şu an çalışsa bile bir sistemi **değiştirmesi, anlaması ya da genişletmesi zor** kılan tasarımdır. Robert Martin'in semptomları: **rigidity** (küçük bir değişiklik birçok başka değişikliği zorlar), **fragility** (değişiklikler beklenmedik yerleri bozar), **immobility** (parçaları başka yerde tekrar kullanamazsın) ve **viscosity** (doğru olanı yapmak hack'lemekten zordur). Tipik olarak sıkı coupling, düşük cohesion, tekrar ve eksik soyutlamalardan gelir. Yani \"kötü tasarım\" çalışmamasıyla ilgili değil — **değişim maliyetinin** çok yüksek olmasıyla ilgilidir.\n\n**\"Fail Early\" / \"Fail Fast\"**, hataları **mümkün olan en kısa sürede tespit edip yüzeye çıkarmak** demektir — girdileri önden doğrula, önkoşulları assert et, geçersiz state'te hemen throw et — kötü verinin sisteme derinlemesine akıp bir şeyleri bozmasına ya da sonra kafa karıştırıcı biçimde başarısız olmasına izin vermek yerine. Erken başarısız olmak hataları **bulması ve düzeltmesi daha ucuz** kılar (başarısızlık doğrudan sebebi gösterir) ve sessiz bozulmayı önler. Sınırlarda erken başarısız olmak istersin: geçersiz argümanlar, eksik config, bozuk invariant'lar.\n\n**Fail Fast vs Robust:** bunlar iki felsefedir. **Fail Fast** beklenmedik bir durumda hemen durur (gürültülü, açık, debug etmesi kolay) — geliştirmede hataları yakalamak ve iç invariant'lar için en iyisi. **Robust** sorunlara rağmen **devam etmeye / zarif biçimde bozulmaya** çalışır (kötü girdiyi tolere et, fallback kullan) — kullanıcılara ya da güvenilmez harici sistemlere bakan sistem kenarlarında en iyisi. Ödün: fail-fast sorunları yüzeye çıkarır ama çökebilir; robust çalışmaya devam eder ama hataları gizleyebilir. İyi sistemler **içeride fail fast** (programcı hatalarını erken yakala) ve **sınırlarda robust** (harici/kullanıcı hatalarını zarif ele al)."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What characterises bad design (per Martin's symptoms)?",
+          "promptTr": "Kötü tasarımı ne karakterize eder (Martin'in semptomlarına göre)?",
+          "options": [
+            { "text": "Rigidity, fragility, immobility, viscosity — the cost of change is too high", "textTr": "Rigidity, fragility, immobility, viscosity — değişim maliyeti çok yüksek", "correct": true },
+            { "text": "The code simply doesn't compile", "textTr": "Kod sadece derlenmiyor" },
+            { "text": "It uses too many comments", "textTr": "Çok fazla yorum kullanıyor" },
+            { "text": "It has high cohesion and low coupling", "textTr": "Yüksek cohesion'ı ve düşük coupling'i var" }
+          ],
+          "explanation": "Bad design may work but is expensive to change: rigid (changes cascade), fragile (breaks unexpectedly), immobile (can't reuse), viscous (hacks are easier than fixes).",
+          "explanationTr": "Kötü tasarım çalışabilir ama değiştirmesi pahalıdır: rigid (değişiklikler yayılır), fragile (beklenmedik biçimde bozulur), immobile (tekrar kullanılamaz), viscous (hack'ler düzeltmelerden kolaydır)."
+        },
+        {
+          "type": "true_false",
+          "statement": "A common rule is to fail fast internally (catch programmer errors early) but be robust at the boundaries (handle user/external errors gracefully).",
+          "statementTr": "Yaygın bir kural, içeride fail fast (programcı hatalarını erken yakala) ama sınırlarda robust (kullanıcı/harici hataları zarif ele al) olmaktır.",
+          "answer": true,
+          "explanation": "Fail fast on invalid internal state to expose bugs cheaply; be tolerant/graceful at edges facing users and unreliable systems.",
+          "explanationTr": "Hataları ucuza ortaya çıkarmak için geçersiz iç state'te fail fast; kullanıcılara ve güvenilmez sistemlere bakan kenarlarda toleranslı/zarif ol."
+        },
+        {
+          "type": "challenge",
+          "question": "What is Bad Design?"
+        },
+        {
+          "type": "challenge",
+          "question": "Compare \"Fail Fast\" vs \"Robust\" approaches of building software"
+        },
+        {
+          "type": "challenge",
+          "question": "What does the expression \"Fail Early\" mean, and when would you want to do so?"
+        }
+      ]
+    },
+    {
+      "slug": "null-vs-empty-why-hard",
+      "title": "Null vs empty & why software is hard",
+      "titleTr": "Null vs empty ve yazılım neden zor",
+      "position": 3,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Small habits and the big picture",
+          "titleTr": "Küçük alışkanlıklar ve büyük resim",
+          "body": "**Return NULL or an empty value?** For collections/strings, **prefer returning an empty value (empty list, empty string) over null** when \"no results\" is a normal, valid outcome. Why: it lets callers iterate/use the result **without null checks**, avoids `NullPointerException`/`undefined` errors, and expresses \"zero items\" cleanly. Reserve **null** for cases where absence is genuinely **exceptional or meaningfully different** from \"empty\" — and even then, prefer an explicit **Optional/Maybe** type or throwing, so the absence is part of the contract. The guiding idea: don't make callers handle null they didn't expect; an empty collection is the **null object** for \"nothing here.\"\n\n**Why is writing software difficult, and maintaining it harder?** Software is **essentially complex** (Fred Brooks' \"No Silver Bullet\"): the problem domains are intricate, requirements are ambiguous and **constantly change**, and the design space is vast with no physical constraints to guide it. **Maintenance** is even harder because: most of a system's lifetime cost is **after** initial release; code is **read far more than written**, so unclear code compounds; changing one part risks **unforeseen effects** elsewhere (especially with high coupling); the **original context/intent is lost** over time and across people; and **accidental complexity** (tech debt, workarounds, outdated dependencies) accumulates. This is why principles like SOLID, KISS, DRY, high cohesion/low coupling, tests, and clear boundaries matter — they're all attempts to **keep change cheap** over a system's long life.",
+          "bodyTr": "**NULL mı yoksa boş değer mi döndürmeli?** Koleksiyonlar/string'ler için, \"sonuç yok\" normal, geçerli bir sonuç olduğunda **null yerine boş bir değer (boş liste, boş string) döndürmeyi tercih et**. Neden: çağıranların sonucu **null kontrolü olmadan** iterate etmesini/kullanmasını sağlar, `NullPointerException`/`undefined` hatalarından kaçınır ve \"sıfır öğe\"yi temiz ifade eder. **null**'ı, yokluğun gerçekten **istisnai ya da \"boş\"tan anlamlı biçimde farklı** olduğu durumlar için sakla — ve o zaman bile, açık bir **Optional/Maybe** tipi ya da throw tercih et ki yokluk sözleşmenin parçası olsun. Yol gösterici fikir: çağıranlara beklemedikleri null'u ele aldırma; boş bir koleksiyon \"burada hiçbir şey yok\" için **null object**'tir.\n\n**Yazılım yazmak neden zor, sürdürmek neden daha zor?** Yazılım **özünde karmaşıktır** (Fred Brooks'un \"No Silver Bullet\"i): problem alanları çetrefilli, gereksinimler belirsiz ve **sürekli değişir** ve tasarım alanı, onu yönlendirecek fiziksel kısıtlar olmadan devasadır. **Bakım** daha da zordur çünkü: bir sistemin ömür maliyetinin çoğu ilk sürümden **sonradır**; kod **yazıldığından çok daha fazla okunur**, bu yüzden net olmayan kod birikir; bir kısmı değiştirmek başka yerde **öngörülemeyen etkiler** riski taşır (özellikle yüksek coupling'le); **orijinal bağlam/niyet** zamanla ve insanlar arasında kaybolur; ve **tesadüfi karmaşıklık** (tech debt, geçici çözümler, eski bağımlılıklar) birikir. Bu yüzden SOLID, KISS, DRY, yüksek cohesion/düşük coupling, testler ve net sınırlar gibi ilkeler önemlidir — hepsi bir sistemin uzun ömrü boyunca **değişimi ucuz tutma** girişimidir."
+        },
+        {
+          "type": "mcq",
+          "prompt": "For a method returning a collection with no results, what's generally preferred?",
+          "promptTr": "Sonuçsuz bir koleksiyon döndüren bir metot için genelde ne tercih edilir?",
+          "options": [
+            { "text": "Return an empty collection, so callers don't need null checks", "textTr": "Boş bir koleksiyon döndür, böylece çağıranların null kontrolüne ihtiyacı olmaz", "correct": true },
+            { "text": "Always return null to save memory", "textTr": "Bellek tasarrufu için her zaman null döndür" },
+            { "text": "Throw an exception for empty results", "textTr": "Boş sonuçlar için exception fırlat" },
+            { "text": "Return the string \"none\"", "textTr": "\"none\" string'ini döndür" }
+          ],
+          "explanation": "An empty collection is the safe 'nothing here' value — callers can iterate without null guards. Reserve null/Optional for genuinely exceptional absence.",
+          "explanationTr": "Boş bir koleksiyon güvenli 'burada hiçbir şey yok' değeridir — çağıranlar null koruması olmadan iterate edebilir. null/Optional'ı gerçekten istisnai yokluk için sakla."
+        },
+        {
+          "type": "true_false",
+          "statement": "Most of a software system's total cost comes after initial release, during maintenance.",
+          "statementTr": "Bir yazılım sisteminin toplam maliyetinin çoğu, ilk sürümden sonra, bakım sırasında gelir.",
+          "answer": true,
+          "explanation": "Code is read and changed far more than first written; evolving requirements, lost context, coupling, and accumulating complexity make maintenance the dominant cost — hence the emphasis on keeping change cheap.",
+          "explanationTr": "Kod ilk yazıldığından çok daha fazla okunur ve değiştirilir; evrilen gereksinimler, kaybolan bağlam, coupling ve biriken karmaşıklık bakımı baskın maliyet yapar — bu yüzden değişimi ucuz tutmaya vurgu."
+        },
+        {
+          "type": "challenge",
+          "question": "Is it better to return NULL or empty values from functions/methods where the return value is not present?"
+        },
+        {
+          "type": "challenge",
+          "question": "Why is writing software difficult? What makes maintaining software hard?"
+        }
+      ]
+    }
+  ]
+}

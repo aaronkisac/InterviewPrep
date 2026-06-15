@@ -1,0 +1,102 @@
+{
+  "topic": "api-design",
+  "slug": "versioning-docs",
+  "title": "Versioning, Compatibility & Docs",
+  "titleTr": "Versiyonlama, Uyumluluk ve Dokümantasyon",
+  "section": "advanced",
+  "position": 5,
+  "lessons": [
+    {
+      "slug": "versioning-and-backwards-compat",
+      "title": "Versioning & backwards compatibility",
+      "titleTr": "Versiyonlama ve geriye uyumluluk",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Evolving an API without breaking clients",
+          "titleTr": "İstemcileri bozmadan bir API'yi evriltmek",
+          "body": "**API versioning** is **managing changes to an API over time so existing clients keep working** while you evolve it. It's needed because once clients depend on your API, a **breaking change** (removing/renaming a field, changing a response shape, altering behaviour) would break them — and you usually can't force every client to update at once. Versioning lets old and new coexist. Common strategies:\n- **URI versioning** — `/v1/users`, `/v2/users` (most visible/common).\n- **Header versioning** — a custom header or `Accept: application/vnd.api.v2+json`.\n- **Query param** — `/users?version=2`.\nKeep versions stable, document deprecation timelines, and avoid proliferating versions.\n\n**Designing a backwards-compatible API** means **changing it without breaking existing clients** — prefer **additive, non-breaking changes** so you rarely need a new version:\n- **Add, don't remove or rename** — new optional fields/endpoints are safe; removing or renaming fields, or changing types/required-ness, is breaking.\n- **Make new fields optional** with sensible defaults; never make a previously-optional request field suddenly required.\n- **Don't change the meaning** of existing fields or the semantics of responses; **tolerant reader** principle — clients should ignore unknown fields.\n- Use the **expand-contract (parallel change)** pattern for migrations: add the new alongside the old, migrate clients, then remove the old later.\n- **Deprecate gracefully** (mark deprecated, warn, give a sunset timeline) rather than deleting abruptly.\nWhen a truly breaking change is unavoidable, **bump the version** and run both for a transition period. The goal: evolve continuously while old integrations keep working.",
+          "bodyTr": "**API versiyonlama**, **bir API'ye zaman içindeki değişiklikleri yönetmek, böylece onu evriltirken mevcut istemcilerin çalışmaya devam etmesidir**. Gereklidir çünkü istemciler API'ne bağımlı olduğunda, bir **breaking change** (bir alanı kaldırma/yeniden adlandırma, yanıt şeklini değiştirme, davranışı değiştirme) onları bozar — ve genelde her istemciyi aynı anda güncellemeye zorlayamazsın. Versiyonlama eski ve yeninin bir arada var olmasını sağlar. Yaygın stratejiler:\n- **URI versiyonlama** — `/v1/users`, `/v2/users` (en görünür/yaygın).\n- **Header versiyonlama** — özel bir başlık ya da `Accept: application/vnd.api.v2+json`.\n- **Query param** — `/users?version=2`.\nVersiyonları kararlı tut, deprecation zaman çizelgelerini belgele ve versiyon çoğaltmaktan kaçın.\n\n**Geriye-uyumlu bir API tasarlamak**, **onu mevcut istemcileri bozmadan değiştirmek** demektir — **eklemeli, bozmayan değişiklikleri** tercih et, böylece nadiren yeni bir versiyona ihtiyaç duyarsın:\n- **Ekle, kaldırma ya da yeniden adlandırma** — yeni isteğe bağlı alanlar/endpoint'ler güvenlidir; alanları kaldırmak ya da yeniden adlandırmak ya da tipleri/gerekliliği değiştirmek bozucudur.\n- Yeni alanları makul varsayılanlarla **isteğe bağlı yap**; daha önce isteğe bağlı bir istek alanını aniden zorunlu yapma.\n- Mevcut alanların **anlamını** ya da yanıtların semantiğini değiştirme; **tolerant reader** ilkesi — istemciler bilinmeyen alanları yok saymalı.\n- Migration'lar için **expand-contract (parallel change)** pattern'ini kullan: yeniyi eskinin yanına ekle, istemcileri migrate et, sonra eskiyi kaldır.\n- Aniden silmek yerine **zarif deprecate et** (deprecated işaretle, uyar, bir sunset zaman çizelgesi ver).\nGerçekten bozucu bir değişiklik kaçınılmazsa, **versiyonu yükselt** ve bir geçiş süresi boyunca ikisini de çalıştır. Amaç: eski entegrasyonlar çalışmaya devam ederken sürekli evrilmek."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Which change is backwards-compatible (non-breaking)?",
+          "promptTr": "Hangi değişiklik geriye-uyumludur (bozmayan)?",
+          "options": [
+            { "text": "Adding a new optional field to a response", "textTr": "Bir yanıta yeni isteğe bağlı bir alan eklemek", "correct": true },
+            { "text": "Removing or renaming an existing field", "textTr": "Mevcut bir alanı kaldırmak ya da yeniden adlandırmak" },
+            { "text": "Making a previously-optional request field required", "textTr": "Daha önce isteğe bağlı bir istek alanını zorunlu yapmak" },
+            { "text": "Changing a field's data type", "textTr": "Bir alanın veri tipini değiştirmek" }
+          ],
+          "explanation": "Additive changes (new optional fields/endpoints) don't break clients. Removing/renaming fields, changing types, or making fields newly-required are breaking and need a version bump.",
+          "explanationTr": "Eklemeli değişiklikler (yeni isteğe bağlı alanlar/endpoint'ler) istemcileri bozmaz. Alan kaldırma/yeniden adlandırma, tip değiştirme ya da alanları yeni-zorunlu yapma bozucudur ve versiyon yükseltme gerektirir."
+        },
+        {
+          "type": "true_false",
+          "statement": "API versioning (e.g. /v1, /v2) exists so you can introduce breaking changes while existing clients keep using the old version.",
+          "statementTr": "API versiyonlama (örn. /v1, /v2), mevcut istemciler eski versiyonu kullanmaya devam ederken bozucu değişiklikler getirebilmen için vardır.",
+          "answer": true,
+          "explanation": "Clients depend on the contract; versioning lets old and new coexist so a breaking change doesn't break everyone at once. Prefer additive changes to avoid needing it often.",
+          "explanationTr": "İstemciler sözleşmeye bağımlıdır; versiyonlama eski ve yeninin bir arada var olmasını sağlar, böylece bozucu bir değişiklik herkesi aynı anda bozmaz. Sık ihtiyaç duymamak için eklemeli değişiklikleri tercih et."
+        },
+        {
+          "type": "challenge",
+          "question": "What Is API Versioning And Why Is It Needed?"
+        },
+        {
+          "type": "challenge",
+          "question": "How Do You Design A Backwards-Compatible API?"
+        }
+      ]
+    },
+    {
+      "slug": "openapi-docs-mocking",
+      "title": "OpenAPI/Swagger, documentation & mocking",
+      "titleTr": "OpenAPI/Swagger, dokümantasyon ve mocking",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Describing, documenting, and faking an API",
+          "titleTr": "Bir API'yi tanımlamak, belgelemek ve taklit etmek",
+          "body": "**OpenAPI / Swagger** is a **standard, language-agnostic specification format for describing REST APIs** (in YAML/JSON): endpoints, methods, parameters, request/response schemas, auth, and status codes. (**OpenAPI** is the spec; **Swagger** is the popular tooling around it — Swagger UI, Editor, Codegen.) **Why use it:** the spec is a **single source of truth/contract** that's both human- and machine-readable, so you can **auto-generate interactive docs (Swagger UI), client SDKs and server stubs, request validation, and mocks** from it. It enables **design-first/contract-first** development (agree on the spec, then build both sides in parallel) and keeps docs in sync with the API.\n\n**Documenting an API effectively:** make it **complete, accurate, and easy to use**. Best practices: describe **every endpoint** (method, path, params, request/response schemas, status/error codes); provide **realistic examples** (sample requests and responses) and ready-to-run snippets/`curl`; document **authentication**, **rate limits**, **pagination**, and **error formats**; keep docs **in sync with the code** (generate from OpenAPI so they don't drift); offer **interactive 'try it' docs** (Swagger UI / Postman); include **getting-started guides** and changelogs/versioning/deprecation notes. Good docs let a developer integrate without reading your source or asking you.\n\n**API mocking** is **simulating an API with fake but realistic responses** before/without the real backend. **Why it's valuable:** **frontend and backend can work in parallel** (the client builds against the mock while the real API is still being written — true with contract-first/OpenAPI); it enables **testing in isolation** (deterministic responses, simulate errors/edge cases/slow responses without a live server), demos, and not depending on unstable/rate-limited third-party services. Tools: Mock Service Worker (MSW), Postman/Prism (mock from an OpenAPI spec), WireMock. Mocking decouples teams and makes tests fast and reliable.",
+          "bodyTr": "**OpenAPI / Swagger**, **REST API'leri tanımlamak için standart, dilden-bağımsız bir spesifikasyon formatıdır** (YAML/JSON'da): endpoint'ler, metotlar, parametreler, request/response şemaları, auth ve durum kodları. (**OpenAPI** spec'tir; **Swagger** etrafındaki popüler araçtır — Swagger UI, Editor, Codegen.) **Neden kullanılır:** spec, hem insan- hem makine-okunabilir bir **tek doğruluk kaynağı/sözleşmesidir**, böylece ondan **interaktif dokümanlar (Swagger UI), istemci SDK'leri ve sunucu stub'ları, istek doğrulama ve mock'lar otomatik üretebilirsin**. **Design-first/contract-first** geliştirmeyi sağlar (spec üzerinde anlaş, sonra iki tarafı paralel inşa et) ve dokümanları API ile senkron tutar.\n\n**Bir API'yi etkili belgelemek:** onu **eksiksiz, doğru ve kullanması kolay** yap. En iyi pratikler: **her endpoint'i** tanımla (metot, path, param'lar, request/response şemaları, durum/hata kodları); **gerçekçi örnekler** sağla (örnek istekler ve yanıtlar) ve çalışmaya-hazır snippet'ler/`curl`; **kimlik doğrulama**, **rate limit'ler**, **pagination** ve **hata formatlarını** belgele; dokümanları **kodla senkron tut** (OpenAPI'den üret ki kaymasınlar); **interaktif 'dene' dokümanları** sun (Swagger UI / Postman); **başlangıç kılavuzları** ve changelog/versiyonlama/deprecation notları ekle. İyi dokümanlar bir geliştiricinin kaynağını okumadan ya da sana sormadan entegre olmasını sağlar.\n\n**API mocking**, gerçek backend'den önce/onsuz **sahte ama gerçekçi yanıtlarla bir API'yi simüle etmektir**. **Neden değerli:** **frontend ve backend paralel çalışabilir** (gerçek API hâlâ yazılırken istemci mock'a karşı inşa eder — contract-first/OpenAPI ile doğru); **izole test** sağlar (deterministik yanıtlar, canlı sunucu olmadan hataları/uç durumları/yavaş yanıtları simüle et), demolar ve kararsız/rate-limit'li üçüncü-taraf servislere bağımlı olmama. Araçlar: Mock Service Worker (MSW), Postman/Prism (bir OpenAPI spec'inden mock), WireMock. Mocking takımları ayırır ve testleri hızlı ve güvenilir kılar."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Why use OpenAPI/Swagger?",
+          "promptTr": "Neden OpenAPI/Swagger kullanılır?",
+          "options": [
+            { "text": "It's a machine-readable spec/contract from which you can generate docs, client SDKs, server stubs, validation, and mocks", "textTr": "Doküman, istemci SDK'leri, sunucu stub'ları, doğrulama ve mock üretebileceğin makine-okunabilir bir spec/sözleşmedir", "correct": true },
+            { "text": "It's a database engine", "textTr": "Bir veritabanı motorudur" },
+            { "text": "It replaces HTTP", "textTr": "HTTP'nin yerine geçer" },
+            { "text": "It only works for GraphQL", "textTr": "Yalnızca GraphQL için çalışır" }
+          ],
+          "explanation": "OpenAPI describes a REST API in YAML/JSON as a single source of truth; Swagger tooling turns it into interactive docs, generated clients/servers, validation, and mocks — enabling contract-first development.",
+          "explanationTr": "OpenAPI bir REST API'yi YAML/JSON'da tek doğruluk kaynağı olarak tanımlar; Swagger araçları onu interaktif dokümanlara, üretilen istemci/sunuculara, doğrulamaya ve mock'lara çevirir — contract-first geliştirmeyi sağlar."
+        },
+        {
+          "type": "true_false",
+          "statement": "API mocking lets frontend and backend teams work in parallel and enables deterministic, isolated testing (including error/edge cases).",
+          "statementTr": "API mocking, frontend ve backend takımlarının paralel çalışmasını sağlar ve deterministik, izole testi (hata/uç durumlar dahil) mümkün kılar.",
+          "answer": true,
+          "explanation": "Mocks simulate realistic responses without the real backend, so clients build against a contract early, and tests are fast/reliable and can force edge cases on demand.",
+          "explanationTr": "Mock'lar gerçek backend olmadan gerçekçi yanıtları simüle eder, böylece istemciler erken bir sözleşmeye karşı inşa eder ve testler hızlı/güvenilir olur ve talep üzerine uç durumları zorlayabilir."
+        },
+        {
+          "type": "challenge",
+          "question": "What Is OpenAPI / Swagger And Why Should You Use It?"
+        },
+        {
+          "type": "challenge",
+          "question": "How Do You Document An API Effectively?"
+        },
+        {
+          "type": "challenge",
+          "question": "What Is API Mocking And Why Is It Valuable?"
+        }
+      ]
+    }
+  ]
+}

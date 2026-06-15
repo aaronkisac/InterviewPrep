@@ -1,0 +1,107 @@
+{
+  "topic": "api-design",
+  "slug": "reliability",
+  "title": "Reliability: Rate Limiting & Idempotency",
+  "titleTr": "Güvenilirlik: Rate Limiting ve Idempotency",
+  "section": "advanced",
+  "position": 4,
+  "lessons": [
+    {
+      "slug": "rate-limiting-throttling-idempotency",
+      "title": "Rate limiting, throttling & idempotency",
+      "titleTr": "Rate limiting, throttling ve idempotency",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Protecting the API and making retries safe",
+          "titleTr": "API'yi korumak ve retry'ları güvenli kılmak",
+          "body": "**Rate limiting** **caps how many requests a client can make in a time window** (e.g. 100 req/min per API key/IP/user). **Why every API needs it:** prevents **abuse and DoS**, protects backend resources from overload, ensures **fair usage** among clients, and controls cost. When exceeded, the API returns **`429 Too Many Requests`** (often with `Retry-After` and `X-RateLimit-*` headers). Common algorithms: **token bucket**, **leaky bucket**, **fixed/sliding window**.\n\n**Throttling vs rate limiting** — closely related, often used interchangeably, but with a nuance: **rate limiting** typically **rejects** requests over the limit (hard cap → 429); **throttling** is more about **shaping/slowing the flow** — delaying, queuing, or smoothing requests to a sustainable rate rather than outright rejecting them. Think of rate limiting as a hard 'no more than N' and throttling as 'slow down to a steady pace.' Both control request rate to protect the system; the difference is **reject vs delay/smooth**.\n\n**Idempotency** means **making the same request multiple times has the same effect as making it once** — no additional side effects on repeats. It matters because networks are unreliable: clients **retry** after timeouts, and without idempotency a retry could **double-charge a card or create duplicate orders**. By HTTP semantics, **GET, PUT, DELETE are idempotent**; **POST is not** (each POST may create a new resource). To make unsafe operations safe to retry, use an **idempotency key**: the client sends a unique key with the request; the server records it and, on a repeat with the same key, **returns the original result instead of re-executing**. Essential for payments, order creation, and any retried mutation.",
+          "bodyTr": "**Rate limiting**, **bir istemcinin bir zaman penceresinde kaç istek yapabileceğini sınırlar** (örn. API key/IP/kullanıcı başına 100 istek/dk). **Neden her API'ye gerekir:** **kötüye kullanımı ve DoS'u** önler, backend kaynaklarını aşırı yükten korur, istemciler arası **adil kullanımı** sağlar ve maliyeti kontrol eder. Aşıldığında, API **`429 Too Many Requests`** döndürür (genelde `Retry-After` ve `X-RateLimit-*` başlıklarıyla). Yaygın algoritmalar: **token bucket**, **leaky bucket**, **fixed/sliding window**.\n\n**Throttling vs rate limiting** — yakından ilişkili, sık birbirinin yerine kullanılır ama bir nüansla: **rate limiting** tipik olarak limit üstü istekleri **reddeder** (sert sınır → 429); **throttling** daha çok **akışı şekillendirme/yavaşlatma** ile ilgilidir — istekleri tümden reddetmek yerine geciktirme, kuyruğa alma ya da sürdürülebilir bir hıza yumuşatma. Rate limiting'i sert bir 'N'den fazla yok', throttling'i 'istikrarlı bir tempoya yavaşla' olarak düşün. İkisi de sistemi korumak için istek hızını kontrol eder; fark **reddet vs geciktir/yumuşat**.\n\n**Idempotency**, **aynı isteği birden çok kez yapmanın bir kez yapmakla aynı etkiye sahip olması** demektir — tekrarlarda ek yan etki yok. Önemlidir çünkü ağlar güvenilmezdir: istemciler timeout sonrası **retry** eder ve idempotency olmadan bir retry **bir kartı çift çekebilir ya da yinelenen sipariş oluşturabilir**. HTTP semantiğine göre, **GET, PUT, DELETE idempotent'tir**; **POST değildir** (her POST yeni bir kaynak oluşturabilir). Güvensiz işlemleri retry'a güvenli kılmak için bir **idempotency key** kullan: istemci istekle birlikte benzersiz bir anahtar gönderir; sunucu onu kaydeder ve aynı anahtarla bir tekrarda, yeniden çalıştırmak yerine **orijinal sonucu döndürür**. Ödemeler, sipariş oluşturma ve retry edilen herhangi bir mutation için şarttır."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Why does idempotency matter in API design?",
+          "promptTr": "Idempotency API tasarımında neden önemlidir?",
+          "options": [
+            { "text": "Retries (after timeouts) won't cause duplicate side effects like double charges — repeating a request has the same effect as doing it once", "textTr": "Retry'lar (timeout sonrası) çift çekim gibi yinelenen yan etkilere yol açmaz — bir isteği tekrarlamak bir kez yapmakla aynı etkiye sahiptir", "correct": true },
+            { "text": "It makes responses load faster", "textTr": "Yanıtların daha hızlı yüklenmesini sağlar" },
+            { "text": "It encrypts the request body", "textTr": "İstek gövdesini şifreler" },
+            { "text": "It removes the need for authentication", "textTr": "Kimlik doğrulama ihtiyacını ortadan kaldırır" }
+          ],
+          "explanation": "Networks fail and clients retry; idempotency (GET/PUT/DELETE inherently, POST via an idempotency key) ensures a retry doesn't double-charge or create duplicates.",
+          "explanationTr": "Ağlar başarısız olur ve istemciler retry eder; idempotency (GET/PUT/DELETE doğası gereği, POST bir idempotency key ile) bir retry'ın çift çekmemesini ya da yinelenen oluşturmamasını sağlar."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What status code does an API return when a client exceeds its rate limit?",
+          "promptTr": "Bir istemci rate limit'ini aştığında API hangi durum kodunu döndürür?",
+          "options": [
+            { "text": "429 Too Many Requests", "textTr": "429 Too Many Requests", "correct": true },
+            { "text": "404 Not Found", "textTr": "404 Not Found" },
+            { "text": "500 Internal Server Error", "textTr": "500 Internal Server Error" },
+            { "text": "200 OK", "textTr": "200 OK" }
+          ],
+          "explanation": "429 Too Many Requests signals the limit was hit, usually with Retry-After/X-RateLimit headers. Rate limiting rejects excess; throttling instead slows/queues to smooth the flow.",
+          "explanationTr": "429 Too Many Requests limitin aşıldığını sinyaller, genelde Retry-After/X-RateLimit başlıklarıyla. Rate limiting fazlayı reddeder; throttling ise akışı yumuşatmak için yavaşlatır/kuyruğa alır."
+        },
+        {
+          "type": "challenge",
+          "question": "What Is Rate Limiting And Why Should Every API Have It?"
+        },
+        {
+          "type": "challenge",
+          "question": "What Is API Throttling And How Is It Different From Rate Limiting?"
+        },
+        {
+          "type": "challenge",
+          "question": "What Is Idempotency And Why Does It Matter In API Design?"
+        }
+      ]
+    },
+    {
+      "slug": "gateway-vs-app-rate-limiting-ha",
+      "title": "Gateway vs app rate limiting & HA APIs",
+      "titleTr": "Gateway vs app rate limiting ve HA API'ler",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Where to limit, and how to stay up",
+          "titleTr": "Nerede sınırlamalı ve nasıl ayakta kalmalı",
+          "body": "**API gateway rate limiting vs application-level rate limiting** — *where* the limit is enforced:\n\n- **Gateway-level** — the limit is enforced at the **API gateway / edge** (e.g. Kong, AWS API Gateway, NGINX), **before** requests reach your services. **Pros:** centralised, protects all backends uniformly, blocks abuse early (saving backend resources), and keeps the logic out of app code. Good for **coarse, global** limits (per IP/key/route).\n- **Application-level** — the limit is enforced **inside the service**, where it has full business context. **Pros:** can do **fine-grained, context-aware** limits (per user tier, per specific operation, based on business rules) that the gateway can't see. **Cons:** the request already reached the app (less protection), and logic is duplicated across services.\n\nThey're **complementary**: use the **gateway for broad protection** and **app-level for nuanced, business-specific** limits. (In distributed setups, app-level limiting usually needs a **shared store like Redis** so the count is consistent across instances.)\n\n**Designing an API for High Availability:** keep it serving despite failures and load. Key techniques: **run multiple instances behind a load balancer** (no single point of failure) across **multiple availability zones/regions**; make services **stateless** (state in shared stores) so any instance can serve any request and you can scale/replace freely; add **redundancy and automatic failover** with **health checks**; protect with **rate limiting, timeouts, retries (with backoff), and circuit breakers** so a struggling dependency doesn't cascade; use **caching and CDNs** to offload load; design for **graceful degradation** (serve reduced functionality over total failure); do **zero-downtime deploys** (rolling/blue-green/canary); and **monitor with alerting** plus define SLAs/SLOs. The theme: **eliminate single points of failure, isolate failures, and degrade gracefully** so the API meets its uptime target.",
+          "bodyTr": "**API gateway rate limiting vs application-level rate limiting** — limitin *nerede* uygulandığı:\n\n- **Gateway seviyesi** — limit **API gateway / edge**'de (örn. Kong, AWS API Gateway, NGINX), istekler servislerine **ulaşmadan önce** uygulanır. **Artıları:** merkezi, tüm backend'leri tekdüze korur, kötüye kullanımı erken engeller (backend kaynaklarını korur) ve mantığı app kodundan uzak tutar. **Kaba, global** limitler için iyi (IP/key/route başına).\n- **Application seviyesi** — limit, tam iş bağlamına sahip olduğu **servisin içinde** uygulanır. **Artıları:** gateway'in göremeyeceği **ince-taneli, bağlam-farkında** limitler yapabilir (kullanıcı katmanı başına, belirli işlem başına, iş kurallarına göre). **Eksileri:** istek zaten app'e ulaştı (daha az koruma) ve mantık servisler arası tekrarlanır.\n\n**Tamamlayıcıdırlar**: geniş koruma için **gateway**'i ve nüanslı, iş-özel limitler için **app-seviyesini** kullan. (Dağıtık kurulumlarda, app-seviyesi sınırlama, sayının instance'lar arası tutarlı olması için genelde **Redis gibi paylaşılan bir depo** gerektirir.)\n\n**Yüksek Erişilebilirlik için API tasarlamak:** başarısızlıklara ve yüke rağmen hizmet vermeye devam et. Temel teknikler: **birden çok availability zone/bölge** boyunca **bir load balancer arkasında birden çok instance çalıştır** (tek arıza noktası yok); servisleri **stateless** yap (state paylaşılan depolarda) ki herhangi bir instance herhangi bir isteği sunsun ve serbestçe ölçekleyip/değiştirebilesin; **health check'lerle redundancy ve otomatik failover** ekle; zorlanan bir bağımlılığın kademelenmemesi için **rate limiting, timeout, retry (backoff'lu) ve circuit breaker** ile koru; yükü boşaltmak için **caching ve CDN** kullan; **graceful degradation** için tasarla (tam başarısızlık yerine azaltılmış işlevsellik sun); **zero-downtime deploy'lar** yap (rolling/blue-green/canary); ve **uyarılı monitoring** artı SLA/SLO tanımla. Tema: API'nin uptime hedefini karşılaması için **tek arıza noktalarını ortadan kaldır, başarısızlıkları izole et ve zarif bozul**."
+        },
+        {
+          "type": "mcq",
+          "prompt": "How do gateway-level and application-level rate limiting compare?",
+          "promptTr": "Gateway-seviyesi ve application-seviyesi rate limiting nasıl kıyaslanır?",
+          "options": [
+            { "text": "Gateway gives centralised, coarse protection before requests hit services; app-level gives fine-grained, business-aware limits — use both", "textTr": "Gateway, istekler servislere ulaşmadan merkezi, kaba koruma verir; app-seviyesi ince-taneli, iş-farkında limitler verir — ikisini de kullan", "correct": true },
+            { "text": "They are identical", "textTr": "Aynılar" },
+            { "text": "App-level runs before the gateway", "textTr": "App-seviyesi gateway'den önce çalışır" },
+            { "text": "Gateway limiting can see per-user business rules", "textTr": "Gateway sınırlama kullanıcı-başına iş kurallarını görebilir" }
+          ],
+          "explanation": "Gateway = early, centralised, coarse (protects backends). App-level = context-aware/fine-grained but after the request arrives. They complement each other; distributed app-level limits need a shared store.",
+          "explanationTr": "Gateway = erken, merkezi, kaba (backend'leri korur). App-seviyesi = bağlam-farkında/ince-taneli ama istek geldikten sonra. Birbirini tamamlar; dağıtık app-seviyesi limitler paylaşılan depo gerektirir."
+        },
+        {
+          "type": "true_false",
+          "statement": "Designing an API for high availability includes running redundant stateless instances behind a load balancer with health checks and failover.",
+          "statementTr": "Yüksek erişilebilirlik için API tasarlamak, health check'ler ve failover ile bir load balancer arkasında yedek stateless instance'lar çalıştırmayı içerir.",
+          "answer": true,
+          "explanation": "HA = no single point of failure: redundancy + load balancing + stateless services + failover + circuit breakers/timeouts + multi-AZ + graceful degradation + monitoring.",
+          "explanationTr": "HA = tek arıza noktası yok: redundancy + load balancing + stateless servisler + failover + circuit breaker/timeout + multi-AZ + graceful degradation + monitoring."
+        },
+        {
+          "type": "challenge",
+          "question": "What Is API Gateway Rate Limiting vs Application-Level Rate Limiting?"
+        },
+        {
+          "type": "challenge",
+          "question": "How Do You Design An API For High Availability?"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "topic": "software-architecture",
+  "slug": "cqrs-event-sourcing",
+  "title": "CQRS & Event Sourcing",
+  "titleTr": "CQRS ve Event Sourcing",
+  "section": "advanced",
+  "position": 8,
+  "lessons": [
+    {
+      "slug": "cqrs",
+      "title": "CQRS & its benefits",
+      "titleTr": "CQRS ve faydaları",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Separating reads from writes",
+          "titleTr": "Okumaları yazmalardan ayırmak",
+          "body": "**CQRS (Command Query Responsibility Segregation)** separates the model that **changes state (commands/writes)** from the model that **reads state (queries/reads)**. Instead of one model serving both, you have a **command side** (handles intent — `PlaceOrder` — enforces business rules, mutates state) and a **query side** (returns data shaped for views, often denormalised/read-optimised). They can use **different models, and even different data stores** (e.g. a normalised write DB and a denormalised read DB kept in sync via events). It builds on the older CQS principle (a method either does something or answers something, not both) but applies it at the architectural level.\n\n**Benefits of CQRS:**\n\n- **Independent scaling** — reads and writes usually have very different loads; scale them separately (e.g. many read replicas).\n- **Optimised models** — the read side can be denormalised/precomputed for fast queries; the write side stays focused on consistency and business rules.\n- **Simpler, focused models** — each side isn't compromised by the other's needs.\n- **Security/clarity** — clear separation of operations that mutate vs operations that read.\n- **Flexibility** — pairs naturally with event sourcing, eventual consistency, and complex domains.\n\n**Costs:** more complexity and often **eventual consistency** between the write and read sides — so CQRS is for **complex, high-scale, or collaboration-heavy domains**, not simple CRUD where it's overkill.",
+          "bodyTr": "**CQRS (Command Query Responsibility Segregation)**, **state'i değiştiren (command/yazma)** modeli, **state'i okuyan (query/okuma)** modelden ayırır. İkisine de hizmet eden tek bir model yerine, bir **command tarafın** (niyeti ele alır — `PlaceOrder` — iş kurallarını uygular, state'i değiştirir) ve bir **query tarafın** (view'lar için şekillendirilmiş, genelde denormalize/okuma-optimize veri döndürür) olur. **Farklı modeller, hatta farklı veri depoları** kullanabilirler (örn. normalize bir yazma DB'si ve event'lerle senkron tutulan denormalize bir okuma DB'si). Daha eski CQS ilkesi üzerine kurulur (bir metot ya bir şey yapar ya bir şey yanıtlar, ikisini birden değil) ama onu mimari seviyede uygular.\n\n**CQRS'nin faydaları:**\n\n- **Bağımsız ölçekleme** — okumalar ve yazmalar genelde çok farklı yüklere sahiptir; onları ayrı ölçekle (örn. birçok okuma replikası).\n- **Optimize modeller** — okuma tarafı hızlı sorgular için denormalize/önceden-hesaplanmış olabilir; yazma tarafı tutarlılık ve iş kurallarına odaklı kalır.\n- **Daha basit, odaklı modeller** — her taraf diğerinin ihtiyaçlarıyla taviz vermez.\n- **Güvenlik/netlik** — değiştiren işlemler ile okuyan işlemlerin net ayrımı.\n- **Esneklik** — event sourcing, eventual consistency ve karmaşık domain'lerle doğal eşleşir.\n\n**Maliyetler:** daha fazla karmaşıklık ve genelde yazma ile okuma tarafları arasında **eventual consistency** — bu yüzden CQRS, fazla olduğu basit CRUD için değil, **karmaşık, yüksek-ölçekli ya da işbirliği-yoğun domain'ler** içindir."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What does CQRS separate?",
+          "promptTr": "CQRS neyi ayırır?",
+          "options": [
+            { "text": "The write model (commands that change state) from the read model (queries that return data)", "textTr": "Yazma modelini (state'i değiştiren command'lar) okuma modelinden (veri döndüren query'ler)", "correct": true },
+            { "text": "The frontend from the backend", "textTr": "Frontend'i backend'den" },
+            { "text": "The database from the cache", "textTr": "Veritabanını cache'ten" },
+            { "text": "Authentication from authorisation", "textTr": "Authentication'ı authorization'dan" }
+          ],
+          "explanation": "CQRS uses distinct models (and sometimes stores) for commands (writes/mutations) and queries (reads), enabling independent optimisation and scaling.",
+          "explanationTr": "CQRS, command'lar (yazma/değişiklik) ve query'ler (okuma) için ayrı modeller (ve bazen depolar) kullanır, bağımsız optimizasyon ve ölçekleme sağlar."
+        },
+        {
+          "type": "true_false",
+          "statement": "A key benefit of CQRS is independently scaling and optimising reads and writes, at the cost of added complexity and often eventual consistency.",
+          "statementTr": "CQRS'nin temel bir faydası okumaları ve yazmaları bağımsız ölçeklemek ve optimize etmektir, eklenen karmaşıklık ve genelde eventual consistency pahasına.",
+          "answer": true,
+          "explanation": "Reads/writes have different loads and shapes; separating them lets each be optimised and scaled, but the read side often lags (eventual consistency). Overkill for simple CRUD.",
+          "explanationTr": "Okuma/yazmaların farklı yükleri ve şekilleri vardır; onları ayırmak her birinin optimize ve ölçeklenmesini sağlar ama okuma tarafı genelde geride kalır (eventual consistency). Basit CRUD için fazla."
+        },
+        {
+          "type": "challenge",
+          "question": "What is the Command and Query Responsibility Segregation (CQRS) Pattern?"
+        },
+        {
+          "type": "challenge",
+          "question": "Name some benefits of CQRS Pattern"
+        }
+      ]
+    },
+    {
+      "slug": "event-sourcing",
+      "title": "Event Sourcing & its relationship to CQRS",
+      "titleTr": "Event Sourcing ve CQRS ile ilişkisi",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Storing changes, not just current state",
+          "titleTr": "Yalnızca mevcut state'i değil, değişiklikleri saklamak",
+          "body": "**Event Sourcing** stores state as an **append-only sequence of immutable events** rather than just the current snapshot. Instead of updating a row in place (overwriting the old value), every change is captured as an **event** (`OrderPlaced`, `ItemAdded`, `OrderShipped`) appended to an **event store**. The **current state is derived by replaying** the events from the beginning (often optimised with periodic **snapshots**). \n\n**Benefits:** a complete, immutable **audit log/history** for free; the ability to **reconstruct state at any past point** (time-travel) and to **rebuild new read models** by replaying; natural fit for event-driven systems and debugging (\"what happened?\"). **Costs:** more complexity — querying current state isn't a simple SELECT, you must handle **event versioning/schema evolution**, replays can get expensive (hence snapshots), and it usually implies **eventual consistency**.\n\n**Can you use CQRS without Event Sourcing? Yes.** They're **frequently paired but independent**. CQRS is just *separating the read and write models* — you can do that with a perfectly ordinary database (e.g. write to a normalised store, maintain a separate denormalised read store/views), no events required. Conversely, Event Sourcing is often combined *with* CQRS (events update read models on the query side), but CQRS doesn't need event sourcing, and you could even event-source without full CQRS. **The relationship:** they're **complementary, not coupled** — CQRS separates responsibilities; Event Sourcing changes how state is persisted. Use CQRS alone when you just need read/write separation; add Event Sourcing when you also need a full history/audit and replayable state. Don't adopt both reflexively — each adds significant complexity.",
+          "bodyTr": "**Event Sourcing**, state'i yalnızca mevcut anlık görüntü olarak değil, **değiştirilemez event'lerin append-only bir dizisi** olarak saklar. Bir satırı yerinde güncellemek (eski değeri üzerine yazmak) yerine, her değişiklik bir **event store**'a eklenen bir **event** (`OrderPlaced`, `ItemAdded`, `OrderShipped`) olarak yakalanır. **Mevcut state, event'leri baştan tekrar oynatarak türetilir** (genelde periyodik **snapshot'larla** optimize edilir).\n\n**Faydalar:** bedavaya tam, değiştirilemez bir **audit log/geçmiş**; herhangi bir geçmiş noktada **state'i yeniden kurma** (zaman-yolculuğu) ve tekrar oynatarak **yeni okuma modelleri inşa etme** yeteneği; event-driven sistemler ve debug için doğal uyum (\"ne oldu?\"). **Maliyetler:** daha fazla karmaşıklık — mevcut state'i sorgulamak basit bir SELECT değildir, **event versiyonlama/şema evrimi** ele almalısın, tekrar oynatmalar pahalı olabilir (dolayısıyla snapshot'lar) ve genelde **eventual consistency** ima eder.\n\n**Event Sourcing olmadan CQRS kullanabilir misin? Evet.** **Sık eşleşirler ama bağımsızdırlar.** CQRS yalnızca *okuma ve yazma modellerini ayırmaktır* — bunu tamamen sıradan bir veritabanıyla yapabilirsin (örn. normalize bir depoya yaz, ayrı bir denormalize okuma deposu/view'lar tut), event gerekmez. Tersine, Event Sourcing genelde CQRS *ile* birleştirilir (event'ler query tarafında okuma modellerini günceller) ama CQRS event sourcing'e ihtiyaç duymaz ve hatta tam CQRS olmadan event-source yapabilirsin. **İlişki:** **tamamlayıcıdırlar, bağlı değil** — CQRS sorumlulukları ayırır; Event Sourcing state'in nasıl kalıcı yapıldığını değiştirir. Yalnızca okuma/yazma ayrımı gerektiğinde CQRS'i tek başına kullan; ayrıca tam bir geçmiş/audit ve tekrar oynatılabilir state gerektiğinde Event Sourcing ekle. İkisini de refleksle benimseme — her biri ciddi karmaşıklık ekler."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What is Event Sourcing?",
+          "promptTr": "Event Sourcing nedir?",
+          "options": [
+            { "text": "Storing state as an append-only log of immutable events; current state is derived by replaying them", "textTr": "State'i değiştirilemez event'lerin append-only bir günlüğü olarak saklamak; mevcut state onları tekrar oynatarak türetilir", "correct": true },
+            { "text": "Overwriting each row with its latest value only", "textTr": "Her satırı yalnızca en son değeriyle üzerine yazmak" },
+            { "text": "Caching query results in memory", "textTr": "Query sonuçlarını bellekte önbelleğe almak" },
+            { "text": "Splitting the UI into components", "textTr": "UI'ı bileşenlere bölmek" }
+          ],
+          "explanation": "Events are appended, never mutated; replaying them yields current state. You gain a full audit/history and time-travel, at the cost of complexity and eventual consistency.",
+          "explanationTr": "Event'ler eklenir, asla değiştirilmez; onları tekrar oynatmak mevcut state'i verir. Tam bir audit/geçmiş ve zaman-yolculuğu kazanırsın, karmaşıklık ve eventual consistency pahasına."
+        },
+        {
+          "type": "true_false",
+          "statement": "CQRS and Event Sourcing are independent: you can use CQRS with an ordinary database, without event sourcing.",
+          "statementTr": "CQRS ve Event Sourcing bağımsızdır: CQRS'i, event sourcing olmadan sıradan bir veritabanıyla kullanabilirsin.",
+          "answer": true,
+          "explanation": "They're complementary but not coupled. CQRS just separates read/write models; ES changes how state is stored. Pair them when you need both separation and full history — not by reflex.",
+          "explanationTr": "Tamamlayıcıdırlar ama bağlı değil. CQRS yalnızca okuma/yazma modellerini ayırır; ES state'in nasıl saklandığını değiştirir. Hem ayrım hem tam geçmiş gerektiğinde eşle — refleksle değil."
+        },
+        {
+          "type": "challenge",
+          "question": "Describe what is the Event Sourcing Pattern"
+        },
+        {
+          "type": "challenge",
+          "question": "Can we use the CQRS without the Event Sourcing?"
+        }
+      ]
+    }
+  ]
+}

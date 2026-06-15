@@ -1,0 +1,152 @@
+{
+  "topic": "software-architecture",
+  "slug": "distributed-consistency",
+  "title": "Distributed Systems & Consistency",
+  "titleTr": "Dağıtık Sistemler ve Tutarlılık",
+  "section": "interview",
+  "position": 10,
+  "lessons": [
+    {
+      "slug": "cap-acid-base",
+      "title": "CAP, ACID & BASE",
+      "titleTr": "CAP, ACID ve BASE",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "The fundamental consistency trade-offs",
+          "titleTr": "Temel tutarlılık ödünleri",
+          "body": "**CAP Theorem:** in a distributed data system you can guarantee at most **two of three** properties — **Consistency** (every read sees the latest write), **Availability** (every request gets a response), **Partition tolerance** (the system keeps working despite network partitions). Since **network partitions are unavoidable**, partition tolerance (P) is a must, so the real-world choice under a partition is between **CP** (stay consistent, sacrifice availability — refuse/err during the partition) and **AP** (stay available, sacrifice consistency — serve possibly-stale data). It's about behaviour *when the network splits*, not a permanent label.\n\n**ACID** describes the guarantees of a (typically relational) transaction:\n- **Atomicity** — all-or-nothing; a transaction fully completes or fully rolls back.\n- **Consistency** — it moves the DB from one valid state to another (invariants hold).\n- **Isolation** — concurrent transactions don't interfere (as if serial).\n- **Durability** — once committed, it survives crashes.\nACID favours **strong consistency** — classic for relational DBs.\n\n**BASE** is the philosophy of many NoSQL/distributed systems, the *opposite end* from ACID:\n- **Basically Available** — the system stays available (per CAP's AP leaning).\n- **Soft state** — state may change over time even without input (due to replication/propagation).\n- **Eventual consistency** — given no new writes, replicas converge to the same value *eventually*, not instantly.\nBASE trades immediate consistency for **availability and scale**. So: **ACID = strong consistency** (correctness first); **BASE = high availability + eventual consistency** (uptime/scale first). CAP explains *why* you must choose between them under partitions.",
+          "bodyTr": "**CAP Teoremi:** dağıtık bir veri sisteminde **üç özellikten en fazla ikisini** garanti edebilirsin — **Consistency** (her okuma en son yazmayı görür), **Availability** (her istek bir yanıt alır), **Partition tolerance** (sistem ağ bölünmelerine rağmen çalışmaya devam eder). **Ağ bölünmeleri kaçınılmaz** olduğundan, partition tolerance (P) şarttır, bu yüzden bir bölünme altında gerçek-dünya seçimi **CP** (tutarlı kal, erişilebilirlikten ödün ver — bölünme sırasında reddet/hata ver) ile **AP** (erişilebilir kal, tutarlılıktan ödün ver — muhtemelen-bayat veri sun) arasındadır. *Ağ bölündüğünde* davranışla ilgilidir, kalıcı bir etiket değil.\n\n**ACID** bir (tipik olarak ilişkisel) transaction'ın garantilerini tanımlar:\n- **Atomicity** — hep ya da hiç; bir transaction tamamen tamamlanır ya da tamamen geri alınır.\n- **Consistency** — DB'yi bir geçerli state'ten başka bir geçerliye taşır (invariant'lar korunur).\n- **Isolation** — eşzamanlı transaction'lar birbirine karışmaz (sanki seri).\n- **Durability** — bir kez commit edilince çökmelerden sağ çıkar.\nACID **güçlü tutarlılığı** tercih eder — ilişkisel DB'ler için klasik.\n\n**BASE** birçok NoSQL/dağıtık sistemin felsefesidir, ACID'in *zıt ucu*:\n- **Basically Available** — sistem erişilebilir kalır (CAP'in AP eğilimine göre).\n- **Soft state** — state, girdi olmadan bile zamanla değişebilir (replikasyon/yayılma nedeniyle).\n- **Eventual consistency** — yeni yazma olmazsa, replikalar *eninde sonunda* aynı değere yakınsar, anında değil.\nBASE anlık tutarlılığı **erişilebilirlik ve ölçeğe** değişir. Yani: **ACID = güçlü tutarlılık** (önce doğruluk); **BASE = yüksek erişilebilirlik + eventual consistency** (önce uptime/ölçek). CAP, bölünmeler altında neden aralarında seçim yapman gerektiğini açıklar."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Under a network partition, CAP says you must choose between what?",
+          "promptTr": "Bir ağ bölünmesi altında, CAP neyin arasında seçim yapman gerektiğini söyler?",
+          "options": [
+            { "text": "Consistency or Availability (partition tolerance is required since partitions happen)", "textTr": "Consistency ya da Availability (bölünmeler olduğundan partition tolerance gereklidir)", "correct": true },
+            { "text": "Atomicity or Durability", "textTr": "Atomicity ya da Durability" },
+            { "text": "Speed or Security", "textTr": "Hız ya da Güvenlik" },
+            { "text": "You can always have all three", "textTr": "Her zaman üçüne de sahip olabilirsin" }
+          ],
+          "explanation": "Partitions are unavoidable (P required), so when one happens you trade Consistency vs Availability — CP (consistent, may refuse) or AP (available, maybe stale).",
+          "explanationTr": "Bölünmeler kaçınılmazdır (P gerekli), bu yüzden biri olduğunda Consistency vs Availability'yi değişirsin — CP (tutarlı, reddedebilir) ya da AP (erişilebilir, belki bayat)."
+        },
+        {
+          "type": "match",
+          "prompt": "Match each system property set to its emphasis",
+          "promptTr": "Her sistem özellik setini vurgusuyla eşleştir",
+          "pairs": [
+            { "left": "ACID", "leftTr": "ACID", "right": "Strong consistency: atomic, isolated, durable transactions", "rightTr": "Güçlü tutarlılık: atomik, izole, kalıcı transaction'lar" },
+            { "left": "BASE", "leftTr": "BASE", "right": "Availability + eventual consistency, soft state", "rightTr": "Erişilebilirlik + eventual consistency, soft state" },
+            { "left": "CAP", "leftTr": "CAP", "right": "At most two of Consistency, Availability, Partition tolerance", "rightTr": "Consistency, Availability, Partition tolerance'tan en fazla ikisi" }
+          ]
+        },
+        {
+          "type": "challenge",
+          "question": "What Is CAP Theorem?"
+        },
+        {
+          "type": "challenge",
+          "question": "What Is ACID Property Of A System?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is BASE property of a system?"
+        }
+      ]
+    },
+    {
+      "slug": "eventually-consistent-sharding",
+      "title": "Eventual consistency & sharding",
+      "titleTr": "Eventual consistency ve sharding",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Converging data and splitting data",
+          "titleTr": "Veriyi yakınsamak ve veriyi bölmek",
+          "body": "**Eventually consistent** means that in a distributed/replicated system, **if no new updates are made, all replicas will *eventually* converge to the same value** — but for a short window after a write, different nodes may return **different (stale) values**. There's no guarantee of *immediate* consistency; reads might temporarily lag the latest write. It's the consistency model of AP/BASE systems (many NoSQL stores, DNS, caches, replicated databases). The benefit is **availability and performance** (you can serve reads from any replica without waiting for global agreement); the cost is that the application must **tolerate temporary staleness** (e.g. a just-posted comment not appearing for everyone instantly). Use it where availability/scale matter more than reading the absolute latest value.\n\n**Sharding** is **horizontally partitioning data across multiple databases/servers (shards)**, where each shard holds a **subset of the data** (e.g. users A–M on shard 1, N–Z on shard 2, by a **shard key**). It's a way to **scale writes and storage beyond one machine**: each shard handles only its slice, so capacity and throughput grow with the number of shards. **Benefits:** horizontal scalability, smaller per-node datasets (faster queries), and fault isolation. **Challenges:** choosing a good **shard key** (to avoid **hot spots**/uneven distribution), **cross-shard queries and joins** become hard/expensive, **rebalancing** when adding shards, and maintaining transactions across shards. Sharding differs from replication: **replication copies the same data** for availability/reads; **sharding splits different data** for scale — and the two are often combined (each shard is also replicated).",
+          "bodyTr": "**Eventually consistent (eninde sonunda tutarlı)**, dağıtık/replikalı bir sistemde, **yeni güncelleme yapılmazsa tüm replikaların *eninde sonunda* aynı değere yakınsayacağı** — ama bir yazmadan sonraki kısa pencerede, farklı node'ların **farklı (bayat) değerler** döndürebileceği anlamına gelir. *Anlık* tutarlılık garantisi yoktur; okumalar geçici olarak en son yazmanın gerisinde kalabilir. AP/BASE sistemlerinin tutarlılık modelidir (birçok NoSQL deposu, DNS, cache'ler, replikalı veritabanları). Faydası **erişilebilirlik ve performanstır** (okumaları global anlaşmayı beklemeden herhangi bir replikadan sunabilirsin); maliyeti, uygulamanın **geçici bayatlığı tolere etmesi** gerektiğidir (örn. yeni gönderilmiş bir yorumun herkese anında görünmemesi). Erişilebilirlik/ölçek, mutlak en son değeri okumaktan daha önemli olduğunda kullan.\n\n**Sharding**, **veriyi birden çok veritabanı/sunucu (shard) arasında yatay bölümlemektir**, her shard **verinin bir alt kümesini** tutar (örn. shard 1'de A–M kullanıcıları, shard 2'de N–Z, bir **shard key** ile). Tek bir makinenin ötesinde **yazmaları ve depolamayı ölçeklemenin** bir yoludur: her shard yalnızca kendi dilimini ele alır, böylece kapasite ve throughput shard sayısıyla büyür. **Faydalar:** yatay ölçeklenebilirlik, daha küçük node-başına veri kümeleri (daha hızlı sorgular) ve hata izolasyonu. **Zorluklar:** iyi bir **shard key** seçmek (**hot spot'lardan**/dengesiz dağıtımdan kaçınmak için), **shard-arası sorgular ve join'ler** zor/pahalı olur, shard eklerken **yeniden dengeleme** ve shard'lar arası transaction'ları sürdürmek. Sharding replikasyondan farklıdır: **replikasyon aynı veriyi kopyalar** (erişilebilirlik/okumalar için); **sharding farklı veriyi böler** (ölçek için) — ve ikisi genelde birleştirilir (her shard ayrıca replikalanır)."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What does 'eventually consistent' guarantee?",
+          "promptTr": "'Eventually consistent' neyi garanti eder?",
+          "options": [
+            { "text": "Without new writes, replicas converge to the same value eventually — but reads may be temporarily stale", "textTr": "Yeni yazma olmazsa, replikalar eninde sonunda aynı değere yakınsar — ama okumalar geçici olarak bayat olabilir", "correct": true },
+            { "text": "Every read instantly returns the latest write everywhere", "textTr": "Her okuma her yerde anında en son yazmayı döndürür" },
+            { "text": "Data is never consistent", "textTr": "Veri asla tutarlı olmaz" },
+            { "text": "Writes are rejected during replication", "textTr": "Replikasyon sırasında yazmalar reddedilir" }
+          ],
+          "explanation": "Replicas converge over time, not instantly; immediately after a write some nodes may serve stale data. It trades immediate consistency for availability/performance (AP/BASE).",
+          "explanationTr": "Replikalar anında değil zamanla yakınsar; bir yazmadan hemen sonra bazı node'lar bayat veri sunabilir. Anlık tutarlılığı erişilebilirlik/performansa değişir (AP/BASE)."
+        },
+        {
+          "type": "true_false",
+          "statement": "Sharding splits different data across nodes to scale, whereas replication copies the same data for availability.",
+          "statementTr": "Sharding ölçeklemek için farklı veriyi node'lara böler, replikasyon ise erişilebilirlik için aynı veriyi kopyalar.",
+          "answer": true,
+          "explanation": "Sharding partitions a dataset by a shard key (scale writes/storage); replication duplicates data (availability/reads). They're complementary and often combined.",
+          "explanationTr": "Sharding bir veri kümesini bir shard key ile bölümler (yazma/depolama ölçekle); replikasyon veriyi çoğaltır (erişilebilirlik/okumalar). Tamamlayıcıdırlar ve genelde birleştirilir."
+        },
+        {
+          "type": "challenge",
+          "question": "What Does Eventually Consistent Mean?"
+        },
+        {
+          "type": "challenge",
+          "question": "What Is Sharding?"
+        }
+      ]
+    },
+    {
+      "slug": "shared-nothing-location-transparency-ha",
+      "title": "Shared-nothing, location transparency & HA",
+      "titleTr": "Shared-nothing, location transparency ve HA",
+      "position": 3,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Independent nodes, hidden locations, staying up",
+          "titleTr": "Bağımsız node'lar, gizli konumlar, ayakta kalmak",
+          "body": "**Shared-Nothing Architecture** is a distributed design where **each node is independent and self-sufficient — nodes share no memory, disk, or state**, and coordinate only by passing messages over the network. There's **no single shared resource** to contend for or to become a bottleneck/single point of failure. **How it scales:** because nodes don't share anything, you scale **horizontally and almost linearly** — just add more nodes; there's no central resource whose contention caps throughput. It underpins most large-scale systems (sharded databases, big-data frameworks, microservices). Trade-offs: data must be partitioned across nodes, and cross-node operations (joins, distributed transactions) are harder — but the payoff is excellent scalability and fault isolation.\n\n**Location Transparency** is the property that **a resource can be accessed without knowing or caring about its physical location**. Clients use a logical name/identifier; the system resolves where it actually lives (which server/node/region). So code calling a service or accessing data doesn't hard-code a host — the resource could move, be replicated, or be relocated, and callers are unaffected. It enables flexibility, scaling, and failover (you can relocate or replace a resource behind the same logical address). Common in distributed systems, service discovery, and actor systems.\n\n**High Availability (HA)** means a system is designed to remain **operational and accessible for a very high percentage of time**, minimising downtime — often quantified in 'nines' (99.9% ≈ 8.7h/yr down, 99.99% ≈ 52min/yr). It's achieved by **eliminating single points of failure** through **redundancy** (multiple servers, clusters), **failover** (automatically switch to healthy components), **load balancing**, **health monitoring**, and geographic distribution. HA is about *uptime/resilience*; it differs from scalability (handling load) and from disaster recovery (recovering after a major outage), though they're related.",
+          "bodyTr": "**Shared-Nothing Architecture**, **her node'un bağımsız ve kendi-kendine yeterli olduğu — node'ların bellek, disk ya da state paylaşmadığı** ve yalnızca ağ üzerinden mesaj geçirerek koordine olduğu bir dağıtık tasarımdır. Çekişilecek ya da darboğaz/tek arıza noktası olacak **tek bir paylaşılan kaynak yoktur**. **Nasıl ölçeklenir:** node'lar hiçbir şey paylaşmadığından, **yatay ve neredeyse doğrusal** ölçeklersin — sadece daha fazla node ekle; çekişmesi throughput'u sınırlayan merkezi bir kaynak yoktur. Çoğu büyük-ölçekli sistemin temelidir (sharded veritabanları, big-data framework'leri, mikroservisler). Ödünler: veri node'lar arası bölümlenmeli ve node-arası işlemler (join'ler, dağıtık transaction'lar) daha zordur — ama getirisi mükemmel ölçeklenebilirlik ve hata izolasyonudur.\n\n**Location Transparency**, **bir kaynağa fiziksel konumunu bilmeden ya da umursamadan erişilebilmesi** özelliğidir. İstemciler mantıksal bir ad/tanımlayıcı kullanır; sistem onun gerçekte nerede yaşadığını (hangi sunucu/node/bölge) çözer. Yani bir servisi çağıran ya da veriye erişen kod bir host'u hard-code etmez — kaynak taşınabilir, replikalanabilir ya da yeniden konumlandırılabilir ve çağıranlar etkilenmez. Esneklik, ölçekleme ve failover sağlar (aynı mantıksal adres arkasında bir kaynağı yeniden konumlandırabilir ya da değiştirebilirsin). Dağıtık sistemlerde, service discovery'de ve actor sistemlerinde yaygın.\n\n**High Availability (HA)**, bir sistemin **zamanın çok yüksek bir yüzdesi boyunca işler ve erişilebilir** kalacak şekilde tasarlanması, kesintiyi en aza indirmesi demektir — genelde 'dokuzlarla' nicelenir (99.9% ≈ 8.7sa/yıl kapalı, 99.99% ≈ 52dk/yıl). **Redundancy** (birden çok sunucu, cluster), **failover** (sağlıklı bileşenlere otomatik geçiş), **load balancing**, **health monitoring** ve coğrafi dağıtım yoluyla **tek arıza noktalarını ortadan kaldırarak** elde edilir. HA *uptime/dirençle* ilgilidir; ölçeklenebilirlikten (yükü karşılama) ve disaster recovery'den (büyük bir kesinti sonrası kurtarma) farklıdır, gerçi ilişkilidirler."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Why does a shared-nothing architecture scale so well horizontally?",
+          "promptTr": "Bir shared-nothing mimari neden yatayda bu kadar iyi ölçeklenir?",
+          "options": [
+            { "text": "Nodes share no memory/disk/state, so there's no central contended resource to bottleneck — just add more nodes", "textTr": "Node'lar bellek/disk/state paylaşmaz, bu yüzden darboğaz olacak merkezi çekişilen bir kaynak yoktur — sadece daha fazla node ekle", "correct": true },
+            { "text": "All nodes share one central database for coordination", "textTr": "Tüm node'lar koordinasyon için tek bir merkezi veritabanı paylaşır" },
+            { "text": "It uses a single powerful machine", "textTr": "Tek güçlü bir makine kullanır" },
+            { "text": "It avoids the network entirely", "textTr": "Ağı tamamen önler" }
+          ],
+          "explanation": "No shared resource means no contention/SPOF capping throughput; capacity grows nearly linearly with nodes. The trade-off is partitioned data and harder cross-node operations.",
+          "explanationTr": "Paylaşılan kaynak olmaması, throughput'u sınırlayan çekişme/SPOF olmaması demektir; kapasite node'larla neredeyse doğrusal büyür. Ödün, bölümlenmiş veri ve daha zor node-arası işlemlerdir."
+        },
+        {
+          "type": "true_false",
+          "statement": "High availability is achieved mainly by eliminating single points of failure through redundancy and automatic failover.",
+          "statementTr": "Yüksek erişilebilirlik esas olarak redundancy ve otomatik failover yoluyla tek arıza noktalarını ortadan kaldırarak elde edilir.",
+          "answer": true,
+          "explanation": "HA = minimal downtime via redundancy, failover, load balancing, and monitoring — no single point of failure. It's about uptime, distinct from scalability and disaster recovery.",
+          "explanationTr": "HA = redundancy, failover, load balancing ve monitoring yoluyla minimal kesinti — tek arıza noktası yok. Uptime ile ilgilidir, ölçeklenebilirlik ve disaster recovery'den ayrıdır."
+        },
+        {
+          "type": "challenge",
+          "question": "What Is Shared Nothing Architecture? How Does It Scale?"
+        },
+        {
+          "type": "challenge",
+          "question": "Provide Definition Of Location Transparency"
+        },
+        {
+          "type": "challenge",
+          "question": "What Do You Mean By High Availability (HA)?"
+        }
+      ]
+    }
+  ]
+}

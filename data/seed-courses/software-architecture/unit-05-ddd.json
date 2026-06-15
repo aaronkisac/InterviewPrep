@@ -1,0 +1,108 @@
+{
+  "topic": "software-architecture",
+  "slug": "ddd",
+  "title": "Domain-Driven Design",
+  "titleTr": "Domain-Driven Design",
+  "section": "advanced",
+  "position": 5,
+  "lessons": [
+    {
+      "slug": "ddd-domain-model",
+      "title": "DDD, the Domain & the Model",
+      "titleTr": "DDD, Domain ve Model",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Designing around the business",
+          "titleTr": "İş etrafında tasarlamak",
+          "body": "**Domain-Driven Design (DDD)** (Eric Evans) is an approach to building complex software by **putting the business domain at the centre** and modelling it in code in close collaboration with **domain experts**. Its hallmarks: a **Ubiquitous Language** (one shared vocabulary used by developers and experts, reflected in the code), **Bounded Contexts** (explicit boundaries within which a model and language are consistent), and tactical building blocks (**Entities, Value Objects, Aggregates, Repositories, Domain Services, Domain Events**). DDD shines when the **domain is complex**; for simple CRUD it's overkill.\n\n**The Domain (in DDD)** is the **subject area / problem space the software addresses** — the business and its rules, processes, and concepts (e.g. for a bank: accounts, transactions, interest). It's *what the software is about*, independent of technology. DDD distinguishes the **core domain** (the part that gives competitive advantage, where you invest most) from **supporting/generic subdomains**.\n\n**A Model (in DDD)** is a **selective, purpose-built abstraction of the domain** — a system of concepts (objects, rules, relationships) that captures the aspects of the domain relevant to solving the problem, expressed in the Ubiquitous Language. It's **not** a diagram or the database schema; it's the shared mental model **embodied in the code**. A good model is rigorously tied to the language and refined continuously as understanding deepens. So: the **Domain** is the real-world problem space; the **Model** is the curated abstraction of it that the team builds and codes.",
+          "bodyTr": "**Domain-Driven Design (DDD)** (Eric Evans), karmaşık yazılımı **iş domain'ini merkeze koyarak** ve onu **domain uzmanlarıyla** yakın işbirliğinde kodda modelleyerek inşa etme yaklaşımıdır. Ayırt edici özellikleri: bir **Ubiquitous Language** (geliştiriciler ve uzmanlarca kullanılan, kodda yansıyan tek paylaşılan kelime dağarcığı), **Bounded Context'ler** (bir model ve dilin tutarlı olduğu açık sınırlar) ve taktiksel yapı taşları (**Entity'ler, Value Object'ler, Aggregate'ler, Repository'ler, Domain Service'ler, Domain Event'ler**). DDD, **domain karmaşık** olduğunda parlar; basit CRUD için fazladır.\n\n**Domain (DDD'de)**, yazılımın ele aldığı **konu alanı / problem uzayıdır** — iş ve onun kuralları, süreçleri ve kavramları (örn. bir banka için: hesaplar, işlemler, faiz). Teknolojiden bağımsız olarak *yazılımın neyle ilgili olduğudur*. DDD, **core domain**'i (rekabet avantajı veren, en çok yatırım yaptığın kısım) **destekleyici/jenerik alt-domain'lerden** ayırır.\n\n**Model (DDD'de)**, **domain'in seçici, amaca-yönelik bir soyutlamasıdır** — problemi çözmekle ilgili domain yönlerini yakalayan, Ubiquitous Language'de ifade edilen bir kavram sistemi (nesneler, kurallar, ilişkiler). Bir diyagram ya da veritabanı şeması **değildir**; **kodda somutlaşan** paylaşılan zihinsel modeldir. İyi bir model dile sıkıca bağlıdır ve anlayış derinleştikçe sürekli iyileştirilir. Yani: **Domain** gerçek-dünya problem uzayıdır; **Model**, takımın inşa edip kodladığı onun düzenlenmiş soyutlamasıdır."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What is at the centre of Domain-Driven Design?",
+          "promptTr": "Domain-Driven Design'ın merkezinde ne vardır?",
+          "options": [
+            { "text": "The business domain, modelled in a ubiquitous language with domain experts", "textTr": "Domain uzmanlarıyla ubiquitous language'de modellenen iş domain'i", "correct": true },
+            { "text": "The database schema", "textTr": "Veritabanı şeması" },
+            { "text": "The UI framework", "textTr": "UI framework'ü" },
+            { "text": "The deployment pipeline", "textTr": "Deployment pipeline'ı" }
+          ],
+          "explanation": "DDD centres the business domain: a shared ubiquitous language, bounded contexts, and a model embodied in code, built with domain experts. Best for complex domains.",
+          "explanationTr": "DDD iş domain'ini merkeze alır: paylaşılan ubiquitous language, bounded context'ler ve kodda somutlaşan bir model, domain uzmanlarıyla kurulur. Karmaşık domain'ler için en iyisi."
+        },
+        {
+          "type": "match",
+          "prompt": "Match each DDD term to its meaning",
+          "promptTr": "Her DDD terimini anlamıyla eşleştir",
+          "pairs": [
+            { "left": "Domain", "leftTr": "Domain", "right": "The real-world problem space / business the software addresses", "rightTr": "Yazılımın ele aldığı gerçek-dünya problem uzayı / iş" },
+            { "left": "Model", "leftTr": "Model", "right": "The curated abstraction of the domain, embodied in code", "rightTr": "Domain'in kodda somutlaşan düzenlenmiş soyutlaması" },
+            { "left": "Ubiquitous Language", "leftTr": "Ubiquitous Language", "right": "The shared vocabulary used by developers and domain experts alike", "rightTr": "Hem geliştiriciler hem domain uzmanlarınca kullanılan paylaşılan kelime dağarcığı" }
+          ]
+        },
+        {
+          "type": "challenge",
+          "question": "What is Domain Driven Design?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is Domain in DDD?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is a Model in DDD?"
+        }
+      ]
+    },
+    {
+      "slug": "dto-viewmodel-bdd",
+      "title": "DTOs, ViewModels & BDD vs DDD",
+      "titleTr": "DTO'lar, ViewModel'ler ve BDD vs DDD",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Data-shaping objects and a related acronym",
+          "titleTr": "Veri-şekillendiren nesneler ve ilgili bir kısaltma",
+          "body": "**DTO vs ViewModel:** both are simple data-carrying objects (no business logic), but with different purposes:\n\n- A **DTO (Data Transfer Object)** carries data **across a boundary/process** — e.g. between the API and clients, or between layers/services. It's about **transport**: shaping and bundling data to minimise round-trips and decouple internal models from the wire.\n- A **ViewModel** is shaped specifically **for a particular view/UI** — it holds exactly what a screen needs to render (often combining/formatting data from several sources), plus presentation state.\n\nSo a DTO is **transport-oriented** (often serialized over the network), a ViewModel is **presentation-oriented** (tailored to one view). Both protect domain entities from being exposed directly.\n\n**Where should a DTO be implemented — Domain or Application Service layer?** In the **Application Service layer** (not the Domain). The domain layer should stay **pure** — entities, value objects, and business rules — with **no knowledge of transport, serialization, or how data is presented/transferred**. DTOs are an **application/boundary concern**: the application service maps domain objects to/from DTOs for callers. Putting DTOs in the domain would couple the core to delivery concerns and violate the dependency direction. (ViewModels, similarly, belong in the presentation layer.)\n\n**BDD vs DDD** — different things despite sharing 'D-D':\n\n- **DDD (Domain-Driven Design)** is a **design/modelling** approach — structuring code around the business domain and a ubiquitous language.\n- **BDD (Behavior-Driven Development)** is a **collaboration/testing** practice — describing software **behaviour** in human-readable scenarios (often **Given-When-Then**, e.g. Cucumber/Gherkin) shared by devs, QA, and business, which double as automated acceptance tests.\n\nThey're **complementary**: DDD shapes *how the system is modelled*; BDD shapes *how behaviour is specified and verified*. Both value collaboration and a shared language with the business; teams often use them together.",
+          "bodyTr": "**DTO vs ViewModel:** ikisi de basit veri-taşıyan nesnelerdir (iş mantığı yok) ama farklı amaçlarla:\n\n- Bir **DTO (Data Transfer Object)** veriyi **bir sınır/süreç boyunca** taşır — örn. API ile istemciler arasında ya da katmanlar/servisler arasında. **Taşıma** ile ilgilidir: round-trip'leri azaltmak ve iç modelleri wire'dan ayırmak için veriyi şekillendirip paketlemek.\n- Bir **ViewModel** belirli bir **view/UI için** özel olarak şekillendirilir — bir ekranın render etmek için tam olarak ihtiyaç duyduğunu tutar (genelde birkaç kaynaktan veriyi birleştirir/biçimlendirir), artı sunum state'i.\n\nYani DTO **taşıma-yönelimlidir** (genelde ağ üzerinden serileştirilir), ViewModel **sunum-yönelimlidir** (tek bir view'a uyarlanmış). İkisi de domain entity'lerinin doğrudan açılmasını önler.\n\n**Bir DTO nerede uygulanmalı — Domain mi Application Service katmanı mı?** **Application Service katmanında** (Domain'de değil). Domain katmanı **saf** kalmalı — entity'ler, value object'ler ve iş kuralları — **taşıma, serileştirme ya da verinin nasıl sunulduğu/aktarıldığı hakkında bilgisi olmadan**. DTO'lar bir **application/sınır endişesidir**: application service domain nesnelerini çağıranlar için DTO'lara eşler. DTO'ları domain'e koymak çekirdeği teslim endişelerine bağlar ve bağımlılık yönünü ihlal eder. (ViewModel'ler de benzer şekilde presentation katmanına aittir.)\n\n**BDD vs DDD** — 'D-D' paylaşmalarına rağmen farklı şeyler:\n\n- **DDD (Domain-Driven Design)** bir **tasarım/modelleme** yaklaşımıdır — kodu iş domain'i ve ubiquitous language etrafında yapılandırmak.\n- **BDD (Behavior-Driven Development)** bir **işbirliği/test** pratiğidir — yazılım **davranışını** insan-okunabilir senaryolarda tanımlamak (genelde **Given-When-Then**, örn. Cucumber/Gherkin), geliştiriciler, QA ve iş tarafından paylaşılır ve otomatik kabul testleri olarak da işlev görür.\n\n**Tamamlayıcıdırlar**: DDD *sistemin nasıl modellendiğini* şekillendirir; BDD *davranışın nasıl belirtildiğini ve doğrulandığını* şekillendirir. İkisi de işbirliğine ve işle paylaşılan bir dile değer verir; takımlar genelde ikisini birlikte kullanır."
+        },
+        {
+          "type": "mcq",
+          "prompt": "In which layer should DTOs typically be implemented?",
+          "promptTr": "DTO'lar tipik olarak hangi katmanda uygulanmalı?",
+          "options": [
+            { "text": "The application service / boundary layer — keep the domain pure and unaware of transport", "textTr": "Application service / sınır katmanı — domain'i saf ve taşımadan habersiz tut", "correct": true },
+            { "text": "The domain layer, alongside entities", "textTr": "Domain katmanında, entity'lerle birlikte" },
+            { "text": "The database schema", "textTr": "Veritabanı şeması" },
+            { "text": "Inside the UI's CSS", "textTr": "UI'ın CSS'inin içinde" }
+          ],
+          "explanation": "DTOs are a transport/boundary concern; the application service maps domain ↔ DTO. Putting them in the domain couples the core to delivery details.",
+          "explanationTr": "DTO'lar bir taşıma/sınır endişesidir; application service domain ↔ DTO eşler. Onları domain'e koymak çekirdeği teslim detaylarına bağlar."
+        },
+        {
+          "type": "true_false",
+          "statement": "BDD and DDD are complementary: DDD is about modelling the domain, while BDD specifies behaviour in shared Given-When-Then scenarios.",
+          "statementTr": "BDD ve DDD tamamlayıcıdır: DDD domain'i modellemekle ilgilidir, BDD ise davranışı paylaşılan Given-When-Then senaryolarında belirtir.",
+          "answer": true,
+          "explanation": "DDD = design/modelling around the domain; BDD = collaborative behaviour specs/tests (Given-When-Then). Different focus, often used together.",
+          "explanationTr": "DDD = domain etrafında tasarım/modelleme; BDD = işbirlikçi davranış spec'leri/testleri (Given-When-Then). Farklı odak, genelde birlikte kullanılır."
+        },
+        {
+          "type": "challenge",
+          "question": "What is the difference between DTOs and ViewModels in DDD?"
+        },
+        {
+          "type": "challenge",
+          "question": "Where should DTO be implemented, in a Domain Layer or in an Application Service Layer? Explain."
+        },
+        {
+          "type": "challenge",
+          "question": "What is the difference between Behavior-Driven Development (BDD) vs Domain-Driven Design (DDD)?"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,407 @@
+{
+  "topic": "software-architecture",
+  "title": "Software Architecture",
+  "$comment": "Canonical concept list (syllabus) for Software Architecture. COMPLETE: 13 units, 40 concepts covering bank ids 1401-1494 (94/94). Verified by: pnpm concept:coverage",
+  "concepts": [
+    {
+      "id": "kiss-dry-yagni",
+      "title": "KISS, DRY/DIE & YAGNI",
+      "titleTr": "KISS, DRY/DIE ve YAGNI",
+      "section": "foundations",
+      "unit": "design-principles-solid",
+      "lessons": [
+        "kiss-dry-yagni"
+      ]
+    },
+    {
+      "id": "solid-and-srp",
+      "title": "SOLID overview & SRP",
+      "titleTr": "SOLID genel bakış ve SRP",
+      "section": "foundations",
+      "unit": "design-principles-solid",
+      "lessons": [
+        "solid-and-srp"
+      ]
+    },
+    {
+      "id": "dip-isp-interfaces",
+      "title": "DIP, ISP & programming to interfaces",
+      "titleTr": "DIP, ISP ve arayüzlere programlama",
+      "section": "foundations",
+      "unit": "design-principles-solid",
+      "lessons": [
+        "dip-isp-interfaces"
+      ]
+    },
+    {
+      "id": "cohesion-coupling-god-class",
+      "title": "Cohesion, coupling & the GOD class",
+      "titleTr": "Cohesion, coupling ve GOD class",
+      "section": "core",
+      "unit": "quality-and-smells",
+      "lessons": [
+        "cohesion-coupling-god-class"
+      ]
+    },
+    {
+      "id": "bad-design-fail-fast",
+      "title": "Bad design, fail-fast & failing early",
+      "titleTr": "Kötü tasarım, fail-fast ve erken başarısızlık",
+      "section": "core",
+      "unit": "quality-and-smells",
+      "lessons": [
+        "bad-design-fail-fast"
+      ]
+    },
+    {
+      "id": "null-vs-empty-why-hard",
+      "title": "Null vs empty & why software is hard",
+      "titleTr": "Null vs empty ve yazılım neden zor",
+      "section": "core",
+      "unit": "quality-and-smells",
+      "lessons": [
+        "null-vs-empty-why-hard"
+      ]
+    },
+    {
+      "id": "why-layer",
+      "title": "Why layering matters",
+      "titleTr": "Katmanlama neden önemli",
+      "section": "core",
+      "unit": "layered-clean",
+      "lessons": [
+        "why-layer"
+      ]
+    },
+    {
+      "id": "clean-architecture",
+      "title": "Clean Architecture & its layers",
+      "titleTr": "Clean Architecture ve katmanları",
+      "section": "core",
+      "unit": "layered-clean",
+      "lessons": [
+        "clean-architecture"
+      ]
+    },
+    {
+      "id": "clean-vs-ntier-onion-hexagonal",
+      "title": "Clean vs N-Tier, Onion & Hexagonal",
+      "titleTr": "Clean vs N-Tier, Onion ve Hexagonal",
+      "section": "core",
+      "unit": "layered-clean",
+      "lessons": [
+        "clean-vs-ntier-onion-hexagonal"
+      ]
+    },
+    {
+      "id": "structure-by-components",
+      "title": "Structure by components & isolate the domain",
+      "titleTr": "Bileşene göre yapılandır ve domain'i izole et",
+      "section": "core",
+      "unit": "structuring-architect",
+      "lessons": [
+        "structure-by-components"
+      ]
+    },
+    {
+      "id": "exceptions-and-architect",
+      "title": "Exceptions in layered apps & the architect role",
+      "titleTr": "Katmanlı uygulamalarda exception'lar ve mimar rolü",
+      "section": "core",
+      "unit": "structuring-architect",
+      "lessons": [
+        "exceptions-and-architect"
+      ]
+    },
+    {
+      "id": "ddd-domain-model",
+      "title": "DDD, the Domain & the Model",
+      "titleTr": "DDD, Domain ve Model",
+      "section": "advanced",
+      "unit": "ddd",
+      "lessons": [
+        "ddd-domain-model"
+      ]
+    },
+    {
+      "id": "dto-viewmodel-bdd",
+      "title": "DTOs, ViewModels & BDD vs DDD",
+      "titleTr": "DTO'lar, ViewModel'ler ve BDD vs DDD",
+      "section": "advanced",
+      "unit": "ddd",
+      "lessons": [
+        "dto-viewmodel-bdd"
+      ]
+    },
+    {
+      "id": "mono-soa-micro",
+      "title": "Monolithic, SOA & Microservices",
+      "titleTr": "Monolitik, SOA ve Mikroservisler",
+      "section": "advanced",
+      "unit": "architecture-styles",
+      "lessons": [
+        "mono-soa-micro"
+      ]
+    },
+    {
+      "id": "micro-comms",
+      "title": "Sync vs async comms & message queues",
+      "titleTr": "Sync vs async iletişim ve message queue'lar",
+      "section": "advanced",
+      "unit": "architecture-styles",
+      "lessons": [
+        "micro-comms"
+      ]
+    },
+    {
+      "id": "micro-transactions-circuit-breaker",
+      "title": "Microservice transactions & the Circuit Breaker",
+      "titleTr": "Mikroservis transaction'ları ve Circuit Breaker",
+      "section": "advanced",
+      "unit": "architecture-styles",
+      "lessons": [
+        "micro-transactions-circuit-breaker"
+      ]
+    },
+    {
+      "id": "repository-vs-service-and-active-record",
+      "title": "Repository vs Service Layer & vs Active Record",
+      "titleTr": "Repository vs Service Layer ve vs Active Record",
+      "section": "advanced",
+      "unit": "repository-uow",
+      "lessons": [
+        "repository-vs-service-and-active-record"
+      ]
+    },
+    {
+      "id": "grouping-repos-and-smart-objects",
+      "title": "Grouping repositories & repository vs smart objects",
+      "titleTr": "Repository gruplama ve repository vs akıllı nesneler",
+      "section": "advanced",
+      "unit": "repository-uow",
+      "lessons": [
+        "grouping-repos-and-smart-objects"
+      ]
+    },
+    {
+      "id": "unit-of-work",
+      "title": "Unit of Work & its relationship to Repository",
+      "titleTr": "Unit of Work ve Repository ile ilişkisi",
+      "section": "advanced",
+      "unit": "repository-uow",
+      "lessons": [
+        "unit-of-work"
+      ]
+    },
+    {
+      "id": "cqrs",
+      "title": "CQRS & its benefits",
+      "titleTr": "CQRS ve faydaları",
+      "section": "advanced",
+      "unit": "cqrs-event-sourcing",
+      "lessons": [
+        "cqrs"
+      ]
+    },
+    {
+      "id": "event-sourcing",
+      "title": "Event Sourcing & its relationship to CQRS",
+      "titleTr": "Event Sourcing ve CQRS ile ilişkisi",
+      "section": "advanced",
+      "unit": "cqrs-event-sourcing",
+      "lessons": [
+        "event-sourcing"
+      ]
+    },
+    {
+      "id": "scalability-elasticity",
+      "title": "Scalability & Elasticity",
+      "titleTr": "Ölçeklenebilirlik ve Elastiklik",
+      "section": "advanced",
+      "unit": "scalability-load-balancing",
+      "lessons": [
+        "scalability-elasticity"
+      ]
+    },
+    {
+      "id": "clusters",
+      "title": "Clusters & clustering",
+      "titleTr": "Cluster'lar ve clustering",
+      "section": "advanced",
+      "unit": "scalability-load-balancing",
+      "lessons": [
+        "clusters"
+      ]
+    },
+    {
+      "id": "load-balancing-failover-affinity",
+      "title": "Load balancing, failover & session affinity",
+      "titleTr": "Yük dengeleme, failover ve session affinity",
+      "section": "advanced",
+      "unit": "scalability-load-balancing",
+      "lessons": [
+        "load-balancing-failover-affinity"
+      ]
+    },
+    {
+      "id": "session-replication-ip-affinity",
+      "title": "Session replication & IP affinity",
+      "titleTr": "Session replication ve IP affinity",
+      "section": "advanced",
+      "unit": "scalability-load-balancing",
+      "lessons": [
+        "session-replication-ip-affinity"
+      ]
+    },
+    {
+      "id": "cap-acid-base",
+      "title": "CAP, ACID & BASE",
+      "titleTr": "CAP, ACID ve BASE",
+      "section": "interview",
+      "unit": "distributed-consistency",
+      "lessons": [
+        "cap-acid-base"
+      ]
+    },
+    {
+      "id": "eventually-consistent-sharding",
+      "title": "Eventual consistency & sharding",
+      "titleTr": "Eventual consistency ve sharding",
+      "section": "interview",
+      "unit": "distributed-consistency",
+      "lessons": [
+        "eventually-consistent-sharding"
+      ]
+    },
+    {
+      "id": "shared-nothing-location-transparency-ha",
+      "title": "Shared-nothing, location transparency & HA",
+      "titleTr": "Shared-nothing, location transparency ve HA",
+      "section": "interview",
+      "unit": "distributed-consistency",
+      "lessons": [
+        "shared-nothing-location-transparency-ha"
+      ]
+    },
+    {
+      "id": "fault-tolerance-resilience",
+      "title": "Fault tolerance, resilience & failure vs error",
+      "titleTr": "Hata toleransı, direnç ve failure vs error",
+      "section": "interview",
+      "unit": "resilience-concurrency",
+      "lessons": [
+        "fault-tolerance-resilience"
+      ]
+    },
+    {
+      "id": "back-pressure-actor",
+      "title": "Back-pressure & the actor model",
+      "titleTr": "Back-pressure ve actor model",
+      "section": "interview",
+      "unit": "resilience-concurrency",
+      "lessons": [
+        "back-pressure-actor"
+      ]
+    },
+    {
+      "id": "concurrency-threads-amdahl",
+      "title": "Concurrency, threads & Amdahl's Law",
+      "titleTr": "Eşzamanlılık, thread'ler ve Amdahl Yasası",
+      "section": "interview",
+      "unit": "resilience-concurrency",
+      "lessons": [
+        "concurrency-threads-amdahl"
+      ]
+    },
+    {
+      "id": "latency-cdn-stateful",
+      "title": "Latency, CDNs & stateful vs stateless",
+      "titleTr": "Gecikme, CDN'ler ve stateful vs stateless",
+      "section": "interview",
+      "unit": "performance-caching-ops",
+      "lessons": [
+        "latency-cdn-stateful"
+      ]
+    },
+    {
+      "id": "offload-db-cache-stampede",
+      "title": "Offloading the DB & cache stampede",
+      "titleTr": "DB'yi boşaltmak ve cache stampede",
+      "section": "interview",
+      "unit": "performance-caching-ops",
+      "lessons": [
+        "offload-db-cache-stampede"
+      ]
+    },
+    {
+      "id": "caching-paginated-miss-storm",
+      "title": "Caching paginated data & cache miss-storms",
+      "titleTr": "Paginated veri önbellekleme ve cache miss-storm'lar",
+      "section": "interview",
+      "unit": "performance-caching-ops",
+      "lessons": [
+        "caching-paginated-miss-storm"
+      ]
+    },
+    {
+      "id": "zero-downtime-twelve-factor",
+      "title": "Zero-downtime deploys & Twelve-Factor",
+      "titleTr": "Zero-downtime deploy'lar ve Twelve-Factor",
+      "section": "interview",
+      "unit": "performance-caching-ops",
+      "lessons": [
+        "zero-downtime-twelve-factor"
+      ]
+    },
+    {
+      "id": "tdd-test-types-private",
+      "title": "TDD, test types & testing private code",
+      "titleTr": "TDD, test türleri ve private kod testi",
+      "section": "interview",
+      "unit": "testing-realtime-applied",
+      "lessons": [
+        "tdd-test-types-private"
+      ]
+    },
+    {
+      "id": "performance-testing",
+      "title": "Performance testing: practices & metrics",
+      "titleTr": "Performans testi: pratikler ve metrikler",
+      "section": "interview",
+      "unit": "testing-realtime-applied",
+      "lessons": [
+        "performance-testing"
+      ]
+    },
+    {
+      "id": "realtime-websocket",
+      "title": "Real-time: WebSocket over HTTP & vs REST",
+      "titleTr": "Gerçek zamanlı: HTTP yerine WebSocket ve vs REST",
+      "section": "interview",
+      "unit": "testing-realtime-applied",
+      "lessons": [
+        "realtime-websocket"
+      ]
+    },
+    {
+      "id": "applied-recommendations-basket",
+      "title": "Applied: recommendations & the basket race",
+      "titleTr": "Uygulamalı: öneriler ve sepet yarışı",
+      "section": "interview",
+      "unit": "testing-realtime-applied",
+      "lessons": [
+        "applied-recommendations-basket"
+      ]
+    },
+    {
+      "id": "utility-code-heuristic",
+      "title": "Sharing utility code & heuristic exceptions",
+      "titleTr": "Yardımcı kod paylaşımı ve heuristic exception'lar",
+      "section": "interview",
+      "unit": "testing-realtime-applied",
+      "lessons": [
+        "utility-code-heuristic"
+      ]
+    }
+  ]
+}

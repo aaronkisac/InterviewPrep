@@ -1,0 +1,150 @@
+{
+  "topic": "api-design",
+  "slug": "auth-security",
+  "title": "Authentication & Security",
+  "titleTr": "Kimlik Doğrulama ve Güvenlik",
+  "section": "core",
+  "position": 3,
+  "lessons": [
+    {
+      "slug": "authn-vs-authz",
+      "title": "Authentication vs authorisation",
+      "titleTr": "Authentication vs authorization",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Who you are vs what you can do",
+          "titleTr": "Kim olduğun vs ne yapabileceğin",
+          "body": "**Authentication vs Authorisation** — two distinct steps:\n\n- **Authentication (authn)** = **verifying *who* you are** — proving identity (login with credentials, a token, etc.). Answers *\"are you who you claim to be?\"* Failure → **401 Unauthorized**.\n- **Authorisation (authz)** = **determining *what* you're allowed to do** — checking permissions/roles for a given action or resource. Answers *\"are you allowed to do this?\"* Failure → **403 Forbidden**.\n\nAuthentication always comes **first** (you must know who someone is before deciding what they can do). A user can be authenticated but not authorised (logged in, but not an admin). Mnemonic: authN = who, authZ = what.\n\n**How to authenticate API requests** — common mechanisms:\n- **API keys** — a secret token in a header; simple, identifies the app/caller (good for server-to-server, less for users).\n- **Bearer tokens / JWT** — the client sends `Authorization: Bearer <token>`; the server validates it on each request (stateless).\n- **OAuth 2.0** — delegated access via access tokens (third-party/user auth).\n- **Session cookies** — server issues a session id stored in a cookie after login (stateful).\n- **Mutual TLS** — certificate-based, for high-security service-to-service.\n\nBest practices: always use **HTTPS**, never put secrets in URLs, prefer short-lived tokens with refresh, and validate/scope tokens on **every** request. The server authenticates the request (identity), then authorises the specific action (permissions).",
+          "bodyTr": "**Authentication vs Authorization** — iki ayrı adım:\n\n- **Authentication (authn)** = **kim olduğunu doğrulamak** — kimliği kanıtlamak (kimlik bilgileriyle giriş, bir token, vb.). *\"İddia ettiğin kişi misin?\"* sorusunu yanıtlar. Başarısızlık → **401 Unauthorized**.\n- **Authorization (authz)** = **ne yapmana izin verildiğini belirlemek** — belirli bir eylem ya da kaynak için izinleri/rolleri kontrol etmek. *\"Bunu yapmana izin var mı?\"* sorusunu yanıtlar. Başarısızlık → **403 Forbidden**.\n\nAuthentication her zaman **önce** gelir (birinin ne yapabileceğine karar vermeden önce kim olduğunu bilmelisin). Bir kullanıcı kimliği doğrulanmış ama yetkilendirilmemiş olabilir (giriş yapmış ama admin değil). Anımsatıcı: authN = kim, authZ = ne.\n\n**API isteklerini nasıl kimlik doğrulamalı** — yaygın mekanizmalar:\n- **API key'ler** — bir başlıkta gizli bir token; basit, app/çağıranı tanımlar (sunucu-sunucu için iyi, kullanıcılar için daha az).\n- **Bearer token'lar / JWT** — istemci `Authorization: Bearer <token>` gönderir; sunucu her istekte onu doğrular (stateless).\n- **OAuth 2.0** — access token'larla delege erişim (üçüncü-taraf/kullanıcı auth'u).\n- **Session cookie'leri** — sunucu girişten sonra bir cookie'de saklanan bir session id verir (stateful).\n- **Mutual TLS** — sertifika-tabanlı, yüksek-güvenlikli servis-servis için.\n\nEn iyi pratikler: her zaman **HTTPS** kullan, sırları asla URL'lere koyma, refresh'li kısa-ömürlü token'ları tercih et ve token'ları **her** istekte doğrula/kapsamla. Sunucu isteği kimlik doğrular (kimlik), sonra belirli eylemi yetkilendirir (izinler)."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What's the difference between authentication and authorisation?",
+          "promptTr": "Authentication ile authorization arasındaki fark nedir?",
+          "options": [
+            { "text": "Authentication verifies who you are (401 if it fails); authorisation checks what you're allowed to do (403 if it fails)", "textTr": "Authentication kim olduğunu doğrular (başarısızsa 401); authorization ne yapmana izin verildiğini kontrol eder (başarısızsa 403)", "correct": true },
+            { "text": "They are the same thing", "textTr": "Aynı şeydir" },
+            { "text": "Authorisation happens before authentication", "textTr": "Authorization, authentication'dan önce olur" },
+            { "text": "Authentication checks permissions; authorisation checks identity", "textTr": "Authentication izinleri kontrol eder; authorization kimliği" }
+          ],
+          "explanation": "AuthN = identity (who), comes first, 401 on failure. AuthZ = permissions (what), comes after, 403 on failure. You can be authenticated but not authorised.",
+          "explanationTr": "AuthN = kimlik (kim), önce gelir, başarısızlıkta 401. AuthZ = izinler (ne), sonra gelir, başarısızlıkta 403. Kimliği doğrulanmış ama yetkilendirilmemiş olabilirsin."
+        },
+        {
+          "type": "true_false",
+          "statement": "A common way to authenticate API requests is a bearer token sent in the Authorization header and validated on each request.",
+          "statementTr": "API isteklerini kimlik doğrulamanın yaygın bir yolu, Authorization başlığında gönderilen ve her istekte doğrulanan bir bearer token'dır.",
+          "answer": true,
+          "explanation": "Authorization: Bearer <token> (often a JWT) is validated server-side per request — stateless. Other options: API keys, OAuth access tokens, session cookies, mTLS. Always over HTTPS.",
+          "explanationTr": "Authorization: Bearer <token> (genelde bir JWT) sunucu tarafında istek başına doğrulanır — stateless. Diğer seçenekler: API key'ler, OAuth access token'ları, session cookie'leri, mTLS. Her zaman HTTPS üzerinden."
+        },
+        {
+          "type": "challenge",
+          "question": "What Is The Difference Between Authentication And Authorisation?"
+        },
+        {
+          "type": "challenge",
+          "question": "How Do You Authenticate API Requests?"
+        }
+      ]
+    },
+    {
+      "slug": "jwt-vs-sessions",
+      "title": "JWT vs sessions & JWT structure",
+      "titleTr": "JWT vs session'lar ve JWT yapısı",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Two ways to remember a logged-in user",
+          "titleTr": "Giriş yapmış bir kullanıcıyı hatırlamanın iki yolu",
+          "body": "**A JWT (JSON Web Token)** is a compact, URL-safe, **signed** token that carries claims about a user. It has **three parts separated by dots** — `header.payload.signature`:\n\n1. **Header** — metadata: the token type (`JWT`) and signing algorithm (e.g. `HS256`, `RS256`).\n2. **Payload** — the **claims** (data): e.g. `sub` (user id), `exp` (expiry), roles. **Base64URL-encoded, not encrypted** — readable by anyone, so never put secrets in it.\n3. **Signature** — the header+payload signed with a secret/private key; lets the server **verify the token wasn't tampered with** (and is authentic).\n\nThe signature is the key: anyone can read the payload, but only the holder of the key can produce a valid signature, so the server trusts a JWT it can verify without storing it.\n\n**JWT vs session-based auth:**\n- **Session-based (stateful)** — on login the server creates a **session stored server-side** (memory/DB/Redis) and gives the client a **session id** in a cookie. Each request sends the cookie; the server looks up the session. Easy to **revoke** (delete server-side), but requires server storage and **sticky sessions or a shared store** to scale.\n- **JWT (stateless)** — the server issues a **signed token the client stores** (and sends each request); the server **validates the signature** without any server-side lookup. **Scales easily** (no shared session store, great for distributed/microservices) but is **hard to revoke before expiry** (the token is valid until it expires), so you use short lifetimes + refresh tokens and a denylist for revocation.\n\nRule of thumb: **sessions** when you want easy server-side control/revocation and have a central store; **JWT** for stateless, distributed, or cross-service auth — accepting the revocation trade-off.",
+          "bodyTr": "**Bir JWT (JSON Web Token)**, bir kullanıcı hakkında claim'ler taşıyan kompakt, URL-güvenli, **imzalı** bir token'dır. **Noktalarla ayrılmış üç parçası** vardır — `header.payload.signature`:\n\n1. **Header** — metadata: token tipi (`JWT`) ve imzalama algoritması (örn. `HS256`, `RS256`).\n2. **Payload** — **claim'ler** (veri): örn. `sub` (kullanıcı id), `exp` (sona erme), roller. **Base64URL-kodlanmış, şifreli değil** — herkesçe okunabilir, bu yüzden asla sır koyma.\n3. **Signature** — header+payload'un bir secret/private key ile imzalanmışı; sunucunun **token'ın kurcalanmadığını** (ve otantik olduğunu) doğrulamasını sağlar.\n\nİmza anahtardır: herkes payload'u okuyabilir ama yalnızca anahtarın sahibi geçerli bir imza üretebilir, bu yüzden sunucu doğrulayabildiği bir JWT'ye saklamadan güvenir.\n\n**JWT vs session-tabanlı auth:**\n- **Session-tabanlı (stateful)** — girişte sunucu **sunucu-tarafında saklanan bir session** oluşturur (bellek/DB/Redis) ve istemciye bir cookie'de **session id** verir. Her istek cookie'yi gönderir; sunucu session'ı arar. **İptal etmesi kolay** (sunucu-tarafında sil) ama sunucu depolaması ve ölçeklemek için **sticky session ya da paylaşılan bir depo** gerektirir.\n- **JWT (stateless)** — sunucu **istemcinin sakladığı imzalı bir token** verir (ve her istekte gönderir); sunucu herhangi bir sunucu-tarafı arama olmadan **imzayı doğrular**. **Kolay ölçeklenir** (paylaşılan session deposu yok, dağıtık/mikroservisler için harika) ama **sona ermeden önce iptal etmesi zordur** (token sona erene kadar geçerlidir), bu yüzden kısa ömürler + refresh token'lar ve iptal için bir denylist kullanırsın.\n\nKural: sunucu-tarafı kolay kontrol/iptal istediğinde ve merkezi bir depon olduğunda **session'lar**; stateless, dağıtık ya da servisler-arası auth için **JWT** — iptal ödününü kabul ederek."
+        },
+        {
+          "type": "order",
+          "prompt": "Order the three parts of a JWT (header.payload.signature)",
+          "promptTr": "Bir JWT'nin üç parçasını sırala (header.payload.signature)",
+          "items": [
+            { "text": "Header — token type and signing algorithm", "textTr": "Header — token tipi ve imzalama algoritması" },
+            { "text": "Payload — the claims (e.g. user id, expiry); encoded, not encrypted", "textTr": "Payload — claim'ler (örn. kullanıcı id, sona erme); kodlanmış, şifreli değil" },
+            { "text": "Signature — verifies the token is authentic and untampered", "textTr": "Signature — token'ın otantik ve kurcalanmamış olduğunu doğrular" }
+          ],
+          "explanation": "header.payload.signature: header (alg/type), payload (claims, base64url — readable!), signature (verifies integrity with a key).",
+          "explanationTr": "header.payload.signature: header (alg/tip), payload (claim'ler, base64url — okunabilir!), signature (bir anahtarla bütünlüğü doğrular)."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What's a key trade-off of stateless JWT auth vs server-side sessions?",
+          "promptTr": "Stateless JWT auth'un sunucu-tarafı session'lara karşı temel bir ödünü nedir?",
+          "options": [
+            { "text": "JWTs scale without a shared session store but are hard to revoke before expiry; sessions are easy to revoke but need server storage", "textTr": "JWT'ler paylaşılan session deposu olmadan ölçeklenir ama sona ermeden iptal etmesi zordur; session'lar iptal etmesi kolaydır ama sunucu depolaması gerektirir", "correct": true },
+            { "text": "JWTs require sticky sessions; sessions are stateless", "textTr": "JWT'ler sticky session gerektirir; session'lar stateless'tir" },
+            { "text": "Sessions can't be revoked at all", "textTr": "Session'lar hiç iptal edilemez" },
+            { "text": "They behave identically", "textTr": "Aynı davranırlar" }
+          ],
+          "explanation": "JWT = stateless, scales easily, but revocation is hard (use short TTL + refresh + denylist). Sessions = server-side state, easy revocation, but need a shared store to scale.",
+          "explanationTr": "JWT = stateless, kolay ölçeklenir ama iptal zordur (kısa TTL + refresh + denylist kullan). Session'lar = sunucu-tarafı state, kolay iptal ama ölçeklemek için paylaşılan depo gerekir."
+        },
+        {
+          "type": "challenge",
+          "question": "What Is The Difference Between JWT And Session-Based Auth?"
+        },
+        {
+          "type": "challenge",
+          "question": "What Is A JWT (JSON Web Token) And What Are Its Three Parts?"
+        }
+      ]
+    },
+    {
+      "slug": "oauth-cors-security",
+      "title": "OAuth 2.0, CORS & security beyond auth",
+      "titleTr": "OAuth 2.0, CORS ve auth ötesi güvenlik",
+      "position": 3,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Delegated access, cross-origin rules, and defence in depth",
+          "titleTr": "Delege erişim, cross-origin kuralları ve katmanlı savunma",
+          "body": "**OAuth 2.0** is an **authorisation framework for delegated access** — it lets a user grant a third-party app **limited access to their resources** on another service **without sharing their password**. Roles: **resource owner** (user), **client** (the app), **authorisation server** (issues tokens), **resource server** (holds the data). The common **Authorization Code flow**: the app redirects the user to the auth server → user logs in and consents → the auth server returns a short-lived **authorization code** to the app → the app exchanges that code (plus its secret) for an **access token** (and often a refresh token) → the app calls the API with the access token. **PKCE** strengthens this for public/mobile/SPA clients. (OAuth is about *authorisation/delegation*; OpenID Connect adds an identity layer on top for login.)\n\n**CORS (Cross-Origin Resource Sharing)** is a **browser security mechanism** controlling whether a web page on one **origin** (scheme+host+port) may call an API on a **different origin**. By default the browser's **same-origin policy** blocks cross-origin requests from JS. The **server opts in** by returning CORS headers — `Access-Control-Allow-Origin` (which origins are allowed), `-Allow-Methods`, `-Allow-Headers`, `-Allow-Credentials` — and for non-simple requests the browser first sends a **preflight `OPTIONS`** request to check permission. You handle CORS **on the server/API** by configuring those headers to allow your trusted front-end origins (avoid blindly using `*` with credentials). Note: CORS is enforced by browsers, not a server-to-server concern.\n\n**API security beyond authentication** — defence in depth: **always use HTTPS/TLS**; **validate and sanitise all input** (prevent injection — SQL/NoSQL/command); **authorise every request** at the resource level (not just authenticate); **rate-limit and throttle** to resist abuse/DoS and brute force; set **CORS** and security headers correctly; avoid leaking info in errors; protect against **OWASP API Top 10** risks (broken object-level authorisation/IDOR, mass assignment, excessive data exposure); use **least privilege** and scoped tokens; **log/monitor/alert**; keep dependencies patched; and never expose secrets. Authentication is just the front door — securing an API means validating input, enforcing authorisation, limiting abuse, encrypting traffic, and monitoring throughout.",
+          "bodyTr": "**OAuth 2.0**, **delege erişim için bir yetkilendirme framework'üdür** — bir kullanıcının üçüncü-taraf bir uygulamaya, **parolasını paylaşmadan** başka bir serviste **kaynaklarına sınırlı erişim** vermesini sağlar. Roller: **resource owner** (kullanıcı), **client** (uygulama), **authorization server** (token verir), **resource server** (veriyi tutar). Yaygın **Authorization Code flow**: uygulama kullanıcıyı auth server'a yönlendirir → kullanıcı giriş yapar ve onaylar → auth server uygulamaya kısa-ömürlü bir **authorization code** döndürür → uygulama o kodu (artı secret'ını) bir **access token** (ve genelde bir refresh token) ile değiştirir → uygulama API'yi access token ile çağırır. **PKCE** bunu public/mobil/SPA istemciler için güçlendirir. (OAuth *yetkilendirme/delegasyon* ile ilgilidir; OpenID Connect giriş için üstüne bir kimlik katmanı ekler.)\n\n**CORS (Cross-Origin Resource Sharing)**, bir **origin**'deki (scheme+host+port) bir web sayfasının **farklı bir origin**'deki bir API'yi çağırıp çağıramayacağını kontrol eden bir **tarayıcı güvenlik mekanizmasıdır**. Varsayılan olarak tarayıcının **same-origin politikası** JS'ten cross-origin isteklerini engeller. **Sunucu**, CORS başlıkları döndürerek **opt-in eder** — `Access-Control-Allow-Origin` (hangi origin'lere izinli), `-Allow-Methods`, `-Allow-Headers`, `-Allow-Credentials` — ve basit-olmayan istekler için tarayıcı önce izni kontrol etmek üzere bir **preflight `OPTIONS`** isteği gönderir. CORS'u **sunucuda/API'de**, o başlıkları güvendiğin front-end origin'lerine izin verecek şekilde yapılandırarak ele alırsın (credentials ile körü körüne `*` kullanmaktan kaçın). Not: CORS tarayıcılarca uygulanır, sunucu-sunucu bir endişe değildir.\n\n**Auth ötesi API güvenliği** — katmanlı savunma: **her zaman HTTPS/TLS kullan**; **tüm girdiyi doğrula ve sanitize et** (injection'ı önle — SQL/NoSQL/command); **her isteği** kaynak seviyesinde **yetkilendir** (yalnızca kimlik doğrulama değil); kötüye kullanıma/DoS'a ve brute force'a direnmek için **rate-limit ve throttle** et; **CORS** ve güvenlik başlıklarını doğru ayarla; hatalarda bilgi sızdırmaktan kaçın; **OWASP API Top 10** risklerine karşı koru (kırık nesne-seviyesi yetkilendirme/IDOR, mass assignment, aşırı veri açığa çıkarma); **least privilege** ve kapsamlı token'lar kullan; **logla/izle/uyar**; bağımlılıkları yamalı tut; ve sırları asla açma. Authentication yalnızca ön kapıdır — bir API'yi güvene almak, girdiyi doğrulamak, yetkilendirmeyi uygulamak, kötüye kullanımı sınırlamak, trafiği şifrelemek ve baştan sona izlemek demektir."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What does OAuth 2.0 enable?",
+          "promptTr": "OAuth 2.0 neyi mümkün kılar?",
+          "options": [
+            { "text": "Delegated, limited access to a user's resources by a third-party app without sharing the password, via access tokens", "textTr": "Üçüncü-taraf bir uygulamanın, parolayı paylaşmadan, access token'larla bir kullanıcının kaynaklarına delege, sınırlı erişimi", "correct": true },
+            { "text": "Encrypting the database at rest", "textTr": "Veritabanını durağan halde şifreleme" },
+            { "text": "Replacing HTTPS", "textTr": "HTTPS'in yerine geçme" },
+            { "text": "Storing passwords in the JWT payload", "textTr": "Parolaları JWT payload'ında saklama" }
+          ],
+          "explanation": "OAuth 2.0 is delegated authorisation: a user grants an app scoped access via tokens (e.g. Authorization Code flow + PKCE) without revealing credentials to the app.",
+          "explanationTr": "OAuth 2.0 delege yetkilendirmedir: bir kullanıcı, uygulamaya kimlik bilgilerini açmadan token'larla kapsamlı erişim verir (örn. Authorization Code flow + PKCE)."
+        },
+        {
+          "type": "true_false",
+          "statement": "CORS is a browser-enforced mechanism where the server opts in (via Access-Control-Allow-* headers) to allow cross-origin requests from JavaScript.",
+          "statementTr": "CORS, sunucunun (Access-Control-Allow-* başlıklarıyla) JavaScript'ten cross-origin isteklere izin vermek için opt-in ettiği, tarayıcı-uygulamalı bir mekanizmadır.",
+          "answer": true,
+          "explanation": "The same-origin policy blocks cross-origin JS calls by default; the server allows specific origins via CORS headers, with a preflight OPTIONS for non-simple requests. It's a browser concern, not server-to-server.",
+          "explanationTr": "Same-origin politikası varsayılan olarak cross-origin JS çağrılarını engeller; sunucu CORS başlıklarıyla belirli origin'lere izin verir, basit-olmayan istekler için preflight OPTIONS ile. Tarayıcı endişesidir, sunucu-sunucu değil."
+        },
+        {
+          "type": "challenge",
+          "question": "What Is OAuth 2.0 And How Does The Flow Work?"
+        },
+        {
+          "type": "challenge",
+          "question": "What Is CORS And How Do You Handle It?"
+        },
+        {
+          "type": "challenge",
+          "question": "How Do You Handle API Security Beyond Authentication?"
+        }
+      ]
+    }
+  ]
+}

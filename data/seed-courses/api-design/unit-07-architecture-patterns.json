@@ -1,0 +1,98 @@
+{
+  "topic": "api-design",
+  "slug": "architecture-patterns",
+  "title": "API Architecture Patterns",
+  "titleTr": "API Mimari Desenleri",
+  "section": "interview",
+  "position": 7,
+  "lessons": [
+    {
+      "slug": "bff-and-api-gateway",
+      "title": "BFF & API Gateway",
+      "titleTr": "BFF ve API Gateway",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Tailoring and centralising access to services",
+          "titleTr": "Servislere erişimi uyarlamak ve merkezileştirmek",
+          "body": "**The BFF (Backend For Frontend) pattern** puts a **dedicated backend layer per frontend/client type** — e.g. a Web BFF, a Mobile BFF — each tailored to that client's needs. Instead of one generic API trying to serve web, mobile, and third parties equally (forcing each to over/under-fetch and do lots of client-side stitching), each BFF **aggregates and shapes data from downstream services specifically for its frontend**. **Benefits:** each client gets exactly the payload shape it needs (fewer round-trips, less over-fetching), client-specific logic lives server-side, and teams own their BFF independently. **Trade-off:** more services to maintain and some duplicated aggregation logic. BFF is popular in microservices/SPA/mobile setups (and pairs well with GraphQL or a gateway).\n\n**An API Gateway** is a **single entry point that sits in front of multiple backend services** and routes each incoming request to the right service. In **microservices**, it solves the problem of clients otherwise needing to know and call many services directly. **Roles/responsibilities:** **request routing** (path/host → service), **aggregation/composition** (combine several service calls into one response), and **cross-cutting concerns** handled centrally — **authentication/authorisation, rate limiting/throttling, TLS termination, caching, logging/metrics/tracing, load balancing, request/response transformation, and versioning**. **Benefits:** clients have one stable endpoint, backend services are hidden/decoupled, and shared concerns aren't duplicated in every service. **Trade-off:** it can become a **single point of failure / bottleneck** (so make it highly available) and adds an extra hop. (A BFF is often implemented as a specialised gateway per client type; gateways like Kong, AWS API Gateway, NGINX are common.)",
+          "bodyTr": "**BFF (Backend For Frontend) pattern'i**, **frontend/istemci tipi başına özel bir backend katmanı** koyar — örn. bir Web BFF, bir Mobil BFF — her biri o istemcinin ihtiyaçlarına uyarlanmış. Web, mobil ve üçüncü-tarafları eşit sunmaya çalışan tek bir jenerik API yerine (her birini over/under-fetch'e ve çok fazla istemci-tarafı birleştirmeye zorlar), her BFF **downstream servislerden veriyi özellikle kendi frontend'i için toplar ve şekillendirir**. **Faydalar:** her istemci tam ihtiyaç duyduğu payload şeklini alır (daha az round-trip, daha az over-fetching), istemci-özel mantık sunucu-tarafında yaşar ve takımlar BFF'lerini bağımsız sahiplenir. **Ödün:** sürdürülecek daha fazla servis ve biraz tekrarlanan toplama mantığı. BFF mikroservis/SPA/mobil kurulumlarında popülerdir (ve GraphQL ya da bir gateway ile iyi eşleşir).\n\n**Bir API Gateway**, **birden çok backend servisinin önünde duran tek bir giriş noktasıdır** ve her gelen isteği doğru servise yönlendirir. **Mikroservislerde**, istemcilerin aksi halde birçok servisi doğrudan bilip çağırması gereken sorununu çözer. **Roller/sorumluluklar:** **istek yönlendirme** (path/host → servis), **toplama/kompozisyon** (birkaç servis çağrısını tek yanıta birleştir) ve merkezi ele alınan **enine kesen endişeler** — **kimlik doğrulama/yetkilendirme, rate limiting/throttling, TLS sonlandırma, caching, logging/metrics/tracing, load balancing, request/response dönüşümü ve versiyonlama**. **Faydalar:** istemcilerin tek kararlı bir endpoint'i olur, backend servisleri gizli/ayrık olur ve paylaşılan endişeler her serviste tekrarlanmaz. **Ödün:** bir **tek arıza noktası / darboğaz** olabilir (bu yüzden yüksek erişilebilir yap) ve ekstra bir hop ekler. (Bir BFF genelde istemci tipi başına özelleşmiş bir gateway olarak uygulanır; Kong, AWS API Gateway, NGINX gibi gateway'ler yaygındır.)"
+        },
+        {
+          "type": "mcq",
+          "prompt": "What problem does the BFF pattern solve?",
+          "promptTr": "BFF pattern'i hangi sorunu çözer?",
+          "options": [
+            { "text": "One generic API serving very different clients poorly — each BFF aggregates/shapes data specifically for its frontend (web, mobile, etc.)", "textTr": "Tek bir jenerik API'nin çok farklı istemcilere kötü hizmet etmesi — her BFF veriyi özellikle kendi frontend'i (web, mobil, vb.) için toplar/şekillendirir", "correct": true },
+            { "text": "It encrypts the database", "textTr": "Veritabanını şifreler" },
+            { "text": "It removes the need for any backend", "textTr": "Herhangi bir backend ihtiyacını ortadan kaldırır" },
+            { "text": "It is the same as a CDN", "textTr": "Bir CDN ile aynıdır" }
+          ],
+          "explanation": "A BFF is a per-client backend that tailors payloads to that frontend, reducing over/under-fetching and client-side stitching — at the cost of more services to maintain.",
+          "explanationTr": "Bir BFF, payload'ları o frontend'e uyarlayan istemci-başına bir backend'dir, over/under-fetching ve istemci-tarafı birleştirmeyi azaltır — sürdürülecek daha fazla servis pahasına."
+        },
+        {
+          "type": "true_false",
+          "statement": "An API gateway provides a single entry point that routes requests and centralises cross-cutting concerns like auth, rate limiting, and TLS for microservices.",
+          "statementTr": "Bir API gateway, istekleri yönlendiren ve mikroservisler için auth, rate limiting ve TLS gibi enine kesen endişeleri merkezileştiren tek bir giriş noktası sağlar.",
+          "answer": true,
+          "explanation": "The gateway hides/decouples backend services and handles routing, aggregation, auth, rate limiting, TLS, caching, and observability centrally — but must be made highly available to avoid being a SPOF.",
+          "explanationTr": "Gateway backend servislerini gizler/ayırır ve yönlendirme, toplama, auth, rate limiting, TLS, caching ve observability'yi merkezi ele alır — ama SPOF olmamak için yüksek erişilebilir yapılmalı."
+        },
+        {
+          "type": "challenge",
+          "question": "What Is The BFF (Backend For Frontend) Pattern?"
+        },
+        {
+          "type": "challenge",
+          "question": "What Is API Gateway And What Role Does It Play In Microservices?"
+        }
+      ]
+    },
+    {
+      "slug": "multi-client-and-event-driven",
+      "title": "Designing for multiple clients & event-driven APIs",
+      "titleTr": "Çoklu istemci için tasarım ve event-driven API'ler",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Serving many consumers and reacting to events",
+          "titleTr": "Birçok tüketiciye hizmet ve event'lere tepki",
+          "body": "**Designing an API for multiple clients (web, mobile, third-party):** different clients have different needs — mobile wants small, efficient payloads and works on flaky networks; web may want richer data; third parties need stability and clear contracts. Strategies: keep a **clean, consistent core API** with solid REST/GraphQL design; **don't over-fetch** — let clients request what they need (**GraphQL** or sparse fieldsets/`?fields=`), or provide **BFFs** per client type to tailor payloads; **version carefully** and stay **backwards-compatible** (third parties can't be force-upgraded); enforce **strong auth, rate limiting, and clear docs/SDKs** for external consumers; and design **client-agnostic resources** while shaping at the edge. The principle: a **stable, well-documented contract** in the middle, with **per-client tailoring** (BFF/GraphQL/field selection) at the edges — don't bloat one endpoint trying to satisfy everyone.\n\n**Event-Driven Architecture (EDA)** is a style where components **communicate by producing and consuming events** (\"something happened\" — `OrderPlaced`, `PaymentReceived`) via a **message broker / event bus** (Kafka, RabbitMQ, SNS/SQS), rather than calling each other directly. Producers emit events without knowing who consumes them; consumers react **asynchronously**. **Benefits:** **loose coupling**, scalability, resilience (consumers can be down and catch up later), and natural fit for real-time and microservices. **How it relates to APIs:** it **complements** request/response APIs. Synchronous REST/GraphQL is great for queries and commands needing an immediate answer; **EDA handles the async, reactive side** — e.g. an API receives `POST /orders`, then **publishes an `OrderPlaced` event** that other services (email, inventory, analytics) consume independently. Outward-facing, events surface to clients as **webhooks** (server→client event notifications) or streaming (**SSE/WebSocket**), and **async APIs** are often documented with **AsyncAPI** (the EDA counterpart to OpenAPI). So modern systems mix **synchronous APIs for direct interactions** and **events for decoupled, reactive workflows**.",
+          "bodyTr": "**Çoklu istemci için API tasarlama (web, mobil, üçüncü-taraf):** farklı istemcilerin farklı ihtiyaçları vardır — mobil küçük, verimli payload'lar ister ve kararsız ağlarda çalışır; web daha zengin veri isteyebilir; üçüncü-taraflar kararlılık ve net sözleşmeler ister. Stratejiler: sağlam REST/GraphQL tasarımıyla **temiz, tutarlı bir çekirdek API** tut; **over-fetch etme** — istemcilerin ihtiyaç duyduklarını istemesine izin ver (**GraphQL** ya da seyrek fieldset'ler/`?fields=`) ya da payload'ları uyarlamak için istemci tipi başına **BFF'ler** sağla; **dikkatli versiyonla** ve **geriye-uyumlu** kal (üçüncü-taraflar zorla yükseltilemez); harici tüketiciler için **güçlü auth, rate limiting ve net doküman/SDK** uygula; ve kenarda şekillendirirken **istemci-agnostik kaynaklar** tasarla. İlke: ortada **kararlı, iyi-belgeli bir sözleşme**, kenarlarda **istemci-başına uyarlama** (BFF/GraphQL/alan seçimi) — herkesi memnun etmeye çalışan tek bir endpoint'i şişirme.\n\n**Event-Driven Architecture (EDA)**, bileşenlerin birbirini doğrudan çağırmak yerine bir **message broker / event bus** (Kafka, RabbitMQ, SNS/SQS) aracılığıyla **event üretip tüketerek iletiştiği** bir stildir (\"bir şey oldu\" — `OrderPlaced`, `PaymentReceived`). Producer'lar kimin tükettiğini bilmeden event yayar; consumer'lar **asenkron** tepki verir. **Faydalar:** **gevşek bağlama**, ölçeklenebilirlik, direnç (consumer'lar kapalı olup sonra yetişebilir) ve gerçek zamanlı ile mikroservislere doğal uyum. **API'lerle nasıl ilişkili:** request/response API'leri **tamamlar**. Senkron REST/GraphQL, anlık yanıt gerektiren sorgular ve komutlar için harika; **EDA async, reaktif tarafı ele alır** — örn. bir API `POST /orders` alır, sonra diğer servislerin (email, envanter, analytics) bağımsız tükettiği bir **`OrderPlaced` event'i yayınlar**. Dışa dönük, event'ler istemcilere **webhook'lar** (sunucu→istemci event bildirimleri) ya da streaming (**SSE/WebSocket**) olarak yüzeye çıkar ve **async API'ler** genelde **AsyncAPI** ile belgelenir (OpenAPI'nin EDA karşılığı). Yani modern sistemler **doğrudan etkileşimler için senkron API'leri** ve **ayrık, reaktif iş akışları için event'leri** karıştırır."
+        },
+        {
+          "type": "mcq",
+          "prompt": "How does event-driven architecture relate to request/response APIs?",
+          "promptTr": "Event-driven mimari request/response API'leriyle nasıl ilişkilidir?",
+          "options": [
+            { "text": "It complements them: sync APIs for immediate queries/commands, events for async decoupled reactions (e.g. publish OrderPlaced after POST /orders)", "textTr": "Onları tamamlar: anlık sorgular/komutlar için sync API'ler, async ayrık tepkiler için event'ler (örn. POST /orders sonrası OrderPlaced yayınla)", "correct": true },
+            { "text": "It replaces all APIs entirely", "textTr": "Tüm API'lerin yerine tamamen geçer" },
+            { "text": "It only works without any HTTP", "textTr": "Yalnızca HTTP olmadan çalışır" },
+            { "text": "It is the same as REST", "textTr": "REST ile aynıdır" }
+          ],
+          "explanation": "EDA decouples via events on a broker for async/reactive flows; it sits alongside sync REST/GraphQL. Events reach clients as webhooks/SSE/WebSocket and are documented with AsyncAPI.",
+          "explanationTr": "EDA, async/reaktif akışlar için bir broker üzerindeki event'lerle ayırır; senkron REST/GraphQL'in yanında durur. Event'ler istemcilere webhook/SSE/WebSocket olarak ulaşır ve AsyncAPI ile belgelenir."
+        },
+        {
+          "type": "true_false",
+          "statement": "A good way to serve web, mobile, and third-party clients is a stable core API plus per-client tailoring (BFF / GraphQL / field selection) at the edges.",
+          "statementTr": "Web, mobil ve üçüncü-taraf istemcilere hizmetin iyi bir yolu, kararlı bir çekirdek API artı kenarlarda istemci-başına uyarlamadır (BFF / GraphQL / alan seçimi).",
+          "answer": true,
+          "explanation": "Keep one consistent, backwards-compatible, well-documented contract; tailor payloads per client (BFF/GraphQL/sparse fields) instead of bloating a single endpoint to satisfy every client.",
+          "explanationTr": "Tutarlı, geriye-uyumlu, iyi-belgeli tek bir sözleşme tut; her istemciyi memnun etmek için tek bir endpoint'i şişirmek yerine payload'ları istemci-başına uyarla (BFF/GraphQL/seyrek alanlar)."
+        },
+        {
+          "type": "challenge",
+          "question": "How Do You Design An API For Multiple Clients (Web, Mobile, Third-Party)?"
+        },
+        {
+          "type": "challenge",
+          "question": "What Is Event-Driven Architecture And How Does It Relate To APIs?"
+        }
+      ]
+    }
+  ]
+}

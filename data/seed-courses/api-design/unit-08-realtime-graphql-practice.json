@@ -1,0 +1,146 @@
+{
+  "topic": "api-design",
+  "slug": "realtime-graphql-practice",
+  "title": "Real-time, GraphQL & Practice",
+  "titleTr": "Gerçek Zamanlı, GraphQL ve Pratik",
+  "section": "interview",
+  "position": 8,
+  "lessons": [
+    {
+      "slug": "webhooks-and-sse",
+      "title": "Webhooks & Server-Sent Events in Next.js",
+      "titleTr": "Webhook'lar ve Next.js'te Server-Sent Events",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Push instead of poll",
+          "titleTr": "Poll yerine push",
+          "body": "**A webhook** is a **user-defined HTTP callback: instead of you repeatedly asking an API 'anything new?', the provider POSTs to your URL when an event happens.** You register a callback URL; when the event fires (payment succeeded, repo pushed), the provider sends an HTTP POST with the event payload to that URL. **Webhook vs polling:** **polling** means the client **repeatedly requests** on a schedule — wasteful (most calls return nothing), adds latency (up to the poll interval), and load. A **webhook is push/event-driven** — the server notifies you **instantly, only when there's something**, so it's more efficient and real-time. Trade-offs: you must **expose a public endpoint**, **verify authenticity** (signatures/secrets), handle **retries/idempotency** (providers re-send on failure → make handlers idempotent), and tolerate out-of-order/duplicate deliveries. Rule: poll only when you can't receive webhooks; prefer webhooks for event notifications.\n\n**Implementing Server-Sent Events (SSE) in Next.js:** SSE streams **server→client** events over a single long-lived HTTP connection (the browser consumes them via `EventSource`). In the **Next.js App Router**, create a **Route Handler** (`app/api/stream/route.ts`) that returns a **`ReadableStream`** with the header **`Content-Type: text/event-stream`** (plus `Cache-Control: no-cache`, `Connection: keep-alive`). You write messages in the SSE wire format — lines like `data: {...}\\n\\n` — pushing to the stream's controller as events occur, and close it on disconnect (listen to the request's abort signal). The client does `new EventSource('/api/stream')` and handles `onmessage`. Note: SSE is **one-way** (use WebSocket for bidirectional); on serverless platforms watch for **function timeouts/buffering** (long-lived connections may need an edge/runtime that supports streaming). It's a lightweight choice for live feeds, notifications, and progress/streaming (e.g. streaming LLM tokens).",
+          "bodyTr": "**Bir webhook**, **kullanıcı-tanımlı bir HTTP callback'tir: bir API'ye tekrar tekrar 'yeni bir şey var mı?' diye sormak yerine, bir event olduğunda sağlayıcı senin URL'ne POST eder.** Bir callback URL'si kaydedersin; event tetiklendiğinde (ödeme başarılı, repo push'landı), sağlayıcı o URL'ye event payload'uyla bir HTTP POST gönderir. **Webhook vs polling:** **polling**, istemcinin bir programa göre **tekrar tekrar istek yapması** demektir — israflı (çoğu çağrı hiçbir şey döndürmez), gecikme ekler (poll aralığı kadar) ve yük. Bir **webhook push/event-driven'dır** — sunucu seni **anında, yalnızca bir şey olduğunda** bildirir, böylece daha verimli ve gerçek zamanlıdır. Ödünler: **public bir endpoint açmalısın**, **otantikliği doğrulamalısın** (imzalar/sırlar), **retry/idempotency** ele almalısın (sağlayıcılar başarısızlıkta yeniden gönderir → handler'ları idempotent yap) ve sırasız/yinelenen teslimatlara tolerans göstermelisin. Kural: yalnızca webhook alamadığında poll'la; event bildirimleri için webhook'ları tercih et.\n\n**Next.js'te Server-Sent Events (SSE) uygulamak:** SSE, tek bir uzun-ömürlü HTTP bağlantısı üzerinden **sunucu→istemci** event akıtır (tarayıcı onları `EventSource` ile tüketir). **Next.js App Router**'da, **`Content-Type: text/event-stream`** başlığıyla (artı `Cache-Control: no-cache`, `Connection: keep-alive`) bir **`ReadableStream`** döndüren bir **Route Handler** (`app/api/stream/route.ts`) oluştur. Mesajları SSE wire formatında yazarsın — `data: {...}\\n\\n` gibi satırlar — event'ler oldukça stream'in controller'ına push ederek ve bağlantı kesilince kapatarak (request'in abort sinyalini dinle). İstemci `new EventSource('/api/stream')` yapar ve `onmessage`'ı ele alır. Not: SSE **tek yönlüdür** (çift yönlü için WebSocket kullan); serverless platformlarda **fonksiyon timeout'larına/buffering'e** dikkat et (uzun-ömürlü bağlantılar streaming destekleyen bir edge/runtime gerektirebilir). Canlı feed'ler, bildirimler ve ilerleme/streaming (örn. LLM token'larını stream'leme) için hafif bir seçimdir."
+        },
+        {
+          "type": "mcq",
+          "prompt": "How does a webhook differ from polling?",
+          "promptTr": "Bir webhook polling'den nasıl farklıdır?",
+          "options": [
+            { "text": "A webhook is push — the provider POSTs to your URL when an event occurs; polling repeatedly asks and mostly gets nothing", "textTr": "Bir webhook push'tur — bir event olduğunda sağlayıcı senin URL'ne POST eder; polling tekrar tekrar sorar ve çoğunlukla bir şey almaz", "correct": true },
+            { "text": "Polling is push; webhooks repeatedly request", "textTr": "Polling push'tur; webhook'lar tekrar tekrar istek yapar" },
+            { "text": "They are identical", "textTr": "Aynılar" },
+            { "text": "Webhooks require no endpoint", "textTr": "Webhook'lar endpoint gerektirmez" }
+          ],
+          "explanation": "Webhooks are event-driven push (instant, efficient) vs polling's repeated requests (wasteful, laggy). Webhooks need a public, secured, idempotent endpoint to receive the callbacks.",
+          "explanationTr": "Webhook'lar event-driven push'tur (anlık, verimli) vs polling'in tekrarlı istekleri (israflı, gecikmeli). Webhook'lar callback'leri almak için public, güvenli, idempotent bir endpoint gerektirir."
+        },
+        {
+          "type": "true_false",
+          "statement": "Implementing SSE in a Next.js route handler involves returning a stream with Content-Type: text/event-stream and writing data: lines.",
+          "statementTr": "Bir Next.js route handler'ında SSE uygulamak, Content-Type: text/event-stream ile bir stream döndürmeyi ve data: satırları yazmayı içerir.",
+          "answer": true,
+          "explanation": "SSE = a long-lived text/event-stream response; you push `data: ...\\n\\n` events to a ReadableStream and close on disconnect. It's one-way (server→client); use WebSocket for bidirectional.",
+          "explanationTr": "SSE = uzun-ömürlü bir text/event-stream yanıtı; bir ReadableStream'e `data: ...\\n\\n` event'leri push edersin ve bağlantı kesilince kapatırsın. Tek yönlüdür (sunucu→istemci); çift yönlü için WebSocket kullan."
+        },
+        {
+          "type": "challenge",
+          "question": "What Is A Webhook And How Does It Differ From Polling?"
+        },
+        {
+          "type": "challenge",
+          "question": "How Do You Implement Server-Sent Events In Next.js?"
+        }
+      ]
+    },
+    {
+      "slug": "graphql-subscriptions-persisted",
+      "title": "GraphQL subscriptions & persisted queries",
+      "titleTr": "GraphQL subscription'ları ve persisted query'ler",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Real-time GraphQL and locking down queries",
+          "titleTr": "Gerçek zamanlı GraphQL ve query'leri kilitlemek",
+          "body": "**GraphQL Subscriptions** are GraphQL's **real-time operation type**, alongside queries (read) and mutations (write). A **subscription** lets a client **subscribe to an event/data stream and receive pushed updates** whenever the relevant data changes — typically over a **WebSocket** (e.g. graphql-ws). The client sends a subscription query (`subscription { messageAdded { id text } }`); the server pushes a new result every time that event fires. **When to use:** features needing **live updates** — chat messages, live notifications, presence, a real-time feed/ticker, collaborative editing. Use queries/mutations for normal request/response; reach for subscriptions only when you genuinely need server-pushed real-time data (they add WebSocket infrastructure and scaling concerns).\n\n**GraphQL Persisted Queries** are a technique where **known queries are stored (registered) on the server and referenced by an id/hash instead of sending the full query string** each time. The client sends a short **hash** (and parameters); the server looks up the corresponding query. **Why they're used:** **performance/bandwidth** — send a tiny hash instead of a large query string (helpful on mobile); **security** — with an **allowlist** of persisted queries, the server **only executes pre-approved operations**, blocking arbitrary/malicious queries and overly expensive ad-hoc queries (a real concern with public GraphQL); and **caching** — a stable id makes GET-based HTTP/CDN caching of GraphQL feasible. **Automatic Persisted Queries (APQ)** register a query by hash on first use, then send only the hash thereafter. So persisted queries make GraphQL **leaner, safer, and more cacheable** by trading the flexibility of sending arbitrary queries for a registry of known ones.",
+          "bodyTr": "**GraphQL Subscription'ları**, GraphQL'in query'ler (okuma) ve mutation'lar (yazma) yanındaki **gerçek zamanlı işlem tipidir**. Bir **subscription**, bir istemcinin **bir event/veri akışına abone olmasını ve ilgili veri her değiştiğinde push edilen güncellemeler almasını** sağlar — tipik olarak bir **WebSocket** üzerinden (örn. graphql-ws). İstemci bir subscription query'si gönderir (`subscription { messageAdded { id text } }`); sunucu o event her tetiklendiğinde yeni bir sonuç push eder. **Ne zaman kullanılır:** **canlı güncellemeler** gerektiren özellikler — chat mesajları, canlı bildirimler, presence, gerçek zamanlı feed/ticker, işbirlikçi düzenleme. Normal request/response için query/mutation kullan; subscription'lara yalnızca gerçekten sunucu-push'lu gerçek zamanlı veri gerektiğinde uzan (WebSocket altyapısı ve ölçekleme endişeleri ekler).\n\n**GraphQL Persisted Query'ler**, **bilinen query'lerin sunucuda saklandığı (kaydedildiği) ve her seferinde tam query string'i göndermek yerine bir id/hash ile referans alındığı** bir tekniktir. İstemci kısa bir **hash** (ve parametreler) gönderir; sunucu karşılık gelen query'yi arar. **Neden kullanılırlar:** **performans/bant genişliği** — büyük bir query string yerine küçük bir hash gönder (mobilde yararlı); **güvenlik** — persisted query'lerin bir **allowlist**'iyle, sunucu **yalnızca önceden-onaylı işlemleri çalıştırır**, rastgele/kötü niyetli query'leri ve aşırı pahalı ad-hoc query'leri engeller (public GraphQL'de gerçek bir endişe); ve **caching** — kararlı bir id, GraphQL'in GET-tabanlı HTTP/CDN caching'ini mümkün kılar. **Automatic Persisted Queries (APQ)** ilk kullanımda bir query'yi hash'le kaydeder, sonra yalnızca hash'i gönderir. Yani persisted query'ler, rastgele query gönderme esnekliğini bilinenlerin bir registry'siyle değiştirerek GraphQL'i **daha yalın, daha güvenli ve daha önbeklenebilir** kılar."
+        },
+        {
+          "type": "mcq",
+          "prompt": "When would you use a GraphQL subscription?",
+          "promptTr": "Bir GraphQL subscription'ını ne zaman kullanırsın?",
+          "options": [
+            { "text": "For real-time, server-pushed updates (chat, live notifications, feeds) — typically over WebSocket", "textTr": "Gerçek zamanlı, sunucu-push'lu güncellemeler için (chat, canlı bildirimler, feed'ler) — tipik olarak WebSocket üzerinden", "correct": true },
+            { "text": "For every read operation instead of a query", "textTr": "Her okuma işlemi için query yerine" },
+            { "text": "To replace mutations for writes", "textTr": "Yazmalar için mutation'ların yerine" },
+            { "text": "Only for static data", "textTr": "Yalnızca statik veri için" }
+          ],
+          "explanation": "Subscriptions push updates over a persistent connection (WebSocket) when data changes — for live features. Use queries/mutations for ordinary request/response.",
+          "explanationTr": "Subscription'lar veri değiştiğinde kalıcı bir bağlantı (WebSocket) üzerinden güncelleme push eder — canlı özellikler için. Sıradan request/response için query/mutation kullan."
+        },
+        {
+          "type": "true_false",
+          "statement": "Persisted queries improve security by letting the server execute only pre-registered (allowlisted) queries, and save bandwidth by sending a hash instead of the full query.",
+          "statementTr": "Persisted query'ler, sunucunun yalnızca önceden-kayıtlı (allowlist'li) query'leri çalıştırmasına izin vererek güvenliği artırır ve tam query yerine bir hash göndererek bant genişliği tasarrufu sağlar.",
+          "answer": true,
+          "explanation": "Referencing queries by hash shrinks payloads (mobile-friendly), enables GET/CDN caching, and — with an allowlist — blocks arbitrary/expensive/malicious queries on public GraphQL APIs.",
+          "explanationTr": "Query'leri hash'le referans almak payload'ları küçültür (mobil-dostu), GET/CDN caching'i sağlar ve — bir allowlist'le — public GraphQL API'lerde rastgele/pahalı/kötü niyetli query'leri engeller."
+        },
+        {
+          "type": "challenge",
+          "question": "What Is GraphQL Subscription And When Would You Use It?"
+        },
+        {
+          "type": "challenge",
+          "question": "What Is GraphQL Persisted Queries And Why Are They Used?"
+        }
+      ]
+    },
+    {
+      "slug": "testing-greenfield-observability",
+      "title": "Testing, greenfield design & observability",
+      "titleTr": "Test, greenfield tasarım ve observability",
+      "position": 3,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Verifying, starting, and watching an API",
+          "titleTr": "Bir API'yi doğrulamak, başlatmak ve izlemek",
+          "body": "**Testing an API effectively** uses a layered approach (a testing pyramid for APIs): **unit tests** for business logic/handlers (fast, mock dependencies); **integration tests** that hit real endpoints against a test DB to verify routing, validation, serialization, and DB interaction; **contract tests** (e.g. against the OpenAPI spec / Pact) to ensure the API matches its agreed contract and doesn't break consumers; and **end-to-end/scenario tests** for key user flows. Also test the **non-happy paths**: validation errors, auth failures (401/403), not-found, rate limits, and edge cases — and add **load/performance tests** for critical endpoints. Use tools like **Postman/Newman, supertest, REST-assured**, and mocks for external services; run them in **CI**. The principle: verify the contract, the error behaviour, and the integrations — not just the happy path.\n\n**Approaching API design for a greenfield project (design-first):** start from **requirements and consumers** — who will use the API and what do they need? Prefer a **design-first / contract-first** approach: **design the contract (OpenAPI/GraphQL schema) before coding**, agree it with stakeholders, and let frontend/backend build in parallel (with mocks). Decisions to make up front: **resource modelling and naming**, **REST vs GraphQL** (or both), **auth strategy**, **versioning and error-format conventions**, **pagination/filtering standards**, and consistency rules. Bake in **non-functionals** (rate limiting, caching, observability, security) from the start, and document as you go. Greenfield is the chance to get the **conventions and contract** right before clients depend on them.\n\n**Monitoring and observing an API in production** rests on the **three pillars of observability**: **metrics** (rates, errors, durations — track the **RED method**: Request rate, Error rate, Duration, plus latency **percentiles p95/p99**, and resource use), **logs** (structured, with a **correlation/request id** to trace a request), and **distributed tracing** (follow a request across services, e.g. OpenTelemetry/Jaeger). Add **health checks**, **alerting** on SLO breaches (error budgets), **dashboards** (Grafana), and **uptime monitoring**. Watch the **golden signals** (latency, traffic, errors, saturation). The goal: detect problems fast, diagnose *why* (not just *that*) something broke, and verify the API meets its SLAs — observability turns a black-box production API into something you can understand and debug.",
+          "bodyTr": "**Bir API'yi etkili test etmek** katmanlı bir yaklaşım kullanır (API'ler için bir test piramidi): iş mantığı/handler'lar için **unit testler** (hızlı, bağımlılıkları mock'la); yönlendirme, doğrulama, serileştirme ve DB etkileşimini doğrulamak için bir test DB'sine karşı gerçek endpoint'lere giden **integration testler**; API'nin anlaşılan sözleşmesine uyduğundan ve tüketicileri bozmadığından emin olmak için **contract testler** (örn. OpenAPI spec'ine / Pact'e karşı); ve temel kullanıcı akışları için **end-to-end/senaryo testleri**. Ayrıca **mutlu-olmayan yolları** da test et: doğrulama hataları, auth başarısızlıkları (401/403), not-found, rate limit'ler ve uç durumlar — ve kritik endpoint'ler için **load/performance testleri** ekle. **Postman/Newman, supertest, REST-assured** gibi araçlar ve harici servisler için mock kullan; onları **CI**'da çalıştır. İlke: yalnızca mutlu yolu değil, sözleşmeyi, hata davranışını ve entegrasyonları doğrula.\n\n**Greenfield bir proje için API tasarımına yaklaşmak (design-first):** **gereksinimlerden ve tüketicilerden** başla — API'yi kim kullanacak ve neye ihtiyaçları var? Bir **design-first / contract-first** yaklaşım tercih et: **kodlamadan önce sözleşmeyi (OpenAPI/GraphQL şeması) tasarla**, paydaşlarla anlaş ve frontend/backend'in paralel inşa etmesine izin ver (mock'larla). Önden verilecek kararlar: **kaynak modelleme ve adlandırma**, **REST vs GraphQL** (ya da ikisi), **auth stratejisi**, **versiyonlama ve hata-formatı konvansiyonları**, **pagination/filtreleme standartları** ve tutarlılık kuralları. **Non-functional'ları** (rate limiting, caching, observability, güvenlik) baştan içine koy ve ilerledikçe belgele. Greenfield, istemciler bağımlı olmadan önce **konvansiyonları ve sözleşmeyi** doğru yapma şansıdır.\n\n**Bir API'yi production'da izlemek ve gözlemlemek**, **observability'nin üç sütununa** dayanır: **metrics** (oranlar, hatalar, süreler — **RED metodunu** izle: Request rate, Error rate, Duration, artı latency **percentile'ları p95/p99** ve kaynak kullanımı), **logs** (yapısal, bir isteği izlemek için bir **correlation/request id**'siyle) ve **distributed tracing** (bir isteği servisler arası izle, örn. OpenTelemetry/Jaeger). **Health check'ler**, SLO ihlallerinde **alerting** (error budget'lar), **dashboard'lar** (Grafana) ve **uptime monitoring** ekle. **Golden signal'leri** izle (latency, traffic, errors, saturation). Amaç: sorunları hızlı tespit et, bir şeyin neden (yalnızca *ki* değil) bozulduğunu teşhis et ve API'nin SLA'larını karşıladığını doğrula — observability, kara-kutu bir production API'sini anlayabileceğin ve debug edebileceğin bir şeye çevirir."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What are the three pillars of observability for monitoring an API?",
+          "promptTr": "Bir API'yi izlemek için observability'nin üç sütunu nedir?",
+          "options": [
+            { "text": "Metrics, logs, and distributed tracing", "textTr": "Metrics, logs ve distributed tracing", "correct": true },
+            { "text": "Caching, sharding, and replication", "textTr": "Caching, sharding ve replikasyon" },
+            { "text": "Auth, CORS, and rate limiting", "textTr": "Auth, CORS ve rate limiting" },
+            { "text": "REST, GraphQL, and SOAP", "textTr": "REST, GraphQL ve SOAP" }
+          ],
+          "explanation": "Observability = metrics (RED/golden signals, percentiles), logs (structured + correlation id), and traces (across services). Plus health checks, alerts, and dashboards to find and diagnose issues fast.",
+          "explanationTr": "Observability = metrics (RED/golden signal'ler, percentile'lar), logs (yapısal + correlation id) ve trace'ler (servisler arası). Artı sorunları hızlı bulup teşhis etmek için health check'ler, alert'ler ve dashboard'lar."
+        },
+        {
+          "type": "true_false",
+          "statement": "A design-first (contract-first) approach — agreeing the OpenAPI/GraphQL schema before coding — is well suited to greenfield API projects.",
+          "statementTr": "Bir design-first (contract-first) yaklaşım — kodlamadan önce OpenAPI/GraphQL şemasında anlaşmak — greenfield API projelerine çok uygundur.",
+          "answer": true,
+          "explanation": "Designing the contract up front lets teams build in parallel against mocks, locks in conventions (naming, auth, versioning, errors), and gets the API right before clients depend on it.",
+          "explanationTr": "Sözleşmeyi önden tasarlamak takımların mock'lara karşı paralel inşa etmesini sağlar, konvansiyonları (adlandırma, auth, versiyonlama, hatalar) sabitler ve istemciler bağımlı olmadan API'yi doğru yapar."
+        },
+        {
+          "type": "challenge",
+          "question": "How Do You Test An API Effectively?"
+        },
+        {
+          "type": "challenge",
+          "question": "How Do You Approach API Design For A Greenfield Project?"
+        },
+        {
+          "type": "challenge",
+          "question": "How Do You Monitor And Observe An API In Production?"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,152 @@
+{
+  "topic": "api-design",
+  "slug": "rest-fundamentals",
+  "title": "REST Fundamentals",
+  "titleTr": "REST Temelleri",
+  "section": "foundations",
+  "position": 1,
+  "lessons": [
+    {
+      "slug": "what-rest-is-and-endpoints",
+      "title": "What REST is & API endpoints",
+      "titleTr": "REST nedir ve API endpoint'leri",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Resources over HTTP",
+          "titleTr": "HTTP üzerinden kaynaklar",
+          "body": "**A REST API (Representational State Transfer)** is an architectural style for web APIs built on HTTP. It models the domain as **resources** (nouns like `/users`, `/orders/42`) that you act on with standard **HTTP methods** (GET, POST, PUT, PATCH, DELETE). Core constraints/principles:\n\n- **Resource-based & uniform interface** — everything is a resource with a URI; you use the same small set of verbs.\n- **Stateless** — each request carries all the context it needs; the server stores no client session between requests (improves scalability).\n- **Client–server** separation, **cacheability**, and a **layered system**.\n- Representations (usually **JSON**) are transferred; the client manipulates resource state via those representations.\n\nREST is convention-based and pragmatic, which is why it dominates web/mobile APIs.\n\n**An API endpoint** is a **specific URL where an API resource or operation can be accessed** — the address a client sends a request to. For example `GET https://api.shop.com/v1/products/42` is an endpoint that returns product 42. An endpoint combines a **method + path** (and the base URL); together with the request/response contract it's the touchpoint between client and server. A REST API is essentially a collection of endpoints, each representing a resource or action.",
+          "bodyTr": "**Bir REST API (Representational State Transfer)**, HTTP üzerine kurulu web API'leri için bir mimari stildir. Domain'i, standart **HTTP metotlarıyla** (GET, POST, PUT, PATCH, DELETE) üzerinde işlem yaptığın **kaynaklar** olarak modeller (`/users`, `/orders/42` gibi isimler). Temel kısıtlar/ilkeler:\n\n- **Kaynak-tabanlı & uniform interface** — her şey bir URI'li kaynaktır; aynı küçük fiil setini kullanırsın.\n- **Stateless** — her istek ihtiyaç duyduğu tüm bağlamı taşır; sunucu istekler arası istemci oturumu saklamaz (ölçeklenebilirliği artırır).\n- **Client–server** ayrımı, **önbelleklenebilirlik** ve **katmanlı sistem**.\n- Temsiller (genelde **JSON**) aktarılır; istemci kaynak state'ini o temsiller aracılığıyla işler.\n\nREST konvansiyon-tabanlı ve pragmatiktir, bu yüzden web/mobil API'lere hâkimdir.\n\n**Bir API endpoint'i**, **bir API kaynağına ya da işlemine erişilebilen belirli bir URL'dir** — bir istemcinin istek gönderdiği adres. Örneğin `GET https://api.shop.com/v1/products/42`, ürün 42'yi döndüren bir endpoint'tir. Bir endpoint bir **metot + path** (ve base URL) birleştirir; istek/yanıt sözleşmesiyle birlikte istemci ile sunucu arasındaki temas noktasıdır. Bir REST API esasen, her biri bir kaynağı ya da eylemi temsil eden endpoint'ler koleksiyonudur."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Which is a core REST principle?",
+          "promptTr": "Hangisi temel bir REST ilkesidir?",
+          "options": [
+            { "text": "Statelessness — each request carries all context; no server-side client session between requests", "textTr": "Statelessness — her istek tüm bağlamı taşır; istekler arası sunucu-tarafı istemci oturumu yok", "correct": true },
+            { "text": "The server must remember each client's session in memory", "textTr": "Sunucu her istemcinin oturumunu bellekte hatırlamalı" },
+            { "text": "All operations must use POST", "textTr": "Tüm işlemler POST kullanmalı" },
+            { "text": "Resources cannot have URIs", "textTr": "Kaynakların URI'si olamaz" }
+          ],
+          "explanation": "REST is resource-based, uses a uniform interface (HTTP verbs), and is stateless — each request is self-contained, which aids scalability and caching.",
+          "explanationTr": "REST kaynak-tabanlıdır, uniform bir interface (HTTP fiilleri) kullanır ve stateless'tir — her istek kendi içinde tamdır, ölçeklenebilirliğe ve caching'e yardım eder."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "Complete the endpoint that retrieves product 42",
+          "promptTr": "Ürün 42'yi getiren endpoint'i tamamla",
+          "code": "___ /v1/products/42",
+          "answers": ["GET"],
+          "distractors": ["POST", "DELETE", "PATCH"],
+          "explanation": "Retrieving a resource uses GET. POST creates, PATCH partially updates, DELETE removes.",
+          "explanationTr": "Bir kaynağı getirmek GET kullanır. POST oluşturur, PATCH kısmen günceller, DELETE kaldırır."
+        },
+        {
+          "type": "challenge",
+          "question": "What Is A REST API?"
+        },
+        {
+          "type": "challenge",
+          "question": "What Is An API Endpoint?"
+        }
+      ]
+    },
+    {
+      "slug": "http-verbs-and-status-codes",
+      "title": "HTTP methods & status codes",
+      "titleTr": "HTTP metotları ve durum kodları",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Verbs that act, codes that report",
+          "titleTr": "İşlem yapan fiiller, raporlayan kodlar",
+          "body": "**HTTP status codes** are 3-digit numbers the server returns to tell the client **what happened**. They're grouped by class:\n\n- **2xx Success** — `200 OK`, `201 Created` (POST made a resource), `204 No Content`.\n- **3xx Redirection** — `301 Moved Permanently`, `304 Not Modified` (use your cache).\n- **4xx Client errors** — `400 Bad Request`, `401 Unauthorized` (not authenticated), `403 Forbidden` (authenticated but not allowed), `404 Not Found`, `409 Conflict`, `422 Unprocessable Entity`, `429 Too Many Requests`.\n- **5xx Server errors** — `500 Internal Server Error`, `503 Service Unavailable`.\n\n**Why they matter:** they give clients a **standard, machine-readable signal** to react correctly (retry, re-auth, show an error, use cache) instead of parsing prose. Using the right code is a key part of good API design — don't return `200` with an error body.\n\n**PUT vs PATCH** — both update, but differently:\n- **PUT** **replaces the entire resource** with the payload you send (a full representation). It's **idempotent** — sending it repeatedly yields the same result. Omitted fields are typically treated as cleared/defaulted because you're replacing the whole thing.\n- **PATCH** applies a **partial update** — you send only the fields to change. It's **not necessarily idempotent** (e.g. a patch that increments a value). \n\nSo: **PUT = full replace; PATCH = partial modify.** Use PUT when the client holds the complete new state; PATCH when you want to change a few fields without resending the whole resource.",
+          "bodyTr": "**HTTP durum kodları**, sunucunun istemciye **ne olduğunu** söylemek için döndürdüğü 3 haneli sayılardır. Sınıfa göre gruplanırlar:\n\n- **2xx Başarı** — `200 OK`, `201 Created` (POST bir kaynak oluşturdu), `204 No Content`.\n- **3xx Yönlendirme** — `301 Moved Permanently`, `304 Not Modified` (cache'ini kullan).\n- **4xx İstemci hataları** — `400 Bad Request`, `401 Unauthorized` (kimlik doğrulanmamış), `403 Forbidden` (kimlik doğrulanmış ama izin yok), `404 Not Found`, `409 Conflict`, `422 Unprocessable Entity`, `429 Too Many Requests`.\n- **5xx Sunucu hataları** — `500 Internal Server Error`, `503 Service Unavailable`.\n\n**Neden önemli:** istemcilere düz metin ayrıştırmak yerine doğru tepki vermeleri için (retry, yeniden-auth, hata göster, cache kullan) **standart, makine-okunabilir bir sinyal** verirler. Doğru kodu kullanmak iyi API tasarımının temel parçasıdır — hata gövdesiyle `200` döndürme.\n\n**PUT vs PATCH** — ikisi de günceller ama farklı:\n- **PUT** kaynağı gönderdiğin payload ile (tam bir temsil) **tamamen değiştirir**. **Idempotent**'tir — tekrar tekrar göndermek aynı sonucu verir. Atlanan alanlar genelde temizlenmiş/varsayılana çevrilmiş olarak ele alınır çünkü tüm şeyi değiştiriyorsun.\n- **PATCH** bir **kısmi güncelleme** uygular — yalnızca değişecek alanları gönderirsin. **Mutlaka idempotent değildir** (örn. bir değeri artıran bir patch).\n\nYani: **PUT = tam değiştir; PATCH = kısmi değiştir.** İstemci tam yeni state'i tuttuğunda PUT; tüm kaynağı yeniden göndermeden birkaç alanı değiştirmek istediğinde PATCH kullan."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What's the difference between PUT and PATCH?",
+          "promptTr": "PUT ile PATCH arasındaki fark nedir?",
+          "options": [
+            { "text": "PUT replaces the whole resource (idempotent); PATCH applies a partial update of selected fields", "textTr": "PUT tüm kaynağı değiştirir (idempotent); PATCH seçili alanların kısmi güncellemesini uygular", "correct": true },
+            { "text": "PATCH replaces the whole resource; PUT updates one field", "textTr": "PATCH tüm kaynağı değiştirir; PUT bir alanı günceller" },
+            { "text": "They are identical", "textTr": "Aynılar" },
+            { "text": "PUT can only create, never update", "textTr": "PUT yalnızca oluşturabilir, asla güncelleyemez" }
+          ],
+          "explanation": "PUT = full replacement (idempotent); PATCH = partial modification (not necessarily idempotent). Choose by whether you're sending the complete new state or just changed fields.",
+          "explanationTr": "PUT = tam değiştirme (idempotent); PATCH = kısmi değiştirme (mutlaka idempotent değil). Tam yeni state mi yoksa yalnızca değişen alanları mı gönderdiğine göre seç."
+        },
+        {
+          "type": "match",
+          "prompt": "Match each status code to its meaning",
+          "promptTr": "Her durum kodunu anlamıyla eşleştir",
+          "pairs": [
+            { "left": "201 Created", "leftTr": "201 Created", "right": "A new resource was successfully created", "rightTr": "Yeni bir kaynak başarıyla oluşturuldu" },
+            { "left": "401 Unauthorized", "leftTr": "401 Unauthorized", "right": "Not authenticated — credentials missing/invalid", "rightTr": "Kimlik doğrulanmamış — kimlik bilgileri eksik/geçersiz" },
+            { "left": "404 Not Found", "leftTr": "404 Not Found", "right": "The requested resource doesn't exist", "rightTr": "İstenen kaynak yok" },
+            { "left": "500 Internal Server Error", "leftTr": "500 Internal Server Error", "right": "An unexpected error on the server side", "rightTr": "Sunucu tarafında beklenmedik bir hata" }
+          ]
+        },
+        {
+          "type": "challenge",
+          "question": "What Are HTTP Status Codes And Why Do They Matter?"
+        },
+        {
+          "type": "challenge",
+          "question": "What Is The Difference Between PUT And PATCH?"
+        }
+      ]
+    },
+    {
+      "slug": "params-and-resource-naming",
+      "title": "Parameters & resource naming",
+      "titleTr": "Parametreler ve kaynak adlandırma",
+      "position": 3,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Identifying resources and filtering them",
+          "titleTr": "Kaynakları tanımlamak ve filtrelemek",
+          "body": "**Query parameters vs path parameters:**\n- **Path parameters** are part of the **URL path** and identify a **specific resource** — `/users/42`, `/orders/42/items/7`. They're hierarchical and usually **required** to locate the resource.\n- **Query parameters** come after the `?` as `key=value` pairs and **modify or filter** a collection request — `/products?category=books&sort=price&page=2`. They're for **optional** filtering, sorting, pagination, and search, not for identifying a single resource.\n\nRule of thumb: **path = which resource; query = how to filter/shape the result.** Use a path param for `/products/42` (that product), query params for `/products?inStock=true` (a filtered list).\n\n**RESTful resource naming conventions:**\n- Use **nouns, not verbs** — `/users`, not `/getUsers` (the HTTP method is the verb).\n- Use **plural nouns** for collections — `/products`, with `/products/42` for one item.\n- Show **hierarchy** with nesting — `/users/42/orders`.\n- Use **lowercase, hyphen-separated** paths (`/order-items`), and keep them consistent.\n- Don't put actions in the URL; let methods express them (GET/POST/PUT/DELETE). For non-CRUD operations, model them as sub-resources where possible.\n- Keep them **predictable and consistent** across the API.\n\nGood naming makes an API intuitive and self-documenting; the verb lives in the HTTP method, the noun in the path, and the filtering in the query string.",
+          "bodyTr": "**Query parametreleri vs path parametreleri:**\n- **Path parametreleri** **URL path'inin** parçasıdır ve **belirli bir kaynağı** tanımlar — `/users/42`, `/orders/42/items/7`. Hiyerarşiktirler ve kaynağı bulmak için genelde **gereklidir**.\n- **Query parametreleri** `?`'ten sonra `key=value` çiftleri olarak gelir ve bir koleksiyon isteğini **değiştirir ya da filtreler** — `/products?category=books&sort=price&page=2`. **İsteğe bağlı** filtreleme, sıralama, pagination ve arama içindir, tek bir kaynağı tanımlamak için değil.\n\nKural: **path = hangi kaynak; query = sonucu nasıl filtreleyeceğin/şekillendireceğin.** `/products/42` (o ürün) için path param, `/products?inStock=true` (filtrelenmiş liste) için query param kullan.\n\n**RESTful kaynak adlandırma konvansiyonları:**\n- **İsim kullan, fiil değil** — `/getUsers` değil `/users` (HTTP metodu fiildir).\n- Koleksiyonlar için **çoğul isimler** kullan — `/products`, tek öğe için `/products/42`.\n- Nesting ile **hiyerarşi** göster — `/users/42/orders`.\n- **Küçük harf, tire-ayrılmış** path'ler kullan (`/order-items`) ve tutarlı tut.\n- Eyleme URL'ye koyma; metotların ifade etmesine izin ver (GET/POST/PUT/DELETE). CRUD-olmayan işlemler için, mümkün olduğunda onları alt-kaynaklar olarak modelle.\n- API genelinde **öngörülebilir ve tutarlı** tut.\n\nİyi adlandırma bir API'yi sezgisel ve kendini-belgeleyen kılar; fiil HTTP metodunda, isim path'te ve filtreleme query string'inde yaşar."
+        },
+        {
+          "type": "mcq",
+          "prompt": "When should you use a query parameter rather than a path parameter?",
+          "promptTr": "Bir path parametresi yerine bir query parametresini ne zaman kullanmalısın?",
+          "options": [
+            { "text": "For optional filtering, sorting, pagination, or search on a collection — not for identifying a specific resource", "textTr": "Bir koleksiyonda isteğe bağlı filtreleme, sıralama, pagination ya da arama için — belirli bir kaynağı tanımlamak için değil", "correct": true },
+            { "text": "To identify a single specific resource", "textTr": "Tek bir belirli kaynağı tanımlamak için" },
+            { "text": "Query params can't be used in REST", "textTr": "Query param'lar REST'te kullanılamaz" },
+            { "text": "Only for POST bodies", "textTr": "Yalnızca POST gövdeleri için" }
+          ],
+          "explanation": "Path params identify a resource (/users/42); query params filter/shape a collection (/users?role=admin&page=2). Path = which; query = how.",
+          "explanationTr": "Path param'lar bir kaynağı tanımlar (/users/42); query param'lar bir koleksiyonu filtreler/şekillendirir (/users?role=admin&page=2). Path = hangi; query = nasıl."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Which follows RESTful resource-naming conventions?",
+          "promptTr": "Hangisi RESTful kaynak-adlandırma konvansiyonlarını izler?",
+          "options": [
+            { "text": "GET /products/42 (plural noun, id in path; verb is the HTTP method)", "textTr": "GET /products/42 (çoğul isim, path'te id; fiil HTTP metodudur)", "correct": true },
+            { "text": "GET /getProduct?id=42 (verb in the path)", "textTr": "GET /getProduct?id=42 (path'te fiil)" },
+            { "text": "POST /createNewProductNow", "textTr": "POST /createNewProductNow" },
+            { "text": "GET /Product/Get/42", "textTr": "GET /Product/Get/42" }
+          ],
+          "explanation": "Use plural nouns and let the HTTP method be the verb: GET /products/42. Avoid verbs in paths (getProduct/createNew…) — that duplicates what the method already says.",
+          "explanationTr": "Çoğul isimler kullan ve HTTP metodunun fiil olmasına izin ver: GET /products/42. Path'lerde fiillerden kaçın (getProduct/createNew…) — metodun zaten söylediğini tekrarlar."
+        },
+        {
+          "type": "challenge",
+          "question": "What Are Query Parameters vs Path Parameters?"
+        },
+        {
+          "type": "challenge",
+          "question": "What Are RESTful Resource Naming Conventions?"
+        }
+      ]
+    }
+  ]
+}

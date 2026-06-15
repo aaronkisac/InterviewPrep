@@ -1,0 +1,156 @@
+{
+  "topic": "software-architecture",
+  "slug": "design-principles-solid",
+  "title": "Design Principles: SOLID & Foundations",
+  "titleTr": "Tasarım İlkeleri: SOLID ve Temeller",
+  "section": "foundations",
+  "position": 1,
+  "lessons": [
+    {
+      "slug": "kiss-dry-yagni",
+      "title": "KISS, DRY/DIE & YAGNI",
+      "titleTr": "KISS, DRY/DIE ve YAGNI",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Keep it simple, don't repeat, don't over-build",
+          "titleTr": "Basit tut, tekrarlama, fazla inşa etme",
+          "body": "A handful of acronyms capture the most repeated advice in software design.\n\n**KISS — \"Keep It Simple, Stupid.\"** Favour the **simplest design that works**; complexity is the enemy of maintainability. Most systems fail from too much cleverness, not too little. Simple code is easier to read, test, and change.\n\n**DRY — \"Don't Repeat Yourself.\"** Every piece of knowledge should have a **single, authoritative representation**. Duplicated logic means bugs fixed in one place and missed in others. Its counterpart **DIE — \"Duplication Is Evil\"** — is the same idea: extract shared logic instead of copy-pasting. (Caveat: don't over-DRY accidental duplication into a wrong abstraction.)\n\n**YAGNI — \"You Aren't Gonna Need It.\"** Don't build functionality on **speculation** about future needs — add it when it's actually required. Speculative generality wastes effort and adds complexity you must maintain.\n\n**KISS vs YAGNI** — related but distinct: **KISS** is about *how* you build (keep the solution simple); **YAGNI** is about *what* you build (don't add things you don't need yet). YAGNI prevents extra features; KISS keeps the features you do build straightforward. Both push toward lean, maintainable systems.",
+          "bodyTr": "Birkaç kısaltma, yazılım tasarımında en çok tekrarlanan tavsiyeyi yakalar.\n\n**KISS — \"Keep It Simple, Stupid.\"** **Çalışan en basit tasarımı** tercih et; karmaşıklık bakım kolaylığının düşmanıdır. Çoğu sistem az değil, fazla zekilikten başarısız olur. Basit kod okuması, test etmesi ve değiştirmesi daha kolaydır.\n\n**DRY — \"Don't Repeat Yourself.\"** Her bilgi parçasının **tek, yetkili bir temsili** olmalı. Tekrarlanan mantık, bir yerde düzeltilip diğerlerinde kaçırılan hatalar demektir. Karşılığı **DIE — \"Duplication Is Evil\"** aynı fikirdir: kopyala-yapıştır yerine paylaşılan mantığı çıkar. (Uyarı: tesadüfi tekrarı yanlış bir soyutlamaya aşırı-DRY etme.)\n\n**YAGNI — \"You Aren't Gonna Need It.\"** Gelecekteki ihtiyaçlar hakkında **spekülasyonla** işlevsellik inşa etme — gerçekten gerektiğinde ekle. Spekülatif genellik efor israf eder ve sürdürmen gereken karmaşıklık ekler.\n\n**KISS vs YAGNI** — ilişkili ama ayrı: **KISS** *nasıl* inşa ettiğinle ilgili (çözümü basit tut); **YAGNI** *neyi* inşa ettiğinle ilgili (henüz ihtiyacın olmayan şeyleri ekleme). YAGNI ekstra özellikleri önler; KISS inşa ettiğin özellikleri sade tutar. İkisi de yalın, sürdürülebilir sistemlere iter."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What is the difference between KISS and YAGNI?",
+          "promptTr": "KISS ile YAGNI arasındaki fark nedir?",
+          "options": [
+            { "text": "KISS is about keeping the solution simple (how); YAGNI is about not building what you don't yet need (what)", "textTr": "KISS çözümü basit tutmakla ilgilidir (nasıl); YAGNI henüz ihtiyacın olmayanı inşa etmemekle (ne)", "correct": true },
+            { "text": "They are identical", "textTr": "Aynılar" },
+            { "text": "KISS means add more abstraction; YAGNI means add more features", "textTr": "KISS daha fazla soyutlama ekle demek; YAGNI daha fazla özellik ekle demek" },
+            { "text": "YAGNI is about performance; KISS is about security", "textTr": "YAGNI performansla; KISS güvenlikle ilgilidir" }
+          ],
+          "explanation": "KISS: keep what you build simple. YAGNI: don't build speculative features. Both reduce complexity, from different angles.",
+          "explanationTr": "KISS: inşa ettiğini basit tut. YAGNI: spekülatif özellikler inşa etme. İkisi de farklı açılardan karmaşıklığı azaltır."
+        },
+        {
+          "type": "true_false",
+          "statement": "DRY means every piece of knowledge should have a single authoritative representation, avoiding duplicated logic.",
+          "statementTr": "DRY, her bilgi parçasının tek yetkili bir temsili olması, tekrarlanan mantıktan kaçınılması demektir.",
+          "answer": true,
+          "explanation": "DRY (and its twin DIE — Duplication Is Evil) keeps logic in one place so fixes/changes happen once, not scattered across copies.",
+          "explanationTr": "DRY (ve ikizi DIE — Duplication Is Evil) mantığı tek yerde tutar, böylece düzeltmeler/değişiklikler kopyalara dağılmadan bir kez olur."
+        },
+        {
+          "type": "challenge",
+          "question": "What is meant by the KISS principle?"
+        },
+        {
+          "type": "challenge",
+          "question": "What are the DRY and DIE principles?"
+        },
+        {
+          "type": "challenge",
+          "question": "What's the difference between principles YAGNI and KISS?"
+        }
+      ]
+    },
+    {
+      "slug": "solid-and-srp",
+      "title": "SOLID overview & SRP",
+      "titleTr": "SOLID genel bakış ve SRP",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Five principles for maintainable OOP",
+          "titleTr": "Sürdürülebilir OOP için beş ilke",
+          "body": "**SOLID** is five object-oriented design principles (coined by Robert C. Martin) that make code easier to maintain and extend:\n\n- **S — Single Responsibility Principle (SRP):** a class should have **one reason to change** — one responsibility/actor it serves.\n- **O — Open/Closed Principle:** software entities should be **open for extension, closed for modification** (add behaviour via new code, not by editing tested code).\n- **L — Liskov Substitution Principle:** subtypes must be **substitutable** for their base types without breaking behaviour.\n- **I — Interface Segregation Principle:** prefer many **small, specific interfaces** over one fat one; clients shouldn't depend on methods they don't use.\n- **D — Dependency Inversion Principle:** depend on **abstractions, not concretions**; high-level modules shouldn't depend on low-level details.\n\n**The Single Responsibility Principle (SRP)** in depth: a module/class should be responsible to **one actor** and have **only one reason to change**. If a `Report` class handles formatting *and* persistence *and* business rules, a change to any one risks the others — it's doing too much. Splitting responsibilities makes each piece smaller, easier to test, and safer to change. The classic smell SRP fights is the **GOD class** that does everything.",
+          "bodyTr": "**SOLID**, kodu sürdürmesi ve genişletmesi daha kolay kılan beş nesne-yönelimli tasarım ilkesidir (Robert C. Martin tarafından adlandırıldı):\n\n- **S — Single Responsibility Principle (SRP):** bir sınıfın **değişmek için tek bir sebebi** olmalı — hizmet ettiği tek bir sorumluluk/aktör.\n- **O — Open/Closed Principle:** yazılım varlıkları **genişlemeye açık, değişikliğe kapalı** olmalı (davranışı test edilmiş kodu düzenleyerek değil, yeni kodla ekle).\n- **L — Liskov Substitution Principle:** alt tipler, davranışı bozmadan temel tiplerinin **yerine geçebilmeli**.\n- **I — Interface Segregation Principle:** tek bir şişman arayüz yerine birçok **küçük, özel arayüz** tercih et; istemciler kullanmadıkları metotlara bağımlı olmamalı.\n- **D — Dependency Inversion Principle:** **soyutlamalara bağımlı ol, somutlara değil**; üst seviye modüller alt seviye detaylara bağımlı olmamalı.\n\n**Single Responsibility Principle (SRP)** derinlemesine: bir modül/sınıf **tek bir aktöre** karşı sorumlu olmalı ve **değişmek için yalnızca bir sebebi** olmalı. Bir `Report` sınıfı biçimlendirme *ve* kalıcılık *ve* iş kurallarını ele alırsa, herhangi birindeki bir değişiklik diğerlerini riske atar — fazla şey yapıyordur. Sorumlulukları ayırmak her parçayı daha küçük, test etmesi daha kolay ve değiştirmesi daha güvenli kılar. SRP'nin savaştığı klasik koku, her şeyi yapan **GOD class**'tır."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What does the Single Responsibility Principle state?",
+          "promptTr": "Single Responsibility Principle ne der?",
+          "options": [
+            { "text": "A class should have one responsibility — one reason to change", "textTr": "Bir sınıfın tek bir sorumluluğu olmalı — değişmek için tek bir sebep", "correct": true },
+            { "text": "A class should implement every interface available", "textTr": "Bir sınıf mevcut her arayüzü uygulamalı" },
+            { "text": "A class should never be changed once written", "textTr": "Bir sınıf bir kez yazıldıktan sonra asla değiştirilmemeli" },
+            { "text": "Every method should return a single value", "textTr": "Her metot tek bir değer döndürmeli" }
+          ],
+          "explanation": "SRP: one reason to change / one responsibility per class. Mixing concerns (formatting + persistence + rules) creates fragile, hard-to-change code.",
+          "explanationTr": "SRP: sınıf başına değişmek için tek sebep / tek sorumluluk. Endişeleri karıştırmak (biçimlendirme + kalıcılık + kurallar) kırılgan, değiştirmesi zor kod yaratır."
+        },
+        {
+          "type": "order",
+          "prompt": "Match the SOLID letters in order (S, O, L, I, D)",
+          "promptTr": "SOLID harflerini sırayla sırala (S, O, L, I, D)",
+          "items": [
+            { "text": "Single Responsibility — one reason to change", "textTr": "Single Responsibility — değişmek için tek sebep" },
+            { "text": "Open/Closed — open to extension, closed to modification", "textTr": "Open/Closed — genişlemeye açık, değişikliğe kapalı" },
+            { "text": "Liskov Substitution — subtypes substitutable for base types", "textTr": "Liskov Substitution — alt tipler temel tiplerin yerine geçer" },
+            { "text": "Interface Segregation — many small interfaces over one fat one", "textTr": "Interface Segregation — tek şişman yerine birçok küçük arayüz" },
+            { "text": "Dependency Inversion — depend on abstractions, not concretions", "textTr": "Dependency Inversion — somutlara değil soyutlamalara bağımlı ol" }
+          ],
+          "explanation": "SOLID = Single Responsibility, Open/Closed, Liskov Substitution, Interface Segregation, Dependency Inversion.",
+          "explanationTr": "SOLID = Single Responsibility, Open/Closed, Liskov Substitution, Interface Segregation, Dependency Inversion."
+        },
+        {
+          "type": "challenge",
+          "question": "What does SOLID stand for? What are its principles?"
+        },
+        {
+          "type": "challenge",
+          "question": "Explain the Single Responsibility Principle (SRP)"
+        }
+      ]
+    },
+    {
+      "slug": "dip-isp-interfaces",
+      "title": "DIP, ISP & programming to interfaces",
+      "titleTr": "DIP, ISP ve arayüzlere programlama",
+      "position": 3,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Depend on abstractions",
+          "titleTr": "Soyutlamalara bağımlı ol",
+          "body": "**Dependency Inversion Principle (DIP)** says **high-level modules should not depend on low-level modules; both should depend on abstractions** — and abstractions shouldn't depend on details. Instead of business logic directly `new`-ing a concrete `MySqlDatabase`, it depends on a `Repository` **interface**, and the concrete implementation is injected. **Why it matters:** it decouples policy from mechanism, so you can swap implementations (DB, API, mock), test in isolation, and change low-level details without touching high-level code. It's the principle behind dependency injection and Clean Architecture's dependency rule.\n\n**Interface Segregation Principle (ISP)** says **no client should be forced to depend on methods it doesn't use** — prefer **many small, role-specific interfaces** over one large \"fat\" interface. **Benefits:** classes implement only what's relevant (no empty/throwing stub methods), changes to one capability don't ripple to unrelated clients, and the code is more cohesive and easier to mock/test. In Clean Architecture, ISP keeps boundaries focused.\n\n**\"Program to interfaces, not implementations\"** is the umbrella idea: code against an **abstraction (interface/contract)** rather than a concrete class. Callers depend on *what* something does, not *how*, so implementations can vary or be replaced freely. It enables polymorphism, loose coupling, testability (inject a fake), and is the foundation DIP and ISP build on.",
+          "bodyTr": "**Dependency Inversion Principle (DIP)**, **üst seviye modüller alt seviye modüllere bağımlı olmamalı; ikisi de soyutlamalara bağımlı olmalı** der — ve soyutlamalar detaylara bağımlı olmamalı. İş mantığının doğrudan somut bir `MySqlDatabase` `new`'lemesi yerine, bir `Repository` **arayüzüne** bağımlı olur ve somut implementasyon enjekte edilir. **Neden önemli:** politikayı mekanizmadan ayırır, böylece implementasyonları değiştirebilir (DB, API, mock), izole test edebilir ve üst seviye koda dokunmadan alt seviye detayları değiştirebilirsin. Dependency injection ve Clean Architecture'ın bağımlılık kuralının arkasındaki ilkedir.\n\n**Interface Segregation Principle (ISP)**, **hiçbir istemci kullanmadığı metotlara bağımlı olmaya zorlanmamalı** der — tek bir büyük \"şişman\" arayüz yerine **birçok küçük, role-özgü arayüz** tercih et. **Faydaları:** sınıflar yalnızca ilgili olanı uygular (boş/throw eden stub metotlar yok), bir yetenekteki değişiklikler ilgisiz istemcilere yayılmaz ve kod daha uyumlu, mock/test etmesi daha kolaydır. Clean Architecture'da ISP sınırları odaklı tutar.\n\n**\"Implementasyonlara değil arayüzlere programla\"** şemsiye fikirdir: somut bir sınıfa değil bir **soyutlamaya (arayüz/sözleşme)** karşı kod yaz. Çağıranlar bir şeyin *nasıl*'ına değil *ne* yaptığına bağımlı olur, böylece implementasyonlar serbestçe değişebilir ya da değiştirilebilir. Polimorfizmi, gevşek bağlamayı, test edilebilirliği (bir fake enjekte et) mümkün kılar ve DIP ile ISP'nin üzerine kurulduğu temeldir."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What does the Dependency Inversion Principle require?",
+          "promptTr": "Dependency Inversion Principle ne gerektirir?",
+          "options": [
+            { "text": "High- and low-level modules both depend on abstractions, not on each other's concrete details", "textTr": "Üst ve alt seviye modüllerin ikisi de birbirinin somut detaylarına değil soyutlamalara bağımlı olur", "correct": true },
+            { "text": "High-level modules must depend directly on concrete low-level classes", "textTr": "Üst seviye modüller doğrudan somut alt seviye sınıflara bağımlı olmalı" },
+            { "text": "You should never use interfaces", "textTr": "Asla arayüz kullanmamalısın" },
+            { "text": "Low-level modules should contain all business logic", "textTr": "Alt seviye modüller tüm iş mantığını içermeli" }
+          ],
+          "explanation": "DIP inverts the usual dependency: both layers depend on an abstraction (interface), and concretions are injected — enabling swapping, testing, and decoupling.",
+          "explanationTr": "DIP olağan bağımlılığı tersine çevirir: iki katman da bir soyutlamaya (arayüz) bağımlı olur ve somutlar enjekte edilir — değiştirme, test ve ayrıştırmayı sağlar."
+        },
+        {
+          "type": "true_false",
+          "statement": "Interface Segregation favours many small, role-specific interfaces over one large interface clients are forced to depend on.",
+          "statementTr": "Interface Segregation, istemcilerin bağımlı olmaya zorlandığı tek büyük arayüz yerine birçok küçük, role-özgü arayüzü tercih eder.",
+          "answer": true,
+          "explanation": "ISP avoids fat interfaces: clients implement/depend on only the methods they actually use, improving cohesion and reducing ripple effects.",
+          "explanationTr": "ISP şişman arayüzlerden kaçınır: istemciler yalnızca gerçekten kullandıkları metotları uygular/bağımlı olur, uyumu artırır ve dalga etkilerini azaltır."
+        },
+        {
+          "type": "challenge",
+          "question": "What is the Dependency Inversion Principle (DIP) and why is it important?"
+        },
+        {
+          "type": "challenge",
+          "question": "Explain what is Interface Segregation Principle (ISP) in Clean Architecture and what are some of its benefits?"
+        },
+        {
+          "type": "challenge",
+          "question": "What does program to interfaces, not implementations mean?"
+        }
+      ]
+    }
+  ]
+}

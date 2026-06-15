@@ -1,0 +1,142 @@
+{
+  "topic": "software-architecture",
+  "slug": "repository-uow",
+  "title": "Repository, Unit of Work & Persistence Patterns",
+  "titleTr": "Repository, Unit of Work ve Kalıcılık Desenleri",
+  "section": "advanced",
+  "position": 7,
+  "lessons": [
+    {
+      "slug": "repository-vs-service-and-active-record",
+      "title": "Repository vs Service Layer & vs Active Record",
+      "titleTr": "Repository vs Service Layer ve vs Active Record",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "What each pattern owns",
+          "titleTr": "Her desenin sahiplendiği şey",
+          "body": "**Repository Pattern vs Service Layer** — both sit between domain and infrastructure but at different jobs:\n\n- A **Repository** abstracts **data access / persistence** — it's a collection-like interface for retrieving and storing domain objects (`findById`, `save`), hiding the database/ORM. Its concern is **\"how do I get and persist entities?\"**\n- A **Service Layer** holds **application/business logic and orchestration** — it coordinates use cases across multiple repositories/domain objects, handles transactions, and exposes operations to callers. Its concern is **\"what business operation am I performing?\"**\n\nSo a service *uses* repositories: the service layer orchestrates the workflow; the repository fetches/saves the data. Keeping them separate keeps persistence concerns out of business logic.\n\n**Repository vs Active Record** — two different ways to handle persistence:\n\n- **Active Record** — the **domain object itself carries persistence methods** (`user.save()`, `user.delete()`); the object *is* its database row. Simple and quick (Rails ActiveRecord, many ORMs), but it **couples the domain model to the database**, mixing business and persistence concerns — harder to unit-test and to keep the domain pure.\n- **Repository** — persistence lives in a **separate object**; domain entities are **persistence-ignorant** (they hold no DB logic). Cleaner separation, better testability and DDD fit, at the cost of more code.\n\nSo **no, they're not the same**: Active Record puts persistence *inside* the entity; Repository keeps it *outside*, leaving the entity pure. Active Record suits simple CRUD apps; Repository suits richer domains where you want the model decoupled from storage.",
+          "bodyTr": "**Repository Pattern vs Service Layer** — ikisi de domain ile altyapı arasında oturur ama farklı işlerde:\n\n- Bir **Repository**, **veri erişimini / kalıcılığı** soyutlar — domain nesnelerini almak ve saklamak için koleksiyon-benzeri bir arayüzdür (`findById`, `save`), veritabanını/ORM'i gizler. Endişesi **\"entity'leri nasıl alır ve kalıcı yaparım?\"**\n- Bir **Service Layer**, **application/iş mantığını ve orkestrasyonu** tutar — birden çok repository/domain nesnesi arası use case'leri koordine eder, transaction'ları ele alır ve çağıranlara işlemler sunar. Endişesi **\"hangi iş işlemini gerçekleştiriyorum?\"**\n\nYani bir servis repository'leri *kullanır*: service layer iş akışını orkestre eder; repository veriyi alır/saklar. Onları ayrı tutmak kalıcılık endişelerini iş mantığından uzak tutar.\n\n**Repository vs Active Record** — kalıcılığı ele almanın iki farklı yolu:\n\n- **Active Record** — **domain nesnesinin kendisi kalıcılık metotları taşır** (`user.save()`, `user.delete()`); nesne, veritabanı satırının ta *kendisidir*. Basit ve hızlı (Rails ActiveRecord, birçok ORM) ama **domain modelini veritabanına bağlar**, iş ve kalıcılık endişelerini karıştırır — unit-test etmesi ve domain'i saf tutması daha zor.\n- **Repository** — kalıcılık **ayrı bir nesnede** yaşar; domain entity'leri **kalıcılık-bilmezdir** (DB mantığı tutmazlar). Daha temiz ayrım, daha iyi test edilebilirlik ve DDD uyumu, daha fazla kod pahasına.\n\nYani **hayır, aynı değiller**: Active Record kalıcılığı entity'nin *içine* koyar; Repository onu *dışarıda* tutar, entity'yi saf bırakır. Active Record basit CRUD uygulamalarına uyar; Repository modelin depolamadan ayrık olmasını istediğin daha zengin domain'lere uyar."
+        },
+        {
+          "type": "mcq",
+          "prompt": "How do the Repository and Service Layer differ?",
+          "promptTr": "Repository ve Service Layer nasıl farklılaşır?",
+          "options": [
+            { "text": "Repository abstracts data access (get/save entities); Service Layer orchestrates business logic/use cases across repositories", "textTr": "Repository veri erişimini soyutlar (entity al/sakla); Service Layer repository'ler arası iş mantığını/use case'leri orkestre eder", "correct": true },
+            { "text": "They are the same thing", "textTr": "Aynı şeydir" },
+            { "text": "Repository holds business rules; Service Layer talks to the database", "textTr": "Repository iş kurallarını tutar; Service Layer veritabanıyla konuşur" },
+            { "text": "Both are UI components", "textTr": "İkisi de UI bileşenidir" }
+          ],
+          "explanation": "Repository = persistence abstraction (how to fetch/store). Service Layer = business orchestration (what operation), using repositories. Keep them separate.",
+          "explanationTr": "Repository = kalıcılık soyutlaması (nasıl alınır/saklanır). Service Layer = iş orkestrasyonu (hangi işlem), repository'leri kullanarak. Onları ayrı tut."
+        },
+        {
+          "type": "true_false",
+          "statement": "Active Record puts persistence methods inside the domain object, while Repository keeps persistence in a separate, persistence-ignorant-entity design.",
+          "statementTr": "Active Record kalıcılık metotlarını domain nesnesinin içine koyar, Repository ise kalıcılığı ayrı, entity'nin kalıcılık-bilmez olduğu bir tasarımda tutar.",
+          "answer": true,
+          "explanation": "They're not the same: Active Record (entity.save()) couples model to DB; Repository keeps entities pure and persistence external — better for testing and rich domains.",
+          "explanationTr": "Aynı değiller: Active Record (entity.save()) modeli DB'ye bağlar; Repository entity'leri saf ve kalıcılığı dışarıda tutar — test ve zengin domain'ler için daha iyi."
+        },
+        {
+          "type": "challenge",
+          "question": "In OOP, what is the difference between the Repository Pattern and a Service Layer?"
+        },
+        {
+          "type": "challenge",
+          "question": "Is Repository Pattern the same as Active Record Pattern?"
+        }
+      ]
+    },
+    {
+      "slug": "grouping-repos-and-smart-objects",
+      "title": "Grouping repositories & repository vs smart objects",
+      "titleTr": "Repository gruplama ve repository vs akıllı nesneler",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "How many repositories, and whether to use them",
+          "titleTr": "Kaç repository ve onları kullanıp kullanmamak",
+          "body": "**How should you group repositories?** The widely-accepted guidance: **one repository per Aggregate Root**, not one per table or per entity. In DDD, an **Aggregate** is a cluster of objects treated as a unit with a single entry point (the **aggregate root**); the repository deals in **whole aggregates**, loading and saving them consistently. So you'd have an `OrderRepository` (Order is the root, owning its line items) rather than separate `OrderRepository` and `OrderLineRepository`. Benefits: it preserves **aggregate boundaries and invariants**, keeps the number of repositories sane, and matches the domain's natural transactional units. Avoid the anti-pattern of a generic `Repository<T>` for every entity — that leaks the data model and breaks aggregate consistency.\n\n**Repository Pattern or \"smart\" business objects?** This is the Repository vs Active-Record-style debate. **\"Smart\" business objects** (Active Record / domain objects that know how to persist themselves) are **simpler and faster for small/CRUD apps** — less ceremony. But they **couple domain logic to persistence**, hurting testability and purity as complexity grows. The **Repository Pattern** keeps domain objects **persistence-ignorant**, giving cleaner separation, easier testing (mock the repo), and a better fit for **complex domains / DDD** — at the cost of more layers. **The pragmatic answer:** choose by **complexity** — smart objects/Active Record for simple CRUD; Repository (with persistence-ignorant entities) when the domain is rich, you value testability, or you're doing DDD. Don't add Repository ceremony to an app that doesn't need it (YAGNI).",
+          "bodyTr": "**Repository'leri nasıl gruplamalısın?** Yaygın kabul gören rehberlik: tablo başına ya da entity başına değil, **Aggregate Root başına bir repository**. DDD'de bir **Aggregate**, tek bir giriş noktasıyla (**aggregate root**) bir birim olarak ele alınan bir nesne kümesidir; repository **bütün aggregate'lerle** ilgilenir, onları tutarlı biçimde yükler ve saklar. Yani ayrı `OrderRepository` ve `OrderLineRepository` yerine bir `OrderRepository`'n olur (Order root'tur, line item'larını sahiplenir). Faydaları: **aggregate sınırlarını ve invariant'larını** korur, repository sayısını makul tutar ve domain'in doğal transaction birimlerine uyar. Her entity için jenerik bir `Repository<T>` anti-pattern'inden kaçın — bu veri modelini sızdırır ve aggregate tutarlılığını bozar.\n\n**Repository Pattern mı yoksa \"akıllı\" iş nesneleri mi?** Bu, Repository vs Active-Record-tarzı tartışmasıdır. **\"Akıllı\" iş nesneleri** (kendini nasıl kalıcı yapacağını bilen Active Record / domain nesneleri) **küçük/CRUD uygulamalar için daha basit ve hızlıdır** — daha az tören. Ama **domain mantığını kalıcılığa bağlarlar**, karmaşıklık arttıkça test edilebilirliğe ve saflığa zarar verir. **Repository Pattern** domain nesnelerini **kalıcılık-bilmez** tutar, daha temiz ayrım, daha kolay test (repo'yu mock'la) ve **karmaşık domain'ler / DDD** için daha iyi uyum verir — daha fazla katman pahasına. **Pragmatik cevap:** **karmaşıklığa göre** seç — basit CRUD için akıllı nesneler/Active Record; domain zenginse, test edilebilirliğe değer veriyorsan ya da DDD yapıyorsan Repository (kalıcılık-bilmez entity'lerle). İhtiyaç duymayan bir uygulamaya Repository töreni ekleme (YAGNI)."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What's the recommended granularity for repositories?",
+          "promptTr": "Repository'ler için önerilen granülerlik nedir?",
+          "options": [
+            { "text": "One repository per Aggregate Root (not one per table/entity)", "textTr": "Aggregate Root başına bir repository (tablo/entity başına değil)", "correct": true },
+            { "text": "One repository per database column", "textTr": "Veritabanı sütunu başına bir repository" },
+            { "text": "Exactly one repository for the whole application", "textTr": "Tüm uygulama için tam olarak bir repository" },
+            { "text": "A generic Repository<T> for every entity", "textTr": "Her entity için jenerik bir Repository<T>" }
+          ],
+          "explanation": "Repositories deal in whole aggregates, so group them per aggregate root — preserving boundaries/invariants and keeping repo count sensible.",
+          "explanationTr": "Repository'ler bütün aggregate'lerle ilgilenir, bu yüzden onları aggregate root başına grupla — sınırları/invariant'ları korur ve repo sayısını makul tutar."
+        },
+        {
+          "type": "true_false",
+          "statement": "Choosing Repository vs 'smart' business objects depends on complexity: smart/Active Record for simple CRUD, Repository for rich domains and testability.",
+          "statementTr": "Repository vs 'akıllı' iş nesneleri seçimi karmaşıklığa bağlıdır: basit CRUD için akıllı/Active Record, zengin domain'ler ve test edilebilirlik için Repository.",
+          "answer": true,
+          "explanation": "Don't add Repository ceremony where it's not needed (YAGNI); use it when persistence-ignorance, testability, and DDD fit matter more than simplicity.",
+          "explanationTr": "İhtiyaç olmayan yere Repository töreni ekleme (YAGNI); kalıcılık-bilmezlik, test edilebilirlik ve DDD uyumu basitlikten önemliyse kullan."
+        },
+        {
+          "type": "challenge",
+          "question": "How should I be grouping my Repositories when using Repository Pattern?"
+        },
+        {
+          "type": "challenge",
+          "question": "What will you choose: Repository Pattern or \"smart\" business objects?"
+        }
+      ]
+    },
+    {
+      "slug": "unit-of-work",
+      "title": "Unit of Work & its relationship to Repository",
+      "titleTr": "Unit of Work ve Repository ile ilişkisi",
+      "position": 3,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Tracking changes and committing as one",
+          "titleTr": "Değişiklikleri izlemek ve bir bütün olarak commit etmek",
+          "body": "**Is Unit of Work equal to a Transaction, or more?** It's **more than a transaction**. A **Unit of Work (UoW)** **tracks all the objects affected during a business operation** — new, modified, and deleted — and then **coordinates writing them out as a single, consistent change**, typically wrapped in a database transaction. So a DB transaction is the **atomic commit mechanism**; the UoW is the higher-level pattern that **maintains an in-memory list of changes (a change set)**, figures out what SQL is needed, orders the operations, and commits/rolls back **as one**. Benefits: fewer round-trips (batch the writes), consistency (all-or-nothing), and the application code doesn't sprinkle `save()` calls everywhere — it just makes changes and calls `commit()` once. (EF's `DbContext` / Hibernate's `Session` are Units of Work.)\n\n**Relationship between Repository and Unit of Work:** they're **complementary collaborators**. **Repositories** provide the **collection-like access to aggregates** (add, remove, query); the **Unit of Work** **tracks the changes those repositories make and commits them together** in one transaction. Typically, multiple repositories **share a single Unit of Work** for a given business operation, so changes across several aggregates commit atomically. A common arrangement: the UoW owns/creates the repositories and exposes a `commit()`/`saveChanges()` that flushes all tracked changes at once. In short: **Repository = where you get and modify aggregates; Unit of Work = what bundles all those modifications into one atomic, consistent commit.** Together they keep persistence both clean (Repository) and transactionally correct (UoW).",
+          "bodyTr": "**Unit of Work bir Transaction'a eşit mi, yoksa fazlası mı?** **Bir transaction'dan fazlasıdır**. Bir **Unit of Work (UoW)**, bir iş işlemi sırasında **etkilenen tüm nesneleri izler** — yeni, değiştirilmiş ve silinmiş — sonra onları **tek, tutarlı bir değişiklik olarak yazmayı koordine eder**, tipik olarak bir veritabanı transaction'ına sarılır. Yani bir DB transaction'ı **atomik commit mekanizmasıdır**; UoW, **bellekte bir değişiklik listesi (change set) tutan**, gereken SQL'i bulan, işlemleri sıralayan ve **bir bütün olarak** commit/rollback eden üst-seviye pattern'dir. Faydaları: daha az round-trip (yazmaları batch'le), tutarlılık (hep ya da hiç) ve application kodu her yere `save()` çağrısı serpmez — sadece değişiklikleri yapar ve bir kez `commit()` çağırır. (EF'in `DbContext`'i / Hibernate'in `Session`'ı Unit of Work'tür.)\n\n**Repository ile Unit of Work ilişkisi:** **tamamlayıcı işbirlikçidirler**. **Repository'ler** aggregate'lere **koleksiyon-benzeri erişim** sağlar (ekle, kaldır, sorgula); **Unit of Work** o repository'lerin yaptığı **değişiklikleri izler ve onları bir transaction'da birlikte commit eder**. Tipik olarak, belirli bir iş işlemi için birden çok repository **tek bir Unit of Work paylaşır**, böylece birkaç aggregate arası değişiklikler atomik commit olur. Yaygın bir düzen: UoW repository'leri sahiplenir/oluşturur ve tüm izlenen değişiklikleri bir anda flush eden bir `commit()`/`saveChanges()` sunar. Kısaca: **Repository = aggregate'leri aldığın ve değiştirdiğin yer; Unit of Work = tüm o değişiklikleri tek atomik, tutarlı bir commit'te paketleyen şey.** Birlikte kalıcılığı hem temiz (Repository) hem transaction-açısından doğru (UoW) tutarlar."
+        },
+        {
+          "type": "mcq",
+          "prompt": "How is a Unit of Work more than just a database transaction?",
+          "promptTr": "Bir Unit of Work neden sadece bir veritabanı transaction'ından fazlasıdır?",
+          "options": [
+            { "text": "It tracks all new/modified/deleted objects (a change set) and coordinates committing them as one, using a transaction underneath", "textTr": "Tüm yeni/değiştirilmiş/silinmiş nesneleri (bir change set) izler ve altta bir transaction kullanarak onları bir bütün olarak commit etmeyi koordine eder", "correct": true },
+            { "text": "It is exactly the same as a SQL transaction", "textTr": "Bir SQL transaction'ıyla tam olarak aynıdır" },
+            { "text": "It only opens database connections", "textTr": "Yalnızca veritabanı bağlantıları açar" },
+            { "text": "It replaces the need for repositories", "textTr": "Repository ihtiyacını ortadan kaldırır" }
+          ],
+          "explanation": "A transaction is the atomic commit; the UoW adds change-tracking and orchestration — accumulate changes in memory, then flush/commit them all at once.",
+          "explanationTr": "Transaction atomik commit'tir; UoW değişiklik-izleme ve orkestrasyon ekler — değişiklikleri bellekte biriktir, sonra hepsini bir anda flush/commit et."
+        },
+        {
+          "type": "true_false",
+          "statement": "Multiple repositories typically share one Unit of Work so changes across aggregates commit atomically together.",
+          "statementTr": "Birden çok repository tipik olarak tek bir Unit of Work paylaşır, böylece aggregate'ler arası değişiklikler birlikte atomik commit olur.",
+          "answer": true,
+          "explanation": "Repositories access/modify aggregates; the shared UoW tracks those modifications and commits them in one transaction — clean access plus transactional correctness.",
+          "explanationTr": "Repository'ler aggregate'lere erişir/değiştirir; paylaşılan UoW o değişiklikleri izler ve bir transaction'da commit eder — temiz erişim artı transaction doğruluğu."
+        },
+        {
+          "type": "challenge",
+          "question": "Is Unit Of Work equal to Transaction? Or is it more than that?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is relationship between Repository and Unit of Work?"
+        }
+      ]
+    }
+  ]
+}

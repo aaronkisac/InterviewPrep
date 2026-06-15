@@ -1,0 +1,238 @@
+{
+  "topic": "software-architecture",
+  "slug": "testing-realtime-applied",
+  "title": "Testing, Real-time & Applied Scenarios",
+  "titleTr": "Test, Gerçek Zamanlı ve Uygulamalı Senaryolar",
+  "section": "interview",
+  "position": 13,
+  "lessons": [
+    {
+      "slug": "tdd-test-types-private",
+      "title": "TDD, test types & testing private code",
+      "titleTr": "TDD, test türleri ve private kod testi",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Driving and structuring tests",
+          "titleTr": "Testleri yönlendirmek ve yapılandırmak",
+          "body": "**Test-Driven Development (TDD)** is a practice where you **write a failing test before the code**, then write just enough code to pass it, then refactor — the **Red → Green → Refactor** cycle. Benefits: it drives **simple, testable design**, gives a safety net for refactoring, and ensures coverage by construction. It's a design discipline as much as a testing one.\n\n**Test types and their differences (by scope/purpose):**\n- **Unit test** — one unit in isolation (dependencies mocked); fast, pinpoints failures.\n- **Integration test** — multiple units/real collaborators together (e.g. service + DB); catches wiring bugs.\n- **Smoke test** — a quick 'is it fundamentally working?' check after a build/deploy.\n- **Regression test** — re-run existing tests to confirm new changes didn't break previously-working behaviour.\nThey differ mainly in **scope** (one unit vs many) and **intent** (correctness in isolation vs collaboration vs basic health vs no-regressions); a healthy suite has many fast unit tests and fewer broader tests (the testing pyramid).\n\n**Testing private methods:** the standard guidance is **don't test them directly — test them indirectly through the public API** that exercises them. Privates are implementation details; covering them via public behaviour keeps tests resilient to refactoring. **If a private is complex enough to demand its own test, that's a design smell** — extract it into its own class with a public interface and test it there. Last resorts (reflection, package-private/`@VisibleForTesting`, making it internal) exist but signal the class is doing too much.",
+          "bodyTr": "**Test-Driven Development (TDD)**, **koddan önce başarısız bir test yazdığın**, sonra onu geçirecek kadar kod yazdığın, sonra refactor ettiğin bir pratiktir — **Red → Green → Refactor** döngüsü. Faydaları: **basit, test edilebilir tasarımı** yönlendirir, refactoring için bir güvenlik ağı verir ve yapı gereği kapsam sağlar. Bir test disiplini kadar bir tasarım disiplinidir.\n\n**Test türleri ve farkları (kapsam/amaca göre):**\n- **Unit test** — bir birim izole (bağımlılıklar mock'lu); hızlı, hataları tam belirler.\n- **Integration test** — birden çok birim/gerçek işbirlikçi birlikte (örn. servis + DB); bağlantı hatalarını yakalar.\n- **Smoke test** — bir build/deploy sonrası hızlı bir 'temelde çalışıyor mu?' kontrolü.\n- **Regression test** — yeni değişikliklerin önceki çalışan davranışı bozmadığını doğrulamak için mevcut testleri yeniden çalıştır.\nEsas olarak **kapsamda** (bir birim vs çok) ve **niyette** (izole doğruluk vs işbirliği vs temel sağlık vs regresyon-yok) farklılaşırlar; sağlıklı bir suite'in çok sayıda hızlı unit testi ve daha az geniş testi vardır (test piramidi).\n\n**Private metotları test etme:** standart rehberlik **onları doğrudan test etmemek — onları çalıştıran public API üzerinden dolaylı test etmek**tir. Private'lar implementasyon detaylarıdır; onları public davranış üzerinden kapsamak testleri refactoring'e dirençli tutar. **Bir private kendi testini gerektirecek kadar karmaşıksa, bu bir tasarım kokusudur** — onu public arayüzlü kendi sınıfına çıkar ve orada test et. Son çareler (reflection, package-private/`@VisibleForTesting`, internal yapma) vardır ama sınıfın fazla şey yaptığını işaret eder."
+        },
+        {
+          "type": "order",
+          "prompt": "Order the TDD cycle",
+          "promptTr": "TDD döngüsünü sırala",
+          "items": [
+            { "text": "Red — write a failing test for the desired behaviour", "textTr": "Red — istenen davranış için başarısız bir test yaz" },
+            { "text": "Green — write the minimal code to make it pass", "textTr": "Green — onu geçirecek minimal kodu yaz" },
+            { "text": "Refactor — clean up while keeping tests green", "textTr": "Refactor — testleri yeşil tutarken temizle" }
+          ],
+          "explanation": "TDD: Red (failing test first) → Green (just enough code) → Refactor (improve design with tests as a safety net), then repeat.",
+          "explanationTr": "TDD: Red (önce başarısız test) → Green (yetecek kadar kod) → Refactor (testler güvenlik ağıyla tasarımı iyileştir), sonra tekrarla."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What's the recommended way to test private methods?",
+          "promptTr": "Private metotları test etmenin önerilen yolu nedir?",
+          "options": [
+            { "text": "Indirectly through the public API; if one needs its own test, extract it into its own unit", "textTr": "Public API üzerinden dolaylı; biri kendi testini gerektiriyorsa kendi birimine çıkar", "correct": true },
+            { "text": "Always via reflection", "textTr": "Her zaman reflection ile" },
+            { "text": "Make every private method public", "textTr": "Her private metodu public yap" },
+            { "text": "They should never be covered", "textTr": "Asla kapsanmamalı" }
+          ],
+          "explanation": "Cover privates through public behaviour (resilient to refactor). A private demanding its own test signals it should become its own class with a public interface.",
+          "explanationTr": "Private'ları public davranış üzerinden kapsa (refactor'a dirençli). Kendi testini gerektiren bir private, public arayüzlü kendi sınıfı olması gerektiğini işaret eder."
+        },
+        {
+          "type": "challenge",
+          "question": "What is Test Driven Development?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is Unit test, Integration Test, Smoke test, Regression Test and what are the differences between them?"
+        },
+        {
+          "type": "challenge",
+          "question": "How do I test a private function or a class that has private methods, fields or inner classes?"
+        }
+      ]
+    },
+    {
+      "slug": "performance-testing",
+      "title": "Performance testing: practices & metrics",
+      "titleTr": "Performans testi: pratikler ve metrikler",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Measuring how a system behaves under load",
+          "titleTr": "Bir sistemin yük altında nasıl davrandığını ölçmek",
+          "body": "**Performance testing** evaluates how a system behaves under load — its speed, stability, and scalability. Types include **load testing** (expected load), **stress testing** (beyond limits, to find the breaking point), **soak/endurance testing** (sustained load over time, to catch leaks), and **spike testing** (sudden surges).\n\n**Best practices:**\n- **Test in a production-like environment** with realistic data volumes — results from a tiny dev box are meaningless.\n- **Define clear goals/SLAs** (target response times, throughput) before testing.\n- **Use realistic workloads and scenarios** (real user journeys, think-times, data distributions), and ramp load gradually.\n- **Isolate variables** and change one thing at a time; **establish a baseline** and compare.\n- **Monitor the whole stack** (app, DB, cache, OS, network) during tests, not just client-side timings.\n- **Automate and run regularly** (in CI / before releases) so regressions are caught; warm up caches/JIT first.\n- **Analyse percentiles, not just averages** (averages hide tail latency).\n\n**Metrics to measure:**\n- **Response time / latency** — ideally as **percentiles (p50, p95, p99)**, not just the mean, since tail latency hurts real users.\n- **Throughput** — requests/transactions per second the system handles.\n- **Error rate** — % of failed requests under load.\n- **Concurrency** — concurrent users/connections supported.\n- **Resource utilisation** — CPU, memory, disk I/O, network, DB connections.\n- **Saturation / scalability** — how metrics degrade as load rises, and the **breaking point**.\nThe theme: measure the **tail** and the **resources**, under **realistic** conditions, against **defined targets**.",
+          "bodyTr": "**Performans testi**, bir sistemin yük altında nasıl davrandığını değerlendirir — hızı, kararlılığı ve ölçeklenebilirliği. Türler: **load testing** (beklenen yük), **stress testing** (limitlerin ötesi, kırılma noktasını bulmak için), **soak/endurance testing** (zamanla sürekli yük, sızıntıları yakalamak için) ve **spike testing** (ani artışlar).\n\n**En iyi pratikler:**\n- **Production-benzeri bir ortamda** gerçekçi veri hacimleriyle test et — küçük bir dev makinesinden gelen sonuçlar anlamsızdır.\n- Test etmeden önce **net hedefler/SLA'lar** (hedef yanıt süreleri, throughput) tanımla.\n- **Gerçekçi iş yükleri ve senaryolar** kullan (gerçek kullanıcı yolculukları, think-time'lar, veri dağılımları) ve yükü kademeli artır.\n- **Değişkenleri izole et** ve her seferinde bir şeyi değiştir; bir **baseline oluştur** ve karşılaştır.\n- Testler sırasında yalnızca istemci-tarafı zamanlamaları değil **tüm stack'i izle** (app, DB, cache, OS, ağ).\n- **Otomatikleştir ve düzenli çalıştır** (CI'da / sürümlerden önce) ki regresyonlar yakalansın; önce cache/JIT'i ısıt.\n- **Yalnızca ortalamaları değil percentile'ları analiz et** (ortalamalar tail latency'yi gizler).\n\n**Ölçülecek metrikler:**\n- **Response time / latency** — ideal olarak yalnızca ortalama değil **percentile'lar (p50, p95, p99)**, çünkü tail latency gerçek kullanıcılara zarar verir.\n- **Throughput** — sistemin kaldırdığı saniye başına istek/transaction.\n- **Error rate** — yük altında başarısız isteklerin %'si.\n- **Concurrency** — desteklenen eşzamanlı kullanıcı/bağlantı.\n- **Kaynak kullanımı** — CPU, bellek, disk I/O, ağ, DB bağlantıları.\n- **Saturation / scalability** — yük arttıkça metriklerin nasıl bozulduğu ve **kırılma noktası**.\nTema: **gerçekçi** koşullar altında, **tanımlı hedeflere** karşı **tail**'i ve **kaynakları** ölç."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Why report response-time percentiles (p95/p99) rather than just the average?",
+          "promptTr": "Neden yalnızca ortalama yerine yanıt-süresi percentile'larını (p95/p99) raporlamalı?",
+          "options": [
+            { "text": "Averages hide tail latency; percentiles reveal the slow experiences real users actually hit", "textTr": "Ortalamalar tail latency'yi gizler; percentile'lar gerçek kullanıcıların gerçekten karşılaştığı yavaş deneyimleri ortaya çıkarır", "correct": true },
+            { "text": "Percentiles are easier to compute than averages", "textTr": "Percentile'lar ortalamalardan hesaplaması daha kolaydır" },
+            { "text": "Averages are always higher than p99", "textTr": "Ortalamalar her zaman p99'dan yüksektir" },
+            { "text": "There is no difference", "textTr": "Fark yoktur" }
+          ],
+          "explanation": "A good average can still mean 1-in-20 users wait seconds (p95/p99 tail). Percentiles surface that tail latency, which dominates real user experience.",
+          "explanationTr": "İyi bir ortalama yine de 20 kullanıcıdan 1'inin saniyelerce beklemesi anlamına gelebilir (p95/p99 tail). Percentile'lar, gerçek kullanıcı deneyimine hâkim olan o tail latency'yi ortaya çıkarır."
+        },
+        {
+          "type": "true_false",
+          "statement": "Performance tests should run in a production-like environment with realistic workloads and monitor the whole stack, not just client timings.",
+          "statementTr": "Performans testleri production-benzeri bir ortamda gerçekçi iş yükleriyle çalışmalı ve yalnızca istemci zamanlamalarını değil tüm stack'i izlemelidir.",
+          "answer": true,
+          "explanation": "Unrealistic environments/loads give misleading numbers; monitoring app+DB+cache+OS+network reveals the true bottleneck. Define SLAs and baseline first.",
+          "explanationTr": "Gerçekçi olmayan ortamlar/yükler yanıltıcı sayılar verir; app+DB+cache+OS+ağ'ı izlemek gerçek darboğazı ortaya çıkarır. Önce SLA'ları tanımla ve baseline al."
+        },
+        {
+          "type": "challenge",
+          "question": "Name some Performance Testing best practices"
+        },
+        {
+          "type": "challenge",
+          "question": "Name some Performance Testing metrics to measure"
+        }
+      ]
+    },
+    {
+      "slug": "realtime-websocket",
+      "title": "Real-time: WebSocket over HTTP & vs REST",
+      "titleTr": "Gerçek zamanlı: HTTP yerine WebSocket ve vs REST",
+      "position": 3,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "When to keep a connection open",
+          "titleTr": "Bir bağlantıyı ne zaman açık tutmalı",
+          "body": "**Why use WebSocket over HTTP?** Plain HTTP is **request–response and half-duplex**: the client must ask, the server can't push unsolicited, and each exchange carries full headers and connection overhead — so simulating real-time means **polling** (wasteful, laggy). **WebSocket** provides a **persistent, full-duplex** connection over a single TCP socket: after one handshake, **either side can send messages anytime** with tiny per-message framing. Benefits: **server push** (instant updates, no polling), **low latency**, **low overhead**, and **bidirectional** flow. Use it for chat, live notifications, collaborative editing, multiplayer, live dashboards/tickers.\n\n**WebSocket vs REST API for real-time data — which to choose?** They suit different needs:\n- **REST** is **request–response, stateless, cacheable** — great for standard CRUD and occasional fetches. For 'live' data it needs polling, which is inefficient and adds latency.\n- **WebSocket** keeps a connection open for **continuous, low-latency, bidirectional push** — ideal when data changes frequently and updates must arrive instantly (prices, presence, chat, collaboration).\n\n**Choose REST** when interactions are discrete request/response, data isn't highly real-time, and you want caching/simplicity/statelessness. **Choose WebSocket** when you need **frequent server-pushed or bidirectional updates** with minimal latency. Many systems use **both** — REST for normal operations, WebSocket for the live parts (and SSE is a lighter option for one-way server→client streams). Don't pay WebSocket's stateful-connection cost (scaling, sticky sessions, reconnection) when simple polling or REST suffices.",
+          "bodyTr": "**Neden HTTP yerine WebSocket?** Düz HTTP **request–response ve half-duplex**'tir: istemci sormalı, sunucu istenmeden push edemez ve her alışveriş tam başlıklar ve bağlantı yükü taşır — bu yüzden gerçek zamanlıyı simüle etmek **polling** demektir (israflı, gecikmeli). **WebSocket**, tek bir TCP socket üzerinden **kalıcı, full-duplex** bir bağlantı sağlar: bir handshake'ten sonra, **her iki taraf da istediği zaman** küçük mesaj-başına framing ile mesaj gönderebilir. Faydalar: **server push** (anlık güncellemeler, polling yok), **düşük gecikme**, **düşük yük** ve **çift yönlü** akış. Chat, canlı bildirimler, işbirlikçi düzenleme, çok oyunculu, canlı dashboard'lar/ticker'lar için kullan.\n\n**Gerçek zamanlı veri için WebSocket vs REST API — hangisini seçmeli?** Farklı ihtiyaçlara uyarlar:\n- **REST** **request–response, stateless, önbelleklenebilirdir** — standart CRUD ve ara sıra fetch için harika. 'Canlı' veri için polling gerektirir ki verimsizdir ve gecikme ekler.\n- **WebSocket**, **sürekli, düşük-gecikmeli, çift yönlü push** için bir bağlantıyı açık tutar — veri sık değiştiğinde ve güncellemelerin anında gelmesi gerektiğinde ideal (fiyatlar, presence, chat, işbirliği).\n\nEtkileşimler ayrık request/response olduğunda, veri yüksek-gerçek-zamanlı olmadığında ve caching/basitlik/statelessness istediğinde **REST seç**. Minimal gecikmeyle **sık sunucu-push'lu ya da çift yönlü güncellemeler** gerektiğinde **WebSocket seç**. Çoğu sistem **ikisini** kullanır — normal işlemler için REST, canlı kısımlar için WebSocket (ve SSE, tek-yönlü sunucu→istemci akışları için daha hafif bir seçenek). Basit polling ya da REST yettiğinde WebSocket'in stateful-bağlantı maliyetini (ölçekleme, sticky session, yeniden bağlanma) ödeme."
+        },
+        {
+          "type": "mcq",
+          "prompt": "When should you choose WebSocket over a REST API?",
+          "promptTr": "Bir REST API yerine WebSocket'i ne zaman seçmelisin?",
+          "options": [
+            { "text": "When you need frequent, low-latency, bidirectional or server-pushed updates (chat, live prices, presence)", "textTr": "Sık, düşük-gecikmeli, çift yönlü ya da sunucu-push'lu güncellemeler gerektiğinde (chat, canlı fiyatlar, presence)", "correct": true },
+            { "text": "For simple, cacheable CRUD with occasional fetches", "textTr": "Ara sıra fetch'li basit, önbelleklenebilir CRUD için" },
+            { "text": "Whenever you want HTTP caching", "textTr": "HTTP caching istediğin her zaman" },
+            { "text": "Never — REST always wins", "textTr": "Asla — REST her zaman kazanır" }
+          ],
+          "explanation": "WebSocket fits continuous bidirectional/low-latency push; REST fits discrete cacheable request/response. Use both as appropriate; don't pay WebSocket's cost when polling/REST suffices.",
+          "explanationTr": "WebSocket sürekli çift yönlü/düşük-gecikmeli push'a uyar; REST ayrık önbelleklenebilir request/response'a uyar. Uygun şekilde ikisini de kullan; polling/REST yettiğinde WebSocket'in maliyetini ödeme."
+        },
+        {
+          "type": "true_false",
+          "statement": "WebSocket's advantage over HTTP for real-time is a persistent full-duplex connection enabling instant server push without polling.",
+          "statementTr": "WebSocket'in gerçek zamanlı için HTTP'ye üstünlüğü, polling olmadan anlık server push sağlayan kalıcı full-duplex bir bağlantıdır.",
+          "answer": true,
+          "explanation": "After one handshake, the open bidirectional channel lets the server push instantly with low overhead — no repeated polling or full HTTP headers per message.",
+          "explanationTr": "Bir handshake'ten sonra, açık çift yönlü kanal sunucunun düşük yükle anında push etmesini sağlar — tekrarlı polling ya da mesaj başına tam HTTP başlıkları yok."
+        },
+        {
+          "type": "challenge",
+          "question": "Why use WebSocket over HTTP?"
+        },
+        {
+          "type": "challenge",
+          "question": "WebSockets vs REST API for real time data? Which to choose?"
+        }
+      ]
+    },
+    {
+      "slug": "applied-recommendations-basket",
+      "title": "Applied: recommendations & the basket race",
+      "titleTr": "Uygulamalı: öneriler ve sepet yarışı",
+      "position": 4,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Two classic design scenarios",
+          "titleTr": "İki klasik tasarım senaryosu",
+          "body": "**\"People who like this also like…\" (recommendations) in an e-commerce shop:** this is a **recommendation system**, typically built with **collaborative filtering** — recommend items based on the behaviour of similar users/items. Common approaches: **item-to-item collaborative filtering** (\"users who bought X also bought Y\" — compute item co-occurrence/similarity from order history, the classic Amazon approach), **user-based** (find similar users, recommend what they liked), and **content-based** (recommend items with similar attributes). Implementation sketch: collect interaction data (views, purchases, ratings) into an events store; **precompute** similarities offline/in batch (or via a model) since real-time computation over all pairs is expensive; store the results (e.g. top-N similar items per product) in a **fast cache/key-value store**; serve recommendations at request time from that precomputed data; refresh periodically. At scale you'd use a data pipeline / ML platform and possibly matrix factorisation or embeddings. The key architectural point: **precompute and cache** the heavy similarity work; serve it fast; treat it as eventually-fresh, not real-time-exact.\n\n**\"Two customers add the last item in stock to their basket at the same time\" (race condition / concurrency):** adding to a basket usually **shouldn't decrement stock** — let both add it; **reserve/decrement stock atomically at checkout**, not at add-to-cart. To handle the race when stock is 1, you need **atomicity and a consistency strategy**:\n- **Optimistic concurrency** — keep a version/stock count; at checkout do a conditional update (`UPDATE … SET stock = stock-1 WHERE id=? AND stock > 0`) that succeeds for only **one** customer; the other gets 'out of stock'. The DB's atomicity decides the winner.\n- **Pessimistic locking** — lock the row/inventory during the critical section so only one proceeds.\n- **Reservations with TTL** — reserve stock for a customer for N minutes during checkout; release if they don't complete.\nThe principle: **don't oversell** — the decision must be a single atomic, serialised operation at the point of purchase, and the loser gets a clear, graceful 'sorry, just sold out' message. (This is the basket version of an idempotent, consistent transaction under concurrency.)",
+          "bodyTr": "**Bir e-ticaret mağazasında \"Bunu beğenenler şunu da beğendi…\" (öneriler):** bu bir **öneri sistemidir**, tipik olarak **collaborative filtering** ile kurulur — öğeleri benzer kullanıcıların/öğelerin davranışına göre öner. Yaygın yaklaşımlar: **item-to-item collaborative filtering** (\"X alanlar Y de aldı\" — sipariş geçmişinden öğe birlikte-oluşum/benzerliği hesapla, klasik Amazon yaklaşımı), **user-based** (benzer kullanıcıları bul, beğendiklerini öner) ve **content-based** (benzer özellikli öğeleri öner). Uygulama taslağı: etkileşim verisini (görüntüleme, satın alma, derecelendirme) bir event store'a topla; tüm çiftler üzerinde gerçek-zamanlı hesaplama pahalı olduğundan benzerlikleri **önceden hesapla** (offline/batch ya da bir modelle); sonuçları (örn. ürün başına top-N benzer öğe) **hızlı bir cache/key-value store'da** sakla; istek zamanında önerileri o önceden-hesaplanmış veriden sun; periyodik yenile. Ölçekte bir veri pipeline'ı / ML platformu ve muhtemelen matrix factorization ya da embedding kullanırsın. Temel mimari nokta: ağır benzerlik işini **önceden hesapla ve cache'le**; hızlı sun; onu gerçek-zamanlı-kesin değil, eninde-sonunda-taze olarak ele al.\n\n**\"İki müşteri stoktaki son öğeyi aynı anda sepetlerine ekliyor\" (race condition / eşzamanlılık):** sepete eklemek genelde **stok düşürmemelidir** — ikisinin de eklemesine izin ver; stoku **add-to-cart'ta değil, checkout'ta atomik rezerve et/düşür**. Stok 1 iken yarışı ele almak için **atomiklik ve bir tutarlılık stratejisi** gerekir:\n- **Optimistic concurrency** — bir versiyon/stok sayısı tut; checkout'ta yalnızca **bir** müşteri için başarılı olan koşullu bir güncelleme yap (`UPDATE … SET stock = stock-1 WHERE id=? AND stock > 0`); diğeri 'stokta yok' alır. DB'nin atomikliği kazananı belirler.\n- **Pessimistic locking** — kritik bölüm sırasında satırı/envanteri kilitle, böylece yalnızca biri ilerler.\n- **TTL'li rezervasyonlar** — checkout sırasında stoku bir müşteri için N dakika rezerve et; tamamlamazsa serbest bırak.\nİlke: **fazla satma** — karar, satın alma noktasında tek atomik, serileştirilmiş bir işlem olmalı ve kaybeden net, zarif bir 'üzgünüz, az önce tükendi' mesajı alır. (Bu, eşzamanlılık altında idempotent, tutarlı bir transaction'ın sepet versiyonudur.)"
+        },
+        {
+          "type": "mcq",
+          "prompt": "How should you handle two customers buying the last in-stock item simultaneously?",
+          "promptTr": "Stoktaki son öğeyi aynı anda satın alan iki müşteriyi nasıl ele almalısın?",
+          "options": [
+            { "text": "Make stock decrement an atomic, conditional operation at checkout so only one succeeds; the other gets a graceful out-of-stock", "textTr": "Stok düşürmeyi checkout'ta atomik, koşullu bir işlem yap, böylece yalnızca biri başarılı olur; diğeri zarif bir stokta-yok alır", "correct": true },
+            { "text": "Let both complete and oversell, then apologise later", "textTr": "İkisinin de tamamlamasına ve fazla satmaya izin ver, sonra özür dile" },
+            { "text": "Decrement stock the moment either adds to cart", "textTr": "İkisinden biri sepete ekler eklemez stok düşür" },
+            { "text": "Pick a winner randomly in the UI", "textTr": "UI'da rastgele bir kazanan seç" }
+          ],
+          "explanation": "Use atomic conditional update (or locking/reservation) at purchase so exactly one decrement succeeds — never oversell. Don't decrement at add-to-cart; handle the loser gracefully.",
+          "explanationTr": "Satın almada atomik koşullu güncelleme (ya da kilitleme/rezervasyon) kullan, böylece tam olarak bir düşürme başarılı olur — asla fazla satma. Add-to-cart'ta düşürme; kaybedeni zarif ele al."
+        },
+        {
+          "type": "true_false",
+          "statement": "A 'people also like' feature is best served from precomputed, cached similarity data rather than computed in real time per request.",
+          "statementTr": "Bir 'bunu da beğenenler' özelliği, istek başına gerçek zamanlı hesaplanmaktansa önceden-hesaplanmış, önbellekli benzerlik verisinden sunmak en iyisidir.",
+          "answer": true,
+          "explanation": "Computing item similarities over all pairs per request is too expensive; precompute offline/batch, cache top-N per item, serve fast, and refresh periodically (eventually fresh).",
+          "explanationTr": "Tüm çiftler üzerinde istek başına öğe benzerliklerini hesaplamak çok pahalıdır; offline/batch önceden hesapla, öğe başına top-N cache'le, hızlı sun ve periyodik yenile (eninde sonunda taze)."
+        },
+        {
+          "type": "challenge",
+          "question": "\"People who like this also like...\". How would you implement this feature in an e-commerce shop?"
+        },
+        {
+          "type": "challenge",
+          "question": "Two customers add a product to the basket at the same time when the stock is only one. What will you do?"
+        }
+      ]
+    },
+    {
+      "slug": "utility-code-heuristic",
+      "title": "Sharing utility code & heuristic exceptions",
+      "titleTr": "Yardımcı kod paylaşımı ve heuristic exception'lar",
+      "position": 5,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Reuse without coupling, and a transaction edge case",
+          "titleTr": "Coupling olmadan tekrar kullanım ve bir transaction uç durumu",
+          "body": "**Keeping one copy of utility code shared across many consumers:** the answer is to **extract it into a separately-versioned, published shared library/package** that consumers depend on — rather than copy-pasting it (which violates DRY and drifts) or putting it in a shared mutable folder. Practically: build the utility as its **own module/package**, **version it (semantic versioning)**, publish it to a **package registry** (npm, NuGet, Maven, a private registry, or a monorepo workspace package), and have each consumer **declare a dependency** on a specific version. Benefits: a **single source of truth**, controlled upgrades (consumers bump versions deliberately), independent deployability, and no duplication. Considerations: keep the shared lib **cohesive and stable** (avoid a junk-drawer 'utils' that couples everything), watch for it becoming a **versioning bottleneck**, and in a monorepo you can share via a workspace package without publishing externally. So: **one versioned package, many dependents** — reuse by dependency, not by copy.\n\n**Heuristic exceptions** are a concept from **distributed transactions (two-phase commit, 2PC)**. In 2PC a coordinator asks all participants to prepare, then commit/abort. A **heuristic decision** happens when a participant, **after promising to commit/abort but losing contact with the coordinator** (e.g. a timeout/partition), **unilaterally decides on its own** what to do (commit or roll back) rather than waiting indefinitely — to free locked resources. A **heuristic exception** is raised when this **independent decision may conflict with the final coordinated outcome**, leaving the system in a **possibly inconsistent state** (some participants committed, others rolled back — a **heuristic mixed/hazard** outcome). It's essentially the transaction system reporting: *\"a participant made a unilateral call under uncertainty, and the global result might be inconsistent — a human/compensating action may be needed.\"* They highlight why distributed transactions are hard and why patterns like **Saga (with compensations)** and eventual consistency are often preferred over 2PC.",
+          "bodyTr": "**Birçok tüketici arasında paylaşılan yardımcı kodun tek bir kopyasını tutmak:** cevap, onu kopyala-yapıştır yapmak (DRY'ı ihlal eder ve kayar) ya da paylaşılan değiştirilebilir bir klasöre koymak yerine, tüketicilerin bağımlı olduğu **ayrı-sürümlü, yayınlanmış paylaşılan bir kütüphane/paket'e çıkarmaktır**. Pratikte: yardımcıyı **kendi modülü/paketi** olarak inşa et, onu **sürümle (semantic versioning)**, bir **paket registry'sine** yayınla (npm, NuGet, Maven, özel bir registry ya da bir monorepo workspace paketi) ve her tüketicinin belirli bir sürüme **bağımlılık bildirmesini** sağla. Faydalar: **tek doğruluk kaynağı**, kontrollü yükseltmeler (tüketiciler sürümleri bilinçli yükseltir), bağımsız deploy edilebilirlik ve tekrar yok. Dikkat edilecekler: paylaşılan kütüphaneyi **uyumlu ve kararlı** tut (her şeyi birbirine bağlayan çöp-çekmecesi bir 'utils'ten kaçın), bir **sürümleme darboğazı** olmasına dikkat et ve bir monorepo'da harici yayınlamadan bir workspace paketiyle paylaşabilirsin. Yani: **tek sürümlü paket, birçok bağımlı** — kopyayla değil, bağımlılıkla tekrar kullan.\n\n**Heuristic exception'lar**, **dağıtık transaction'lardan (two-phase commit, 2PC)** bir kavramdır. 2PC'de bir koordinatör tüm katılımcılardan hazırlanmasını ister, sonra commit/abort eder. Bir **heuristic karar**, bir katılımcının, **commit/abort sözü verdikten sonra koordinatörle teması kaybedip** (örn. timeout/bölünme), süresiz beklemek yerine ne yapacağına **tek taraflı kendisinin karar vermesiyle** (commit ya da rollback) olur — kilitli kaynakları serbest bırakmak için. Bu **bağımsız karar, nihai koordineli sonuçla çelişebildiğinde** bir **heuristic exception** ortaya çıkar, sistemi **muhtemelen tutarsız bir state'te** bırakır (bazı katılımcılar commit etti, diğerleri rollback yaptı — bir **heuristic mixed/hazard** sonucu). Esasen transaction sisteminin şunu raporlamasıdır: *\"bir katılımcı belirsizlik altında tek taraflı bir karar verdi ve global sonuç tutarsız olabilir — bir insan/compensating eylem gerekebilir.\"* Dağıtık transaction'ların neden zor olduğunu ve neden **Saga (compensation'larla)** ve eventual consistency gibi pattern'lerin genelde 2PC'ye tercih edildiğini vurgularlar."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What's the best way to share one copy of utility code across many components?",
+          "promptTr": "Yardımcı kodun tek bir kopyasını birçok bileşen arasında paylaşmanın en iyi yolu nedir?",
+          "options": [
+            { "text": "Extract it into a separately-versioned shared package that each consumer depends on", "textTr": "Onu, her tüketicinin bağımlı olduğu ayrı-sürümlü paylaşılan bir pakete çıkar", "correct": true },
+            { "text": "Copy-paste it into each project", "textTr": "Her projeye kopyala-yapıştır" },
+            { "text": "Put it in one giant file everyone edits", "textTr": "Herkesin düzenlediği tek dev bir dosyaya koy" },
+            { "text": "Duplicate it and let each copy drift", "textTr": "Onu çoğalt ve her kopyanın kaymasına izin ver" }
+          ],
+          "explanation": "A versioned, published library (npm/NuGet/Maven or a monorepo workspace) gives a single source of truth and controlled upgrades — reuse by dependency, not by copy.",
+          "explanationTr": "Sürümlü, yayınlanmış bir kütüphane (npm/NuGet/Maven ya da bir monorepo workspace) tek doğruluk kaynağı ve kontrollü yükseltmeler verir — kopyayla değil, bağımlılıkla tekrar kullan."
+        },
+        {
+          "type": "true_false",
+          "statement": "Heuristic exceptions arise in distributed (2PC) transactions when a participant makes a unilateral commit/rollback decision that may leave the system inconsistent.",
+          "statementTr": "Heuristic exception'lar, dağıtık (2PC) transaction'larda bir katılımcının sistemi tutarsız bırakabilecek tek taraflı bir commit/rollback kararı verdiğinde ortaya çıkar.",
+          "answer": true,
+          "explanation": "Cut off from the coordinator, a participant decides on its own to free locks; if that clashes with the global outcome, a heuristic (mixed/hazard) exception flags possible inconsistency — a reason Sagas are often preferred.",
+          "explanationTr": "Koordinatörden kopan bir katılımcı kilitleri serbest bırakmak için kendi başına karar verir; bu global sonuçla çelişirse, bir heuristic (mixed/hazard) exception olası tutarsızlığı işaretler — Saga'ların genelde tercih edilme sebebi."
+        },
+        {
+          "type": "challenge",
+          "question": "How can you keep one copy of your utility code and let multiple consumer components use and deploy it?"
+        },
+        {
+          "type": "challenge",
+          "question": "What are heuristic exceptions?"
+        }
+      ]
+    }
+  ]
+}

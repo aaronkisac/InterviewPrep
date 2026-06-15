@@ -1,0 +1,194 @@
+{
+  "topic": "software-architecture",
+  "slug": "scalability-load-balancing",
+  "title": "Scalability & Load Balancing",
+  "titleTr": "Ölçeklenebilirlik ve Yük Dengeleme",
+  "section": "advanced",
+  "position": 9,
+  "lessons": [
+    {
+      "slug": "scalability-elasticity",
+      "title": "Scalability & Elasticity",
+      "titleTr": "Ölçeklenebilirlik ve Elastiklik",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Handling growth, and handling it automatically",
+          "titleTr": "Büyümeyi karşılamak ve onu otomatik karşılamak",
+          "body": "**Scalability** is a system's ability to **handle increased load by adding resources**. Two kinds:\n\n- **Vertical scaling (scale up)** — add power to a single machine (more CPU/RAM). Simple, but has a ceiling and a single point of failure.\n- **Horizontal scaling (scale out)** — add more machines/instances and distribute load across them (behind a load balancer). Near-unlimited, fault-tolerant, but requires statelessness and coordination.\n\nGood scalability means performance grows roughly proportionally as you add resources, without re-architecting.\n\n**Elasticity (vs scalability):** elasticity is the ability to **automatically scale resources up *and down* in real time to match current demand**. Scalability is the *capability* to grow; **elasticity** is doing it **dynamically and bidirectionally**, often **automatically**, so you provision more during spikes and **release** resources when load drops — paying only for what you need (a cloud hallmark). So: scalability = can it grow? elasticity = does it grow and shrink **on demand, automatically**? A system can be scalable (you *can* add servers) without being elastic (it doesn't do so automatically). Elasticity optimises cost and responsiveness for variable workloads.",
+          "bodyTr": "**Ölçeklenebilirlik (Scalability)**, bir sistemin **kaynak ekleyerek artan yükü karşılama** yeteneğidir. İki tür:\n\n- **Dikey ölçekleme (scale up)** — tek bir makineye güç ekle (daha fazla CPU/RAM). Basit ama bir tavanı ve tek bir arıza noktası var.\n- **Yatay ölçekleme (scale out)** — daha fazla makine/instance ekle ve yükü aralarında dağıt (bir load balancer arkasında). Neredeyse-sınırsız, hata-toleranslı ama statelessness ve koordinasyon gerektirir.\n\nİyi ölçeklenebilirlik, kaynak ekledikçe performansın yeniden-mimarileştirme olmadan kabaca orantılı büyümesi demektir.\n\n**Elastiklik (vs ölçeklenebilirlik):** elastiklik, **kaynakları mevcut talebi karşılamak için gerçek zamanlı olarak otomatik yukarı *ve aşağı* ölçekleme** yeteneğidir. Ölçeklenebilirlik büyüme *kabiliyetidir*; **elastiklik** bunu **dinamik ve çift-yönlü**, genelde **otomatik** yapmaktır, böylece ani artışlarda daha fazla provision eder ve yük düştüğünde kaynakları **serbest bırakırsın** — yalnızca ihtiyacın olan için ödeyerek (bir bulut ayırt edici özelliği). Yani: ölçeklenebilirlik = büyüyebilir mi? elastiklik = **talep üzerine, otomatik** büyüyüp küçülür mü? Bir sistem elastik olmadan (otomatik yapmaz) ölçeklenebilir olabilir (sunucu *ekleyebilirsin*). Elastiklik değişken iş yükleri için maliyeti ve yanıt verme yeteneğini optimize eder."
+        },
+        {
+          "type": "mcq",
+          "prompt": "How does elasticity differ from scalability?",
+          "promptTr": "Elastiklik ölçeklenebilirlikten nasıl farklıdır?",
+          "options": [
+            { "text": "Scalability is the capability to grow; elasticity is automatically scaling up and down in real time to match demand", "textTr": "Ölçeklenebilirlik büyüme kabiliyetidir; elastiklik talebi karşılamak için gerçek zamanlı otomatik yukarı ve aşağı ölçeklemedir", "correct": true },
+            { "text": "They are identical terms", "textTr": "Aynı terimlerdir" },
+            { "text": "Elasticity only means scaling up, never down", "textTr": "Elastiklik yalnızca yukarı ölçekleme demektir, asla aşağı" },
+            { "text": "Scalability is automatic; elasticity is manual", "textTr": "Ölçeklenebilirlik otomatiktir; elastiklik manueldir" }
+          ],
+          "explanation": "Scalability = can it handle more load by adding resources. Elasticity = it does so automatically and bidirectionally (up and down) to match demand, optimising cost.",
+          "explanationTr": "Ölçeklenebilirlik = kaynak ekleyerek daha fazla yükü karşılayabilir mi. Elastiklik = bunu talebi karşılamak için otomatik ve çift-yönlü (yukarı ve aşağı) yapar, maliyeti optimize eder."
+        },
+        {
+          "type": "true_false",
+          "statement": "Horizontal scaling (adding more machines) is generally more fault-tolerant and has a higher ceiling than vertical scaling (a bigger machine).",
+          "statementTr": "Yatay ölçekleme (daha fazla makine eklemek) genelde dikey ölçeklemeden (daha büyük makine) daha hata-toleranslıdır ve daha yüksek bir tavanı vardır.",
+          "answer": true,
+          "explanation": "Scaling out adds redundancy (no single point of failure) and near-unlimited capacity, but needs statelessness/coordination; scaling up is simpler but capped and a SPOF.",
+          "explanationTr": "Scale out yedeklilik (tek arıza noktası yok) ve neredeyse-sınırsız kapasite ekler ama statelessness/koordinasyon gerektirir; scale up daha basit ama sınırlı ve bir SPOF'tur."
+        },
+        {
+          "type": "challenge",
+          "question": "What Is Scalability?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is Elasticity (in contrast to Scalability)?"
+        }
+      ]
+    },
+    {
+      "slug": "clusters",
+      "title": "Clusters & clustering",
+      "titleTr": "Cluster'lar ve clustering",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Many machines acting as one",
+          "titleTr": "Tek bir şey gibi davranan birçok makine",
+          "body": "**A cluster** is a **group of machines (nodes) working together as a single logical system**. To the outside they appear as one service; internally, work and/or data is distributed across the nodes, usually behind a load balancer.\n\n**Why you need clustering** — two big reasons:\n\n- **High availability / fault tolerance** — if one node fails, others keep serving, so there's **no single point of failure** (failover).\n- **Scalability / performance** — distribute load across nodes to handle more traffic than one machine could (horizontal scaling).\n\nClustering also enables maintenance without downtime (take a node out, others cover) and can improve throughput. The cost is added complexity: coordination, shared/replicated state, and load distribution.\n\n**Middle-tier clustering** is clustering applied specifically to the **application/business-logic tier** (the \"middle\" between the presentation tier and the data tier). You run **multiple instances of the application server** as a cluster so that business-logic processing is **load-balanced and highly available**: requests are spread across app-server nodes, and if one app server dies the others continue. It's how you scale and protect the stateful-ish app layer (often paired with session replication or sticky sessions to handle user session state across the cluster). So: clustering the web/app servers in the middle tier gives the business layer the same HA + scalability benefits that clustering gives generally.",
+          "bodyTr": "**Bir cluster**, **tek bir mantıksal sistem olarak birlikte çalışan bir makine (node) grubudur**. Dışarıya tek bir servis gibi görünürler; içeride iş ve/veya veri node'lara dağıtılır, genelde bir load balancer arkasında.\n\n**Neden clustering'e ihtiyacın var** — iki büyük sebep:\n\n- **Yüksek erişilebilirlik / hata toleransı** — bir node başarısız olursa diğerleri hizmet vermeye devam eder, böylece **tek bir arıza noktası yoktur** (failover).\n- **Ölçeklenebilirlik / performans** — yükü node'lara dağıtarak tek bir makinenin kaldırabileceğinden fazla trafiği karşıla (yatay ölçekleme).\n\nClustering ayrıca kesinti olmadan bakımı sağlar (bir node'u çıkar, diğerleri karşılar) ve throughput'u artırabilir. Maliyeti eklenen karmaşıklıktır: koordinasyon, paylaşılan/replikalı state ve yük dağıtımı.\n\n**Middle-tier clustering**, clustering'in özellikle **application/iş-mantığı katmanına** (presentation tier ile data tier arasındaki \"orta\") uygulanmasıdır. **Uygulama sunucusunun birden çok instance'ını** bir cluster olarak çalıştırırsın, böylece iş-mantığı işleme **yük-dengelenmiş ve yüksek erişilebilir** olur: istekler app-server node'larına yayılır ve bir app server ölürse diğerleri devam eder. Stateful'a-yakın app katmanını böyle ölçekler ve korursun (kullanıcı oturum state'ini cluster genelinde ele almak için genelde session replication ya da sticky session ile eşlenir). Yani: orta katmandaki web/app sunucularını cluster'lamak, iş katmanına clustering'in genel olarak verdiği aynı HA + ölçeklenebilirlik faydalarını verir."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What are the two main reasons to use clustering?",
+          "promptTr": "Clustering kullanmanın iki temel sebebi nedir?",
+          "options": [
+            { "text": "High availability/fault tolerance (no single point of failure) and scalability/performance (distribute load)", "textTr": "Yüksek erişilebilirlik/hata toleransı (tek arıza noktası yok) ve ölçeklenebilirlik/performans (yükü dağıt)", "correct": true },
+            { "text": "To reduce the number of servers to one", "textTr": "Sunucu sayısını bire indirmek" },
+            { "text": "To make the code simpler", "textTr": "Kodu basitleştirmek" },
+            { "text": "To avoid using a database", "textTr": "Veritabanı kullanmaktan kaçınmak" }
+          ],
+          "explanation": "A cluster (many nodes as one system) gives failover (if a node dies, others serve) and horizontal scaling (spread load) — at the cost of coordination complexity.",
+          "explanationTr": "Bir cluster (tek sistem olarak birçok node) failover (bir node ölürse diğerleri hizmet eder) ve yatay ölçekleme (yükü yay) verir — koordinasyon karmaşıklığı pahasına."
+        },
+        {
+          "type": "true_false",
+          "statement": "Middle-tier clustering runs multiple application-server instances so the business-logic layer is load-balanced and highly available.",
+          "statementTr": "Middle-tier clustering, birden çok uygulama-sunucusu instance'ı çalıştırır, böylece iş-mantığı katmanı yük-dengelenmiş ve yüksek erişilebilir olur.",
+          "answer": true,
+          "explanation": "Clustering the app/business tier spreads requests across app servers and survives node failures, often paired with session replication/sticky sessions for session state.",
+          "explanationTr": "App/iş katmanını cluster'lamak istekleri app sunucularına yayar ve node arızalarından sağ çıkar, oturum state'i için genelde session replication/sticky session ile eşlenir."
+        },
+        {
+          "type": "challenge",
+          "question": "What Is A Cluster?"
+        },
+        {
+          "type": "challenge",
+          "question": "Why Do You Need Clustering?"
+        },
+        {
+          "type": "challenge",
+          "question": "What Is Middle Tier Clustering?"
+        }
+      ]
+    },
+    {
+      "slug": "load-balancing-failover-affinity",
+      "title": "Load balancing, failover & session affinity",
+      "titleTr": "Yük dengeleme, failover ve session affinity",
+      "position": 3,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Distributing traffic and keeping sessions",
+          "titleTr": "Trafiği dağıtmak ve oturumları korumak",
+          "body": "**Load balancing** is **distributing incoming requests across multiple servers** so no single one is overwhelmed. A **load balancer** sits in front of a pool of servers and routes traffic using an algorithm — **round-robin**, **least-connections**, **weighted**, IP-hash, etc. Benefits: better **throughput and response times**, **high availability** (route around dead servers), and the ability to scale out. It can be L4 (transport) or L7 (application-aware, can route by path/host).\n\n**Load Balancing Failover** is the load balancer's **high-availability behaviour**: it continuously **health-checks** the backend servers and, when one becomes unhealthy/unreachable, **stops sending it traffic and reroutes requests to the healthy servers** — automatically. So failover ensures that a server (or even a whole node) failing doesn't take down the service; the LB \"fails over\" to the remaining capacity. (At the LB level itself, you also run redundant LBs so the balancer isn't a single point of failure.)\n\n**Sticky sessions / session affinity:** normally a load balancer may send each request from a user to *any* server. **Sticky sessions (session affinity)** make the LB **route all requests from a given client to the same backend server** for the duration of their session — typically by tracking a session cookie or the client's IP. **Why:** if session state (login, cart) is stored **in that server's memory**, subsequent requests must hit the same server to find it. The downside: it **unbalances load** and **breaks failover** (if that server dies, the in-memory session is lost). That's why the better long-term fix is **stateless servers** with session state in a shared store (Redis/DB) — then any server can handle any request and you don't need stickiness. Affinity is a pragmatic patch for in-memory session state.",
+          "bodyTr": "**Yük dengeleme (Load balancing)**, **gelen istekleri birden çok sunucuya dağıtmaktır**, böylece tek biri bunalmaz. Bir **load balancer** bir sunucu havuzunun önünde durur ve trafiği bir algoritma kullanarak yönlendirir — **round-robin**, **least-connections**, **weighted**, IP-hash, vb. Faydaları: daha iyi **throughput ve yanıt süreleri**, **yüksek erişilebilirlik** (ölü sunucuların etrafından yönlendir) ve scale out yeteneği. L4 (transport) ya da L7 (application-farkında, path/host'a göre yönlendirebilir) olabilir.\n\n**Load Balancing Failover**, load balancer'ın **yüksek-erişilebilirlik davranışıdır**: backend sunucuları sürekli **health-check** eder ve biri sağlıksız/ulaşılamaz olduğunda, ona **trafik göndermeyi durdurur ve istekleri sağlıklı sunuculara yeniden yönlendirir** — otomatik olarak. Yani failover, bir sunucunun (hatta tüm bir node'un) başarısız olmasının servisi düşürmemesini sağlar; LB kalan kapasiteye \"fail over\" eder. (LB seviyesinde de, balancer'ın tek arıza noktası olmaması için yedek LB'ler çalıştırırsın.)\n\n**Sticky session / session affinity:** normalde bir load balancer bir kullanıcının her isteğini *herhangi* bir sunucuya gönderebilir. **Sticky session (session affinity)**, LB'nin **belirli bir istemciden gelen tüm istekleri oturumları süresince aynı backend sunucuya yönlendirmesini** sağlar — tipik olarak bir oturum cookie'sini ya da istemcinin IP'sini takip ederek. **Neden:** oturum state'i (login, sepet) **o sunucunun belleğinde** saklanıyorsa, sonraki isteklerin onu bulmak için aynı sunucuya gitmesi gerekir. Dezavantajı: **yükü dengesizleştirir** ve **failover'ı bozar** (o sunucu ölürse, bellekteki oturum kaybolur). Bu yüzden daha iyi uzun-vadeli çözüm, oturum state'i paylaşılan bir depoda (Redis/DB) olan **stateless sunuculardır** — o zaman herhangi bir sunucu herhangi bir isteği ele alabilir ve stickiness'a ihtiyacın olmaz. Affinity, bellekteki oturum state'i için pragmatik bir yamadır."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What does 'session affinity' (sticky sessions) do?",
+          "promptTr": "'Session affinity' (sticky session) ne yapar?",
+          "options": [
+            { "text": "Routes all of a client's requests to the same backend server, so in-memory session state is found", "textTr": "Bir istemcinin tüm isteklerini aynı backend sunucuya yönlendirir, böylece bellekteki oturum state'i bulunur", "correct": true },
+            { "text": "Spreads each request randomly across all servers", "textTr": "Her isteği tüm sunuculara rastgele yayar" },
+            { "text": "Encrypts the session cookie", "textTr": "Oturum cookie'sini şifreler" },
+            { "text": "Deletes the session after each request", "textTr": "Her istekten sonra oturumu siler" }
+          ],
+          "explanation": "Stickiness pins a client to one server (via cookie/IP) so server-memory session state persists across requests. Downside: unbalanced load and broken failover — prefer stateless servers + shared session store.",
+          "explanationTr": "Stickiness bir istemciyi bir sunucuya sabitler (cookie/IP ile), böylece sunucu-belleği oturum state'i istekler arası kalır. Dezavantajı: dengesiz yük ve bozuk failover — stateless sunucular + paylaşılan oturum deposu tercih et."
+        },
+        {
+          "type": "true_false",
+          "statement": "Load balancing failover means the LB health-checks servers and reroutes traffic away from unhealthy ones automatically.",
+          "statementTr": "Load balancing failover, LB'nin sunucuları health-check etmesi ve trafiği sağlıksız olanlardan otomatik uzaklaştırması demektir.",
+          "answer": true,
+          "explanation": "Health checks let the balancer detect a down server and send requests only to healthy backends, so one failure doesn't take down the service.",
+          "explanationTr": "Health check'ler balancer'ın kapalı bir sunucuyu tespit etmesini ve istekleri yalnızca sağlıklı backend'lere göndermesini sağlar, böylece bir arıza servisi düşürmez."
+        },
+        {
+          "type": "challenge",
+          "question": "What Is Load Balancing?"
+        },
+        {
+          "type": "challenge",
+          "question": "What Is Load Balancing Fail Over?"
+        },
+        {
+          "type": "challenge",
+          "question": "What Is Sticky Session Load Balancing? What Do You Mean By \"Session Affinity\"?"
+        }
+      ]
+    },
+    {
+      "slug": "session-replication-ip-affinity",
+      "title": "Session replication & IP affinity",
+      "titleTr": "Session replication ve IP affinity",
+      "position": 4,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Two more ways to handle session state in a cluster",
+          "titleTr": "Cluster'da oturum state'ini ele almanın iki yolu daha",
+          "body": "Two techniques related to managing user sessions across a load-balanced cluster:\n\n**Session Replication** is **copying session state across multiple servers** in the cluster, so that **any** node has (or can get) the user's session. If the server handling a user fails, another already holds a replica of their session and can take over **without the user losing their state** (true failover for sessions). Approaches: full replication (every node copies every session — simple but heavy on memory/network), or partial/buddy replication (each session replicated to one or a few backups). **Trade-off:** it provides resilience and lets you avoid strict stickiness, but replication consumes **memory and network bandwidth** and can become a bottleneck at scale — which is why a **shared external session store** (Redis) is often preferred instead.\n\n**IP Address Affinity** is a **load-balancing technique where the balancer routes a client to a backend server based on a hash of the client's IP address**. The same source IP consistently maps to the same server, giving **session affinity without needing a cookie** — useful for non-HTTP or cookie-less clients. **Limitations:** many clients can share one IP (corporate NAT, mobile carriers → uneven load and overloaded servers), and a client's IP can change (mobile networks), breaking the affinity. So IP affinity is a simple way to achieve stickiness, but it's coarser and less reliable than cookie-based affinity, and like all stickiness it complicates failover and balance compared to stateless servers with a shared session store.",
+          "bodyTr": "Yük-dengelenmiş bir cluster genelinde kullanıcı oturumlarını yönetmekle ilgili iki teknik:\n\n**Session Replication**, cluster'da **oturum state'ini birden çok sunucuya kopyalamaktır**, böylece **herhangi** bir node kullanıcının oturumuna sahip olur (ya da alabilir). Bir kullanıcıyı ele alan sunucu başarısız olursa, başka biri zaten oturumunun bir replikasını tutar ve **kullanıcı state'ini kaybetmeden** devralabilir (oturumlar için gerçek failover). Yaklaşımlar: tam replikasyon (her node her oturumu kopyalar — basit ama bellek/ağ için ağır) ya da kısmi/buddy replikasyon (her oturum bir ya da birkaç yedeğe replikalanır). **Ödün:** direnç sağlar ve katı stickiness'tan kaçınmana izin verir ama replikasyon **bellek ve ağ bant genişliği** tüketir ve ölçekte bir darboğaz olabilir — bu yüzden genelde bunun yerine **paylaşılan harici bir oturum deposu** (Redis) tercih edilir.\n\n**IP Address Affinity**, **balancer'ın bir istemciyi istemcinin IP adresinin bir hash'ine göre bir backend sunucuya yönlendirdiği bir yük-dengeleme tekniğidir**. Aynı kaynak IP tutarlı biçimde aynı sunucuya eşlenir, **cookie'ye ihtiyaç duymadan session affinity** verir — HTTP-olmayan ya da cookie'siz istemciler için yararlı. **Sınırlamalar:** birçok istemci tek bir IP paylaşabilir (kurumsal NAT, mobil operatörler → dengesiz yük ve aşırı yüklü sunucular) ve bir istemcinin IP'si değişebilir (mobil ağlar), affinity'yi bozar. Yani IP affinity stickiness elde etmenin basit bir yoludur ama cookie-tabanlı affinity'den daha kaba ve daha az güvenilirdir ve tüm stickiness gibi, paylaşılan oturum deposu olan stateless sunuculara kıyasla failover'ı ve dengeyi zorlaştırır."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What is session replication?",
+          "promptTr": "Session replication nedir?",
+          "options": [
+            { "text": "Copying session state across cluster nodes so another node can take over if one fails", "textTr": "Oturum state'ini cluster node'larına kopyalamak, böylece biri başarısız olursa başka bir node devralabilir", "correct": true },
+            { "text": "Routing by client IP hash", "textTr": "İstemci IP hash'ine göre yönlendirme" },
+            { "text": "Deleting sessions on logout", "textTr": "Çıkışta oturumları silmek" },
+            { "text": "Encrypting the session token", "textTr": "Oturum token'ını şifrelemek" }
+          ],
+          "explanation": "Replication keeps copies of sessions on other nodes for failover, but costs memory/bandwidth — a shared store (Redis) is often preferred. IP-hash routing is IP affinity, a different thing.",
+          "explanationTr": "Replikasyon failover için oturumların kopyalarını diğer node'larda tutar ama bellek/bant genişliği maliyeti vardır — genelde paylaşılan bir depo (Redis) tercih edilir. IP-hash yönlendirme IP affinity'dir, farklı bir şey."
+        },
+        {
+          "type": "true_false",
+          "statement": "IP address affinity can distribute load unevenly because many clients may share one IP (e.g. behind corporate NAT).",
+          "statementTr": "IP address affinity yükü dengesiz dağıtabilir çünkü birçok istemci tek bir IP paylaşabilir (örn. kurumsal NAT arkasında).",
+          "answer": true,
+          "explanation": "Hashing by source IP means all clients behind one NAT/proxy land on the same server (overload), and changing IPs break affinity — coarser/less reliable than cookie-based stickiness.",
+          "explanationTr": "Kaynak IP'ye göre hash, bir NAT/proxy arkasındaki tüm istemcilerin aynı sunucuya inmesi (aşırı yük) demektir ve değişen IP'ler affinity'yi bozar — cookie-tabanlı stickiness'tan daha kaba/az güvenilir."
+        },
+        {
+          "type": "challenge",
+          "question": "What Is Session Replication?"
+        },
+        {
+          "type": "challenge",
+          "question": "What Is IP Address Affinity Technique For Load Balancing?"
+        }
+      ]
+    }
+  ]
+}

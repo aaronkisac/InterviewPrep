@@ -1,0 +1,187 @@
+{
+  "topic": "software-architecture",
+  "slug": "performance-caching-ops",
+  "title": "Performance, Caching & Operations",
+  "titleTr": "Performans, Önbellekleme ve Operasyon",
+  "section": "interview",
+  "position": 12,
+  "lessons": [
+    {
+      "slug": "latency-cdn-stateful",
+      "title": "Latency, CDNs & stateful vs stateless",
+      "titleTr": "Gecikme, CDN'ler ve stateful vs stateless",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Speed, edge delivery, and where state lives",
+          "titleTr": "Hız, edge teslimat ve state'in nerede yaşadığı",
+          "body": "**Lower-latency interaction** means **reducing the delay between a request and its response** so the system feels fast/responsive. Latency is the *time* per operation (distinct from throughput, the *volume*). Techniques: caching, CDNs (serve from nearby), keeping connections open (WebSocket/HTTP-2), minimising round-trips, doing work async/off the critical path, geo-locating servers near users, and efficient data formats. Low latency matters for UX (perceived speed), real-time features, and even revenue (slow pages lose users).\n\n**A CDN (Content Delivery Network)** is a **geographically distributed network of edge servers that cache and serve content from a location near the user**. Instead of every request travelling to your origin server (possibly far away), the CDN serves cached copies (static assets, images, video, increasingly dynamic content) from the **nearest edge POP**. **How it improves performance:** **lower latency** (shorter physical distance), **reduced origin load** (edge absorbs traffic), **higher availability/DDoS resilience**, and better handling of traffic spikes. (Cloudflare, Akamai, CloudFront.)\n\n**Stateful vs Stateless services:**\n- A **stateless service** keeps **no client/session state between requests** — each request is self-contained (all needed context comes in the request or a shared store). Any instance can handle any request, so they're **easy to scale horizontally, load-balance, and replace** (no sticky sessions needed). REST aims to be stateless.\n- A **stateful service** **retains state across requests** (in-memory sessions, connection state). It can be more efficient for some workloads but is **harder to scale** (needs sticky sessions or replication) and to fail over (losing an instance loses its state).\nGuidance: **prefer stateless services** (push state to a shared store like Redis/DB) for scalability and resilience; keep state explicit and external.",
+          "bodyTr": "**Daha düşük gecikmeli (lower-latency) etkileşim**, sistemin hızlı/duyarlı hissettirmesi için **bir istek ile yanıtı arasındaki gecikmeyi azaltmak** demektir. Latency işlem başına *zamandır* (throughput'tan, yani *hacimden* farklı). Teknikler: caching, CDN'ler (yakından sun), bağlantıları açık tutma (WebSocket/HTTP-2), round-trip'leri minimize etme, işi async/kritik yoldan uzak yapma, sunucuları kullanıcılara yakın konumlandırma ve verimli veri formatları. Düşük gecikme UX (algılanan hız), gerçek zamanlı özellikler ve hatta gelir için önemlidir (yavaş sayfalar kullanıcı kaybeder).\n\n**Bir CDN (Content Delivery Network)**, **içeriği kullanıcıya yakın bir konumdan önbelleğe alan ve sunan, coğrafi olarak dağıtılmış bir edge sunucu ağıdır**. Her isteğin origin sunucuna (muhtemelen uzakta) gitmesi yerine, CDN önbelleğe alınmış kopyaları (statik asset'ler, görseller, video, giderek dinamik içerik) **en yakın edge POP'tan** sunar. **Performansı nasıl artırır:** **daha düşük gecikme** (daha kısa fiziksel mesafe), **azaltılmış origin yükü** (edge trafiği emer), **daha yüksek erişilebilirlik/DDoS direnci** ve trafik artışlarını daha iyi ele alma. (Cloudflare, Akamai, CloudFront.)\n\n**Stateful vs Stateless servisler:**\n- Bir **stateless servis**, istekler arası **istemci/oturum state'i tutmaz** — her istek kendi içinde tamdır (gereken tüm bağlam istekte ya da paylaşılan bir depoda gelir). Herhangi bir instance herhangi bir isteği ele alabilir, böylece **yatay ölçeklemesi, load-balance etmesi ve değiştirmesi kolaydır** (sticky session gerekmez). REST stateless olmayı amaçlar.\n- Bir **stateful servis**, istekler arası **state tutar** (bellekteki oturumlar, bağlantı state'i). Bazı iş yükleri için daha verimli olabilir ama **ölçeklemesi daha zordur** (sticky session ya da replikasyon gerekir) ve failover etmesi (bir instance kaybetmek state'ini kaybetmektir).\nRehberlik: ölçeklenebilirlik ve direnç için **stateless servisleri tercih et** (state'i Redis/DB gibi paylaşılan bir depoya it); state'i açık ve harici tut."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Why are stateless services easier to scale than stateful ones?",
+          "promptTr": "Stateless servisler neden stateful olanlardan daha kolay ölçeklenir?",
+          "options": [
+            { "text": "Any instance can handle any request (no per-instance session state), so you can load-balance and add/replace instances freely", "textTr": "Herhangi bir instance herhangi bir isteği ele alabilir (instance-başına oturum state'i yok), böylece serbestçe load-balance edebilir ve instance ekleyebilir/değiştirebilirsin", "correct": true },
+            { "text": "They never use any storage", "textTr": "Asla depolama kullanmazlar" },
+            { "text": "They require sticky sessions", "textTr": "Sticky session gerektirirler" },
+            { "text": "They run faster on a single core only", "textTr": "Yalnızca tek çekirdekte daha hızlı çalışırlar" }
+          ],
+          "explanation": "Stateless = no client state held between requests, so requests are interchangeable across instances — easy horizontal scaling and failover. Push state to a shared store.",
+          "explanationTr": "Stateless = istekler arası istemci state'i tutulmaz, böylece istekler instance'lar arası değiştirilebilir — kolay yatay ölçekleme ve failover. State'i paylaşılan bir depoya it."
+        },
+        {
+          "type": "true_false",
+          "statement": "A CDN improves performance mainly by serving cached content from edge servers near the user, reducing latency and origin load.",
+          "statementTr": "Bir CDN performansı esas olarak içeriği kullanıcıya yakın edge sunuculardan önbellekli sunarak, gecikmeyi ve origin yükünü azaltarak artırır.",
+          "answer": true,
+          "explanation": "Edge caching shortens the distance to users (lower latency), offloads the origin, absorbs spikes, and adds availability/DDoS resilience.",
+          "explanationTr": "Edge caching kullanıcılara mesafeyi kısaltır (daha düşük gecikme), origin'i boşaltır, artışları emer ve erişilebilirlik/DDoS direnci ekler."
+        },
+        {
+          "type": "challenge",
+          "question": "What do you mean by lower latency interaction?"
+        },
+        {
+          "type": "challenge",
+          "question": "What Is A CDN (Content Delivery Network) And How Does It Improve Performance?"
+        },
+        {
+          "type": "challenge",
+          "question": "What Is The Difference Between Stateful And Stateless Services?"
+        }
+      ]
+    },
+    {
+      "slug": "offload-db-cache-stampede",
+      "title": "Offloading the DB & cache stampede",
+      "titleTr": "DB'yi boşaltmak ve cache stampede",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Taking pressure off the database",
+          "titleTr": "Veritabanından baskıyı almak",
+          "body": "**Off-loading work from the database:** the DB is often the scalability bottleneck (hard to scale writes, single source of truth), so you reduce load on it by:\n\n- **Caching** — serve frequent reads from a cache (Redis/Memcached) or CDN instead of hitting the DB every time.\n- **Read replicas** — route reads to replicas, keeping the primary for writes.\n- **Move heavy work off the request path** — use **async processing / queues / background jobs** for non-urgent work, and **batch** writes.\n- **Materialised views / precomputation / denormalisation** — precompute expensive aggregations.\n- **Offload search to a search engine** (Elasticsearch) and use a CDN for static/blob content rather than storing/serving it from the DB.\n- **Connection pooling**, query optimisation/indexing, and pushing computation to the app tier where appropriate.\nThe theme: don't make the database do work that something cheaper/closer/async can do.\n\n**Cache Stampede (a.k.a. dog-piling / thundering herd):** when a **popular cached item expires (or is missing)**, and **many concurrent requests miss the cache at the same moment**, they **all hit the database simultaneously** to recompute it — a sudden spike that can overload or crash the DB. It's a concurrency problem around cache misses on hot keys. **Mitigations:** a **lock / mutex** so only one request recomputes while others wait or get stale data (\"single-flight\"); **early/probabilistic expiration** (refresh slightly before expiry, jittered so keys don't all expire together); serving **stale-while-revalidate** (return the old value and refresh in the background); and **request coalescing**. The goal is to ensure that **only one** computation runs per expired key, not thousands.",
+          "bodyTr": "**Veritabanından iş boşaltma:** DB genelde ölçeklenebilirlik darboğazıdır (yazmaları ölçeklemek zor, tek doğruluk kaynağı), bu yüzden üzerindeki yükü şöyle azaltırsın:\n\n- **Caching** — sık okumaları her seferinde DB'ye gitmek yerine bir cache'ten (Redis/Memcached) ya da CDN'den sun.\n- **Read replica'lar** — okumaları replikalara yönlendir, primary'yi yazmalar için tut.\n- **Ağır işi istek yolundan çıkar** — acil olmayan iş için **async işleme / kuyruklar / arka plan işleri** kullan ve yazmaları **batch'le**.\n- **Materialized view / önceden-hesaplama / denormalizasyon** — pahalı agregasyonları önceden hesapla.\n- **Aramayı bir arama motoruna boşalt** (Elasticsearch) ve statik/blob içerik için DB'den saklamak/sunmak yerine bir CDN kullan.\n- **Connection pooling**, sorgu optimizasyonu/indeksleme ve uygun olduğunda hesaplamayı app katmanına itme.\nTema: veritabanına, daha ucuz/yakın/async bir şeyin yapabileceği işi yaptırma.\n\n**Cache Stampede (diğer adıyla dog-piling / thundering herd):** **popüler bir önbellekli öğe sona erdiğinde (ya da eksik olduğunda)** ve **birçok eşzamanlı istek aynı anda cache'i ıskaladığında**, onu yeniden hesaplamak için **hepsi aynı anda veritabanına gider** — DB'yi aşırı yükleyebilen ya da çökertebilen ani bir artış. Sıcak anahtarlarda cache miss'leri etrafında bir eşzamanlılık sorunudur. **Hafifletmeler:** yalnızca bir isteğin yeniden hesapladığı bir **lock / mutex**, diğerleri beklerken ya da bayat veri alırken (\"single-flight\"); **erken/olasılıksal sona erme** (sona ermeden biraz önce yenile, jitter'lı ki anahtarlar birlikte sona ermesin); **stale-while-revalidate** sunma (eski değeri döndür ve arka planda yenile); ve **request coalescing**. Amaç, sona eren anahtar başına binlerce değil **yalnızca bir** hesaplamanın çalışmasını sağlamaktır."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What is a cache stampede?",
+          "promptTr": "Cache stampede nedir?",
+          "options": [
+            { "text": "Many concurrent requests miss an expired hot cache key at once and all hit the DB to recompute it, overloading it", "textTr": "Birçok eşzamanlı istek aynı anda sona ermiş sıcak bir cache anahtarını ıskalar ve hepsi onu yeniden hesaplamak için DB'ye gider, onu aşırı yükler", "correct": true },
+            { "text": "The cache server runs out of memory at startup", "textTr": "Cache sunucusu başlangıçta belleği tüketir" },
+            { "text": "A virus spreading through the cache", "textTr": "Cache boyunca yayılan bir virüs" },
+            { "text": "When the cache never expires anything", "textTr": "Cache hiçbir şeyi sona erdirmediğinde" }
+          ],
+          "explanation": "On a hot key's expiry, simultaneous misses all recompute via the DB — a spike. Fix with locks/single-flight, jittered/early expiry, or stale-while-revalidate so only one recompute happens.",
+          "explanationTr": "Sıcak bir anahtarın sona ermesinde, eşzamanlı miss'lerin hepsi DB üzerinden yeniden hesaplar — bir artış. Lock/single-flight, jitter'lı/erken sona erme ya da stale-while-revalidate ile düzelt, böylece yalnızca bir yeniden hesaplama olur."
+        },
+        {
+          "type": "true_false",
+          "statement": "Using read replicas, caching, and async/background jobs are all ways to off-load work from the primary database.",
+          "statementTr": "Read replica'lar, caching ve async/arka plan işleri kullanmak, primary veritabanından iş boşaltmanın yollarıdır.",
+          "answer": true,
+          "explanation": "All reduce direct load on the primary DB: replicas absorb reads, caches serve hot data, and queues move non-urgent work off the request path.",
+          "explanationTr": "Hepsi primary DB'ye doğrudan yükü azaltır: replikalar okumaları emer, cache'ler sıcak veriyi sunar ve kuyruklar acil olmayan işi istek yolundan çıkarır."
+        },
+        {
+          "type": "challenge",
+          "question": "How do you off-load work from the Database?"
+        },
+        {
+          "type": "challenge",
+          "question": "Explain what is Cache Stampede"
+        }
+      ]
+    },
+    {
+      "slug": "caching-paginated-miss-storm",
+      "title": "Caching paginated data & cache miss-storms",
+      "titleTr": "Paginated veri önbellekleme ve cache miss-storm'lar",
+      "position": 3,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Hard caching problems",
+          "titleTr": "Zor önbellekleme problemleri",
+          "body": "**Caching paginated results whose ordering/properties can change** is tricky because the underlying list mutates: an item inserted/deleted/re-sorted shifts everything, so a cached 'page 2' can become wrong (duplicates or skipped items), and invalidating per-page caches on every change is expensive. **Best practices:**\n\n- **Prefer cursor / keyset pagination** over offset-based — cache by a **stable cursor** (e.g. `id > lastSeenId` or a sort-key cursor) so inserts/deletes don't shift pages. Offset pages (`LIMIT/OFFSET`) are fragile under change.\n- **Cache with short TTLs** for list pages, accepting brief staleness, rather than trying to keep them perfectly fresh.\n- **Cache individual items** (by id) separately from the **ordered list of ids** for a query; invalidate the small list key on change while item caches stay reusable.\n- **Version / namespace** the cache key by query parameters and a dataset version, so changing the sort/filter yields a new key and an invalidation bumps the version.\n- Use **stale-while-revalidate** to serve fast while refreshing in the background.\nThe theme: make the cache key reflect a **stable view** and decouple item caching from list-order caching.\n\n**Cache miss-storm (invalidation concurrency on high-traffic sites)** is the cache-stampede problem in its acute form: when a cached entry is **invalidated/expires on a high-traffic key**, a flood of concurrent requests all miss and stampede the backend at once. **Dealing with the concurrency:** ensure **only one request recomputes** the value while others wait or get a slightly stale copy — via a **distributed lock / mutex** ('single-flight'/request coalescing), **probabilistic early expiration** (refresh ahead of expiry, jittered so many keys don't expire simultaneously), **stale-while-revalidate** (serve old value, refresh async), and pre-warming/background refresh of hot keys. For invalidation specifically: avoid mass-expiring many keys at the same instant (stagger TTLs), and consider **write-through / refresh-ahead** caching so the cache is updated rather than blanked. The goal across all of these: protect the backend from a synchronized thundering herd when caches turn cold.",
+          "bodyTr": "**Sıralaması/özellikleri değişebilen paginated sonuçları önbelleğe almak** zordur çünkü alttaki liste değişir: eklenen/silinen/yeniden-sıralanan bir öğe her şeyi kaydırır, böylece önbellekli bir 'sayfa 2' yanlış olabilir (yinelenenler ya da atlanan öğeler) ve her değişiklikte sayfa-başına cache'leri invalidate etmek pahalıdır. **En iyi pratikler:**\n\n- Offset-tabanlı yerine **cursor / keyset pagination'ı tercih et** — **kararlı bir cursor** ile cache'le (örn. `id > lastSeenId` ya da bir sort-key cursor) ki eklemeler/silmeler sayfaları kaydırmasın. Offset sayfaları (`LIMIT/OFFSET`) değişim altında kırılgandır.\n- Liste sayfaları için **kısa TTL'lerle cache'le**, mükemmel taze tutmaya çalışmak yerine kısa bayatlığı kabul et.\n- Bir sorgu için **bireysel öğeleri** (id'ye göre) **sıralı id listesinden** ayrı cache'le; değişiklikte küçük liste anahtarını invalidate et, öğe cache'leri tekrar kullanılabilir kalsın.\n- Cache anahtarını sorgu parametrelerine ve bir veri kümesi sürümüne göre **sürümle / namespace'le**, böylece sıralama/filtre değiştirmek yeni bir anahtar verir ve bir invalidation sürümü artırır.\n- Hızlı sunarken arka planda yenilemek için **stale-while-revalidate** kullan.\nTema: cache anahtarını **kararlı bir görünümü** yansıtacak şekilde yap ve öğe cache'lemeyi liste-sırası cache'lemeden ayır.\n\n**Cache miss-storm (yüksek-trafikli sitelerde invalidation eşzamanlılığı)**, cache-stampede probleminin akut formudur: önbellekli bir girdi **yüksek-trafikli bir anahtarda invalidate olduğunda/sona erdiğinde**, eşzamanlı isteklerin seli hepsi ıskalar ve backend'i aynı anda basar. **Eşzamanlılığı ele alma:** diğerleri beklerken ya da biraz bayat bir kopya alırken **yalnızca bir isteğin** değeri yeniden hesapladığından emin ol — bir **dağıtık lock / mutex** ('single-flight'/request coalescing), **olasılıksal erken sona erme** (sona ermeden önce yenile, jitter'lı ki birçok anahtar eşzamanlı sona ermesin), **stale-while-revalidate** (eski değeri sun, async yenile) ve sıcak anahtarların pre-warming/arka plan yenilemesi yoluyla. Özellikle invalidation için: birçok anahtarı aynı anda toplu sona erdirmekten kaçın (TTL'leri kademe), ve cache'in boşaltılmak yerine güncellenmesi için **write-through / refresh-ahead** caching düşün. Tüm bunların ortak amacı: cache'ler soğuduğunda backend'i senkronize bir thundering herd'den korumak."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Why is cursor/keyset pagination preferred over offset for caching changing lists?",
+          "promptTr": "Değişen listeleri önbelleğe alırken offset yerine cursor/keyset pagination neden tercih edilir?",
+          "options": [
+            { "text": "A stable cursor isn't shifted by inserts/deletes, so cached pages stay correct; offset pages break when the list changes", "textTr": "Kararlı bir cursor eklemeler/silmelerden kaymaz, böylece önbellekli sayfalar doğru kalır; offset sayfaları liste değişince bozulur", "correct": true },
+            { "text": "Offset pagination cannot be cached at all", "textTr": "Offset pagination hiç önbelleğe alınamaz" },
+            { "text": "Cursors make the database slower", "textTr": "Cursor'lar veritabanını yavaşlatır" },
+            { "text": "They are identical for caching", "textTr": "Önbellekleme için aynılar" }
+          ],
+          "explanation": "Offset pages assume a fixed list; an insert/delete shifts everything, corrupting cached pages. Keyset/cursor anchors to a stable key, so pages remain valid under change.",
+          "explanationTr": "Offset sayfaları sabit bir liste varsayar; bir ekleme/silme her şeyi kaydırır, önbellekli sayfaları bozar. Keyset/cursor kararlı bir anahtara sabitlenir, böylece sayfalar değişim altında geçerli kalır."
+        },
+        {
+          "type": "true_false",
+          "statement": "Single-flight locks, jittered/early expiry, and stale-while-revalidate all help prevent a cache miss-storm from overwhelming the backend.",
+          "statementTr": "Single-flight kilitleri, jitter'lı/erken sona erme ve stale-while-revalidate, bir cache miss-storm'un backend'i bunaltmasını önlemeye yardımcı olur.",
+          "answer": true,
+          "explanation": "They ensure only one recompute per hot key, stagger expirations so keys don't all die together, and serve stale data while refreshing — protecting the backend from a synchronized herd.",
+          "explanationTr": "Sıcak anahtar başına yalnızca bir yeniden hesaplama sağlar, sona ermeleri kademeler ki anahtarlar birlikte ölmesin ve yenilerken bayat veri sunar — backend'i senkronize bir herd'den korur."
+        },
+        {
+          "type": "challenge",
+          "question": "What are best practices for caching paginated results whose ordering/properties can change?"
+        },
+        {
+          "type": "challenge",
+          "question": "Cache miss-storm: Dealing with concurrency when caching invalidates for high-traffic sites"
+        }
+      ]
+    },
+    {
+      "slug": "zero-downtime-twelve-factor",
+      "title": "Zero-downtime deploys & Twelve-Factor",
+      "titleTr": "Zero-downtime deploy'lar ve Twelve-Factor",
+      "position": 4,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Shipping safely and building cloud-native apps",
+          "titleTr": "Güvenli teslimat ve cloud-native uygulamalar kurmak",
+          "body": "**Updating a live, heavy-traffic site with zero/minimum downtime:** deploy strategies that swap versions without dropping requests:\n\n- **Rolling deployment** — update instances **in batches** behind a load balancer; drained instances are replaced while others keep serving.\n- **Blue-green deployment** — run two identical environments; deploy to the idle **'green'**, test it, then **switch the load balancer** from 'blue' to 'green' instantly (and roll back by switching back).\n- **Canary release** — route a **small % of traffic** to the new version, watch metrics, then ramp up gradually.\n- Supporting practices: **health checks + graceful connection draining**, **backward-compatible / expand-contract database migrations** (add columns before removing; never break the running old version), **feature flags** to decouple deploy from release, and **idempotent, stateless** services so any instance can be cycled. \nThe key constraint is that **old and new versions must coexist briefly**, so changes (especially DB schema) must be backward compatible.\n\n**The Twelve-Factor App** is a set of **12 principles for building cloud-native, scalable, maintainable SaaS apps** (from Heroku). Highlights: **I. Codebase** (one codebase in version control, many deploys); **II. Dependencies** (explicitly declare and isolate); **III. Config** (store config in the environment, not code); **IV. Backing services** (treat DBs/queues as attached resources); **V. Build, release, run** (strictly separate stages); **VI. Processes** (run as stateless processes — state goes to backing services); **VII. Port binding** (export services via a port); **VIII. Concurrency** (scale out via the process model); **IX. Disposability** (fast startup, graceful shutdown); **X. Dev/prod parity** (keep environments similar); **XI. Logs** (treat logs as event streams to stdout); **XII. Admin processes** (run admin tasks as one-off processes). The themes — **statelessness, config in env, explicit dependencies, disposability, parity** — are exactly what make apps easy to deploy, scale horizontally, and run reliably in the cloud.",
+          "bodyTr": "**Canlı, yüksek-trafikli bir siteyi sıfır/minimum kesintiyle güncellemek:** istek düşürmeden sürümleri değiştiren deploy stratejileri:\n\n- **Rolling deployment** — bir load balancer arkasında instance'ları **partiler halinde** güncelle; boşaltılan instance'lar değiştirilirken diğerleri hizmet vermeye devam eder.\n- **Blue-green deployment** — iki özdeş ortam çalıştır; boşta olan **'green'**'e deploy et, test et, sonra load balancer'ı 'blue'dan 'green'e **anında geçir** (ve geri geçirerek rollback yap).\n- **Canary release** — trafiğin **küçük bir %'sini** yeni sürüme yönlendir, metrikleri izle, sonra kademeli artır.\n- Destekleyici pratikler: **health check'ler + zarif bağlantı boşaltma**, **geriye-uyumlu / expand-contract veritabanı migration'ları** (kaldırmadan önce sütun ekle; çalışan eski sürümü asla bozma), deploy'u release'ten ayırmak için **feature flag'ler** ve herhangi bir instance'ın döndürülebilmesi için **idempotent, stateless** servisler.\nTemel kısıt, **eski ve yeni sürümlerin kısa süre bir arada var olması** gerektiğidir, bu yüzden değişiklikler (özellikle DB şeması) geriye uyumlu olmalı.\n\n**Twelve-Factor App**, **cloud-native, ölçeklenebilir, sürdürülebilir SaaS uygulamaları kurmak için 12 ilke** kümesidir (Heroku'dan). Öne çıkanlar: **I. Codebase** (versiyon kontrolünde tek kod tabanı, birçok deploy); **II. Dependencies** (açıkça bildir ve izole et); **III. Config** (config'i kodda değil ortamda sakla); **IV. Backing services** (DB/kuyrukları bağlı kaynaklar olarak ele al); **V. Build, release, run** (aşamaları katı ayır); **VI. Processes** (stateless process'ler olarak çalıştır — state backing service'lere gider); **VII. Port binding** (servisleri bir port üzerinden dışa aktar); **VIII. Concurrency** (process modeliyle scale out); **IX. Disposability** (hızlı başlangıç, zarif kapanış); **X. Dev/prod parity** (ortamları benzer tut); **XI. Logs** (logları stdout'a event akışları olarak ele al); **XII. Admin processes** (admin görevlerini tek-seferlik process'ler olarak çalıştır). Temalar — **statelessness, ortamda config, açık bağımlılıklar, disposability, parity** — uygulamaları deploy etmesi, yatay ölçeklemesi ve bulutta güvenilir çalıştırması kolay kılan şeyin ta kendisidir."
+        },
+        {
+          "type": "match",
+          "prompt": "Match each zero-downtime strategy to its mechanism",
+          "promptTr": "Her zero-downtime stratejisini mekanizmasıyla eşleştir",
+          "pairs": [
+            { "left": "Rolling", "leftTr": "Rolling", "right": "Update instances in batches while others keep serving", "rightTr": "Diğerleri hizmet verirken instance'ları partiler halinde güncelle" },
+            { "left": "Blue-green", "leftTr": "Blue-green", "right": "Two environments; switch traffic to the new one instantly", "rightTr": "İki ortam; trafiği yenisine anında geçir" },
+            { "left": "Canary", "leftTr": "Canary", "right": "Send a small % of traffic to the new version, then ramp up", "rightTr": "Trafiğin küçük bir %'sini yeni sürüme gönder, sonra artır" }
+          ]
+        },
+        {
+          "type": "true_false",
+          "statement": "A core Twelve-Factor principle is running apps as stateless processes with config supplied by the environment.",
+          "statementTr": "Temel bir Twelve-Factor ilkesi, uygulamaları config'i ortamdan sağlanan stateless process'ler olarak çalıştırmaktır.",
+          "answer": true,
+          "explanation": "Stateless processes (state in backing services), config in the environment, explicit dependencies, and disposability are central to Twelve-Factor — enabling easy scaling and reliable cloud deploys.",
+          "explanationTr": "Stateless process'ler (state backing service'lerde), ortamda config, açık bağımlılıklar ve disposability Twelve-Factor'ın merkezindedir — kolay ölçekleme ve güvenilir bulut deploy'larını sağlar."
+        },
+        {
+          "type": "challenge",
+          "question": "How do you update a live heavy traffic site with minimum or Zero Down Time?"
+        },
+        {
+          "type": "challenge",
+          "question": "Are you familiar with The Twelve-Factor App principles?"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,151 @@
+{
+  "topic": "software-architecture",
+  "slug": "architecture-styles",
+  "title": "Monolith, SOA & Microservices",
+  "titleTr": "Monolit, SOA ve Mikroservisler",
+  "section": "advanced",
+  "position": 6,
+  "lessons": [
+    {
+      "slug": "mono-soa-micro",
+      "title": "Monolithic, SOA & Microservices",
+      "titleTr": "Monolitik, SOA ve Mikroservisler",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Three ways to size your services",
+          "titleTr": "Servislerini boyutlandırmanın üç yolu",
+          "body": "**Monolithic vs SOA vs Microservices** — three architectural styles on a spectrum of granularity:\n\n- **Monolithic** — the whole application is **one deployable unit**: UI, business logic, and data access in a single codebase/process. Simple to build, test, and deploy early on; but as it grows it gets hard to scale selectively, change safely, and adopt new tech — one bug or deploy affects everything.\n- **SOA (Service-Oriented Architecture)** — the system is decomposed into **coarse-grained services** that communicate, often via an **Enterprise Service Bus (ESB)** and shared infrastructure/data. Promotes reuse across an enterprise; but the ESB can become a bottleneck and services are often less independent.\n- **Microservices** — many **small, independently deployable services**, each owning a **single business capability and its own data**, communicating over lightweight protocols (HTTP/REST, messaging). Enables independent scaling, deployment, and tech choices; at the cost of **distributed-system complexity** (network, data consistency, observability, deployment).\n\n**Microservice Architecture (definition):** an approach where an application is built as a **suite of small, autonomous services**, each running in its own process, **independently deployable**, organised around **business capabilities**, owning its **own database** (no shared DB), and communicating via lightweight APIs/messaging. Decentralised, polyglot-friendly, and resilient by isolation — but operationally complex.\n\n**Defending the monolith:** monoliths are often the *right* choice, especially early. Advantages: **simplicity** (one codebase, one deploy, easy local dev/debugging), **no network/distributed-systems overhead** (in-process calls, easy transactions and strong consistency), **easier end-to-end testing**, lower operational cost, and faster initial delivery. Microservices' benefits come with real costs (infra, observability, eventual consistency, deployment complexity) that a small team or product may not need. A **well-structured 'modular monolith'** captures much of the modularity benefit without the distribution tax — and you can extract services later if/when scale demands. \"Monolith first\" is a respected strategy.",
+          "bodyTr": "**Monolitik vs SOA vs Mikroservisler** — granülerlik spektrumunda üç mimari stil:\n\n- **Monolitik** — tüm uygulama **tek bir deploy edilebilir birimdir**: UI, iş mantığı ve veri erişimi tek bir kod tabanında/süreçte. Başlangıçta inşa etmesi, test etmesi ve deploy etmesi basit; ama büyüdükçe seçici ölçekleme, güvenli değiştirme ve yeni teknoloji benimseme zorlaşır — tek bir hata ya da deploy her şeyi etkiler.\n- **SOA (Service-Oriented Architecture)** — sistem, genelde bir **Enterprise Service Bus (ESB)** ve paylaşılan altyapı/veri aracılığıyla iletişen **kaba-granüllü servislere** ayrıştırılır. Bir kuruluş genelinde tekrar kullanımı teşvik eder; ama ESB bir darboğaz olabilir ve servisler genelde daha az bağımsızdır.\n- **Mikroservisler** — her biri **tek bir iş yeteneğini ve kendi verisini** sahiplenen, hafif protokollerle (HTTP/REST, messaging) iletişen birçok **küçük, bağımsız deploy edilebilir servis**. Bağımsız ölçekleme, deploy ve teknoloji seçimi sağlar; **dağıtık-sistem karmaşıklığı** (ağ, veri tutarlılığı, observability, deployment) pahasına.\n\n**Mikroservis Mimarisi (tanım):** bir uygulamanın **küçük, otonom servisler takımı** olarak inşa edildiği bir yaklaşım; her biri kendi sürecinde çalışır, **bağımsız deploy edilebilir**, **iş yetenekleri** etrafında organize, **kendi veritabanını** sahiplenir (paylaşılan DB yok) ve hafif API'ler/messaging ile iletişir. Merkezi-olmayan, polyglot-dostu ve izolasyonla dirençli — ama operasyonel olarak karmaşık.\n\n**Monoliti savunmak:** monolitler genelde *doğru* seçimdir, özellikle erken. Avantajlar: **basitlik** (tek kod tabanı, tek deploy, kolay yerel geliştirme/debug), **ağ/dağıtık-sistem yükü yok** (süreç-içi çağrılar, kolay transaction'lar ve güçlü tutarlılık), **daha kolay uçtan-uca test**, daha düşük operasyonel maliyet ve daha hızlı ilk teslimat. Mikroservislerin faydaları, küçük bir takımın ya da ürünün ihtiyaç duymayabileceği gerçek maliyetlerle gelir (altyapı, observability, eventual consistency, deployment karmaşıklığı). **İyi-yapılandırılmış bir 'modüler monolit'** dağıtım vergisi olmadan modülerlik faydasının çoğunu yakalar — ve ölçek gerektirdiğinde sonra servis çıkarabilirsin. \"Monolith first\" saygın bir stratejidir."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What defines a microservices architecture?",
+          "promptTr": "Bir mikroservis mimarisini ne tanımlar?",
+          "options": [
+            { "text": "Small, independently-deployable services, each owning one business capability and its own data, communicating over lightweight APIs", "textTr": "Küçük, bağımsız deploy edilebilir servisler; her biri tek bir iş yeteneğini ve kendi verisini sahiplenir, hafif API'lerle iletişir", "correct": true },
+            { "text": "One large deployable unit containing all logic", "textTr": "Tüm mantığı içeren tek büyük bir deploy edilebilir birim" },
+            { "text": "Many services all sharing one central database", "textTr": "Tek bir merkezi veritabanını paylaşan birçok servis" },
+            { "text": "A UI-only architecture with no backend", "textTr": "Backend'i olmayan yalnızca-UI bir mimari" }
+          ],
+          "explanation": "Microservices = small autonomous services per business capability, each with its own data, independently deployable, lightweight comms — flexible but operationally complex.",
+          "explanationTr": "Mikroservisler = iş yeteneği başına küçük otonom servisler, her biri kendi verisiyle, bağımsız deploy edilebilir, hafif iletişim — esnek ama operasyonel olarak karmaşık."
+        },
+        {
+          "type": "true_false",
+          "statement": "A modular monolith can capture much of the modularity benefit of microservices without the distributed-system overhead.",
+          "statementTr": "Modüler bir monolit, dağıtık-sistem yükü olmadan mikroservislerin modülerlik faydasının çoğunu yakalayabilir.",
+          "answer": true,
+          "explanation": "Monoliths offer simplicity, easy transactions/testing, and no network tax; a well-structured modular monolith keeps boundaries clean and lets you extract services later if scale demands.",
+          "explanationTr": "Monolitler basitlik, kolay transaction/test ve ağ vergisi olmaması sunar; iyi-yapılandırılmış modüler bir monolit sınırları temiz tutar ve ölçek gerektirdiğinde sonra servis çıkarmana izin verir."
+        },
+        {
+          "type": "challenge",
+          "question": "What is the difference between Monolithic, SOA and Microservices Architecture?"
+        },
+        {
+          "type": "challenge",
+          "question": "Define Microservice Architecture"
+        },
+        {
+          "type": "challenge",
+          "question": "Defend the monolithic architecture."
+        }
+      ]
+    },
+    {
+      "slug": "micro-comms",
+      "title": "Sync vs async comms & message queues",
+      "titleTr": "Sync vs async iletişim ve message queue'lar",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "How services talk",
+          "titleTr": "Servisler nasıl konuşur",
+          "body": "**Synchronous vs asynchronous communication in microservices:**\n\n- **Synchronous** — the caller **sends a request and waits (blocks)** for the response, typically over **HTTP/REST or gRPC**. Simple and immediate (request/response), but it creates **temporal coupling**: the caller depends on the callee being up and fast, and chains of sync calls multiply latency and failure risk.\n- **Asynchronous** — the caller **sends a message/event and doesn't wait**; the work happens later, typically via a **message broker/queue** (RabbitMQ, Kafka). This **decouples** services in time — the producer and consumer needn't be available simultaneously — improving resilience and scalability, at the cost of **eventual consistency** and more complex flows/debugging.\n\nRule of thumb: use **sync** when you need an immediate answer and tight request/response; use **async** for decoupling, long-running work, broadcasting events, and resilience.\n\n**A Message Queue** is middleware that lets services **communicate asynchronously by passing messages** through a buffer: a **producer** puts messages on the queue, a **consumer** reads them when ready. **Problems it solves:** **decoupling** (producer/consumer don't need to know each other or be online together), **load levelling/buffering** (absorb spikes — the queue smooths bursts so consumers process at their own pace), **resilience** (if a consumer is down, messages wait rather than being lost), **scalability** (add more consumers to process in parallel), and **reliability** (delivery guarantees, retries, dead-letter queues). It turns brittle synchronous chains into resilient, scalable async pipelines.",
+          "bodyTr": "**Mikroservislerde senkron vs asenkron iletişim:**\n\n- **Senkron** — çağıran **bir istek gönderir ve yanıtı bekler (bloklar)**, tipik olarak **HTTP/REST ya da gRPC** üzerinden. Basit ve anlık (request/response) ama **zamansal coupling** yaratır: çağıran, çağrılanın ayakta ve hızlı olmasına bağımlıdır ve sync çağrı zincirleri gecikmeyi ve başarısızlık riskini katlar.\n- **Asenkron** — çağıran **bir mesaj/event gönderir ve beklemez**; iş sonra olur, tipik olarak bir **message broker/queue** (RabbitMQ, Kafka) aracılığıyla. Bu servisleri zamanda **ayırır** — producer ve consumer aynı anda mevcut olmak zorunda değildir — direnci ve ölçeklenebilirliği artırır, **eventual consistency** ve daha karmaşık akışlar/debug pahasına.\n\nKural: anlık bir yanıt ve sıkı request/response gerektiğinde **sync** kullan; ayırma, uzun-süren iş, event yayınlama ve direnç için **async** kullan.\n\n**Bir Message Queue**, servislerin bir tampon aracılığıyla **mesaj geçirerek asenkron iletişmesini** sağlayan middleware'dir: bir **producer** mesajları queue'ya koyar, bir **consumer** hazır olduğunda okur. **Çözdüğü sorunlar:** **ayırma** (producer/consumer birbirini bilmek ya da birlikte çevrimiçi olmak zorunda değil), **yük dengeleme/tamponlama** (ani artışları emer — queue patlamaları yumuşatır, consumer'lar kendi hızında işler), **direnç** (bir consumer kapalıysa mesajlar kaybolmak yerine bekler), **ölçeklenebilirlik** (paralel işlemek için daha fazla consumer ekle) ve **güvenilirlik** (teslimat garantileri, retry'lar, dead-letter queue'lar). Kırılgan senkron zincirleri dirençli, ölçeklenebilir async pipeline'lara çevirir."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What's a key advantage of asynchronous (message-based) communication?",
+          "promptTr": "Asenkron (mesaj-tabanlı) iletişimin temel bir avantajı nedir?",
+          "options": [
+            { "text": "It decouples services in time and absorbs load spikes, improving resilience and scalability", "textTr": "Servisleri zamanda ayırır ve yük artışlarını emer, direnci ve ölçeklenebilirliği artırır", "correct": true },
+            { "text": "It guarantees an immediate synchronous response", "textTr": "Anlık senkron bir yanıt garanti eder" },
+            { "text": "It removes the need for any error handling", "textTr": "Herhangi bir hata işleme ihtiyacını ortadan kaldırır" },
+            { "text": "It makes all data instantly strongly consistent", "textTr": "Tüm veriyi anında güçlü tutarlı yapar" }
+          ],
+          "explanation": "Async via a queue decouples producer/consumer in time, buffers spikes, and adds resilience/scalability — trading immediacy and strong consistency for eventual consistency.",
+          "explanationTr": "Queue ile async, producer/consumer'ı zamanda ayırır, artışları tamponlar ve direnç/ölçeklenebilirlik ekler — anlık olma ve güçlü tutarlılığı eventual consistency'ye değişir."
+        },
+        {
+          "type": "true_false",
+          "statement": "A message queue helps with load levelling: it buffers bursts so consumers can process at their own pace.",
+          "statementTr": "Bir message queue yük dengelemeye yardım eder: patlamaları tamponlar, böylece consumer'lar kendi hızında işleyebilir.",
+          "answer": true,
+          "explanation": "Buffering decouples producer rate from consumer rate, smoothing spikes; it also adds resilience (messages persist if a consumer is down) and scalability (more consumers).",
+          "explanationTr": "Tamponlama producer hızını consumer hızından ayırır, artışları yumuşatır; ayrıca direnç (consumer kapalıysa mesajlar kalır) ve ölçeklenebilirlik (daha fazla consumer) ekler."
+        },
+        {
+          "type": "challenge",
+          "question": "What Is The Difference Between Synchronous And Asynchronous Communication In Microservices?"
+        },
+        {
+          "type": "challenge",
+          "question": "What Is A Message Queue And What Problem Does It Solve?"
+        }
+      ]
+    },
+    {
+      "slug": "micro-transactions-circuit-breaker",
+      "title": "Microservice transactions & the Circuit Breaker",
+      "titleTr": "Mikroservis transaction'ları ve Circuit Breaker",
+      "position": 3,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Consistency across services and failing gracefully",
+          "titleTr": "Servisler arası tutarlılık ve zarif başarısızlık",
+          "body": "**The most accepted transaction strategy for microservices is the Saga pattern.** Because each microservice owns its **own database**, you **can't use a single ACID transaction** across services (distributed 2-phase commit is fragile and tightly coupling). Instead, a **Saga** models a business transaction as a **sequence of local transactions**, one per service; each step publishes an event/message that triggers the next. If a step fails, the saga runs **compensating transactions** to undo the previous steps (semantic rollback). Two coordination styles: **choreography** (services react to each other's events, no central coordinator) and **orchestration** (a central orchestrator tells each service what to do). The result is **eventual consistency** instead of immediate ACID consistency — the accepted trade-off for service autonomy.\n\n**The Circuit Breaker pattern** prevents a failing dependency from cascading into a system-wide outage. Like an electrical breaker, it **monitors calls to a remote service** and has three states:\n\n- **Closed** — calls flow normally; failures are counted.\n- **Open** — once failures cross a threshold, the breaker **trips**: further calls **fail fast** (return an error/fallback immediately) without hitting the struggling service, giving it time to recover and freeing the caller's resources.\n- **Half-Open** — after a cooldown, it lets a few **trial calls** through; if they succeed it closes again, if not it re-opens.\n\n**Why it matters:** without it, a slow/down dependency ties up threads and connections, causing **cascading failures** and resource exhaustion across services. The circuit breaker (e.g. Resilience4j, Polly) contains the blast radius, enables **graceful degradation** (fallbacks), and lets systems self-heal — a core resilience pattern in microservices.",
+          "bodyTr": "**Mikroservisler için en kabul gören transaction stratejisi Saga pattern'idir.** Her mikroservis **kendi veritabanını** sahiplendiği için, servisler arası **tek bir ACID transaction kullanamazsın** (dağıtık 2-phase commit kırılgan ve sıkı bağlayıcıdır). Bunun yerine, bir **Saga** bir iş transaction'ını **yerel transaction'lar dizisi** olarak modeller, servis başına bir tane; her adım bir sonrakini tetikleyen bir event/mesaj yayınlar. Bir adım başarısız olursa, saga önceki adımları geri almak için **compensating transaction'lar** çalıştırır (semantik rollback). İki koordinasyon stili: **choreography** (servisler birbirinin event'lerine tepki verir, merkezi koordinatör yok) ve **orchestration** (merkezi bir orchestrator her servise ne yapacağını söyler). Sonuç, anlık ACID tutarlılığı yerine **eventual consistency**'dir — servis otonomisi için kabul gören ödün.\n\n**Circuit Breaker pattern'i**, başarısız bir bağımlılığın sistem-geneli bir kesintiye yayılmasını önler. Elektrik kesicisi gibi, **bir uzak servise yapılan çağrıları izler** ve üç state'i vardır:\n\n- **Closed** — çağrılar normal akar; başarısızlıklar sayılır.\n- **Open** — başarısızlıklar bir eşiği geçtiğinde, kesici **atar**: sonraki çağrılar, zorlanan servise dokunmadan **hızlı başarısız olur** (hemen bir hata/fallback döndürür), ona toparlanma zamanı verir ve çağıranın kaynaklarını serbest bırakır.\n- **Half-Open** — bir soğuma sonrası, birkaç **deneme çağrısı** geçmesine izin verir; başarılı olurlarsa tekrar kapanır, olmazlarsa yeniden açılır.\n\n**Neden önemli:** o olmadan, yavaş/kapalı bir bağımlılık thread'leri ve bağlantıları bağlar, servisler arası **kademeli başarısızlıklara** ve kaynak tükenmesine yol açar. Circuit breaker (örn. Resilience4j, Polly) patlama yarıçapını sınırlar, **zarif bozulmayı** (fallback'ler) sağlar ve sistemlerin kendini iyileştirmesine izin verir — mikroservislerde temel bir direnç pattern'i."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What is the most accepted way to handle transactions spanning multiple microservices?",
+          "promptTr": "Birden çok mikroservise yayılan transaction'ları ele almanın en kabul gören yolu nedir?",
+          "options": [
+            { "text": "The Saga pattern — a sequence of local transactions with compensating actions, giving eventual consistency", "textTr": "Saga pattern'i — compensating eylemlerle yerel transaction'lar dizisi, eventual consistency verir", "correct": true },
+            { "text": "A single global ACID transaction across all services", "textTr": "Tüm servisler arası tek bir global ACID transaction" },
+            { "text": "Sharing one database across all services", "textTr": "Tüm servisler arası tek bir veritabanı paylaşmak" },
+            { "text": "Ignoring consistency entirely", "textTr": "Tutarlılığı tamamen yok saymak" }
+          ],
+          "explanation": "With a DB per service, use a Saga: local transactions chained via events, with compensating transactions to undo on failure → eventual consistency, not distributed 2PC.",
+          "explanationTr": "Servis başına DB ile bir Saga kullan: event'lerle zincirlenen yerel transaction'lar, başarısızlıkta geri almak için compensating transaction'larla → eventual consistency, dağıtık 2PC değil."
+        },
+        {
+          "type": "order",
+          "prompt": "Order the Circuit Breaker states through a failure-and-recovery cycle",
+          "promptTr": "Circuit Breaker state'lerini bir başarısızlık-ve-toparlanma döngüsünde sırala",
+          "items": [
+            { "text": "Closed — calls flow normally, failures counted", "textTr": "Closed — çağrılar normal akar, başarısızlıklar sayılır" },
+            { "text": "Open — threshold crossed, calls fail fast without hitting the service", "textTr": "Open — eşik geçildi, çağrılar servise dokunmadan hızlı başarısız olur" },
+            { "text": "Half-Open — after a cooldown, trial calls test recovery", "textTr": "Half-Open — soğuma sonrası, deneme çağrıları toparlanmayı test eder" },
+            { "text": "Closed again — trials succeed, normal flow resumes", "textTr": "Tekrar Closed — denemeler başarılı, normal akış devam eder" }
+          ],
+          "explanation": "Closed (normal) → Open (trip, fail fast) → Half-Open (probe) → Closed (recovered) or back to Open. This contains cascading failures and enables self-healing.",
+          "explanationTr": "Closed (normal) → Open (at, hızlı başarısız) → Half-Open (yokla) → Closed (toparlandı) ya da tekrar Open. Bu kademeli başarısızlıkları sınırlar ve kendini-iyileştirmeyi sağlar."
+        },
+        {
+          "type": "challenge",
+          "question": "What is the most accepted transaction strategy for microservices?"
+        },
+        {
+          "type": "challenge",
+          "question": "What Is The Circuit Breaker Pattern?"
+        }
+      ]
+    }
+  ]
+}

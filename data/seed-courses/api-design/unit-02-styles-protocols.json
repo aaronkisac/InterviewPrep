@@ -1,0 +1,102 @@
+{
+  "topic": "api-design",
+  "slug": "styles-protocols",
+  "title": "API Styles & Protocols",
+  "titleTr": "API Stilleri ve Protokolleri",
+  "section": "core",
+  "position": 2,
+  "lessons": [
+    {
+      "slug": "rest-graphql-soap",
+      "title": "REST vs GraphQL vs SOAP",
+      "titleTr": "REST vs GraphQL vs SOAP",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Three ways to expose an API",
+          "titleTr": "Bir API'yi sunmanın üç yolu",
+          "body": "**REST vs GraphQL:**\n- **REST** exposes **multiple endpoints, one per resource**, and you get whatever each returns. Simple, cacheable (HTTP caching works on URLs), but prone to **over-fetching** (you get fields you don't need) and **under-fetching** (you must call several endpoints to assemble a view — N requests).\n- **GraphQL** exposes a **single endpoint** with a **typed schema**; the client sends a **query specifying exactly the fields it needs**, and gets back exactly that — solving over/under-fetching and avoiding multiple round-trips. Trade-offs: HTTP caching is harder (one URL, POST queries), you can hit **N+1** and expensive nested queries server-side, and it adds schema/tooling complexity.\n\nRule: REST for simple, cacheable, resource-style APIs; GraphQL when clients need **flexible, precise data shapes** (e.g. varied mobile/web screens).\n\n**SOAP vs REST:**\n- **SOAP** is a **strict, XML-based protocol** with a formal contract (**WSDL**), built-in standards for security/transactions (WS-*), and works over multiple transports. It's **heavyweight, verbose, rigid** — common in enterprise/legacy/banking where formal contracts and strict standards matter.\n- **REST** is an **architectural style** (not a protocol) over HTTP, typically **JSON**, lightweight and flexible. It's easier to use, cache, and consume from browsers/mobile.\n\nSo SOAP = formal, XML, protocol with heavy standards; REST = lightweight, JSON, HTTP-native style. Most modern web/mobile APIs use REST (or GraphQL); SOAP persists where strict contracts/enterprise standards are required.",
+          "bodyTr": "**REST vs GraphQL:**\n- **REST** **birden çok endpoint** sunar, kaynak başına bir tane ve her birinin döndürdüğünü alırsın. Basit, önbelleklenebilir (HTTP caching URL'lerde çalışır) ama **over-fetching**'e (ihtiyacın olmayan alanları alırsın) ve **under-fetching**'e (bir görünüm oluşturmak için birkaç endpoint çağırmalısın — N istek) eğilimlidir.\n- **GraphQL** **tek bir endpoint** ile **tipli bir şema** sunar; istemci **tam olarak ihtiyaç duyduğu alanları belirten bir query** gönderir ve tam olarak onu geri alır — over/under-fetching'i çözer ve birden çok round-trip'ten kaçınır. Ödünler: HTTP caching daha zordur (tek URL, POST query'ler), sunucu tarafında **N+1**'e ve pahalı iç içe query'lere çarpabilirsin ve şema/araç karmaşıklığı ekler.\n\nKural: basit, önbelleklenebilir, kaynak-stili API'ler için REST; istemciler **esnek, kesin veri şekilleri** gerektirdiğinde GraphQL (örn. çeşitli mobil/web ekranları).\n\n**SOAP vs REST:**\n- **SOAP**, resmi bir sözleşmeli (**WSDL**), güvenlik/transaction için yerleşik standartlı (WS-*) ve birden çok transport üzerinde çalışan **katı, XML-tabanlı bir protokoldür**. **Ağır, ayrıntılı, katıdır** — resmi sözleşmelerin ve katı standartların önemli olduğu kurumsal/legacy/bankacılıkta yaygın.\n- **REST**, HTTP üzerinde bir **mimari stildir** (protokol değil), tipik olarak **JSON**, hafif ve esnek. Kullanması, cache'lemesi ve tarayıcılardan/mobilden tüketmesi daha kolay.\n\nYani SOAP = resmi, XML, ağır standartlı protokol; REST = hafif, JSON, HTTP-native stil. Çoğu modern web/mobil API REST (ya da GraphQL) kullanır; SOAP, katı sözleşmelerin/kurumsal standartların gerektiği yerde devam eder."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What problem does GraphQL solve compared to REST?",
+          "promptTr": "GraphQL, REST'e kıyasla hangi sorunu çözer?",
+          "options": [
+            { "text": "Over-/under-fetching — clients request exactly the fields they need from one endpoint, avoiding multiple round-trips", "textTr": "Over-/under-fetching — istemciler tek bir endpoint'ten tam olarak ihtiyaç duydukları alanları ister, birden çok round-trip'ten kaçınır", "correct": true },
+            { "text": "It makes HTTP caching trivially easy", "textTr": "HTTP caching'i kolayca yapar" },
+            { "text": "It removes the need for a schema", "textTr": "Şema ihtiyacını ortadan kaldırır" },
+            { "text": "It only works with XML", "textTr": "Yalnızca XML'le çalışır" }
+          ],
+          "explanation": "GraphQL's typed single endpoint lets clients fetch exactly the data they need in one request. Trade-offs: harder HTTP caching, possible N+1, more tooling/schema complexity.",
+          "explanationTr": "GraphQL'in tipli tek endpoint'i istemcilerin tek istekte tam ihtiyaç duydukları veriyi almasını sağlar. Ödünler: daha zor HTTP caching, olası N+1, daha fazla araç/şema karmaşıklığı."
+        },
+        {
+          "type": "true_false",
+          "statement": "SOAP is a strict XML-based protocol with a formal contract (WSDL), while REST is a lightweight architectural style typically using JSON over HTTP.",
+          "statementTr": "SOAP resmi sözleşmeli (WSDL) katı XML-tabanlı bir protokoldür, REST ise tipik olarak HTTP üzerinden JSON kullanan hafif bir mimari stildir.",
+          "answer": true,
+          "explanation": "SOAP = heavyweight, XML, formal standards (enterprise/legacy). REST = lightweight, JSON, HTTP-native, flexible — dominant for modern web/mobile.",
+          "explanationTr": "SOAP = ağır, XML, resmi standartlar (kurumsal/legacy). REST = hafif, JSON, HTTP-native, esnek — modern web/mobil için baskın."
+        },
+        {
+          "type": "challenge",
+          "question": "What Is The Difference Between REST And GraphQL?"
+        },
+        {
+          "type": "challenge",
+          "question": "What Is The Difference Between SOAP And REST?"
+        }
+      ]
+    },
+    {
+      "slug": "trpc-sync-async-content-negotiation",
+      "title": "tRPC, sync vs async APIs & content negotiation",
+      "titleTr": "tRPC, sync vs async API'ler ve content negotiation",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Typed RPC, timing models, and formats",
+          "titleTr": "Tipli RPC, zamanlama modelleri ve formatlar",
+          "body": "**tRPC** is a TypeScript library for building **end-to-end typesafe APIs without a schema or code generation**. You define procedures on the server (queries/mutations); the client **infers their types directly from the server's TypeScript types**, so calling an API feels like calling a typed function — with autocomplete and compile-time errors if the contract changes. **How it changes API design for TS projects:** no REST endpoints, OpenAPI, or GraphQL schema to maintain; the types *are* the contract, shared across a TypeScript monorepo (great with Next.js). Trade-off: it's **TypeScript-only and tightly couples client and server** (same codebase/types), so it's ideal for internal full-stack TS apps, **not** public/multi-language APIs (use REST/GraphQL there).\n\n**Synchronous vs asynchronous APIs:**\n- A **synchronous API** returns the **result in the same request/response** — the client waits (blocks) until the work is done (typical REST GET/POST). Simple and immediate, but bad for long-running work (timeouts, tied-up connections).\n- An **asynchronous API** **accepts the request and returns immediately** (often `202 Accepted` with a job id), doing the work in the background; the client later **polls a status endpoint, gets a webhook/callback, or subscribes** for the result. Better for long-running/heavy tasks and decoupling, at the cost of complexity.\n\n**Content Negotiation** is the HTTP mechanism by which **client and server agree on the best representation** of a resource. The client sends headers stating its preferences — **`Accept`** (media type: `application/json` vs `application/xml`), **`Accept-Language`**, **`Accept-Encoding`** (gzip/br) — and the server picks a matching representation and responds with the corresponding **`Content-Type`** (and `Content-Language` etc.). It lets one endpoint serve multiple formats/languages based on what the client asks for, rather than baking the format into the URL.",
+          "bodyTr": "**tRPC**, **şema ya da kod üretimi olmadan uçtan-uca tip-güvenli API'ler** kurmak için bir TypeScript kütüphanesidir. Sunucuda procedure'lar tanımlarsın (query/mutation'lar); istemci **tiplerini doğrudan sunucunun TypeScript tiplerinden çıkarır**, böylece bir API çağırmak tipli bir fonksiyon çağırmak gibi hissettirir — sözleşme değişirse otomatik tamamlama ve derleme-zamanı hatalarıyla. **TS projeleri için API tasarımını nasıl değiştirir:** sürdürülecek REST endpoint'leri, OpenAPI ya da GraphQL şeması yok; tipler sözleşmenin ta *kendisidir*, bir TypeScript monorepo'sunda paylaşılır (Next.js ile harika). Ödün: **yalnızca-TypeScript'tir ve istemci ile sunucuyu sıkı bağlar** (aynı kod tabanı/tipler), bu yüzden iç full-stack TS uygulamaları için ideal, **public/çok-dilli API'ler için değil** (orada REST/GraphQL kullan).\n\n**Senkron vs asenkron API'ler:**\n- Bir **senkron API**, **sonucu aynı request/response'ta** döndürür — istemci iş bitene kadar bekler (bloklar) (tipik REST GET/POST). Basit ve anlık ama uzun-süren iş için kötü (timeout'lar, bağlı kalan bağlantılar).\n- Bir **asenkron API**, **isteği kabul eder ve hemen döner** (genelde bir job id ile `202 Accepted`), işi arka planda yapar; istemci sonra sonuç için **bir status endpoint'i poll'lar, bir webhook/callback alır ya da abone olur**. Uzun-süren/ağır görevler ve ayırma için daha iyi, karmaşıklık pahasına.\n\n**Content Negotiation**, **istemci ve sunucunun bir kaynağın en iyi temsili üzerinde anlaştığı** HTTP mekanizmasıdır. İstemci tercihlerini belirten başlıklar gönderir — **`Accept`** (medya tipi: `application/json` vs `application/xml`), **`Accept-Language`**, **`Accept-Encoding`** (gzip/br) — ve sunucu eşleşen bir temsil seçip karşılık gelen **`Content-Type`** ile (ve `Content-Language` vb.) yanıt verir. Formatı URL'ye gömmek yerine, tek bir endpoint'in istemcinin istediğine göre birden çok format/dil sunmasını sağlar."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What makes tRPC distinctive?",
+          "promptTr": "tRPC'yi ayırt edici kılan nedir?",
+          "options": [
+            { "text": "End-to-end TypeScript type safety without a separate schema/codegen — the server's types are the client's contract", "textTr": "Ayrı bir şema/codegen olmadan uçtan-uca TypeScript tip güvenliği — sunucunun tipleri istemcinin sözleşmesidir", "correct": true },
+            { "text": "It's a language-agnostic protocol like SOAP", "textTr": "SOAP gibi dilden bağımsız bir protokoldür" },
+            { "text": "It requires an XML schema", "textTr": "Bir XML şeması gerektirir" },
+            { "text": "It only works for public third-party APIs", "textTr": "Yalnızca public üçüncü-taraf API'ler için çalışır" }
+          ],
+          "explanation": "tRPC infers client types from server TS types — no schema/codegen. Great for internal full-stack TS (e.g. Next.js monorepos), but TS-only and tightly coupled, so not for public/multi-language APIs.",
+          "explanationTr": "tRPC istemci tiplerini sunucu TS tiplerinden çıkarır — şema/codegen yok. İç full-stack TS için harika (örn. Next.js monorepo'ları) ama yalnızca-TS ve sıkı bağlı, bu yüzden public/çok-dilli API'ler için değil."
+        },
+        {
+          "type": "true_false",
+          "statement": "Content negotiation lets a client and server agree on the response format/language via headers like Accept, so one endpoint can serve multiple representations.",
+          "statementTr": "Content negotiation, istemci ve sunucunun Accept gibi başlıklarla yanıt formatı/dili üzerinde anlaşmasını sağlar, böylece tek bir endpoint birden çok temsil sunabilir.",
+          "answer": true,
+          "explanation": "The client states preferences (Accept, Accept-Language, Accept-Encoding); the server returns a matching representation with the right Content-Type — no format in the URL needed.",
+          "explanationTr": "İstemci tercihleri belirtir (Accept, Accept-Language, Accept-Encoding); sunucu doğru Content-Type ile eşleşen bir temsil döndürür — URL'de format gerekmez."
+        },
+        {
+          "type": "challenge",
+          "question": "What Is tRPC And How Does It Change API Design For TypeScript Projects?"
+        },
+        {
+          "type": "challenge",
+          "question": "What Is The Difference Between Synchronous And Asynchronous APIs?"
+        },
+        {
+          "type": "challenge",
+          "question": "What Is Content Negotiation In HTTP?"
+        }
+      ]
+    }
+  ]
+}

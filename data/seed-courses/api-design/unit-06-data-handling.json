@@ -1,0 +1,186 @@
+{
+  "topic": "api-design",
+  "slug": "data-handling",
+  "title": "Data Handling & Performance",
+  "titleTr": "Veri İşleme ve Performans",
+  "section": "advanced",
+  "position": 6,
+  "lessons": [
+    {
+      "slug": "pagination-and-errors",
+      "title": "Pagination & consistent error handling",
+      "titleTr": "Pagination ve tutarlı hata işleme",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Returning big lists and clear errors",
+          "titleTr": "Büyük listeler ve net hatalar döndürmek",
+          "body": "**Designing pagination for a REST API:** never return an unbounded list — break it into pages. Approaches:\n- **Offset/limit (page-based)** — `?page=2&limit=20` or `?offset=40&limit=20`. Simple and supports jumping to any page, but **slow on large offsets** and **unstable** if items are inserted/deleted (items shift between pages → duplicates/skips).\n- **Cursor/keyset pagination** — `?limit=20&cursor=<opaque>` (e.g. based on a stable sort key/id). The client passes the cursor from the previous page; the server returns the next slice. **Efficient and stable** under inserts/deletes — preferred for large or frequently-changing datasets and infinite scroll. Downside: can't jump to an arbitrary page.\nAlways return **metadata** (total count where feasible, next/prev cursors or links — HATEOAS-style), use sensible **default and max page sizes**, and keep ordering deterministic.\n\n**Handling API errors consistently:** use a **uniform, predictable error format** across the whole API so clients can handle errors generically. Best practices: return the **correct HTTP status code** (4xx client, 5xx server) — don't return `200` with an error body; use a **consistent JSON error shape** (e.g. `{ \"error\": { \"code\": \"VALIDATION_ERROR\", \"message\": \"...\", \"details\": [...] } }`); include a **machine-readable error code** plus a human message and, for validation, **field-level details**; add a **request/correlation id** for tracing; **don't leak** stack traces or internal details to clients (log them server-side); and document the error formats. A central **error-handling middleware** maps exceptions to this shape so it's consistent everywhere. Consistency lets clients write one error handler instead of special-casing each endpoint.",
+          "bodyTr": "**Bir REST API için pagination tasarlamak:** asla sınırsız bir liste döndürme — onu sayfalara böl. Yaklaşımlar:\n- **Offset/limit (sayfa-tabanlı)** — `?page=2&limit=20` ya da `?offset=40&limit=20`. Basit ve herhangi bir sayfaya atlamayı destekler ama **büyük offset'lerde yavaş** ve öğeler eklenirse/silinirse **kararsız** (öğeler sayfalar arası kayar → yinelenenler/atlamalar).\n- **Cursor/keyset pagination** — `?limit=20&cursor=<opaque>` (örn. kararlı bir sıralama anahtarına/id'ye dayalı). İstemci önceki sayfadan cursor'ı geçirir; sunucu sonraki dilimi döndürür. Eklemeler/silmeler altında **verimli ve kararlı** — büyük ya da sık-değişen veri kümeleri ve infinite scroll için tercih edilir. Dezavantajı: rastgele bir sayfaya atlanamaz.\nHer zaman **metadata** döndür (uygun olduğunda toplam sayı, next/prev cursor'lar ya da link'ler — HATEOAS-tarzı), makul **varsayılan ve maksimum sayfa boyutları** kullan ve sıralamayı deterministik tut.\n\n**API hatalarını tutarlı işlemek:** tüm API genelinde **tekdüze, öngörülebilir bir hata formatı** kullan, böylece istemciler hataları jenerik ele alabilsin. En iyi pratikler: **doğru HTTP durum kodunu** döndür (4xx istemci, 5xx sunucu) — hata gövdesiyle `200` döndürme; **tutarlı bir JSON hata şekli** kullan (örn. `{ \"error\": { \"code\": \"VALIDATION_ERROR\", \"message\": \"...\", \"details\": [...] } }`); **makine-okunabilir bir hata kodu** artı insan mesajı ve doğrulama için **alan-seviyesi detaylar** ekle; izleme için bir **request/correlation id** ekle; stack trace'leri ya da iç detayları istemcilere **sızdırma** (sunucu-tarafında logla); ve hata formatlarını belgele. Merkezi bir **hata-işleme middleware'i** exception'ları bu şekle eşler, böylece her yerde tutarlıdır. Tutarlılık, istemcilerin her endpoint'i özel-durumlamak yerine tek bir hata işleyici yazmasını sağlar."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Why is cursor/keyset pagination often preferred over offset/limit for large datasets?",
+          "promptTr": "Büyük veri kümeleri için cursor/keyset pagination neden genelde offset/limit'e tercih edilir?",
+          "options": [
+            { "text": "It's efficient at scale and stable under inserts/deletes (no shifting/duplicates), unlike large offsets", "textTr": "Ölçekte verimlidir ve eklemeler/silmeler altında kararlıdır (kayma/yinelenme yok), büyük offset'lerin aksine", "correct": true },
+            { "text": "It lets you jump to any arbitrary page easily", "textTr": "Herhangi bir rastgele sayfaya kolayca atlamanı sağlar" },
+            { "text": "Offset pagination can't be used in REST", "textTr": "Offset pagination REST'te kullanılamaz" },
+            { "text": "They are identical", "textTr": "Aynılar" }
+          ],
+          "explanation": "Large offsets are slow and shift when data changes (duplicates/skips). Cursors anchor to a stable key — fast and consistent — but can't jump to an arbitrary page.",
+          "explanationTr": "Büyük offset'ler yavaştır ve veri değişince kayar (yinelenme/atlama). Cursor'lar kararlı bir anahtara sabitlenir — hızlı ve tutarlı — ama rastgele bir sayfaya atlayamaz."
+        },
+        {
+          "type": "true_false",
+          "statement": "Consistent error handling means using correct HTTP status codes and a uniform JSON error shape with a machine-readable code, not returning 200 with an error body.",
+          "statementTr": "Tutarlı hata işleme, doğru HTTP durum kodları ve makine-okunabilir kodlu tekdüze bir JSON hata şekli kullanmak demektir, hata gövdesiyle 200 döndürmek değil.",
+          "answer": true,
+          "explanation": "A predictable error envelope (status code + code + message + details + correlation id), without leaking internals, lets clients handle all errors generically.",
+          "explanationTr": "Öngörülebilir bir hata zarfı (durum kodu + kod + mesaj + detaylar + correlation id), iç detayları sızdırmadan, istemcilerin tüm hataları jenerik ele almasını sağlar."
+        },
+        {
+          "type": "challenge",
+          "question": "How Do You Design Pagination For A REST API?"
+        },
+        {
+          "type": "challenge",
+          "question": "How Do You Handle API Errors Consistently?"
+        }
+      ]
+    },
+    {
+      "slug": "caching-and-n-plus-one",
+      "title": "Caching & the N+1 problem",
+      "titleTr": "Caching ve N+1 problemi",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Serving faster and avoiding query storms",
+          "titleTr": "Daha hızlı sunmak ve sorgu fırtınalarından kaçınmak",
+          "body": "**Implementing caching in a REST API** — at several levels:\n- **HTTP caching** — use response headers so clients/proxies/CDNs can cache: **`Cache-Control`** (max-age, public/private, no-store), **`ETag`** + conditional `If-None-Match` (server returns **`304 Not Modified`** if unchanged — saves bandwidth), and `Last-Modified`/`If-Modified-Since`. Great for GETs on cacheable resources.\n- **Server-side / application caching** — store computed results or hot data in an in-memory cache (**Redis/Memcached**) keyed by request/query, with TTLs.\n- **CDN/edge caching** — cache responses geographically near users.\n- **Database/query caching** — cache expensive query results.\nKey concerns: only cache **safe/idempotent (GET)** responses, choose **TTLs** wisely, and have an **invalidation strategy** (TTL expiry, event-based purge, or versioned keys) so stale data doesn't persist. Caching is the biggest lever for API performance and offloading the backend.\n\n**The N+1 problem** is a performance anti-pattern where, to return a list, the code runs **1 query to fetch N items, then N more queries** — one per item — to fetch each item's related data (e.g. fetch 100 posts, then 100 separate queries for each post's author). That's **N+1 queries** instead of a couple, causing huge latency and DB load that worsens with list size. **Fixes:** **eager loading / JOINs** (fetch posts with their authors in one query), **batching** (collect the N ids and fetch all related rows in a single `WHERE id IN (...)` query — the **DataLoader** pattern, common in GraphQL to coalesce per-item lookups), and **caching**. The principle: **fetch related data in bulk**, not one row at a time in a loop. It's a classic ORM/GraphQL pitfall to watch for.",
+          "bodyTr": "**Bir REST API'de caching uygulamak** — birkaç seviyede:\n- **HTTP caching** — yanıt başlıkları kullan ki istemciler/proxy'ler/CDN'ler cache'leyebilsin: **`Cache-Control`** (max-age, public/private, no-store), **`ETag`** + koşullu `If-None-Match` (sunucu değişmemişse **`304 Not Modified`** döndürür — bant genişliği tasarrufu) ve `Last-Modified`/`If-Modified-Since`. Önbelleklenebilir kaynaklardaki GET'ler için harika.\n- **Sunucu-tarafı / application caching** — hesaplanmış sonuçları ya da sıcak veriyi istek/sorguyla anahtarlanmış bir bellek-içi cache'te (**Redis/Memcached**), TTL'lerle sakla.\n- **CDN/edge caching** — yanıtları kullanıcılara coğrafi yakın cache'le.\n- **Veritabanı/sorgu caching** — pahalı sorgu sonuçlarını cache'le.\nTemel endişeler: yalnızca **güvenli/idempotent (GET)** yanıtları cache'le, **TTL'leri** akıllıca seç ve bir **invalidation stratejisi** (TTL sona erme, event-tabanlı purge ya da versiyonlu anahtarlar) bulundur ki bayat veri kalmasın. Caching, API performansı ve backend'i boşaltmak için en büyük kaldıraçtır.\n\n**N+1 problemi**, bir liste döndürmek için kodun **N öğe almak için 1 sorgu, sonra N sorgu daha** çalıştırdığı bir performans anti-pattern'idir — öğe başına bir tane — her öğenin ilişkili verisini almak için (örn. 100 gönderi al, sonra her gönderinin yazarı için 100 ayrı sorgu). Bu, birkaç yerine **N+1 sorgudur**, liste boyutuyla kötüleşen büyük gecikme ve DB yüküne neden olur. **Çözümler:** **eager loading / JOIN'ler** (gönderileri yazarlarıyla tek sorguda al), **batching** (N id'yi topla ve tüm ilişkili satırları tek bir `WHERE id IN (...)` sorgusunda al — **DataLoader** pattern'i, GraphQL'de öğe-başına aramaları birleştirmek için yaygın) ve **caching**. İlke: ilişkili veriyi bir döngüde teker teker değil **toplu al**. Dikkat edilecek klasik bir ORM/GraphQL tuzağıdır."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What is the N+1 problem and how is it typically fixed?",
+          "promptTr": "N+1 problemi nedir ve tipik olarak nasıl düzeltilir?",
+          "options": [
+            { "text": "1 query for a list + N queries for each item's relations; fix with eager loading/JOINs or batching (e.g. WHERE id IN (...), DataLoader)", "textTr": "Liste için 1 sorgu + her öğenin ilişkileri için N sorgu; eager loading/JOIN ya da batching ile düzelt (örn. WHERE id IN (...), DataLoader)", "correct": true },
+            { "text": "Running too few queries; fix by adding more", "textTr": "Çok az sorgu çalıştırmak; daha fazla ekleyerek düzelt" },
+            { "text": "A caching header bug", "textTr": "Bir caching başlığı hatası" },
+            { "text": "An authentication failure", "textTr": "Bir kimlik doğrulama başarısızlığı" }
+          ],
+          "explanation": "N+1 = a loop issuing one query per item for related data. Fix by fetching relations in bulk: JOIN/eager load or batch the ids into a single query (DataLoader in GraphQL).",
+          "explanationTr": "N+1 = ilişkili veri için öğe başına bir sorgu atan bir döngü. İlişkileri toplu alarak düzelt: JOIN/eager load ya da id'leri tek sorguda batch'le (GraphQL'de DataLoader)."
+        },
+        {
+          "type": "true_false",
+          "statement": "ETags with conditional requests let a server return 304 Not Modified, saving bandwidth when a cached resource hasn't changed.",
+          "statementTr": "Koşullu isteklerle ETag'ler, bir sunucunun 304 Not Modified döndürmesini sağlar, önbellekli bir kaynak değişmediğinde bant genişliği tasarrufu sağlar.",
+          "answer": true,
+          "explanation": "The client sends If-None-Match with the ETag; if unchanged, the server replies 304 with no body — the client reuses its cached copy. Part of HTTP caching alongside Cache-Control.",
+          "explanationTr": "İstemci ETag ile If-None-Match gönderir; değişmemişse sunucu gövdesiz 304 yanıtı verir — istemci önbellekli kopyasını yeniden kullanır. Cache-Control'ün yanında HTTP caching'in parçası."
+        },
+        {
+          "type": "challenge",
+          "question": "How Do You Implement Caching In A REST API?"
+        },
+        {
+          "type": "challenge",
+          "question": "What Is The N+1 Problem In APIs And How Do You Fix It?"
+        }
+      ]
+    },
+    {
+      "slug": "uploads-and-validation",
+      "title": "File uploads & request validation",
+      "titleTr": "Dosya yüklemeleri ve istek doğrulama",
+      "position": 3,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Receiving files and trusting input",
+          "titleTr": "Dosya almak ve girdiye güvenmek",
+          "body": "**Handling file uploads in a REST API:** common approaches:\n- **`multipart/form-data`** — the standard way to POST a file (plus fields) directly to your API; the server streams it to storage.\n- **Pre-signed URLs (recommended at scale)** — the client asks your API for a **time-limited signed URL** and uploads the file **directly to object storage (S3/GCS)**, bypassing your server. This offloads bandwidth/CPU from your API and scales much better for large files.\n- **Chunked / resumable uploads** for very large files (tus, multipart S3) to survive interruptions.\nKey concerns: enforce **size limits**, **validate file type/content** (don't trust the extension/MIME — check magic bytes), **scan for malware**, generate safe/random filenames, store outside the web root or in object storage, and **stream** rather than buffering whole files in memory. Return a reference (URL/id) to the stored file.\n\n**Validating API request bodies:** **never trust client input** — validate **at the boundary** before it touches business logic. Best practices: **validate against a schema** (JSON Schema, or libraries like **Zod/Joi/class-validator**) checking types, required fields, formats (email, ranges), and constraints; reject invalid requests early with **`400 Bad Request`** (or `422 Unprocessable Entity`) and a **clear, field-level error response**; **sanitise** input to prevent injection (SQL/NoSQL/XSS); guard against **mass assignment** (only accept allowed fields, don't blindly bind to your model); and apply the same validation consistently (often via middleware). Validation is both a **correctness** and a **security** measure — it's the API's first line of defence.",
+          "bodyTr": "**Bir REST API'de dosya yüklemelerini ele alma:** yaygın yaklaşımlar:\n- **`multipart/form-data`** — bir dosyayı (artı alanları) doğrudan API'ne POST etmenin standart yolu; sunucu onu depolamaya stream eder.\n- **Pre-signed URL'ler (ölçekte önerilir)** — istemci API'nden **zaman-sınırlı imzalı bir URL** ister ve dosyayı sunucunu atlayarak **doğrudan object storage'a (S3/GCS)** yükler. Bu, API'nden bant genişliği/CPU'yu boşaltır ve büyük dosyalar için çok daha iyi ölçeklenir.\n- Kesintilerden sağ çıkmak için çok büyük dosyalar için **chunked / resumable upload'lar** (tus, multipart S3).\nTemel endişeler: **boyut limitleri** uygula, **dosya tipini/içeriğini doğrula** (uzantıya/MIME'ye güvenme — magic byte'ları kontrol et), **malware tara**, güvenli/rastgele dosya adları üret, web root dışında ya da object storage'da sakla ve tüm dosyaları bellekte buffer'lamak yerine **stream** et. Saklanan dosyaya bir referans (URL/id) döndür.\n\n**API istek gövdelerini doğrulama:** **istemci girdisine asla güvenme** — iş mantığına dokunmadan önce **sınırda** doğrula. En iyi pratikler: tip, zorunlu alan, format (email, aralık) ve kısıtları kontrol eden bir **şemaya karşı doğrula** (JSON Schema ya da **Zod/Joi/class-validator** gibi kütüphaneler); geçersiz istekleri **`400 Bad Request`** (ya da `422 Unprocessable Entity`) ve **net, alan-seviyesi hata yanıtıyla** erken reddet; injection'ı önlemek için girdiyi **sanitize et** (SQL/NoSQL/XSS); **mass assignment'a** karşı koru (yalnızca izinli alanları kabul et, modeline körü körüne bind etme); ve aynı doğrulamayı tutarlı uygula (genelde middleware ile). Doğrulama hem bir **doğruluk** hem bir **güvenlik** önlemidir — API'nin ilk savunma hattıdır."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Why use pre-signed URLs for large file uploads?",
+          "promptTr": "Büyük dosya yüklemeleri için neden pre-signed URL kullanılır?",
+          "options": [
+            { "text": "The client uploads directly to object storage, offloading bandwidth/CPU from your API and scaling better", "textTr": "İstemci doğrudan object storage'a yükler, API'nden bant genişliği/CPU boşaltır ve daha iyi ölçeklenir", "correct": true },
+            { "text": "They make the file smaller", "textTr": "Dosyayı küçültürler" },
+            { "text": "They remove the need to validate file type", "textTr": "Dosya tipini doğrulama ihtiyacını ortadan kaldırırlar" },
+            { "text": "They only work for text files", "textTr": "Yalnızca metin dosyaları için çalışırlar" }
+          ],
+          "explanation": "A pre-signed URL lets the client PUT the file straight to S3/GCS (time-limited, authorised), so your API server isn't a bandwidth bottleneck — ideal for large files at scale.",
+          "explanationTr": "Pre-signed URL, istemcinin dosyayı doğrudan S3/GCS'e PUT etmesini sağlar (zaman-sınırlı, yetkili), böylece API sunucun bir bant genişliği darboğazı olmaz — ölçekte büyük dosyalar için ideal."
+        },
+        {
+          "type": "true_false",
+          "statement": "Request body validation should reject invalid input at the boundary (e.g. 400) and guard against mass assignment by only accepting allowed fields.",
+          "statementTr": "İstek gövdesi doğrulaması geçersiz girdiyi sınırda reddetmeli (örn. 400) ve yalnızca izinli alanları kabul ederek mass assignment'a karşı korumalı.",
+          "answer": true,
+          "explanation": "Validate against a schema, reject early with clear field errors, sanitise to prevent injection, and never blindly bind input to your model (mass assignment) — correctness + security.",
+          "explanationTr": "Bir şemaya karşı doğrula, net alan hatalarıyla erken reddet, injection'ı önlemek için sanitize et ve girdiyi modeline asla körü körüne bind etme (mass assignment) — doğruluk + güvenlik."
+        },
+        {
+          "type": "challenge",
+          "question": "How Do You Handle File Uploads In A REST API?"
+        },
+        {
+          "type": "challenge",
+          "question": "How Do You Validate API Request Bodies?"
+        }
+      ]
+    },
+    {
+      "slug": "search-and-long-running",
+      "title": "Search APIs & long-running operations",
+      "titleTr": "Arama API'leri ve uzun-süren işlemler",
+      "position": 4,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Querying flexibly and handling slow work",
+          "titleTr": "Esnek sorgulama ve yavaş işi ele alma",
+          "body": "**Designing a search API:** expose search via a clear endpoint (e.g. `GET /search?q=...` or resource-scoped `GET /products?q=...`) and support the features users expect: **full-text query** (`q`), **filters** (faceted: `?category=books&minPrice=10`), **sorting** (`?sort=price:asc`), and **pagination** (cursor-based for large result sets). Considerations: return **relevance-ranked** results (back it with a search engine like **Elasticsearch/OpenSearch/Algolia** rather than `LIKE` queries for scale and ranking), support **partial matching/typo tolerance/highlighting/facets**, **debounce** and **rate-limit** (search is expensive), **cache** popular queries, and keep responses paginated with metadata. Use **GET** so searches are cacheable/shareable; if the query is huge/complex, a `POST /search` with a body is acceptable. Keep the query language simple and documented.\n\n**Handling long-running operations in a REST API:** don't block the client on a slow synchronous request (timeouts, tied-up connections). Use the **asynchronous request-reply pattern**: \n1. The client `POST`s the request; the server **starts the work in the background** and immediately returns **`202 Accepted`** with a **job/operation id** and a status URL (e.g. `Location: /jobs/123`).\n2. The client tracks progress by **polling** `GET /jobs/123` (returns `pending`/`running`/`completed` + result link), **or** the server notifies via a **webhook/callback**, **or** the client subscribes (WebSocket/SSE) for completion.\n3. When done, the result is available at a resource URL.\nThis frees the connection, survives long durations, and lets you scale the workers independently (often via a queue). The principle: **accept fast, process async, report status** — never hold an HTTP request open for minutes.",
+          "bodyTr": "**Bir arama API'si tasarlama:** aramayı net bir endpoint ile sun (örn. `GET /search?q=...` ya da kaynak-kapsamlı `GET /products?q=...`) ve kullanıcıların beklediği özellikleri destekle: **full-text query** (`q`), **filtreler** (faceted: `?category=books&minPrice=10`), **sıralama** (`?sort=price:asc`) ve **pagination** (büyük sonuç kümeleri için cursor-tabanlı). Dikkat edilecekler: **relevance-sıralı** sonuçlar döndür (ölçek ve sıralama için `LIKE` sorguları yerine **Elasticsearch/OpenSearch/Algolia** gibi bir arama motoruyla destekle), **kısmi eşleşme/yazım toleransı/highlighting/facet** destekle, **debounce** ve **rate-limit** et (arama pahalıdır), popüler sorguları **cache'le** ve yanıtları metadata ile paginated tut. Aramaların önbelleklenebilir/paylaşılabilir olması için **GET** kullan; sorgu çok büyük/karmaşıksa gövdeli bir `POST /search` kabul edilebilir. Sorgu dilini basit ve belgeli tut.\n\n**Bir REST API'de uzun-süren işlemleri ele alma:** istemciyi yavaş bir senkron istekte bloklama (timeout'lar, bağlı kalan bağlantılar). **Asenkron request-reply pattern'ini** kullan:\n1. İstemci isteği `POST` eder; sunucu **işi arka planda başlatır** ve hemen bir **job/operation id** ve bir status URL'siyle (örn. `Location: /jobs/123`) **`202 Accepted`** döndürür.\n2. İstemci ilerlemeyi `GET /jobs/123` **poll'layarak** izler (`pending`/`running`/`completed` + sonuç linki döndürür), **ya da** sunucu bir **webhook/callback** ile bildirir, **ya da** istemci tamamlanma için abone olur (WebSocket/SSE).\n3. Bittiğinde, sonuç bir kaynak URL'sinde mevcuttur.\nBu bağlantıyı serbest bırakır, uzun sürelerden sağ çıkar ve worker'ları bağımsız ölçeklemene izin verir (genelde bir kuyruk ile). İlke: **hızlı kabul et, async işle, durum raporla** — bir HTTP isteğini asla dakikalarca açık tutma."
+        },
+        {
+          "type": "mcq",
+          "prompt": "How should a REST API handle a long-running operation?",
+          "promptTr": "Bir REST API uzun-süren bir işlemi nasıl ele almalı?",
+          "options": [
+            { "text": "Accept it and return 202 with a job id/status URL; do the work async; the client polls or gets a webhook for the result", "textTr": "Kabul et ve bir job id/status URL'siyle 202 döndür; işi async yap; istemci poll'lar ya da sonuç için bir webhook alır", "correct": true },
+            { "text": "Hold the HTTP request open for several minutes until done", "textTr": "Bitene kadar HTTP isteğini birkaç dakika açık tut" },
+            { "text": "Reject all slow operations with 500", "textTr": "Tüm yavaş işlemleri 500 ile reddet" },
+            { "text": "Run it synchronously and hope it finishes before timeout", "textTr": "Senkron çalıştır ve timeout'tan önce bitmesini um" }
+          ],
+          "explanation": "Async request-reply: 202 Accepted + job id, process in the background (often via a queue), and report status via polling, webhook, or subscription — never block the connection for minutes.",
+          "explanationTr": "Async request-reply: 202 Accepted + job id, arka planda işle (genelde bir kuyruk ile) ve durumu polling, webhook ya da abonelikle raporla — bağlantıyı asla dakikalarca bloklama."
+        },
+        {
+          "type": "true_false",
+          "statement": "A search API should typically support full-text query, filters, sorting, and pagination, ideally backed by a search engine for relevance and scale.",
+          "statementTr": "Bir arama API'si tipik olarak full-text query, filtreler, sıralama ve pagination desteklemeli, ideal olarak relevance ve ölçek için bir arama motoruyla desteklenmeli.",
+          "answer": true,
+          "explanation": "Search needs q + facets/filters + sort + pagination, relevance ranking (Elasticsearch/Algolia over LIKE), plus rate limiting and caching since it's expensive. Use GET for cacheable/shareable searches.",
+          "explanationTr": "Arama q + facet/filtre + sıralama + pagination, relevance sıralama (LIKE yerine Elasticsearch/Algolia), artı pahalı olduğundan rate limiting ve caching gerektirir. Önbelleklenebilir/paylaşılabilir aramalar için GET kullan."
+        },
+        {
+          "type": "challenge",
+          "question": "How Do You Design A Search API?"
+        },
+        {
+          "type": "challenge",
+          "question": "How Do You Handle Long-Running Operations In A REST API?"
+        }
+      ]
+    }
+  ]
+}

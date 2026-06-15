@@ -1,0 +1,155 @@
+{
+  "topic": "software-architecture",
+  "slug": "resilience-concurrency",
+  "title": "Resilience & Concurrency",
+  "titleTr": "Direnç ve Eşzamanlılık",
+  "section": "interview",
+  "position": 11,
+  "lessons": [
+    {
+      "slug": "fault-tolerance-resilience",
+      "title": "Fault tolerance, resilience & failure vs error",
+      "titleTr": "Hata toleransı, direnç ve failure vs error",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Coping with things going wrong",
+          "titleTr": "Bir şeylerin ters gitmesiyle başa çıkmak",
+          "body": "**Fault Tolerance vs Fault Resilience** — related but distinct:\n\n- **Fault Tolerance** is the ability of a system to **keep operating *correctly* despite faults** — ideally with no visible impact. It's usually achieved through **redundancy** (replicas, failover, RAID) so a failed component is masked. The goal: the fault doesn't degrade service.\n- **Fault Resilience** is the broader ability to **withstand, adapt to, and recover from faults gracefully** — the system may **degrade** but stays functional and bounces back. Resilience emphasises **recovery and graceful degradation** (circuit breakers, retries, bulkheads, self-healing), not necessarily masking the fault entirely.\n\nRoughly: fault tolerance = *don't fail (mask the fault, keep running correctly)*; resilience = *fail gracefully and recover*. Tolerance is often a subset/technique within the broader goal of resilience.\n\n**\"A system shall be resilient\"** means it should **stay responsive and recover in the face of failures** rather than crash or hang. A resilient system **contains failures** (isolates them so one part failing doesn't cascade — bulkheads, circuit breakers), **degrades gracefully** (reduced functionality over total outage), **recovers automatically** (retries, restarts, self-healing), and stays **responsive even under stress** (a Reactive Systems trait). It treats failure as expected and designs for it.\n\n**Failure vs Error:** an **error** is a **flaw/deviation** — a mistake or incorrect internal state (a bug, a wrong value, an exception condition) that *may* lead to a problem. A **failure** is when the **system actually fails to deliver its required behaviour** to the outside — the observable malfunction. The chain (per dependability terminology): a **fault** (defect) can cause an **error** (incorrect internal state), which may lead to a **failure** (the service deviates from correct behaviour as observed). So an error is internal/latent; a failure is the manifested, externally-visible breakdown. You can have errors that never become failures (handled/masked) — which is exactly what fault tolerance achieves.",
+          "bodyTr": "**Fault Tolerance vs Fault Resilience** — ilişkili ama ayrı:\n\n- **Fault Tolerance**, bir sistemin **hatalara rağmen *doğru* çalışmaya devam etme** yeteneğidir — ideal olarak görünür etki olmadan. Genelde **redundancy** (replikalar, failover, RAID) yoluyla elde edilir, böylece başarısız bir bileşen maskelenir. Amaç: hata servisi bozmaz.\n- **Fault Resilience**, hatalara **dayanma, uyum sağlama ve onlardan zarif biçimde toparlanma** yönündeki daha geniş yetenektir — sistem **bozulabilir** ama işlevsel kalır ve geri döner. Direnç **toparlanma ve zarif bozulmayı** (circuit breaker, retry, bulkhead, self-healing) vurgular, hatayı tamamen maskelemeyi değil.\n\nKabaca: fault tolerance = *başarısız olma (hatayı maskele, doğru çalışmaya devam et)*; resilience = *zarif başarısız ol ve toparlan*. Tolerance genelde daha geniş direnç hedefi içinde bir alt küme/tekniktir.\n\n**\"Bir sistem dirençli olmalı\"**, çökmek ya da takılmak yerine **başarısızlıklar karşısında duyarlı kalmalı ve toparlanmalı** demektir. Dirençli bir sistem **başarısızlıkları sınırlar** (onları izole eder, böylece bir parçanın başarısız olması yayılmaz — bulkhead'ler, circuit breaker'lar), **zarif bozulur** (tam kesinti yerine azaltılmış işlevsellik), **otomatik toparlanır** (retry, restart, self-healing) ve **stres altında bile duyarlı** kalır (bir Reactive Systems özelliği). Başarısızlığı beklenen olarak ele alır ve onun için tasarlar.\n\n**Failure vs Error:** bir **error**, bir **kusur/sapmadır** — bir soruna *yol açabilecek* bir hata ya da yanlış iç state (bir bug, yanlış bir değer, bir exception durumu). Bir **failure**, **sistemin gerektirdiği davranışı dışarıya gerçekten sunamadığı** durumdur — gözlemlenebilir arıza. Zincir (dependability terminolojisine göre): bir **fault** (kusur) bir **error**'a (yanlış iç state) neden olabilir, bu da bir **failure**'a (servisin gözlemlendiği üzere doğru davranıştan sapması) yol açabilir. Yani error iç/gizlidir; failure tezahür eden, dışarıdan-görünür bozulmadır. Asla failure'a dönüşmeyen error'lara sahip olabilirsin (ele alınmış/maskelenmiş) — ki fault tolerance'ın tam olarak başardığı budur."
+        },
+        {
+          "type": "mcq",
+          "prompt": "How do fault tolerance and resilience differ in emphasis?",
+          "promptTr": "Fault tolerance ve resilience vurguda nasıl farklılaşır?",
+          "options": [
+            { "text": "Tolerance masks faults to keep running correctly (often via redundancy); resilience emphasises graceful degradation and recovery", "textTr": "Tolerance hataları maskeleyerek doğru çalışmaya devam eder (genelde redundancy ile); resilience zarif bozulma ve toparlanmayı vurgular", "correct": true },
+            { "text": "They are identical", "textTr": "Aynılar" },
+            { "text": "Resilience means ignoring all errors", "textTr": "Resilience tüm hataları yok saymak demektir" },
+            { "text": "Tolerance means crashing immediately", "textTr": "Tolerance hemen çökmek demektir" }
+          ],
+          "explanation": "Fault tolerance = keep running correctly despite faults (mask them, e.g. redundancy). Resilience = the broader ability to degrade gracefully and recover. Tolerance is often a technique within resilience.",
+          "explanationTr": "Fault tolerance = hatalara rağmen doğru çalışmaya devam et (onları maskele, örn. redundancy). Resilience = zarif bozulma ve toparlanma yönündeki daha geniş yetenek. Tolerance genelde direnç içinde bir tekniktir."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What's the relationship between an error and a failure?",
+          "promptTr": "Bir error ile bir failure arasındaki ilişki nedir?",
+          "options": [
+            { "text": "An error is an incorrect internal state; a failure is the externally-observable deviation from correct behaviour it can cause", "textTr": "Error yanlış bir iç state'tir; failure ise onun neden olabileceği, doğru davranıştan dışarıdan-gözlemlenebilir sapmadır", "correct": true },
+            { "text": "They are the same thing", "textTr": "Aynı şeydir" },
+            { "text": "A failure always happens before an error", "textTr": "Bir failure her zaman bir error'dan önce olur" },
+            { "text": "An error is visible to users; a failure is internal", "textTr": "Error kullanıcılara görünür; failure içseldir" }
+          ],
+          "explanation": "Fault → error (latent internal flaw) → failure (manifested, external malfunction). Handled errors needn't become failures — which is what fault tolerance achieves.",
+          "explanationTr": "Fault → error (gizli iç kusur) → failure (tezahür eden, dış arıza). Ele alınan error'lar failure olmak zorunda değildir — ki fault tolerance'ın başardığı budur."
+        },
+        {
+          "type": "challenge",
+          "question": "What is the difference between Fault Tolerance and Fault Resilience?"
+        },
+        {
+          "type": "challenge",
+          "question": "What does it mean \"System Shall Be Resilient\"?"
+        },
+        {
+          "type": "challenge",
+          "question": "Explain Failure in contrast to Error"
+        }
+      ]
+    },
+    {
+      "slug": "back-pressure-actor",
+      "title": "Back-pressure & the actor model",
+      "titleTr": "Back-pressure ve actor model",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Flow control and message-based concurrency",
+          "titleTr": "Akış kontrolü ve mesaj-tabanlı eşzamanlılık",
+          "body": "**Back-Pressure** is a **flow-control mechanism where a consumer signals to a producer to slow down when it can't keep up**. In a stream/pipeline, if a fast producer overwhelms a slower consumer, work piles up — leading to unbounded queues, memory exhaustion, and crashes. Back-pressure prevents this by letting the **downstream component push back**: the producer reduces its rate, buffers within limits, or drops/blocks until the consumer is ready. It's a core idea in **Reactive Streams** (e.g. RxJS, Project Reactor, Akka Streams) and is essential for **resilient, bounded** systems under load — instead of failing catastrophically when overloaded, the system gracefully throttles. Strategies include buffering (bounded), dropping, sampling, or blocking the producer.\n\n**The Actor Model** is a model of **concurrent computation built around 'actors' as the universal primitive**. An **actor** is an independent unit that has **private state** (never shared) and communicates **only by sending and receiving asynchronous messages**. In response to a message, an actor can: (1) **change its own state**, (2) **send messages** to other actors, and (3) **create new actors**. Crucially, each actor processes messages **one at a time** from its mailbox, so there's **no shared mutable state and no locks** — which sidesteps the classic concurrency hazards (race conditions, deadlocks from shared memory). This makes it a powerful way to build **scalable, distributed, fault-tolerant concurrent systems** (Erlang/Elixir processes, Akka). Actors map naturally onto distributed nodes (location transparency) and often pair with **supervision** strategies (a parent actor restarts failed children) for resilience.",
+          "bodyTr": "**Back-Pressure**, **bir consumer'ın yetişemediğinde bir producer'a yavaşlamasını sinyallediği bir akış-kontrol mekanizmasıdır**. Bir stream/pipeline'da, hızlı bir producer daha yavaş bir consumer'ı bunaltırsa, iş birikir — sınırsız kuyruklara, bellek tükenmesine ve çökmelere yol açar. Back-pressure bunu, **downstream bileşenin geri itmesine** izin vererek önler: producer hızını azaltır, sınırlar içinde buffer'lar ya da consumer hazır olana kadar drop'lar/bloklar. **Reactive Streams**'te (örn. RxJS, Project Reactor, Akka Streams) temel bir fikirdir ve yük altında **dirençli, sınırlı** sistemler için şarttır — aşırı yüklendiğinde felaketle başarısız olmak yerine, sistem zarifçe kısıtlar. Stratejiler buffering (sınırlı), drop etme, örnekleme ya da producer'ı bloklama içerir.\n\n**Actor Model**, **evrensel ilkel olarak 'actor'lar etrafında kurulu eşzamanlı hesaplama** modelidir. Bir **actor**, **private state**'i olan (asla paylaşılmaz) ve **yalnızca asenkron mesaj gönderip alarak** iletişen bağımsız bir birimdir. Bir mesaja yanıt olarak bir actor: (1) **kendi state'ini değiştirebilir**, (2) diğer actor'lara **mesaj gönderebilir** ve (3) **yeni actor'lar oluşturabilir**. Önemlisi, her actor mailbox'ından mesajları **teker teker** işler, böylece **paylaşılan değiştirilebilir state ve kilit yoktur** — ki bu klasik eşzamanlılık tehlikelerini (race condition'lar, paylaşılan bellekten deadlock'lar) atlatır. Bu, onu **ölçeklenebilir, dağıtık, hata-toleranslı eşzamanlı sistemler** kurmanın güçlü bir yolu yapar (Erlang/Elixir process'leri, Akka). Actor'lar dağıtık node'lara doğal eşlenir (location transparency) ve genelde direnç için **supervision** stratejileriyle (bir parent actor başarısız child'ları yeniden başlatır) eşlenir."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What problem does back-pressure solve?",
+          "promptTr": "Back-pressure hangi sorunu çözer?",
+          "options": [
+            { "text": "A fast producer overwhelming a slower consumer — it lets the consumer signal the producer to slow down, keeping the system bounded", "textTr": "Hızlı bir producer'ın daha yavaş bir consumer'ı bunaltması — consumer'ın producer'a yavaşlamasını sinyallemesini sağlar, sistemi sınırlı tutar", "correct": true },
+            { "text": "Slow networks by compressing data", "textTr": "Veriyi sıkıştırarak yavaş ağları" },
+            { "text": "Authentication of API requests", "textTr": "API isteklerinin kimlik doğrulaması" },
+            { "text": "Encrypting messages in transit", "textTr": "Aktarımdaki mesajları şifrelemek" }
+          ],
+          "explanation": "Back-pressure is flow control: the consumer pushes back so the producer slows/buffers/drops, preventing unbounded queues and crashes under load (core to Reactive Streams).",
+          "explanationTr": "Back-pressure akış kontrolüdür: consumer geri iter, böylece producer yavaşlar/buffer'lar/drop'lar, yük altında sınırsız kuyrukları ve çökmeleri önler (Reactive Streams'in temeli)."
+        },
+        {
+          "type": "true_false",
+          "statement": "In the actor model, actors share no mutable state and communicate only via asynchronous messages, avoiding locks.",
+          "statementTr": "Actor model'de actor'lar değiştirilebilir state paylaşmaz ve yalnızca asenkron mesajlarla iletişir, kilitlerden kaçınır.",
+          "answer": true,
+          "explanation": "Each actor has private state and processes messages one at a time, so there are no shared-memory race conditions or locks — great for scalable, distributed, fault-tolerant concurrency.",
+          "explanationTr": "Her actor'ün private state'i vardır ve mesajları teker teker işler, böylece paylaşılan-bellek race condition'ları ya da kilitler yoktur — ölçeklenebilir, dağıtık, hata-toleranslı eşzamanlılık için harika."
+        },
+        {
+          "type": "challenge",
+          "question": "What is Back-Pressure?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is actor model in context of a programming language?"
+        }
+      ]
+    },
+    {
+      "slug": "concurrency-threads-amdahl",
+      "title": "Concurrency, threads & Amdahl's Law",
+      "titleTr": "Eşzamanlılık, thread'ler ve Amdahl Yasası",
+      "position": 3,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Doing many things, and the limits of parallelism",
+          "titleTr": "Birçok şey yapmak ve paralelliğin sınırları",
+          "body": "**Concurrency vs Parallelism** — often confused:\n\n- **Concurrency** is **dealing with many tasks at once** — *structuring* a program so multiple tasks are *in progress* over the same period, making progress by interleaving. It can happen on a **single core** (the CPU rapidly switches between tasks). It's about **composition/structure**.\n- **Parallelism** is **doing many tasks at literally the same instant** — *executing* multiple computations simultaneously, which requires **multiple cores/processors**. It's about **execution/hardware**.\n\nRob Pike's line: *\"Concurrency is about dealing with lots of things at once; parallelism is about doing lots of things at once.\"* You can have concurrency without parallelism (one core interleaving), and parallelism is one way to *run* concurrent tasks. Concurrency is a design property; parallelism is a runtime/hardware property.\n\n**Threads (simply):** imagine one worker (a program) who can only do one thing at a time. A **thread** is like giving that worker the ability to **juggle several jobs** — it's an independent **sequence of instructions that can run alongside others** within the same program, sharing the same memory/workspace. Multiple threads let a program do things 'at the same time' (e.g. download a file while keeping the UI responsive). The catch: because threads **share memory**, they can step on each other (race conditions), so they need careful coordination (locks) — like two cooks sharing one kitchen needing to take turns with the shared tools.\n\n**Amdahl's Law** quantifies the **maximum speedup from parallelisation**, and its key insight is **the serial (non-parallelisable) part limits everything**. If a fraction **P** of a task can be parallelised (and **1−P** is inherently serial), then with N processors the speedup is **1 / ((1−P) + P/N)**. As **N → ∞**, speedup approaches **1 / (1−P)** — capped by the serial portion. Example: if 10% must be serial, even infinite processors give at most **10×** speedup. **Implication:** throwing more cores at a problem has **diminishing returns**; to scale, you must shrink the serial fraction, not just add hardware. It's a sobering counterweight to 'just parallelise it.'",
+          "bodyTr": "**Concurrency vs Parallelism** — sık karıştırılır:\n\n- **Concurrency (eşzamanlılık)**, **aynı anda birçok görevle başa çıkmaktır** — bir programı, birden çok görevin aynı dönemde *devam ettiği* şekilde *yapılandırmak*, araya sokarak ilerlemek. **Tek bir çekirdekte** olabilir (CPU görevler arasında hızla geçer). **Kompozisyon/yapı** ile ilgilidir.\n- **Parallelism (paralellik)**, **birçok görevi tam anlamıyla aynı anda yapmaktır** — birden çok hesaplamayı eşzamanlı *yürütmek*, ki **birden çok çekirdek/işlemci** gerektirir. **Yürütme/donanım** ile ilgilidir.\n\nRob Pike'ın sözü: *\"Concurrency aynı anda birçok şeyle başa çıkmaktır; parallelism aynı anda birçok şey yapmaktır.\"* Paralellik olmadan concurrency'e sahip olabilirsin (tek çekirdek araya sokarak) ve parallelism eşzamanlı görevleri *çalıştırmanın* bir yoludur. Concurrency bir tasarım özelliğidir; parallelism bir runtime/donanım özelliğidir.\n\n**Thread'ler (basitçe):** aynı anda yalnızca bir şey yapabilen bir işçi (bir program) düşün. Bir **thread**, o işçiye **birkaç işi aynı anda idare etme** yeteneği vermek gibidir — aynı program içinde diğerleriyle yan yana çalışabilen, aynı belleği/çalışma alanını paylaşan bağımsız bir **komut dizisidir**. Birden çok thread bir programın 'aynı anda' işler yapmasını sağlar (örn. UI'ı duyarlı tutarken bir dosya indirmek). Püf noktası: thread'ler **bellek paylaştığı** için birbirlerine basabilirler (race condition'lar), bu yüzden dikkatli koordinasyon (kilitler) gerektirir — paylaşılan araçlarla sıra alması gereken, tek mutfağı paylaşan iki aşçı gibi.\n\n**Amdahl Yasası**, **paralelleştirmeden maksimum hızlanmayı** niceler ve temel içgörüsü **seri (paralelleştirilemeyen) kısmın her şeyi sınırladığıdır**. Bir görevin bir **P** kesri paralelleştirilebiliyorsa (ve **1−P** doğası gereği seriyse), N işlemciyle hızlanma **1 / ((1−P) + P/N)**'dir. **N → ∞** iken, hızlanma **1 / (1−P)**'ye yaklaşır — seri kısımla sınırlı. Örnek: %10 seri olmalıysa, sonsuz işlemci bile en fazla **10×** hızlanma verir. **Çıkarım:** bir soruna daha fazla çekirdek atmak **azalan getiri** sağlar; ölçeklemek için yalnızca donanım eklemek değil, seri kesri küçültmelisin. 'Sadece paralelleştir'e karşı ayıltıcı bir karşı-ağırlıktır."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What's the difference between concurrency and parallelism?",
+          "promptTr": "Concurrency ile parallelism arasındaki fark nedir?",
+          "options": [
+            { "text": "Concurrency is structuring tasks to be in progress together (even on one core); parallelism is executing them simultaneously (needs multiple cores)", "textTr": "Concurrency görevleri birlikte devam edecek şekilde yapılandırmaktır (tek çekirdekte bile); parallelism onları eşzamanlı yürütmektir (birden çok çekirdek gerekir)", "correct": true },
+            { "text": "They are exactly the same", "textTr": "Tam olarak aynılar" },
+            { "text": "Concurrency requires multiple CPUs; parallelism runs on one", "textTr": "Concurrency birden çok CPU gerektirir; parallelism tek birinde çalışır" },
+            { "text": "Parallelism is about code structure; concurrency is about hardware", "textTr": "Parallelism kod yapısıyla; concurrency donanımla ilgilidir" }
+          ],
+          "explanation": "Concurrency = dealing with many tasks at once (structure/interleaving, possible on one core); parallelism = doing them at the same instant (execution on multiple cores).",
+          "explanationTr": "Concurrency = aynı anda birçok görevle başa çıkmak (yapı/araya sokma, tek çekirdekte mümkün); parallelism = onları aynı anda yapmak (birden çok çekirdekte yürütme)."
+        },
+        {
+          "type": "true_false",
+          "statement": "Amdahl's Law shows that the serial portion of a task caps the maximum speedup from adding more processors.",
+          "statementTr": "Amdahl Yasası, bir görevin seri kısmının daha fazla işlemci eklemekten gelen maksimum hızlanmayı sınırladığını gösterir.",
+          "answer": true,
+          "explanation": "Speedup = 1/((1−P)+P/N); as N→∞ it approaches 1/(1−P). If 10% is serial, max speedup is 10× no matter how many cores — diminishing returns.",
+          "explanationTr": "Hızlanma = 1/((1−P)+P/N); N→∞ iken 1/(1−P)'ye yaklaşır. %10 seriyse, kaç çekirdek olursa olsun maksimum hızlanma 10×'tir — azalan getiri."
+        },
+        {
+          "type": "challenge",
+          "question": "What is the difference between Concurrency and Parallelism?"
+        },
+        {
+          "type": "challenge",
+          "question": "Explain threads to your grandparents"
+        },
+        {
+          "type": "challenge",
+          "question": "What does Amdahl's Law mean?"
+        }
+      ]
+    }
+  ]
+}

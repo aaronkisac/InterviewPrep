@@ -1,0 +1,142 @@
+{
+  "topic": "software-architecture",
+  "slug": "layered-clean",
+  "title": "Layered & Clean Architecture",
+  "titleTr": "Katmanlı ve Clean Mimari",
+  "section": "core",
+  "position": 3,
+  "lessons": [
+    {
+      "slug": "why-layer",
+      "title": "Why layering matters",
+      "titleTr": "Katmanlama neden önemli",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Separating concerns into layers",
+          "titleTr": "Endişeleri katmanlara ayırmak",
+          "body": "**Layering** organises an application into horizontal **layers** by responsibility — typically **presentation → application/business → domain → data/infrastructure**. Each layer has a clear role and talks mainly to the layer directly below it. **Why it matters:** separation of concerns (each layer changes for its own reasons), testability (swap a layer for a mock), reusability, and clearer dependencies. \n\n**Bad layering** examples: a UI component that runs raw SQL directly against the database (skipping business/domain layers); business logic living inside controllers or views; a 'layer' that's bypassed by everyone; or **leaky** layers where domain objects expose database/ORM details to the UI. These collapse the benefits — changes ripple everywhere and concerns get tangled.\n\n**Why should \"lower\" layers not be aware of \"higher\" ones?** Dependencies should flow **one direction — downward** (or, in Clean Architecture, inward toward the domain). A lower layer (e.g. domain/data) that knows about a higher layer (e.g. UI) creates a **circular dependency** and couples stable, general code to volatile, specific code. Keeping lower layers ignorant of higher ones means the **core stays reusable and stable**: you can put a different UI on top, or change the presentation, without touching the domain. Higher layers depend on lower ones, never the reverse — that one-way dependency rule is what makes layering pay off.",
+          "bodyTr": "**Katmanlama**, bir uygulamayı sorumluluğa göre yatay **katmanlara** organize eder — tipik olarak **presentation → application/business → domain → data/infrastructure**. Her katmanın net bir rolü vardır ve esas olarak hemen altındaki katmanla konuşur. **Neden önemli:** endişe ayrımı (her katman kendi sebepleriyle değişir), test edilebilirlik (bir katmanı mock'la değiştir), tekrar kullanılabilirlik ve daha net bağımlılıklar.\n\n**Kötü katmanlama** örnekleri: doğrudan veritabanına ham SQL çalıştıran bir UI bileşeni (business/domain katmanlarını atlayarak); controller'ların ya da view'ların içinde yaşayan iş mantığı; herkesin atladığı bir 'katman'; ya da domain nesnelerinin veritabanı/ORM detaylarını UI'a açtığı **sızıntılı** katmanlar. Bunlar faydaları çökertir — değişiklikler her yere yayılır ve endişeler birbirine karışır.\n\n**\"Alt\" katmanlar neden \"üst\" katmanlardan habersiz olmalı?** Bağımlılıklar **tek yönde — aşağı** akmalı (ya da Clean Architecture'da, domain'e doğru içeri). Bir üst katmanı (örn. UI) bilen bir alt katman (örn. domain/data) bir **döngüsel bağımlılık** yaratır ve kararlı, genel kodu değişken, özel koda bağlar. Alt katmanları üstlerden habersiz tutmak, **çekirdeğin tekrar kullanılabilir ve kararlı kalması** demektir: üstüne farklı bir UI koyabilir ya da sunumu değiştirebilirsin, domain'e dokunmadan. Üst katmanlar alt katmanlara bağımlıdır, asla tersi değil — o tek yönlü bağımlılık kuralı katmanlamanın işe yaramasını sağlar."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Why shouldn't lower layers depend on higher layers?",
+          "promptTr": "Alt katmanlar neden üst katmanlara bağımlı olmamalı?",
+          "options": [
+            { "text": "Dependencies should flow one way (downward/inward); otherwise you get circular dependencies and couple stable code to volatile code", "textTr": "Bağımlılıklar tek yönde akmalı (aşağı/içeri); aksi halde döngüsel bağımlılıklar olur ve kararlı kodu değişken koda bağlarsın", "correct": true },
+            { "text": "Lower layers run faster if they ignore higher ones", "textTr": "Alt katmanlar üstleri yok sayarsa daha hızlı çalışır" },
+            { "text": "Higher layers don't actually exist", "textTr": "Üst katmanlar aslında yoktur" },
+            { "text": "It has no real benefit", "textTr": "Gerçek bir faydası yoktur" }
+          ],
+          "explanation": "One-way (downward/inward) dependencies keep the stable core reusable and prevent cycles; a domain that knows the UI can't be reused or changed independently.",
+          "explanationTr": "Tek yönlü (aşağı/içeri) bağımlılıklar kararlı çekirdeği tekrar kullanılabilir tutar ve döngüleri önler; UI'ı bilen bir domain bağımsız tekrar kullanılamaz ya da değiştirilemez."
+        },
+        {
+          "type": "true_false",
+          "statement": "A UI component running raw SQL directly against the database is an example of bad layering.",
+          "statementTr": "Doğrudan veritabanına ham SQL çalıştıran bir UI bileşeni kötü katmanlamaya örnektir.",
+          "answer": true,
+          "explanation": "It skips the business/domain/data layers, tangling presentation with persistence — changes and bugs now cross concerns that should be separated.",
+          "explanationTr": "Business/domain/data katmanlarını atlar, sunumu kalıcılıkla iç içe geçirir — değişiklikler ve hatalar artık ayrılması gereken endişeleri keser."
+        },
+        {
+          "type": "challenge",
+          "question": "Why layering your application is important? Provide some bad layering example."
+        },
+        {
+          "type": "challenge",
+          "question": "Why is it a good idea for \"lower\" application layers not to be aware of \"higher\" ones?"
+        }
+      ]
+    },
+    {
+      "slug": "clean-architecture",
+      "title": "Clean Architecture & its layers",
+      "titleTr": "Clean Architecture ve katmanları",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "The dependency rule and concentric circles",
+          "titleTr": "Bağımlılık kuralı ve eş-merkezli daireler",
+          "body": "**Clean Architecture** (Robert C. Martin) organises a system into **concentric circles** with one overriding rule: **the Dependency Rule — source code dependencies point only inward**, toward higher-level policy. Inner circles know nothing about outer ones. From inside out:\n\n- **Entities** (innermost) — enterprise-wide business rules / core domain objects.\n- **Use Cases (Application)** — application-specific business rules that orchestrate entities.\n- **Interface Adapters** — controllers, presenters, gateways that convert data between use cases and the outside.\n- **Frameworks & Drivers** (outermost) — the UI, DB, web framework, devices — details.\n\n**Inner vs outer layers:** the **inner** layers hold **business logic and policy** — stable, abstract, framework-independent, the heart of the app. The **outer** layers hold **details/mechanisms** — UI, database, frameworks, external services — which are volatile and replaceable. The Dependency Rule means outer depends on inner (never the reverse): the domain doesn't import the database or React; instead it defines **interfaces** the outer layers implement (Dependency Inversion). \n\n**Why:** the business rules become **independent of UI, database, and frameworks**, so they're highly testable (no DB/UI needed) and you can swap an outer detail (Postgres → Mongo, REST → GraphQL) without touching the core. The cost is more indirection/boilerplate, so it suits complex, long-lived systems more than simple CRUD apps.",
+          "bodyTr": "**Clean Architecture** (Robert C. Martin) bir sistemi **eş-merkezli dairelere** organize eder, tek bir üstün kuralla: **Bağımlılık Kuralı — kaynak kod bağımlılıkları yalnızca içeri**, üst seviye politikaya doğru işaret eder. İç daireler dış olanlar hakkında hiçbir şey bilmez. İçten dışa:\n\n- **Entities** (en iç) — kuruluş-geneli iş kuralları / çekirdek domain nesneleri.\n- **Use Cases (Application)** — entity'leri orkestre eden uygulamaya-özgü iş kuralları.\n- **Interface Adapters** — use case'ler ile dış arasında veri dönüştüren controller'lar, presenter'lar, gateway'ler.\n- **Frameworks & Drivers** (en dış) — UI, DB, web framework'ü, cihazlar — detaylar.\n\n**İç vs dış katmanlar:** **iç** katmanlar **iş mantığını ve politikayı** tutar — kararlı, soyut, framework'ten bağımsız, uygulamanın kalbi. **Dış** katmanlar **detayları/mekanizmaları** tutar — UI, veritabanı, framework'ler, harici servisler — ki değişken ve değiştirilebilirdir. Bağımlılık Kuralı, dışın içe bağımlı olması demektir (asla tersi): domain veritabanını ya da React'i import etmez; bunun yerine dış katmanların uyguladığı **arayüzler** tanımlar (Dependency Inversion).\n\n**Neden:** iş kuralları **UI, veritabanı ve framework'lerden bağımsız** olur, böylece son derece test edilebilirler (DB/UI gerekmez) ve çekirdeğe dokunmadan bir dış detayı değiştirebilirsin (Postgres → Mongo, REST → GraphQL). Maliyeti daha fazla dolaylılık/boilerplate'tir, bu yüzden basit CRUD uygulamalarından çok karmaşık, uzun ömürlü sistemlere uygundur."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What is the central rule of Clean Architecture?",
+          "promptTr": "Clean Architecture'ın merkezi kuralı nedir?",
+          "options": [
+            { "text": "The Dependency Rule — source dependencies point only inward, toward business policy", "textTr": "Bağımlılık Kuralı — kaynak bağımlılıkları yalnızca içeri, iş politikasına doğru işaret eder", "correct": true },
+            { "text": "The UI must contain all business logic", "textTr": "UI tüm iş mantığını içermeli" },
+            { "text": "Every layer may depend on every other layer", "textTr": "Her katman diğer her katmana bağımlı olabilir" },
+            { "text": "The database is the innermost layer", "textTr": "Veritabanı en iç katmandır" }
+          ],
+          "explanation": "Dependencies point inward: outer (UI/DB/frameworks = details) depend on inner (entities/use-cases = policy), never the reverse — keeping the core independent and testable.",
+          "explanationTr": "Bağımlılıklar içeri işaret eder: dış (UI/DB/framework'ler = detaylar) içe (entity/use-case = politika) bağımlı olur, asla tersi değil — çekirdeği bağımsız ve test edilebilir tutar."
+        },
+        {
+          "type": "true_false",
+          "statement": "In Clean Architecture, inner layers hold business policy while outer layers hold details like UI, database, and frameworks.",
+          "statementTr": "Clean Architecture'da iç katmanlar iş politikasını, dış katmanlar UI, veritabanı ve framework'ler gibi detayları tutar.",
+          "answer": true,
+          "explanation": "Inner = stable policy (entities, use cases); outer = volatile mechanisms. Outer depends inward, so you can swap details without touching the core.",
+          "explanationTr": "İç = kararlı politika (entity'ler, use case'ler); dış = değişken mekanizmalar. Dış içe bağımlıdır, böylece çekirdeğe dokunmadan detayları değiştirebilirsin."
+        },
+        {
+          "type": "challenge",
+          "question": "What do you understand by Clean Architecture approach?"
+        },
+        {
+          "type": "challenge",
+          "question": "Explain the purpose of Clean Architecture Inner and Outer layers"
+        }
+      ]
+    },
+    {
+      "slug": "clean-vs-ntier-onion-hexagonal",
+      "title": "Clean vs N-Tier, Onion & Hexagonal",
+      "titleTr": "Clean vs N-Tier, Onion ve Hexagonal",
+      "position": 3,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "A family of dependency-inverting architectures",
+          "titleTr": "Bağımlılık-tersine-çeviren bir mimari ailesi",
+          "body": "**Clean vs N-Tier:** **N-Tier (classic layered)** stacks layers with dependencies flowing **top-down**: presentation → business → **data**. The crucial point is the data/database layer sits at the **bottom**, so business logic **depends on** the database. **Clean Architecture** inverts this: the **domain is at the centre** and the database is an **outer detail** that depends *inward* (via interfaces). So in N-Tier the DB is foundational; in Clean the DB is a replaceable plugin and the **domain is independent of it**. Clean is harder to set up but keeps business rules pure and testable.\n\n**Onion vs Clean vs Hexagonal** — three architectures that are **conceptually the same idea**: put the **domain at the centre**, keep it free of infrastructure, and make **dependencies point inward** using Dependency Inversion (interfaces defined by the core, implemented by the outside).\n\n- **Hexagonal (Ports & Adapters)** — Alistair Cockburn. The app core exposes **ports** (interfaces); the outside connects via **adapters** (one per technology: REST adapter, DB adapter, etc.). Emphasis: the core is **isolated from all I/O**, symmetrically (driving vs driven sides).\n- **Onion** — Jeffrey Palermo. Concentric layers with the **domain model at the center**, application/services around it, infrastructure outermost; dependencies point inward.\n- **Clean** — Robert Martin's synthesis/generalisation of the above, with named circles (entities, use cases, adapters, frameworks) and the explicit Dependency Rule.\n\nThey differ mostly in **vocabulary and emphasis**, not in essence: all isolate the domain, invert dependencies toward it, and make infrastructure swappable. Hexagonal stresses ports/adapters; Onion stresses concentric domain-centric layers; Clean unifies and names them.",
+          "bodyTr": "**Clean vs N-Tier:** **N-Tier (klasik katmanlı)** katmanları bağımlılıklar **yukarıdan-aşağı** akacak şekilde yığar: presentation → business → **data**. Kritik nokta, data/veritabanı katmanının **altta** durmasıdır, böylece iş mantığı veritabanına **bağımlıdır**. **Clean Architecture** bunu tersine çevirir: **domain merkezdedir** ve veritabanı *içeri* bağımlı olan (arayüzler aracılığıyla) bir **dış detaydır**. Yani N-Tier'da DB temeldir; Clean'de DB değiştirilebilir bir eklentidir ve **domain ondan bağımsızdır**. Clean kurması daha zordur ama iş kurallarını saf ve test edilebilir tutar.\n\n**Onion vs Clean vs Hexagonal** — **kavramsal olarak aynı fikir** olan üç mimari: **domain'i merkeze** koy, onu altyapıdan uzak tut ve Dependency Inversion kullanarak **bağımlılıkları içeri** yönelt (çekirdek tarafından tanımlanan, dış tarafından uygulanan arayüzler).\n\n- **Hexagonal (Ports & Adapters)** — Alistair Cockburn. Uygulama çekirdeği **port'lar** (arayüzler) açar; dış, **adapter'lar** (teknoloji başına bir tane: REST adapter, DB adapter, vb.) aracılığıyla bağlanır. Vurgu: çekirdek **tüm I/O'dan izole**, simetrik olarak (driving vs driven taraflar).\n- **Onion** — Jeffrey Palermo. **Domain modeli merkezde**, etrafında application/servisler, en dışta altyapı; bağımlılıklar içeri işaret eder.\n- **Clean** — Robert Martin'in yukarıdakilerin sentezi/genellemesi, adlandırılmış dairelerle (entity'ler, use case'ler, adapter'lar, framework'ler) ve açık Bağımlılık Kuralıyla.\n\nÇoğunlukla **kelime dağarcığı ve vurguda** farklılaşırlar, özde değil: hepsi domain'i izole eder, bağımlılıkları ona doğru tersine çevirir ve altyapıyı değiştirilebilir kılar. Hexagonal port/adapter'ı vurgular; Onion eş-merkezli domain-merkezli katmanları vurgular; Clean onları birleştirir ve adlandırır."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What's the key difference between Clean and classic N-Tier architecture?",
+          "promptTr": "Clean ile klasik N-Tier mimari arasındaki temel fark nedir?",
+          "options": [
+            { "text": "N-Tier puts the database at the bottom (business depends on it); Clean puts the domain at the centre and makes the DB an outer, replaceable detail", "textTr": "N-Tier veritabanını alta koyar (business ona bağımlı); Clean domain'i merkeze koyar ve DB'yi dış, değiştirilebilir bir detay yapar", "correct": true },
+            { "text": "They are identical", "textTr": "Aynılar" },
+            { "text": "Clean has no layers at all", "textTr": "Clean'in hiç katmanı yoktur" },
+            { "text": "N-Tier keeps the domain independent of the database", "textTr": "N-Tier domain'i veritabanından bağımsız tutar" }
+          ],
+          "explanation": "N-Tier: business depends downward on the DB. Clean inverts it — the domain is central and infrastructure (DB) is an outer plugin depending inward, so the core stays independent.",
+          "explanationTr": "N-Tier: business aşağı doğru DB'ye bağımlıdır. Clean bunu tersine çevirir — domain merkezidir ve altyapı (DB) içeri bağımlı bir dış eklentidir, böylece çekirdek bağımsız kalır."
+        },
+        {
+          "type": "true_false",
+          "statement": "Onion, Clean, and Hexagonal architectures share the same core idea: a central domain isolated from infrastructure, with dependencies pointing inward.",
+          "statementTr": "Onion, Clean ve Hexagonal mimariler aynı çekirdek fikri paylaşır: altyapıdan izole, bağımlılıkları içeri işaret eden merkezi bir domain.",
+          "answer": true,
+          "explanation": "They differ in vocabulary/emphasis (ports & adapters vs concentric layers vs named circles) but all invert dependencies toward an isolated domain core.",
+          "explanationTr": "Kelime dağarcığı/vurguda farklılaşırlar (port & adapter vs eş-merkezli katmanlar vs adlandırılmış daireler) ama hepsi bağımlılıkları izole bir domain çekirdeğine doğru tersine çevirir."
+        },
+        {
+          "type": "challenge",
+          "question": "What is the difference between the Clean and the N-Tier Architectures?"
+        },
+        {
+          "type": "challenge",
+          "question": "Compare Onion vs Clean vs Hexagonal Architectures"
+        }
+      ]
+    }
+  ]
+}

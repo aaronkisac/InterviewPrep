@@ -181,7 +181,9 @@ Same retro rules apply: challenge texts byte-for-byte from seed JSON, 5–9 step
 
 **Agile & Scrum course COMPLETE** (bank 1001–1027, 27 q) — 5 units, 10 lessons, **27/27**. `data/seed-courses/agile-scrum/` + syllabus. Units: 01 Agile Foundations (1001/1004/1025 · 1011/1020), 02 Scrum Framework (1002/1023/1018 · 1019/1006/1021), 03 Sprints & Events (1003/1007/1008 · 1014/1015/1022), 04 Backlog & Work Items (1005/1009/1013 · 1012/1010), 05 Metrics/Flow/Practices (1016/1017 · 1027/1026/1024). Uses order + match steps.
 
-**Course scale-out status (2026-06-14): React ✓, TypeScript ✓, Next.js ✓, JavaScript ✓, Redux ✓ (35/35), React Hooks ✓ (29/29), HTML5 ✓ (51/51), CSS ✓ (33/33), Git ✓ (21/21), Unit Testing ✓ (16/16), Design Patterns ✓ (16/16), WebSockets ✓ (18/18), Agile & Scrum ✓ (27/27).** "Small" batch fully done. **Remaining: software-architecture (~94 q) + api-design (~47 q) — the two big ones, not yet authorised by Aaron.**
+**Software Architecture course COMPLETE** (bank 1401–1494, 94 q) — 13 units, 40 lessons, **94/94**. `data/seed-courses/software-architecture/` + syllabus. Units: 01 Design Principles/SOLID, 02 Quality & Smells, 03 Layered & Clean, 04 Structuring & Architect, 05 DDD, 06 Architecture Styles (mono/SOA/micro), 07 Repository & UoW, 08 CQRS & Event Sourcing, 09 Scalability & Load Balancing, 10 Distributed & Consistency, 11 Resilience & Concurrency, 12 Performance/Caching/Ops, 13 Testing/Real-time/Applied. Syllabus auto-generated from unit files.
+
+**Course scale-out status (2026-06-14): React ✓, TypeScript ✓, Next.js ✓, JavaScript ✓, Redux ✓ (35/35), React Hooks ✓ (29/29), HTML5 ✓ (51/51), CSS ✓ (33/33), Git ✓ (21/21), Unit Testing ✓ (16/16), Design Patterns ✓ (16/16), WebSockets ✓ (18/18), Agile & Scrum ✓ (27/27), Software Architecture ✓ (94/94).** Last remaining: api-design (~47 q) — in progress.
 
 ---
 

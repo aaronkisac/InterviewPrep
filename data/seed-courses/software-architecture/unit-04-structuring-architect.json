@@ -1,0 +1,98 @@
+{
+  "topic": "software-architecture",
+  "slug": "structuring-architect",
+  "title": "Structuring Solutions & the Architect",
+  "titleTr": "Çözümleri Yapılandırmak ve Mimar",
+  "section": "core",
+  "position": 4,
+  "lessons": [
+    {
+      "slug": "structure-by-components",
+      "title": "Structure by components & isolate the domain",
+      "titleTr": "Bileşene göre yapılandır ve domain'i izole et",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Organising around features, protecting the core",
+          "titleTr": "Özellikler etrafında organize etmek, çekirdeği korumak",
+          "body": "**Structuring your solution by components** means organising code around **features/business capabilities** (e.g. `orders`, `billing`, `catalog`) rather than around **technical layers** (`controllers`, `services`, `repositories` as top-level folders). Each component bundles everything for one capability together. **Why:** high cohesion (related code lives together), clear boundaries and ownership, easier to find and change a feature, and it's the natural stepping stone toward modular monoliths and microservices. Layer-by-technical-type spreads one feature across many folders, increasing coupling and making changes scatter. (Inside a component you can still layer.)\n\n**Why isolate domain entities from the presentation layer?** The domain (core business model) is the **stable, valuable heart**; the presentation layer (UI/API shape) is **volatile** and changes often. If the UI binds directly to domain entities, you get problems: presentation concerns (formatting, view-specific fields) leak into the domain; changing the UI risks breaking business rules and vice versa; you may **over-expose** sensitive fields; and the domain becomes coupled to a specific delivery mechanism. The fix is to **map domain entities to/from DTOs or ViewModels** at the boundary. This keeps the domain pure and reusable across multiple presentations (web, mobile, API), lets each evolve independently, and protects invariants. It's the same dependency-direction idea as Clean Architecture: the core shouldn't depend on the edges.",
+          "bodyTr": "**Çözümünü bileşene göre yapılandırmak**, kodu **teknik katmanlar** (üst düzey klasörler olarak `controllers`, `services`, `repositories`) etrafında değil, **özellikler/iş yetenekleri** (örn. `orders`, `billing`, `catalog`) etrafında organize etmek demektir. Her bileşen, tek bir yetenek için her şeyi bir araya paketler. **Neden:** yüksek cohesion (ilgili kod birlikte yaşar), net sınırlar ve sahiplik, bir özelliği bulmak ve değiştirmek daha kolay ve modüler monolitlere ile mikroservislere doğru doğal bir basamaktır. Teknik-tipe-göre katmanlama bir özelliği birçok klasöre yayar, coupling'i artırır ve değişiklikleri dağıtır. (Bir bileşen içinde yine katmanlama yapabilirsin.)\n\n**Domain entity'lerini neden presentation katmanından izole etmeli?** Domain (çekirdek iş modeli) **kararlı, değerli kalptir**; presentation katmanı (UI/API şekli) **değişkendir** ve sık değişir. UI doğrudan domain entity'lerine bağlanırsa sorunlar olur: sunum endişeleri (biçimlendirme, view'a-özgü alanlar) domain'e sızar; UI'ı değiştirmek iş kurallarını bozma riski taşır ve tersi; hassas alanları **fazla açabilirsin**; ve domain belirli bir teslim mekanizmasına bağlanır. Çözüm, sınırda domain entity'lerini **DTO'lara ya da ViewModel'lere eşlemektir**. Bu domain'i saf ve birden çok sunum (web, mobil, API) arasında tekrar kullanılabilir tutar, her birinin bağımsız evrilmesini sağlar ve invariant'ları korur. Clean Architecture ile aynı bağımlılık-yönü fikridir: çekirdek kenarlara bağımlı olmamalı."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What does 'structure your solution by components' mean?",
+          "promptTr": "'Çözümünü bileşene göre yapılandır' ne demektir?",
+          "options": [
+            { "text": "Organise code around business capabilities/features, not around technical layer types as top-level folders", "textTr": "Kodu üst düzey klasör olarak teknik katman tipleri etrafında değil, iş yetenekleri/özellikler etrafında organize et", "correct": true },
+            { "text": "Put all controllers in one folder, all services in another, etc.", "textTr": "Tüm controller'ları bir klasöre, tüm servisleri başkasına koy" },
+            { "text": "Avoid having any folders", "textTr": "Hiç klasör olmamasını sağla" },
+            { "text": "Write everything in one file", "textTr": "Her şeyi tek dosyaya yaz" }
+          ],
+          "explanation": "Component/feature-based structure groups all code for a capability together (high cohesion, clear boundaries), versus scattering one feature across technical-layer folders.",
+          "explanationTr": "Bileşen/özellik-tabanlı yapı, bir yetenek için tüm kodu bir araya gruplar (yüksek cohesion, net sınırlar), bir özelliği teknik-katman klasörlerine dağıtmak yerine."
+        },
+        {
+          "type": "true_false",
+          "statement": "Mapping domain entities to DTOs/ViewModels at the boundary keeps the domain pure and prevents presentation concerns from leaking into it.",
+          "statementTr": "Domain entity'lerini sınırda DTO'lara/ViewModel'lere eşlemek domain'i saf tutar ve sunum endişelerinin ona sızmasını önler.",
+          "answer": true,
+          "explanation": "Isolating the domain from presentation avoids over-exposure and coupling, letting UI and domain evolve independently across multiple clients.",
+          "explanationTr": "Domain'i sunumdan izole etmek fazla-açılmayı ve coupling'i önler, UI ve domain'in birden çok istemcide bağımsız evrilmesini sağlar."
+        },
+        {
+          "type": "challenge",
+          "question": "Why should you structure your solution by components?"
+        },
+        {
+          "type": "challenge",
+          "question": "Why should I isolate my domain entities from my presentation layer?"
+        }
+      ]
+    },
+    {
+      "slug": "exceptions-and-architect",
+      "title": "Exceptions in layered apps & the architect role",
+      "titleTr": "Katmanlı uygulamalarda exception'lar ve mimar rolü",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Where to handle errors, and what an architect does",
+          "titleTr": "Hataları nerede ele almalı ve bir mimar ne yapar",
+          "body": "**Handling exceptions in a layered application:** the guiding ideas are **don't swallow exceptions silently**, **let them bubble to a layer that can act meaningfully**, and **translate them at boundaries**. Practically: throw specific, meaningful exceptions in lower layers; **catch where you can actually handle or report** (often a top-level/presentation handler or middleware) rather than scattering try/catch everywhere; **wrap/translate** low-level exceptions into domain-meaningful ones as they cross layer boundaries (so the UI doesn't see a raw `SQLException`); add **context** when rethrowing; and use a **global handler** to map exceptions to user-friendly responses / HTTP status codes and to log centrally. Use **checked/domain exceptions** for expected, recoverable conditions and let truly unexpected ones fail fast. The anti-patterns: empty catch blocks, catching `Exception` everywhere, and leaking infrastructure errors to the user.\n\n**What defines a software architect?** Beyond senior coding, an architect is responsible for the **high-level structure and the significant, hard-to-change decisions** of a system — choosing patterns, defining boundaries/components, and the **cross-cutting concerns** (scalability, security, performance, reliability). Key traits: balances **technical depth with business goals and constraints**; makes decisions about **trade-offs** (and documents the *why*, e.g. via ADRs); communicates and aligns stakeholders and dev teams; sets standards and guides without necessarily writing all the code; and thinks about the **long-term evolution and the qualities** (the 'non-functionals') of the system, not just features. In short: an architect owns the **shape and the consequential decisions** that are expensive to reverse, and keeps them aligned with both engineering reality and business needs.",
+          "bodyTr": "**Katmanlı bir uygulamada exception'ları ele alma:** yol gösterici fikirler **exception'ları sessizce yutma**, **anlamlı davranabilecek bir katmana yükselmelerine izin ver** ve **onları sınırlarda çevir**. Pratikte: alt katmanlarda özel, anlamlı exception'lar fırlat; her yere try/catch dağıtmak yerine **gerçekten ele alabileceğin ya da raporlayabileceğin yerde yakala** (genelde üst düzey/presentation handler'ı ya da middleware); katman sınırlarını geçerken alt seviye exception'ları domain-anlamlı olanlara **sar/çevir** (UI ham bir `SQLException` görmesin); yeniden fırlatırken **bağlam** ekle; ve exception'ları kullanıcı-dostu yanıtlara / HTTP durum kodlarına eşlemek ve merkezi loglamak için bir **global handler** kullan. Beklenen, kurtarılabilir durumlar için **checked/domain exception'ları** kullan ve gerçekten beklenmedik olanların fail fast olmasına izin ver. Anti-pattern'ler: boş catch blokları, her yerde `Exception` yakalamak ve altyapı hatalarını kullanıcıya sızdırmak.\n\n**Bir yazılım mimarını ne tanımlar?** Kıdemli kodlamanın ötesinde, bir mimar bir sistemin **üst seviye yapısından ve önemli, değiştirmesi zor kararlarından** sorumludur — desenleri seçme, sınırları/bileşenleri tanımlama ve **enine kesen endişeler** (ölçeklenebilirlik, güvenlik, performans, güvenilirlik). Temel özellikler: **teknik derinliği iş hedefleri ve kısıtlarla** dengeler; **ödünler** hakkında kararlar verir (ve *neden*'ini belgeler, örn. ADR'lerle); paydaşları ve geliştirme takımlarını iletişir ve hizalar; tüm kodu yazmadan standartları belirler ve rehberlik eder; ve yalnızca özellikleri değil, sistemin **uzun vadeli evrimini ve niteliklerini** ('non-functional'ları) düşünür. Kısaca: bir mimar, geri almak pahalı olan **şekli ve sonuç doğuran kararları** sahiplenir ve onları hem mühendislik gerçekliği hem de iş ihtiyaçlarıyla hizalı tutar."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What's a good practice for exceptions in a layered application?",
+          "promptTr": "Katmanlı bir uygulamada exception'lar için iyi bir pratik nedir?",
+          "options": [
+            { "text": "Translate low-level exceptions at layer boundaries and handle them centrally where you can act, instead of empty catches everywhere", "textTr": "Alt seviye exception'ları katman sınırlarında çevir ve davranabileceğin yerde merkezi ele al, her yerde boş catch yerine", "correct": true },
+            { "text": "Catch and ignore every exception with empty catch blocks", "textTr": "Her exception'ı boş catch bloklarıyla yakala ve yok say" },
+            { "text": "Always show the raw SQLException to the user", "textTr": "Kullanıcıya her zaman ham SQLException göster" },
+            { "text": "Never throw exceptions at all", "textTr": "Asla exception fırlatma" }
+          ],
+          "explanation": "Let exceptions bubble to where they can be handled, wrap/translate them across boundaries (no raw infra errors leaking), add context, and use a global handler — never swallow silently.",
+          "explanationTr": "Exception'ların ele alınabilecekleri yere yükselmesine izin ver, sınırlar arası sar/çevir (ham altyapı hataları sızmasın), bağlam ekle ve bir global handler kullan — asla sessizce yutma."
+        },
+        {
+          "type": "true_false",
+          "statement": "A software architect is mainly responsible for high-level structure and significant, hard-to-reverse decisions, balancing technical and business concerns.",
+          "statementTr": "Bir yazılım mimarı esas olarak üst seviye yapıdan ve önemli, geri alması zor kararlardan sorumludur, teknik ve iş endişelerini dengeler.",
+          "answer": true,
+          "explanation": "Architects own structure, boundaries, patterns, and cross-cutting non-functionals (scalability/security/etc.), document trade-offs, and align teams — not just write features.",
+          "explanationTr": "Mimarlar yapıyı, sınırları, desenleri ve enine kesen non-functional'ları (ölçeklenebilirlik/güvenlik/vb.) sahiplenir, ödünleri belgeler ve takımları hizalar — yalnızca özellik yazmaz."
+        },
+        {
+          "type": "challenge",
+          "question": "How to handle exceptions in a layered application?"
+        },
+        {
+          "type": "challenge",
+          "question": "What defines a software architect?"
+        }
+      ]
+    }
+  ]
+}
