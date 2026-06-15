@@ -1,0 +1,108 @@
+{
+  "topic": "agile-scrum",
+  "slug": "scrum-framework",
+  "title": "The Scrum Framework",
+  "titleTr": "Scrum Framework'ü",
+  "section": "core",
+  "position": 2,
+  "lessons": [
+    {
+      "slug": "scrum-theory-and-values",
+      "title": "Scrum: theory & values",
+      "titleTr": "Scrum: teori ve değerler",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Empiricism and the values that support it",
+          "titleTr": "Empirizm ve onu destekleyen değerler",
+          "body": "**Scrum** is a **lightweight Agile framework** for delivering complex products in short cycles. A cross-functional team works in fixed-length **Sprints**, guided by defined **roles**, **events**, and **artifacts**, inspecting and adapting as they go. It's the most widely-used Agile framework.\n\n**Scrum theory is based on empiricism** (and lean thinking) — the idea that **knowledge comes from experience and decisions are based on what's observed**, not up-front prediction. Empirical process control rests on **three pillars**:\n\n1. **Transparency** — the work and process are visible to those responsible for the outcome (shared Definition of Done, visible backlog/board).\n2. **Inspection** — frequently check artifacts and progress toward the goal (the Scrum events are the inspection points).\n3. **Adaptation** — adjust as soon as inspection reveals a problem (re-plan, refine, improve in the retro).\n\n**The five Scrum Values** make the empiricism work by shaping team behaviour:\n\n- **Commitment** — to the goals and the team.\n- **Courage** — to do the right thing and tackle tough problems.\n- **Focus** — on the Sprint's work and goal.\n- **Openness** — about the work and challenges.\n- **Respect** — for each other as capable, independent people.\n\nMnemonic: **C-C-F-O-R**. Transparency/inspection/adaptation only function when the team lives these values.",
+          "bodyTr": "**Scrum**, karmaşık ürünleri kısa döngülerde teslim etmek için **hafif bir Agile framework'üdür**. Çapraz-işlevli bir takım, tanımlı **roller**, **etkinlikler** ve **artifact'larla** yönlendirilen sabit-uzunluklu **Sprint'lerde** çalışır, ilerlerken inceler ve uyum sağlar. En yaygın kullanılan Agile framework'üdür.\n\n**Scrum teorisi empirizme** (ve yalın düşünceye) dayanır — **bilginin deneyimden geldiği ve kararların önceden tahmine değil gözlemlenene dayandığı** fikri. Empirik süreç kontrolü **üç sütuna** dayanır:\n\n1. **Şeffaflık (Transparency)** — iş ve süreç, sonuçtan sorumlu olanlara görünürdür (paylaşılan Definition of Done, görünür backlog/board).\n2. **İnceleme (Inspection)** — artifact'ları ve hedefe doğru ilerlemeyi sık kontrol et (Scrum etkinlikleri inceleme noktalarıdır).\n3. **Uyarlama (Adaptation)** — inceleme bir sorun ortaya çıkardığı an ayarla (yeniden planla, iyileştir, retroda geliştir).\n\n**Beş Scrum Değeri**, takım davranışını şekillendirerek empirizmi çalışır kılar:\n\n- **Commitment (Bağlılık)** — hedeflere ve takıma.\n- **Courage (Cesaret)** — doğru olanı yapmak ve zor sorunlarla uğraşmak.\n- **Focus (Odak)** — Sprint'in işine ve hedefine.\n- **Openness (Açıklık)** — iş ve zorluklar hakkında.\n- **Respect (Saygı)** — birbirine yetkin, bağımsız insanlar olarak.\n\nAnımsatıcı: **C-C-F-O-R**. Şeffaflık/inceleme/uyarlama yalnızca takım bu değerleri yaşadığında işler."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Scrum's empirical process control rests on which three pillars?",
+          "promptTr": "Scrum'ın empirik süreç kontrolü hangi üç sütuna dayanır?",
+          "options": [
+            { "text": "Transparency, Inspection, and Adaptation", "textTr": "Şeffaflık, İnceleme ve Uyarlama", "correct": true },
+            { "text": "Planning, Coding, and Testing", "textTr": "Planlama, Kodlama ve Test" },
+            { "text": "Speed, Cost, and Scope", "textTr": "Hız, Maliyet ve Kapsam" },
+            { "text": "Commitment, Courage, and Focus", "textTr": "Bağlılık, Cesaret ve Odak" }
+          ],
+          "explanation": "Empiricism = transparency (make it visible), inspection (check often), adaptation (adjust). (Commitment/Courage/Focus are Scrum Values, not the pillars.)",
+          "explanationTr": "Empirizm = şeffaflık (görünür kıl), inceleme (sık kontrol et), uyarlama (ayarla). (Bağlılık/Cesaret/Odak Scrum Değerleridir, sütunlar değil.)"
+        },
+        {
+          "type": "true_false",
+          "statement": "The five Scrum Values are Commitment, Courage, Focus, Openness, and Respect.",
+          "statementTr": "Beş Scrum Değeri Bağlılık, Cesaret, Odak, Açıklık ve Saygı'dır.",
+          "answer": true,
+          "explanation": "C-C-F-O-R. These values underpin the trust and behaviour that make Scrum's transparency, inspection, and adaptation effective.",
+          "explanationTr": "C-C-F-O-R. Bu değerler, Scrum'ın şeffaflık, inceleme ve uyarlamasını etkili kılan güven ve davranışın temelini oluşturur."
+        },
+        {
+          "type": "challenge",
+          "question": "What is Scrum?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is Scrum Theory based on?"
+        },
+        {
+          "type": "challenge",
+          "question": "What are the Scrum Values?"
+        }
+      ]
+    },
+    {
+      "slug": "scrum-vs-agile-and-roles",
+      "title": "Scrum vs Agile & the roles",
+      "titleTr": "Scrum vs Agile ve roller",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Framework vs philosophy, and who does what",
+          "titleTr": "Framework vs felsefe ve kim ne yapar",
+          "body": "**Scrum vs Agile:** **Agile** is the broad **mindset/philosophy** (the Manifesto's values and principles); **Scrum** is **one specific framework** that implements Agile with concrete rules — defined roles, time-boxed Sprints, ceremonies, and artifacts. So: *all Scrum is Agile, but not all Agile is Scrum* (Kanban and XP are also Agile). Agile says *what* to value; Scrum gives you a *how*. Agile has no prescribed roles/events; Scrum prescribes them.\n\n**The three roles (accountabilities) in Scrum:**\n\n- **Product Owner (PO)** — owns the **\"what\" and the why**: maximises product value, manages and **prioritises the Product Backlog**, represents stakeholders/customers, and decides what the team builds.\n- **Scrum Master (SM)** — owns the **process**: a servant-leader who coaches the team on Scrum, **facilitates events**, and **removes impediments**.\n- **Developers (the Development Team)** — own the **\"how\"**: the cross-functional people who do the work and build the Increment; self-organizing, typically small (≈ 3–9).\n\n**Scrum Master responsibilities** in more detail: facilitate the Scrum events (planning, daily, review, retro); **remove blockers** for the team; **coach** the team toward self-organization and Scrum understanding; **shield the team** from outside interruptions and scope-pushing; help the PO with backlog management; and foster continuous improvement. Crucially, the SM is a **servant-leader and facilitator, not a manager/boss** — they have no authority to assign tasks or command the team; they enable the team to be effective.",
+          "bodyTr": "**Scrum vs Agile:** **Agile** geniş **zihniyet/felsefedir** (Manifesto'nun değerleri ve ilkeleri); **Scrum**, Agile'ı somut kurallarla uygulayan **belirli bir framework'tür** — tanımlı roller, zaman-kutulu Sprint'ler, törenler ve artifact'lar. Yani: *tüm Scrum Agile'dır ama tüm Agile Scrum değildir* (Kanban ve XP de Agile'dır). Agile *neye* değer verileceğini söyler; Scrum sana bir *nasıl* verir. Agile'ın belirlenmiş rolleri/etkinlikleri yoktur; Scrum onları belirler.\n\n**Scrum'daki üç rol (sorumluluk):**\n\n- **Product Owner (PO)** — **\"ne\" ve neden**'i sahiplenir: ürün değerini maksimize eder, Product Backlog'u yönetir ve **önceliklendirir**, paydaşları/müşterileri temsil eder ve takımın ne inşa edeceğine karar verir.\n- **Scrum Master (SM)** — **süreci** sahiplenir: takıma Scrum konusunda koçluk yapan, **etkinlikleri kolaylaştıran** ve **engelleri kaldıran** bir hizmetkâr-lider.\n- **Developers (Geliştirme Takımı)** — **\"nasıl\"**'ı sahiplenir: işi yapan ve Increment'i inşa eden çapraz-işlevli kişiler; kendi-kendini örgütleyen, tipik olarak küçük (≈ 3–9).\n\n**Scrum Master sorumlulukları** daha detaylı: Scrum etkinliklerini kolaylaştır (planlama, daily, review, retro); takım için **engelleri kaldır**; takımı kendi-kendini örgütlemeye ve Scrum anlayışına **koçla**; takımı dış kesintilerden ve kapsam-itmeden **koru**; backlog yönetiminde PO'ya yardım et; ve sürekli iyileştirmeyi besle. Önemlisi, SM bir **hizmetkâr-lider ve kolaylaştırıcıdır, bir yönetici/patron değil** — görev atama ya da takıma emir verme yetkisi yoktur; takımın etkili olmasını sağlar."
+        },
+        {
+          "type": "mcq",
+          "prompt": "How do Scrum and Agile relate?",
+          "promptTr": "Scrum ve Agile nasıl ilişkilidir?",
+          "options": [
+            { "text": "Agile is the mindset/philosophy; Scrum is one concrete framework implementing it (all Scrum is Agile, not vice versa)", "textTr": "Agile zihniyet/felsefedir; Scrum onu uygulayan somut bir framework'tür (tüm Scrum Agile'dır, tersi değil)", "correct": true },
+            { "text": "Scrum is broader than Agile", "textTr": "Scrum, Agile'dan daha geniştir" },
+            { "text": "They are unrelated", "textTr": "İlgisizdirler" },
+            { "text": "Agile is a framework; Scrum is a philosophy", "textTr": "Agile bir framework'tür; Scrum bir felsefedir" }
+          ],
+          "explanation": "Agile = values/principles (the why/what to value); Scrum = a prescriptive framework (roles, events, artifacts) that implements Agile. Kanban/XP are other Agile frameworks.",
+          "explanationTr": "Agile = değerler/ilkeler (neden/neye değer verileceği); Scrum = Agile'ı uygulayan kuralcı bir framework (roller, etkinlikler, artifact'lar). Kanban/XP diğer Agile framework'leridir."
+        },
+        {
+          "type": "match",
+          "prompt": "Match each Scrum role to its accountability",
+          "promptTr": "Her Scrum rolünü sorumluluğuyla eşleştir",
+          "pairs": [
+            { "left": "Product Owner", "leftTr": "Product Owner", "right": "Owns and prioritises the backlog; decides what to build (the 'what')", "rightTr": "Backlog'u sahiplenir ve önceliklendirir; ne inşa edileceğine karar verir ('ne')" },
+            { "left": "Scrum Master", "leftTr": "Scrum Master", "right": "Servant-leader: facilitates events, removes impediments, coaches the team", "rightTr": "Hizmetkâr-lider: etkinlikleri kolaylaştırır, engelleri kaldırır, takıma koçluk yapar" },
+            { "left": "Developers", "leftTr": "Developers", "right": "Cross-functional team that builds the Increment (the 'how')", "rightTr": "Increment'i inşa eden çapraz-işlevli takım ('nasıl')" }
+          ]
+        },
+        {
+          "type": "challenge",
+          "question": "What are the main differences between Scrum and Agile?"
+        },
+        {
+          "type": "challenge",
+          "question": "What are the roles in Scrum?"
+        },
+        {
+          "type": "challenge",
+          "question": "What are the roles and responsibilities of a Scrum Master?"
+        }
+      ]
+    }
+  ]
+}

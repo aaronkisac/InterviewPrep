@@ -1,0 +1,104 @@
+{
+  "topic": "design-patterns",
+  "slug": "fundamentals-creational",
+  "title": "Fundamentals & Creational Patterns",
+  "titleTr": "Temeller ve Creational Desenler",
+  "section": "foundations",
+  "position": 1,
+  "lessons": [
+    {
+      "slug": "what-patterns-are-and-categories",
+      "title": "What design patterns are & the three categories",
+      "titleTr": "Design pattern nedir ve üç kategori",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Reusable solutions to recurring problems",
+          "titleTr": "Tekrarlayan sorunlara tekrar kullanılabilir çözümler",
+          "body": "**A design pattern** is a **reusable, named solution to a commonly-recurring design problem** in software. Patterns aren't code you copy — they're **proven templates/approaches** you adapt. Popularised by the \"Gang of Four\" (GoF) book.\n\n**Why use them:** a **shared vocabulary** (\"let's use an Observer here\" instantly conveys a design), solutions that are **battle-tested** for maintainability and flexibility, and faster communication in code review and architecture discussions. The caveat: patterns are tools, not goals — **forcing** a pattern where it isn't needed adds needless complexity.\n\nThe GoF organises patterns into **three categories** by what they're concerned with:\n\n- **Creational** — *how objects are created*. They make instantiation flexible and decoupled from concrete classes. Examples: **Singleton, Factory, Builder, Abstract Factory, Prototype**.\n- **Structural** — *how objects/classes are composed* into larger structures. They focus on relationships and interfaces. Examples: **Adapter, Decorator, Facade, Proxy, Composite, Bridge**.\n- **Behavioral** — *how objects communicate and distribute responsibility*. They focus on interaction and algorithms. Examples: **Observer, Strategy, Command, Iterator, State, Mediator**.\n\nMnemonic: Creational = **creating**, Structural = **composing**, Behavioral = **communicating**.",
+          "bodyTr": "**Bir design pattern**, yazılımda **sık tekrarlayan bir tasarım sorununa tekrar kullanılabilir, adlandırılmış bir çözümdür**. Desenler kopyaladığın kod değildir — uyarladığın **kanıtlanmış şablonlardır/yaklaşımlardır**. \"Gang of Four\" (GoF) kitabıyla popülerleşti.\n\n**Neden kullanılır:** **ortak bir kelime dağarcığı** (\"burada Observer kullanalım\" anında bir tasarımı iletir), bakım ve esneklik için **savaşta-test edilmiş** çözümler ve kod incelemesi ile mimari tartışmalarda daha hızlı iletişim. Uyarı: desenler araçtır, amaç değil — gerekli olmadığı yerde bir deseni **zorlamak** gereksiz karmaşıklık ekler.\n\nGoF desenleri, neyle ilgilendiklerine göre **üç kategoride** düzenler:\n\n- **Creational** — *nesnelerin nasıl oluşturulduğu*. Örneklemeyi esnek ve somut sınıflardan ayrık kılarlar. Örnekler: **Singleton, Factory, Builder, Abstract Factory, Prototype**.\n- **Structural** — *nesnelerin/sınıfların nasıl daha büyük yapılara birleştirildiği*. İlişkilere ve arayüzlere odaklanırlar. Örnekler: **Adapter, Decorator, Facade, Proxy, Composite, Bridge**.\n- **Behavioral** — *nesnelerin nasıl iletiştiği ve sorumluluğu dağıttığı*. Etkileşime ve algoritmalara odaklanırlar. Örnekler: **Observer, Strategy, Command, Iterator, State, Mediator**.\n\nAnımsatıcı: Creational = **oluşturma**, Structural = **birleştirme**, Behavioral = **iletişme**."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What does each GoF category focus on?",
+          "promptTr": "Her GoF kategorisi neye odaklanır?",
+          "options": [
+            { "text": "Creational = object creation; Structural = composition; Behavioral = communication/responsibility", "textTr": "Creational = nesne oluşturma; Structural = birleştirme; Behavioral = iletişim/sorumluluk", "correct": true },
+            { "text": "Creational = communication; Structural = creation; Behavioral = composition", "textTr": "Creational = iletişim; Structural = oluşturma; Behavioral = birleştirme" },
+            { "text": "They all do the same thing", "textTr": "Hepsi aynı şeyi yapar" },
+            { "text": "Creational = UI; Structural = database; Behavioral = network", "textTr": "Creational = UI; Structural = veritabanı; Behavioral = ağ" }
+          ],
+          "explanation": "Creational patterns handle how objects are made, Structural how they're composed into bigger structures, and Behavioral how they interact and share responsibility.",
+          "explanationTr": "Creational desenler nesnelerin nasıl yapıldığını, Structural daha büyük yapılara nasıl birleştirildiğini ve Behavioral nasıl etkileştiklerini ve sorumluluğu paylaştıklarını ele alır."
+        },
+        {
+          "type": "match",
+          "prompt": "Match each pattern to its category",
+          "promptTr": "Her deseni kategorisiyle eşleştir",
+          "pairs": [
+            { "left": "Factory", "leftTr": "Factory", "right": "Creational", "rightTr": "Creational" },
+            { "left": "Adapter", "leftTr": "Adapter", "right": "Structural", "rightTr": "Structural" },
+            { "left": "Observer", "leftTr": "Observer", "right": "Behavioral", "rightTr": "Behavioral" }
+          ]
+        },
+        {
+          "type": "challenge",
+          "question": "What is a design pattern and why are they used?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is the difference between Creational, Structural, and Behavioral design patterns?"
+        }
+      ]
+    },
+    {
+      "slug": "creational-patterns",
+      "title": "Creational: Singleton, Factory & Builder",
+      "titleTr": "Creational: Singleton, Factory ve Builder",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Controlling how objects come into being",
+          "titleTr": "Nesnelerin nasıl var olduğunu kontrol etmek",
+          "body": "Three common **creational** patterns:\n\n**Singleton** ensures a class has **exactly one instance** with a **global access point** to it. Use for a single shared resource — a config store, a logger, a DB connection pool. In JS a module export is effectively a singleton. **Caveats:** it's essentially global state, which hurts testability and can hide dependencies; overuse is an anti-pattern.\n\n**Factory** provides a method that **creates objects without the caller specifying the exact class** — you ask the factory for \"a thing\" and it decides which concrete type to return based on input. It **decouples creation from use**, so adding a new type doesn't change call sites. Example: `createButton(os)` returning a platform-specific button. (Abstract Factory extends this to families of related objects.)\n\n**Builder** constructs a **complex object step by step**, separating construction from representation. Instead of a constructor with many parameters (the \"telescoping constructor\" problem), you chain calls: `new QueryBuilder().select(...).where(...).limit(10).build()`. Useful when an object has **many optional parts** or needs a readable, fluent setup. Common in frontend for building queries, configs, or test data.\n\nTogether: **Singleton** = one instance; **Factory** = decide *which* object to make; **Builder** = assemble a complex object piece by piece.",
+          "bodyTr": "Üç yaygın **creational** desen:\n\n**Singleton**, bir sınıfın ona **global bir erişim noktasıyla** **tam olarak bir örneğe** sahip olmasını sağlar. Tek bir paylaşılan kaynak için kullan — bir config store, bir logger, bir DB bağlantı havuzu. JS'te bir modül export'u etkili biçimde bir singleton'dır. **Uyarılar:** esasen global state'tir, test edilebilirliğe zarar verir ve bağımlılıkları gizleyebilir; aşırı kullanım bir anti-pattern'dir.\n\n**Factory**, **çağıranın tam sınıfı belirtmeden nesneler oluşturan** bir metot sağlar — factory'den \"bir şey\" istersin ve o, girdiye göre hangi somut tipi döndüreceğine karar verir. **Oluşturmayı kullanımdan ayırır**, böylece yeni bir tip eklemek çağrı yerlerini değiştirmez. Örnek: platforma özgü bir buton döndüren `createButton(os)`. (Abstract Factory bunu ilişkili nesne ailelerine genişletir.)\n\n**Builder**, **karmaşık bir nesneyi adım adım** inşa eder, inşayı temsilden ayırır. Birçok parametreli bir constructor (\"telescoping constructor\" sorunu) yerine çağrıları zincirlersin: `new QueryBuilder().select(...).where(...).limit(10).build()`. Bir nesnenin **birçok isteğe bağlı parçası** olduğunda ya da okunabilir, akıcı bir kurulum gerektiğinde yararlıdır. Frontend'de sorgu, config ya da test verisi oluşturmak için yaygın.\n\nBirlikte: **Singleton** = tek örnek; **Factory** = *hangi* nesneyi yapacağına karar ver; **Builder** = karmaşık bir nesneyi parça parça birleştir."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Which problem does the Builder pattern solve?",
+          "promptTr": "Builder deseni hangi sorunu çözer?",
+          "options": [
+            { "text": "Constructing a complex object step by step, avoiding a constructor with many parameters", "textTr": "Karmaşık bir nesneyi adım adım inşa etmek, çok parametreli bir constructor'dan kaçınmak", "correct": true },
+            { "text": "Guaranteeing only one instance exists", "textTr": "Yalnızca bir örnek olduğunu garanti etmek" },
+            { "text": "Choosing which subclass to instantiate at runtime", "textTr": "Çalışma zamanında hangi alt sınıfın örnekleneceğini seçmek" },
+            { "text": "Notifying many objects of a change", "textTr": "Birçok nesneyi bir değişiklikten haberdar etmek" }
+          ],
+          "explanation": "Builder assembles a complex object via fluent step-by-step calls (great for many optional fields). Single-instance = Singleton; choosing a subclass = Factory; notifying = Observer.",
+          "explanationTr": "Builder karmaşık bir nesneyi akıcı adım-adım çağrılarla birleştirir (birçok isteğe bağlı alan için harika). Tek-örnek = Singleton; alt sınıf seçme = Factory; haberdar etme = Observer."
+        },
+        {
+          "type": "true_false",
+          "statement": "A Singleton provides a single shared instance with a global access point, but overusing it is essentially global state and can hurt testability.",
+          "statementTr": "Bir Singleton, global erişim noktalı tek bir paylaşılan örnek sağlar ama onu aşırı kullanmak esasen global state'tir ve test edilebilirliğe zarar verebilir.",
+          "answer": true,
+          "explanation": "Singletons are handy for one shared resource but act as global state — they hide dependencies and complicate isolated testing, so use sparingly.",
+          "explanationTr": "Singleton'lar tek bir paylaşılan kaynak için kullanışlıdır ama global state gibi davranır — bağımlılıkları gizler ve izole testi zorlaştırır, bu yüzden az kullan."
+        },
+        {
+          "type": "challenge",
+          "question": "What is the Singleton pattern?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is the Factory pattern?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is the Builder pattern and when would you use it in frontend development?"
+        }
+      ]
+    }
+  ]
+}

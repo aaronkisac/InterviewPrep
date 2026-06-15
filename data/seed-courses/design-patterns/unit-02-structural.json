@@ -1,0 +1,140 @@
+{
+  "topic": "design-patterns",
+  "slug": "structural",
+  "title": "Structural Patterns",
+  "titleTr": "Structural Desenler",
+  "section": "core",
+  "position": 2,
+  "lessons": [
+    {
+      "slug": "decorator-adapter-facade",
+      "title": "Decorator, Adapter & Facade",
+      "titleTr": "Decorator, Adapter ve Facade",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Wrapping to add, convert, or simplify",
+          "titleTr": "Eklemek, dönüştürmek ya da basitleştirmek için sarmak",
+          "body": "Three structural patterns that all **wrap** an object for different reasons:\n\n**Decorator** **adds behaviour to an object dynamically** by wrapping it in another object with the **same interface**. You can stack decorators to compose features without subclass explosion. Example: wrapping a data stream with compression then encryption; or higher-order components / function wrappers in JS that add logging, memoization, etc. Key idea: *same interface, extra behaviour layered on*.\n\n**Adapter** **converts one interface into another** so two incompatible parts can work together — a \"translator.\" You wrap a class whose interface doesn't match what your code expects and expose the interface it does expect. Example: wrapping a third-party SDK so it matches your app's `PaymentProvider` interface, or adapting a legacy API's shape to a new one. Key idea: *make a mismatched interface compatible*.\n\n**Facade** provides a **simplified, unified interface over a complex subsystem**. It hides the messy details behind one easy entry point. In **frontend**, a Facade is everywhere: an API-client module that wraps fetch + auth + error handling behind `api.getUser()`; a service that hides several libraries behind a clean method; a hook like `useAuth()` that fronts a tangle of context, storage, and network calls. Key idea: *one simple door to a complicated room*.\n\nDistinguish them: **Decorator** keeps the interface and *adds*; **Adapter** *changes* the interface; **Facade** *simplifies* access to many things.",
+          "bodyTr": "Hepsi de bir nesneyi farklı sebeplerle **saran** üç structural desen:\n\n**Decorator**, bir nesneyi **aynı arayüze** sahip başka bir nesneye sararak ona **dinamik olarak davranış ekler**. Alt sınıf patlaması olmadan özellikleri birleştirmek için decorator'ları üst üste yığabilirsin. Örnek: bir veri akışını önce sıkıştırma sonra şifreleme ile sarmak; ya da JS'te logging, memoization vb. ekleyen higher-order component'ler / fonksiyon wrapper'ları. Temel fikir: *aynı arayüz, üstüne katmanlanan ekstra davranış*.\n\n**Adapter**, **bir arayüzü başkasına dönüştürür** ki uyumsuz iki parça birlikte çalışabilsin — bir \"çevirmen.\" Arayüzü kodunun beklediğiyle eşleşmeyen bir sınıfı sarar ve beklediği arayüzü sunarsın. Örnek: üçüncü taraf bir SDK'yi uygulamanın `PaymentProvider` arayüzüne uyacak şekilde sarmak ya da legacy bir API'nin şeklini yenisine uyarlamak. Temel fikir: *uyumsuz bir arayüzü uyumlu kıl*.\n\n**Facade**, **karmaşık bir alt sistem üzerinde basitleştirilmiş, birleşik bir arayüz** sağlar. Dağınık detayları tek bir kolay giriş noktası arkasında gizler. **Frontend'de** Facade her yerdedir: fetch + auth + hata işlemeyi `api.getUser()` arkasında saran bir API-istemci modülü; birkaç kütüphaneyi temiz bir metot arkasında gizleyen bir servis; context, storage ve ağ çağrıları karmaşasını önünde sunan `useAuth()` gibi bir hook. Temel fikir: *karmaşık bir odaya tek basit kapı*.\n\nAyırt et: **Decorator** arayüzü korur ve *ekler*; **Adapter** arayüzü *değiştirir*; **Facade** birçok şeye erişimi *basitleştirir*."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What distinguishes Decorator, Adapter, and Facade?",
+          "promptTr": "Decorator, Adapter ve Facade'ı ne ayırt eder?",
+          "options": [
+            {
+              "text": "Decorator adds behaviour (same interface); Adapter converts an interface; Facade simplifies access to a subsystem",
+              "textTr": "Decorator davranış ekler (aynı arayüz); Adapter bir arayüzü dönüştürür; Facade bir alt sisteme erişimi basitleştirir",
+              "correct": true
+            },
+            {
+              "text": "They are three names for the same wrapper",
+              "textTr": "Aynı wrapper için üç isimdir"
+            },
+            {
+              "text": "All three create single instances",
+              "textTr": "Üçü de tek örnek oluşturur"
+            },
+            {
+              "text": "Decorator converts interfaces; Adapter adds behaviour",
+              "textTr": "Decorator arayüzleri dönüştürür; Adapter davranış ekler"
+            }
+          ],
+          "explanation": "All wrap, but for different goals: add (Decorator, same interface), translate (Adapter, new interface), or simplify a complex subsystem behind one entry point (Facade).",
+          "explanationTr": "Hepsi sarar ama farklı amaçlarla: ekle (Decorator, aynı arayüz), çevir (Adapter, yeni arayüz) ya da karmaşık bir alt sistemi tek giriş noktası arkasında basitleştir (Facade)."
+        },
+        {
+          "type": "true_false",
+          "statement": "An API-client module that wraps fetch, auth, and error handling behind methods like api.getUser() is a Facade.",
+          "statementTr": "fetch, auth ve hata işlemeyi api.getUser() gibi metotlar arkasında saran bir API-istemci modülü bir Facade'dır.",
+          "answer": true,
+          "explanation": "It exposes a simple, unified interface over a complex subsystem (HTTP + tokens + retries + errors) — the textbook frontend Facade.",
+          "explanationTr": "Karmaşık bir alt sistem (HTTP + token'lar + retry + hatalar) üzerinde basit, birleşik bir arayüz sunar — ders kitabı frontend Facade'ı."
+        },
+        {
+          "type": "challenge",
+          "question": "What is the Decorator pattern?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is the Adapter pattern?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is the Facade pattern and how is it used in frontend applications?"
+        }
+      ]
+    },
+    {
+      "slug": "proxy-composite-module",
+      "title": "Proxy, Composite & the Module pattern",
+      "titleTr": "Proxy, Composite ve Module deseni",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Stand-ins, trees, and encapsulation",
+          "titleTr": "Vekiller, ağaçlar ve kapsülleme",
+          "body": "**Proxy** provides a **stand-in/placeholder for another object to control access to it**, exposing the **same interface** so callers can't tell the difference. The proxy can add logic before/after delegating to the real object: **lazy loading** (create the heavy object only on first use), **access control/auth**, **caching**, **logging**, or **remote** calls. JavaScript even has a built-in `Proxy` object that intercepts property reads/writes (used by reactive frameworks like Vue). Key idea: *same interface, but mediated access*. (Compare with Decorator, which adds behaviour rather than controlling access.)\n\n**Composite** lets you **treat individual objects and compositions of objects uniformly** by giving both the **same interface**, forming a **tree**. A \"leaf\" and a \"container of leaves\" respond to the same operations, so client code doesn't care whether it's dealing with one or many. Classic examples: a file-system (files and folders), or a **UI component tree** (a button and a panel containing buttons both `render()`), which is exactly how React's nested components work. Key idea: *part-whole hierarchies handled the same way*.\n\n**The Module pattern (JavaScript)** uses a **closure** (historically an IIFE) to create **private state** and expose only a **public API**, achieving **encapsulation** before ES modules existed:\n\n```js\nconst counter = (() => {\n  let count = 0;                  // private\n  return { inc: () => ++count, get: () => count };  // public\n})();\n```\n\nIt hides internals and avoids polluting the global scope. Today **ES modules** (`import`/`export`) provide this natively — each file is its own module with private top-level bindings — but the pattern's idea (private vs public via closure) still underpins lots of JS.",
+          "bodyTr": "**Proxy**, **ona erişimi kontrol etmek için başka bir nesnenin yerine geçen bir vekil/placeholder** sağlar, **aynı arayüzü** sunar ki çağıranlar farkı anlayamasın. Proxy, gerçek nesneye devretmeden önce/sonra mantık ekleyebilir: **lazy loading** (ağır nesneyi yalnızca ilk kullanımda oluştur), **erişim kontrolü/auth**, **caching**, **logging** ya da **uzak** çağrılar. JavaScript'in hatta property okuma/yazmalarını araya giren yerleşik bir `Proxy` nesnesi vardır (Vue gibi reaktif framework'lerce kullanılır). Temel fikir: *aynı arayüz, ama aracılı erişim*. (Erişimi kontrol etmek yerine davranış ekleyen Decorator ile karşılaştır.)\n\n**Composite**, her ikisine de **aynı arayüzü** vererek **bireysel nesneleri ve nesne birleşimlerini tekdüze ele almanı** sağlar, bir **ağaç** oluşturur. Bir \"yaprak\" ve bir \"yapraklar konteyneri\" aynı işlemlere yanıt verir, böylece istemci kodu bir mi çoğunu mu ele aldığını umursamaz. Klasik örnekler: bir dosya sistemi (dosyalar ve klasörler) ya da bir **UI bileşen ağacı** (bir buton ve buton içeren bir panel ikisi de `render()`), ki React'in iç içe bileşenlerinin tam olarak çalışma şekli budur. Temel fikir: *parça-bütün hiyerarşileri aynı şekilde ele alınır*.\n\n**Module deseni (JavaScript)**, **private state** oluşturmak ve yalnızca bir **public API** sunmak için bir **closure** (tarihsel olarak bir IIFE) kullanır, ES modülleri var olmadan önce **kapsülleme** sağlar:\n\n```js\nconst counter = (() => {\n  let count = 0;                  // private\n  return { inc: () => ++count, get: () => count };  // public\n})();\n```\n\nİç yapıyı gizler ve global scope'u kirletmekten kaçınır. Bugün **ES modülleri** (`import`/`export`) bunu native sağlar — her dosya private top-level binding'leriyle kendi modülüdür — ama desenin fikri (closure ile private vs public) hâlâ çok sayıda JS'in temelidir."
+        },
+        {
+          "type": "mcq",
+          "prompt": "How does Proxy differ from Decorator?",
+          "promptTr": "Proxy, Decorator'dan nasıl farklıdır?",
+          "options": [
+            {
+              "text": "Proxy controls access to the same-interface object (lazy load, auth, cache); Decorator adds new behaviour",
+              "textTr": "Proxy, aynı-arayüzlü nesneye erişimi kontrol eder (lazy load, auth, cache); Decorator yeni davranış ekler",
+              "correct": true
+            },
+            {
+              "text": "Proxy changes the interface; Decorator keeps it",
+              "textTr": "Proxy arayüzü değiştirir; Decorator korur"
+            },
+            {
+              "text": "They are identical",
+              "textTr": "Aynılar"
+            },
+            {
+              "text": "Proxy builds trees of objects",
+              "textTr": "Proxy nesne ağaçları kurar"
+            }
+          ],
+          "explanation": "Both share the wrapped object's interface, but Proxy mediates/controls access (lazy, auth, cache, logging), whereas Decorator layers on additional behaviour. Trees of objects = Composite.",
+          "explanationTr": "İkisi de sarılan nesnenin arayüzünü paylaşır ama Proxy erişimi aracılar/kontrol eder (lazy, auth, cache, logging), oysa Decorator ek davranış katmanlar. Nesne ağaçları = Composite."
+        },
+        {
+          "type": "fill_blank",
+          "prompt": "The Module pattern uses a closure to keep state private",
+          "promptTr": "Module deseni state'i private tutmak için bir closure kullanır",
+          "code": "const m = (() => {\n  let secret = 0;   // ___\n  return { get: () => secret };\n})();",
+          "answers": [
+            "private"
+          ],
+          "distractors": [
+            "public",
+            "global",
+            "export"
+          ],
+          "explanation": "The variable inside the closure isn't accessible outside — it's private. Only what the returned object exposes is public.",
+          "explanationTr": "Closure içindeki değişkene dışarıdan erişilemez — private'dır. Yalnızca döndürülen nesnenin sunduğu public'tir."
+        },
+        {
+          "type": "challenge",
+          "question": "What is the Proxy pattern?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is the Composite pattern?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is the Module pattern in JavaScript?"
+        }
+      ]
+    }
+  ]
+}

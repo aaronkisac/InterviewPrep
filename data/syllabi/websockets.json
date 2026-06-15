@@ -1,0 +1,77 @@
+{
+  "topic": "websockets",
+  "title": "WebSockets",
+  "$comment": "Canonical concept list (syllabus) for WebSockets. COMPLETE: 3 units, 7 concepts covering bank ids 1101-1118 (18/18). Verified by: pnpm concept:coverage",
+  "concepts": [
+    {
+      "id": "what-websocket-is-and-why",
+      "title": "What WebSocket is & why over HTTP",
+      "titleTr": "WebSocket nedir ve neden HTTP yerine",
+      "section": "foundations",
+      "unit": "realtime-foundations",
+      "lessons": [
+        "what-websocket-is-and-why"
+      ]
+    },
+    {
+      "id": "polling-and-realtime-landscape",
+      "title": "Polling & the real-time landscape",
+      "titleTr": "Polling ve gerçek zamanlı manzara",
+      "section": "foundations",
+      "unit": "realtime-foundations",
+      "lessons": [
+        "polling-and-realtime-landscape"
+      ]
+    },
+    {
+      "id": "sse-and-ws-vs-sse",
+      "title": "Server-Sent Events & WS vs SSE",
+      "titleTr": "Server-Sent Events ve WS vs SSE",
+      "section": "core",
+      "unit": "ws-vs-alternatives",
+      "lessons": [
+        "sse-and-ws-vs-sse"
+      ]
+    },
+    {
+      "id": "socketio-and-ws-vs-rest",
+      "title": "Socket.io & WebSocket vs REST",
+      "titleTr": "Socket.io ve WebSocket vs REST",
+      "section": "core",
+      "unit": "ws-vs-alternatives",
+      "lessons": [
+        "socketio-and-ws-vs-rest"
+      ]
+    },
+    {
+      "id": "performance-and-webrtc",
+      "title": "Performance vs polling & WebRTC",
+      "titleTr": "Polling'e karşı performans ve WebRTC",
+      "section": "core",
+      "unit": "ws-vs-alternatives",
+      "lessons": [
+        "performance-and-webrtc"
+      ]
+    },
+    {
+      "id": "scaling-and-securing",
+      "title": "Scaling & securing WebSockets",
+      "titleTr": "WebSocket'leri ölçeklemek ve güvene almak",
+      "section": "advanced",
+      "unit": "production-protocol",
+      "lessons": [
+        "scaling-and-securing"
+      ]
+    },
+    {
+      "id": "protocol-internals",
+      "title": "Protocol internals: handshake, frames & TCP",
+      "titleTr": "Protokol iç yapısı: handshake, frame'ler ve TCP",
+      "section": "advanced",
+      "unit": "production-protocol",
+      "lessons": [
+        "protocol-internals"
+      ]
+    }
+  ]
+}

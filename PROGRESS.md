@@ -173,7 +173,13 @@ Same retro rules apply: challenge texts byte-for-byte from seed JSON, 5–9 step
 
 **Git course COMPLETE** (bank 901–921, 21 q) — 4 units, 10 lessons, **21/21**. `data/seed-courses/git/` + `data/syllabi/git.json`. Units: 01 Fundamentals (901/902 · 903/909), 02 Branching & Collaboration (905/904 · 906/912), 03 Undoing & Rewriting (907/914 · 908/915 · 919/917), 04 Workflows & Advanced (910/911/913 · 916/918 · 920/921). Uses match + order steps. **Needs `pnpm seed courses` + coverage + play-test.**
 
-**Course scale-out status (2026-06-14): React ✓, TypeScript ✓, Next.js ✓, JavaScript ✓, Redux ✓ (35/35), React Hooks ✓ (29/29), HTML5 ✓ (51/51), CSS ✓ (33/33), Git ✓ (21/21).** Remaining "small" batch (Aaron-approved order): unit-testing, design-patterns, websockets, agile-scrum. Then big ones: software-architecture, api-design.
+**Unit Testing course COMPLETE** (bank 1201–1216, 16 q) — 3 units, 7 lessons, **16/16**. `data/seed-courses/unit-testing/` + `data/syllabi/unit-testing.json`. Units: 01 Fundamentals (1202/1204 · 1203/1205), 02 Mocking & What to Test (1201/1207/1208 · 1206/1210), 03 Hard-to-Test & Strategy (1211/1213 · 1212/1216 · 1209/1214/1215). Uses match + order steps.
+
+**Design Patterns course COMPLETE** (bank 1301–1316, 16 q) — 3 units, 6 lessons, **16/16**. `data/seed-courses/design-patterns/` + syllabus. Units: 01 Fundamentals & Creational (1301/1303 · 1302/1305/1315), 02 Structural (1307/1312/1311 · 1309/1313/1306), 03 Behavioral & Practice (1304/1308/1310 · 1314/1316). Uses match + fill_blank steps.
+
+**WebSockets course COMPLETE** (bank 1101–1118, 18 q) — 3 units, 7 lessons, **18/18**. `data/seed-courses/websockets/` + syllabus. Units: 01 Real-time Foundations (1101/1102 · 1103/1104/1105), 02 WS vs Alternatives (1106/1107/1110 · 1108/1109 · 1111/1112), 03 Production & Protocol (1113/1114/1115 · 1116/1117/1118). Uses order steps.
+
+**Course scale-out status (2026-06-14): React ✓, TypeScript ✓, Next.js ✓, JavaScript ✓, Redux ✓ (35/35), React Hooks ✓ (29/29), HTML5 ✓ (51/51), CSS ✓ (33/33), Git ✓ (21/21), Unit Testing ✓ (16/16), Design Patterns ✓ (16/16), WebSockets ✓ (18/18).** Remaining "small" batch: agile-scrum. Then big ones: software-architecture, api-design.
 
 ---
 

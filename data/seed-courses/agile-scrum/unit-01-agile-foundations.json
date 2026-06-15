@@ -1,0 +1,102 @@
+{
+  "topic": "agile-scrum",
+  "slug": "agile-foundations",
+  "title": "Agile Foundations",
+  "titleTr": "Agile Temelleri",
+  "section": "foundations",
+  "position": 1,
+  "lessons": [
+    {
+      "slug": "what-agile-is",
+      "title": "What Agile is: Manifesto, values & principles",
+      "titleTr": "Agile nedir: Manifesto, değerler ve ilkeler",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "A mindset, not a process",
+          "titleTr": "Bir süreç değil, bir zihniyet",
+          "body": "**Agile** is an **iterative, incremental approach** to building software that values **flexibility, collaboration, and delivering working software frequently** over rigid up-front planning. Instead of one big \"waterfall\" delivery, you ship in **short cycles**, gather feedback, and adapt. Agile is an **umbrella mindset**; Scrum, Kanban, and XP are specific frameworks under it.\n\n**The Agile Manifesto (2001)** captures this in **4 values** — each prefers the left over the right (without discarding the right):\n\n1. **Individuals and interactions** over processes and tools\n2. **Working software** over comprehensive documentation\n3. **Customer collaboration** over contract negotiation\n4. **Responding to change** over following a plan\n\nThe key phrase: *\"while there is value in the items on the right, we value the items on the left more.\"*\n\n**The 12 Agile Principles** expand the Manifesto into practice. Highlights: **satisfy the customer through early and continuous delivery**; **welcome changing requirements**, even late; **deliver working software frequently** (weeks, not months); **business people and developers work together daily**; **build projects around motivated individuals**; favour **face-to-face conversation**; **working software is the primary measure of progress**; promote **sustainable pace**; **continuous attention to technical excellence**; **simplicity** (maximise work *not* done); **self-organizing teams**; and **regular reflection** to tune behaviour (the retrospective). You don't memorise all 12 verbatim, but you should know the themes: customer value, embracing change, frequent delivery, collaboration, sustainability, and continuous improvement.",
+          "bodyTr": "**Agile**, yazılım inşa etmeye yönelik **iteratif, artımlı bir yaklaşımdır**; katı önceden planlamadan çok **esnekliğe, işbirliğine ve çalışan yazılımı sık teslim etmeye** değer verir. Tek bir büyük \"waterfall\" teslimat yerine **kısa döngülerde** yayınlar, geri bildirim toplar ve uyum sağlarsın. Agile bir **şemsiye zihniyettir**; Scrum, Kanban ve XP onun altındaki belirli framework'lerdir.\n\n**Agile Manifesto (2001)** bunu **4 değerde** yakalar — her biri soldakini sağdakine tercih eder (sağdakini atmadan):\n\n1. Süreçler ve araçlardan çok **bireyler ve etkileşimler**\n2. Kapsamlı dokümantasyondan çok **çalışan yazılım**\n3. Sözleşme pazarlığından çok **müşteri işbirliği**\n4. Bir planı izlemekten çok **değişime yanıt verme**\n\nAnahtar ifade: *\"sağdaki maddelerde değer olsa da, soldaki maddelere daha çok değer veriyoruz.\"*\n\n**12 Agile İlkesi** Manifesto'yu pratiğe genişletir. Öne çıkanlar: **müşteriyi erken ve sürekli teslimatla memnun et**; geç bile olsa **değişen gereksinimleri karşıla**; **çalışan yazılımı sık teslim et** (ay değil hafta); **iş insanları ve geliştiriciler her gün birlikte çalışır**; **motive bireyler etrafında proje kur**; **yüz yüze konuşmayı** tercih et; **çalışan yazılım ilerlemenin birincil ölçüsüdür**; **sürdürülebilir tempoyu** teşvik et; **teknik mükemmelliğe sürekli dikkat**; **sadelik** (yapılMAyan işi maksimize et); **kendi-kendini örgütleyen takımlar**; ve davranışı ayarlamak için **düzenli yansıma** (retrospektif). 12'sini kelimesi kelimesine ezberlemezsin ama temaları bilmelisin: müşteri değeri, değişimi kucaklama, sık teslimat, işbirliği, sürdürülebilirlik ve sürekli iyileştirme."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Which is one of the four Agile Manifesto values?",
+          "promptTr": "Hangisi dört Agile Manifesto değerinden biridir?",
+          "options": [
+            { "text": "Working software over comprehensive documentation", "textTr": "Kapsamlı dokümantasyondan çok çalışan yazılım", "correct": true },
+            { "text": "Detailed contracts over customer collaboration", "textTr": "Müşteri işbirliğinden çok detaylı sözleşmeler" },
+            { "text": "Following a fixed plan over responding to change", "textTr": "Değişime yanıt vermekten çok sabit bir planı izlemek" },
+            { "text": "Tools and processes over individuals", "textTr": "Bireylerden çok araçlar ve süreçler" }
+          ],
+          "explanation": "The four values prefer: individuals & interactions, working software, customer collaboration, and responding to change — each over its right-hand counterpart.",
+          "explanationTr": "Dört değer şunları tercih eder: bireyler & etkileşimler, çalışan yazılım, müşteri işbirliği ve değişime yanıt verme — her biri sağ taraftaki karşılığına göre."
+        },
+        {
+          "type": "true_false",
+          "statement": "Agile is itself a specific framework, the same thing as Scrum.",
+          "statementTr": "Agile kendisi belirli bir framework'tür, Scrum'la aynı şeydir.",
+          "answer": false,
+          "explanation": "Agile is an umbrella mindset/philosophy (Manifesto + principles). Scrum, Kanban, and XP are concrete frameworks that implement Agile.",
+          "explanationTr": "Agile bir şemsiye zihniyet/felsefedir (Manifesto + ilkeler). Scrum, Kanban ve XP, Agile'ı uygulayan somut framework'lerdir."
+        },
+        {
+          "type": "challenge",
+          "question": "What is Agile?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is the Agile Manifesto and what are its 4 values?"
+        },
+        {
+          "type": "challenge",
+          "question": "What are the 12 Agile Principles?"
+        }
+      ]
+    },
+    {
+      "slug": "iterative-vs-incremental",
+      "title": "Iterations: iterative vs incremental",
+      "titleTr": "İterasyonlar: iteratif vs artımlı",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Two dimensions of delivering in pieces",
+          "titleTr": "Parça parça teslimatın iki boyutu",
+          "body": "**An Agile iteration** is a **short, fixed-length, time-boxed development cycle** (often 1–4 weeks) that produces a **potentially shippable increment** of working software. Each iteration includes planning, building, testing, and review, then feedback feeds the next one. In Scrum, an iteration is called a **Sprint**. Iterations give a steady rhythm, frequent feedback, and the ability to change direction between cycles.\n\n**Iterative vs incremental development** — Agile is **both**, but they mean different things:\n\n- **Incremental** = building the product in **pieces (increments)**, adding one working slice of functionality at a time. Think building a house room by room — each increment is a *new* finished part. (Mona Lisa analogy: paint the bottom-left section fully, then the next section.)\n- **Iterative** = building a **rough version of the whole**, then **refining it** over repeated passes. Think sketching the entire painting, then improving detail and quality each iteration. (Mona Lisa: a rough full sketch first, then refine the whole thing each pass.)\n\nSo *incremental* adds **new** functionality; *iterative* **revisits and improves** what's there. Agile combines them: each iteration delivers a new increment **and** lets you refine earlier work based on feedback — you both add slices and polish the whole as understanding grows.",
+          "bodyTr": "**Bir Agile iterasyonu**, çalışan yazılımın **potansiyel olarak teslim edilebilir bir artımını** üreten **kısa, sabit-uzunluklu, zaman-kutulu bir geliştirme döngüsüdür** (genelde 1–4 hafta). Her iterasyon planlama, inşa, test ve review içerir, sonra geri bildirim bir sonrakini besler. Scrum'da bir iterasyona **Sprint** denir. İterasyonlar düzenli bir ritim, sık geri bildirim ve döngüler arası yön değiştirme yeteneği verir.\n\n**İteratif vs artımlı geliştirme** — Agile **ikisidir** ama farklı şeyler ifade ederler:\n\n- **Artımlı (incremental)** = ürünü **parçalar (artımlar) halinde** inşa etmek, her seferinde bir çalışan işlevsellik dilimi ekleyerek. Bir evi oda oda inşa etmeyi düşün — her artım *yeni* bitmiş bir parçadır. (Mona Lisa benzetmesi: sol-alt bölümü tamamen boya, sonra bir sonraki bölümü.)\n- **İteratif (iterative)** = **bütünün kaba bir sürümünü** inşa etmek, sonra tekrarlı geçişlerle onu **iyileştirmek**. Tüm tabloyu çizip sonra her iterasyonda detay ve kaliteyi artırmayı düşün. (Mona Lisa: önce kaba bir tam taslak, sonra her geçişte tümünü iyileştir.)\n\nYani *artımlı* **yeni** işlevsellik ekler; *iteratif* var olanı **tekrar ziyaret eder ve iyileştirir**. Agile ikisini birleştirir: her iterasyon yeni bir artım teslim eder **ve** geri bildirime göre önceki işi iyileştirmene izin verir — anlayış arttıkça hem dilim eklersin hem de bütünü cilalarsın."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What's the difference between incremental and iterative development?",
+          "promptTr": "Artımlı ile iteratif geliştirme arasındaki fark nedir?",
+          "options": [
+            { "text": "Incremental adds new finished slices; iterative builds a rough whole then refines it over passes", "textTr": "Artımlı yeni bitmiş dilimler ekler; iteratif kaba bir bütün inşa edip sonra geçişlerle iyileştirir", "correct": true },
+            { "text": "They are the same thing", "textTr": "Aynı şeydir" },
+            { "text": "Incremental means refining; iterative means adding", "textTr": "Artımlı iyileştirme demek; iteratif ekleme demek" },
+            { "text": "Both mean delivering everything at the end (waterfall)", "textTr": "İkisi de her şeyi sonunda teslim etmek (waterfall) demek" }
+          ],
+          "explanation": "Incremental = add new working pieces one at a time; iterative = make a rough version of the whole and improve it each cycle. Agile uses both.",
+          "explanationTr": "Artımlı = yeni çalışan parçaları teker teker ekle; iteratif = bütünün kaba bir sürümünü yap ve her döngüde iyileştir. Agile ikisini de kullanır."
+        },
+        {
+          "type": "true_false",
+          "statement": "An Agile iteration is a short, time-boxed cycle that produces a potentially shippable increment (a Sprint in Scrum).",
+          "statementTr": "Bir Agile iterasyonu, potansiyel teslim edilebilir bir artım üreten kısa, zaman-kutulu bir döngüdür (Scrum'da bir Sprint).",
+          "answer": true,
+          "explanation": "Iterations are fixed-length cycles (1–4 weeks) ending in working software and feedback; Scrum names this a Sprint.",
+          "explanationTr": "İterasyonlar, çalışan yazılım ve geri bildirimle biten sabit-uzunluklu döngülerdir (1–4 hafta); Scrum buna Sprint der."
+        },
+        {
+          "type": "challenge",
+          "question": "What is an Agile iteration?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is the difference between Incremental and Iterative development in Agile?"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,102 @@
+{
+  "topic": "websockets",
+  "slug": "realtime-foundations",
+  "title": "Real-time Foundations",
+  "titleTr": "Gerçek Zamanlı Temeller",
+  "section": "foundations",
+  "position": 1,
+  "lessons": [
+    {
+      "slug": "what-websocket-is-and-why",
+      "title": "What WebSocket is & why over HTTP",
+      "titleTr": "WebSocket nedir ve neden HTTP yerine",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "A persistent two-way channel",
+          "titleTr": "Kalıcı çift yönlü bir kanal",
+          "body": "**WebSocket** is a protocol that provides a **persistent, full-duplex (two-way) connection** between client and server over a single TCP connection. Once open, **either side can send messages at any time** with very low overhead, until one side closes it. It's designed for **real-time** apps: chat, live notifications, collaborative editing, multiplayer games, live dashboards, trading tickers.\n\nIt starts life as an HTTP request: the client sends an **HTTP Upgrade** handshake (`Upgrade: websocket`), the server agrees (`101 Switching Protocols`), and the connection then **switches** from HTTP to the WebSocket protocol on the same socket. URLs use the **`ws://`** / **`wss://`** (TLS) schemes.\n\n**Why use WebSocket over plain HTTP?** Classic HTTP is **request–response** and **half-duplex**: the client must **ask** for data, the server can't **push** unsolicited, and every exchange carries **full HTTP headers** plus connection setup. To simulate real-time over HTTP you must **poll** (repeatedly request), which wastes bandwidth and adds latency. WebSocket fixes this:\n\n- **Server push** — the server can send data the instant something happens, no polling.\n- **Low overhead** — after the handshake, messages are tiny frames (a few bytes of framing), not full headers per message.\n- **Low latency, bidirectional** — both directions stay open, so updates are near-instant.\n\nUse WebSocket when you need **frequent, low-latency, bidirectional** updates; stick with HTTP for ordinary request/response (it's simpler, cacheable, and stateless).",
+          "bodyTr": "**WebSocket**, istemci ve sunucu arasında tek bir TCP bağlantısı üzerinden **kalıcı, full-duplex (çift yönlü) bir bağlantı** sağlayan bir protokoldür. Bir kez açıldığında, biri kapatana kadar **her iki taraf da çok düşük yük ile istediği zaman mesaj gönderebilir**. **Gerçek zamanlı** uygulamalar için tasarlanmıştır: chat, canlı bildirimler, işbirlikçi düzenleme, çok oyunculu oyunlar, canlı dashboard'lar, borsa ticker'ları.\n\nHayata bir HTTP isteği olarak başlar: istemci bir **HTTP Upgrade** handshake'i gönderir (`Upgrade: websocket`), sunucu kabul eder (`101 Switching Protocols`) ve bağlantı aynı socket üzerinde HTTP'den WebSocket protokolüne **geçer**. URL'ler **`ws://`** / **`wss://`** (TLS) şemalarını kullanır.\n\n**Neden düz HTTP yerine WebSocket?** Klasik HTTP **request–response** ve **half-duplex**'tir: istemci veriyi **istemek** zorundadır, sunucu istenmeden **push** edemez ve her alışveriş **tam HTTP başlıkları** artı bağlantı kurulumu taşır. HTTP üzerinde gerçek zamanlıyı simüle etmek için **polling** yapmalısın (tekrar tekrar istek), bu bant genişliği israf eder ve gecikme ekler. WebSocket bunu düzeltir:\n\n- **Server push** — sunucu bir şey olur olmaz veri gönderebilir, polling yok.\n- **Düşük yük** — handshake'ten sonra mesajlar mesaj başına tam başlık değil, küçük frame'lerdir (birkaç byte framing).\n- **Düşük gecikme, çift yönlü** — iki yön de açık kalır, böylece güncellemeler neredeyse anlıktır.\n\n**Sık, düşük-gecikmeli, çift yönlü** güncellemeler gerektiğinde WebSocket kullan; sıradan request/response için HTTP'de kal (daha basit, önbelleklenebilir ve stateless)."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What is the defining characteristic of WebSocket vs HTTP?",
+          "promptTr": "WebSocket'in HTTP'ye karşı tanımlayıcı özelliği nedir?",
+          "options": [
+            { "text": "A persistent, full-duplex connection where the server can push at any time with low overhead", "textTr": "Sunucunun düşük yükle istediği zaman push edebildiği kalıcı, full-duplex bir bağlantı", "correct": true },
+            { "text": "It caches responses better than HTTP", "textTr": "Yanıtları HTTP'den daha iyi önbelleğe alır" },
+            { "text": "It is request-response and half-duplex like HTTP", "textTr": "HTTP gibi request-response ve half-duplex'tir" },
+            { "text": "It only works for downloading files", "textTr": "Yalnızca dosya indirmek için çalışır" }
+          ],
+          "explanation": "WebSocket keeps one connection open for two-way, low-overhead messaging — the server can push instantly, unlike HTTP's client-initiated request/response.",
+          "explanationTr": "WebSocket, çift yönlü, düşük-yüklü mesajlaşma için tek bir bağlantıyı açık tutar — HTTP'nin istemci-başlatmalı request/response'unun aksine sunucu anında push edebilir."
+        },
+        {
+          "type": "true_false",
+          "statement": "A WebSocket connection begins with an HTTP Upgrade handshake and a 101 Switching Protocols response.",
+          "statementTr": "Bir WebSocket bağlantısı bir HTTP Upgrade handshake'i ve bir 101 Switching Protocols yanıtıyla başlar.",
+          "answer": true,
+          "explanation": "The client requests an upgrade; the server replies 101 and the same TCP socket switches from HTTP to the WebSocket protocol (ws:// or wss://).",
+          "explanationTr": "İstemci bir upgrade ister; sunucu 101 yanıtı verir ve aynı TCP socket HTTP'den WebSocket protokolüne geçer (ws:// ya da wss://)."
+        },
+        {
+          "type": "challenge",
+          "question": "What is WebSocket?"
+        },
+        {
+          "type": "challenge",
+          "question": "Why use WebSocket over HTTP?"
+        }
+      ]
+    },
+    {
+      "slug": "polling-and-realtime-landscape",
+      "title": "Polling & the real-time landscape",
+      "titleTr": "Polling ve gerçek zamanlı manzara",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "How real-time was done before, and the options today",
+          "titleTr": "Gerçek zamanlının eskiden nasıl yapıldığı ve bugünkü seçenekler",
+          "body": "Before WebSocket, real-time updates were faked over HTTP with **polling**.\n\n**Short polling** — the client **repeatedly requests** the server on a fixed interval (\"any updates? any updates?\"). **Problems:** most requests return **nothing new** (wasted bandwidth and server load), updates are delayed by up to the polling interval (**latency**), and every poll pays full HTTP-header + connection overhead. Tighter intervals reduce latency but multiply waste.\n\n**Long polling** — the client requests, and the server **holds the request open** until it has data (or a timeout), then responds; the client immediately re-requests. This gives **near-real-time** delivery with far fewer empty responses than short polling, but each message still costs a full request/response cycle, and holding many open requests strains the server. It was the standard real-time hack pre-WebSocket.\n\n**Real-time techniques on the web today:**\n\n- **Short polling** / **long polling** — HTTP-based, simple, work everywhere, but inefficient.\n- **Server-Sent Events (SSE)** — server→client **one-way** streaming over HTTP.\n- **WebSocket** — full **two-way**, low-latency, the general-purpose real-time choice.\n- **WebRTC** — peer-to-peer media/data, for low-latency audio/video and direct client-to-client data.\n- (Plus higher-level libs like **Socket.io** that wrap WebSocket with fallbacks.)\n\nThe trend: polling for trivial/legacy cases, **SSE** for simple server push, **WebSocket** for interactive bidirectional apps.",
+          "bodyTr": "WebSocket'ten önce, gerçek zamanlı güncellemeler HTTP üzerinde **polling** ile taklit edilirdi.\n\n**Short polling** — istemci, sunucuyu sabit bir aralıkta **tekrar tekrar ister** (\"güncelleme var mı? güncelleme var mı?\"). **Sorunlar:** çoğu istek **yeni bir şey döndürmez** (boşa bant genişliği ve sunucu yükü), güncellemeler polling aralığı kadar gecikir (**gecikme**) ve her poll tam HTTP-başlık + bağlantı yükü öder. Daha sıkı aralıklar gecikmeyi azaltır ama israfı katlar.\n\n**Long polling** — istemci ister ve sunucu verisi olana (ya da bir timeout'a) kadar **isteği açık tutar**, sonra yanıtlar; istemci hemen yeniden ister. Bu, short polling'den çok daha az boş yanıtla **neredeyse-gerçek-zamanlı** teslimat verir ama her mesaj hâlâ tam bir request/response döngüsüne mal olur ve birçok açık isteği tutmak sunucuyu zorlar. WebSocket-öncesi standart gerçek zamanlı hack'ti.\n\n**Bugün web'de gerçek zamanlı teknikler:**\n\n- **Short polling** / **long polling** — HTTP tabanlı, basit, her yerde çalışır ama verimsiz.\n- **Server-Sent Events (SSE)** — HTTP üzerinde sunucu→istemci **tek yönlü** streaming.\n- **WebSocket** — tam **çift yönlü**, düşük-gecikmeli, genel amaçlı gerçek zamanlı seçim.\n- **WebRTC** — peer-to-peer medya/veri, düşük-gecikmeli ses/video ve doğrudan istemci-istemci veri için.\n- (Artı WebSocket'i fallback'lerle saran **Socket.io** gibi üst-seviye kütüphaneler.)\n\nEğilim: önemsiz/legacy durumlar için polling, basit server push için **SSE**, etkileşimli çift yönlü uygulamalar için **WebSocket**."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What's the difference between short polling and long polling?",
+          "promptTr": "Short polling ile long polling arasındaki fark nedir?",
+          "options": [
+            { "text": "Short polling re-requests on a fixed interval (many empty responses); long polling holds the request open until data is ready", "textTr": "Short polling sabit aralıkta yeniden ister (çok sayıda boş yanıt); long polling veri hazır olana kadar isteği açık tutar", "correct": true },
+            { "text": "Long polling never contacts the server", "textTr": "Long polling sunucuyla asla iletişmez" },
+            { "text": "Short polling is a two-way persistent connection", "textTr": "Short polling çift yönlü kalıcı bir bağlantıdır" },
+            { "text": "They are identical", "textTr": "Aynılar" }
+          ],
+          "explanation": "Short polling spams requests at intervals (mostly empty); long polling keeps each request hanging until there's data, cutting empty responses but still paying per-message HTTP overhead.",
+          "explanationTr": "Short polling aralıklarla istek yağdırır (çoğu boş); long polling her isteği veri olana kadar bekletir, boş yanıtları azaltır ama hâlâ mesaj başına HTTP yükü öder."
+        },
+        {
+          "type": "true_false",
+          "statement": "Short polling wastes bandwidth because most requests return no new data and each carries full HTTP overhead.",
+          "statementTr": "Short polling bant genişliği israf eder çünkü çoğu istek yeni veri döndürmez ve her biri tam HTTP yükü taşır.",
+          "answer": true,
+          "explanation": "That inefficiency (empty responses + header/connection overhead + interval latency) is exactly why long polling and then WebSocket/SSE were adopted.",
+          "explanationTr": "Bu verimsizlik (boş yanıtlar + başlık/bağlantı yükü + aralık gecikmesi), long polling'in ve sonra WebSocket/SSE'nin benimsenmesinin tam sebebidir."
+        },
+        {
+          "type": "challenge",
+          "question": "What is Short Polling and what are its problems?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is Long Polling?"
+        },
+        {
+          "type": "challenge",
+          "question": "What different real-time communication techniques exist on the web?"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,111 @@
+{
+  "topic": "websockets",
+  "slug": "production-protocol",
+  "title": "Production & Protocol Internals",
+  "titleTr": "Üretim ve Protokol İç Yapısı",
+  "section": "advanced",
+  "position": 3,
+  "lessons": [
+    {
+      "slug": "scaling-and-securing",
+      "title": "Scaling & securing WebSockets",
+      "titleTr": "WebSocket'leri ölçeklemek ve güvene almak",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Many connections, safely",
+          "titleTr": "Çok sayıda bağlantı, güvenle",
+          "body": "**Load balancing WebSocket connections:** because a WebSocket is a **long-lived, stateful** connection (not independent requests), the load balancer must keep each client pinned to a working backend. Key techniques:\n\n- **Sticky sessions (session affinity)** — route a client consistently to the same server for the life of the connection. The LB must operate at **L4 (TCP)** or be **WebSocket-aware at L7** (and pass the `Upgrade` header).\n- **A shared backplane / Pub-Sub** — since clients live on different servers, broadcast across them via **Redis Pub/Sub**, Kafka, or a message broker (this is what Socket.io's Redis adapter does), so a message published on one node reaches subscribers on all nodes.\n- **Horizontal scaling** — add nodes behind the LB; use a connection-friendly proxy (e.g. NGINX with upgrade headers, or a dedicated WS gateway).\n\n**Securing WebSocket communication:**\n\n- **Use `wss://` (TLS)** — encrypt the connection; never send sensitive data over plain `ws://`.\n- **Authenticate the handshake** — validate a token/cookie during the HTTP upgrade (WebSocket has no auth of its own); re-check authorization per message/action.\n- **Validate the `Origin` header** and use CSRF-style checks — browsers don't apply the same-origin policy to WebSocket, so the server must verify allowed origins to prevent **Cross-Site WebSocket Hijacking**.\n- **Validate/sanitise all messages**, enforce **rate limits / message-size caps** (mitigate DoS), and apply **auth/permission checks** on every action, not just at connect.\n\n**Can WebSocket handle 1,000,000 concurrent connections?** **Yes — but it's a systems problem, not a protocol limit.** A single tuned server can hold hundreds of thousands of mostly-idle connections (each is cheap memory-wise), but you must raise OS limits (**file descriptors / `ulimit`**, ephemeral ports), tune the kernel, use an **event-driven** server (epoll/kqueue — Node, Go, etc.), and budget RAM per connection. For a true 1M+, you **scale horizontally** across many nodes behind LBs with a shared pub/sub backplane. So it's achievable with the right architecture, not out of the box on a default server.",
+          "bodyTr": "**WebSocket bağlantılarını load balancing:** bir WebSocket **uzun ömürlü, durumlu** bir bağlantı olduğundan (bağımsız istekler değil), load balancer her istemciyi çalışan bir backend'e sabitlemeli. Temel teknikler:\n\n- **Sticky session (session affinity)** — bir istemciyi bağlantının ömrü boyunca tutarlı biçimde aynı sunucuya yönlendir. LB **L4 (TCP)**'te çalışmalı ya da **L7'de WebSocket-farkında** olmalı (ve `Upgrade` başlığını geçirmeli).\n- **Paylaşılan bir backplane / Pub-Sub** — istemciler farklı sunucularda yaşadığından, **Redis Pub/Sub**, Kafka ya da bir message broker ile aralarında broadcast et (Socket.io'nun Redis adapter'ının yaptığı budur), böylece bir node'da yayınlanan bir mesaj tüm node'lardaki abonelere ulaşsın.\n- **Yatay ölçekleme** — LB arkasına node ekle; bağlantı-dostu bir proxy kullan (örn. upgrade başlıklı NGINX ya da özel bir WS gateway).\n\n**WebSocket iletişimini güvene alma:**\n\n- **`wss://` (TLS) kullan** — bağlantıyı şifrele; hassas veriyi asla düz `ws://` üzerinden gönderme.\n- **Handshake'i doğrula** — HTTP upgrade sırasında bir token/cookie doğrula (WebSocket'in kendi auth'u yoktur); yetkilendirmeyi mesaj/eylem başına yeniden kontrol et.\n- **`Origin` başlığını doğrula** ve CSRF-tarzı kontroller kullan — tarayıcılar same-origin politikasını WebSocket'e uygulamaz, bu yüzden sunucu **Cross-Site WebSocket Hijacking**'i önlemek için izinli origin'leri doğrulamalı.\n- **Tüm mesajları doğrula/sanitize et**, **rate limit / mesaj-boyutu sınırları** uygula (DoS'u hafiflet) ve her eylemde **auth/izin kontrolleri** uygula, yalnızca bağlanışta değil.\n\n**WebSocket 1.000.000 eşzamanlı bağlantıyı kaldırabilir mi?** **Evet — ama bu bir sistem problemidir, protokol limiti değil.** Tek bir ayarlı sunucu yüz binlerce çoğunlukla-boşta bağlantıyı tutabilir (her biri bellek açısından ucuz), ama OS limitlerini (**file descriptor / `ulimit`**, ephemeral port'lar) yükseltmeli, kernel'i ayarlamalı, **event-driven** bir sunucu kullanmalı (epoll/kqueue — Node, Go, vb.) ve bağlantı başına RAM bütçelemelisin. Gerçek bir 1M+ için, LB'ler arkasında paylaşılan bir pub/sub backplane'le birçok node'a **yatay ölçeklersin**. Yani doğru mimariyle ulaşılabilir, varsayılan bir sunucuda kutudan çıktığı gibi değil."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Why do WebSocket connections need sticky sessions and a pub/sub backplane when scaled?",
+          "promptTr": "WebSocket bağlantıları ölçeklendiğinde neden sticky session'lara ve bir pub/sub backplane'e ihtiyaç duyar?",
+          "options": [
+            { "text": "Connections are long-lived/stateful, so a client must stay on one node, and broadcasts must reach clients spread across nodes via pub/sub", "textTr": "Bağlantılar uzun ömürlü/durumludur, bu yüzden bir istemci tek bir node'da kalmalı ve broadcast'ler node'lara yayılmış istemcilere pub/sub ile ulaşmalı", "correct": true },
+            { "text": "WebSocket can't work behind a load balancer at all", "textTr": "WebSocket bir load balancer arkasında hiç çalışamaz" },
+            { "text": "Each message opens a brand-new connection", "textTr": "Her mesaj yepyeni bir bağlantı açar" },
+            { "text": "Sticky sessions encrypt the traffic", "textTr": "Sticky session'lar trafiği şifreler" }
+          ],
+          "explanation": "A persistent connection must stay pinned to its backend (affinity), and because clients are spread across nodes, a shared pub/sub (e.g. Redis) is needed to broadcast to everyone.",
+          "explanationTr": "Kalıcı bir bağlantı backend'ine sabit kalmalı (affinity) ve istemciler node'lara yayıldığından, herkese broadcast için paylaşılan bir pub/sub (örn. Redis) gerekir."
+        },
+        {
+          "type": "true_false",
+          "statement": "Because browsers don't enforce same-origin policy on WebSocket, the server should validate the Origin header to prevent Cross-Site WebSocket Hijacking.",
+          "statementTr": "Tarayıcılar same-origin politikasını WebSocket'e uygulamadığından, sunucu Cross-Site WebSocket Hijacking'i önlemek için Origin başlığını doğrulamalı.",
+          "answer": true,
+          "explanation": "WebSocket isn't covered by CORS/SOP the way XHR is, so origin validation plus token auth on the handshake are essential to block hijacking. Always use wss:// too.",
+          "explanationTr": "WebSocket, XHR'nin olduğu gibi CORS/SOP kapsamında değildir, bu yüzden origin doğrulama artı handshake'te token auth, hijacking'i engellemek için şarttır. Ayrıca her zaman wss:// kullan."
+        },
+        {
+          "type": "challenge",
+          "question": "How do you load balance WebSocket connections?"
+        },
+        {
+          "type": "challenge",
+          "question": "How would you secure WebSocket communication?"
+        },
+        {
+          "type": "challenge",
+          "question": "Would WebSocket be able to handle 1,000,000 concurrent connections?"
+        }
+      ]
+    },
+    {
+      "slug": "protocol-internals",
+      "title": "Protocol internals: handshake, frames & TCP",
+      "titleTr": "Protokol iç yapısı: handshake, frame'ler ve TCP",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Under the hood",
+          "titleTr": "Kaputun altında",
+          "body": "**How the WebSocket protocol works under the hood:**\n\n1. **Handshake** — the client sends an HTTP `GET` with `Upgrade: websocket`, `Connection: Upgrade`, and a random **`Sec-WebSocket-Key`**. The server replies **`101 Switching Protocols`** with a `Sec-WebSocket-Accept` derived from that key (hash + magic GUID), proving it understood the protocol.\n2. **Upgrade** — the same TCP connection now stops speaking HTTP and speaks the WebSocket wire protocol.\n3. **Framing** — data is exchanged as **frames** (not HTTP messages) until either side sends a **close frame**. Ping/pong frames keep the connection alive.\n\n**A WebSocket frame** is the protocol's **unit of data**. Each frame has a small header: a **FIN** bit (is this the last fragment of a message?), an **opcode** (text, binary, close, ping, pong), a **mask** bit + 32-bit **masking key**, and the **payload length**. Messages can be split across multiple frames (fragmentation).\n\n**Frame masking:** **all frames sent from client → server MUST be masked** — the client XORs the payload with a random 32-bit key (sent in the frame). **Purpose:** it's a **security measure**, not encryption. It prevents **cache-poisoning attacks** against intermediaries (proxies) that might misinterpret attacker-controlled WebSocket bytes as a separate HTTP request. Randomizing the bytes stops a malicious page from crafting payloads that confuse proxies. (Server→client frames are not masked.)\n\n**WebSocket vs raw TCP — and why WebSocket exists on top of TCP:** raw TCP is a **continuous byte stream with no message boundaries** — you'd have to invent your own framing, handshake, and especially a way to traverse the **web** (browsers can't open arbitrary TCP sockets; firewalls/proxies expect HTTP on ports 80/443). WebSocket layers on TCP to provide: **message framing** (discrete messages, not a raw stream), an **HTTP-compatible handshake** (works through existing web infrastructure and ports, upgrades from HTTP), **browser API access** (the `WebSocket` object), and built-in **ping/pong + close** semantics. So WebSocket exists to make TCP-like bidirectional messaging **usable from browsers across the web**, with structure TCP alone doesn't provide.",
+          "bodyTr": "**WebSocket protokolünün kaput altında nasıl çalıştığı:**\n\n1. **Handshake** — istemci `Upgrade: websocket`, `Connection: Upgrade` ve rastgele bir **`Sec-WebSocket-Key`** ile bir HTTP `GET` gönderir. Sunucu, o anahtardan türetilen (hash + magic GUID) bir `Sec-WebSocket-Accept` ile **`101 Switching Protocols`** yanıtı verir, protokolü anladığını kanıtlar.\n2. **Upgrade** — aynı TCP bağlantısı artık HTTP konuşmayı bırakır ve WebSocket wire protokolünü konuşur.\n3. **Framing** — biri bir **close frame** gönderene kadar veri HTTP mesajları olarak değil **frame'ler** olarak değiş tokuş edilir. Ping/pong frame'leri bağlantıyı canlı tutar.\n\n**Bir WebSocket frame'i** protokolün **veri birimidir**. Her frame'in küçük bir başlığı vardır: bir **FIN** biti (bu mesajın son parçası mı?), bir **opcode** (text, binary, close, ping, pong), bir **mask** biti + 32-bit **masking key** ve **payload uzunluğu**. Mesajlar birden çok frame'e bölünebilir (fragmentation).\n\n**Frame masking:** **istemci → sunucu gönderilen tüm frame'ler MASKELENMELİ** — istemci payload'u rastgele bir 32-bit anahtarla XOR'lar (frame'de gönderilir). **Amaç:** bu bir **güvenlik önlemidir**, şifreleme değil. Saldırgan-kontrollü WebSocket byte'larını ayrı bir HTTP isteği olarak yanlış yorumlayabilecek aracılara (proxy'ler) karşı **cache-poisoning saldırılarını** önler. Byte'ları rastgeleleştirmek, kötü niyetli bir sayfanın proxy'leri şaşırtan payload'lar üretmesini durdurur. (Sunucu→istemci frame'leri maskelenmez.)\n\n**WebSocket vs raw TCP — ve WebSocket neden TCP üstünde var:** raw TCP, **mesaj sınırı olmayan sürekli bir byte akışıdır** — kendi framing'ini, handshake'ini ve özellikle **web'i** dolaşmanın bir yolunu icat etmen gerekirdi (tarayıcılar rastgele TCP socket açamaz; firewall/proxy'ler 80/443 portlarında HTTP bekler). WebSocket, şunları sağlamak için TCP üstüne katmanlanır: **mesaj framing'i** (raw akış değil, ayrık mesajlar), **HTTP-uyumlu handshake** (mevcut web altyapısı ve portları üzerinden çalışır, HTTP'den upgrade olur), **tarayıcı API erişimi** (`WebSocket` nesnesi) ve yerleşik **ping/pong + close** semantiği. Yani WebSocket, TCP-benzeri çift yönlü mesajlaşmayı, TCP'nin tek başına sağlamadığı yapıyla **web genelinde tarayıcılardan kullanılabilir** kılmak için vardır."
+        },
+        {
+          "type": "order",
+          "prompt": "Order the WebSocket connection lifecycle",
+          "promptTr": "WebSocket bağlantı yaşam döngüsünü sırala",
+          "items": [
+            { "text": "Client sends HTTP GET with Upgrade: websocket and Sec-WebSocket-Key", "textTr": "İstemci Upgrade: websocket ve Sec-WebSocket-Key ile HTTP GET gönderir" },
+            { "text": "Server replies 101 Switching Protocols with Sec-WebSocket-Accept", "textTr": "Sunucu Sec-WebSocket-Accept ile 101 Switching Protocols yanıtı verir" },
+            { "text": "Both sides exchange data frames over the same TCP connection", "textTr": "İki taraf aynı TCP bağlantısı üzerinden veri frame'leri değiş tokuş eder" },
+            { "text": "One side sends a close frame to end the connection", "textTr": "Bir taraf bağlantıyı bitirmek için bir close frame gönderir" }
+          ],
+          "explanation": "Upgrade request → 101 handshake response → framed bidirectional messaging → close frame. The same socket switches from HTTP to the WebSocket protocol.",
+          "explanationTr": "Upgrade isteği → 101 handshake yanıtı → frame'li çift yönlü mesajlaşma → close frame. Aynı socket HTTP'den WebSocket protokolüne geçer."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What is the purpose of frame masking (client→server)?",
+          "promptTr": "Frame masking'in (istemci→sunucu) amacı nedir?",
+          "options": [
+            { "text": "A security measure (not encryption) that randomizes bytes to prevent cache-poisoning attacks against proxies", "textTr": "Proxy'lere karşı cache-poisoning saldırılarını önlemek için byte'ları rastgeleleştiren bir güvenlik önlemi (şifreleme değil)", "correct": true },
+            { "text": "It encrypts the payload end-to-end", "textTr": "Payload'u uçtan uca şifreler" },
+            { "text": "It compresses the frame", "textTr": "Frame'i sıkıştırır" },
+            { "text": "It authenticates the user", "textTr": "Kullanıcıyı doğrular" }
+          ],
+          "explanation": "Masking XORs client payloads with a random key so intermediaries can't be tricked into misreading WebSocket bytes as a separate HTTP request (cache poisoning). It's not encryption — use wss:// for that.",
+          "explanationTr": "Masking, istemci payload'larını rastgele bir anahtarla XOR'lar ki aracılar WebSocket byte'larını ayrı bir HTTP isteği olarak yanlış okumaya kandırılamasın (cache poisoning). Şifreleme değildir — bunun için wss:// kullan."
+        },
+        {
+          "type": "challenge",
+          "question": "Explain how the WebSocket protocol works under the hood."
+        },
+        {
+          "type": "challenge",
+          "question": "What is a WebSocket frame and what is the purpose of frame masking?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is the fundamental difference between WebSocket and raw TCP? Why does WebSocket exist on top of TCP?"
+        }
+      ]
+    }
+  ]
+}

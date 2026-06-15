@@ -1,0 +1,67 @@
+{
+  "topic": "design-patterns",
+  "title": "Design Patterns",
+  "$comment": "Canonical concept list (syllabus) for Design Patterns. COMPLETE: 3 units, 6 concepts covering bank ids 1301-1316 (16/16). Verified by: pnpm concept:coverage",
+  "concepts": [
+    {
+      "id": "what-patterns-are-and-categories",
+      "title": "What design patterns are & the three categories",
+      "titleTr": "Design pattern nedir ve üç kategori",
+      "section": "foundations",
+      "unit": "fundamentals-creational",
+      "lessons": [
+        "what-patterns-are-and-categories"
+      ]
+    },
+    {
+      "id": "creational-patterns",
+      "title": "Creational: Singleton, Factory & Builder",
+      "titleTr": "Creational: Singleton, Factory ve Builder",
+      "section": "foundations",
+      "unit": "fundamentals-creational",
+      "lessons": [
+        "creational-patterns"
+      ]
+    },
+    {
+      "id": "decorator-adapter-facade",
+      "title": "Decorator, Adapter & Facade",
+      "titleTr": "Decorator, Adapter ve Facade",
+      "section": "core",
+      "unit": "structural",
+      "lessons": [
+        "decorator-adapter-facade"
+      ]
+    },
+    {
+      "id": "proxy-composite-module",
+      "title": "Proxy, Composite & the Module pattern",
+      "titleTr": "Proxy, Composite ve Module deseni",
+      "section": "core",
+      "unit": "structural",
+      "lessons": [
+        "proxy-composite-module"
+      ]
+    },
+    {
+      "id": "observer-strategy-command",
+      "title": "Observer, Strategy & Command",
+      "titleTr": "Observer, Strategy ve Command",
+      "section": "advanced",
+      "unit": "behavioral-practice",
+      "lessons": [
+        "observer-strategy-command"
+      ]
+    },
+    {
+      "id": "patterns-in-react-and-di",
+      "title": "Patterns in React & DI vs Service Locator",
+      "titleTr": "React'te desenler ve DI vs Service Locator",
+      "section": "advanced",
+      "unit": "behavioral-practice",
+      "lessons": [
+        "patterns-in-react-and-di"
+      ]
+    }
+  ]
+}

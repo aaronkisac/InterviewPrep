@@ -1,0 +1,146 @@
+{
+  "topic": "websockets",
+  "slug": "ws-vs-alternatives",
+  "title": "WebSocket vs Alternatives",
+  "titleTr": "WebSocket vs Alternatifler",
+  "section": "core",
+  "position": 2,
+  "lessons": [
+    {
+      "slug": "sse-and-ws-vs-sse",
+      "title": "Server-Sent Events & WS vs SSE",
+      "titleTr": "Server-Sent Events ve WS vs SSE",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "One-way streaming over HTTP",
+          "titleTr": "HTTP üzerinde tek yönlü streaming",
+          "body": "**Server-Sent Events (SSE)** is a standard for the **server to stream events to the client over a single, long-lived HTTP connection**, consumed in the browser via the **`EventSource`** API. It's **one-way** (server → client only) and text-based, sending a simple `data:` stream. The browser's `EventSource` **auto-reconnects** and supports event IDs / `Last-Event-ID` for resuming.\n\n```js\nconst es = new EventSource(\"/updates\");\nes.onmessage = (e) => console.log(e.data);\n```\n\n**WebSocket vs SSE:**\n\n- **Direction** — WebSocket is **bidirectional**; SSE is **server→client only** (the client still uses normal HTTP requests to send).\n- **Protocol** — SSE runs over **plain HTTP** (works with existing infra, proxies, HTTP/2); WebSocket uses its own protocol after an upgrade.\n- **Data** — SSE is **text/UTF-8 only**; WebSocket sends text **and binary**.\n- **Built-in reconnect** — SSE **auto-reconnects**; WebSocket you handle yourself.\n- **Connection limits** — SSE over HTTP/1.1 is capped by the browser's per-domain connection limit (~6); HTTP/2 multiplexing mitigates this.\n\n**When to choose SSE over WebSocket:** when you only need **server→client push** — live feeds, notifications, news/score tickers, progress updates, log streaming. SSE is **simpler**, plays nicely with **HTTP infrastructure/auth**, and gives **free reconnection**. Reach for WebSocket when you need true **two-way** or **binary** communication (chat, gaming, collaborative editing).",
+          "bodyTr": "**Server-Sent Events (SSE)**, **sunucunun tek, uzun ömürlü bir HTTP bağlantısı üzerinden istemciye event akıtması** için bir standarttır; tarayıcıda **`EventSource`** API'siyle tüketilir. **Tek yönlüdür** (yalnızca sunucu → istemci) ve metin tabanlıdır, basit bir `data:` akışı gönderir. Tarayıcının `EventSource`'u **otomatik yeniden bağlanır** ve devam için event ID'leri / `Last-Event-ID` destekler.\n\n```js\nconst es = new EventSource(\"/updates\");\nes.onmessage = (e) => console.log(e.data);\n```\n\n**WebSocket vs SSE:**\n\n- **Yön** — WebSocket **çift yönlüdür**; SSE **yalnızca sunucu→istemci**'dir (istemci göndermek için hâlâ normal HTTP istekleri kullanır).\n- **Protokol** — SSE **düz HTTP** üzerinde çalışır (mevcut altyapı, proxy'ler, HTTP/2 ile çalışır); WebSocket bir upgrade'den sonra kendi protokolünü kullanır.\n- **Veri** — SSE **yalnızca text/UTF-8**'dir; WebSocket text **ve binary** gönderir.\n- **Yerleşik reconnect** — SSE **otomatik yeniden bağlanır**; WebSocket'i kendin halledersin.\n- **Bağlantı limitleri** — HTTP/1.1 üzerinde SSE, tarayıcının domain-başına bağlantı limitiyle (~6) sınırlıdır; HTTP/2 multiplexing bunu hafifletir.\n\n**SSE'yi WebSocket yerine ne zaman seç:** yalnızca **sunucu→istemci push** gerektiğinde — canlı feed'ler, bildirimler, haber/skor ticker'ları, ilerleme güncellemeleri, log streaming. SSE **daha basittir**, **HTTP altyapısı/auth** ile iyi anlaşır ve **bedava yeniden bağlanma** verir. Gerçek **çift yönlü** ya da **binary** iletişim gerektiğinde (chat, oyun, işbirlikçi düzenleme) WebSocket'e uzan."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What's the key difference between WebSocket and Server-Sent Events?",
+          "promptTr": "WebSocket ile Server-Sent Events arasındaki temel fark nedir?",
+          "options": [
+            { "text": "WebSocket is bidirectional and supports binary; SSE is one-way (server→client), text-only, over plain HTTP with auto-reconnect", "textTr": "WebSocket çift yönlüdür ve binary destekler; SSE tek yönlüdür (sunucu→istemci), yalnızca metin, otomatik yeniden bağlanmalı düz HTTP üzerinde", "correct": true },
+            { "text": "SSE is bidirectional; WebSocket is one-way", "textTr": "SSE çift yönlüdür; WebSocket tek yönlüdür" },
+            { "text": "They are the same protocol", "textTr": "Aynı protokoldür" },
+            { "text": "WebSocket cannot send binary data", "textTr": "WebSocket binary veri gönderemez" }
+          ],
+          "explanation": "SSE = simple one-way text streaming over HTTP with built-in reconnect; WebSocket = full duplex, text + binary, its own protocol. Choose SSE for pure push, WebSocket for two-way.",
+          "explanationTr": "SSE = HTTP üzerinde yerleşik reconnect'li basit tek yönlü metin streaming; WebSocket = full duplex, text + binary, kendi protokolü. Salt push için SSE, çift yönlü için WebSocket seç."
+        },
+        {
+          "type": "true_false",
+          "statement": "SSE is a good choice when you only need server-to-client push, such as live notifications or a score ticker.",
+          "statementTr": "SSE, yalnızca sunucu-istemci push gerektiğinde iyi bir seçimdir, canlı bildirimler ya da bir skor ticker'ı gibi.",
+          "answer": true,
+          "explanation": "For one-way push SSE is simpler than WebSocket, works over HTTP infra/auth, and auto-reconnects. Use WebSocket when the client also needs to push frequently or send binary.",
+          "explanationTr": "Tek yönlü push için SSE, WebSocket'ten daha basittir, HTTP altyapısı/auth üzerinde çalışır ve otomatik yeniden bağlanır. İstemci de sık push etmeli ya da binary göndermeliyse WebSocket kullan."
+        },
+        {
+          "type": "challenge",
+          "question": "What is Server-Sent Events (SSE) / EventSource?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is the difference between WebSocket and Server-Sent Events?"
+        },
+        {
+          "type": "challenge",
+          "question": "When would you choose Server-Sent Events over WebSocket?"
+        }
+      ]
+    },
+    {
+      "slug": "socketio-and-ws-vs-rest",
+      "title": "Socket.io & WebSocket vs REST",
+      "titleTr": "Socket.io ve WebSocket vs REST",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "A library on top, and when REST is enough",
+          "titleTr": "Üstte bir kütüphane ve REST'in ne zaman yettiği",
+          "body": "**Socket.io** is a **library** (not the WebSocket protocol) that builds a real-time layer **on top of** WebSocket. Its key features over raw WebSocket:\n\n- **Automatic reconnection** with backoff, and **connection state recovery**.\n- **Fallbacks** — historically falls back to HTTP long polling if WebSocket isn't available (older infra/proxies).\n- **Rooms and namespaces** — group clients and broadcast to subsets easily.\n- **Event-based API** — `socket.emit(\"event\", data)` / `socket.on(...)` with acknowledgements, instead of raw message strings.\n- **Auto (de)serialization**, heartbeats/ping-pong, and middleware.\n\nThe trade-off: it's **not raw-WebSocket-compatible** (client and server must both use Socket.io) and adds a dependency/overhead. Use it when you want batteries-included real-time; use raw WebSocket when you need a lean, standards-only connection or interop with non-Socket.io clients.\n\n**WebSocket vs REST API for real-time data — which to choose?** They solve different problems:\n\n- **REST** is **request–response**, stateless, cacheable — ideal for CRUD, occasional fetches, and actions the client initiates. For \"live\" data it requires **polling**, which is inefficient.\n- **WebSocket** keeps a connection open for **server push** and frequent bidirectional updates — ideal when data changes often and latency matters (chat, live prices, presence, collaboration).\n\nRule: use **REST for standard request/response and infrequent data**, **WebSocket when you need real-time push / high-frequency two-way updates**. Many apps use **both** — REST for normal CRUD, WebSocket for the live parts.",
+          "bodyTr": "**Socket.io**, WebSocket **üzerine** gerçek zamanlı bir katman kuran bir **kütüphanedir** (WebSocket protokolü değil). Raw WebSocket'e göre temel özellikleri:\n\n- Backoff'lu **otomatik yeniden bağlanma** ve **bağlantı durumu kurtarma**.\n- **Fallback'ler** — WebSocket yoksa (eski altyapı/proxy'ler) tarihsel olarak HTTP long polling'e döner.\n- **Room'lar ve namespace'ler** — istemcileri grupla ve alt kümelere kolayca broadcast et.\n- **Event tabanlı API** — raw mesaj string'leri yerine acknowledgement'larla `socket.emit(\"event\", data)` / `socket.on(...)`.\n- **Otomatik (de)serileştirme**, heartbeat/ping-pong ve middleware.\n\nÖdün: **raw-WebSocket-uyumlu değildir** (istemci ve sunucu ikisi de Socket.io kullanmalı) ve bir bağımlılık/yük ekler. Bataryalar-dahil gerçek zamanlı istediğinde kullan; yalın, yalnızca-standart bir bağlantıya ya da Socket.io-olmayan istemcilerle interop'a ihtiyacın olduğunda raw WebSocket kullan.\n\n**Gerçek zamanlı veri için WebSocket vs REST API — hangisi seçilir?** Farklı sorunları çözerler:\n\n- **REST** **request–response**, stateless, önbelleklenebilirdir — CRUD, ara sıra fetch ve istemci-başlatmalı eylemler için ideal. \"Canlı\" veri için **polling** gerektirir ki verimsizdir.\n- **WebSocket**, **server push** ve sık çift yönlü güncellemeler için bir bağlantıyı açık tutar — veri sık değiştiğinde ve gecikme önemli olduğunda ideal (chat, canlı fiyatlar, presence, işbirliği).\n\nKural: **standart request/response ve seyrek veri için REST**, **gerçek zamanlı push / yüksek-frekanslı çift yönlü güncellemeler gerektiğinde WebSocket** kullan. Çoğu uygulama **ikisini** birden kullanır — normal CRUD için REST, canlı kısımlar için WebSocket."
+        },
+        {
+          "type": "mcq",
+          "prompt": "How does Socket.io differ from raw WebSocket?",
+          "promptTr": "Socket.io raw WebSocket'ten nasıl farklıdır?",
+          "options": [
+            { "text": "It's a library adding auto-reconnect, fallbacks, rooms/namespaces, and an event API — but both ends must use Socket.io", "textTr": "Otomatik yeniden bağlanma, fallback, room/namespace ve event API ekleyen bir kütüphanedir — ama iki uç da Socket.io kullanmalı", "correct": true },
+            { "text": "It's a lower-level protocol that replaces TCP", "textTr": "TCP'nin yerine geçen daha düşük seviyeli bir protokoldür" },
+            { "text": "It is identical to raw WebSocket with no added features", "textTr": "Eklenen özellik olmadan raw WebSocket ile aynıdır" },
+            { "text": "It removes the need for a server", "textTr": "Sunucu ihtiyacını ortadan kaldırır" }
+          ],
+          "explanation": "Socket.io wraps WebSocket with reconnection, polling fallback, rooms/namespaces, and an emit/on event API. The cost: it's not wire-compatible with raw WebSocket clients.",
+          "explanationTr": "Socket.io, WebSocket'i yeniden bağlanma, polling fallback'i, room/namespace ve emit/on event API'siyle sarar. Maliyeti: raw WebSocket istemcileriyle wire-uyumlu değildir."
+        },
+        {
+          "type": "true_false",
+          "statement": "REST is fine for standard request/response and infrequent data, while WebSocket suits frequent, low-latency, bidirectional updates.",
+          "statementTr": "REST standart request/response ve seyrek veri için uygundur, WebSocket ise sık, düşük-gecikmeli, çift yönlü güncellemeler için uygundur.",
+          "answer": true,
+          "explanation": "They're complementary: REST for CRUD/occasional fetches (cacheable, simple), WebSocket for live push and high-frequency two-way data. Many apps use both.",
+          "explanationTr": "Tamamlayıcıdırlar: CRUD/ara sıra fetch için REST (önbelleklenebilir, basit), canlı push ve yüksek-frekanslı çift yönlü veri için WebSocket. Çoğu uygulama ikisini de kullanır."
+        },
+        {
+          "type": "challenge",
+          "question": "What are the key features of Socket.io and how does it differ from raw WebSocket?"
+        },
+        {
+          "type": "challenge",
+          "question": "WebSocket vs REST API for real-time data — which to choose?"
+        }
+      ]
+    },
+    {
+      "slug": "performance-and-webrtc",
+      "title": "Performance vs polling & WebRTC",
+      "titleTr": "Polling'e karşı performans ve WebRTC",
+      "position": 3,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Why WebSocket wins, and when to go peer-to-peer",
+          "titleTr": "WebSocket neden kazanır ve ne zaman peer-to-peer",
+          "body": "**How WebSocket beats long polling on performance:** with long polling, **every message is a fresh HTTP request/response** — full headers, a new (or pooled) connection cycle, and the server must hold and re-establish requests. WebSocket pays the handshake **once**, then keeps **one persistent connection**:\n\n- **Far less overhead per message** — tiny frames (a few bytes of framing) instead of full HTTP headers each time.\n- **Lower latency** — the channel is already open, so the server pushes instantly; no re-request round-trip or interval delay.\n- **Less server load** — no constant connection churn or hanging requests to manage; one socket handles many messages both ways.\n- **True bidirectional** — the client can send anytime without starting a new request.\n\nSo for **high-frequency, low-latency** traffic, WebSocket is dramatically more efficient than polling.\n\n**When to use WebRTC over WebSocket:** **WebRTC** is built for **peer-to-peer**, low-latency **media (audio/video)** and direct data channels **between clients**, not client↔server messaging. Choose it when you need: real-time **audio/video calls**, **screen sharing**, or **direct P2P data** with the lowest possible latency (it can use **UDP** and send media directly between peers, bypassing your server). WebSocket still plays a role in WebRTC — it's commonly the **signaling channel** that helps peers exchange connection info before the direct P2P link is established. Rule: **WebRTC for P2P media/low-latency data between users; WebSocket for client–server real-time messaging** (and signaling).",
+          "bodyTr": "**WebSocket'in performansta long polling'i nasıl yendiği:** long polling ile **her mesaj taze bir HTTP request/response'tur** — tam başlıklar, yeni (ya da havuzlanmış) bir bağlantı döngüsü ve sunucu istekleri tutup yeniden kurmalı. WebSocket handshake'i **bir kez** öder, sonra **tek bir kalıcı bağlantı** tutar:\n\n- **Mesaj başına çok daha az yük** — her seferinde tam HTTP başlıkları yerine küçük frame'ler (birkaç byte framing).\n- **Daha düşük gecikme** — kanal zaten açık, bu yüzden sunucu anında push eder; yeniden-istek round-trip'i ya da aralık gecikmesi yok.\n- **Daha az sunucu yükü** — yönetilecek sürekli bağlantı churn'ü ya da bekleyen istek yok; tek socket iki yönde de birçok mesajı halleder.\n- **Gerçek çift yönlü** — istemci yeni bir istek başlatmadan istediği zaman gönderebilir.\n\nYani **yüksek-frekanslı, düşük-gecikmeli** trafik için WebSocket, polling'den çarpıcı biçimde daha verimlidir.\n\n**WebRTC'yi WebSocket yerine ne zaman kullanmalı:** **WebRTC**, istemci↔sunucu mesajlaşması değil, **istemciler arası** **peer-to-peer**, düşük-gecikmeli **medya (ses/video)** ve doğrudan veri kanalları için yapılmıştır. Şunlara ihtiyacın olduğunda seç: gerçek zamanlı **ses/video aramaları**, **ekran paylaşımı** ya da mümkün olan en düşük gecikmeyle **doğrudan P2P veri** (UDP kullanabilir ve sunucunu atlayarak medyayı doğrudan peer'lar arasında gönderebilir). WebSocket WebRTC'de hâlâ rol oynar — doğrudan P2P bağlantı kurulmadan önce peer'ların bağlantı bilgisi değiş tokuş etmesine yardımcı olan **signaling kanalı** genelde odur. Kural: **kullanıcılar arası P2P medya/düşük-gecikmeli veri için WebRTC; istemci–sunucu gerçek zamanlı mesajlaşma için WebSocket** (ve signaling)."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Why is WebSocket more performant than long polling for frequent updates?",
+          "promptTr": "Sık güncellemeler için WebSocket neden long polling'den daha performanslıdır?",
+          "options": [
+            { "text": "One persistent connection with tiny frames — no per-message HTTP headers, re-requests, or interval delay", "textTr": "Küçük frame'li tek kalıcı bağlantı — mesaj başına HTTP başlığı, yeniden-istek ya da aralık gecikmesi yok", "correct": true },
+            { "text": "It compresses every message to one byte", "textTr": "Her mesajı bir byte'a sıkıştırır" },
+            { "text": "It avoids using TCP", "textTr": "TCP kullanmaktan kaçınır" },
+            { "text": "It caches messages on the client", "textTr": "Mesajları istemcide önbelleğe alır" }
+          ],
+          "explanation": "After one handshake, WebSocket reuses a single open connection with minimal framing, so each message avoids HTTP header overhead, connection churn, and polling latency.",
+          "explanationTr": "Bir handshake'ten sonra WebSocket, minimal framing'le tek bir açık bağlantıyı yeniden kullanır, böylece her mesaj HTTP başlık yükünden, bağlantı churn'ünden ve polling gecikmesinden kaçınır."
+        },
+        {
+          "type": "true_false",
+          "statement": "WebRTC is preferred over WebSocket for peer-to-peer audio/video and direct low-latency data between clients, while WebSocket often serves as the signaling channel.",
+          "statementTr": "WebRTC, istemciler arası peer-to-peer ses/video ve doğrudan düşük-gecikmeli veri için WebSocket'e tercih edilir, WebSocket ise genelde signaling kanalı olarak hizmet eder.",
+          "answer": true,
+          "explanation": "WebRTC enables direct P2P media/data (can use UDP, bypasses the server for media); WebSocket is the client-server messaging tool and commonly carries WebRTC's signaling.",
+          "explanationTr": "WebRTC doğrudan P2P medya/veri sağlar (UDP kullanabilir, medya için sunucuyu atlar); WebSocket istemci-sunucu mesajlaşma aracıdır ve genelde WebRTC'nin signaling'ini taşır."
+        },
+        {
+          "type": "challenge",
+          "question": "How can WebSocket be better than Long Polling in terms of performance?"
+        },
+        {
+          "type": "challenge",
+          "question": "When would you use WebRTC over WebSocket?"
+        }
+      ]
+    }
+  ]
+}

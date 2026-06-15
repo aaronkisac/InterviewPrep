@@ -1,0 +1,104 @@
+{
+  "topic": "design-patterns",
+  "slug": "behavioral-practice",
+  "title": "Behavioral Patterns & Patterns in Practice",
+  "titleTr": "Behavioral Desenler ve Pratikte Desenler",
+  "section": "advanced",
+  "position": 3,
+  "lessons": [
+    {
+      "slug": "observer-strategy-command",
+      "title": "Observer, Strategy & Command",
+      "titleTr": "Observer, Strategy ve Command",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "How objects collaborate",
+          "titleTr": "Nesneler nasıl işbirliği yapar",
+          "body": "Three core **behavioral** patterns:\n\n**Observer** defines a **one-to-many** dependency: a **subject** maintains a list of **observers** and **notifies them automatically** when its state changes. Subscribers react without the subject knowing their concrete types — loose coupling. It underpins **event systems and reactivity**: DOM `addEventListener`, RxJS, pub/sub, and state libraries that re-render subscribers on change. Key idea: *publish a change; many listeners react*.\n\n**Strategy** defines a **family of interchangeable algorithms**, encapsulates each behind a common interface, and lets you **swap them at runtime**. Instead of a big `if/switch` choosing behaviour, you inject a strategy object/function. Example: different sorting comparators, pricing rules, or validation strategies passed in as functions. In JS, passing a callback (`array.sort(comparator)`) is Strategy in miniature. Key idea: *select an algorithm by plugging one in*.\n\n**Command** **encapsulates a request as an object** — bundling the action and its parameters — so you can parameterise, queue, log, and **undo/redo** operations. Each command has an `execute()` (and often `undo()`). Examples: undo/redo stacks in an editor, action objects in Redux (an action is a command-like object describing what to do), job queues, menu/button actions decoupled from their handlers. Key idea: *turn 'do X' into a first-class object you can store and replay*.\n\nQuick distinction: **Observer** = notify many on change; **Strategy** = swap an algorithm; **Command** = reify an action for queueing/undo.",
+          "bodyTr": "Üç temel **behavioral** desen:\n\n**Observer**, **bire-çok** bir bağımlılık tanımlar: bir **subject**, **observer** listesi tutar ve state'i değiştiğinde onları **otomatik haberdar eder**. Aboneler, subject somut tiplerini bilmeden tepki verir — gevşek bağlama. **Event sistemleri ve reaktivitenin** temelidir: DOM `addEventListener`, RxJS, pub/sub ve değişimde aboneleri yeniden render eden state kütüphaneleri. Temel fikir: *bir değişikliği yayınla; birçok dinleyici tepki verir*.\n\n**Strategy**, **birbirinin yerine geçebilen bir algoritma ailesi** tanımlar, her birini ortak bir arayüz arkasında kapsüller ve onları **çalışma zamanında değiştirmene** izin verir. Davranış seçen büyük bir `if/switch` yerine bir strategy nesnesi/fonksiyonu enjekte edersin. Örnek: farklı sıralama comparator'ları, fiyatlandırma kuralları ya da fonksiyon olarak geçirilen doğrulama stratejileri. JS'te bir callback geçirmek (`array.sort(comparator)`) minyatür Strategy'dir. Temel fikir: *bir tane takarak bir algoritma seç*.\n\n**Command**, **bir isteği bir nesne olarak kapsüller** — eylemi ve parametrelerini paketler — böylece işlemleri parametreleştirebilir, kuyruğa alabilir, loglayabilir ve **geri al/yinele** yapabilirsin. Her command'in bir `execute()`'u (ve genelde `undo()`'su) vardır. Örnekler: bir editörde geri al/yinele yığınları, Redux'taki action nesneleri (bir action, ne yapılacağını tanımlayan command-benzeri bir nesnedir), iş kuyrukları, handler'larından ayrılmış menü/buton eylemleri. Temel fikir: *'X yap'ı saklayıp tekrar oynatabileceğin birinci-sınıf bir nesneye çevir*.\n\nHızlı ayrım: **Observer** = değişimde birçoğunu haberdar et; **Strategy** = bir algoritmayı değiştir; **Command** = kuyruk/geri al için bir eylemi nesneleştir."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Which pattern lets you swap interchangeable algorithms at runtime via a common interface?",
+          "promptTr": "Hangi desen, ortak bir arayüz üzerinden çalışma zamanında birbirinin yerine geçebilen algoritmaları değiştirmene izin verir?",
+          "options": [
+            { "text": "Strategy", "textTr": "Strategy", "correct": true },
+            { "text": "Observer", "textTr": "Observer" },
+            { "text": "Command", "textTr": "Command" },
+            { "text": "Singleton", "textTr": "Singleton" }
+          ],
+          "explanation": "Strategy encapsulates a family of algorithms behind one interface so they're swappable (e.g. different comparators). Observer notifies many; Command reifies an action.",
+          "explanationTr": "Strategy bir algoritma ailesini tek arayüz arkasında kapsüller, böylece değiştirilebilir (örn. farklı comparator'lar). Observer birçoğunu haberdar eder; Command bir eylemi nesneleştirir."
+        },
+        {
+          "type": "match",
+          "prompt": "Match each behavioral pattern to a real-world use",
+          "promptTr": "Her behavioral deseni gerçek bir kullanımla eşleştir",
+          "pairs": [
+            { "left": "Observer", "leftTr": "Observer", "right": "Event listeners / reactive state notifying subscribers on change", "rightTr": "Değişimde aboneleri haberdar eden event listener'lar / reaktif state" },
+            { "left": "Strategy", "leftTr": "Strategy", "right": "Passing a comparator to sort, or swappable validation rules", "rightTr": "sort'a comparator geçirmek ya da değiştirilebilir doğrulama kuralları" },
+            { "left": "Command", "leftTr": "Command", "right": "Undo/redo stacks and Redux-style action objects", "rightTr": "Geri al/yinele yığınları ve Redux-tarzı action nesneleri" }
+          ]
+        },
+        {
+          "type": "challenge",
+          "question": "What is the Observer pattern?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is the Strategy pattern?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is the Command pattern?"
+        }
+      ]
+    },
+    {
+      "slug": "patterns-in-react-and-di",
+      "title": "Patterns in React & DI vs Service Locator",
+      "titleTr": "React'te desenler ve DI vs Service Locator",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Where the theory shows up day-to-day",
+          "titleTr": "Teorinin günlük hayatta göründüğü yer",
+          "body": "**Design patterns in React** — the framework is full of them, often under different names:\n\n- **Structural:** **Composite** (the component tree — leaves and containers both render); **Decorator/Proxy** (Higher-Order Components and wrappers that add behaviour like `withAuth(Component)`); **Facade** (a custom hook like `useApi()` hiding fetch/cache/error logic).\n- **Behavioral:** **Observer** (Context + `useState`/external stores notifying subscribers to re-render; effects reacting to dependency changes); **Strategy** (passing render-prop or callback functions to vary behaviour, e.g. a custom comparator or a `renderItem` prop); **Command** (Redux actions / `useReducer` dispatches as action objects).\n- Plus React-specific idioms: **render props**, **compound components**, **provider** pattern, **custom hooks** for logic reuse.\n\nThe point in interviews: recognise that everyday React *is* applied patterns.\n\n**Dependency Injection vs Service Locator** — both decouple a class from constructing its own dependencies, but differ in **how dependencies are obtained**:\n\n- **Dependency Injection (DI)** — dependencies are **pushed in from outside** (via constructor/props/params). The object **declares what it needs** and receives it; dependencies are **explicit and visible** in the signature, which makes testing easy (just pass a mock) and coupling clear.\n- **Service Locator** — the object **pulls** dependencies from a **central registry** on demand (`locator.get('UserService')`). Dependencies are **hidden** inside the code, not in the signature.\n\n**Which to prefer? Generally DI.** It makes dependencies explicit, improves testability, and avoids the Service Locator's downside of hiding what a class actually needs (often considered an anti-pattern because it obscures coupling and complicates testing). Service Locator can be pragmatic in some setups, but DI's transparency usually wins.",
+          "bodyTr": "**React'te design pattern'ler** — framework onlarla doludur, genelde farklı isimler altında:\n\n- **Structural:** **Composite** (bileşen ağacı — yapraklar ve konteynerler ikisi de render eder); **Decorator/Proxy** (Higher-Order Component'ler ve `withAuth(Component)` gibi davranış ekleyen wrapper'lar); **Facade** (fetch/cache/hata mantığını gizleyen `useApi()` gibi bir custom hook).\n- **Behavioral:** **Observer** (Context + `useState`/harici store'lar aboneleri yeniden render etmeye haberdar eder; bağımlılık değişimlerine tepki veren effect'ler); **Strategy** (davranışı değiştirmek için render-prop ya da callback fonksiyonları geçirmek, örn. özel bir comparator ya da bir `renderItem` prop'u); **Command** (Redux action'ları / action nesneleri olarak `useReducer` dispatch'leri).\n- Artı React'e özgü idiomlar: **render props**, **compound component'ler**, **provider** deseni, mantık tekrarı için **custom hook'lar**.\n\nMülakatlarda önemli olan: günlük React'in *uygulanmış desenler olduğunu* tanımak.\n\n**Dependency Injection vs Service Locator** — ikisi de bir sınıfı kendi bağımlılıklarını oluşturmaktan ayırır ama **bağımlılıkların nasıl elde edildiğinde** farklılaşır:\n\n- **Dependency Injection (DI)** — bağımlılıklar **dışarıdan içeri itilir** (constructor/props/parametre ile). Nesne **neye ihtiyacı olduğunu bildirir** ve onu alır; bağımlılıklar imzada **açık ve görünürdür**, bu da testi kolaylaştırır (sadece bir mock geçir) ve bağlamayı netleştirir.\n- **Service Locator** — nesne, bağımlılıkları talep üzerine **merkezi bir registry'den çeker** (`locator.get('UserService')`). Bağımlılıklar imzada değil, kodun içinde **gizlidir**.\n\n**Hangisi tercih edilir? Genelde DI.** Bağımlılıkları açık kılar, test edilebilirliği artırır ve Service Locator'ın bir sınıfın gerçekte neye ihtiyacı olduğunu gizleme dezavantajından kaçınır (genelde bir anti-pattern sayılır çünkü bağlamayı gizler ve testi zorlaştırır). Service Locator bazı kurulumlarda pragmatik olabilir ama DI'nın şeffaflığı genelde kazanır."
+        },
+        {
+          "type": "mcq",
+          "prompt": "Why is Dependency Injection usually preferred over the Service Locator pattern?",
+          "promptTr": "Dependency Injection neden genelde Service Locator desenine tercih edilir?",
+          "options": [
+            { "text": "DI makes dependencies explicit in the signature (easy to see and mock); Service Locator hides them, obscuring coupling and complicating tests", "textTr": "DI bağımlılıkları imzada açık kılar (görmesi ve mock'laması kolay); Service Locator onları gizler, bağlamayı bulanıklaştırır ve testleri zorlaştırır", "correct": true },
+            { "text": "Service Locator can't be used in JavaScript", "textTr": "Service Locator JavaScript'te kullanılamaz" },
+            { "text": "DI removes all dependencies from the code", "textTr": "DI koddan tüm bağımlılıkları kaldırır" },
+            { "text": "They are the same pattern", "textTr": "Aynı desendir" }
+          ],
+          "explanation": "Both decouple construction, but DI pushes deps in (explicit, testable) while Service Locator pulls them from a registry (hidden) — so DI is generally favoured for transparency and testability.",
+          "explanationTr": "İkisi de oluşturmayı ayırır ama DI bağımlılıkları içeri iter (açık, test edilebilir), Service Locator onları bir registry'den çeker (gizli) — bu yüzden DI şeffaflık ve test edilebilirlik için genelde tercih edilir."
+        },
+        {
+          "type": "true_false",
+          "statement": "A Higher-Order Component like withAuth(Component) is an application of the Decorator/Proxy idea in React.",
+          "statementTr": "withAuth(Component) gibi bir Higher-Order Component, React'te Decorator/Proxy fikrinin bir uygulamasıdır.",
+          "answer": true,
+          "explanation": "An HOC wraps a component to add or gate behaviour while preserving its interface — exactly the Decorator/Proxy concept applied to React components.",
+          "explanationTr": "Bir HOC, arayüzünü korurken davranış eklemek ya da kapılamak için bir bileşeni sarar — React bileşenlerine uygulanan Decorator/Proxy kavramının ta kendisi."
+        },
+        {
+          "type": "challenge",
+          "question": "How are design patterns applied in React — give examples of Structural and Behavioral patterns in practice."
+        },
+        {
+          "type": "challenge",
+          "question": "What is the difference between Dependency Injection and the Service Locator pattern, and which should you prefer?"
+        }
+      ]
+    }
+  ]
+}
