@@ -31,39 +31,36 @@ export default async function HomePage() {
   const hasCourseProgress = featuredCourses.some((c) => c.completedCount > 0);
 
   return (
-    <main className="mx-auto flex w-full max-w-3xl flex-col gap-14 px-6 py-16">
+    <main className="mx-auto flex w-full max-w-5xl flex-col gap-14 px-6 py-16">
       {/* ── Hero ── */}
       <section className="space-y-5">
         <div className="space-y-3">
           <p className="text-sm font-medium text-muted-foreground">
             {i18n.tagline}
           </p>
-          <h1 className="bg-gradient-to-br from-foreground via-foreground to-foreground/55 bg-clip-text text-4xl font-semibold tracking-tight text-transparent">
+          <h1 className="max-w-2xl bg-gradient-to-br from-foreground via-foreground to-foreground/55 bg-clip-text text-4xl font-semibold tracking-tight text-transparent sm:text-5xl">
             {i18n.headline}
           </h1>
-          <p className="max-w-lg text-base text-muted-foreground">
+          <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+            {i18n.stack}
+          </p>
+          <p className="max-w-xl text-base text-muted-foreground">
             {i18n.heroDesc(totalQuestions, systemTopics.length)}
           </p>
         </div>
 
         <div className="flex flex-wrap gap-3">
           <Link
+            href="/learn"
+            className="rounded-md bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground shadow-sm transition hover:opacity-90 active:scale-[0.98]"
+          >
+            {i18n.startLearningCta}
+          </Link>
+          <Link
             href="/questions"
-            className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-sm transition hover:opacity-90 active:scale-[0.98]"
+            className="rounded-md border border-border px-5 py-2.5 text-sm font-medium transition hover:bg-accent active:scale-[0.98]"
           >
             {i18n.browseQuestions}
-          </Link>
-          <Link
-            href="/mock"
-            className="rounded-md border border-border px-4 py-2 text-sm font-medium transition hover:bg-accent active:scale-[0.98]"
-          >
-            {i18n.startMock}
-          </Link>
-          <Link
-            href="/glossary"
-            className="rounded-md border border-border px-4 py-2 text-sm font-medium transition hover:bg-accent active:scale-[0.98]"
-          >
-            {i18n.glossary}
           </Link>
         </div>
       </section>
@@ -149,7 +146,7 @@ export default async function HomePage() {
         <h2 className="text-sm font-medium text-muted-foreground">
           {i18n.whatsInside}
         </h2>
-        <div className="grid gap-4 sm:grid-cols-3">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {i18n.features.map((f) => (
             <Link
               key={f.href}

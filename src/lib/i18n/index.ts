@@ -396,6 +396,12 @@ export const i18nHome = {
     browseQuestions: "Browse questions",
     features: [
       {
+        cta: "Start learning",
+        description: "Guided, bilingual courses that take each topic from zero to interview-ready through interactive lessons.",
+        href: "/learn",
+        title: "Guided courses",
+      },
+      {
         cta: "Browse questions",
         description: "Questions across 15 topics with general and personal answers. Filter by topic and seniority level.",
         href: "/questions",
@@ -416,14 +422,16 @@ export const i18nHome = {
     ] as const,
     footer: "Interview Prep — built for Senior Frontend Engineers",
     glossary: "Glossary",
-    headline: "React · TypeScript · Next.js",
+    headline: "From zero to interview-ready",
+    stack: "React · TypeScript · Next.js",
     heroDesc: (count: number, topicCount: number) =>
-      `${count > 0 ? `${count}+` : "Hundreds of"} questions across ${topicCount} topics. Structured Q&A, a term glossary, and timed mock interview sessions.`,
+      `${count > 0 ? `${count}+` : "Hundreds of"} questions across ${topicCount} topics — guided courses, structured Q&A, a term glossary, and timed mock interviews.`,
     questions: (n: number) => (n > 0 ? `${n} questions` : "Coming soon"),
     allCourses: "All courses →",
     continueTitle: "Continue learning",
     exploreTitle: "Explore courses",
     signInCta: "Sign in to get started",
+    startLearningCta: "Start learning",
     startMock: "Start mock interview",
     tagline: "Frontend Interview Prep",
     topics: "Topics",
@@ -437,6 +445,12 @@ export const i18nHome = {
   tr: {
     browseQuestions: "Sorulara göz at",
     features: [
+      {
+        cta: "Öğrenmeye başla",
+        description: "Her konuyu sıfırdan mülakata hazır seviyeye getiren, interaktif derslerle rehberli iki dilli kurslar.",
+        href: "/learn",
+        title: "Rehberli kurslar",
+      },
       {
         cta: "Sorulara göz at",
         description: "15 topic'te genel ve kişisel cevaplarla sorular. Topic ve seviyeye göre filtrele.",
@@ -458,14 +472,16 @@ export const i18nHome = {
     ] as const,
     footer: "Interview Prep — Senior Frontend Engineer'lar için",
     glossary: "Sözlük",
-    headline: "React · TypeScript · Next.js",
+    headline: "Sıfırdan mülakata hazır",
+    stack: "React · TypeScript · Next.js",
     heroDesc: (count: number, topicCount: number) =>
-      `${topicCount} topic'te ${count > 0 ? `${count}+` : "yüzlerce"} soru. Yapılandırılmış S&C, terim sözlüğü ve zamanlı mock mülakat oturumları.`,
+      `${topicCount} topic'te ${count > 0 ? `${count}+` : "yüzlerce"} soru — rehberli kurslar, yapılandırılmış S&C, terim sözlüğü ve zamanlı mock mülakatlar.`,
     questions: (n: number) => (n > 0 ? `${n} soru` : "Yakında"),
     allCourses: "Tüm eğitimler →",
     continueTitle: "Öğrenmeye devam et",
     exploreTitle: "Eğitimleri keşfet",
     signInCta: "Başlamak için giriş yap",
+    startLearningCta: "Öğrenmeye başla",
     startMock: "Mock mülakat başlat",
     tagline: "Frontend Mülakat Hazırlık",
     topics: "Konular",
