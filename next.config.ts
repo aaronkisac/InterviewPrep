@@ -19,6 +19,12 @@ const securityHeaders = [
     key: "Permissions-Policy",
     value: "camera=(), microphone=(), geolocation=(), payment=()",
   },
+  // Force HTTPS for two years, incl. subdomains (production is HTTPS-only).
+  // Harmless on plain-HTTP localhost — browsers ignore HSTS sent over HTTP.
+  {
+    key: "Strict-Transport-Security",
+    value: "max-age=63072000; includeSubDomains; preload",
+  },
 ] as const;
 
 const nextConfig: NextConfig = {

@@ -8,7 +8,13 @@ import { NextResponse } from "next/server";
 import { encode } from "next-auth/jwt";
 
 export async function GET() {
-  if (process.env.PLAYWRIGHT_TEST !== "true") {
+  // Hard off-switch in production, plus the explicit test-mode flag. Either
+  // condition alone is enough to 404; together they're belt-and-braces so a
+  // stray PLAYWRIGHT_TEST=true can never mint a session in a prod build.
+  if (
+    process.env.NODE_ENV === "production" ||
+    process.env.PLAYWRIGHT_TEST !== "true"
+  ) {
     return NextResponse.json({ error: "Not found" }, { status: 404 });
   }
 

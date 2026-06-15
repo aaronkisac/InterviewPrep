@@ -51,7 +51,6 @@ export const config = {
     "/glossary/:path*",
     "/dashboard/:path*",
     "/admin/:path*",
-    "/profile/:path*",
 
     "/questions/new",
     "/questions/:id",
