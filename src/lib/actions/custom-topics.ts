@@ -1,7 +1,7 @@
 "use server";
 
 import { auth } from "@/lib/auth";
-import { createAdminClient } from "@/lib/supabase/admin";
+import { createServerSupabaseClient } from "@/lib/supabase/server";
 import type { MockOptionInput } from "@/types/mock";
 
 // ── Types ────────────────────────────────────────────────────────────────────
@@ -53,7 +53,7 @@ async function requireUser() {
 
 export async function listCustomTopics(overrideUserId?: string): Promise<CustomTopic[]> {
   const userId = overrideUserId ?? (await requireUser());
-  const sb = createAdminClient();
+  const sb = await createServerSupabaseClient();
 
   const { data, error } = await sb
     .from("custom_topics")
@@ -99,7 +99,7 @@ export async function listTopicsWithQuestions(): Promise<{
   questionsMap: Record<string, CustomQuestion[]>;
 }> {
   const userId = await requireUser();
-  const sb = createAdminClient();
+  const sb = await createServerSupabaseClient();
 
   const { data: topicsData } = await sb
     .from("custom_topics")
@@ -142,7 +142,7 @@ export async function getCustomTopic(
   overrideUserId?: string,
 ): Promise<{ topic: CustomTopic; questions: CustomQuestion[] } | null> {
   const userId = overrideUserId ?? (await requireUser());
-  const sb = createAdminClient();
+  const sb = await createServerSupabaseClient();
 
   const { data: topic, error } = await sb
     .from("custom_topics")
@@ -180,7 +180,7 @@ export async function createCustomTopic(
   if (trimmed.length > 80) return { ok: false, error: "Name too long (max 80 chars)" };
 
   const userId = await requireUser();
-  const sb = createAdminClient();
+  const sb = await createServerSupabaseClient();
 
   let slug = toSlug(trimmed);
   if (!slug) slug = "topic";
@@ -217,7 +217,7 @@ export async function deleteCustomTopic(
   id: string,
 ): Promise<{ ok: boolean }> {
   const userId = await requireUser();
-  const sb = createAdminClient();
+  const sb = await createServerSupabaseClient();
 
   const { error } = await sb
     .from("custom_topics")
@@ -246,7 +246,7 @@ export async function createCustomQuestion(
   if (!trimmedQ) return { ok: false };
 
   const userId = await requireUser();
-  const sb = createAdminClient();
+  const sb = await createServerSupabaseClient();
 
   // Verify ownership
   const { data: topic } = await sb
@@ -305,7 +305,7 @@ export async function updateCustomQuestion(
     Array.isArray(mock_options) && mock_options.length === 4 ? mock_options : null;
 
   const userId = await requireUser();
-  const sb = createAdminClient();
+  const sb = await createServerSupabaseClient();
 
   const { error } = await sb
     .from("custom_questions")
@@ -331,7 +331,7 @@ export async function deleteCustomQuestion(
   id: string,
 ): Promise<{ ok: boolean }> {
   const userId = await requireUser();
-  const sb = createAdminClient();
+  const sb = await createServerSupabaseClient();
 
   const { error } = await sb
     .from("custom_questions")
@@ -356,7 +356,7 @@ export async function deleteCustomQuestion(
 export async function getCustomMockReadyMeta(
   userId: string,
 ): Promise<Array<{ topic: string; level: number }>> {
-  const sb = createAdminClient();
+  const sb = await createServerSupabaseClient();
 
   // Get all topics for this user first
   const { data: topicsData } = await sb
@@ -397,7 +397,7 @@ export async function getCustomMockQuestions(
   slugs: string[],
 ): Promise<CustomQuestion[]> {
   if (slugs.length === 0) return [];
-  const sb = createAdminClient();
+  const sb = await createServerSupabaseClient();
 
   const { data: topicsData } = await sb
     .from("custom_topics")
@@ -430,7 +430,7 @@ export async function toggleCustomBookmark(
   if (!session?.user?.id) return null;
 
   const userId = session.user.id;
-  const sb = createAdminClient();
+  const sb = await createServerSupabaseClient();
 
   const { data: existing } = await sb
     .from("custom_question_bookmarks")
@@ -458,7 +458,7 @@ export async function getCustomBookmarkIds(overrideUserId?: string): Promise<str
   const userId = overrideUserId ?? (await auth())?.user?.id;
   if (!userId) return [];
 
-  const sb = createAdminClient();
+  const sb = await createServerSupabaseClient();
   const { data } = await sb
     .from("custom_question_bookmarks")
     .select("custom_question_id")
@@ -480,7 +480,7 @@ export async function getBookmarkedCustomQuestions(
   const userId = overrideUserId ?? (await auth())?.user?.id;
   if (!userId) return [];
 
-  const sb = createAdminClient();
+  const sb = await createServerSupabaseClient();
 
   // Step 1: get bookmarked IDs
   const { data: bookmarks } = await sb

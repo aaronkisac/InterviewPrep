@@ -8,6 +8,7 @@ import { NavLink } from "@/components/nav-link";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { ThemeSelector } from "@/components/theme-selector";
 import { MobileNav } from "@/components/mobile-nav";
+import { NavSettings } from "@/components/nav-settings";
 import { Logo } from "@/components/logo";
 import {
   BookOpen,
@@ -57,26 +58,28 @@ export async function Navbar() {
           Interview Prep
         </Link>
 
-        {/* Desktop nav — hidden below 800px */}
+        {/* Desktop nav — hidden below 800px. Between 800–1200px the links are
+            icon-only (labels kept in the a11y tree via sr-only); full labels
+            appear at >=1200px. */}
         <div className="hidden min-[800px]:flex items-center gap-1">
           <NavLink href="/learn">
             <GraduationCap className="size-4" aria-hidden="true" />
-            {nav.learn}
+            <span className="sr-only min-[1200px]:not-sr-only">{nav.learn}</span>
           </NavLink>
           <NavLink href="/questions">
             <ListChecks className="size-4" aria-hidden="true" />
-            {nav.questions}
+            <span className="sr-only min-[1200px]:not-sr-only">{nav.questions}</span>
           </NavLink>
           {user && (
             <NavLink href="/mock">
               <MessageSquare className="size-4" aria-hidden="true" />
-              {nav.mock}
+              <span className="sr-only min-[1200px]:not-sr-only">{nav.mock}</span>
             </NavLink>
           )}
           {user && (
             <NavLink href="/glossary">
               <BookOpen className="size-4" aria-hidden="true" />
-              {nav.glossary}
+              <span className="sr-only min-[1200px]:not-sr-only">{nav.glossary}</span>
             </NavLink>
           )}
           {isAdmin && (
@@ -85,7 +88,7 @@ export async function Navbar() {
               className="text-violet-600 hover:text-violet-700 dark:text-violet-400"
             >
               <Shield className="size-4" aria-hidden="true" />
-              {nav.admin}
+              <span className="sr-only min-[1200px]:not-sr-only">{nav.admin}</span>
             </NavLink>
           )}
         </div>
@@ -93,19 +96,25 @@ export async function Navbar() {
         {/* Spacer */}
         <div className="flex-1" />
 
-        {/* Language toggle */}
-        <LangToggle />
+        {/* Language + theme controls — inline only at >=1200px; below that they
+            collapse into the settings gear so the bar stays on one line. */}
+        <div className="hidden min-[1200px]:flex items-center gap-1">
+          <LangToggle />
+          <ThemeSelector />
+          <ThemeToggle />
+        </div>
 
-        {/* Theme controls */}
-        <ThemeSelector />
-        <ThemeToggle />
+        {/* Settings gear — holds lang/theme controls below 1200px (mid + mobile) */}
+        <div className="min-[1200px]:hidden">
+          <NavSettings />
+        </div>
 
         {/* Desktop auth — hidden below 800px */}
         {user ? (
           <div className="hidden min-[800px]:flex items-center gap-1">
             <NavLink href="/dashboard" exact>
               <LayoutDashboard className="size-4" aria-hidden="true" />
-              {nav.dashboard}
+              <span className="sr-only min-[1200px]:not-sr-only">{nav.dashboard}</span>
             </NavLink>
             <form action={handleSignOut}>
               <button

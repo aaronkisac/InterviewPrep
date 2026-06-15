@@ -2,7 +2,7 @@
 
 import { auth } from "@/lib/auth";
 import { nextBox, nextDueAt } from "@/lib/leitner";
-import { createAdminClient } from "@/lib/supabase/admin";
+import { createServerSupabaseClient } from "@/lib/supabase/server";
 import type { Topic } from "@/lib/supabase/types";
 
 // ============================================================================
@@ -24,7 +24,7 @@ export async function saveMockSession(
   if (!session?.user?.id) return null;
 
   const userId = session.user.id;
-  const sb = createAdminClient();
+  const sb = await createServerSupabaseClient();
 
   const { data, error } = await sb
     .from("mock_sessions")
@@ -74,7 +74,7 @@ export async function toggleBookmark(
   if (!session?.user?.id) return null;
 
   const userId = session.user.id;
-  const sb = createAdminClient();
+  const sb = await createServerSupabaseClient();
 
   // Check if already bookmarked
   const { data: existing } = await sb
@@ -103,7 +103,7 @@ export async function getBookmarkedIds(overrideUserId?: string): Promise<string[
   const userId = overrideUserId ?? (await auth())?.user?.id;
   if (!userId) return [];
 
-  const sb = createAdminClient();
+  const sb = await createServerSupabaseClient();
   const { data } = await sb
     .from("bookmarks")
     .select("question_id")
@@ -138,7 +138,7 @@ export async function saveTopicMastery(
   if (!session?.user?.id) return;
 
   const userId = session.user.id;
-  const sb = createAdminClient();
+  const sb = await createServerSupabaseClient();
   const nowDate = new Date();
   const now = nowDate.toISOString();
 
@@ -189,7 +189,7 @@ export async function getMasteredIds(
   mode: "mock" | "flashcard",
 ): Promise<Set<string>> {
   if (topics.length === 0) return new Set();
-  const sb = createAdminClient();
+  const sb = await createServerSupabaseClient();
 
   const { data, error } = await sb
     .from("user_topic_mastery")
@@ -217,7 +217,7 @@ export async function getTopicMasteryStats(
   mode: "mock" | "flashcard",
 ): Promise<Record<string, number>> {
   if (topics.length === 0) return {};
-  const sb = createAdminClient();
+  const sb = await createServerSupabaseClient();
 
   const { data, error } = await sb
     .from("user_topic_mastery")
@@ -266,7 +266,7 @@ export async function getDashboardData(): Promise<DashboardData | null> {
   if (!session?.user?.id) return null;
 
   const userId = session.user.id;
-  const sb = createAdminClient();
+  const sb = await createServerSupabaseClient();
 
   const [sessionsResult, progressResult, bookmarkResult] = await Promise.all([
     sb
@@ -329,7 +329,7 @@ export async function getDueReviews(
   userId: string,
   limit = 200,
 ): Promise<DueReview[]> {
-  const sb = createAdminClient();
+  const sb = await createServerSupabaseClient();
   const { data, error } = await sb
     .from("user_topic_mastery")
     .select("question_id, topic, box, due_at")
@@ -375,7 +375,7 @@ export async function getSessionTrend(
   userId: string,
   limit = 30,
 ): Promise<SessionTrendPoint[]> {
-  const sb = createAdminClient();
+  const sb = await createServerSupabaseClient();
   const { data, error } = await sb
     .from("mock_sessions")
     .select("score, total, created_at")

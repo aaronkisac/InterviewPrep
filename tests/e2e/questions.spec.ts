@@ -109,7 +109,7 @@ test.describe("/questions pagination", () => {
 test.describe("/questions pagination resets", () => {
   test("changing topic resets to page 1", async ({ page }) => {
     await page.goto("/questions?page=2");
-    await expect(page.getByText(/Page 2 of \d+/)).toBeVisible();
+    await expect(page.getByText(/Page 2 of \d+/).first()).toBeVisible();
 
     await page.locator("#topic-filter").selectOption("websockets");
     await expect(page).toHaveURL(/topic=websockets/);
@@ -125,6 +125,6 @@ test.describe("/questions pagination resets", () => {
     await page.getByLabel(/Per page/).selectOption("50");
     await expect(page).toHaveURL(/per=50/);
     await expect(page).not.toHaveURL(/page=/);
-    await expect(page.getByText(/Page 1 of \d+/)).toBeVisible();
+    await expect(page.getByText(/Page 1 of \d+/).first()).toBeVisible();
   });
 });
