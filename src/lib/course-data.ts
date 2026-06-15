@@ -86,6 +86,42 @@ export async function getCompletedLessonIds(
   return new Set((data ?? []).map((r) => r.lesson_id as string));
 }
 
+/**
+ * Latest activity timestamp per topic for a user, derived from
+ * `user_lesson_progress`. A topic only appears here once the user has *saved*
+ * progress (a row exists — written by `recordLessonResult`); merely opening
+ * and leaving a course without finishing a lesson writes nothing, so it won't
+ * show up. Used to float recently-worked topics to the top of the /learn grid.
+ */
+async function getLastActivityByTopic(
+  userId: string,
+): Promise<Map<string, string>> {
+  const sb = createAdminClient();
+  const { data, error } = await sb
+    .from("user_lesson_progress")
+    .select("updated_at, lessons(units(topic_slug))")
+    .eq("user_id", userId)
+    .order("updated_at", { ascending: false });
+
+  if (error) {
+    console.error("[getLastActivityByTopic]", error.message);
+    return new Map();
+  }
+
+  // Rows arrive newest-first, so the first time we see a topic is its latest.
+  const latest = new Map<string, string>();
+  for (const row of data ?? []) {
+    const slug = (
+      row.lessons as unknown as {
+        units: { topic_slug: string } | null;
+      } | null
+    )?.units?.topic_slug;
+    const ts = row.updated_at as string | null;
+    if (slug && ts && !latest.has(slug)) latest.set(slug, ts);
+  }
+  return latest;
+}
+
 // ---------------------------------------------------------------------------
 // Course summaries — the /learn grid + dashboard card.
 // ---------------------------------------------------------------------------
@@ -113,9 +149,12 @@ export async function listCourseSummaries(
     return [];
   }
 
-  const completed = userId
-    ? await getCompletedLessonIds(userId)
-    : new Set<string>();
+  const [completed, lastActivity] = userId
+    ? await Promise.all([
+        getCompletedLessonIds(userId),
+        getLastActivityByTopic(userId),
+      ])
+    : [new Set<string>(), new Map<string, string>()];
 
   const byTopic = new Map<string, CourseSummary>();
   for (const u of data ?? []) {
@@ -129,7 +168,50 @@ export async function listCourseSummaries(
     entry.completedCount += lessons.filter((l) => completed.has(l.id)).length;
     byTopic.set(slug, entry);
   }
-  return [...byTopic.values()];
+
+  // `data` is ordered by topic_slug, so the values start alphabetical.
+  // Float topics with saved progress to the top, most-recently-worked first;
+  // topics with no progress keep their alphabetical order (stable sort).
+  const summaries = [...byTopic.values()];
+  summaries.sort((a, b) => {
+    const ta = lastActivity.get(a.topicSlug);
+    const tb = lastActivity.get(b.topicSlug);
+    if (ta && tb) return tb.localeCompare(ta); // ISO timestamps → newest first
+    if (ta) return -1; // a has progress, b doesn't → a first
+    if (tb) return 1;
+    return 0; // neither touched → keep alphabetical
+  });
+  return summaries;
+}
+
+/**
+ * Up to `count` courses for the home page "dashboard" strip:
+ * in-progress courses first (most-recently-worked, since listCourseSummaries
+ * already sorts that way), then the remaining slots filled with random
+ * untouched courses. Guests / no-progress users just get a random selection,
+ * reshuffled on every load (the page is force-dynamic).
+ */
+export async function getFeaturedCourses(
+  userId?: string,
+  count = 3,
+): Promise<CourseSummary[]> {
+  const summaries = await listCourseSummaries(userId);
+
+  const inProgress = summaries.filter((c) => c.completedCount > 0);
+  const rest = summaries.filter((c) => c.completedCount === 0);
+
+  // Fisher–Yates shuffle for the untouched pool.
+  for (let i = rest.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const a = rest[i];
+    const b = rest[j];
+    if (a && b) {
+      rest[i] = b;
+      rest[j] = a;
+    }
+  }
+
+  return [...inProgress, ...rest].slice(0, count);
 }
 
 export type ContinueLearning = {

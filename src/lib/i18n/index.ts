@@ -420,6 +420,9 @@ export const i18nHome = {
     heroDesc: (count: number, topicCount: number) =>
       `${count > 0 ? `${count}+` : "Hundreds of"} questions across ${topicCount} topics. Structured Q&A, a term glossary, and timed mock interview sessions.`,
     questions: (n: number) => (n > 0 ? `${n} questions` : "Coming soon"),
+    allCourses: "All courses →",
+    continueTitle: "Continue learning",
+    exploreTitle: "Explore courses",
     signInCta: "Sign in to get started",
     startMock: "Start mock interview",
     tagline: "Frontend Interview Prep",
@@ -459,6 +462,9 @@ export const i18nHome = {
     heroDesc: (count: number, topicCount: number) =>
       `${topicCount} topic'te ${count > 0 ? `${count}+` : "yüzlerce"} soru. Yapılandırılmış S&C, terim sözlüğü ve zamanlı mock mülakat oturumları.`,
     questions: (n: number) => (n > 0 ? `${n} soru` : "Yakında"),
+    allCourses: "Tüm eğitimler →",
+    continueTitle: "Öğrenmeye devam et",
+    exploreTitle: "Eğitimleri keşfet",
     signInCta: "Başlamak için giriş yap",
     startMock: "Mock mülakat başlat",
     tagline: "Frontend Mülakat Hazırlık",

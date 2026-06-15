@@ -2,8 +2,9 @@ import Link from "next/link";
 
 import { auth } from "@/lib/auth";
 import { getLang } from "@/lib/lang";
-import { i18nHome } from "@/lib/i18n";
+import { i18nHome, i18nCourse } from "@/lib/i18n";
 import { getTopicStats } from "@/lib/questions";
+import { getFeaturedCourses } from "@/lib/course-data";
 import { getTopicIcon } from "@/lib/topic-icons";
 import { listSystemTopics } from "@/lib/actions/admin-topics";
 
@@ -19,11 +20,15 @@ export default async function HomePage() {
   const lang = await getLang();
   const i18n = i18nHome[lang];
 
-  const [topicStats, systemTopics] = await Promise.all([
+  const [topicStats, systemTopics, featuredCourses] = await Promise.all([
     getTopicStats().catch(() => ({}) as Record<string, number>),
     listSystemTopics(),
+    getFeaturedCourses(user?.id, 3).catch(() => []),
   ]);
   const totalQuestions = Object.values(topicStats).reduce((s, n) => s + n, 0);
+  const topicNames = Object.fromEntries(systemTopics.map((t) => [t.slug, t.name]));
+  const i18nC = i18nCourse[lang];
+  const hasCourseProgress = featuredCourses.some((c) => c.completedCount > 0);
 
   return (
     <main className="mx-auto flex w-full max-w-3xl flex-col gap-14 px-6 py-16">
@@ -81,6 +86,61 @@ export default async function HomePage() {
           >
             {i18n.viewDashboard}
           </Link>
+        </section>
+      )}
+
+      {/* ── Courses (continue / explore) ── */}
+      {featuredCourses.length > 0 && (
+        <section className="space-y-4">
+          <div className="flex items-center justify-between gap-4">
+            <h2 className="text-sm font-medium text-muted-foreground">
+              {hasCourseProgress ? i18n.continueTitle : i18n.exploreTitle}
+            </h2>
+            <Link
+              href="/learn"
+              className="shrink-0 text-xs font-medium text-primary hover:underline"
+            >
+              {i18n.allCourses}
+            </Link>
+          </div>
+          <div className="grid gap-3 sm:grid-cols-3">
+            {featuredCourses.map((course) => {
+              const Icon = getTopicIcon(course.topicSlug);
+              const pct =
+                course.lessonCount === 0
+                  ? 0
+                  : Math.round(
+                      (course.completedCount / course.lessonCount) * 100,
+                    );
+              return (
+                <Link
+                  key={course.topicSlug}
+                  href={`/learn/${course.topicSlug}`}
+                  className="card-lift group flex flex-col rounded-lg border border-border bg-card p-4 hover:bg-accent/40"
+                >
+                  <p className="flex items-center gap-2 text-sm font-semibold">
+                    <Icon className="size-4 shrink-0 text-primary" aria-hidden="true" />
+                    <span className="truncate">
+                      {topicNames[course.topicSlug] ?? course.topicSlug}
+                    </span>
+                  </p>
+                  <p className="mt-1 text-xs text-muted-foreground">
+                    {course.completedCount > 0
+                      ? `${i18nC.lessonsDone(course.completedCount, course.lessonCount)} · ${pct}%`
+                      : i18nC.lessonsDone(course.completedCount, course.lessonCount)}
+                  </p>
+                  <p className="mt-3 text-xs font-medium text-primary group-hover:underline">
+                    {!user
+                      ? i18nC.signInToStart
+                      : course.completedCount === 0
+                        ? i18nC.startLearning
+                        : i18nC.continueLearning}{" "}
+                    →
+                  </p>
+                </Link>
+              );
+            })}
+          </div>
         </section>
       )}
 
