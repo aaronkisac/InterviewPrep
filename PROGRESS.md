@@ -123,7 +123,7 @@ pnpm install          # picks up @playwright/test
 pnpm exec playwright install --with-deps chromium
 pnpm test:e2e
 ```
-GitHub Secrets needed: `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, `NEXTAUTH_SECRET`, `AUTH_SECRET`
+GitHub Secrets needed: `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, `SUPABASE_JWT_SECRET`, `NEXTAUTH_SECRET`, `AUTH_SECRET`
 
 ### Still missing (optional / future):
 - `answerPersonal` / `answerPersonalTr` for most questions (add from Aaron's real interview experience)

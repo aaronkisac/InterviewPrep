@@ -38,6 +38,9 @@ export default defineConfig({
             process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? "",
           SUPABASE_SERVICE_ROLE_KEY:
             process.env.SUPABASE_SERVICE_ROLE_KEY ?? "",
+          // Required for the NextAuth→Supabase JWT bridge. The PLAYWRIGHT_TEST
+          // session auto-authenticates a test user, so every page mints a token.
+          SUPABASE_JWT_SECRET: process.env.SUPABASE_JWT_SECRET ?? "",
           NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET ?? "test-secret",
           AUTH_SECRET: process.env.AUTH_SECRET ?? "test-secret",
           NEXTAUTH_URL: "http://localhost:3000",
