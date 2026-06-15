@@ -1,0 +1,217 @@
+{
+  "topic": "api-design",
+  "title": "API Design",
+  "$comment": "Canonical concept list (syllabus) for API Design. COMPLETE: 8 units, 21 concepts covering bank ids 1501-1547 (47/47). Verified by: pnpm concept:coverage",
+  "concepts": [
+    {
+      "id": "what-rest-is-and-endpoints",
+      "title": "What REST is & API endpoints",
+      "titleTr": "REST nedir ve API endpoint'leri",
+      "section": "foundations",
+      "unit": "rest-fundamentals",
+      "lessons": [
+        "what-rest-is-and-endpoints"
+      ]
+    },
+    {
+      "id": "http-verbs-and-status-codes",
+      "title": "HTTP methods & status codes",
+      "titleTr": "HTTP metotları ve durum kodları",
+      "section": "foundations",
+      "unit": "rest-fundamentals",
+      "lessons": [
+        "http-verbs-and-status-codes"
+      ]
+    },
+    {
+      "id": "params-and-resource-naming",
+      "title": "Parameters & resource naming",
+      "titleTr": "Parametreler ve kaynak adlandırma",
+      "section": "foundations",
+      "unit": "rest-fundamentals",
+      "lessons": [
+        "params-and-resource-naming"
+      ]
+    },
+    {
+      "id": "rest-graphql-soap",
+      "title": "REST vs GraphQL vs SOAP",
+      "titleTr": "REST vs GraphQL vs SOAP",
+      "section": "core",
+      "unit": "styles-protocols",
+      "lessons": [
+        "rest-graphql-soap"
+      ]
+    },
+    {
+      "id": "trpc-sync-async-content-negotiation",
+      "title": "tRPC, sync vs async APIs & content negotiation",
+      "titleTr": "tRPC, sync vs async API'ler ve content negotiation",
+      "section": "core",
+      "unit": "styles-protocols",
+      "lessons": [
+        "trpc-sync-async-content-negotiation"
+      ]
+    },
+    {
+      "id": "authn-vs-authz",
+      "title": "Authentication vs authorisation",
+      "titleTr": "Authentication vs authorization",
+      "section": "core",
+      "unit": "auth-security",
+      "lessons": [
+        "authn-vs-authz"
+      ]
+    },
+    {
+      "id": "jwt-vs-sessions",
+      "title": "JWT vs sessions & JWT structure",
+      "titleTr": "JWT vs session'lar ve JWT yapısı",
+      "section": "core",
+      "unit": "auth-security",
+      "lessons": [
+        "jwt-vs-sessions"
+      ]
+    },
+    {
+      "id": "oauth-cors-security",
+      "title": "OAuth 2.0, CORS & security beyond auth",
+      "titleTr": "OAuth 2.0, CORS ve auth ötesi güvenlik",
+      "section": "core",
+      "unit": "auth-security",
+      "lessons": [
+        "oauth-cors-security"
+      ]
+    },
+    {
+      "id": "rate-limiting-throttling-idempotency",
+      "title": "Rate limiting, throttling & idempotency",
+      "titleTr": "Rate limiting, throttling ve idempotency",
+      "section": "advanced",
+      "unit": "reliability",
+      "lessons": [
+        "rate-limiting-throttling-idempotency"
+      ]
+    },
+    {
+      "id": "gateway-vs-app-rate-limiting-ha",
+      "title": "Gateway vs app rate limiting & HA APIs",
+      "titleTr": "Gateway vs app rate limiting ve HA API'ler",
+      "section": "advanced",
+      "unit": "reliability",
+      "lessons": [
+        "gateway-vs-app-rate-limiting-ha"
+      ]
+    },
+    {
+      "id": "versioning-and-backwards-compat",
+      "title": "Versioning & backwards compatibility",
+      "titleTr": "Versiyonlama ve geriye uyumluluk",
+      "section": "advanced",
+      "unit": "versioning-docs",
+      "lessons": [
+        "versioning-and-backwards-compat"
+      ]
+    },
+    {
+      "id": "openapi-docs-mocking",
+      "title": "OpenAPI/Swagger, documentation & mocking",
+      "titleTr": "OpenAPI/Swagger, dokümantasyon ve mocking",
+      "section": "advanced",
+      "unit": "versioning-docs",
+      "lessons": [
+        "openapi-docs-mocking"
+      ]
+    },
+    {
+      "id": "pagination-and-errors",
+      "title": "Pagination & consistent error handling",
+      "titleTr": "Pagination ve tutarlı hata işleme",
+      "section": "advanced",
+      "unit": "data-handling",
+      "lessons": [
+        "pagination-and-errors"
+      ]
+    },
+    {
+      "id": "caching-and-n-plus-one",
+      "title": "Caching & the N+1 problem",
+      "titleTr": "Caching ve N+1 problemi",
+      "section": "advanced",
+      "unit": "data-handling",
+      "lessons": [
+        "caching-and-n-plus-one"
+      ]
+    },
+    {
+      "id": "uploads-and-validation",
+      "title": "File uploads & request validation",
+      "titleTr": "Dosya yüklemeleri ve istek doğrulama",
+      "section": "advanced",
+      "unit": "data-handling",
+      "lessons": [
+        "uploads-and-validation"
+      ]
+    },
+    {
+      "id": "search-and-long-running",
+      "title": "Search APIs & long-running operations",
+      "titleTr": "Arama API'leri ve uzun-süren işlemler",
+      "section": "advanced",
+      "unit": "data-handling",
+      "lessons": [
+        "search-and-long-running"
+      ]
+    },
+    {
+      "id": "bff-and-api-gateway",
+      "title": "BFF & API Gateway",
+      "titleTr": "BFF ve API Gateway",
+      "section": "interview",
+      "unit": "architecture-patterns",
+      "lessons": [
+        "bff-and-api-gateway"
+      ]
+    },
+    {
+      "id": "multi-client-and-event-driven",
+      "title": "Designing for multiple clients & event-driven APIs",
+      "titleTr": "Çoklu istemci için tasarım ve event-driven API'ler",
+      "section": "interview",
+      "unit": "architecture-patterns",
+      "lessons": [
+        "multi-client-and-event-driven"
+      ]
+    },
+    {
+      "id": "webhooks-and-sse",
+      "title": "Webhooks & Server-Sent Events in Next.js",
+      "titleTr": "Webhook'lar ve Next.js'te Server-Sent Events",
+      "section": "interview",
+      "unit": "realtime-graphql-practice",
+      "lessons": [
+        "webhooks-and-sse"
+      ]
+    },
+    {
+      "id": "graphql-subscriptions-persisted",
+      "title": "GraphQL subscriptions & persisted queries",
+      "titleTr": "GraphQL subscription'ları ve persisted query'ler",
+      "section": "interview",
+      "unit": "realtime-graphql-practice",
+      "lessons": [
+        "graphql-subscriptions-persisted"
+      ]
+    },
+    {
+      "id": "testing-greenfield-observability",
+      "title": "Testing, greenfield design & observability",
+      "titleTr": "Test, greenfield tasarım ve observability",
+      "section": "interview",
+      "unit": "realtime-graphql-practice",
+      "lessons": [
+        "testing-greenfield-observability"
+      ]
+    }
+  ]
+}
