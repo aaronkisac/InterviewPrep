@@ -1,0 +1,111 @@
+{
+  "topic": "agile-scrum",
+  "slug": "sprints-events",
+  "title": "Sprints & Events",
+  "titleTr": "Sprint'ler ve Etkinlikler",
+  "section": "core",
+  "position": 3,
+  "lessons": [
+    {
+      "slug": "sprints-and-ceremonies",
+      "title": "Sprints & ceremonies",
+      "titleTr": "Sprint'ler ve törenler",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "The heartbeat of Scrum",
+          "titleTr": "Scrum'ın kalp atışı",
+          "body": "**A Sprint** is Scrum's core unit: a **fixed-length time-box (1–4 weeks, commonly 2)** during which the team builds a **\"Done\", usable Increment**. Sprints are **back-to-back** (a new one starts the moment the last ends), have a consistent length for rhythm, and a **Sprint Goal** that gives focus. Scope is agreed at planning and **shouldn't change** in ways that endanger the goal; the Sprint is the container for all the other events.\n\n**The Scrum events (ceremonies)** — five total, each a time-boxed inspect-and-adapt opportunity:\n\n1. **The Sprint** itself — the container for the rest.\n2. **Sprint Planning** — kick off the Sprint: decide the Sprint Goal and what backlog items the team will deliver, and how.\n3. **Daily Scrum (stand-up)** — a short (~15 min) daily sync for Developers to inspect progress toward the Sprint Goal and re-plan the day.\n4. **Sprint Review** — at the end, show the Increment to stakeholders and gather feedback (inspect the *product*).\n5. **Sprint Retrospective** — after the Review, the team reflects on **how they worked** and picks improvements (inspect the *process*).\n\n**Sprint Planning** specifically answers: **Why** is this Sprint valuable (the Sprint Goal)? **What** can be Done this Sprint (select Product Backlog items)? and **How** will the work get done (the plan / Sprint Backlog)? The whole Scrum Team participates; the output is a **Sprint Goal + Sprint Backlog**.",
+          "bodyTr": "**Bir Sprint**, Scrum'ın çekirdek birimidir: takımın **\"Done\", kullanılabilir bir Increment** inşa ettiği **sabit-uzunluklu bir zaman-kutusu (1–4 hafta, genelde 2)**. Sprint'ler **arka arkayadır** (sonuncusu biter bitmez yenisi başlar), ritim için tutarlı bir uzunluğa ve odak veren bir **Sprint Goal**'a sahiptir. Kapsam planlamada kararlaştırılır ve hedefi tehlikeye atacak şekilde **değişmemeli**; Sprint, diğer tüm etkinliklerin konteyneridir.\n\n**Scrum etkinlikleri (törenler)** — toplam beş, her biri zaman-kutulu bir incele-ve-uyarla fırsatı:\n\n1. **Sprint'in kendisi** — gerisinin konteyneri.\n2. **Sprint Planning** — Sprint'i başlat: Sprint Goal'u ve takımın hangi backlog öğelerini, nasıl teslim edeceğini kararlaştır.\n3. **Daily Scrum (stand-up)** — Geliştiricilerin Sprint Goal'a doğru ilerlemeyi incelemesi ve günü yeniden planlaması için kısa (~15 dk) günlük senkron.\n4. **Sprint Review** — sonunda, Increment'i paydaşlara göster ve geri bildirim topla (*ürünü* incele).\n5. **Sprint Retrospective** — Review'dan sonra, takım **nasıl çalıştığını** yansıtır ve iyileştirmeler seçer (*süreci* incele).\n\n**Sprint Planning** özellikle şunları yanıtlar: Bu Sprint **neden** değerli (Sprint Goal)? Bu Sprint **ne** Done olabilir (Product Backlog öğelerini seç)? ve İş **nasıl** yapılacak (plan / Sprint Backlog)? Tüm Scrum Takımı katılır; çıktı bir **Sprint Goal + Sprint Backlog**'tur."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What three questions does Sprint Planning answer?",
+          "promptTr": "Sprint Planning hangi üç soruyu yanıtlar?",
+          "options": [
+            { "text": "Why is the Sprint valuable (Goal), what can be Done (selected items), and how will it be done (plan)", "textTr": "Sprint neden değerli (Goal), ne Done olabilir (seçilen öğeler) ve nasıl yapılacak (plan)", "correct": true },
+            { "text": "Who to blame, when to ship, and how much to charge", "textTr": "Kimi suçlamak, ne zaman teslim etmek ve ne kadar ücret almak" },
+            { "text": "Only the budget for the quarter", "textTr": "Yalnızca çeyreğin bütçesi" },
+            { "text": "Which employees to hire", "textTr": "Hangi çalışanların işe alınacağı" }
+          ],
+          "explanation": "Planning sets the Sprint Goal (why), selects Product Backlog items (what), and forms a plan/Sprint Backlog (how). The whole team participates.",
+          "explanationTr": "Planlama Sprint Goal'u (neden) belirler, Product Backlog öğelerini (ne) seçer ve bir plan/Sprint Backlog (nasıl) oluşturur. Tüm takım katılır."
+        },
+        {
+          "type": "order",
+          "prompt": "Order the Scrum events within a Sprint",
+          "promptTr": "Bir Sprint içindeki Scrum etkinliklerini sırala",
+          "items": [
+            { "text": "Sprint Planning — set the goal and plan the work", "textTr": "Sprint Planning — hedefi belirle ve işi planla" },
+            { "text": "Daily Scrum — sync each day on progress toward the goal", "textTr": "Daily Scrum — her gün hedefe ilerlemede senkron ol" },
+            { "text": "Sprint Review — show the Increment and gather feedback", "textTr": "Sprint Review — Increment'i göster ve geri bildirim topla" },
+            { "text": "Sprint Retrospective — reflect on how to improve the process", "textTr": "Sprint Retrospective — süreci nasıl iyileştireceğini yansıt" }
+          ],
+          "explanation": "Within the Sprint: Planning starts it, Daily Scrums run throughout, then the Review (inspect product) and Retrospective (inspect process) close it.",
+          "explanationTr": "Sprint içinde: Planning onu başlatır, Daily Scrum'lar boyunca çalışır, sonra Review (ürünü incele) ve Retrospective (süreci incele) onu kapatır."
+        },
+        {
+          "type": "challenge",
+          "question": "What is a Sprint in Scrum?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is Sprint Planning?"
+        },
+        {
+          "type": "challenge",
+          "question": "What are the Scrum events (ceremonies)?"
+        }
+      ]
+    },
+    {
+      "slug": "review-retro-increment",
+      "title": "Review, Retrospective & the Increment",
+      "titleTr": "Review, Retrospective ve Increment",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Inspecting the product and the process",
+          "titleTr": "Ürünü ve süreci incelemek",
+          "body": "Two end-of-Sprint events inspect different things, producing the third concept here — the Increment.\n\n**Sprint Review** happens at the **end of the Sprint** to **inspect the product Increment and adapt the Product Backlog**. The Scrum Team and **stakeholders** review what was Done, demo working software, discuss progress toward goals, and collaborate on what to do next. It's a **working session**, not just a demo — feedback may reshape the backlog. (Inspect the **product**.)\n\n**Sprint Retrospective** happens **after the Review, before the next Planning**, for the team to **inspect itself — how it worked** (people, relationships, process, tools) — and create a plan for **improvements** to apply next Sprint. Classic prompts: what went well, what didn't, what to try. It's the engine of **continuous improvement** and embodies Agile's \"reflect and adjust\" principle. (Inspect the **process**.)\n\nSo Review = *did we build the right thing well?* (product); Retrospective = *how do we work better next time?* (process).\n\n**A Scrum Increment** is a **concrete, usable, \"Done\" step toward the Product Goal** — the sum of all completed Product Backlog items in a Sprint **plus** the value of all previous Increments. It must meet the **Definition of Done** to be releasable. Multiple Increments may be created within a Sprint; an Increment is only considered real when it meets the DoD. It's the tangible output Scrum delivers each Sprint — *potentially shippable* working product.",
+          "bodyTr": "İki Sprint-sonu etkinliği farklı şeyleri inceler, buradaki üçüncü kavramı üretir — Increment.\n\n**Sprint Review**, **Sprint'in sonunda**, **ürün Increment'ini incelemek ve Product Backlog'u uyarlamak** için olur. Scrum Takımı ve **paydaşlar** neyin Done olduğunu gözden geçirir, çalışan yazılımı demo eder, hedeflere ilerlemeyi tartışır ve sırada ne yapılacağı üzerine işbirliği yapar. Sadece bir demo değil, bir **çalışma oturumudur** — geri bildirim backlog'u yeniden şekillendirebilir. (**Ürünü** incele.)\n\n**Sprint Retrospective**, **Review'dan sonra, bir sonraki Planning'den önce** olur; takımın **kendini — nasıl çalıştığını** (insanlar, ilişkiler, süreç, araçlar) incelemesi ve bir sonraki Sprint'te uygulanacak **iyileştirmeler** için bir plan oluşturması içindir. Klasik sorular: ne iyi gitti, ne gitmedi, ne denenecek. **Sürekli iyileştirmenin** motorudur ve Agile'ın \"yansı ve ayarla\" ilkesini somutlaştırır. (**Süreci** incele.)\n\nYani Review = *doğru şeyi iyi mi inşa ettik?* (ürün); Retrospective = *bir sonraki sefer nasıl daha iyi çalışırız?* (süreç).\n\n**Bir Scrum Increment'i**, **Product Goal'a doğru somut, kullanılabilir, \"Done\" bir adımdır** — bir Sprint'te tamamlanan tüm Product Backlog öğelerinin toplamı **artı** tüm önceki Increment'lerin değeri. Yayınlanabilir olması için **Definition of Done**'ı karşılamalı. Bir Sprint içinde birden çok Increment oluşturulabilir; bir Increment yalnızca DoD'u karşıladığında gerçek sayılır. Scrum'ın her Sprint'te teslim ettiği somut çıktıdır — *potansiyel teslim edilebilir* çalışan ürün."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What's the difference between a Sprint Review and a Sprint Retrospective?",
+          "promptTr": "Sprint Review ile Sprint Retrospective arasındaki fark nedir?",
+          "options": [
+            { "text": "Review inspects the product Increment with stakeholders; Retrospective inspects how the team worked, to improve the process", "textTr": "Review, paydaşlarla ürün Increment'ini inceler; Retrospective, süreci iyileştirmek için takımın nasıl çalıştığını inceler", "correct": true },
+            { "text": "They are the same meeting", "textTr": "Aynı toplantıdır" },
+            { "text": "Review improves the process; Retrospective demos the product", "textTr": "Review süreci iyileştirir; Retrospective ürünü demo eder" },
+            { "text": "Both happen at the start of the Sprint", "textTr": "İkisi de Sprint'in başında olur" }
+          ],
+          "explanation": "Review = inspect the product (with stakeholders, adapt the backlog); Retrospective = inspect the process (team-only, plan improvements). Different focus, both at Sprint end.",
+          "explanationTr": "Review = ürünü incele (paydaşlarla, backlog'u uyarla); Retrospective = süreci incele (yalnızca takım, iyileştirmeleri planla). Farklı odak, ikisi de Sprint sonunda."
+        },
+        {
+          "type": "true_false",
+          "statement": "A Scrum Increment must meet the Definition of Done and represents the sum of completed work plus all previous Increments.",
+          "statementTr": "Bir Scrum Increment'i Definition of Done'ı karşılamalı ve tamamlanan işin toplamı artı tüm önceki Increment'leri temsil eder.",
+          "answer": true,
+          "explanation": "An Increment is a usable, Done step toward the Product Goal — only counts when it meets the DoD, and it builds additively on prior Increments.",
+          "explanationTr": "Bir Increment, Product Goal'a doğru kullanılabilir, Done bir adımdır — yalnızca DoD'u karşıladığında sayılır ve önceki Increment'lerin üstüne eklemeli kurulur."
+        },
+        {
+          "type": "challenge",
+          "question": "What is a Sprint Review?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is a Sprint Retrospective?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is a Scrum Increment?"
+        }
+      ]
+    }
+  ]
+}

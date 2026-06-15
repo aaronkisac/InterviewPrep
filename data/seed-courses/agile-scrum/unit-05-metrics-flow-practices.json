@@ -1,0 +1,107 @@
+{
+  "topic": "agile-scrum",
+  "slug": "metrics-flow-practices",
+  "title": "Metrics, Flow & Practices",
+  "titleTr": "Metrikler, Akış ve Pratikler",
+  "section": "advanced",
+  "position": 5,
+  "lessons": [
+    {
+      "slug": "velocity-and-burn-charts",
+      "title": "Velocity & burn charts",
+      "titleTr": "Velocity ve burn grafikleri",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Measuring throughput and progress",
+          "titleTr": "İş hacmini ve ilerlemeyi ölçmek",
+          "body": "**Velocity** is the **amount of work (usually story points) a team completes per Sprint**, averaged over recent Sprints. It's used for **forecasting/capacity planning** — \"we average 30 points/Sprint, so we can plan ~30 next Sprint\" — and to project how many Sprints a backlog might take. Key cautions: velocity is **team-specific and relative**, so you **can't compare it across teams** (their points mean different things), and it should **never be a performance target** — gaming it (inflating estimates) destroys its usefulness. It's a planning tool, not a productivity score.\n\n**Burn-Down and Burn-Up charts** visualise progress over time:\n\n- **Burn-Down chart** — plots **work remaining** (Y) against time (X). The line **falls toward zero** as work completes; an ideal line shows the target pace. It answers *\"are we on track to finish?\"* — used for Sprint and release tracking.\n- **Burn-Up chart** — plots **work completed** (Y) rising over time **toward a total-scope line**. Its advantage over burn-down: it shows **scope changes** explicitly — if scope is added, the **top line moves up**, so you can see scope creep that a burn-down would hide (a burn-down just flattens ambiguously).\n\nSo both track progress, but a **burn-down** emphasises \"how much is left,\" while a **burn-up** separates **progress** from **total scope**, making added/removed work visible. Teams often prefer burn-up when scope changes during a release.",
+          "bodyTr": "**Velocity**, **bir takımın Sprint başına tamamladığı iş miktarıdır (genelde story point)**, son Sprint'ler üzerinden ortalaması alınır. **Tahmin/kapasite planlaması** için kullanılır — \"Sprint başına ortalama 30 point yapıyoruz, yani sonraki Sprint ~30 planlayabiliriz\" — ve bir backlog'un kaç Sprint sürebileceğini projekte etmek için. Temel uyarılar: velocity **takıma-özgü ve görelidir**, bu yüzden **takımlar arasında karşılaştıramazsın** (point'leri farklı şeyler ifade eder) ve **asla bir performans hedefi olmamalı** — onu oyunlamak (tahminleri şişirmek) yararlılığını yok eder. Bir planlama aracıdır, üretkenlik skoru değil.\n\n**Burn-Down ve Burn-Up grafikleri** ilerlemeyi zaman içinde görselleştirir:\n\n- **Burn-Down grafiği** — **kalan işi** (Y) zamana (X) karşı çizer. İş tamamlandıkça çizgi **sıfıra doğru düşer**; ideal bir çizgi hedef tempoyu gösterir. *\"Bitirmek için yolunda mıyız?\"* sorusunu yanıtlar — Sprint ve sürüm takibi için kullanılır.\n- **Burn-Up grafiği** — **tamamlanan işi** (Y) zamanla **bir toplam-kapsam çizgisine doğru** yükselen olarak çizer. Burn-down'a göre avantajı: **kapsam değişikliklerini** açıkça gösterir — kapsam eklenirse **üst çizgi yukarı çıkar**, böylece burn-down'ın gizleyeceği scope creep'i görebilirsin (burn-down sadece belirsizce düzleşir).\n\nYani ikisi de ilerlemeyi izler ama bir **burn-down** \"ne kadar kaldı\"yı vurgular, bir **burn-up** ise **ilerlemeyi** **toplam kapsamdan** ayırır, eklenen/çıkarılan işi görünür kılar. Takımlar bir sürüm sırasında kapsam değiştiğinde genelde burn-up'ı tercih eder."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What's the main advantage of a burn-up chart over a burn-down chart?",
+          "promptTr": "Bir burn-up grafiğinin burn-down grafiğine göre temel avantajı nedir?",
+          "options": [
+            { "text": "It shows scope changes explicitly via a separate total-scope line, revealing scope creep", "textTr": "Ayrı bir toplam-kapsam çizgisiyle kapsam değişikliklerini açıkça gösterir, scope creep'i ortaya çıkarır", "correct": true },
+            { "text": "It is the only chart that uses time on the X axis", "textTr": "X ekseninde zaman kullanan tek grafiktir" },
+            { "text": "It measures individual developer performance", "textTr": "Bireysel geliştirici performansını ölçer" },
+            { "text": "It replaces the need for a backlog", "textTr": "Backlog ihtiyacını ortadan kaldırır" }
+          ],
+          "explanation": "Burn-up plots completed work rising toward a scope line; when scope changes, the scope line moves, making it visible. Burn-down (work remaining) would just flatten ambiguously.",
+          "explanationTr": "Burn-up, tamamlanan işi bir kapsam çizgisine doğru yükselen olarak çizer; kapsam değişince kapsam çizgisi hareket eder, görünür olur. Burn-down (kalan iş) yalnızca belirsizce düzleşir."
+        },
+        {
+          "type": "true_false",
+          "statement": "Velocity is team-specific and should be used for forecasting, not as a cross-team performance target.",
+          "statementTr": "Velocity takıma-özgüdür ve takımlar-arası performans hedefi olarak değil, tahmin için kullanılmalıdır.",
+          "answer": true,
+          "explanation": "Points are relative per team, so comparing velocities across teams is meaningless, and targeting velocity invites estimate inflation. It's a planning aid only.",
+          "explanationTr": "Point'ler takım başına görelidir, bu yüzden velocity'leri takımlar arası karşılaştırmak anlamsızdır ve velocity'yi hedeflemek tahmin şişirmeyi davet eder. Yalnızca bir planlama yardımıdır."
+        },
+        {
+          "type": "challenge",
+          "question": "What is Velocity in Agile and how is it used?"
+        },
+        {
+          "type": "challenge",
+          "question": "What are Burn-Down and Burn-Up charts?"
+        }
+      ]
+    },
+    {
+      "slug": "kanban-xp-and-ci",
+      "title": "Kanban, XP & Continuous Integration",
+      "titleTr": "Kanban, XP ve Continuous Integration",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Other Agile flavours and an engineering practice",
+          "titleTr": "Diğer Agile çeşitleri ve bir mühendislik pratiği",
+          "body": "**Kanban** is an Agile method focused on **visualizing work and optimizing flow**, rather than fixed iterations. Core practices: a **Kanban board** with columns for workflow stages (To Do → In Progress → Done); **Work-In-Progress (WIP) limits** that cap how many items can be in each stage (to expose bottlenecks and force finishing over starting); and **continuous, pull-based flow** — there are **no Sprints**; work is pulled when capacity frees up, and items are released continuously. It emphasises **flow metrics** (cycle time, throughput) and **continuous delivery/improvement**. Great for support/ops or steady streams of work; Scrum suits planned, goal-driven iterations.\n\n**Extreme Programming (XP) vs Scrum:** both are Agile, but at different layers. **Scrum** is a **management/process framework** — roles, Sprints, ceremonies, artifacts — and is largely **silent on engineering practices**. **XP** is an Agile method centered on **engineering/technical practices**: **Test-Driven Development, pair programming, continuous integration, refactoring, simple design, small frequent releases, collective code ownership**. So Scrum tells you *how to organize the work*; XP tells you *how to write the code well*. They're **complementary** — many teams run Scrum's structure with XP's engineering practices inside it. (XP also has shorter iterations and stricter rules about customer involvement and prioritisation.)\n\n**Why Continuous Integration (CI) matters for Agile:** Agile demands **frequent, working, integrable** software. **CI** — developers merge to a shared mainline often, and **every push triggers an automated build + test** — makes that possible: it **catches integration bugs early** (small, cheap fixes), keeps the codebase **always releasable**, gives **fast feedback**, and avoids painful \"big bang\" merges. It directly enables Agile's principles of frequent delivery, technical excellence, and responding to change with confidence — and is the foundation for continuous delivery/deployment.",
+          "bodyTr": "**Kanban**, sabit iterasyonlar yerine **işi görselleştirmeye ve akışı optimize etmeye** odaklanan bir Agile yöntemidir. Temel pratikler: iş akışı aşamaları için sütunlu bir **Kanban board'u** (To Do → In Progress → Done); her aşamada kaç öğe olabileceğini sınırlayan **Work-In-Progress (WIP) limitleri** (darboğazları ortaya çıkarmak ve başlamaktansa bitirmeyi zorlamak için); ve **sürekli, pull-tabanlı akış** — **Sprint yok**; kapasite boşaldığında iş çekilir ve öğeler sürekli yayınlanır. **Akış metriklerini** (cycle time, throughput) ve **sürekli teslimat/iyileştirmeyi** vurgular. Destek/ops ya da istikrarlı iş akışları için harika; Scrum planlı, hedef-güdümlü iterasyonlara uygun.\n\n**Extreme Programming (XP) vs Scrum:** ikisi de Agile ama farklı katmanlarda. **Scrum** bir **yönetim/süreç framework'üdür** — roller, Sprint'ler, törenler, artifact'lar — ve **mühendislik pratikleri konusunda büyük ölçüde sessizdir**. **XP**, **mühendislik/teknik pratiklere** odaklı bir Agile yöntemidir: **Test-Driven Development, pair programming, continuous integration, refactoring, basit tasarım, küçük sık sürümler, kolektif kod sahipliği**. Yani Scrum sana *işi nasıl organize edeceğini* söyler; XP *kodu nasıl iyi yazacağını* söyler. **Tamamlayıcıdırlar** — birçok takım Scrum'ın yapısını içinde XP'nin mühendislik pratikleriyle çalıştırır. (XP'nin ayrıca daha kısa iterasyonları ve müşteri katılımı ile önceliklendirme konusunda daha katı kuralları vardır.)\n\n**Continuous Integration (CI) Agile için neden önemli:** Agile **sık, çalışan, entegre edilebilir** yazılım gerektirir. **CI** — geliştiriciler sık sık paylaşılan bir mainline'a merge eder ve **her push otomatik bir build + test tetikler** — bunu mümkün kılar: **entegrasyon hatalarını erken yakalar** (küçük, ucuz düzeltmeler), kod tabanını **her zaman yayınlanabilir** tutar, **hızlı geri bildirim** verir ve acılı \"big bang\" merge'lerden kaçınır. Agile'ın sık teslimat, teknik mükemmellik ve değişime güvenle yanıt verme ilkelerini doğrudan mümkün kılar — ve continuous delivery/deployment'ın temelidir."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What is a defining feature of Kanban compared to Scrum?",
+          "promptTr": "Kanban'ın Scrum'a kıyasla tanımlayıcı bir özelliği nedir?",
+          "options": [
+            { "text": "Continuous, pull-based flow with WIP limits and no fixed Sprints", "textTr": "WIP limitli ve sabit Sprint'siz sürekli, pull-tabanlı akış", "correct": true },
+            { "text": "Mandatory two-week Sprints and a Scrum Master", "textTr": "Zorunlu iki haftalık Sprint'ler ve bir Scrum Master" },
+            { "text": "It forbids visualizing work on a board", "textTr": "İşi bir board'da görselleştirmeyi yasaklar" },
+            { "text": "It has no concept of work stages", "textTr": "İş aşamaları kavramı yoktur" }
+          ],
+          "explanation": "Kanban visualises flow on a board, caps work with WIP limits, and pulls work continuously — no time-boxed Sprints. Scrum is the iteration-based, role-defined framework.",
+          "explanationTr": "Kanban akışı bir board'da görselleştirir, işi WIP limitleriyle sınırlar ve işi sürekli çeker — zaman-kutulu Sprint yok. Scrum, iterasyon-tabanlı, rol-tanımlı framework'tür."
+        },
+        {
+          "type": "mcq",
+          "prompt": "How do XP and Scrum differ?",
+          "promptTr": "XP ve Scrum nasıl farklılaşır?",
+          "options": [
+            { "text": "Scrum is a process/management framework; XP focuses on engineering practices (TDD, pairing, CI, refactoring) — they're complementary", "textTr": "Scrum bir süreç/yönetim framework'üdür; XP mühendislik pratiklerine (TDD, pairing, CI, refactoring) odaklanır — tamamlayıcıdırlar", "correct": true },
+            { "text": "They are the same framework", "textTr": "Aynı framework'tür" },
+            { "text": "XP has no iterations; Scrum has no roles", "textTr": "XP'nin iterasyonu yok; Scrum'ın rolü yok" },
+            { "text": "Scrum prescribes pair programming and TDD", "textTr": "Scrum pair programming ve TDD'yi zorunlu kılar" }
+          ],
+          "explanation": "Scrum organises the work (roles/events/artifacts) but is quiet on coding practice; XP prescribes technical practices like TDD, pairing, and CI. Teams often combine them.",
+          "explanationTr": "Scrum işi organize eder (roller/etkinlikler/artifact'lar) ama kodlama pratiği konusunda sessizdir; XP, TDD, pairing ve CI gibi teknik pratikleri zorunlu kılar. Takımlar genelde ikisini birleştirir."
+        },
+        {
+          "type": "challenge",
+          "question": "What is Kanban?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is the difference between Extreme Programming (XP) and Scrum?"
+        },
+        {
+          "type": "challenge",
+          "question": "Why is Continuous Integration important for Agile?"
+        }
+      ]
+    }
+  ]
+}

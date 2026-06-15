@@ -1,0 +1,106 @@
+{
+  "topic": "agile-scrum",
+  "slug": "backlog-work-items",
+  "title": "Backlog & Work Items",
+  "titleTr": "Backlog ve İş Öğeleri",
+  "section": "core",
+  "position": 4,
+  "lessons": [
+    {
+      "slug": "stories-tasks-acceptance-dod",
+      "title": "Epics, stories, tasks, acceptance criteria & DoD",
+      "titleTr": "Epic'ler, story'ler, task'lar, acceptance criteria ve DoD",
+      "position": 1,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "Breaking work down and defining 'finished'",
+          "titleTr": "İşi parçalamak ve 'bitmiş'i tanımlamak",
+          "body": "Agile work is broken into a **hierarchy**:\n\n- **Epic** — a **large body of work** too big for one Sprint, representing a broad goal/feature (e.g. \"Checkout flow\"). It's split into stories.\n- **User Story** — a **small, user-centric slice of value**, usually written as *\"As a [user], I want [goal] so that [benefit].\"* Sized to fit in a Sprint, it describes the *what/why* from the user's view, not the implementation.\n- **Task** — the **technical work items** a story is broken into by Developers (e.g. \"add API endpoint,\" \"write component,\" \"add tests\"). Tasks describe the *how*.\n\nSo: **Epic → Stories → Tasks**, from broad goal to concrete work.\n\n**Acceptance Criteria** are the **specific, testable conditions a user story must satisfy to be accepted** as complete — defined **per story**. They clarify scope and expected behaviour (\"Given/When/Then\" or a checklist), remove ambiguity, and become the basis for tests and for the PO to accept the story. Example: *\"User sees an error if the email is invalid.\"*\n\n**Definition of Done (DoD)** is a **shared, team-wide checklist of what \"Done\" means for *any* work item** before it counts as a complete, releasable Increment — e.g. code reviewed, tests passing, merged, docs updated, deployed to staging. It's **global** (applies to all items), ensures quality and transparency, and prevents \"done\" from meaning different things to different people.\n\n**Acceptance Criteria vs DoD:** Acceptance Criteria are **story-specific** (does *this* feature do what was asked?); the Definition of Done is **universal** (does *any* item meet our quality bar?). A story is truly complete only when it meets **both**.",
+          "bodyTr": "Agile işi bir **hiyerarşiye** bölünür:\n\n- **Epic** — tek bir Sprint için çok büyük, geniş bir hedefi/özelliği temsil eden **büyük bir iş gövdesi** (örn. \"Checkout akışı\"). Story'lere bölünür.\n- **User Story** — **küçük, kullanıcı-merkezli bir değer dilimi**, genelde *\"Bir [kullanıcı] olarak, [fayda] için [hedef] istiyorum.\"* şeklinde yazılır. Bir Sprint'e sığacak boyutta, implementasyonu değil kullanıcının bakışından *ne/neden*'i tanımlar.\n- **Task** — bir story'nin Geliştiriciler tarafından bölündüğü **teknik iş öğeleri** (örn. \"API endpoint ekle,\" \"bileşen yaz,\" \"test ekle\"). Task'lar *nasıl*'ı tanımlar.\n\nYani: **Epic → Story'ler → Task'lar**, geniş hedeften somut işe.\n\n**Acceptance Criteria**, bir user story'nin tamamlanmış olarak **kabul edilmesi için karşılaması gereken belirli, test edilebilir koşullardır** — **story başına** tanımlanır. Kapsamı ve beklenen davranışı netleştirir (\"Given/When/Then\" ya da bir kontrol listesi), belirsizliği kaldırır ve testler için ve PO'nun story'yi kabul etmesi için temel olur. Örnek: *\"E-posta geçersizse kullanıcı bir hata görür.\"*\n\n**Definition of Done (DoD)**, *herhangi bir* iş öğesinin tam, yayınlanabilir bir Increment sayılmadan önce **\"Done\"ın ne anlama geldiğine dair paylaşılan, takım-geneli bir kontrol listesidir** — örn. kod incelendi, testler geçiyor, merge edildi, dokümanlar güncellendi, staging'e deploy edildi. **Globaldir** (tüm öğelere uygulanır), kaliteyi ve şeffaflığı sağlar ve \"done\"ın farklı insanlar için farklı şeyler ifade etmesini önler.\n\n**Acceptance Criteria vs DoD:** Acceptance Criteria **story'ye özgüdür** (*bu* özellik isteneni yapıyor mu?); Definition of Done **evrenseldir** (*herhangi bir* öğe kalite çıtamızı karşılıyor mu?). Bir story yalnızca **ikisini de** karşıladığında gerçekten tamamlanmıştır."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What's the difference between Acceptance Criteria and the Definition of Done?",
+          "promptTr": "Acceptance Criteria ile Definition of Done arasındaki fark nedir?",
+          "options": [
+            { "text": "Acceptance Criteria are story-specific conditions; the Definition of Done is a universal quality checklist for any item", "textTr": "Acceptance Criteria story'ye özgü koşullardır; Definition of Done herhangi bir öğe için evrensel bir kalite kontrol listesidir", "correct": true },
+            { "text": "They are the same thing", "textTr": "Aynı şeydir" },
+            { "text": "Acceptance Criteria are global; DoD is per-story", "textTr": "Acceptance Criteria globaldir; DoD story başınadır" },
+            { "text": "DoD describes the user benefit; Acceptance Criteria describes deployment", "textTr": "DoD kullanıcı faydasını tanımlar; Acceptance Criteria deploy'u tanımlar" }
+          ],
+          "explanation": "AC = 'does this specific story do what was asked?' (per-story). DoD = 'does any item meet our shared quality bar?' (team-wide). A story needs both.",
+          "explanationTr": "AC = 'bu belirli story isteneni yapıyor mu?' (story başına). DoD = 'herhangi bir öğe paylaşılan kalite çıtamızı karşılıyor mu?' (takım-geneli). Bir story ikisine de ihtiyaç duyar."
+        },
+        {
+          "type": "order",
+          "prompt": "Order these work items from largest to smallest",
+          "promptTr": "Bu iş öğelerini en büyükten en küçüğe sırala",
+          "items": [
+            { "text": "Epic — a large goal spanning multiple Sprints", "textTr": "Epic — birden çok Sprint'e yayılan büyük bir hedef" },
+            { "text": "User Story — a user-centric slice that fits in a Sprint", "textTr": "User Story — bir Sprint'e sığan kullanıcı-merkezli dilim" },
+            { "text": "Task — a concrete technical work item", "textTr": "Task — somut bir teknik iş öğesi" }
+          ],
+          "explanation": "Epic → User Story → Task: a big goal is split into user-valued stories, which Developers break into technical tasks.",
+          "explanationTr": "Epic → User Story → Task: büyük bir hedef kullanıcı-değerli story'lere bölünür, Geliştiriciler de onları teknik task'lara böler."
+        },
+        {
+          "type": "challenge",
+          "question": "What are Epics, User Stories, and Tasks in Agile?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is Acceptance Criteria?"
+        },
+        {
+          "type": "challenge",
+          "question": "What is the Definition of Done in Scrum?"
+        }
+      ]
+    },
+    {
+      "slug": "backlogs-and-story-points",
+      "title": "Backlogs & story points",
+      "titleTr": "Backlog'lar ve story point'ler",
+      "position": 2,
+      "steps": [
+        {
+          "type": "concept",
+          "title": "What to build, and sizing it",
+          "titleTr": "Ne inşa edileceği ve onu boyutlamak",
+          "body": "**Product Backlog vs Sprint Backlog:**\n\n- **Product Backlog** — the **single, ordered list of everything** that might be needed in the product (features, fixes, tech work), owned and **prioritised by the Product Owner**. It's **dynamic** and never \"finished\" — it evolves as the product and market do. It's the **what-might-be-built**.\n- **Sprint Backlog** — the **subset the team commits to for the current Sprint**: the selected Product Backlog items **plus the Sprint Goal and the plan** to deliver them. Owned by the **Developers**, it's the **what-we're-building-now**.\n\nIn short: the Product Backlog is the whole prioritised wishlist (PO-owned, long-lived); the Sprint Backlog is this Sprint's slice + plan (Developer-owned, one Sprint). Items flow from Product Backlog → Sprint Backlog at Planning.\n\n**Story Points** are a **relative, unitless measure of the effort/complexity/uncertainty** of a backlog item — *not* hours. The team estimates **how big a story is compared to others** (often using a Fibonacci-like scale: 1, 2, 3, 5, 8, 13…), commonly via **Planning Poker** for consensus. Why relative instead of time? People are better at comparing sizes than predicting exact durations, points account for complexity/risk (not just time), and they're **person-independent**. Over Sprints, completed points sum to **velocity**, which the team uses to **forecast** how much it can take on — *for planning, not as a performance target or a cross-team comparison*.",
+          "bodyTr": "**Product Backlog vs Sprint Backlog:**\n\n- **Product Backlog** — üründe gerekebilecek **her şeyin tek, sıralı listesi** (özellikler, düzeltmeler, teknik iş), Product Owner tarafından sahiplenilen ve **önceliklendirilen**. **Dinamiktir** ve asla \"bitmez\" — ürün ve piyasa değiştikçe evrilir. **Ne-inşa-edilebilir**'dir.\n- **Sprint Backlog** — **takımın mevcut Sprint için taahhüt ettiği alt küme**: seçilen Product Backlog öğeleri **artı Sprint Goal ve** onları teslim etme **planı**. **Geliştiriciler** tarafından sahiplenilir, **şu-an-ne-inşa-ettiğimiz**'dir.\n\nKısaca: Product Backlog tüm önceliklendirilmiş istek listesidir (PO-sahipli, uzun ömürlü); Sprint Backlog bu Sprint'in dilimi + planıdır (Geliştirici-sahipli, tek Sprint). Öğeler Planning'de Product Backlog → Sprint Backlog'a akar.\n\n**Story Point'ler**, bir backlog öğesinin **efor/karmaşıklık/belirsizliğinin göreli, birimsiz bir ölçüsüdür** — saat *değil*. Takım, **bir story'nin diğerlerine kıyasla ne kadar büyük olduğunu** tahmin eder (genelde Fibonacci-benzeri bir ölçek kullanarak: 1, 2, 3, 5, 8, 13…), genelde fikir birliği için **Planning Poker** ile. Neden zaman yerine göreli? İnsanlar tam süre tahmin etmektense boyutları karşılaştırmada daha iyidir, point'ler karmaşıklık/riski hesaba katar (sadece zaman değil) ve **kişiden bağımsızdır**. Sprint'ler boyunca tamamlanan point'ler **velocity**'ye toplanır, takım onu ne kadar iş alabileceğini **tahmin etmek** için kullanır — *planlama için, bir performans hedefi ya da takımlar-arası karşılaştırma olarak değil*."
+        },
+        {
+          "type": "mcq",
+          "prompt": "What is the difference between the Product Backlog and the Sprint Backlog?",
+          "promptTr": "Product Backlog ile Sprint Backlog arasındaki fark nedir?",
+          "options": [
+            { "text": "Product Backlog is the full PO-prioritised list of everything; Sprint Backlog is the subset + plan the Developers commit to this Sprint", "textTr": "Product Backlog her şeyin tam PO-önceliklendirilmiş listesidir; Sprint Backlog Geliştiricilerin bu Sprint taahhüt ettiği alt küme + plandır", "correct": true },
+            { "text": "They are the same list with different names", "textTr": "Farklı isimlerle aynı listedir" },
+            { "text": "The Sprint Backlog contains everything; the Product Backlog is just one Sprint", "textTr": "Sprint Backlog her şeyi içerir; Product Backlog yalnızca bir Sprint'tir" },
+            { "text": "The Product Backlog is owned by Developers; the Sprint Backlog by the PO", "textTr": "Product Backlog Geliştiriciler tarafından; Sprint Backlog PO tarafından sahiplenilir" }
+          ],
+          "explanation": "Product Backlog = whole prioritised wishlist (PO-owned, evolving). Sprint Backlog = the items selected for this Sprint + goal + plan (Developer-owned).",
+          "explanationTr": "Product Backlog = tüm önceliklendirilmiş istek listesi (PO-sahipli, evrilen). Sprint Backlog = bu Sprint için seçilen öğeler + hedef + plan (Geliştirici-sahipli)."
+        },
+        {
+          "type": "true_false",
+          "statement": "Story points measure relative effort/complexity (often on a Fibonacci scale), not exact hours.",
+          "statementTr": "Story point'ler tam saatleri değil, göreli efor/karmaşıklığı ölçer (genelde Fibonacci ölçeğinde).",
+          "answer": true,
+          "explanation": "Points are a unitless, relative size accounting for effort, complexity, and uncertainty — easier to estimate by comparison and person-independent. They feed velocity for forecasting.",
+          "explanationTr": "Point'ler efor, karmaşıklık ve belirsizliği hesaba katan birimsiz, göreli bir boyuttur — karşılaştırmayla tahmin etmesi daha kolay ve kişiden bağımsız. Tahmin için velocity'yi beslerler."
+        },
+        {
+          "type": "challenge",
+          "question": "What is the difference between the Product Backlog and Sprint Backlog?"
+        },
+        {
+          "type": "challenge",
+          "question": "What are Story Points and how are they used?"
+        }
+      ]
+    }
+  ]
+}

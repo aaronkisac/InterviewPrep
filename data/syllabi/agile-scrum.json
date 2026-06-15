@@ -1,0 +1,107 @@
+{
+  "topic": "agile-scrum",
+  "title": "Agile & Scrum",
+  "$comment": "Canonical concept list (syllabus) for Agile & Scrum. COMPLETE: 5 units, 10 concepts covering bank ids 1001-1027 (27/27). Verified by: pnpm concept:coverage",
+  "concepts": [
+    {
+      "id": "what-agile-is",
+      "title": "What Agile is: Manifesto, values & principles",
+      "titleTr": "Agile nedir: Manifesto, değerler ve ilkeler",
+      "section": "foundations",
+      "unit": "agile-foundations",
+      "lessons": [
+        "what-agile-is"
+      ]
+    },
+    {
+      "id": "iterative-vs-incremental",
+      "title": "Iterations: iterative vs incremental",
+      "titleTr": "İterasyonlar: iteratif vs artımlı",
+      "section": "foundations",
+      "unit": "agile-foundations",
+      "lessons": [
+        "iterative-vs-incremental"
+      ]
+    },
+    {
+      "id": "scrum-theory-and-values",
+      "title": "Scrum: theory & values",
+      "titleTr": "Scrum: teori ve değerler",
+      "section": "core",
+      "unit": "scrum-framework",
+      "lessons": [
+        "scrum-theory-and-values"
+      ]
+    },
+    {
+      "id": "scrum-vs-agile-and-roles",
+      "title": "Scrum vs Agile & the roles",
+      "titleTr": "Scrum vs Agile ve roller",
+      "section": "core",
+      "unit": "scrum-framework",
+      "lessons": [
+        "scrum-vs-agile-and-roles"
+      ]
+    },
+    {
+      "id": "sprints-and-ceremonies",
+      "title": "Sprints & ceremonies",
+      "titleTr": "Sprint'ler ve törenler",
+      "section": "core",
+      "unit": "sprints-events",
+      "lessons": [
+        "sprints-and-ceremonies"
+      ]
+    },
+    {
+      "id": "review-retro-increment",
+      "title": "Review, Retrospective & the Increment",
+      "titleTr": "Review, Retrospective ve Increment",
+      "section": "core",
+      "unit": "sprints-events",
+      "lessons": [
+        "review-retro-increment"
+      ]
+    },
+    {
+      "id": "stories-tasks-acceptance-dod",
+      "title": "Epics, stories, tasks, acceptance criteria & DoD",
+      "titleTr": "Epic'ler, story'ler, task'lar, acceptance criteria ve DoD",
+      "section": "core",
+      "unit": "backlog-work-items",
+      "lessons": [
+        "stories-tasks-acceptance-dod"
+      ]
+    },
+    {
+      "id": "backlogs-and-story-points",
+      "title": "Backlogs & story points",
+      "titleTr": "Backlog'lar ve story point'ler",
+      "section": "core",
+      "unit": "backlog-work-items",
+      "lessons": [
+        "backlogs-and-story-points"
+      ]
+    },
+    {
+      "id": "velocity-and-burn-charts",
+      "title": "Velocity & burn charts",
+      "titleTr": "Velocity ve burn grafikleri",
+      "section": "advanced",
+      "unit": "metrics-flow-practices",
+      "lessons": [
+        "velocity-and-burn-charts"
+      ]
+    },
+    {
+      "id": "kanban-xp-and-ci",
+      "title": "Kanban, XP & Continuous Integration",
+      "titleTr": "Kanban, XP ve Continuous Integration",
+      "section": "advanced",
+      "unit": "metrics-flow-practices",
+      "lessons": [
+        "kanban-xp-and-ci"
+      ]
+    }
+  ]
+}
