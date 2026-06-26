@@ -195,6 +195,8 @@ Same retro rules apply: challenge texts byte-for-byte from seed JSON, 5–9 step
 
 All 15 topics now have mock seed files (263 questions total). After `pnpm seed` runs, all topics will appear in `/mock`.
 
+**Mock TR backfill (2026-06-16):** 4 files were missing `optionTextTr`/`explanationTr` on every option (would fall back to EN in `lang=tr`). Backfilled all 864 options: `seed-mock-javascript.json` (86q/344opt), `seed-mock-html5.json` (52q/208opt), `seed-mock-software-architecture-extra-1.json` (46q/184opt), `seed-mock-software-architecture-extra-2.json` (32q/128opt). All 20 seed-mock files now verified: 610 questions, every option has EN+TR, exactly 4 options + 1 correct. **Needs `pnpm seed mock`.**
+
 | File | Questions |
 | --- | --- |
 | seed-mock-react.json | 20 |

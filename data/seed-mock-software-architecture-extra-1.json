@@ -7,29 +7,29 @@
         "optionText": "A group of servers that work together to provide higher availability, scalability, and fault tolerance than a single server can offer.",
         "isCorrect": true,
         "explanation": "Correct — clustering distributes load and provides redundancy so that if one node fails, others continue serving requests.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Tek bir sunucunun sunabileceğinden daha yüksek erişilebilirlik, ölçeklenebilirlik ve hata toleransı sağlamak için birlikte çalışan bir grup sunucu.",
+        "explanationTr": "Doğru — kümeleme yükü dağıtır ve yedeklilik sağlar, böylece bir düğüm arızalanırsa diğerleri istekleri sunmaya devam eder."
       },
       {
         "optionText": "A collection of microservices that share the same database schema to reduce data duplication.",
         "isCorrect": false,
         "explanation": "Sharing a database across microservices is actually an anti-pattern. A cluster refers to grouped server nodes, not services sharing a DB.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Veri tekrarını azaltmak için aynı veritabanı şemasını paylaşan bir mikroservis topluluğu.",
+        "explanationTr": "Mikroservisler arasında veritabanı paylaşmak aslında bir anti-desendir. Küme, DB paylaşan servisleri değil gruplanmış sunucu düğümlerini ifade eder."
       },
       {
         "optionText": "A design pattern where multiple classes collaborate on a single responsibility to reduce class size.",
         "isCorrect": false,
         "explanation": "That describes the Delegation or Composite pattern, not a cluster in the infrastructure sense.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Sınıf boyutunu azaltmak için birden çok sınıfın tek bir sorumluluk üzerinde işbirliği yaptığı bir tasarım deseni.",
+        "explanationTr": "Bu, Delegation veya Composite desenini tanımlar, altyapı anlamındaki bir kümeyi değil."
       },
       {
         "optionText": "A set of Docker containers running the same image, managed by a load balancer without any shared state.",
         "isCorrect": false,
         "explanation": "While containers can form a cluster, a cluster is broader than Docker containers — it includes any group of coordinated server nodes.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Aynı imajı çalıştıran, paylaşılan durum olmadan bir yük dengeleyici tarafından yönetilen bir dizi Docker konteyneri.",
+        "explanationTr": "Konteynerler bir küme oluşturabilse de küme, Docker konteynerlerinden daha geniştir — koordine edilmiş herhangi bir sunucu düğümü grubunu içerir."
       }
     ]
   },
@@ -41,29 +41,29 @@
         "optionText": "A development practice where you write a failing test first, then write the minimum code to make it pass, then refactor — red, green, refactor.",
         "isCorrect": true,
         "explanation": "Correct — TDD's short feedback loop drives better design and high test coverage by making tests the specification.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Önce başarısız bir test yazdığınız, sonra onu geçirecek minimum kodu yazdığınız, sonra refactor ettiğiniz bir geliştirme pratiği — kırmızı, yeşil, refactor.",
+        "explanationTr": "Doğru — TDD'nin kısa geri bildirim döngüsü, testleri spesifikasyon hâline getirerek daha iyi tasarımı ve yüksek test kapsamını yönlendirir."
       },
       {
         "optionText": "A QA process where testers write automated tests after developers complete a feature, before it goes to production.",
         "isCorrect": false,
         "explanation": "That describes post-development testing, not TDD. TDD means tests are written before the implementation.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Test edenlerin, geliştiriciler bir özelliği tamamladıktan sonra ve üretime gitmeden önce otomatik testler yazdığı bir QA süreci.",
+        "explanationTr": "Bu, TDD'yi değil geliştirme sonrası testi tanımlar. TDD, testlerin uygulamadan önce yazılması demektir."
       },
       {
         "optionText": "A methodology where test results from CI are the primary metric for deciding which features to build next.",
         "isCorrect": false,
         "explanation": "That describes a data-driven or test-metric-driven product process, not Test Driven Development.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "CI'dan gelen test sonuçlarının, sırada hangi özelliklerin geliştirileceğine karar vermek için birincil metrik olduğu bir metodoloji.",
+        "explanationTr": "Bu, Test Driven Development'ı değil veri odaklı veya test-metriği odaklı bir ürün sürecini tanımlar."
       },
       {
         "optionText": "A framework-specific technique where unit tests automatically generate mock data and inject it into components.",
         "isCorrect": false,
         "explanation": "TDD is a development discipline, not a framework feature or mock-generation technique.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Unit testlerin otomatik olarak mock veri üretip bileşenlere enjekte ettiği, framework'e özgü bir teknik.",
+        "explanationTr": "TDD bir geliştirme disiplinidir, bir framework özelliği veya mock üretim tekniği değil."
       }
     ]
   },
@@ -75,29 +75,29 @@
         "optionText": "Detecting and reporting errors as close to their source as possible — validating inputs, asserting preconditions — so bugs surface before they cause cascading damage.",
         "isCorrect": true,
         "explanation": "Correct — failing early makes bugs cheaper to fix and prevents corrupted state from propagating through the system.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Hataları kaynaklarına olabildiğince yakın tespit edip raporlamak — girdileri doğrulamak, önkoşulları assert etmek — böylece bug'lar zincirleme hasara yol açmadan ortaya çıkar.",
+        "explanationTr": "Doğru — erken başarısız olmak bug'ların düzeltilmesini ucuzlatır ve bozuk durumun sistemde yayılmasını önler."
       },
       {
         "optionText": "Deliberately crashing the application on startup if dependencies are unavailable, to avoid serving stale cached data.",
         "isCorrect": false,
         "explanation": "While startup checks are one use case, 'Fail Early' is a broader principle about surfacing errors immediately wherever they occur.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Bağımlılıklar mevcut değilse, bayat önbelleğe alınmış veri sunmamak için uygulamayı başlangıçta kasıtlı olarak çökertmek.",
+        "explanationTr": "Başlangıç kontrolleri bir kullanım durumu olsa da 'Fail Early', hataları oluştukları her yerde anında ortaya çıkarmayla ilgili daha geniş bir prensiptir."
       },
       {
         "optionText": "Returning default values instead of throwing exceptions so that the UI never shows an error state to users.",
         "isCorrect": false,
         "explanation": "Returning silent defaults is the opposite of Fail Early — it hides errors rather than surfacing them quickly.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "İstisna fırlatmak yerine varsayılan değerler döndürmek, böylece UI kullanıcılara asla bir hata durumu göstermez.",
+        "explanationTr": "Sessizce varsayılan döndürmek Fail Early'nin tam tersidir — hataları hızlıca ortaya çıkarmak yerine gizler."
       },
       {
         "optionText": "Deploying to production as quickly as possible to get real user feedback before the code is fully tested.",
         "isCorrect": false,
         "explanation": "That describes a Lean/MVP ship-early principle, not the software engineering concept of Fail Early.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Kod tam olarak test edilmeden önce gerçek kullanıcı geri bildirimi almak için olabildiğince hızlı üretime dağıtmak.",
+        "explanationTr": "Bu, Fail Early yazılım mühendisliği kavramını değil bir Lean/MVP erken-yayınlama prensibini tanımlar."
       }
     ]
   },
@@ -109,29 +109,29 @@
         "optionText": "Someone who makes high-level structural decisions — choosing technologies, defining system boundaries, and ensuring the design meets quality attributes like scalability and maintainability.",
         "isCorrect": true,
         "explanation": "Correct — a software architect balances technical depth with the ability to reason about systems at scale and communicate trade-offs to stakeholders.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Üst seviye yapısal kararlar veren biri — teknolojileri seçen, sistem sınırlarını tanımlayan ve tasarımın ölçeklenebilirlik ile sürdürülebilirlik gibi kalite niteliklerini karşılamasını sağlayan.",
+        "explanationTr": "Doğru — bir yazılım mimarı, teknik derinliği sistemleri ölçekte muhakeme etme ve ödünleşimleri paydaşlara iletme yeteneğiyle dengeler."
       },
       {
         "optionText": "The most senior developer on a team who reviews all pull requests before they are merged.",
         "isCorrect": false,
         "explanation": "Code review is one activity a senior engineer might do, but it doesn't define an architect's role.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Bir ekipteki, birleştirilmeden önce tüm pull request'leri inceleyen en kıdemli geliştirici.",
+        "explanationTr": "Kod incelemesi kıdemli bir mühendisin yapabileceği bir etkinliktir ama bir mimarın rolünü tanımlamaz."
       },
       {
         "optionText": "A project manager who translates business requirements into user stories and assigns them to developers.",
         "isCorrect": false,
         "explanation": "That describes a product manager or scrum master role, not a software architect.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "İş gereksinimlerini kullanıcı hikâyelerine çeviren ve bunları geliştiricilere atayan bir proje yöneticisi.",
+        "explanationTr": "Bu, bir yazılım mimarını değil bir ürün yöneticisi veya scrum master rolünü tanımlar."
       },
       {
         "optionText": "A specialist who writes infrastructure-as-code and manages CI/CD pipelines for the engineering team.",
         "isCorrect": false,
         "explanation": "That's closer to a DevOps/platform engineer role. An architect focuses on system design, not pipeline management.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Mühendislik ekibi için infrastructure-as-code yazan ve CI/CD pipeline'larını yöneten bir uzman.",
+        "explanationTr": "Bu, daha çok bir DevOps/platform mühendisi rolüne yakındır. Bir mimar pipeline yönetimine değil sistem tasarımına odaklanır."
       }
     ]
   },
@@ -143,29 +143,29 @@
         "optionText": "It enforces the Dependency Inversion Principle — lower layers (domain, data) remain stable and reusable while higher layers (presentation, application) can change without affecting them.",
         "isCorrect": true,
         "explanation": "Correct — when low-level modules don't depend on high-level ones, you can swap out the UI or application logic without touching core business rules.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Bağımlılığın Tersine Çevrilmesi Prensibi'ni (DIP) zorlar — alt katmanlar (domain, veri) kararlı ve yeniden kullanılabilir kalırken üst katmanlar (sunum, uygulama) onları etkilemeden değişebilir.",
+        "explanationTr": "Doğru — alt seviye modüller üst seviye olanlara bağlı olmadığında, çekirdek iş kurallarına dokunmadan UI'ı veya uygulama mantığını değiştirebilirsiniz."
       },
       {
         "optionText": "It reduces the number of files in the project by keeping all shared logic in the top layer that all others can reference.",
         "isCorrect": false,
         "explanation": "Centralising logic in the top layer would create the opposite problem — tight coupling from every lower layer to the UI layer.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Tüm paylaşılan mantığı, diğer hepsinin referans verebileceği üst katmanda tutarak projedeki dosya sayısını azaltır.",
+        "explanationTr": "Mantığı üst katmanda merkezileştirmek tam tersi sorunu yaratır — her alt katmandan UI katmanına sıkı bağımlılık."
       },
       {
         "optionText": "It improves database query performance because lower layers can directly access the HTTP request context.",
         "isCorrect": false,
         "explanation": "Lower layers having HTTP context is an anti-pattern, not a performance feature.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Alt katmanlar HTTP istek bağlamına doğrudan erişebildiği için veritabanı sorgu performansını iyileştirir.",
+        "explanationTr": "Alt katmanların HTTP bağlamına sahip olması bir performans özelliği değil bir anti-desendir."
       },
       {
         "optionText": "It allows the deployment pipeline to build layers in parallel without waiting for the higher layer to compile first.",
         "isCorrect": false,
         "explanation": "Build parallelism is a CI concern, not the architectural reason for keeping layers unaware of their dependants.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Dağıtım pipeline'ının, önce üst katmanın derlenmesini beklemeden katmanları paralel oluşturmasına izin verir.",
+        "explanationTr": "Build paralelliği bir CI kaygısıdır, katmanları kendilerine bağımlı olanlardan habersiz tutmanın mimari nedeni değil."
       }
     ]
   },
@@ -177,29 +177,29 @@
         "optionText": "To distribute load across multiple servers and eliminate single points of failure, enabling horizontal scaling and high availability.",
         "isCorrect": true,
         "explanation": "Correct — clustering means traffic and work are shared, so failure of one node doesn't take down the service.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Yükü birden çok sunucuya dağıtmak ve tek hata noktalarını ortadan kaldırmak, böylece yatay ölçekleme ve yüksek erişilebilirlik sağlamak.",
+        "explanationTr": "Doğru — kümeleme, trafiğin ve işin paylaşılması demektir, böylece bir düğümün arızası servisi düşürmez."
       },
       {
         "optionText": "To share a single database connection pool across all application instances, reducing DB connection overhead.",
         "isCorrect": false,
         "explanation": "DB connection pooling is a separate concern; clustering is about distributing server workload, not sharing connections.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Tek bir veritabanı bağlantı havuzunu tüm uygulama örnekleri arasında paylaşıp DB bağlantı yükünü azaltmak.",
+        "explanationTr": "DB bağlantı havuzlama ayrı bir kaygıdır; kümeleme bağlantı paylaşımıyla değil sunucu iş yükünü dağıtmayla ilgilidir."
       },
       {
         "optionText": "To enforce strict API versioning by routing requests to clusters based on the API version in the URL.",
         "isCorrect": false,
         "explanation": "Version-based routing is a routing concern, not the purpose of clustering.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "URL'deki API sürümüne göre istekleri kümelere yönlendirerek katı API sürümlemeyi zorlamak.",
+        "explanationTr": "Sürüm tabanlı yönlendirme bir yönlendirme kaygısıdır, kümelemenin amacı değil."
       },
       {
         "optionText": "To encrypt traffic between services by grouping them in the same network segment with shared TLS certificates.",
         "isCorrect": false,
         "explanation": "Encryption and certificate management are security concerns, not the architectural reason for clustering.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Servisleri paylaşılan TLS sertifikalarıyla aynı ağ segmentinde gruplayarak aralarındaki trafiği şifrelemek.",
+        "explanationTr": "Şifreleme ve sertifika yönetimi güvenlik kaygılarıdır, kümelemenin mimari nedeni değil."
       }
     ]
   },
@@ -211,29 +211,29 @@
         "optionText": "WebSocket provides a persistent, full-duplex connection that allows the server to push data to the client without polling — ideal for real-time features like chat or live dashboards.",
         "isCorrect": true,
         "explanation": "Correct — HTTP is request-response; WebSocket keeps the connection open so both sides can send messages at any time.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "WebSocket, sunucunun istemciye polling olmadan veri push etmesini sağlayan kalıcı, çift yönlü (full-duplex) bir bağlantı sunar — sohbet veya canlı panolar gibi gerçek zamanlı özellikler için idealdir.",
+        "explanationTr": "Doğru — HTTP istek-yanıttır; WebSocket bağlantıyı açık tutar, böylece her iki taraf da istediği zaman mesaj gönderebilir."
       },
       {
         "optionText": "WebSocket is faster for large file uploads because it compresses payloads at the transport layer automatically.",
         "isCorrect": false,
         "explanation": "Large file uploads are generally better handled with HTTP/2 or chunked HTTP. WebSocket's advantage is real-time bidirectional messaging.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "WebSocket, payload'ları taşıma katmanında otomatik sıkıştırdığı için büyük dosya yüklemelerinde daha hızlıdır.",
+        "explanationTr": "Büyük dosya yüklemeleri genellikle HTTP/2 veya parçalı HTTP ile daha iyi ele alınır. WebSocket'in avantajı gerçek zamanlı çift yönlü mesajlaşmadır."
       },
       {
         "optionText": "WebSocket improves SEO by reducing page load time through server-side rendering of dynamic content.",
         "isCorrect": false,
         "explanation": "WebSocket has no effect on SSR or SEO — those are separate concerns.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "WebSocket, dinamik içeriğin sunucu taraflı render'ı yoluyla sayfa yükleme süresini azaltarak SEO'yu iyileştirir.",
+        "explanationTr": "WebSocket'in SSR veya SEO üzerinde etkisi yoktur — bunlar ayrı kaygılardır."
       },
       {
         "optionText": "WebSocket is easier to cache at the CDN layer, reducing load on origin servers for high-traffic applications.",
         "isCorrect": false,
         "explanation": "WebSocket connections are stateful and persistent — they cannot be cached by a CDN.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "WebSocket, CDN katmanında daha kolay önbelleğe alınır ve yoğun trafikli uygulamalar için origin sunucuların yükünü azaltır.",
+        "explanationTr": "WebSocket bağlantıları durumlu ve kalıcıdır — bir CDN tarafından önbelleğe alınamazlar."
       }
     ]
   },
@@ -245,29 +245,29 @@
         "optionText": "A software design approach that centres the codebase around a rich domain model, uses a ubiquitous language shared by developers and domain experts, and organises code into bounded contexts.",
         "isCorrect": true,
         "explanation": "Correct — DDD's key ideas are the ubiquitous language, bounded contexts, aggregates, entities, and value objects that reflect real business concepts.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Kod tabanını zengin bir domain modeli etrafında merkezleyen, geliştiriciler ve domain uzmanlarınca paylaşılan ortak bir dil (ubiquitous language) kullanan ve kodu bounded context'lere düzenleyen bir yazılım tasarım yaklaşımı.",
+        "explanationTr": "Doğru — DDD'nin temel fikirleri, gerçek iş kavramlarını yansıtan ubiquitous language, bounded context'ler, aggregate'ler, entity'ler ve value object'lerdir."
       },
       {
         "optionText": "A database design methodology where every table name matches a business domain term to simplify ORM mapping.",
         "isCorrect": false,
         "explanation": "DDD is a holistic design philosophy, not a database naming convention.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Her tablo adının ORM eşlemesini basitleştirmek için bir iş domain terimiyle eşleştiği bir veritabanı tasarım metodolojisi.",
+        "explanationTr": "DDD bütünsel bir tasarım felsefesidir, bir veritabanı adlandırma kuralı değil."
       },
       {
         "optionText": "A framework for building microservices where each service is named after its API domain and exposed via REST.",
         "isCorrect": false,
         "explanation": "DDD predates microservices and applies to any architecture. Bounded contexts can inform service boundaries, but DDD is broader.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Her servisin API domain'ine göre adlandırıldığı ve REST ile sunulduğu, mikroservis oluşturmaya yönelik bir framework.",
+        "explanationTr": "DDD, mikroservislerden önce gelir ve herhangi bir mimariye uygulanır. Bounded context'ler servis sınırlarını bilgilendirebilir ama DDD daha geniştir."
       },
       {
         "optionText": "A project management technique where domain experts write user stories that developers implement without changing.",
         "isCorrect": false,
         "explanation": "DDD involves deep collaboration between developers and domain experts on the design, not just requirements gathering.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Domain uzmanlarının, geliştiricilerin değiştirmeden uyguladığı kullanıcı hikâyeleri yazdığı bir proje yönetim tekniği.",
+        "explanationTr": "DDD, yalnızca gereksinim toplama değil tasarım üzerinde geliştiriciler ile domain uzmanları arasında derin işbirliğini içerir."
       }
     ]
   },
@@ -279,29 +279,29 @@
         "optionText": "An architecture that organises code in concentric layers — Entities, Use Cases, Interface Adapters, Frameworks — with dependencies only pointing inward, keeping business logic independent of frameworks and UI.",
         "isCorrect": true,
         "explanation": "Correct — Robert Martin's Clean Architecture makes the core domain ignorant of delivery mechanisms, enabling testability and flexibility.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Kodu eş merkezli katmanlarda düzenleyen — Entities, Use Cases, Interface Adapters, Frameworks — bağımlılıkların yalnızca içe doğru işaret ettiği, iş mantığını framework ve UI'dan bağımsız tutan bir mimari.",
+        "explanationTr": "Doğru — Robert Martin'in Clean Architecture'ı çekirdek domain'i teslimat mekanizmalarından habersiz kılarak test edilebilirlik ve esneklik sağlar."
       },
       {
         "optionText": "An approach that removes all comments and dead code from the codebase to keep files short and readable.",
         "isCorrect": false,
         "explanation": "'Clean' in Clean Architecture refers to dependency direction and layer separation, not code tidiness.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Dosyaları kısa ve okunabilir tutmak için kod tabanındaki tüm yorumları ve ölü kodu kaldıran bir yaklaşım.",
+        "explanationTr": "Clean Architecture'daki 'Clean', kod düzgünlüğünü değil bağımlılık yönünü ve katman ayrımını ifade eder."
       },
       {
         "optionText": "A microservices pattern where each service has its own database and communicates only via events, with no shared libraries.",
         "isCorrect": false,
         "explanation": "Clean Architecture applies to the internal structure of a single service or monolith, not inter-service communication patterns.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Her servisin kendi veritabanına sahip olduğu ve yalnızca olaylar yoluyla iletişim kurduğu, paylaşılan kütüphane olmayan bir mikroservis deseni.",
+        "explanationTr": "Clean Architecture, servisler arası iletişim desenlerine değil tek bir servisin veya monolitin iç yapısına uygulanır."
       },
       {
         "optionText": "A CI/CD strategy that enforces zero-warning builds and automated code formatting before every merge.",
         "isCorrect": false,
         "explanation": "That describes code quality enforcement tooling, not Clean Architecture.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Her birleştirmeden önce sıfır uyarılı build'leri ve otomatik kod biçimlendirmeyi zorlayan bir CI/CD stratejisi.",
+        "explanationTr": "Bu, Clean Architecture'ı değil kod kalitesi zorlama araçlarını tanımlar."
       }
     ]
   },
@@ -313,29 +313,29 @@
         "optionText": "Reducing the time between a user action and the system's response — achieved through caching, edge deployment, optimised queries, and minimising network round trips.",
         "isCorrect": true,
         "explanation": "Correct — lower latency means faster perceived responsiveness. Techniques include CDNs, in-memory caches, connection pooling, and payload compression.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Bir kullanıcı eylemi ile sistemin yanıtı arasındaki süreyi azaltmak — önbellekleme, edge dağıtımı, optimize edilmiş sorgular ve ağ gidiş-dönüşlerini en aza indirmeyle sağlanır.",
+        "explanationTr": "Doğru — daha düşük gecikme, daha hızlı algılanan tepkiselliktir. Teknikler arasında CDN'ler, bellek-içi önbellekler, bağlantı havuzlama ve payload sıkıştırma vardır."
       },
       {
         "optionText": "Using fewer HTTP requests by bundling all API calls into a single GraphQL query per page load.",
         "isCorrect": false,
         "explanation": "Reducing round trips helps latency, but lower latency interaction is a broader goal encompassing many optimisation strategies.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Sayfa başına tüm API çağrılarını tek bir GraphQL sorgusunda paketleyerek daha az HTTP isteği kullanmak.",
+        "explanationTr": "Gidiş-dönüşleri azaltmak gecikmeye yardımcı olur ama düşük gecikmeli etkileşim birçok optimizasyon stratejisini kapsayan daha geniş bir hedeftir."
       },
       {
         "optionText": "Rendering pages on the client side to avoid server round trips and deliver content faster.",
         "isCorrect": false,
         "explanation": "CSR can increase latency for first paint. Lower latency often favours SSR or edge rendering depending on the context.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Sunucu gidiş-dönüşlerinden kaçınmak ve içeriği daha hızlı sunmak için sayfaları istemci tarafında render etmek.",
+        "explanationTr": "CSR, ilk boyama için gecikmeyi artırabilir. Düşük gecikme genellikle bağlama göre SSR veya edge render'ı tercih eder."
       },
       {
         "optionText": "Compressing images and static assets so the browser downloads fewer bytes per page load.",
         "isCorrect": false,
         "explanation": "Asset compression reduces bandwidth and can improve load time, but latency is specifically about delay, not bytes transferred.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Tarayıcının sayfa başına daha az byte indirmesi için görselleri ve statik varlıkları sıkıştırmak.",
+        "explanationTr": "Varlık sıkıştırma bant genişliğini azaltır ve yükleme süresini iyileştirebilir ama gecikme özellikle gecikmeyle ilgilidir, aktarılan byte sayısıyla değil."
       }
     ]
   },
@@ -347,29 +347,29 @@
         "optionText": "A set of abstractions that describe selected aspects of a domain, implemented as entities, value objects, and aggregates that reflect business concepts in code.",
         "isCorrect": true,
         "explanation": "Correct — the domain model is a distillation of business knowledge into software constructs, collaboratively refined with domain experts.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Bir domain'in seçili yönlerini tanımlayan, iş kavramlarını kodda yansıtan entity'ler, value object'ler ve aggregate'ler olarak uygulanan bir soyutlamalar kümesi.",
+        "explanationTr": "Doğru — domain modeli, iş bilgisinin domain uzmanlarıyla işbirliğiyle rafine edilen yazılım yapılarına damıtılmasıdır."
       },
       {
         "optionText": "A database schema that maps one-to-one with the UI forms so that data entry updates the DB directly.",
         "isCorrect": false,
         "explanation": "DDD models are domain-centric, not UI or schema-driven. A domain model may differ significantly from the persistence schema.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "UI formlarıyla birebir eşleşen, böylece veri girişinin DB'yi doğrudan güncellediği bir veritabanı şeması.",
+        "explanationTr": "DDD modelleri UI veya şema odaklı değil domain merkezlidir. Bir domain modeli kalıcılık şemasından önemli ölçüde farklı olabilir."
       },
       {
         "optionText": "The M in MVC — a class that holds component state and passes it to views via data binding.",
         "isCorrect": false,
         "explanation": "While DDD models can live in MVC architectures, a DDD Model is a richer concept encompassing behaviour and business rules, not just data.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "MVC'deki M — bileşen durumunu tutan ve veri bağlama yoluyla view'lara geçiren bir sınıf.",
+        "explanationTr": "DDD modelleri MVC mimarilerinde bulunabilse de DDD Modeli, yalnızca veri değil davranışı ve iş kurallarını kapsayan daha zengin bir kavramdır."
       },
       {
         "optionText": "A machine learning model trained on production logs to predict system failures before they occur.",
         "isCorrect": false,
         "explanation": "In DDD, 'model' refers to a domain abstraction, not a machine learning model.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Sistem arızalarını oluşmadan tahmin etmek için üretim loglarında eğitilmiş bir makine öğrenmesi modeli.",
+        "explanationTr": "DDD'de 'model', bir makine öğrenmesi modelini değil bir domain soyutlamasını ifade eder."
       }
     ]
   },
@@ -381,29 +381,29 @@
         "optionText": "A Repository abstracts data access (CRUD against a data store); a Service Layer encapsulates business logic and orchestrates use cases, often calling repositories and other services.",
         "isCorrect": true,
         "explanation": "Correct — they have different responsibilities: repositories handle persistence, service layers handle business workflows.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Bir Repository veri erişimini (bir veri deposuna karşı CRUD) soyutlar; bir Service Layer iş mantığını kapsüller ve kullanım durumlarını orkestre eder, sıkça repository'leri ve diğer servisleri çağırır.",
+        "explanationTr": "Doğru — farklı sorumlulukları vardır: repository'ler kalıcılığı, servis katmanları iş akışlarını ele alır."
       },
       {
         "optionText": "A Service Layer is a subset of the Repository Pattern — every service must extend a base repository class.",
         "isCorrect": false,
         "explanation": "They are independent patterns. Services don't extend repositories; they may depend on them via injection.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Bir Service Layer, Repository Pattern'in bir alt kümesidir — her servis bir base repository sınıfını genişletmelidir.",
+        "explanationTr": "Bunlar bağımsız desenlerdir. Servisler repository'leri genişletmez; onlara enjeksiyon yoluyla bağımlı olabilirler."
       },
       {
         "optionText": "A Repository Pattern is used in REST APIs while a Service Layer is used in GraphQL APIs.",
         "isCorrect": false,
         "explanation": "Both patterns are transport-agnostic — they apply regardless of the API protocol.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Repository Pattern REST API'lerde, Service Layer GraphQL API'lerde kullanılır.",
+        "explanationTr": "Her iki desen de taşımadan bağımsızdır — API protokolünden bağımsız olarak geçerlidir."
       },
       {
         "optionText": "There is no meaningful difference — both are ways to wrap database queries in a class.",
         "isCorrect": false,
         "explanation": "They serve different purposes. Conflating them leads to fat repositories with business logic or anemic services that just proxy DB calls.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Anlamlı bir fark yoktur — ikisi de veritabanı sorgularını bir sınıfta sarmalama yollarıdır.",
+        "explanationTr": "Farklı amaçlara hizmet ederler. Onları birbirine karıştırmak iş mantığı içeren şişman repository'lere veya yalnızca DB çağrılarını ileten zayıf servislere yol açar."
       }
     ]
   },
@@ -415,29 +415,29 @@
         "optionText": "Unit of Work is broader — it tracks all changes to objects during a business operation and coordinates writing them out as a single atomic transaction.",
         "isCorrect": true,
         "explanation": "Correct — UoW manages change tracking, deduplication of writes, and transaction coordination across multiple repositories.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Unit of Work daha geniştir — bir iş işlemi sırasında nesnelerdeki tüm değişiklikleri izler ve bunları tek bir atomik transaction olarak yazmayı koordine eder.",
+        "explanationTr": "Doğru — UoW değişiklik izlemeyi, yazmaların tekilleştirilmesini ve birden çok repository genelinde transaction koordinasyonunu yönetir."
       },
       {
         "optionText": "Unit of Work and Transaction are identical — both refer to a single SQL BEGIN/COMMIT block on the database.",
         "isCorrect": false,
         "explanation": "A transaction is a DB concept; Unit of Work is a higher-level pattern that may use a transaction internally but adds change tracking on top.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Unit of Work ve Transaction aynıdır — ikisi de veritabanındaki tek bir SQL BEGIN/COMMIT bloğunu ifade eder.",
+        "explanationTr": "Transaction bir DB kavramıdır; Unit of Work, içeride bir transaction kullanabilen ama üzerine değişiklik izleme ekleyen daha üst seviye bir desendir."
       },
       {
         "optionText": "Unit of Work is smaller than a transaction — it represents a single INSERT or UPDATE statement.",
         "isCorrect": false,
         "explanation": "Unit of Work typically spans multiple repository operations across an entire business operation, not a single DB statement.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Unit of Work bir transaction'dan daha küçüktür — tek bir INSERT veya UPDATE ifadesini temsil eder.",
+        "explanationTr": "Unit of Work tipik olarak tek bir DB ifadesini değil tüm bir iş işlemi boyunca birden çok repository işlemini kapsar."
       },
       {
         "optionText": "Unit of Work replaces transactions entirely by using optimistic locking to resolve conflicts without DB-level locks.",
         "isCorrect": false,
         "explanation": "Unit of Work doesn't replace transactions — it coordinates when to commit them. Optimistic locking is a separate concurrency strategy.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Unit of Work, DB seviyesi kilitler olmadan çatışmaları çözmek için iyimser kilitleme kullanarak transaction'ların yerini tamamen alır.",
+        "explanationTr": "Unit of Work transaction'ların yerini almaz — onları ne zaman commit edeceğini koordine eder. İyimser kilitleme ayrı bir eşzamanlılık stratejisidir."
       }
     ]
   },
@@ -449,29 +449,29 @@
         "optionText": "Extract the utility into a shared module or package, import it where needed, and — if mutation is required — expose callback or event interfaces so consumers can contribute input without coupling.",
         "isCorrect": true,
         "explanation": "Correct — shared modules with well-defined interfaces avoid duplication while keeping consumers decoupled.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Yardımcı kodu paylaşılan bir modüle veya pakete çıkarın, gerektiği yerde import edin ve — değişiklik gerekiyorsa — tüketicilerin bağlanmadan girdi katabilmesi için callback veya olay arayüzleri sunun.",
+        "explanationTr": "Doğru — iyi tanımlanmış arayüzlere sahip paylaşılan modüller, tüketicileri ayrık tutarken tekrarı önler."
       },
       {
         "optionText": "Copy the utility into every component that needs it to avoid dependency issues between modules.",
         "isCorrect": false,
         "explanation": "Copying code violates DRY and makes maintenance a nightmare — any bug fix must be applied everywhere.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Modüller arası bağımlılık sorunlarından kaçınmak için yardımcıyı ihtiyaç duyan her bileşene kopyalayın.",
+        "explanationTr": "Kod kopyalamak DRY'yi ihlal eder ve bakımı kâbusa çevirir — herhangi bir bug düzeltmesi her yere uygulanmalıdır."
       },
       {
         "optionText": "Store utility code in the database as stored procedures so any service can execute it via SQL.",
         "isCorrect": false,
         "explanation": "Stored procedures are valid in some contexts but putting general utility logic in the DB creates tight coupling to the data layer.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Yardımcı kodu, herhangi bir servisin SQL ile çalıştırabilmesi için stored procedure olarak veritabanında saklayın.",
+        "explanationTr": "Stored procedure'lar bazı bağlamlarda geçerlidir ama genel yardımcı mantığı DB'ye koymak veri katmanına sıkı bağımlılık yaratır."
       },
       {
         "optionText": "Use global variables to share utility state across components without importing anything.",
         "isCorrect": false,
         "explanation": "Global mutable state introduces hidden coupling, race conditions, and makes testing very difficult.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Hiçbir şey import etmeden yardımcı durumu bileşenler arasında paylaşmak için global değişkenler kullanın.",
+        "explanationTr": "Global değiştirilebilir durum gizli bağımlılık, yarış koşulları getirir ve testi çok zorlaştırır."
       }
     ]
   },
@@ -483,29 +483,29 @@
         "optionText": "Use collaborative filtering (user-item matrix or item-based similarity) or embed products with a recommendation model, then serve pre-computed suggestions from a cache for low-latency reads.",
         "isCorrect": true,
         "explanation": "Correct — collaborative filtering finds patterns in user behaviour; caching pre-computed results keeps the feature fast at scale.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "İşbirlikçi filtreleme (kullanıcı-öğe matrisi veya öğe tabanlı benzerlik) kullanın ya da ürünleri bir öneri modeliyle gömün (embed), sonra düşük gecikmeli okumalar için önceden hesaplanmış önerileri bir önbellekten sunun.",
+        "explanationTr": "Doğru — işbirlikçi filtreleme kullanıcı davranışındaki kalıpları bulur; önceden hesaplanmış sonuçları önbelleğe almak özelliği ölçekte hızlı tutar."
       },
       {
         "optionText": "Query the database for all products and sort them by total sales, returning the top 10 as recommendations.",
         "isCorrect": false,
         "explanation": "Returning best-sellers is a popularity ranking, not personalised 'people who like this also like' recommendations.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Veritabanını tüm ürünler için sorgulayın ve toplam satışa göre sıralayın, ilk 10'u öneri olarak döndürün.",
+        "explanationTr": "En çok satanları döndürmek bir popülerlik sıralamasıdır, kişiselleştirilmiş 'bunu beğenenler şunları da beğendi' önerisi değil."
       },
       {
         "optionText": "Use a regex to match product names with similar keywords and return those as suggestions.",
         "isCorrect": false,
         "explanation": "Name-based keyword matching produces poor recommendations — it ignores actual user behaviour patterns.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Ürün adlarını benzer anahtar kelimelerle eşleştirmek için bir regex kullanın ve bunları öneri olarak döndürün.",
+        "explanationTr": "Ad tabanlı anahtar kelime eşleştirme kötü öneriler üretir — gerçek kullanıcı davranış kalıplarını yok sayar."
       },
       {
         "optionText": "Add a 'related_product_id' foreign key column to each product and manually curate the relationships in the admin panel.",
         "isCorrect": false,
         "explanation": "Manual curation doesn't scale to large catalogues and doesn't reflect real user behaviour.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Her ürüne bir 'related_product_id' foreign key sütunu ekleyin ve ilişkileri admin panelinde manuel olarak küratörleyin.",
+        "explanationTr": "Manuel küratörlük büyük kataloglara ölçeklenmez ve gerçek kullanıcı davranışını yansıtmaz."
       }
     ]
   },
@@ -517,29 +517,29 @@
         "optionText": "Depend on abstractions (interfaces/abstract types) rather than concrete classes so that implementations can be swapped without changing consumers.",
         "isCorrect": true,
         "explanation": "Correct — this is one of the SOLID principles (Dependency Inversion) and the Gang of Four's first design principle, enabling flexibility and testability.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Somut sınıflar yerine soyutlamalara (arayüzler/soyut tipler) bağlı olun, böylece uygulamalar tüketicileri değiştirmeden takas edilebilsin.",
+        "explanationTr": "Doğru — bu, SOLID prensiplerinden biridir (Dependency Inversion) ve Gang of Four'un ilk tasarım prensibidir; esneklik ve test edilebilirlik sağlar."
       },
       {
         "optionText": "Write TypeScript interface files for every class in the codebase to document the public API.",
         "isCorrect": false,
         "explanation": "The principle is about dependency direction, not documentation. Adding interfaces purely for documentation doesn't achieve the design benefit.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Public API'yi belgelemek için kod tabanındaki her sınıf için TypeScript interface dosyaları yazın.",
+        "explanationTr": "Prensip dokümantasyonla değil bağımlılık yönüyle ilgilidir. Yalnızca dokümantasyon için arayüz eklemek tasarım faydasını sağlamaz."
       },
       {
         "optionText": "Build REST APIs for every service so that consumers always interact via HTTP, never via direct function calls.",
         "isCorrect": false,
         "explanation": "HTTP APIs are one form of interface, but the principle applies to code-level abstractions inside a codebase, not just service boundaries.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Her servis için REST API'ler oluşturun, böylece tüketiciler her zaman doğrudan fonksiyon çağrıları yerine HTTP üzerinden etkileşir.",
+        "explanationTr": "HTTP API'leri bir arayüz biçimidir ama prensip yalnızca servis sınırlarına değil bir kod tabanı içindeki kod seviyesi soyutlamalara uygulanır."
       },
       {
         "optionText": "Avoid using classes entirely and write only pure functions to keep the codebase functional.",
         "isCorrect": false,
         "explanation": "Programming to interfaces is an OOP principle about abstraction. Functional programming is a separate paradigm.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Kod tabanını fonksiyonel tutmak için sınıfları tamamen kullanmaktan kaçının ve yalnızca saf fonksiyonlar yazın.",
+        "explanationTr": "Arayüzlere programlamak soyutlamayla ilgili bir OOP prensibidir. Fonksiyonel programlama ayrı bir paradigmadır."
       }
     ]
   },
@@ -551,29 +551,29 @@
         "optionText": "A class or module should have only one reason to change — it should be responsible for a single part of the system's functionality.",
         "isCorrect": true,
         "explanation": "Correct — SRP reduces coupling: when business rules change, only the relevant module changes, leaving unrelated modules untouched.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Bir sınıf veya modülün değişmek için yalnızca bir nedeni olmalı — sistemin işlevselliğinin tek bir parçasından sorumlu olmalı.",
+        "explanationTr": "Doğru — SRP bağımlılığı azaltır: iş kuralları değiştiğinde yalnızca ilgili modül değişir, ilgisiz modüllere dokunulmaz."
       },
       {
         "optionText": "A class should have only one method, and that method should perform all the work the class needs to do.",
         "isCorrect": false,
         "explanation": "SRP is about a single responsibility, not a single method. A class can have multiple methods as long as they all relate to one concern.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Bir sınıfın yalnızca bir metodu olmalı ve o metot sınıfın yapması gereken tüm işi gerçekleştirmeli.",
+        "explanationTr": "SRP tek bir metotla değil tek bir sorumlulukla ilgilidir. Bir sınıfın, hepsi tek bir kaygıyla ilgili olduğu sürece birden çok metodu olabilir."
       },
       {
         "optionText": "Each microservice should own a single API endpoint and never expose more than one route.",
         "isCorrect": false,
         "explanation": "SRP applies to classes and modules in OOP design, not to the number of routes a service exposes.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Her mikroservis tek bir API endpoint'ine sahip olmalı ve asla birden fazla route sunmamalı.",
+        "explanationTr": "SRP, OOP tasarımındaki sınıflara ve modüllere uygulanır, bir servisin sunduğu route sayısına değil."
       },
       {
         "optionText": "A function should be responsible for both validating and persisting data to ensure they stay in sync.",
         "isCorrect": false,
         "explanation": "Combining validation and persistence in one function violates SRP — those are two distinct responsibilities.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Bir fonksiyon, senkronize kalmalarını sağlamak için verinin hem doğrulanmasından hem de kalıcılaştırılmasından sorumlu olmalı.",
+        "explanationTr": "Doğrulama ve kalıcılığı tek bir fonksiyonda birleştirmek SRP'yi ihlal eder — bunlar iki ayrı sorumluluktur."
       }
     ]
   },
@@ -585,29 +585,29 @@
         "optionText": "DTOs carry data across layer or service boundaries without behaviour; ViewModels are presentation-layer objects shaped specifically for a UI view, often combining multiple DTOs.",
         "isCorrect": true,
         "explanation": "Correct — DTOs are transport objects; ViewModels are display objects. A ViewModel may flatten or enrich a DTO with formatting or computed properties.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "DTO'lar veriyi katman veya servis sınırları arasında davranış olmadan taşır; ViewModel'ler özellikle bir UI view'ı için şekillendirilmiş, sıkça birden çok DTO'yu birleştiren sunum katmanı nesneleridir.",
+        "explanationTr": "Doğru — DTO'lar taşıma nesneleridir; ViewModel'ler görüntüleme nesneleridir. Bir ViewModel bir DTO'yu biçimlendirme veya hesaplanmış özelliklerle düzleştirebilir ya da zenginleştirebilir."
       },
       {
         "optionText": "DTOs are used in REST APIs; ViewModels are used in GraphQL APIs — they are protocol-specific equivalents.",
         "isCorrect": false,
         "explanation": "Both patterns are protocol-agnostic. The distinction is about their role in the layer structure, not the transport protocol.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "DTO'lar REST API'lerde; ViewModel'ler GraphQL API'lerde kullanılır — protokole özgü eşdeğerlerdir.",
+        "explanationTr": "Her iki desen de protokolden bağımsızdır. Ayrım, taşıma protokolüyle değil katman yapısındaki rolleriyle ilgilidir."
       },
       {
         "optionText": "ViewModels are persisted to the database; DTOs exist only in memory during a single request.",
         "isCorrect": false,
         "explanation": "Neither DTOs nor ViewModels are typically persisted. Both are transient objects for data transfer or display.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "ViewModel'ler veritabanına kalıcılaştırılır; DTO'lar yalnızca tek bir istek sırasında bellekte var olur.",
+        "explanationTr": "Ne DTO'lar ne de ViewModel'ler tipik olarak kalıcılaştırılır. İkisi de veri aktarımı veya görüntüleme için geçici nesnelerdir."
       },
       {
         "optionText": "There is no meaningful difference — both are plain objects without business logic.",
         "isCorrect": false,
         "explanation": "While both lack domain logic, their purpose and shape differ. Conflating them leads to bloated DTOs full of UI-specific fields.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Anlamlı bir fark yoktur — ikisi de iş mantığı olmayan düz nesnelerdir.",
+        "explanationTr": "İkisinde de domain mantığı bulunmasa da amaçları ve şekilleri farklıdır. Onları karıştırmak UI'ya özgü alanlarla dolu şişman DTO'lara yol açar."
       }
     ]
   },
@@ -619,29 +619,29 @@
         "optionText": "Define clear SLOs before testing, test in a production-like environment, use realistic data volumes and traffic patterns, isolate bottlenecks, and run tests repeatedly to detect regressions.",
         "isCorrect": true,
         "explanation": "Correct — without realistic conditions and clear goals, performance tests produce misleading results.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Test öncesi net SLO'lar tanımlayın, üretime benzer bir ortamda test edin, gerçekçi veri hacimleri ve trafik kalıpları kullanın, darboğazları izole edin ve regresyonları tespit etmek için testleri tekrar tekrar çalıştırın.",
+        "explanationTr": "Doğru — gerçekçi koşullar ve net hedefler olmadan performans testleri yanıltıcı sonuçlar üretir."
       },
       {
         "optionText": "Run performance tests only on the last day before a release to confirm the build is ready for production.",
         "isCorrect": false,
         "explanation": "Late-stage performance testing means fixing bottlenecks under deadline pressure. Performance testing should be continuous.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Performans testlerini yalnızca bir sürümden önceki son gün, build'in üretime hazır olduğunu onaylamak için çalıştırın.",
+        "explanationTr": "Geç aşama performans testi, darboğazların son tarih baskısı altında düzeltilmesi demektir. Performans testi sürekli olmalıdır."
       },
       {
         "optionText": "Test using a single virtual user to eliminate variability and get the most reproducible results.",
         "isCorrect": false,
         "explanation": "Single-user tests don't reveal concurrency issues. Realistic load profiles are essential for meaningful results.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Değişkenliği ortadan kaldırmak ve en tekrarlanabilir sonuçları almak için tek bir sanal kullanıcı kullanarak test edin.",
+        "explanationTr": "Tek kullanıcılı testler eşzamanlılık sorunlarını ortaya çıkarmaz. Anlamlı sonuçlar için gerçekçi yük profilleri şarttır."
       },
       {
         "optionText": "Run performance tests directly against the production database with live data to get the most accurate results.",
         "isCorrect": false,
         "explanation": "Testing against live production data risks data corruption and impacts real users. Use a staging environment with production-like data.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "En doğru sonuçları almak için performans testlerini canlı verilerle doğrudan üretim veritabanına karşı çalıştırın.",
+        "explanationTr": "Canlı üretim verisine karşı test etmek veri bozulması riski taşır ve gerçek kullanıcıları etkiler. Üretime benzer veriyle bir staging ortamı kullanın."
       }
     ]
   },
@@ -653,29 +653,29 @@
         "optionText": "Prefer empty values (empty collections, Null Object pattern) to avoid null checks and NullPointerExceptions; reserve null or Option types for cases where 'not found' is semantically meaningful.",
         "isCorrect": true,
         "explanation": "Correct — returning nulls forces callers to guard against them everywhere. Empty values and Null Objects simplify client code.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Null kontrollerinden ve NullPointerException'lardan kaçınmak için boş değerleri (boş koleksiyonlar, Null Object deseni) tercih edin; null veya Option tiplerini 'bulunamadı'nın anlamsal olarak anlamlı olduğu durumlara saklayın.",
+        "explanationTr": "Doğru — null döndürmek çağıranları her yerde onlara karşı korunmaya zorlar. Boş değerler ve Null Object'ler istemci kodunu basitleştirir."
       },
       {
         "optionText": "Always return null — it is the most explicit way to signal that no value exists and prevents callers from acting on empty data.",
         "isCorrect": false,
         "explanation": "Returning null shifts the burden to every caller and is a common source of runtime errors.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Her zaman null döndürün — değer olmadığını bildirmenin en açık yoludur ve çağıranların boş veri üzerinde işlem yapmasını önler.",
+        "explanationTr": "Null döndürmek yükü her çağırana kaydırır ve runtime hatalarının yaygın bir kaynağıdır."
       },
       {
         "optionText": "Always throw an exception instead of returning null or empty — missing data is always an error condition.",
         "isCorrect": false,
         "explanation": "Not all missing data is an error. 'Not found' is often a normal case that should be handled gracefully, not exceptionally.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "null veya boş döndürmek yerine her zaman istisna fırlatın — eksik veri her zaman bir hata durumudur.",
+        "explanationTr": "Tüm eksik veri bir hata değildir. 'Bulunamadı' genellikle istisnai değil zarifçe ele alınması gereken normal bir durumdur."
       },
       {
         "optionText": "Return -1 for numeric types and 'N/A' for strings to make missing values obvious in logs.",
         "isCorrect": false,
         "explanation": "Using sentinel values (-1, 'N/A') pollutes the type system and leads to subtle bugs when callers forget to check for them.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Eksik değerleri loglarda belirgin kılmak için sayısal tipler için -1 ve string'ler için 'N/A' döndürün.",
+        "explanationTr": "Sentinel değerler (-1, 'N/A') kullanmak tip sistemini kirletir ve çağıranlar kontrol etmeyi unuttuğunda ince bug'lara yol açar."
       }
     ]
   },
@@ -687,29 +687,29 @@
         "optionText": "The sphere of knowledge and activity around which the application is built — the business problem space that the software is intended to solve.",
         "isCorrect": true,
         "explanation": "Correct — in DDD, the domain is the subject area (e.g. e-commerce, banking, logistics) whose concepts and rules the software must accurately model.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Uygulamanın etrafında kurulduğu bilgi ve etkinlik alanı — yazılımın çözmesi amaçlanan iş problem uzayı.",
+        "explanationTr": "Doğru — DDD'de domain, kavramlarını ve kurallarını yazılımın doğru modellemesi gereken konu alanıdır (örn. e-ticaret, bankacılık, lojistik)."
       },
       {
         "optionText": "The DNS domain name used by the application's API endpoints.",
         "isCorrect": false,
         "explanation": "DNS domains are a networking concern, unrelated to Domain Driven Design's use of 'domain'.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Uygulamanın API endpoint'leri tarafından kullanılan DNS domain adı.",
+        "explanationTr": "DNS domain'leri bir ağ kaygısıdır, Domain Driven Design'ın 'domain' kullanımıyla ilgisizdir."
       },
       {
         "optionText": "A database schema that groups related tables under a single namespace.",
         "isCorrect": false,
         "explanation": "A DDD domain is a business concept, not a DB schema grouping.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "İlgili tabloları tek bir namespace altında gruplayan bir veritabanı şeması.",
+        "explanationTr": "Bir DDD domain'i bir iş kavramıdır, bir DB şema gruplaması değil."
       },
       {
         "optionText": "A bounded context that exposes a public REST API to external consumers.",
         "isCorrect": false,
         "explanation": "Bounded contexts are sub-divisions within a domain. The domain is the overall problem space, not a specific API boundary.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Dış tüketicilere public bir REST API sunan bir bounded context.",
+        "explanationTr": "Bounded context'ler bir domain içindeki alt bölümlerdir. Domain, belirli bir API sınırı değil genel problem uzayıdır."
       }
     ]
   },
@@ -721,29 +721,29 @@
         "optionText": "Fault Tolerance means the system continues operating correctly even when a fault occurs; Fault Resilience means the system can recover from a fault and return to normal operation.",
         "isCorrect": true,
         "explanation": "Correct — tolerance is about masking failures without interruption; resilience is about absorbing and recovering from them.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Fault Tolerance, bir hata oluştuğunda bile sistemin doğru çalışmaya devam etmesi demektir; Fault Resilience, sistemin bir hatadan kurtulup normal çalışmaya dönebilmesi demektir.",
+        "explanationTr": "Doğru — tolerans, kesinti olmadan hataları maskelemekle ilgilidir; dayanıklılık (resilience), onları soğurup kurtulmakla ilgilidir."
       },
       {
         "optionText": "They are synonyms — both describe a system that never fails under any condition.",
         "isCorrect": false,
         "explanation": "No system is entirely failure-proof. The terms describe different strategies: continuing through failure vs. recovering from it.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Eş anlamlıdırlar — ikisi de hiçbir koşulda asla arızalanmayan bir sistemi tanımlar.",
+        "explanationTr": "Hiçbir sistem tamamen arızaya dayanıklı değildir. Terimler farklı stratejileri tanımlar: arıza boyunca devam etmek ile arızadan kurtulmak."
       },
       {
         "optionText": "Fault Tolerance applies to hardware failures while Fault Resilience applies to software bugs.",
         "isCorrect": false,
         "explanation": "Both concepts apply across hardware and software. The distinction is about masking vs. recovering, not the fault type.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Fault Tolerance donanım arızalarına, Fault Resilience yazılım bug'larına uygulanır.",
+        "explanationTr": "Her iki kavram da hem donanıma hem yazılıma uygulanır. Ayrım, arıza türüyle değil maskeleme ile kurtarma arasındadır."
       },
       {
         "optionText": "Fault Resilience requires redundant hardware; Fault Tolerance is achieved purely through software retry logic.",
         "isCorrect": false,
         "explanation": "Both can be achieved through software and hardware strategies. Neither is exclusive to one approach.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Fault Resilience yedekli donanım gerektirir; Fault Tolerance yalnızca yazılım retry mantığıyla sağlanır.",
+        "explanationTr": "Her ikisi de yazılım ve donanım stratejileriyle sağlanabilir. Hiçbiri tek bir yaklaşıma özgü değildir."
       }
     ]
   },
@@ -755,29 +755,29 @@
         "optionText": "Response time (p50/p95/p99), throughput (requests per second), error rate, CPU and memory utilisation, and concurrent user capacity.",
         "isCorrect": true,
         "explanation": "Correct — these metrics together reveal latency, capacity, stability, and resource efficiency under load.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Yanıt süresi (p50/p95/p99), verim (saniyede istek), hata oranı, CPU ve bellek kullanımı ve eşzamanlı kullanıcı kapasitesi.",
+        "explanationTr": "Doğru — bu metrikler birlikte yük altında gecikmeyi, kapasiteyi, kararlılığı ve kaynak verimliliğini ortaya koyar."
       },
       {
         "optionText": "Lines of code, cyclomatic complexity, and test coverage percentage.",
         "isCorrect": false,
         "explanation": "Those are code quality metrics, not performance metrics. Performance testing focuses on runtime behaviour under load.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Kod satırı sayısı, döngüsel karmaşıklık (cyclomatic complexity) ve test kapsamı yüzdesi.",
+        "explanationTr": "Bunlar kod kalitesi metrikleridir, performans metrikleri değil. Performans testi yük altındaki çalışma zamanı davranışına odaklanır."
       },
       {
         "optionText": "Deployment frequency, mean time to recovery, and change failure rate.",
         "isCorrect": false,
         "explanation": "Those are DORA metrics for delivery performance, not load/performance testing metrics.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Dağıtım sıklığı, ortalama kurtarma süresi ve değişiklik başarısızlık oranı.",
+        "explanationTr": "Bunlar teslimat performansı için DORA metrikleridir, yük/performans testi metrikleri değil."
       },
       {
         "optionText": "Number of active users, monthly recurring revenue, and feature adoption rate.",
         "isCorrect": false,
         "explanation": "Those are product and business metrics, not technical performance testing metrics.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Aktif kullanıcı sayısı, aylık tekrarlayan gelir ve özellik benimseme oranı.",
+        "explanationTr": "Bunlar ürün ve iş metrikleridir, teknik performans testi metrikleri değil."
       }
     ]
   },
@@ -789,29 +789,29 @@
         "optionText": "Concurrency is about dealing with multiple tasks at once (interleaving execution); Parallelism is about doing multiple tasks simultaneously on multiple processors.",
         "isCorrect": true,
         "explanation": "Correct — concurrency is a design property (structure); parallelism is an execution property (hardware). You can have one without the other.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Eşzamanlılık (concurrency), birden çok görevle aynı anda başa çıkmakla ilgilidir (yürütmeyi araya yerleştirme); Paralellik, birden çok görevi birden çok işlemcide eş zamanlı yapmakla ilgilidir.",
+        "explanationTr": "Doğru — eşzamanlılık bir tasarım özelliğidir (yapı); paralellik bir yürütme özelliğidir (donanım). Biri olmadan diğeri olabilir."
       },
       {
         "optionText": "Concurrency requires multiple CPU cores; Parallelism can run on a single core using time-slicing.",
         "isCorrect": false,
         "explanation": "It's the opposite — parallelism requires multiple cores; concurrency can run on a single core via context switching.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Eşzamanlılık birden çok CPU çekirdeği gerektirir; Paralellik time-slicing kullanarak tek bir çekirdekte çalışabilir.",
+        "explanationTr": "Tam tersi — paralellik birden çok çekirdek gerektirir; eşzamanlılık bağlam değiştirme yoluyla tek bir çekirdekte çalışabilir."
       },
       {
         "optionText": "They are identical — both mean executing multiple threads at exactly the same time.",
         "isCorrect": false,
         "explanation": "Concurrency doesn't require simultaneous execution. Threads can take turns on one core and still be concurrent.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Aynıdırlar — ikisi de birden çok thread'i tam olarak aynı anda yürütmek demektir.",
+        "explanationTr": "Eşzamanlılık eş zamanlı yürütme gerektirmez. Thread'ler tek bir çekirdekte sırayla çalışıp yine de eşzamanlı olabilir."
       },
       {
         "optionText": "Parallelism is a subset of concurrency — every parallel program is concurrent, and every concurrent program is parallel.",
         "isCorrect": false,
         "explanation": "While parallel programs are concurrent, not all concurrent programs are parallel. A single-threaded event loop is concurrent but not parallel.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Paralellik, eşzamanlılığın bir alt kümesidir — her paralel program eşzamanlıdır ve her eşzamanlı program paraleldir.",
+        "explanationTr": "Paralel programlar eşzamanlı olsa da her eşzamanlı program paralel değildir. Tek iş parçacıklı bir olay döngüsü eşzamanlıdır ama paralel değildir."
       }
     ]
   },
@@ -823,29 +823,29 @@
         "optionText": "The system can absorb disruptions (failures, spikes, degraded dependencies) and recover quickly, continuing to serve users — possibly with degraded but acceptable functionality.",
         "isCorrect": true,
         "explanation": "Correct — resilience includes fault isolation, graceful degradation, circuit breakers, retries, and rapid recovery.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Sistem, kesintileri (arızalar, ani yükler, bozulmuş bağımlılıklar) soğurabilir ve hızla kurtulabilir, kullanıcılara hizmet vermeye devam eder — muhtemelen bozulmuş ama kabul edilebilir işlevsellikle.",
+        "explanationTr": "Doğru — dayanıklılık hata izolasyonunu, zarif bozulmayı (graceful degradation), circuit breaker'ları, retry'ları ve hızlı kurtarmayı içerir."
       },
       {
         "optionText": "The system must never have downtime — 100% uptime with no maintenance windows.",
         "isCorrect": false,
         "explanation": "100% uptime is impractical. Resilience is about recovering quickly from failures, not eliminating them entirely.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Sistemin asla kesinti yaşamaması gerekir — bakım pencereleri olmadan %100 çalışma süresi.",
+        "explanationTr": "%100 çalışma süresi pratik değildir. Dayanıklılık, arızaları tamamen ortadan kaldırmakla değil onlardan hızla kurtulmakla ilgilidir."
       },
       {
         "optionText": "The system encrypts all data at rest and in transit to protect against security breaches.",
         "isCorrect": false,
         "explanation": "Encryption is a security property, not resilience. Resilience concerns availability and recovery from failures.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Sistem, güvenlik ihlallerine karşı korunmak için bekleyen ve aktarımdaki tüm verileri şifreler.",
+        "explanationTr": "Şifreleme bir güvenlik özelliğidir, dayanıklılık değil. Dayanıklılık erişilebilirlik ve arızalardan kurtarmayla ilgilidir."
       },
       {
         "optionText": "The system uses synchronous communication between all services to ensure data consistency.",
         "isCorrect": false,
         "explanation": "Synchronous coupling actually reduces resilience — if one service is slow, it cascades. Resilient systems often use async and circuit breakers.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Sistem, veri tutarlılığını sağlamak için tüm servisler arasında senkron iletişim kullanır.",
+        "explanationTr": "Senkron bağlılık aslında dayanıklılığı azaltır — bir servis yavaşsa zincirleme yayılır. Dayanıklı sistemler sıkça async ve circuit breaker kullanır."
       }
     ]
   },
@@ -857,29 +857,29 @@
         "optionText": "ISP states that clients should not be forced to depend on interfaces they don't use — split large interfaces into smaller, focused ones. Advantages: reduced coupling, easier mocking, and no forced implementations of irrelevant methods.",
         "isCorrect": true,
         "explanation": "Correct — fat interfaces create unnecessary dependencies. Small, cohesive interfaces keep classes focused and tests simple.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "ISP, istemcilerin kullanmadıkları arayüzlere bağlı olmaya zorlanmaması gerektiğini belirtir — büyük arayüzleri daha küçük, odaklı arayüzlere bölün. Avantajları: azalan bağımlılık, kolay mock'lama ve ilgisiz metotların zorunlu uygulanmaması.",
+        "explanationTr": "Doğru — şişman arayüzler gereksiz bağımlılıklar yaratır. Küçük, uyumlu arayüzler sınıfları odaklı ve testleri basit tutar."
       },
       {
         "optionText": "ISP requires every class to implement at least one interface so that all dependencies can be injected.",
         "isCorrect": false,
         "explanation": "ISP is about the size and focus of interfaces, not mandating that every class must implement one.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "ISP, tüm bağımlılıkların enjekte edilebilmesi için her sınıfın en az bir arayüz uygulamasını gerektirir.",
+        "explanationTr": "ISP, her sınıfın bir arayüz uygulamasını zorunlu kılmakla değil arayüzlerin boyutu ve odağıyla ilgilidir."
       },
       {
         "optionText": "ISP means separating the HTTP interface from the business logic by placing controllers in a different package.",
         "isCorrect": false,
         "explanation": "That's a layer separation concern (Clean Architecture layers), not the Interface Segregation Principle.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "ISP, controller'ları farklı bir pakete koyarak HTTP arayüzünü iş mantığından ayırmak demektir.",
+        "explanationTr": "Bu bir katman ayrımı kaygısıdır (Clean Architecture katmanları), Interface Segregation Principle değil."
       },
       {
         "optionText": "ISP recommends using a single large interface per domain so consumers always have access to all available methods.",
         "isCorrect": false,
         "explanation": "ISP explicitly argues against large interfaces. Consumers should only see the methods they actually need.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "ISP, tüketicilerin her zaman tüm mevcut metotlara erişebilmesi için domain başına tek bir büyük arayüz kullanmayı önerir.",
+        "explanationTr": "ISP açıkça büyük arayüzlere karşı çıkar. Tüketiciler yalnızca gerçekten ihtiyaç duydukları metotları görmelidir."
       }
     ]
   },
@@ -891,29 +891,29 @@
         "optionText": "Copying session data across all nodes in a cluster so any node can serve any request without the user being tied to a specific server.",
         "isCorrect": true,
         "explanation": "Correct — session replication enables stateful sessions in a multi-node cluster while avoiding sticky sessions.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Oturum verilerini bir kümedeki tüm düğümlere kopyalamak, böylece kullanıcı belirli bir sunucuya bağlı olmadan herhangi bir düğüm herhangi bir isteği sunabilir.",
+        "explanationTr": "Doğru — oturum replikasyonu, sticky session'lardan kaçınarak çok düğümlü bir kümede durumlu oturumları mümkün kılar."
       },
       {
         "optionText": "Storing the same user session in both a relational database and a Redis cache for redundancy.",
         "isCorrect": false,
         "explanation": "Dual-storing sessions is one implementation option, but session replication refers specifically to distributing sessions across cluster nodes.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Aynı kullanıcı oturumunu yedeklilik için hem ilişkisel bir veritabanında hem de bir Redis önbelleğinde saklamak.",
+        "explanationTr": "Oturumu çift saklamak bir uygulama seçeneğidir ama oturum replikasyonu özellikle oturumların küme düğümlerine dağıtılmasını ifade eder."
       },
       {
         "optionText": "Cloning a user's browser session to a staging environment to reproduce bugs from production.",
         "isCorrect": false,
         "explanation": "Session replication is an infrastructure/scalability technique, not a debugging tool.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Üretimdeki bug'ları yeniden üretmek için bir kullanıcının tarayıcı oturumunu bir staging ortamına klonlamak.",
+        "explanationTr": "Oturum replikasyonu bir altyapı/ölçeklenebilirlik tekniğidir, bir hata ayıklama aracı değil."
       },
       {
         "optionText": "Restarting user sessions after a deployment to ensure all active users are running the latest code.",
         "isCorrect": false,
         "explanation": "Forcing session restarts on deployment is a UX concern, not session replication.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Tüm aktif kullanıcıların en son kodu çalıştırdığından emin olmak için bir dağıtımdan sonra kullanıcı oturumlarını yeniden başlatmak.",
+        "explanationTr": "Dağıtımda oturum yeniden başlatmayı zorlamak bir UX kaygısıdır, oturum replikasyonu değil."
       }
     ]
   },
@@ -925,29 +925,29 @@
         "optionText": "Sticky sessions (session affinity) route all requests from the same client to the same server, typically using a cookie or IP hash, so in-memory session state is always available.",
         "isCorrect": true,
         "explanation": "Correct — sticky sessions simplify stateful architectures but create uneven load distribution and complicate failover.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Sticky session'lar (session affinity), aynı istemciden gelen tüm istekleri tipik olarak bir çerez veya IP hash kullanarak aynı sunucuya yönlendirir, böylece bellek-içi oturum durumu her zaman mevcuttur.",
+        "explanationTr": "Doğru — sticky session'lar durumlu mimarileri basitleştirir ama dengesiz yük dağılımı yaratır ve failover'ı zorlaştırır."
       },
       {
         "optionText": "Sticky sessions cache database query results on each node so repeated queries don't hit the DB.",
         "isCorrect": false,
         "explanation": "That describes query caching. Sticky sessions are about routing requests to the same server, not caching DB results.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Sticky session'lar, tekrarlanan sorguların DB'ye gitmemesi için her düğümde veritabanı sorgu sonuçlarını önbelleğe alır.",
+        "explanationTr": "Bu, sorgu önbelleklemeyi tanımlar. Sticky session'lar DB sonuçlarını önbelleğe almayla değil istekleri aynı sunucuya yönlendirmeyle ilgilidir."
       },
       {
         "optionText": "Session affinity means all services share a single in-memory session store to avoid data inconsistency.",
         "isCorrect": false,
         "explanation": "A shared session store (e.g. Redis) is an alternative to sticky sessions. They are different approaches to stateful session management.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Session affinity, veri tutarsızlığından kaçınmak için tüm servislerin tek bir bellek-içi oturum deposu paylaşması demektir.",
+        "explanationTr": "Paylaşılan bir oturum deposu (örn. Redis), sticky session'lara bir alternatiftir. Durumlu oturum yönetimine yönelik farklı yaklaşımlardır."
       },
       {
         "optionText": "Sticky sessions use JWT tokens so the server doesn't need to store any session state.",
         "isCorrect": false,
         "explanation": "JWTs enable stateless authentication — the opposite of sticky sessions, which exist precisely to maintain server-side state.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Sticky session'lar JWT token'ları kullanır, böylece sunucunun herhangi bir oturum durumu saklaması gerekmez.",
+        "explanationTr": "JWT'ler durumsuz kimlik doğrulama sağlar — bu, sunucu taraflı durumu korumak için var olan sticky session'ların tam tersidir."
       }
     ]
   },
@@ -959,29 +959,29 @@
         "optionText": "Use WebSockets for true real-time bidirectional data (chat, live feeds, gaming); use REST for request-response interactions where polling or SSE suffices and stateless calls are preferable.",
         "isCorrect": true,
         "explanation": "Correct — WebSockets add connection overhead; REST is simpler and better cached. The right choice depends on latency needs and directionality.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Gerçek zamanlı çift yönlü veri (sohbet, canlı akışlar, oyun) için WebSocket; polling veya SSE'nin yeterli olduğu ve durumsuz çağrıların tercih edildiği istek-yanıt etkileşimleri için REST kullanın.",
+        "explanationTr": "Doğru — WebSocket'ler bağlantı yükü ekler; REST daha basittir ve daha iyi önbelleğe alınır. Doğru seçim gecikme ihtiyaçlarına ve yönlülüğe bağlıdır."
       },
       {
         "optionText": "Always use REST because it is more widely supported and can achieve real-time with short polling intervals.",
         "isCorrect": false,
         "explanation": "Short polling is inefficient — it floods the server with requests. WebSockets are far more efficient for genuinely real-time data.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Her zaman REST kullanın çünkü daha yaygın desteklenir ve kısa polling aralıklarıyla gerçek zamanlıya ulaşabilir.",
+        "explanationTr": "Kısa polling verimsizdir — sunucuyu isteklerle doldurur. Gerçekten gerçek zamanlı veri için WebSocket'ler çok daha verimlidir."
       },
       {
         "optionText": "Always use WebSockets — they are strictly superior to REST for all data transfer because they are faster.",
         "isCorrect": false,
         "explanation": "WebSockets have overhead (persistent connections, no caching, complex infra). For simple request-response, REST is often simpler and more appropriate.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Her zaman WebSocket kullanın — daha hızlı oldukları için tüm veri aktarımında REST'ten kesinlikle üstündürler.",
+        "explanationTr": "WebSocket'lerin yükü vardır (kalıcı bağlantılar, önbellekleme yok, karmaşık altyapı). Basit istek-yanıt için REST genellikle daha basit ve uygundur."
       },
       {
         "optionText": "Use GraphQL subscriptions instead — they automatically choose WebSocket or REST based on the data change frequency.",
         "isCorrect": false,
         "explanation": "GraphQL subscriptions use WebSockets under the hood — they don't auto-select between WebSocket and REST.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Bunun yerine GraphQL subscription'ları kullanın — veri değişim sıklığına göre otomatik olarak WebSocket veya REST seçerler.",
+        "explanationTr": "GraphQL subscription'ları arka planda WebSocket kullanır — WebSocket ile REST arasında otomatik seçim yapmazlar."
       }
     ]
   },
@@ -993,29 +993,29 @@
         "optionText": "A system design goal ensuring the system remains operational for a high percentage of time (e.g. 99.9%+), achieved through redundancy, failover, load balancing, and eliminating single points of failure.",
         "isCorrect": true,
         "explanation": "Correct — HA is measured in 'nines' of uptime. Achieving it requires redundant components and automated failover.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Sistemin zamanın yüksek bir yüzdesinde (örn. %99.9+) çalışır kalmasını sağlayan bir sistem tasarım hedefi; yedeklilik, failover, yük dengeleme ve tek hata noktalarını ortadan kaldırmayla elde edilir.",
+        "explanationTr": "Doğru — HA, çalışma süresinin 'dokuzlarıyla' ölçülür. Bunu elde etmek yedekli bileşenler ve otomatik failover gerektirir."
       },
       {
         "optionText": "Running the application on high-performance hardware with fast CPUs and SSDs to minimise response time.",
         "isCorrect": false,
         "explanation": "Fast hardware improves performance but not availability. A single powerful server is still a single point of failure.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Yanıt süresini en aza indirmek için uygulamayı hızlı CPU'lar ve SSD'lerle yüksek performanslı donanımda çalıştırmak.",
+        "explanationTr": "Hızlı donanım performansı iyileştirir ama erişilebilirliği değil. Tek bir güçlü sunucu yine de tek bir hata noktasıdır."
       },
       {
         "optionText": "Deploying the application to multiple regions so users connect to the nearest data centre for low latency.",
         "isCorrect": false,
         "explanation": "Multi-region improves latency and is often part of HA, but HA specifically focuses on uptime and failure handling, not latency.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Kullanıcıların düşük gecikme için en yakın veri merkezine bağlanması amacıyla uygulamayı birden çok bölgeye dağıtmak.",
+        "explanationTr": "Çok bölgelilik gecikmeyi iyileştirir ve sıkça HA'nın bir parçasıdır ama HA özellikle gecikmeye değil çalışma süresine ve arıza yönetimine odaklanır."
       },
       {
         "optionText": "Encrypting all data in transit and at rest to ensure the system is always safe to access.",
         "isCorrect": false,
         "explanation": "Encryption is a security property. High Availability concerns uptime and failure tolerance.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Sistemin erişiminin her zaman güvenli olmasını sağlamak için aktarımdaki ve bekleyen tüm verileri şifrelemek.",
+        "explanationTr": "Şifreleme bir güvenlik özelliğidir. Yüksek Erişilebilirlik çalışma süresi ve arıza toleransıyla ilgilidir."
       }
     ]
   },
@@ -1027,29 +1027,29 @@
         "optionText": "Clustering the application/business logic layer (middle tier) in a three-tier architecture so it can handle more requests and provides redundancy without clustering the database tier.",
         "isCorrect": true,
         "explanation": "Correct — middle tier clustering scales the application servers independently while the database remains a separate, potentially non-clustered tier.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Üç katmanlı bir mimaride uygulama/iş mantığı katmanını (orta katman) kümelemek, böylece veritabanı katmanını kümelemeden daha fazla istek işleyebilir ve yedeklilik sağlar.",
+        "explanationTr": "Doğru — orta katman kümeleme uygulama sunucularını bağımsız ölçeklerken veritabanı ayrı, potansiyel olarak kümelenmemiş bir katman olarak kalır."
       },
       {
         "optionText": "Grouping microservices by domain into clusters, with each cluster having its own API gateway.",
         "isCorrect": false,
         "explanation": "That describes domain-based service grouping, not the classic three-tier middle-tier clustering concept.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Mikroservisleri domain'e göre kümelere gruplamak, her kümenin kendi API gateway'i olacak şekilde.",
+        "explanationTr": "Bu, klasik üç katmanlı orta-katman kümeleme kavramını değil domain tabanlı servis gruplamayı tanımlar."
       },
       {
         "optionText": "Running multiple databases in a cluster to serve a single application server.",
         "isCorrect": false,
         "explanation": "Database clustering is a separate concern. Middle tier clustering refers to clustering the application logic layer.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Tek bir uygulama sunucusuna hizmet vermek için bir kümede birden çok veritabanı çalıştırmak.",
+        "explanationTr": "Veritabanı kümeleme ayrı bir kaygıdır. Orta katman kümeleme, uygulama mantığı katmanını kümelemeyi ifade eder."
       },
       {
         "optionText": "Clustering the CDN edge nodes that cache static assets between the user and the origin server.",
         "isCorrect": false,
         "explanation": "CDN edge clustering is a presentation/content-delivery concern. Middle tier refers to the application/business logic layer.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Kullanıcı ile origin sunucu arasında statik varlıkları önbelleğe alan CDN edge düğümlerini kümelemek.",
+        "explanationTr": "CDN edge kümeleme bir sunum/içerik-dağıtım kaygısıdır. Orta katman, uygulama/iş mantığı katmanını ifade eder."
       }
     ]
   },
@@ -1061,29 +1061,29 @@
         "optionText": "Use blue-green deployments or rolling updates — route traffic to the new version incrementally, verify health, then cut over; combine with feature flags to decouple deployment from release.",
         "isCorrect": true,
         "explanation": "Correct — these strategies allow you to swap in a new version without interrupting live traffic, with the ability to roll back instantly.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Blue-green dağıtımlar veya rolling update'ler kullanın — trafiği yeni sürüme aşamalı yönlendirin, sağlığı doğrulayın, sonra geçiş yapın; dağıtımı yayından ayırmak için feature flag'lerle birleştirin.",
+        "explanationTr": "Doğru — bu stratejiler canlı trafiği kesmeden yeni bir sürümü devreye almanıza ve anında geri alma yeteneğine olanak tanır."
       },
       {
         "optionText": "Schedule maintenance windows at 3am when traffic is lowest and warn users in advance.",
         "isCorrect": false,
         "explanation": "Maintenance windows still cause downtime and are disruptive for global services. Zero-downtime techniques avoid any interruption.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Trafiğin en düşük olduğu gece 3'te bakım pencereleri planlayın ve kullanıcıları önceden uyarın.",
+        "explanationTr": "Bakım pencereleri yine de kesinti yaratır ve küresel servisler için yıkıcıdır. Sıfır kesinti teknikleri her türlü kesintiyi önler."
       },
       {
         "optionText": "Push all changes directly to production and rely on fast rollback scripts if users report issues.",
         "isCorrect": false,
         "explanation": "Deploying untested changes to all users simultaneously risks widespread impact before rollback completes.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Tüm değişiklikleri doğrudan üretime gönderin ve kullanıcılar sorun bildirirse hızlı geri alma scriptlerine güvenin.",
+        "explanationTr": "Test edilmemiş değişiklikleri tüm kullanıcılara aynı anda dağıtmak, geri alma tamamlanmadan önce geniş çaplı etki riski taşır."
       },
       {
         "optionText": "Put the site in read-only mode during deployment so users can still view content while the database migrates.",
         "isCorrect": false,
         "explanation": "Read-only mode is a form of partial downtime. True zero-downtime deployments keep all functionality available.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Veritabanı taşınırken kullanıcılar yine de içeriği görüntüleyebilsin diye dağıtım sırasında siteyi salt-okunur moda alın.",
+        "explanationTr": "Salt-okunur mod kısmi bir kesinti biçimidir. Gerçek sıfır-kesinti dağıtımlar tüm işlevselliği erişilebilir tutar."
       }
     ]
   },
@@ -1095,29 +1095,29 @@
         "optionText": "Independent scaling of read and write sides, optimised read models for queries, clearer separation of concerns, and easier event sourcing integration.",
         "isCorrect": true,
         "explanation": "Correct — CQRS separates reads (queries) from writes (commands), letting each side be optimised, scaled, and evolved independently.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Okuma ve yazma taraflarının bağımsız ölçeklenmesi, sorgular için optimize edilmiş okuma modelleri, ilgilerin daha net ayrılması ve kolay event sourcing entegrasyonu.",
+        "explanationTr": "Doğru — CQRS okumaları (query'ler) yazmalardan (command'lar) ayırır ve her tarafın bağımsız olarak optimize edilmesini, ölçeklenmesini ve evrilmesini sağlar."
       },
       {
         "optionText": "It eliminates the need for a database by storing all state in memory on the application server.",
         "isCorrect": false,
         "explanation": "CQRS doesn't eliminate databases. It separates read and write models — both typically still interact with persistent storage.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Tüm durumu uygulama sunucusunda bellekte saklayarak veritabanı ihtiyacını ortadan kaldırır.",
+        "explanationTr": "CQRS veritabanlarını ortadan kaldırmaz. Okuma ve yazma modellerini ayırır — ikisi de tipik olarak kalıcı depolamayla etkileşir."
       },
       {
         "optionText": "It ensures strong consistency by synchronously updating all read models before acknowledging a command.",
         "isCorrect": false,
         "explanation": "CQRS often involves eventual consistency, especially when read models are updated asynchronously via events.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Bir command'ı onaylamadan önce tüm okuma modellerini senkron güncelleyerek güçlü tutarlılık sağlar.",
+        "explanationTr": "CQRS, özellikle okuma modelleri olaylar yoluyla asenkron güncellendiğinde sıkça eventual consistency içerir."
       },
       {
         "optionText": "It removes the need for an ORM by using raw SQL for all queries and commands.",
         "isCorrect": false,
         "explanation": "CQRS is architecture-level separation of concerns, not a statement about ORM vs raw SQL.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Tüm sorgular ve command'lar için ham SQL kullanarak ORM ihtiyacını ortadan kaldırır.",
+        "explanationTr": "CQRS, ORM ile ham SQL hakkında bir ifade değil mimari seviyede ilgilerin ayrılmasıdır."
       }
     ]
   },
@@ -1129,29 +1129,29 @@
         "optionText": "Atomicity (all or nothing), Consistency (data rules are always enforced), Isolation (concurrent transactions don't interfere), Durability (committed data survives crashes).",
         "isCorrect": true,
         "explanation": "Correct — ACID properties are the guarantees relational databases provide to ensure reliable transaction processing.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Atomicity (ya hep ya hiç), Consistency (veri kuralları her zaman zorlanır), Isolation (eşzamanlı transaction'lar birbirine karışmaz), Durability (commit edilmiş veri çökmelere dayanır).",
+        "explanationTr": "Doğru — ACID özellikleri, güvenilir transaction işlemeyi sağlamak için ilişkisel veritabanlarının sunduğu garantilerdir."
       },
       {
         "optionText": "Availability, Consistency, Integrity, Durability — the four guarantees of a distributed NoSQL database.",
         "isCorrect": false,
         "explanation": "ACID stands for Atomicity, Consistency, Isolation, Durability. The described acronym is incorrect.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Availability, Consistency, Integrity, Durability — dağıtık bir NoSQL veritabanının dört garantisi.",
+        "explanationTr": "ACID, Atomicity, Consistency, Isolation, Durability'nin açılımıdır. Tanımlanan kısaltma yanlıştır."
       },
       {
         "optionText": "Asynchronous, Concurrent, Idempotent, Distributed — describing the properties of a resilient microservices architecture.",
         "isCorrect": false,
         "explanation": "ACID is a database transaction concept, not a microservices architecture pattern.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Asynchronous, Concurrent, Idempotent, Distributed — dayanıklı bir mikroservis mimarisinin özelliklerini tanımlar.",
+        "explanationTr": "ACID bir veritabanı transaction kavramıdır, bir mikroservis mimari deseni değil."
       },
       {
         "optionText": "A test framework property requiring that all unit tests are Atomic, Consistent, Isolated, and Deterministic.",
         "isCorrect": false,
         "explanation": "ACID is a database concept. While good tests should be isolated and deterministic, ACID doesn't refer to testing.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Tüm unit testlerin Atomic, Consistent, Isolated ve Deterministic olmasını gerektiren bir test framework özelliği.",
+        "explanationTr": "ACID bir veritabanı kavramıdır. İyi testler izole ve deterministik olmalı ama ACID testi ifade etmez."
       }
     ]
   },
@@ -1163,29 +1163,29 @@
         "optionText": "An architectural pattern that separates the write side (commands that mutate state) from the read side (queries that return data), allowing each to use different models and storage optimised for their purpose.",
         "isCorrect": true,
         "explanation": "Correct — CQRS recognises that read and write workloads often have very different characteristics and can benefit from separate models.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Yazma tarafını (durumu değiştiren command'lar) okuma tarafından (veri döndüren query'ler) ayıran, her birinin amacına göre optimize edilmiş farklı modeller ve depolama kullanmasına olanak tanıyan bir mimari desen.",
+        "explanationTr": "Doğru — CQRS, okuma ve yazma iş yüklerinin sıkça çok farklı özelliklere sahip olduğunu ve ayrı modellerden fayda görebileceğini kabul eder."
       },
       {
         "optionText": "A SQL query optimisation pattern that separates SELECT statements from INSERT/UPDATE/DELETE in different database roles.",
         "isCorrect": false,
         "explanation": "CQRS is an architectural pattern, not a SQL or database role configuration technique.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "SELECT ifadelerini INSERT/UPDATE/DELETE'ten farklı veritabanı rollerinde ayıran bir SQL sorgu optimizasyon deseni.",
+        "explanationTr": "CQRS bir mimari desendir, bir SQL veya veritabanı rolü yapılandırma tekniği değil."
       },
       {
         "optionText": "A design pattern where commands are queued in RabbitMQ and queries are handled by a dedicated read replica.",
         "isCorrect": false,
         "explanation": "Message queues and read replicas are common CQRS implementation choices, but CQRS itself is the conceptual separation, not a specific technology prescription.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Command'ların RabbitMQ'da kuyruğa alındığı ve query'lerin özel bir okuma replikasıyla ele alındığı bir tasarım deseni.",
+        "explanationTr": "Mesaj kuyrukları ve okuma replikaları yaygın CQRS uygulama seçenekleridir ama CQRS'in kendisi belirli bir teknoloji reçetesi değil kavramsal ayrımdır."
       },
       {
         "optionText": "A REST API convention where POST/PUT/DELETE endpoints return no data and GET endpoints never modify state.",
         "isCorrect": false,
         "explanation": "While REST's idempotency conventions share some ideas, CQRS is an architectural pattern for entire application design, not an API convention.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "POST/PUT/DELETE endpoint'lerinin veri döndürmediği ve GET endpoint'lerinin asla durum değiştirmediği bir REST API kuralı.",
+        "explanationTr": "REST'in idempotency kuralları bazı fikirleri paylaşsa da CQRS bir API kuralı değil tüm uygulama tasarımı için bir mimari desendir."
       }
     ]
   },
@@ -1197,29 +1197,29 @@
         "optionText": "Inner layers (Entities, Use Cases) contain pure business logic with no framework dependencies; outer layers (Controllers, Gateways, UI, DB) handle delivery and infrastructure and depend inward, never outward.",
         "isCorrect": true,
         "explanation": "Correct — the Dependency Rule states that source code dependencies only point inward, keeping the core domain stable and independently testable.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "İç katmanlar (Entities, Use Cases) framework bağımlılığı olmayan saf iş mantığı içerir; dış katmanlar (Controllers, Gateways, UI, DB) teslimat ve altyapıyı ele alır ve dışa değil içe doğru bağımlıdır.",
+        "explanationTr": "Doğru — Bağımlılık Kuralı, kaynak kodu bağımlılıklarının yalnızca içe doğru işaret etmesini söyler ve çekirdek domain'i kararlı ve bağımsız test edilebilir tutar."
       },
       {
         "optionText": "Inner layers are faster because they run in memory; outer layers are slower because they involve network or disk I/O.",
         "isCorrect": false,
         "explanation": "While this is often true in practice, the architectural purpose of inner/outer layers is about dependency direction, not performance.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "İç katmanlar bellekte çalıştığı için daha hızlıdır; dış katmanlar ağ veya disk I/O içerdiği için daha yavaştır.",
+        "explanationTr": "Bu pratikte sıkça doğru olsa da iç/dış katmanların mimari amacı performansla değil bağımlılık yönüyle ilgilidir."
       },
       {
         "optionText": "Inner layers handle user-facing features; outer layers handle background jobs and scheduled tasks.",
         "isCorrect": false,
         "explanation": "The layer distinction is about abstraction and dependency direction, not foreground vs. background responsibilities.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "İç katmanlar kullanıcıya bakan özellikleri ele alır; dış katmanlar arka plan işlerini ve zamanlanmış görevleri ele alır.",
+        "explanationTr": "Katman ayrımı ön plan ile arka plan sorumluluklarıyla değil soyutlama ve bağımlılık yönüyle ilgilidir."
       },
       {
         "optionText": "Outer layers are tested with unit tests; inner layers are tested with integration tests.",
         "isCorrect": false,
         "explanation": "The opposite is usually true — inner layers (pure business logic) are ideal for fast unit tests; outer layers need integration tests.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Dış katmanlar unit testlerle test edilir; iç katmanlar integration testlerle test edilir.",
+        "explanationTr": "Genellikle tam tersi doğrudur — iç katmanlar (saf iş mantığı) hızlı unit testler için idealdir; dış katmanlar integration testleri gerektirir."
       }
     ]
   },
@@ -1231,29 +1231,29 @@
         "optionText": "N-Tier layers each depend on the one below (UI → BL → DAL → DB); Clean Architecture's Dependency Rule requires all dependencies point inward toward the domain, not downward through layers.",
         "isCorrect": true,
         "explanation": "Correct — in traditional N-Tier, the domain layer depends on the DAL; in Clean Architecture, the DAL depends on the domain (inverted).",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "N-Tier'da her katman altındakine bağlıdır (UI → BL → DAL → DB); Clean Architecture'ın Bağımlılık Kuralı, tüm bağımlılıkların katmanlar boyunca aşağıya değil domain'e doğru içe işaret etmesini gerektirir.",
+        "explanationTr": "Doğru — geleneksel N-Tier'da domain katmanı DAL'a bağlıdır; Clean Architecture'da DAL domain'e bağlıdır (tersine çevrilmiş)."
       },
       {
         "optionText": "N-Tier is for monoliths; Clean Architecture is only suitable for microservices.",
         "isCorrect": false,
         "explanation": "Both patterns apply to monoliths and microservices. Clean Architecture is about internal module structure, not deployment topology.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "N-Tier monolitler içindir; Clean Architecture yalnızca mikroservisler için uygundur.",
+        "explanationTr": "Her iki desen de monolitlere ve mikroservislere uygulanır. Clean Architecture dağıtım topolojisiyle değil iç modül yapısıyla ilgilidir."
       },
       {
         "optionText": "Clean Architecture uses exactly three layers (Presentation, Business, Data) while N-Tier can have any number.",
         "isCorrect": false,
         "explanation": "Clean Architecture typically has four concentric layers (Entities, Use Cases, Interface Adapters, Frameworks). The key difference is dependency direction.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Clean Architecture tam olarak üç katman kullanır (Sunum, İş, Veri); N-Tier ise herhangi bir sayıda olabilir.",
+        "explanationTr": "Clean Architecture tipik olarak dört eş merkezli katmana sahiptir (Entities, Use Cases, Interface Adapters, Frameworks). Temel fark bağımlılık yönüdür."
       },
       {
         "optionText": "They are functionally equivalent — Clean Architecture is just a rebranding of N-Tier with different naming.",
         "isCorrect": false,
         "explanation": "They differ fundamentally in dependency direction. In N-Tier, higher layers depend on lower ones; Clean Architecture inverts this for the domain.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "İşlevsel olarak eşdeğerdirler — Clean Architecture, N-Tier'ın farklı adlandırmayla yeniden markalanmasıdır.",
+        "explanationTr": "Bağımlılık yönünde temelden farklılaşırlar. N-Tier'da üst katmanlar alt olanlara bağlıdır; Clean Architecture bunu domain için tersine çevirir."
       }
     ]
   },
@@ -1265,29 +1265,29 @@
         "optionText": "BDD is a testing methodology that describes system behaviour in natural-language scenarios (Given/When/Then); DDD is an architectural approach to modelling complex business domains in code.",
         "isCorrect": true,
         "explanation": "Correct — BDD focuses on specification and testing of behaviour; DDD focuses on structuring the codebase around business concepts.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "BDD, sistem davranışını doğal-dil senaryolarında (Given/When/Then) tanımlayan bir test metodolojisidir; DDD, karmaşık iş domain'lerini kodda modellemeye yönelik bir mimari yaklaşımdır.",
+        "explanationTr": "Doğru — BDD davranışın spesifikasyonu ve testine odaklanır; DDD kod tabanını iş kavramları etrafında yapılandırmaya odaklanır."
       },
       {
         "optionText": "BDD is used for front-end testing; DDD is used for back-end architecture — they never overlap.",
         "isCorrect": false,
         "explanation": "BDD and DDD can both be applied across the full stack. DDD often informs BDD scenario language through the ubiquitous language.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "BDD front-end testi için; DDD back-end mimarisi için kullanılır — asla örtüşmezler.",
+        "explanationTr": "BDD ve DDD'nin ikisi de tüm yığında uygulanabilir. DDD, ubiquitous language yoluyla BDD senaryo dilini sıkça bilgilendirir."
       },
       {
         "optionText": "They are synonyms — both describe writing tests before code to guide the design.",
         "isCorrect": false,
         "explanation": "BDD involves test-first specification; DDD is about domain modelling. They complement each other but are distinct disciplines.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Eş anlamlıdırlar — ikisi de tasarımı yönlendirmek için koddan önce test yazmayı tanımlar.",
+        "explanationTr": "BDD test-önce spesifikasyonu içerir; DDD domain modellemeyle ilgilidir. Birbirini tamamlarlar ama farklı disiplinlerdir."
       },
       {
         "optionText": "DDD replaces BDD — once you have a rich domain model, you no longer need behaviour specifications.",
         "isCorrect": false,
         "explanation": "DDD and BDD are complementary. DDD's ubiquitous language actually enriches BDD scenarios with meaningful business terminology.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "DDD, BDD'nin yerini alır — zengin bir domain modeliniz olunca artık davranış spesifikasyonlarına ihtiyacınız kalmaz.",
+        "explanationTr": "DDD ve BDD birbirini tamamlar. DDD'nin ubiquitous language'i aslında BDD senaryolarını anlamlı iş terminolojisiyle zenginleştirir."
       }
     ]
   },
@@ -1299,29 +1299,29 @@
         "optionText": "Design that is rigid (hard to change), fragile (breaks in unexpected places when changed), immobile (code can't be reused), and viscous (doing the right thing is harder than the wrong thing).",
         "isCorrect": true,
         "explanation": "Correct — these are Robert Martin's four symptoms of bad design: rigidity, fragility, immobility, and viscosity.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Katı (değiştirmesi zor), kırılgan (değiştirildiğinde beklenmedik yerlerde bozulan), hareketsiz (kod yeniden kullanılamaz) ve viskoz (doğru olanı yapmanın yanlış olandan daha zor olduğu) tasarım.",
+        "explanationTr": "Doğru — bunlar Robert Martin'in kötü tasarımın dört belirtisidir: katılık, kırılganlık, hareketsizlik ve viskozite."
       },
       {
         "optionText": "Any design that doesn't use design patterns — good design always requires applying named patterns from the GoF book.",
         "isCorrect": false,
         "explanation": "Over-engineering with patterns can itself be bad design. Patterns are tools, not requirements for good software.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Tasarım desenleri kullanmayan herhangi bir tasarım — iyi tasarım her zaman GoF kitabındaki adlandırılmış desenleri uygulamayı gerektirir.",
+        "explanationTr": "Desenlerle aşırı mühendislik de kötü tasarım olabilir. Desenler araçlardır, iyi yazılım için gereklilik değil."
       },
       {
         "optionText": "Code that lacks comments and documentation, making it hard for new developers to understand.",
         "isCorrect": false,
         "explanation": "Poor documentation is a maintenance issue, but bad design refers to structural problems: tight coupling, poor abstractions, and violated principles.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Yorum ve dokümantasyondan yoksun, yeni geliştiricilerin anlamasını zorlaştıran kod.",
+        "explanationTr": "Zayıf dokümantasyon bir bakım sorunudur ama kötü tasarım yapısal sorunları ifade eder: sıkı bağlılık, zayıf soyutlamalar ve ihlal edilen prensipler."
       },
       {
         "optionText": "Any architecture that doesn't match the diagram in the original technical specification.",
         "isCorrect": false,
         "explanation": "Architecture evolves; divergence from a spec diagram doesn't define bad design. The actual quality attributes matter.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Orijinal teknik spesifikasyondaki diyagramla eşleşmeyen herhangi bir mimari.",
+        "explanationTr": "Mimari evrilir; bir spesifikasyon diyagramından sapma kötü tasarımı tanımlamaz. Asıl önemli olan gerçek kalite nitelikleridir."
       }
     ]
   },
@@ -1333,29 +1333,29 @@
         "optionText": "A flow control mechanism where a consumer signals to a producer to slow down when it can't keep up with the rate of incoming data, preventing buffer overflow and system overload.",
         "isCorrect": true,
         "explanation": "Correct — back-pressure is essential in reactive systems and streaming pipelines to handle mismatched producer/consumer speeds.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Bir tüketicinin, gelen veri hızına yetişemediğinde bir üreticiye yavaşlaması için sinyal verdiği, buffer taşmasını ve sistem aşırı yüklenmesini önleyen bir akış kontrol mekanizması.",
+        "explanationTr": "Doğru — back-pressure, uyumsuz üretici/tüketici hızlarını ele almak için reaktif sistemlerde ve akış pipeline'larında şarttır."
       },
       {
         "optionText": "The latency introduced by load balancers when they route requests to slow backend nodes.",
         "isCorrect": false,
         "explanation": "That describes routing latency. Back-pressure is a flow control signal from consumer to producer.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Yük dengeleyicilerin istekleri yavaş backend düğümlerine yönlendirdiğinde getirdiği gecikme.",
+        "explanationTr": "Bu, yönlendirme gecikmesini tanımlar. Back-pressure, tüketiciden üreticiye giden bir akış kontrol sinyalidir."
       },
       {
         "optionText": "A deployment strategy where a previous version of the service pushes back against new deployments until health checks pass.",
         "isCorrect": false,
         "explanation": "That describes a blue-green or canary rollback condition, not back-pressure.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Bir servisin önceki bir sürümünün, sağlık kontrolleri geçene kadar yeni dağıtımlara karşı direndiği bir dağıtım stratejisi.",
+        "explanationTr": "Bu, bir blue-green veya canary geri alma koşulunu tanımlar, back-pressure'ı değil."
       },
       {
         "optionText": "The CPU overhead caused by garbage collection when heap memory fills up under heavy load.",
         "isCorrect": false,
         "explanation": "GC pressure is a runtime performance concern. Back-pressure is a flow control concept for managing data rates between producers and consumers.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Yoğun yük altında heap belleği dolduğunda çöp toplamanın (garbage collection) neden olduğu CPU yükü.",
+        "explanationTr": "GC baskısı bir çalışma zamanı performans kaygısıdır. Back-pressure, üreticiler ile tüketiciler arasında veri hızlarını yönetmeye yönelik bir akış kontrol kavramıdır."
       }
     ]
   },
@@ -1367,29 +1367,29 @@
         "optionText": "Elasticity is the ability to automatically scale resources up AND down in response to load changes; Scalability is the capability to handle increased load by adding resources.",
         "isCorrect": true,
         "explanation": "Correct — a scalable system can grow; an elastic system can also shrink automatically when load drops, optimising cost.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Esneklik (elasticity), yük değişimlerine yanıt olarak kaynakları otomatik olarak hem yukarı HEM aşağı ölçekleme yeteneğidir; Ölçeklenebilirlik (scalability), kaynak ekleyerek artan yükü ele alma kabiliyetidir.",
+        "explanationTr": "Doğru — ölçeklenebilir bir sistem büyüyebilir; esnek bir sistem yük düştüğünde otomatik olarak küçülebilir de ve maliyeti optimize eder."
       },
       {
         "optionText": "Elasticity means the system never degrades under any load; Scalability means it degrades gracefully.",
         "isCorrect": false,
         "explanation": "Elasticity is about dynamic resource adjustment, not zero degradation. Graceful degradation is resilience, not scalability.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Esneklik, sistemin hiçbir yük altında asla bozulmaması demektir; Ölçeklenebilirlik, zarifçe bozulması demektir.",
+        "explanationTr": "Esneklik, sıfır bozulma değil dinamik kaynak ayarlamayla ilgilidir. Zarif bozulma dayanıklılıktır, ölçeklenebilirlik değil."
       },
       {
         "optionText": "They are synonyms — both describe the system's ability to handle more users over time.",
         "isCorrect": false,
         "explanation": "Elasticity includes automatic scale-down; scalability only implies the ability to scale up. They are related but distinct.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Eş anlamlıdırlar — ikisi de sistemin zamanla daha fazla kullanıcıyı ele alma yeteneğini tanımlar.",
+        "explanationTr": "Esneklik otomatik küçülmeyi içerir; ölçeklenebilirlik yalnızca büyütme yeteneğini ima eder. İlişkilidirler ama farklıdırlar."
       },
       {
         "optionText": "Scalability applies to databases; Elasticity applies to application servers only.",
         "isCorrect": false,
         "explanation": "Both concepts apply across all layers of a system — databases, application servers, caches, and queues can all be elastic or scalable.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Ölçeklenebilirlik veritabanlarına; Esneklik yalnızca uygulama sunucularına uygulanır.",
+        "explanationTr": "Her iki kavram da bir sistemin tüm katmanlarına uygulanır — veritabanları, uygulama sunucuları, önbellekler ve kuyruklar hepsi esnek veya ölçeklenebilir olabilir."
       }
     ]
   },
@@ -1401,29 +1401,29 @@
         "optionText": "When a load balancer detects a healthy node has become unavailable and automatically redistributes its traffic to the remaining healthy nodes.",
         "isCorrect": true,
         "explanation": "Correct — failover ensures continuity by rerouting traffic away from failed nodes, a core mechanism of high availability.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Bir yük dengeleyicinin, sağlıklı bir düğümün erişilemez hâle geldiğini tespit edip trafiğini otomatik olarak kalan sağlıklı düğümlere yeniden dağıtması.",
+        "explanationTr": "Doğru — failover, trafiği arızalı düğümlerden uzağa yeniden yönlendirerek sürekliliği sağlar; yüksek erişilebilirliğin çekirdek mekanizmasıdır."
       },
       {
         "optionText": "A technique where the load balancer switches from round-robin to least-connections algorithm when a node is overloaded.",
         "isCorrect": false,
         "explanation": "Changing routing algorithms is a load balancing strategy, not failover. Failover specifically handles node failures.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Bir düğüm aşırı yüklendiğinde yük dengeleyicinin round-robin'den least-connections algoritmasına geçtiği bir teknik.",
+        "explanationTr": "Yönlendirme algoritmalarını değiştirmek bir yük dengeleme stratejisidir, failover değil. Failover özellikle düğüm arızalarını ele alır."
       },
       {
         "optionText": "The process of spinning up a new application server when the primary deployment fails during a release.",
         "isCorrect": false,
         "explanation": "That describes a deployment recovery process. Load balancing failover is about runtime traffic rerouting when a node goes down.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Bir sürüm sırasında birincil dağıtım başarısız olduğunda yeni bir uygulama sunucusu ayağa kaldırma süreci.",
+        "explanationTr": "Bu, bir dağıtım kurtarma sürecini tanımlar. Yük dengeleme failover'ı, bir düğüm çöktüğünde çalışma zamanı trafik yeniden yönlendirmesiyle ilgilidir."
       },
       {
         "optionText": "Storing a backup copy of the load balancer configuration so it can be restored after a hardware failure.",
         "isCorrect": false,
         "explanation": "Configuration backup is disaster recovery, not load balancing failover.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Bir donanım arızasından sonra geri yüklenebilmesi için yük dengeleyici yapılandırmasının yedek kopyasını saklamak.",
+        "explanationTr": "Yapılandırma yedeği felaket kurtarmadır, yük dengeleme failover'ı değil."
       }
     ]
   },
@@ -1435,29 +1435,29 @@
         "optionText": "All three enforce the same core principle — dependencies point inward toward the domain — but differ in terminology and layer names; they are largely equivalent philosophically with minor structural differences.",
         "isCorrect": true,
         "explanation": "Correct — Hexagonal (ports and adapters), Onion, and Clean Architecture all share the dependency inversion goal, differing mainly in vocabulary.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Üçü de aynı temel prensibi zorlar — bağımlılıklar domain'e doğru içe işaret eder — ama terminoloji ve katman adlarında farklılaşır; küçük yapısal farklarla felsefi olarak büyük ölçüde eşdeğerdirler.",
+        "explanationTr": "Doğru — Hexagonal (ports and adapters), Onion ve Clean Architecture hepsi bağımlılık tersine çevirme hedefini paylaşır, esas olarak söz dağarcığında farklılaşır."
       },
       {
         "optionText": "Hexagonal Architecture is for event-driven systems; Onion is for REST APIs; Clean is for monolithic applications.",
         "isCorrect": false,
         "explanation": "All three are general architectural patterns applicable to any application style.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Hexagonal Architecture olay tabanlı sistemler için; Onion REST API'ler için; Clean monolitik uygulamalar içindir.",
+        "explanationTr": "Üçü de herhangi bir uygulama stiline uygulanabilen genel mimari desenlerdir."
       },
       {
         "optionText": "Clean Architecture is the strictest — it requires exactly four layers; Onion and Hexagonal allow any number of rings.",
         "isCorrect": false,
         "explanation": "All three are flexible in the number of layers. The four-layer depiction of Clean Architecture is illustrative, not mandatory.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Clean Architecture en katısıdır — tam olarak dört katman gerektirir; Onion ve Hexagonal herhangi bir sayıda halkaya izin verir.",
+        "explanationTr": "Üçü de katman sayısında esnektir. Clean Architecture'ın dört katmanlı gösterimi açıklayıcıdır, zorunlu değil."
       },
       {
         "optionText": "Onion Architecture places the database at the centre; the other two place it at the outer edge.",
         "isCorrect": false,
         "explanation": "All three place the domain at the centre and infrastructure (including the database) at the outer edge.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Onion Architecture veritabanını merkeze koyar; diğer ikisi onu dış kenara koyar.",
+        "explanationTr": "Üçü de domain'i merkeze, altyapıyı (veritabanı dahil) dış kenara koyar."
       }
     ]
   },
@@ -1469,29 +1469,29 @@
         "optionText": "Unit: tests a single unit in isolation. Integration: tests multiple components together. Smoke: a quick sanity check after deployment. Regression: ensures existing functionality still works after changes.",
         "isCorrect": true,
         "explanation": "Correct — these four test types cover different scopes and purposes in the testing pyramid.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Unit: tek bir birimi izole test eder. Integration: birden çok bileşeni birlikte test eder. Smoke: dağıtımdan sonra hızlı bir akıl sağlığı kontrolü. Regression: değişikliklerden sonra mevcut işlevselliğin hâlâ çalıştığını garanti eder.",
+        "explanationTr": "Doğru — bu dört test türü, test piramidinde farklı kapsam ve amaçları kapsar."
       },
       {
         "optionText": "They are the same — all test the same code paths but at different times during the CI pipeline.",
         "isCorrect": false,
         "explanation": "They differ in scope, speed, and purpose. Conflating them leads to gaps in test coverage.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Aynıdırlar — hepsi aynı kod yollarını ama CI pipeline'ı sırasında farklı zamanlarda test eder.",
+        "explanationTr": "Kapsam, hız ve amaç olarak farklılaşırlar. Onları karıştırmak test kapsamında boşluklara yol açar."
       },
       {
         "optionText": "Unit tests run in production; integration tests run in staging; smoke tests run in development; regression tests run manually.",
         "isCorrect": false,
         "explanation": "The distinction between these test types is about scope and purpose, not environment.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Unit testler üretimde; integration testler staging'de; smoke testler geliştirmede; regression testler manuel çalışır.",
+        "explanationTr": "Bu test türleri arasındaki ayrım ortamla değil kapsam ve amaçla ilgilidir."
       },
       {
         "optionText": "Smoke tests replace unit tests in agile teams because they are faster to write and cover more code paths.",
         "isCorrect": false,
         "explanation": "Smoke tests are shallow sanity checks, not replacements for thorough unit tests.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Smoke testler, daha hızlı yazıldıkları ve daha fazla kod yolu kapsadıkları için agile ekiplerde unit testlerin yerini alır.",
+        "explanationTr": "Smoke testler sığ akıl sağlığı kontrolleridir, kapsamlı unit testlerin yerine geçmez."
       }
     ]
   },
@@ -1503,29 +1503,29 @@
         "optionText": "Use caching layers (Redis/Memcached) for frequent reads, message queues for async writes, read replicas for read-heavy workloads, and denormalise data for expensive joins.",
         "isCorrect": true,
         "explanation": "Correct — these strategies reduce DB load by serving data from cache, deferring writes, and distributing read traffic.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Sık okumalar için önbellek katmanları (Redis/Memcached), asenkron yazmalar için mesaj kuyrukları, okuma-ağırlıklı iş yükleri için okuma replikaları kullanın ve pahalı join'ler için veriyi denormalize edin.",
+        "explanationTr": "Doğru — bu stratejiler veriyi önbellekten sunarak, yazmaları erteleyerek ve okuma trafiğini dağıtarak DB yükünü azaltır."
       },
       {
         "optionText": "Increase the database connection pool size so more queries can run simultaneously.",
         "isCorrect": false,
         "explanation": "A larger connection pool increases concurrency but doesn't reduce the total work the DB must do.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Daha fazla sorgunun aynı anda çalışabilmesi için veritabanı bağlantı havuzu boyutunu artırın.",
+        "explanationTr": "Daha büyük bir bağlantı havuzu eşzamanlılığı artırır ama DB'nin yapması gereken toplam işi azaltmaz."
       },
       {
         "optionText": "Switch from a relational to a NoSQL database — NoSQL databases have no performance limits.",
         "isCorrect": false,
         "explanation": "NoSQL databases have different performance characteristics but are not infinitely scalable. The same off-loading strategies apply.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "İlişkiselden NoSQL veritabanına geçin — NoSQL veritabanlarının performans sınırı yoktur.",
+        "explanationTr": "NoSQL veritabanlarının farklı performans özellikleri vardır ama sonsuz ölçeklenebilir değildir. Aynı yük boşaltma stratejileri geçerlidir."
       },
       {
         "optionText": "Run all database queries inside background threads on the application server to avoid blocking the event loop.",
         "isCorrect": false,
         "explanation": "Async execution avoids blocking the app server but doesn't reduce the number of queries hitting the database.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Olay döngüsünü bloklamamak için tüm veritabanı sorgularını uygulama sunucusunda arka plan thread'lerinde çalıştırın.",
+        "explanationTr": "Asenkron yürütme uygulama sunucusunu bloklamayı önler ama veritabanına ulaşan sorgu sayısını azaltmaz."
       }
     ]
   },
@@ -1537,29 +1537,29 @@
         "optionText": "When a cached entry expires and many concurrent requests simultaneously find a cache miss, all querying the database at once — overwhelming it before the cache is repopulated.",
         "isCorrect": true,
         "explanation": "Correct — cache stampede (thundering herd) is mitigated by probabilistic early expiry, locking (mutex), or background refresh.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Önbelleğe alınmış bir girdinin süresi dolduğunda ve birçok eşzamanlı isteğin aynı anda bir cache miss bulduğunda, hepsinin aynı anda veritabanını sorgulaması — önbellek yeniden doldurulmadan önce onu bunaltır.",
+        "explanationTr": "Doğru — cache stampede (thundering herd), olasılıksal erken sona erme, kilitleme (mutex) veya arka plan yenileme ile hafifletilir."
       },
       {
         "optionText": "When the cache fills to capacity and starts evicting entries faster than they can be re-inserted.",
         "isCorrect": false,
         "explanation": "That describes cache eviction pressure under memory constraints, not a cache stampede.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Önbellek kapasiteye dolduğunda ve girdileri yeniden eklenebileceğinden daha hızlı tahliye etmeye başladığında.",
+        "explanationTr": "Bu, bellek kısıtları altında önbellek tahliye baskısını tanımlar, bir cache stampede değil."
       },
       {
         "optionText": "When multiple cache servers disagree on the value of a key due to replication lag.",
         "isCorrect": false,
         "explanation": "That describes cache inconsistency from eventual consistency, not a stampede.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Birden çok önbellek sunucusunun, replikasyon gecikmesi nedeniyle bir anahtarın değeri konusunda anlaşamadığında.",
+        "explanationTr": "Bu, eventual consistency'den kaynaklanan önbellek tutarsızlığını tanımlar, bir stampede değil."
       },
       {
         "optionText": "When a deploy invalidates all cached entries at once, causing a brief period of elevated load.",
         "isCorrect": false,
         "explanation": "While a mass invalidation can trigger stampede-like behaviour, a classic cache stampede refers specifically to concurrent misses on a single expired key.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Bir dağıtım tüm önbellek girdilerini aynı anda geçersiz kıldığında ve kısa bir yüksek yük dönemine neden olduğunda.",
+        "explanationTr": "Toplu bir geçersizleştirme stampede benzeri davranışı tetikleyebilse de klasik bir cache stampede özellikle tek bir süresi dolmuş anahtardaki eşzamanlı miss'leri ifade eder."
       }
     ]
   }

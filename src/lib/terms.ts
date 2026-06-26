@@ -50,7 +50,13 @@ export async function getRelatedTerms(slugs: string[]): Promise<TermListItem[]> 
     .select("id, slug, label, topic, tooltip, tooltip_tr")
     .in("slug", slugs);
 
-  if (error) throw new Error(`Failed to load related terms: ${error.message}`);
+  // Degrade gracefully — this only powers the decorative tooltip prefetch.
+  // A failure here must not take down the whole /glossary page (the term list
+  // itself comes from listTerms via the admin client).
+  if (error) {
+    console.error("[getRelatedTerms]", error.message);
+    return [];
+  }
   return data ?? [];
 }
 

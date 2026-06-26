@@ -7,29 +7,29 @@
         "optionText": "Provides alternative text for screen readers and displays when the image fails to load — essential for accessibility and SEO",
         "isCorrect": true,
         "explanation": "The alt attribute serves two purposes: screen readers announce it to visually impaired users, and browsers display it when the image can't load. It also gives search engines context. Decorative images should have alt='' (empty) to be skipped by screen readers.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Ekran okuyucular için alternatif metin sağlar ve görsel yüklenemediğinde görüntülenir — erişilebilirlik ve SEO için şarttır",
+        "explanationTr": "alt özniteliği iki amaca hizmet eder: ekran okuyucular görme engelli kullanıcılara onu seslendirir ve görsel yüklenemediğinde tarayıcılar onu gösterir. Ayrıca arama motorlarına bağlam verir. Dekoratif görseller, ekran okuyucular tarafından atlanması için alt='' (boş) almalıdır."
       },
       {
         "optionText": "Sets the title tooltip that appears on mouse hover over the image",
         "isCorrect": false,
         "explanation": "Hover tooltips are set with the title attribute. alt is for accessibility and fallback text.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Görselin üzerine fareyle gelindiğinde çıkan title ipucu balonunu ayarlar",
+        "explanationTr": "Hover ipucu balonları title özniteliğiyle ayarlanır. alt, erişilebilirlik ve yedek metin içindir."
       },
       {
         "optionText": "Defines the image dimensions to prevent layout shift during loading",
         "isCorrect": false,
         "explanation": "Width and height attributes prevent layout shift. alt is for alternative text.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Yükleme sırasında düzen kaymasını önlemek için görsel boyutlarını tanımlar",
+        "explanationTr": "Düzen kaymasını width ve height öznitelikleri önler. alt, alternatif metin içindir."
       },
       {
         "optionText": "A required attribute that browsers use to pre-load images faster",
         "isCorrect": false,
         "explanation": "Pre-loading uses the link rel='preload' element or the loading attribute. alt is for alternative text.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Tarayıcıların görselleri daha hızlı ön-yüklemek için kullandığı zorunlu bir öznitelik",
+        "explanationTr": "Ön-yükleme, link rel='preload' öğesini veya loading özniteliğini kullanır. alt, alternatif metin içindir."
       }
     ]
   },
@@ -41,29 +41,29 @@
         "optionText": "div is a block-level element that takes full width; span is an inline element that wraps text without breaking flow",
         "isCorrect": true,
         "explanation": "div creates a block that starts on a new line. span is inline — it wraps text or inline content without affecting the surrounding flow. Both are generic containers with no semantic meaning.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "div, tam genişlik kaplayan blok seviyesi bir öğedir; span ise akışı bozmadan metni saran inline bir öğedir",
+        "explanationTr": "div, yeni bir satırda başlayan bir blok oluşturur. span inline'dır — çevreleyen akışı etkilemeden metni veya inline içeriği sarar. İkisi de anlamsal anlamı olmayan genel kapsayıcılardır."
       },
       {
         "optionText": "span has semantic meaning; div is purely presentational",
         "isCorrect": false,
         "explanation": "Both div and span are non-semantic containers. For semantic meaning, use elements like section, article, nav, p, strong etc.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "span'in anlamsal anlamı vardır; div tamamen sunumsaldır",
+        "explanationTr": "Hem div hem span anlamsal olmayan kapsayıcılardır. Anlamsal anlam için section, article, nav, p, strong gibi öğeler kullanın."
       },
       {
         "optionText": "div can contain any elements; span can only contain text",
         "isCorrect": false,
         "explanation": "span is an inline element and should only contain inline elements (text, img, other spans). But this is about valid nesting, not a strict rule of span vs div.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "div herhangi bir öğeyi içerebilir; span yalnızca metin içerebilir",
+        "explanationTr": "span inline bir öğedir ve yalnızca inline öğeler (metin, img, başka span'ler) içermelidir. Ama bu, geçerli iç içe yerleştirmeyle ilgilidir, span vs div'in katı bir kuralı değil."
       },
       {
         "optionText": "They are identical — div and span are just old names for the same element",
         "isCorrect": false,
         "explanation": "They have different default display values: div is block, span is inline.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Aynıdırlar — div ve span, aynı öğenin yalnızca eski adlarıdır",
+        "explanationTr": "Farklı varsayılan display değerleri vardır: div blok, span inline'dır."
       }
     ]
   },
@@ -75,29 +75,29 @@
         "optionText": "Tells the browser which HTML version to use — <!DOCTYPE html> triggers standards mode in all modern browsers",
         "isCorrect": true,
         "explanation": "Without a doctype, browsers enter 'quirks mode' and emulate old buggy behavior. <!DOCTYPE html> (HTML5 doctype) activates standards mode. It's not an HTML tag — it's a document type declaration.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Tarayıcıya hangi HTML sürümünün kullanılacağını söyler — <!DOCTYPE html> tüm modern tarayıcılarda standartlar modunu tetikler",
+        "explanationTr": "Bir doctype olmadan tarayıcılar 'quirks mode'a girer ve eski hatalı davranışı taklit eder. <!DOCTYPE html> (HTML5 doctype) standartlar modunu etkinleştirir. Bir HTML etiketi değildir — bir belge türü bildirimidir."
       },
       {
         "optionText": "DOCTYPE defines the website's title shown in the browser tab",
         "isCorrect": false,
         "explanation": "The page title is set with the <title> element inside <head>. DOCTYPE tells the browser the document type.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "DOCTYPE, tarayıcı sekmesinde gösterilen web sitesi başlığını tanımlar",
+        "explanationTr": "Sayfa başlığı, <head> içindeki <title> öğesiyle ayarlanır. DOCTYPE tarayıcıya belge türünü söyler."
       },
       {
         "optionText": "DOCTYPE prevents search engines from indexing the page",
         "isCorrect": false,
         "explanation": "Search engine indexing is controlled by robots.txt and meta robots tags, not DOCTYPE.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "DOCTYPE, arama motorlarının sayfayı dizine eklemesini önler",
+        "explanationTr": "Arama motoru dizinlemesi DOCTYPE ile değil robots.txt ve meta robots etiketleriyle kontrol edilir."
       },
       {
         "optionText": "DOCTYPE is required to load external CSS files correctly",
         "isCorrect": false,
         "explanation": "CSS loading works regardless of DOCTYPE. However, without DOCTYPE, rendering may differ in quirks mode.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "DOCTYPE, harici CSS dosyalarının doğru yüklenmesi için gereklidir",
+        "explanationTr": "CSS yükleme DOCTYPE'tan bağımsız çalışır. Ancak DOCTYPE olmadan render quirks modunda farklılaşabilir."
       }
     ]
   },
@@ -109,29 +109,29 @@
         "optionText": "Semantic elements (article, section, nav), Canvas and SVG, video/audio elements, Web Storage, Web Workers, Geolocation, WebSockets, and new form input types",
         "isCorrect": true,
         "explanation": "HTML5 significantly expanded the web platform: semantic markup for accessibility/SEO, native multimedia without Flash, client-side storage, background threads, and APIs for location, offline caching, drag-and-drop, and real-time communication.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Anlamsal öğeler (article, section, nav), Canvas ve SVG, video/audio öğeleri, Web Storage, Web Workers, Geolocation, WebSockets ve yeni form girdi türleri",
+        "explanationTr": "HTML5 web platformunu önemli ölçüde genişletti: erişilebilirlik/SEO için anlamsal markup, Flash'sız yerel multimedya, istemci taraflı depolama, arka plan thread'leri ve konum, çevrimdışı önbellekleme, sürükle-bırak ve gerçek zamanlı iletişim için API'ler."
       },
       {
         "optionText": "HTML5 replaced CSS entirely — all styling is now done with HTML attributes",
         "isCorrect": false,
         "explanation": "CSS is still the styling layer. HTML5 added new APIs and elements, not styling capabilities.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "HTML5 CSS'in tamamen yerini aldı — tüm stillendirme artık HTML öznitelikleriyle yapılır",
+        "explanationTr": "CSS hâlâ stillendirme katmanıdır. HTML5 stillendirme yetenekleri değil yeni API'ler ve öğeler ekledi."
       },
       {
         "optionText": "HTML5 added server-side scripting directly in HTML files using PHP syntax",
         "isCorrect": false,
         "explanation": "HTML5 is a client-side markup standard. Server-side scripting remains a separate concern (PHP, Node.js etc).",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "HTML5, PHP sözdizimi kullanarak doğrudan HTML dosyalarında sunucu taraflı betikleme ekledi",
+        "explanationTr": "HTML5 bir istemci taraflı markup standardıdır. Sunucu taraflı betikleme ayrı bir kaygı olarak kalır (PHP, Node.js vb.)."
       },
       {
         "optionText": "HTML5 is only relevant for mobile — desktop browsers still use HTML4",
         "isCorrect": false,
         "explanation": "HTML5 is the current standard for all browsers — mobile and desktop. HTML4 is obsolete.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "HTML5 yalnızca mobil için geçerlidir — masaüstü tarayıcılar hâlâ HTML4 kullanır",
+        "explanationTr": "HTML5, mobil ve masaüstü tüm tarayıcılar için geçerli standarttır. HTML4 eskimiştir."
       }
     ]
   },
@@ -143,29 +143,29 @@
         "optionText": "Both download scripts in parallel without blocking HTML parsing; async executes immediately when downloaded (possibly out of order); defer executes in order after HTML parsing completes",
         "isCorrect": true,
         "explanation": "Without attributes: blocks parsing. async: downloads parallel, runs immediately when ready (good for analytics). defer: downloads parallel, runs in order after DOM is ready (good for most scripts). Both avoid blocking the parser.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "İkisi de betikleri HTML ayrıştırmasını bloklamadan paralel indirir; async indirilince hemen çalışır (muhtemelen sırasız); defer, HTML ayrıştırması bittikten sonra sırayla çalışır",
+        "explanationTr": "Öznitelik olmadan: ayrıştırmayı bloklar. async: paralel indirir, hazır olunca hemen çalışır (analytics için iyi). defer: paralel indirir, DOM hazır olduktan sonra sırayla çalışır (çoğu betik için iyi). İkisi de ayrıştırıcıyı bloklamaz."
       },
       {
         "optionText": "defer executes the script immediately; async waits until after the page loads",
         "isCorrect": false,
         "explanation": "It's the opposite: defer waits until HTML parsing completes; async runs as soon as the script downloads.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "defer betiği hemen çalıştırır; async ise sayfa yüklenene kadar bekler",
+        "explanationTr": "Tam tersi: defer HTML ayrıştırması bitene kadar bekler; async betik indirilir indirilmez çalışır."
       },
       {
         "optionText": "Both async and defer make scripts execute synchronously",
         "isCorrect": false,
         "explanation": "Both attributes make script loading non-blocking/asynchronous. Synchronous is the default (no attributes).",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Hem async hem defer betikleri senkron çalıştırır",
+        "explanationTr": "Her iki öznitelik de betik yüklemesini bloklamasız/asenkron yapar. Senkron varsayılandır (öznitelik yok)."
       },
       {
         "optionText": "async and defer only work in the <body> tag — they have no effect in <head>",
         "isCorrect": false,
         "explanation": "async and defer are specifically useful in <head> to avoid parser blocking while keeping the script in the right place.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "async ve defer yalnızca <body> etiketinde çalışır — <head> içinde etkisizdir",
+        "explanationTr": "async ve defer, betiği doğru yerde tutarken ayrıştırıcı bloklamasını önlemek için özellikle <head> içinde faydalıdır."
       }
     ]
   },
@@ -177,29 +177,29 @@
         "optionText": "Cookies: sent with every HTTP request, configurable expiry, accessible server-side. sessionStorage: browser tab lifetime, not sent to server. localStorage: persists indefinitely, not sent to server. Both storage APIs are ~5MB",
         "isCorrect": true,
         "explanation": "Cookies are the only one sent to the server on requests. sessionStorage is cleared when the tab closes. localStorage persists until explicitly cleared. Both Web Storage APIs are only accessible via JavaScript.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Cookie'ler: her HTTP isteğiyle gönderilir, yapılandırılabilir süre, sunucu taraflı erişilebilir. sessionStorage: tarayıcı sekmesi ömrü, sunucuya gönderilmez. localStorage: süresiz kalır, sunucuya gönderilmez. İki storage API'si de ~5MB",
+        "explanationTr": "Cookie'ler isteklerde sunucuya gönderilen tek seçenektir. sessionStorage sekme kapanınca temizlenir. localStorage açıkça temizlenene kadar kalır. İki Web Storage API'sine de yalnızca JavaScript ile erişilir."
       },
       {
         "optionText": "All three are sent to the server on every HTTP request",
         "isCorrect": false,
         "explanation": "Only cookies are sent with HTTP requests. sessionStorage and localStorage are client-only JavaScript APIs.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Üçü de her HTTP isteğinde sunucuya gönderilir",
+        "explanationTr": "Yalnızca cookie'ler HTTP istekleriyle gönderilir. sessionStorage ve localStorage yalnızca istemci taraflı JavaScript API'leridir."
       },
       {
         "optionText": "localStorage is cleared when the browser closes; sessionStorage persists indefinitely",
         "isCorrect": false,
         "explanation": "It's the opposite: sessionStorage clears when the tab/window closes; localStorage persists until explicitly cleared.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "localStorage tarayıcı kapanınca temizlenir; sessionStorage süresiz kalır",
+        "explanationTr": "Tam tersi: sessionStorage sekme/pencere kapanınca temizlenir; localStorage açıkça temizlenene kadar kalır."
       },
       {
         "optionText": "Cookies have a 50MB storage limit; localStorage has only 4KB like cookies",
         "isCorrect": false,
         "explanation": "Cookies are limited to ~4KB. localStorage and sessionStorage can store ~5-10MB (browser-dependent).",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Cookie'lerin 50MB depolama sınırı vardır; localStorage cookie'ler gibi yalnızca 4KB'dir",
+        "explanationTr": "Cookie'ler ~4KB ile sınırlıdır. localStorage ve sessionStorage ~5-10MB saklayabilir (tarayıcıya bağlı)."
       }
     ]
   },
@@ -211,29 +211,29 @@
         "optionText": "They convey meaning to browsers, screen readers, and search engines — improving accessibility, SEO, and code maintainability over generic divs",
         "isCorrect": true,
         "explanation": "<article>, <nav>, <main>, <header>, <footer>, <aside>, <section> communicate structure and intent. Screen readers can navigate by landmarks. Search engines weight semantic headings. Developers understand the layout at a glance.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Tarayıcılara, ekran okuyuculara ve arama motorlarına anlam iletirler — genel div'lere kıyasla erişilebilirliği, SEO'yu ve kod sürdürülebilirliğini iyileştirir",
+        "explanationTr": "<article>, <nav>, <main>, <header>, <footer>, <aside>, <section> yapıyı ve niyeti iletir. Ekran okuyucular landmark'larla gezinebilir. Arama motorları anlamsal başlıklara ağırlık verir. Geliştiriciler düzeni bir bakışta anlar."
       },
       {
         "optionText": "Semantic tags load faster than div elements due to browser optimisation",
         "isCorrect": false,
         "explanation": "There's no meaningful performance difference. The benefit is semantic meaning, not speed.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Anlamsal etiketler, tarayıcı optimizasyonu sayesinde div öğelerinden daha hızlı yüklenir",
+        "explanationTr": "Anlamlı bir performans farkı yoktur. Fayda hız değil anlamsal anlamdır."
       },
       {
         "optionText": "Semantic tags apply built-in CSS styles automatically",
         "isCorrect": false,
         "explanation": "Semantic tags have minimal browser default styles (similar to div/span). They don't style your page for you.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Anlamsal etiketler yerleşik CSS stillerini otomatik olarak uygular",
+        "explanationTr": "Anlamsal etiketlerin minimal tarayıcı varsayılan stilleri vardır (div/span'e benzer). Sayfanızı sizin için stillendirmezler."
       },
       {
         "optionText": "Semantic tags are required — browsers refuse to render pages using only divs",
         "isCorrect": false,
         "explanation": "Divs work fine. Semantic tags are a best practice for accessibility and maintainability, not a technical requirement.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Anlamsal etiketler zorunludur — tarayıcılar yalnızca div kullanan sayfaları render etmeyi reddeder",
+        "explanationTr": "Div'ler sorunsuz çalışır. Anlamsal etiketler erişilebilirlik ve sürdürülebilirlik için bir en iyi uygulamadır, teknik bir gereklilik değil."
       }
     ]
   },
@@ -245,29 +245,29 @@
         "optionText": "Plain <script> blocks HTML parsing until downloaded and executed; async downloads in parallel and runs immediately; defer downloads in parallel and runs after HTML is fully parsed, in order",
         "isCorrect": true,
         "explanation": "For most scripts, defer is the right choice — it doesn't block parsing and respects script order. async suits independent scripts like analytics. Plain script in <head> without defer/async blocks the browser.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Düz <script> indirilip çalıştırılana kadar HTML ayrıştırmasını bloklar; async paralel indirir ve hemen çalışır; defer paralel indirir ve HTML tamamen ayrıştırıldıktan sonra sırayla çalışır",
+        "explanationTr": "Çoğu betik için defer doğru seçimdir — ayrıştırmayı bloklamaz ve betik sırasına saygı duyar. async, analytics gibi bağımsız betiklere uygundur. <head>'de defer/async olmayan düz betik tarayıcıyı bloklar."
       },
       {
         "optionText": "async scripts always run before defer scripts regardless of download order",
         "isCorrect": false,
         "explanation": "async scripts run when their download completes, regardless of other scripts. defer scripts run after HTML parsing, in document order.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "async betikler indirme sırasından bağımsız olarak her zaman defer betiklerden önce çalışır",
+        "explanationTr": "async betikler indirmeleri tamamlanınca, diğer betiklerden bağımsız çalışır. defer betikler HTML ayrıştırmasından sonra belge sırasında çalışır."
       },
       {
         "optionText": "Adding defer to a script makes it execute on a background thread",
         "isCorrect": false,
         "explanation": "defer changes when a script executes, not on which thread. JavaScript is always single-threaded (Web Workers are separate).",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Bir betiğe defer eklemek onu bir arka plan thread'inde çalıştırır",
+        "explanationTr": "defer, bir betiğin hangi thread'de değil ne zaman çalışacağını değiştirir. JavaScript her zaman tek iş parçacıklıdır (Web Workers ayrıdır)."
       },
       {
         "optionText": "async and defer are only valid for external scripts; inline scripts always block",
         "isCorrect": false,
         "explanation": "Correct — async and defer only apply to scripts with a src attribute. Inline scripts always execute synchronously and block parsing.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "async ve defer yalnızca harici betikler için geçerlidir; inline betikler her zaman bloklar",
+        "explanationTr": "Doğru — async ve defer yalnızca src özniteliği olan betiklere uygulanır. Inline betikler her zaman senkron çalışır ve ayrıştırmayı bloklar."
       }
     ]
   },
@@ -279,29 +279,29 @@
         "optionText": "Client-side key-value storage APIs: localStorage persists across sessions; sessionStorage is limited to the current tab's lifetime — both store strings and are not sent to the server",
         "isCorrect": true,
         "explanation": "Both use the same API (setItem, getItem, removeItem, clear). They're synchronous and store strings (use JSON.stringify/parse for objects). Neither is accessible from other origins (same-origin policy).",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "İstemci taraflı anahtar-değer depolama API'leri: localStorage oturumlar arası kalır; sessionStorage geçerli sekmenin ömrüyle sınırlıdır — ikisi de string saklar ve sunucuya gönderilmez",
+        "explanationTr": "İkisi de aynı API'yi kullanır (setItem, getItem, removeItem, clear). Senkrondurlar ve string saklarlar (nesneler için JSON.stringify/parse kullanın). Hiçbiri başka origin'lerden erişilemez (same-origin politikası)."
       },
       {
         "optionText": "Web Storage is a NoSQL database built into the browser, similar to MongoDB",
         "isCorrect": false,
         "explanation": "Web Storage is a simple synchronous key-value store. IndexedDB is the browser's more database-like option.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Web Storage, MongoDB'ye benzer, tarayıcıya yerleşik bir NoSQL veritabanıdır",
+        "explanationTr": "Web Storage basit, senkron bir anahtar-değer deposudur. IndexedDB, tarayıcının daha veritabanı benzeri seçeneğidir."
       },
       {
         "optionText": "sessionStorage data is shared between all browser tabs on the same domain",
         "isCorrect": false,
         "explanation": "sessionStorage is isolated to the specific tab. localStorage is shared across all tabs of the same origin.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "sessionStorage verisi aynı domain'deki tüm tarayıcı sekmeleri arasında paylaşılır",
+        "explanationTr": "sessionStorage belirli sekmeye izoledir. localStorage, aynı origin'in tüm sekmeleri arasında paylaşılır."
       },
       {
         "optionText": "Both localStorage and sessionStorage can store any JavaScript type including functions",
         "isCorrect": false,
         "explanation": "Both only store strings. Functions cannot be stored. Objects must be serialized with JSON.stringify.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Hem localStorage hem sessionStorage fonksiyonlar dahil herhangi bir JavaScript türünü saklayabilir",
+        "explanationTr": "İkisi de yalnızca string saklar. Fonksiyonlar saklanamaz. Nesneler JSON.stringify ile serileştirilmelidir."
       }
     ]
   },
@@ -313,29 +313,29 @@
         "optionText": "Techniques that display content to the user as quickly as possible rather than waiting for the full page to load — includes lazy loading, above-the-fold prioritisation, and streaming HTML",
         "isCorrect": true,
         "explanation": "Progressive rendering: send critical HTML first, render visible content immediately, lazy load below-fold images (loading='lazy'), async/defer scripts, and split heavy CSS. React/Next.js support streaming server rendering for this.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "İçeriği tam sayfa yüklenmesini beklemek yerine kullanıcıya olabildiğince hızlı gösteren teknikler — lazy loading, ekranın görünür kısmını önceliklendirme ve streaming HTML içerir",
+        "explanationTr": "Progressive rendering: önce kritik HTML'i gönder, görünür içeriği hemen render et, ekran altı görselleri lazy yükle (loading='lazy'), betikleri async/defer et ve ağır CSS'i böl. React/Next.js bunun için streaming sunucu render'ı destekler."
       },
       {
         "optionText": "A CSS animation technique that gradually reveals elements as users scroll",
         "isCorrect": false,
         "explanation": "Scroll animations are separate (Intersection Observer). Progressive rendering is about loading strategy.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Kullanıcılar kaydırdıkça öğeleri kademeli olarak ortaya çıkaran bir CSS animasyon tekniği",
+        "explanationTr": "Kaydırma animasyonları ayrıdır (Intersection Observer). Progressive rendering yükleme stratejisiyle ilgilidir."
       },
       {
         "optionText": "A browser feature that automatically optimises images to progressive JPEG format",
         "isCorrect": false,
         "explanation": "Progressive JPEG is an image format. Progressive rendering is a broader strategy for incremental content delivery.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Görselleri otomatik olarak progressive JPEG formatına optimize eden bir tarayıcı özelliği",
+        "explanationTr": "Progressive JPEG bir görsel formatıdır. Progressive rendering, artımlı içerik teslimatı için daha geniş bir stratejidir."
       },
       {
         "optionText": "Progressive rendering requires Service Workers to work correctly",
         "isCorrect": false,
         "explanation": "Service Workers help with offline support and caching. Progressive rendering can be achieved without them.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Progressive rendering doğru çalışmak için Service Worker gerektirir",
+        "explanationTr": "Service Worker'lar çevrimdışı destek ve önbelleklemeye yardımcı olur. Progressive rendering onlarsız da sağlanabilir."
       }
     ]
   },
@@ -347,29 +347,29 @@
         "optionText": "An inline frame that embeds another HTML document within the current page — the embedded page has its own browsing context, separate JavaScript and CSS scope",
         "isCorrect": true,
         "explanation": "iframes create isolated browsing contexts. The parent and child pages communicate via postMessage. Used for embedding maps, payments (Stripe), social widgets, and sandboxed third-party content. The sandbox attribute restricts what the iframe can do.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Geçerli sayfa içinde başka bir HTML belgesini gömen inline bir çerçeve — gömülü sayfanın kendi tarama bağlamı, ayrı JavaScript ve CSS kapsamı vardır",
+        "explanationTr": "iframe'ler izole tarama bağlamları oluşturur. Ebeveyn ve çocuk sayfalar postMessage ile iletişir. Haritalar, ödemeler (Stripe), sosyal widget'lar ve sandbox'lanmış üçüncü taraf içeriği gömmek için kullanılır. sandbox özniteliği iframe'in ne yapabileceğini kısıtlar."
       },
       {
         "optionText": "An iframe is a React component that renders child components inside a shadow DOM",
         "isCorrect": false,
         "explanation": "iframes are native HTML elements, not React-specific. Shadow DOM is a Web Components concept.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "iframe, çocuk bileşenleri bir shadow DOM içinde render eden bir React bileşenidir",
+        "explanationTr": "iframe'ler React'e özgü değil yerel HTML öğeleridir. Shadow DOM bir Web Components kavramıdır."
       },
       {
         "optionText": "iframes share JavaScript and CSS with the parent page automatically",
         "isCorrect": false,
         "explanation": "iframes are isolated. The embedded page has its own window, document, scripts, and styles — they don't bleed into the parent.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "iframe'ler JavaScript ve CSS'i ebeveyn sayfayla otomatik olarak paylaşır",
+        "explanationTr": "iframe'ler izoledir. Gömülü sayfanın kendi window, document, betikleri ve stilleri vardır — ebeveyne sızmazlar."
       },
       {
         "optionText": "iframes can only embed content from the same domain for security reasons",
         "isCorrect": false,
         "explanation": "iframes can embed cross-origin content. The X-Frame-Options or Content-Security-Policy headers control whether a page allows itself to be embedded, not the parent.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "iframe'ler güvenlik nedeniyle yalnızca aynı domain'den içerik gömebilir",
+        "explanationTr": "iframe'ler cross-origin içerik gömebilir. X-Frame-Options veya Content-Security-Policy başlıkları, bir sayfanın gömülmeye izin verip vermediğini kontrol eder, ebeveyni değil."
       }
     ]
   },
@@ -381,29 +381,29 @@
         "optionText": "Storing custom data in HTML elements that can be read by JavaScript via dataset — a clean way to embed configuration without using classes or hidden inputs",
         "isCorrect": true,
         "explanation": "<button data-id='123' data-action='delete'>. Access via element.dataset.id and element.dataset.action. Useful for attaching data to DOM elements without extra network requests or JS variables.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "HTML öğelerinde JavaScript tarafından dataset üzerinden okunabilen özel veri saklamak — sınıf veya gizli input kullanmadan yapılandırma gömmenin temiz bir yolu",
+        "explanationTr": "<button data-id='123' data-action='delete'>. element.dataset.id ve element.dataset.action ile erişin. Ekstra ağ isteği veya JS değişkeni olmadan DOM öğelerine veri eklemek için faydalıdır."
       },
       {
         "optionText": "They are used to bind CSS styles directly in HTML — replacing the need for CSS classes",
         "isCorrect": false,
         "explanation": "data-* attributes store data, not styles. CSS can select on them ([data-state='active']), but they don't apply styles.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "CSS stillerini doğrudan HTML'de bağlamak için kullanılır — CSS sınıflarına olan ihtiyacı ortadan kaldırır",
+        "explanationTr": "data-* öznitelikleri stilleri değil veriyi saklar. CSS bunları seçebilir ([data-state='active']) ama stil uygulamazlar."
       },
       {
         "optionText": "data-* attributes automatically sync values to a database when changed",
         "isCorrect": false,
         "explanation": "There's no built-in sync. data-* attributes are static HTML attributes read by JavaScript.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "data-* öznitelikleri değiştirildiğinde değerleri otomatik olarak bir veritabanına senkronlar",
+        "explanationTr": "Yerleşik bir senkronizasyon yoktur. data-* öznitelikleri, JavaScript tarafından okunan statik HTML öznitelikleridir."
       },
       {
         "optionText": "data-* attributes are required for all HTML5 custom elements",
         "isCorrect": false,
         "explanation": "Custom elements use a different specification (Web Components). data-* attributes are available on any HTML element for custom metadata.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "data-* öznitelikleri tüm HTML5 özel öğeleri için gereklidir",
+        "explanationTr": "Özel öğeler farklı bir spesifikasyon kullanır (Web Components). data-* öznitelikleri özel metadata için herhangi bir HTML öğesinde mevcuttur."
       }
     ]
   },
@@ -415,29 +415,29 @@
         "optionText": "Accessibility ensures usability for people with disabilities; ARIA roles add semantic meaning to non-semantic elements so assistive technologies understand their purpose",
         "isCorrect": true,
         "explanation": "ARIA (Accessible Rich Internet Applications) fills gaps where native HTML semantics are absent. role='dialog', aria-label, aria-expanded, aria-live let screen readers understand custom widgets. Rule of thumb: prefer native HTML elements over ARIA when possible.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Erişilebilirlik, engelli kişiler için kullanılabilirliği sağlar; ARIA rolleri, yardımcı teknolojilerin amacını anlaması için anlamsal olmayan öğelere anlamsal anlam ekler",
+        "explanationTr": "ARIA (Accessible Rich Internet Applications), yerel HTML anlambiliminin bulunmadığı boşlukları doldurur. role='dialog', aria-label, aria-expanded, aria-live ekran okuyucuların özel widget'ları anlamasını sağlar. Genel kural: mümkün olduğunda ARIA yerine yerel HTML öğelerini tercih edin."
       },
       {
         "optionText": "ARIA roles apply CSS styles to elements for visual accessibility indicators",
         "isCorrect": false,
         "explanation": "ARIA is about semantics communicated to assistive technologies, not visual styling.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "ARIA rolleri, görsel erişilebilirlik göstergeleri için öğelere CSS stilleri uygular",
+        "explanationTr": "ARIA, görsel stillendirme değil yardımcı teknolojilere iletilen anlambilimle ilgilidir."
       },
       {
         "optionText": "Accessibility is automatically handled by browsers — developers don't need to worry about it",
         "isCorrect": false,
         "explanation": "Browsers provide some defaults but developers must write accessible markup, maintain focus management, provide alt text, ensure contrast, and use ARIA where needed.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Erişilebilirlik tarayıcılar tarafından otomatik ele alınır — geliştiricilerin endişelenmesi gerekmez",
+        "explanationTr": "Tarayıcılar bazı varsayılanlar sağlar ama geliştiriciler erişilebilir markup yazmalı, odak yönetimini sürdürmeli, alt metin sağlamalı, kontrastı garanti etmeli ve gerektiğinde ARIA kullanmalıdır."
       },
       {
         "optionText": "ARIA roles replace the need for semantic HTML elements like nav, main, and article",
         "isCorrect": false,
         "explanation": "The first rule of ARIA is 'don't use ARIA if a native HTML element exists'. Use nav instead of div role='navigation' where possible.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "ARIA rolleri nav, main ve article gibi anlamsal HTML öğelerine olan ihtiyacı ortadan kaldırır",
+        "explanationTr": "ARIA'nın ilk kuralı 'yerel bir HTML öğesi varsa ARIA kullanma'dır. Mümkün olduğunda div role='navigation' yerine nav kullanın."
       }
     ]
   },
@@ -449,29 +449,29 @@
         "optionText": "Set lang attribute on <html>, use the Content-Language header, serve different HTML per locale via URL routing (/en/, /tr/), and use hreflang for SEO",
         "isCorrect": true,
         "explanation": "<html lang='en'> tells browsers and screen readers the language. hreflang links tell search engines about alternate language versions. Content negotiation via Accept-Language header or URL routing serves the right language version.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "<html> üzerinde lang özniteliğini ayarlayın, Content-Language başlığını kullanın, URL yönlendirmesiyle (/en/, /tr/) yerel başına farklı HTML sunun ve SEO için hreflang kullanın",
+        "explanationTr": "<html lang='en'> tarayıcılara ve ekran okuyuculara dili söyler. hreflang bağlantıları arama motorlarına alternatif dil sürümlerini bildirir. Accept-Language başlığı veya URL yönlendirmesiyle içerik müzakeresi doğru dil sürümünü sunar."
       },
       {
         "optionText": "Use the translate='yes' attribute on every element that needs to be translated",
         "isCorrect": false,
         "explanation": "translate attribute hints browsers about machine translation, but doesn't serve different languages. Full i18n needs routing and content management.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Çevrilmesi gereken her öğede translate='yes' özniteliğini kullanın",
+        "explanationTr": "translate özniteliği tarayıcılara makine çevirisi hakkında ipucu verir ama farklı diller sunmaz. Tam i18n yönlendirme ve içerik yönetimi gerektirir."
       },
       {
         "optionText": "JavaScript automatically detects the user's language and translates HTML content",
         "isCorrect": false,
         "explanation": "Browsers can offer auto-translation (Google Translate integration) but this is not the correct approach for a multi-language site — provide actual translated content.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "JavaScript kullanıcının dilini otomatik algılar ve HTML içeriğini çevirir",
+        "explanationTr": "Tarayıcılar otomatik çeviri sunabilir (Google Translate entegrasyonu) ama bu çok dilli bir site için doğru yaklaşım değildir — gerçek çevrilmiş içerik sağlayın."
       },
       {
         "optionText": "Multiple languages require separate domain names — path-based routing doesn't work",
         "isCorrect": false,
         "explanation": "Both subdirectories (/en/), subdomains (en.example.com), and separate domains work for i18n. Path-based routing is widely used.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Birden çok dil ayrı domain adları gerektirir — path tabanlı yönlendirme çalışmaz",
+        "explanationTr": "i18n için hem alt dizinler (/en/), hem alt alan adları (en.example.com), hem ayrı domain'ler çalışır. Path tabanlı yönlendirme yaygın kullanılır."
       }
     ]
   },
@@ -483,29 +483,29 @@
         "optionText": "An obsolete browser API for SQL-based client-side storage — deprecated in favour of IndexedDB and never standardised by W3C",
         "isCorrect": true,
         "explanation": "WebSQL used SQLite under the hood in some browsers. The W3C stopped development after key implementors disagreed on the spec. IndexedDB is the modern standard for structured client-side storage.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "SQL tabanlı istemci taraflı depolama için eskimiş bir tarayıcı API'si — IndexedDB lehine kullanımdan kaldırıldı ve W3C tarafından hiç standartlaştırılmadı",
+        "explanationTr": "WebSQL bazı tarayıcılarda arka planda SQLite kullanıyordu. Kilit uygulayıcılar spesifikasyon konusunda anlaşamayınca W3C geliştirmeyi durdurdu. Yapılandırılmış istemci taraflı depolama için modern standart IndexedDB'dir."
       },
       {
         "optionText": "A JavaScript library for querying REST APIs using SQL-like syntax",
         "isCorrect": false,
         "explanation": "WebSQL was a native browser API, not a third-party library.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "SQL benzeri sözdizimi kullanarak REST API'leri sorgulamaya yönelik bir JavaScript kütüphanesi",
+        "explanationTr": "WebSQL bir üçüncü taraf kütüphanesi değil yerel bir tarayıcı API'siydi."
       },
       {
         "optionText": "A server-side SQL extension for WebSockets, used for real-time database queries",
         "isCorrect": false,
         "explanation": "WebSQL has nothing to do with WebSockets. It was a client-side browser storage API.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "WebSocket'ler için, gerçek zamanlı veritabanı sorguları için kullanılan sunucu taraflı bir SQL uzantısı",
+        "explanationTr": "WebSQL'in WebSocket'lerle ilgisi yoktur. İstemci taraflı bir tarayıcı depolama API'siydi."
       },
       {
         "optionText": "WebSQL is the current W3C standard for browser-based database storage",
         "isCorrect": false,
         "explanation": "WebSQL was abandoned. The W3C standard for structured browser storage is IndexedDB.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "WebSQL, tarayıcı tabanlı veritabanı depolaması için geçerli W3C standardıdır",
+        "explanationTr": "WebSQL terk edildi. Yapılandırılmış tarayıcı depolaması için W3C standardı IndexedDB'dir."
       }
     ]
   },
@@ -517,29 +517,29 @@
         "optionText": "JavaScript scripts running in background threads — they can't access the DOM but enable CPU-intensive tasks (image processing, encryption) without blocking the main thread",
         "isCorrect": true,
         "explanation": "const worker = new Worker('worker.js'). Communication is via postMessage. Web Workers have no access to the DOM, window, or document. Shared Workers can be accessed by multiple tabs. Use for heavy computation that would freeze the UI.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Arka plan thread'lerinde çalışan JavaScript betikleri — DOM'a erişemezler ama CPU-yoğun görevleri (görsel işleme, şifreleme) ana thread'i bloklamadan mümkün kılar",
+        "explanationTr": "const worker = new Worker('worker.js'). İletişim postMessage iledir. Web Workers'ın DOM, window veya document'a erişimi yoktur. Shared Worker'lara birden çok sekme erişebilir. UI'ı donduracak ağır hesaplamalar için kullanın."
       },
       {
         "optionText": "Server-side worker processes that handle HTTP requests in Node.js",
         "isCorrect": false,
         "explanation": "Web Workers are browser-side. Node.js has worker_threads for server-side parallelism.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Node.js'te HTTP isteklerini işleyen sunucu taraflı işçi süreçleri",
+        "explanationTr": "Web Workers tarayıcı taraflıdır. Node.js'in sunucu taraflı paralellik için worker_threads'i vardır."
       },
       {
         "optionText": "Web Workers are JavaScript functions that execute on a schedule like cron jobs",
         "isCorrect": false,
         "explanation": "Scheduled background tasks are handled by Service Workers with background sync, not Web Workers.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Web Workers, cron işleri gibi bir zamanlamaya göre çalışan JavaScript fonksiyonlarıdır",
+        "explanationTr": "Zamanlanmış arka plan görevleri Web Workers ile değil background sync'li Service Worker'larla ele alınır."
       },
       {
         "optionText": "Web Workers are the same as Service Workers — both intercept network requests",
         "isCorrect": false,
         "explanation": "They're different. Web Workers are for CPU-intensive computation. Service Workers intercept network requests and manage caching.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Web Workers, Service Worker'larla aynıdır — ikisi de ağ isteklerini yakalar",
+        "explanationTr": "Farklıdırlar. Web Workers CPU-yoğun hesaplama içindir. Service Worker'lar ağ isteklerini yakalar ve önbelleği yönetir."
       }
     ]
   },
@@ -551,29 +551,29 @@
         "optionText": "Marks the dominant, unique content of the page — there should be only one <main> per page, and it's a landmark region for screen reader navigation",
         "isCorrect": true,
         "explanation": "<main> identifies the primary content, excluding headers, footers, sidebars, and navigation. Screen reader users can jump directly to <main> to skip repetitive navigation. Only one visible <main> should exist per page.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Sayfanın baskın, benzersiz içeriğini işaretler — sayfa başına yalnızca bir <main> olmalı ve ekran okuyucu gezinmesi için bir landmark bölgesidir",
+        "explanationTr": "<main>, header'lar, footer'lar, kenar çubukları ve gezinme hariç birincil içeriği tanımlar. Ekran okuyucu kullanıcıları tekrarlayan gezinmeyi atlamak için doğrudan <main>'e atlayabilir. Sayfa başına yalnızca bir görünür <main> olmalıdır."
       },
       {
         "optionText": "<main> is the required wrapper for all page content — removing it breaks layout",
         "isCorrect": false,
         "explanation": "<main> is semantic and optional. Pages render fine without it, but you lose the accessibility landmark.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "<main>, tüm sayfa içeriği için zorunlu sarmalayıcıdır — kaldırmak düzeni bozar",
+        "explanationTr": "<main> anlamsaldır ve isteğe bağlıdır. Sayfalar onsuz sorunsuz render edilir ama erişilebilirlik landmark'ını kaybedersiniz."
       },
       {
         "optionText": "<main> applies a fixed-width container style automatically",
         "isCorrect": false,
         "explanation": "<main> is a semantic element with no default layout constraints. Styling is your responsibility.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "<main> otomatik olarak sabit genişlikli bir kapsayıcı stili uygular",
+        "explanationTr": "<main> varsayılan düzen kısıtı olmayan anlamsal bir öğedir. Stillendirme sizin sorumluluğunuzdadır."
       },
       {
         "optionText": "<main> is equivalent to <body> — they can be used interchangeably",
         "isCorrect": false,
         "explanation": "<body> is the root of all visible content. <main> is a semantic landmark within body that marks the primary content area.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "<main>, <body> ile eşdeğerdir — birbirinin yerine kullanılabilirler",
+        "explanationTr": "<body> tüm görünür içeriğin köküdür. <main>, body içinde birincil içerik alanını işaretleyen anlamsal bir landmark'tır."
       }
     ]
   },
@@ -585,29 +585,29 @@
         "optionText": "A low-level browser API for storing large amounts of structured data client-side with indexes for fast retrieval — asynchronous and supports transactions",
         "isCorrect": true,
         "explanation": "IndexedDB can store JSON objects (not just strings like localStorage), files, and blobs. It's transaction-based, async, and can hold hundreds of MB. Wrapped by libraries like Dexie.js for a friendlier API. Used in PWAs for offline data.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Büyük miktarda yapılandırılmış veriyi hızlı erişim için indekslerle istemci tarafında saklayan düşük seviyeli bir tarayıcı API'si — asenkron ve transaction destekler",
+        "explanationTr": "IndexedDB JSON nesneleri (localStorage gibi yalnızca string değil), dosyalar ve blob'lar saklayabilir. Transaction tabanlı, asenkrondur ve yüzlerce MB tutabilir. Daha dostça bir API için Dexie.js gibi kütüphanelerle sarılır. PWA'larda çevrimdışı veri için kullanılır."
       },
       {
         "optionText": "A cached version of the server database that automatically syncs on reconnection",
         "isCorrect": false,
         "explanation": "IndexedDB doesn't auto-sync. You build sync logic manually or with libraries like PouchDB.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Yeniden bağlanmada otomatik senkronlanan sunucu veritabanının önbelleğe alınmış bir sürümü",
+        "explanationTr": "IndexedDB otomatik senkronlanmaz. Senkron mantığını manuel veya PouchDB gibi kütüphanelerle kurarsınız."
       },
       {
         "optionText": "IndexedDB is the same as localStorage but with a higher storage limit",
         "isCorrect": false,
         "explanation": "They're fundamentally different: IndexedDB is asynchronous, stores any JS value, supports indexes and transactions. localStorage is synchronous and only stores strings.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "IndexedDB, localStorage ile aynıdır ama daha yüksek depolama sınırına sahiptir",
+        "explanationTr": "Temelden farklıdırlar: IndexedDB asenkrondur, herhangi bir JS değeri saklar, indeksleri ve transaction'ları destekler. localStorage senkrondur ve yalnızca string saklar."
       },
       {
         "optionText": "IndexedDB is only available in Chrome — other browsers use SQLite",
         "isCorrect": false,
         "explanation": "IndexedDB is supported in all modern browsers. WebSQL (which used SQLite) is deprecated and was never universally supported.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "IndexedDB yalnızca Chrome'da mevcuttur — diğer tarayıcılar SQLite kullanır",
+        "explanationTr": "IndexedDB tüm modern tarayıcılarda desteklenir. WebSQL (SQLite kullanan) kullanımdan kaldırıldı ve hiç evrensel desteklenmedi."
       }
     ]
   },
@@ -619,29 +619,29 @@
         "optionText": "srcset provides multiple image resolutions; the browser selects the best one based on the device's screen density (DPR) and viewport size — avoiding unnecessarily large images on small screens",
         "isCorrect": true,
         "explanation": "<img srcset='small.jpg 480w, large.jpg 1080w' sizes='(max-width: 600px) 480px, 1080px'>. Browser calculates: viewport width × DPR ÷ sizes hint → picks the smallest src that covers that resolution. Saves bandwidth on mobile.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "srcset birden çok görsel çözünürlüğü sağlar; tarayıcı cihazın ekran yoğunluğuna (DPR) ve viewport boyutuna göre en iyisini seçer — küçük ekranlarda gereksiz büyük görselleri önler",
+        "explanationTr": "<img srcset='small.jpg 480w, large.jpg 1080w' sizes='(max-width: 600px) 480px, 1080px'>. Tarayıcı hesaplar: viewport genişliği × DPR ÷ sizes ipucu → o çözünürlüğü karşılayan en küçük src'yi seçer. Mobilde bant genişliği tasarrufu sağlar."
       },
       {
         "optionText": "srcset loads all listed images in parallel to reduce latency",
         "isCorrect": false,
         "explanation": "The browser picks one appropriate image and downloads only that one. It doesn't download all options.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "srcset, gecikmeyi azaltmak için listelenen tüm görselleri paralel yükler",
+        "explanationTr": "Tarayıcı uygun bir görsel seçer ve yalnızca onu indirir. Tüm seçenekleri indirmez."
       },
       {
         "optionText": "srcset is used to define fallback images if the primary src fails to load",
         "isCorrect": false,
         "explanation": "Error fallback is handled differently (onerror handler). srcset is for responsive images based on screen size.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "srcset, birincil src yüklenemezse yedek görselleri tanımlamak için kullanılır",
+        "explanationTr": "Hata yedeği farklı ele alınır (onerror handler). srcset, ekran boyutuna dayalı duyarlı görseller içindir."
       },
       {
         "optionText": "srcset requires JavaScript to work — without JS, only the src image loads",
         "isCorrect": false,
         "explanation": "srcset is processed by the browser natively without JavaScript. The parser evaluates it during resource loading.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "srcset çalışmak için JavaScript gerektirir — JS olmadan yalnızca src görseli yüklenir",
+        "explanationTr": "srcset tarayıcı tarafından JavaScript olmadan yerel işlenir. Ayrıştırıcı kaynak yükleme sırasında onu değerlendirir."
       }
     ]
   },
@@ -653,29 +653,29 @@
         "optionText": "A set of native browser APIs — Custom Elements, Shadow DOM, and HTML Templates — that let you create reusable, encapsulated HTML elements without any framework",
         "isCorrect": true,
         "explanation": "Custom Elements define new HTML tags. Shadow DOM provides style encapsulation (styles inside don't leak out). HTML Templates (<template>) hold inert markup. Together they create framework-agnostic components usable in React, Vue, or plain HTML.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Herhangi bir framework olmadan yeniden kullanılabilir, kapsüllenmiş HTML öğeleri oluşturmanı sağlayan bir dizi yerel tarayıcı API'si — Custom Elements, Shadow DOM ve HTML Templates",
+        "explanationTr": "Custom Elements yeni HTML etiketleri tanımlar. Shadow DOM stil kapsülleme sağlar (içerideki stiller dışarı sızmaz). HTML Templates (<template>) hareketsiz markup tutar. Birlikte React, Vue veya düz HTML'de kullanılabilen framework'ten bağımsız bileşenler oluştururlar."
       },
       {
         "optionText": "Web Components is a JavaScript framework similar to React and Vue",
         "isCorrect": false,
         "explanation": "Web Components are native browser standards, not a framework. They can be used with or without frameworks.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Web Components, React ve Vue'ya benzer bir JavaScript framework'üdür",
+        "explanationTr": "Web Components bir framework değil yerel tarayıcı standartlarıdır. Framework'lerle veya onlarsız kullanılabilirler."
       },
       {
         "optionText": "Web Components require TypeScript to function correctly",
         "isCorrect": false,
         "explanation": "Web Components are standard JavaScript APIs — no TypeScript required.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Web Components doğru çalışmak için TypeScript gerektirir",
+        "explanationTr": "Web Components standart JavaScript API'leridir — TypeScript gerekmez."
       },
       {
         "optionText": "Web Components are React components that are optimised for the web",
         "isCorrect": false,
         "explanation": "Web Components are framework-agnostic browser standards. React has its own component model that's distinct from Web Components.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Web Components, web için optimize edilmiş React bileşenleridir",
+        "explanationTr": "Web Components framework'ten bağımsız tarayıcı standartlarıdır. React'in, Web Components'ten farklı kendi bileşen modeli vardır."
       }
     ]
   },
@@ -687,29 +687,29 @@
         "optionText": "A mapping that converts characters to bytes — UTF-8 is the standard for the web, declared with <meta charset='UTF-8'>.",
         "isCorrect": true,
         "explanation": "Correct — without a charset declaration, browsers may guess wrong and display garbled text. UTF-8 covers all Unicode characters including emoji.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Karakterleri byte'lara dönüştüren bir eşleme — UTF-8 web için standarttır, <meta charset='UTF-8'> ile bildirilir.",
+        "explanationTr": "Doğru — bir charset bildirimi olmadan tarayıcılar yanlış tahmin edip bozuk metin gösterebilir. UTF-8 emoji dahil tüm Unicode karakterlerini kapsar."
       },
       {
         "optionText": "A security technique that encrypts page content before sending it to the browser.",
         "isCorrect": false,
         "explanation": "Encryption is handled by HTTPS/TLS. Character encoding maps characters to byte sequences — it's about text representation, not security.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Sayfa içeriğini tarayıcıya göndermeden önce şifreleyen bir güvenlik tekniği.",
+        "explanationTr": "Şifreleme HTTPS/TLS ile ele alınır. Karakter kodlaması karakterleri byte dizilerine eşler — güvenlikle değil metin temsiliyle ilgilidir."
       },
       {
         "optionText": "A compression algorithm that reduces HTML file size for faster transfer.",
         "isCorrect": false,
         "explanation": "Compression uses gzip/Brotli at the HTTP level. Character encoding is the byte-to-character mapping scheme (UTF-8, ASCII, etc.).",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Daha hızlı aktarım için HTML dosya boyutunu azaltan bir sıkıştırma algoritması.",
+        "explanationTr": "Sıkıştırma HTTP seviyesinde gzip/Brotli kullanır. Karakter kodlaması byte-karakter eşleme şemasıdır (UTF-8, ASCII vb.)."
       },
       {
         "optionText": "The process of converting HTML special characters like < and > to &lt; and &gt;.",
         "isCorrect": false,
         "explanation": "That's HTML entity encoding (escaping). Character encoding is the lower-level byte-to-character mapping, e.g. UTF-8.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "< ve > gibi HTML özel karakterlerini &lt; ve &gt;'e dönüştürme süreci.",
+        "explanationTr": "Bu, HTML entity kodlamasıdır (escaping). Karakter kodlaması daha düşük seviyeli byte-karakter eşlemesidir, örn. UTF-8."
       }
     ]
   },
@@ -721,29 +721,29 @@
         "optionText": "A void element with no closing tag — e.g. <img>, <input>, <br>, <hr>, <meta>, <link>.",
         "isCorrect": true,
         "explanation": "Correct — void elements cannot have child content. In HTML5 the slash is optional: <br> and <br/> are both valid. In JSX and XHTML, the slash is required.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Kapanış etiketi olmayan bir void öğe — örn. <img>, <input>, <br>, <hr>, <meta>, <link>.",
+        "explanationTr": "Doğru — void öğeler çocuk içeriğe sahip olamaz. HTML5'te eğik çizgi isteğe bağlıdır: <br> ve <br/> ikisi de geçerlidir. JSX ve XHTML'de eğik çizgi zorunludur."
       },
       {
         "optionText": "Any HTML tag that automatically closes when another tag opens — e.g. <p> closes before <div>.",
         "isCorrect": false,
         "explanation": "Optional tag omission (like <p> auto-closing) is a separate concept. Self-closing tags are void elements that can never have children.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Başka bir etiket açıldığında otomatik kapanan herhangi bir HTML etiketi — örn. <p>, <div>'den önce kapanır.",
+        "explanationTr": "İsteğe bağlı etiket atlama (<p>'nin otomatik kapanması gibi) ayrı bir kavramdır. Self-closing etiketler asla çocuğa sahip olamayan void öğelerdir."
       },
       {
         "optionText": "A custom web component that manages its own shadow DOM lifecycle.",
         "isCorrect": false,
         "explanation": "Web Components have their own lifecycle callbacks. Self-closing tags are standard HTML void elements like <img> and <input>.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Kendi shadow DOM yaşam döngüsünü yöneten özel bir web bileşeni.",
+        "explanationTr": "Web Components'in kendi yaşam döngüsü geri çağrıları vardır. Self-closing etiketler <img> ve <input> gibi standart HTML void öğeleridir."
       },
       {
         "optionText": "Tags that close themselves when the page loads via JavaScript.",
         "isCorrect": false,
         "explanation": "Self-closing is a markup concept — void elements have no closing tag in the HTML spec. JavaScript isn't involved.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Sayfa yüklendiğinde JavaScript ile kendini kapatan etiketler.",
+        "explanationTr": "Self-closing bir markup kavramıdır — void öğelerin HTML spesifikasyonunda kapanış etiketi yoktur. JavaScript devreye girmez."
       }
     ]
   },
@@ -755,29 +755,29 @@
         "optionText": "Use the <mark> element — it semantically marks text as highlighted, with a yellow background by default.",
         "isCorrect": true,
         "explanation": "Correct — <mark> is the semantic choice for highlighted/searched text. Use CSS to customise the colour. <span> with styling works but lacks semantic meaning.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "<mark> öğesini kullanın — metni anlamsal olarak vurgulanmış olarak işaretler, varsayılan olarak sarı arka planla.",
+        "explanationTr": "Doğru — <mark>, vurgulanmış/aranan metin için anlamsal seçimdir. Rengi özelleştirmek için CSS kullanın. Stilli <span> çalışır ama anlamsal anlamı yoktur."
       },
       {
         "optionText": "Use <highlight> — it's a semantic HTML5 element for marked text.",
         "isCorrect": false,
         "explanation": "There is no <highlight> element in HTML. Use <mark> for semantic highlighting.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "<highlight> kullanın — işaretli metin için anlamsal bir HTML5 öğesidir.",
+        "explanationTr": "HTML'de <highlight> öğesi yoktur. Anlamsal vurgulama için <mark> kullanın."
       },
       {
         "optionText": "Use <em> — it highlights text with yellow background by default.",
         "isCorrect": false,
         "explanation": "<em> indicates emphasis (italic by default), not highlight. Use <mark> for highlighted text.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "<em> kullanın — metni varsayılan olarak sarı arka planla vurgular.",
+        "explanationTr": "<em> vurgu belirtir (varsayılan italik), highlight değil. Vurgulanmış metin için <mark> kullanın."
       },
       {
         "optionText": "Use <b> with a yellow background inline style — <b style='background:yellow'>.",
         "isCorrect": false,
         "explanation": "<b> indicates keywords/bold without semantic meaning. <mark> is the correct semantic element for highlighted text.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "<b>'yi sarı arka plan inline stiliyle kullanın — <b style='background:yellow'>.",
+        "explanationTr": "<b> anlamsal anlam olmadan anahtar kelime/kalın belirtir. <mark>, vurgulanmış metin için doğru anlamsal öğedir."
       }
     ]
   },
@@ -789,29 +789,29 @@
         "optionText": "A tree-like in-memory representation of an HTML document that JavaScript uses to read and manipulate the page.",
         "isCorrect": true,
         "explanation": "Correct — the DOM (Document Object Model) is a programming interface. JavaScript traverses it via document.querySelector(), and React/Vue update it via virtual DOM diffing.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Bir HTML belgesinin, JavaScript'in sayfayı okumak ve değiştirmek için kullandığı, ağaç benzeri bellek-içi temsili.",
+        "explanationTr": "Doğru — DOM (Document Object Model) bir programlama arayüzüdür. JavaScript onu document.querySelector() ile dolaşır ve React/Vue onu virtual DOM diff'lemeyle günceller."
       },
       {
         "optionText": "The CSS Object Model — the browser's representation of stylesheets.",
         "isCorrect": false,
         "explanation": "That's the CSSOM (CSS Object Model). The DOM represents the HTML element tree. Both combine to form the render tree.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "CSS Object Model — tarayıcının stil sayfalarının temsili.",
+        "explanationTr": "Bu, CSSOM'dur (CSS Object Model). DOM, HTML öğe ağacını temsil eder. İkisi birleşerek render ağacını oluşturur."
       },
       {
         "optionText": "A JavaScript design pattern for managing state in web applications.",
         "isCorrect": false,
         "explanation": "DOM is a browser API, not a design pattern. State management patterns include MVC, Flux, and Redux.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Web uygulamalarında durum yönetimi için bir JavaScript tasarım deseni.",
+        "explanationTr": "DOM bir tarayıcı API'sidir, bir tasarım deseni değil. Durum yönetimi desenleri MVC, Flux ve Redux'u içerir."
       },
       {
         "optionText": "The compiled output of an HTML file stored in browser cache for fast re-rendering.",
         "isCorrect": false,
         "explanation": "Browser cache stores HTTP responses. The DOM is a live in-memory tree created from parsed HTML on every page load.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Hızlı yeniden render için tarayıcı önbelleğinde saklanan bir HTML dosyasının derlenmiş çıktısı.",
+        "explanationTr": "Tarayıcı önbelleği HTTP yanıtlarını saklar. DOM, her sayfa yüklemesinde ayrıştırılan HTML'den oluşturulan canlı bir bellek-içi ağaçtır."
       }
     ]
   },
@@ -823,29 +823,29 @@
         "optionText": "Block elements start on a new line and take full width (<div>, <p>, <h1>); inline elements flow within text (<span>, <a>, <strong>).",
         "isCorrect": true,
         "explanation": "Correct — block elements create vertical stacking; inline elements sit within the text flow. CSS display: inline / block overrides the default behaviour.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Blok öğeler yeni bir satırda başlar ve tam genişlik kaplar (<div>, <p>, <h1>); inline öğeler metin içinde akar (<span>, <a>, <strong>).",
+        "explanationTr": "Doğru — blok öğeler dikey yığılma oluşturur; inline öğeler metin akışı içinde oturur. CSS display: inline / block varsayılan davranışı geçersiz kılar."
       },
       {
         "optionText": "Block elements are for layout; inline elements are only for text styling.",
         "isCorrect": false,
         "explanation": "Inline elements can do more than text styling (e.g. <a> links, <img> images). The distinction is about flow behaviour, not purpose.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Blok öğeler düzen içindir; inline öğeler yalnızca metin stillendirme içindir.",
+        "explanationTr": "Inline öğeler metin stillendirmeden fazlasını yapabilir (örn. <a> bağlantıları, <img> görselleri). Ayrım amaçla değil akış davranışıyla ilgilidir."
       },
       {
         "optionText": "Block elements load after inline elements — they are deferred for performance.",
         "isCorrect": false,
         "explanation": "Load order has nothing to do with block vs inline. The distinction is purely about CSS layout flow.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Blok öğeler inline öğelerden sonra yüklenir — performans için ertelenirler.",
+        "explanationTr": "Yükleme sırasının blok vs inline ile ilgisi yoktur. Ayrım tamamen CSS düzen akışıyla ilgilidir."
       },
       {
         "optionText": "Inline elements cannot have CSS applied to them — they inherit parent styles only.",
         "isCorrect": false,
         "explanation": "Inline elements accept most CSS including color, font, padding (horizontal), border. Block-level properties like width/height don't apply to inline elements by default.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Inline öğelere CSS uygulanamaz — yalnızca ebeveyn stillerini miras alırlar.",
+        "explanationTr": "Inline öğeler color, font, padding (yatay), border dahil çoğu CSS'i kabul eder. width/height gibi blok seviyesi özellikler varsayılan olarak inline öğelere uygulanmaz."
       }
     ]
   },
@@ -857,29 +857,29 @@
         "optionText": "<strong> conveys semantic importance (screen readers stress it); <b> is purely visual bold with no semantic meaning.",
         "isCorrect": true,
         "explanation": "Correct — prefer <strong> for important text. Screen readers may emphasise it. <b> is for stylistically bold text (keywords, product names) without added importance.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "<strong> anlamsal önem iletir (ekran okuyucular vurgular); <b> anlamsal anlamı olmayan tamamen görsel kalındır.",
+        "explanationTr": "Doğru — önemli metin için <strong>'u tercih edin. Ekran okuyucular onu vurgulayabilir. <b>, eklenmiş önem olmadan stilistik kalın metin (anahtar kelimeler, ürün adları) içindir."
       },
       {
         "optionText": "<b> is the HTML5 tag; <strong> is deprecated.",
         "isCorrect": false,
         "explanation": "Both are valid in HTML5. <strong> is the semantically meaningful choice; <b> is preserved for bold without semantic importance.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "<b> HTML5 etiketidir; <strong> kullanımdan kaldırılmıştır.",
+        "explanationTr": "İkisi de HTML5'te geçerlidir. <strong> anlamsal olarak anlamlı seçimdir; <b> anlamsal önem olmadan kalın için korunur."
       },
       {
         "optionText": "They are completely identical — just two names for the same element.",
         "isCorrect": false,
         "explanation": "They render the same by default but have different semantics. <strong> signals importance to assistive technologies; <b> does not.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Tamamen aynıdırlar — yalnızca aynı öğenin iki adıdır.",
+        "explanationTr": "Varsayılan olarak aynı render edilirler ama farklı anlambilime sahiptirler. <strong> yardımcı teknolojilere önem sinyali verir; <b> vermez."
       },
       {
         "optionText": "<strong> applies bold styling; <b> also makes the text larger.",
         "isCorrect": false,
         "explanation": "Neither element changes font size by default. Both render bold text. The difference is semantic: <strong> conveys importance, <b> does not.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "<strong> kalın stil uygular; <b> ayrıca metni büyütür.",
+        "explanationTr": "Hiçbir öğe varsayılan olarak font boyutunu değiştirmez. İkisi de kalın metin render eder. Fark anlamsaldır: <strong> önem iletir, <b> iletmez."
       }
     ]
   },
@@ -891,29 +891,29 @@
         "optionText": "<meta> elements in <head> provide machine-readable metadata: charset, viewport, description, Open Graph, and cache-control.",
         "isCorrect": true,
         "explanation": "Correct — key meta tags: charset (encoding), viewport (mobile scaling), description (SEO snippet), og:title/image (social sharing), robots (indexing).",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "<head> içindeki <meta> öğeleri makine tarafından okunabilir metadata sağlar: charset, viewport, description, Open Graph ve cache-control.",
+        "explanationTr": "Doğru — kilit meta etiketleri: charset (kodlama), viewport (mobil ölçekleme), description (SEO snippet), og:title/image (sosyal paylaşım), robots (dizinleme)."
       },
       {
         "optionText": "Meta tags are HTML comments — they're invisible to the browser and only for developers.",
         "isCorrect": false,
         "explanation": "Meta tags are parsed by browsers, crawlers, and social media scrapers. They control encoding, SEO, social previews, and viewport behaviour.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Meta etiketleri HTML yorumlarıdır — tarayıcıya görünmezler ve yalnızca geliştiriciler içindir.",
+        "explanationTr": "Meta etiketleri tarayıcılar, crawler'lar ve sosyal medya scraper'ları tarafından ayrıştırılır. Kodlamayı, SEO'yu, sosyal önizlemeleri ve viewport davranışını kontrol ederler."
       },
       {
         "optionText": "Meta tags define the CSS styles that apply globally across the page.",
         "isCorrect": false,
         "explanation": "Global styles go in <style> or linked <link> stylesheets. Meta tags provide document-level metadata, not styling.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Meta etiketleri sayfa genelinde geçerli CSS stillerini tanımlar.",
+        "explanationTr": "Global stiller <style> veya bağlı <link> stil sayfalarına gider. Meta etiketleri stillendirme değil belge seviyesi metadata sağlar."
       },
       {
         "optionText": "Meta tags are only used for SEO — other uses are non-standard.",
         "isCorrect": false,
         "explanation": "Meta tags serve many purposes: charset declaration, viewport settings, social sharing (Open Graph), Twitter cards, and HTTP cache hints.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Meta etiketleri yalnızca SEO için kullanılır — diğer kullanımlar standart değildir.",
+        "explanationTr": "Meta etiketleri birçok amaca hizmet eder: charset bildirimi, viewport ayarları, sosyal paylaşım (Open Graph), Twitter kartları ve HTTP önbellek ipuçları."
       }
     ]
   },
@@ -925,29 +925,29 @@
         "optionText": "Eliminate plugin dependency (Flash/Silverlight), standardise native audio/video/canvas, improve form inputs, and add semantic elements.",
         "isCorrect": true,
         "explanation": "Correct — HTML5 also introduced localStorage, WebWorkers, WebSockets, and the History API to support rich web apps without plugins.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Eklenti bağımlılığını (Flash/Silverlight) ortadan kaldırmak, yerel audio/video/canvas'ı standartlaştırmak, form girdilerini iyileştirmek ve anlamsal öğeler eklemek.",
+        "explanationTr": "Doğru — HTML5 ayrıca eklentisiz zengin web uygulamalarını desteklemek için localStorage, WebWorkers, WebSockets ve History API'sini tanıttı."
       },
       {
         "optionText": "Replace CSS and JavaScript with a unified declarative language.",
         "isCorrect": false,
         "explanation": "HTML5 kept the separation of HTML, CSS, and JS. Its goal was to enhance HTML with native capabilities, not replace the other web technologies.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "CSS ve JavaScript'i birleşik bir bildirimsel dille değiştirmek.",
+        "explanationTr": "HTML5, HTML, CSS ve JS ayrımını korudu. Amacı diğer web teknolojilerini değiştirmek değil HTML'i yerel yeteneklerle geliştirmekti."
       },
       {
         "optionText": "Improve server-side rendering performance for PHP applications.",
         "isCorrect": false,
         "explanation": "HTML5 is a client-side specification. Server-side rendering is a separate concern handled by frameworks like Next.js or PHP templating.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "PHP uygulamaları için sunucu taraflı render performansını iyileştirmek.",
+        "explanationTr": "HTML5 bir istemci taraflı spesifikasyondur. Sunucu taraflı render, Next.js gibi framework'ler veya PHP şablonlamasıyla ele alınan ayrı bir kaygıdır."
       },
       {
         "optionText": "Create a strict XML-based successor to HTML4 that all browsers must follow.",
         "isCorrect": false,
         "explanation": "That describes XHTML, which was abandoned. HTML5 was intentionally backward-compatible and error-tolerant, unlike strict XML.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Tüm tarayıcıların uymak zorunda olduğu, HTML4'ün katı XML tabanlı bir ardılını oluşturmak.",
+        "explanationTr": "Bu, terk edilen XHTML'i tanımlar. HTML5, katı XML'in aksine kasıtlı olarak geriye dönük uyumlu ve hata-toleranslıydı."
       }
     ]
   },
@@ -959,29 +959,29 @@
         "optionText": "Attributes are in HTML markup (always strings); properties are on the live DOM object (typed values that can differ from the attribute).",
         "isCorrect": true,
         "explanation": "Correct — e.g. input.getAttribute('value') returns the initial HTML string; input.value returns the current value. They diverge after user interaction.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Öznitelikler HTML markup'tadır (her zaman string); özellikler canlı DOM nesnesindedir (öznitelikten farklı olabilen tipli değerler).",
+        "explanationTr": "Doğru — örn. input.getAttribute('value') başlangıç HTML string'ini döndürür; input.value geçerli değeri döndürür. Kullanıcı etkileşiminden sonra ayrışırlar."
       },
       {
         "optionText": "Attributes are for styling; properties are for behaviour.",
         "isCorrect": false,
         "explanation": "Both can affect styling and behaviour. The distinction is: attributes are in HTML source (strings), properties are on the DOM object (typed, live values).",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Öznitelikler stillendirme içindir; özellikler davranış içindir.",
+        "explanationTr": "İkisi de stillendirmeyi ve davranışı etkileyebilir. Ayrım şudur: öznitelikler HTML kaynağındadır (string), özellikler DOM nesnesindedir (tipli, canlı değerler)."
       },
       {
         "optionText": "They are synonyms — 'attribute' is the HTML term and 'property' is the JavaScript term for the same thing.",
         "isCorrect": false,
         "explanation": "They start the same but can diverge. input value attribute = initial default; input.value property = current typed value. They're not synonyms.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Eş anlamlıdırlar — 'attribute' HTML terimi, 'property' aynı şeyin JavaScript terimidir.",
+        "explanationTr": "Aynı başlarlar ama ayrışabilirler. input value özniteliği = başlangıç varsayılanı; input.value özelliği = geçerli yazılan değer. Eş anlamlı değildirler."
       },
       {
         "optionText": "Properties are read-only; attributes can be changed by JavaScript.",
         "isCorrect": false,
         "explanation": "Both can be read and changed via JavaScript. getAttribute/setAttribute modifies attributes; dot notation modifies properties. They may affect each other or not.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Özellikler salt-okunurdur; öznitelikler JavaScript ile değiştirilebilir.",
+        "explanationTr": "İkisi de JavaScript ile okunup değiştirilebilir. getAttribute/setAttribute öznitelikleri, nokta notasyonu özellikleri değiştirir. Birbirlerini etkileyebilir ya da etkilemeyebilirler."
       }
     ]
   },
@@ -993,29 +993,29 @@
         "optionText": "On <a target='_blank'> links — prevents the new tab from accessing window.opener and potentially redirecting the original page.",
         "isCorrect": true,
         "explanation": "Correct — without noopener, the new tab can call window.opener.location = 'phishing-site'. Modern browsers default to noopener but explicit is still best practice.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "<a target='_blank'> bağlantılarında — yeni sekmenin window.opener'a erişip orijinal sayfayı yönlendirmesini önler.",
+        "explanationTr": "Doğru — noopener olmadan yeni sekme window.opener.location = 'phishing-site' çağırabilir. Modern tarayıcılar varsayılan olarak noopener kullanır ama açık belirtmek hâlâ en iyi uygulamadır."
       },
       {
         "optionText": "On <link> elements to tell browsers not to preload the stylesheet.",
         "isCorrect": false,
         "explanation": "noopener applies to <a> tags opening new windows/tabs. Stylesheet loading is controlled by rel='preload' or media attributes.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Tarayıcılara stil sayfasını ön-yüklememelerini söylemek için <link> öğelerinde.",
+        "explanationTr": "noopener, yeni pencere/sekme açan <a> etiketlerine uygulanır. Stil sayfası yüklemesi rel='preload' veya media öznitelikleriyle kontrol edilir."
       },
       {
         "optionText": "On <form> elements to prevent CSRF attacks by blocking cross-origin submissions.",
         "isCorrect": false,
         "explanation": "CSRF protection uses CSRF tokens or SameSite cookies, not rel attributes. noopener is for anchor tags opening new tabs.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Cross-origin gönderimleri bloklayarak CSRF saldırılarını önlemek için <form> öğelerinde.",
+        "explanationTr": "CSRF koruması rel öznitelikleri değil CSRF token'ları veya SameSite cookie'leri kullanır. noopener, yeni sekme açan anchor etiketleri içindir."
       },
       {
         "optionText": "On <script> tags to prevent the script from accessing parent window variables.",
         "isCorrect": false,
         "explanation": "Script isolation uses iframes with sandboxing or Content Security Policy. noopener is for <a target='_blank'> to prevent opener access.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Betiğin ebeveyn pencere değişkenlerine erişmesini önlemek için <script> etiketlerinde.",
+        "explanationTr": "Betik izolasyonu, sandbox'lı iframe'ler veya Content Security Policy kullanır. noopener, opener erişimini önlemek için <a target='_blank'> içindir."
       }
     ]
   },
@@ -1027,29 +1027,29 @@
         "optionText": "<header>: introductory content for its parent; <article>: self-contained content; <section>: thematic grouping; <footer>: closing info for its parent.",
         "isCorrect": true,
         "explanation": "Correct — these can appear multiple times per page. An <article> can have its own <header> and <footer>. Semantic elements help screen readers and SEO crawlers understand page structure.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "<header>: ebeveyni için tanıtıcı içerik; <article>: kendine yeten içerik; <section>: tematik gruplama; <footer>: ebeveyni için kapanış bilgisi.",
+        "explanationTr": "Doğru — bunlar sayfa başına birden çok kez görünebilir. Bir <article>'in kendi <header> ve <footer>'ı olabilir. Anlamsal öğeler ekran okuyucuların ve SEO crawler'larının sayfa yapısını anlamasına yardımcı olur."
       },
       {
         "optionText": "Each can only appear once per page — <header> at top, <footer> at bottom, one <main> in the middle.",
         "isCorrect": false,
         "explanation": "Multiple <header>, <footer>, <section>, and <article> elements are valid on one page. They scope to their nearest sectioning ancestor.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Her biri sayfa başına yalnızca bir kez görünebilir — <header> üstte, <footer> altta, ortada bir <main>.",
+        "explanationTr": "Bir sayfada birden çok <header>, <footer>, <section> ve <article> öğesi geçerlidir. En yakın sectioning ata öğeye göre kapsamlanırlar."
       },
       {
         "optionText": "<section> replaces <div> entirely in HTML5 — divs are deprecated.",
         "isCorrect": false,
         "explanation": "<div> is still valid and widely used for non-semantic layout grouping. <section> is for thematic content grouping with a heading.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "<section>, HTML5'te <div>'in tamamen yerini alır — div'ler kullanımdan kaldırılmıştır.",
+        "explanationTr": "<div> hâlâ geçerli ve anlamsal olmayan düzen gruplama için yaygın kullanılır. <section>, başlıklı tematik içerik gruplama içindir."
       },
       {
         "optionText": "These elements are identical to <div> — they only differ in default CSS browser styles.",
         "isCorrect": false,
         "explanation": "Semantic elements carry meaning for screen readers, SEO, and outline algorithms. They have the same default display as <div> but very different semantic value.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Bu öğeler <div> ile aynıdır — yalnızca varsayılan CSS tarayıcı stillerinde farklılaşırlar.",
+        "explanationTr": "Anlamsal öğeler ekran okuyucular, SEO ve outline algoritmaları için anlam taşır. <div> ile aynı varsayılan display'e ama çok farklı anlamsal değere sahiptirler."
       }
     ]
   },
@@ -1061,29 +1061,29 @@
         "optionText": "Yes — both can appear multiple times, scoped to their nearest sectioning ancestor (<body>, <article>, <section>).",
         "isCorrect": true,
         "explanation": "Correct — a <header> inside an <article> is that article's header. Multiple <footer> elements for multiple sections are valid. Only <main> should appear once.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Evet — ikisi de en yakın sectioning ata öğeye (<body>, <article>, <section>) kapsamlanarak birden çok kez görünebilir.",
+        "explanationTr": "Doğru — bir <article> içindeki bir <header> o makalenin başlığıdır. Birden çok bölüm için birden çok <footer> öğesi geçerlidir. Yalnızca <main> bir kez görünmelidir."
       },
       {
         "optionText": "No — only one <header> and one <footer> per page, both in <body>.",
         "isCorrect": false,
         "explanation": "The HTML5 spec allows multiple <header> and <footer> elements. They scope to their nearest sectioning parent, not the entire page.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Hayır — sayfa başına yalnızca bir <header> ve bir <footer>, ikisi de <body>'de.",
+        "explanationTr": "HTML5 spesifikasyonu birden çok <header> ve <footer> öğesine izin verir. Tüm sayfaya değil en yakın sectioning ebeveyne kapsamlanırlar."
       },
       {
         "optionText": "Multiple <header> elements are valid but multiple <footer> elements are not.",
         "isCorrect": false,
         "explanation": "Both can appear multiple times. The spec treats <header> and <footer> symmetrically — each scopes to its sectioning context.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Birden çok <header> öğesi geçerlidir ama birden çok <footer> öğesi değildir.",
+        "explanationTr": "İkisi de birden çok kez görünebilir. Spesifikasyon <header> ve <footer>'ı simetrik ele alır — her biri kendi sectioning bağlamına kapsamlanır."
       },
       {
         "optionText": "Multiple headers/footers require the role ARIA attribute to be valid.",
         "isCorrect": false,
         "explanation": "ARIA roles help assistive technologies but are not required for multiple semantic elements. Valid HTML allows multiple <header>/<footer> without ARIA.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Birden çok header/footer'ın geçerli olması için role ARIA özniteliği gerekir.",
+        "explanationTr": "ARIA rolleri yardımcı teknolojilere yardımcı olur ama birden çok anlamsal öğe için gerekli değildir. Geçerli HTML, ARIA olmadan birden çok <header>/<footer>'a izin verir."
       }
     ]
   },
@@ -1095,29 +1095,29 @@
         "optionText": "Forces browsers to fetch fresh assets after a deploy — achieved by appending a content hash to filenames: main.a3f9b2.js.",
         "isCorrect": true,
         "explanation": "Correct — content-hashed filenames let you set cache headers to immutable (1 year). The filename changes only when content changes, so new deploys bust the cache automatically.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Tarayıcıları bir dağıtımdan sonra taze varlıkları getirmeye zorlar — dosya adlarına bir içerik hash'i ekleyerek sağlanır: main.a3f9b2.js.",
+        "explanationTr": "Doğru — içerik-hash'li dosya adları, önbellek başlıklarını immutable (1 yıl) ayarlamanızı sağlar. Dosya adı yalnızca içerik değiştiğinde değişir, böylece yeni dağıtımlar önbelleği otomatik buster."
       },
       {
         "optionText": "Clears the server-side cache by restarting the web server after each deploy.",
         "isCorrect": false,
         "explanation": "Server restart may clear server cache but doesn't affect files already cached in users' browsers. Cache busting targets the browser/CDN cache.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Her dağıtımdan sonra web sunucusunu yeniden başlatarak sunucu taraflı önbelleği temizler.",
+        "explanationTr": "Sunucu yeniden başlatma sunucu önbelleğini temizleyebilir ama kullanıcıların tarayıcılarında önbelleğe alınmış dosyaları etkilemez. Cache busting tarayıcı/CDN önbelleğini hedefler."
       },
       {
         "optionText": "Adding Cache-Control: no-cache to all responses so browsers never cache assets.",
         "isCorrect": false,
         "explanation": "no-cache forces revalidation on every request — useful for HTML but terrible for static assets. Content hashing + long cache is the better pattern.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Tüm yanıtlara Cache-Control: no-cache ekleyerek tarayıcıların varlıkları asla önbelleğe almamasını sağlar.",
+        "explanationTr": "no-cache her istekte yeniden doğrulamaya zorlar — HTML için faydalı ama statik varlıklar için korkunç. İçerik hash'i + uzun önbellek daha iyi desendir."
       },
       {
         "optionText": "Using HTTP/2 push to send updated assets before the browser requests them.",
         "isCorrect": false,
         "explanation": "HTTP/2 push proactively sends resources but doesn't bust the existing cache. Cache busting changes the URL so cached old versions are bypassed.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Tarayıcı istemeden önce güncellenmiş varlıkları göndermek için HTTP/2 push kullanmak.",
+        "explanationTr": "HTTP/2 push kaynakları proaktif gönderir ama mevcut önbelleği bustermez. Cache busting URL'yi değiştirir, böylece önbelleğe alınmış eski sürümler atlanır."
       }
     ]
   },
@@ -1129,29 +1129,29 @@
         "optionText": "Full standards: <!DOCTYPE html> triggers correct rendering; Quirks: missing doctype triggers legacy IE behaviour; Almost standards: old transitional doctypes.",
         "isCorrect": true,
         "explanation": "Correct — always use <!DOCTYPE html> (HTML5 doctype) to ensure full standards mode. Quirks mode activates ancient box model and layout bugs from IE5 era.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Tam standartlar: <!DOCTYPE html> doğru render'ı tetikler; Quirks: eksik doctype eski IE davranışını tetikler; Neredeyse standart: eski transitional doctype'lar.",
+        "explanationTr": "Doğru — tam standartlar modunu garanti etmek için her zaman <!DOCTYPE html> (HTML5 doctype) kullanın. Quirks mode IE5 döneminden kalma eski box model ve düzen hatalarını etkinleştirir."
       },
       {
         "optionText": "Quirks mode is a performance optimisation for mobile — it skips CSS parsing.",
         "isCorrect": false,
         "explanation": "Quirks mode activates legacy rendering behaviour for old broken HTML, not a performance feature. It causes layout inconsistencies.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Quirks mode mobil için bir performans optimizasyonudur — CSS ayrıştırmasını atlar.",
+        "explanationTr": "Quirks mode eski bozuk HTML için eski render davranışını etkinleştirir, bir performans özelliği değil. Düzen tutarsızlıklarına neden olur."
       },
       {
         "optionText": "Almost standard mode is triggered by adding <html strict> to the document.",
         "isCorrect": false,
         "explanation": "There is no <html strict> attribute. Rendering mode is determined by the DOCTYPE declaration at the top of the HTML file.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Neredeyse standart mod, belgeye <html strict> eklenerek tetiklenir.",
+        "explanationTr": "<html strict> özniteliği yoktur. Render modu, HTML dosyasının başındaki DOCTYPE bildirimiyle belirlenir."
       },
       {
         "optionText": "Full standards mode requires validating your HTML with the W3C validator before deployment.",
         "isCorrect": false,
         "explanation": "Standards mode is triggered purely by <!DOCTYPE html> — no validator run required. W3C validation catches errors but doesn't affect render mode.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Tam standartlar modu, dağıtımdan önce HTML'inizi W3C doğrulayıcısıyla doğrulamayı gerektirir.",
+        "explanationTr": "Standartlar modu tamamen <!DOCTYPE html> ile tetiklenir — doğrulayıcı çalıştırması gerekmez. W3C doğrulaması hataları yakalar ama render modunu etkilemez."
       }
     ]
   },
@@ -1163,29 +1163,29 @@
         "optionText": "CSS in <head> loads before paint (preventing FOUC); scripts before </body> let the DOM parse first so JS can access elements without waiting.",
         "isCorrect": true,
         "explanation": "Correct — render-blocking CSS in <head> is necessary. Scripts at the bottom ensure DOM is ready. Modern alternative: use defer attribute on <script> and keep it in <head>.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "<head>'deki CSS boyamadan önce yüklenir (FOUC önler); </body>'den hemen önceki betikler DOM'un önce ayrıştırılmasını sağlar, böylece JS beklemeden öğelere erişebilir.",
+        "explanationTr": "Doğru — <head>'deki render-bloklayan CSS gereklidir. Alttaki betikler DOM'un hazır olmasını sağlar. Modern alternatif: <script>'te defer özniteliği kullanıp onu <head>'de tutmak."
       },
       {
         "optionText": "CSS must go in <head> because browsers reject stylesheets elsewhere, and scripts must go in <body> by the HTML spec.",
         "isCorrect": false,
         "explanation": "The spec doesn't mandate these positions — they're performance best practices. Scripts can go in <head> with async/defer; CSS can technically go anywhere.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "CSS <head>'e gitmeli çünkü tarayıcılar başka yerdeki stil sayfalarını reddeder ve betikler HTML spesifikasyonuna göre <body>'ye gitmeli.",
+        "explanationTr": "Spesifikasyon bu konumları zorunlu kılmaz — bunlar performans en iyi uygulamalarıdır. Betikler async/defer ile <head>'e gidebilir; CSS teknik olarak herhangi bir yere gidebilir."
       },
       {
         "optionText": "JavaScript files must load before CSS so they can modify styles before the first paint.",
         "isCorrect": false,
         "explanation": "Loading JS before CSS blocks rendering. CSS should load first so the browser can construct the CSSOM and paint without waiting for JS.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "JavaScript dosyaları, ilk boyamadan önce stilleri değiştirebilmeleri için CSS'ten önce yüklenmeli.",
+        "explanationTr": "JS'i CSS'ten önce yüklemek render'ı bloklar. CSS önce yüklenmeli, böylece tarayıcı CSSOM'u oluşturup JS'i beklemeden boyayabilir."
       },
       {
         "optionText": "It doesn't matter — modern browsers parallelise all resource loading regardless of position.",
         "isCorrect": false,
         "explanation": "Browsers do parallelise fetches but parsing and execution are still sequential. CSS in <head> and defer on scripts remain important for FCP.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Önemi yok — modern tarayıcılar konumdan bağımsız olarak tüm kaynak yüklemesini paralelleştirir.",
+        "explanationTr": "Tarayıcılar getirmeleri paralelleştirir ama ayrıştırma ve yürütme hâlâ sıralıdır. <head>'deki CSS ve betiklerdeki defer, FCP için hâlâ önemlidir."
       }
     ]
   },
@@ -1197,29 +1197,29 @@
         "optionText": "XHTML requires all tags closed, lowercase tag names, quoted attributes, and a valid XML declaration — it's HTML as strict XML.",
         "isCorrect": true,
         "explanation": "Correct — XHTML errors break the entire page (unlike HTML's forgiving parser). It was superseded by HTML5 which is error-tolerant and more practical.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "XHTML tüm etiketlerin kapatılmasını, küçük harf etiket adlarını, tırnaklı öznitelikleri ve geçerli bir XML bildirimini gerektirir — katı XML olarak HTML'dir.",
+        "explanationTr": "Doğru — XHTML hataları tüm sayfayı bozar (HTML'in bağışlayıcı ayrıştırıcısının aksine). Hata-toleranslı ve daha pratik olan HTML5 tarafından geçildi."
       },
       {
         "optionText": "XHTML supports custom HTML elements natively; standard HTML does not.",
         "isCorrect": false,
         "explanation": "Custom elements are a Web Components API available in HTML5 — not unique to XHTML. XHTML is stricter XML syntax, not a feature superset.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "XHTML özel HTML öğelerini yerel destekler; standart HTML desteklemez.",
+        "explanationTr": "Özel öğeler HTML5'te mevcut bir Web Components API'sidir — XHTML'e özgü değil. XHTML daha katı XML sözdizimidir, bir özellik üst kümesi değil."
       },
       {
         "optionText": "XHTML is faster to parse because its strict rules allow the browser to skip error correction.",
         "isCorrect": false,
         "explanation": "XHTML was not significantly faster. HTML5's forgiving parser is now highly optimised. XHTML's strict error mode could also block entire pages on small mistakes.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "XHTML ayrıştırması daha hızlıdır çünkü katı kuralları tarayıcının hata düzeltmeyi atlamasını sağlar.",
+        "explanationTr": "XHTML önemli ölçüde daha hızlı değildi. HTML5'in bağışlayıcı ayrıştırıcısı artık yüksek optimize edilmiştir. XHTML'in katı hata modu küçük hatalarda tüm sayfaları da bloklayabilirdi."
       },
       {
         "optionText": "XHTML replaced HTML5 as the current web standard.",
         "isCorrect": false,
         "explanation": "XHTML was abandoned in favour of HTML5. HTML5 is the current living standard maintained by WHATWG.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "XHTML, geçerli web standardı olarak HTML5'in yerini aldı.",
+        "explanationTr": "XHTML, HTML5 lehine terk edildi. HTML5, WHATWG tarafından sürdürülen geçerli yaşayan standarttır."
       }
     ]
   },
@@ -1231,29 +1231,29 @@
         "optionText": "A modern image format by Google with better compression than JPEG/PNG — supports transparency, animation, and lossless modes.",
         "isCorrect": true,
         "explanation": "Correct — WebP is ~25-35% smaller than JPEG at equivalent quality. Use <picture> with WebP source + JPEG fallback. AVIF is the next-gen successor.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Google'ın JPEG/PNG'den daha iyi sıkıştırmaya sahip modern bir görsel formatı — şeffaflık, animasyon ve kayıpsız modları destekler.",
+        "explanationTr": "Doğru — WebP eşdeğer kalitede JPEG'den ~%25-35 daha küçüktür. WebP source + JPEG yedeğiyle <picture> kullanın. AVIF yeni nesil ardılıdır."
       },
       {
         "optionText": "A web protocol for streaming video — the successor to WebRTC.",
         "isCorrect": false,
         "explanation": "WebP is an image format, not a protocol. WebRTC is a real-time communication protocol. WebP stands for Web Picture.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Video akışı için bir web protokolü — WebRTC'nin ardılı.",
+        "explanationTr": "WebP bir görsel formatıdır, bir protokol değil. WebRTC bir gerçek zamanlı iletişim protokolüdür. WebP, Web Picture'ın açılımıdır."
       },
       {
         "optionText": "A CSS property for optimising image rendering performance in browsers.",
         "isCorrect": false,
         "explanation": "image-rendering is the CSS property for rendering hints. WebP is a file format (.webp) for images with better compression.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Tarayıcılarda görsel render performansını optimize etmek için bir CSS özelliği.",
+        "explanationTr": "image-rendering, render ipuçları için CSS özelliğidir. WebP, daha iyi sıkıştırmaya sahip görseller için bir dosya formatıdır (.webp)."
       },
       {
         "optionText": "A JavaScript API for processing images in Web Workers.",
         "isCorrect": false,
         "explanation": "Image processing in Workers uses Canvas API or OffscreenCanvas. WebP is an image file format, not a JavaScript API.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Web Workers'da görsel işlemek için bir JavaScript API'si.",
+        "explanationTr": "Worker'larda görsel işleme Canvas API veya OffscreenCanvas kullanır. WebP, bir JavaScript API'si değil bir görsel dosya formatıdır."
       }
     ]
   },
@@ -1265,29 +1265,29 @@
         "optionText": "Semantic markup, native media (audio/video), Canvas API, form enhancements, Web Storage, Web Workers, WebSockets, and Geolocation.",
         "isCorrect": true,
         "explanation": "Correct — HTML5 is an umbrella term covering the HTML markup spec plus associated APIs. Together they enable rich web apps without plugins.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Anlamsal markup, yerel medya (audio/video), Canvas API, form geliştirmeleri, Web Storage, Web Workers, WebSockets ve Geolocation.",
+        "explanationTr": "Doğru — HTML5, HTML markup spesifikasyonu artı ilişkili API'leri kapsayan bir şemsiye terimdir. Birlikte eklentisiz zengin web uygulamalarını mümkün kılarlar."
       },
       {
         "optionText": "HTML, CSS, and JavaScript — the three core web technologies bundled into one spec.",
         "isCorrect": false,
         "explanation": "HTML5 is specifically the HTML specification — CSS and JS are separate standards. HTML5 introduced APIs that JS uses, but CSS remains its own spec.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "HTML, CSS ve JavaScript — tek bir spesifikasyonda paketlenmiş üç çekirdek web teknolojisi.",
+        "explanationTr": "HTML5 özellikle HTML spesifikasyonudur — CSS ve JS ayrı standartlardır. HTML5 JS'in kullandığı API'leri tanıttı ama CSS kendi spesifikasyonu olarak kalır."
       },
       {
         "optionText": "React, Angular, and Vue — the component-based frameworks built on HTML5.",
         "isCorrect": false,
         "explanation": "Those are JavaScript frameworks that use HTML5 features. HTML5's building blocks are browser-native APIs like Canvas, Storage, and semantic elements.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "React, Angular ve Vue — HTML5 üzerine kurulu bileşen tabanlı framework'ler.",
+        "explanationTr": "Bunlar HTML5 özelliklerini kullanan JavaScript framework'leridir. HTML5'in yapı taşları Canvas, Storage ve anlamsal öğeler gibi tarayıcıya yerel API'lerdir."
       },
       {
         "optionText": "DOCTYPE, head, and body — the three required sections of every HTML document.",
         "isCorrect": false,
         "explanation": "DOCTYPE, <head>, and <body> are structural parts of an HTML document, not the HTML5 feature set. HTML5 building blocks refers to its new APIs and elements.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "DOCTYPE, head ve body — her HTML belgesinin üç zorunlu bölümü.",
+        "explanationTr": "DOCTYPE, <head> ve <body> bir HTML belgesinin yapısal parçalarıdır, HTML5 özellik kümesi değil. HTML5 yapı taşları yeni API'lerine ve öğelerine atıfta bulunur."
       }
     ]
   },
@@ -1299,29 +1299,29 @@
         "optionText": "SVG for scalable vector graphics, charts, and icons (DOM nodes, accessible); Canvas for pixel manipulation, games, and real-time rendering (bitmap, JS-driven).",
         "isCorrect": true,
         "explanation": "Correct — SVG is retained-mode (shapes in DOM, CSS styleable, accessible). Canvas is immediate-mode (draw pixels, no DOM structure, not accessible by default).",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Ölçeklenebilir vektör grafikleri, grafikler ve ikonlar için SVG (DOM düğümleri, erişilebilir); piksel manipülasyonu, oyunlar ve gerçek zamanlı render için Canvas (bitmap, JS-güdümlü).",
+        "explanationTr": "Doğru — SVG retained-mode'dur (şekiller DOM'da, CSS stillenebilir, erişilebilir). Canvas immediate-mode'dur (piksel çiz, DOM yapısı yok, varsayılan olarak erişilebilir değil)."
       },
       {
         "optionText": "Canvas for all graphics — SVG is deprecated in modern browsers.",
         "isCorrect": false,
         "explanation": "SVG is not deprecated and is widely supported. It's preferred for scalable UI graphics, icons, and data visualisations that need accessibility.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Tüm grafikler için Canvas — SVG modern tarayıcılarda kullanımdan kaldırılmıştır.",
+        "explanationTr": "SVG kullanımdan kaldırılmadı ve yaygın desteklenir. Erişilebilirlik gerektiren ölçeklenebilir UI grafikleri, ikonlar ve veri görselleştirmeleri için tercih edilir."
       },
       {
         "optionText": "SVG for photos and raster images; Canvas for vector icons.",
         "isCorrect": false,
         "explanation": "It's the opposite — SVG is for vectors (infinitely scalable); Canvas renders bitmap pixels. Photos use <img> with JPEG/WebP.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Fotoğraflar ve raster görseller için SVG; vektör ikonlar için Canvas.",
+        "explanationTr": "Tam tersi — SVG vektörler içindir (sonsuz ölçeklenebilir); Canvas bitmap piksel render eder. Fotoğraflar JPEG/WebP ile <img> kullanır."
       },
       {
         "optionText": "They are interchangeable — the choice is purely stylistic.",
         "isCorrect": false,
         "explanation": "They have fundamentally different architectures. SVG is DOM-based and accessible; Canvas is a blank pixel buffer. The choice depends on use case: UI/charts vs games/image processing.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Birbirinin yerine kullanılabilirler — seçim tamamen stilistiktir.",
+        "explanationTr": "Temelden farklı mimarileri vardır. SVG DOM tabanlı ve erişilebilirdir; Canvas boş bir piksel tamponudur. Seçim kullanım durumuna bağlıdır: UI/grafikler vs oyunlar/görsel işleme."
       }
     ]
   },
@@ -1333,29 +1333,29 @@
         "optionText": "<!DOCTYPE html> triggers standards mode rendering — without it, browsers fall back to quirks mode and apply legacy broken layout rules.",
         "isCorrect": true,
         "explanation": "Correct — the HTML5 doctype is the shortest valid form. It's not an HTML tag but a parser instruction. Always include it as the very first line of every HTML file.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "<!DOCTYPE html> standartlar modu render'ını tetikler — onsuz tarayıcılar quirks moduna düşer ve eski bozuk düzen kurallarını uygular.",
+        "explanationTr": "Doğru — HTML5 doctype en kısa geçerli formdur. Bir HTML etiketi değil bir ayrıştırıcı talimatıdır. Her HTML dosyasının ilk satırı olarak her zaman ekleyin."
       },
       {
         "optionText": "DOCTYPE tells the browser which version of HTML to download from the W3C server.",
         "isCorrect": false,
         "explanation": "DOCTYPE is a local parser instruction — no download happens. It tells the browser's rendering engine which compatibility mode to use.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "DOCTYPE, tarayıcıya W3C sunucusundan hangi HTML sürümünün indirileceğini söyler.",
+        "explanationTr": "DOCTYPE yerel bir ayrıştırıcı talimatıdır — indirme olmaz. Tarayıcının render motoruna hangi uyumluluk modunu kullanacağını söyler."
       },
       {
         "optionText": "DOCTYPE is required for HTTPS — browsers block pages without it on secure connections.",
         "isCorrect": false,
         "explanation": "DOCTYPE has nothing to do with HTTPS or security. It controls CSS rendering mode (standards vs quirks). Missing DOCTYPE causes layout bugs, not security blocks.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "DOCTYPE, HTTPS için gereklidir — tarayıcılar güvenli bağlantılarda onsuz sayfaları bloklar.",
+        "explanationTr": "DOCTYPE'ın HTTPS veya güvenlikle ilgisi yoktur. CSS render modunu (standartlar vs quirks) kontrol eder. Eksik DOCTYPE güvenlik bloklaması değil düzen hataları yaratır."
       },
       {
         "optionText": "DOCTYPE declares the page's character encoding — equivalent to <meta charset='UTF-8'>.",
         "isCorrect": false,
         "explanation": "Character encoding is declared with <meta charset='UTF-8'>. DOCTYPE triggers the rendering mode — it has no effect on character encoding.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "DOCTYPE, sayfanın karakter kodlamasını bildirir — <meta charset='UTF-8'> ile eşdeğer.",
+        "explanationTr": "Karakter kodlaması <meta charset='UTF-8'> ile bildirilir. DOCTYPE render modunu tetikler — karakter kodlaması üzerinde etkisi yoktur."
       }
     ]
   },
@@ -1367,29 +1367,29 @@
         "optionText": "Yes — JSX (React), Pug, Handlebars, Nunjucks. JSX compiles to JS; others compile to HTML. JSX is most common in modern frontend stacks.",
         "isCorrect": true,
         "explanation": "Correct — JSX is the standard for React/Next.js. Pug (ex-Jade) uses indentation syntax. Handlebars and Nunjucks are logic-light templates popular in Node.js backends.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Evet — JSX (React), Pug, Handlebars, Nunjucks. JSX, JS'e derlenir; diğerleri HTML'e derlenir. JSX modern frontend yığınlarında en yaygındır.",
+        "explanationTr": "Doğru — JSX, React/Next.js için standarttır. Pug (eski Jade) girinti sözdizimi kullanır. Handlebars ve Nunjucks, Node.js backend'lerinde popüler mantık-hafif şablonlardır."
       },
       {
         "optionText": "No — HTML templating languages are not used in modern development; raw HTML is always preferred.",
         "isCorrect": false,
         "explanation": "Templating languages are standard across frontend (JSX, Vue templates) and backend (Pug, Jinja2, EJS). They reduce repetition and improve maintainability.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Hayır — HTML şablonlama dilleri modern geliştirmede kullanılmaz; her zaman ham HTML tercih edilir.",
+        "explanationTr": "Şablonlama dilleri frontend (JSX, Vue şablonları) ve backend (Pug, Jinja2, EJS) genelinde standarttır. Tekrarı azaltır ve sürdürülebilirliği iyileştirirler."
       },
       {
         "optionText": "Only Markdown — it compiles to HTML and is the standard for all web templating.",
         "isCorrect": false,
         "explanation": "Markdown is for content authoring, not UI templating. Templating languages like JSX, Pug, and Handlebars generate full HTML documents with dynamic data.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Yalnızca Markdown — HTML'e derlenir ve tüm web şablonlaması için standarttır.",
+        "explanationTr": "Markdown UI şablonlama değil içerik yazımı içindir. JSX, Pug ve Handlebars gibi şablonlama dilleri dinamik veriyle tam HTML belgeleri üretir."
       },
       {
         "optionText": "PHP — it's the only real HTML templating language with broad browser support.",
         "isCorrect": false,
         "explanation": "PHP is a server-side language, not a templating language per se, and it runs on the server — browsers never see PHP. JSX, Pug, and Handlebars are dedicated templating solutions.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "PHP — geniş tarayıcı desteğine sahip tek gerçek HTML şablonlama dilidir.",
+        "explanationTr": "PHP bir sunucu taraflı dildir, kendi başına bir şablonlama dili değil ve sunucuda çalışır — tarayıcılar PHP'yi asla görmez. JSX, Pug ve Handlebars özel şablonlama çözümleridir."
       }
     ]
   },
@@ -1401,29 +1401,29 @@
         "optionText": "Text expansion (translated text is longer), RTL support (Arabic/Hebrew), font coverage, date/number formatting, and hreflang attributes for SEO.",
         "isCorrect": true,
         "explanation": "Correct — German text can be 30% longer than English, breaking fixed layouts. Use lang and dir attributes, Unicode fonts, and Intl API for locale-aware formatting.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Metin genişlemesi (çevrilen metin daha uzun), RTL desteği (Arapça/İbranice), font kapsamı, tarih/sayı biçimlendirme ve SEO için hreflang öznitelikleri.",
+        "explanationTr": "Doğru — Almanca metin İngilizceden %30 daha uzun olabilir ve sabit düzenleri bozar. lang ve dir öznitelikleri, Unicode fontları ve yerele duyarlı biçimlendirme için Intl API kullanın."
       },
       {
         "optionText": "Only charset encoding — use UTF-8 and all multilingual concerns are covered.",
         "isCorrect": false,
         "explanation": "UTF-8 handles encoding but multilingual sites also need RTL layouts, locale-specific formatting, hreflang tags, font support, and flexible layouts for text expansion.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Yalnızca charset kodlaması — UTF-8 kullanın ve tüm çok dilli kaygılar kapsanır.",
+        "explanationTr": "UTF-8 kodlamayı ele alır ama çok dilli siteler ayrıca RTL düzenleri, yerele özgü biçimlendirme, hreflang etiketleri, font desteği ve metin genişlemesi için esnek düzenler de gerektirir."
       },
       {
         "optionText": "Multilingual sites require separate CSS files per language — shared styles don't work.",
         "isCorrect": false,
         "explanation": "Shared CSS with [lang='ar'] { direction: rtl } and [lang='de'] { font-size: 0.9em } selectors handles language differences. Separate files per language are not required.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Çok dilli siteler dil başına ayrı CSS dosyaları gerektirir — paylaşılan stiller çalışmaz.",
+        "explanationTr": "[lang='ar'] { direction: rtl } ve [lang='de'] { font-size: 0.9em } seçicileriyle paylaşılan CSS dil farklarını ele alır. Dil başına ayrı dosyalar gerekmez."
       },
       {
         "optionText": "Use only images for text — bitmap text looks the same in all languages.",
         "isCorrect": false,
         "explanation": "Image-based text is inaccessible (screen readers can't read it), hard to translate, and blurry on retina screens. Use real text with proper Unicode support.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Metin için yalnızca görsel kullanın — bitmap metin tüm dillerde aynı görünür.",
+        "explanationTr": "Görsel tabanlı metin erişilemez (ekran okuyucular okuyamaz), çevirmesi zor ve retina ekranlarda bulanıktır. Uygun Unicode desteğiyle gerçek metin kullanın."
       }
     ]
   },
@@ -1435,29 +1435,29 @@
         "optionText": "Use semantic HTML, a descriptive <title> and meta description, fast load times (Core Web Vitals), structured data (JSON-LD), and proper hreflang for multilingual.",
         "isCorrect": true,
         "explanation": "Correct — semantic elements help crawlers understand structure. Core Web Vitals (LCP, CLS, INP) are ranking signals. JSON-LD structured data enables rich snippets.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Anlamsal HTML, açıklayıcı bir <title> ve meta description, hızlı yükleme süreleri (Core Web Vitals), yapılandırılmış veri (JSON-LD) ve çok dilli için uygun hreflang kullanın.",
+        "explanationTr": "Doğru — anlamsal öğeler crawler'ların yapıyı anlamasına yardımcı olur. Core Web Vitals (LCP, CLS, INP) sıralama sinyalleridir. JSON-LD yapılandırılmış veri zengin snippet'leri mümkün kılar."
       },
       {
         "optionText": "Add as many <meta keywords> tags as possible — search engines prioritise keyword density.",
         "isCorrect": false,
         "explanation": "Google has ignored meta keywords since 2009. Keyword stuffing is penalised. Focus on semantic HTML, quality content, and performance.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Olabildiğince çok <meta keywords> etiketi ekleyin — arama motorları anahtar kelime yoğunluğunu önceliklendirir.",
+        "explanationTr": "Google 2009'dan beri meta keywords'ü yok sayıyor. Anahtar kelime doldurma cezalandırılır. Anlamsal HTML'e, kaliteli içeriğe ve performansa odaklanın."
       },
       {
         "optionText": "Use JavaScript-rendered content — Google indexes JS apps the same as static HTML.",
         "isCorrect": false,
         "explanation": "Googlebot can render JavaScript but with delays and limitations. Server-rendered or statically generated HTML is indexed faster and more reliably.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "JavaScript ile render edilen içerik kullanın — Google JS uygulamalarını statik HTML ile aynı şekilde dizinler.",
+        "explanationTr": "Googlebot JavaScript render edebilir ama gecikmeler ve sınırlamalarla. Sunucu-render'lı veya statik üretilen HTML daha hızlı ve güvenilir dizinlenir."
       },
       {
         "optionText": "Submit individual HTML files to Google Search Console — it indexes files directly.",
         "isCorrect": false,
         "explanation": "Search Console allows sitemap submission and URL inspection, not direct file uploads. Google crawls your live site via its search bot.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Bireysel HTML dosyalarını Google Search Console'a gönderin — dosyaları doğrudan dizinler.",
+        "explanationTr": "Search Console doğrudan dosya yükleme değil sitemap gönderimi ve URL incelemesi sağlar. Google canlı sitenizi arama botuyla tarar."
       }
     ]
   },
@@ -1469,29 +1469,29 @@
         "optionText": "The spec (WHATWG Living Standard) defines ideal behaviour; browsers implement it gradually and may have bugs, extensions, or lag behind the spec.",
         "isCorrect": true,
         "explanation": "Correct — caniuse.com tracks implementation status. Features may be behind flags or partial. The spec is normative; browser implementations are real-world approximations.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Spesifikasyon (WHATWG Living Standard) ideal davranışı tanımlar; tarayıcılar onu kademeli uygular ve hatalar, uzantılar olabilir veya spesifikasyonun gerisinde kalabilir.",
+        "explanationTr": "Doğru — caniuse.com uygulama durumunu izler. Özellikler flag'lerin arkasında veya kısmi olabilir. Spesifikasyon normatiftir; tarayıcı uygulamaları gerçek dünya yaklaşımlarıdır."
       },
       {
         "optionText": "Browsers implement the spec perfectly — any deviation is a bug that gets immediately patched.",
         "isCorrect": false,
         "explanation": "Implementation gaps and bugs persist for years. CSS/HTML feature support varies. Use caniuse.com and progressive enhancement to handle differences.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Tarayıcılar spesifikasyonu mükemmel uygular — herhangi bir sapma hemen yamalanan bir hatadır.",
+        "explanationTr": "Uygulama boşlukları ve hatalar yıllarca kalır. CSS/HTML özellik desteği değişir. Farkları ele almak için caniuse.com ve progressive enhancement kullanın."
       },
       {
         "optionText": "Browser vendors write the spec — they implement their own features and the spec documents them after.",
         "isCorrect": false,
         "explanation": "Partially true historically, but today WHATWG and W3C maintain the spec through a consensus process. Browser vendors participate but the spec is not just post-hoc documentation.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Tarayıcı üreticileri spesifikasyonu yazar — kendi özelliklerini uygular ve spesifikasyon onları sonradan belgeler.",
+        "explanationTr": "Tarihsel olarak kısmen doğru ama bugün WHATWG ve W3C spesifikasyonu bir konsensüs süreciyle sürdürür. Tarayıcı üreticileri katılır ama spesifikasyon yalnızca sonradan dokümantasyon değildir."
       },
       {
         "optionText": "The spec and browser implementation are identical — HTML is a binary standard with no room for variation.",
         "isCorrect": false,
         "explanation": "HTML is not a binary standard. Browser implementations differ in edge cases, performance, and feature support. Cross-browser testing remains essential.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Spesifikasyon ve tarayıcı uygulaması aynıdır — HTML, varyasyona yer olmayan bir ikili standarttır.",
+        "explanationTr": "HTML bir ikili standart değildir. Tarayıcı uygulamaları uç durumlarda, performansta ve özellik desteğinde farklılaşır. Cross-browser test şart olmaya devam eder."
       }
     ]
   },
@@ -1503,29 +1503,29 @@
         "optionText": "A tool that compiles an extended markup syntax to HTML — e.g. Pug (indentation-based), Haml, or JSX (React's HTML-in-JS extension).",
         "isCorrect": true,
         "explanation": "Correct — preprocessors reduce repetition with includes, variables, and loops. JSX is the most common today, compiled by Babel/SWC as part of the React build.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Genişletilmiş bir markup sözdizimini HTML'e derleyen bir araç — örn. Pug (girinti tabanlı), Haml veya JSX (React'in HTML-in-JS uzantısı).",
+        "explanationTr": "Doğru — preprocessor'lar include'lar, değişkenler ve döngülerle tekrarı azaltır. JSX bugün en yaygındır, React build'inin parçası olarak Babel/SWC ile derlenir."
       },
       {
         "optionText": "A browser extension that reformats HTML source code for readability.",
         "isCorrect": false,
         "explanation": "Browser extensions (Prettier, HTML formatter) format code in the editor — they don't preprocess it into different HTML. Preprocessors transform syntax at build time.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "HTML kaynak kodunu okunabilirlik için yeniden biçimlendiren bir tarayıcı uzantısı.",
+        "explanationTr": "Tarayıcı uzantıları (Prettier, HTML formatter) kodu editörde biçimlendirir — onu farklı HTML'e preprocess etmez. Preprocessor'lar sözdizimini build zamanında dönüştürür."
       },
       {
         "optionText": "A server that sends pre-compressed HTML responses to reduce transfer size.",
         "isCorrect": false,
         "explanation": "Gzip/Brotli compression handles transfer size. HTML preprocessors transform markup syntax (Pug, JSX) into standard HTML at build time.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Aktarım boyutunu azaltmak için önceden sıkıştırılmış HTML yanıtları gönderen bir sunucu.",
+        "explanationTr": "Gzip/Brotli sıkıştırma aktarım boyutunu ele alır. HTML preprocessor'lar markup sözdizimini (Pug, JSX) build zamanında standart HTML'e dönüştürür."
       },
       {
         "optionText": "HTML has no preprocessors — only CSS (Sass) and JavaScript (TypeScript) can be preprocessed.",
         "isCorrect": false,
         "explanation": "HTML preprocessors exist and are widely used — JSX is the most prominent. Pug, Haml, and Nunjucks are also HTML preprocessors.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "HTML'in preprocessor'ı yoktur — yalnızca CSS (Sass) ve JavaScript (TypeScript) preprocess edilebilir.",
+        "explanationTr": "HTML preprocessor'ları vardır ve yaygın kullanılır — JSX en öne çıkanıdır. Pug, Haml ve Nunjucks de HTML preprocessor'larıdır."
       }
     ]
   },
@@ -1537,29 +1537,29 @@
         "optionText": "For fine print, legal disclaimers, and side comments — secondary content that is subsidiary to the main text.",
         "isCorrect": true,
         "explanation": "Correct — <small> has semantic meaning: side comments and fine print. It renders smaller by default but should be chosen for semantics, not just font size (use CSS for that).",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "İnce yazı, yasal feragatnameler ve yan yorumlar için — ana metne tabi ikincil içerik.",
+        "explanationTr": "Doğru — <small> anlamsal anlama sahiptir: yan yorumlar ve ince yazı. Varsayılan olarak daha küçük render edilir ama yalnızca font boyutu için değil anlambilim için seçilmelidir (boyut için CSS kullanın)."
       },
       {
         "optionText": "Whenever you want smaller font size — it's a presentational element like <b> or <i>.",
         "isCorrect": false,
         "explanation": "Use CSS font-size for visual size changes. <small> is semantic — it marks fine print and disclaimers, not arbitrary smaller text.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Daha küçük font boyutu istediğiniz her zaman — <b> veya <i> gibi sunumsal bir öğedir.",
+        "explanationTr": "Görsel boyut değişiklikleri için CSS font-size kullanın. <small> anlamsaldır — keyfi daha küçük metni değil ince yazı ve feragatnameleri işaretler."
       },
       {
         "optionText": "<small> is deprecated in HTML5 — use CSS font-size: small instead.",
         "isCorrect": false,
         "explanation": "<small> was repurposed in HTML5 with semantic meaning (fine print). It's valid HTML5; only its purely presentational role from HTML4 is discouraged.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "<small>, HTML5'te kullanımdan kaldırıldı — bunun yerine CSS font-size: small kullanın.",
+        "explanationTr": "<small>, HTML5'te anlamsal anlamla (ince yazı) yeniden amaçlandırıldı. Geçerli HTML5'tir; yalnızca HTML4'teki tamamen sunumsal rolü önerilmez."
       },
       {
         "optionText": "For captions below images — it's equivalent to <figcaption>.",
         "isCorrect": false,
         "explanation": "<figcaption> is the correct element for image captions. <small> is for legal fine print and disclaimers within text.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Görsellerin altındaki açıklamalar için — <figcaption> ile eşdeğerdir.",
+        "explanationTr": "<figcaption>, görsel açıklamaları için doğru öğedir. <small>, metin içindeki yasal ince yazı ve feragatnameler içindir."
       }
     ]
   },
@@ -1571,29 +1571,29 @@
         "optionText": "Use the dir attribute: dir='rtl' for Arabic/Hebrew, dir='ltr' for left-to-right. The <bdi> and <bdo> elements also control bidirectional text.",
         "isCorrect": true,
         "explanation": "Correct — set dir='rtl' on <html> for RTL pages. <bdi> isolates a span of text from surrounding direction; <bdo> forces a specific direction.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "dir özniteliğini kullanın: Arapça/İbranice için dir='rtl', soldan sağa için dir='ltr'. <bdi> ve <bdo> öğeleri de çift yönlü metni kontrol eder.",
+        "explanationTr": "Doğru — RTL sayfalar için <html> üzerinde dir='rtl' ayarlayın. <bdi> bir metin aralığını çevreleyen yönden izole eder; <bdo> belirli bir yönü zorlar."
       },
       {
         "optionText": "Use CSS text-align: right — this reverses text direction for RTL languages.",
         "isCorrect": false,
         "explanation": "text-align: right aligns text to the right margin but doesn't reverse character order for RTL scripts. Use dir='rtl' for proper bidirectional text.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "CSS text-align: right kullanın — bu, RTL diller için metin yönünü tersine çevirir.",
+        "explanationTr": "text-align: right metni sağ kenara hizalar ama RTL betikler için karakter sırasını tersine çevirmez. Uygun çift yönlü metin için dir='rtl' kullanın."
       },
       {
         "optionText": "Use the <rtl> HTML element introduced in HTML5 for right-to-left content.",
         "isCorrect": false,
         "explanation": "There is no <rtl> element. Use the dir attribute on any element or the <bdi>/<bdo> elements for bidirectional control.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Sağdan sola içerik için HTML5'te tanıtılan <rtl> HTML öğesini kullanın.",
+        "explanationTr": "<rtl> öğesi yoktur. Herhangi bir öğede dir özniteliğini veya çift yönlü kontrol için <bdi>/<bdo> öğelerini kullanın."
       },
       {
         "optionText": "JavaScript must reverse the string — HTML has no built-in RTL support.",
         "isCorrect": false,
         "explanation": "HTML has built-in RTL support via the dir attribute and Unicode Bidirectional Algorithm. No JavaScript is needed for proper RTL text.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "JavaScript string'i tersine çevirmeli — HTML'in yerleşik RTL desteği yoktur.",
+        "explanationTr": "HTML'in dir özniteliği ve Unicode Bidirectional Algorithm yoluyla yerleşik RTL desteği vardır. Uygun RTL metin için JavaScript gerekmez."
       }
     ]
   },
@@ -1605,29 +1605,29 @@
         "optionText": "Tags the HTML parser can infer and that may legally be omitted — e.g. </li>, </td>, <html>, <head>, <body>.",
         "isCorrect": true,
         "explanation": "Correct — the HTML5 spec explicitly lists optional tags. Omitting them is valid but most style guides recommend keeping them for readability.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "HTML ayrıştırıcının çıkarabileceği ve yasal olarak atlanabilen etiketler — örn. </li>, </td>, <html>, <head>, <body>.",
+        "explanationTr": "Doğru — HTML5 spesifikasyonu isteğe bağlı etiketleri açıkça listeler. Onları atlamak geçerlidir ama çoğu stil kılavuzu okunabilirlik için tutmayı önerir."
       },
       {
         "optionText": "HTML5 attributes that have default values and don't need to be specified.",
         "isCorrect": false,
         "explanation": "Optional attributes (like type='text' on inputs) are a different concept. Optional tags are elements whose opening/closing tags can be omitted from the source.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Varsayılan değerleri olan ve belirtilmesi gerekmeyen HTML5 öznitelikleri.",
+        "explanationTr": "İsteğe bağlı öznitelikler (input'larda type='text' gibi) farklı bir kavramdır. İsteğe bağlı etiketler, açılış/kapanış etiketleri kaynaktan atlanabilen öğelerdir."
       },
       {
         "optionText": "Deprecated HTML4 tags that browsers still support but shouldn't be used.",
         "isCorrect": false,
         "explanation": "Deprecated elements (like <font>, <center>) are discouraged but not optional in the specification sense. Optional tags are those the parser can infer.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Tarayıcıların hâlâ desteklediği ama kullanılmaması gereken eskimiş HTML4 etiketleri.",
+        "explanationTr": "Kullanımdan kaldırılan öğeler (<font>, <center> gibi) önerilmez ama spesifikasyon anlamında isteğe bağlı değildir. İsteğe bağlı etiketler ayrıştırıcının çıkarabildikleridir."
       },
       {
         "optionText": "Self-closing tags like <br> and <img> — they're optional to close.",
         "isCorrect": false,
         "explanation": "Self-closing void elements (<br>, <img>) are a different concept — they can never have children. Optional tags are tags whose presence can be entirely omitted.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "<br> ve <img> gibi self-closing etiketler — kapatılması isteğe bağlıdır.",
+        "explanationTr": "Self-closing void öğeler (<br>, <img>) farklı bir kavramdır — asla çocuğa sahip olamazlar. İsteğe bağlı etiketler varlığı tamamen atlanabilen etiketlerdir."
       }
     ]
   },
@@ -1639,29 +1639,29 @@
         "optionText": "<meta http-equiv='X-UA-Compatible' content='IE=edge'> — forces IE to use its highest available rendering engine.",
         "isCorrect": true,
         "explanation": "Correct — IE=edge prevents IE from falling back to compatibility view. It's legacy configuration; modern projects only support evergreen browsers and can omit this.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "<meta http-equiv='X-UA-Compatible' content='IE=edge'> — IE'yi mevcut en yüksek render motorunu kullanmaya zorlar.",
+        "explanationTr": "Doğru — IE=edge, IE'nin uyumluluk görünümüne düşmesini önler. Eski bir yapılandırmadır; modern projeler yalnızca evergreen tarayıcıları destekler ve bunu atlayabilir."
       },
       {
         "optionText": "Add a conditional comment: <!--[if IE]><html class='ie'><![endif]--> to target IE.",
         "isCorrect": false,
         "explanation": "Conditional comments control IE-specific HTML but don't set compatibility mode. The X-UA-Compatible meta tag controls which IE rendering engine is used.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Koşullu bir yorum ekleyin: IE'yi hedeflemek için <!--[if IE]><html class='ie'><![endif]-->.",
+        "explanationTr": "Koşullu yorumlar IE'ye özgü HTML'i kontrol eder ama uyumluluk modunu ayarlamaz. X-UA-Compatible meta etiketi hangi IE render motorunun kullanılacağını kontrol eder."
       },
       {
         "optionText": "Use document.compatMode = 'IE9' in JavaScript to switch modes at runtime.",
         "isCorrect": false,
         "explanation": "document.compatMode is read-only — it reports the current mode, not sets it. Use the X-UA-Compatible meta tag or HTTP header to set IE compat mode.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Modları çalışma zamanında değiştirmek için JavaScript'te document.compatMode = 'IE9' kullanın.",
+        "explanationTr": "document.compatMode salt-okunurdur — geçerli modu bildirir, ayarlamaz. IE uyumluluk modunu ayarlamak için X-UA-Compatible meta etiketi veya HTTP başlığı kullanın."
       },
       {
         "optionText": "IE compatibility mode is set automatically based on the DOCTYPE — no developer action needed.",
         "isCorrect": false,
         "explanation": "DOCTYPE controls standards vs quirks mode. IE compatibility mode is a separate IE-specific feature requiring the X-UA-Compatible meta tag or header.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "IE uyumluluk modu DOCTYPE'a göre otomatik ayarlanır — geliştirici eylemi gerekmez.",
+        "explanationTr": "DOCTYPE standartlar vs quirks modunu kontrol eder. IE uyumluluk modu, X-UA-Compatible meta etiketi veya başlığı gerektiren ayrı bir IE'ye özgü özelliktir."
       }
     ]
   },
@@ -1673,29 +1673,29 @@
         "optionText": "CSS in <head> prevents FOUC; scripts before </body> let the DOM parse first. Exception: use defer/async on <script> in <head> instead.",
         "isCorrect": true,
         "explanation": "Correct — render-blocking CSS must load before paint. defer scripts download in parallel and execute after DOM parse — cleaner than moving scripts to the bottom.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "<head>'deki CSS FOUC'u önler; </body>'den önceki betikler DOM'un önce ayrıştırılmasını sağlar. İstisna: bunun yerine <head>'deki <script>'te defer/async kullanın.",
+        "explanationTr": "Doğru — render-bloklayan CSS boyamadan önce yüklenmeli. defer betikler paralel indirilir ve DOM ayrıştırmasından sonra çalışır — betikleri alta taşımaktan daha temiz."
       },
       {
         "optionText": "CSS must be in <head> because the browser rejects stylesheets found elsewhere in the document.",
         "isCorrect": false,
         "explanation": "Browsers accept CSS links anywhere but defer rendering until CSSOM is built. Positioning in <head> is a best practice for performance, not a strict requirement.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "CSS <head>'de olmalı çünkü tarayıcı belgenin başka yerinde bulunan stil sayfalarını reddeder.",
+        "explanationTr": "Tarayıcılar CSS bağlantılarını her yerde kabul eder ama CSSOM oluşturulana kadar render'ı erteler. <head>'de konumlandırma performans için bir en iyi uygulamadır, katı bir gereklilik değil."
       },
       {
         "optionText": "Scripts before </body> prevent them from blocking CSS downloads.",
         "isCorrect": false,
         "explanation": "Modern browsers can parallelise CSS and script downloads. Scripts block HTML parsing, not CSS downloads. defer on <script> in <head> is the modern best practice.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "</body>'den önceki betikler CSS indirmelerini bloklamalarını önler.",
+        "explanationTr": "Modern tarayıcılar CSS ve betik indirmelerini paralelleştirebilir. Betikler CSS indirmelerini değil HTML ayrıştırmasını bloklar. <head>'deki <script>'te defer modern en iyi uygulamadır."
       },
       {
         "optionText": "There are no exceptions — this rule is absolute in HTML5.",
         "isCorrect": false,
         "explanation": "async and defer are important exceptions — they allow <script> to stay in <head> without blocking parsing. Critical inline scripts may also need to be in <head>.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "İstisna yoktur — bu kural HTML5'te mutlaktır.",
+        "explanationTr": "async ve defer önemli istisnalardır — <script>'in ayrıştırmayı bloklamadan <head>'de kalmasını sağlarlar. Kritik inline betiklerin de <head>'de olması gerekebilir."
       }
     ]
   },
@@ -1707,29 +1707,29 @@
         "optionText": "The <keygen> element was designed for this but is now deprecated — use the Web Crypto API (window.crypto.subtle) instead.",
         "isCorrect": true,
         "explanation": "Correct — <keygen> generated a key pair and submitted the public key via a form. It's removed from the spec. The Web Crypto API is the modern, secure alternative.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "<keygen> öğesi bunun için tasarlanmıştı ama artık kullanımdan kaldırıldı — bunun yerine Web Crypto API'sini (window.crypto.subtle) kullanın.",
+        "explanationTr": "Doğru — <keygen> bir anahtar çifti üretip public anahtarı bir form üzerinden gönderiyordu. Spesifikasyondan kaldırıldı. Web Crypto API modern, güvenli alternatiftir."
       },
       {
         "optionText": "Yes, using <input type='publickey'> — a new HTML5 input type for cryptographic keys.",
         "isCorrect": false,
         "explanation": "There is no type='publickey' input. Key generation requires JavaScript via the Web Crypto API (window.crypto.subtle.generateKey).",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Evet, <input type='publickey'> kullanarak — kriptografik anahtarlar için yeni bir HTML5 input türü.",
+        "explanationTr": "type='publickey' input'u yoktur. Anahtar üretimi Web Crypto API yoluyla JavaScript gerektirir (window.crypto.subtle.generateKey)."
       },
       {
         "optionText": "HTML cannot generate keys — this requires a server-side language like PHP or Node.js.",
         "isCorrect": false,
         "explanation": "The Web Crypto API (window.crypto.subtle) enables client-side key generation in JavaScript. Server-side generation is one option but not the only one.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "HTML anahtar üretemez — bu PHP veya Node.js gibi sunucu taraflı bir dil gerektirir.",
+        "explanationTr": "Web Crypto API (window.crypto.subtle) JavaScript'te istemci taraflı anahtar üretimini mümkün kılar. Sunucu taraflı üretim bir seçenektir ama tek değil."
       },
       {
         "optionText": "<keygen> is still the recommended HTML5 element for key generation in all modern browsers.",
         "isCorrect": false,
         "explanation": "<keygen> is deprecated and removed from all major browsers. Use the Web Crypto API for key generation in modern web applications.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "<keygen>, tüm modern tarayıcılarda anahtar üretimi için hâlâ önerilen HTML5 öğesidir.",
+        "explanationTr": "<keygen> kullanımdan kaldırıldı ve tüm büyük tarayıcılardan çıkarıldı. Modern web uygulamalarında anahtar üretimi için Web Crypto API kullanın."
       }
     ]
   },
@@ -1741,29 +1741,29 @@
         "optionText": "A tool compiling extended markup to HTML — JSX (React/Next.js), Pug, and Haml are common. JSX is used in all modern React projects.",
         "isCorrect": true,
         "explanation": "Correct — JSX is the de-facto HTML preprocessor for React. It adds component composition and expressions to markup, compiled at build time by SWC or Babel.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Genişletilmiş markup'ı HTML'e derleyen bir araç — JSX (React/Next.js), Pug ve Haml yaygındır. JSX tüm modern React projelerinde kullanılır.",
+        "explanationTr": "Doğru — JSX, React için fiili HTML preprocessor'dır. Markup'a bileşen kompozisyonu ve ifadeler ekler, build zamanında SWC veya Babel ile derlenir."
       },
       {
         "optionText": "A minifier that removes whitespace from HTML files — equivalent to UglifyJS for HTML.",
         "isCorrect": false,
         "explanation": "HTML minifiers reduce file size but don't transform syntax. Preprocessors like Pug and JSX introduce new markup syntax compiled to standard HTML.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "HTML dosyalarından boşlukları kaldıran bir minifier — HTML için UglifyJS ile eşdeğer.",
+        "explanationTr": "HTML minifier'lar dosya boyutunu azaltır ama sözdizimini dönüştürmez. Pug ve JSX gibi preprocessor'lar standart HTML'e derlenen yeni markup sözdizimi getirir."
       },
       {
         "optionText": "A browser feature that pre-processes HTML before rendering to fix validation errors.",
         "isCorrect": false,
         "explanation": "Browsers have error-correction parsers but these are not 'preprocessors'. HTML preprocessors are build-time tools that transform extended syntax.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "Doğrulama hatalarını düzeltmek için render'dan önce HTML'i işleyen bir tarayıcı özelliği.",
+        "explanationTr": "Tarayıcıların hata-düzeltme ayrıştırıcıları vardır ama bunlar 'preprocessor' değildir. HTML preprocessor'lar genişletilmiş sözdizimini dönüştüren build-zamanı araçlarıdır."
       },
       {
         "optionText": "HTML preprocessors are no longer used — modern frameworks like React use plain HTML directly.",
         "isCorrect": false,
         "explanation": "React uses JSX, which is an HTML preprocessor. JSX is compiled by SWC/Babel on every build. HTML templating and preprocessing is more common than ever.",
-        "optionTextTr": "",
-        "explanationTr": ""
+        "optionTextTr": "HTML preprocessor'ları artık kullanılmıyor — React gibi modern framework'ler doğrudan düz HTML kullanır.",
+        "explanationTr": "React, JSX kullanır — bir HTML preprocessor. Düz HTML kullanmaz. Preprocessor'lar modern frontend ve backend genelinde yaygın kalır."
       }
     ]
   }
